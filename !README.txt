@@ -2,13 +2,17 @@ To flash the O.MG Cable:
 - Plug in the programmer to computer
 - Plug in the cable to programmer
 - Run flash.sh and follow the menu to build a new firmware with your chosen wifi settings
-- When finished, unplug the cable from the programmer and plug it into a USB port
+- When finished, unplug the programmer and plug the cable into a USB port.
 - Wait a bit for all of the services to start up (usually 60 seconds is plenty)
-- If in Station mode, the O.MG Cable will be available via http://whatever-IP-your-network-assigns-the-cable. If in Access Point mode, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1
+- Connect:
+-- If in Station mode, the O.MG Cable will be available via http://whatever-IP-your-network-assigns-the-cable. 
+-- If in Access Point mode, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1
 
-The flasher has been tested on OS X and Linux. 
+NOTE: 
+- The flasher has been tested on OS X and Linux. 
+- The flasher script requires that you have python 3.7 or higher installed
+- If the programmer is not detected, you may need to install the drivers for CP210X USB bridge: https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
 
-You may need to install the drivers for CP210X USB bridge: https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
 
 
 
