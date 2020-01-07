@@ -239,7 +239,7 @@ def omg_input():
         while not SANITIZED_SELECTION:
             try:
                 WIFI_SSID = input("\nENTER WIFI SSID (limit 1-32chars): ")
-                if len(WIFI_SSID) > 1 and len(WIFI_SSID) < 33: 
+                if len(WIFI_SSID) > 1 and len(WIFI_SSID) < 33:
                     SANITIZED_SELECTION = True
             except:
                 pass
@@ -248,11 +248,11 @@ def omg_input():
 
         WIFI_PASS = ''
         SANITIZED_SELECTION = False
-        
+
         while not SANITIZED_SELECTION:
             try:
                 WIFI_PASS = input("\nENTER WIFI PASS (limit 8-64chars): ")
-                if len(WIFI_PASS) > 1 and len(WIFI_PASS) < 33: 
+                if len(WIFI_PASS) > 7 and len(WIFI_PASS) < 65:
                     SANITIZED_SELECTION = True
             except:
                 pass
