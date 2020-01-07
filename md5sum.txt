@@ -1,0 +1,10 @@
+f48701cfdeb9483aeba611eaaa99a288  ./README.md
+7f2155e138b3ed9aff7ebeecbfe5091f  ./flash.py
+c7f9d88ec3a2d31efa3b0642670b2fa1  ./flash_win64.exe
+14e2295faa9769c1d57923797ea20340  ./flash_osx
+70df29c162ba8a21e5c81b6bd7ce6445  ./flash_linux
+10b8fdb3b0faf08cc12e21346fb46dc8  ./firmware/image.elf-0x10000.bin
+0cf5b813cbba99471c07f23fa0c338d5  ./firmware/image.elf-0x00000.bin
+bf92a0bff718218f5d9ce92db74eea26  ./firmware/page.mpfs
+95659619c2cd734463c6604736a564f8  ./firmware/esp_init_data_default_v08.bin
+edd48e89127871357706630bd91e837d  ./scripts/esptool.py
