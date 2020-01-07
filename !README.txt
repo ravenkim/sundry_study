@@ -1,17 +1,21 @@
 To flash the O.MG Cable: 
 - Plug in the programmer to computer
 - Plug in the cable to programmer
-- Run flash.sh,flash_linux,flash_osx or flash_win64 & follow the menu to build a new firmware with your chosen wifi settings
+
+- Run flash.py or flash_[os] binaries & then follow the menu to build a new firmware with your chosen wifi settings
+	
+
 - When finished, unplug the programmer and plug the cable into a USB port.
 - Wait a bit for all of the services to start up (usually 60 seconds is plenty)
 - Connect:
--- If in Station mode, the O.MG Cable will be available via http://whatever-IP-your-network-assigns-the-cable. 
--- If in Access Point mode, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1
+-- If in Station mode, the O.MG Cable will be available via http://whatever-IP-your-network-assigns-the-cable or http://OMG_LASTSIXOFMACID.local. 
+-- If in Access Point mode, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1 or http://OMG_LASTSIXOFMACID.local
 
 NOTE: 
-- The flash.sh flasher script has been tested on OS X and Linux.
-- The flasher script requires that you have python 3.7 or higher & pyserial module installed. to install pyserial use `python3 -m pip install pyserial`
-- There are os specific compiled binary flashers for osx/linux/windows. flash_win64.exe, flash_osx, flash_linux. They do not require python3 or pyserial. The osx & linux bins require an executable flag. e.g. `chmod +x flash_linux;./flash_linux`.
+- The flash.py flasher script has been tested on OS X, Linux and Windows.
+- The flasher script requires that you have python 3.7 or higher & with the pyserial module installed. to install pyserial use `python3 -m pip install pyserial`
+- There are os specific compiled binary flashers for OS X/Linux/Windows. flash_win64.exe, flash_osx, flash_linux. They are static and do not require python3 or pyserial but still require the firmware files. The OS X & Linux bins require an executable flag. e.g. `chmod +x flash_linux && ./flash_linux`.
+- If you're looking to use http://OMG_LASTSIXOFMACID.local rather than an ip address, your macid is shown to you while flashing the firwmare.
 - If the programmer is not detected, you may need to install the drivers for CP210X USB bridge: https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
 
 
