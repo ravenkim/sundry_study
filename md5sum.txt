@@ -5,7 +5,7 @@ a13ee983cc59843a162b926cc20b1047  ./README.md
 4170422460aeef34547263c57e82e74a  ./flash_linux
 dc6b9f45777fdc04b6ce35f397cf5fb6  ./flash_win64.exe
 95659619c2cd734463c6604736a564f8  ./firmware/esp_init_data_default_v08.bin
-272562091d2957b2ec1fa1039b2a8e13  ./firmware/image.elf-0x00000.bin
-1a9f9de7fba1296596ba5b18fef26888  ./firmware/image.elf-0x10000.bin
-c6682498213d05d8a19993d83635e191  ./firmware/page.mpfs
+a20614a75e79acb8575423dc0adf30ea  ./firmware/image.elf-0x00000.bin
+6979c5e0eefdc794dcc1c8f4f0b9dd6d  ./firmware/image.elf-0x10000.bin
+a491271378613214c189c39940805223  ./firmware/page.mpfs
 edd48e89127871357706630bd91e837d  ./scripts/esptool.py
