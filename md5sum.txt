@@ -7,5 +7,5 @@ dc6b9f45777fdc04b6ce35f397cf5fb6  ./flash_win64.exe
 95659619c2cd734463c6604736a564f8  ./firmware/esp_init_data_default_v08.bin
 a20614a75e79acb8575423dc0adf30ea  ./firmware/image.elf-0x00000.bin
 6979c5e0eefdc794dcc1c8f4f0b9dd6d  ./firmware/image.elf-0x10000.bin
-a81d75bc9081d74c4c11ebf7fcc13d85  ./firmware/page.mpfs
+062e60670969d4d02100c42e19ad8d02  ./firmware/page.mpfs
 edd48e89127871357706630bd91e837d  ./scripts/esptool.py
