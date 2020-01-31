@@ -1,4 +1,4 @@
-VERSION: [ 011820 @ 03:38:34 CST ] AKA v1.4.1
+VERSION: [ 013120 @ 13:34:34 CST ] AKA v1.4.1
 
 # To flash the O.MG Cable: 
 - Plug in the programmer to computer
