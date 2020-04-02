@@ -1,4 +1,4 @@
-VERSION: [ 013120 @ 13:34:34 CST ] AKA v1.4.1
+VERSION: [ 032120 @ 15:48:34 CST ] AKA v5.00
 
 # To flash the O.MG Cable: 
 - Plug in the programmer to computer
@@ -14,7 +14,7 @@ VERSION: [ 013120 @ 13:34:34 CST ] AKA v1.4.1
 
 # Connect to the O.MG Cable:
 - **If in Station mode**, the O.MG Cable connects as a client and will be available via http://whatever-IP-your-network-assigns-the-cable or http://OMG_LASTSIXOFMACID.local. (ex: http://OMG_D1361A.local)
-- **If in Access Point mode**, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1 or http://OMG_LASTSIXOFMACID.local (ex: http://OMG_D1361A.local)
+- **If in Access Point mode**, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1 
 
 # NOTE: 
 - If you have issues with any of the flasher, make sure you are running a current OS and have followed any of the dialog presented by the flasher. 

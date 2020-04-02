@@ -1,9 +1,11 @@
+# Copyright 2020 Mischief Gadgets LLC
+
 import os
 import sys
 import glob
 import platform
 
-VERSION="FIRMWARE FLASHER VERSION NUMBER [ 010720 @ 031615 CST ] .[d]."
+VERSION="FIRMWARE FLASHER VERSION NUMBER [ 040120 @ 203515 CST ] .[d]."
 UPDATES="FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
 
 MOTD="""\
@@ -106,7 +108,7 @@ def omg_probe():
 
     if results.OS_DETECTED == "WINDOWS":
         print("<<< PROBING WINDOWS COMPORTS FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        for i in range(1,9):
+        for i in range(1,257):
             try:
                 comport = "COM{PORT}".format(PORT=i)
                 command = [ '--baud', '115200', '--port', comport, '--no-stub', 'chip_id' ]
@@ -126,7 +128,7 @@ def omg_probe():
     elif results.OS_DETECTED == "DARWIN":
         print("<<< PROBING OSX DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
         devices = glob.glob("/dev/cu.*SLAB*UART*")
-
+        devices += glob.glob("/dev/cu.usbserial*")
     elif results.OS_DETECTED == "LINUX":
         print("<<< PROBING LINUX DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
         devices = glob.glob("/dev/ttyUSB*")
