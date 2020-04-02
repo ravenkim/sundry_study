@@ -1,3 +1,4 @@
+# [LATEST FIRMWARE](https://github.com/O-MG/O.MG_Cable-Firmware/releases)
 # [SETUP INSTRUCTIONS](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
 
 ----
