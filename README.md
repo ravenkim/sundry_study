@@ -1,34 +1,9 @@
-VERSION: [ 032120 @ 15:48:34 CST ] AKA v5.00
+VERSION: [ 040120 @ 12:00:00 CST ] AKA v5.00
 
 # To flash the O.MG Cable: 
-- Plug in the programmer to computer
-- Plug in the cable to programmer
-- Run one of the flashers and follow the menu to build a new firmware with your chosen wifi settings
-- - **flash_[linux/OSX/win64.exe]** - a binary for those who want to do the lease amount of work 
-- - - for linux & osx, make sure you set the file as executable. ex: `chmod +x flash_osx` before you run it: ex `./flash_osx`
-- - **flash.py** - for those who know how to execute python scripts, but want the script to automatically install some dependencies. 
-- - **flash_alternative.py** - for only the most 1337 hacker who knows about pip install and wants to do everything themselves
-- pay attention to the dialog, you might have to install a driver!
-- When finished, unplug the programmer and plug the cable into a USB port.
-- Wait a bit for all of the services to start up (usually 60 seconds is plenty)
-
-# Connect to the O.MG Cable:
-- **If in Station mode**, the O.MG Cable connects as a client and will be available via http://whatever-IP-your-network-assigns-the-cable or http://OMG_LASTSIXOFMACID.local. (ex: http://OMG_D1361A.local)
-- **If in Access Point mode**, you can connect to the SSID you specified and the cable will be accessible via http://192.168.4.1 
-
-# NOTE: 
-- If you have issues with any of the flasher, make sure you are running a current OS and have followed any of the dialog presented by the flasher. 
-- The flasher script requires that you have python 3.7 or higher & with the pyserial module installed. To install pyserial use `python3 -m pip install pyserial`
-- There are os specific compiled binary flashers for OS X/Linux/Windows. flash_win64.exe, flash_osx, flash_linux. They are static and do not require python3 or pyserial but still require the firmware files. The OS X & Linux bins require an executable flag. e.g. `chmod +x flash_linux && ./flash_linux`.
-- If you're looking to use http://OMG_LASTSIXOFMACID.local rather than an ip address, your macid is shown to you while flashing the firwmare.
-- If the programmer is not detected, you may need to install the drivers for CP210X USB bridge: https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
-
-
-
+- [WIKI](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
 
 ----
-
-
 
 SOFTWARE LICENSE AGREEMENT
 IMPORTANT - PLEASE READ CAREFULLY: THIS END-USER LICENSE AGREEMENT ("EULA" OR "AGREEMENT") IS A LEGAL AGREEMENT BETWEEN YOU (EITHER AN INDIVIDUAL OR A SINGLE ENTITY) ("YOU" OR "USER") AND MISCHIEF GADGETS LLC, OF 548 MARKET STREET #61961, SAN FRANCISCO, CALIFORNIA, 94104 ("OWNER"). BY USING ANY MISCHIEF GADGETS PRODUCT OR ANY PROPRIETARY SOFTWARE DEVELOPED BY THE OWNER ("SOFTWARE"), THE USER, EITHER ON BEHALF OF YOURSELF AS AN INDIVIDUAL OR ON BEHALF OF AN ENTITY AS ITS AUTHORIZED REPRESENTATIVE, AGREES TO ALL OF THE TERMS OF THIS AGREEMENT. BY INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, DO NOT INSTALL OR USE THE PRODUCTS OR SOFTWARE.
