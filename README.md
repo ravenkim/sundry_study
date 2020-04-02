@@ -62,3 +62,5 @@ FCC NOTICE: This kit is designed to allow:
 (2) Software developers to write software applications for use with the end product. This kit is not a finished product and when assembled may not be resold or otherwise market  unless all required FCC equipment authorizations are first obtained. Operation is subject to the condition that this product not cause harmful interference to licensed radio stations and that this product accept harmful interference. Unless the assembled kit is designed to operate under part 15, part 18 or part 95 of this chapter, the operator of the kit must operate under the authority of an FCC license holder or must secure an experimental authorization under part 5 of this chapter. For evaluation only; not FCC approved for resale. 
 </p>
 </details>
+
+<img src="https://o.mg.lol/OMGCable-pkg.jpg" >
