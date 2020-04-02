@@ -1,7 +1,6 @@
-VERSION: [ 040120 @ 12:00:00 CST ] AKA v5.00
+VERSION: [ 040220 @ 00:31:00 CST ] AKA v5.00
 
-# To flash the O.MG Cable: 
-- [WIKI](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
+# [SETUP INSTRUCTIONS](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
 
 ----
 
