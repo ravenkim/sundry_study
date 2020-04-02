@@ -1,15 +1,15 @@
 
-> # [LATEST FIRMWARE](https://github.com/O-MG/O.MG_Cable-Firmware/releases)
+# [Download Latest Firmware HERE](https://github.com/O-MG/O.MG_Cable-Firmware/releases)
 
-----
 
-> # [SETUP INSTRUCTIONS](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
-Please make sure you read the latest instructions! 
 
-----
-# LICENSE: 
+# [Read Setup Instruction HERE](https://github.com/O-MG/O.MG_Cable-Firmware/wiki) < Read this, seriously
 
-SOFTWARE LICENSE AGREEMENT
+
+#### LICENSE: 
+
+<details><summary>SOFTWARE LICENSE AGREEMENT</summary>
+<p>
 IMPORTANT - PLEASE READ CAREFULLY: THIS END-USER LICENSE AGREEMENT ("EULA" OR "AGREEMENT") IS A LEGAL AGREEMENT BETWEEN YOU (EITHER AN INDIVIDUAL OR A SINGLE ENTITY) ("YOU" OR "USER") AND MISCHIEF GADGETS LLC, OF 548 MARKET STREET #61961, SAN FRANCISCO, CALIFORNIA, 94104 ("OWNER"). BY USING ANY MISCHIEF GADGETS PRODUCT OR ANY PROPRIETARY SOFTWARE DEVELOPED BY THE OWNER ("SOFTWARE"), THE USER, EITHER ON BEHALF OF YOURSELF AS AN INDIVIDUAL OR ON BEHALF OF AN ENTITY AS ITS AUTHORIZED REPRESENTATIVE, AGREES TO ALL OF THE TERMS OF THIS AGREEMENT. BY INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, DO NOT INSTALL OR USE THE PRODUCTS OR SOFTWARE.
 
 1. GRANT OF LICENSE The SOFTWARE is protected by copyright laws and laws protecting the confidentiality of trade secrets. The SOFTWARE is licensed, not sold. Any supplemental software or software code, provided to the USER as part of support, shall be considered part of the SOFTWARE and subject to the terms and conditions of this AGREEMENT. Subject to the terms of this AGREEMENT, OWNER hereby grants USER a non-transferable license to use the SOFTWARE for authorized network auditing and security analysis purposes only where permitted subject local and international laws where applicable. USER is solely responsible for compliance with all laws of their locality.
@@ -60,3 +60,5 @@ FCC NOTICE: This kit is designed to allow:
 (1) Product development to evaluate electronic components, circuitry, or software associated with the kit to determine whether to incorporate such items in a finished product and
 
 (2) Software developers to write software applications for use with the end product. This kit is not a finished product and when assembled may not be resold or otherwise market  unless all required FCC equipment authorizations are first obtained. Operation is subject to the condition that this product not cause harmful interference to licensed radio stations and that this product accept harmful interference. Unless the assembled kit is designed to operate under part 15, part 18 or part 95 of this chapter, the operator of the kit must operate under the authority of an FCC license holder or must secure an experimental authorization under part 5 of this chapter. For evaluation only; not FCC approved for resale. 
+</p>
+</details>
