@@ -1,5 +1,3 @@
-VERSION: [ 040220 @ 00:31:00 CST ] AKA v5.00
-
 # [SETUP INSTRUCTIONS](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
 
 ----
