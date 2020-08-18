@@ -45,12 +45,10 @@
 #
 
 import sys,os
-from #pprint import #pprint
 import argparse
 import threading
 import shlex
 import logging
-#import time
 from time import sleep
 from math import floor,ceil
 from websocket import create_connection
@@ -122,7 +120,7 @@ class Duckpiler():
 		'f12': 69
 	}
 	
-	# python is silly sometimes
+	# this allows us to build method "modules" to easily add commands and features
 	def commands(self):
 		commands = {
 				"STRING":self.cmd_string,
@@ -215,8 +213,7 @@ class Duckpiler():
 			res = {}
 			res['raw']=ln
 			params = {}
-			# yeah we could have shlex parse files
-			# but this way we can just throw each line into processing. 
+			# using shlex provides a stronger processing support then by simply splitting. such as quotes.
 			fields = shlex.split(ln)
 			command = str(fields.pop(0))
 			parse_pos = 0
@@ -225,8 +222,6 @@ class Duckpiler():
 					# we	might have a param
 					param = str(field).replace("'","").replace("\"","").split("=")
 					# give us a chance to clean up 
-					# throw in some better cleaning here
-					# re.sub(r'\W+', '', param[0/1])
 					param_key = str(param[0]).strip()
 					param_val = str(param[1]).strip()
 					params[param_key]=param_val
@@ -305,7 +300,6 @@ class Duckpiler():
 			k,m=self.keymap(c)
 			print("|",end=" ")
 			print(self.charToHex(c),end=" ")
-			#print(self.numToHex(c),end=" ")
 			print(c,end=" ")
 			print(k,end=" ")
 			print(m,end=' |\n')
@@ -350,7 +344,6 @@ class Duckpiler():
 		elif upper_command in self.commands():
 			logging.info("processLine - Found handler for command '%s', passing to handler..." % upper_command)
 			c =(self.commands())[upper_command](parsed_line)
-			#pprint("Got: %s"%str(c))
 			self.output+=c
 			return c
 		else:
@@ -406,8 +399,6 @@ class Duckpiler():
 		if waitForBSSID is not None and waitForSSID is not None:
 			logging.error("cmd_waitforpresent - Error SSID and BSSID both set, one or the other only must be set")
 			return False
-		#elif waitForMinutes is not None and waitForInterval is not None:
-		#	logging.error("cmd_waitforpresent - Error Interval and Minutes set, only one can be set!")
 		elif (waitForMinutes is not None or waitForInterval is not None) and (waitForSSID is None and waitForBSSID is None):
 			logging.error("cmd_waitforpresent - Error wait for minutes or interval is set but no SSID/BSSID is set!")
 			return False
@@ -473,8 +464,6 @@ class Duckpiler():
 		if waitForBSSID is not None and waitForSSID is not None:
 			logging.error("cmd_waitfornotpresent - Error SSID and BSSID both set, one or the other only must be set")
 			return False
-		#elif waitForMinutes is not None and waitForInterval is not None:
-		#	logging.error("cmd_waitforpresent - Error Interval and Minutes set, only one can be set!")
 		elif (waitForMinutes is not None or waitForInterval is not None) and (waitForSSID is None and waitForBSSID is None):
 			logging.error("cmd_waitfornotpresent - Error wait for minutes or interval is set but no SSID/BSSID is set!")
 			return False
@@ -532,7 +521,8 @@ class Duckpiler():
 			if len(waitForBSSID) == 17:
 				logging.error("BSSID is the wrong length AA:BB:CC:DD:EE:FF")	
 		elif "SIGNAL" in processed_line['fields']:
-			# I don't think this is right....
+			# by removing - (as the javascript does) we remove the signal dB units which can be both positive or negative
+			# we follow the javascript but this may change later. 
 			presentSignal = str(processed_line['fields']['SIGNAL']).replace("-","")
 		
 		# now validate
@@ -578,9 +568,10 @@ class Duckpiler():
 			if len(waitForBSSID) == 17:
 				logging.error("BSSID is the wrong length AA:BB:CC:DD:EE:FF")	
 		elif "SIGNAL" in processed_line['fields']:
-			# I don't think this is right....
+			# by removing - (as the javascript does) we remove the signal dB units which can be both positive or negative
+			# we follow the javascript but this may change later. 
 			presentSignal = str(processed_line['fields']['SIGNAL']).replace("-","")
-		
+	
 		# now validate
 		if presentSSID is not None and presentBSSID is not None:
 			logging.error("cmd_ifnotpresent - Error SSID and BSSID both set, one or the other only must be set")
@@ -781,14 +772,9 @@ class Duckpiler():
 				if lookup_value in modValues:
 					iModify+=modValues[lookup_value]
 				print("4IMOD:%d"%iModify)
-		# and the 5th pass
-		# why don't i just throw this in a loop... 
+		# and the 5th pass - this may become a loop later 
 		output+="01" + self.numToHex(iModify)
-		#print("IMOD:%d"%iModify)
 		lookup_value = None # here we go again 
-		# i really should just make a loop for this
-		#print("Processing Modifiers")
-		#print(processed_line)
 		if len(processed_line['fields'])==1:
 			lookup_value = str(processed_line['fields'][0]).lower()
 		elif len(processed_line['fields'])==2:
@@ -802,7 +788,6 @@ class Duckpiler():
 		# now do something
 		if lookup_value is not None:
 			mapped_value = self.mapping[lookup_value]
-			#print(self.numToHex(mapped_value))
 			output+=self.numToHex(mapped_value)				
 		else:
 			output+="00"
@@ -842,7 +827,6 @@ class Duckpiler():
 		output=""
 		prefix="02"
 		bDelay=False
-		#print(processed_line)
 		if len(processed_line['fields'])<1:
 			logging.error("cmd_delay - too few arguments to delay")
 			return None	
@@ -888,7 +872,6 @@ class OMGInterface():
 		tries = 3
 		success = False
 		while (tries>0 and not success):
-			#print(success)
 			try:
 				self.soc = create_connection(url)
 				success = True
@@ -965,7 +948,6 @@ class OMGInterface():
 	def loadScan(self):
 		self.send("CS0\t")
 		r=self.recv()
-		#print(r)
 		sleep(4)
 		output=b''
 		user_addresses = [520192, 521216, 522240, 523264]
@@ -1045,7 +1027,6 @@ class OMGInterface():
 		jiggler_state = bool(s)
 		# this can probably be accomplished by int(jiggler_state)
 		cmd_line = "CJ"+str(int(jiggler_state))+"\t"
-		#print(cmd_line)
 		self.send(cmd_line)
 
 	# cmd: enable*usb, disable*usb
@@ -1075,11 +1056,6 @@ class OMGInterface():
 			starto = i*512
 			endo = starto+512
 			parsement=script[starto:endo]
-			print("--- \nParsement:")
-			#print(parsement)
-			print("Script:")
-			#print(script)
-			print("--- \n")
 			alignment = ceil(len(parsement)/4)*4 # math, not even once
 			user_addr = user_addresses[int(slot)]+starto
 			cmd = "FW" + str(user_addr) + "\t" + str(alignment) + "\t" + parsement
@@ -1159,7 +1135,7 @@ class OMGWriter(threading.Thread):
         self.slot = slot
         self.ogscript = input_script
         self.script = self.fix_script(input_script)
-        self.pretty_slot = str(int(slot)+1) # might fix? might be jenky
+        self.pretty_slot = str(int(slot)+1)
         if pretty_slot:
         	self.pretty_slot = pretty_slot
         self.keepRunning = True
@@ -1260,7 +1236,6 @@ elif args.command is not None:
 	if args.ip is None:
 		logging.error("One or more IP addresses must be defined!")
 		sys.exit(1)
-	#print(len(args.ip))
 	if len(args.ip)>1:
 		logging.error("Command mode only supports 1 IP at current time.")
 		sys.exit(1)
