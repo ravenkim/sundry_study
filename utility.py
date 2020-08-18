@@ -45,12 +45,10 @@
 #
 
 import sys,os
-from #pprint import #pprint
 import argparse
 import threading
 import shlex
 import logging
-#import time
 from time import sleep
 from math import floor,ceil
 from websocket import create_connection
@@ -121,8 +119,7 @@ class Duckpiler():
 		'f11': 68,
 		'f12': 69
 	}
-	
-	# python is silly sometimes
+
 	def commands(self):
 		commands = {
 				"STRING":self.cmd_string,
@@ -282,8 +279,7 @@ class Duckpiler():
 					print(y)
 					cePayload+=self.ceHex(hexPayload)
 		return cePayload
-		
-	# from d_coded...	
+			
 	def keymap(self,char):
 		lo = "…………abcdefghijklmnopqrstuvwxyz1234567890………… -=[]\\\;'`,./"
 		hi = '…………ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()……………_+{}||:"~<>?'
@@ -350,7 +346,6 @@ class Duckpiler():
 		elif upper_command in self.commands():
 			logging.info("processLine - Found handler for command '%s', passing to handler..." % upper_command)
 			c =(self.commands())[upper_command](parsed_line)
-			#pprint("Got: %s"%str(c))
 			self.output+=c
 			return c
 		else:
@@ -406,8 +401,6 @@ class Duckpiler():
 		if waitForBSSID is not None and waitForSSID is not None:
 			logging.error("cmd_waitforpresent - Error SSID and BSSID both set, one or the other only must be set")
 			return False
-		#elif waitForMinutes is not None and waitForInterval is not None:
-		#	logging.error("cmd_waitforpresent - Error Interval and Minutes set, only one can be set!")
 		elif (waitForMinutes is not None or waitForInterval is not None) and (waitForSSID is None and waitForBSSID is None):
 			logging.error("cmd_waitforpresent - Error wait for minutes or interval is set but no SSID/BSSID is set!")
 			return False
@@ -473,8 +466,6 @@ class Duckpiler():
 		if waitForBSSID is not None and waitForSSID is not None:
 			logging.error("cmd_waitfornotpresent - Error SSID and BSSID both set, one or the other only must be set")
 			return False
-		#elif waitForMinutes is not None and waitForInterval is not None:
-		#	logging.error("cmd_waitforpresent - Error Interval and Minutes set, only one can be set!")
 		elif (waitForMinutes is not None or waitForInterval is not None) and (waitForSSID is None and waitForBSSID is None):
 			logging.error("cmd_waitfornotpresent - Error wait for minutes or interval is set but no SSID/BSSID is set!")
 			return False
@@ -595,7 +586,6 @@ class Duckpiler():
 			payloadVal = presentBSSID
 		else:
 			logging.error("cmd_ifnotpresent - ERROR INVALID PREFIX")
-		
 		
 		# add everything together
 		output = prefix + "0106"
@@ -762,7 +752,8 @@ class Duckpiler():
 		}
 		if len(processed_line['fields']) >= 1:
 			lookup_value = str(processed_line['fields'][0]).lower()			
-			# now go through passes?
+			# TODO #
+			# Future improvements could be made here by creating a loop for each value where you increase n for each character in a processed line.
 			if lookup_value in modValues:
 				iModify+=modValues[lookup_value]
 				print("0IMOD:%d"%iModify)
@@ -781,14 +772,10 @@ class Duckpiler():
 				if lookup_value in modValues:
 					iModify+=modValues[lookup_value]
 				print("4IMOD:%d"%iModify)
-		# and the 5th pass
-		# why don't i just throw this in a loop... 
+				
 		output+="01" + self.numToHex(iModify)
-		#print("IMOD:%d"%iModify)
-		lookup_value = None # here we go again 
-		# i really should just make a loop for this
-		#print("Processing Modifiers")
-		#print(processed_line)
+		lookup_value = None 
+
 		if len(processed_line['fields'])==1:
 			lookup_value = str(processed_line['fields'][0]).lower()
 		elif len(processed_line['fields'])==2:
@@ -799,10 +786,9 @@ class Duckpiler():
 			lookup_value = str(processed_line['fields'][3]).lower()
 		else:
 			logging.warning("No match found on Key Modifier")
-		# now do something
+
 		if lookup_value is not None:
 			mapped_value = self.mapping[lookup_value]
-			#print(self.numToHex(mapped_value))
 			output+=self.numToHex(mapped_value)				
 		else:
 			output+="00"
@@ -842,7 +828,6 @@ class Duckpiler():
 		output=""
 		prefix="02"
 		bDelay=False
-		#print(processed_line)
 		if len(processed_line['fields'])<1:
 			logging.error("cmd_delay - too few arguments to delay")
 			return None	
@@ -1163,12 +1148,9 @@ class OMGWriter(threading.Thread):
         if pretty_slot:
         	self.pretty_slot = pretty_slot
         self.keepRunning = True
-        #self.daemon = True 
         
     def fix_script(self,input_script):
     	# just try to clean up stuff we don't want
-    	# we don't really need this anymore
-    	# but who cares
     	new_output = []
     	temp_input_script = []
     	if "\n" in input_script and isinstance(input_script,str):
@@ -1179,8 +1161,6 @@ class OMGWriter(threading.Thread):
     	for l in temp_input_script:
     		new_output.append(l.replace("\\n","").replace("\r",""))
     	return new_output
-
-    	# this was old and now I realize pointless
     	
     def upload(self):
     	if self.slot == 8: # we are boot payload
