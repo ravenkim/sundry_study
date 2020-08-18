@@ -119,6 +119,7 @@ class Duckpiler():
 		'f11': 68,
 		'f12': 69
 	}
+
 	
 	# this allows us to build method "modules" to easily add commands and features
 	def commands(self):
@@ -277,8 +278,7 @@ class Duckpiler():
 					print(y)
 					cePayload+=self.ceHex(hexPayload)
 		return cePayload
-		
-	# from d_coded...	
+			
 	def keymap(self,char):
 		lo = "…………abcdefghijklmnopqrstuvwxyz1234567890………… -=[]\\\;'`,./"
 		hi = '…………ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()……………_+{}||:"~<>?'
@@ -587,7 +587,6 @@ class Duckpiler():
 		else:
 			logging.error("cmd_ifnotpresent - ERROR INVALID PREFIX")
 		
-		
 		# add everything together
 		output = prefix + "0106"
 		i = 0
@@ -753,7 +752,8 @@ class Duckpiler():
 		}
 		if len(processed_line['fields']) >= 1:
 			lookup_value = str(processed_line['fields'][0]).lower()			
-			# now go through passes?
+			# TODO #
+			# Future improvements could be made here by creating a loop for each value where you increase n for each character in a processed line.
 			if lookup_value in modValues:
 				iModify+=modValues[lookup_value]
 				print("0IMOD:%d"%iModify)
@@ -772,9 +772,10 @@ class Duckpiler():
 				if lookup_value in modValues:
 					iModify+=modValues[lookup_value]
 				print("4IMOD:%d"%iModify)
-		# and the 5th pass - this may become a loop later 
+
 		output+="01" + self.numToHex(iModify)
-		lookup_value = None # here we go again 
+		lookup_value = None 
+
 		if len(processed_line['fields'])==1:
 			lookup_value = str(processed_line['fields'][0]).lower()
 		elif len(processed_line['fields'])==2:
@@ -785,7 +786,7 @@ class Duckpiler():
 			lookup_value = str(processed_line['fields'][3]).lower()
 		else:
 			logging.warning("No match found on Key Modifier")
-		# now do something
+
 		if lookup_value is not None:
 			mapped_value = self.mapping[lookup_value]
 			output+=self.numToHex(mapped_value)				
@@ -1139,12 +1140,9 @@ class OMGWriter(threading.Thread):
         if pretty_slot:
         	self.pretty_slot = pretty_slot
         self.keepRunning = True
-        #self.daemon = True 
         
     def fix_script(self,input_script):
     	# just try to clean up stuff we don't want
-    	# we don't really need this anymore
-    	# but who cares
     	new_output = []
     	temp_input_script = []
     	if "\n" in input_script and isinstance(input_script,str):
@@ -1155,8 +1153,6 @@ class OMGWriter(threading.Thread):
     	for l in temp_input_script:
     		new_output.append(l.replace("\\n","").replace("\r",""))
     	return new_output
-
-    	# this was old and now I realize pointless
     	
     def upload(self):
     	if self.slot == 8: # we are boot payload
