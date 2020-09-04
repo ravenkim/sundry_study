@@ -6,37 +6,32 @@
 #  
 #  Developed by @spiceywasabi 2020
 #  
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMh+MMMMMMMMMMMMMMhsMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm/ oMMMMMMMMMMMMMMm +NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMy`  yMMMMMMMMMMMMMMM- -mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMs+dMMMMMMMMMM+    sMMMMMMMMMMMMMMM-  `dMMMMMMMMMMms/NMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMM+ .omMMMMMM:     -MMMMMMMMMMMMMMo    `yMMMMMMMy: `dMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMM-   /dMMM+       sMMMMMMMMMMMMh      `hMMMNo`   sMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMd     :dm        `mMMMMMMMMMMN.       .NNo`    .MMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMM:      -         :MMMMMMMMMMs         :`      sMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMs                 ymNMMMMMNm.                 NMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMy                    `-/-`                   .MMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMo                                            .NMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMNh+.                                               :sdMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMhso+:.                                                      `-/+syMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMM-                                                                 dMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMM`   `.:+/.                                              `/s+:.    sMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMNo   -oms.             .//-`               `:/:`            `+md+`  .hMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMNs`                        .odNdo.       .ohmd+`                        :dMMMMMMMMMMMMM
-#  MMMMMMMMMMMNo`                             ..           .-                             :hMMMMMMMMMMM
-#  MMMMMMMMMd+`                                                                             -sNMMMMMMMM
-#  MMMMMMNs-                         `..                          `/-.                        `+dMMMMMM
-#  MMMNy:                       ./sdNMMMh:                      `sNMMMNds/.                      .odMMM
-#  MM+                       :ymMMMMMMMMMMh.                   +NMMMMMMMMMMmo-                      /NM
-#  MMMh:                  .sNMMMMMMMMMMMMMMN-                `hMMMMMMMMMMMMMMMm+`                 :hMMM
-#  MMMMMd:`       ``-:+shmMMMMMMMMMMMMMMMMMMN.               hMMMMMMMMMMMMMMMMMMMmhs+/-..``````./dMMMMM
-#  MMMMMMMMMNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMo              .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMy              .MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN.             /MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN+`         `+NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNs.    -hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-#  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMdyymMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+#  Ol;..';dKMMMMMMMMMMMMMMMMMMMMMMNkc,..,cx
+#  MWX0d,..,xNMMMMMMMMMMMMMMMMMMWO:..'lOKNM
+#  MMMMMK:...lNMMMMMMMMMMMMMMMMMk...'kWMMMM
+#  MMMMMWl...;0MMMMMMMMMMMMMMMMNc...:KMMMMM
+#  MMMMXo....cXMMMMMMMMMMMMMMMMWd....c0WMMM
+#  MMNk;....:0MMMMMMMMMMMMMMMMMMXo....'dXMM
+#  WO:....'dXMMMMMMMMMMMMMMMMMMMMWO;....,xN
+#  k'....,kWMMMMMMMMMMMMMMMMMMMMMMMKc.....o
+#  ;.....oWMMMMMMMMMMMMMMMMMMMMMMMMMO'.....
+#  '.....;0WMMMMWX0OkxxxxkO0XWMMMMMXl......
+#  ,.......:oool:,..........';coooc,.......
+#  o......................................:
+#  Nx'...................................lK
+#  MWKd:.........,ok0KKKK0ko;.........;o0WM
+#  MMMMO,......;kNMMMMMMMMMMNO:.......xMMMM
+#  MMMNl......cXMMMMMMMMMMMMMMNl......;KMMM
+#  MMMO,.....;KMMMMMMMMMMMMMMMMX:......xMMM
+#  MMMk......lWMMMMMMMMMMMMMMMMMo......dMMM
+#  MMMO,.....,0MMMMMMMMMMMMMMMMK;......dMMM
+#  MMMNc......:KMMMMMMMMMMMMMMXc......;0MMM
+#  MMMMO,......,dXMMMMMMMMMMNx;.......xWMMM
+#  MMMMMO,.......'cdkOOOOOdl,.......'xWMMMM
+#  MMMMMMKl........................:0WMMMMM
+#  MMMMMMMW0l'...................cONMMMMMMM
+#  MMMMMMMMMWXkl;'..........';lxKWMMMMMMMMM
+#  MMMMMMMMMMMMMN0xolcccclox0NMMMMMMMMMMMMM
 #  
 #  ------ BEGIN NOTES ------ 
 #  Basic install guide: You need an O.MG Cable, Python 3, and websocket_client
@@ -53,6 +48,7 @@ from time import sleep
 from math import floor,ceil
 from websocket import create_connection
 from websocket._exceptions import *
+from pprint import pprint # leave this for debugging, not used during prod. 
 
 VERBOSITY=0 # global variable, rip
 
@@ -868,6 +864,36 @@ class OMGInterface():
 			self.url = url
 			self.connectSocket(self.url)
 	
+	def isHex(self,hstr):
+		try:
+			int(hstr,16)
+			return True
+		except:
+			return False
+		
+	def toHex(self,rchr):	
+		try:
+			s=str(format(rchr,"x"))
+			if len(s)==1:
+				s="0"+s
+			print("attempting to process %s to %s"%(str(rchr),s))
+			return s
+		except KeyError:
+			return None
+			
+	def numToHex(self,rchr):
+		try:
+			return self.toHex(int(rchr))
+		except KeyError: 
+			return None
+	
+	def charToHex(self,rchr):
+		try:
+			return self.toHex(ord(rchr))
+		except:
+			return None
+			
+			
 	def connectSocket(self,url):
 		print("Connecting to URL: %s"%url)
 		tries = 3
@@ -1072,32 +1098,36 @@ class OMGInterface():
 				endo = starto+distance
 				parsement=script[starto:endo]
 				# do the thing
-				this_sof = "20" + self.numToHex(i+1) +  self.charToHex(ops)
-				this_eof = "30" +  self.numToHex(i+1) + self.charToHex(ops)
+				this_sof = "20" + self.numToHex(i+1) +  self.numToHex(ops)
+				this_eof = "30" +  self.numToHex(i+1) + self.numToHex(ops)
 				split_payloads.append(this_sof + parsement + this_eof)
 		else:
-				this_sof = "20" + self.numToHex(i+1) +  self.charToHex(ops)
-				this_eof = "30" +  self.numToHex(i+1) + self.charToHex(ops)
+				ops = ceil(len(payload)/936)
+				this_sof = "20" + self.numToHex(1) +  self.numToHex(ops)
+				this_eof = "30" + self.numToHex(1) + self.numToHex(ops)
 				split_payloads.append(this_sof + payload + this_eof);
+		print(split_payloads)
 		return split_payloads
 	
 	def encodePayload(self,commands):
 		compiler = Duckpiler()
-		output+=""
+		output=""
 		i=1
 		for command in commands:
-				o=compiler.processLine(self,ln)
+				print("command",end=" ")
+				print(command)
+				o=compiler.processLine(command)
 				if o is None:
 					print("Error! Command invalid on line %d"%i)
 				i+=1
 				output+=o
-		return output
+		return output.replace(";","")
 	
 	def runPayload(self,raw_script):
 		if isinstance(raw_script,str):
 			raw_script = raw_script.split("\n")
 		payload = self.encodePayload(raw_script)
-		split_payloads = split_process(payload)
+		split_payloads = self.splitProcess(payload)
 		for split_payload in split_payloads:
 			cmd = "CE" + split_payload + "\n"
 			self.send(cmd)
@@ -1107,8 +1137,8 @@ class OMGInterface():
 		if isinstance(raw_script,str):
 			raw_script = raw_script.split("\n")
 		payload = self.encodePayload(raw_script)
-		split_payloads = split_process(payload)
-		buff = "".join(split_payloads)
+		split_payloads = splitProcess(payload)
+		buff = "".join(self.split_payloads)
 		iterations = ceil(len(buff/512))
 		if interations == 0:
 			iterations = 1
@@ -1160,10 +1190,6 @@ class OMGWriter(threading.Thread):
     	else:
     		return self.omgsock.writeScript(self.slot,"".join(self.script))
     
-    def run(self):
-    	# warning: untested and unused at this time
-    	return self.omgsock.runPayload(self.script)
-
     def run(self):
     	i = 0
     	print("The thread for %s and slot %s is starting.."%(str(self.ip_addr),pretty_slot))
@@ -1252,19 +1278,29 @@ elif args.command is not None:
 	elif "disableboot" in cmd:
 		bootstate = o.toggleBoot(False)
 		print("O.MG Cable Boot Payload: disabled")
-	#cmd: loadslot
-	elif "loadslot" in cmd or "loadpayload" in cmd:
+	#cmd: readslot
+	elif "readslot" in cmd or "loadpayload" in cmd:
 		if args.slot is not None:
 			slot = int(args.slot[0])-1		
 			print("Loading Slot %s"%args.slot[0])
 			ls = o.loadPayload(slot)
 			if ls[0] != 0xff:			
 				print("Slot Hex:")
-				print("".join("0x{:02x} ".format(x) for x in b))
+				script = ls.split(b'\xff')[0]
+				print("".join("0x{:02x} ".format(x) for x in script))
 				print("Slot String:")
-				print("")
+				print(str(script))
 			else:
 				print("Slot is empty!")
+	#cmd: runslot
+	elif "runslot" in cmd or "loadslot" in cmd:
+		if args.slot is not None:
+			slot = int(args.slot[0])-1		
+			print("Loading Slot %s"%args.slot[0])
+			ls = o.loadPayload(slot)
+			if ls[0] != 0xff:			
+				script = ls.split(b'\xff')[0]
+				o.runPayload(script.decode("utf-8"))
 	elif "loadboot" in cmd:
 		print("Loading Boot Slot:")
 		slot = o.loadPayload(6)
@@ -1336,6 +1372,8 @@ elif args.command is not None:
 			print("Error! WiFi arguments are needed to update WiFi settings")
 			print("Minimum: You must have options: --wifi-mode, --wifi-ssid, and --wifi-password")
 			arg_help()
+	else:
+		print("Unknown command %s"%str(cmd))
 		
 elif args.slot is not None and args.ip is not None and len(args.ip)>=1:
 	print("! CABLE DEST MODE ...")
@@ -1357,4 +1395,3 @@ elif args.slot is not None and args.ip is not None and len(args.ip)>=1:
 			t.start()
 else:
 	print("!! Error! Something went wrong...")
-
