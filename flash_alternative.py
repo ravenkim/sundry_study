@@ -43,7 +43,6 @@ class omg_results():
     def __init__(self):
         self.OS_DETECTED = ""
         self.PORT_FOUND = False
-        self.PORT_NUMBER = -1
         self.PORT_PATH = ""
         self.WIFI_DEFAULTS = False
         self.WIFI_SSID = "O.MG-Cable"
@@ -114,13 +113,13 @@ def omg_probe():
                 command = [ '--baud', '115200', '--port', comport, '--no-stub', 'chip_id' ]
                 esptool.main(command)
                 results.PORT_FOUND = True
-                results.PORT_NUMBER = i
+                results.PORT_PATH = comport
                 break
             except:
                 pass
 
         if results.PORT_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON COM{PORT} >>>".format(PORT=results.PORT_NUMBER))
+            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON PORT} >>>".format(PORT=results.PORT_PATH))
         else:
             print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
             sys.exit(1)
@@ -268,15 +267,9 @@ def omg_flash():
         FILE_ELF0 = results.FILE_ELF0
         FILE_ELF1 = results.FILE_ELF1
 
-        if results.OS_DETECTED == "WINDOWS":
-            comport = "COM{PORT}".format(PORT=results.PORT_NUMBER)
-            command = [ '--baud', '115200', '--port', comport, 'write_flash', '--erase-all', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '524288', FILE_PAGE ]
-            esptool.main(command)
-
-        if results.OS_DETECTED == "DARWIN" or results.OS_DETECTED == "LINUX":
-            devport = "{PORT}".format(PORT=results.PORT_PATH)
-            command = [ '--baud', '115200', '--port', devport, 'write_flash', '--erase-all', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '524288', FILE_PAGE ]
-            esptool.main(command)
+        command = ['--baud', '115200', '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm',
+                   'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
+        esptool.main(command)
 
     except:
         print("\n<<< SOMETHING FAILED WHILE FLASHING >>>")
