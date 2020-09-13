@@ -55,6 +55,11 @@ class omg_results():
         self.FILE_ELF0 = "image.elf-0x00000.bin"
         self.FILE_ELF1 = "image.elf-0x10000.bin"
 
+
+def complete(statuscode,message="Press Enter to continue..."):
+	input(message)
+	sys.exit(statuscode)
+
 def omg_locate():
 
     PAGE_LOCATED = False
@@ -99,7 +104,7 @@ def omg_locate():
         if not ELF0_LOCATED: print("\tMISSING FILE: {ELF0}".format(ELF0=results.FILE_ELF0))
         if not ELF1_LOCATED: print("\tMISSING FILE: {ELF1}".format(ELF1=results.FILE_ELF1))
         print('')
-        sys.exit(1)
+        complete(1)
 
 def omg_probe():
 
@@ -123,7 +128,7 @@ def omg_probe():
             print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON PORT} >>>".format(PORT=results.PORT_PATH))
         else:
             print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
-            sys.exit(1)
+            complete(1)
 
     elif results.OS_DETECTED == "DARWIN":
         print("<<< PROBING OSX DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
@@ -153,7 +158,7 @@ def omg_probe():
                 print("VISIT: [ https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers ]\n")
             else:
                 print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES >>>\n")
-            sys.exit(1)
+            complete(1)
 
 def omg_patch(_ssid, _pass, _mode):
 
@@ -207,7 +212,7 @@ def omg_patch(_ssid, _pass, _mode):
         print("\n<<< PATCH SUCCESS, FLASHING FIRMWARE >>>\n")
     except:
         print("\n<<< PATCH FAILURE, ABORTING >>>")
-        sys.exit(1)
+        complete(1)
 
 def omg_input():
     WIFI_MODE = ''
@@ -273,7 +278,7 @@ def omg_flash():
 
     except:
         print("\n<<< SOMETHING FAILED WHILE FLASHING >>>")
-        sys.exit(1)
+        complete(1)
 
 def get_script_path():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
@@ -298,7 +303,7 @@ if __name__=='__main__':
         import serial
     except:
         print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
-        sys.exit(1)
+        complete(1)
 
     try:
         import esptool
@@ -307,7 +312,7 @@ if __name__=='__main__':
             from scripts import esptool as esptool
         except:
             print("<<< ESPTOOL.PY MISSING, PLACE IT IN THIS FILE'S DIRECTORY >>>")
-            sys.exit(1)
+            complete(1)
 
     results.OS_DETECTED = platform.system().upper()
 
@@ -328,4 +333,5 @@ if __name__=='__main__':
     print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
 
     print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
-    sys.exit(0)
+    complete(0)
+   
