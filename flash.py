@@ -108,7 +108,7 @@ def omg_probe():
 
     if results.OS_DETECTED == "WINDOWS":
         print("<<< PROBING WINDOWS COMPORTS FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        for i in range(1, 257):
+        for i in range(1, 256):
             try:
                 comport = "COM{PORT}".format(PORT=i)
                 command = [ '--baud', '115200', '--port', comport, '--no-stub', 'chip_id' ]
