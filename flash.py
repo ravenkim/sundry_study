@@ -125,7 +125,7 @@ def omg_probe():
                 pass
 
         if results.PORT_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON PORT} >>>".format(PORT=results.PORT_PATH))
+            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
         else:
             print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
             complete(1)
