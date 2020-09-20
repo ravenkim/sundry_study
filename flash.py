@@ -4,7 +4,6 @@ import os
 import sys
 import glob
 import platform
-from pip._internal import main as pipmain
 
 VERSION="FIRMWARE FLASHER VERSION NUMBER [ 040120 @ 203515 CST ] .[d]."
 UPDATES="FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
@@ -151,7 +150,9 @@ def omg_probe():
                 pass
 
         if results.PORT_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT {PORT} >>>".format(PORT=results.PORT_PATH))
+            from pprint import pprint
+            pprint(results)
+            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT %s >>>"%(str(results.PORT_PATH)))
         else:
             if results.OS_DETECTED == "DARWIN":
                 print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES, YOU MAY NEED TO INSTALL THE DRIVERS FOR CP210X USB BRIDGE >>>\n")
@@ -215,6 +216,7 @@ def omg_patch(_ssid, _pass, _mode):
         complete(1)
 
 def omg_input():
+    print("INPUT PREPARED ")
     WIFI_MODE = ''
     SANITIZED_SELECTION = False
 
@@ -296,9 +298,7 @@ if __name__=='__main__':
     try:
         import serial
     except:
-        print("<<< PYSERIAL MODULE MISSING, INSTALLING >>>\n")
-        pipmain(['install', 'pyserial'])
-
+        print("<<< PYSERIAL MODULE MISSING >>> ")
     try:
         import serial
     except:
@@ -335,3 +335,10 @@ if __name__=='__main__':
     print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
     complete(0)
    
+
+
+
+
+
+
+
