@@ -4,7 +4,6 @@ import os
 import sys
 import glob
 import platform
-from pip._internal import main as pipmain
 
 VERSION="FIRMWARE FLASHER VERSION NUMBER [ 040120 @ 203515 CST ] .[d]."
 UPDATES="FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
@@ -44,7 +43,6 @@ class omg_results():
     def __init__(self):
         self.OS_DETECTED = ""
         self.PORT_FOUND = False
-        self.PORT_NUMBER = -1
         self.PORT_PATH = ""
         self.WIFI_DEFAULTS = False
         self.WIFI_SSID = "O.MG-Cable"
@@ -55,6 +53,11 @@ class omg_results():
         self.FILE_INIT = "esp_init_data_default_v08.bin"
         self.FILE_ELF0 = "image.elf-0x00000.bin"
         self.FILE_ELF1 = "image.elf-0x10000.bin"
+
+
+def complete(statuscode,message="Press Enter to continue..."):
+	input(message)
+	sys.exit(statuscode)
 
 def omg_locate():
 
@@ -100,7 +103,7 @@ def omg_locate():
         if not ELF0_LOCATED: print("\tMISSING FILE: {ELF0}".format(ELF0=results.FILE_ELF0))
         if not ELF1_LOCATED: print("\tMISSING FILE: {ELF1}".format(ELF1=results.FILE_ELF1))
         print('')
-        sys.exit(1)
+        complete(1)
 
 def omg_probe():
 
@@ -109,22 +112,22 @@ def omg_probe():
 
     if results.OS_DETECTED == "WINDOWS":
         print("<<< PROBING WINDOWS COMPORTS FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        for i in range(1,257):
+        for i in range(1, 256):
             try:
                 comport = "COM{PORT}".format(PORT=i)
                 command = [ '--baud', '115200', '--port', comport, '--no-stub', 'chip_id' ]
                 esptool.main(command)
                 results.PORT_FOUND = True
-                results.PORT_NUMBER = i
+                results.PORT_PATH = comport
                 break
             except:
                 pass
 
         if results.PORT_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON COM{PORT} >>>".format(PORT=results.PORT_NUMBER))
+            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
         else:
             print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
-            sys.exit(1)
+            complete(1)
 
     elif results.OS_DETECTED == "DARWIN":
         print("<<< PROBING OSX DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
@@ -147,14 +150,16 @@ def omg_probe():
                 pass
 
         if results.PORT_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT {PORT} >>>".format(PORT=results.PORT_PATH))
+            from pprint import pprint
+            pprint(results)
+            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT %s >>>"%(str(results.PORT_PATH)))
         else:
             if results.OS_DETECTED == "DARWIN":
                 print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES, YOU MAY NEED TO INSTALL THE DRIVERS FOR CP210X USB BRIDGE >>>\n")
                 print("VISIT: [ https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers ]\n")
             else:
                 print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES >>>\n")
-            sys.exit(1)
+            complete(1)
 
 def omg_patch(_ssid, _pass, _mode):
 
@@ -208,9 +213,10 @@ def omg_patch(_ssid, _pass, _mode):
         print("\n<<< PATCH SUCCESS, FLASHING FIRMWARE >>>\n")
     except:
         print("\n<<< PATCH FAILURE, ABORTING >>>")
-        sys.exit(1)
+        complete(1)
 
 def omg_input():
+    print("INPUT PREPARED ")
     WIFI_MODE = ''
     SANITIZED_SELECTION = False
 
@@ -262,26 +268,19 @@ def omg_input():
         results.WIFI_PASS = WIFI_PASS
 
 def omg_flash():
-
     try:
         FILE_PAGE = results.FILE_PAGE
         FILE_INIT = results.FILE_INIT
         FILE_ELF0 = results.FILE_ELF0
         FILE_ELF1 = results.FILE_ELF1
 
-        if results.OS_DETECTED == "WINDOWS":
-            comport = "COM{PORT}".format(PORT=results.PORT_NUMBER)
-            command = [ '--baud', '115200', '--port', comport, 'write_flash', '--erase-all', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '524288', FILE_PAGE ]
-            esptool.main(command)
-
-        if results.OS_DETECTED == "DARWIN" or results.OS_DETECTED == "LINUX":
-            devport = "{PORT}".format(PORT=results.PORT_PATH)
-            command = [ '--baud', '115200', '--port', devport, 'write_flash', '--erase-all', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '524288', FILE_PAGE ]
-            esptool.main(command)
+        command = ['--baud', '115200', '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm',
+                   'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
+        esptool.main(command)
 
     except:
         print("\n<<< SOMETHING FAILED WHILE FLASHING >>>")
-        sys.exit(1)
+        complete(1)
 
 def get_script_path():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
@@ -299,14 +298,12 @@ if __name__=='__main__':
     try:
         import serial
     except:
-        print("<<< PYSERIAL MODULE MISSING, INSTALLING >>>\n")
-        pipmain(['install', 'pyserial'])
-
+        print("<<< PYSERIAL MODULE MISSING >>> ")
     try:
         import serial
     except:
         print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
-        sys.exit(1)
+        complete(1)
 
     try:
         import esptool
@@ -315,7 +312,7 @@ if __name__=='__main__':
             from scripts import esptool as esptool
         except:
             print("<<< ESPTOOL.PY MISSING, PLACE IT IN THIS FILE'S DIRECTORY >>>")
-            sys.exit(1)
+            complete(1)
 
     results.OS_DETECTED = platform.system().upper()
 
@@ -336,4 +333,12 @@ if __name__=='__main__':
     print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
 
     print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
-    sys.exit(0)
+    complete(0)
+   
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 
-# [Download Latest Firmware HERE](https://github.com/O-MG/O.MG_Cable-Firmware/releases)
+# [Download Latest Firmware HERE](https://github.com/O-MG/O.MG_Cable-Firmware/releases/latest)
 
 
 

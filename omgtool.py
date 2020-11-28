@@ -864,7 +864,7 @@ class OMGInterface():
 		if self.soc is None and url is not None:
 			self.url = url
 			self.connectSocket(self.url)
-	
+
 	def isHex(self,hstr):
 		try:
 			int(hstr,16)
@@ -893,7 +893,6 @@ class OMGInterface():
 			return self.toHex(ord(rchr))
 		except:
 			return None
-			
 			
 	def connectSocket(self,url):
 		print("Connecting to URL: %s"%url)
@@ -1375,6 +1374,7 @@ elif args.command is not None:
 			arg_help()
 	else:
 		print("Unknown command %s"%str(cmd))
+
 		
 elif args.slot is not None and args.ip is not None and len(args.ip)>=1:
 	print("! CABLE DEST MODE ...")
