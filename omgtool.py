@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#  omgtool.py v1.0
+#  omgtool.py v1.2
 #  
 #  Copyright 2020 Mischief Gadgets LLC
 #  
@@ -215,14 +215,14 @@ class Duckpiler():
 			command = str(fields.pop(0))
 			parse_pos = 0
 			for field in fields:
-				if "=" in field:
-					# we	might have a param
-					param = str(field).replace("'","").replace("\"","").split("=")
-					# give us a chance to clean up 
-					param_key = str(param[0]).strip()
-					param_val = str(param[1]).strip()
-					params[param_key]=param_val
-					del(fields[parse_pos])
+				# if "=" in field:
+				# 	# we	might have a param
+				# 	param = str(field).replace("'","").replace("\"","").split("=")
+				# 	# give us a chance to clean up
+				# 	param_key = str(param[0]).strip()
+				# 	param_val = str(param[1]).strip()
+				# 	params[param_key]=param_val
+				# 	del(fields[parse_pos])
 				parse_pos+=1
 			# remaining fields get added
 			res['fields'] = fields
@@ -311,7 +311,7 @@ class Duckpiler():
 		
 	def toHex(self,rchr):	
 		try:
-			s=str(format(rchr,"x"))
+			s=str(format(rchr,"X"))
 			if len(s)==1:
 				s="0"+s
 			print("attempting to process %s to %s"%(str(rchr),s))
@@ -832,6 +832,7 @@ class Duckpiler():
 			while iDelay>255:
 				if not bDelay:
 					output+=prefix + "01FF"
+					bDelay=True
 				else:
 					output+=prefix + "02FF"
 				iDelay-=256
@@ -1093,10 +1094,10 @@ class OMGInterface():
 		if float(len(payload)/936) > 1.0:
 			ops = ceil(len(payload)/936)
 			for i in range(0,ops):
-				distance = 926
+				distance = 936
 				starto = i*distance
 				endo = starto+distance
-				parsement=script[starto:endo]
+				parsement=payload[starto:endo]
 				# do the thing
 				this_sof = "20" + self.numToHex(i+1) +  self.numToHex(ops)
 				this_eof = "30" +  self.numToHex(i+1) + self.numToHex(ops)
@@ -1129,7 +1130,7 @@ class OMGInterface():
 		payload = self.encodePayload(raw_script)
 		split_payloads = self.splitProcess(payload)
 		for split_payload in split_payloads:
-			cmd = "CE" + split_payload + "\n"
+			cmd = "ce" + split_payload + "\n"
 			self.send(cmd)
 		return True
 
@@ -1286,7 +1287,7 @@ elif args.command is not None:
 			ls = o.loadPayload(slot)
 			if ls[0] != 0xff:			
 				print("Slot Hex:")
-				script = ls.split(b'\xff')[0]
+				script = ls.split(b'\xff')[0].split(b'\x00')[0]
 				print("".join("0x{:02x} ".format(x) for x in script))
 				print("Slot String:")
 				print(str(script))
@@ -1299,7 +1300,7 @@ elif args.command is not None:
 			print("Loading Slot %s"%args.slot[0])
 			ls = o.loadPayload(slot)
 			if ls[0] != 0xff:			
-				script = ls.split(b'\xff')[0]
+				script = ls.split(b'\xff')[0].split(b'\x00')[0]
 				o.runPayload(script.decode("utf-8"))
 	elif "loadboot" in cmd:
 		print("Loading Boot Slot:")
