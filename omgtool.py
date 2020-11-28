@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#  omgtool.py v1.0
+#  omgtool.py v1.2
 #  
 #  Copyright 2020 Mischief Gadgets LLC
 #  
@@ -48,6 +48,7 @@ from time import sleep
 from math import floor,ceil
 from websocket import create_connection
 from websocket._exceptions import *
+from pprint import pprint # leave this for debugging, not used during prod. 
 
 VERBOSITY=0 # global variable, rip
 
@@ -214,14 +215,14 @@ class Duckpiler():
 			command = str(fields.pop(0))
 			parse_pos = 0
 			for field in fields:
-				if "=" in field:
-					# we	might have a param
-					param = str(field).replace("'","").replace("\"","").split("=")
-					# give us a chance to clean up 
-					param_key = str(param[0]).strip()
-					param_val = str(param[1]).strip()
-					params[param_key]=param_val
-					del(fields[parse_pos])
+				# if "=" in field:
+				# 	# we	might have a param
+				# 	param = str(field).replace("'","").replace("\"","").split("=")
+				# 	# give us a chance to clean up
+				# 	param_key = str(param[0]).strip()
+				# 	param_val = str(param[1]).strip()
+				# 	params[param_key]=param_val
+				# 	del(fields[parse_pos])
 				parse_pos+=1
 			# remaining fields get added
 			res['fields'] = fields
@@ -310,7 +311,7 @@ class Duckpiler():
 		
 	def toHex(self,rchr):	
 		try:
-			s=str(format(rchr,"x"))
+			s=str(format(rchr,"X"))
 			if len(s)==1:
 				s="0"+s
 			print("attempting to process %s to %s"%(str(rchr),s))
@@ -831,6 +832,7 @@ class Duckpiler():
 			while iDelay>255:
 				if not bDelay:
 					output+=prefix + "01FF"
+					bDelay=True
 				else:
 					output+=prefix + "02FF"
 				iDelay-=256
@@ -862,7 +864,36 @@ class OMGInterface():
 		if self.soc is None and url is not None:
 			self.url = url
 			self.connectSocket(self.url)
+
+	def isHex(self,hstr):
+		try:
+			int(hstr,16)
+			return True
+		except:
+			return False
+		
+	def toHex(self,rchr):	
+		try:
+			s=str(format(rchr,"x"))
+			if len(s)==1:
+				s="0"+s
+			print("attempting to process %s to %s"%(str(rchr),s))
+			return s
+		except KeyError:
+			return None
+			
+	def numToHex(self,rchr):
+		try:
+			return self.toHex(int(rchr))
+		except KeyError: 
+			return None
 	
+	def charToHex(self,rchr):
+		try:
+			return self.toHex(ord(rchr))
+		except:
+			return None
+			
 	def connectSocket(self,url):
 		print("Connecting to URL: %s"%url)
 		tries = 3
@@ -1062,39 +1093,43 @@ class OMGInterface():
 		if float(len(payload)/936) > 1.0:
 			ops = ceil(len(payload)/936)
 			for i in range(0,ops):
-				distance = 926
+				distance = 936
 				starto = i*distance
 				endo = starto+distance
-				parsement=script[starto:endo]
+				parsement=payload[starto:endo]
 				# do the thing
-				this_sof = "20" + self.numToHex(i+1) +  self.charToHex(ops)
-				this_eof = "30" +  self.numToHex(i+1) + self.charToHex(ops)
+				this_sof = "20" + self.numToHex(i+1) +  self.numToHex(ops)
+				this_eof = "30" +  self.numToHex(i+1) + self.numToHex(ops)
 				split_payloads.append(this_sof + parsement + this_eof)
 		else:
-				this_sof = "20" + self.numToHex(i+1) +  self.charToHex(ops)
-				this_eof = "30" +  self.numToHex(i+1) + self.charToHex(ops)
+				ops = ceil(len(payload)/936)
+				this_sof = "20" + self.numToHex(1) +  self.numToHex(ops)
+				this_eof = "30" + self.numToHex(1) + self.numToHex(ops)
 				split_payloads.append(this_sof + payload + this_eof);
+		print(split_payloads)
 		return split_payloads
 	
 	def encodePayload(self,commands):
 		compiler = Duckpiler()
-		output+=""
+		output=""
 		i=1
 		for command in commands:
-				o=compiler.processLine(self,ln)
+				print("command",end=" ")
+				print(command)
+				o=compiler.processLine(command)
 				if o is None:
 					print("Error! Command invalid on line %d"%i)
 				i+=1
 				output+=o
-		return output
+		return output.replace(";","")
 	
 	def runPayload(self,raw_script):
 		if isinstance(raw_script,str):
 			raw_script = raw_script.split("\n")
 		payload = self.encodePayload(raw_script)
-		split_payloads = split_process(payload)
+		split_payloads = self.splitProcess(payload)
 		for split_payload in split_payloads:
-			cmd = "CE" + split_payload + "\n"
+			cmd = "ce" + split_payload + "\n"
 			self.send(cmd)
 		return True
 
@@ -1102,8 +1137,8 @@ class OMGInterface():
 		if isinstance(raw_script,str):
 			raw_script = raw_script.split("\n")
 		payload = self.encodePayload(raw_script)
-		split_payloads = split_process(payload)
-		buff = "".join(split_payloads)
+		split_payloads = splitProcess(payload)
+		buff = "".join(self.split_payloads)
 		iterations = ceil(len(buff/512))
 		if interations == 0:
 			iterations = 1
@@ -1155,10 +1190,6 @@ class OMGWriter(threading.Thread):
     	else:
     		return self.omgsock.writeScript(self.slot,"".join(self.script))
     
-    def run(self):
-    	# warning: untested and unused at this time
-    	return self.omgsock.runPayload(self.script)
-
     def run(self):
     	i = 0
     	print("The thread for %s and slot %s is starting.."%(str(self.ip_addr),pretty_slot))
@@ -1247,19 +1278,29 @@ elif args.command is not None:
 	elif "disableboot" in cmd:
 		bootstate = o.toggleBoot(False)
 		print("O.MG Cable Boot Payload: disabled")
-	#cmd: loadslot
-	elif "loadslot" in cmd or "loadpayload" in cmd:
+	#cmd: readslot
+	elif "readslot" in cmd or "loadpayload" in cmd:
 		if args.slot is not None:
 			slot = int(args.slot[0])-1		
 			print("Loading Slot %s"%args.slot[0])
 			ls = o.loadPayload(slot)
 			if ls[0] != 0xff:			
 				print("Slot Hex:")
-				print("".join("0x{:02x} ".format(x) for x in b))
+				script = ls.split(b'\xff')[0].split(b'\x00')[0]
+				print("".join("0x{:02x} ".format(x) for x in script))
 				print("Slot String:")
-				print("")
+				print(str(script))
 			else:
 				print("Slot is empty!")
+	#cmd: runslot
+	elif "runslot" in cmd or "loadslot" in cmd:
+		if args.slot is not None:
+			slot = int(args.slot[0])-1		
+			print("Loading Slot %s"%args.slot[0])
+			ls = o.loadPayload(slot)
+			if ls[0] != 0xff:			
+				script = ls.split(b'\xff')[0].split(b'\x00')[0]
+				o.runPayload(script.decode("utf-8"))
 	elif "loadboot" in cmd:
 		print("Loading Boot Slot:")
 		slot = o.loadPayload(6)
@@ -1331,6 +1372,9 @@ elif args.command is not None:
 			print("Error! WiFi arguments are needed to update WiFi settings")
 			print("Minimum: You must have options: --wifi-mode, --wifi-ssid, and --wifi-password")
 			arg_help()
+	else:
+		print("Unknown command %s"%str(cmd))
+
 		
 elif args.slot is not None and args.ip is not None and len(args.ip)>=1:
 	print("! CABLE DEST MODE ...")
@@ -1352,4 +1396,3 @@ elif args.slot is not None and args.ip is not None and len(args.ip)>=1:
 			t.start()
 else:
 	print("!! Error! Something went wrong...")
-
