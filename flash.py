@@ -54,6 +54,17 @@ class omg_results():
         self.FILE_ELF0 = "image.elf-0x00000.bin"
         self.FILE_ELF1 = "image.elf-0x10000.bin"
 
+def get_dev_info(dev):
+    esp = esptool.ESP8266ROM(dev, '115200', None)
+    esp.connect(None)
+    mac = esp.read_mac()
+
+    esp.flash_spi_attach(0)
+    flash_id = esp.flash_id()
+    size_id = flash_id >> 16
+    flash_size = {0x14: 0x100000, 0x15: 0x200000, 0x16: 0x400000}[size_id]
+    return mac, flash_size
+
 
 def complete(statuscode,message="Press Enter to continue..."):
 	input(message)
@@ -268,14 +279,20 @@ def omg_input():
         results.WIFI_PASS = WIFI_PASS
 
 def omg_flash():
+    mac, flash_size = get_dev_info(results.PORT_PATH)
+
     try:
         FILE_PAGE = results.FILE_PAGE
         FILE_INIT = results.FILE_INIT
         FILE_ELF0 = results.FILE_ELF0
         FILE_ELF1 = results.FILE_ELF1
 
-        command = ['--baud', '115200', '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm',
-                   'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
+        if flash_size < 0x200000:
+            command = ['--baud', '115200', '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm',
+                       'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
+        else:
+            command = ['--baud', '115200', '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm',
+                       'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
         esptool.main(command)
 
     except:
