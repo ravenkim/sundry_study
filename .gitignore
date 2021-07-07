@@ -1,0 +1,13 @@
+.cache
+_backups
+_builds
+_firmware
+_repo
+node_modules
+release
+coverage
+src/assets/js/bundle/build
+.env
+.idea
+package-lock.json
+package.json
