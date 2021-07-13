@@ -90,17 +90,17 @@ def ask_for_port():
         if includedport in desc:
             excludedport = "usbserial"
             if excludedport in port:
-                print("Excluded a device", port)
+                ports.append(port)
             else:
                 sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
                 ports.append(port)
+                identifiedport = n
         else: 
-            print("Excluded a device", port)
+            ports.append(port)
     while True:
         count = len(ports)
-        print(count)
         if count == 1:
-            return port
+            return ports[n]
         else:
             port = raw_input('--- Enter port index or full name: ')
             try:
@@ -183,12 +183,11 @@ def omg_probe():
                 break
             except:
                 pass
-
         if results.PROG_FOUND:
             print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
         else:
-                print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
-                complete(1)
+            print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
+            complete(1)
 
     elif results.OS_DETECTED == "DARWIN":
         detected_ports = ask_for_port();
