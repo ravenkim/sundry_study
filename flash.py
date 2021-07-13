@@ -7,6 +7,7 @@ import sys
 import serial
 from serial.tools.list_ports import comports
 from serial.tools import hexlify_codec
+from scripts import flashapi as flashapi
 
 try:
     raw_input
@@ -157,13 +158,13 @@ def omg_probe():
 
     if results.OS_DETECTED == "WINDOWS":
         from pprint import pprint
-        detected_ports = ask_for_port();
-        # pprint(detected_ports);
-        devices = detected_ports;
+        detected_ports = ask_for_port()
+        pprint(detected_ports)
+        devices = detected_ports
         print("<<< PROBING COMPORTS FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        for i in range(1, 256):
+        for i in range(1, 1):
             try:
-                comport = "COM{PORT}".format(PORT=i)
+                comport = devices
                 command = ['--baud', baudrate, '--port', comport, '--no-stub', 'chip_id']
                 flashapi.main(command)
                 results.PROG_FOUND = True
@@ -179,28 +180,23 @@ def omg_probe():
                 complete(1)
 
     elif results.OS_DETECTED == "DARWIN":
+        from pprint import pprint
+        detected_ports = ask_for_port();
+        devices = detected_ports;
         print("<<< PROBING FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        devices = glob.glob("/dev/cu.*SLAB*UART*")
-        devices += glob.glob("/dev/cu.usbserial*")
     elif results.OS_DETECTED == "LINUX":
         from pprint import pprint
         detected_ports = ask_for_port();
-        # pprint(detected_ports);
+        pprint(detected_ports);
         devices = detected_ports;
         print("<<< PROBING FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        # devices = glob.glob("/dev/ttyUSB*")
 
     if results.OS_DETECTED == "DARWIN" or results.OS_DETECTED == "LINUX":
-        for i in range(len(devices)):
-            try:
-                devport = "{PORT}".format(PORT=devices[i])
-                command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
-                flashapi.main(command)
-                results.PROG_FOUND = True
-                results.PORT_PATH = devices[i]
-                break
-            except:
-                pass
+        devport = devices
+        command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
+        flashapi.main(command)
+        results.PROG_FOUND = True
+        results.PORT_PATH = devices
 
         if results.PROG_FOUND:
             from pprint import pprint
@@ -209,7 +205,7 @@ def omg_probe():
         else:
             port = ''
             if port != '':
-                devport = "{PORT}".format(PORT=devices[i])
+                devport = devices
                 command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
                 flashapi.main(command)
                 results.PROG_FOUND = True
@@ -466,7 +462,7 @@ if __name__ == '__main__':
             print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
             print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
             repeating = input("\n\n<<< PRESS ENTER TO RESTORE NEXT CABLE, OR 'E' TO EXIT >>>\n")
-    if MENU_MODE == '5':
+    elif MENU_MODE == '5':
         print("\nBACKUP CABLE")
         mac, flash_size = get_dev_info(results.PORT_PATH)
         if flash_size < 0x200000:
