@@ -91,7 +91,7 @@ def ask_for_port():
             sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
             ports.append(port)
         else: 
-            pprint("Excluded Device: ",port)
+            print("Excluded a device")
     while True:
         count = len(ports)
         if count == 1:
