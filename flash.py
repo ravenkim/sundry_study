@@ -99,7 +99,7 @@ def ask_for_port():
             ports.append(port)
     while True:
         count = len(ports)
-        if count == 1:
+        if identifiedport == n:
             return ports[n]
         else:
             port = raw_input('--- Enter port index or full name: ')
