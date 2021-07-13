@@ -78,7 +78,6 @@ def get_dev_info(dev):
     return mac, flash_size
 
 def ask_for_port():
-    from pprint import pprint
     """\
     Show a list of ports and ask the user for a choice. To make selection
     easier on systems with long device names, also allow the input of an
@@ -166,9 +165,7 @@ def omg_probe():
     results.PROG_FOUND = False
 
     if results.OS_DETECTED == "WINDOWS":
-        from pprint import pprint
         detected_ports = ask_for_port()
-        pprint(detected_ports)
         devices = detected_ports
         print("<<< PROBING COMPORTS FOR O.MG-CABLE-PROGRAMMER >>>\n")
         for i in range(1, 1):
@@ -189,14 +186,11 @@ def omg_probe():
                 complete(1)
 
     elif results.OS_DETECTED == "DARWIN":
-        from pprint import pprint
         detected_ports = ask_for_port();
         devices = detected_ports;
         print("<<< PROBING FOR O.MG-CABLE-PROGRAMMER >>>\n")
     elif results.OS_DETECTED == "LINUX":
-        from pprint import pprint
         detected_ports = ask_for_port();
-        pprint(detected_ports);
         devices = detected_ports;
         print("<<< PROBING FOR O.MG-CABLE-PROGRAMMER >>>\n")
 
@@ -208,8 +202,6 @@ def omg_probe():
         results.PORT_PATH = devices
 
         if results.PROG_FOUND:
-            from pprint import pprint
-            pprint(results)
             print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT %s >>>" % (str(results.PORT_PATH)))
         else:
             port = ''
