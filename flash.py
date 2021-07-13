@@ -89,17 +89,24 @@ def ask_for_port():
         sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
         ports.append(port)
     while True:
-        port = raw_input('--- Enter port index or full name: ')
-        try:
-            index = int(port) - 1
-            if not 0 <= index < len(ports):
-                sys.stderr.write('--- Invalid index!\n')
-                continue
-        except ValueError:
-            pass
+        from pprint import pprint
+        pprint(port)
+        count = len(ports)
+        if count == 1:
+            return port
         else:
-            port = ports[index]
-        return port
+            pprint(count)
+            port = raw_input('--- Enter port index or full name: ')
+            try:
+                index = int(port) - 1
+                if not 0 <= index < len(ports):
+                    sys.stderr.write('--- Invalid index!\n')
+                    continue
+            except ValueError:
+                pass
+            else:
+                port = ports[index]
+            return port
 
 def complete(statuscode, message="Press Enter to continue..."):
     input(message)
