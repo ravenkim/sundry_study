@@ -89,7 +89,7 @@ def ask_for_port():
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
         excludedport = "/dev/cu.usbserial"
         if excludedport in port:
-            pprint("Excluded Device: ",port)
+            print("Excluded a device: /dev/cu.usbserial*")
         else: 
             sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
             ports.append(port)
