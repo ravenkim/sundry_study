@@ -88,7 +88,7 @@ def ask_for_port():
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
         includedport = "CP2102"
         if includedport in desc:
-            excludedport = "cu.usbserial"
+            excludedport = "usbserial"
             if excludedport in port:
                 print("Excluded a device")
             else:
