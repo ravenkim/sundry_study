@@ -4,6 +4,8 @@ import os
 import sys
 import glob
 import platform
+from signal import signal, SIGINT
+from sys import exit
 
 VERSION="FIRMWARE FLASHER VERSION NUMBER [ 040120 @ 203515 CST ] .[d]."
 UPDATES="FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
@@ -38,6 +40,11 @@ MOTD="""\
            `Ndo:`    `.`
            :-\
 """
+
+def handler(signal_received, frame):
+    # Handle any cleanup here
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    exit(0)
 
 class omg_results():
     def __init__(self):
@@ -286,6 +293,7 @@ def get_script_path():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
 if __name__=='__main__':
+    signal(SIGINT, handler)
     print("\n" + VERSION)
     print("\n" + UPDATES)
     print("\n" + MOTD + "\n")
