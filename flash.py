@@ -476,10 +476,11 @@ if __name__ == '__main__':
         print("\nBACKUP CABLE")
         mac, flash_size = get_dev_info(results.PORT_PATH)
         if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', 'backup.img']
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', 'backup-{mac}.img']
         else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', 'backup.img']
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', 'backup-{mac}.img']
         flashapi.main(command)
+        print('Backup written to backup-{mac}.img')
 
     else:
         print("<<< NO VALID INPUT WAS DETECTED. >>>")
