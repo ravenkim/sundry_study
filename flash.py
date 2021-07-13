@@ -78,6 +78,7 @@ def get_dev_info(dev):
     return mac, flash_size
 
 def ask_for_port():
+    from pprint import pprint
     """\
     Show a list of ports and ask the user for a choice. To make selection
     easier on systems with long device names, also allow the input of an
@@ -86,11 +87,13 @@ def ask_for_port():
     sys.stderr.write('\n--- Available ports:\n')
     ports = []
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
-        sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
-        ports.append(port)
+        excludedport = "/dev/cu.usbserial"
+        if excludedport in port:
+            pprint("Excluded Device: ",port)
+        else: 
+            sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
+            ports.append(port)
     while True:
-        from pprint import pprint
-        pprint(port)
         count = len(ports)
         if count == 1:
             return port
