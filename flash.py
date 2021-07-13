@@ -87,7 +87,7 @@ def ask_for_port():
     sys.stderr.write('\n--- Available ports:\n')
     ports = []
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
-        includedport = "CP2102N USB to UART Bridge Controller"
+        includedport = "CP2102"
         if includedport in desc:
             sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
             ports.append(port)
