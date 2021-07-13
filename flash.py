@@ -98,6 +98,7 @@ def ask_for_port():
             print("Excluded a device")
     while True:
         count = len(ports)
+        print(count)
         if count == 1:
             return port
         else:
