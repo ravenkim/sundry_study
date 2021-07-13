@@ -83,7 +83,7 @@ def ask_for_port():
     easier on systems with long device names, also allow the input of an
     index.
     """
-    i = 1
+    i = 0
     sys.stderr.write('\n--- Available ports:\n')
     ports = []
     skippedports = []
@@ -94,16 +94,16 @@ def ask_for_port():
             if excludedport in port:
                 skippedports.append(port)
             else:
+                i = i+1
                 sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(i, port, desc))
                 ports.append(port)
-                identifiedport = n
-                i = i+1
+                identifiedport = i
         else: 
             skippedports.append(port)
     while True:
         count = len(ports)
-        if identifiedport == n:
-            return ports[n]
+        if identifiedport == 1:
+            return ports[i]
         else:
             port = raw_input('--- Enter port index or full name: ')
             try:
