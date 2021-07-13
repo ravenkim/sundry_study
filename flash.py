@@ -90,12 +90,12 @@ def ask_for_port():
         if includedport in desc:
             excludedport = "usbserial"
             if excludedport in port:
-                print("Excluded a device")
+                print("Excluded a device", port)
             else:
                 sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
                 ports.append(port)
         else: 
-            print("Excluded a device")
+            print("Excluded a device", port)
     while True:
         count = len(ports)
         print(count)
