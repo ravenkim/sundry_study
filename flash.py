@@ -83,20 +83,23 @@ def ask_for_port():
     easier on systems with long device names, also allow the input of an
     index.
     """
+    i = 1
     sys.stderr.write('\n--- Available ports:\n')
     ports = []
+    skippedports = []
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
         includedport = "CP2102"
         if includedport in desc:
             excludedport = "usbserial"
             if excludedport in port:
-                ports.append(port)
+                skippedports.append(port)
             else:
-                sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(n, port, desc))
+                sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(i, port, desc))
                 ports.append(port)
                 identifiedport = n
+                i = i+1
         else: 
-            ports.append(port)
+            skippedports.append(port)
     while True:
         count = len(ports)
         if identifiedport == n:
