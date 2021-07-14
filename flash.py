@@ -8,6 +8,7 @@ import serial
 from serial.tools.list_ports import comports
 from serial.tools import hexlify_codec
 from scripts import flashapi as flashapi
+from time import time
 
 try:
     raw_input
@@ -495,7 +496,7 @@ if __name__ == '__main__':
         elif MENU_MODE == '5':
             print("\nBACKUP CABLE")
             mac, flash_size = get_dev_info(results.PORT_PATH)
-            filename = "backup-{MACLOW}.img".format(MACLOW="".join([hex(m).lstrip("0x") for m in mac]).lower())
+            filename = "backup-{MACLOW}-{TIMESTAMP}.img".format(MACLOW="".join([hex(m).lstrip("0x") for m in mac]).lower(),TIMESTAMP=int(time()))
             if flash_size < 0x200000:
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', filename]
             else:
