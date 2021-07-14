@@ -198,10 +198,13 @@ def omg_probe():
 
     if results.OS_DETECTED == "DARWIN" or results.OS_DETECTED == "LINUX":
         devport = devices
-        command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
-        flashapi.main(command)
-        results.PROG_FOUND = True
-        results.PORT_PATH = devices
+        try:
+            command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
+            flashapi.main(command)
+            results.PROG_FOUND = True
+            results.PORT_PATH = devices
+        except:
+            results.PROG_FOUND = False
 
         if results.PROG_FOUND:
             print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT %s >>>" % (str(results.PORT_PATH)))
@@ -209,10 +212,13 @@ def omg_probe():
             port = ''
             if port != '':
                 devport = devices
-                command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
-                flashapi.main(command)
-                results.PROG_FOUND = True
-                results.PORT_PATH = devices[i]
+                try:
+                    command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
+                    flashapi.main(command)
+                    results.PROG_FOUND = True
+                    results.PORT_PATH = devices[i]
+                except:
+                    results.PROG_FOUND = False
             else:
                 if results.OS_DETECTED == "DARWIN":
                     print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES, YOU MAY NEED TO INSTALL THE DRIVERS FOR CP210X USB BRIDGE >>>\n")
@@ -409,52 +415,21 @@ if __name__ == '__main__':
                      print("")
                  i+=1    
             menu_options = [''] 
-            MENU_MODE = input("Select Option: ")
+            MENU_MODE = str(input("Select Option: ")).replace(" ","")
             if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6':
                 SANITIZED_SELECTION = True
         except:
             pass
-
-    if MENU_MODE == '1':
-        print("\nFIRMWARE UPGRADE")
-        mac, flash_size = get_dev_info(results.PORT_PATH)
-        command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
-        flashapi.main(command)
-
-        omg_input()
-        omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-        omg_flash()
-        print("\n[ WIFI SETTINGS ]")
-        print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
-        print("\n[ FIRMWARE USED ]")
-        print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-        print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
-    elif MENU_MODE == '2':
-        print("\nFACTORY RESET")
-        mac, flash_size = get_dev_info(results.PORT_PATH)
-        if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x8A000']
-        else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
-        flashapi.main(command)
-
-        omg_input()
-        omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-        omg_flash()
-        print("\n[ WIFI SETTINGS ]")
-        print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
-        print("\n[ FIRMWARE USED ]")
-        print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-        print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
-    elif MENU_MODE == '3':
-        baudrate = '460800'
-        mac, flash_size = get_dev_info(results.PORT_PATH)
-        print("\nFIRMWARE UPGRADE - BATCH MODE")
-        omg_input()
-        repeating = ''
-        while repeating != 'e':
+    # handle python serial exceptions here        
+    try:
+    
+        if MENU_MODE == '1':
+            print("\nFIRMWARE UPGRADE")
+            mac, flash_size = get_dev_info(results.PORT_PATH)
             command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
             flashapi.main(command)
+
+            omg_input()
             omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
             omg_flash()
             print("\n[ WIFI SETTINGS ]")
@@ -462,19 +437,16 @@ if __name__ == '__main__':
             print("\n[ FIRMWARE USED ]")
             print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
             print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
-            repeating = input("\n\n<<< PRESS ENTER TO UPGRADE NEXT CABLE, OR 'E' TO EXIT >>>\n")
-    elif MENU_MODE == '4':
-        baudrate = '460800'
-        mac, flash_size = get_dev_info(results.PORT_PATH)
-        print("\nFACTORY RESET - BATCH MODE")
-        omg_input()
-        repeating = ''
-        while repeating != 'e':
+        elif MENU_MODE == '2':
+            print("\nFACTORY RESET")
+            mac, flash_size = get_dev_info(results.PORT_PATH)
             if flash_size < 0x200000:
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x8A000']
             else:
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
             flashapi.main(command)
+
+            omg_input()
             omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
             omg_flash()
             print("\n[ WIFI SETTINGS ]")
@@ -482,20 +454,59 @@ if __name__ == '__main__':
             print("\n[ FIRMWARE USED ]")
             print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
             print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
-            repeating = input("\n\n<<< PRESS ENTER TO RESTORE NEXT CABLE, OR 'E' TO EXIT >>>\n")
-    elif MENU_MODE == '5':
-        print("\nBACKUP CABLE")
-        mac, flash_size = get_dev_info(results.PORT_PATH)
-        if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', 'backup.img']
+        elif MENU_MODE == '3':
+            baudrate = '460800'
+            mac, flash_size = get_dev_info(results.PORT_PATH)
+            print("\nFIRMWARE UPGRADE - BATCH MODE")
+            omg_input()
+            repeating = ''
+            while repeating != 'e':
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
+                flashapi.main(command)
+                omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
+                omg_flash()
+                print("\n[ WIFI SETTINGS ]")
+                print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
+                print("\n[ FIRMWARE USED ]")
+                print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
+                print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
+                repeating = input("\n\n<<< PRESS ENTER TO UPGRADE NEXT CABLE, OR 'E' TO EXIT >>>\n")
+                complete(0)
+        elif MENU_MODE == '4':
+            baudrate = '460800'
+            mac, flash_size = get_dev_info(results.PORT_PATH)
+            print("\nFACTORY RESET - BATCH MODE")
+            omg_input()
+            repeating = ''
+            while repeating != 'e':
+                if flash_size < 0x200000:
+                    command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x8A000']
+                else:
+                    command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
+                flashapi.main(command)
+                omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
+                omg_flash()
+                print("\n[ WIFI SETTINGS ]")
+                print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
+                print("\n[ FIRMWARE USED ]")
+                print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
+                print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
+                repeating = input("\n\n<<< PRESS ENTER TO RESTORE NEXT CABLE, OR 'E' TO EXIT >>>\n")
+        elif MENU_MODE == '5':
+            print("\nBACKUP CABLE")
+            mac, flash_size = get_dev_info(results.PORT_PATH)
+            if flash_size < 0x200000:
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', 'backup.img']
+            else:
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', 'backup.img']
+            flashapi.main(command)
+            print('Backup written to backup.img')
+        elif MENU_MODE == '6':
+            print("<<< GOOD BYE. FLASHER EXITING >>> ")
+            sys.exit(0)
         else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', 'backup.img']
-        flashapi.main(command)
-        print('Backup written to backup.img')
-    elif MENU_MODE == '6':
-        print("<<< GOOD BYE. FLASHER EXITING >>> ")
-        sys.exit(0)
-    else:
-        print("<<< NO VALID INPUT WAS DETECTED. >>>")
-
+            print("<<< NO VALID INPUT WAS DETECTED. >>>")
+    except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
+        print("<<< PLEASE DISCONNECT AND RECONNECT FLASHER AND START TASK AGAIN >>>")
+        sys.exit(1) # special case
     complete(0)
