@@ -90,20 +90,15 @@ def ask_for_port():
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
         includedport = "CP2102"
         if includedport in desc:
-            excludedport = "usbserial"
-            if excludedport in port:
-                skippedports.append(port)
-            else:
-                i = i+1
-                sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(i, port, desc))
-                ports.append(port)
-                identifiedport = i
+            i+=1
+            sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(i, port, desc))
+            ports.append(port)
         else: 
             skippedports.append(port)
     while True:
-        count = len(ports)
-        if identifiedport == 1:
-            return ports[i]
+        num_ports = len(ports)
+        if num_ports == 1:
+            return ports[0]
         else:
             port = raw_input('--- Enter port index or full name: ')
             try:
@@ -372,7 +367,7 @@ if __name__ == '__main__':
         import serial
     except:
         print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
-        print("<<< YOU CAN TRY: npm install serial OR pip install pyserial >>>")
+        print("<<< YOU CAN TRY: npm install serial or pip install pyserial >>>")
         complete(1)
 
     try:
@@ -396,8 +391,8 @@ if __name__ == '__main__':
 
     while not SANITIZED_SELECTION:
         try:
-            MENU_MODE = input("\nSELECT FUNCTION:\n1: FLASH NEW FIRMWARE (DEFAULT)\n2: FACTORY RESET\n3: FIRMWARE UPGRADE - BATCH MODE\n4: FACTORY RESET - BATCH MODE\n5: BACKUP CABLE\n")
-            if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5':
+            MENU_MODE = input("\nSELECT FUNCTION:\n1: FLASH NEW FIRMWARE (DEFAULT)\n2: FACTORY RESET\n3: FIRMWARE UPGRADE - BATCH MODE\n4: FACTORY RESET - BATCH MODE\n5: BACKUP CABLE\n6: EXIT FLASHER\n")
+            if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6':
                 SANITIZED_SELECTION = True
         except:
             pass
@@ -479,7 +474,9 @@ if __name__ == '__main__':
             command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', 'backup.img']
         flashapi.main(command)
         print('Backup written to backup.img')
-
+    elif MENU_MODE == '6':
+        print("<<< GOOD BYE. FLASHER EXITING >>> ")
+        sys.exit(0)
     else:
         print("<<< NO VALID INPUT WAS DETECTED. >>>")
 
