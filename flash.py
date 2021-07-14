@@ -495,12 +495,13 @@ if __name__ == '__main__':
         elif MENU_MODE == '5':
             print("\nBACKUP CABLE")
             mac, flash_size = get_dev_info(results.PORT_PATH)
+            filename = "backup-{MACLOW}.img".format(MACLOW="".join([hex(m).lstrip("0x") for m in mac]).lower())
             if flash_size < 0x200000:
-                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', 'backup.img']
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', filename]
             else:
-                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', 'backup.img']
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', filename]
             flashapi.main(command)
-            print('Backup written to backup.img')
+            print('Backup written to ', filename)
         elif MENU_MODE == '6':
             print("<<< GOOD BYE. FLASHER EXITING >>> ")
             sys.exit(0)
