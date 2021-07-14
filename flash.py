@@ -391,7 +391,25 @@ if __name__ == '__main__':
 
     while not SANITIZED_SELECTION:
         try:
-            MENU_MODE = input("\nSELECT FUNCTION:\n1: FLASH NEW FIRMWARE (DEFAULT)\n2: FACTORY RESET\n3: FIRMWARE UPGRADE - BATCH MODE\n4: FACTORY RESET - BATCH MODE\n5: BACKUP CABLE\n6: EXIT FLASHER\n")
+            menu_options = [
+                'FLASH NEW FIRMWARE',
+                'FACTORY RESET',
+                'FIRMWARE UPGRADE - BATCH MODE',
+                'FACTORY RESET - BATCH MODE',
+                'BACKUP CABLE',
+                'EXIT FLASHER',
+            ]
+            print("Available Options \n")
+            i = 1
+            for menu_option in menu_options:
+                 print(i," ",menu_option,end="")
+                 if i == 1:
+                     print(" (DEFAULT)")
+                 else:
+                     print("")
+                 i+=1    
+            menu_options = [''] 
+            MENU_MODE = input("Select Option: ")
             if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6':
                 SANITIZED_SELECTION = True
         except:
