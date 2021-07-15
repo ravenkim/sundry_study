@@ -19,6 +19,7 @@ except NameError:
 
 
 VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 070421 @ 003304 EST ] .[d]."
+FLASHER_VERSION = 1 # presume we have an old style flasher 
 UPDATES = "FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
 
 MOTD = """\
@@ -78,6 +79,21 @@ def get_dev_info(dev):
     flash_size = {0x14: 0x100000, 0x15: 0x200000, 0x16: 0x400000}[size_id]
     return mac, flash_size
 
+def ask_for_flasherhwver():
+    """
+        Ask for the flasher version, either 1 or 2 right now...
+    """
+    flash_version = 1
+    while True:
+        try:
+            flash_version = int(raw_input("--- Enter version of flasher hardware [Available: 1 or 2] (Default is Version 1): "))
+        except:
+            pass
+        if flash_version == 1 or flash_version == 2:
+            break
+    print("<<< USER REPORTED HARDWARE FLASHER REVISION AS VERSION", flash_version, ">>>")
+    return flash_version    
+    
 def ask_for_port():
     """\
     Show a list of ports and ask the user for a choice. To make selection
@@ -112,6 +128,32 @@ def ask_for_port():
             else:
                 port = ports[index]
             return port
+
+def omg_flash(command,tries=2):
+    ver = FLASHER_VERSION
+    if ver == 2:
+        try:
+            return flashapi.main(command)
+        except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
+            print("Error", str(e))
+            return None
+    else:
+        ret = False
+        while tries>0:
+            try:
+                ret = flashapi.main(command)
+                print("<<< PLEASE UNPLUG AND REPLUG FLASHER BEFORE CONTINUING >>>")
+                input("Press Enter to continue when ready...")
+                ret = True
+                break
+            except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
+                tries-=1
+                print("Unsuccessful communication,", tries, "trie(s) remain")
+        if not ret:
+            print("<<< ERROR DURING FLASHING PROCESS PREVENTED SUCCESSFUL FLASH. TRY TO RECONNECT FLASHER OR REBOOT >>>")
+            complete(1)
+        else:
+            return ret
 
 def complete(statuscode, message="Press Enter to continue..."):
     input(message)
@@ -167,66 +209,28 @@ def omg_locate():
 def omg_probe():
     devices = ""
     results.PROG_FOUND = False
-
-    if results.OS_DETECTED == "WINDOWS":
-        detected_ports = ask_for_port()
-        devices = detected_ports
-        print("<<< PROBING COMPORTS FOR O.MG-CABLE-PROGRAMMER >>>\n")
-        for i in range(1, 1):
-            try:
-                comport = devices
-                command = ['--baud', baudrate, '--port', comport, '--no-stub', 'chip_id']
-                flashapi.main(command)
-                results.PROG_FOUND = True
-                results.PORT_PATH = comport
-                break
-            except:
-                pass
-        if results.PROG_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
-        else:
-            print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND ON THESE COMPORTS >>>\n")
-            complete(1)
-
-    elif results.OS_DETECTED == "DARWIN":
-        detected_ports = ask_for_port();
-        devices = detected_ports;
-        print("<<< PROBING FOR O.MG-CABLE-PROGRAMMER >>>\n")
-    elif results.OS_DETECTED == "LINUX":
-        detected_ports = ask_for_port();
-        devices = detected_ports;
-        print("<<< PROBING FOR O.MG-CABLE-PROGRAMMER >>>\n")
-
-    if results.OS_DETECTED == "DARWIN" or results.OS_DETECTED == "LINUX":
-        devport = devices
-        try:
-            command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
-            flashapi.main(command)
+     
+    FLASHER_VERSION = ask_for_flasherhwver()
+    detected_ports = ask_for_port()
+    devices = detected_ports
+    print("<<< PROBING DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
+    try:
+        command = ['--baud', baudrate, '--port', devices, '--no-stub', 'chip_id']
+        res = omg_flash(command)
+        if res:
             results.PROG_FOUND = True
             results.PORT_PATH = devices
-        except:
-            results.PROG_FOUND = False
-
-        if results.PROG_FOUND:
-            print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND AT %s >>>" % (str(results.PORT_PATH)))
+    except:
+        pass
+    if results.PROG_FOUND:
+        print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
+    else:
+        if results.OS_DETECTED == "DARWIN":
+            print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES, YOU MAY NEED TO INSTALL THE DRIVERS FOR CP210X USB BRIDGE >>>\n")
+            print("VISIT: [ https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers ]\n")
         else:
-            port = ''
-            if port != '':
-                devport = devices
-                try:
-                    command = ['--baud', baudrate, '--port', devport, '--no-stub', 'chip_id']
-                    flashapi.main(command)
-                    results.PROG_FOUND = True
-                    results.PORT_PATH = devices[i]
-                except:
-                    results.PROG_FOUND = False
-            else:
-                if results.OS_DETECTED == "DARWIN":
-                    print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES, YOU MAY NEED TO INSTALL THE DRIVERS FOR CP210X USB BRIDGE >>>\n")
-                    print("VISIT: [ https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers ]\n")
-                else:
-                    print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES >>>\n")
-                complete(1)
+            print("<<< O.MG-CABLE-PROGRAMMER WAS NOT FOUND IN DEVICES >>>\n")
+        complete(1)
 
 
 def omg_patch(_ssid, _pass, _mode):
@@ -335,7 +339,7 @@ def omg_input():
         results.WIFI_PASS = WIFI_PASS
 
 
-def omg_flash():
+def omg_flashfw():
     mac, flash_size = get_dev_info(results.PORT_PATH)
 
     try:
@@ -348,7 +352,7 @@ def omg_flash():
             command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
         else:
             command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
-        flashapi.main(command)
+        omg_flash(command)
 
     except:
         print("\n<<< SOMETHING FAILED WHILE FLASHING >>>")
@@ -428,11 +432,11 @@ if __name__ == '__main__':
             print("\nFIRMWARE UPGRADE")
             mac, flash_size = get_dev_info(results.PORT_PATH)
             command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
-            flashapi.main(command)
+            omg_flash(command)
 
             omg_input()
             omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-            omg_flash()
+            omg_flashfw()
             print("\n[ WIFI SETTINGS ]")
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
             print("\n[ FIRMWARE USED ]")
@@ -445,11 +449,11 @@ if __name__ == '__main__':
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x8A000']
             else:
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
-            flashapi.main(command)
+            omg_flash(command)
 
             omg_input()
             omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-            omg_flash()
+            omg_flashfw()
             print("\n[ WIFI SETTINGS ]")
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
             print("\n[ FIRMWARE USED ]")
@@ -463,9 +467,9 @@ if __name__ == '__main__':
             repeating = ''
             while repeating != 'e':
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
-                flashapi.main(command)
+                omg_flash(command)
                 omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-                omg_flash()
+                omg_flashfw()
                 print("\n[ WIFI SETTINGS ]")
                 print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
                 print("\n[ FIRMWARE USED ]")
@@ -484,9 +488,9 @@ if __name__ == '__main__':
                     command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x8A000']
                 else:
                     command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
-                flashapi.main(command)
+                omg_flash(command)
                 omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-                omg_flash()
+                omg_flashfw()
                 print("\n[ WIFI SETTINGS ]")
                 print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
                 print("\n[ FIRMWARE USED ]")
@@ -501,7 +505,7 @@ if __name__ == '__main__':
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x100000', filename]
             else:
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'read_flash', '0x00000', '0x200000', filename]
-            flashapi.main(command)
+            omg_flash(command)
             print('Backup written to ', filename)
         elif MENU_MODE == '6':
             print("<<< GOOD BYE. FLASHER EXITING >>> ")
