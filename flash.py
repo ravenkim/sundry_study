@@ -85,7 +85,7 @@ def ask_for_flasherhwver():
         Ask for the flasher version, either 1 or 2 right now...
     """
     if FLASHER_SKIP_ON_VALID_DETECTION and FLASHER_VERSION != 1:
-        return FLASHER_SKIP_ON_VALID_DETECTION
+        return FLASHER_VERSION
         
     flash_version = FLASHER_VERSION
     while True:
