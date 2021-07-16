@@ -20,6 +20,7 @@ except NameError:
 
 VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 070421 @ 003304 EST ] .[d]."
 FLASHER_VERSION = 1 # presume we have an old style flasher 
+FLASHER_SKIP_ON_VALID_DETECTION = True
 UPDATES = "FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
 
 MOTD = """\
@@ -83,10 +84,13 @@ def ask_for_flasherhwver():
     """
         Ask for the flasher version, either 1 or 2 right now...
     """
-    flash_version = 1
+    if FLASHER_SKIP_ON_VALID_DETECTION and FLASHER_VERSION != 1:
+        return FLASHER_SKIP_ON_VALID_DETECTION
+        
+    flash_version = FLASHER_VERSION
     while True:
         try:
-            flash_version = int(raw_input("--- Enter version of flasher hardware [Available: 1 or 2] (Default is Version 1): "))
+            flash_version = int(raw_input("--- Enter version of flasher hardware [Available: 1 or 2] (Detected is Version {FLASHVER}): ".format(FLASHVER=flash_version)))
         except:
             pass
         if flash_version == 1 or flash_version == 2:
@@ -133,10 +137,11 @@ def omg_flash(command,tries=2):
     ver = FLASHER_VERSION
     if ver == 2:
         try:
-            return flashapi.main(command)
+            flashapi.main(command)
+            return True
         except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
             print("Error", str(e))
-            return None
+            return False
     else:
         ret = False
         while tries>0:
@@ -209,10 +214,28 @@ def omg_locate():
 def omg_probe():
     devices = ""
     results.PROG_FOUND = False
-     
-    FLASHER_VERSION = ask_for_flasherhwver()
+
     detected_ports = ask_for_port()
     devices = detected_ports
+ 
+    # do v2 check sensing 
+    try:
+        sense = serial.Serial()
+        sense.baudrate = baudrate
+        sense.port = devices
+        sense.dtr = 1
+        sense.dsrdtr = 1
+        sense.setDTR(True)
+        sense.open()
+        if sense.dsr == sense.dtr:
+            FLASHER_VERSION = 2
+        sense.close()
+    except:
+        pass
+                 
+    FLASHER_VERSION = ask_for_flasherhwver()
+    
+
     print("<<< PROBING DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
     try:
         command = ['--baud', baudrate, '--port', devices, '--no-stub', 'chip_id']
