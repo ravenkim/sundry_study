@@ -88,14 +88,15 @@ def ask_for_flasherhwver():
         return FLASHER_VERSION
         
     flash_version = FLASHER_VERSION
-    while True:
-        try:
-            flash_version = int(raw_input("--- Enter version of flasher hardware [Available: 1 or 2] (Detected is Version {FLASHVER}): ".format(FLASHVER=flash_version)))
-        except:
-            pass
-        if flash_version == 1 or flash_version == 2:
-            break
-    print("<<< USER REPORTED HARDWARE FLASHER REVISION AS VERSION", flash_version, ">>>")
+    if FLASHER_VERSION is None:
+        while True:
+            try:
+                flash_version = int(raw_input("--- Enter version of flasher hardware [Available: 1 or 2] (Detected is Version {FLASHVER}): ".format(FLASHVER=flash_version)))
+            except:
+                pass
+            if flash_version == 1 or flash_version == 2:
+                break
+        print("<<< USER REPORTED HARDWARE FLASHER REVISION AS VERSION", flash_version, ">>>")
     return flash_version    
     
 def ask_for_port():
