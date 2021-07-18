@@ -21,7 +21,7 @@ except NameError:
 
 
 VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 070421 @ 003304 EST ] .[d]."
-FLASHER_VERSION = 1 # presume we have an old style flasher 
+FLASHER_VERSION = 2 # presume we have an old style flasher 
 FLASHER_SKIP_ON_VALID_DETECTION = True
 UPDATES = "FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
 
@@ -143,7 +143,7 @@ def ask_for_port():
 
 def omg_flash(command,tries=2):
     ver = FLASHER_VERSION
-    if ver.find("2") != -1:
+    if int(ver) == 2
         try:
             flashapi.main(command)
             return True
@@ -246,16 +246,9 @@ def omg_probe():
                  
     FLASHER_VERSION = ask_for_flasherhwver()
     
-
-    print("<<< PROBING DEVICES FOR O.MG-CABLE-PROGRAMMER >>>\n")
-    try:
-        command = ['--baud', baudrate, '--port', devices, '--no-stub', 'chip_id']
-        res = omg_flash(command)
-        if res:
-            results.PROG_FOUND = True
-            results.PORT_PATH = devices
-    except:
-        pass
+    results.PROG_FOUND = True
+    results.PORT_PATH = devices
+    
     if results.PROG_FOUND:
         print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
     else:
@@ -476,7 +469,7 @@ if __name__ == '__main__':
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
             print("\n[ FIRMWARE USED ]")
             print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-            print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
+            print("\n<<< PROCESS FINISHED, REMOVE CABLE >>>\n")
         elif MENU_MODE == '2':
             print("\nFACTORY RESET")
             mac, flash_size = get_dev_info(results.PORT_PATH)
@@ -493,7 +486,7 @@ if __name__ == '__main__':
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
             print("\n[ FIRMWARE USED ]")
             print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-            print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
+            print("\n<<< PROCESS FINISHED, REMOVE CABLE >>>\n")
         elif MENU_MODE == '3':
             baudrate = '460800'
             mac, flash_size = get_dev_info(results.PORT_PATH)
@@ -509,7 +502,7 @@ if __name__ == '__main__':
                 print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
                 print("\n[ FIRMWARE USED ]")
                 print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-                print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
+                print("\n<<< PROCESS FINISHED, REMOVE CABLE AND PLUG IN NEW CABLE >>>\n")
                 repeating = input("\n\n<<< PRESS ENTER TO UPGRADE NEXT CABLE, OR 'E' TO EXIT >>>\n")
                 complete(0)
         elif MENU_MODE == '4':
@@ -548,6 +541,6 @@ if __name__ == '__main__':
         else:
             print("<<< NO VALID INPUT WAS DETECTED. >>>")
     except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
-        print("<<< PLEASE DISCONNECT AND RECONNECT FLASHER AND START TASK AGAIN >>>")
+        print("<<< PLEASE DISCONNECT AND RECONNECT PROGRAMMER AND START TASK AGAIN >>>")
         sys.exit(1) # special case
     complete(0)
