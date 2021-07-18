@@ -9,6 +9,8 @@ from serial.tools.list_ports import comports
 from serial.tools import hexlify_codec
 from scripts import flashapi as flashapi
 from time import time
+from signal import signal, SIGINT
+from sys import exit
 
 try:
     raw_input
@@ -53,6 +55,11 @@ MOTD = """\
            `Ndo:`    `.`
            :-\
 """
+
+def handler(signal_received, frame):
+    # Handle any cleanup here
+    print('SIGINT or CTRL-C detected. Exiting gracefully')
+    exit(0)
 
 class omg_results():
     def __init__(self):
@@ -136,7 +143,7 @@ def ask_for_port():
 
 def omg_flash(command,tries=2):
     ver = FLASHER_VERSION
-    if ver == 2:
+    if ver.find("2") != -1:
         try:
             flashapi.main(command)
             return True
@@ -224,12 +231,15 @@ def omg_probe():
         sense = serial.Serial()
         sense.baudrate = baudrate
         sense.port = devices
-        sense.dtr = 1
-        sense.dsrdtr = 1
+        sense.dtr = "1"
+        sense.dsrdtr = "1"
         sense.setDTR(True)
         sense.open()
+        global FLASHER_VERSION
         if sense.dsr == sense.dtr:
-            FLASHER_VERSION = 2
+            FLASHER_VERSION = "2"
+        else: 
+            FLASHER_VERSION = "1"            
         sense.close()
     except:
         pass
@@ -388,6 +398,7 @@ def get_script_path():
 
 
 if __name__ == '__main__':
+    signal(SIGINT, handler)
     print("\n" + VERSION)
     print("\n" + UPDATES)
     print("\n" + MOTD + "\n")
