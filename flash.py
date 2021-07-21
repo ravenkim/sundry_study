@@ -12,6 +12,9 @@ from time import time
 from signal import signal, SIGINT
 from sys import exit
 
+from pprint import pprint
+
+
 try:
     raw_input
 except NameError:
@@ -98,7 +101,7 @@ def ask_for_flasherhwver():
     if FLASHER_VERSION is None:
         while True:
             try:
-                flash_version = int(raw_input("--- Enter version of flasher hardware [Available: 1 or 2] (Detected is Version {FLASHVER}): ".format(FLASHVER=flash_version)))
+                flash_version = int(raw_input("--- Enter version of programmer hardware [Available Versions: 1 or 2] (Detected is Version {FLASHVER}): ".format(FLASHVER=flash_version)))
             except:
                 pass
             if flash_version == 1 or flash_version == 2:
@@ -142,8 +145,11 @@ def ask_for_port():
             return port
 
 def omg_flash(command,tries=2):
+    global FLASHER_VERSION
     ver = FLASHER_VERSION
-    if int(ver) == 2
+    from pprint import pprint
+    pprint(ver)
+    if int(ver) == 2:
         try:
             flashapi.main(command)
             return True
@@ -155,7 +161,7 @@ def omg_flash(command,tries=2):
         while tries>0:
             try:
                 ret = flashapi.main(command)
-                print("<<< PLEASE UNPLUG AND REPLUG FLASHER BEFORE CONTINUING >>>")
+                print("<<< PLEASE UNPLUG AND REPLUG CABLE BEFORE CONTINUING >>>")
                 input("Press Enter to continue when ready...")
                 ret = True
                 break
@@ -163,7 +169,7 @@ def omg_flash(command,tries=2):
                 tries-=1
                 print("Unsuccessful communication,", tries, "trie(s) remain")
         if not ret:
-            print("<<< ERROR DURING FLASHING PROCESS PREVENTED SUCCESSFUL FLASH. TRY TO RECONNECT FLASHER OR REBOOT >>>")
+            print("<<< ERROR DURING FLASHING PROCESS PREVENTED SUCCESSFUL FLASH. TRY TO RECONNECT CABLE OR REBOOT >>>")
             complete(1)
         else:
             return ret
@@ -226,24 +232,6 @@ def omg_probe():
     detected_ports = ask_for_port()
     devices = detected_ports
  
-    # do v2 check sensing 
-    try:
-        sense = serial.Serial()
-        sense.baudrate = baudrate
-        sense.port = devices
-        sense.dtr = "1"
-        sense.dsrdtr = "1"
-        sense.setDTR(True)
-        sense.open()
-        global FLASHER_VERSION
-        if sense.dsr == sense.dtr:
-            FLASHER_VERSION = "2"
-        else: 
-            FLASHER_VERSION = "1"            
-        sense.close()
-    except:
-        pass
-                 
     FLASHER_VERSION = ask_for_flasherhwver()
     
     results.PROG_FOUND = True
@@ -264,38 +252,25 @@ def omg_patch(_ssid, _pass, _mode):
     FILE_PAGE = results.FILE_PAGE
 
     try:
-        BYTES = []
+        BYTES = bytearray()
         with open(FILE_PAGE, "rb") as f:
             byte = f.read(1)
-            BYTES.append(byte)
             while byte != b"":
                 byte = f.read(1)
-                BYTES.append(byte)
-
-            offset = 0
-
-            for i, byte in enumerate(BYTES):
-                if chr(int(hex(int.from_bytes(BYTES[i + 0], "big"))[2:].upper(), 16)) == 'a':
-                    if chr(int(hex(int.from_bytes(BYTES[i + 1], "big"))[2:].upper(), 16)) == 'c':
-                        if chr(int(hex(int.from_bytes(BYTES[i + 2], "big"))[2:].upper(), 16)) == 'c':
-                            if chr(int(hex(int.from_bytes(BYTES[i + 3], "big"))[2:].upper(), 16)) == 'e':
-                                if chr(int(hex(int.from_bytes(BYTES[i + 4], "big"))[2:].upper(), 16)) == 's':
-                                    if chr(int(hex(int.from_bytes(BYTES[i + 5], "big"))[2:].upper(), 16)) == 's':
-                                        if chr(int(hex(int.from_bytes(BYTES[i + 6], "big"))[2:].upper(), 16)) == '.':
-                                            if chr(int(hex(int.from_bytes(BYTES[i + 7], "big"))[2:].upper(), 16)) == 'l':
-                                                if chr(int(hex(int.from_bytes(BYTES[i + 8], "big"))[2:].upper(), 16)) == 'o':
-                                                    if chr(int(hex(int.from_bytes(BYTES[i + 9], "big"))[2:].upper(), 16)) == 'g':
-                                                        offset = i
-                                                        break
-        offset += 24
-        d = hex(int.from_bytes(BYTES[offset + 0], "big"))[2:].zfill(2)
-        c = hex(int.from_bytes(BYTES[offset + 1], "big"))[2:].zfill(2)
-        b = hex(int.from_bytes(BYTES[offset + 2], "big"))[2:].zfill(2)
-        a = hex(int.from_bytes(BYTES[offset + 3], "big"))[2:].zfill(2)
-        offset = int(a + b + c + d, 16)
-        length = len("SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid, PASS=_pass, MODE=_mode))
+                try:
+                    BYTES.append(ord(byte))
+                except TypeError:
+                    pass
+        offset = BYTES.find(b'access.log')
+        if offset < 0: 
+            raise ValueError("Invalid location for access.log")
+        raw_pointer = bytearray()
+        offset = int.from_bytes(BYTES[offset+24:offset+28], "little")
+        rcfg = "SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid, PASS=_pass, MODE=_mode)
+        length = len(rcfg)
         aligned = 114
-        _bytes = bytearray("SSID {SSID}\0PASS {PASS}\0MODE {MODE}{NULL}".format(SSID=_ssid, PASS=_pass, MODE=_mode, NULL="\0" * (aligned - length)).encode("utf8"))
+        _bytes = bytearray("{CONFIG}{NULL}".format(CONFIG=rcfg, NULL="\0" * (aligned - length)).encode("utf8"))
+        print("offset:", offset, "aligned:", (offset+aligned), "len:", len(BYTES), "   end")
         for i in range(offset + 0, offset + aligned):
             BYTES[i] = _bytes[i - offset]
         try:
@@ -309,7 +284,7 @@ def omg_patch(_ssid, _pass, _mode):
                 else:
                     f.write(byte)
         print("\n<<< PATCH SUCCESS, FLASHING FIRMWARE >>>\n")
-    except:
+    except KeyError:
         print("\n<<< PATCH FAILURE, ABORTING >>>")
         complete(1)
 
@@ -458,9 +433,9 @@ if __name__ == '__main__':
     
         if MENU_MODE == '1':
             print("\nFIRMWARE UPGRADE")
-            mac, flash_size = get_dev_info(results.PORT_PATH)
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
-            omg_flash(command)
+            #mac, flash_size = get_dev_info(results.PORT_PATH)
+            #command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
+            #omg_flash(command)
 
             omg_input()
             omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
@@ -494,8 +469,8 @@ if __name__ == '__main__':
             omg_input()
             repeating = ''
             while repeating != 'e':
-                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
-                omg_flash(command)
+                #command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x7F0000', '0x1000']
+                #omg_flash(command)
                 omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
                 omg_flashfw()
                 print("\n[ WIFI SETTINGS ]")
@@ -523,7 +498,7 @@ if __name__ == '__main__':
                 print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
                 print("\n[ FIRMWARE USED ]")
                 print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-                print("\n<<< PROCESS FINISHED, REMOVE PROGRAMMER >>>\n")
+                print("\n<<< PROCESS FINISHED, REMOVE CABLE >>>\n")
                 repeating = input("\n\n<<< PRESS ENTER TO RESTORE NEXT CABLE, OR 'E' TO EXIT >>>\n")
         elif MENU_MODE == '5':
             print("\nBACKUP CABLE")
@@ -541,6 +516,6 @@ if __name__ == '__main__':
         else:
             print("<<< NO VALID INPUT WAS DETECTED. >>>")
     except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
-        print("<<< PLEASE DISCONNECT AND RECONNECT PROGRAMMER AND START TASK AGAIN >>>")
+        print("<<< PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>")
         sys.exit(1) # special case
     complete(0)
