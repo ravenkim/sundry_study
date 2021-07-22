@@ -78,6 +78,7 @@ class omg_results():
         self.FILE_INIT = "esp_init_data_default_v08.bin"
         self.FILE_ELF0 = "image.elf-0x00000.bin"
         self.FILE_ELF1 = "image.elf-0x10000.bin"
+        self.FILE_ELF2 = "image.elf-0x20000.bin"
 
 def get_dev_info(dev):
     esp = flashapi.ESP8266ROM(dev, baudrate, None)
@@ -184,6 +185,7 @@ def omg_locate():
     INIT_LOCATED = False
     ELF0_LOCATED = False
     ELF1_LOCATED = False
+    ELF2_LOCATED = False
 
     if os.path.isfile(results.FILE_PAGE):
         PAGE_LOCATED = True
@@ -213,7 +215,15 @@ def omg_locate():
             results.FILE_ELF1 = "firmware/" + results.FILE_ELF1
             ELF1_LOCATED = True
 
-    if PAGE_LOCATED and INIT_LOCATED and ELF0_LOCATED and ELF1_LOCATED:
+    if os.path.isfile(results.FILE_ELF2):
+        ELF2_LOCATED = True
+    else:
+        if os.path.isfile("firmware/" + results.FILE_ELF2):
+            results.FILE_ELF2 = "firmware/" + results.FILE_ELF2
+            ELF2_LOCATED = True
+
+
+    if PAGE_LOCATED and INIT_LOCATED and ELF0_LOCATED and ELF1_LOCATED and ELF2_LOCATED:
         print("\n<<< ALL FIRMWARE FILES LOCATED >>>\n")
     else:
         print("<<< SOME FIRMWARE FILES ARE MISSING, PLACE THEM IN THIS FILE'S DIRECTORY >>>")
@@ -221,6 +231,7 @@ def omg_locate():
         if not INIT_LOCATED: print("\tMISSING FILE: {INIT}".format(INIT=results.FILE_INIT))
         if not ELF0_LOCATED: print("\tMISSING FILE: {ELF0}".format(ELF0=results.FILE_ELF0))
         if not ELF1_LOCATED: print("\tMISSING FILE: {ELF1}".format(ELF1=results.FILE_ELF1))
+        if not ELF2_LOCATED: print("\tMISSING FILE: {ELF2}".format(ELF2=results.FILE_ELF2))
         print('')
         complete(1)
 
@@ -252,33 +263,32 @@ def omg_patch(_ssid, _pass, _mode):
     FILE_PAGE = results.FILE_PAGE
 
     try:
-        BYTES = bytearray()
+        BL = bytearray()
         with open(FILE_PAGE, "rb") as f:
-            byte = f.read(1)
-            while byte != b"":
-                byte = f.read(1)
-                try:
-                    BYTES.append(ord(byte))
-                except TypeError:
-                    pass
-        offset = BYTES.find(b'access.log')
+            b = f.read(1)
+            while b != b"":
+                b = f.read(1)
+                BL += (b)
+        offset = BL.find(b'access.log')
+        offset_o = offset
         if offset < 0: 
             raise ValueError("Invalid location for access.log")
         raw_pointer = bytearray()
-        offset = int.from_bytes(BYTES[offset+24:offset+28], "little")
-        rcfg = "SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid, PASS=_pass, MODE=_mode)
-        length = len(rcfg)
+        offset = int.from_bytes(BL[offset+24:offset+28], "little")
+        ccfg = "SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid, PASS=_pass, MODE=_mode)
+        length = len(ccfg)
         aligned = 114
-        _bytes = bytearray("{CONFIG}{NULL}".format(CONFIG=rcfg, NULL="\0" * (aligned - length)).encode("utf8"))
-        print("offset:", offset, "aligned:", (offset+aligned), "len:", len(BYTES), "   end")
+        _bytes = bytearray("{CONFIG}{NULL}".format(CONFIG=ccfg, NULL="\0" * (aligned - length)).encode("utf8"))
+        print("offset:", offset, " original offset:", offset_o, "aligned:", (offset+aligned), "len:", len(BL), "   end")
         for i in range(offset + 0, offset + aligned):
-            BYTES[i] = _bytes[i - offset]
+            BL[i] = _bytes[i - offset]
+            print(BL[i])
         try:
             os.remove(FILE_PAGE)
         except:
             pass
         with open(FILE_PAGE, 'bw+') as f:
-            for byte in BYTES:
+            for byte in BL:
                 if type(byte) == int:
                     f.write(bytes([byte]))
                 else:
@@ -349,11 +359,12 @@ def omg_flashfw():
         FILE_INIT = results.FILE_INIT
         FILE_ELF0 = results.FILE_ELF0
         FILE_ELF1 = results.FILE_ELF1
+        FILE_ELF2 = results.FILE_ELF2
 
         if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x7f000', FILE_ELF2]
         else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE]
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x17f000', FILE_ELF2]
         omg_flash(command)
 
     except:
