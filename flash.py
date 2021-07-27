@@ -78,7 +78,7 @@ class omg_results():
         self.FILE_INIT = "esp_init_data_default_v08.bin"
         self.FILE_ELF0 = "image.elf-0x00000.bin"
         self.FILE_ELF1 = "image.elf-0x10000.bin"
-        self.FILE_ELF2 = "image.elf-0x20000.bin"
+        self.FILE_BLANK = "blank.bin"
 
 def get_dev_info(dev):
     esp = flashapi.ESP8266ROM(dev, baudrate, None)
@@ -215,11 +215,11 @@ def omg_locate():
             results.FILE_ELF1 = "firmware/" + results.FILE_ELF1
             ELF1_LOCATED = True
 
-    if os.path.isfile(results.FILE_ELF2):
+    if os.path.isfile(results.FILE_BLANK):
         ELF2_LOCATED = True
     else:
-        if os.path.isfile("firmware/" + results.FILE_ELF2):
-            results.FILE_ELF2 = "firmware/" + results.FILE_ELF2
+        if os.path.isfile("firmware/" + results.FILE_BLANK):
+            results.FILE_BLANK = "firmware/" + results.FILE_BLANK
             ELF2_LOCATED = True
 
 
@@ -231,7 +231,7 @@ def omg_locate():
         if not INIT_LOCATED: print("\tMISSING FILE: {INIT}".format(INIT=results.FILE_INIT))
         if not ELF0_LOCATED: print("\tMISSING FILE: {ELF0}".format(ELF0=results.FILE_ELF0))
         if not ELF1_LOCATED: print("\tMISSING FILE: {ELF1}".format(ELF1=results.FILE_ELF1))
-        if not ELF2_LOCATED: print("\tMISSING FILE: {ELF2}".format(ELF2=results.FILE_ELF2))
+        if not ELF2_LOCATED: print("\tMISSING FILE: {ELF2}".format(ELF2=results.FILE_BLANK))
         print('')
         complete(1)
 
@@ -274,36 +274,35 @@ def omg_patch(_ssid, _pass, _mode):
             offset = 0
 
             for i, byte in enumerate(BYTES):
-                if chr(int(hex(int.from_bytes(BYTES[i+0],"big"))[2:].upper(),16)) == 'a':
-                    if chr(int(hex(int.from_bytes(BYTES[i+1],"big"))[2:].upper(),16)) == 'c':
-                        if chr(int(hex(int.from_bytes(BYTES[i+2],"big"))[2:].upper(),16)) == 'c':
-                            if chr(int(hex(int.from_bytes(BYTES[i+3],"big"))[2:].upper(),16)) == 'e':
-                                if chr(int(hex(int.from_bytes(BYTES[i+4],"big"))[2:].upper(),16)) == 's':
-                                    if chr(int(hex(int.from_bytes(BYTES[i+5],"big"))[2:].upper(),16)) == 's':
-                                        if chr(int(hex(int.from_bytes(BYTES[i+6],"big"))[2:].upper(),16)) == '.':
-                                            if chr(int(hex(int.from_bytes(BYTES[i+7],"big"))[2:].upper(),16)) == 'l':
-                                                if chr(int(hex(int.from_bytes(BYTES[i+8],"big"))[2:].upper(),16)) == 'o':
-                                                    if chr(int(hex(int.from_bytes(BYTES[i+9],"big"))[2:].upper(),16)) == 'g':
+                if chr(int(hex(int.from_bytes(BYTES[i + 0], "big"))[2:].upper(), 16)) == 'a':
+                    if chr(int(hex(int.from_bytes(BYTES[i + 1], "big"))[2:].upper(), 16)) == 'c':
+                        if chr(int(hex(int.from_bytes(BYTES[i + 2], "big"))[2:].upper(), 16)) == 'c':
+                            if chr(int(hex(int.from_bytes(BYTES[i + 3], "big"))[2:].upper(), 16)) == 'e':
+                                if chr(int(hex(int.from_bytes(BYTES[i + 4], "big"))[2:].upper(), 16)) == 's':
+                                    if chr(int(hex(int.from_bytes(BYTES[i + 5], "big"))[2:].upper(), 16)) == 's':
+                                        if chr(int(hex(int.from_bytes(BYTES[i + 6], "big"))[2:].upper(), 16)) == '.':
+                                            if chr(int(hex(int.from_bytes(BYTES[i + 7], "big"))[2:].upper(), 16)) == 'l':
+                                                if chr(int(hex(int.from_bytes(BYTES[i + 8], "big"))[2:].upper(), 16)) == 'o':
+                                                    if chr(int(hex(int.from_bytes(BYTES[i + 9], "big"))[2:].upper(), 16)) == 'g':
                                                         offset = i
                                                         break
-        offset+=24
-        d=hex(int.from_bytes(BYTES[offset+0],"big"))[2:].zfill(2)
-        c=hex(int.from_bytes(BYTES[offset+1],"big"))[2:].zfill(2)
-        b=hex(int.from_bytes(BYTES[offset+2],"big"))[2:].zfill(2)
-        a=hex(int.from_bytes(BYTES[offset+3],"big"))[2:].zfill(2)
-        offset=int(a+b+c+d,16)
-        length=len("SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid,PASS=_pass,MODE=_mode))
-        aligned=114
-        _bytes=bytearray("SSID {SSID}\0PASS {PASS}\0MODE {MODE}{NULL}".format(SSID=_ssid,PASS=_pass,MODE=_mode,NULL="\0"*(aligned-length)).encode("utf8"))
-        for i in range(offset+0,offset+aligned):
-            BYTES[i]=_bytes[i-offset]
-        pprint(BL)
+        offset += 24
+        d = hex(int.from_bytes(BYTES[offset + 0], "big"))[2:].zfill(2)
+        c = hex(int.from_bytes(BYTES[offset + 1], "big"))[2:].zfill(2)
+        b = hex(int.from_bytes(BYTES[offset + 2], "big"))[2:].zfill(2)
+        a = hex(int.from_bytes(BYTES[offset + 3], "big"))[2:].zfill(2)
+        offset = int(a + b + c + d, 16)
+        length = len("SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid, PASS=_pass, MODE=_mode))
+        aligned = 114
+        _bytes = bytearray("SSID {SSID}\0PASS {PASS}\0MODE {MODE}{NULL}".format(SSID=_ssid, PASS=_pass, MODE=_mode, NULL="\0" * (aligned - length)).encode("utf8"))
+        for i in range(offset + 0, offset + aligned):
+            BYTES[i] = _bytes[i - offset]
         try:
             os.remove(FILE_PAGE)
         except:
             pass
         with open(FILE_PAGE, 'bw+') as f:
-            for byte in BL:
+            for byte in BYTES:
                 if type(byte) == int:
                     f.write(bytes([byte]))
                 else:
@@ -374,12 +373,12 @@ def omg_flashfw():
         FILE_INIT = results.FILE_INIT
         FILE_ELF0 = results.FILE_ELF0
         FILE_ELF1 = results.FILE_ELF1
-        FILE_ELF2 = results.FILE_ELF2
+        FILE_BLANK = results.FILE_BLANK
 
         if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE] #, '0x7f000', FILE_ELF2]
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE] #, '0x7f000', FILE_BLANK]
         else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE] #, '0x17f000', FILE_ELF2]
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE] #, '0x17f000', FILE_BLANK]
         omg_flash(command)
 
     except:
