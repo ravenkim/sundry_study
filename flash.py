@@ -263,26 +263,41 @@ def omg_patch(_ssid, _pass, _mode):
     FILE_PAGE = results.FILE_PAGE
 
     try:
-        BL = bytearray()
+        BYTES = []
         with open(FILE_PAGE, "rb") as f:
-            b = f.read(1)
-            while b != b"":
-                b = f.read(1)
-                BL += (b)
-        offset = BL.find(b'access.log')
-        offset_o = offset
-        if offset < 0: 
-            raise ValueError("Invalid location for access.log")
-        raw_pointer = bytearray()
-        offset = int.from_bytes(BL[offset+24:offset+28], "little")
-        ccfg = "SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid, PASS=_pass, MODE=_mode)
-        length = len(ccfg)
-        aligned = 114
-        _bytes = bytearray("{CONFIG}{NULL}".format(CONFIG=ccfg, NULL="\0" * (aligned - length)).encode("utf8"))
-        print("offset:", offset, " original offset:", offset_o, "aligned:", (offset+aligned), "len:", len(BL), "   end")
-        for i in range(offset + 0, offset + aligned):
-            BL[i] = _bytes[i - offset]
-            print(BL[i])
+            byte = f.read(1)
+            BYTES.append(byte)
+            while byte != b"":
+                byte = f.read(1)
+                BYTES.append(byte)
+
+            offset = 0
+
+            for i, byte in enumerate(BYTES):
+                if chr(int(hex(int.from_bytes(BYTES[i+0],"big"))[2:].upper(),16)) == 'a':
+                    if chr(int(hex(int.from_bytes(BYTES[i+1],"big"))[2:].upper(),16)) == 'c':
+                        if chr(int(hex(int.from_bytes(BYTES[i+2],"big"))[2:].upper(),16)) == 'c':
+                            if chr(int(hex(int.from_bytes(BYTES[i+3],"big"))[2:].upper(),16)) == 'e':
+                                if chr(int(hex(int.from_bytes(BYTES[i+4],"big"))[2:].upper(),16)) == 's':
+                                    if chr(int(hex(int.from_bytes(BYTES[i+5],"big"))[2:].upper(),16)) == 's':
+                                        if chr(int(hex(int.from_bytes(BYTES[i+6],"big"))[2:].upper(),16)) == '.':
+                                            if chr(int(hex(int.from_bytes(BYTES[i+7],"big"))[2:].upper(),16)) == 'l':
+                                                if chr(int(hex(int.from_bytes(BYTES[i+8],"big"))[2:].upper(),16)) == 'o':
+                                                    if chr(int(hex(int.from_bytes(BYTES[i+9],"big"))[2:].upper(),16)) == 'g':
+                                                        offset = i
+                                                        break
+        offset+=24
+        d=hex(int.from_bytes(BYTES[offset+0],"big"))[2:].zfill(2)
+        c=hex(int.from_bytes(BYTES[offset+1],"big"))[2:].zfill(2)
+        b=hex(int.from_bytes(BYTES[offset+2],"big"))[2:].zfill(2)
+        a=hex(int.from_bytes(BYTES[offset+3],"big"))[2:].zfill(2)
+        offset=int(a+b+c+d,16)
+        length=len("SSID {SSID} PASS {PASS} MODE {MODE}".format(SSID=_ssid,PASS=_pass,MODE=_mode))
+        aligned=114
+        _bytes=bytearray("SSID {SSID}\0PASS {PASS}\0MODE {MODE}{NULL}".format(SSID=_ssid,PASS=_pass,MODE=_mode,NULL="\0"*(aligned-length)).encode("utf8"))
+        for i in range(offset+0,offset+aligned):
+            BYTES[i]=_bytes[i-offset]
+        pprint(BL)
         try:
             os.remove(FILE_PAGE)
         except:
@@ -362,9 +377,9 @@ def omg_flashfw():
         FILE_ELF2 = results.FILE_ELF2
 
         if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x7f000', FILE_ELF2]
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE] #, '0x7f000', FILE_ELF2]
         else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x17f000', FILE_ELF2]
+            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE] #, '0x17f000', FILE_ELF2]
         omg_flash(command)
 
     except:
