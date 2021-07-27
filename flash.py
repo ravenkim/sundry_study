@@ -95,14 +95,14 @@ def ask_for_flasherhwver():
     """
         Ask for the flasher version, either 1 or 2 right now...
     """
-    if FLASHER_SKIP_ON_VALID_DETECTION and FLASHER_VERSION != 1:
-        return FLASHER_VERSION
-        
+    #if FLASHER_SKIP_ON_VALID_DETECTION and FLASHER_VERSION != 1:
+    #    return FLASHER_VERSION
+    FLASHER_VERSION = None    
     flash_version = FLASHER_VERSION
     if FLASHER_VERSION is None:
         while True:
             try:
-                flash_version = int(raw_input("--- Enter version of programmer hardware [Available Versions: 1 or 2] (Detected is Version {FLASHVER}): ".format(FLASHVER=flash_version)))
+                flash_version = int(raw_input("--- Enter version of programmer hardware [Available Versions: Programmer V1 or Programmer V2]: ".format(FLASHVER=flash_version)))
             except:
                 pass
             if flash_version == 1 or flash_version == 2:
@@ -162,7 +162,7 @@ def omg_flash(command,tries=2):
         while tries>0:
             try:
                 ret = flashapi.main(command)
-                print("<<< PLEASE UNPLUG AND REPLUG CABLE BEFORE CONTINUING >>>")
+                print("<<< GOOD FLASH. PLEASE UNPLUG AND REPLUG CABLE BEFORE CONTINUING >>>")
                 input("Press Enter to continue when ready...")
                 ret = True
                 break
@@ -245,8 +245,10 @@ def omg_probe():
  
     FLASHER_VERSION = ask_for_flasherhwver()
     
-    results.PROG_FOUND = True
+    
     results.PORT_PATH = devices
+    if len(devices) > 1:
+    	results.PROG_FOUND = True
     
     if results.PROG_FOUND:
         print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
@@ -307,7 +309,7 @@ def omg_patch(_ssid, _pass, _mode):
                     f.write(bytes([byte]))
                 else:
                     f.write(byte)
-        print("\n<<< PATCH SUCCESS, FLASHING FIRMWARE >>>\n")
+        #print("\n<<< PATCH SUCCESS, FLASHING FIRMWARE >>>\n")
     except KeyError:
         print("\n<<< PATCH FAILURE, ABORTING >>>")
         complete(1)
@@ -469,7 +471,7 @@ if __name__ == '__main__':
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
             print("\n[ FIRMWARE USED ]")
             print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-            print("\n<<< PROCESS FINISHED, REMOVE CABLE >>>\n")
+            print("\n<<< FIRMWARE PROCESS FINISHED, REMOVE CABLE >>>\n")
         elif MENU_MODE == '2':
             print("\nFACTORY RESET")
             mac, flash_size = get_dev_info(results.PORT_PATH)
@@ -479,14 +481,14 @@ if __name__ == '__main__':
                 command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
             omg_flash(command)
 
-            omg_input()
-            omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-            omg_flashfw()
-            print("\n[ WIFI SETTINGS ]")
-            print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
-            print("\n[ FIRMWARE USED ]")
-            print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-            print("\n<<< PROCESS FINISHED, REMOVE CABLE >>>\n")
+            #omg_input()
+            #omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
+            #omg_flashfw()
+            #print("\n[ WIFI SETTINGS ]")
+            #print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
+            #print("\n[ FIRMWARE USED ]")
+            #print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
+            print("\n<<< FACTORY RESET PROCESS FINISHED, REMOVE CABLE >>>\n")
         elif MENU_MODE == '3':
             baudrate = '460800'
             mac, flash_size = get_dev_info(results.PORT_PATH)
@@ -516,14 +518,6 @@ if __name__ == '__main__':
                     command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x8A000']
                 else:
                     command = ['--baud', baudrate, '--port', results.PORT_PATH, 'erase_region', '0x70000', '0x18A000']
-                omg_flash(command)
-                omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
-                omg_flashfw()
-                print("\n[ WIFI SETTINGS ]")
-                print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
-                print("\n[ FIRMWARE USED ]")
-                print("\n\tINIT: {INIT}\n\tELF0: {ELF0}\n\tELF1: {ELF1}\n\tPAGE: {PAGE}".format(INIT=results.FILE_INIT, ELF0=results.FILE_ELF0, ELF1=results.FILE_ELF1, PAGE=results.FILE_PAGE))
-                print("\n<<< PROCESS FINISHED, REMOVE CABLE >>>\n")
                 repeating = input("\n\n<<< PRESS ENTER TO RESTORE NEXT CABLE, OR 'E' TO EXIT >>>\n")
         elif MENU_MODE == '5':
             print("\nBACKUP CABLE")
@@ -536,11 +530,11 @@ if __name__ == '__main__':
             omg_flash(command)
             print('Backup written to ', filename)
         elif MENU_MODE == '6':
-            print("<<< GOOD BYE. FLASHER EXITING >>> ")
+            print("<<< GOODBYE. FLASHER EXITING >>> ")
             sys.exit(0)
         else:
             print("<<< NO VALID INPUT WAS DETECTED. >>>")
     except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
-        print("<<< PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>")
+        print("<<< FATAL ERROR. PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>")
         sys.exit(1) # special case
     complete(0)
