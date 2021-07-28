@@ -97,7 +97,7 @@ def ask_for_flasherhwver():
     """
     #if FLASHER_SKIP_ON_VALID_DETECTION and FLASHER_VERSION != 1:
     #    return FLASHER_VERSION
-    FLASHER_VERSION = None    
+    FLASHER_VERSION = 1    
     flash_version = FLASHER_VERSION
     if FLASHER_VERSION is None:
         while True:
