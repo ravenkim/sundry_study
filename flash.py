@@ -130,20 +130,20 @@ def ask_for_port():
             skippedports.append(port)
     while True:
         num_ports = len(ports)
-        if num_ports == 1:
-            return ports[0]
+        #if num_ports == 1:
+        #    return ports[0]
+        #else:
+        port = raw_input('--- Enter port index or full name: ')
+        try:
+            index = int(port) - 1
+            if not 0 <= index < len(ports):
+                sys.stderr.write('--- Invalid index!\n')
+                continue
+        except ValueError:
+            pass
         else:
-            port = raw_input('--- Enter port index or full name: ')
-            try:
-                index = int(port) - 1
-                if not 0 <= index < len(ports):
-                    sys.stderr.write('--- Invalid index!\n')
-                    continue
-            except ValueError:
-                pass
-            else:
-                port = ports[index]
-            return port
+            port = ports[index]
+        return port
 
 def omg_flash(command,tries=2):
     global FLASHER_VERSION
@@ -248,7 +248,7 @@ def omg_probe():
     
     results.PORT_PATH = devices
     if len(devices) > 1:
-    	results.PROG_FOUND = True
+        results.PROG_FOUND = True
     
     if results.PROG_FOUND:
         print("\n<<< O.MG-CABLE-PROGRAMMER WAS FOUND ON {PORT} >>>".format(PORT=results.PORT_PATH))
