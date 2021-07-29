@@ -322,7 +322,7 @@ def omg_input():
     while not SANITIZED_SELECTION:
 
         try:
-            WIFI_MODE = input("\nSELECT WIFI MODE\n1: STATION - (Connect to existing network. 2.4GHz Channels 1-7)\n2: ACCESS POINT - (Create SSID. IP: 192.168.4.1)\n")
+            WIFI_MODE = input("\nSELECT WIFI MODE\n1: STATION - (Connect to existing network. 2.4GHz)\n2: ACCESS POINT - (Create SSID. IP: 192.168.4.1)\n")
             if WIFI_MODE == '' or WIFI_MODE == '1' or WIFI_MODE == '2':
                 SANITIZED_SELECTION = True
         except:
