@@ -121,7 +121,7 @@ def ask_for_port():
     ports = []
     skippedports = []
     for n, (port, desc, hwid) in enumerate(sorted(comports()), 1):
-        includedport = "CP2102"
+        includedport = "CP210"
         if includedport in desc:
             i+=1
             sys.stderr.write('--- {:2}: {:20} {!r}\n'.format(i, port, desc))
