@@ -1,9 +1,5 @@
 
-# [Download Latest Firmware HERE](https://github.com/O-MG/O.MG_Cable-Firmware/releases/latest)
-
-
-
-# [Read Setup Instruction HERE](https://github.com/O-MG/O.MG_Cable-Firmware/wiki) < Read this, seriously
+# [Setup Instructions & Latest Firmware](https://github.com/O-MG/O.MG_Cable-Firmware/wiki)
 
  
 
