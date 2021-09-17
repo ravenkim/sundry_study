@@ -535,6 +535,8 @@ if __name__ == '__main__':
         else:
             print("<<< NO VALID INPUT WAS DETECTED. >>>")
     except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
-        print("<<< FATAL ERROR. PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>")
+        if not e:
+            e="Unable to communicate, please attempt to disconnect and reconnect cable"
+        print("<<< FATAL ERROR: %s >>>"%str(e))
         sys.exit(1) # special case
     complete(0)
