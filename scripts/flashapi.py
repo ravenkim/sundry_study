@@ -378,8 +378,7 @@ class ESPLoader(object):
         finally:
             print('')
         raise FatalError(
-            'Failed to connect to %s: %s | \n \n ERROR: A programmer is detected, but no cable seems plugged in. Please try unplugging and replugging the cable and/or programmer. Please also make sure only one programmer is connected.' % (
-                self.CHIP_NAME, last_error))
+            'ERROR: A programmer is detected, but no cable seems plugged in. Please try unplugging and replugging the cable and/or programmer. Please also make sure only one programmer is connected. (%s)' % (last_error))
 
     def read_reg(self, addr):
 

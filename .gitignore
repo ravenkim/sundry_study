@@ -11,3 +11,6 @@ src/assets/js/bundle/build
 .idea
 package-lock.json
 package.json
+*.img
+*.diff
+.DS_Store
