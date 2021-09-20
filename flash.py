@@ -253,8 +253,8 @@ def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
                 if resource['name'] not in dl_files:
                     dl_files.append(resource['name'])
             pymap[mem_size]=file_map
-        pprint(pymap)
-        pprint(dl_files)
+        #pprint(pymap)
+        #pprint(dl_files)
         for dl_file in dl_files:
             dl_url = ("%s/%s"%(FIRMWARE_URL,dl_file)).replace("%BRANCH%",curr_branch)
             n = get_firmware_file(dl_url)    
