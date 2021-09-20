@@ -1,26 +1,24 @@
 # Copyright 2021 Mischief Gadgets LLC
 
-import glob
 import os
-import platform
 import sys
 import json
+import glob
 import serial
 import base64
+import platform
 import argparse
 import platform
 import mimetypes
 import http.client
 import urllib.parse
-from serial.tools.list_ports import comports
-from serial.tools import hexlify_codec
-from scripts import flashapi as flashapi
+from sys import exit
 from time import time
 from signal import signal, SIGINT
-from sys import exit
+from serial.tools.list_ports import comports
+from serial.tools import hexlify_codec
 
 from pprint import pprint
-
 
 try:
     raw_input
@@ -36,7 +34,7 @@ FLASHER_SKIP_ON_VALID_DETECTION = True
 
 BRANCH = "master"
 FIRMWARE_DIR="./firmware"
-FIRMWARE_URL = "https://raw.githubusercontent.com/O-MG/O.MG_Cable-Firmware/%BRANCH%/firmware"
+FIRMWARE_URL = "https://raw.githubusercontent.com/O-MG/O.MG_Cable-Firmware/%BRANCH%"
 MEMMAP_URL = "https://raw.githubusercontent.com/O-MG/WebFlasher/main/assets/memmap.json"
 
 UPDATES = "FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
@@ -71,6 +69,41 @@ MOTD = """\
            `Ndo:`    `.`
            :-\
 """
+
+def omg_dependency_imports():
+    # load pyserial
+    try:
+        global serial
+        import serial
+    except:
+        print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
+        print("<<< YOU CAN TRY: npm install serial or pip install pyserial >>>")
+        complete(1)
+
+    try:
+        from scripts import flashapi as flashtest
+    except:
+        if not os.path.exists('./scripts/'):
+            os.mkdir("./scripts/")
+        dependencies = ['flashapi.py', 'miniterm.py']
+        for dependency in dependencies:
+            file_path = "scripts/"+dependency
+            file_url = FIRMWARE_URL.replace("%BRANCH%",BRANCH) + "/scripts/" + dependency
+            try:
+                res = get_resource_file(file_url)
+                if res['status'] == 200:
+                    with open(file_path,"wb") as f:
+                            f.write(res['data'])
+                    print("succesfully fetched missing dependency %s from %s"%(dependency,file_url))
+            except:
+                print("failed to get missing dependency %s from %s"%(dependency,file_url))
+    try:
+        global flashapi
+        from scripts import flashapi as flashapi 
+    except:
+        print("<<< flashapi.PY MISSING FROM scripts/flashapi.py >>>")
+        print("<<< PLEASE MANUALLY DOWNLOAD FROM https://github.com/O-MG/O.MG_Cable-Firmware >>>")
+        complete(1)
 
 def handler(signal_received, frame):
     # Handle any cleanup here
@@ -208,7 +241,7 @@ def make_request(url):
         conn = http.client.HTTPConnection(host=url_parts[0], port=url_parts[1])
     return conn
 
-def get_firmware_file(url,params=None):
+def get_resource_file(url,params=None):
     pyver = sys.version_info
     uas = "httplib ({0}) python/{1}.{2}.{3}-{4}".format(sys.platform,pyver.major,pyver.minor,pyver.micro,pyver.serial)
     headers = {
@@ -230,7 +263,7 @@ def get_firmware_file(url,params=None):
 
 def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
     curr_branch = BRANCH
-    mem_map = get_firmware_file(MEMMAP_URL)
+    mem_map = get_resource_file(MEMMAP_URL)
     data = None
     if mem_map is not None and 'status' in mem_map and mem_map['status'] == 200:
         # attempt to create dir
@@ -256,9 +289,9 @@ def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
         #pprint(pymap)
         #pprint(dl_files)
         for dl_file in dl_files:
-            dl_url = ("%s/%s"%(FIRMWARE_URL,dl_file)).replace("%BRANCH%",curr_branch)
-            n = get_firmware_file(dl_url)    
-            if n is not None and 'data' in n:
+            dl_url = ("%s/firmware/%s"%(FIRMWARE_URL,dl_file)).replace("%BRANCH%",curr_branch)
+            n = get_resource_file(dl_url)    
+            if n is not None and 'data' in n and n['status']==200:
                 dl_file_path = "%s/%s"%(dst_dir,dl_file)
                 with open(dl_file_path,'wb') as f:
                     print("writing %d bytes of data to file %s from %s"%(len(n['data']),dl_file_path,dl_url))
@@ -506,22 +539,8 @@ if __name__ == '__main__':
     thedirectory = get_script_path()
     os.chdir(thedirectory)
 
-    try:
-        import serial
-    except:
-        print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
-        print("<<< YOU CAN TRY: npm install serial or pip install pyserial >>>")
-        complete(1)
 
-    try:
-        from scripts import flashapi as flashapi
-    except:
-        try:
-            from scripts import flashapi as flashapi
-        except:
-            print("<<< flashapi.PY MISSING FROM scripts/flashapi.py >>>")
-            print("<<< PLEASE RE-DOWNLOAD FROM https://github.com/O-MG/O.MG_Cable-Firmware >>>")
-            complete(1)
+    omg_dependency_imports()
 
     results.OS_DETECTED = platform.system().upper()
 
@@ -639,6 +658,7 @@ if __name__ == '__main__':
                 print("\n<<< LOAD SUCCESS. RELOADING DATA >>>\n\n")
             else:
                 print("\n<<< LOAD FAILED. PLEASE MANUALLY DOWNLOAD FIRMWARE AND PLACE IN '%s' >>>\n\n"%FIRMWARE_DIR)
+                complete(0)
         elif MENU_MODE == '7':
             print("<<< GOODBYE. FLASHER EXITING >>> ")
             sys.exit(0)
