@@ -573,7 +573,7 @@ if __name__ == '__main__':
                  i+=1    
             menu_options = [''] 
             MENU_MODE = str(input("Select Option: ")).replace(" ","")
-            if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6':
+            if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6' or  MENU_MODE == '7' or  MENU_MODE == '8':
                 SANITIZED_SELECTION = True
         except:
             pass
