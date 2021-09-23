@@ -1,19 +1,24 @@
 # Copyright 2021 Mischief Gadgets LLC
 
-import glob
 import os
-import platform
 import sys
+import json
+import glob
 import serial
-from serial.tools.list_ports import comports
-from serial.tools import hexlify_codec
-from scripts import flashapi as flashapi
+import base64
+import platform
+import argparse
+import platform
+import mimetypes
+import http.client
+import urllib.parse
+from sys import exit
 from time import time
 from signal import signal, SIGINT
-from sys import exit
+from serial.tools.list_ports import comports
+from serial.tools import hexlify_codec
 
 from pprint import pprint
-
 
 try:
     raw_input
@@ -23,9 +28,15 @@ except NameError:
     unichr = chr
 
 
-VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 070421 @ 003304 EST ] .[d]."
+VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 092021 @ 0040211 EST ] .[d]."
 FLASHER_VERSION = 2 # presume we have an old style flasher 
 FLASHER_SKIP_ON_VALID_DETECTION = True
+
+BRANCH = "master"
+FIRMWARE_DIR="./firmware"
+FIRMWARE_URL = "https://raw.githubusercontent.com/O-MG/O.MG_Cable-Firmware/%BRANCH%"
+MEMMAP_URL = "https://raw.githubusercontent.com/O-MG/WebFlasher/main/assets/memmap.json"
+
 UPDATES = "FOR UPDATES VISIT: [ https://github.com/O-MG/O.MG_Cable-Firmware ]\n"
 
 MOTD = """\
@@ -58,6 +69,41 @@ MOTD = """\
            `Ndo:`    `.`
            :-\
 """
+
+def omg_dependency_imports():
+    # load pyserial
+    try:
+        global serial
+        import serial
+    except:
+        print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
+        print("<<< YOU CAN TRY: npm install serial or pip install pyserial >>>")
+        complete(1)
+
+    try:
+        from scripts import flashapi as flashtest
+    except:
+        if not os.path.exists('./scripts/'):
+            os.mkdir("./scripts/")
+        dependencies = ['flashapi.py', 'miniterm.py']
+        for dependency in dependencies:
+            file_path = "scripts/"+dependency
+            file_url = FIRMWARE_URL.replace("%BRANCH%",BRANCH) + "/scripts/" + dependency
+            try:
+                res = get_resource_file(file_url)
+                if res['status'] == 200:
+                    with open(file_path,"wb") as f:
+                            f.write(res['data'])
+                    print("succesfully fetched missing dependency %s from %s"%(dependency,file_url))
+            except:
+                print("failed to get missing dependency %s from %s"%(dependency,file_url))
+    try:
+        global flashapi
+        from scripts import flashapi as flashapi 
+    except:
+        print("<<< flashapi.PY MISSING FROM scripts/flashapi.py >>>")
+        print("<<< PLEASE MANUALLY DOWNLOAD FROM https://github.com/O-MG/O.MG_Cable-Firmware >>>")
+        complete(1)
 
 def handler(signal_received, frame):
     # Handle any cleanup here
@@ -179,50 +225,138 @@ def complete(statuscode, message="Press Enter to continue..."):
     input(message)
     sys.exit(statuscode)
 
+def make_request(url):
+    urlparse = urllib.parse.urlparse(url)
+    url_parts = None
+    if ":" in str(urlparse.netloc):
+        url_parts = str(urlparse.netloc).split(":")
+    else:
+        port = 443
+        if urlparse.scheme != "https":
+            port = 80
+        url_parts = (urlparse.netloc, port)
+    if urlparse.scheme == "https":
+        conn = http.client.HTTPSConnection(host=url_parts[0], port=url_parts[1])
+    else:
+        conn = http.client.HTTPConnection(host=url_parts[0], port=url_parts[1])
+    return conn
+
+def get_resource_file(url,params=None):
+    pyver = sys.version_info
+    uas = "httplib ({0}) python/{1}.{2}.{3}-{4}".format(sys.platform,pyver.major,pyver.minor,pyver.micro,pyver.serial)
+    headers = {
+        "Content-type": "application/x-www-form-urlencoded",
+        "Accept": "text/plain",
+        "User-Agent": uas
+    }
+    status = None
+    try:
+        conn = make_request(url)
+        conn.request("GET", url, params, headers)
+        response = conn.getresponse()
+        status = int(response.status)
+        data = response.read()
+    except ConnectionError:
+        data = None
+        status = 500
+    return {'data': data, 'status': status}
+
+def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
+    curr_branch = BRANCH
+    mem_map = get_resource_file(MEMMAP_URL)
+    data = None
+    if mem_map is not None and 'status' in mem_map and mem_map['status'] == 200:
+        # attempt to create dir
+        if not dst_dir=="./" or create_dst_dir:
+            if os.path.exists(dst_dir):
+                for f in os.listdir(dst_dir):
+                    os.remove(dst_dir + "/" + f)
+                os.rmdir(dst_dir)
+            os.mkdir(dst_dir)
+        json_map = json.loads(mem_map['data'])
+        data = json_map
+        pymap = {}
+        dl_files = []
+        for flash_size,files in json_map.items():
+            mem_size = int(int(flash_size)/1024)
+            file_map = []
+            for resource in files:
+                file_map.append(resource['offset'])
+                file_map.append(resource['name'])
+                if resource['name'] not in dl_files:
+                    dl_files.append(resource['name'])
+            pymap[mem_size]=file_map
+        #pprint(pymap)
+        #pprint(dl_files)
+        for dl_file in dl_files:
+            dl_url = ("%s/firmware/%s"%(FIRMWARE_URL,dl_file)).replace("%BRANCH%",curr_branch)
+            n = get_resource_file(dl_url)    
+            if n is not None and 'data' in n and n['status']==200:
+                dl_file_path = "%s/%s"%(dst_dir,dl_file)
+                with open(dl_file_path,'wb') as f:
+                    print("writing %d bytes of data to file %s from %s"%(len(n['data']),dl_file_path,dl_url))
+                    f.write(n['data'])
+    return data
 
 def omg_locate():
-    PAGE_LOCATED = False
-    INIT_LOCATED = False
-    ELF0_LOCATED = False
-    ELF1_LOCATED = False
-    ELF2_LOCATED = False
+    def omg_check(fw_path):
+    
+        pprint(fw_path)
+        PAGE_LOCATED = False
+        INIT_LOCATED = False
+        ELF0_LOCATED = False
+        ELF1_LOCATED = False
+        ELF2_LOCATED = False
 
-    if os.path.isfile(results.FILE_PAGE):
-        PAGE_LOCATED = True
-    else:
-        if os.path.isfile("firmware/" + results.FILE_PAGE):
-            results.FILE_PAGE = "firmware/" + results.FILE_PAGE
+        if os.path.isfile(results.FILE_PAGE):
             PAGE_LOCATED = True
+        else:
+            if os.path.isfile(fw_path + results.FILE_PAGE):
+                results.FILE_PAGE = fw_path + results.FILE_PAGE
+                PAGE_LOCATED = True
 
-    if os.path.isfile(results.FILE_INIT):
-        INIT_LOCATED = True
-    else:
-        if os.path.isfile("firmware/" + results.FILE_INIT):
-            results.FILE_INIT = "firmware/" + results.FILE_INIT
+        if os.path.isfile(results.FILE_INIT):
             INIT_LOCATED = True
+        else:
+            if os.path.isfile(fw_path + results.FILE_INIT):
+                results.FILE_INIT = fw_path + results.FILE_INIT
+                INIT_LOCATED = True
 
-    if os.path.isfile(results.FILE_ELF0):
-        ELF0_LOCATED = True
-    else:
-        if os.path.isfile("firmware/" + results.FILE_ELF0):
-            results.FILE_ELF0 = "firmware/" + results.FILE_ELF0
+        if os.path.isfile(results.FILE_ELF0):
             ELF0_LOCATED = True
+        else:
+            if os.path.isfile(fw_path + results.FILE_ELF0):
+                results.FILE_ELF0 = fw_path + results.FILE_ELF0
+                ELF0_LOCATED = True
 
-    if os.path.isfile(results.FILE_ELF1):
-        ELF1_LOCATED = True
-    else:
-        if os.path.isfile("firmware/" + results.FILE_ELF1):
-            results.FILE_ELF1 = "firmware/" + results.FILE_ELF1
+        if os.path.isfile(results.FILE_ELF1):
             ELF1_LOCATED = True
+        else:
+            if os.path.isfile(fw_path + results.FILE_ELF1):
+                results.FILE_ELF1 = fw_path + results.FILE_ELF1
+                ELF1_LOCATED = True
 
-    if os.path.isfile(results.FILE_BLANK):
-        ELF2_LOCATED = True
-    else:
-        if os.path.isfile("firmware/" + results.FILE_BLANK):
-            results.FILE_BLANK = "firmware/" + results.FILE_BLANK
+        if os.path.isfile(results.FILE_BLANK):
             ELF2_LOCATED = True
+        else:
+            if os.path.isfile(fw_path + results.FILE_BLANK):
+                results.FILE_BLANK = fw_path + results.FILE_BLANK
+                ELF2_LOCATED = True
+        # return data
+        return (PAGE_LOCATED,INIT_LOCATED,ELF0_LOCATED,ELF1_LOCATED,ELF2_LOCATED)
 
-
+    # do lookups
+    fw_path = FIRMWARE_DIR + "/"
+    if not os.path.exists(fw_path):
+        omg_fetch_latest_firmware(True,fw_path)
+    # try one
+    PAGE_LOCATED,INIT_LOCATED,ELF0_LOCATED,ELF1_LOCATED,ELF2_LOCATED = omg_check(fw_path)
+    
+    if not (PAGE_LOCATED and INIT_LOCATED and ELF0_LOCATED and ELF1_LOCATED and ELF2_LOCATED):
+        omg_fetch_latest_firmware(False,fw_path)
+        PAGE_LOCATED,INIT_LOCATED,ELF0_LOCATED,ELF1_LOCATED,ELF2_LOCATED = omg_check(fw_path)
+    
+    # now see if things worked
     if PAGE_LOCATED and INIT_LOCATED and ELF0_LOCATED and ELF1_LOCATED and ELF2_LOCATED:
         print("\n<<< ALL FIRMWARE FILES LOCATED >>>\n")
     else:
@@ -234,6 +368,7 @@ def omg_locate():
         if not ELF2_LOCATED: print("\tMISSING FILE: {ELF2}".format(ELF2=results.FILE_BLANK))
         print('')
         complete(1)
+
 
 
 def omg_probe():
@@ -404,22 +539,8 @@ if __name__ == '__main__':
     thedirectory = get_script_path()
     os.chdir(thedirectory)
 
-    try:
-        import serial
-    except:
-        print("\n<<< PYSERIAL MODULE MISSING, MANUALLY INSTALL TO CONTINUE >>>")
-        print("<<< YOU CAN TRY: npm install serial or pip install pyserial >>>")
-        complete(1)
 
-    try:
-        from scripts import flashapi as flashapi
-    except:
-        try:
-            from scripts import flashapi as flashapi
-        except:
-            print("<<< flashapi.PY MISSING FROM scripts/flashapi.py >>>")
-            print("<<< PLEASE RE-DOWNLOAD FROM https://github.com/O-MG/O.MG_Cable-Firmware >>>")
-            complete(1)
+    omg_dependency_imports()
 
     results.OS_DETECTED = platform.system().upper()
 
@@ -438,6 +559,7 @@ if __name__ == '__main__':
                 'FIRMWARE UPGRADE - BATCH MODE',
                 'FACTORY RESET - BATCH MODE',
                 'BACKUP CABLE',
+                'DOWNLOAD FIRMWARE UPDATES',
                 'EXIT FLASHER',
             ]
             print("Available Options \n")
@@ -451,7 +573,7 @@ if __name__ == '__main__':
                  i+=1    
             menu_options = [''] 
             MENU_MODE = str(input("Select Option: ")).replace(" ","")
-            if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6':
+            if MENU_MODE == '1' or MENU_MODE == '2' or MENU_MODE == '3' or MENU_MODE == '4' or MENU_MODE == '5' or MENU_MODE == '6' or  MENU_MODE == '7' or  MENU_MODE == '8':
                 SANITIZED_SELECTION = True
         except:
             pass
@@ -530,13 +652,20 @@ if __name__ == '__main__':
             omg_flash(command)
             print('Backup written to ', filename)
         elif MENU_MODE == '6':
+            print("Attempting to update flash data...")
+            d = omg_fetch_latest_firmware(True,FIRMWARE_DIR)
+            if d is not None and len(d) > 1:
+                print("\n<<< LOAD SUCCESS. RELOADING DATA >>>\n\n")
+            else:
+                print("\n<<< LOAD FAILED. PLEASE MANUALLY DOWNLOAD FIRMWARE AND PLACE IN '%s' >>>\n\n"%FIRMWARE_DIR)
+                complete(0)
+        elif MENU_MODE == '7':
             print("<<< GOODBYE. FLASHER EXITING >>> ")
             sys.exit(0)
         else:
             print("<<< NO VALID INPUT WAS DETECTED. >>>")
     except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
-        if not e:
-            e="Unable to communicate, please attempt to disconnect and reconnect cable"
-        print("<<< FATAL ERROR: %s >>>"%str(e))
+        print("<<< FATAL ERROR. PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>")
         sys.exit(1) # special case
     complete(0)
+    
