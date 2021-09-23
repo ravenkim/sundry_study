@@ -668,3 +668,4 @@ if __name__ == '__main__':
         print("<<< FATAL ERROR. PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>")
         sys.exit(1) # special case
     complete(0)
+    
