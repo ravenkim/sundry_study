@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copyright 2021 Mischief Gadgets LLC
 
 import os
@@ -618,7 +619,7 @@ if __name__ == '__main__':
             #omg_flash(command)
 
             omg_input()
-            omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
+            #omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
             omg_flashfw()
             print("\n[ WIFI SETTINGS ]")
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
