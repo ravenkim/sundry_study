@@ -29,9 +29,10 @@ except NameError:
     unichr = chr
 
 
-VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 092021 @ 0040211 EST ] .[d]."
+VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 100421 @ 010311 UTC ]"
 FLASHER_VERSION = 2 # presume we have an old style flasher 
 FLASHER_SKIP_ON_VALID_DETECTION = True
+FLASHER_TEST_MODE = False
 
 BRANCH = "master"
 FIRMWARE_DIR="./firmware"
@@ -195,8 +196,6 @@ def ask_for_port():
 def omg_flash(command,tries=2):
     global FLASHER_VERSION
     ver = FLASHER_VERSION
-    from pprint import pprint
-    pprint(ver)
     if int(ver) == 2:
         try:
             flashapi.main(command)
@@ -531,9 +530,7 @@ def omg_flashfw():
         FILE_ELF1 = results.FILE_ELF1
         FILE_BLANK = results.FILE_BLANK
 
-        pprint("flash size:" + str(flash_size/1024))
         dyna_flash = omg_fetch_flash_map(flash_size/1024)
-        pprint(dyna_flash)
         command = None
         if dyna_flash is None:
             if flash_size < 0x200000:
@@ -619,7 +616,8 @@ if __name__ == '__main__':
             #omg_flash(command)
 
             omg_input()
-            #omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
+            if not FLASHER_TEST_MODE:
+                omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
             omg_flashfw()
             print("\n[ WIFI SETTINGS ]")
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
