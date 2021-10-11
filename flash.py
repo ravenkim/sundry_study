@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copyright 2021 Mischief Gadgets LLC
 
 import os
@@ -28,9 +29,10 @@ except NameError:
     unichr = chr
 
 
-VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 092021 @ 0040211 EST ] .[d]."
+VERSION = "FIRMWARE FLASHER VERSION NUMBER [ 100421 @ 010311 UTC ]"
 FLASHER_VERSION = 2 # presume we have an old style flasher 
 FLASHER_SKIP_ON_VALID_DETECTION = True
+FLASHER_TEST_MODE = False
 
 BRANCH = "master"
 FIRMWARE_DIR="./firmware"
@@ -194,8 +196,6 @@ def ask_for_port():
 def omg_flash(command,tries=2):
     global FLASHER_VERSION
     ver = FLASHER_VERSION
-    from pprint import pprint
-    pprint(ver)
     if int(ver) == 2:
         try:
             flashapi.main(command)
@@ -261,6 +261,27 @@ def get_resource_file(url,params=None):
         status = 500
     return {'data': data, 'status': status}
 
+def omg_fetch_flash_map(size):
+    size=int(size) # just forcing things
+    curr_branch = BRANCH
+    mem_map = get_resource_file(MEMMAP_URL)
+    data = None
+    if mem_map is not None and 'status' in mem_map and mem_map['status'] == 200:
+        json_map = json.loads(mem_map['data'])
+        data = json_map
+        pymap = {}
+        for flash_size,files in json_map.items():
+            mem_size = flash_size
+            file_map = []
+            for resource in files:
+                file_map.append(resource['offset'])
+                file_map.append(FIRMWARE_DIR + "/" + resource['name'])
+            pymap[mem_size]=file_map
+        if str(int(size)) in pymap:
+           return pymap[str(int(size))]
+    else:
+        return None
+    
 def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
     curr_branch = BRANCH
     mem_map = get_resource_file(MEMMAP_URL)
@@ -286,8 +307,6 @@ def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
                 if resource['name'] not in dl_files:
                     dl_files.append(resource['name'])
             pymap[mem_size]=file_map
-        #pprint(pymap)
-        #pprint(dl_files)
         for dl_file in dl_files:
             dl_url = ("%s/firmware/%s"%(FIRMWARE_URL,dl_file)).replace("%BRANCH%",curr_branch)
             n = get_resource_file(dl_url)    
@@ -301,7 +320,6 @@ def omg_fetch_latest_firmware(create_dst_dir=False,dst_dir="./firmware"):
 def omg_locate():
     def omg_check(fw_path):
     
-        pprint(fw_path)
         PAGE_LOCATED = False
         INIT_LOCATED = False
         ELF0_LOCATED = False
@@ -512,14 +530,25 @@ def omg_flashfw():
         FILE_ELF1 = results.FILE_ELF1
         FILE_BLANK = results.FILE_BLANK
 
-        if flash_size < 0x200000:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x7f000', FILE_BLANK]
+        dyna_flash = omg_fetch_flash_map(flash_size/1024)
+        command = None
+        if dyna_flash is None:
+            if flash_size < 0x200000:
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '1MB', '-fm', 'dout', '0xfc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x7f000', FILE_BLANK]
+            else:
+                command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x7f000', FILE_BLANK]
         else:
-            command = ['--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', '2MB', '-fm', 'dout', '0x1fc000', FILE_INIT, '0x00000', FILE_ELF0, '0x10000', FILE_ELF1, '0x80000', FILE_PAGE, '0x7f000', FILE_BLANK]
-        omg_flash(command)
+            fs = "%dMB"%((flash_size/1024)/1024)
+            command = [ '--baud', baudrate, '--port', results.PORT_PATH, 'write_flash', '-fs', fs ] + dyna_flash
+            print("In Dynamic Flash mode: %s" % command)
+        if command:
+            omg_flash(command)
+        else:
+            print("\n<<< INVALID FLASH COMMAND >>>")
+            complete(1)                    
 
-    except:
-        print("\n<<< SOMETHING FAILED WHILE FLASHING >>>")
+    except KeyError as e:
+        print("\n<<< SOMETHING FAILED WHILE FLASHING (%s)>>>"%str(e))
         complete(1)
 
 
@@ -587,7 +616,8 @@ if __name__ == '__main__':
             #omg_flash(command)
 
             omg_input()
-            omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
+            if not FLASHER_TEST_MODE:
+                omg_patch(results.WIFI_SSID, results.WIFI_PASS, results.WIFI_MODE)
             omg_flashfw()
             print("\n[ WIFI SETTINGS ]")
             print("\n\tWIFI_SSID: {SSID}\n\tWIFI_PASS: {PASS}\n\tWIFI_MODE: {MODE}\n\tWIFI_TYPE: {TYPE}".format(SSID=results.WIFI_SSID, PASS=results.WIFI_PASS, MODE=results.WIFI_MODE, TYPE=results.WIFI_TYPE))
@@ -665,7 +695,6 @@ if __name__ == '__main__':
         else:
             print("<<< NO VALID INPUT WAS DETECTED. >>>")
     except (flashapi.FatalError, serial.SerialException, serial.serialutil.SerialException) as e:
-        print("<<< FATAL ERROR: %s. PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN >>>"%str(e))
+        print("<<< FATAL ERROR: %s. PLEASE DISCONNECT AND RECONNECT CABLE AND START TASK AGAIN>>>"%str(e))
         sys.exit(1) # special case
     complete(0)
-    
