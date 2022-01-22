@@ -118,7 +118,7 @@ class omg_results():
         self.PROG_FOUND = False
         self.PORT_PATH = ""
         self.WIFI_DEFAULTS = False
-        self.WIFI_SSID = "O.MG-Cable"
+        self.WIFI_SSID = "O.MG"
         self.WIFI_PASS = "12345678"
         self.WIFI_MODE = "1"
         self.WIFI_TYPE = "STATION"
