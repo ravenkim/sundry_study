@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Pokemon Talk</title>
+  </head>
+  <body>
+    <img
+      src="https://mblogthumb-phinf.pstatic.net/20160718_288/a878062_146881687085357gyf_JPEG/12_3.jpg?type=w800"
+      class="index-bgimg"
+    />
+
+    <div class="status-bar">
+      <div class="status-bar__column">
+        <span>No Service</span>
+        <i class="fas fa-wifi"></i>
+      </div>
+      <div class="status-bar__column">
+        <span>18:43</span>
+      </div>
+      <div class="status-bar__column">
+        <span>110%</span>
+        <i class="fas fa-battery-full fa-lg"></i>
+        <i class="fas fa-bolt"></i>
+      </div>
+    </div>
+
+    <header class="welcome-header">
+      <h1 class="welcome-header__title">Pokemon Talk</h1>
+      <p class="welcome-header__text">
+        If you have like Pokemon, please tell me your favorite Pokemon and
+        Serise.
+      </p>
+    </header>
+
+    <form action="friends.html" method="get" id="login-form">
+      <input name="username" type="text" placeholder="My favorite Pokemon" />
+      <input
+        name="password"
+        type="text"
+        placeholder="My favorite Pokemon Serise"
+      />
+      <input type="submit" value="Log In" />
+      <a href="#">Find My favorite Pokemon</a>
+    </form>
+
+    <div id="no-mobile">
+      <span
+        >포켓몬과 대화를 하기 위해서 스크린 비율을 핸드폰처럼 가로를 짧게,
+        세로를 길게 해주세요!</span
+      >
+      <span>
+        In order to talk to Pokemon, please make the screen ratio short and long
+        horizontally like a cell phone!
+      </span>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/6478f529f2.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
