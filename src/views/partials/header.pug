@@ -1,12 +1,17 @@
 header 
     a(href="/") 
-        h1=pageTitle
+        h1  Home | #{siteName}
     nav
         ul 
             li
-                a(href="/") Home
+                a(href="/search") Search
             li
                 a(href="/videos/upload") Upload Video
-            li
-                a(href="/search") Search
-        
+            if loggedIn
+                li
+                    a(href="/logout")  Log Out
+            else
+                li
+                    a(href="/join")  Join
+                li
+                    a(href="/login")  Login
