@@ -5,11 +5,13 @@ header
         ul 
             li
                 a(href="/search") Search
-            li
-                a(href="/videos/upload") Upload Video
             if loggedIn
                 li
                     a(href="/users/logout")  Log Out
+                li 
+                    a(href="/users/edit") Edit Profile
+                li
+                    a(href="/videos/upload") Upload Video
             else
                 li
                     a(href="/join")  Join

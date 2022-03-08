@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import { protectorMiddleware } from "../middlewares";
 
 export const home = async (req, res) => {
     const videos = await Video.find({}).sort({ createdAt: "desc" });
