@@ -1,0 +1,21 @@
+//font
+@import url("https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Permanent+Marker&display=swap");
+
+// Config
+@import "./config/_variables.scss";
+@import "./config/_reset.scss";
+
+// Components
+@import "./components/header.scss";
+@import "./components/footer.scss";
+
+// Screens
+@import "./screens/home.scss";
+@import "./screens/login.scss";
+
+// Defaults
+body {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}

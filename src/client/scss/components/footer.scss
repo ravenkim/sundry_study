@@ -1,0 +1,21 @@
+footer {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  height: 60px;
+  z-index: 1100;
+  box-sizing: border-box;
+
+  .footer_wrap {
+    display: flex;
+    width: 100%;
+    padding: 10px 28px;
+    box-sizing: border-box;
+    background: #272727;
+    line-height: 40px;
+    height: 100%;
+    //수정
+    color: azure;
+  }
+}

@@ -1,0 +1,19 @@
+extends base
+
+block content
+    .wrapper-top 
+            main
+                .loginPage
+                    if errorMessage
+                        span=errorMessage
+                    form(method="POST")
+                        input(placeholder="Username", name="username", type="text", required)
+                        input(placeholder="Password", name="password", type="password", required)
+                        input(type="submit", value="LogIn").loginPage-LogIn 
+                        
+                    .social-login asdasd
+                        
+                    div.auth-switch
+                        div Don't have an account? 
+                        a(href="/join") 
+                            div Create one now &rarr; 
