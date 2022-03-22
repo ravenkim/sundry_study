@@ -50,6 +50,10 @@
       height: 90px;
       margin-top: -45px;
     }
+    #home-btn-prev:active {
+      color: white;
+    }
+
     #home-btn-next {
       position: absolute;
       top: 50%;
@@ -57,6 +61,9 @@
       width: 90px;
       height: 90px;
       margin-top: -45px;
+    }
+    #home-btn-next:active {
+      color: white;
     }
 
     button {
@@ -89,7 +96,7 @@
       float: left;
       margin: 0 5px;
 
-      button {
+      .dots {
         padding: 0;
         margin: 0;
         border: none;
@@ -97,6 +104,10 @@
         width: 10px;
         height: 10px;
         border-radius: 5px;
+        background-color: #131312;
+      }
+
+      .active {
         background-color: white;
       }
     }

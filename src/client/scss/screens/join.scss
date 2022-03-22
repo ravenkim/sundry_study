@@ -1,4 +1,4 @@
-.loginPage {
+.joinPage {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -11,6 +11,7 @@
   background-color: rgba(14, 17, 23, 0.7);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+
   form {
     display: flex;
     width: 100%;
@@ -50,5 +51,9 @@
     width: 90%;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .auth-switch {
+    text-align: center;
   }
 }

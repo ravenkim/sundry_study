@@ -5,7 +5,7 @@ block content
         main
             .album-cover
                 .album-container
-                    .album-inner
+                    .album-inner.active
                         img(src="https://image.bugsm.co.kr/album/images/1000/204529/20452988.jpg")
                     .album-inner
                         img(src="https://image.bugsm.co.kr/album/images/1000/204515/20451516.jpg")
@@ -25,15 +25,16 @@ block content
             .carousel 
                 ul 
                     li 
-                        button#home-btn1
+                        button#home-btn1.dots.active
                     li 
-                        button#home-btn2
+                        button#home-btn2.dots
                     li 
-                        button#home-btn3
+                        button#home-btn3.dots
                     li 
-                        button#home-btn4
-            
-
+                        button#home-btn4.dots
+block scripts
+    script(src="/static/js/album.js")
+                
 
 
                 

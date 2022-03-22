@@ -5,13 +5,14 @@ block content
             main
                 .loginPage
                     if errorMessage
-                        span=errorMessage
+                        div=errorMessage
                     form(method="POST")
-                        input(placeholder="Username", name="username", type="text", required)
+                        input(placeholder="ID", name="id", type="text", required)
                         input(placeholder="Password", name="password", type="password", required)
-                        input(type="submit", value="LogIn").loginPage-LogIn 
+                        input(type="submit", value="LogIn").submitBtn 
                         
-                    .social-login asdasd
+                    .social-login 
+                        
                         
                     div.auth-switch
                         div Don't have an account? 
