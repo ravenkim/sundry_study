@@ -73,7 +73,7 @@ document.querySelector("#home-btn4").addEventListener("click", ()=> {
     showDivs(slideNumber+1)
 });
 
-
+//배경색 지정(background color)
 function albumBackgroundColor(){
     switch (slideNumber) {
         case 0:

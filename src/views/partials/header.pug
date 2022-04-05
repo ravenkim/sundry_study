@@ -4,25 +4,68 @@
             a(href="/" title="WIHI 홈페이지로 이동")
                 div WIHI
         
-        .gnb
-            <i class="fas fa-2x fa-list"></i>
+        #headergnb
+            button.headergnb_btn 
+                span.headergnb_btn1 
+                    <i class="fas fa-2x fa-list"></i> 
+                span.headergnb_btn2 
+                    <i class="fa-solid fa-3x fa-xmark"></i>
    
+
         // nav >> 목록 누르면 여러가지 목록 나오는거 구현하기.
+        nav(display="flex").mainNav
+            div.mainNav_inner
+                ul.mainNav_main
+                    li 
+                        div.button_wrap
+                            a(href="/")
+                                button HOME
+                                 
+                    li 
+                        div.button_wrap
+                            a(href="/")
+                                button ABOUT
+                                 
+                    li 
+                        div.button_wrap
+                            a(href="/")
+                                button ARTIST
+                                 
+                    li 
+                        div.button_wrap
+                            a(href="/videos")
+                                button VIDEOS
+                                 
+                    li 
+                        div.button_wrap
+                            a(href="/")
+                                button COMMENTS
+                                             
+
+
 
         .user_nav
             nav
                 ul
                     li
-                            a(href="/search")
-                                <i class="fa-solid fa-2x fa-tv"></i>
+                        a(href="/search")
+                            <i class="fa-solid fa-2x fa-tv"></i>
                                 
-
-                    li
-                        span
-                            a(href="/join")  Join
-                    li
-                        span
-                            a(href="/login")  Login
+                    if loggedIn
+                        li
+                            span
+                                a(href="/users/edit") Profile
+                        li
+                            span
+                                a(href="/users/logout")  Logout
+                    else
+                        li
+                            span
+                                a(href="/join")  Join
+                        li
+                            span
+                                a(href="/login")  Login
+    script(src="/static/js/headerNav.js")
                 
 
 

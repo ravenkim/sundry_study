@@ -49,14 +49,14 @@ export const getLogin = async (req, res) => {
 export const postLogin = async (req, res) => {
     const { id, password } = req.body;
     const pageTitle = "Login";
-    console.log(id)
     const user = await User.findOne({ id });
-    console.log(user)
+
     if (!user) {
         return res.status(400).render("login", {
           pageTitle,
           errorMessage: "This ID does not exists.",
         });
+
     }
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) {
@@ -69,6 +69,11 @@ export const postLogin = async (req, res) => {
     req.session.user = user;
     return res.redirect("/");
 }
+
+export const logout = async (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
 
 
 
