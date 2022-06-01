@@ -6,6 +6,7 @@ module.exports = {
     main: "./src/client/js/main.js",
     album: "./src/client/js/album.js",
     headerNav: "./src/client/js/headerNav.js",
+    videoPlayer: "./src/client/js/videoPlayer.js",
   },
   mode: "development",
   watch: true,
@@ -39,6 +40,7 @@ module.exports = {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
+      
     ],
   },
 };

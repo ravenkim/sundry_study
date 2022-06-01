@@ -1,0 +1,27 @@
+// video mixin
+.video-mixin {
+    .video-mixin__thumb {
+      height: 320px;
+      border-radius: 7px;
+      border: solid black 2px;
+      width: 480px;
+      background-color: ivory;
+    }
+    .video-mixin__data {
+      padding: 0px 15px;
+      .video-mixin__title {
+        font-size: 18px;
+        display: block;
+        margin-top: 10px;
+        color: azure;
+      }
+      .video-mixin__meta {
+        color: azure;
+
+        margin-top: 5px;
+        font-size: 12px;
+      }
+      margin-bottom: 20px;
+    }
+  }
+  

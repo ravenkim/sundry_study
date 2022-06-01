@@ -5,20 +5,43 @@
 @import "./config/_variables.scss";
 @import "./config/_reset.scss";
 
+
 // Components
 @import "./components/header.scss";
 @import "./components/footer.scss";
+@import "./components/video.scss";
+
 
 // Screens
 @import "./screens/home.scss";
 @import "./screens/login.scss";
 @import "./screens/join.scss";
+@import "./screens/videos.scss";
+@import "./screens/manager.scss";
+@import "./screens/upload.scss";
+@import "./screens/watch.scss";
+@import "./screens/members.scss";
+@import "./screens/about.scss";
+
+
+
+
+
 
 // Defaults
 body {
   height: 100vh;
   width: 100vw;
   box-sizing: border-box;
+  background-color: $mainback;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .hidden {
