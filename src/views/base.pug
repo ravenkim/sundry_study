@@ -1,3 +1,5 @@
+include mixins/message
+
 doctype html
 html(lang="en")
     head
@@ -8,6 +10,13 @@ html(lang="en")
         script(src="https://kit.fontawesome.com/2dfde335fa.js" crossorigin="anonymous") 
         title #{pageTitle}
     body 
+        if messages.error
+            +message("error", messages.error)
+        if messages.info
+            +message("info", messages.info)
+        if messages.success
+            +message("sucess", messages.success)
+
         include partials/header
         
         block content
