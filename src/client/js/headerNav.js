@@ -8,7 +8,6 @@ mainNav.style.display = "none"
 headergnb_btn2.classList.add("hidden")
 
 
-
 headergnb_btn.addEventListener("click", ()=> {
     if (headergnb.classList.contains("hederBtnActive")) {
         headergnb.classList.remove("hederBtnActive")

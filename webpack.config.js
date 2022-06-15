@@ -25,6 +25,7 @@ module.exports = {
     path: path.resolve(__dirname, "assets"),
     clean: true,
   },
+
   module: {
     rules: [
       {
@@ -41,15 +42,15 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '/imgs/[name].[ext]',
-            },
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '/[name].[contenthash].[ext]',
+            outputPath:'imgs',
+            publicPath: 'assets',
           },
-        ],
+        },
       },
     ],
   },
