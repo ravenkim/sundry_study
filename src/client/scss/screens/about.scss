@@ -30,9 +30,11 @@
     }
 
     .mainpic{
+        display: flex;
         background-color: aqua;
-        width: 100%;
-        overflow:hidden;
-        background-image: url("../imgs/aboutMain.jpg");
+        img{
+            width: 100%;
+        }
+       
     }
 }
