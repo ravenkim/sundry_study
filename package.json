@@ -1,7 +1,11 @@
 {
   "name": "wihi",
   "version": "1.0.0",
-  "description": "",
+  "description": "asdasd",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravenkim/WIHI_HomePage.git"
+  },
   "scripts": {
     "start": "node build/init.js",
     "build": "npm run build:server && npm run build:assets",
@@ -9,10 +13,6 @@
     "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
     "dev:assets": "webpack --mode=development -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ravenkim/WIHI_HomePage.git"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +33,7 @@
     "multer": "^1.4.4",
     "node-fetch": "^2.6.1",
     "pug": "^3.0.2",
+    "regenerator-runtime": "^0.13.9",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
