@@ -6,7 +6,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "WIHI HomePage";
   res.locals.loggedInUser = req.session.user || {};
-  res.locals.isHeroku = isHeroku;
+  //res.locals.isHeroku = isHeroku;
   next();
 };
 
@@ -34,7 +34,7 @@ export const avatarUpload = multer({
   limits: {
     fileSize: 4000000,
   },
-  storage: isHeroku ? s3ImageUploader : undefined,
+  //storage: isHeroku ? s3ImageUploader : undefined,
 });
 
 export const videoUpload = multer({
@@ -42,5 +42,5 @@ export const videoUpload = multer({
   limits: {
     fileSize: 20000000,
   },
-  storage: isHeroku ? s3VideoUploader : undefined,
+  //storage: isHeroku ? s3VideoUploader : undefined,
 });
