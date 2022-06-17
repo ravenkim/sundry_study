@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node build/init.js",
-    "bulid": "npm run build:server && npm run build:assets",
+    "build": "npm run build:server && npm run build:assets",
     "build:server": "babel src -d build",
     "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
