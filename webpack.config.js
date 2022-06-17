@@ -8,8 +8,6 @@ module.exports = {
     headerNav: "./src/client/js/headerNav.js",
     videoPlayer: "./src/client/js/videoPlayer.js",
   },
-  mode: "development",
-  watch: true,
   watchOptions: {
     ignored: /node_modules/,
     aggregateTimeout: 2000,
