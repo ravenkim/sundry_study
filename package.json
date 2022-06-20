@@ -25,6 +25,7 @@
     "npm": "8.x"
   },
   "dependencies": {
+    "aws-sdk": "^2.1157.0",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.0",
