@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ravenkim/WIHI_HomePage#readme",
   "engines": {
-    "node": "14.x",
+    "node": "16.x",
     "npm": "8.x"
   },
   "dependencies": {
