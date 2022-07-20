@@ -1,0 +1,191 @@
+.main_container_project{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background:  #FCDDAB 
+
+}
+
+/* sidebar 시작 */
+.sidebar_container{
+    display: flex;
+    width: 5vw;
+    height: 100vh;
+    background-color: #FFB94A;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar_container2{
+    display: none;
+    width: 20vw;
+    height: 100vh;
+    background-color: #FFB94A;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FCDDAB;
+}
+
+.sidebar_list{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    white-space:nowrap;
+    font-size: 2vw;
+}
+
+.sidebar_icon{
+    font-size: 2vw;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: #FCDDAB;
+   
+}
+
+a{
+    color: #FCDDAB;
+}
+
+.sidebar_icon_li{
+    margin-bottom: 66px;
+    cursor: pointer;
+}
+
+/* sidebar 끝 */
+
+
+.project_bigcover{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.project_page{
+    width: 100%;
+    height: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.project_cover{
+    overflow: hidden;
+    width: 80% ;
+    height: 80%;
+    border-radius: 25px;
+    box-shadow: 0 0 6px black;
+    
+}
+
+.project_container{
+    display: flex;
+    width: 400%; /* 100 x 프로젝트수 */
+    height: 100%;
+    transition: transform 0.5s;
+    background-color: black;
+}
+
+.project_inner{
+    width: calc(100% / 4 );
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+button{
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+#project_btn_prev{
+    color: #fac97a;
+    width: 90px;
+    height: 90px;
+}
+
+#project_btn_next{
+    color: #fac97a;
+    width: 90px;
+    height: 90px;
+}
+
+
+#project_btn_prev:active {
+    color: #f8b549;
+}
+
+#project_btn_next:active {
+    color: #f8b549;
+}
+
+
+.carousel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    
+}
+
+li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin: 0 5px;
+}
+
+.dots{
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: visible;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #fac97a;
+}
+
+#project_btn1.active{
+    background-color: #f8b549;
+}
+#project_btn2.active{
+    background-color: #f8b549;
+}
+#project_btn3.active{
+    background-color: #f8b549;
+}
+#project_btn4.active{
+    background-color: #f8b549;
+}
+
+
+
+
+.test1{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+.test2{
+    width: 100%;
+    height: 100%;
+    background-color: turquoise;
+}
+.test3{
+    width: 100%;
+    height: 100%;
+    background-color: tomato;
+}
+.test4{
+    width: 100%;
+    height: 100%;
+    background-color:blueviolet ;
+}

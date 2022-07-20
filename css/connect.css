@@ -1,0 +1,7 @@
+.main_container_connect{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(105deg, #8EA89B 80%, #697D72 20%);
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alatsi&family=Nanum+Myeongjo:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 아이콘 -->
+    <script
+      src="https://kit.fontawesome.com/2dfde335fa.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- 스타일 -->
+    <link rel="stylesheet" href="../css/resetcss.css" />
+    <link rel="stylesheet" href="../css/project.css" />
+    <title>프로젝트</title>
+  </head>
+  <body>
+    <div class="main_container_project">
+      <!--사이드바 시작 -->
+      <div id="sidebar_container1" class="sidebar_container">
+        <i
+          id="sidebar_list1"
+          class="fa-solid fa-list sidebar_icon sidebar_icon_li"
+        ></i>
+
+        <a href="../index.html">
+          <i class="fa-solid fa-house sidebar_icon"></i>
+        </a>
+
+        <a href="../html/profile.html">
+          <i class="fa-solid fa-address-card sidebar_icon"></i>
+        </a>
+
+        <a href="../html/career.html">
+          <i class="fa-solid fa-clock-rotate-left sidebar_icon"></i>
+        </a>
+
+        <a href="../html/aboutme.html">
+          <i class="fa-solid fa-book sidebar_icon"></i>
+        </a>
+
+        <a href="../html/project.html">
+          <i class="fa-solid fa-diagram-project sidebar_icon"></i>
+        </a>
+
+        <a href="../html/connect.html">
+          <i class="fa-solid fa-link sidebar_icon"></i>
+        </a>
+      </div>
+
+      <div id="sidebar_container2" class="sidebar_container2">
+        <i
+          id="sidebar_list2"
+          class="fa-solid fa-xmark sidebar_icon sidebar_icon_li fa-3x"
+        ></i>
+        <div class="sidebar_list">
+          <a href="../index.html">
+            <i class="fa-solid fa-house sidebar_icon"></i>
+            <span>Home</span>
+          </a>
+        </div>
+
+        <div class="sidebar_list">
+          <a href="../html/profile.html">
+            <i class="fa-solid fa-address-card sidebar_icon"></i>
+            <span>Profile</span>
+          </a>
+        </div>
+        <div class="sidebar_list">
+          <a href="../html/career.html">
+            <i class="fa-solid fa-clock-rotate-left sidebar_icon"></i>
+            <span>Career</span>
+          </a>
+        </div>
+        <div class="sidebar_list">
+          <a href="../html/aboutme.html">
+            <i class="fa-solid fa-book sidebar_icon"></i>
+            <span>About Me</span>
+          </a>
+        </div>
+
+        <div class="sidebar_list">
+          <a href="../html/project.html">
+            <i class="fa-solid fa-diagram-project sidebar_icon"></i>
+            <span>Project</span>
+          </a>
+        </div>
+
+        <div class="sidebar_list">
+          <a href="../html/connect.html">
+            <i class="fa-solid fa-link sidebar_icon"></i>
+            <span>Connect</span>
+          </a>
+        </div>
+      </div>
+      <!-- 사이드바 끝-->
+
+      <!--  프로젝트  -->
+
+      <div class="project_bigcover">
+        <div class="project_page">
+          <button type="button" id="project_btn_prev" title="이전">
+            <div>
+              <i class="fa-solid fa-4x fa-chevron-left"></i>
+            </div>
+          </button>
+          <div class="project_cover">
+            <div class="project_container">
+              <div class="project_inner active">
+                <div class="test1"></div>
+              </div>
+              <div class="project_inner">
+                <div class="test2"></div>
+              </div>
+              <div class="project_inner">
+                <div class="test3"></div>
+              </div>
+              <div class="project_inner">
+                <div class="test4"></div>
+              </div>
+            </div>
+          </div>
+          <button type="button" id="project_btn_next" title="다음">
+            <div>
+              <i class="fa-solid fa-4x fa-chevron-right"></i>
+            </div>
+          </button>
+        </div>
+        <!--  이동 커서  -->
+        <div class="carousel">
+          <ul>
+            <li>
+              <button id="project_btn1" class="dots active"></button>
+            </li>
+            <li>
+              <button id="project_btn2" class="dots"></button>
+            </li>
+            <li>
+              <button id="project_btn3" class="dots"></button>
+            </li>
+            <li>
+              <button id="project_btn4" class="dots"></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/list.js"></script>
+    <script src="../js/project.js"></script>
+  </body>
+</html>
