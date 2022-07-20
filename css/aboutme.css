@@ -1,0 +1,296 @@
+body{
+    position: relative;
+
+}
+.main_container_aboutme{
+    
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    background:  #A0C0D7 
+    
+
+}
+
+/* sidebar 시작 */
+.sidebar_container{
+    display: flex;
+    width: 5vw;
+    height: 100vh;
+    background-color: #FFFFFF;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar_container2{
+    
+    display: none;
+    width: 20vw;
+    height: 100vh;
+    background-color: #FFFFFF;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #A0C0D7;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar_list{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    white-space:nowrap;
+    font-size: 2vw;
+}
+
+.sidebar_icon{
+    font-size: 2vw;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: #A0C0D7;
+   
+}
+
+a{
+    color: #A0C0D7;
+}
+
+.sidebar_icon_li{
+    margin-bottom: 66px;
+    cursor: pointer;
+}
+
+.sidebar_fixed{
+    position: relative;
+}
+
+/* sidebar 끝 */
+.aboutme_qlist{
+    display: flex;
+    height: 100vh;
+    width: 33%;
+    background-color: #ECECEC;
+    position: sticky;
+    top: 0;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Nanum Pen Script', cursive;
+    padding-top: 40px;
+}
+
+.aboutme_qlist_cover{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    font-size: 80px;
+    font-weight: 400;
+    
+}
+
+.aboutme_qlist_inner{
+    margin-left: 10px;
+    padding-left: 20px;
+    position: relative;
+    top: 20px;
+    font-size: 30px;
+    font-weight: normal;
+    border-left: #171717 1px dashed;
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutme_qlist_hour{
+    color: #A0C0D7;
+}
+
+
+.aboutme_chat{
+    flex: 1;
+    position: relative;
+    font-family: 'Nanum Pen Script', cursive;
+    height: 10000vh;
+    scroll-behavior: smooth;
+}
+.status-bar{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    float: right;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #90aec9;
+    font-size: 30px;
+    padding: 3px 7px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    
+}
+
+.status-bar_font{
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.alt-header{
+    z-index: 1;
+    
+    box-sizing: border-box;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #B2C7DA;
+    margin-bottom: 20px;
+
+    position: sticky;
+    top: 37px;
+
+}
+
+.alt_header_font{
+    color: black;
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+.alt-header__title{
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+main{
+    position: relative;
+    height: 1500vh;
+
+}
+
+.chat_category{
+    width: fit-content;
+    color: white;
+    background-color: #92a4b2;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+}
+
+
+.chatbox{
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+
+}
+
+.aboutme_category{
+    color: white;
+    background-color: #92a4b2;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+
+.message_left{
+    width: 95%;
+    display: flex;
+    margin-bottom: 25px;
+    overflow: visible;
+    box-sizing: border-box;
+
+}
+
+.message_image_cover{
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+    margin-right: 10px;
+    background-color: #B2C7DA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 10px;
+    box-sizing: border-box;
+    font-size: 50px;
+    box-shadow: 0 0 2px black;
+}
+
+.message_message_questionbox{
+    display: flex;
+    flex-direction: column;
+    max-width: 79%;
+}
+
+.message_message_questioner{
+    margin-bottom: 5px;
+    display: flex;
+    
+}
+
+.message__info {
+    display: flex;
+    align-items: flex-end;
+    
+  }
+
+.message_message_question{
+    display: flex;
+    
+    background-color: white;
+    padding: 13px;
+    font-size: 18px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    margin-right: 5px;
+
+}
+
+.message_num{
+    display: flex;
+    align-items: flex-end;
+}
+
+.message_blank{
+    display: flex;
+    align-items: flex-end;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+}
+
+.message_right{
+    box-sizing: border-box;
+    width: 95%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 30px;
+    padding-left: 10%;
+}
+
+.message_message_answer{
+    background-color: yellow;
+    padding: 13px;
+    font-size: 18px;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    margin-right: 0px;
+    margin-left: 5px;
+}

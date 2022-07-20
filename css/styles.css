@@ -1,0 +1,113 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.main_container{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(105deg, #8EA89B 80%, #697D72 20%);
+
+}
+
+
+
+/* sidebar 시작 */
+.sidebar_container{
+    display: flex;
+    width: 5vw;
+    height: 100vh;
+    background-color: #61746a;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar_container2{
+    display: none;
+    width: 20vw;
+    height: 100vh;
+    background-color: #61746a;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #8EBFA5;
+}
+
+.sidebar_list{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    white-space:nowrap;
+    font-size: 2vw;
+}
+
+.sidebar_icon{
+    font-size: 2vw;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: #8EBFA5;
+   
+}
+
+a{
+    color: #8EBFA5;
+}
+
+.sidebar_icon_li{
+    margin-bottom: 66px;
+    cursor: pointer;
+}
+
+/* sidebar 끝 */
+
+.main_inner_container1{
+    width: 46.8%;
+    margin-left: 8%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main_title{
+    font-size: 9vw;
+    color: #080010;
+    font-family: 'Alatsi', sans-serif;
+}
+
+.main_title_x{
+    font-family: 'Alatsi', sans-serif;
+    color: #596b61;
+    font-size: 7vw;
+    position: relative;
+    bottom: 5px;
+}
+
+.main_title_sub{
+    padding-left: 1%;
+    font-size: 3vw;
+    box-sizing: border-box;
+    font-family: 'Nanum Myeongjo', serif;
+    color: #080010;
+
+}
+
+
+.main_inner_container2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    
+}
+
+.main_pic{
+    height: 95%;
+}
+
