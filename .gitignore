@@ -1,0 +1,6 @@
+.vscode
+tool
+backend/.dev.env
+backend/.prod.env
+backend/.test.env
+**/.DS_Store
