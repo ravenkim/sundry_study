@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format:check": "prettier --check \"**/*.{ts,tsx,json,yaml,yml,js,md}\"",
-    "format": "prettier --write \"**/*.{ts,tsx,json,yaml,yml,js,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,json,yaml,yml,js,md}\"",
+    "tailwind": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }
