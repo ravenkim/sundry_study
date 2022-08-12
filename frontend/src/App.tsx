@@ -37,12 +37,7 @@ index d319f4d..3383adc 100644
      "name": "Wonmo Jung",`;
 
 function App() {
-  return (
-    <div>
-      <header></header>
-      <DiffViewer diffString={testDiffString} index={0} />
-    </div>
-  );
+  return <DiffViewer diffString={testDiffString} />;
 }
 
 export default App;

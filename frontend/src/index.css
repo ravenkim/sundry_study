@@ -4,3 +4,6 @@
 .hidden {
   display: none;
 }
+.extracted-simple-text {
+  background-color: yellow;
+}
