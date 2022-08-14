@@ -48,3 +48,12 @@ services:
       - docker_network
     env_file:
       - ./backend/.env.postgres.example
+
+  mongo:
+    image: mongo
+    env_file:
+      - ./backend/.env.example
+    volumes:
+      - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - 27017:27017
