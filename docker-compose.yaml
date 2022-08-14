@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 networks:
   docker_network:
@@ -13,9 +13,9 @@ services:
       - 3030:3030
     volumes:
       - ./frontend/src:/app/src
+      - ./frontend/tsconfig.json:/app/tsconfig.json
       - ./frontend/public:/app/public
-    command:
-      yarn start
+    command: yarn start
     networks:
       - docker_network
     env_file:
@@ -32,15 +32,14 @@ services:
       - 3031:3031
     volumes:
       - ./backend/src:/app/src
-    command:
-      yarn run start:dev
+    command: yarn run start:dev
     networks:
       - docker_network
     env_file:
       - ./backend/.env.example
     depends_on:
       - postgres
-      
+
   postgres:
     image: postgres:alpine
     ports:
