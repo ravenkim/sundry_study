@@ -1,6 +1,5 @@
 .vscode
-tool
-backend/.dev.env
-backend/.prod.env
-backend/.test.env
+**/dist
+**/node_modules
+**/.env
 **/.DS_Store
