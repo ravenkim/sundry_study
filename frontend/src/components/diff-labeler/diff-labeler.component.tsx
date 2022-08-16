@@ -8,7 +8,7 @@ import {
   increaseNumber,
   substractClass,
 } from '../../shared/utils';
-import { labelSelectedRange } from './diff-labeler.logic';
+import { labelSelectedRange, unlabelById } from './diff-labeler.logic';
 
 const DiffLabeler = (props: Props) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ const DiffLabeler = (props: Props) => {
   const [selectedRange, setSeletecRange] = useState<Range | undefined>(
     undefined
   );
-  const [lastMarkedId, setMakedId] = useState(0);
+  const [labelId, setLabelId] = useState(0);
 
   useEffect(() => {
     if (ref.current) {
@@ -49,14 +49,15 @@ const DiffLabeler = (props: Props) => {
 
   useEffect(() => {
     if (selectedRange) {
-      const labeledRange = labelSelectedRange(selectedRange, lastMarkedId);
+      const labeledRange = labelSelectedRange(selectedRange, labelId);
       const label: Label = {
-        id: lastMarkedId,
+        id: labelId,
         selectedRange: labeledRange,
         fileName: '',
         changeType: 'Inserted',
       };
-      setMakedId(lastMarkedId + 1);
+      setLabelId(labelId + 1);
+      setLabelList([...labelList, label]);
     }
   }, [selectedRange]);
   return (
@@ -83,38 +84,70 @@ const DiffLabeler = (props: Props) => {
           }}
         />
         <div>
-          <div className="flex flex-row py-2 space-x-4">
-            <button
-              className={`basis-1/2 font-bold py-2 px-4 h-12 ${
-                fileIndex == 0
-                  ? 'bg-zinc-200 text-zinc-500 cursor-default'
-                  : 'bg-cyan-300 text-sky-900'
-              }  rounded-xl flex items-center justify-center`}
-              onClick={() => {
-                setFileIndex(decreaseNumber(fileIndex));
-              }}
-            >
-              Prev
-            </button>
-            <button
-              className={`basis-1/2 font-bold py-2 px-4 h-12 ${
-                fileIndex == numberOfFiles - 1
-                  ? 'bg-zinc-200 text-zinc-500 cursor-default'
-                  : 'bg-cyan-300 text-sky-900'
-              } rounded-xl flex items-center justify-center`}
-              onClick={() => {
-                setFileIndex(increaseNumber(fileIndex, numberOfFiles - 1));
-              }}
-            >
-              Next
-            </button>
+          <div className="flex flex-row py-2">
+            <div className=" basis-1/4 flex flex-row py-2 space-x-4 pr-6">
+              <button
+                className={`basis-1/2 font-bold py-2 px-4 h-12 text-cyan-300 bg-sky-900  rounded-xl flex items-center justify-center`}
+                onClick={() => {
+                  if (labelList.length > 0) {
+                    const lastId = labelList[labelList.length - 1].id;
+                    unlabelById(lastId);
+                    setLabelList(
+                      labelList.filter((label) => label.id != lastId)
+                    );
+                  }
+                }}
+              >
+                Undo
+              </button>
+              <button
+                className={`basis-1/2 font-bold py-2 px-4 h-12 text-cyan-300 bg-sky-900  rounded-xl flex items-center justify-center`}
+                onClick={() => {
+                  labelList.forEach((label) => {
+                    unlabelById(label.id);
+                  });
+                  setLabelList([]);
+                }}
+              >
+                Refresh
+              </button>
+            </div>
+            <div className="basis-3/4 flex flex-row py-2 space-x-4">
+              <button
+                className={`basis-1/2 font-bold py-2 px-4 h-12 ${
+                  fileIndex == 0
+                    ? 'bg-zinc-200 text-zinc-500 cursor-default'
+                    : 'bg-cyan-300 text-sky-900'
+                }  rounded-xl flex items-center justify-center`}
+                onClick={() => {
+                  setFileIndex(decreaseNumber(fileIndex));
+                }}
+              >
+                Prev
+              </button>
+              <button
+                className={`basis-1/2 font-bold py-2 px-4 h-12 ${
+                  fileIndex == numberOfFiles - 1
+                    ? 'bg-zinc-200 text-zinc-500 cursor-default'
+                    : 'bg-cyan-300 text-sky-900'
+                } rounded-xl flex items-center justify-center`}
+                onClick={() => {
+                  setFileIndex(increaseNumber(fileIndex, numberOfFiles - 1));
+                }}
+              >
+                Next
+              </button>
+            </div>
           </div>
           <div className="flex flex-row pt-4">
-            <div
+            <button
               className={`grow font-bold py-2 px-4 h-14  rounded-xl flex items-center justify-center text-cyan-300 bg-sky-900`}
+              onClick={() => {
+                console.log(labelList);
+              }}
             >
               Submit
-            </div>
+            </button>
           </div>
         </div>
       </div>

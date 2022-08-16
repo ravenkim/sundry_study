@@ -21,6 +21,18 @@ export const labelSelectedRange = (range: Range, id: number): SelectedRange => {
   return seletedCodeRange;
 };
 
+export const unlabelById = (id: number) => {
+  const elements = Array.from(
+    document.getElementsByClassName(`${LABEL_ID_PREFIX}${id}`)
+  );
+  elements.forEach((element) => {
+    if (element.textContent) {
+      const textNode = document.createTextNode(element.textContent);
+      element.parentElement?.replaceChild(textNode, element);
+    }
+  });
+};
+
 const handleEndIncluded = (node: Node, range: Range, id: number) => {
   if (needToMarkUp(node, range, id)) {
     const span = createSpan(id);
@@ -293,7 +305,6 @@ const getPreviousSibling = (element: Node, siblings: Node[]): Node[] => {
 
 const createSpan = (id: number): HTMLElement => {
   const span = document.createElement('span');
-  span.className = LABEL_CLASS_NAME;
-  span.id = `${LABEL_ID_PREFIX}${id}`;
+  span.className = `${LABEL_CLASS_NAME} ${LABEL_ID_PREFIX}${id}`;
   return span;
 };
