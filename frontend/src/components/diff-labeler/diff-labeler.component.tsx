@@ -56,7 +56,6 @@ const DiffLabeler = (props: Props) => {
         fileName: '',
         changeType: 'Inserted',
       };
-      setLabelList;
       setMakedId(lastMarkedId + 1);
     }
   }, [selectedRange]);
