@@ -8,13 +8,14 @@ import {
   increaseNumber,
   substractClass,
 } from '../../shared/utils';
+import UrlForm from '../url-form';
 import { labelSelectedRange, unlabelById } from './diff-labeler.logic';
 
 const DiffLabeler = (props: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const html = diff2html.html(props.diffString, {
     outputFormat: 'side-by-side',
-    drawFileList: true,
+    drawFileList: false,
   });
   const [fileIndex, setFileIndex] = useState(0);
   const [labelList, setLabelList] = useState([] as Label[]);
@@ -63,6 +64,9 @@ const DiffLabeler = (props: Props) => {
   return (
     <>
       <div className="flex flex-col px-12 pt-12 pb-4 h-screen">
+        <div className="pb-8">
+          <UrlForm />
+        </div>
         <div
           className="grow"
           ref={ref}
