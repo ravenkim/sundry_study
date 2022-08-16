@@ -21,7 +21,6 @@ services:
     env_file:
       - ./frontend/.env.example
     depends_on:
-      - postgres
       - backend
 
   backend:
