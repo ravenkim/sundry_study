@@ -38,16 +38,7 @@ services:
     env_file:
       - ./backend/.env.example
     depends_on:
-      - postgres
-
-  postgres:
-    image: postgres:alpine
-    ports:
-      - 5000:5432
-    networks:
-      - docker_network
-    env_file:
-      - ./backend/.env.postgres.example
+      - mongo
 
   mongo:
     image: mongo
@@ -57,3 +48,5 @@ services:
       - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     ports:
       - 27017:27017
+    networks:
+      - docker_network
