@@ -13,7 +13,7 @@
 - github 등에서 제출된 commit 이나 pull request 들을 보면 코드의 어떤 부분이 추가되고, 삭제되었는지를 비교해서 볼 수 있는 화면이 있습니다.
 - 이는 `diff` 커맨드를 통해서 생성된 결과로, 언뜻보면 정확해 보이고, 간단한 알고리즘을 통한 결과로 생각되지만 그렇지만은 않습니다.
 - git diff 를 통해서 생성된 코드의 change 는 생각보다 정확도가 떨어집니다.
-  ![Untitled](%5B%E1%84%8F%E1%85%A9%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%5D%20%E1%84%8F%E1%85%A9%E1%84%83%E1%85%B3%20%E1%84%8E%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%8C%E1%85%B5%20%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%20f57842c14acf46c2a99d1dc33875fec7/Untitled.png)
+  ![Untitled](https://teamelysium.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6aaaeb6e-7718-4aec-be3e-9c02a8b1485f%2FUntitled.png?table=block&id=f57842c1-4acf-46c2-a99d-1dc33875fec7&spaceId=fe5c2a3c-9c54-49da-88ba-9e0308614618&width=2000&userId=&cache=v2)
   - 위 이미지에서 git diff 의 실수를 알아차리시겠나요?
   - git 은 before 와 after 의 10번 line 에 `mjs.` 이라는 단어가 추가되었고, 11 번 line 이 전체 삭제 되고, 다른 `.vscode` 라는 완전히 새로운 11번 line 이 추가되었다고 파악했지만,
   - 사실 before 의 11번 line `!/acorn/dist/acorn.mjs.d.ts` 이 after 의 10번 line 으로 변경없이 옮겨지고, before 의 10번이 전체 삭제되고된 것입니다.
@@ -35,4 +35,4 @@
 - package installer 로 yarn 을 사용한 프로젝트이지만, npm, pnpm 등 다른 package manager 를 사용하셔도 무관합니다.
 - 현재 frontend 의 기능들이 구현되어 있고, 과제는 아래 설명되어있는 backend 의 기능들과 이에 matching 되는 frontend 의 일부 기능을 구현하는 것입니다.
 
-![Untitled](%5B%E1%84%8F%E1%85%A9%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%90%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%5D%20%E1%84%8F%E1%85%A9%E1%84%83%E1%85%B3%20%E1%84%8E%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%8C%E1%85%B5%20%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%20f57842c14acf46c2a99d1dc33875fec7/Untitled%201.png)
+![Untitled](https://teamelysium.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff0d684d8-e9a6-4392-9d6a-36eb5763a2b1%2FUntitled.png?table=block&id=0a2bb7b3-bc56-455a-9506-a127e070ada3&spaceId=fe5c2a3c-9c54-49da-88ba-9e0308614618&width=2000&userId=&cache=v2)
