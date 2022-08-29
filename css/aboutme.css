@@ -95,6 +95,7 @@ a{
     font-weight: 400;
     padding-bottom: 20px;
     
+    
 }
 
 .aboutme_qlist_inner{
@@ -107,9 +108,11 @@ a{
     border-left: #171717 1px dashed;
     display: flex;
     flex-direction: column;
+    
 }
 
 .aboutme_qlist_hour{
+    width: 18%;
     color: #A0C0D7;
 }
 
@@ -298,4 +301,5 @@ main{
     border-top-right-radius: 0px;
     margin-right: 0px;
     margin-left: 5px;
+    margin-bottom: 5px;
 }

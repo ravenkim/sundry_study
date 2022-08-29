@@ -1,7 +1,245 @@
+body{
+    overflow: hidden;
+    height: 100%;
+}
+
 .main_container_connect{
     box-sizing: border-box;
     width: 100vw;
     height: 100vh;
     display: flex;
-    background: linear-gradient(105deg, #8EA89B 80%, #697D72 20%);
+    background: linear-gradient(160deg, #E9D366 50%, #53645C 50%);
+    overflow: hidden;
+}
+
+/* sidebar 시작 */
+.sidebar_container{
+    display: flex;
+    width: 5vw;
+    height: 100vh;
+    background-color: #E34F17;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar_container2{
+    display: none;
+    width: 20vw;
+    height: 100vh;
+    background-color: #E34F17;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FCDDAB;
+}
+
+.sidebar_list{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    white-space:nowrap;
+    font-size: 2vw;
+}
+
+.sidebar_icon{
+    font-size: 2vw;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: #FCDDAB;
+   
+}
+
+a{
+    color: #FCDDAB;
+}
+
+.sidebar_icon_li{
+    margin-bottom: 66px;
+    cursor: pointer;
+}
+
+/* sidebar 끝 */
+
+.connect_title{
+    position: absolute;
+    top: 28%;
+    left: 40%;
+    font-weight: bold;
+    font-size: 200px;
+    font-family: 'Nanum Pen Script', cursive;
+    transform: rotate(-20deg);
+}
+
+.connect_title_1{
+    color: #53645C;
+
+}
+.connect_title_2{
+    color: #E9D366;
+}
+.logo1{
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 45%;
+    left: 18%;
+    border-radius: 50%;
+    display: flex;
+    background-color: #E9D366;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo1_inner{
+    width: 270px;
+    height: 270px;
+    background-color: #F3EDC9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    transform: rotate(15deg);
+
+}
+
+.logo1_inner_icon{
+    font-size: 180px;
+    opacity: 0.95;
+    color: #F3B1B4;
+}
+
+.logo1_inner_letter{
+    font-size: 38px;
+    font-family: 'Nanum Pen Script', cursive;
+    color: #F3B1B4;
+    opacity: 0.95;
+
+}
+
+.logo2{
+    width: 280px;
+    height: 280px;
+    position: absolute;
+    top: 15%;
+    left: 78%;
+    border-radius: 50%;
+    display: flex;
+    background-color: #53645C;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo2_inner{
+    width: 250px;
+    height: 250px;
+    background-color: #8BA798;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: rotate(-25deg);
+}
+
+.logo2_inner_icon{
+    font-size: 180px;
+    opacity: 0.95;
+    color: #FAF5E2;
+}
+
+.logo2_inner_letter{
+    font-size: 38px;
+    font-family: 'Nanum Pen Script', cursive;
+    color: #FAF5E2;
+    opacity: 0.95;
+
+}
+
+
+
+.logo3{
+    width: 350px;
+    height: 350px;
+    position: absolute;
+    top: 2%;
+    left: 25%;
+    border-radius: 50%;
+    display: flex;
+    background-color: #53645C;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo3_inner{
+    width: 320px;
+    height: 320px;
+    background-color: #8BA798;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    
+}
+
+.logo3_inner_icon{
+    font-size: 200px;
+    opacity: 0.95;
+    color: #54665A;
+}
+
+.logo3_inner_letter{
+    font-size: 38px;
+    font-family: 'Nanum Pen Script', cursive;
+    color: #54665A;
+    opacity: 0.95;
+
+}
+
+.logo4{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 80%;
+    left: 40%;
+    border-radius: 50%;
+    display: flex;
+    background-color: #E9D366;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo4_inner{
+    width: 220px;
+    height: 220px;
+    background-color: #F3EDC9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    transform: rotate(-15deg);
+}
+
+.logo4_inner_icon{
+    font-size: 160px;
+    opacity: 0.95;
+    color: #F3B1B4;
+}
+
+.logo4_inner_letter{
+    font-size: 30px;
+    font-family: 'Nanum Pen Script', cursive;
+    color: #F3B1B4;
+    opacity: 0.95;
+
 }
