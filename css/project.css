@@ -75,6 +75,7 @@ a{
 }
 
 .project_cover{
+    font-family: 'Nanum Pen Script', cursive;
     overflow: hidden;
     width: 80% ;
     height: 80%;
@@ -88,7 +89,6 @@ a{
     width: 400%; /* 100 x 프로젝트수 */
     height: 100%;
     transition: transform 0.5s;
-    background-color: black;
 }
 
 .project_inner{
@@ -166,25 +166,85 @@ li{
     background-color: #f8b549;
 }
 
+.project_title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 45px;
+    padding-bottom: 15px;
+    color: black;
+}
+
+.project_summary{
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+}
 
 
-
-.test1{
+.project_1{
     width: 100%;
     height: 100%;
-    background-color: black;
+    display: flex;
 }
-.test2{
+
+
+.project_1_pic{
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 30px;
+}
+
+.proj_img{
+    height: 100%;
+    object-fit: cover;
+}
+
+.project_text{
+    box-sizing: border-box;
+    display: flex;
+    border: 3px dashed #8EA89B ;
+    border-radius: 5px;
+    width: 100%;
+    height: 87%;
+    padding: 20px;
+}
+
+.project_link_icon{
+    color: black;
+    font-size: 50px;
+}
+
+.project_link{
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    height: 10%;
+    border: 3px dashed #8EA89B ;
+    border-radius: 5px;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.project_2{
     width: 100%;
     height: 100%;
-    background-color: turquoise;
+  
 }
-.test3{
+.project_3{
     width: 100%;
     height: 100%;
     background-color: tomato;
 }
-.test4{
+.project_4{
     width: 100%;
     height: 100%;
     background-color:blueviolet ;

@@ -16,6 +16,11 @@
     display:none;
 }
 
+.date_center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 /* sidebar 시작 */
