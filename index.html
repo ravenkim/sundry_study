@@ -20,20 +20,20 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    let counter = 0;
-    function countup() {
-      counter = counter + 1;
-      render();
+    function App() {
+      const [counter, reset] = React.useState(0);
+      const onclick = () => {
+        reset(counter + 1);
+      };
+
+      return (
+        <div>
+          <h3> click {counter}</h3>
+          <button onClick={onclick}>click</button>
+        </div>
+      );
     }
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
-    const Container = () => (
-      <div>
-        <h3> click {counter}</h3>
-        <button onClick={countup}>click</button>
-      </div>
-    );
-    render();
+
+    ReactDOM.render(<App />, root);
   </script>
 </html>
