@@ -17,6 +17,7 @@
     src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     crossorigin
   ></script>
+  <script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function Btn({ bana }) {
@@ -33,6 +34,11 @@
     function CvBtn() {
       return <button> asdzzz </button>;
     }
+
+    Btn.prototype = {
+      text: PropTypes.string,
+      fontSize: PropTypes.number,
+    };
     function App() {
       return (
         <div>
@@ -41,7 +47,8 @@
         </div>
       );
     }
-    const root = document.getElementById("root");
-    ReactDOM.render(<App />, root);
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
   </script>
 </html>
