@@ -1,0 +1,72 @@
+.main_container_profile{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background:  #FFFFFF
+
+}
+
+/* sidebar 시작 */
+.sidebar_container{
+    display: flex;
+    width: 5vw;
+    height: 100vh;
+    background-color: #333333;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar_container2{
+    
+    display: none;
+    width: 20vw;
+    height: 100vh;
+    background-color: #333333;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #A0C0D7;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar_list{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    white-space:nowrap;
+    font-size: 2vw;
+}
+
+.sidebar_icon{
+    font-size: 2vw;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: #A0C0D7;
+   
+}
+
+a{
+    color: #A0C0D7;
+}
+
+.sidebar_icon_li{
+    margin-bottom: 66px;
+    cursor: pointer;
+}
+
+.sidebar_fixed{
+    position: relative;
+}
+
+/* sidebar 끝 */
+
+
+.profile_page{
+    width: 100%;
+}
