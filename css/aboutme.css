@@ -264,8 +264,7 @@ main{
 
 .message_message_question{
     display: flex;
-    
-    background-color: white;
+    font-family: 'Nanum Gothic', sans-serif;    background-color: white;
     padding: 13px;
     font-size: 23px;
     border-radius: 15px;
@@ -298,8 +297,8 @@ main{
 }
 
 .message_message_answer{
-    background-color: yellow;
-    padding: 13px;
+    background-color: #FFE90A;
+    font-family: 'Nanum Gothic', sans-serif;    padding: 13px;
     font-size: 23px;
     border-radius: 15px;
     border-top-right-radius: 0px;
