@@ -247,5 +247,46 @@ li{
 .project_4{
     width: 100%;
     height: 100%;
-    background-color:blueviolet ;
+}
+
+.project_4_title{
+    display: flex;
+    width: 100%;
+    height: 20%;
+    font-size: 100px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.project_4_container{
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.project_4_inner{
+margin: 8px;
+box-shadow: 0 0 2px black;
+border-radius: 3px;
+display: flex;
+flex-direction: row;
+box-sizing: border-box;
+justify-content: space-evenly;
+align-items: center;
+
+
+}
+
+.project_4_inner_pic{
+ width: 47%;
+ 
+}
+
+
+.project_4_inner_text{
+    width: 47%;
+    height: 95%;
 }
