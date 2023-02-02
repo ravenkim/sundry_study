@@ -66,11 +66,52 @@ a{
 
 /* sidebar 끝 */
 
-.test{
-    background-color: black;
-    height: 100px;
-    width: 100px;
+
+.intro_cover{
+    width: 100%;
+    background-color: #F7DDCE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
 }
+
+.intro_title{
+    margin-top: 30px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 100px;
+
+}
+
+.intro_bar{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 60px;
+    height: 8px;
+    background-color: #D9948C;
+    border-radius: 3px;
+}
+
+.intro_text{
+    font-size: 40px;
+
+    color: #333333;
+    font-family: 'Nanum Pen Script', cursive;
+
+
+}
+
+.intro_button{
+    margin: 30px  0px;
+    background-color: #D9948C;
+
+    padding: 10px;
+    box-shadow: 0 0 6px black;    border-radius: 16px;
+
+    width: 120px;
+}
+
 
 .profile_page{
     width: 100%;
@@ -82,6 +123,7 @@ a{
 }
 
 .license_cover{
+    background-color: white;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -148,6 +190,7 @@ h2{
     font-size:20px;
 
     margin: 30px;
+    
 }
 
 .add_info{
@@ -159,6 +202,7 @@ h2{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(#CDC9B6, #BBA9AC);
 }
 
 ol{
@@ -179,7 +223,6 @@ li{
 
     width: 80%;
     height: 100%;
-    background-color: tomato;
     display: flex;
     flex-direction: column;
     justify-content: center;;
@@ -196,12 +239,88 @@ li{
 }
 
 h3{
-    font-size: 70px;
+    font-size: 100px;
     font-family: 'Nanum Pen Script', cursive;
 }
 
 .skills_cover_inner{
-    width: 100%;
+    width: 90%;
     height: 200px;
-    background-color: #A0C0D7;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 45px;
+}
+
+.skills_cover_inner_line{
+    width: 30%;
+    height: 500px;
+
+}
+
+.skills_cover_inner_box{
+    margin-bottom: 50px;
+ width: 100%;
+ height: auto;
+ background-color: white;
+    box-shadow: 0 0 6px black;    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.skills_cover_inner_box_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 40px;
+    font-family: 'Nanum Pen Script', cursive;
+    margin: 30px;
+    white-space : nowrap;
+}
+
+.skills_cover_inner_box_skill{
+    margin: 5px;
+    font-size: 70px;
+    font-family: 'Nanum Pen Script', cursive;
+}
+
+iconify-icon{
+    font-size: 70px;
+    margin: 0;
+    padding: 0;
+}
+
+.s_html{
+    color: #F35924;
+}
+
+.s_css{
+    color: #0186D2;
+}
+.s_js{
+    color: #F78324;
+}
+
+.s_react{
+    color: #07D9FD;
+}
+.s_git{
+    color: #EE5D44;
+}
+.s_sass{
+    color: #D47EA9;
+}
+
+.s_nodejs{
+    color: #84CE2A;
+}
+.s_mongodb{
+    color: #149A4C;
+}
+.s_pug{
+    color: #EFCCA3;
 }
