@@ -5,6 +5,7 @@ const slideIcons = document.querySelectorAll(".dots")
 const numberOfSlides = slides.length;
 let slideNumber = 0;
 
+
 nextBtn.addEventListener("click", ()=> {
     slideIcons.forEach((slideIcon) => {
         slideIcon.classList.remove("active");
