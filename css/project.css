@@ -16,6 +16,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    top: 0;
 }
 
 .sidebar_container2{
@@ -27,6 +29,9 @@
     justify-content: center;
     align-items: center;
     color: #FCDDAB;
+    position: sticky;
+    top: 0;
+    
 }
 
 .sidebar_list{
@@ -53,6 +58,10 @@ a{
 .sidebar_icon_li{
     margin-bottom: 66px;
     cursor: pointer;
+}
+
+.sidebar_fixed{
+    position: relative;
 }
 
 /* sidebar 끝 */
@@ -131,7 +140,6 @@ button{
     display: flex;
     justify-content: center;
     flex-direction: row;
-    
 }
 
 li{
@@ -182,6 +190,16 @@ li{
     padding: 30px;
 }
 
+.project_explain{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    padding-bottom: 15px;
+    color: black;
+
+}
+
 
 .project_1{
     width: 100%;
@@ -198,12 +216,46 @@ li{
     align-items: center;
     height: 100%;
     padding: 30px;
+    
 }
 
-.proj_img{
+.proj_img1{
+    
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
+
+
+.project_2{
+    font-size: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.project_3_pic{
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 30px;
+    flex-direction: column;
+    overflow: scroll;
+   
+}
+
+.project_3_pic::-webkit-scrollbar{
+    display:none;
+  }
+
+.proj_img3{
+    
+    width: 100%;
+    
+}
+
 
 .project_text{
     box-sizing: border-box;
@@ -213,6 +265,7 @@ li{
     width: 100%;
     height: 87%;
     padding: 20px;
+    flex-direction: column;
 }
 
 .project_link_icon{
@@ -242,8 +295,19 @@ li{
 .project_3{
     width: 100%;
     height: 100%;
-    background-color: tomato;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}   
+
+.project_3_container{
+    width: 40%;
+    height: 80%;
+    background-color: aqua;
 }
+
+
 .project_4{
     width: 100%;
     height: 100%;
