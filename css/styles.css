@@ -5,6 +5,13 @@ body{
     min-height: 720px;
 }
 
+main{
+    display: flex;
+    position: fixed;
+    left: 0;
+    min-width: 1280px;
+    min-height: 720px;
+}
 
 
 .main_container{
