@@ -120,3 +120,26 @@ a{
     height: 95%;
 }
 
+.main_files{
+    
+    
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    
+}
+
+.main_files_cover{
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 100px;
+    color: #080010;
+}
+
+
+.main_files_cover_icon{
+    margin-bottom: 15px;
+    font-size: 80px;
+}
