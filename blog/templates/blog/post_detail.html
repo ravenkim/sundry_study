@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+
+
+{% block content %}
+    <div class="date">
+    {{ post.published_date }}
+    </div>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content|linebreaksbr }}</p>
+    
+
+    {% comment "주석에 대한 설명(달지 않아도 됨)" %}
+    <div class="post">
+        {% if post.publised_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% else %}
+            {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+            {% endif %}
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content|linebreaksbr }}</p>
+    </div>
+    {% endcomment %}
+{% endblock %}
