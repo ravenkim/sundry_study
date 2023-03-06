@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),  # 바꿔줄것
     path('blog1/', include('blog1.urls')),
+    path('instagram/', include('instagram.urls')),
 ]
