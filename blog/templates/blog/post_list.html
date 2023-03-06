@@ -1,19 +1,8 @@
-{% extends 'blog/base.html' %}
+<h1>Post List</h1>
 
-{% block content %}
+{% for post in post_list %}
+    <h2>{{ post.title }}</h2>
+    {{ post.content }}
+{% endfor %}
 
-    {% for post in posts %} 
-        <div class="post">
-            <div>
-                <P>작성일: {{ post.published_date  }}</P>
-            </div>
-            <div>
-                <h3>
-                    <a href="{% url 'post_detail' pk=post.pk %}"> {{ post.title }} </a>
-                </h3>
-            </div>
-            <br/>
-        </div>
-    {% endfor %}
 
-{% endblock %}

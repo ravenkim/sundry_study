@@ -7,11 +7,10 @@ from .models import Post
 
 # 리스트 출력
 def post_list(request):
-    posts = Post.objects.filter(
-        published_date__lte=timezone.now()).order_by('published_date')
-    # 쿼리 확인
-    print(posts.query)
-    return render(request, 'blog/post_list.html', {'post': posts})
+    qs = Post.objects.all()
+    return render(request, 'blog/post_list.html', {
+        'post_list': qs
+    })
 
 
 # 디테일 출력
