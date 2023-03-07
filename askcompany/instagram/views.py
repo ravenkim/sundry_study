@@ -12,3 +12,6 @@ def post_list(request):
         'post_list': qs,
         'q': q,
     })
+
+def post_detail(request, pk):
+    pass
