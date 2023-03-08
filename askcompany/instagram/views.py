@@ -1,10 +1,36 @@
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView
 from django.http import HttpResponse, HttpRequest, Http404
-from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, get_object_or_404, render, redirect
 from .models import Post
+from .forms import PostForm
 
 
-post_list = ListView.as_view(model=Post)
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            return redirect(post)
+    else:
+        form = PostForm()
+
+    return render(request, 'instagram/post_form.html', {
+        'form': form,
+    })
+
+
+
+#post_list = PostListView.as_view()
+post_list = login_required(ListView.as_view(model=Post, paginate_by=10))
+#@method_decorator(login_required, name='dispatch')
+class PostListView(LoginRequiredMixin, ListView):
+    model = Post
+    paginate_by = 100
+
 
 
 # def post_list(request):
@@ -25,7 +51,23 @@ post_list = ListView.as_view(model=Post)
 #         'post': post,
 #     })
 
-post_detail = DetailView.as_view(model=Post)
 
-def archives_year(request, year):
-    return HttpResponse(f"{year}sus archives")
+class PostDetailView(DetailView):
+    model = Post
+    # queryset = Post.objects.filter(is_public=True)
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if not self.request.user.is_authenticated:
+            qs = qs.filter(is_public=True)
+        return qs
+
+
+post_detail = PostDetailView.as_view()
+
+# def archives_year(request, year):
+#     return HttpResponse(f"{year}sus archives")
+
+
+post_archive = ArchiveIndexView.as_view(model=Post, date_field='created_at', paginate_by=10)
+
+post_archive_year = YearArchiveView.as_view(model=Post, date_field='created_at', make_object_list=True, paginate_by=10)
