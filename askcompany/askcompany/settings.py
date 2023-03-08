@@ -25,7 +25,9 @@ SECRET_KEY = '^3n%d&t+kc2#%&wmk$pqhxhqtfm-2_32$$_ti2t4ez+8jnf2&m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    #"b95d-121-159-54-27.ngrok.io"
+]
 
 
 # Application definition
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'debug_toolbar',
+    'bootstrap4',
     
     'blog1',
     'instagram',
@@ -129,7 +132,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = ''
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'askcompany', 'static'),
+]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
