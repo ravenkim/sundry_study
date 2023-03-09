@@ -1,10 +1,6 @@
 {% extends "instagram/layout.html" %} {% load bootstrap4 %} {% block content %}
 <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %} {% bootstrap_form form %} {#
-    <table>
-        #} {# {{ form }}#} {#
-    </table>
-    #} {% buttons %}
+    {% csrf_token %} {% bootstrap_form form %} {% buttons %}
     <button class="btn btn-primary">저장</button>
     {% endbuttons %}
 </form>
