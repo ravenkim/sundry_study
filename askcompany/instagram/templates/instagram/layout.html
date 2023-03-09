@@ -1,4 +1,4 @@
-{% load static %}
+{% load bootstrap4 static %}
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -76,7 +76,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    {% block content %} {% endblock content %}
+                    {% bootstrap_messages %} {% block content %} {% endblock content %}
 
                     <hr />
                     &copy; 만든사람

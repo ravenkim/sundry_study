@@ -1,7 +1,17 @@
+{% extends "instagram/layout.html" %} {% load bootstrap4 %} {% block content %}
 <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+    {% csrf_token %} {% bootstrap_form form %} {#
     <table>
-        {{ form }}
+        #} {# {{ form }}#} {#
     </table>
-    <input type="submit" value="저장" />
+    #} {% buttons %}
+    <button class="btn btn-primary">저장</button>
+    {% endbuttons %}
 </form>
+<hr />
+
+{% if post %}
+<a href="{{ post.get_absolute_url }}" class="btn btn-secondary"> 내용으로 </a>
+{% endif %}
+<a href="{% url 'instagram:post_list' %}" class="btn btn-primary"> 목록 </a>
+{% endblock %}
