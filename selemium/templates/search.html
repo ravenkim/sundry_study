@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <hgroup>
+        <h1>{{keyword}} 계열의 추천 색상</h1>
+        <a href="/export?keyword={{keyword}}">파일로 다운로드</a>
+      </hgroup>
+
+      <table>
+        <thead>
+          <tr>
+            <th>정도차</th>
+            <th>값</th>
+            <th>밝기 퍼센트</th>
+            <th>hex 복사버튼</th>
+            <th>rgb 복사버튼</th>
+            <th>hsl 복사버튼</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for color in colors %}
+          <tr bgcolor="#{{color.color_hex}}">
+            <th>{{color.color_distance}}</th>
+            <th>{{color.color_hex}}</th>
+            <th>{{color.color_lightness}}</th>
+            <th>
+              <button onclick="copybut(this)">{{color.color_hex}}</button>
+            </th>
+            <th>
+              <button onclick="copybut(this)">{{color.color_rgb}}</button>
+            </th>
+            <th>
+              <button onclick="copybut(this)">{{color.color_hsl}}</button>
+            </th>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </main>
+  </body>
+
+  <script>
+    function copybut(num1) {
+      window.navigator.clipboard.writeText(num1.innerText).then(() => {
+        // 복사가 완료되면 호출된다.
+
+        alert("복사완료");
+      });
+    }
+  </script>
+</html>
