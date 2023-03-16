@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Comforter&family=Lato:ital@1&family=Nanum+Pen+Script&family=Neonderthaw&family=Open+Sans:wght@400;600&display=swap");
+
+.hidden {
+  display: none;
+}
+
+header {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+}
+
+body {
+  font-family: "Nanum Pen Script", cursive, "Comforter", cursive;
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  min-width: 800px;
+  flex-direction: column;
+  background-image: url("https://musicmeta-phinf.pstatic.net/album/007/144/7144705.jpg?type=r360Fll&v=20220210115928");
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: "Nanum Pen Script", cursive, "Comforter", cursive;
+}
+
+.header_weather {
+  padding-left: 15px;
+  font-size: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#weather {
+  border: 1px black solid;
+  border-radius: 5px;
+  opacity: 0.95;
+  padding: 10px;
+  background-color: #c4a973;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+}
+
+.header_clock {
+  border: 1px black solid;
+  flex: 1;
+  max-width: 280px;
+  background-color: rgba(185, 170, 150, 0.95);
+  display: flex;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 15px;
+}
+
+.header_clock_now {
+  font-size: 20px;
+}
+
+.header_clock_time {
+  font-size: 40px;
+}
+
+.header_login {
+  padding-top: 10pt;
+  justify-content: right;
+  align-items: center;
+  display: flex;
+  padding-right: 15px;
+  flex: 1;
+}
+
+.header_login_name {
+  margin-top: 5px;
+  width: 150px;
+  background-color: #c4a973;
+  border: 1px black solid;
+  border-radius: 5px;
+  opacity: 0.95;
+}
+
+.header_login_btn {
+  margin-top: 5px;
+  float: right;
+  background-color: #c4a973;
+  border: 1px black solid;
+  border-radius: 5px;
+  opacity: 0.95;
+}
+
+#greeting {
+  border: 1px black solid;
+  border-radius: 5px;
+  opacity: 0.95;
+  padding: 10px;
+  background-color: #c4a973;
+}
+
+main {
+  flex-direction: column;
+  display: flex;
+  height: 65%;
+}
+
+.mainpage {
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+  height: fit-content;
+  justify-content: space-between;
+}
+
+.mainpage_main {
+  justify-content: space-between;
+  background-color: #e8dac0;
+  opacity: 0.95;
+  display: flex;
+  flex-direction: row;
+  padding: 3%;
+  border-radius: 5px;
+  border: 1px black solid;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.mainpage_main_todo {
+  width: 50%;
+  height: 90%;
+  padding-top: 25px;
+  background-color: #c4a973;
+  border: 1px black dashed;
+  border-radius: 50% 20% / 10% 40%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mainpage_main_secon {
+  margin-left: 40px;
+  width: 40%;
+  height: 100%;
+}
+
+.mainpage_main_secon_singer {
+  display: flex;
+  padding-top: 10px;
+  width: 100%;
+  font-size: 40px;
+  border: 1px black dashed;
+  border-radius: 50% 20% / 10% 40%;
+  height: 40%;
+  flex-direction: column;
+  align-items: center;
+  background-color: #c4a973;
+}
+
+.mainpage_main_secon_Button {
+  width: 100%;
+  height: 10%;
+  margin: 10px 0;
+}
+
+.mainpage_main_secon_songs {
+  display: flex;
+  width: 100%;
+  font-size: 40px;
+  padding-top: 10px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px black dashed;
+  border-radius: 50% 20% / 10% 40%;
+  height: 40%;
+  background-color: #c4a973;
+}
+
+.mainpage_sidebar {
+  height: fit-content;
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px black solid;
+  border-radius: 5px;
+  opacity: 0.95;
+  padding: 5px;
+  background-color: #e8dac0;
+}
+.mainpage_sidebar_title {
+  display: flex;
+  width: max-content;
+  font-size: 20px;
+  border: 1px black solid;
+  border-radius: 5px;
+  opacity: 0.95;
+  padding: 0 15px;
+  align-items: center;
+  background-color: rgba(185, 170, 150, 0.95);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.mainpage_sidebar_btn_shape {
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+}
+.mainpage_sidebar_btn_cover {
+  display: flex;
+  border: 1px black dashed;
+
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(185, 170, 150, 0.75);
+  width: 70px;
+  margin: 5px;
+  padding: 5px;
+  height: 70px;
+  border-radius: 40px;
+}
+
+img {
+  object-fit: cover;
+}
+
+.quote {
+  padding: 20px;
+  display: flex;
+  height: 10%;
+  border: 1px black solid;
+  border-radius: 5px;
+
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(185, 170, 150, 0.95);
+}
+
+footer {
+  padding-top: 80px;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+
+  display: flex;
+
+  height: 15%;
+}

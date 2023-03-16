@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="header_weather">
+        <div id="weather">
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="header_clock">
+        <div class="header_clock_now">현재시각</div>
+        <div class="header_clock_time" id="clock">00:00:00</div>
+      </div>
+      <div class="header_login">
+        <form class="hidden" id="login-form">
+          <input
+            class="header_login_name"
+            required
+            maxlength="15"
+            type="text"
+            placeholder="What is your name?"
+          />
+          <br />
+          <input class="header_login_btn" type="submit" value="Log In" />
+        </form>
+        <h1 class="hidden" id="greeting"></h1>
+      </div>
+    </header>
+    <main>
+      <div class="mainpage">
+        <div class="mainpage_main">
+          <div class="mainpage_main_todo">
+            <form id="todo-form">
+              <input type="text" placeholder="Write a To Do List" required />
+            </form>
+            <ul id="todo-list"></ul>
+          </div>
+
+          <div class="mainpage_main_secon">
+            <div class="mainpage_main_secon_singer">
+              Best Singer
+              <img />
+            </div>
+            <div class="mainpage_main_secon_Button">
+              <img class="" src="" />
+            </div>
+            <div class="mainpage_main_secon_songs">Best Songs</div>
+          </div>
+        </div>
+
+        <div class="mainpage_sidebar">
+          <div class="mainpage_sidebar_title">
+            ofiicial <br />
+            link of WIHI
+          </div>
+          <a href="https://www.instagram.com/wihiofficial/?igshid=4k3xnf0zrddn">
+            <div class="mainpage_sidebar_btn_cover">
+              <img class="mainpage_sidebar_btn_shape" src="img/instagram.png" />
+            </div>
+          </a>
+          <a href="https://www.youtube.com/c/WiHiOFFICIAL">
+            <div class="mainpage_sidebar_btn_cover">
+              <img class="mainpage_sidebar_btn_shape" src="img/YouTube.png" />
+            </div>
+          </a>
+          <a href="https://music.bugs.co.kr/artist/20091377">
+            <div class="mainpage_sidebar_btn_cover">
+              <img
+                class="mainpage_sidebar_btn_shape"
+                src="https://lh3.ggpht.com/M6UXPC-jncjtUd020iWikIdSaQ80Q1je3-uyTy-NkdOHme0X518DuYGsG3ftxTi5-w"
+              />
+            </div>
+          </a>
+          <a href="https://www.genie.co.kr/detail/artistInfo?xxnm=80748062">
+            <div class="mainpage_sidebar_btn_cover">
+              <img
+                class="mainpage_sidebar_btn_shape"
+                src="https://cdn.mhns.co.kr/news/photo/201907/244491_347821_1712.png"
+              />
+            </div>
+          </a>
+          <a href="https://music.apple.com/kr/artist/wihi/1480657166">
+            <div class="mainpage_sidebar_btn_cover">
+              <img
+                class="mainpage_sidebar_btn_shape"
+                src="https://w7.pngwing.com/pngs/976/811/png-transparent-great-american-music-hall-apple-music-singer-songwriter-hyper-music-others-text-trademark-logo-thumbnail.png"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="quote" id="quote">
+        <span></span>
+        <span></span>
+      </div>
+    </footer>
+
+    <script src="js/clock.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/singer.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/backgroundd.js"></script>
+  </body>
+</html>
