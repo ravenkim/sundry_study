@@ -3,8 +3,8 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import Layout from '../../components/layout/Layout';
 
 const Profile = () => {
-    const mainColor = "#8EA89B"
-    const subColor = "#61746A"
+    const mainColor = "#A0C0D7"
+    const subColor = "#333333"
 
     return (
         <>

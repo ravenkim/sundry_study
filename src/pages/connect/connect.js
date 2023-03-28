@@ -3,8 +3,8 @@ import { BrowserView, MobileView } from 'react-device-detect';
 import Layout from '../../components/layout/Layout';
 
 const Connect = () => {
-    const mainColor = "#8EA89B"
-    const subColor = "#61746A"
+    const mainColor = "#F3EDC9"
+    const subColor = "#E9D366"
 
     return (
         <>
