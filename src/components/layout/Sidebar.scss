@@ -1,9 +1,24 @@
+
+
 .sidebar_container{
     display: flex;
-    width: 5vw;
     height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    top: 0;
+    font-size: 2rem;
 }
 
+
+.index_icon{
+    padding: 1.2rem;
+    span{
+        margin-left: 0.2rem;
+    }
+}
+
+.index_list{
+    padding: 2rem 0;
+}

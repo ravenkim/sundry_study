@@ -6,9 +6,12 @@ function App() {
   
   return (
     <>
-        <IndexRoute>
 
-        </IndexRoute>
+          <IndexRoute>
+
+          </IndexRoute>
+  
+        
     </>
   );
 }

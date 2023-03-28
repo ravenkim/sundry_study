@@ -1,28 +1,29 @@
 import React from "react";
 import SideBar from "./SideBar";
 import "./Layout.scss"
+import "../design/resetcss.scss"
 
 
 const Layout = ({
     mainColor,
     subColor,
     children
-
 }) => {
-    const layoutS = {
+    const mainColorBG = {
         backgroundColor: mainColor,
     }
 
 
     return (
         <>  
-            <div className="layout" style={layoutS}>
-                <SideBar>
+            <div className="layout" style={mainColorBG}>
+                <SideBar mainColor={mainColor} subColor={subColor}>
 
                 </SideBar>
                 <div className="layoutInner">
-                    
-                    {children}
+                    <main>
+                        {children}
+                    </main>
                 </div>
             </div>
         </>

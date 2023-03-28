@@ -1,14 +1,10 @@
-import React from "react";
-import { BrowserView, MobileView } from 'react-device-detect'
-import Layout from "../../components/layout/Layout";
+import React from 'react';
+import { BrowserView, MobileView } from 'react-device-detect';
+import Layout from '../../components/layout/Layout';
 
-
-
-const Home = () => {
+const Connect = () => {
     const mainColor = "#8EA89B"
     const subColor = "#61746A"
-
-
 
     return (
         <>
@@ -17,7 +13,7 @@ const Home = () => {
                     mainColor={mainColor} 
                     subColor = {subColor}
                     children={
-                        <h1>home</h1>
+                        <h1>Connect</h1>
                     
                     }>
                     
@@ -28,6 +24,6 @@ const Home = () => {
             </MobileView>
         </>
     )
-}
+};
 
-export default Home;
+export default Connect;
