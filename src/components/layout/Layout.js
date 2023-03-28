@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header";
 import SideBar from "./SideBar";
 import "./Layout.scss"
 
@@ -7,7 +6,6 @@ import "./Layout.scss"
 const Layout = ({
     mainColor,
     subColor,
-    accentColor,
     children
 
 }) => {
@@ -23,11 +21,7 @@ const Layout = ({
 
                 </SideBar>
                 <div className="layoutInner">
-                    <Header
-                        accentColor = {accentColor}
-                    >
-
-                    </Header>
+                    
                     {children}
                 </div>
             </div>

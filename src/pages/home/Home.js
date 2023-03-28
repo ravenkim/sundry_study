@@ -7,7 +7,7 @@ import Layout from "../../components/layout/Layout";
 const Home = () => {
     const mainColor = "#8EA89B"
     const subColor = "#61746A"
-    const accentColor = "#A09E8C"
+
 
 
     return (
@@ -16,7 +16,7 @@ const Home = () => {
                 <Layout 
                     mainColor={mainColor} 
                     subColor = {subColor}
-                    accentColor = {accentColor}
+               
                     children={
                         <h1>home</h1>
                     
