@@ -29,8 +29,3 @@ export const reducerUtils = {
         errorMessage: error.msg,
     }),
 }
-
-//타입뒤 성공 했는지 실패 했는지
-export const createActionString = (type) => {
-    return { success: `${type}Success`, error: `${type}Error` }
-}

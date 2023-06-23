@@ -14,7 +14,7 @@ const Cat = () => {
 
 
     const btnclick = () => {
-        dispatch(catActions.getCatsFectch())
+        dispatch(catActions.getCats())
     }
   
 

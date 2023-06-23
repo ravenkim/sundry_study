@@ -1,17 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import client from "api/client";
-import { createActionString, reducerUtils } from 'utils/asyncUtils';
+import { reducerUtils } from 'utils/asyncUtils';
 
 
 const { takeLatest, put } = require("redux-saga/effects")
 
 
-
-
-//getCatsFectch 가 발생하면 비동기 처리 함수를 실행
+//getCats 가 발생하면 비동기 처리 함수를 실행
 export default function* catSaga() {
-    yield takeLatest('cat/getCatsFectch', workGetCatsFetch)
+    yield takeLatest('cat/getCats', workGetCatsFetch)
 }
+
 
 
 
@@ -26,10 +25,18 @@ function* workGetCatsFetch() {
     } catch (error) {
         yield put(catActions.getCatsFail(error))
     }
-    
 }
 
 
+function* asyncFetch () {
+    //api 요청 시작을 알림 (로딩 true)
+    try {
+        //api 요청
+        //완료 알림
+    } catch (error) {
+        //에러를 알림
+    }
+}
 
 
 export const cat = createSlice({
@@ -37,7 +44,7 @@ export const cat = createSlice({
     initialState: reducerUtils.init(),
     
     reducers:{
-        getCatsFectch: (state, action) => {
+        getCats: (state, action) => {
             return {
                 ...state,
                 ...reducerUtils.loading(state.data), 
@@ -55,6 +62,7 @@ export const cat = createSlice({
                 ...reducerUtils.error(action.payload), 
             }
         }
-    }
+    },
 })
+
 export const catActions = cat.actions
