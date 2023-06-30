@@ -17,12 +17,13 @@ const Sample = () => {
         dispatch(sampleAction.getCodeList())
     }
 
-
     return (
         <>
             <button
                 onClick={() => btnclick()}
-            >{codeList}aaaaa</button>
+            >aaaaa</button>
+            <p>
+            </p>
         </>
     );
 };
