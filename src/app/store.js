@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { connectRouter } from 'connected-react-router';
-import catSaga, { cat } from 'features/cat/catReducer';
 import sampleSaga, { sampleSlice } from 'features/sample/sampleReducer';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
@@ -12,14 +11,12 @@ const history = createBrowserHistory()
 //리듀서
 const reducers = {
   router: connectRouter(history),
-  catReducer: cat.reducer,
   sampleReducer: sampleSlice.reducer,
 }
 
 //사가
 export function* rootSaga() {
   yield all([
-    catSaga(),
     sampleSaga(),
   ]);
 }
