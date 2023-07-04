@@ -27,6 +27,8 @@ const localReducers = {
 
 
 //*******************************************스토어에 넘겨줄것****************************************************
+//복붙후 제목만 변경
+
     //비동기 처리
     export default function* sampleSaga() {
         for (let reducerName in makeRequest) {
@@ -50,6 +52,7 @@ const localReducers = {
         extraReducers: extraReducers(prefix, initialState)
     })
 
+    
 //*******************************************디스패치를 위한 액션****************************************************
 export const sampleAction = sampleSlice.actions
 

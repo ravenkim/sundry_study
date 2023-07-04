@@ -89,7 +89,7 @@ export const extraReducers = (prefix, initialState) => {
     }
 }
 
-
+//리듀서 자동 생성
 export const reducers = (makeRequest) =>{
     const reducers = {}
     for (const reducersName in makeRequest) {
@@ -98,6 +98,7 @@ export const reducers = (makeRequest) =>{
     return reducers
 }
 
+//리듀서 초기화
 export const initializeReducers = (initialState) => {
     const initializeReducers = {
         initializeAll: (state, action) => {
