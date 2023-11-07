@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84cc29e8-9cb2-4a8c-ab9b-f60951966b21" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/tool/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tool/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/tool/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/tool/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/tool/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/tool/wsgi.py" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +124,7 @@
       <updated>1698291697331</updated>
       <workItem from="1698291699603" duration="1048000" />
       <workItem from="1698292868373" duration="1542000" />
-      <workItem from="1699359600378" duration="1268000" />
+      <workItem from="1699359600378" duration="1516000" />
     </task>
     <servers />
   </component>
