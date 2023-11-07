@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84cc29e8-9cb2-4a8c-ab9b-f60951966b21" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/tool/templates/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tool/templates/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tool/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tool/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/tool/templates/main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tool/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tool/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +127,7 @@
       <updated>1698291697331</updated>
       <workItem from="1698291699603" duration="1048000" />
       <workItem from="1698292868373" duration="1542000" />
-      <workItem from="1699359600378" duration="2800000" />
+      <workItem from="1699359600378" duration="4215000" />
     </task>
     <servers />
   </component>

@@ -8,6 +8,7 @@ API_KEY = '8972d09b-9538-44a2-bf3d-f51c50e2edf0'
 
 # Create your views here.
 def index(request):
+
     msg = 'My Message'
     return render(request, 'main.html', {'message': msg})
 
