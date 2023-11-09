@@ -29,3 +29,12 @@ body=json.dumps(requestJson)
 print("[responseCode] " + str(response.status))
 print("[responBody]")
 print(response.data)
+
+english_to_korean = {
+    "Standing": "서있는",
+    "Walking": "걷는",
+    "Crouch": "웅크리는",
+    "Running": "달리는",
+    "Lying": "누워 있는",
+    "Sitting": "앉아 있는"
+}
