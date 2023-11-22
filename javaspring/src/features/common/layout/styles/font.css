@@ -1,0 +1,80 @@
+/* font : MinSans         */
+@font-face {
+  font-family: "MinSans-Thin";
+  src: url('/fonts/MinSans/MinSans-Thin.otf') format("opentype");
+}
+@font-face {
+  font-family: "MinSans-Light";
+  src: url('/fonts/MinSans/MinSans-Light.otf') format("opentype");
+}
+@font-face {
+  font-family: "MinSans-Regular";
+  src: url('/fonts/MinSans/MinSans-Regular.otf') format("opentype");
+}
+@font-face {
+  font-family: "MinSans-Medium";
+  src: url('/fonts/MinSans/MinSans-Medium.otf') format("opentype");
+}
+@font-face {
+  font-family: "MinSans-Bold";
+  src: url('/fonts/MinSans/MinSans-Bold.otf') format("opentype");
+}
+@font-face {
+  font-family: "MinSans-Black";
+  src: url('/fonts/MinSans/MinSans-Black.otf') format("opentype");
+}
+
+/* font defualt(400) */
+body{font-family: 'MinSans-Light';}
+
+/* font-weight */
+.font-bold-100{font-family: 'MinSans-Thin' !important;}
+.font-bold-300{font-family: 'MinSans-Light' !important;}
+.font-bold-400{font-family: 'MinSans-Regular' !important;}
+.font-bold-500{font-family: 'MinSans-Medium' !important;}
+.font-bold-700{font-family: 'MinSans-Bold' !important;}
+.font-bold-900{font-family: 'MinSans-Black' !important;}
+
+/* Heading(title) font */
+h1, .h1{font-family: 'MinSans-Regular'; font-size: 48px; line-height: 56px;}
+h2, .h2{font-family: 'MinSans-Regular'; font-size: 24px; line-height: 32px;}
+h3, .h3{font-family: 'MinSans-Regular'; font-size: 20px; line-height: 28px;}
+h4, .h4{font-family: 'MinSans-Regular'; font-size: 18px; line-height: 26px;}
+h5, .h5{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px;}
+
+/* Paragraph set */
+.text-16-r{font-family: 'MinSans-Light' !important; font-size: 16px !important; line-height: 24px !important;}
+.text-16-m{font-family: 'MinSans-Regular' !important; font-size: 16px !important; line-height: 24px !important;}
+.text-14-r{font-family: 'MinSans-Light' !important; font-size: 14px !important; line-height: 22px !important;}
+.text-14-m{font-family: 'MinSans-Regular' !important; font-size: 14px !important; line-height: 22px !important;}
+.text-12-r{font-family: 'MinSans-Light' !important; font-size: 12px !important; line-height: 20px !important;}
+.text-12-m{font-family: 'MinSans-Regular' !important; font-size: 12px !important; line-height: 20px !important;}
+
+/* only text-size */
+.text-18{font-size: 18px !important; line-height: 26px !important;}
+.text-16{font-size: 16px !important; line-height: 24px !important;}
+.text-14{font-size: 14px !important; line-height: 22px !important;}
+.text-12{font-size: 12px !important; line-height: 20px !important;}
+
+/* icon-size */
+.text-icon-16{font-size: 16px !important;}
+.text-icon-18{font-size: 18px !important;}
+.text-icon-20{font-size: 20px !important;}
+.text-icon-22{font-size: 22px !important;}
+.text-icon-24{font-size: 24px !important;}
+.text-icon-26{font-size: 26px !important;}
+.text-icon-28{font-size: 28px !important;}
+
+/* text-align */
+.text-left{text-align: left !important;}
+.text-center{text-align: center !important;}
+.text-right{text-align: right !important;}
+
+/* underline */
+.underline{text-decoration: underline !important; text-underline-position: under !important;}
+
+/* line-height */
+.line-height-none{line-height: unset !important;}
+
+/* selection color(drag) */
+::selection{background-color: #E6F0F8; color: inherit;}

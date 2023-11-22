@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "thebarkman.vscode-djaneiro",
+    "batisteo.vscode-django",
+    "esbenp.prettier-vscode"
+  ]
+}

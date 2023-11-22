@@ -1,0 +1,18 @@
+version: '3.2'
+
+services:
+  react_dev:
+    container_name: tipa_frontend_container
+    build:
+      context: .
+      dockerfile: Dockerfile_dev
+    command: yarn start
+    ports:
+      - "3002:3000"
+    volumes:
+      - ".:/tipa_frontend"
+      - "/tipa_frontend/node_modules"
+    restart: always
+    stdin_open: true
+
+#docker-compose -f docker-compose-dev.yml up -d --build

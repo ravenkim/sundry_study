@@ -1,0 +1,12 @@
+FROM node:12  AS builder
+WORKDIR /tipa_frontend
+
+COPY ./ /tipa_frontend/
+
+ENV PATH /tipa_frontend/node_modules/.bin:$PATH
+
+
+RUN apt-get update && apt-get install -y vim
+RUN yarn cache clean
+RUN yarn&&yarn install --frozen-lockfile
+RUN yarn build:dev

@@ -1,0 +1,50 @@
+{
+  "data": {
+    "total": 164,
+    "doc_ids": [
+      "1465031667",
+      "1345307698",
+      "1711124500",
+      "1345284295",
+      "1711121735",
+      "1345319630",
+      "1345235770",
+      "1425145402",
+      "1345327885",
+      "1345304269"
+    ],
+    "doc_size": 10,
+    "doc_data": [],
+    "analysis_data": {
+      "bar_chart": [
+        {
+          "name": "L",
+          "x": [
+            "2020"
+          ],
+          "y": [
+            4
+          ],
+          "type": "bar"
+        },
+        {
+          "name": "U",
+          "x": [
+            "2015",
+            "2018",
+            "2019",
+            "2020"
+          ],
+          "y": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "type": "bar"
+        }
+      ]
+    }
+  },
+  "full_query": "{\"_source\": [\"doc_id\", \"pjt_id\", \"stan_yr\", \"yr_cnt\", \"hm_nm\", \"rsch_area_cls_cd\", \"rsch_area_cls_nm\", \"kor_kywd\", \"eng_kywd\", \"rsch_goal_abstract\", \"rsch_abstract\", \"exp_efct_abstract\", \"pjt_prfrm_org_cd\", \"pjt_prfrm_org_nm\", \"kor_pjt_nm\", \"eng_pjt_nm\", \"pjt_mgnt_org_cd\", \"spclty_org_nm\", \"prctuse_nm\", \"rnd_phase\", \"rsch_exec_suj\", \"dtl_pjt_clas\", \"tech_lifecyc_nm\", \"regn_nm\", \"pjt_no\", \"tot_rsch_start_dt\", \"tot_rsch_end_dt\", \"tsyr_rsch_start_dt\", \"tsyr_rsch_end_dt\", \"rndco_tot_amt\"], \"sort\": [{\"_score\": {\"order\": \"desc\"}}, {\"stan_yr\": {\"order\": \"desc\"}}], \"query\": {\"bool\": {\"must\": [{\"query_string\": {\"fields\": [\"kor_kywd^1.5\", \"eng_kywd^1.5\", \"kor_pjt_nm^2\", \"rsch_goal_abstract\", \"rsch_abstract\", \"exp_efct_abstract\"], \"query\": \"(인공지능 빅데이터|\\\"인공지능 빅데이터\\\"^1.2|인공지능^2.0|빅데이터^1.5) + -(조류독감)\"}}], \"filter\": [{\"terms\": {\"doc_section\": [\"LA\", \"UK\"]}}]}}, \"min_score\": 71}"
+}

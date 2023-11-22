@@ -1,0 +1,400 @@
+/* 기본 padding */
+.p-0 {
+  padding: 0 !important;
+}
+.p-4 {
+  padding: 4px !important;
+}
+.p-8 {
+  padding: 8px !important;
+}
+.p-16 {
+  padding: 16px !important;
+}
+.p-24 {
+  padding: 24px !important;
+}
+.p-32 {
+  padding: 32px !important;
+}
+.p-40 {
+  padding: 40px !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+.pt-4 {
+  padding-top: 4px !important;
+}
+.pt-8 {
+  padding-top: 8px !important;
+}
+.pt-16 {
+  padding-top: 16px !important;
+}
+.pt-24 {
+  padding-top: 24px !important;
+}
+.pt-32 {
+  padding-top: 32px !important;
+}
+.pt-40 {
+  padding-top: 40px !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+.pb-4 {
+  padding-bottom: 4px !important;
+}
+.pb-8 {
+  padding-bottom: 8px !important;
+}
+.pb-16 {
+  padding-bottom: 16px !important;
+}
+.pb-24 {
+  padding-bottom: 24px !important;
+}
+.pb-32 {
+  padding-bottom: 32px !important;
+}
+.pb-40 {
+  padding-bottom: 40px !important;
+}
+
+.ptb-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.ptb-4 {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+.ptb-8 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+.ptb-16 {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+.ptb-24 {
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+}
+.ptb-32 {
+  padding-top: 32px !important;
+  padding-bottom: 32px !important;
+}
+.ptb-40 {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+.pl-4 {
+  padding-left: 4px !important;
+}
+.pl-8 {
+  padding-left: 8px !important;
+}
+.pl-16 {
+  padding-left: 16px !important;
+}
+.pl-24 {
+  padding-left: 24px !important;
+}
+.pl-32 {
+  padding-left: 32px !important;
+}
+.pl-40 {
+  padding-left: 40px !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+.pr-4 {
+  padding-right: 4px !important;
+}
+.pr-8 {
+  padding-right: 8px !important;
+}
+.pr-16 {
+  padding-right: 16px !important;
+}
+.pr-24 {
+  padding-right: 24px !important;
+}
+.pr-32 {
+  padding-right: 32px !important;
+}
+.pr-40 {
+  padding-right: 40px !important;
+}
+
+.plr-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.plr-4 {
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+.plr-8 {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+.plr-16 {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+.plr-24 {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+.plr-32 {
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+}
+.plr-40 {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+/* 기본 margin */
+.m-auto {
+  margin: auto !important;
+}
+.m-0 {
+  margin: 0 !important;
+}
+.m-4 {
+  margin: 4px !important;
+}
+.m-8 {
+  margin: 8px !important;
+}
+.m-16 {
+  margin: 16px !important;
+}
+.m-24 {
+  margin: 24px !important;
+}
+.m-32 {
+  margin: 32px !important;
+}
+.m-40 {
+  margin: 40px !important;
+}
+
+.mt-auto {
+  margin-top: auto !important;
+}
+.mt-0 {
+  margin-top: 0 !important;
+}
+.mt-4 {
+  margin-top: 4px !important;
+}
+.mt-8 {
+  margin-top: 8px !important;
+}
+.mt-16 {
+  margin-top: 16px !important;
+}
+.mt-24 {
+  margin-top: 24px !important;
+}
+.mt-32 {
+  margin-top: 32px !important;
+}
+.mt-40 {
+  margin-top: 40px !important;
+}
+
+.mb-auto {
+  margin-bottom: auto !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-4 {
+  margin-bottom: 4px !important;
+}
+.mb-8 {
+  margin-bottom: 8px !important;
+}
+.mb-16 {
+  margin-bottom: 16px !important;
+}
+.mb-24 {
+  margin-bottom: 24px !important;
+}
+.mb-32 {
+  margin-bottom: 32px !important;
+}
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+.mtb-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.mtb-4 {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+}
+.mtb-8 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.mtb-16 {
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+}
+.mtb-24 {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+.mtb-32 {
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+}
+.mtb-40 {
+  margin-top: 40px !important;
+  margin-bottom: 40px !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+.ml-0 {
+  margin-left: 0 !important;
+}
+.ml-4 {
+  margin-left: 4px !important;
+}
+.ml-8 {
+  margin-left: 8px !important;
+}
+.ml-16 {
+  margin-left: 16px !important;
+}
+.ml-24 {
+  margin-left: 24px !important;
+}
+.ml-32 {
+  margin-left: 32px !important;
+}
+.ml-40 {
+  margin-left: 40px !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+.mr-0 {
+  margin-right: 0 !important;
+}
+.mr-4 {
+  margin-right: 4px !important;
+}
+.mr-8 {
+  margin-right: 8px !important;
+}
+.mr-16 {
+  margin-right: 16px !important;
+}
+.mr-24 {
+  margin-right: 24px !important;
+}
+.mr-32 {
+  margin-right: 32px !important;
+}
+.mr-40 {
+  margin-right: 40px !important;
+}
+
+.mlr-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.mlr-4 {
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+}
+.mlr-8 {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
+.mlr-16 {
+  margin-left: 16px !important;
+  margin-right: 16px !important;
+}
+.mlr-24 {
+  margin-left: 24px !important;
+  margin-right: 24px !important;
+}
+.mlr-32 {
+  margin-left: 32px !important;
+  margin-right: 32px !important;
+}
+.mlr-40 {
+  margin-left: 40px !important;
+  margin-right: 40px !important;
+}
+
+/* width */
+.w-full {
+  width: 100% !important;
+}
+.w-contsize {
+  width: fit-content !important;
+}
+
+/* height */
+.h-contsize {
+  height: fit-content !important;
+}
+
+/* line-height */
+.font-space-1{line-height: 1.2 !important;}
+
+/* display(show, hide, hidden 등등) */
+.hidden {
+  visibility: hidden !important;
+}
+.visible {
+  visibility: visible !important;
+}
+.no-show {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.show-flex {
+  display: flex !important;
+}
+
+/* 빈응형(미디어쿼리) */
+@media screen and (max-width: 1439px) {
+  .table-wrap {
+    width: 100%;
+    overflow: auto;
+  }
+}
+
+@media screen and (max-width: 1559px) {
+  table.tooltip-table{width: 1090px !important;}
+  #tooltip1{top: -45px !important; left: 32% !important;}
+  #tooltip2{top: -45px !important; left: 45% !important;}
+  #tooltip3{top: -45px !important; left: 58% !important;}
+}

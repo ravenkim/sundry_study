@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+  react:
+    container_name: tipa_frontend_container
+    build:
+      context: .
+      dockerfile: Dockerfile_use_image
+#    image: tipa_frontend:latest
+    ports:
+      - "3003:80"
+    restart: always
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: tipa_network
