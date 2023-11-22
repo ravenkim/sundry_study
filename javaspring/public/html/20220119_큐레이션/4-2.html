@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=1920" />
+<title>iris</title>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" />
+<link type="text/css" rel="stylesheet" href="../css/common.css" />
+</head>
+<body>
+    <a href="#contents" class="skip">본문바로가기</a>    
+    <!-- header -->    
+    <div class="header-wrap">
+	    <header>
+            <div class="header-logo">
+                <h1><a href="#" title="iris"><em class="hidden">iris</em></a></h1>
+		    </div>        
+            <nav class="gnb">
+                <h2 class="hidden">메뉴</h2>
+                <ul class="">
+                    <li><a href="#" title="다차원 검색"><em class="hidden">다차원 검색</em></a></li>
+                    <li><a href="#" title="과제검색"><em class="hidden">과제검색</em></a></li>
+                    <li><a href="#" title="전문가토픽모델"><em class="hidden">전문가토픽모델</em></a></li>
+                    <li><a href="#" title="관리자 페이지"><em class="hidden">관리자 페이지</em></a></li>
+                </ul> 
+            </nav> 
+        </header>
+    </div>      
+    <!-- header -->
+    <!-- main --> 
+    <main id="contents">
+        <div class="top-header">
+            <ul>
+                <li>다차원 큐레이션</li>
+            </ul>
+            <p class="text-exclamation">검색할 과제를 정렬하거나 필터링하여 선택할 수 있습니다.</p>
+            <a href="#" class="user"><em>User</em></a>  
+        </div>
+        <!-- section3 --> 
+        <section class="section3 container">
+            <h2 class="hidden">다차원큐레이션</h2>
+            <div class="row row1">
+<!-- 수정된 패널 -->
+                <article class="col-left panel">
+                    <ul class="con-box curation-panel height-100">
+<!-- 패널 - 툴바 영역 -->
+                        <li class="con-box height-100 col-left curation-left tool-bar">
+                            <div class="con-box">      
+                                <div class="filtering">
+                                    <div class="con-tooltip">
+                                        <a href="#" title="과제목록" class="btn-uploadfile"><em class="hidden">과제목록</em></a>
+                                        <span class="tooltiptext">제안과제 목록</span>
+                                    </div> 
+                                    <div class="con-tooltip">
+                                        <a href="#" title="필터링" class="btn-filter"><em class="hidden">과제필터하여 선택하기</em></a>
+                                        <span class="tooltiptext">과제필터하여 선택하기</span>
+                                    </div> 
+                                    <a href="#" title="삭제" class="btn-trash"><em class="hidden">삭제</em></a>
+                                </div>
+                            </div>    
+                        </li>
+<!-- 패널 - 콘텐츠 영역 -->
+                        <li class="con-box height-100 panel-contents hidden">
+                            <div class="filtering">
+                                <a href="#" title="열림" class="btn-left"><em class="hidden">열림</em></a>
+                                <div class="con-title">
+                                    <h3>과제필터하여 선택하기</h3>
+                                </div>
+                            </div>
+                                                       
+                            <div class="tab-wrap mb-gutter">
+                                <ul class="con-tab">
+                                    <li><a href="#" class="active">용어분석</a></li>
+                                    <li><a href="#">소시오그램</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-detail socio-wrap">
+                                <p class="text-infor">소시오그램 도구 도움말 입니다.</p>
+                                <div class="graph-area">
+                                    소시오그램 그래프 표출
+                                </div>
+                                <div class="filter-area">
+                                    <div class="filter-controller">
+                                        <span class="radio-lable">검색 방식</span>
+                                        <ul>
+                                            <li>
+                                                <div class="radio-button mtb-gutter">
+                                                    <input type="radio" id="1" checked /><label for="1">Word</label>
+                                                    <input type="radio" id="2" /><label for="2">Paper</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="filter-controller">
+                                        <span>네트워크 지표</span>
+                                        <ul>
+                                            <li>0.0</li>
+                                            <li class="slider-box">Slider 컴포넌트 영역</li>
+                                        </ul>
+                                    </div>
+                                    <div class="filter-controller">
+                                        <span>날짜 설정</span>
+                                        <ul>
+                                            <li>1999 - 2012</li>
+                                            <li class="slider-box">Slider 컴포넌트 영역</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="content-button">
+                                <button type="button" class="btn btn-tertiary btn-block"><i class="far fa-trash-alt mr-gutter"></i>제거 과제 목록보기</button>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="col-right curation-right">                    
+                    <div class="con-box">
+                        <div class="con-title title-top">
+                            <h3>유사과제 선택하기</h3> 
+                        </div>
+                        <div class="row">                            
+                            <div class="col-left">
+                                <div class="con-title2 assign-naming">
+                                    <div class="title-lable">
+                                        <span>과제명</span>
+                                    </div>
+                                    <button type="button" class="assign-detail"></button>
+                                    <h4>대면적 디스플레이용 유도결합 플라즈마 건식 식각공정에서 플라즈마 해석 기술개발</h4>
+                                </div>   
+                                <div class="select-remove mb10">
+                                    <button type="button" class="btn btn-primary mr-gutter">선택제거</button>
+                                    <div class="con-search mr-gutter">
+                                        <form>
+                                            <label for="totalSearch" class="hidden">키워드 검색</label>
+                                            <input type="text" id="totalSearch" placeholder="키워드 입력" />
+                                            <button type="submit"><i class="fas fa-search" title="검색"></i></button>
+                                            <span class="helper-text hidden">*검색결과가 없습니다.</span>
+                                        </form>
+                                    </div>
+                                    <div class="sort-warp">
+                                        <ul>
+                                            <li class="active">
+                                                키워드 관련성
+                                                <div class="sort">
+                                                    <a href="#" class="up" title="오름차순정렬"><em class="hidden">오름차순정렬</em></a>
+                                                    <a href="#" class="down" title="내림차순정렬"><em class="hidden">내림차순정렬</em></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                과제 영향력
+                                                <div class="sort">
+                                                    <a href="#" class="up" title="오름차순정렬"><em class="hidden">오름차순정렬</em></a>
+                                                    <a href="#" class="down" title="내림차순정렬"><em class="hidden">내림차순정렬</em></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                과제 매개력
+                                                <div class="sort">
+                                                    <a href="#" class="up" title="오름차순정렬"><em class="hidden">오름차순정렬</em></a>
+                                                    <a href="#" class="down" title="내림차순정렬"><em class="hidden">내림차순정렬</em></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                과제 연결성
+                                                <div class="sort">
+                                                    <a href="#" class="up" title="오름차순정렬"><em class="hidden">오름차순정렬</em></a>
+                                                    <a href="#" class="down" title="내림차순정렬"><em class="hidden">내림차순정렬</em></a>
+                                                </div>
+                                            </li>
+                                            <li class="active">
+                                                최신성
+                                                <div class="sort">
+                                                    <a href="#" class="up" title="오름차순정렬"><em class="hidden">오름차순정렬</em></a>
+                                                    <a href="#" class="down" title="내림차순정렬"><em class="hidden">내림차순정렬</em></a>
+                                                </div>
+                                            </li>
+                                        </ul>    
+                                    </div>
+                                </div>
+                                <div class="table-box content-detail">                                        
+                                    <table>
+                                        <caption>과제명, 수행기관, 과제기관에 대한 정보를 보여 주는 표</caption>
+                                        <colgroup>
+                                            <col style="width:36px;">
+                                            <col style="width:auto;">						
+                                            <col style="width:15%;">
+                                            <col style="width:15%;">
+                                            <col style="width:36px;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><input type="checkbox" id="table-checkbox" /><label for="table-checkbox"></label></th>
+                                                <th scope="col">과제명</th>
+                                                <th scope="col">수행기관</th>
+                                                <th scope="col">과제기관</th>
+                                                <th></th>
+                                            </tr>    
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox1" /><label for="table-checkbox1"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td> 
+                                            </tr>    
+                                            <tr class="active">
+                                                <td><input type="checkbox" id="table-checkbox2" checked /><label for="table-checkbox2"></label></td>
+                                                <td>단일권선 변압기의 유니폴라 동기식 절연형  Class D 오디오 앰프</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-close"><a href="#" title="닫기"><em class="hidden">닫기</em></a></td>   
+                                            </tr> 
+                                            <tr class="table-col">
+                                                <td colspan="5">
+                                                    <div class="table-content modal-button">
+                                                        <div class="content-button">
+                                                            <button type="button" class="btn btn-sm-blue btn-sm">상세보기</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-content">
+                                                        <h6>연구목표</h6>
+                                                        <table>
+                                                            <caption>연구목표 설명</caption>
+                                                            <colgroup>
+                                                                <col style="width:100%;">
+                                                            </colgroup>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>본 발명은 일반적으로 디지털 오디오 앰프 시스템에 사용하기 위한 절연형 Class D 오디오 앰프에 관한 것이다. 특히, 본 발명은 절연형 SMPS단과 비절연형 Class D 앰프단으로 구성된 종래의 디지털 오디오 앰프 시스템에서 벗어나 별도의 SMPS단 필요없이 하나의 절연형 Class D 오디오 앰프로 DC 전압 조정, 전기적 절연, 음원신호 증폭을 동시에 구현하여 고효율을 달성할 수 있고 종래의 디지털 오디오 앰프 시스템에서 필수적이다.</td>
+                                                                </tr>                                                    
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="content-button hidden">
+                                                            <button type="button" class="btn btn-tertiary btn-sm">+ 더보기</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-content">
+                                                        <h6>연구내용</h6>
+                                                        <table>
+                                                            <caption>연구내용 설명</caption>
+                                                            <colgroup>
+                                                                <col style="width:100%;">
+                                                            </colgroup>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>본 발명은 일반적으로 디지털 오디오 앰프 시스템에 사용하기 위한 절연형 Class D 오디오 앰프에 관한 것이다. 특히, 본 발명은 절연형 SMPS단과 비절연형 Class D 앰프단으로 구성된 종래의 디지털 오디오 앰프 시스템에서 벗어나 별도의 SMPS단 필요없이 하나의 절연형 Class D 오디오 앰프로 DC 전압 조정, 전기적 절연, 음원신호 증폭을 동시에 구현하여 고효율을 달성할 수 있고 종래의 디지털 오디오 앰프 시스템에서 필수적이며  SMPS단 필요없이 하나의...</td>
+                                                                </tr>                                                    
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="content-button">
+                                                            <button type="button" class="btn btn-tertiary btn-sm">+ 더보기</button>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="table-content">
+                                                        <h6>기대효과</h6>
+                                                        <table>
+                                                            <caption>기대효과 설명</caption>
+                                                            <colgroup>
+                                                                <col style="width:100%;">
+                                                            </colgroup>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>***더보기 버튼을 클릭하면 전체 내용이 보여지며 하단 '+더보기' 버튼은 사라집니다. </br>본 발명은 일반적으로 디지털 오디오 앰프 시스템에 사용하기 위한 절연형 Class D 오디오 앰프에 관한 것이다. 특히, 본 발명은 절연형 SMPS단과 비절연형 Class D 앰프단으로 구성된 종래의 디지털 오디오 앰프 시스템에서 벗어나 별도의 SMPS단 필요없이 하나의 절연형 Class D 오디오 앰프로 DC 전압 조정, 전기적 절연, 음원신호 증폭을 동시에 구현하여 고효율을 달성할 수 있고 종래의 디지털 오디오 앰프 시스템에서 필수적이다.특히, 본 발명은 절연형 SMPS단과 비절연형 Class D 앰프단으로 구성된 종래의 디지털 오디오 앰프 시스템에서 벗어나 별도의 SMPS단 필요없이 하나의 절연형 Class D 오디오 앰프로 DC 전압 조정, 전기적 절연, 음원신호 증폭을 동시에 구현하여 고효율을 달성할 수 있고 종래의 디지털 오디오 앰프 시스템에서 필수적이다.특히, 본 발명은 절연형 SMPS단과 비절연형 Class D 앰프단으로 구성된 종래의 디지털 오디오 앰프 시스템에서 벗어나 별도의 SMPS단 필요없이 하나의 절연형 Class D 오디오 앰프로 DC 전압 조정, 전기적 절연, 음원신호 증폭을 동시에 구현하여 고효율을 달성할 수 있고 종래의 디지털 오디오 앰프 시스템에서 필수적이다.</td>
+                                                                </tr>                                                    
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="content-button hidden">
+                                                            <button type="button" class="btn btn-tertiary btn-sm">+ 더보기</button>
+                                                        </div>
+                                                    </div>
+                                                </td>                                                    
+                                            </tr>
+                                            <tr> 
+                                                <td><input type="checkbox" id="table-checkbox3" disabled /><label for="table-checkbox3"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>   
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox4" /><label for="table-checkbox4"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox5" /><label for="table-checkbox5"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>  
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox6" /><label for="table-checkbox6"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>   
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox7" /><label for="table-checkbox7"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td> 
+                                            </tr>  
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox8" /><label for="table-checkbox8"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>  
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox9" /><label for="table-checkbox9"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox10" /><label for="table-checkbox10"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="transfer">
+                                <button type="button" class="btn btn-primary"><i class="fas fa-angle-right"></i></button>
+                                <button type="button" class="btn btn-primary"><i class="fas fa-angle-left"></i></button>
+                            </div>
+                            <div class="col-right">                                
+                                <div class="con-title2">
+                                    <h4>선택 과제<span>36</span>건</h4> 
+                                    <div>
+                                        <button type="button" class="btn btn-secondary btn-sm mr-gutter" disabled>과제규모 산정</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">저장하기</button>
+                                    </div>
+                                </div>
+                                <p class="text-infor"><strong>과제규모 산정</strong>은 선택한 과제를 저장하고 이동할 수 있습니다.</p>
+                                <div class="table-box content-detail">
+                                    <table>
+                                        <caption>과제명, 수행기관, 과제기관에 대한 정보를 보여 주는 표</caption>
+                                        <colgroup>
+                                            <col style="width:36px;">
+                                            <col style="width:auto;">						
+                                            <col style="width:15%;">
+                                            <col style="width:15%;">
+                                            <col style="width:36px;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><input type="checkbox" id="table-checkbox0" /><label for="table-checkbox0"></label></th>
+                                                <th scope="col">과제명</th>
+                                                <th scope="col">수행기관</th>
+                                                <th scope="col">과제기관</th>
+                                                <th></th>
+                                            </tr>    
+                                        </thead>
+                                        <tbody> 
+                                            <tr> 
+                                                <td><input type="checkbox" id="table-checkbox13" disabled /><label for="table-checkbox13"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>  
+                                            <tr> 
+                                                <td><input type="checkbox" id="table-checkbox13" disabled /><label for="table-checkbox13"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>  
+                                            <tr> 
+                                                <td><input type="checkbox" id="table-checkbox13" disabled /><label for="table-checkbox13"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>  
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox14" /><label for="table-checkbox14"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox15" /><label for="table-checkbox15"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>  
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox16" /><label for="table-checkbox16"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>   
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox17" /><label for="table-checkbox17"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td> 
+                                            </tr>  
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox18" /><label for="table-checkbox18"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>  
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox19" /><label for="table-checkbox19"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="table-checkbox20" /><label for="table-checkbox20"></label></td>
+                                                <td>과제명</td>
+                                                <td>수행기관</td>
+                                                <td>과제기관</td>
+                                                <td class="table-open"><a href="#" title="열기"><em class="hidden">열기</em></a></td>   
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>          
+                                <div class="calcul-preview">
+                                    <div class="card-small">
+                                        <div class="card-lable blue">
+                                            <span>최저</span>
+                                        </div>
+                                        <div class="calcul-data">
+                                            00,000,000
+                                        </div>
+                                    </div>
+                                    <div class="card-small">
+                                        <div class="card-lable">
+                                            <span>평균</span>
+                                        </div>
+                                        <div class="calcul-data">
+                                            41,250,000
+                                        </div>
+                                    </div>
+                                    <div class="card-small">
+                                        <div class="card-lable">
+                                            <span>중위수</span>
+                                        </div>
+                                        <div class="calcul-data">
+                                            00,000,000
+                                        </div>
+                                    </div>
+                                    <div class="card-small">
+                                        <div class="card-lable red">
+                                            <span>최고</span>
+                                        </div>
+                                        <div class="calcul-data">
+                                            00,000,000
+                                        </div>
+                                    </div>
+                                </div>                      
+                            </div>
+                        </div>                       
+                    </div>
+                </article>
+            </div> 
+        </section>
+        <!-- section3 -->
+    </main>
+    <!-- main --> 
+</body>
+</html>

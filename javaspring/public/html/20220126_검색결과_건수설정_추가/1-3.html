@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=1920" />
+<title>iris</title>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" />
+<link type="text/css" rel="stylesheet" href="../css/common.css" />
+</head>
+<body>
+    <a href="#contents" class="skip">본문바로가기</a>    
+    <!-- header -->    
+    <div class="header-wrap">
+	    <header>
+            <div class="header-logo">
+                <h1><a href="#" title="iris"><em class="hidden">iris</em></a></h1>
+		    </div>        
+            <nav class="gnb">
+                <h2 class="hidden">메뉴</h2>
+                <ul>
+                    <li class="active"><a href="#" title="다차원 검색"><em class="hidden">다차원 검색</em></a></li> 
+                    <li><a href="#" title="토픽모델 기반 검색"><em class="hidden">토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="전문가 토픽모델 기반 검색"><em class="hidden">전문가 토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="관리자 페이지"><em class="hidden">관리자 페이지</em></a></li>
+                </ul>
+            </nav> 
+        </header>
+    </div>      
+    <!-- header -->
+    <!-- main --> 
+    <main id="contents">
+        <div class="top-header search-header">
+            <ul>
+                <li>다차원 검색</li>
+            </ul>
+            <a href="#" class="user"><em>User</em></a>            
+        </div>
+        <!-- section1 --> 
+        <section class="section1">
+            <h2 class="hidden">검색 메뉴</h2>
+            <ul class="search-button">
+                <li>
+                    <a href="#" class="active">
+                        <strong>키워드</strong>
+                        <span>키워드 관련 과제 검색</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>과제</strong>
+                        <span>과제 목록으로 유사과제 검색</span>
+                    </a>
+                </li>   
+                <li>
+                    <a href="#">
+                        <strong>토픽</strong>
+                        <span>토픽모델 관련 과제 검색</span>
+                    </a>
+                </li>   
+            </ul> 
+        </section>
+        <!-- section1 -->
+        <!-- section2 --> 
+        <section class="section2 container">
+            <h2 class="hidden">키워드</h2>
+            <div class="row row1">
+                <article class="col-left">
+                    <div class="con-box">
+                        <div class="con-title">
+                            <h3>키워드 검색</h3>
+                            <a href="#" title="키워드 검색 닫기" class="btn-up"><em class="hidden">키워드 검색 닫기</em></a>
+                        </div>                        
+                        <div class="content-detai height-auto">
+                            <div class="radio-button">
+                                <input type="radio" id="1" /><label for="1">단어</label>
+                                <input type="radio" id="2" checked /><label for="2">문장</label>
+                            </div>
+                            <ol class="label-input">
+                                <li>
+                                    <label for="keyword0">문장 타이틀</label>
+                                    <input type="text" id="keyword0" placeholder="아래의 문장들을 대표하는 하나의 타이틀 입력" />
+                                </li> 
+                                <li>
+                                    <label for="keyword1">순위 1</label>
+                                    <input type="text" id="keyword1" placeholder="순위 1 주요문장이나 필  수 키워드 입력" />
+                                </li>
+                                <li>
+                                    <label for="keyword2">순위 2</label>
+                                    <input type="text" id="keyword2" placeholder="순위 2 참조 문장이나 키워드 입력" />
+                                </li>
+                                <li>
+                                    <label for="keyword3">순위 3</label>
+                                    <input type="text" id="keyword3" placeholder="순위 3 참조 문장이나 키워드 입력" />
+                                </li>    
+                            </ol>  
+                        </div>
+                        <div class="content-button02">
+                            <div class="result-option-box mt-gutter">
+                                <label class="option-lable" for="keyword1">과제 검색 수</label>
+                                <ul class="option-button-box radio-button03">
+                                    <input type="radio" id="1" checked /><label for="1">500건</label>
+                                    <input type="radio" id="2" /><label for="2">1000건</label> 
+                                    <input type="radio" id="3" /><label for="2">1500건</label> 
+                                </ul>
+                            </div> 
+                            <button type="button" class="btn btn-primary btn-block">검색하기</button>
+                        </div>   
+                    </div>    
+                </article>
+                <article class="col-right">
+                    <div class="con-box">
+                        <div class="con-title">
+                            <h3>검색 이력</h3>                            
+                            <span>키워드 - 문장 검색 이력입니다.</span>
+                            <a href="#" title="검색 이력 닫기" class="btn-up"><em class="hidden">검색 이력 닫기</em></a>
+                        </div>
+                        <div class="content-detail">
+                            <ul class="search-history">                                    
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack active" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>문장 검색 타이틀 영역입니다.</strong>
+                                    <dl>
+                                        <dt>순위 1</dt>
+                                        <dd>입력된 주요문장이나 필수 키워드가 표출됩니다.</dd>
+                                        <dt>순위 2</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                        <dt>순위 3</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>문장 검색 타이틀 영역입니다.</strong>
+                                    <dl>
+                                        <dt>순위 1</dt>
+                                        <dd>입력된 주요문장이나 필수 키워드가 표출됩니다.</dd>
+                                        <dt>순위 2</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                        <dt>순위 3</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>문장 검색 타이틀 영역입니다.</strong>
+                                    <dl class="display-none">
+                                        <dt>순위 1</dt>
+                                        <dd>입력된 주요문장이나 필수 키워드가 표출됩니다.</dd>
+                                        <dt>순위 2</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                        <dt>순위 3</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>문장 검색 타이틀 영역입니다.</strong>
+                                    <dl class="display-none">
+                                        <dt>순위 1</dt>
+                                        <dd>입력된 주요문장이나 필수 키워드가 표출됩니다.</dd>
+                                        <dt>순위 2</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                        <dt>순위 3</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>문장 검색 타이틀 영역입니다.</strong>
+                                    <dl class="display-none">
+                                        <dt>순위 1</dt>
+                                        <dd>입력된 주요문장이나 필수 키워드가 표출됩니다.</dd>
+                                        <dt>순위 2</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                        <dt>순위 3</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>문장 검색 타이틀 영역입니다.</strong>
+                                    <dl class="display-none">
+                                        <dt>순위 1</dt>
+                                        <dd>입력된 주요문장이나 필수 키워드가 표출됩니다.</dd>
+                                        <dt>순위 2</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                        <dt>순위 3</dt>
+                                        <dd>입력된 참조 문장이나 키워드가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>   
+                </article>
+            </div> 
+        </section>
+        <!-- section2 -->
+    </main>
+    <!-- main --> 
+</body>
+</html>

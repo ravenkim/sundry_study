@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=1920" />
+<title>iris</title>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" />
+<link type="text/css" rel="stylesheet" href="../css/common.css" />
+</head>
+<body>
+    <a href="#contents" class="skip">본문바로가기</a>    
+    <!-- header -->    
+    <div class="header-wrap">
+	    <header>
+            <div class="header-logo">
+                <h1><a href="#" title="iris"><em class="hidden">iris</em></a></h1>
+		    </div>        
+            <nav class="gnb">
+                <h2 class="hidden">메뉴</h2>
+                <ul>
+                    <li><a href="#" title="메인화면"><em class="hidden">메인화면</em></a></li> 
+                    <li class="active"><a href="#" title="토픽모델 기반 검색"><em class="hidden">토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="전문가 토픽모델 기반 검색"><em class="hidden">전문가 토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="관리자 페이지"><em class="hidden">관리자 페이지</em></a></li>
+                </ul> 
+            </nav> 
+        </header>
+    </div>      
+    <!-- header -->
+    <!-- main --> 
+    <main id="contents">
+        <div class="top-header">
+            <ul>
+                <li><a href="#" class="btn-exclamation">토픽 모델링</a></li>
+            </ul> 
+            <a href="#" class="user"><em>User</em></a>
+        </div>
+        <!-- section4 --> 
+        <section class="section4 container">
+            <h2 class="hidden">토픽모델링</h2>
+            <div class="row row1">
+                <article class="col-left topicmodel-left">
+                    <div class="con-box height-100">
+                        <div class="filtering">
+                            <a href="#" title="열림" class="btn-right"><em class="hidden">열림</em></a>
+                        </div>  
+                    </div>
+                    <div class="con-box display-none">
+                        <div class="con-title">
+                            <h3>토픽 재료</h3>
+                            <a href="#" title="토픽 재료 닫기" class="btn-up"><em class="hidden">토픽 재료 닫기</em></a>
+                        </div>   
+                        <div class="tab-wrap mb-gutter">
+                            <ul class="con-tab">
+                                <li><a href="#" class="active">토픽 재료</a></li>
+                                <li><a href="#">전문가 토픽</a></li>
+                            </ul>
+                        </div> 
+                        <div class="con-search">
+                            <form>
+                                <label for="totalSearch" class="hidden">키워드 검색</label>
+                                <input type="text" id="totalSearch" placeholder="키워드를 입력하세요." />
+                                <button type="submit"><i class="fas fa-search" title="검색"></i></button>
+                            </form>
+                        </div>
+                        <div class="content-detail">                                                              
+                            <div class="keyworld-filter width-100">
+                                <div class="con-box-gray">
+                                    <h4>추천 키워드</h4>
+                                    <ul>
+                                        <li>머신러닝<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                        <li>감기<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>                         
+                    </div>
+                    <div class="con-box display-none">
+                        <div class="con-title">
+                            <h3>워드클라우드</h3>
+                            <a href="#" title="워드클라우드 열기" class="btn-down"><em class="hidden">워드클라우드 열기</em></a>
+                        </div>
+                        <div class="display-none">
+                            <div class="content-detail">
+                                <p class="text-infor"><strong>제거해야할 키워드</strong>와 <strong>선택 키워드</strong>(중요한 키워드)를 지정하여 과제검색을 강화합니다.</p>
+                                <div>
+                                    워드클라우드                            
+                                </div>
+                                <div class="keyworld-filter">
+                                    <div class="con-box-gray">
+                                        <h4>제거 키워드</h4>
+                                        <ul>
+                                            <li>머신러닝<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                            <li>감기<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="con-box-blue">
+                                        <h4>선택 키워드</h4>
+                                        <ul>
+                                            <li>클라우드서버<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                            <li>음성데이터<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                            <li>대화형<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                            <li>모바일로봇<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                            <li>영상데이터<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                            <li>기계<a href="#" title="삭제"><em class="hidden">삭제</em></a></li>
+                                        </ul>
+                                    </div>
+                                </div>   
+                            </div>   
+                        </div>    
+                    </div>
+                    <div class="con-box display-none">
+                        <div class="con-title">
+                            <h3>소시오그램</h3>
+                            <a href="#" title="소시오그램 열기" class="btn-down"><em class="hidden">소시오그램 열기</em></a>
+                        </div>
+                        <div class="display-none">
+                            <div class="content-detail">
+                                <p class="text-infor">소시오그램 도구 도움말 입니다.</p>
+                                <div>
+                                    소시오그램                            
+                                </div>  
+                                <div class="radio-button mtb-gutter">
+                                    <input type="radio" id="1" checked /><label for="1">단어</label>
+                                    <input type="radio" id="2" /><label for="2">문장</label>
+                                </div>
+                            </div>   
+                        </div>    
+                    </div>
+                    <div class="con-box display-none">
+                        <div class="con-title">
+                            <h3>전문가 토픽</h3>
+                            <a href="#" title="전문가 토픽 열기" class="btn-down"><em class="hidden">전문가 토픽 열기</em></a>
+                        </div>
+                        <div class="display-none">
+                            <div class="content-detail">
+                                <ul class="topic-folder master">
+                                    <li>  
+                                        <ul>
+                                            <li>
+                                                <input id="checkbox1" type="checkbox"><label for="checkbox1"></label>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-bookmark"><em class="hidden">관리</em></a> 
+                                                <a href="#" class="btn-control"><em class="hidden">관리</em></a> 
+                                            </li>
+                                            <li>
+                                                <input id="checkbox2" type="checkbox"><label for="checkbox2"></label>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-bookmark active"><em class="hidden">관리</em></a> 
+                                                <a href="#" class="btn-control"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li>
+                                                <input id="checkbox3" type="checkbox"><label for="checkbox3"></label>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-bookmark"><em class="hidden">관리</em></a> 
+                                                <a href="#" class="btn-control"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li class="active">
+                                                    <input id="checkbox4" type="checkbox" checked=""><label for="checkbox4"></label>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-bookmark"><em class="hidden">관리</em></a> 
+                                                <a href="#" class="btn-control"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li>
+                                                <input id="checkbox5" type="checkbox"><label for="checkbox5"></label> 
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-bookmark"><em class="hidden">관리</em></a> 
+                                                <a href="#" class="btn-control"><em class="hidden">관리</em></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>   
+                        </div>    
+                    </div>
+                </article>
+                <article class="col-right topicmodel-right">                    
+                    <div class="con-box topicmap-box"> 
+                        <div class="con-title topic-top">
+                            <h3>Topic Modeling</h3> 
+                            <a href="#" title="새로고침" class="btn-sync"><em class="hidden">새로고침</em></a>
+                            <div class="content-button">
+                                <button type="button" class="btn btn-tertiary btn-sm">나의토픽</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">검색식</button>
+                                <button type="submit" class="btn btn-primary btn-sm">토픽 저장</button>
+                            </div>
+                        </div>
+                                  
+                        <div class="content-detail height-100">
+                            <div class="tutorial_container">
+                                <div class="tutorial-box">
+                                    <div class="image-box">
+                                        <img src="../images/tutorial-image-1.svg" alt="토픽 모델링 이미지" />
+                                    </div>
+                                    <div class="pagenation">
+                                        <ul>
+                                            <li class="active"></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>                                
+                        </div> 
+                    </div>
+                </article>
+            </div> 
+        </section>
+        <!-- section4 -->
+    </main>
+    <!-- main --> 
+</body>
+</html>

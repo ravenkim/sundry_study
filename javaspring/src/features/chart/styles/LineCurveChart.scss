@@ -1,0 +1,16 @@
+.line-curve_chart .axis path,
+.line-curve_chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line-curve_chart .x.axis path {
+  display: none;
+}
+
+.line-curve_chart .lineCurve {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.2px;
+}

@@ -1,0 +1,1101 @@
+@import url('font.css');
+@import url('color.css');
+@import url('space.css');
+@import url('layout.css');
+@import url('custom.css');
+
+html, body{overflow: hidden;}
+body{min-width: 1440px;}
+hr{border: none; border-top: 1px solid #E5E7EB;}
+button{outline: none;}
+
+/* Scroll */
+::-webkit-scrollbar{width: 8px; height: 8px;}
+::-webkit-scrollbar-track{background-color: #f3f3f3; border-radius: 8px;}
+::-webkit-scrollbar-thumb{background-color: #dbdbdf; border-radius: 8px;}
+html, div, .table-wrap, .overflow-auto{scrollbar-color: #dbdbdf #f3f3f3; scrollbar-width: thin;}
+
+/* Main Height */
+.main-height-yebi{height: calc(100vh - 194px);}
+.main-height-chart{height: calc(100vh - 118px);
+  margin: 0 auto; width: 1418px; background: transparent; overflow: auto;}
+.main-height-small{height: calc(100vh - 134px);}
+.main-height-large{height: calc(100vh - 82px);}
+.main-height-full{height: calc(100vh - 54px);}
+
+/* Login Page */
+.login-page{width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;}
+.login-form{width: 278px; display: flex; flex-direction: column; grid-gap: 0px; gap: 0px;}
+.login-form [class^="helper-text-"]{margin: 8px 0 -8px 0;}
+.my-prorile{position:relative; top:48%; left:50%; transform: translate(-50%, -51%);}
+
+/* Layout Grid & Frame */
+.grid-left, .grid-center, .grid-right{background-color: #fff;
+  border: 1px solid #E5E7EB; border-radius: 8px; padding: 24px 16px 16px 16px; overflow-y: auto;}
+.grid-left strong, .grid-center strong, .grid-right strong{color: #005EAE;}
+p > strong{color: #005EAE;}
+.frame{border: 1px solid #E5E7EB; border-radius: 8px;}
+.frame-border{border: 1px solid #E5E7EB; border-radius: 8px; background: #F9FAFB;}
+.frame-top-border{border: 0; border-top: 1px solid #E5E7EB;}
+[class^="frame-cont"]{display: flex; align-items: center; justify-content: center;
+  background-color: #F9FAFB; overflow: hidden; min-height: 128px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; color: #9CA3AF;}
+.frame-cont-border{border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box; overflow: auto;}
+.frame-cont-bottom-r{border-radius: 8px; border-top-right-radius: 0 !important; border-top-left-radius: 0 !important;}
+.min-height-120{min-height: 120px;}
+
+
+/* Move-Button */
+.move-btn-group-col3{position: absolute; top: 45%; right: calc(100% / 3 - 24px); z-index: 999;}
+.move-btn-group-col2{position: absolute; top: 45%; right: -31px; z-index: 999;}
+
+.move-btn-triangle-right-col3{position: absolute; top: 24px; left: calc(100% / 3 - 11px); z-index: 0;}
+.move-btn-triangle-left-col3{position: absolute; top: 24px; right: calc(100% / 3 - 11px); z-index: 0;}
+
+.move-btn-triangle-right-col2-1{position: absolute; top: 24px; left: -17px; z-index: 0;}
+.move-btn-triangle-right-col2-2{position: absolute; top: 24px; left: calc(100% / 2 - 8px); z-index: 0;}
+
+.move-btn-triangle-left-col2-1{position: absolute; top: 24px; right: calc(100% / 2 - 9px); z-index: 0;}
+.move-btn-triangle-left-col2-2{position: absolute; top: 24px; right: -17px; z-index: 0;}
+
+/* toast */
+.toast-area{position: fixed; bottom: 0; right: 0; z-index: 10001;}
+
+/* ant-design loading */
+.ant-spin-dot-item {width: 9px; background-color: #121A4C;}
+.ant-spin-text {margin-top: 1.6rem; color: #121A4C; font-weight: 900; letter-spacing: 0.01rem;}
+
+/* ant-datepicker */
+.ant-datepicker{display: flex; align-items: center; margin-left: auto; padding: 4px 16px;}
+
+/* etc. */
+.square{margin-top: -24px;}
+.cursor-defalt{cursor: default !important;}
+.ol{font-family: "MinSans-Light"; font-size: 16px; line-height: 24px;}
+.ol::before{font-family: "Material Design Icons"; content: "\F09DE"; color: inherit; margin-right: 4px;}
+.yebi-btn-scroll-fixed{padding-top: 8px; margin-top: 16px; position: sticky;
+  right: 0; bottom: 0; background: #fff; border: 1px solid #fff; box-sizing: border-box;
+  border-top: 1px solid #E5E7EB;}
+
+/* 예비평가 테이블 안의 체크박스 구성 */
+.yebi-row{ display: flex; flex-direction: row; flex-wrap: nowrap;
+  grid-gap: 16px; gap: 16px; color: #9CA3AF;}
+.yebi-col-3{width: calc(100% / 3); text-align: center;}
+.yebi-col-4{width: calc(100% / 4); text-align: center;}
+.yebi-check{display: flex; align-items: center; justify-content: center;
+  background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 4px;
+  color: #005EAE; text-align: center; font-family: "MinSans-Regular" !important;}
+.yebi-check::before{font-family: "Material Design Icons"; content: "\F0133";
+  color: #005EAE; width: 0px; height: 26px; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; margin-right: 16px;}
+
+/* box-sizing */
+.border-box{box-sizing: border-box !important;}
+
+/* ============================================================================== */
+/* Slider navigation */
+/* ============================================================================== */
+/* icon-button-Size */
+/* ------------------------------------------------------------------------------ */
+[class^="nav-btn-"]{background-color: #fff; color: #9CA3AF; border-radius: 8px; display: flex; align-items: center; justify-content: center;}
+[class^="nav-btn-"]:hover{background-color: #F9FAFB; color: #005EAE; border-radius: 8px;}
+[class^="nav-btn-"]:active, [class^="nav-btn-"]:focus{color: #005EAE;}
+.nav-btn-48{width: 48px; height: 48px; font-size: 20px;}
+.nav-btn-40{width: 40px; height: 40px; font-size: 20px;}
+.nav-btn-32{width: 32px; height: 32px; font-size: 16px;}
+
+[class^="nav-btn-folder-"]{border-radius: 8px; background-color: #fff;
+  font-size: 14px; font-family: 'MinSans-Regular'; padding-right: 16px;
+  color: #9CA3AF; justify-content: flex-start;}
+.nav-btn-folder-40{height: 40px;}
+.nav-btn-folder-40 .mdi:nth-child(1){width: 40px; height: 40px; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; border-radius: 8px;}
+.nav-btn-folder-40 .mdi:nth-last-child(1){margin-left: auto; font-size: 18px;}
+.nav-btn-folder-40:focus, .nav-btn-folder-40:active{color: #005EAE; background-color: #fff;}
+
+/* 스크립트 추가하면서 추가될 CSS */
+[class^="nav-btn-folder-"] .folder-open-close{margin-left: auto;}
+[class^="nav-btn-folder-"] .folder-open-close::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F0140"; cursor: pointer;}
+.menu-group {max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out;}
+[class^="nav-btn-folder-"]:hover{background: #F9FAFB; color: #005EAE !important;}
+[class^="nav-btn-folder-"]:hover > .folder-open-close::after{color: #005EAE;}
+[class^="nav-btn-folder-"]:focus{color: #9CA3AF;}
+.folder-active{color: #005EAE !important; background-color: #fff !important;}
+.folder-active > .folder-open-close::after{
+  font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0143"; cursor: pointer;}
+
+[class^="nav-btn-label-"]{border-radius: 8px; background-color: #fff;
+  font-size: 14px; font-family: 'MinSans-Regular'; padding-right: 16px;
+  color: #9CA3AF; justify-content: flex-start;}
+.nav-btn-label-40{height: 40px;}
+.nav-btn-label-40::before{font-family: "Material Design Icons"; content: "\F0156"; color: #fff;
+  width: 40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;}
+[class^="nav-btn-label-"]:hover{background-color: #F9FAFB; color: #005EAE;}
+[class^="nav-btn-label-"]:focus{color: #005EAE; background-color: #fff;}
+[class^="nav-btn-label-"]:active, .active{color: #005EAE; background-color: #fff;}
+
+/* nav-closed-button */
+.nav-closed::before{font-family: "Material Design Icons"; content: "\F0156"; font-size: 16px; color: #9CA3AF;
+  width: 40px; height: 40px; border-radius: 50%; margin-right: 4px;
+  display: flex; align-items: center; justify-content: center;}
+.nav-closed:hover::before{color: #005EAE; border-radius: 50%; background-color: transparent;}
+
+/* nav-header */
+@keyframes navShow{from {left: -230px;} to {left: 0px;}}
+.nav{width: 230px; padding: 16px; height: 100%; box-sizing: border-box;
+  position: absolute; z-index: 1000; top: 57px; background-color: #fff;
+  animation-name: navShow; animation-duration: 0.5s;
+  box-shadow: 0px 10px 15px rgb(0 0 0 / 8%), 0px 4px 6px rgb(0 0 0 / 5%);}
+.nav-header{display: flex; justify-content: space-between; padding-bottom: 16px;}
+
+/* ------------------------------------------------------------------------------ */
+/* top-header */
+/* ------------------------------------------------------------------------------ */
+header, .header{width:100%; height: 54px; padding: 0 16px; background-color: #fff; box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.08);
+  display: flex; flex-direction: row; align-items: center;}
+header .right-items, .header .right-items{display: flex; flex-direction: row; align-items: center; margin-left: auto;}
+header .right-items a, .header .right-items a{display: flex; flex-direction: row; align-items: center; font-size: 14px; line-height: 32px; font-family: 'MinSans-Regular'; color: #9CA3AF;}
+header .right-items a .mdi, .header .right-items a .mdi{font-size: 20px; margin: 0 8px 0 10px;}
+header .right-items a:hover, .header .right-items a:hover{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* section-controller (section-tab) */
+/* ------------------------------------------------------------------------------ */
+.section-controller{width:100%; height: 48px; background-color: transparent; box-sizing: border-box;
+  display: flex; flex-direction: row-reverse; align-items: center; margin: -8px 0 8px 0;}
+.section-controller .nav-btn-back{font-family: 'MinSans-Regular';
+  font-size: 14px; line-height: 22px; height: 48px; padding: 8px 16px 8px 8px;
+  color: #111827; border: 1px solid #E5E7EB; border-radius: 8px; margin-right: auto;}
+.section-controller .nav-btn-back::before{font-family: "Material Design Icons"; content: "\F0141"; font-size: 20px;}
+.section-controller .nav-btn-back:hover{color: #111827; background-color: #F9FAFB;}
+.section-controller .nav-btn-back:disabled{cursor: not-allowed; background: #E5E7EB; color: #111827; opacity: 0.5;}
+
+/* tabs */
+.section-controller .tabs{display: inline-flex; flex-direction: row;}
+.section-controller .section-tab{width: 120px; height: 48px; padding: 12px 4px 8px 4px;
+  font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; background: transparent; color: #9CA3AF;
+  cursor: pointer; box-sizing: border-box; border-bottom: 4px solid transparent;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;}
+.section-controller .section-tab:hover{color: #005EAE; border-bottom: 4px solid transparent;}
+.section-controller .section-tab:active, .section-controller .section-tab:focus, .section-controller .section-tab-active{
+  color: #005EAE; border: none; border-bottom: 4px solid #005EAE; background-color: transparent;}
+.section-controller .tabs .section-tab:disabled{cursor: not-allowed;}
+.section-controller .tabs .section-tab:disabled:hover{color: #9CA3AF;}
+.section-controller .tabs .section-tab:disabled:active, .section-controller .tabs .section-tab:disabled:focus{
+  color: #9CA3AF; border: none; border-bottom: 4px solid transparent; background-color: transparent;}
+
+/* ------------------------------------------------------------------------------ */
+/* Tabs */
+/* ------------------------------------------------------------------------------ */
+.tab-wrap{width: 100%; height: 48px; background: #F9FAFB; box-sizing: border-box;
+  display: flex; align-items: center; margin-bottom: 1px;
+  border: 1px solid #E5E7EB; border-left: 0; border-right: 0;}
+.tab-wrap-top{width: 100%; height: 48px; background: #F9FAFB; box-sizing: border-box;
+  display: flex; align-items: center; margin-bottom: 1px; border-left: 0; border-right: 0;
+  border-bottom: 1px solid #E5E7EB; border-top: 1px solid transparent;}
+.tabs{display: inline-flex; flex-direction: row;}
+.section-tab > strong{margin-left: 8px;}
+.section-tab > p{margin-left: 8px;}
+.section-tab{font-size: 16px; font-family: 'MinSans-Regular'; background-color: transparent; color: #9CA3AF;
+  cursor: pointer; padding: 12px 8px 8px 8px; box-sizing: border-box; border-bottom: 4px solid transparent;
+  display: flex; flex-direction: row; align-items: center; justify-content: center; outline: none;}
+.section-tab .mdi{margin-left: 8px; font-size: 16px;}
+.section-tab:hover{color: #005EAE;}
+.section-tab:active, .section-tab:focus, .active-section-tab{
+  color: #005EAE; border-bottom: 4px solid #005EAE; background-color: transparent;}
+.contents-tab{width: 100%; font-size: 14px; font-family: 'MinSans-Light'; text-align: center;
+  background-color: #fff; color: #9CA3AF; border: 1px solid #E5E7EB;
+  cursor: pointer; padding: 10px 12px; box-sizing: border-box; border-radius: 8px;}
+.contents-tab:hover{font-family: 'MinSans-Regular'; color: #005EAE;}
+.contents-tab:active, .contents-tab:focus, .active-contents-tab{ font-family: 'MinSans-Regular';
+  color: #005EAE; background-color: #E6F0F8; border: 1px solid #E6F0F8;}
+
+
+/* ============================================================================== */
+/* Form */
+/* ============================================================================== */
+/* Input */
+/* ------------------------------------------------------------------------------ */
+input[type='text'],input[type='password']{border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  background-color: #fff; color: #111827; padding: 12px 16px; width: 100%; height: 40px;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;}
+input::placeholder{color: #9CA3AF; font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;
+  text-align: left;}
+input[type='number']::placeholder{text-align: left;}
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='number']:focus{border: 1px solid #005EAE;}
+input[type='text']:required:valid,
+input[type='password']:required:valid,
+input[type='number']:required:valid{border: 1px solid #4CAF50;}
+input[type='text']:required:invalid,
+input[type='password']:required:invalid,
+input[type='number']:required:invalid{border: 1px solid #D32F2F;}
+input[type='text']:disabled,
+input[type='password']:disabled,
+input[type='number']:disabled{cursor: not-allowed; color: #636871; background: #F9FAFB;}
+/* readonly가 없어지고 disabeld로 통일한다고 하면 이것을 써야함 */
+input[type='text']:disabled, input[type='password']:disabled, input[type='number']:disabled{
+  cursor: default; color: #111827; background: #F9FAFB;}
+.h-32{height: 32px !important;}
+.h-30{height: 30px !important;}
+.h-38{height: 38px !important;}
+.h-40{height: 40px !important;}
+/* label */
+.form-label, .form-label-text, .form-label-icon{font-family: 'MinSans-Regular'; font-size: 14px; letter-spacing: 0.8px;
+  display: flex; align-items: center; color: #636871;}
+.form-label-text p{font-family: 'MinSans-Light'; font-size: 12px; color: #636871; margin-left: 8px; letter-spacing: 0;}
+.form-label-icon .mdi{font-size: 16px; color: #9CA3AF; margin-left: auto; cursor: pointer;}
+/* helper-text */
+[class^="helper-text"]{color: #111827; font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.helper-text-primary{color: #005EAE;}
+.helper-text-gray-600{color: #636871;}
+.helper-text-red::before{font-family: "Material Design Icons"; content: "\F0156"; margin-right: 4px;}
+.helper-text-red{color: #D32F2F;}
+.helper-text-green::before{font-family: "Material Design Icons"; content: "\F012C"; margin-right: 4px;}
+.helper-text-green{color: #4CAF50;}
+
+/* input [type = date, datetime-local, month, time, week, number] Form 디자인 적용 */
+input[type='date'], input[type='datetime-local'], input[type='month'],
+input[type='time'], input[type='week'], input[type='number']{
+  border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  background-color: #fff; color: #111827; padding: 12px 16px; height: 40px;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Textrarea */
+/* ------------------------------------------------------------------------------ */
+textarea, .textarea{border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  background-color: #fff; color: #111827; padding: 8px 16px 20px 16px; width: 100%;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;}
+textarea::placeholder{color: #9CA3AF; font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;}
+textarea:focus{border: 1px solid #005EAE;}
+textarea:required:valid{border: 1px solid #4CAF50;}
+textarea:required:invalid{border: 1px solid #D32F2F;}
+/* textarea:disabled{cursor: not-allowed; color: #9CA3AF;} */
+/* readonly가 없어지고 disabeld로 통일한다고 하면 이것을 써야함 */
+textarea:disabled{cursor: default; color: #111827; background: #F9FAFB;}
+.noresize{resize: none;}
+.textarea-min{min-height: 100px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Input-search */
+/* ------------------------------------------------------------------------------ */
+[class^="search-"]{border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  background-color: #fff; padding: 0; display: flex; align-items: center;}
+.search-40{height: 40px;}
+.search-32{height: 32px;}
+input[type='search']{border: none; border-radius: 8px; width: 100%;
+  background-color: #fff; color: #111827; font-family: 'MinSans-Light'; font-size: 16px;}
+.search-40 input[type='search']{padding: 0px 16px;}
+.search-32 input[type='search']{padding: 4px 16px;}
+[class^="search-"] button{color: #9CA3AF; font-size: 20px; border-radius: 8px; border: none;}
+.search-btn{order: 1;}
+.search-btn-close{margin-left: auto;}
+.search-40 .search-btn::before{font-family: "Material Design Icons"; content: "\F0349"; padding: 0 13px 0 10px;}
+.search-40 .search-btn-close::before{font-family: "Material Design Icons"; content: "\F0156"; padding: 0 0 0 8px;}
+.search-32 .search-btn::before{font-family: "Material Design Icons"; content: "\F0349"; padding: 5px 13px 4px 10px;}
+.search-32 .search-btn-close::before{font-family: "Material Design Icons"; content: "\F0156"; padding: 5px 0 4px 8px;}
+.search-40:focus-within, .search-32:focus-within{border: 1px solid #005EAE; border-radius: 8px;}
+.search-40 > :first-child:focus + button, .search-32 > :first-child:focus + button{color: #005EAE;}
+input[type='search']:disabled{cursor: default; color: #111827; background: #F9FAFB;}
+[class^="search-"] button:disabled{cursor: default; background: #F9FAFB;}
+
+/* ------------------------------------------------------------------------------ */
+/* Select box */
+/* ------------------------------------------------------------------------------ */
+.select{width: 100%; height: 40px; background-color: #fff; color: #9CA3AF; cursor: pointer;
+  border: 1px solid #E5E7EB;border-radius: 8px; box-sizing: border-box;}
+[class^="select-"]{width: 100%; background-color: #fff; color: #9CA3AF; cursor: pointer;
+  border: 1px solid #E5E7EB;border-radius: 8px; box-sizing: border-box;}
+.select-32{height: 32px;}
+.select-40{height: 40px;}
+.select-48{height: 48px;}
+
+.select .selected, [class^="select-"] .selected{
+  display: flex; justify-content: space-between; align-items: center; padding-right: 8px;}
+.select .options, [class^="select-"] .options{
+  box-shadow: 0px 10px 15px rgb(0 0 0 / 8%), 0px 4px 6px rgb(0 0 0 / 5%);}
+.select ul, [class^="select-"] ul{display: none; position: relative; top: 1px; z-index: 10; cursor: pointer;
+  padding: 8px 0; border-radius: 8px; background: #fff; max-height: 228px; overflow: auto;
+  box-shadow: 0px 10px 15px rgb(0 0 0 / 8%), 0px 4px 6px rgb(0 0 0 / 5%);}
+.select .ul-small, [class^="select-"] .ul-small{max-height: 150px;}
+.select ul li, .select .selected .selected-value,
+[class^="select-"] ul li, [class^="select-"] .selected .selected-value{
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding: 8px 16px; font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.select-32 .selected .selected-value{padding: 4px 16px;}
+.select-40 .selected .selected-value{padding: 8px 16px;}
+.select-48 .selected .selected-value{padding: 13px 16px;}
+.select.active ul, [class^="select-"].active ul{display: block;}
+
+.select.active, [class^="select-"].active{border: 1px solid #005EAE; color: #111827;}
+.select .selected::after, [class^="select-"] .selected::after{
+  font-family: "Material Design Icons"; font-size: 22px; color: #9CA3AF; content: "\F0140"; cursor: pointer;}
+.select.active > .selected::after, [class^="select-"].active > .selected::after{color: #005EAE;}
+.select .selected .selected-value, [class^="select-"] .selected .selected-value{
+  color: #9CA3AF; font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;}
+.select ul li:hover, [class^="select-"] ul li:hover{background: #F9FAFB; color: #005EAE;}
+.select ul .optgroup, [class^="select-"] ul .optgroup{cursor: default; padding: 8px 16px;
+  font-family: 'MinSans-Regular'; font-size: 12px; line-height: 20px; color: #9CA3AF; background: #fff;}
+
+/* ------------------------------------------------------------------------------ */
+/* Upload(file) */
+/* ------------------------------------------------------------------------------ */
+/* .file{background-color: #ffffff; width: 600px; margin: 0 auto; padding: 20px;} */
+.file{width: 100%; height: 140px; color: #9CA3AF; background: #F9FAFB;
+  border: 2px dashed #E5E7EB; border-radius: 8px; box-sizing: border-box; position: relative;
+  display: flex; align-items: center; justify-content: center;}
+.file:hover{border: 2px dashed #005EAE; color: #005EAE;}
+.file .mdi{font-size: 22px; margin-right: 4px;}
+/* input[type="file"] 초기화 */
+.file-input{position: absolute;margin: 0;padding: 0;width: 100%;height: 100%;outline: none;opacity: 0; cursor: pointer;}
+
+.file-content{width: 100%; padding: 8px; color: #9CA3AF; background: #fff;
+  border: 2px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;}
+.file-list-multi{display: flex; flex-direction: column; gap: 4px; grid-gap: 4px;
+  max-height: 72px; overflow: auto;}
+.file-content .file-name{border-radius: 8px; box-sizing: border-box;
+  background-color: #fff; padding: 0 10px 0 16px; display: flex; align-items: center;}
+.file-content .file-name:hover{background: #F9FAFB;}
+.file-content .file-name:hover > input[type="text"]{background: #F9FAFB;}
+.file-content .file-name > input[type="text"]{border: none; text-overflow: ellipsis; white-space: nowrap;
+  width: 100%; height: 32px; font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;
+  background-color: #fff; color: #9CA3AF; padding: 0; padding-right: 8px;}
+.file-content .file-name > button{ background: transparent;
+  color: #9CA3AF; font-size: 18px; border-radius: 8px; border: none;}
+.file-content .file-name > button::after{
+  font-family: "Material Design Icons"; content: "\F0156"; padding: 9px 0 8px 8px;}
+
+.file-list-one{background: #F9FAFB; border-radius: 8px; height: 116px;
+  display: flex; flex-direction: row; align-items: center;
+  gap: 8px; grid-gap: 8px; padding: 0 16px;}
+.file-list-one > input[type="text"]{border: none; background: transparent; flex: 1 1 0%;
+  font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px; color: #111827;
+  text-overflow: ellipsis; white-space: nowrap; padding: 0;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* Radio */
+/* ------------------------------------------------------------------------------ */
+input[type="radio"]{width: 16px; height: 16px; border-radius: 50%; border: 1px solid #9CA3AF; background-color: #fff; cursor: pointer;}
+input[type="radio"]:checked{background-color: #005EAE; box-sizing: border-box; border: 1px solid #005EAE;
+  position: relative; padding: 4px;}
+input[type="radio"]:checked::before{content: ''; background-color: #fff; width: 6px; height: 6px;
+  border-radius: 50%; position: absolute;}
+input[type="radio"]:disabled{width: 16px; height: 16px; border-radius: 50%; opacity: 0.5; cursor: not-allowed;}
+
+.radio-label{display: flex; align-items: center;}
+.radio-label input[type="radio"] + label{font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; padding: 1px 0 0 8px; cursor: pointer;}
+.radio-label input[type="radio"]:disabled + label{cursor: not-allowed;}
+
+.radio-box-type input[type="radio"]{width: 0; height: 0; position: absolute; left: -9999px;}
+.radio-box-type input[type="radio"] + label{ margin: 0; padding: 8px 23px; text-align: center;
+  box-sizing: border-box; border: 1px solid #9ca3af; border-radius: 8px;
+  background-color: #9ca3af; position: relative; display: inline-block;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; color: #fff; cursor: pointer;}
+.radio-box-type input[type="radio"]:checked + label{border: 1px solid #f9fafb; background-color: #f9fafb; color: #005eae;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.08);}
+.radio-box-type input[type="radio"]:disabled + label{cursor: not-allowed; background-color: #636871; color: #fff; opacity: 0.2;}
+
+/* ------------------------------------------------------------------------------ */
+/* Check box */
+/* ------------------------------------------------------------------------------ */
+input[type="checkbox"]{width: 16px; height: 16px; border-radius: 4px; border: 1px solid #9CA3AF; background-color: #fff; cursor: pointer;}
+input[type="checkbox"]:checked{background-color: #005EAE; box-sizing: border-box; border: 1px solid #005EAE;
+  position: relative;}
+input[type="checkbox"]:checked::before{font-family: "Material Design Icons"; content: '\F012C'; color: #fff;
+  font-size: 11px; font-weight: bold; position: absolute; top: -4px; left: 1px;}
+input[type="checkbox"]:disabled{cursor: not-allowed; opacity: 0.5;}
+
+.check-label{display: flex; align-items: center;}
+.check-label input[type="checkbox"]:checked::before{left: 1px;}
+.check-label input[type="checkbox"] + label{font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; padding-left: 8px; cursor: pointer;}
+.check-label input[type="checkbox"]:disabled + label{cursor: not-allowed; opacity: 0.5;}
+
+/* ------------------------------------------------------------------------------ */
+/* Toggle */
+/* ------------------------------------------------------------------------------ */
+.toggle{position: relative; display: inline-block; width: 44px; height: 24px; box-sizing: border-box;}
+.toggle input{opacity: 0; width: 0; height: 0;}
+.toggle .slider{position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #E5E7EB; border-radius: 16px;}
+.toggle .slider::before{position: absolute; content: "";
+  height: 18px; width: 18px; left: 3px; bottom: 3px;
+  background-color: #fff; border-radius: 50%;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  -webkit-transition: .4s; transition: .4s;}
+.toggle input[type="checkbox"]:checked + .slider{background-color: #005EAE;}
+.toggle input[type="checkbox"]:focus + .slider {box-shadow: 0 0 1px #E5E7EB;}
+.toggle input[type="checkbox"]:checked + .slider:before {
+  -webkit-transform: translateX(20px); -ms-transform: translateX(20px); transform: translateX(20px);}
+
+/* sort-text */
+.sort-text{display: inline-flex; align-items: center;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;}
+.sort-text input[type="checkbox"]{display: none;}
+.sort-text input[type="checkbox"] + label{padding: 0 8px; color: #9CA3AF;}
+.sort-text input[type="checkbox"]:checked + label{color: #005EAE;}
+.sort-text input[type="checkbox"] + label:hover{cursor: pointer;}
+.sort-text input[type="checkbox"]:disabled + label{color: #636871; opacity: 0.5; cursor: not-allowed;}
+
+/* Legend */
+.legend{display: inline-flex; align-items: center; font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px;}
+.legend input[type="checkbox"]{display: none;}
+.legend input[type="checkbox"] + label{padding: 0 8px 0 0; color: #9CA3AF; display: flex; flex-direction: row;}
+.legend input[type="checkbox"] + label .mdi{font-size: 24px;}
+.legend input[type="checkbox"]:checked + label{color: #005EAE;}
+.legend input[type="checkbox"] + label:hover{cursor: pointer;}
+.legend input[type="checkbox"]:disabled + label{color: #636871; opacity: 0.5; cursor: not-allowed;}
+
+/* ------------------------------------------------------------------------------ */
+/* Slider */
+/* ------------------------------------------------------------------------------ */
+input[type="range"]{width: 100%; height: 4px; box-sizing: border-box; border-radius: 29px;
+  background-color: #E5E7EB; flex: 1 1 0%;
+  background: linear-gradient(to right, #2E3092 0%, #2E3092 90%, #E5E7EB 40%, #E5E7EB 100%);}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; background-color: #2E3092; border-radius: 50%;}
+input[type="range"]::-moz-range-thumb{
+  width: 14px; height: 14px; background-color: #2E3092; border-radius: 50%; border: none;}
+.slider{display: flex; align-items: center; grid-gap: 16px; gap: 16px;}
+.range-label{font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; color: #9CA3AF;}
+
+/* ------------------------------------------------------------------------------ */
+/* Sorting */
+/* ------------------------------------------------------------------------------ */
+.sorting{display: flex; flex-wrap: wrap; grid-gap: 16px; gap: 16px;}
+.sorting input[type="checkbox"]{display: none;}
+
+/* sort-icons */
+.sort-icons{margin-left: 8px; display: flex; flex-direction: column; cursor: default;}
+.sort-up{width: 0; height: 0; border: solid 5px transparent; background: transparent;
+  border-bottom: solid 5px #9CA3AF; border-top-width: 0; border-radius: 4px; cursor: pointer;
+  margin-bottom: 3px;}
+.sort-down{width: 0; height: 0; border: solid 5px transparent; background: transparent;
+  border-top: solid 5px #9CA3AF; border-bottom-width: 0; border-radius: 4px; cursor: pointer;
+  margin-top: 1px;}
+.sort-up:hover, .sort-up:focus, .sort-up:active, .active-up{border-bottom: solid 5px #005EAE;}
+.sort-down:hover, .sort-down:focus, .sort-down:active, .active-down{border-top: solid 5px #005EAE;}
+button:disabled .sort-icons{pointer-events: none;}
+.sort-up:disabled, .sort-down:disabled{cursor: not-allowed;}
+
+/* sort-icon-toggle */
+.sort-icon-toggle{display: inline-flex; align-items: center; color: #636871;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;}
+
+/* sort-icon-round */
+[class^="sort-icon-round-"]{display: inline-flex; align-items: center; color: #636871;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  border: 1px solid #E5E7EB; border-radius: 8px; padding: 4px 6px;}
+.sort-icon-round-primary .active-up{border-bottom: solid 5px #005EAE;}
+.sort-icon-round-primary .active-down{border-top: solid 5px #005EAE;}
+.sort-icon-round-orange .active-up, .sort-icon-round-orange .sort-up:hover,
+.sort-icon-round-orange .sort-up:active, .sort-icon-round-orange .sort-up:focus
+{border-bottom: solid 5px #FF7A00;}
+.sort-icon-round-orange .active-down, .sort-icon-round-orange .sort-down:hover,
+.sort-icon-round-orange .sort-down:active, .sort-icon-round-orange .sort-down:focus
+{border-top: solid 5px #FF7A00;}
+
+/* sort-button */
+.sort-btn-round{display: inline-flex; align-items: center;
+  border: 1px solid #E5E7EB; border-radius: 8px; padding: 4px 6px;}
+.sort-btn-round button{font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; color: #636871;}
+.sort-btn-round .sort-icons .sort-up,
+.sort-btn-round .sort-icons .sort-down{pointer-events: none;}
+.sort-btn-round .sort-title:disabled{cursor: not-allowed; background: #E5E7EB; color: #636871;}
+
+
+/* ============================================================================== */
+/* Buttons */
+/* ============================================================================== */
+/* Primary buttons */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-"] > strong{font-family: 'MinSans-Regular'; font-size: 15px; line-height: 22px; margin-left: 4px;}
+[class^="btn-primary-"]{padding: 8px 37px;
+  background-color: #005EAE; color: #fff; border-radius: 8px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  display: flex; align-items: center; justify-content: center;}
+[class^="btn-primary-"]:hover{background-color: #024D8C;}
+[class^="btn-primary-"]:disabled{cursor: not-allowed; background: #E5E7EB; color: #111827; opacity: 0.5;}
+.btn-primary-32{height: 32px;}
+.btn-primary-40{height: 40px;}
+.btn-primary-48{height: 48px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Secondary buttons */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-secondary-"]{padding: 8px 37px;
+  background-color: #E6F0F8; color: #005EAE; border-radius: 8px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  display: flex; align-items: center; justify-content: center;}
+[class^="btn-secondary-"]:hover{background-color: #D1E3F1;}
+[class^="btn-secondary-"]:disabled{cursor: not-allowed; background: #E5E7EB; color: #111827; opacity: 0.5;}
+.btn-secondary-32{height: 32px;}
+.btn-secondary-40{height: 40px;}
+.btn-secondary-48{height: 48px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Tertiary buttons */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-tertiary-"]{padding: 8px 37px;
+  background-color: #FFFFFF; color: #111827; border-radius: 8px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #E5E7EB; box-sizing: border-box;}
+[class^="btn-tertiary-"]:hover{background-color: #F9FAFB;}
+[class^="btn-tertiary-"]:disabled{cursor: not-allowed; background: #E5E7EB; color: #111827; opacity: 0.5;}
+.btn-tertiary-32{height: 32px;}
+.btn-tertiary-40{height: 40px;}
+.btn-tertiary-48{height: 48px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Button */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-size-"]{background-color: #fff; color: #9CA3AF; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;}
+[class^="btn-size-"]:hover{background-color: #fff; color: #005EAE;}
+[class^="btn-size-"]:active, [class^="btn-size-"]:focus, .active{background-color: #fff; color: #005EAE;}
+.btn-size-14{width: 14px; height: 14px; font-size: 16px; border-radius: 4px;}
+.btn-size-16{width: 16px; height: 16px; font-size: 18px; border-radius: 4px;}
+.btn-size-32{width: 32px; height: 32px; font-size: 16px;}
+.btn-size-40{width: 40px; height: 40px; font-size: 18px;}
+.btn-size-48{width: 48px; height: 48px; font-size: 20px;}
+.done{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* Icon buttons */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-icon-"]{padding: 0 16px; width: fit-content; border-radius: 8px; box-sizing: border-box;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; display: flex; align-items: center;}
+[class^="btn-icon-"] .mdi{font-family: "Material Design Icons"; font-size: 18px; cursor: pointer; margin-left: 4px;}
+[class^="btn-icon-left-"] .mdi{margin: 0 4px 0 0;}
+[class^="btn-icon-left-primary-"], [class^="btn-icon-right-primary-"]{
+  border: 1px solid #005EAE; background-color: #005EAE; color: #fff;}
+[class^="btn-icon-left-primary-"]:hover, [class^="btn-icon-right-primary-"]:hover{background-color: #024D8C;}
+[class^="btn-icon-left-secondary-"], [class^="btn-icon-right-secondary-"]{
+  border: 1px solid #E6F0F8; background-color: #E6F0F8; color: #005EAE;}
+[class^="btn-icon-left-secondary-"]:hover, [class^="btn-icon-right-secondary-"]:hover{background-color: #D1E3F1;}
+[class^="btn-icon-left-tertiary-"], [class^="btn-icon-right-tertiary-"]{
+  border: 1px solid #E5E7EB; background-color: #fff; color: #111827;}
+[class^="btn-icon-left-tertiary-"]:hover, [class^="btn-icon-right-tertiary-"]:hover{background-color: #F9FAFB;}
+.btn-icon-left-primary-32, .btn-icon-right-primary-32, .btn-icon-left-secondary-32, .btn-icon-right-secondary-32,
+.btn-icon-left-tertiary-32, .btn-icon-right-tertiary-32{height: 32px;}
+.btn-icon-left-primary-40, .btn-icon-right-primary-40, .btn-icon-left-secondary-40, .btn-icon-right-secondary-40,
+.btn-icon-left-tertiary-40, .btn-icon-right-tertiary-40{height: 40px;}
+.btn-icon-left-primary-48, .btn-icon-right-primary-48, .btn-icon-left-secondary-48, .btn-icon-right-secondary-48,
+.btn-icon-left-tertiary-48, .btn-icon-right-tertiary-48{height: 48px;}
+[class^="btn-icon-"]:disabled{cursor: not-allowed; background: #E5E7EB;
+  border: 1px solid #E5E7EB; color: #111827; opacity: 0.5;}
+[class^="btn-icon-"]:disabled .mdi{color: #111827; pointer-events: none;}
+
+/* ------------------------------------------------------------------------------ */
+/* Option buttons */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-option-"]{padding: 0 12px 0 16px; width: 100px;
+  border-radius: 8px; border: 1px solid #E5E7EB; background-color: #fff; box-sizing: border-box;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  display: flex; align-items: center;}
+[class^="btn-option-"]::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #111827; content: "\F0140"; cursor: pointer; margin-left: auto;}
+[class^="btn-option-"]:hover{background-color: #F9FAFB;}
+[class^="btn-option-"]:disabled{cursor: not-allowed; background: #E5E7EB; color: #111827; opacity: 0.5;}
+[class^="btn-option-"]:disabled::after{pointer-events: none;}
+.btn-option-32{height: 32px;}
+.btn-option-40{height: 40px;}
+.btn-option-48{height: 48px;}
+[class^="btn-option-primary-"]{background-color: #005EAE; color: #fff; border-color: #005EAE;}
+[class^="btn-option-primary-"]::after{color: #fff;}
+[class^="btn-option-primary-"]:hover{background-color: #024D8C;}
+[class^="btn-option-primary-"]:disabled{cursor: not-allowed; background: #E5E7EB;
+  color: #111827; opacity: 0.5; border: 1px solid #E5E7EB;}
+[class^="btn-option-primary-"]:disabled::after{color: #111827; opacity: 0.5; pointer-events: none;}
+.btn-option-primary-32{height: 32px;}
+.btn-option-primary-40{height: 40px;}
+.btn-option-primary-48{height: 48px;}
+[class^="btn-option-secondary-"]{background-color: #E6F0F8; color: #005EAE; border-color: #E6F0F8;}
+[class^="btn-option-secondary-"]::after{color: #005EAE;}
+[class^="btn-option-secondary-"]:hover{background-color: #D1E3F1; border: 1px solid #D1E3F1;}
+[class^="btn-option-secondary-"]:disabled{cursor: not-allowed; background: #E5E7EB; color: #111827; opacity: 0.5;}
+[class^="btn-option-secondary-"]:disabled::after{color: #111827; opacity: 0.5; pointer-events: none;}
+.btn-option-secondary-32{height: 32px;}
+.btn-option-secondary-40{height: 40px;}
+.btn-option-secondary-48{height: 48px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Text buttons */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-text-"]{font-family: 'MinSans-Regular'; color: #9CA3AF; cursor: pointer;}
+[class^="btn-text-"]:hover{text-decoration: underline; text-underline-position: under;}
+.btn-text-14{font-size: 14px; line-height: 22px;}
+.btn-text-12{font-size: 12px; line-height: 20px;}
+
+/* ------------------------------------------------------------------------------ */
+/* System button */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-system-"]{padding: 8px;
+  background-color: #FFFFFF; color: #636871; border-radius: 8px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #E5E7EB; box-sizing: border-box;
+}
+.btn-system-blue-32, .btn-system-blue-heightlight-32, .btn-system-red-32, .btn-system-red-heightlight-32,
+.btn-system-orange-32, .btn-system-green-32{height: 32px;}
+.btn-system-blue-40, .btn-system-blue-heightlight-40, .btn-system-red-40, .btn-system-red-heightlight-40,
+.btn-system-orange-40, .btn-system-green-40{height: 40px;}
+.btn-system-blue-48, .btn-system-blue-heightlight-48, .btn-system-red-48, .btn-system-red-heightlight-48,
+.btn-system-orange-48, .btn-system-green-48{height: 48px;}
+.btn-system-blue-32:hover, .btn-system-blue-40:hover, .btn-system-blue-48:hover,
+.btn-system-blue-heightlight-32, .btn-system-blue-heightlight-40, .btn-system-blue-heightlight-48{
+  background-color: #E5EFFF; color: #0091EA; border: 1px solid #E5EFFF;}
+.btn-system-blue-heightlight-32:hover, .btn-system-blue-heightlight-40:hover, .btn-system-blue-heightlight-48:hover{
+  border: 1px solid #0091EA;}
+.btn-system-red-32:hover, .btn-system-red-40:hover, .btn-system-red-48:hover{
+  background-color: #FFE4E4; color: #D32F2F; border: 1px solid #FFE4E4;}
+.btn-system-red-heightlight-32, .btn-system-red-heightlight-40, .btn-system-red-heightlight-48{
+  background-color: #FFE4E4; color: #D32F2F; border: 1px solid #FFE4E4;}
+.btn-system-red-heightlight-32:hover, .btn-system-red-heightlight-40:hover, .btn-system-red-heightlight-48:hover{
+  border: 1px solid #D32F2F;}
+.btn-system-orange-32:hover, .btn-system-orange-40:hover, .btn-system-orange-48:hover{
+  background-color: #FFF1DD; color: #FF7A00; border: 1px solid #FFF1DD;}
+.btn-system-green-32:hover, .btn-system-green-40:hover, .btn-system-green-48:hover{
+  background-color: #E1FFEB; color: #4CAF50; border: 1px solid #E1FFEB;}
+[class^="btn-system-"]:disabled{background-color: #F9FAFB; color: #9CA3AF; border: 1px solid #F9FAFB; cursor: not-allowed;}
+[class^="btn-system-"]:disabled:hover{background-color: #F9FAFB; color: #9CA3AF; border: 1px solid #F9FAFB;}
+
+/* ------------------------------------------------------------------------------ */
+/* Badges */
+/* ------------------------------------------------------------------------------ */
+.badge{height: 24px; font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  padding: 0 4px; color: #636871; background-color: #F9FAFB; border: 1px solid #F9FAFB;
+  border-radius: 5px; box-sizing: border-box; cursor: default; width: fit-content;}
+[class^="badge-"]{height: 24px; font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  padding: 0 4px; border-radius: 5px; box-sizing: border-box; cursor: default; width: fit-content;}
+.badge-green{color: #4CAF50; background: #E1FFEB; border: 1px solid #E1FFEB;}
+.badge-orange{color: #FF7A00; background: #FFF1DD; border: 1px solid #FFF1DD;}
+
+
+/* ------------------------------------------------------------------------------ */
+/* Tag */
+/* ------------------------------------------------------------------------------ */
+.tag{height: 24px; font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  padding: 0 4px 0 8px; color: #9CA3AF; background-color: #fff; border: 1px solid #E5E7EB;
+  border-radius: 5px; box-sizing: border-box; display: flex; align-items: center;}
+.tag::after{font-family: "Material Design Icons"; font-size: 16px;
+  color: #9CA3AF; content: "\F0156"; cursor: pointer; margin-left: 3px;}
+.tag:hover, .tag:active{color: #111827;}
+.tag:hover::after, .tag:active::after{color: #111827;}
+
+.tag-container{background-color: #F9FAFB; padding: 16px; border-radius: 8px;}
+.tag-container .tags{display: inline-flex; flex-wrap: wrap; grid-gap: 8px; gap: 8px; max-height: 120px; overflow-y: auto;}
+/* tag-label */
+.tag-label{font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  display: flex; align-items: center; margin-bottom: 16px;}
+.tag-label .sub-text{color: #9CA3AF; margin-left: 8px; cursor: pointer;}
+.tag-label .sub-text:nth-child(1){margin-left: auto;}
+.tag-label .sub-text:active, .tag-label .active{color: #005EAE; background-color: transparent;}
+
+/* ------------------------------------------------------------------------------ */
+/* Button-control(left, right, up, down) */
+/* ------------------------------------------------------------------------------ */
+[class^="btn-control-"]{width: 43px; height: 43px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;}
+[class^="btn-control-left-"]::before{font-family: "Material Design Icons"; font-size: 24px; content: "\F0141";}
+[class^="btn-control-right-"]::before{font-family: "Material Design Icons"; font-size: 24px; content: "\F0142";}
+[class^="btn-control-up-"]::before{font-family: "Material Design Icons"; font-size: 24px; content: "\F0143";}
+[class^="btn-control-down-"]::before{font-family: "Material Design Icons"; font-size: 24px; content: "\F0140";}
+.btn-control-left-primary, .btn-control-right-primary, .btn-control-up-primary, .btn-control-down-primary{background: #005EAE; opacity: 0.6;}
+.btn-control-left-primary::before, .btn-control-right-primary::before, .btn-control-up-primary::before, .btn-control-down-primary::before{color: #fff;}
+.btn-control-left-primary:hover, .btn-control-right-primary:hover, .btn-control-up-primary:hover, .btn-control-down-primary:hover{opacity: 1;}
+.btn-control-left-primary:active, .btn-control-right-primary:active, .btn-control-up-primary:active, .btn-control-down-primary:active,
+.btn-control-left-primary:focus, .btn-control-right-primary:focus, .btn-control-up-primary:focus, .btn-control-down-primary:focus{opacity: 1;}
+.btn-control-left-primary:focus, .btn-control-right-primary:focus, .btn-control-up-primary:focus, .btn-control-down-primary:focus{opacity: 1;}
+.btn-control-left-secondary, .btn-control-right-secondary, .btn-control-up-secondary, .btn-control-down-secondary{background: #E5E7EB; opacity: 0.6;}
+.btn-control-left-secondary:hover, .btn-control-right-secondary:hover, .btn-control-up-secondary:hover, .btn-control-down-secondary:hover{opacity: 1; background-color: #E6F0F8;}
+.btn-control-left-secondary:hover::before, .btn-control-right-secondary:hover::before, .btn-control-up-secondary:hover::before, .btn-control-down-secondary:hover::before{color: #005EAE;}
+.btn-control-left-secondary:active, .btn-control-right-secondary:active, .btn-control-up-secondary:active, .btn-control-down-secondary:active,
+.btn-control-left-secondary:focus, .btn-control-right-secondary:focus, .btn-control-up-secondary:focus, .btn-control-down-secondary:focus{opacity: 1; background-color: #E6F0F8;}
+.btn-control-left-secondary:active::before, .btn-control-right-secondary:active::before, .btn-control-up-secondary:active::before, .btn-control-down-secondary:active::before,
+.btn-control-left-secondary:focus::before, .btn-control-right-secondary:focus::before, .btn-control-up-secondary:focus::before, .btn-control-down-secondary:focus::before{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* open-close Triangle Button */
+/* ------------------------------------------------------------------------------ */
+.btn-triangle-right{width: 0px; height: 0px; position: relative; color: #fff;
+  border-right: none; border-left: 33px solid #005EAE; border-top: 33px solid transparent; border-bottom: 33px solid  transparent;}
+.btn-triangle-right .mdi{font-size: 28px; position: absolute; top: -15px; left: -39px;}
+.btn-triangle-left{width: 0px; height: 0px; position: relative; color: #fff;
+  border-left: none; border-right: 33px solid #005EAE; border-top: 33px solid transparent; border-bottom: 33px solid  transparent;}
+.btn-triangle-left .mdi{font-size: 28px; position: absolute; top: -15px; left: 11px;}
+.btn-triangle-right:hover{border-left: 33px solid #E6F0F8;}
+.btn-triangle-left:hover{border-right: 33px solid #E6F0F8;}
+.btn-triangle-right:hover .mdi, .btn-triangle-left:hover .mdi{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* open-close Trapezoid Button */
+/* ------------------------------------------------------------------------------ */
+.btn-trapezoid-right{width: 0; height: 72px; position: absolute; color: #fff; opacity: 0.6;
+  border-left: 33px solid #005EAE; border-top: 16px solid transparent; z-index: 2;
+  border-bottom: 16px solid transparent; background: transparent; top: calc(50% - 31px);}
+.btn-trapezoid-right .mdi{font-size: 28px; position: absolute; top: 6px; right: 2px;}
+.btn-trapezoid-right:hover, .trapezoid-active{opacity: 1;}
+.tra-col2-right{left: calc(100% / 2 - 17px);}
+.tra-col3-right{right: calc(100% / 3 - 14px);}
+
+.btn-trapezoid-left{width: 0; height: 72px; position: absolute; color: #fff; opacity: 0.6;
+  border-right: 33px solid #005EAE; border-top: 16px solid transparent; z-index: 2;
+  border-bottom: 16px solid transparent; background: transparent; top: calc(50% + 31px);}
+.btn-trapezoid-left .mdi{font-size: 28px; position: absolute; top: 6px; left: 2px;}
+.btn-trapezoid-left:hover, .trapezoid-active{opacity: 1;}
+.tra-col2-left{left: calc(100% / 2 - 17px);}
+.tra-col3-left{right: calc(100% / 3 - 14px);}
+
+.btn-trapezoid-filter{width: 0; height: 64px; position: absolute; top: 110px; color: #005EAE; opacity: 0.6;
+  border: 16px solid #E6F0F8; border-top-right-radius: 8px; border-bottom-right-radius: 8px; z-index: 1;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.04)) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.08));}
+.btn-trapezoid-filter .mdi{font-size: 20px; position: absolute; top: 7px; left: -10px;}
+.btn-trapezoid-filter:hover{border: 16px solid #D1E3F1;}
+.filter-col3{left: calc(100% / 3 - 22px);}
+
+/* ============================================================================== */
+/* Tables */
+/* ============================================================================== */
+/* Table header */
+/* ------------------------------------------------------------------------------ */
+.table-wrap{overflow: auto;}
+table{width: 100%; border-collapse: separate; border-spacing: 0 4px; background-color: #fff;}
+table thead input[type="checkbox"], table tbody input[type="checkbox"]{display: flex;}
+.table-check{width: 0px; padding-right: 0px;}
+table th {font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px;
+  background-color: #fff; color: #636871; border-bottom: 1px solid #E5E7EB; padding: 8px 16px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50px;
+  position: sticky; top: 0; z-index: 1;}
+table th:nth-child(1){padding-left: 16px;}
+table th:nth-last-child(1){padding-right: 16px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Table body */
+/* ------------------------------------------------------------------------------ */
+table td{padding: 8px 16px; font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50px;}
+.line-break{min-width: 80px; white-space: normal; word-wrap: break-word; word-break: break-all;}
+table tbody tr:hover{box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.08);}
+.striped tr:nth-child(2n){background-color: #F9FAFB;}
+.striped tr:nth-child(2n):hover{box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.08);}
+[class^="table-arrow-"]{width: 0px; padding-left: 0px;}
+.table-arrow-right::after{font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0142"; cursor: pointer;}
+.table-arrow-left::after{font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0141"; cursor: pointer;}
+.table-arrow-up::after{font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0143"; cursor: pointer;}
+.table-arrow-down::after{font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0140"; cursor: pointer;}
+table thead .table-arrow::after{color: #fff; cursor: default;}
+.table-btn{width: 0px; padding: 4px 16px;}
+
+.tbody tr:focus-within{background-color: #E6F0F8;}
+
+/* ------------------------------------------------------------------------------ */
+/* Table-info */
+/* ------------------------------------------------------------------------------ */
+.table-info{width: 100%; border-collapse: collapse;}
+.table-info tr:hover{box-shadow: none;}
+.table-info th{background: #F9FAFB; border: 0.6px solid #E5E7EB; color: #636871;
+  font-family: 'MinSans-Regular'; font-size: 12px; line-height: 20px; position: static;
+  padding: 6px 16px;}
+.table-info td{background: transparent; border: 0.6px solid #E5E7EB; color: #111827;
+  font-family: 'MinSans-Light'; font-size: 14px; line-height: 24px;
+  padding: 6px 16px;}
+
+/* ------------------------------------------------------------------------------ */
+/* Table-indicator */
+/* ------------------------------------------------------------------------------ */
+.table-indicator{font-family: 'MinSans-Light'; font-size: 12px; line-height: 20px; padding: 12px 0;}
+.table-indicator .cancel{color: #005EAE; float: right; margin-left: 12px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; cursor: pointer;}
+.table-indicator .cancel:hover{text-decoration: underline; text-underline-position: under;}
+.table-indicator .delete{color: #D32F2F; float: right; margin-left: 12px;
+  font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; cursor: pointer;}
+.table-indicator .delete:hover{text-decoration: underline; text-underline-position: under;}
+.table-indicator b{font-family: 'MinSans-Regular'; color: #111827;}
+.table-indicator strong{font-family: 'MinSans-Regular'; color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* Pagenation */
+/* ------------------------------------------------------------------------------ */
+.pagenation{display: flex; flex-direction: row; grid-gap: 8px; gap: 8px;}
+.pagenation button{border: 1px solid #E5E7EB; font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.pagenation .dynamic-page{width: fit-content !important; padding-left: 11px !important;padding-right: 11px !important;}
+.pagenation .btn-pre::before{font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0141"; cursor: pointer;}
+.pagenation .btn-next::before{font-family: "Material Design Icons"; font-size: 18px; color: #9CA3AF; content: "\F0142"; cursor: pointer;}
+.pagenation .btn-pre:hover::before, .pagenation .btn-next:hover::before,
+.pagenation .btn-pre:focus::before, .pagenation .btn-next:focus::before,
+.pagenation .btn-pre:active::before, .pagenation .btn-next:active::before{color: #005EAE;}
+.pagenation [class^='btn-size-']:focus, .pagenation [class^='btn-size-']:active{border: 1px solid #005EAE;}
+.pagenation .active{border: 1px solid #005EAE; color: #005EAE;}
+
+
+/* ============================================================================== */
+/* Lists */
+/* ============================================================================== */
+/* One row list */
+/* ------------------------------------------------------------------------------ */
+.list-one{display: flex; flex-direction: column; grid-gap: 8px; gap: 8px; padding: 8px;}
+.list-one-border{display: flex; flex-direction: column; grid-gap: 8px; gap: 8px; padding: 8px;
+  border: 1px solid #E5E7EB; border-radius: 8px; background: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.08);
+  width: calc((100% / 3) - 72px); max-height: 235px; overflow: auto; position: absolute;}
+.search-auto{position: relative;}
+.list-one li, .list-one-border li{padding: 3px 8px 3px 16px;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;
+  border: 1px solid #fff; border-radius: 8px; box-sizing: border-box; cursor: pointer; display: flex;}
+.list-one li:hover, .list-one-border li:hover{background-color: #F9FAFB; border-radius: 8px;}
+.list-one li:active, .list-one li:focus, .list-one .active-list
+.list-one-border li:active, .list-one-border li:focus, .list-one-border .active-list{
+  background: #F9FAFB; border: 1px solid #E5E7EB; box-sizing: border-box; border-radius: 8px;}
+
+.list-one button, .list-icon::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F01D9"; margin-left: auto; cursor: pointer;}
+.list-one button:active::after, .list-one button:focus::after, .list-one button:hover::after{color: #005EAE;}
+.active-icon > .list-icon::after{color: #005EAE !important;}
+
+/* ------------------------------------------------------------------------------ */
+/* Two row list */
+/* ------------------------------------------------------------------------------ */
+.list-two{display: flex; flex-direction: column; grid-gap: 8px; gap: 8px;}
+.list-two li{display: flex; flex-direction: column; padding: 16px;
+  border: 1px solid #fff; box-sizing: border-box; cursor: pointer;}
+.list-two .title{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; display: flex;}
+.list-two .text{font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.list-two li:hover{background-color: #F9FAFB; border-radius: 8px;}
+.list-two li:active, .list-two li:focus, .list-two .active-list{background: #F9FAFB;
+  border: 1px solid #E5E7EB; box-sizing: border-box; border-radius: 8px;}
+
+.list-two button, .list-icon::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F01D9"; margin-left: auto; cursor: pointer;}
+.list-two button:active::after, .list-two button:focus::after, .list-two button:hover::after{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* Three row list */
+/* ------------------------------------------------------------------------------ */
+.list-three{display: flex; flex-direction: column; grid-gap: 8px; gap: 8px;}
+.list-three li{display: flex; flex-direction: column; padding: 16px;
+  border: 1px solid #fff; box-sizing: border-box; cursor: pointer;}
+.list-three .sub{font-family: 'MinSans-Light'; font-size: 12px; line-height: 20px;}
+.list-three .title{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; display: flex;}
+.list-three .text{font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.list-three li:hover{background-color: #F9FAFB; border-radius: 8px;}
+.list-three li:active, .list-three li:focus, .list-three .active-list{background: #F9FAFB;
+  border: 1px solid #E5E7EB; box-sizing: border-box; border-radius: 8px;}
+
+.list-three button, .list-icon::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F01D9"; margin-left: auto; cursor: pointer;}
+.list-three button:active::after, .list-three button:focus::after, .list-three button:hover::after{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* Multiple list */
+/* ------------------------------------------------------------------------------ */
+.list-multi{display: flex; flex-direction: column; grid-gap: 8px; gap: 8px; overflow-y: auto;}
+.list-multi li{font-family: 'MinSans-Light'; font-size: 14px; line-height: 24px; padding-right: 16px;
+  display: flex; flex-direction: column; border-bottom: 1px solid #E5E7EB; cursor: pointer;}
+.list-multi .list-multi-title-hover, .list-multi .list-multi-title{
+  display: flex; align-items: center; grid-gap: 8px; gap: 8px; border-left: 4px solid #fff;}
+.list-multi .title{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; padding: 12px 0;}
+/* .list-multi .title{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px;} */
+.list-multi .title .list-icon-pin::before{font-family: "Material Design Icons"; font-size: 16px;
+  color: #9CA3AF; content: "\F0403"; cursor: pointer; padding: 0 16px;}
+.list-multi .title .list-icon-pin:active::before,
+.list-multi .title .list-icon-pin:focus::before{color: #005EAE;}
+.active-icon > .list-icon-pin::before{color: #005EAE !important;}
+.list-multi li:hover > .list-multi-title-hover{border-left: 4px solid #005EAE; box-sizing: border-box;}
+.list-multi .time{font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px; color: #9CA3AF; margin-left: auto;}
+.list-multi .text{font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px; margin-left: 48px; margin-bottom: 16px;}
+.list-multi .sub{font-family: 'MinSans-Regular'; font-size: 14px; line-height: 22px; margin-left: 48px; color: #9CA3AF;}
+.list-multi .list-icon-up::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F0143"; cursor: pointer;}
+.list-multi .list-icon-down::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F0140"; cursor: pointer;}
+.list-multi .list-icon-up:active::after, .list-multi .list-icon-up:focus::after,
+.list-multi .list-icon-down:active::after, .list-multi .list-icon-down:focus::after{color: #005EAE;}
+
+.list-multi .data-list{font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px; margin: 8px 0 16px 48px;
+  max-height: 266px; display: flex; flex-direction: column; gap: 8px; overflow: auto;}
+.list-multi .data-list li{padding: 3px 8px; background-color: #F9FAFB; border: 0; border-radius: 4px;}
+
+/* ============================================================================== */
+/* Drop down */
+/* ============================================================================== */
+/* Drop down - Content */
+/* ------------------------------------------------------------------------------ */
+.drop-down-content{border-left: 2px solid #E5E7EB; border-bottom: 1px solid #E5E7EB; padding: 0;}
+.drop-down-content:nth-last-child(1){margin-bottom: 0;}
+.drop-down{padding: 12px 0; display: flex;
+  font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; cursor: pointer;}
+.drop-down:hover{background-color: #F9FAFB;}
+/* .drop-down::before{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F0256"; cursor: pointer; padding: 0 16px;} */
+.drop-down .mdi{font-size: 18px; color: #9CA3AF; cursor: pointer; padding: 0 16px;}
+.drop-down .list-icon-down::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F0140"; cursor: pointer; padding-right: 16px;}
+.drop-down .list-icon-down::after{font-family: "Material Design Icons"; font-size: 18px;
+  color: #9CA3AF; content: "\F0140"; cursor: pointer; padding-right: 16px;}
+.drop-down button{margin-left: auto;}
+.drop-down .list-icon-down:active::after, .drop-down .list-icon-down:focus::after{color: #005EAE;}
+
+.drop-down-list{padding: 0 8px 8px 8px;}
+/* .drop-down-list ul{grid-gap: 0; gap: 0;} */
+
+/* ------------------------------------------------------------------------------ */
+/* Drop down - Title */
+/* ------------------------------------------------------------------------------ */
+.drop-down-title{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; cursor: pointer;
+  display: flex; align-items: center; grid-gap: 8px; gap: 8px;}
+.drop-down-title .mdi{font-size: 16px; color: #9CA3AF; cursor: pointer;}
+.drop-down-title button:nth-last-child(1){margin-left: auto;}
+
+
+/* ============================================================================== */
+/* Modal */
+/* ============================================================================== */
+/* Modal Content */
+/* ------------------------------------------------------------------------------ */
+.modal-mask{background-color: #000; opacity: 0.5; width: 100%; height: 100vh;
+  position: fixed; top: 0; left: 0; z-index: 1000;}
+.modal{background: #fff; border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10001;
+  width: 640px; padding: 32px; max-height: 80%; overflow-y: auto;}
+.modal .modal-btn-2{display: flex; grid-gap: 16px; gap: 16px;}
+.modal .search-data{border: 1px solid #E5E7EB; box-sizing: border-box; border-radius: 8px;
+  background-color: #fff; padding: 8px 16px; color: #636871;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;}
+.modal .text{font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px; color: #111827;}
+
+/* ------------------------------------------------------------------------------ */
+/* Modal Large (Modal-Large-Preview & Modal-Large-Table & (성능지표)Modal-Large-Unit) */
+/* ------------------------------------------------------------------------------ */
+.modal-large-preview{width: 80%; max-height: 90%; overflow: hidden; padding: 16px;}
+.modal-large-table{width: 934px; max-height: 760px; overflow: hidden; padding: 16px;}
+.modal-large-unit{width: 80%; max-width: 1400px; min-width: 1260px; max-height: 802px;
+  overflow: hidden; padding: 16px 32px;}
+
+.modal-large-table .table-wrap{max-height: 584px; margin: 0 0 16px 0;}
+.modal-large-preview .title, .modal-large-table .title, .modal-large-unit .title,
+.modal .title{padding: 6px 0; display: flex; align-items: center;}
+.modal-large-preview .title .close, .modal-large-table .title .close,
+.modal-large-unit .title .close, .modal .title .close{margin-left: auto;}
+.modal-large-preview .title .close::after, .modal-large-table .title .close::after,
+.modal-large-unit .title .close::after, .modal .title .close::after{padding: 0 11px; color: #9CA3AF;
+  font-family: "Material Design Icons"; font-size: 18px; content: "\F0156"; cursor: pointer;}
+.modal-large-preview .title .close:hover::after, .modal-large-table .title .close:hover::after,
+.modal-large-unit .title .close:hover::after, .modal .title .close:hover::after{color: #005EAE;}
+
+/* ------------------------------------------------------------------------------ */
+/* Modal POP */
+/* ------------------------------------------------------------------------------ */
+.modal-pop{border: 1px solid #E5E7EB; box-sizing: border-box; border-radius: 8px;
+  background-color: #fff; padding: 16px; min-width: 640px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  position: absolute; z-index: 10001; right: 0;}
+.modal-pop .title, .modal-pop .title{padding: 6px 0; display: flex;}
+.modal-pop .title .close{margin-left: auto;}
+.modal-pop .title .close::after{padding: 0 11px; color: #9CA3AF;
+  font-family: "Material Design Icons"; font-size: 18px; content: "\F0156"; cursor: pointer;}
+
+
+/* ============================================================================== */
+/* Feedback Indicators */
+/* ============================================================================== */
+/* Popover */
+/* ------------------------------------------------------------------------------ */
+.popover{padding: 16px; width: 280px; position: absolute;
+  border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  background-color: #fff;}
+.popover h5{margin-bottom: 10px;}
+.popover .pop-list{display: flex; flex-direction: column; grid-gap: 4px; gap: 4px;}
+.popover .pop-list .row{display: flex; align-items: center;}
+.popover .pop-list .row a{display: flex; align-items: center; padding: 4px 0;
+  font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.popover .pop-list .row a .mdi{width: 32px; height: 32px; font-size: 18px; color: #9CA3AF;
+  display: flex; align-items: center; justify-content: center;}
+.popover .pop-list .row:hover{background: #F9FAFB; border-radius: 8px; color: #005EAE;}
+.popover .pop-list .row:hover .mdi{color: #005EAE;}
+
+.popover .toggle{margin-left: auto; margin-right: 8px;}
+
+.popover-small{padding: 8px 32px 8px 16px; width: fit-content; display: none; z-index: 999;
+  border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  background-color: #fff; position: absolute; right: 16px; top: 45px;}
+.popover-small .pop-list{display: flex; flex-direction: column;}
+.popover-small .pop-list a{display: flex; align-items: center; padding: 4px 0;
+  font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px;}
+.popover-small .pop-list a .mdi{width: 32px; height: 32px; font-size: 18px; color: #9CA3AF;
+  display: flex; align-items: center; justify-content: center;}
+.popover-small .pop-list a:hover, .popover-small .pop-list a:hover .mdi{color: #005EAE;}
+
+
+/* ------------------------------------------------------------------------------ */
+/* Tooltip-helper */
+/* ------------------------------------------------------------------------------ */
+[class^="tooltip-helper"]{background: #fff; border-radius: 8px; padding: 8px;
+  /* width: 257px; min-height: 118px; max-height: 118px;  */
+  width: 277px;
+  overflow: hidden; position: absolute; z-index: 999;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.04)) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.08));
+  font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px; white-space: normal;
+  display: flex; grid-gap: 8px; gap: 8px; color: #111827; text-align: left;
+  visibility: hidden; opacity:0;
+  transition:visibility 0.3s linear,opacity 0.3s linear;}
+[class^="tooltip-helper"]::before{font-family: "Material Design Icons"; font-size: 18px; content: "\F02D7"; color: #005EAE;}
+[class^="tooltip-helper"]::after{content: ''; position: absolute;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.04)) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.08));}
+.tabs .section-tab .mdi:hover + .tooltip-helper, .form-label-icon .mdi:hover + .tooltip-helper{
+  visibility: visible; opacity: 1;}
+.tooltip-helper-hover{visibility: visible; opacity: 1;}
+.mdi-help-circle{cursor: pointer;}
+
+/* ------------------------------------------------------------------------------ */
+/* Tooltip-graph */
+/* ------------------------------------------------------------------------------ */
+.tooltip-graph{background: #111827; opacity: 0.76; color: #EDEFF2; border-radius: 4px;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px; padding: 4px 8px;
+  width: fit-content; max-width: 279px; position: absolute; z-index: 999;}
+
+/* ------------------------------------------------------------------------------ */
+/* Banner */
+/* ------------------------------------------------------------------------------ */
+.banner{border: 1px solid #E5E7EB; border-radius: 8px; padding: 8px 16px;
+  font-family: 'MinSans-Light'; font-size: 16px; line-height: 24px;
+  display: flex; grid-gap: 8px; gap: 8px; align-items: flex-start}
+
+[class^="banner-system"]{width: 949px; border: 1px solid #E5E7EB; border-radius: 8px; box-sizing: border-box;
+  position: relative; padding: 16px 40px; display: flex; flex-direction: column; grid-gap: 4px; gap: 4px;}
+[class^="banner-system"]::before{content: ''; width: 16px; position: absolute; top:0; left: 0; height: 100%;
+  border-top-left-radius: 8px; border-bottom-left-radius: 8px; background: #fff;}
+[class^="banner-system"] .title{font-family: 'MinSans-Regular'; font-size: 16px; line-height: 24px; color: #4B5563;
+  display: flex; grid-gap: 8px; gap: 8px;}
+[class^="banner-system"] .title .mdi{font-size: 20px; color: #4B5563;}
+.banner-system .title .btn-close{margin-left: auto;}
+.banner-system .title .btn-close::before{font-family: "Material Design Icons"; font-size: 24px; content: "\F0156"; color: #9CA3AF;}
+[class^="banner-system-"] .title .btn-close{margin-left: auto;}
+[class^="banner-system-"] .title .btn-close::before{font-family: "Material Design Icons"; font-size: 24px; content: "\F0159";}
+[class^="banner-system"] .text{font-family: 'MinSans-Light'; font-size: 14px; line-height: 22px; padding-right: 24px;}
+
+.banner-system-blue{background: #E5EFFF;}
+.banner-system-blue::before{background: #0091EA;}
+.banner-system-blue .title, .banner-system-blue .title .btn-close, .banner-system-blue .title .mdi{color: #0091EA;}
+
+.banner-system-orange{background: #FFF1DD;}
+.banner-system-orange::before{background: #FF7A00;}
+.banner-system-orange .title, .banner-system-orange .title .btn-close, .banner-system-orange .title .mdi{color: #F9A825;}
+
+.banner-system-green{background: #E1FFEB;}
+.banner-system-green::before{background: #4CAF50;}
+.banner-system-green .title, .banner-system-green .title .btn-close, .banner-system-green .title .mdi{color: #4CAF50;}
+
+.banner-system-red{background: #FFE4E4;}
+.banner-system-red::before{background: #D32F2F;}
+.banner-system-red .title, .banner-system-red .title .btn-close, .banner-system-red .title .mdi{color: #D32F2F;}
+
+

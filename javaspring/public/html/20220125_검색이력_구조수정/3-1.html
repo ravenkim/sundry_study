@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=1920" />
+<title>iris</title>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" />
+<link type="text/css" rel="stylesheet" href="../css/common.css" />
+</head>
+<body>
+    <a href="#contents" class="skip">본문바로가기</a>    
+    <!-- header -->    
+    <div class="header-wrap">
+	    <header>
+            <div class="header-logo">
+                <h1><a href="#" title="iris"><em class="hidden">iris</em></a></h1>
+		    </div>        
+            <nav class="gnb">
+                <h2 class="hidden">메뉴</h2>
+                <ul>
+                    <li class="active"><a href="#" title="다차원 검색"><em class="hidden">다차원 검색</em></a></li> 
+                    <li><a href="#" title="토픽모델 기반 검색"><em class="hidden">토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="전문가 토픽모델 기반 검색"><em class="hidden">전문가 토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="관리자 페이지"><em class="hidden">관리자 페이지</em></a></li>
+                </ul>
+            </nav> 
+        </header>
+    </div>      
+    <!-- header -->
+    <!-- main --> 
+    <main id="contents">
+        <div class="top-header search-header">
+            <ul>
+                <li>다차원 검색</li>
+            </ul>
+            <a href="#" class="user"><em>User</em></a>            
+        </div>
+        <!-- section1 --> 
+        <section class="section1">
+            <h2 class="hidden">검색 메뉴</h2>
+            <ul class="search-button">
+                <li>
+                    <a href="#">
+                        <strong>키워드</strong>
+                        <span>키워드 관련 과제 검색</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <strong>과제</strong>
+                        <span>과제 목록으로 유사과제 검색</span>
+                    </a>
+                </li>   
+                <li>
+                    <a href="#" class="active">
+                        <strong>토픽</strong>
+                        <span>토픽모델 관련 과제 검색</span>
+                    </a>
+                </li>   
+            </ul> 
+        </section>
+        <!-- section1 -->
+        <!-- section2 --> 
+        <section class="section2 container">
+            <h2 class="hidden">과제</h2>
+            <div class="row row1">
+                <article class="col-left">
+                    <div class="con-box">
+                        <div class="con-title">
+                            <h3>토픽 검색</h3>
+                            <span>검색할 토픽을 선택해주세요.</span>
+                            <a href="#" title="토픽 검색 닫기" class="btn-up"><em class="hidden">토픽 검색 닫기</em></a>
+                        </div>
+                        <div class="content-detail">
+                            <div class="topic-detail">
+                                <div class="topic-title">
+                                    <h4>전문가 토픽으로 검색</h4>
+                                </div>                                                                                  
+                                <div class="con-search">
+                                    <form>
+                                        <label for="topicSearch" class="hidden">키워드 검색</label>
+                                        <input type="text" id="topicSearch" placeholder="키워드를 입력하세요." />
+                                        <button type="submit"><i class="fas fa-search" title="검색"></i></button>
+                                        <ul class="topic-popover">
+                                            <li>
+                                                <a href="#">
+                                                    <strong>Topic title</strong>
+                                                    <span>검색텍스트 설명</span>
+                                                </a>
+                                                <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <strong>인공지능</strong>
+                                                    <span>무엇을 중심으로 이루어진 모델링인지에 대한 설명문입니다.무엇을 중심으로 이루어진 모델링인지에 대한 설명문입니다 무엇을 중심으로 이루어진 모델링인지에 대한 설명문입니다</span>
+                                                </a> 
+                                                <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <strong>Topic title</strong>
+                                                    <span>검색텍스트 설명</span>
+                                                </a>    
+                                                <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <strong>Topic title</strong>
+                                                    <span>검색텍스트 설명</span>
+                                                </a>    
+                                                <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <strong>Topic title</strong>
+                                                    <span>검색텍스트 설명</span>
+                                                </a> 
+                                                <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <strong>Topic title</strong>
+                                                    <span>검색텍스트 설명</span>
+                                                </a>  
+                                                <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="topic-detail">
+                                <div class="topic-title">
+                                    <h4>나의 토픽으로 검색</h4>
+                                    <div>
+                                        <button type="button" class="btn btn-topic"><i class="fas fa-plus"></i>토픽 모델 만들기</button>
+                                        <button type="button" class="btn-folder-plus"><i class="fas fa-folder-plus" title="폴더 추가"></i></button>
+                                    </div> 
+                                </div>
+                                <ul class="topic-folder">
+                                    <li>
+                                        <strong class="folder">폴더명</strong>
+                                        <a href="#" class="btn-down" title="열기"><em class="hidden">열기</em></a>    
+                                        <ul class="display-none">
+                                            <li>
+                                                <div>
+                                                    <input id="checkbox" type="checkbox" /><label for="checkbox"></label>
+                                                </div>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>                                        
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong class="folder">폴더명</strong>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>    
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명토픽설명토픽설명토픽설명토픽설명토픽설명토픽토픽설명토픽설명토픽설명토픽설명설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명토픽설명토픽설명토픽설명토픽설명토픽설명토픽토픽설명토픽설명토픽설명토픽설명설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명토픽설명토픽설명토픽설명토픽설명토픽설명토픽토픽설명토픽설명토픽설명토픽설명설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명토픽설명토픽설명토픽설명토픽설명토픽설명토픽토픽설명토픽설명토픽설명토픽설명설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명토픽설명토픽설명토픽설명토픽설명토픽설명토픽토픽설명토픽설명토픽설명토픽설명설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong class="folder">폴더명</strong>
+                                        <a href="#" class="btn-down" title="열기"><em class="hidden">열기</em></a>    
+                                        <ul class="display-none">
+                                            <li>
+                                                <input id="checkbox6" type="checkbox" /><label for="checkbox6"></label>
+                                                <a href="#" class="topic-explain">
+                                                    <strong>토픽명</strong>
+                                                    <span>토픽설명</span>
+                                                </a>
+                                                <a href="#" class="btn-control" title="관리"><em class="hidden">관리</em></a>
+                                            </li>                                             
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content-button">
+                            <button type="button" class="btn btn-primary btn-block">검색하기</button>
+                        </div>  
+                    </div>    
+                </article>
+                <article class="col-right">
+                    <div class="con-box">
+                        <div class="con-title">
+                            <h3>검색 이력</h3>                            
+                            <span>토픽 검색 이력입니다.</span>
+                            <a href="#" title="검색 이력 닫기" class="btn-up"><em class="hidden">검색 이력 닫기</em></a>
+                        </div> 
+                        <div class="content-detail">
+                            <ul class="search-history">                                    
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack active" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <span>2022-01-25 00:00</span>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong>토픽명</strong>
+                                    <dl>
+                                        <dt>토픽 설명</dt>
+                                        <dd>사용자가 직접 작성한 토픽 모델링 설명입니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-look" title="미리보기"><em class="hidden">미리보기</em></a>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>   
+                </article>
+            </div>            
+        </section>
+        <!-- section2 -->
+    </main>
+    <!-- main --> 
+</body>
+</html>

@@ -1,0 +1,129 @@
+/* color default */
+body{background-color: #FFFFFF; color:#111827;}
+
+/* Main colors */
+/* Primary color */
+.bg-primary{background-color: #005EAE !important;}
+.text-primary{color: #005EAE !important;}
+.border-primary{border-color: #005EAE !important;}
+
+/* Secondary color */
+.bg-secondary{background-color: #00ADEF !important;}
+.text-secondary{color: #00ADEF !important;}
+.border-secondary{border-color: #00ADEF !important;}
+
+/* dark-blue */
+.bg-dark-blue{background-color: #024D8C !important;}
+.text-dark-blue{color: #024D8C !important;}
+.border-dark-blue{border-color: #024D8C !important;}
+
+/* semi-blue */
+.bg-semi-blue{background-color: #D1E3F1 !important;}
+.text-semi-blue{color: #D1E3F1 !important;}
+.border-semi-blue{border-color: #D1E3F1 !important;}
+
+/* light-blue */
+.bg-light-blue{background-color: #E6F0F8 !important;}
+.text-light-blue{color: #E6F0F8 !important;}
+.border-light-blue{border-color: #E6F0F8 !important;}
+
+/* Gray Scale */
+.bg-gray-900{background-color: #111827 !important;}
+.text-gray-900{color: #111827 !important;}
+.border-gray-900{border-color: #111827 !important;}
+
+.bg-gray-600{background-color: #636871 !important;}
+.text-gray-600{color: #636871 !important;}
+.border-gray-600{border-color: #636871 !important;}
+
+.bg-gray-400{background-color: #9CA3AF !important;}
+.text-gray-400{color: #9CA3AF !important;}
+.border-gray-400{border-color: #9CA3AF !important;}
+
+.bg-gray-200{background-color: #E5E7EB !important;}
+.text-gray-200{color: #E5E7EB !important;}
+.border-gray-200{border-color: #E5E7EB !important;}
+
+.bg-gray-100{background-color: #F9FAFB !important;}
+.text-gray-100{color: #F9FAFB !important;}
+.border-gray-100{border-color: #F9FAFB !important;}
+
+.bg-white{background-color: #FFFFFF !important;}
+.text-white{color: #FFFFFF !important;}
+.border-white{border-color: #FFFFFF !important;}
+
+/* System color */
+/* Blue */
+.bg-blue{background-color: #0091EA !important;}
+.text-blue{color: #0091EA !important;}
+.border-blue{border-color: #0091EA !important;}
+
+/* sub_Blue */
+.bg-sub-blue{background-color: #E5EFFF !important;}
+.text-sub-blue{color: #E5EFFF !important;}
+.border-sub-blue{border-color: #E5EFFF !important;}
+
+/* Red */
+.bg-red{background-color: #D32F2F !important;}
+.text-red{color: #D32F2F !important;}
+.border-red{border-color: #D32F2F !important;}
+
+/* sub_Red */
+.bg-sub-red{background-color: #FFE4E4 !important;}
+.text-sub-red{color: #FFE4E4 !important;}
+.border-sub-red{border-color: #FFE4E4 !important;}
+
+/* Orange */
+.bg-orange{background-color: #FF7A00 !important;}
+.text-orange{color: #FF7A00 !important;}
+.border-orange{border-color: #FF7A00 !important;}
+
+/* sub_Orange */
+.bg-sub-orange{background-color: #FFF1DD !important;}
+.text-sub-orange{color: #FFF1DD !important;}
+.border-sub-orange{border-color: #FFF1DD !important;}
+
+/* Green */
+.bg-green{background-color: #4CAF50 !important;}
+.text-green{color: #4CAF50 !important;}
+.border-green{border-color: #4CAF50 !important;}
+
+/* sub_Green */
+.bg-sub-green{background-color: #E1FFEB !important;}
+.text-sub-green{color: #E1FFEB !important;}
+.border-sub-green{border-color: #E1FFEB !important;}
+
+
+/* 추후에 추가할것 */
+/* Shadows */
+.shadow-md{box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.08) !important;}
+.shadow-lg{box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.08), 0px 4px 6px rgba(0, 0, 0, 0.05) !important;}
+.shadow-xl{box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.04) !important;}
+
+/* opacity */
+.opacity-0   {opacity: 0 !important;}
+.opacity-05  {opacity: 0.05 !important;}
+.opacity-10	 {opacity: 0.1 !important;}
+.opacity-15	 {opacity: 0.15 !important;}
+.opacity-20	 {opacity: 0.2 !important;}
+.opacity-25	 {opacity: 0.25 !important;}
+.opacity-30	 {opacity: 0.3 !important;}
+.opacity-35	 {opacity: 0.35 !important;}
+.opacity-40	 {opacity: 0.4 !important;}
+.opacity-45	 {opacity: 0.45 !important;}
+.opacity-50	 {opacity: 0.5 !important;}
+.opacity-55	 {opacity: 0.55 !important;}
+.opacity-60	 {opacity: 0.6 !important;}
+.opacity-65	 {opacity: 0.65 !important;}
+.opacity-70	 {opacity: 0.7 !important;}
+.opacity-75	 {opacity: 0.75 !important;}
+.opacity-80	 {opacity: 0.8 !important;}
+.opacity-85	 {opacity: 0.85 !important;}
+.opacity-90	 {opacity: 0.9 !important;}
+.opacity-95	 {opacity: 0.95 !important;}
+.opacity-1   {opacity: 1 !important;}
+
+/* none color */
+.bg-none{background-color: transparent !important;}
+.text-none{color: transparent !important;}
+.border-none{border-color: transparent !important;}

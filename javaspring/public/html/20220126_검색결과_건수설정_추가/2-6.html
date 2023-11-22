@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=1920" />
+<title>iris</title>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" />
+<link type="text/css" rel="stylesheet" href="../css/common.css" />
+</head>
+<body>
+    <a href="#contents" class="skip">본문바로가기</a>    
+    <!-- header -->    
+    <div class="header-wrap">
+	    <header>
+            <div class="header-logo">
+                <h1><a href="#" title="iris"><em class="hidden">iris</em></a></h1>
+		    </div>        
+            <nav class="gnb">
+                <h2 class="hidden">메뉴</h2>
+                <ul>
+                    <li class="active"><a href="#" title="다차원 검색"><em class="hidden">다차원 검색</em></a></li> 
+                    <li><a href="#" title="토픽모델 기반 검색"><em class="hidden">토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="전문가 토픽모델 기반 검색"><em class="hidden">전문가 토픽모델 기반 검색</em></a></li>
+                    <li><a href="#" title="관리자 페이지"><em class="hidden">관리자 페이지</em></a></li>
+                </ul>
+            </nav> 
+        </header>
+    </div>      
+    <!-- header -->
+    <!-- main --> 
+    <main id="contents">
+        <div class="top-header search-header">
+            <ul>
+                <li>다차원 검색</li>
+            </ul>
+            <a href="#" class="user"><em>User</em></a>            
+        </div>
+        <!-- section1 --> 
+        <section class="section1">
+            <h2 class="hidden">검색 메뉴</h2>
+            <ul class="search-button">
+                <li>
+                    <a href="#">
+                        <strong>키워드</strong>
+                        <span>키워드 관련 과제 검색</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="active">
+                        <strong>과제</strong>
+                        <span>과제 목록으로 유사과제 검색</span>
+                    </a>
+                </li>   
+                <li>
+                    <a href="#">
+                        <strong>토픽</strong>
+                        <span>토픽모델 관련 과제 검색</span>
+                    </a>
+                </li>   
+            </ul> 
+        </section>
+        <!-- section1 -->
+        <!-- section2 --> 
+        <section class="section2 container">
+            <h2 class="hidden">과제</h2>
+            <div class="row row1">
+                <article class="col-left">
+                    <div class="con-box">
+                        <div class="con-title">
+                            <h3>과제 검색</h3>
+                            <span>과제목록(Excel)을 업로드 또는 직접 필드 입력</span>
+                            <a href="#" title="과제 검색 닫기" class="btn-up"><em class="hidden">과제 검색 닫기</em></a>
+                        </div>
+                        <div class="content-detail">
+                            <div class="radio-button">
+                                <input type="radio" id="1" /><label for="1">업로드</label>
+                                <input type="radio" id="2" checked /><label for="2">직접입력</label>
+                            </div>
+                            <ul class="label-textarea">
+                                <li>
+                                    <label for="project1">과제명</label>
+                                    <textarea id="project1" placeholder="과제명을 입력해주세요." ></textarea>
+                                </li>
+                                <li>
+                                    <label for="project2">연구 초록</label>
+                                    <textarea id="project2" placeholder="연구 초록을 입력해주세요." ></textarea>
+                                </li>
+                                <li>
+                                    <label for="project3">연구 내용</label>
+                                    <textarea id="project3" placeholder="연구 내용을 입력해주세요." ></textarea>
+                                </li>
+                                <li>
+                                    <label for="project4">기대효과</label>
+                                    <textarea id="project4" placeholder="기대효과를 입력해주세요." ></textarea>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content-button02">
+                            <div class="result-option-box mt-gutter">
+                                <label class="option-lable" for="keyword1">과제 검색 수</label>
+                                <ul class="option-button-box radio-button03">
+                                    <input type="radio" id="1" checked /><label for="1">500건</label>
+                                    <input type="radio" id="2" /><label for="2">1000건</label> 
+                                    <input type="radio" id="3" /><label for="2">1500건</label> 
+                                </ul>
+                            </div> 
+                            <button type="button" class="btn btn-primary btn-block">검색하기</button>
+                        </div>  
+                    </div>    
+                </article>
+                <article class="col-right">
+                    <div class="con-box">
+                        <div class="con-title">
+                            <h3>검색 이력</h3>                            
+                            <span>과제 - 직접입력 검색 이력입니다. </span>
+                            <a href="#" title="검색 이력 닫기" class="btn-up"><em class="hidden">검색 이력 닫기</em></a>
+                        </div> 
+                        <div class="content-detail">
+                            <ul class="search-history">                                    
+                                <li>
+                                   <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack active" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong class="folder">20211102_직접 입력 과제</strong>
+                                    <dl class="project-history display-none">
+                                        <dt>과제명</dt>
+                                        <dd>입력된 과제명이 표출됩니다.</dd>
+                                        <dt>연구 초록</dt>
+                                        <dd>입력된 연구 초록이 표출됩니다.</dd>
+                                        <dt>연구 내용</dt>
+                                        <dd>입력된 연구 내용이 표출됩니다.</dd>
+                                        <dt>기대효과</dt>
+                                        <dd>입력된 기대효과가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong class="folder">20211102_직접 입력 과제</strong>
+                                    <dl class="project-history">
+                                        <dt>과제명</dt>
+                                        <dd>입력된 과제명이 표출됩니다.</dd>
+                                        <dt>연구 초록</dt>
+                                        <dd>입력된 연구 초록이 표출됩니다.</dd>
+                                        <dt>연구 내용</dt>
+                                        <dd>입력된 연구 내용이 표출됩니다.</dd>
+                                        <dt>기대효과</dt>
+                                        <dd>입력된 기대효과가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong class="folder">20211102_직접 입력 과제</strong>
+                                    <dl class="project-history">
+                                        <dt>과제명</dt>
+                                        <dd>입력된 과제명이 표출됩니다.</dd>
+                                        <dt>연구 초록</dt>
+                                        <dd>입력된 연구 초록이 표출됩니다.</dd>
+                                        <dt>연구 내용</dt>
+                                        <dd>입력된 연구 내용이 표출됩니다.</dd>
+                                        <dt>기대효과</dt>
+                                        <dd>입력된 기대효과가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong class="folder">20211102_직접 입력 과제</strong>
+                                    <dl class="project-history display-none">
+                                        <dt>과제명</dt>
+                                        <dd>입력된 과제명이 표출됩니다.</dd>
+                                        <dt>연구 초록</dt>
+                                        <dd>입력된 연구 초록이 표출됩니다.</dd>
+                                        <dt>연구 내용</dt>
+                                        <dd>입력된 연구 내용이 표출됩니다.</dd>
+                                        <dt>기대효과</dt>
+                                        <dd>입력된 기대효과가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="thumbtack">
+                                        <a href="#" class="btn-thumbtack" title="고정"><em class="hidden">고정</em></a>
+                                    </div>
+                                    <strong class="folder">20211102_직접 입력 과제</strong>
+                                    <dl class="project-history display-none">
+                                        <dt>과제명</dt>
+                                        <dd>입력된 과제명이 표출됩니다.</dd>
+                                        <dt>연구 초록</dt>
+                                        <dd>입력된 연구 초록이 표출됩니다.</dd>
+                                        <dt>연구 내용</dt>
+                                        <dd>입력된 연구 내용이 표출됩니다.</dd>
+                                        <dt>기대효과</dt>
+                                        <dd>입력된 기대효과가 표출됩니다.</dd>
+                                    </dl>
+                                    <div>
+                                        <a href="#" class="btn-trash" title="삭제"><em class="hidden">삭제</em></a>
+                                        <a href="#" class="btn btn-sm-blue" title="조회">조회</a>
+                                        <a href="#" class="btn-up" title="닫기"><em class="hidden">닫기</em></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>                        
+                    </div>   
+                </article>
+            </div> 
+        </section>
+        <!-- section2 -->
+    </main>
+    <!-- main -->
+</body>
+</html>

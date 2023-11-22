@@ -1,0 +1,383 @@
+/* grid */
+.grid-col-full {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-col-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-col-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-col-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid-col-5 {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.grid-col-6 {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* grid span */
+.col-span-2 {
+    grid-column: span 2 / span 2;
+}
+.col-span-3 {
+    grid-column: span 3 / span 3;
+}
+.col-span-4 {
+    grid-column: span 4 / span 4;
+}
+.col-span-5 {
+    grid-column: span 5 / span 5;
+}
+
+/* gap(그리드 간의 간격) */
+.gap-0 {
+    grid-gap: 0 !important;
+    gap: 0 !important;
+}
+.gap-4 {
+    grid-gap: 4px !important;
+    gap: 4px !important;
+}
+.gap-8 {
+    grid-gap: 8px !important;
+    gap: 8px !important;
+}
+.gap-16 {
+    grid-gap: 16px !important;
+    gap: 16px !important;
+}
+.gap-24 {
+    grid-gap: 24px !important;
+    gap: 24px !important;
+}
+.gap-32 {
+    grid-gap: 32px !important;
+    gap: 32px !important;
+}
+.gap-40 {
+    grid-gap: 40px !important;
+    gap: 40px !important;
+}
+
+/* flex */
+.flex-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+.flex-row-cont {
+    display: inline-flex !important;
+    flex-direction: row !important;
+}
+.flex-row-reverse {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+}
+.flex-row-dan {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+.flex-col {
+    display: flex !important;
+    flex-direction: column !important;
+}
+.flex-col-cont {
+    display: inline-flex !important;
+    flex-direction: column !important;
+}
+.flex-col-reverse {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+}
+
+.nowrap {
+    flex-wrap: nowrap !important;
+}
+
+/* flex row 비율-> (ex) flex-row 1:2:1 비율) */
+.flex-1 {
+    flex: 1 1 0%;
+}
+.flex-2 {
+    flex: 2 1 0%;
+}
+.flex-3 {
+    flex: 3 1 0%;
+}
+.flex-fixed-50{
+    flex: 0 0 50px;
+}
+.flex-fixed-25{
+    flex: 0 0 25px;
+}
+
+/* flex-row 정렬(Justify Content) */
+.justify-start {
+    justify-content: flex-start;
+}
+.justify-end {
+    justify-content: flex-end;
+}
+.justify-center {
+    justify-content: center;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.justify-around {
+    justify-content: space-around;
+}
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
+/* (Justify Items) */
+.justify-items-start {
+    justify-items: start;
+}
+.justify-items-end {
+    justify-items: end;
+}
+.justify-items-center {
+    justify-items: center;
+}
+.justify-items-stretch {
+    justify-items: stretch;
+}
+
+/* flex-col 정렬(Align Content) */
+.align-start {
+    align-content: flex-start;
+}
+.align-end {
+    align-content: flex-end;
+}
+.align-center {
+    align-content: center;
+}
+.align-between {
+    align-content: space-between;
+}
+.align-around {
+    align-content: space-around;
+}
+.align-evenly {
+    align-content: space-evenly;
+}
+
+/* (Align Items) */
+.items-start {
+    align-items: flex-start;
+}
+.items-end {
+    align-items: flex-end;
+}
+.items-center {
+    align-items: center;
+}
+.items-baseline {
+    align-items: baseline;
+}
+.items-stretch {
+    align-items: stretch;
+}
+
+/* flex-center 정중앙 */
+.flex-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* float */
+.float-right {
+    float: right !important;
+}
+.float-left {
+    float: left !important;
+}
+.float-none {
+    float: none !important;
+}
+
+/* position */
+.relative {
+    position: relative !important;
+}
+.absolute {
+    position: absolute !important;
+}
+
+/* overflow */
+.overflow-auto {
+    overflow: auto !important;
+}
+.overflow-x-auto {
+    overflow-x: auto !important;
+}
+.overflow-y-auto {
+    overflow-y: auto !important;
+}
+.overflow-hidden {
+    overflow: hidden !important;
+}
+.overflow-x-hidden {
+    overflow-x: hidden !important;
+}
+.overflow-y-hidden {
+    overflow-y: hidden !important;
+}
+.overflow-visible {
+    overflow: visible !important;
+}
+.overflow-x-visible {
+    overflow-x: visible !important;
+}
+.overflow-y-visible {
+    overflow-y: visible !important;
+}
+
+/* order */
+.order-first {
+    order: -9999 !important;
+}
+.order-none {
+    order: 0 !important;
+}
+.order-1 {
+    order: 1 !important;
+}
+.order-2 {
+    order: 2 !important;
+}
+.order-3 {
+    order: 3 !important;
+}
+.order-4 {
+    order: 4 !important;
+}
+.order-5 {
+    order: 5 !important;
+}
+.order-6 {
+    order: 6 !important;
+}
+.order-last {
+    order: 9999 !important;
+}
+
+/* ============================================================================== */
+/* border */
+/* ============================================================================== */
+/* border-width */
+.border-0 {
+    border-width: 0px !important;
+    border: none !important;
+}
+.border-1 {
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+.border-2 {
+    border-width: 2px !important;
+    border-style: solid !important;
+}
+.border-3 {
+    border-width: 3px !important;
+    border-style: solid !important;
+}
+.border-4 {
+    border-width: 4px !important;
+    border-style: solid !important;
+}
+.border-5 {
+    border-width: 5px !important;
+    border-style: solid !important;
+}
+.border-1-dashed {
+    border-width: 1px !important;
+    border-style: dashed !important;
+}
+.border-2-dashed {
+    border-width: 2px !important;
+    border-style: dashed !important;
+}
+.border-3-dashed {
+    border-width: 3px !important;
+    border-style: dashed !important;
+}
+.border-4-dashed {
+    border-width: 4px !important;
+    border-style: dashed !important;
+}
+.border-5-dashed {
+    border-width: 5px !important;
+    border-style: dashed !important;
+}
+
+/* border 4 side only */
+.border-top-200{
+    border-top: 1px solid #E5E7EB;
+}
+.border-left-200{
+    border-left: 1px solid #E5E7EB;
+}
+.border-right-200{
+    border-right: 1px solid #E5E7EB;
+}
+.border-bottom-200{
+    border-bottom: 1px solid #E5E7EB;
+}
+
+/* border none */
+.border-top-0 {
+    border-top: none !important;
+}
+.border-bottom-0 {
+    border-bottom: none !important;
+}
+.border-left-0 {
+    border-left: none !important;
+}
+.border-right-0 {
+    border-right: none !important;
+}
+
+/* border-radius */
+.rounded-none {
+    border-radius: 0 !important;
+}
+.rounded-l {
+    border-radius: 16px !important;
+}
+.rounded-m {
+    border-radius: 8px !important;
+}
+.rounded-s {
+    border-radius: 4px !important;
+}
+
+/* border-radius none */
+.rounded-tr-0 {
+    border-top-right-radius: 0 !important;
+}
+.rounded-tl-0 {
+    border-top-left-radius: 0 !important;
+}
+.rounded-br-0 {
+    border-bottom-right-radius: 0 !important;
+}
+.rounded-bl-0 {
+    border-bottom-left-radius: 0 !important;
+}
