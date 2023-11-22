@@ -32,12 +32,12 @@ const localReducers = {
     //비동기 처리
     export default function* sampleSaga() {
         for (let reducerName in makeRequest) {
-            if (makeRequest.hasOwnProperty(reducerName)) {
+
                 yield takeLatest(
                     `${prefix}/${reducerName}`, 
                     createRequestSaga(makeRequest[reducerName])
                 )
-            }
+
         }
     }
     // 리덕스 툴킷 

@@ -23,8 +23,6 @@ export function* rootSaga() {
 
 
 
-
-
 //미들웨어
 const sagaMiddleware = createSagaMiddleware();
 
@@ -34,13 +32,11 @@ const middlewares = [
 
 
 
-
 //스토어
 const store = configureStore({
   reducer: reducers,
   middleware: middlewares,
 })
-
 
 
 sagaMiddleware.run(rootSaga)
