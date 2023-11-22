@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<h1>Post List</h1>
+
+{% for post in post_list %}
+    <div>
+        <p>공개시간 : {{ post.published_date }}</p>
+        <a href="{% url 'post_detail' pk=post.pk %}">
+            <h2>{{ post.title }}</h2>
+        </a>
+    </div>
+    
+    <br/>
+    <br/>
+    <br/>
+{% endfor %}
+
+{% endblock %}
