@@ -30,13 +30,18 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.39"],\
           ["@types/react-dom", "npm:18.2.17"],\
           ["@vitejs/plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.2.0"],\
+          ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
           ["eslint", "npm:8.54.0"],\
           ["eslint-plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:7.33.2"],\
           ["eslint-plugin-react-hooks", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:0.4.4"],\
+          ["history", "npm:5.3.0"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:18.2.0"],\
+          ["react-redux", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3"],\
+          ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["react-router-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
+          ["redux", "npm:4.2.1"],\
           ["redux-saga", "npm:1.2.3"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.4"]\
         ],\
@@ -896,7 +901,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-redux", null],\
           ["immer", "npm:9.0.21"],\
           ["react", "npm:18.2.0"],\
-          ["react-redux", null],\
+          ["react-redux", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3"],\
           ["redux", "npm:4.2.1"],\
           ["redux-thunk", "virtual:67cd294b06d74a6318b9691fa08cd73cb5b933e6ca3aa58dee27a5aa8f5f395a277887b825e18e0d229420b1bb7dc3e0ea306160d19d65278ad46e643029a2eb#npm:2.4.2"],\
           ["reselect", "npm:4.1.8"]\
@@ -1072,6 +1077,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/hoist-non-react-statics", [\
+      ["npm:3.3.5", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-hoist-non-react-statics-npm-3.3.5-98b8d8e47b-10c0.zip/node_modules/@types/hoist-non-react-statics/",\
+        "packageDependencies": [\
+          ["@types/hoist-non-react-statics", "npm:3.3.5"],\
+          ["@types/react", "npm:18.2.39"],\
+          ["hoist-non-react-statics", "npm:3.3.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/prop-types", [\
       ["npm:15.7.11", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-prop-types-npm-15.7.11-a0a5a0025c-10c0.zip/node_modules/@types/prop-types/",\
@@ -1108,6 +1124,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-scheduler-npm-0.16.8-303819b439-10c0.zip/node_modules/@types/scheduler/",\
         "packageDependencies": [\
           ["@types/scheduler", "npm:0.16.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/use-sync-external-store", [\
+      ["npm:0.0.3", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-use-sync-external-store-npm-0.0.3-875a91a914-10c0.zip/node_modules/@types/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["@types/use-sync-external-store", "npm:0.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1542,6 +1567,48 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/concat-map-npm-0.0.1-85a921b7ee-10c0.zip/node_modules/concat-map/",\
         "packageDependencies": [\
           ["concat-map", "npm:0.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["connected-react-router", [\
+      ["npm:6.9.3", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/connected-react-router-npm-6.9.3-87a887faf3-10c0.zip/node_modules/connected-react-router/",\
+        "packageDependencies": [\
+          ["connected-react-router", "npm:6.9.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3", {\
+        "packageLocation": "./.yarn/__virtual__/connected-react-router-virtual-4f3cc2c413/4/AppData/Local/Yarn/Berry/cache/connected-react-router-npm-6.9.3-87a887faf3-10c0.zip/node_modules/connected-react-router/",\
+        "packageDependencies": [\
+          ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
+          ["@types/history", null],\
+          ["@types/react", "npm:18.2.39"],\
+          ["@types/react-redux", null],\
+          ["@types/react-router", null],\
+          ["@types/redux", null],\
+          ["history", "npm:5.3.0"],\
+          ["immutable", "npm:4.3.4"],\
+          ["lodash.isequalwith", "npm:4.4.0"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.2.0"],\
+          ["react-redux", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3"],\
+          ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
+          ["redux", "npm:4.2.1"],\
+          ["seamless-immutable", "npm:7.1.4"]\
+        ],\
+        "packagePeers": [\
+          "@types/history",\
+          "@types/react-redux",\
+          "@types/react-router",\
+          "@types/react",\
+          "@types/redux",\
+          "history",\
+          "react-redux",\
+          "react-router",\
+          "react",\
+          "redux"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2447,6 +2514,26 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["history", [\
+      ["npm:5.3.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/history-npm-5.3.0-00136b6a63-10c0.zip/node_modules/history/",\
+        "packageDependencies": [\
+          ["history", "npm:5.3.0"],\
+          ["@babel/runtime", "npm:7.23.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["hoist-non-react-statics", [\
+      ["npm:3.3.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hoist-non-react-statics-npm-3.3.2-e7b709e6c1-10c0.zip/node_modules/hoist-non-react-statics/",\
+        "packageDependencies": [\
+          ["hoist-non-react-statics", "npm:3.3.2"],\
+          ["react-is", "npm:16.13.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["http-cache-semantics", [\
       ["npm:4.1.1", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/http-cache-semantics-npm-4.1.1-1120131375-10c0.zip/node_modules/http-cache-semantics/",\
@@ -2502,6 +2589,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/immer-npm-9.0.21-03c48c58ea-10c0.zip/node_modules/immer/",\
         "packageDependencies": [\
           ["immer", "npm:9.0.21"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["immutable", [\
+      ["npm:4.3.4", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/immutable-npm-4.3.4-2f54cf641b-10c0.zip/node_modules/immutable/",\
+        "packageDependencies": [\
+          ["immutable", "npm:4.3.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2986,6 +3082,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["locate-path", "npm:6.0.0"],\
           ["p-locate", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lodash.isequalwith", [\
+      ["npm:4.4.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/lodash.isequalwith-npm-4.4.0-128278c097-10c0.zip/node_modules/lodash.isequalwith/",\
+        "packageDependencies": [\
+          ["lodash.isequalwith", "npm:4.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3563,6 +3668,53 @@ const RAW_RUNTIME_STATE =
           ["react-is", "npm:16.13.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:18.2.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/react-is-npm-18.2.0-0cc5edb910-10c0.zip/node_modules/react-is/",\
+        "packageDependencies": [\
+          ["react-is", "npm:18.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-redux", [\
+      ["npm:8.1.3", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/react-redux-npm-8.1.3-1c8300c001-10c0.zip/node_modules/react-redux/",\
+        "packageDependencies": [\
+          ["react-redux", "npm:8.1.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3", {\
+        "packageLocation": "./.yarn/__virtual__/react-redux-virtual-199fb2a55f/4/AppData/Local/Yarn/Berry/cache/react-redux-npm-8.1.3-1c8300c001-10c0.zip/node_modules/react-redux/",\
+        "packageDependencies": [\
+          ["react-redux", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3"],\
+          ["@babel/runtime", "npm:7.23.5"],\
+          ["@types/hoist-non-react-statics", "npm:3.3.5"],\
+          ["@types/react", "npm:18.2.39"],\
+          ["@types/react-dom", "npm:18.2.17"],\
+          ["@types/react-native", null],\
+          ["@types/redux", null],\
+          ["@types/use-sync-external-store", "npm:0.0.3"],\
+          ["hoist-non-react-statics", "npm:3.3.2"],\
+          ["react", "npm:18.2.0"],\
+          ["react-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:18.2.0"],\
+          ["react-is", "npm:18.2.0"],\
+          ["react-native", null],\
+          ["redux", "npm:4.2.1"],\
+          ["use-sync-external-store", "virtual:199fb2a55f484c41d13dad6a52ed2708869bd8f50b3f55e35ec61444b36812d26503cdeee6f4f9d0dc8bc531eb7b5942cc348941379dfe39c4e3c04bfa8143c5#npm:1.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react-native",\
+          "@types/react",\
+          "@types/redux",\
+          "react-dom",\
+          "react-native",\
+          "react",\
+          "redux"\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["react-refresh", [\
@@ -3582,10 +3734,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:6a99144661047221a09e17756f034996035f8222cde88935e068c3d4e0288039e9bd11cc9aeca4e024342eab88876d4e644f1e65aa46d3916a164884b552feac#npm:6.20.0", {\
-        "packageLocation": "./.yarn/__virtual__/react-router-virtual-c737c3b5bb/4/AppData/Local/Yarn/Berry/cache/react-router-npm-6.20.0-56a6ec6bd8-10c0.zip/node_modules/react-router/",\
+      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0", {\
+        "packageLocation": "./.yarn/__virtual__/react-router-virtual-087a6ffe54/4/AppData/Local/Yarn/Berry/cache/react-router-npm-6.20.0-56a6ec6bd8-10c0.zip/node_modules/react-router/",\
         "packageDependencies": [\
-          ["react-router", "virtual:6a99144661047221a09e17756f034996035f8222cde88935e068c3d4e0288039e9bd11cc9aeca4e024342eab88876d4e644f1e65aa46d3916a164884b552feac#npm:6.20.0"],\
+          ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["@remix-run/router", "npm:1.13.0"],\
           ["@types/react", "npm:18.2.39"],\
           ["react", "npm:18.2.0"]\
@@ -3614,7 +3766,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.17"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:18.2.0"],\
-          ["react-router", "virtual:6a99144661047221a09e17756f034996035f8222cde88935e068c3d4e0288039e9bd11cc9aeca4e024342eab88876d4e644f1e65aa46d3916a164884b552feac#npm:6.20.0"]\
+          ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"]\
         ],\
         "packagePeers": [\
           "@types/react-dom",\
@@ -3770,13 +3922,18 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.39"],\
           ["@types/react-dom", "npm:18.2.17"],\
           ["@vitejs/plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.2.0"],\
+          ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
           ["eslint", "npm:8.54.0"],\
           ["eslint-plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:7.33.2"],\
           ["eslint-plugin-react-hooks", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:0.4.4"],\
+          ["history", "npm:5.3.0"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:18.2.0"],\
+          ["react-redux", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3"],\
+          ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["react-router-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
+          ["redux", "npm:4.2.1"],\
           ["redux-saga", "npm:1.2.3"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.4"]\
         ],\
@@ -3855,6 +4012,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["scheduler", "npm:0.23.0"],\
           ["loose-envify", "npm:1.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["seamless-immutable", [\
+      ["npm:7.1.4", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/seamless-immutable-npm-7.1.4-107e4aec08-10c0.zip/node_modules/seamless-immutable/",\
+        "packageDependencies": [\
+          ["seamless-immutable", "npm:7.1.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4317,6 +4483,28 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["uri-js", "npm:4.4.1"],\
           ["punycode", "npm:2.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["use-sync-external-store", [\
+      ["npm:1.2.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/use-sync-external-store-npm-1.2.0-44f75d2564-10c0.zip/node_modules/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["use-sync-external-store", "npm:1.2.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:199fb2a55f484c41d13dad6a52ed2708869bd8f50b3f55e35ec61444b36812d26503cdeee6f4f9d0dc8bc531eb7b5942cc348941379dfe39c4e3c04bfa8143c5#npm:1.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/use-sync-external-store-virtual-89c3f612dc/4/AppData/Local/Yarn/Berry/cache/use-sync-external-store-npm-1.2.0-44f75d2564-10c0.zip/node_modules/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["use-sync-external-store", "virtual:199fb2a55f484c41d13dad6a52ed2708869bd8f50b3f55e35ec61444b36812d26503cdeee6f4f9d0dc8bc531eb7b5942cc348941379dfe39c4e3c04bfa8143c5#npm:1.2.0"],\
+          ["@types/react", "npm:18.2.39"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
