@@ -24,7 +24,8 @@ dist-ssr
 *.sw?
 
 
-# zero install
+### yarn ###
+# used Zero-Install
 .yarn/*
 !.yarn/cache
 !.yarn/patches
