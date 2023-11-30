@@ -1,5 +1,9 @@
 import {BrowserRouter} from "react-router-dom";
-import IndexRoute from "./routes/IndexRoute.jsx";
+import IndexRoute from "/src/routes/IndexRoute.jsx";
+
+
+
+import '/src/assets/reset.css'
 
 
 function App() {
