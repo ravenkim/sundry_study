@@ -4,10 +4,14 @@ import { createBrowserHistory } from 'history'
 import createSagaMiddleware from 'redux-saga'
 const history = createBrowserHistory()
 import { all } from 'redux-saga/effects'
+import {assetsSlice} from "../assets/assetsReducer.jsx";
+import {userSlice} from "../features/accounts/userReducer.jsx";
 
 const reducers = {
     router: connectRouter(history),
-    // testReducer: testSlice.reducer,
+    assetsReducer: assetsSlice.reducer,
+    userReducer: userSlice.reducer,
+
 }
 
 export function* rootSaga() {
