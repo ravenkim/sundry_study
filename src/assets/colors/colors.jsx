@@ -1,8 +1,15 @@
-export const theme = {
+export const basicTheme = {
     //메인(브랜드) 칼러
 
+
+
     //배경 색상 (비중상 60%)
-    bgColor: '#dddddd',
+    bgColor: '#f5f5f5',
+
+
+
+
+
     textColorOposit: '#dddddd',
 
 
