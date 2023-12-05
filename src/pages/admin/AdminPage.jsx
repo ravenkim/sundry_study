@@ -4,7 +4,14 @@
 만든 래이아웃을 보냄
 
 
-{
+
+
+
+name : book,
+         id: 1,
+         layout: [
+
+         {
     order:1
 
     useLabel: 'N'
@@ -20,12 +27,13 @@
     order:3
 
     useLabel: 'Y'
+
     label: 'main',
 
-    type: card, >> 이거에 따라서 컴포 넌트를 구현
-    data: {
-        책 json
-    },
+
+
+    type: card, list, ..... , >> 이거에 따라서 컴포 넌트를 구현
+
 
 
 }
