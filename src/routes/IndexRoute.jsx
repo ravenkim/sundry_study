@@ -1,6 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import LoginPage from "../pages/accounts/LoginPage.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import DoorPage from "../pages/door/DoorPage.jsx";
 
 
 const IndexRoute = () => {
@@ -18,10 +19,10 @@ const IndexRoute = () => {
             />
 
             <Route
-                path="/c"
+                path="/door"
                 element={
                     <PrivateRoute>
-                        <div>vvvv</div>
+                        <DoorPage></DoorPage>
                     </PrivateRoute>
                 }
             />
