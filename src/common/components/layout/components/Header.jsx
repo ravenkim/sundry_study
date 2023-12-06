@@ -36,9 +36,7 @@ const Header = ({
                 justifyContent: "center"
             }}
             >
-                {menuOpen ?
-                    <CloseOutlined />
-                    :
+                {!menuOpen &&
                     <MenuOutlined
                         onClick={() => setMenuOpen(true)}
                     />
