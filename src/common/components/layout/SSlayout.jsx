@@ -11,8 +11,8 @@ const SSlayout = () => {
     return (
         <Background>
             <Header
-                setMenuOpen ={setMenuOpen}
-                menuOpen ={menuOpen}
+                setMenuOpen={setMenuOpen}
+                menuOpen={menuOpen}
             />
             <main
                 style={{
@@ -26,7 +26,12 @@ const SSlayout = () => {
             <Footer/>
 
 
-            {menuOpen && <Menu/>}
+            {menuOpen &&
+                <Menu
+                    setMenuOpen={setMenuOpen}
+                    menuOpen={menuOpen}
+                />
+            }
 
         </Background>
     );

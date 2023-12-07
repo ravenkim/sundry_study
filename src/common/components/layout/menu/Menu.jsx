@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Menu = () => {
+import {CloseOutlined} from "@ant-design/icons";
+
+
+
+const Menu = ({
+    setMenuOpen,
+    menuOpen
+              }) => {
 
 
     return (
@@ -12,13 +19,27 @@ const Menu = () => {
                 left: 0,
                 top: 0,
                 backgroundColor: "black",
-                opacity: 0.8
+                opacity: 0.8,
+                display: 'flex',
+
             }}
         >
             <div>
-                <div>
+                <div
+                    style = {{
+                        height: '63px',
+                        width: '63px',
+                        color: 'white',
+                        display:'flex',
+                                        alignItems: "center",
+                justifyContent: "center"
+                    }}
+                    onClick={() => setMenuOpen(false)}
 
+                >
+                    {menuOpen && <CloseOutlined/>}
                 </div>
+
             </div>
 
         </div>
