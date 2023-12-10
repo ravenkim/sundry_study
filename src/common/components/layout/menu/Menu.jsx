@@ -62,7 +62,7 @@ const Menu = ({
                     <li>
                         <MenuButtonWrap
                             text = {"aaaa"}
-                            url = {'/asd'}
+                            url = {'/'}
                         />
 
                     </li>

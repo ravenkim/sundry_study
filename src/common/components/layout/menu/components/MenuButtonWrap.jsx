@@ -1,6 +1,7 @@
 import React from 'react';
 import {Divider} from "antd";
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { push } from "redux-first-history";
 
 const MenuButtonWrap = ({
                             text,
