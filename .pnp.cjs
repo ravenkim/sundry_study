@@ -45,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["react-router-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["redux", "npm:4.2.1"],\
+          ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
           ["redux-saga", "npm:1.2.3"],\
           ["tailwindcss", "npm:3.3.6"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.4"]\
@@ -5813,6 +5814,32 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["redux-first-history", [\
+      ["npm:5.1.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/redux-first-history-npm-5.1.1-d50a6b05b7-10c0.zip/node_modules/redux-first-history/",\
+        "packageDependencies": [\
+          ["redux-first-history", "npm:5.1.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1", {\
+        "packageLocation": "./.yarn/__virtual__/redux-first-history-virtual-846c081d12/4/AppData/Local/Yarn/Berry/cache/redux-first-history-npm-5.1.1-d50a6b05b7-10c0.zip/node_modules/redux-first-history/",\
+        "packageDependencies": [\
+          ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
+          ["@types/history", null],\
+          ["@types/redux", null],\
+          ["history", "npm:5.3.0"],\
+          ["redux", "npm:4.2.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/history",\
+          "@types/redux",\
+          "history",\
+          "redux"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["redux-saga", [\
       ["npm:1.2.3", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/redux-saga-npm-1.2.3-626ee26318-10c0.zip/node_modules/redux-saga/",\
@@ -5982,6 +6009,7 @@ const RAW_RUNTIME_STATE =
           ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["react-router-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.0"],\
           ["redux", "npm:4.2.1"],\
+          ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
           ["redux-saga", "npm:1.2.3"],\
           ["tailwindcss", "npm:3.3.6"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.4"]\

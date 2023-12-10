@@ -1,19 +1,45 @@
 import {configureStore} from '@reduxjs/toolkit'; //스토어 생성
-import {connectRouter, routerMiddleware} from 'connected-react-router'
+import {connectRouter} from 'connected-react-router'
 import {createBrowserHistory} from 'history'
 import createSagaMiddleware from 'redux-saga'
+import { createReduxHistoryContext } from "redux-first-history";
 
-const history = createBrowserHistory()
 import {all} from 'redux-saga/effects'
 import {assetsSlice} from "../assets/assetsReducer.jsx";
 import {userSlice} from "../features/accounts/userReducer.jsx";
 
+
+const {
+  createReduxHistory,
+  routerMiddleware,
+  routerReducer
+} = createReduxHistoryContext({ history: createBrowserHistory() });
+
+
+
+
+
 const reducers = {
-    router: connectRouter(history),
+    router: routerReducer,
     assetsReducer: assetsSlice.reducer,
     userReducer: userSlice.reducer,
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function* rootSaga() {
     yield all([
@@ -22,12 +48,24 @@ export function* rootSaga() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [
-    routerMiddleware(history),
     sagaMiddleware,
-
+    routerMiddleware
 ]
 
 const store = configureStore({
@@ -38,3 +76,6 @@ const store = configureStore({
 sagaMiddleware.run(rootSaga)
 
 export default store
+
+export const history = createReduxHistory(store);
+

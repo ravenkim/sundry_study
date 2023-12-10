@@ -4414,6 +4414,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"redux-first-history@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "redux-first-history@npm:5.1.1"
+  peerDependencies:
+    history: ^4.7.2 || ^5.0
+    redux: ^3.6.0 || ^4.0.0
+  checksum: 4652adb2e82abf2a8c6a40a60afd0beebd9c4f69bdcfbba798ae2a7a7676cfda7b6a96beb03a9b1a2bd56a378052c7f38800496abfb0e1686add6dacf20a75c1
+  languageName: node
+  linkType: hard
+
 "redux-saga@npm:^1.2.3":
   version: 1.2.3
   resolution: "redux-saga@npm:1.2.3"
@@ -4594,6 +4604,7 @@ __metadata:
     react-router: "npm:^6.20.0"
     react-router-dom: "npm:^6.20.0"
     redux: "npm:^4.2.1"
+    redux-first-history: "npm:^5.1.1"
     redux-saga: "npm:^1.2.3"
     tailwindcss: "npm:^3.3.6"
     vite: "npm:^5.0.0"
