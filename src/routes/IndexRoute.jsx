@@ -6,7 +6,8 @@ import DoorPage from "../pages/door/DoorPage.jsx";
 
 const IndexRoute = () => {
     return (
-        <Routes>
+        <Routes
+        >
 
             <Route
                 path=""
