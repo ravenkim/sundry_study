@@ -1,6 +1,6 @@
 import { useSelector, shallowEqual } from 'react-redux';
 import {useState,useEffect} from "react"
-const Background = ( { children }) => {
+const Background = ( { children, className }) => {
 
 
 
@@ -26,7 +26,10 @@ const Background = ( { children }) => {
                 backgroundColor: bgColor,
                 width: '100vw', //
                 height: '100vh', //
+                position:'relative',
+                overflow:"hidden"
             }}
+            className={className}
         >
             {children}
 
