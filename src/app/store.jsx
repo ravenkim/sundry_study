@@ -3,10 +3,12 @@ import {connectRouter} from 'connected-react-router'
 import {createBrowserHistory} from 'history'
 import createSagaMiddleware from 'redux-saga'
 import { createReduxHistoryContext } from "redux-first-history";
-
+import storage from 'redux-persist/lib/storage'
 import {all} from 'redux-saga/effects'
 import {assetsSlice} from "../assets/assetsReducer.jsx";
 import {userSlice} from "../features/accounts/userReducer.jsx";
+import {persistReducer, persistStore} from "redux-persist";
+import {combineReducers} from "redux";
 
 
 const {
@@ -14,8 +16,6 @@ const {
   routerMiddleware,
   routerReducer
 } = createReduxHistoryContext({ history: createBrowserHistory() });
-
-
 
 
 
@@ -27,20 +27,6 @@ const reducers = {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function* rootSaga() {
     yield all([
         // testSaga(),
@@ -50,13 +36,13 @@ export function* rootSaga() {
 
 
 
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['userReducer'] // 로컬에 저장할 리듀서 목록
+};
 
-
-
-
-
-
-
+const persistedReducer = persistReducer(persistConfig, combineReducers(reducers));
 
 
 
@@ -68,8 +54,9 @@ const middlewares = [
     routerMiddleware
 ]
 
+
 const store = configureStore({
-    reducer: reducers,
+    reducer: persistedReducer,
     middleware: middlewares,
 })
 
@@ -79,3 +66,11 @@ export default store
 
 export const history = createReduxHistory(store);
 
+
+
+// local store
+
+
+
+
+export const persistor = persistStore(store);
