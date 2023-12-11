@@ -2,12 +2,15 @@ import React from 'react';
 import {Input} from "antd";
 
 const SSsearchInput = ({
-                           children,
-                           inputStyle,
-                           containerStyle,
-                            title,
-                           inputOtherProps
-                       }) => {
+    children,
+    inputStyle,
+    containerStyle,
+    title,
+    onChange,
+    onPressEnter,
+    placeholder = "",
+    inputOtherProps
+}) => {
     return (
         <div
             style={{
@@ -24,12 +27,15 @@ const SSsearchInput = ({
             </h1>
 
 
-
             <Input
                 style={{
                     marginBottom: '20px',
                     ...inputStyle,
                 }}
+                placeHolder={{}}
+                onChange={onChange}
+                placeholder={placeholder}
+                onPressEnter={onPressEnter}
                 {...inputOtherProps}
             >
 
