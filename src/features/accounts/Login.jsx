@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import MainLogoSvg from "../../common/components/Svg/MainLogoSvg.jsx";
 import axios from "axios";
+import {userAction} from "./userReducer.jsx";
 
 
 const Login = () => {
@@ -111,13 +112,21 @@ const Login = () => {
                             로그인
                         </SSbutton>
                     </form>
-                    <div className='flex w-full justify-center items-center'>
-                        <ul className='flex flex-row gap-[10px] tablet:gap-[16px] text-[#51525C] items-center justify-center'>
-                            <li onClick={() => dispatch(push("/searchId"))} className='cursor-pointer'>아이디 찾기</li>
-                            <div className='w-[1px] h-[14px] bg-[#51525C]'></div>
-                            <li onClick={() => dispatch(push("/searchPw"))} className='cursor-pointer'>비밀번호 찾기</li>
-                        </ul>
-                    </div>
+                    {/*<div className='flex w-full justify-center items-center'>*/}
+                    {/*    <ul className='flex flex-row gap-[10px] tablet:gap-[16px] text-[#51525C] items-center justify-center'>*/}
+                    {/*        <li onClick={() => dispatch(push("/searchId"))} className='cursor-pointer'>아이디 찾기</li>*/}
+                    {/*        <div className='w-[1px] h-[14px] bg-[#51525C]'></div>*/}
+                    {/*        <li onClick={() => dispatch(push("/searchPw"))} className='cursor-pointer'>비밀번호 찾기</li>*/}
+                    {/*    </ul>*/}
+                    {/*</div>*/}
+
+                               <button
+                onClick={() => dispatch(userAction.login())}
+
+                // 2 = action.payload
+                // addnumber =  action.type
+
+            >zzzzzzzzzzz</button>
                 </SSwrapper>
             </div>
         </div>
