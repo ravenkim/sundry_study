@@ -8,30 +8,11 @@ import MainLogoSvg from "../../common/components/Svg/MainLogoSvg.jsx";
 import axios from "axios";
 
 
-/*
-{
-    status: 200
-    message: '로그인이 성공하였습니다.'
-    data : {
-        accessToken: "블라블라",
-        refreshToken: '1회용 어쩌구 저쩌구'
-    }
-
-
-}
-
-    userId: 1
-    name: 김해준
-
-
-*/
 const Login = () => {
     const dispatch = useDispatch()
 
     const [userID, setUserID] = useState("")
     const [userPassword, setUserPassword] = useState("")
-
-
 
 
     const validateEmail = (email) => {
