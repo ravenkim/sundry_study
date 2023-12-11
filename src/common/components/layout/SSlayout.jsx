@@ -4,7 +4,9 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Menu from "./menu/Menu.jsx";
 
-const SSlayout = () => {
+const SSlayout = ({
+    children
+                  }) => {
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -18,10 +20,13 @@ const SSlayout = () => {
                 style={{
                     width: '100%',
                     minHeight: 'calc(100vh - 123px)',
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',
+                    display: "flex",
+                    flexDirection: 'column',
+                    alignItems: "center"
                 }}
             >
-
+                {children}
             </main>
             <Footer/>
 
