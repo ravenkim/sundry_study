@@ -1,5 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@charset "UTF-8";
+
+
+@font-face {
+  font-family: "NotoSansKR-100";
+  src: url("./fonts/NotoSansKR-Thin.otf") format('opentype');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "NotoSansKR-300";
+  src: url("./fonts/NotoSansKR-Light.otf") format('opentype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "NotoSansKR-400";
+  src: url("./fonts/NotoSansKR-Regular.otf") format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "NotoSansKR-500";
+  src: url("./fonts/NotoSansKR-SemiBold.ttf") format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "NotoSansKR-700";
+  src: url("./fonts/NotoSansKR-Bold.otf") format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "NotoSansKR-900";
+  src: url("./fonts/NotoSansKR-Black.otf") format('opentype');
+  font-weight: 900;
+}
+
 
 body {
-    font-family: 'Noto Sans KR', sans-serif
+    font-family: 'NotoSansKR-400', sans-serif !important;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-input {
+    font-family: 'NotoSansKR-400', sans-serif !important;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn)[class^="ant-btn"], :where(.css-dev-only-do-not-override-6j9yrn)[class*=" ant-btn"] {
+    font-family: 'NotoSansKR-400', sans-serif !important;
 }
