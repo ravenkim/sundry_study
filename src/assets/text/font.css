@@ -49,3 +49,7 @@ body {
 :where(.css-dev-only-do-not-override-6j9yrn)[class^="ant-btn"], :where(.css-dev-only-do-not-override-6j9yrn)[class*=" ant-btn"] {
     font-family: 'NotoSansKR-400', sans-serif !important;
 }
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'NotoSansKR-500', sans-serif !important;
+}
