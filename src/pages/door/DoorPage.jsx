@@ -1,6 +1,7 @@
 import React from 'react';
 import SSlayout from "../../common/components/layout/SSlayout.jsx";
 import {Input} from "antd";
+import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
 
 const DoorPage = () => {
 
@@ -9,16 +10,9 @@ const DoorPage = () => {
 
     return (
         <SSlayout>
-            <div
-                style={{
-                    width: '800px'
-                }}
-            >
-                무엇을 찾으시나요?
-                <Input
-
-                />
-            </div>
+            <SSsearchInput
+                title = {'무엇을 찾으시나요?'}
+            />
 
             <div
                 style={{
