@@ -1,20 +1,19 @@
 import React from 'react';
 import {Divider} from "antd";
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { push } from "redux-first-history";
 
 const MenuButtonWrap = ({
-                            text,
-                            url,
-                        }) => {
-
-
-    const dispatch =  useDispatch()
+    text,
+    onClick,
+    selected = false
+}) => {
 
 
     return (
-        <a
-            onClick={() =>  dispatch(push(url))}
+        <li
+            onClick={onClick}
+           style = {  {
+                backgroundColor: selected && "rgba(0, 0, 0, 0.95)"
+            }}
         >
             <div
                 style={{
@@ -40,7 +39,7 @@ const MenuButtonWrap = ({
 
                 }}
             />
-        </a>
+        </li>
     );
 };
 

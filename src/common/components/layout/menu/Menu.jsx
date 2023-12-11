@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {CloseOutlined} from "@ant-design/icons";
-import {Divider} from "antd";
 import MenuButtonWrap from "./components/MenuButtonWrap.jsx";
+import {useDispatch, useSelector, shallowEqual} from 'react-redux';
+import {push} from "redux-first-history";
 
 
 const Menu = ({
-                  setMenuOpen,
-                  menuOpen
-              }) => {
+    setMenuOpen,
+    menuOpen
+}) => {
+
+    const dispatch = useDispatch()
+
+
+    // 선택된 대분류
+    const [selectedButton, setSelectedButton] = useState('CONTENTS')
+    /*
+   myPage
+   contents
+   manager
+     */
+
 
 
     return (
@@ -45,7 +58,6 @@ const Menu = ({
             </div>
 
 
-            
             {/*왼쪽 메뉴*/}
             <div
                 style={{
@@ -59,25 +71,50 @@ const Menu = ({
                 }}
             >
                 <ul>
-                    <li>
-                        <MenuButtonWrap
-                            text = {"aaaa"}
-                            url = {'/'}
-                        />
 
-                    </li>
-                    <li>
-                        <MenuButtonWrap
-                            text = {"aaaa"}
-                            url = {'/asd'}
-                        />
+                    <MenuButtonWrap
+                        text={"HOME"}
+                        onClick={() => dispatch(push('/'))}
+                    />
 
-                    </li>
+                    <MenuButtonWrap
+                        text={"MY PAGE"}
+                        url={'/asd'}
+                        onClick = {() => {
+                            setSelectedButton('MY PAGE')
+                        }}
+                        selected = {
+                            selectedButton === 'MY PAGE'
+                        }
+
+
+                    />
+                    <MenuButtonWrap
+                        text={"CONTENTS"}
+                        url={'/asd'}
+                         onClick = {() => {
+                            setSelectedButton('CONTENTS')
+                        }}
+                        selected = {
+                            selectedButton === 'CONTENTS'
+                        }
+                    />
+                    <MenuButtonWrap
+                        text={"MANAGER"}
+                        url={'/asd'}
+                        onClick = {() => {
+                            setSelectedButton('MANAGER')
+                        }}
+                        selected = {
+                            selectedButton === 'MANAGER'
+                        }
+                    />
+
                 </ul>
 
 
             </div>
-            
+
             {/*오른쪽 메뉴*/}
             <div
                 style={{
