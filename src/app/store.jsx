@@ -6,7 +6,7 @@ import { createReduxHistoryContext } from "redux-first-history";
 
 import {all} from 'redux-saga/effects'
 import {assetsSlice} from "../assets/assetsReducer.jsx";
-import {userSlice} from "../features/accounts/userReducer.jsx";
+import {userSaga, userSlice} from "../features/accounts/userReducer.jsx";
 
 
 const {
@@ -43,7 +43,9 @@ const reducers = {
 
 export function* rootSaga() {
     yield all([
+
         // testSaga(),
+              userSaga(),
     ]);
 }
 
