@@ -24,7 +24,6 @@ const Login = () => {
         console.log('실행중')
 
         if (!validateEmail(userID)) {
-            /*message.error('올바른 이메일 형식이 아닙니다.');*/
             alert("올바른 이메일 형식이 아닙니다.")
             return;
         } // 이메일 형식이 아닐 경우
@@ -46,11 +45,6 @@ const Login = () => {
             console.error('로그인 실패:', error);
         }
     };
-
-
-    useEffect(() => {
-        console.log(userID)
-    }, [userID]);
 
     return (
         <div className='relative w-full h-full'>
