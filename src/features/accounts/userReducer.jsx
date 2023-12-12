@@ -1,29 +1,50 @@
-
-
+import { takeLatest } from "redux-saga/effects";
+import {call, put} from 'redux-saga/effects';
+import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import {reducerUtils, reduxMaker} from "../../common/utils/redux/asyncUtils.jsx";
 
-
-const prefix = 'user'
-
-const asyncRequest = {
-    login: [
-        {user: reducerUtils.init()},
+function* login() {
+  try {
+    const response = yield call(
+        //로그인 요청
         () => axios.get('https://jsonplaceholder.typicode.com/posts')
-    ],
-
+    );
+    yield put({
+        type: 'user/loginSuccess',
+        payload: response
+    });
+  } catch (e) {
+    yield put({
+        type: 'user/loginFailure',
+        payload: e.message
+    });
+  }
 }
 
 
-const localState= {}
-const localReducers = {
-    loginSuccess: (state, action) => {
-        console.log(action.payload.data)
-    },
+
+export function* userSaga() {
+    yield takeLatest( 'user/login' ,login)
 }
 
-export const {userSlice, userSaga, userAction} = reduxMaker(prefix, asyncRequest,localState, localReducers);
+
+
+
+export const userSlice = createSlice({
+	name: 'user',
+	initialState: {
+
+	},
+	reducers: {
+        login: (state, action) => {},
+        loginSuccess: (state, action) => {
+            console.log(action.payload.data)
+        },
+	}
+})
+
+export const userAction = userSlice.actions
 
 
 
@@ -32,41 +53,38 @@ export const {userSlice, userSaga, userAction} = reduxMaker(prefix, asyncRequest
 
 
 
-
-
-
-
-
-
-
-// import {createSlice} from '@reduxjs/toolkit';
+//
+// import axios from 'axios';
+//
+// import {reducerUtils, reduxMaker} from "../../common/utils/redux/asyncUtils.jsx";
 //
 //
-// export const TOKEN_TIME_OUT = 600*1000;
+// const prefix = 'user'
+//
+// const asyncRequest = {
+//     login: [
+//         {user: reducerUtils.init()},
+//         () => axios.get('https://jsonplaceholder.typicode.com/posts')
+//     ],
+//
+// }
 //
 //
-// export const userSlice = createSlice({
-// 	name: 'authToken',
-// 	initialState: {
-// 		authToken: {
-// 			authenticated: false,
-// 			accessToken: null,
-// 			expireTime: null
-// 		}
+// const localState= {}
+// const localReducers = {
+//     loginSuccess: (state, action) => {
+//         console.log(action.payload.data)
+//     },
+// }
 //
-// 	},
-// 	reducers: {
-// 		SET_TOKEN: (state, action) => {
-// 			state.authToken.authenticated = true;
-// 			state.authToken.accessToken = action.payload;
-// 			state.authToken.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
-// 		},
-// 		DELETE_TOKEN: (state) => {
-// 			state.authToken.authenticated = false;
-// 			state.authToken.accessToken = null;
-// 			state.authToken.expireTime = null
-// 		},
-// 	}
-// })
+// export const {userSlice, userSaga, userAction} = reduxMaker(prefix, asyncRequest,localState, localReducers);
 //
-// export const userAction = userSlice.actions
+//
+//
+//
+//
+
+
+
+
+
