@@ -62,7 +62,7 @@ const Header = ({
                         height: 34
 
                     }}
-                    src={'logo/logo_main.png'} alt={'logo'}/>
+                    src={'/src/assets/logo/logo_main.png'} alt={'logo'}/>
 
             </div>
             <div

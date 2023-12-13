@@ -1,4 +1,4 @@
-import MainLogo from '/public/logo/logo_main.png'
+import MainLogo from '/src/assets/logo/logo_main.png'
 
 const MainLogoSvg = ({
     width

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
+import SSsearchInput from "/src/common/components/input/SSsearchInput.jsx";
 import {Input} from "antd";
-import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
-import SScardWrap from "../../common/components/Card/SScardWrap.jsx";
-import SScard from "../../common/components/Card/SScard.jsx";
+import SSsectionWrap from "/src/common/components/wrapper/SSsectionWrap.jsx";
+import SScardWrap from "/src/common/components/Card/SScardWrap.jsx";
+import SScard from "/src/common/components/Card/SScard.jsx";
 
 const Door = () => {
 
