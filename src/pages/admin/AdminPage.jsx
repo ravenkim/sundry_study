@@ -44,12 +44,18 @@ name : book,
 
 
 import React from 'react';
+import SSlayout from "../../common/components/layout/SSlayout.jsx";
 
 const AdminPage = () => {
+
+
+
+
+
     return (
-        <div>
-            
-        </div>
+        <SSlayout>
+
+        </SSlayout>
     );
 };
 

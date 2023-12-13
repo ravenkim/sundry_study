@@ -3,14 +3,15 @@ import {Divider} from "antd";
 
 const MenuButtonWrap = ({
     text,
-    onClick,
-    selected = false
+    onMouseOver,
+    selected = false,
+    cursor
 }) => {
 
 
     return (
         <li
-            onClick={onClick}
+            onMouseOver={onMouseOver}
            style = {  {
                 backgroundColor: selected && "rgba(0, 0, 0, 0.95)"
             }}
@@ -24,7 +25,8 @@ const MenuButtonWrap = ({
                     justifyContent: "center",
                     color: "wheat",
                     boxSizing: "border-box",
-                    flexDirection: "column"
+                    flexDirection: "column",
+                    cursor: cursor
 
                 }}
             >
