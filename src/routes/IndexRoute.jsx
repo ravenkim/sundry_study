@@ -4,6 +4,7 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import DoorPage from "../pages/door/DoorPage.jsx";
 import IndexPage from "../pages/index/IndexPage.jsx";
 import ErrorPage from "../pages/error/ErrorPage.jsx";
+import AdminPage from "../pages/admin/AdminPage.jsx";
 
 
 const IndexRoute = () => {
@@ -36,6 +37,16 @@ const IndexRoute = () => {
                 element={
                     <PrivateRoute>
                         <DoorPage></DoorPage>
+                    </PrivateRoute>
+                }
+            />
+
+
+             <Route
+                path="/admin"
+                element={
+                    <PrivateRoute>
+                        <AdminPage/>
                     </PrivateRoute>
                 }
             />
