@@ -5,13 +5,15 @@ const MenuButtonWrap = ({
     text,
     onMouseOver,
     selected = false,
-    cursor
+    cursor,
+    onClick
 }) => {
 
 
     return (
         <li
             onMouseOver={onMouseOver}
+            onClick = {onClick}
            style = {  {
                 backgroundColor: selected && "rgba(0, 0, 0, 0.95)"
             }}

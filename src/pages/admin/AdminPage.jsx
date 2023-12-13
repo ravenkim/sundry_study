@@ -45,6 +45,7 @@ name : book,
 
 import React from 'react';
 import SSlayout from "../../common/components/layout/SSlayout.jsx";
+import Admin from "../../features/admin/Admin.jsx";
 
 const AdminPage = () => {
 
@@ -54,7 +55,7 @@ const AdminPage = () => {
 
     return (
         <SSlayout>
-
+            <Admin/>
         </SSlayout>
     );
 };
