@@ -27,7 +27,8 @@ const localState = {
 //로컬 리듀서
 const localReducers = {
      setTab: (state, action) => {
-            state.tab = action.payload
+         state.tab = action.payload
+         return state
      },
 }
 
