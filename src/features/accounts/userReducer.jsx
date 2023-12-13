@@ -53,37 +53,6 @@ export const userAction = userSlice.actions
 
 
 
-//
-// import axios from 'axios';
-//
-// import {reducerUtils, reduxMaker} from "../../common/utils/redux/asyncUtils.jsx";
-//
-//
-// const prefix = 'user'
-//
-// const asyncRequest = {
-//     login: [
-//         {user: reducerUtils.init()},
-//         () => axios.get('https://jsonplaceholder.typicode.com/posts')
-//     ],
-//
-// }
-//
-//
-// const localState= {}
-// const localReducers = {
-//     loginSuccess: (state, action) => {
-//         console.log(action.payload.data)
-//     },
-// }
-//
-// export const {userSlice, userSaga, userAction} = reduxMaker(prefix, asyncRequest,localState, localReducers);
-//
-//
-//
-//
-//
-
 
 
 

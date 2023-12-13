@@ -4,6 +4,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import MenuButtonWrap from "./components/MenuButtonWrap.jsx";
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {push} from "redux-first-history";
+import SubMenuButtonWrap from "./components/SubMenuButtonWrap.jsx";
 
 
 const Menu = ({
@@ -73,6 +74,7 @@ const Menu = ({
                 <ul>
 
                     <MenuButtonWrap
+                        cursor={ 'pointer'}
                         text={"HOME"}
                         onClick={() => dispatch(push('/'))}
                     />
@@ -80,7 +82,7 @@ const Menu = ({
                     <MenuButtonWrap
                         text={"MY PAGE"}
                         url={'/asd'}
-                        onClick = {() => {
+                        onMouseOver = {() => {
                             setSelectedButton('MY PAGE')
                         }}
                         selected = {
@@ -92,7 +94,7 @@ const Menu = ({
                     <MenuButtonWrap
                         text={"CONTENTS"}
                         url={'/asd'}
-                         onClick = {() => {
+                         onMouseOver = {() => {
                             setSelectedButton('CONTENTS')
                         }}
                         selected = {
@@ -102,7 +104,7 @@ const Menu = ({
                     <MenuButtonWrap
                         text={"MANAGER"}
                         url={'/asd'}
-                        onClick = {() => {
+                        onMouseOver = {() => {
                             setSelectedButton('MANAGER')
                         }}
                         selected = {
@@ -120,10 +122,37 @@ const Menu = ({
                 style={{
                     width: '50%',
                     height: '100%',
-                    backgroundColor: "rgba(0, 0, 0, 0.2)"
-
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    display: "flex",
+                    alignItems: "center"
                 }}
             >
+                {selectedButton === 'MANAGER' &&
+                    <ul>
+                        <SubMenuButtonWrap
+                            text={"회원 관리"}
+                            tab={'/member'}
+                            setMenuOpen = {setMenuOpen}
+                        />
+                        <SubMenuButtonWrap
+                            text={"보드 관리"}
+                            tab={'/board'}
+                            setMenuOpen = {setMenuOpen}
+                        />
+                        <SubMenuButtonWrap
+                            text={"연체자 관리"}
+                            tab={'/delinquent'}
+                            setMenuOpen = {setMenuOpen}
+                        />
+                        <SubMenuButtonWrap
+                            text={"권한 관리"}
+                            tab={'/auth'}
+                            setMenuOpen = {setMenuOpen}
+                        />
+                    </ul>
+                }
+
+
 
             </div>
 
