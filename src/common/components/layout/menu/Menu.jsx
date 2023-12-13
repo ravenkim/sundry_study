@@ -131,22 +131,22 @@ const Menu = ({
                     <ul>
                         <SubMenuButtonWrap
                             text={"회원 관리"}
-                            tab={'/member'}
+                            tab={'member'}
                             setMenuOpen = {setMenuOpen}
                         />
                         <SubMenuButtonWrap
                             text={"보드 관리"}
-                            tab={'/board'}
+                            tab={'board'}
                             setMenuOpen = {setMenuOpen}
                         />
                         <SubMenuButtonWrap
                             text={"연체자 관리"}
-                            tab={'/delinquent'}
+                            tab={'delinquent'}
                             setMenuOpen = {setMenuOpen}
                         />
                         <SubMenuButtonWrap
                             text={"권한 관리"}
-                            tab={'/auth'}
+                            tab={'auth'}
                             setMenuOpen = {setMenuOpen}
                         />
                     </ul>
