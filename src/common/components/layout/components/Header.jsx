@@ -1,5 +1,5 @@
 import {CloseOutlined, MenuOutlined} from "@ant-design/icons";
-import {useSelector} from "react-redux";
+import {shallowEqual, useSelector} from "react-redux";
 
 const Header = ({
     setMenuOpen,
@@ -10,7 +10,10 @@ const Header = ({
         bgcolor1
     } = useSelector(({assetsReducer}) => ({
         bgcolor1: assetsReducer.colors.bgcolor,
-    }));
+    }),
+     shallowEqual
+    );
+
 
 
     return (
