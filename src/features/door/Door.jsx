@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
 import {Input} from "antd";
+import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
+import SScardWrap from "../../common/components/Card/SScardWrap.jsx";
+import SScard from "../../common/components/Card/SScard.jsx";
 
 const Door = () => {
 
@@ -14,21 +17,38 @@ const Door = () => {
                      placeholder={'찾고자 하는 항목을 입력하세요. (전체 항목에서 검색됩니다)'}
                 title={'무엇을 찾으시나요?'}
             />
-
-
-
-
-
-            <div
-                style={{
-                    width: '800px'
-                }}
-            >
-                <h2>원하는 서비스로 가장 빠르게 이동해 보세요.</h2>
-
-            </div>
+            <SSsectionWrap>
+                <SScardWrap>
+                    <SScard>
+                        <div>
+                            adfasdfasdf
+                        </div>
+                    </SScard>
+                    <SScard>
+                        <div>
+                            adfasdfasdf
+                        </div>
+                    </SScard>
+                    <SScard>
+                        <div>
+                            adfasdfasdf
+                        </div>
+                    </SScard>
+                    <SScard>
+                        <div>
+                            adfasdfasdf
+                        </div>
+                    </SScard>
+                    <SScard>
+                        <div>
+                            adfasdfasdf
+                        </div>
+                    </SScard>
+                </SScardWrap>
+            </SSsectionWrap>
         </>
     );
 };
 
 export default Door;
+

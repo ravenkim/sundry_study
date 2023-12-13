@@ -75,8 +75,8 @@ const Login = () => {
                         }}
                         className='pb-[30px]'
                     >
-                        <h2 className='text-[#111321] text-[22px] tablet:text-[26px] desktop:text-[30px]'>안녕하세요 :)</h2>
-                        <h2 className='text-[#111321] text-[22px] tablet:text-[26px] desktop:text-[30px]'>RMS 입니다.</h2>
+                        <h1 className=''>안녕하세요 :)</h1>
+                        <h1 className=''>RMS 입니다.</h1>
                     </div>
                     <form action=""
                           onSubmit={(e) => {

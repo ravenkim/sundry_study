@@ -7,6 +7,7 @@ import store from "./app/store.jsx";
 // css import
 import '../src/assets/reset.css';
 import '../src/assets/global/global.css';
+import '../src/assets/text/font.css';
 //
 
 
