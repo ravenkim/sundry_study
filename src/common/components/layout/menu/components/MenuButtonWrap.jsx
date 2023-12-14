@@ -15,34 +15,24 @@ const MenuButtonWrap = ({
             onMouseOver={onMouseOver}
             onClick = {onClick}
            style = {  {
-                backgroundColor: selected && "rgba(0, 0, 0, 0.95)"
+                /*backgroundColor: selected && "rgba(0, 0, 0, 0.95)"*/
             }}
+            className={'border-b-[1px] border-[#51525c] border-solid hover:border-[#ffffff] text-[#51525c] hover:text-[#ffffff]'}
         >
             <div
                 style={{
-                    width: '364px',
-                    height: '100px',
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "wheat",
                     boxSizing: "border-box",
                     flexDirection: "column",
                     cursor: cursor
-
                 }}
+                className={'py-[30px] w-[300px]'}
             >
-                {text}
+                <p className={'text-[30px] font-[NotoSansKR-900]'}>{text}</p>
 
             </div>
-            <Divider
-                style={{
-                    backgroundColor: "wheat",
-                    margin: 0,
-                    padding: 0,
-
-                }}
-            />
         </li>
     );
 };
