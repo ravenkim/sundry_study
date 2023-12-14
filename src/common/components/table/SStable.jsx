@@ -65,8 +65,10 @@ const SStable = ({
             } else {
                 const filtered = dataSource.filter(item => {
 
-                    const itemValues = Object.values(item).join(' ').toLowerCase()
-                    return itemValues.includes(searchText.toLowerCase())
+
+                    const itemValues = hangul.disassemble(Object.values(item).join(' ').toLowerCase()).join('');
+                    const searchTextProcessed = hangul.disassemble(searchText.toLowerCase()).join('');
+                    return itemValues.includes(searchTextProcessed);
                 });
                 setFilteredData(filtered)
             }
