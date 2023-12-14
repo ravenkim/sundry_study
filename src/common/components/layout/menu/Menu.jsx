@@ -62,12 +62,11 @@ const Menu = ({
                 style={{
                     width: '50%',
                     height: '100%',
-                    backgroundColor: "rgba(22, 22, 22, 0.95)",
                     display: "flex",
                     alignItems: "center",
                     flexDirection: "row-reverse"
-
                 }}
+                className={'relative z-99 before:absolute before:left-[0] before:top-[0] before:w-full before:h-full before:bg-[#161616] before:bg-opacity-95 before:-z-10'}
             >
                 <ul>
 
@@ -120,10 +119,11 @@ const Menu = ({
                 style={{
                     width: '50%',
                     height: '100%',
-                    backgroundColor: "rgba(0, 0, 0, 0.2)",
                     display: "flex",
                     alignItems: "center"
+
                 }}
+                className={'relative z-99 before:absolute before:left-[0] before:top-[0] before:w-full before:h-full before:bg-[#161616] before:bg-opacity-95 before:-z-10'}
             >
                 {selectedButton === 'MANAGER' &&
                     <ul>
