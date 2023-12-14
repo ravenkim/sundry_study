@@ -11,7 +11,7 @@ const AdminAuth = () => {
               title: '이름',
               dataIndex: 'name',
               width: '30%',
-
+              searchAllow : true
 
         },
         {

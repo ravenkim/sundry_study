@@ -8,7 +8,13 @@ import Highlighter from 'react-highlight-words';
 /*
 ex
 
-columns
+columns = [
+    {
+        searchAllow,
+
+
+    },
+]
 
 
 */
@@ -77,15 +83,22 @@ const SStable = ({
     }, [searchText, dataSource])
 
 
-    const [featuresColumns, setFeaturesColumns] = useState([])
 
+
+
+
+
+
+    const [colorFeaturesColumns, setColorFeaturesColumns] = useState([])
 
     useEffect(() => {
-        setFeaturesColumns(
+
+
+
+
+        setColorFeaturesColumns(
             columns.map(item => {
-
                 return {
-
                     render: text => (
                         <Highlighter
                             highlightStyle={{backgroundColor: 'yellow', padding: 0}}
@@ -96,9 +109,7 @@ const SStable = ({
 
                     ),
                     ...item
-
                 }
-
 
             })
         )
@@ -128,7 +139,7 @@ const SStable = ({
             <Table
                 className={'mt-[16px]'}
                 dataSource={filteredData}
-                columns={featuresColumns}
+                columns={colorFeaturesColumns}
             />
         </>
     );
