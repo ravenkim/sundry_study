@@ -50,11 +50,12 @@ columns = [
 
 
 const SStable = ({
-                     useSearch = false,
+                     useSearch = true,
 
                      useIndex = false,
                      columns,
                      dataSource,
+
 
 
                  }) => {
@@ -126,14 +127,14 @@ const SStable = ({
     return (
         <>
 
+            {useSearch &&
+                <SSsearchInput
 
-            <SSsearchInput
-
-                value={searchText}
-                onChange={e => setSearchText(e.target.value)}
+                    value={searchText}
+                    onChange={e => setSearchText(e.target.value)}
 
 
-            />
+                />}
 
 
             <Table
