@@ -9,19 +9,20 @@ const SSsearchInput = ({
                            value,
                            placeholder = "",
                            inputStyle,
-                           containerStyle,
+                           containerClassName = '',
                            inputOtherProps
+
                        }) => {
 
     return (
         <div
-            style={{
-                marginTop: '40px',
-                width: '800px',
-                display: "flex",
-                flexDirection: "column",
-                ...containerStyle
-            }}
+            className={`
+                mt-10  
+                flex 
+                flex-col 
+                w-full 
+                ${containerClassName}
+            `}
         >
             <h1 className={title ? 'mb-[20px]' : ''}>
                 {title}
