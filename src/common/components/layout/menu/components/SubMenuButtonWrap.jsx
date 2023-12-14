@@ -36,11 +36,12 @@ const SubMenuButtonWrap = ({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: mouseOver ? "wheat" : "white",
+                    color: mouseOver ? "white" : "#51525C",
                     boxSizing: "border-box",
                     flexDirection: "column"
 
                 }}
+                className={'text-[22px] font-[NotoSansKR-700]'}
             >
                 {text}
 
