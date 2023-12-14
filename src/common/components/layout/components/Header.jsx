@@ -40,6 +40,7 @@ const Header = ({
                     alignItems: "center",
                     justifyContent: "center"
                 }}
+                className={'cursor-pointer'}
             >
                 {!menuOpen &&
                     <MenuOutlined
