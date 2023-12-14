@@ -18,7 +18,16 @@ export default {
         desktop: '8rem',
       },
     },
-    extend: {},
+    extend: {
+		fontFamily: {
+			'NotoSansKR-100': ['"NotoSansKR-100"'],
+			'NotoSansKR-300': ['"NotoSansKR-300"'],
+			'NotoSansKR-400': ['"NotoSansKR-400"'],
+			'NotoSansKR-500': ['"NotoSansKR-500"'],
+			'NotoSansKR-700': ['"NotoSansKR-700"'],
+			'NotoSansKR-900': ['"NotoSansKR-900"'],
+		}
+	},
   },
   plugins: [],
 }
