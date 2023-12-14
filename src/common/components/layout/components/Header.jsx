@@ -1,19 +1,23 @@
 import {CloseOutlined, MenuOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import {push} from "redux-first-history";
 
 const Header = ({
-    setMenuOpen,
-    menuOpen
-}) => {
+                    setMenuOpen,
+                    menuOpen
+                }) => {
+
+    const dispatch = useDispatch()
+
 
     const {
         bgcolor1
     } = useSelector(({assetsReducer}) => ({
-        bgcolor1: assetsReducer.colors.bgcolor,
-    }),
-     shallowEqual
+            bgcolor1: assetsReducer.colors.bgcolor,
+        }),
+        shallowEqual
     );
-
 
 
     return (
@@ -41,10 +45,11 @@ const Header = ({
                     justifyContent: "center"
                 }}
                 className={'cursor-pointer'}
+                onClick={() => setMenuOpen(true)}
             >
                 {!menuOpen &&
                     <MenuOutlined
-                        onClick={() => setMenuOpen(true)}
+
                     />
                 }
 
@@ -57,13 +62,17 @@ const Header = ({
                     justifyContent: "center",
 
                 }}
+                onClick={() => dispatch(push('/'))}
             >
+
                 <img
                     style={{
                         height: 34
 
                     }}
-                    src={'/src/assets/logo/logo_main.png'} alt={'logo'}/>
+                    src={'/src/assets/logo/logo_main.png'} alt={'logo'}
+                />
+
 
             </div>
             <div
