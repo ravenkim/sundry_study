@@ -8,9 +8,9 @@ import SubMenuButtonWrap from "./components/SubMenuButtonWrap.jsx";
 
 
 const Menu = ({
-    setMenuOpen,
-    menuOpen
-}) => {
+                  setMenuOpen,
+                  menuOpen
+              }) => {
 
     const dispatch = useDispatch()
 
@@ -22,7 +22,6 @@ const Menu = ({
    contents
    manager
      */
-
 
 
     return (
@@ -37,24 +36,7 @@ const Menu = ({
             }}
             className={'w-full h-full fixed'}
         >
-            {/*닫기 버튼*/}
-            <div
-                style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    height: '63px',
-                    width: '63px',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
-                onClick={() => setMenuOpen(false)}
-                className={'cursor-pointer'}
-            >
-                {menuOpen && <CloseOutlined/>}
-            </div>
+
 
 
             {/*왼쪽 메뉴*/}
@@ -71,7 +53,7 @@ const Menu = ({
                 <ul>
 
                     <MenuButtonWrap
-                        cursor={ 'pointer'}
+                        cursor={'pointer'}
                         text={"HOME"}
                         onClick={() => dispatch(push('/'))}
                     />
@@ -79,10 +61,10 @@ const Menu = ({
                     <MenuButtonWrap
                         text={"MY PAGE"}
                         url={'/asd'}
-                        onMouseOver = {() => {
+                        onMouseOver={() => {
                             setSelectedButton('MY PAGE')
                         }}
-                        selected = {
+                        selected={
                             selectedButton === 'MY PAGE'
                         }
 
@@ -91,20 +73,20 @@ const Menu = ({
                     <MenuButtonWrap
                         text={"CONTENTS"}
                         url={'/asd'}
-                         onMouseOver = {() => {
+                        onMouseOver={() => {
                             setSelectedButton('CONTENTS')
                         }}
-                        selected = {
+                        selected={
                             selectedButton === 'CONTENTS'
                         }
                     />
                     <MenuButtonWrap
                         text={"MANAGER"}
                         url={'/asd'}
-                        onMouseOver = {() => {
+                        onMouseOver={() => {
                             setSelectedButton('MANAGER')
                         }}
-                        selected = {
+                        selected={
                             selectedButton === 'MANAGER'
                         }
                     />
@@ -130,30 +112,52 @@ const Menu = ({
                         <SubMenuButtonWrap
                             text={"회원 관리"}
                             tab={'member'}
-                            setMenuOpen = {setMenuOpen}
+                            setMenuOpen={setMenuOpen}
                         />
                         <SubMenuButtonWrap
                             text={"보드 관리"}
                             tab={'board'}
-                            setMenuOpen = {setMenuOpen}
+                            setMenuOpen={setMenuOpen}
                         />
                         <SubMenuButtonWrap
                             text={"연체자 관리"}
                             tab={'delinquent'}
-                            setMenuOpen = {setMenuOpen}
+                            setMenuOpen={setMenuOpen}
                         />
                         <SubMenuButtonWrap
                             text={"권한 관리"}
                             tab={'auth'}
-                            setMenuOpen = {setMenuOpen}
+                            setMenuOpen={setMenuOpen}
                         />
                     </ul>
                 }
 
 
-
             </div>
 
+            {/*닫기 버튼*/}
+            <div
+                style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    height: '63px',
+                    width: '63px',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}
+
+
+                onClick={
+                  () => setMenuOpen(false)
+
+                }
+                className={'cursor-pointer z-99'}
+            >
+                {menuOpen && <CloseOutlined/>}
+            </div>
 
 
         </div>
