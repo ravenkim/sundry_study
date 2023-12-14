@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 
 const AdminBoard = () => {
 
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <div>

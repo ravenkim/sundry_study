@@ -7,6 +7,7 @@ import AdminMember from "./components/member/AdminMember.jsx";
 import AdminBoard from "./components/board/AdminBoard.jsx";
 import AdminDelinquent from "./components/delinquent/AdminDelinquent.jsx";
 import AdminAuth from "./components/auth/AdminAuth.jsx";
+import SStable from "../../common/components/table/SStable.jsx";
 
 const Admin = () => {
 
@@ -22,6 +23,9 @@ const Admin = () => {
     )
 
 
+
+
+
     return (
         <SSwrapper
 
@@ -33,6 +37,9 @@ const Admin = () => {
             </div>
 
             <Divider/>
+
+
+
 
             <Tabs
                 type="card"
