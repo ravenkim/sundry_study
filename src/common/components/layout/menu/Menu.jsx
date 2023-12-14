@@ -28,9 +28,6 @@ const Menu = ({
     return (
         <div
             style={{
-                width: '100vw',
-                height: '100vh',
-                position: 'absolute',
                 left: 0,
                 top: 0,
                 backgroundColor: "black",
@@ -38,6 +35,7 @@ const Menu = ({
                 flexDirection: 'row',
                 opacity: '0.9'
             }}
+            className={'w-full h-full fixed'}
         >
             {/*닫기 버튼*/}
             <div
@@ -53,7 +51,7 @@ const Menu = ({
                     justifyContent: "center"
                 }}
                 onClick={() => setMenuOpen(false)}
-
+                className={'cursor-pointer'}
             >
                 {menuOpen && <CloseOutlined/>}
             </div>
