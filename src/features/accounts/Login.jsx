@@ -62,10 +62,17 @@ const Login = () => {
                 }}
             >
                 <SSwrapper
-                    className={
-                        `w-full mx-[20px] px-[40px] py-[30px]
-                        tablet:max-w-[900px] tablet:px-[50px] tablet:py-[40px]
-                 desktop:px-[60px] desktop:py-[50px] desktop:max-w-[900px] 
+                    className={`
+                        w-full
+                        mx-[20px] 
+                        px-[40px] 
+                        py-[30px]
+                        tablet:max-w-[900px] 
+                        tablet:px-[50px]
+                        tablet:py-[40px]
+                        desktop:px-[60px] 
+                        desktop:py-[50px]
+                        desktop:max-w-[900px] 
                 `
                     }
                 >
@@ -120,13 +127,14 @@ const Login = () => {
                     {/*    </ul>*/}
                     {/*</div>*/}
 
-                               <button
-                onClick={() => dispatch(userAction.login())}
+                    <button
+                        onClick={() => dispatch(userAction.login())}
 
-                // 2 = action.payload
-                // addnumber =  action.type
+                        // 2 = action.payload
+                        // addnumber =  action.type
 
-            >zzzzzzzzzzz</button>
+                    >zzzzzzzzzzz
+                    </button>
                 </SSwrapper>
             </div>
         </div>

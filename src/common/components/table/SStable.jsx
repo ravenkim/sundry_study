@@ -138,6 +138,7 @@ const SStable = ({
 
 
             <Table
+                size={"small"}
                 className={'mt-[16px]'}
                 dataSource={filteredData}
                 columns={colorFeaturesColumns}
