@@ -3,6 +3,10 @@ import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
 import {Divider, Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {adminAction} from "./adminReducer.jsx";
+import AdminMember from "./components/member/AdminMember.jsx";
+import AdminBoard from "./components/board/AdminBoard.jsx";
+import AdminDelinquent from "./components/delinquent/AdminDelinquent.jsx";
+import AdminAuth from "./components/auth/AdminAuth.jsx";
 
 const Admin = () => {
 
@@ -39,23 +43,23 @@ const Admin = () => {
                     {
                         label: `회원 관리`,
                         key: `member`,
-                        children: `member`,
+                        children: <AdminMember/>,
                     },
                     {
                         label: `보드 관리`,
                         key: `board`,
-                        children: `board`,
+                        children: <AdminBoard/>,
                     },
                     {
                         label: `연체자 관리`,
                         key: `delinquent`,
-                        children: `delinquent`,
+                        children: <AdminDelinquent/>,
 
                     },
                     {
                         label: `권한 관리`,
                         key: `auth`,
-                        children: `auth`,
+                        children: <AdminAuth/>,
 
                     }
                 ]}
