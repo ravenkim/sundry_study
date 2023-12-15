@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import SSsearchInput from "/src/common/components/input/SSsearchInput.jsx";
-import {Input} from "antd";
 import SSsectionWrap from "/src/common/components/wrapper/SSsectionWrap.jsx";
 import SScardWrap from "/src/common/components/Card/SScardWrap.jsx";
 import SScard from "/src/common/components/Card/SScard.jsx";
 import {useDispatch} from "react-redux";
 import DoorCard from '/src/data/DoorCard.jsx'
+import {push} from "redux-first-history";
 
 const Door = () => {
     const dispatch = useDispatch()
