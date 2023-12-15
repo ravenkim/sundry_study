@@ -42,6 +42,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.16.16"],\
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
+          ["jwt-decode", "npm:4.0.0"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
           ["react-cookie", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.1.1"],\
@@ -3935,6 +3936,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["jwt-decode", [\
+      ["npm:4.0.0", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/jwt-decode-npm-4.0.0-4cd8e89909-10c0.zip/node_modules/jwt-decode/",\
+        "packageDependencies": [\
+          ["jwt-decode", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["keyv", [\
       ["npm:4.5.4", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/keyv-npm-4.5.4-4c8e2cf7f7-10c0.zip/node_modules/keyv/",\
@@ -6263,6 +6273,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.16.16"],\
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
+          ["jwt-decode", "npm:4.0.0"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
           ["react-cookie", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.1.1"],\
