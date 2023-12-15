@@ -13,11 +13,6 @@ const Background = ( { children, className }) => {
     );
 
 
-    useEffect(() => {
-            console.log(bgColor)
-
-    }, [bgColor]);
-
 
 
     return (

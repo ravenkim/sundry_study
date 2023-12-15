@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import MainLogoSvg from "../../common/components/Svg/MainLogoSvg.jsx";
 import axios from "axios";
 import {userAction} from "./userReducer.jsx";
+import {getCookie, setCookie} from "../../app/cookie.jsx";
 
 
 const Login = () => {
@@ -20,6 +21,8 @@ const Login = () => {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailPattern.test(String(email).toLowerCase());
     }; // 이메일 형식 유효성 검사
+
+
 
     const loginHandler = async () => {
         console.log('실행중')
