@@ -25,7 +25,7 @@ const Background = ( { children, className }) => {
             style={{
                 backgroundColor: bgColor,
                 width: '100%', //
-                height:'100%',
+                height:'100vh',
                 position:'relative'
             }}
             className={className}
