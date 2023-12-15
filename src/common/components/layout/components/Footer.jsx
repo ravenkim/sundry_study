@@ -8,7 +8,7 @@ const Footer = () => {
             }}
             className={'h-[60px] flex justify-center items-center'}
         >
-            <p className={'text-white text-[16px] font-normal'}>ⓒ COPYRIGHT by EUCLIDSOFT. All rights reserved.</p>
+            <p className={'text-white text-[12px] font-normal'}>ⓒ COPYRIGHT by EUCLIDSOFT. All rights reserved.</p>
         </footer>
     );
 };
