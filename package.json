@@ -28,7 +28,8 @@
     "react-router-dom": "^6.20.0",
     "redux": "^4.2.1",
     "redux-first-history": "^5.1.1",
-    "redux-saga": "^1.2.3"
+    "redux-saga": "^1.2.3",
+    "suneditor-react": "^3.6.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
