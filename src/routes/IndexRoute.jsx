@@ -5,6 +5,7 @@ import DoorPage from "../pages/door/DoorPage.jsx";
 import IndexPage from "../pages/index/IndexPage.jsx";
 import ErrorPage from "../pages/error/ErrorPage.jsx";
 import AdminPage from "../pages/admin/AdminPage.jsx";
+import ContentPage from "../pages/cms/ContentPage.jsx";
 
 
 const IndexRoute = () => {
@@ -50,6 +51,17 @@ const IndexRoute = () => {
                     </PrivateRoute>
                 }
             />
+
+
+            <Route
+                path="/contents/:board/:content"
+                element={
+                    <PrivateRoute>
+                        <ContentPage/>
+                    </PrivateRoute>
+                }
+            />
+
 
 
 
