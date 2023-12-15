@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
 import {Divider, Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
@@ -21,6 +21,13 @@ const Admin = () => {
         }),
         shallowEqual
     )
+
+
+    useEffect(() => {
+        if(!activeTab)
+            dispatch(adminAction.setTab("member"))
+
+    }, []);
 
 
 
