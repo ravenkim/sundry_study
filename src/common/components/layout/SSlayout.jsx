@@ -5,7 +5,8 @@ import Footer from "./components/Footer.jsx";
 import Menu from "./menu/Menu.jsx";
 
 const SSlayout = ({
-    children
+    children,
+    style
                   }) => {
 
     const [menuOpen, setMenuOpen] = useState(false)
@@ -23,7 +24,8 @@ const SSlayout = ({
                     backgroundColor: 'white',
                     display: "flex",
                     flexDirection: 'column',
-                    alignItems: "center"
+                    alignItems: "center",
+                    ...style
                 }}
             >
                 {children}

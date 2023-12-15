@@ -28,9 +28,11 @@ const Background = ( { children, className }) => {
                 height:'100vh',
                 position:'relative'
             }}
+
             className={className}
         >
             {children}
+
 
         </div>
     );
