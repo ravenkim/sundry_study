@@ -7,9 +7,7 @@ const AdminBoard = () => {
     const dispatch = useDispatch();
 
     return (
-        <div>
             <SSeditor/>
-        </div>
     );
 };
 
