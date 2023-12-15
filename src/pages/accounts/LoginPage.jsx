@@ -13,7 +13,7 @@ const LoginPage = () => {
 
     return (
 
-        <Background>
+        <Background className={'overflow-hidden'}>
             <img src={El_3} alt="#" className='absolute
             -bottom-[20%] -right-[50%]
             tablet:-bottom-[30%] tablet:-right-[20%]
