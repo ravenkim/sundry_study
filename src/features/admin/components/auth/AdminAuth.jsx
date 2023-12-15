@@ -61,6 +61,7 @@ const AdminAuth = () => {
     return (
         <div>
             <SStable
+                useIndex={true}
                 dataSource = {dataSource}
                 columns = {columns}
             />

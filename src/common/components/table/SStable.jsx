@@ -56,32 +56,46 @@ const SStable = ({
                      columns,
                      dataSource,
 
-
-
                  }) => {
 
+   /*
+       데이터 처리기능
+   */
 
-    const [searchText, setSearchText] = useState('')
-    const [filteredData, setFilteredData] = useState([])
 
+
+    //1. 빠른 정렬을 위해 key추가
+    const [keyAddDataSource, setKeyAddDataSource] = useState()
 
     useEffect(() => {
         if (dataSource) {
+            setKeyAddDataSource(dataSource.map((d, index) => ({...d, key: index + 1})))
+        }
+    }, [dataSource]);
+
+
+    //검색기능 추가
+    const [searchText, setSearchText] = useState('') //입력값
+    const [filteredData, setFilteredData] = useState([]) //검색되고 남은 값들
+
+
+    useEffect(() => {
+        if (keyAddDataSource) {
             if (searchText.trim() === '') {
-                setFilteredData(dataSource)
+                setFilteredData(keyAddDataSource)
             } else {
-                const filtered = dataSource.filter(item => {
+                const filtered = keyAddDataSource.filter(item => {
 
 
                     const itemValues = hangul.disassemble(Object.values(item).join(' ').toLowerCase()).join('');
                     const searchTextProcessed = hangul.disassemble(searchText.toLowerCase()).join('');
                     return itemValues.includes(searchTextProcessed);
-                });
+                })
                 setFilteredData(filtered)
             }
         }
 
-    }, [searchText, dataSource])
+    }, [searchText, keyAddDataSource])
 
 
 
@@ -89,16 +103,47 @@ const SStable = ({
 
 
 
+    /*
+    colums 관리
+    */
 
+
+     const [indexColumns, setIndexColumns] = useState([])
+
+
+    //1. index 추가 기능
+    useEffect(() => {
+        if (columns) {
+            if (useIndex) {
+                const olumnsWithNo = [
+                    {
+                        title: 'No',
+                        dataIndex: 'key',
+                    },
+                ]
+                setIndexColumns([
+                    ...olumnsWithNo,
+                    ...columns
+                ])
+            } else {
+                setIndexColumns(columns)
+            }
+        }
+
+    }, [columns]);
+
+
+
+
+    //2. 검색시 하이라이트 기능
     const [colorFeaturesColumns, setColorFeaturesColumns] = useState([])
+
 
     useEffect(() => {
 
 
-
-
         setColorFeaturesColumns(
-            columns.map(item => {
+            indexColumns.map(item => {
                 return {
                     render: text => (
                         <Highlighter
@@ -115,13 +160,7 @@ const SStable = ({
             })
         )
 
-    }, [columns, filteredData]);
-
-
-    useEffect(() => {
-        console.log(filteredData)
-
-    }, [filteredData]);
+    }, [indexColumns, filteredData]);
 
 
     return (
