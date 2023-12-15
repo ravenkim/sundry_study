@@ -17,7 +17,14 @@ const MenuButtonWrap = ({
            style = {  {
                 /*backgroundColor: selected && "rgba(0, 0, 0, 0.95)"*/
             }}
-            className={'border-b-[1px] border-[#51525c] border-solid hover:border-[#ffffff] text-[#51525c] hover:text-[#ffffff]'}
+            className={
+
+                selected ? 'border-[#ffffff] text-[#ffffff] border-b-[1px] border-solid':
+
+
+                'border-b-[1px] border-[#51525c] border-solid  text-[#51525c] '
+
+             }
         >
             <div
                 style={{
