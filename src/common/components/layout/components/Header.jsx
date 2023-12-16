@@ -35,7 +35,7 @@ const Header = ({
                 userSelect: 'none',
             }}
         >
-
+            {/*메뉴 버튼*/}
             <div
                 style={{
                     width: '63px',
@@ -54,6 +54,7 @@ const Header = ({
                 }
 
             </div>
+            {/*로고 이미지*/}
             <div
 
                 style={{
@@ -75,6 +76,7 @@ const Header = ({
 
 
             </div>
+            {/*프로필 영역*/}
             <div
                 style={{
                     width: '63px',
