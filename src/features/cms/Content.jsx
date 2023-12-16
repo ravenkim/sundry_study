@@ -16,6 +16,9 @@ const Content = () => {
     )
 
 
+    const [editMode, setEditMode] = useState(false)
+
+
     const [boardId, setBoardId] = useState(null)
     const [contentId, setContentId] = useState(null)
 
@@ -92,18 +95,33 @@ const Content = () => {
 
                 </div>
 
-                 <div
+                <div
                     style={{
-                        width: '38%',
-                        height: '500px',
-                        backgroundColor: "salmon"
-                    }}
+                            width: '38%',
+                            height: '500px',
+                            display: "flex",
+                            flexDirection: 'column'
+                        }}
+                >
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '350px',
+                            backgroundColor: "salmon"
+                        }}
 
-                 >
-                     대여 머시기 들어가는 공간
+                    >
+                        대여 머시기 들어가는 공간
 
 
-                 </div>
+                    </div>
+                    
+                    <div>
+                        수정, 삭제 버튼 들어갈 공간
+                    </div>
+                    
+                    
+                </div>
 
 
             </div>
