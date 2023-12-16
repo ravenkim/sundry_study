@@ -14,7 +14,7 @@ const Door = () => {
 
     return (
         <>
-            <SSsectionWrap className={'tablet:py-[0] py-[0]'}>
+            <SSsectionWrap className={'tablet:py-[0] py-[0] desktop:py-[0]'}>
                 <SSsearchInput
                     value={serchAllText}
                     onChange={(e) => setSerchAllText(e.target.value)}
