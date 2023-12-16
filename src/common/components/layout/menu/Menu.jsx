@@ -141,7 +141,7 @@ const Menu = ({
                 className={'w-full h-full z-99 flex tablet:hidden relative before:w-full before:h-full before:absolute before:top-0 before:left-0 before:bg-[#161616] before:bg-opacity-95 before:-z-10 justify-center items-center'}>
                 <div className={'box-border w-full h-full px-[20px] m-0 mx-auto flex justify-center items-center'}>
                     <ul className={'w-full h-auto flex flex-col justify-center items-center'}>
-                        <MobileButton text={'HOME'} onClick={() => console.log('asdasdasd')}/>
+                        <MobileButton text={'HOME'} onClick={() => dispatch(push('/'))}/>
                         <MobileButton text={'MY PAGE'}
                                       selectedButton={selectedButton}
                                       onClick={() => {
