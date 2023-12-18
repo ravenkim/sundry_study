@@ -35,7 +35,7 @@ const Login = () => {
 
 
         dispatch(userAction.login({
-            username: userID,
+            userEmail: userID,
             password: userPassword,
         }))
 
@@ -44,22 +44,6 @@ const Login = () => {
 
 
 
-        // try {
-        //     const response = await axios.post('url', {
-        //         userID,
-        //         userPassword,
-        //     });
-        //     const token = response.data.token; // 서버로부터 받은 JWT 토큰
-        //
-        //     // 받은 토큰을 로컬 스토리지에 저장
-        //     localStorage.setItem('token', token);
-        //
-        //     // 로그인 성공 후 작업 실행
-        //
-        // } catch (error) {
-        //     // 로그인 실패 처리
-        //     console.error('로그인 실패:', error);
-        // }
     };
 
     return (
@@ -142,17 +126,7 @@ const Login = () => {
                     {/*    </ul>*/}
                     {/*</div>*/}
 
-                    <button
-                        onClick={() => dispatch(userAction.login({
-            userEmail: userID,
-            password: userPassword,
-        }))}
 
-                        // 2 = action.payload
-                        // addnumber =  action.type
-
-                    >zzzzzzzzzzz
-                    </button>
                 </SSwrapper>
             </div>
         </div>
