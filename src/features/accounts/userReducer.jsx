@@ -8,17 +8,7 @@ import client from "../../api/client.jsx";
 
 
 const initialState = {
-    user: {
-        isActive: false
-        // id: token.id,
-        // isActive: token.isActive,
-        // isAdmin: token.isAdmin,
-        // username: token.username,
-        // name: token.name,
-        // email: token.email,
-        // groups: data.groups,
-    },
-
+    user: null
 }
 
 
