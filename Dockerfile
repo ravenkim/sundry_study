@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20.10.0
 
 WORKDIR rms_front
 
