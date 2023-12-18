@@ -25,29 +25,41 @@ const Login = () => {
 
 
     const loginHandler = async () => {
-        console.log('실행중')
 
         if (!validateEmail(userID)) {
             alert("올바른 이메일 형식이 아닙니다.")
             return;
         } // 이메일 형식이 아닐 경우
 
-        try {
-            const response = await axios.post('url', {
-                userID,
-                userPassword,
-            });
-            const token = response.data.token; // 서버로부터 받은 JWT 토큰
 
-            // 받은 토큰을 로컬 스토리지에 저장
-            localStorage.setItem('token', token);
 
-            // 로그인 성공 후 작업 실행
 
-        } catch (error) {
-            // 로그인 실패 처리
-            console.error('로그인 실패:', error);
-        }
+        dispatch(userAction.login({
+            username: userID,
+            password: userPassword,
+        }))
+
+        //todo 실패 매시지 띠우기
+
+
+
+
+        // try {
+        //     const response = await axios.post('url', {
+        //         userID,
+        //         userPassword,
+        //     });
+        //     const token = response.data.token; // 서버로부터 받은 JWT 토큰
+        //
+        //     // 받은 토큰을 로컬 스토리지에 저장
+        //     localStorage.setItem('token', token);
+        //
+        //     // 로그인 성공 후 작업 실행
+        //
+        // } catch (error) {
+        //     // 로그인 실패 처리
+        //     console.error('로그인 실패:', error);
+        // }
     };
 
     return (
@@ -131,7 +143,10 @@ const Login = () => {
                     {/*</div>*/}
 
                     <button
-                        onClick={() => dispatch(userAction.login())}
+                        onClick={() => dispatch(userAction.login({
+            userEmail: userID,
+            password: userPassword,
+        }))}
 
                         // 2 = action.payload
                         // addnumber =  action.type

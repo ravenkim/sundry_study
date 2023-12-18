@@ -15,7 +15,8 @@ const asyncRequest = {
     //     {aaaa: reducerUtils.init()},
     //     () => axios.get('https://jsonplaceholder.typicode.com/posts')
     // ],
-    
+
+
 }
 
 
