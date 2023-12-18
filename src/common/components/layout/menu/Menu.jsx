@@ -39,7 +39,7 @@ const Menu = ({
         >
 
             {/*tablet~pc*/}
-            <div className={'hidden tablet:block w-full h-full'}>
+            <div className={'hidden w-full h-full relative tablet:flex flex-row'}>
                 {/*왼쪽 메뉴*/}
                 <div
                     style={{
@@ -57,6 +57,12 @@ const Menu = ({
                             cursor={'pointer'}
                             text={"HOME"}
                             onClick={() => dispatch(push('/'))}
+                            onMouseOver={() => {
+                                setSelectedButton('HOME')
+                            }}
+                            selected={
+                                selectedButton === 'HOME'
+                            }
                         />
 
                         <MenuButtonWrap
