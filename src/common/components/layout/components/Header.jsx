@@ -108,7 +108,7 @@ const Header = ({
                             </div>
                         </div>
                         <div className={'p-[20px] pt-[50px] flex flex-col justify-center items-center gap-[8px]' }>
-                            <div className={'flex justify-center items-center flex-col'}>
+                            <div className={'flex justify-center items-center flex-col mb-[20px]'}>
                                 <h5>박찬민</h5>
                                 <h5>cksals123@gmail.com</h5>
                             </div>
