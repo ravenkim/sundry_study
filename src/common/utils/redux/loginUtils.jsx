@@ -1,38 +1,35 @@
 import store from "/src/app/store.jsx";
-import { jwtDecode } from "jwt-decode";
-import {userAction} from "../../../features/accounts/userReducer.jsx";
-import {getCookie} from "../../../app/cookie.jsx";
-
+import {jwtDecode} from "jwt-decode";
+import {userAction} from "src/features/accounts/userReducer.jsx";
+import {getCookie} from "src/app/cookie.jsx";
 
 
 const jwtDecodeHandler = (data) => {
-  let result = null;
-  if (data) {
-    const token = jwtDecode(data.access);
-    result = {
-      ...data,
-      id: token.id,
-      isActive: token.isActive,
-      isAdmin: token.isAdmin,
-      username: token.username,
-      name: token.name,
-      email: token.email,
-      groups: data.groups,
-    };
-  }
-
-  return result;
+    return jwtDecode(data);
 };
 
 
 export const setUserHandler = () => {
-  try {
-    const userToken = getCookie('tk')  // 쿠키에서 가져오지
-    if (!userToken) return;
+    try {
+        const userToken = getCookie('tk')  // 쿠키에서 가져오지
+        if (!userToken) {store.dispatch(userAction.initialize('user'))
+            return ;
+        }
+        store.dispatch(userAction.setUser(jwtDecodeHandler(userToken)))
+    } catch (e) {
+        console.error("User Setting Exception : ", e);
+    }
+};
 
-    store.dispatch(userAction.setUser(jwtDecodeHandler(userToken)));
 
-  } catch (e) {
-    console.error("User Setting Exception : ", e);
-  }
+export const logoutHandler = () => {
+    try {
+        let user = getCookie('tk')
+        if (user) {
+            // 쿠키삭제
+            //  리프레시 토큰 삭제
+        }
+    } catch (e) {
+        console.error("Logout Exception : ", e);
+    }
 };

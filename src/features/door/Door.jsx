@@ -6,6 +6,7 @@ import SScard from "/src/common/components/Card/SScard.jsx";
 import {useDispatch} from "react-redux";
 import DoorCard from '/src/data/DoorCard.jsx'
 import {push} from "redux-first-history";
+import {adminAction} from "../admin/adminReducer.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -48,6 +49,14 @@ const Door = () => {
                         </SScard>
                     ))}
                 </SScardWrap>
+
+
+
+
+                <button
+                    onClick={() => dispatch(adminAction.test())}
+                >asdads</button>
+
             </SSsectionWrap>
         </>
     );
