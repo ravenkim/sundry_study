@@ -71,7 +71,7 @@ const Header = ({
                     justifyContent: "center",
 
                 }}
-                onClick={() => dispatch(push('/'))}
+                onClick={() => dispatch(push('/door'))}
             >
 
                 <img

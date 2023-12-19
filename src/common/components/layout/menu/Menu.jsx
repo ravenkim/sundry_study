@@ -35,7 +35,8 @@ const Menu = ({
                 flexDirection: 'row',
                 opacity: '0.9'
             }}
-            className={'w-full h-full fixed'}
+            className={'w-full h-full fixed z-50'}
+
         >
 
             {/*tablet~pc*/}
@@ -56,7 +57,7 @@ const Menu = ({
                         <MenuButtonWrap
                             cursor={'pointer'}
                             text={"HOME"}
-                            onClick={() => dispatch(push('/'))}
+                            onClick={() => dispatch(push('/door'))}
                             onMouseOver={() => {
                                 setSelectedButton('HOME')
                             }}
