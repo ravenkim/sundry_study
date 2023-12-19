@@ -1,10 +1,9 @@
 import {takeLatest} from "redux-saga/effects";
 import {call, put} from 'redux-saga/effects';
 import {createSlice} from '@reduxjs/toolkit';
-import axios from 'axios';
 import {setCookie} from "../../app/cookie.jsx";
-import {reducerUtils} from "../../common/utils/redux/asyncUtils.jsx";
 import client from "../../api/client.jsx";
+import {jwtDecode} from "jwt-decode";
 
 
 const initialState = {
@@ -62,6 +61,7 @@ export const userSlice = createSlice({
         login: (state, action) => {
         },
         loginSuccess: (state, action) => {
+            state.user = jwtDecode(action.payload)
         },
         setUser: (state, action) => {
             state.user = action.payload

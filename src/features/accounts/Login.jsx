@@ -3,15 +3,33 @@ import {Input} from "antd";
 import SSbutton from "../../common/components/button/SSbutton.jsx";
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import MainLogoSvg from "../../common/components/Svg/MainLogoSvg.jsx";
 import axios from "axios";
 import {userAction} from "./userReducer.jsx";
 import {getCookie, setCookie} from "../../app/cookie.jsx";
+import {push} from "redux-first-history";
 
 
 const Login = () => {
     const dispatch = useDispatch()
+
+
+      const {
+        user
+    } = useSelector(({userReducer}) => ({
+        user: userReducer.user
+    }),
+        shallowEqual
+        )
+
+
+    useEffect(() => {
+        if(user){
+            dispatch(push('/door'))
+        }
+    }, [user]);
+
 
     const [userID, setUserID] = useState("")
     const [userPassword, setUserPassword] = useState("")
@@ -23,7 +41,6 @@ const Login = () => {
     }; // 이메일 형식 유효성 검사
 
 
-
     const loginHandler = async () => {
 
         if (!validateEmail(userID)) {
@@ -33,15 +50,12 @@ const Login = () => {
 
 
 
-
         dispatch(userAction.login({
             userEmail: userID,
             password: userPassword,
         }))
 
         //todo 실패 매시지 띠우기
-
-
 
 
     };
