@@ -17,10 +17,9 @@ const PrivateRoute = ({
     )
 
     
-    const t = true
-    //이거 지우고 밑에 t user로 바꾸기
 
-    return t ? children : <Navigate to="/login"/>;
+
+    return user ? children : <Navigate to="/login"/>;
 }
 
 export default PrivateRoute;
