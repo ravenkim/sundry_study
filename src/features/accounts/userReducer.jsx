@@ -18,16 +18,13 @@ export const loginT = (payload) =>
 function* login(action) {
     try {
 
-
         const response = yield call(
             () =>  client.post("login", action.payload)
         )
 
-
         const tk = response.data?.accessToken
 
         setCookie('tk', tk)
-
 
 
         yield put({
