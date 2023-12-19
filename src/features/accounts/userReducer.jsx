@@ -1,7 +1,7 @@
 import {takeLatest} from "redux-saga/effects";
 import {call, put} from 'redux-saga/effects';
 import {createSlice} from '@reduxjs/toolkit';
-import {setCookie} from "../../app/cookie.jsx";
+import {removeCookie, setCookie} from "../../app/cookie.jsx";
 import client from "../../api/client.jsx";
 import {jwtDecode} from "jwt-decode";
 
@@ -65,6 +65,10 @@ export const userSlice = createSlice({
         },
         setUser: (state, action) => {
             state.user = action.payload
+        },
+        logout: (state, action) => {
+            state.user = null
+            removeCookie('tk')
         },
 
     }
