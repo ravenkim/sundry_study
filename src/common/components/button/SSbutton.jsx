@@ -4,6 +4,8 @@ import {Button} from "antd";
 const SSbutton = ({
     children,
     style,
+    onClick,
+    className,
     ...otherProps
 }) => {
 
@@ -15,7 +17,8 @@ const SSbutton = ({
                 ...style,
             }}
             {...otherProps}
-
+            onClick={onClick}
+            className={className}
         >
             {children}
         </Button>

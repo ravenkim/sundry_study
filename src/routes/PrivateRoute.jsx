@@ -1,14 +1,25 @@
 import {Navigate} from 'react-router-dom';
+import {useDispatch, useSelector, shallowEqual} from 'react-redux'
+import {push} from "redux-first-history";
 
 const PrivateRoute = ({
-	children
-}) => {
-
-	const isAuthenticated = true
-    //로그인 검증 하기
+                          children
+                      }) => {
+    const dispatch = useDispatch()
 
 
-	return isAuthenticated ? children : <Navigate to="/login"/>;
+    const {
+        user
+    } = useSelector(({userReducer}) => ({
+            user: userReducer.user
+        }),
+        shallowEqual
+    )
+
+    
+
+
+    return user ? children : <Navigate to="/login"/>;
 }
 
 export default PrivateRoute;

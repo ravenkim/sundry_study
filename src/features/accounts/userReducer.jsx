@@ -1,41 +1,36 @@
 import {takeLatest} from "redux-saga/effects";
 import {call, put} from 'redux-saga/effects';
 import {createSlice} from '@reduxjs/toolkit';
-import axios from 'axios';
-import {setCookie} from "../../app/cookie.jsx";
-import {reducerUtils} from "../../common/utils/redux/asyncUtils.jsx";
-
+import {removeCookie, setCookie} from "../../app/cookie.jsx";
+import client from "../../api/client.jsx";
+import {jwtDecode} from "jwt-decode";
 
 
 const initialState = {
-        user: {
-            isActive:false
-            // id: token.id,
-            // isActive: token.isActive,
-            // isAdmin: token.isAdmin,
-            // username: token.username,
-            // name: token.name,
-            // email: token.email,
-            // groups: data.groups,
-        },
-
-    }
+    user: null
+}
 
 
-function* login() {
+export const loginT = (payload) =>
+  client.post("login", payload);
+
+
+
+//로그인 비동기 처리 > 처리가 많아지면 따로 파일 뺼것
+function* login(action) {
     try {
         const response = yield call(
-            //로그인 요청
-            () => axios.get('https://jsonplaceholder.typicode.com/posts')
-        );
+            () =>  client.post("login", action.payload)
+        )
 
-        const tk = response.data[0]
+        const tk = response.data?.accessToken
 
         setCookie('tk', tk)
 
+
         yield put({
             type: 'user/loginSuccess',
-            payload: response
+            payload: tk
         });
     } catch (e) {
         yield put({
@@ -61,12 +56,18 @@ export const userSlice = createSlice({
         initialize: (state, action) => {
             //todo 하나만 초기화
         },
-        login: (state, action) => {
-        },
+        login: (state, action) => {},
         loginSuccess: (state, action) => {
+            state.user = jwtDecode(action.payload)
         },
+        //로그인 완료시 사용자 등록 (클라이언트가 인식하게끔)
         setUser: (state, action) => {
-                state.user = action.payload
+            state.user = action.payload
+        },
+        logout: (state, action) => {
+            // 만약 토큰 추가된다면 비동기 요청을 진행한주 석세스시 값 지우고 비우기
+            state.user = null
+            removeCookie('tk')
         },
 
     }

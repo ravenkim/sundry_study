@@ -3,15 +3,33 @@ import {Input} from "antd";
 import SSbutton from "../../common/components/button/SSbutton.jsx";
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import MainLogoSvg from "../../common/components/Svg/MainLogoSvg.jsx";
 import axios from "axios";
 import {userAction} from "./userReducer.jsx";
 import {getCookie, setCookie} from "../../app/cookie.jsx";
+import {push} from "redux-first-history";
 
 
 const Login = () => {
     const dispatch = useDispatch()
+
+
+      const {
+        user
+    } = useSelector(({userReducer}) => ({
+        user: userReducer.user
+    }),
+        shallowEqual
+        )
+
+
+    useEffect(() => {
+        if(user){
+            dispatch(push('/door'))
+        }
+    }, [user]);
+
 
     const [userID, setUserID] = useState("")
     const [userPassword, setUserPassword] = useState("")
@@ -23,31 +41,23 @@ const Login = () => {
     }; // 이메일 형식 유효성 검사
 
 
-
     const loginHandler = async () => {
-        console.log('실행중')
 
         if (!validateEmail(userID)) {
             alert("올바른 이메일 형식이 아닙니다.")
             return;
         } // 이메일 형식이 아닐 경우
 
-        try {
-            const response = await axios.post('url', {
-                userID,
-                userPassword,
-            });
-            const token = response.data.token; // 서버로부터 받은 JWT 토큰
 
-            // 받은 토큰을 로컬 스토리지에 저장
-            localStorage.setItem('token', token);
 
-            // 로그인 성공 후 작업 실행
+        dispatch(userAction.login({
+            userEmail: userID,
+            password: userPassword,
+        }))
 
-        } catch (error) {
-            // 로그인 실패 처리
-            console.error('로그인 실패:', error);
-        }
+        //todo 실패 매시지 띠우기
+
+
     };
 
     return (
@@ -130,14 +140,7 @@ const Login = () => {
                     {/*    </ul>*/}
                     {/*</div>*/}
 
-                    <button
-                        onClick={() => dispatch(userAction.login())}
 
-                        // 2 = action.payload
-                        // addnumber =  action.type
-
-                    >zzzzzzzzzzz
-                    </button>
                 </SSwrapper>
             </div>
         </div>

@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20.10.0
 
 WORKDIR rms_front
 
@@ -10,6 +10,6 @@ COPY . .
 
 RUN yarn build
 
-EXPOSE 3000
+EXPOSE 5173
 
 CMD ["yarn", "dev"]

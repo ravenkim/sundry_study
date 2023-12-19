@@ -12,15 +12,17 @@ const IndexPage = () => {
     const {
         user
     } = useSelector(({userReducer}) => ({
-        user: userReducer.user?.data
+        user: userReducer.user
     }),
         shallowEqual
         )
 
     useEffect(() => {
         //로근인 했으면 통과 true 에 user 로 변경 권환 확인
-        if(true){
+        if(user){
          dispatch(push('/door'))
+        } else {
+            dispatch(push('/login'))
         }
     }, []);
 
