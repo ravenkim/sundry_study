@@ -26,6 +26,7 @@ export const logoutHandler = () => {
     try {
         let user = getCookie('tk')
         if (user) {
+            // 쿠키삭제
             //  리프레시 토큰 삭제
         }
     } catch (e) {
