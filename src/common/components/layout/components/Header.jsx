@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {push} from "redux-first-history";
 import React, {useEffect, useState} from "react";
 import SSbutton from "../../button/SSbutton.jsx";
+import {userAction} from "../../../../features/accounts/userReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
@@ -142,7 +143,7 @@ const Header = ({
                             </SSbutton>*/}
 
                             <SSbutton danger className={'w-full'} onClick={()=>{
-                                console.log('로그아웃 후 메인 화면으로 이동')
+                               dispatch(userAction.logout())
                             }}>로그아웃</SSbutton>
                         </div>
                     </div>
