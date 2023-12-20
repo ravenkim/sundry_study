@@ -22,7 +22,7 @@ client.interceptors.request.use(
             } else {
                 config.headers["AccessToken"] = userToken
             }
-            
+
         }
         return config;
     },
