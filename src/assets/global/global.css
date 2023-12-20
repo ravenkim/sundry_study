@@ -37,3 +37,27 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary:hover {
     background-color: #263BF2 !important;
 }
+
+.slick-slide img {
+    object-fit: cover;
+    width:100%;
+    box-sizing: border-box;
+}
+
+.slick-prev {
+    left: -40px;
+    z-index: 999;
+}
+
+.slick-next {
+    right:-40px;
+    z-index: 999;
+}
+
+.slick-prev:before,.slick-next:before {
+    color: #000;
+}
+
+.slick-dots {
+
+}
