@@ -11,6 +11,7 @@ const SSlayout = ({
 
     const [menuOpen, setMenuOpen] = useState(false)
     const [profileOpen, setProfileOpen] = useState(false)
+
     const modalRef = useRef(null)
     const modalOutsideClick = (e) => {
         if(modalRef.current === e.target) {
