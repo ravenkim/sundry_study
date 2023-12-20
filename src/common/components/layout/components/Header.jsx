@@ -2,17 +2,20 @@ import {CloseOutlined, MenuOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {push} from "redux-first-history";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import SSbutton from "../../button/SSbutton.jsx";
 import {userAction} from "../../../../features/accounts/userReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
-                    menuOpen
+                    menuOpen,
+                    setProfileOpen,
+                    profileOpen,
+                    onClick,
+    modalRef
                 }) => {
 
     const dispatch = useDispatch()
-
 
     const {
         bgcolor1
@@ -23,7 +26,6 @@ const Header = ({
     );
 
     const [imageSrc, setImageSrc] = useState('');
-    const [profileOpen, setProfileOpen] = useState(false)
 
     useEffect(() => {
         setImageSrc('/src/assets/img/profile_example.png')
@@ -43,6 +45,8 @@ const Header = ({
                 msUserSelect: 'none',
                 userSelect: 'none',
             }}
+            ref={modalRef}
+            onClick={onClick}
         >
             {/*메뉴 버튼*/}
             <div
@@ -54,7 +58,10 @@ const Header = ({
                     justifyContent: "center"
                 }}
                 className={'cursor-pointer'}
-                onClick={() => setMenuOpen(true)}
+                onClick={() => {
+                    setMenuOpen(true)
+                    setProfileOpen(false)
+                }}
             >
                 {!menuOpen &&
                     <MenuOutlined
@@ -97,7 +104,9 @@ const Header = ({
             </div>
             {/*오픈영역*/}
                 {profileOpen &&
-                    <div className={'absolute top-[70px] right-[20px] tablet:right-[23px] text-[#000000] rounded-[10px] overflow-hidden shadow-[0px_1px_4px_rgba(0,0,0,0.3)] box-border w-[calc(100%-40px)] tablet:w-fit tablet:min-w-[400px] desktop:min-w-[300px] z-[90] bg-[#ffffff]'}>
+                    <div className={'absolute top-[70px] right-[20px] tablet:right-[23px] text-[#000000] rounded-[10px] overflow-hidden shadow-[0px_1px_4px_rgba(0,0,0,0.3)] box-border w-[calc(100%-40px)] tablet:w-fit tablet:min-w-[400px] desktop:min-w-[300px] z-[90] bg-[#ffffff]'}
+
+                    >
                         <div className={'relative w-full flex flex-col justify-center items-center bg-[#5565F6] bg-opacity-60 p-[20px]'}>
                             <h4 className={'text-[#ffffff] pb-[50px]'}>일반 사용자</h4>
                             <div className={'absolute rounded-full overflow-hidden border-[#ffffff] border-2 box-border border-solid -bottom-1/2 -translate-y-1/2 cursor-pointer'}>

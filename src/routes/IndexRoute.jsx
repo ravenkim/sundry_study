@@ -6,6 +6,7 @@ import IndexPage from "../pages/index/IndexPage.jsx";
 import ErrorPage from "../pages/error/ErrorPage.jsx";
 import AdminPage from "../pages/admin/AdminPage.jsx";
 import ContentPage from "../pages/cms/ContentPage.jsx";
+import BoardPage from "../pages/cms/BoardPage.jsx";
 
 
 const IndexRoute = () => {
@@ -43,7 +44,7 @@ const IndexRoute = () => {
             />
 
 
-             <Route
+            <Route
                 path="/admin"
                 element={
                     <PrivateRoute>
@@ -53,19 +54,25 @@ const IndexRoute = () => {
             />
 
 
-            <Route
+            {/*<Route
                 path="/contents/:board/:content"
                 element={
                     <PrivateRoute>
                         <ContentPage/>
                     </PrivateRoute>
                 }
+            />*/}
+
+            {/*임시 보드 페이지*/}
+            <Route
+                path="/contents/:board/"
+                element={
+                    <PrivateRoute>
+                        {/*<ContentPage/>*/}
+                        <BoardPage />
+                    </PrivateRoute>
+                }
             />
-
-
-
-
-
 
 
             <Route

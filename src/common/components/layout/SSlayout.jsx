@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import Background from "./components/Background.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -10,12 +10,26 @@ const SSlayout = ({
                   }) => {
 
     const [menuOpen, setMenuOpen] = useState(false)
+    const [profileOpen, setProfileOpen] = useState(false)
+    const modalRef = useRef(null)
+    const modalOutsideClick = (e) => {
+        if(modalRef.current === e.target) {
+            setProfileOpen(false)
+            console.log('작동중')
+        }
+    }
 
     return (
-        <Background>
+        <Background
+
+        >
             <Header
                 setMenuOpen={setMenuOpen}
                 menuOpen={menuOpen}
+                setProfileOpen={setProfileOpen}
+                profileOpen={profileOpen}
+                modalRef={modalRef}
+                onClick={(e)=>modalOutsideClick(e)}
             />
             <main
                 style={{
@@ -27,6 +41,8 @@ const SSlayout = ({
                     alignItems: "center",
                     ...style
                 }}
+                ref={modalRef}
+                onClick={(e)=>modalOutsideClick(e)}
             >
                 {children}
             </main>
