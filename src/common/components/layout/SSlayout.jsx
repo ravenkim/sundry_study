@@ -16,7 +16,6 @@ const SSlayout = ({
     const modalOutsideClick = (e) => {
         if(modalRef.current === e.target) {
             setProfileOpen(false)
-            console.log('작동중')
         }
     }
 
