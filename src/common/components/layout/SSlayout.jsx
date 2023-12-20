@@ -10,14 +10,8 @@ const SSlayout = ({
                   }) => {
 
     const [menuOpen, setMenuOpen] = useState(false)
-    const [profileOpen, setProfileOpen] = useState(false)
 
-    const modalRef = useRef(null)
-    const modalOutsideClick = (e) => {
-        if(modalRef.current === e.target) {
-            setProfileOpen(false)
-        }
-    }
+
 
     return (
         <Background
@@ -26,10 +20,6 @@ const SSlayout = ({
             <Header
                 setMenuOpen={setMenuOpen}
                 menuOpen={menuOpen}
-                setProfileOpen={setProfileOpen}
-                profileOpen={profileOpen}
-                modalRef={modalRef}
-                onClick={(e)=>modalOutsideClick(e)}
             />
             <main
                 style={{
@@ -41,8 +31,7 @@ const SSlayout = ({
                     alignItems: "center",
                     ...style
                 }}
-                ref={modalRef}
-                onClick={(e)=>modalOutsideClick(e)}
+
             >
                 {children}
             </main>
