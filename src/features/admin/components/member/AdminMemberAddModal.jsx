@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Modal} from "antd";
+import {Input, Modal, Select} from "antd";
+import SSlabelForInput from "../../../../common/components/label/SSlabelForInput.jsx";
 
 const AdminMemberAddModal = ({
     setModalVisible,
@@ -22,6 +23,9 @@ const AdminMemberAddModal = ({
     }
 
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+
 
     return (
             <Modal
@@ -33,9 +37,33 @@ const AdminMemberAddModal = ({
                 cancelText="취소"
                 width={800}
             >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+                <SSlabelForInput
+                    label ={'이름'}
+                >
+                    <Input
+
+                    />
+                </SSlabelForInput>
+                <SSlabelForInput
+                    label ={'이메일'}
+                >
+                    <Input
+
+                    />
+                </SSlabelForInput>
+                <SSlabelForInput
+                    label ={'권한'}
+                >
+                    <Select/>
+                </SSlabelForInput>
+                <SSlabelForInput
+                    label ={'재직 상태'}
+                >
+                    <Input
+
+                    />
+                </SSlabelForInput>
+
             </Modal>
     );
 };
