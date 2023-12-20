@@ -46,12 +46,28 @@
 
 .slick-prev {
     left: -40px;
-    z-index: 999;
+    z-index: 80;
+    width:24px;
+    height: 24px;
+    background-image: url("/src/assets/img/angle_left_arrow.svg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    cursor: pointer;
+}
+
+.slick-prev:before, .slick-next:before {
+    display:none;
 }
 
 .slick-next {
     right:-40px;
-    z-index: 999;
+    z-index: 80;
+    width:24px;
+    height: 24px;
+    background-image: url("/src/assets/img/angle_right_arrow.svg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    cursor: pointer;
 }
 
 .slick-prev:before,.slick-next:before {
