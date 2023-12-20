@@ -12,11 +12,7 @@ const AdminMember = () => {
 
     return (
         <div>
-            <div>
-                <SStitleLabel
-                    title={'회원관리'}
-                />
-            </div>
+
 
             <div>
                 <SSbutton>회원 추가</SSbutton>
