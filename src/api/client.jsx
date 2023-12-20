@@ -19,9 +19,10 @@ client.interceptors.request.use(
             if (tokenData.exp < Date.now() / 1000) {
                 removeCookie('tk')
                 window.location = "/";
+            } else {
+                config.headers["AccessToken"] = userToken
             }
-
-
+            
         }
         return config;
     },
