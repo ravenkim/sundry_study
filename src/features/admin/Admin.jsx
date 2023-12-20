@@ -27,7 +27,10 @@ const Admin = () => {
         if(!activeTab)
             dispatch(adminAction.setTab("member"))
 
+
+
     }, []);
+
 
 
 
@@ -41,11 +44,11 @@ const Admin = () => {
             className={'w-2/3 p-[30px] box-border'}
 
         >
-            <div>
-                네임테그 들어가는곳
-            </div>
+            {/*<div>*/}
+            {/*    네임테그 들어가는곳*/}
+            {/*</div>*/}
 
-            <Divider/>
+            {/*<Divider/>*/}
 
 
 

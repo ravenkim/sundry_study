@@ -54,14 +54,14 @@ const IndexRoute = () => {
             />
 
 
-            {/*<Route
+            <Route
                 path="/contents/:board/:content"
                 element={
                     <PrivateRoute>
                         <ContentPage/>
                     </PrivateRoute>
                 }
-            />*/}
+            />
 
             {/*임시 보드 페이지*/}
             <Route

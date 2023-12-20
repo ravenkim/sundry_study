@@ -21,6 +21,11 @@ const asyncRequest = {
         () => client.get('testTest')
     ],
 
+    getUsers: [
+        {users: reducerUtils.init()},
+        () => client.get('admin/users')
+    ],
+
 
 }
 
