@@ -3,21 +3,24 @@ import SStable from "src/common/components/table/SStable.jsx";
 import {removeRole} from "src/common/utils/redux/dataProcessingUtils.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {adminAction} from "../../adminReducer.jsx";
+import {Spin} from 'antd';
 
 const AdminMemberTable = () => {
     const dispatch = useDispatch()
     const {
-        usersData
+        usersData,
+        usersDataLoading
     } = useSelector(({adminReducer}) => ({
-            usersData: removeRole(adminReducer.users.data)
+            usersData: removeRole(adminReducer.users.data),
+            usersDataLoading: adminReducer.users.loading
         }),
         shallowEqual
     );
 
 
-
     useEffect(() => {
         dispatch(adminAction.getUsers())
+        
     }, []);
 
 
@@ -39,21 +42,23 @@ const AdminMemberTable = () => {
             dataIndex: 'authNm',
         },
         {
-            title: '상태',
+            title: '재직 상태',
             dataIndex: 'userStat',
         }
     ]
 
 
-
-
     return (
-        <SStable
-            columns={columns}
-            dataSource={ usersData}
-        >
 
-        </SStable>
+        <Spin
+            spinning={usersDataLoading}
+        >
+            <SStable
+                columns={columns}
+                dataSource={usersData}
+            >
+
+            </SStable></Spin>
 
 
     );
