@@ -26,6 +26,7 @@ const asyncRequest = {
     getAuthList: [
         {authList: reducerUtils.init()},
         () => client.get('admin/auth-list')
+
     ],
 
 

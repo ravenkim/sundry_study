@@ -22,7 +22,13 @@ const AdminMember = () => {
                     onClick={() => {setModalVisible(true)}}
 
                 >회원 추가</SSbutton>
-                <SSbutton>알림 보내기</SSbutton>
+
+
+                {/* todo 2차 기능 구현 예정*/}
+                {/* 테이블 왼쪽에 select 추가후 버튼 누를시 메시지 입력 모달 */}
+                <SSbutton
+                    disabled = {true}
+                >알림 보내기</SSbutton>
             </div>
 
             <div>

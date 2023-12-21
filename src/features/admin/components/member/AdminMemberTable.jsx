@@ -57,6 +57,7 @@ const AdminMemberTable = () => {
             <SStable
                 columns={columns}
                 dataSource={usersData}
+                useIndex ={true}
             >
 
             </SStable></Spin>

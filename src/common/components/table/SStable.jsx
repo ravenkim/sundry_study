@@ -119,6 +119,7 @@ const SStable = ({
                     {
                         title: 'No',
                         dataIndex: 'key',
+
                     },
                 ]
                 setIndexColumns([
@@ -144,6 +145,13 @@ const SStable = ({
 
         setColorFeaturesColumns(
             indexColumns.map(item => {
+
+                if(item.render){
+                    return {
+                        ...item
+                    }
+                }
+
                 return {
                     render: text => (
                         <Highlighter

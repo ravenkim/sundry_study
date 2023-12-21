@@ -36,8 +36,8 @@ const Content = () => {
 
     useEffect(() => {
         if(boardId && contentId) {
-            console.log(boardId)
-            console.log(contentId)
+            // console.log(boardId)
+            // console.log(contentId)
 
         }
     }, [boardId, contentId]);
