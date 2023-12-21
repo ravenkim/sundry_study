@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Input, Modal, Select} from "antd";
 import SSlabelForInput from "../../../../common/components/label/SSlabelForInput.jsx";
+import {shallowEqual, useSelector} from "react-redux";
+import {removeRole} from "../../../../common/utils/redux/dataProcessingUtils.jsx";
 
 const AdminMemberAddModal = ({
     setModalVisible,
@@ -8,7 +10,21 @@ const AdminMemberAddModal = ({
                              }) => {
 
 
-    const [modalOpen, setModalOpen] = useState(false)
+    const {
+        authList
+
+    } = useSelector(({adminReducer}) => ({
+            authList: removeRole(adminReducer.authList.data)
+        }),
+        shallowEqual
+    )
+
+
+    useEffect(() => {
+        console.log(authList)
+    }, [authList]);
+
+
 
 
     const addHandler = () => {
