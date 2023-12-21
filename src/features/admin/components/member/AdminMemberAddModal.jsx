@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Input, Modal, Select} from "antd";
+import {Divider, Input, Modal, Select} from "antd";
 import SSlabelForInput from "../../../../common/components/label/SSlabelForInput.jsx";
 import {shallowEqual, useSelector} from "react-redux";
 import {removeRole} from "../../../../common/utils/redux/dataProcessingUtils.jsx";
@@ -44,8 +44,23 @@ const AdminMemberAddModal = ({
             return
         }
 
+        if(userNm.length > 20){
+            showMessage('warning', '이름이 너무 깁니다')
+            return
+        }
+
         if(validateEmail(userEmail)){
             showMessage('warning', '올바르지 않은 형식의 이메일 입니다.')
+            return
+        }
+
+        if(phoneNumber.length !== 11){
+            showMessage('warning', '올바른 전화번호를 입력하세요.')
+            return
+        }
+
+        if(authId.length === 0){
+            showMessage('warning', '권한을 설정해 주세요.')
             return
         }
 
@@ -73,7 +88,7 @@ const AdminMemberAddModal = ({
 
     return (
         <Modal
-            title="사용자 추가"
+            title={<h1>사용자 추가</h1>}
             open={modalVisible}
             onOk={addHandler}
             onCancel={cancelHandler}
@@ -81,6 +96,7 @@ const AdminMemberAddModal = ({
             cancelText="취소"
             width={800}
         >
+            <Divider></Divider>
             <SSlabelForInput
                 label={'이름'}
             >
@@ -104,7 +120,7 @@ const AdminMemberAddModal = ({
             >
                 <Input
                     value={phoneNumber}
-                    onChange={e => setPhoneNumber(e.target.value)}
+                    onChange={e => setPhoneNumber(e.target.value.replace(/\s|-/g, ''))}
                     placeholder="01012345678"
                 />
             </SSlabelForInput>
