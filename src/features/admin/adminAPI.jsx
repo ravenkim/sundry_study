@@ -10,3 +10,7 @@ export const getUsers = () =>
 export const getAuthList = () =>
   client.get('admin/auth-list')
 
+
+
+export const addUser = (param) =>
+  client.post('admin/users/add', param)
