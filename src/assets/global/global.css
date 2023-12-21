@@ -77,3 +77,37 @@
 .slick-dots {
 
 }
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs {
+    color:#ACACBA !important;
+    border-color: #ACACBA !important;
+    border-top-color:#232433 !important;
+}
+
+/*:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs:focus,:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs:active, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs:hover{
+    color:#232433 !important;
+    border-color: #232433 !important;
+}*/
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color:#232433 !important;
+    border-color: #232433 !important;
+}
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab {
+    color:#ACACBA;
+}
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab:hover {
+    color:#232433 !important;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-ink-bar {
+    background: #232433;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top >.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom >.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top >div>.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom >div>.ant-tabs-nav .ant-tabs-ink-bar {
+    height: 1px;
+}
