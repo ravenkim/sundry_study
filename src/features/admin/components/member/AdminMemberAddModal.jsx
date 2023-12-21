@@ -4,6 +4,7 @@ import SSlabelForInput from "../../../../common/components/label/SSlabelForInput
 import {shallowEqual, useSelector} from "react-redux";
 import {removeRole} from "../../../../common/utils/redux/dataProcessingUtils.jsx";
 import showMessage from "../../../../common/components/notice/notice.js";
+import {validateEmail} from "../../../../common/utils/redux/validateUtils.jsx";
 
 const AdminMemberAddModal = ({
                                  setModalVisible,
@@ -43,8 +44,8 @@ const AdminMemberAddModal = ({
             return
         }
 
-        if(userEmail.length === 0){
-            showMessage('warning', '이메일은 필수 입니다')
+        if(validateEmail(userEmail)){
+            showMessage('warning', '올바르지 않은 형식의 이메일 입니다.')
             return
         }
 
