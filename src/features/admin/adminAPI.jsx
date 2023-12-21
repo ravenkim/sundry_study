@@ -6,3 +6,7 @@ export const test = (param) =>
 
 export const getUsers = () =>
   client.get('admin/users')
+
+export const getAuthList = () =>
+  client.get('admin/auth-list')
+
