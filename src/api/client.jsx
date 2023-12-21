@@ -14,7 +14,6 @@ client.interceptors.request.use(
         const userToken = getCookie('tk')
         if (userToken) {
             const tokenData = jwtDecode(userToken)
-            console.log(tokenData.exp)
 
             if (tokenData.exp < Date.now() / 1000) {
                 removeCookie('tk')
