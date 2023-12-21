@@ -5,8 +5,6 @@ import {
 import client from "../../api/client.jsx";
 
 
-
-
 const prefix = 'admin'
 
 
@@ -25,10 +23,13 @@ const asyncRequest = {
         {users: reducerUtils.init()},
         () => client.get('admin/users')
     ],
+    getAuthList: [
+        {authList: reducerUtils.init()},
+        () => client.get('admin/auth-list')
+    ],
 
 
 }
-
 
 
 const localState = {
@@ -37,13 +38,13 @@ const localState = {
 
 //로컬 리듀서
 const localReducers = {
-     setTab: (state, action) => {
-         state.tab = action.payload
-         return state
-     },
+    setTab: (state, action) => {
+        state.tab = action.payload
+        return state
+    },
 }
 
 //이름만 바꿔서 사용
-export const {adminSlice, adminSaga, adminAction} = reduxMaker(prefix, asyncRequest,localState, localReducers);
+export const {adminSlice, adminSaga, adminAction} = reduxMaker(prefix, asyncRequest, localState, localReducers);
 
 
