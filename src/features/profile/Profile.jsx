@@ -55,7 +55,7 @@ const Profile = () => {
                         <h2>{user.userNm}님, 어서오세요!</h2>
                     </div>
                     <Tabs
-                        type="card"
+                        type=""
                         size={'small'}
                         activeKey={activeTab}
                         onChange={(activeKey) => dispatch(profileAction.setTab(activeKey))}

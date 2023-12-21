@@ -4,6 +4,7 @@ import {profileAction} from "../profileReducer.jsx";
 import {UserOutlined} from '@ant-design/icons';
 import {Avatar, Space} from 'antd';
 import SSbutton from "../../../common/components/button/SSbutton.jsx";
+import SSinput from "../../../common/components/input/SSinput.jsx";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -61,8 +62,8 @@ const UserInfo = () => {
     return (
         <>
             <div className={'w-full'}>
-                <div className={'w-full flex desktop:flex-row gap-[60px]'}>
-                    <div className={'flex flex-col '}>
+                <div className={'w-fit flex desktop:flex-row gap-[60px] desktop:m-0 desktop:mx-auto'}>
+                    <div className={'flex flex-col items-center'}>
                         {/*<img src="" alt="#"/>*/}
                         {userProfileImg?.data == null
                             ? <Space direction='vertical' wrap size={180}>
@@ -81,31 +82,34 @@ const UserInfo = () => {
                             onChange={onUploadImage}
                             ref={inputRef}
                         />
+
                     </div>
-                    <div className={''}>
-                        <div className={'flex'}>
-                            <p>아이디</p>
-                            <p>{user?.userEmail}</p>
+                    <div className={'flex flex-col gap-[6px]'}>
+                        <div className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
+                            <p className={'desktop:min-w-[80px]'}>아이디</p>
+                            <p className={''}>{user?.userEmail}</p>
                         </div>
-                        <div className={'flex'}>
-                            <p>비밀번호</p>
-                            <button className={'box-border bg-[#E3E4E8] text-[#51525c] '} onClick={() => setPasswordInput(!passwordInput)}>비밀번호 변경하기</button>
-                            {passwordInput && <input type="text" value=''/>}
+                        <div className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
+                            <p className={'desktop:min-w-[80px]'}>비밀번호</p>
+                            <div className={'flex flex-col desktop:flex-row gap-[6px]'}>
+                            <button className={'box-border bg-[#E3E4E8] text-[#51525c] px-[10px] py-[5px] rounded-[5px] min-w-fit w-fit'} onClick={() => setPasswordInput(!passwordInput)}>비밀번호 변경하기</button>
+                            {passwordInput && <SSinput className={'mb-[0]'}/>}
                             {/*input value값 post 요청하기 - 핸들러는 저장버튼 눌렀을 때 요청*/}
+                            </div>
                         </div>
-                        <div className={'flex'}>
-                            <p>이름</p>
+                        <div className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
+                            <p className={'desktop:min-w-[80px]'}>이름</p>
                             <p>{user?.userNm}</p>
                         </div>
-                        <div className={'flex'}>
-                            <p>핸드폰 번호</p>
+                        <div className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
+                            <p className={'desktop:min-w-[80px]'}>핸드폰 번호</p>
                             <p>010-9866-2951</p>
                             {/*<p>{user.phone}</p>*/}
                         </div>
                     </div>
                 </div>
 
-                <div className={'w-full flex justify-center items-center gap-[16px]'}>
+                <div className={'w-full flex justify-center items-center gap-[16px] mt-[20px] tablet:mt-[40px] desktop:mt-[80px] '}>
                     <SSbutton danger className={'px-[60px]'}>취소</SSbutton>
                     <SSbutton type={'primary'} className={'px-[60px]'} onClick={onSave}>저장</SSbutton>
                 </div>

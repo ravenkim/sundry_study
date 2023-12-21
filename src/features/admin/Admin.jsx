@@ -46,10 +46,11 @@ const Admin = () => {
 
 
             <Tabs
-                type="card"
+                type=""
                 size={'small'}
                 activeKey={activeTab}
                 onChange={(activeKey) => dispatch(adminAction.setTab(activeKey))}
+                rootClassName={'border-t-[1px] border-solid border-t-[#111321] box-border '}
                 items={[
                     {
                         label: `회원 관리`,
