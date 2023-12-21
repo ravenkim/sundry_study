@@ -7,7 +7,7 @@ const AdminDelinquent = () => {
 
     return (
         <button
-            onClick={() => dispatch(adminAction.test())}
+            onClick={() => dispatch(adminAction.test('aaaa'))}
         >
 asdasd
         </button>

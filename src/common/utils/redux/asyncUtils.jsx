@@ -2,6 +2,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {takeLatest} from 'redux-saga/effects';
 import {call, put} from 'redux-saga/effects';
+import client from "../../../api/client.jsx";
 
 //reducer data 상테
 export const reducerUtils = {
@@ -30,7 +31,7 @@ export const reducerUtils = {
         data: null,
         loading: false,
         error: true,
-        errorMessage: error.msg,
+        errorMessage: error,
     }),
 
 }
@@ -79,9 +80,9 @@ export const initialStateHandler = (apiAction) => {
 
 //api 요청이 성공 했는지 실패 했는지 확인 해서 리듀서 요청 해주는 함수
 export const createRequestSaga = (prefix, reducerName, apiRequest) => {
-    return function* fetchApiData() {
+    return function* fetchApiData(action) {
         try {
-            const response = yield call(apiRequest); // 여기서 apiCall은 실제 API 호출 함수입니다.
+            const response = yield call(() => apiRequest(action.payload)); // 여기서 apiCall은 실제 API 호출 함수입니다.
             yield put({
                 type: `${prefix}/${reducerName}Success`,
                 payload: response
@@ -96,12 +97,10 @@ export const createRequestSaga = (prefix, reducerName, apiRequest) => {
 }
 
 
-
-
 //비동기 처리 성공 실패 처리해주는 추가적인 리듀서
 export const extraReducers = (prefix, asyncRequest) => {
-     return (builder) => {
-         builder.addMatcher(
+    return (builder) => {
+        builder.addMatcher(
             (action) => {
                 return action.type.includes(prefix)
             },
@@ -118,14 +117,12 @@ export const extraReducers = (prefix, asyncRequest) => {
                 }
             }
         )
-     }
+    }
 }
 
 
-
-
 // 편리한 자동생성기
-export const reduxMaker = (prefix, asyncRequest,localState = {}, localReducers = {}) => {
+export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers = {}) => {
     const initialState = initialStateHandler(asyncRequest)
     const final = {}
 
