@@ -9,6 +9,8 @@ import {getUsers, test} from "./adminAPI.jsx";
 const prefix = 'admin'
 
 
+
+
 //비동기 처리용 input
 const asyncRequest = {
     // getApi: [

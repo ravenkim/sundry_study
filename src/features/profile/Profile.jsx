@@ -1,11 +1,6 @@
 import React, {useEffect} from 'react';
 import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
 import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
-import {adminAction} from "../admin/adminReducer.jsx";
-import AdminMember from "../admin/components/member/AdminMember.jsx";
-import AdminBoard from "../admin/components/board/AdminBoard.jsx";
-import AdminDelinquent from "../admin/components/delinquent/AdminDelinquent.jsx";
-import AdminAuth from "../admin/components/auth/AdminAuth.jsx";
 import {Divider, Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
@@ -13,6 +8,10 @@ import UserInfo from "./components/UserInfo.jsx";
 import LikesInfo from "./components/LikesInfo.jsx";
 import RentalsInfo from "./components/RentalsInfo.jsx";
 import ReservationsInfo from "./components/ReservationsInfo.jsx";
+import {profileAction} from "./profileReducer.jsx";
+
+import {UserOutlined} from '@ant-design/icons';
+import {Avatar, Space} from 'antd';
 
 
 const Profile = () => {
@@ -20,32 +19,46 @@ const Profile = () => {
     const dispatch = useDispatch()
 
     const {
-        activeTab
+        activeTab,
+        userProfileImg,
+        user
 
-    } = useSelector(({adminReducer}) => ({
-            activeTab: adminReducer.tab
+    } = useSelector(({userReducer, profileReducer}) => ({
+            user: userReducer.user,
+            activeTab: profileReducer.tab,
+            userProfileImg: profileReducer.getUserProfileImg
         }),
         shallowEqual
     )
 
-    useEffect(() => {
-        if(!activeTab) dispatch(adminAction.setTab("userInfo"))
 
-    },[])
+    useEffect(() => {
+        dispatch(profileAction.getUserProfileImg())
+    }, []);
+
+    useEffect(() => {
+        if (!activeTab) dispatch(profileAction.setTab("userInfo"))
+        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+    }, [])
 
     return (
         <>
             <SSsectionWrap>
                 <SSwrapper className={'w-full m-[0] bg-[#f5f5f5] bg-opacity-50 p-[16px]'}>
-                    <div className={'flex pb-[16px] '}>
-                        <img src="" alt="#" className={'desktop:max-w-[80px] desktop:max-h-[80px]'}/>
-                        <h2>님, 어서오세요!</h2>
+                    <div className={'flex pb-[16px] items-center gap-[20px]'}>
+                        {/*<img src="" alt="#" className={'desktop:max-w-[80px] desktop:max-h-[80px]'}/>*/}
+                        {userProfileImg?.data == null ? <Space wrap size={80}>
+                            <Avatar size={80} icon={<UserOutlined/>}/>
+                        </Space> : <img src={userProfileImg?.data} alt="#"/>}
+
+
+                        <h2>{user.userNm}님, 어서오세요!</h2>
                     </div>
                     <Tabs
                         type="card"
                         size={'small'}
                         activeKey={activeTab}
-                        onChange={(activeKey) => dispatch(adminAction.setTab(activeKey))}
+                        onChange={(activeKey) => dispatch(profileAction.setTab(activeKey))}
                         items={[
                             {
                                 label: `회원 정보`,
@@ -74,6 +87,10 @@ const Profile = () => {
                     />
                 </SSwrapper>
             </SSsectionWrap>
+            {/*{getProfileImg}*/}
+            {activeTab}
+            {userProfileImg?.data == null ? '널이다 이자시가' : 'ㅁㄴㅇ'}
+
         </>
     )
 }
