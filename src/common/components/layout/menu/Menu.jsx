@@ -115,6 +115,31 @@ const Menu = ({
                     }}
                     className={'relative z-99 before:absolute before:left-[0] before:top-[0] before:w-full before:h-full before:bg-[#161616] before:bg-opacity-95 before:-z-10'}
                 >
+                    {selectedButton === 'MY PAGE' &&
+                        <ul>
+                            <SubMenuButtonWrap
+                                text={"회원 정보"}
+                                tab={'userInfo'}
+                                setMenuOpen={setMenuOpen}
+                            />
+                            <SubMenuButtonWrap
+                                text={"대여 목록"}
+                                tab={'rentalsInfo'}
+                                setMenuOpen={setMenuOpen}
+                            />
+                            <SubMenuButtonWrap
+                                text={"관심 목록"}
+                                tab={'likesInfo'}
+                                setMenuOpen={setMenuOpen}
+                            />
+                            <SubMenuButtonWrap
+                                text={"예약 목록"}
+                                tab={'reservationsInfo'}
+                                setMenuOpen={setMenuOpen}
+                            />
+                        </ul>
+                    }
+
                     {selectedButton === 'MANAGER' &&
                         <ul>
                             <SubMenuButtonWrap
@@ -139,6 +164,7 @@ const Menu = ({
                             />
                         </ul>
                     }
+
                 </div>
             </div>
             {/*tablet~pc*/}

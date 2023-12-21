@@ -41,7 +41,7 @@ const Door = () => {
                 </div>
                 <SScardWrap>
                     {DoorCard.map((item, idx) => (
-                        <SScard onClick={() => dispatch(push("/door"))} className={'cursor-pointer'} key={idx}>
+                        <SScard onClick={() => dispatch(push(item.root))} className={'cursor-pointer'} key={idx}>
                             <div className={'p-[20px] box-border flex flex-col justify-between w-full'}>
                                 <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
                                     {item.title}

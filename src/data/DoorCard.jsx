@@ -1,5 +1,5 @@
 const DoorCard = [
-    {title: '도서관', doorId: 1, svg:`<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '도서관', root:'/contents/1', doorId: 1, svg:`<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2342_419)">
 <path d="M77.9998 73.0116H17.8967C13.9803 73.0116 10.8054 69.8308 10.8054 65.9072C10.8054 61.9836 13.9803 58.8028 17.8967 58.8028H77.9996C74.8676 63.0192 74.8676 68.795 77.9998 73.0116Z" fill="#FFF7E8"/>
 <path d="M77.9999 58.8026H71.7499C68.6179 63.0192 68.6179 68.795 71.7499 73.0115H77.9999C74.8677 68.795 74.8677 63.0192 77.9999 58.8026Z" fill="#FFF1D6"/>
@@ -28,7 +28,7 @@ const DoorCard = [
 </defs>
 </svg>
 `},
-    {title: '영상강의', doorId: 2, svg: `<svg width="101" height="88" viewBox="0 0 101 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '영상강의', root:'/contents/2', doorId: 2, svg: `<svg width="101" height="88" viewBox="0 0 101 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2342_438)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.35669 1.35599H95.2102V12.2033H5.35669V1.35599Z" fill="white"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.35596 12.2035H95.2095V58.3055H5.35596V12.2035Z" fill="#ABE6FC"/>
@@ -68,7 +68,7 @@ const DoorCard = [
 </defs>
 </svg>
 `},
-    {title: '프로필', doorId: 3, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '프로필', root:'/profile', doorId: 3, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2424_1784)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M78.9883 1.5625H9.0127C7.12143 1.5625 5.57125 3.10377 5.5625 4.99505V5.0127V18.0166H82.4386V5.01286C82.4386 3.11268 80.884 1.5625 78.9883 1.5625Z" fill="#FF7D95"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M82.4386 18.0166H5.5625V62.8702V62.8879C5.57141 64.7746 7.12158 66.3204 9.0127 66.3204H21.9855C19.4299 62.2899 17.9506 57.5153 17.9506 52.3908C17.9506 38.005 29.6125 26.3433 43.9982 26.3433C58.3839 26.3433 70.0457 38.0052 70.0457 52.3908C70.0457 57.5153 68.5663 62.2899 66.0108 66.3204H78.9882C80.8839 66.3204 82.4384 64.7659 82.4384 62.8702V18.0166H82.4386Z" fill="white"/>
@@ -98,7 +98,7 @@ const DoorCard = [
 </defs>
 </svg>
 `},
-    {title: '관리자', doorId: 4, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '관리자', root:'/admin', doorId: 4, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2342_515)">
 <path d="M78.3882 35.8603L81.8971 29.2851C82.4023 28.3385 82.6665 27.2821 82.6665 26.2091C82.6665 25.0809 82.3744 23.9719 81.8185 22.9901C81.2626 22.0084 80.462 21.1873 79.4946 20.6068L78.4823 19.9995H73.3332V25.3328L67.8022 30.5673L78.3882 35.8603Z" fill="#FFCEB6"/>
 <path d="M78.6667 7.99945H73.3334C71.8607 7.99945 70.6667 9.19336 70.6667 10.6661V22.6661C70.6667 24.1389 71.8607 25.3328 73.3334 25.3328H78.6667C80.1395 25.3328 81.3334 24.1389 81.3334 22.6661V10.6661C81.3334 9.19336 80.1395 7.99945 78.6667 7.99945Z" fill="#4F5DFF"/>
