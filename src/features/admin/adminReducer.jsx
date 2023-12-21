@@ -3,6 +3,7 @@ import {
     reducerUtils, reduxMaker
 } from "src/common/utils/redux/asyncUtils.jsx";
 import client from "../../api/client.jsx";
+import {getUsers, test} from "./adminAPI.jsx";
 
 
 const prefix = 'admin'
@@ -16,12 +17,12 @@ const asyncRequest = {
     // ],
     test: [
         {test: reducerUtils.init()},
-        () => client.get('testTest')
+        test
     ],
 
     getUsers: [
         {users: reducerUtils.init()},
-        () => client.get('admin/users')
+        getUsers
     ],
     getAuthList: [
         {authList: reducerUtils.init()},

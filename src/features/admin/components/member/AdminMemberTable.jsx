@@ -20,7 +20,7 @@ const AdminMemberTable = () => {
 
     useEffect(() => {
         dispatch(adminAction.getUsers())
-        dispatch(adminAction.getAuthList())
+        // dispatch(adminAction.getAuthList())
 
     }, []);
 
