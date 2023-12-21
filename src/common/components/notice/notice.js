@@ -10,7 +10,7 @@ import { notification } from 'antd';
 const showMessage = (type, message) => {
   notification[type]({
     message: message,
-    duration: 2, // 메시지가 표시될 시간 (초 단위)
+    duration: 1.3, // 메시지가 표시될 시간 (초 단위)
   });
 };
 

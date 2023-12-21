@@ -26,9 +26,6 @@ const Admin = () => {
     useEffect(() => {
         if(!activeTab)
             dispatch(adminAction.setTab("member"))
-
-
-
     }, []);
 
 

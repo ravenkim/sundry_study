@@ -20,7 +20,7 @@ const AdminMemberTable = () => {
 
     useEffect(() => {
         dispatch(adminAction.getUsers())
-        // dispatch(adminAction.getAuthList())
+        dispatch(adminAction.getAuthList())
 
     }, []);
 
@@ -33,6 +33,10 @@ const AdminMemberTable = () => {
         {
             title: '이메일',
             dataIndex: 'userEmail',
+        },
+        {
+            title: '전화번호',
+            dataIndex: 'phoneNumber',
         },
         {
             title: '가입일',
@@ -60,7 +64,8 @@ const AdminMemberTable = () => {
                 useIndex ={true}
             >
 
-            </SStable></Spin>
+            </SStable>
+        </Spin>
 
 
     );

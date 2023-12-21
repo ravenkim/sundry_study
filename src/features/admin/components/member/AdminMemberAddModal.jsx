@@ -1,39 +1,54 @@
 import React, {useEffect, useState} from 'react';
 import {Divider, Input, Modal, Select} from "antd";
-import SSlabelForInput from "../../../../common/components/label/SSlabelForInput.jsx";
-import {shallowEqual, useSelector} from "react-redux";
-import {removeRole} from "../../../../common/utils/redux/dataProcessingUtils.jsx";
-import showMessage from "../../../../common/components/notice/notice.js";
-import {validateEmail} from "../../../../common/utils/redux/validateUtils.jsx";
+import SSlabelForInput from "src/common/components/label/SSlabelForInput.jsx";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {removeRole} from "src/common/utils/redux/dataProcessingUtils.jsx";
+import showMessage from "src/common/components/notice/notice.js";
+import {validateEmail} from "src/common/utils/redux/validateUtils.jsx";
+import {adminAction} from "../../adminReducer.jsx";
 
 const AdminMemberAddModal = ({
                                  setModalVisible,
                                  modalVisible
                              }) => {
 
+    const dispatch = useDispatch()
 
     const {
-        authList
-
+        authListData,
+        addUserStatus
     } = useSelector(({adminReducer}) => ({
-            authList: removeRole(adminReducer.authList.data)
+            authListData: adminReducer.authList.data,
+        addUserStatus:adminReducer.addUserStatus.data?.res
         }),
         shallowEqual
     )
 
+    const [authList, setAuthList] = useState()
+
+    useEffect(() => {
+        if(authListData)setAuthList(removeRole(authListData))
+    }, [authListData]);
+
+
+    useEffect(() => {
+        if(addUserStatus){
+            dispatch(adminAction.getUsers())
+            dispatch(adminAction.initialize('addUserStatus'))
+            showMessage('success', '성공적으로 추가... 이거 리덕스 스토어 msg 에서 받게 변경')
+            cancelHandler()
+        }
+    }, [addUserStatus]);
 
 
 
 
-    const verification = () => {
-
-    }
 
 
-        const [userNm, setUserNm] = useState('')
+    const [userNm, setUserNm] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [authId, setAuthId] = useState('')
+    const [authId, setAuthId] = useState(null)
 
 
     const addHandler = () => {
@@ -59,7 +74,7 @@ const AdminMemberAddModal = ({
             return
         }
 
-        if(authId.length === 0){
+        if(authId === null){
             showMessage('warning', '권한을 설정해 주세요.')
             return
         }
@@ -75,15 +90,19 @@ const AdminMemberAddModal = ({
 
         }
 
-        console.log(finalData)
-        // setModalVisible(false)
+        dispatch(adminAction.addUser(finalData))
+
     }
 
     const cancelHandler = () => {
         setModalVisible(false)
+
+        //창 닫을시 값 초기화
+        setUserNm('')
+        setUserEmail('')
+        setPhoneNumber('')
+        setAuthId(null)
     }
-
-
 
 
     return (
@@ -135,6 +154,7 @@ const AdminMemberAddModal = ({
                     onChange={value => setAuthId(value)}
                     options={authList}
                     fieldNames={{label: 'authNm', value: 'authId'}}
+                    placeholder="권한을 선택해 주세요."
                 />
             </SSlabelForInput>
 
