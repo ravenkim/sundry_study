@@ -3,7 +3,7 @@ import SSsearchInput from "/src/common/components/input/SSsearchInput.jsx";
 import SSsectionWrap from "/src/common/components/wrapper/SSsectionWrap.jsx";
 import SScardWrap from "/src/common/components/Card/SScardWrap.jsx";
 import SScard from "/src/common/components/Card/SScard.jsx";
-import {useDispatch} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import DoorCard from '/src/data/DoorCard.jsx'
 import {push} from "redux-first-history";
 import {adminAction} from "../admin/adminReducer.jsx";
@@ -12,6 +12,15 @@ const Door = () => {
     const dispatch = useDispatch()
 
     const [serchAllText, setSerchAllText] = useState()
+
+
+        const {
+        bgColor
+    } = useSelector(({adminReducer}) => ({
+            bgColor: adminReducer.test.data,
+        }),
+        shallowEqual
+    );
 
     return (
         <>
@@ -58,6 +67,7 @@ const Door = () => {
                 <button
                     onClick={() => dispatch(adminAction.test())}
                 >asdads</button>
+                <img src={bgColor} alt={'이미지'}/>
 
             </SSsectionWrap>
         </>

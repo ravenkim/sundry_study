@@ -5,7 +5,7 @@ import {jwtDecode} from "jwt-decode";
 
 const imgClient = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
-    headers: {'content-type': 'multipart/form-data'}
+    responseType: 'blob'
 })
 
 
@@ -14,7 +14,6 @@ imgClient.interceptors.request.use(
         const userToken = getCookie('tk')
         if (userToken) {
             const tokenData = jwtDecode(userToken)
-            console.log(tokenData.exp)
 
             if (tokenData.exp < Date.now() / 1000) {
                 removeCookie('tk')
@@ -30,6 +29,9 @@ imgClient.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+
+
 
 
 export default imgClient;

@@ -22,7 +22,7 @@ const AdminMemberTable = () => {
 
 
     useEffect(() => {
-        if(users)setUsersData(users)
+        if(users)setUsersData(removeRole(users))
     }, [users]);
 
 

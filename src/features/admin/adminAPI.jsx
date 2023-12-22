@@ -1,7 +1,8 @@
 import client from "../../api/client.jsx";
+import imgClient from "../../api/imgClient.jsx";
 
 export const test = (param) =>
-  console.log(param)
+  imgClient.get('profile/user/img')
 
 
 export const getUsers = () =>
