@@ -24,6 +24,33 @@ const MobileButton = ({
 
                 {text}
 
+                {selectedButton === 'MY PAGE' && selected ?
+
+                            <ul className={`w-full flex justify-center items-center flex-col transition-all overflow-hidden ` + (selectedButton === 'MANAGER' && selected ? 'h-auto' : '')}>
+                                <SubMenuButtonWrap
+                                    text={"회원 관리"}
+                                    tab={'userInfo'}
+                                    setMenuOpen={setMenuOpen}
+                                />
+                                <SubMenuButtonWrap
+                                    text={"보드 관리"}
+                                    tab={'rentalsInfo'}
+                                    setMenuOpen={setMenuOpen}
+                                />
+                                <SubMenuButtonWrap
+                                    text={"연체자 관리"}
+                                    tab={'likesInfo'}
+                                    setMenuOpen={setMenuOpen}
+                                />
+                                <SubMenuButtonWrap
+                                    text={"권한 관리"}
+                                    tab={'reservationsInfo'}
+                                    setMenuOpen={setMenuOpen}
+                                />
+                            </ul>
+
+                     : null }
+
                 {selectedButton === 'MANAGER' && selected ?
 
                             <ul className={`w-full flex justify-center items-center flex-col transition-all overflow-hidden ` + (selectedButton === 'MANAGER' && selected ? 'h-auto' : '')}>
