@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {CloseOutlined} from "@ant-design/icons";
 import MenuButtonWrap from "./components/MenuButtonWrap.jsx";
@@ -16,6 +16,15 @@ const Menu = ({
     const dispatch = useDispatch()
 
 
+    const {
+        boardListData
+    } = useSelector(({cmsReducer}) => ({
+            boardListData: cmsReducer.boardList.data
+        }),
+        shallowEqual
+    );
+
+
     // 선택된 대분류
     const [selectedButton, setSelectedButton] = useState('CONTENTS')
     /*
@@ -23,6 +32,16 @@ const Menu = ({
    contents
    manager
      */
+
+
+    const [boardList, setBoardList] = useState([])
+
+
+    useEffect(() => {
+        if (boardListData) {
+            setBoardList(boardListData)
+        }
+    }, [boardListData]);
 
 
     return (
@@ -115,6 +134,26 @@ const Menu = ({
                     }}
                     className={'relative z-99 before:absolute before:left-[0] before:top-[0] before:w-full before:h-full before:bg-[#161616] before:bg-opacity-95 before:-z-10'}
                 >
+
+                    {
+                        selectedButton === 'CONTENTS' &&
+                        <ul>
+                            {
+                                boardList.map((item) => (
+                                    <SubMenuButtonWrap
+                                        key = {item.boardId}
+                                        text={item.boardNm}
+                                        boardId = {item.boardId}
+                                        setMenuOpen={setMenuOpen}
+                                        selectedButton={selectedButton}
+                                    />
+                                ))
+                            }
+                        </ul>
+
+                    }
+
+
                     {selectedButton === 'MY PAGE' &&
                         <ul>
                             <SubMenuButtonWrap

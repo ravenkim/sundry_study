@@ -1,8 +1,6 @@
-import axios from 'axios';
 import {
     reducerUtils, reduxMaker
 } from "src/common/utils/redux/asyncUtils.jsx";
-import client from "../../api/client.jsx";
 import {addUser, getAuthList, getUsers, test} from "./adminAPI.jsx";
 
 
