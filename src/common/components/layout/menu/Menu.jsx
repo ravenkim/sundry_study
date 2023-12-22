@@ -115,30 +115,64 @@ const Menu = ({
                     }}
                     className={'relative z-99 before:absolute before:left-[0] before:top-[0] before:w-full before:h-full before:bg-[#161616] before:bg-opacity-95 before:-z-10'}
                 >
+                    {selectedButton === 'MY PAGE' &&
+                        <ul>
+                            <SubMenuButtonWrap
+                                text={"회원 정보"}
+                                tab={'userInfo'}
+                                setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
+                            />
+                            <SubMenuButtonWrap
+                                text={"대여 목록"}
+                                tab={'rentalsInfo'}
+                                setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
+                            />
+                            <SubMenuButtonWrap
+                                text={"관심 목록"}
+                                tab={'likesInfo'}
+                                setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
+                            />
+                            <SubMenuButtonWrap
+                                text={"예약 목록"}
+                                tab={'reservationsInfo'}
+                                setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
+                            />
+                        </ul>
+                    }
+
                     {selectedButton === 'MANAGER' &&
                         <ul>
                             <SubMenuButtonWrap
                                 text={"회원 관리"}
                                 tab={'member'}
                                 setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
                             />
                             <SubMenuButtonWrap
                                 text={"보드 관리"}
                                 tab={'board'}
                                 setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
                             />
                             <SubMenuButtonWrap
                                 text={"연체자 관리"}
                                 tab={'delinquent'}
                                 setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
                             />
                             <SubMenuButtonWrap
                                 text={"권한 관리"}
                                 tab={'auth'}
                                 setMenuOpen={setMenuOpen}
+                                selectedButton={selectedButton}
                             />
                         </ul>
                     }
+
                 </div>
             </div>
             {/*tablet~pc*/}
