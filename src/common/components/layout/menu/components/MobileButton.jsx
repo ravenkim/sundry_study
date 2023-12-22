@@ -31,21 +31,25 @@ const MobileButton = ({
                                     text={"회원 관리"}
                                     tab={'userInfo'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
                                     text={"보드 관리"}
                                     tab={'rentalsInfo'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
                                     text={"연체자 관리"}
                                     tab={'likesInfo'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
                                     text={"권한 관리"}
                                     tab={'reservationsInfo'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                             </ul>
 
@@ -58,21 +62,25 @@ const MobileButton = ({
                                     text={"회원 관리"}
                                     tab={'member'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
                                     text={"보드 관리"}
                                     tab={'board'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
                                     text={"연체자 관리"}
                                     tab={'delinquent'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
                                     text={"권한 관리"}
                                     tab={'auth'}
                                     setMenuOpen={setMenuOpen}
+                                    selectedButton={selectedButton}
                                 />
                             </ul>
 
