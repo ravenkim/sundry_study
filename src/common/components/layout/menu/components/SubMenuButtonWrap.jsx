@@ -7,7 +7,8 @@ import {profileAction} from "../../../../../features/profile/profileReducer.jsx"
 const SubMenuButtonWrap = ({
                                text,
                                tab,
-                                setMenuOpen
+                                setMenuOpen,
+                            selectedButton
                            }) => {
     const dispatch = useDispatch()
 
@@ -18,9 +19,18 @@ const SubMenuButtonWrap = ({
     return (
         <li
             onClick={() => {
-                dispatch(profileAction.setTab(tab))
 
-                dispatch(push('/profile'))
+                if (selectedButton === 'MANAGER') {
+                    dispatch(adminAction.setTab(tab))
+
+                    dispatch(push('/admin'))
+                }
+
+                else if(selectedButton === 'MY PAGE') {
+                    dispatch(profileAction.setTab(tab))
+
+                    dispatch(push('/profile'))
+                }
 
                 setMenuOpen(false)
             }}
