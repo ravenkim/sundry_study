@@ -3,10 +3,11 @@ import {createBrowserHistory} from 'history'
 import createSagaMiddleware from 'redux-saga'
 import {createReduxHistoryContext} from "redux-first-history";
 import {all} from 'redux-saga/effects'
-import {assetsSlice} from "../assets/assetsReducer.jsx";
-import {userSaga, userSlice} from "../features/accounts/userReducer.jsx";
-import {adminSaga, adminSlice} from "../features/admin/adminReducer.jsx";
+import {assetsSlice} from "src/assets/assetsReducer.jsx";
+import {userSaga, userSlice} from "src/features/accounts/userReducer.jsx";
+import {adminSaga, adminSlice} from "src/features/admin/adminReducer.jsx";
 import {profileSaga, profileSlice} from "src/features/profile/profileReducer.jsx";
+import {cmsSaga, cmsSlice} from "src/features/cms/cmsReducer.jsx";
 
 const {
     createReduxHistory,
@@ -21,6 +22,7 @@ const reducers = {
     userReducer: userSlice.reducer,
     adminReducer: adminSlice.reducer,
     profileReducer: profileSlice.reducer,
+    cmsReducer: cmsSlice.reducer,
 }
 
 
@@ -28,7 +30,8 @@ export function* rootSaga() {
     yield all([
         userSaga(),
         adminSaga(),
-        profileSaga()
+        profileSaga(),
+        cmsSaga()
     ]);
 }
 
