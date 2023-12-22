@@ -17,7 +17,7 @@ const SSlayout = ({
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(cmsAction.getBoardList())
+
     }, []);
 
 

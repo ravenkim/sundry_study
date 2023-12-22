@@ -6,15 +6,17 @@ import store from "./app/store.jsx";
 import {CookiesProvider} from "react-cookie";
 
 // css import
-import '../src/assets/reset.css';
-import '../src/assets/global/global.css';
-import '../src/assets/text/font.css';
-import {setUserHandler} from "./common/utils/redux/loginUtils.jsx";
+import 'src/assets/reset.css';
+import 'src/assets/global/global.css';
+import 'src/assets/text/font.css';
+import {setUserHandler} from "src/common/utils/redux/loginUtils.jsx";
+import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 //
 
 
 setUserHandler()
 
+ store.dispatch(cmsAction.getBoardList())
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <CookiesProvider defaultSetOptions={{path: '/'}}>
