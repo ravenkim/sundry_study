@@ -13,7 +13,6 @@ const SSbutton = ({
         <Button
 
             style={{
-
                 ...style,
             }}
             {...otherProps}

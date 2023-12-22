@@ -8,14 +8,25 @@ import {Spin} from 'antd';
 const AdminMemberTable = () => {
     const dispatch = useDispatch()
     const {
-        usersData,
+        users,
         usersDataLoading
     } = useSelector(({adminReducer}) => ({
-            usersData: removeRole(adminReducer.users.data),
+            users: removeRole(adminReducer.users.data),
             usersDataLoading: adminReducer.users.loading
         }),
         shallowEqual
     );
+
+
+    const [usersData, setUsersData] = useState()
+
+
+    useEffect(() => {
+        if(users)setUsersData(users)
+    }, [users]);
+
+
+
 
 
     useEffect(() => {
