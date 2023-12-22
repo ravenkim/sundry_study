@@ -52,7 +52,7 @@ const Menu = ({
                 backgroundColor: "black",
                 display: 'flex',
                 flexDirection: 'row',
-                opacity: '0.9'
+                opacity: '0.97'
             }}
             className={'w-full h-full fixed z-[99]'}
 

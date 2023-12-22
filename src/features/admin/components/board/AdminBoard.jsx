@@ -4,6 +4,7 @@ import SSeditor from "../../../../common/components/editor/SSeditor.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 import AdminMemberTable from "../member/AdminMemberTable.jsx";
 import AdminMemberAddModal from "../member/AdminMemberAddModal.jsx";
+import AdminBoardTable from "./AdminBoardTable.jsx";
 
 const AdminBoard = () => {
 
@@ -27,7 +28,7 @@ const AdminBoard = () => {
             </div>
 
             <div>
-                <AdminMemberTable/>
+                <AdminBoardTable/>
             </div>
 
 
