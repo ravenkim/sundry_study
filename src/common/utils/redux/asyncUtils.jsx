@@ -82,7 +82,6 @@ export const initialStateHandler = (apiAction) => {
 export const createRequestSaga = (prefix, reducerName, apiRequest) => {
     return function* fetchApiData(action) {
         try {
-            console.log('action payload', action.payload)
             const response = yield call(() => apiRequest(action.payload)); // 여기서 apiCall은 실제 API 호출 함수입니다.
             yield put({
                 type: `${prefix}/${reducerName}Success`,

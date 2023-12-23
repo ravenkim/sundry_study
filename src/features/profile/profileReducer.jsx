@@ -4,7 +4,7 @@ import {
 } from "src/common/utils/redux/asyncUtils.jsx";
 import client from "../../api/client.jsx";
 import imgClient from "../../api/imgClient.jsx";
-import {getUserProfileImg, imgTest, postUserProfileImg} from "./profileAPI.jsx";
+import {getUserFullStat, getUserProfileImg, imgTest, postUserProfileImg} from "./profileAPI.jsx";
 
 
 const prefix = 'profile'
@@ -28,6 +28,11 @@ const asyncRequest = {
         {dddd: reducerUtils.init()},
         imgTest
     ],
+
+    getUserFullStat: [
+        {userStat:reducerUtils.init()},
+        getUserFullStat
+    ]
 
 }
 
