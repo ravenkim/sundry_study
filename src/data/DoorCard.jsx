@@ -68,7 +68,7 @@ const DoorCard = [
 </defs>
 </svg>
 `},
-    {title: '프로필', root:'/profile', doorId: 3, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '프로필', root:'/profile', tab:'userInfo', action:'profileAction', doorId: 3, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2424_1784)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M78.9883 1.5625H9.0127C7.12143 1.5625 5.57125 3.10377 5.5625 4.99505V5.0127V18.0166H82.4386V5.01286C82.4386 3.11268 80.884 1.5625 78.9883 1.5625Z" fill="#FF7D95"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M82.4386 18.0166H5.5625V62.8702V62.8879C5.57141 64.7746 7.12158 66.3204 9.0127 66.3204H21.9855C19.4299 62.2899 17.9506 57.5153 17.9506 52.3908C17.9506 38.005 29.6125 26.3433 43.9982 26.3433C58.3839 26.3433 70.0457 38.0052 70.0457 52.3908C70.0457 57.5153 68.5663 62.2899 66.0108 66.3204H78.9882C80.8839 66.3204 82.4384 64.7659 82.4384 62.8702V18.0166H82.4386Z" fill="white"/>
@@ -98,7 +98,7 @@ const DoorCard = [
 </defs>
 </svg>
 `},
-    {title: '관리자', root:'/admin', doorId: 4, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '관리자', root:'/admin', tab:'member', action:'adminAction', doorId: 4, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2342_515)">
 <path d="M78.3882 35.8603L81.8971 29.2851C82.4023 28.3385 82.6665 27.2821 82.6665 26.2091C82.6665 25.0809 82.3744 23.9719 81.8185 22.9901C81.2626 22.0084 80.462 21.1873 79.4946 20.6068L78.4823 19.9995H73.3332V25.3328L67.8022 30.5673L78.3882 35.8603Z" fill="#FFCEB6"/>
 <path d="M78.6667 7.99945H73.3334C71.8607 7.99945 70.6667 9.19336 70.6667 10.6661V22.6661C70.6667 24.1389 71.8607 25.3328 73.3334 25.3328H78.6667C80.1395 25.3328 81.3334 24.1389 81.3334 22.6661V10.6661C81.3334 9.19336 80.1395 7.99945 78.6667 7.99945Z" fill="#4F5DFF"/>
