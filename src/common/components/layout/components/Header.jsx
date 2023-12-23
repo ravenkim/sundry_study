@@ -1,10 +1,11 @@
-import {MenuOutlined} from "@ant-design/icons";
+import {MenuOutlined,UserOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {push} from "redux-first-history";
 import React, {useEffect, useState} from "react";
 import MiniProfile from "./MiniProfile.jsx";
-import {Popover} from "antd";
+import {Popover, Avatar, Space} from "antd";
+import {profileAction} from "../../../../features/profile/profileReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
@@ -16,9 +17,11 @@ const Header = ({
     const dispatch = useDispatch()
 
     const {
-        bgcolor1
-    } = useSelector(({assetsReducer}) => ({
+        bgcolor1,
+        userProfileImg
+    } = useSelector(({assetsReducer, profileReducer}) => ({
             bgcolor1: assetsReducer.colors.bgcolor,
+            userProfileImg: profileReducer.getUserProfileImg,
         }),
         shallowEqual
     );
@@ -26,7 +29,10 @@ const Header = ({
     const [imageSrc, setImageSrc] = useState('');
 
     useEffect(() => {
-        setImageSrc('/src/assets/img/profile_example.png')
+        dispatch(profileAction.getUserProfileImg())
+        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+        setImageSrc(userProfileImg)
+        // get profile 이미지 가져왔는지 데이터에 추가했을 때 확인
     }, []);
 
 
@@ -75,6 +81,7 @@ const Header = ({
                     justifyContent: "center",
 
                 }}
+                className={'cursor-pointer'}
                 onClick={() => dispatch(push('/door'))}
             >
 
@@ -100,7 +107,12 @@ const Header = ({
                     <div
                         className={'after:overflow-hidden rounded-full overflow-hidden max-w-[63px] max-h-[63px] flex justify-center items-center cursor-pointer bg-[#ffffff]'}
                     >
-                        <img src={imageSrc} alt="#" className={'max-w-[40px] max-h-[auto]'}/>
+                        {userProfileImg?.data == null ? <Space direction='vertical' wrap size={40}>
+                                <Avatar size={40} icon={<UserOutlined/>}/>
+                            </Space> : <img src={imageSrc} alt="#" className={'max-w-[40px] max-h-[auto]'}/>
+                        }
+
+                        
                     </div>
 
                 </div>

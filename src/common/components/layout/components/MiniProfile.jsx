@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import SSbutton from "../../button/SSbutton.jsx";
+import SSbutton from "/src/common/components/button/SSbutton.jsx";
 import {userAction} from "src/features/accounts/userReducer.jsx";
-import {useDispatch} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {push} from "redux-first-history";
+import {profileAction} from "/src/features/profile/profileReducer.jsx";
+import {Avatar, Space} from 'antd';
+import {UserOutlined} from '@ant-design/icons';
+import {removeRole} from "../../../utils/redux/dataProcessingUtils.jsx";
 
 const MiniProfile = () => {
     const dispatch = useDispatch()
@@ -11,8 +16,31 @@ const MiniProfile = () => {
 
     useEffect(() => {
         setImageSrc('/src/assets/img/profile_example.png')
+        // 이미지 get으로 받아오고 회원에 따라서 수정한 이미지가 아니면 안트디 초기 이미지로 설정
     }, []);
 
+    const {
+        user,
+        userProfileImg,
+
+    } = useSelector(({userReducer, profileReducer}) => ({
+            user: userReducer.user,
+            userProfileImg: profileReducer.getUserProfileImg,
+
+        }),
+        shallowEqual
+    )
+
+    const [suerAuthNm, setSuerAuthNm] = useState()
+
+
+    useEffect(() => {
+        dispatch(profileAction.getUserProfileImg())
+
+        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+    }, []);
+
+    console.log('phoneNumber', user?.phoneNumber)
 
     return (
 
@@ -22,20 +50,27 @@ const MiniProfile = () => {
         >
             <div
                 className={'relative w-full flex flex-col justify-center items-center bg-[#5565F6] bg-opacity-60 p-[20px]'}>
-                <h4 className={'text-[#ffffff] pb-[50px]'}>일반 사용자</h4>
+                <h4 className={'text-[#ffffff] pb-[50px]'}>{user?.authNm.replace('ROLE', '').replace(/_/g, ' ').trim()}</h4>
                 <div
-                    className={'absolute rounded-full overflow-hidden border-[#ffffff] border-2 box-border border-solid -bottom-1/2 -translate-y-1/2 cursor-pointer'}>
-                    <img src={imageSrc} alt="#" className={'max-w-[63px] h-auto'}
-                         onClick={() => {
-                             console.log('프로필 수정 화면으로 이동')
-                         }}
-                    />
+                    className={'absolute rounded-full overflow-hidden border-[#ffffff] border-2 box-border border-solid -bottom-1/2 -translate-y-1/2 cursor-pointer bg-white'}>
+
+                    {userProfileImg?.data == null
+                        ? <Space direction='vertical' wrap size={63} onClick={()=> { dispatch(push('/profile'))}}>
+                            <Avatar size={63} icon={<UserOutlined/>}/>
+                        </Space>
+                        : <img src={imageSrc} alt="#" className={'max-w-[63px] h-auto'}
+                               onClick={() => {
+                                   dispatch(push('/profile'))
+                               }}
+                        />
+                    }
                 </div>
             </div>
             <div className={'p-[20px] pt-[50px] flex flex-col justify-center items-center gap-[8px]'}>
                 <div className={'flex justify-center items-center flex-col mb-[20px]'}>
-                    <h5>박찬민</h5>
-                    <h5>cksals123@gmail.com</h5>
+                    <h5>{user?.userNm}</h5>
+                    <h5>{user?.userEmail}</h5>
+                    <h5>{user?.phoneNumber}</h5>
                 </div>
                 <SSbutton onClick={() => {
                     /*내 정보 페이지로 이동*/

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
 import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
 import {Divider, Tabs} from "antd";
@@ -12,6 +12,7 @@ import {profileAction} from "./profileReducer.jsx";
 
 import {UserOutlined} from '@ant-design/icons';
 import {Avatar, Space} from 'antd';
+import {adminAction} from "../admin/adminReducer.jsx";
 
 
 const Profile = () => {
@@ -21,25 +22,31 @@ const Profile = () => {
     const {
         activeTab,
         userProfileImg,
-        user
+        user,
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
             activeTab: profileReducer.tab,
-            userProfileImg: profileReducer.getUserProfileImg
+            userProfileImg: profileReducer.getUserProfileImg,
+
         }),
         shallowEqual
     )
 
+    /*const [userData, setUserData] = useState()*/
+
 
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg())
+        /*dispatch(adminAction.getUsers())
+        setUserData(usersData)*/
     }, []);
 
     useEffect(() => {
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
     }, [])
+
 
     return (
         <>
