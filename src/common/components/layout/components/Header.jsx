@@ -21,18 +21,15 @@ const Header = ({
         userProfileImg
     } = useSelector(({assetsReducer, profileReducer}) => ({
             bgcolor1: assetsReducer.colors.bgcolor,
-            userProfileImg: profileReducer.getUserProfileImg,
+            userProfileImg: profileReducer.userProfileImg.data,
         }),
         shallowEqual
     );
 
-    const [imageSrc, setImageSrc] = useState('');
-
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg())
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
-        setImageSrc(userProfileImg)
-        // get profile 이미지 가져왔는지 데이터에 추가했을 때 확인
+
     }, []);
 
 
@@ -100,16 +97,16 @@ const Header = ({
             {/*프로필 영역*/}
 
             {/*상세정보*/}
-            <Popover  content={ <MiniProfile/>} trigger="click" placement="bottomRight"  arrow={{pointAtCenter: true}}>
+            <Popover className={'p-[0]'}  content={ <MiniProfile />} trigger="click" placement="bottomRight"  arrow={{pointAtCenter: true}}>
 
                 {/*프로필 사진 부분*/}
                 <div className={'w-[63px] h-[63px] flex justify-center items-center relative'}>
                     <div
                         className={'after:overflow-hidden rounded-full overflow-hidden max-w-[63px] max-h-[63px] flex justify-center items-center cursor-pointer bg-[#ffffff]'}
                     >
-                        {userProfileImg?.data == null ? <Space direction='vertical' wrap size={40}>
+                        {userProfileImg == null ? <Space direction='vertical' wrap size={40}>
                                 <Avatar size={40} icon={<UserOutlined/>}/>
-                            </Space> : <img src={imageSrc} alt="#" className={'max-w-[40px] max-h-[auto]'}/>
+                            </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full]'}/>
                         }
 
                         

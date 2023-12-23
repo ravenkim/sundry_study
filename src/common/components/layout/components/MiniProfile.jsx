@@ -25,7 +25,7 @@ const MiniProfile = () => {
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
-            userProfileImg: profileReducer.getUserProfileImg,
+            userProfileImg: profileReducer.userProfileImg.data,
 
         }),
         shallowEqual
@@ -40,13 +40,9 @@ const MiniProfile = () => {
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
     }, []);
 
-    console.log('phoneNumber', user?.phoneNumber)
-
     return (
-
-
         <div
-            className={' tablet:right-[23px] text-[#000000] rounded-[10px] overflow-hidden shadow-[0px_1px_4px_rgba(0,0,0,0.3)] box-border w-[calc(100%-40px)] tablet:w-fit tablet:min-w-[400px] desktop:min-w-[300px] z-[90] bg-[#ffffff]'}
+            className={' tablet:right-[23px] text-[#000000] rounded-[10px] overflow-hidden box-border w-[calc(100%-40px)] tablet:w-fit tablet:min-w-[400px] desktop:min-w-[300px] z-[90] bg-[#ffffff]'}
         >
             <div
                 className={'relative w-full flex flex-col justify-center items-center bg-[#5565F6] bg-opacity-60 p-[20px]'}>
@@ -54,11 +50,11 @@ const MiniProfile = () => {
                 <div
                     className={'absolute rounded-full overflow-hidden border-[#ffffff] border-2 box-border border-solid -bottom-1/2 -translate-y-1/2 cursor-pointer bg-white'}>
 
-                    {userProfileImg?.data == null
+                    {userProfileImg == null
                         ? <Space direction='vertical' wrap size={63} onClick={()=> { dispatch(push('/profile'))}}>
                             <Avatar size={63} icon={<UserOutlined/>}/>
                         </Space>
-                        : <img src={imageSrc} alt="#" className={'max-w-[63px] h-auto'}
+                        : <img src={userProfileImg} alt="#" className={'max-w-[63px] h-auto'}
                                onClick={() => {
                                    dispatch(push('/profile'))
                                }}
@@ -70,10 +66,10 @@ const MiniProfile = () => {
                 <div className={'flex justify-center items-center flex-col mb-[20px]'}>
                     <h5>{user?.userNm}</h5>
                     <h5>{user?.userEmail}</h5>
-                    <h5>{user?.phoneNumber}</h5>
                 </div>
                 <SSbutton onClick={() => {
-                    /*내 정보 페이지로 이동*/
+                    dispatch(push('/profile'))
+                    dispatch(profileAction.setTab('userInfo'))
                 }}
                           className={'w-full'}
                 >
@@ -82,6 +78,9 @@ const MiniProfile = () => {
 
                 <SSbutton onClick={() => {
                     /*관심목록으로 이동*/
+                    dispatch(push('/profile'))
+                    dispatch(profileAction.setTab('likesInfo'))
+
                 }}
                           className={'w-full'}
                 >
@@ -89,6 +88,8 @@ const MiniProfile = () => {
                 </SSbutton>
 
                 <SSbutton onClick={() => {
+                    dispatch(push('/profile'))
+                    dispatch(profileAction.setTab('rentalsInfo'))
                     /*대여 목록으로 이동*/
                 }}
                           className={'w-full'}
