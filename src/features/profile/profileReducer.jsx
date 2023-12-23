@@ -4,6 +4,7 @@ import {
 } from "src/common/utils/redux/asyncUtils.jsx";
 import client from "../../api/client.jsx";
 import imgClient from "../../api/imgClient.jsx";
+import {getUserProfileImg, imgTest, postUserProfileImg} from "./profileAPI.jsx";
 
 
 const prefix = 'profile'
@@ -15,17 +16,17 @@ const prefix = 'profile'
 const asyncRequest = {
     getUserProfileImg: [
         {userProfileImg: reducerUtils.init()},
-        () => axios.get('http://110.35.15.168:8088/profile/user/img')
+        getUserProfileImg
     ],
 
     postUserProfileImg: [
-        {userProfileImg:reducerUtils.init()},
-        (param)=>console.log(param)
+        {postUserProfileImgStatus:reducerUtils.init()},
+        postUserProfileImg
     ],
 
     test: [
         {dddd: reducerUtils.init()},
-        (param) => imgClient.post('http://110.35.15.168:8088/test', param)
+        imgTest
     ],
 
 }
