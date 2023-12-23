@@ -7,6 +7,7 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import DoorCard from '/src/data/DoorCard.jsx'
 import {push} from "redux-first-history";
 import {adminAction} from "../admin/adminReducer.jsx";
+import {profileAction} from "../profile/profileReducer.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -50,7 +51,12 @@ const Door = () => {
                 </div>
                 <SScardWrap>
                     {DoorCard.map((item, idx) => (
-                        <SScard onClick={() => dispatch(push(item.root))} className={'cursor-pointer'} key={idx}>
+                        <SScard onClick={() => {
+                            dispatch(push(item.root))
+                            item?.action === 'profileAction' ? dispatch(profileAction.setTab(item?.tab)) : false
+                            item?.action === 'adminAction' ? dispatch(adminAction.setTab(item?.tab)) : false
+                        }
+                        } className={'cursor-pointer'} key={idx}>
                             <div className={'p-[20px] box-border flex flex-col justify-between w-full'}>
                                 <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
                                     {item.title}
