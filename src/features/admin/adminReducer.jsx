@@ -1,7 +1,7 @@
 import {
     reducerUtils, reduxMaker
 } from "src/common/utils/redux/asyncUtils.jsx";
-import {addUser, getAuthList, getUsers, test} from "./adminAPI.jsx";
+import {addUser, getAuthList, getBoardList, getUsers, test} from "./adminAPI.jsx";
 
 
 const prefix = 'admin'
@@ -32,6 +32,10 @@ const asyncRequest = {
     addUser:[
         {addUserStatus: reducerUtils.init()},
         addUser
+    ],
+     getBoardList:[
+        {boardList: reducerUtils.init()},
+        getBoardList
     ],
 
 
