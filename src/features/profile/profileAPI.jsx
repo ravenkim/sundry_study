@@ -6,13 +6,7 @@ export const getUserProfileImg = () =>
 
 export const postUserProfileImg = (param) => {
     imgClientPost.post('/profile/user/save-img', param);
-    console.log('param', param)
 }
 
-export const getUserFullStat = () =>
+export const getFullUserInfo = () =>
     userClient.get('/profile/user');
-
-
-
-export const imgTest = (param) =>
-    imgClientPost.post('/test', param);
