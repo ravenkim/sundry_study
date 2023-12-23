@@ -27,22 +27,14 @@ const Profile = () => {
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
             activeTab: profileReducer.tab,
-            userProfileImg: profileReducer.getUserProfileImg,
+            userProfileImg: profileReducer.userProfileImg.data,
 
         }),
         shallowEqual
     )
 
-    /*const [userData, setUserData] = useState()*/
-
-
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg())
-        /*dispatch(adminAction.getUsers())
-        setUserData(usersData)*/
-    }, []);
-
-    useEffect(() => {
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
     }, [])
@@ -54,9 +46,9 @@ const Profile = () => {
                 <SSwrapper className={'w-full m-[0] bg-[#f5f5f5] bg-opacity-50 p-[16px]'}>
                     <div className={'flex pb-[16px] items-center gap-[20px]'}>
                         {/*<img src="" alt="#" className={'desktop:max-w-[80px] desktop:max-h-[80px]'}/>*/}
-                        {userProfileImg?.data == null ? <Space wrap size={80}>
+                        {userProfileImg == null ? <Space wrap size={80}>
                             <Avatar size={80} icon={<UserOutlined/>}/>
-                        </Space> : <img src={userProfileImg?.data} alt="#"/>}
+                        </Space> : <img src={userProfileImg} alt="#" className={'rounded-full w-[80px] h-full max-w-[80px] max-h-[80px]'}/>}
 
 
                         <h2>{user.userNm}님, 어서오세요!</h2>

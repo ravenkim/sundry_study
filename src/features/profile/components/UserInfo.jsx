@@ -6,15 +6,14 @@ import {Avatar, Space, Button, message, Upload} from 'antd';
 import SSbutton from "../../../common/components/button/SSbutton.jsx";
 import SSinput from "../../../common/components/input/SSinput.jsx";
 import imgClient from "../../../api/imgClient.jsx";
-import {getUserFullStat} from "../profileAPI.jsx";
 
 const {Dragger} = Upload;
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
-    const [img, setImg] = useState([])
     const [selectedImage, setSelectedImage] = useState(null);
     const inputRef = useRef(null)
+    const [userImg, setUserImg] = useState('')
 
     const dispatch = useDispatch()
 
@@ -22,61 +21,39 @@ const UserInfo = () => {
         user,
         userProfileImg,
         postUserProfileImg,
-        test,
-        getFullUser
+        fullUserInfo
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
-            userProfileImg: profileReducer.getUserProfileImg,
+            userProfileImg: profileReducer.userProfileImg.data,
             postUserProfileImg: profileReducer.postUserProfileImg,
-            getFullUser: profileReducer.getUserFullStat,
+            fullUserInfo: profileReducer.fullUserInfo.data,
         }),
         shallowEqual
     )
 
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg())
-        dispatch(profileAction.getUserFullStat())
+        dispatch(profileAction.getFullUserInfo())
+
+        setUserImg(userProfileImg)
+        console.log('userImg', userImg)
 
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
-        if (!getFullUser) dispatch(profileAction.getUserFullStat(null))
+        if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
+
     }, []);
 
-    /*const props = {
-        name: 'file',
-        multiple: false,
-        action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        onChange(info) {
-            const {status, originFileObj} = info.file;
-            if (status !== 'uploading' && status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully.`);
+    useEffect(()=> {
+        console.log('getFullUser', fullUserInfo)
+        console.log('userProfileImg',userProfileImg)
+    },[fullUserInfo,userProfileImg])
 
-                setSelectedImage(originFileObj); // 데이터 state에 저장
 
-                console.log('status', originFileObj);
-            } else if (status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-        onDrop(e) {
-            console.log('Dropped files', e.dataTransfer.files);
-        },
-    };*/
-
-    useEffect(() => { // 이미지 데이터 저장되면 실행
-        /*console.log('selectedImage',selectedImage)*/
-    }, [selectedImage])
 
     const onSave = () => {
         if (selectedImage) {
-            /*const formData = new FormData();
-            formData.append('image', selectedImage);
 
-            console.log('formData', formData);*/
-            /*console.log('selectedImage', selectedImage)*/
             dispatch(profileAction.postUserProfileImg(selectedImage)); // 이미지 업로드 액션
         } else {
             console.log('파일이 없습니다.');
@@ -124,74 +101,59 @@ const UserInfo = () => {
         },
     };
 
-    console.log(getFullUser)
 
 
     return (
         <>
             <div className={'w-full'}>
-                <div className={'w-fit flex desktop:flex-row gap-[60px] desktop:m-0 desktop:mx-auto'}>
-                    <div className={'flex flex-col items-center'}>
+                <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
+                    <div className={'flex flex-col items-center '}>
                         {/*<img src="" alt="#"/>*/}
-                        {userProfileImg?.data == null
+                        {userProfileImg == null
                             ? <Space direction='vertical' wrap size={180}>
                                 <Avatar size={180} icon={<UserOutlined/>}/>
                             </Space>
-                            : <img src={userProfileImg?.data} alt="#"/>
+                            : <img src={userProfileImg} alt="#" className={'rounded-full w-[180px] h-full max-w-[180px] max-h-[180px]'}/>
                         }
-
-                        {/*<img src={user.img} alt="#"/>*/}
-                        {/*<label htmlFor="profileImgSet">프로필 이미지 변경</label>*/}
-                        {/*<input
-                            type="file"
-                            id='profileImgSet'
-                            accept='image/*'
-                            name='profileImgSet'
-                            onChange={onUploadImage}
-                            ref={inputRef}
-                        />*/}
-                        {/*<Dragger {...props}
-                                 ref={inputRef}>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined/>
-                            </p>
-                            <p className="ant-upload-text">클릭 또는 파일 드래그로 <br/>프로필 이미지를 변경해보세요. </p>
-                        </Dragger>*/}
 
                         <form action="/item" method={'post'} encType={"multipart/form-data"}>
                             <Upload {...props}>
                                 <Button icon={<UploadOutlined/>}>이미지 업로드</Button>
                             </Upload>
-                            <Button onClick={handleUpload}>제출</Button>
+                            <Button onClick={handleUpload}>변경 이미지 저장</Button>
+                            {/*나중에 버튼 ref로 묶어서 하단 저장버튼에서 함수 실행되도록 바꾸기 */}
                         </form>
                     </div>
                     <div className={'flex flex-col gap-[6px]'}>
                         <div
                             className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
                             <p className={'desktop:min-w-[80px]'}>아이디</p>
-                            <p className={''}>{getFullUser?.userInfo.userNm}</p>
+                            <p className={''}>{fullUserInfo?.userInfo.userEmail}</p>
                         </div>
-                        <div
-                            className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
-                            <p className={'desktop:min-w-[80px]'}>비밀번호</p>
-                            <div className={'flex flex-col desktop:flex-row gap-[6px]'}>
-                                <button
-                                    className={'box-border bg-[#E3E4E8] text-[#51525c] px-[10px] py-[5px] rounded-[5px] min-w-fit w-fit'}
-                                    onClick={() => setPasswordInput(!passwordInput)}>비밀번호 변경하기
-                                </button>
-                                {passwordInput && <SSinput className={'mb-[0]'}/>}
-                                {/*input value값 post 요청하기 - 핸들러는 저장버튼 눌렀을 때 요청*/}
-                            </div>
-                        </div>
+
                         <div
                             className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
                             <p className={'desktop:min-w-[80px]'}>이름</p>
-                            <p>{user?.userNm}</p>
+                            <p>{fullUserInfo?.userInfo.userNm}</p>
                         </div>
                         <div
                             className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
                             <p className={'desktop:min-w-[80px]'}>핸드폰 번호</p>
-                            <p>{user?.phoneNumber}</p>
+                            <p>{fullUserInfo?.userInfo.phoneNumber}</p>
+                        </div>
+                        <div
+                            className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
+                            <div className={'h-fit desktop:h-[35.141px] desktop:max-h-[35.141px] self-start flex items-center'}>
+                                <p className={'desktop:min-w-[80px]'}>비밀번호</p>
+                            </div>
+                            <div className={'flex flex-col desktop:flex-col gap-[6px]'}>
+                                <button
+                                    className={'box-border bg-[#E3E4E8] text-[#51525c] px-[10px] py-[5px] rounded-[5px] min-w-fit w-fit desktop:max-w-[141.8px]'}
+                                    onClick={() => setPasswordInput(!passwordInput)}>비밀번호 변경하기
+                                </button>
+                                {passwordInput && <SSinput className={'mb-[0]  desktop:max-w-[141.8px]'}/>}
+                                {/*input value값 post 요청하기 - 핸들러는 저장버튼 눌렀을 때 요청*/}
+                            </div>
                         </div>
                     </div>
                 </div>
