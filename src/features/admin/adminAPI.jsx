@@ -15,3 +15,17 @@ export const getAuthList = () =>
 
 export const addUser = (param) =>
   client.post('admin/users/add', param)
+
+
+
+
+
+
+
+
+
+
+
+
+export const getBoardList = () =>
+  client.get('admin/boards')
