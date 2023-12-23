@@ -28,25 +28,25 @@ const MobileButton = ({
 
                             <ul className={`w-full flex justify-center items-center flex-col transition-all overflow-hidden ` + (selectedButton === 'MANAGER' && selected ? 'h-auto' : '')}>
                                 <SubMenuButtonWrap
-                                    text={"회원 관리"}
+                                    text={"회원 정보"}
                                     tab={'userInfo'}
                                     setMenuOpen={setMenuOpen}
                                     selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
-                                    text={"보드 관리"}
+                                    text={"대여 목록"}
                                     tab={'rentalsInfo'}
                                     setMenuOpen={setMenuOpen}
                                     selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
-                                    text={"연체자 관리"}
+                                    text={"관심 목록"}
                                     tab={'likesInfo'}
                                     setMenuOpen={setMenuOpen}
                                     selectedButton={selectedButton}
                                 />
                                 <SubMenuButtonWrap
-                                    text={"권한 관리"}
+                                    text={"예약 목록"}
                                     tab={'reservationsInfo'}
                                     setMenuOpen={setMenuOpen}
                                     selectedButton={selectedButton}
