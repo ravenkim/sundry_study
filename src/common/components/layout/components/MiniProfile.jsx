@@ -6,7 +6,7 @@ import {push} from "redux-first-history";
 import {profileAction} from "/src/features/profile/profileReducer.jsx";
 import {Avatar, Space} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
-import {removeRole} from "../../../utils/redux/dataProcessingUtils.jsx";
+import {removeRole} from "../../../utils/dataProcessingUtils.jsx";
 
 const MiniProfile = () => {
     const dispatch = useDispatch()

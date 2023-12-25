@@ -1,6 +1,6 @@
 import {
     reducerUtils, reduxMaker
-} from "src/common/utils/redux/asyncUtils.jsx";
+} from "src/common/utils/asyncUtils.jsx";
 import {addUser, getAuthList, getBoardList, getUsers, test} from "./adminAPI.jsx";
 
 

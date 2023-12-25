@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SStable from "src/common/components/table/SStable.jsx";
-import {removeRole} from "src/common/utils/redux/dataProcessingUtils.jsx";
+import {removeRole} from "src/common/utils/dataProcessingUtils.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {adminAction} from "../../adminReducer.jsx";
 import {Spin} from 'antd';

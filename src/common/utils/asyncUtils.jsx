@@ -2,7 +2,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {takeLatest} from 'redux-saga/effects';
 import {call, put} from 'redux-saga/effects';
-import client from "../../../api/client.jsx";
+import client from "../../api/client.jsx";
 
 //reducer data 상테
 export const reducerUtils = {
