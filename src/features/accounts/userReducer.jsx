@@ -23,6 +23,7 @@ function* login(action) {
             () =>  client.post("login", action.payload)
         )
 
+
         const tk = response.data?.accessToken
 
         setCookie('tk', tk)

@@ -1,4 +1,4 @@
-import {reducerUtils, reduxMaker} from "src/common/utils/redux/asyncUtils.jsx";
+import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
 import {getBoardList} from "./cmsAPI.jsx";
 
 

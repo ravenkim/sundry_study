@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {Divider, Input, Modal, Select} from "antd";
 import SSlabelForInput from "src/common/components/label/SSlabelForInput.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {removeRole} from "src/common/utils/redux/dataProcessingUtils.jsx";
+import {removeRole} from "src/common/utils/dataProcessingUtils.jsx";
 import showMessage from "src/common/components/notice/notice.js";
-import {validateEmail} from "src/common/utils/redux/validateUtils.jsx";
+import {validateEmail} from "src/common/utils/validateUtils.jsx";
 import {adminAction} from "../../adminReducer.jsx";
 
 const AdminMemberAddModal = ({
