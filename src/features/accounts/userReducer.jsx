@@ -7,32 +7,39 @@ import {jwtDecode} from "jwt-decode";
 
 
 const initialState = {
-    user: null
+    user: null,
+    loginErrorMsg: null,
 }
 
 
 export const loginT = (payload) =>
-  client.post("login", payload);
-
+    client.post("login", payload);
 
 
 //로그인 비동기 처리 > 처리가 많아지면 따로 파일 뺼것
 function* login(action) {
     try {
+
         const response = yield call(
-            () =>  client.post("login", action.payload)
+            () => client.post("login", action.payload)
         )
 
+        console.log(response)
+        if (response.data?.res) {
+            const tk = response.data?.msg
+            setCookie('tk', tk)
+            yield put({
+                type: 'user/loginSuccess',
+                payload: tk
+            });
+        } else {
+            yield put({
+                type: 'user/loginFailure',
+                payload: response.data?.msg
+            });
+        }
 
-        const tk = response.data?.accessToken
 
-        setCookie('tk', tk)
-
-
-        yield put({
-            type: 'user/loginSuccess',
-            payload: tk
-        });
     } catch (e) {
         yield put({
             type: 'user/loginFailure',
@@ -57,9 +64,13 @@ export const userSlice = createSlice({
         initialize: (state, action) => {
             //todo 하나만 초기화
         },
-        login: (state, action) => {},
+        login: (state, action) => {
+        },
         loginSuccess: (state, action) => {
             state.user = jwtDecode(action.payload)
+        },
+        loginFailure: (state, action) => {
+            state.loginErrorMsg = action.payload
         },
         //로그인 완료시 사용자 등록 (클라이언트가 인식하게끔)
         setUser: (state, action) => {
