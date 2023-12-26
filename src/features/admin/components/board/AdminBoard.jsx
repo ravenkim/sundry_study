@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import SSeditor from "../../../../common/components/editor/SSeditor.jsx";
-import SSbutton from "../../../../common/components/button/SSbutton.jsx";
-import AdminMemberTable from "../member/AdminMemberTable.jsx";
-import AdminMemberAddModal from "../member/AdminMemberAddModal.jsx";
+import SSbutton from "src/common/components/button/SSbutton.jsx";
 import AdminBoardTable from "./AdminBoardTable.jsx";
 import AdminBoardOrderModal from "./AdminBoardOrderModal.jsx";
+import {adminAction} from "../../adminReducer.jsx";
 
 const AdminBoard = () => {
 
@@ -25,7 +23,8 @@ const AdminBoard = () => {
 
 
                 <SSbutton
-
+                    onClick={      () =>       dispatch(adminAction.getBoardList())
+}
                 >새로고침</SSbutton>
 
                 <SSbutton
