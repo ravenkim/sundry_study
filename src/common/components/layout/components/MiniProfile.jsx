@@ -11,14 +11,6 @@ import {removeRole} from "../../../utils/dataProcessingUtils.jsx";
 const MiniProfile = () => {
     const dispatch = useDispatch()
 
-
-    const [imageSrc, setImageSrc] = useState('');
-
-    useEffect(() => {
-        setImageSrc('/src/assets/img/profile_example.png')
-        // 이미지 get으로 받아오고 회원에 따라서 수정한 이미지가 아니면 안트디 초기 이미지로 설정
-    }, []);
-
     const {
         user,
         userProfileImg,
@@ -30,9 +22,6 @@ const MiniProfile = () => {
         }),
         shallowEqual
     )
-
-    const [suerAuthNm, setSuerAuthNm] = useState()
-
 
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg())

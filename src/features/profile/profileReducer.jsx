@@ -4,7 +4,7 @@ import {
 } from "src/common/utils/asyncUtils.jsx";
 import client from "../../api/client.jsx";
 import imgClient from "../../api/imgClient.jsx";
-import {getFullUserInfo, getUserProfileImg, postUserProfileImg} from "./profileAPI.jsx";
+import {getFullUserInfo, getUserProfileImg, postUserProfileImg, postUserPW} from "./profileAPI.jsx";
 
 
 const prefix = 'profile'
@@ -27,7 +27,12 @@ const asyncRequest = {
     getFullUserInfo: [
         {fullUserInfo:reducerUtils.init()},
         getFullUserInfo
-    ] // 유지 언포메이션 데이터 콘솔 찍는게 안됨
+    ], // 유지 언포메이션 데이터 콘솔 찍는게 안됨
+
+    postUserPW:[
+        {userPW:reducerUtils.init()},
+        postUserPW
+    ]
 
 }
 
