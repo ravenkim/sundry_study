@@ -11,7 +11,7 @@ const AdminMemberTable = () => {
         users,
         usersDataLoading
     } = useSelector(({adminReducer}) => ({
-            users: adminReducer.users.data,
+            users: adminReducer.users.data?.userList,
             usersDataLoading: adminReducer.users.loading
         }),
         shallowEqual

@@ -19,7 +19,7 @@ const Menu = ({
     const {
         boardListData
     } = useSelector(({cmsReducer}) => ({
-            boardListData: cmsReducer.boardList.data
+            boardListData: cmsReducer.boardList.data?.boardList
         }),
         shallowEqual
     );

@@ -18,7 +18,7 @@ const AdminMemberAddModal = ({
         authListData,
         addUserStatus
     } = useSelector(({adminReducer}) => ({
-            authListData: adminReducer.authList.data,
+            authListData: adminReducer.authList.data?.authenticationList,
         addUserStatus:adminReducer.addUserStatus.data?.res
         }),
         shallowEqual
