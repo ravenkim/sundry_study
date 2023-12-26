@@ -11,6 +11,10 @@ const prefix = 'admin'
 
 //비동기 처리용 input
 const asyncRequest = {
+    // getApi: [
+    //     {aaaa: reducerUtils.init()},
+    //     () => axios.get('https://jsonplaceholder.typicode.com/posts')
+    // ],
 
     getUsers: [
         {users: reducerUtils.init()},
@@ -43,9 +47,6 @@ const asyncRequest = {
         {boardList: reducerUtils.init()},
         getBoardList
     ],
-
-
-
 
 }
 

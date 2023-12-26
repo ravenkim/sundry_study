@@ -5,7 +5,9 @@ import {jwtDecode} from "jwt-decode";
 
 const userClient = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
-
+    headers: {
+        'Content-Type': 'application/json',
+    },
 })
 
 
