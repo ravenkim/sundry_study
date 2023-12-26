@@ -10,3 +10,8 @@ export const postUserProfileImg = (param) => {
 
 export const getFullUserInfo = () =>
     userClient.get('/profile/user');
+
+
+export const postUserPW = (param) => {
+    userClient.post('/profile/user/save-pwd', param);
+}
