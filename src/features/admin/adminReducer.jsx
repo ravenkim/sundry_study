@@ -1,7 +1,7 @@
 import {
     reducerUtils, reduxMaker
 } from "src/common/utils/asyncUtils.jsx";
-import {addUser, getAuthList, getBoardList, getUsers, test} from "./adminAPI.jsx";
+import {addUser, getAuthList, getBoardList, getUsers, resetPassword} from "./adminAPI.jsx";
 
 
 const prefix = 'admin'
@@ -11,14 +11,6 @@ const prefix = 'admin'
 
 //비동기 처리용 input
 const asyncRequest = {
-    // getApi: [
-    //     {aaaa: reducerUtils.init()},
-    //     () => axios.get('https://jsonplaceholder.typicode.com/posts')
-    // ],
-    test: [
-        {test: reducerUtils.init()},
-        test
-    ],
 
     getUsers: [
         {users: reducerUtils.init()},
@@ -33,6 +25,15 @@ const asyncRequest = {
         {addUserStatus: reducerUtils.init()},
         addUser
     ],
+
+    resetPassword:[
+        {resetPasswordStatus: reducerUtils.init()},
+        resetPassword
+    ],
+
+
+
+
      getBoardList:[
         {boardList: reducerUtils.init()},
         getBoardList

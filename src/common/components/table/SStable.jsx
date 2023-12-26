@@ -148,11 +148,12 @@ const SStable = ({
 
                 if(item.render){
                     return {
+                        align: 'center',
                         ...item
                     }
-                }
-
-                return {
+                } else {
+                          return {
+                                     align: 'center',
                     render: text => (
                         <Highlighter
                             highlightStyle={{backgroundColor: 'yellow', padding: 0}}
@@ -164,6 +165,9 @@ const SStable = ({
                     ),
                     ...item
                 }
+                }
+
+
 
             })
         )
