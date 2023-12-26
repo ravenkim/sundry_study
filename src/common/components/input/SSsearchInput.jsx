@@ -10,7 +10,7 @@ const SSsearchInput = ({
                            placeholder = "",
                            inputStyle,
                            containerClassName = '',
-                            inputClassName,
+                            inputClassName = false,
                             iconClassName,
                             svgWidth,
                            inputOtherProps,
@@ -33,7 +33,6 @@ const SSsearchInput = ({
             <div className={'relative'}>
                 <Input
                     style={{
-                        height:'60px',
                         ...inputStyle,
                     }}
                     placeholder={placeholder}
@@ -41,10 +40,10 @@ const SSsearchInput = ({
                     onChange={onChange}
                     onPressEnter={onPressEnter}
                     {...inputOtherProps}
-                    className={'rounded-[5px] placeholder:text-[16px] px-[22px] text-[16px] text-[#ACACBA] placeholder:text-[#ACACBA] ' + inputClassName}
+                    className={'rounded-[5px] placeholder:text-[16px] px-[22px] text-[16px] text-[#ACACBA] placeholder:text-[#ACACBA] ' + (inputClassName ? ' h-[40px]' : ' h-[60px]')}
                 >
                 </Input>
-                <img src="/src/assets/img/icon_search.svg" alt="#" className={'absolute top-1/2 -translate-y-1/2 right-[22px]'}/>
+                <img src="/src/assets/img/icon_search.svg" alt="#" className={'absolute top-1/2 -translate-y-1/2 right-[22px] ' + (inputClassName ? 'h-[16px]' : '')}/>
             </div>
         </div>
     );
