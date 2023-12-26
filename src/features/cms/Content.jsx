@@ -91,6 +91,8 @@ const Content = () => {
                 >
                     <SSeditor
                         height={'1000px'}
+                        isEditMode ={true}
+                        changeHandler = {(contents) => {console.log(contents)}}
                     />
 
                 </div>

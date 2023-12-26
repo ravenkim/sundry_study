@@ -43,8 +43,7 @@ const UserInfo = () => {
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
         if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
 
-        dispatch(profileAction.initialize('userProfileImg'))
-        dispatch(profileAction.initialize('fullUserInfo'))
+
         // 요청 초기화 작성
     }, []);
 
@@ -93,7 +92,6 @@ const UserInfo = () => {
 
                     setFileList([])
                     dispatch(profileAction.getUserProfileImg())
-                    dispatch(profileAction.initialize('userProfileImg'))
 
                     // 업로드 후 필요한 작업을 수행합니다.
                 })
