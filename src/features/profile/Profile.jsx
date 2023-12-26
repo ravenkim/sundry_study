@@ -43,7 +43,7 @@ const Profile = () => {
     return (
         <>
             <SSsectionWrap>
-                <SSwrapper className={'w-full m-[0] bg-[#f5f5f5] bg-opacity-50 p-[16px]'}>
+                <SSwrapper className={'w-full m-[0] bg-[#f5f5f5] bg-opacity-50 p-[16px] h-full'}>
                     <div className={'flex pb-[16px] items-center gap-[20px]'}>
                         {/*<img src="" alt="#" className={'desktop:max-w-[80px] desktop:max-h-[80px]'}/>*/}
                         {userProfileImg == null ? <Space wrap size={80}>
@@ -86,10 +86,6 @@ const Profile = () => {
                     />
                 </SSwrapper>
             </SSsectionWrap>
-            {/*{getProfileImg}*/}
-            {activeTab}
-            {userProfileImg?.data == null ? '널이다 이자시가' : 'ㅁㄴㅇ'}
-
         </>
     )
 }

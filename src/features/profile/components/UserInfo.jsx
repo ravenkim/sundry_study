@@ -2,11 +2,12 @@ import React, {useEffect, useState, useCallback, useRef} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {profileAction} from "../profileReducer.jsx";
 import {UserOutlined, UploadOutlined, InboxOutlined} from '@ant-design/icons';
-import {Avatar, Space, Button, message, Upload} from 'antd';
+import {Avatar, Space, Button, message, Upload, Spin} from 'antd';
 import SSbutton from "../../../common/components/button/SSbutton.jsx";
 import SSinput from "../../../common/components/input/SSinput.jsx";
 import imgClient from "../../../api/imgClient.jsx";
 import userClient from "../../../api/userClient.jsx";
+import showMessage from "src/common/components/notice/notice.js";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -21,13 +22,15 @@ const UserInfo = () => {
         userProfileImg,
         postUserProfileImg,
         fullUserInfo,
-        postUserPW
+        postUserPW,
+        userDataLoading
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
             userProfileImg: profileReducer.userProfileImg.data,
             postUserProfileImg: profileReducer.postUserProfileImg,
             fullUserInfo: profileReducer.fullUserInfo.data,
+            userDataLoading: profileReducer.userProfileImg.loading,
             postUserPW: profileReducer.userPW,
         }),
         shallowEqual
@@ -40,6 +43,9 @@ const UserInfo = () => {
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
         if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
 
+        dispatch(profileAction.initialize('userProfileImg'))
+        dispatch(profileAction.initialize('fullUserInfo'))
+        // 요청 초기화 작성
     }, []);
 
     const validatePassword = (password) => {
@@ -82,14 +88,22 @@ const UserInfo = () => {
 
             imgClient.post('/profile/user/save-img', formData) // imgClient.post 메소드를 사용하여 이미지를 업로드합니다.
                 .then(response => {
-                    message.success('이미지 업로드가 완료되었습니다.');
+                    /*message.success('이미지 업로드가 완료되었습니다.');*/
+                    showMessage('success', '이미지 업로드가 완료되었습니다.')
+
+                    setFileList([])
+                    dispatch(profileAction.getUserProfileImg())
+                    dispatch(profileAction.initialize('userProfileImg'))
+
                     // 업로드 후 필요한 작업을 수행합니다.
                 })
                 .catch(error => {
-                    message.error('이미지 업로드 중 오류가 발생했습니다.');
+                    /*message.error('이미지 업로드 중 오류가 발생했습니다.');*/
+                    showMessage('error', '이미지 업로드가 완료되었습니다.')
                     // 오류 처리를 수행합니다.
                     console.log('error', error)
                 });
+            dispatch(profileAction.initialize('postUserProfileImg'));
         }
 
         if (postPwValue.trim() !== '') {
@@ -108,14 +122,19 @@ const UserInfo = () => {
                 dispatch(profileAction.postUserPW(postData));
                 userClient.post('/profile/user/save-pwd', postData)
                     .then(response => {
-                        message.success('성공적으로 패스워드를 변경하였습니다.');
+                        showMessage('success', response.data.msg)
+                        /*message.success('성공적으로 패스워드를 변경하였습니다.');*/
+                        console.log(response.data.msg)
                         setPostPwValue('') // 성공하면 인풋 값 초기화
+
+                        dispatch(profileAction.initialize('postUserPW'))
                     })
                     .catch(error => {
-                        message.error('알 수 없는 오류로 변경에 실패하였습니다.');
+                        showMessage('error', '비밀번호 변경 중 알 수 없는 오류가 발생하였습니다.')
                         console.log('error', error) // 에러 로그 보기
                     });
 
+                dispatch(profileAction.initialize('postUserPW'));
                 // 정규식 추가해야됨
                 // REGEX = "^((?=.\\d)(?=.[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$"
             }
@@ -161,69 +180,71 @@ const UserInfo = () => {
 
     return (
         <>
-            <div className={'w-full'}>
+            <Spin
+                spinning={userDataLoading}
+            >
+                <div className={'w-full'}>
+                    <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
+                        <div className={'flex flex-col items-center gap-[8px]'}>
+                            {userProfileImg == null
+                                ? <Space direction='vertical' wrap size={180}>
+                                    <Avatar size={180} icon={<UserOutlined/>}/>
+                                </Space>
+                                : <img src={userProfileImg} alt="#"
+                                       className={'rounded-full w-[180px] h-full max-w-[180px] max-h-[180px]'}/>
+                            }
 
-                <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
-
-                    <div className={'flex flex-col items-center gap-[8px]'}>
-                        {userProfileImg == null
-                            ? <Space direction='vertical' wrap size={180}>
-                                <Avatar size={180} icon={<UserOutlined/>}/>
-                            </Space>
-                            : <img src={userProfileImg} alt="#"
-                                   className={'rounded-full w-[180px] h-full max-w-[180px] max-h-[180px]'}/>
-                        }
-
-                        <form action="/item" method={'post'} encType={"multipart/form-data"}>
-                            <Upload {...props} >
-                                <Button icon={<UploadOutlined/>}>프로필 변경</Button>
-                            </Upload>
-                        </form>
-                    </div>
-                    <div className={'flex flex-col gap-[6px]'}>
-                        <div
-                            className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
-                            <p className={'desktop:min-w-[89px]'}>아이디</p>
-                            <p className={''}>{fullUserInfo?.userInfo?.userEmail}</p>
+                            <form action="/item" method={'post'} encType={"multipart/form-data"}>
+                                <Upload {...props} >
+                                    <Button icon={<UploadOutlined/>}>프로필 변경</Button>
+                                </Upload>
+                            </form>
                         </div>
-
-                        <div
-                            className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
-                            <p className={'desktop:min-w-[89px]'}>이름</p>
-                            <p>{fullUserInfo?.userInfo?.userNm}</p>
-                        </div>
-                        <div
-                            className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
-                            <p className={'desktop:min-w-[89px]'}>핸드폰 번호</p>
-                            <p>{fullUserInfo?.userInfo?.phoneNumber}</p>
-                        </div>
-                        <form action=""
-                              method={'post'}
-                              encType={"application/json"}
-                        >
+                        <div className={'flex flex-col gap-[6px]'}>
                             <div
-                                className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
-                                <div
-                                    className={'h-fit desktop:h-[35.141px] desktop:max-h-[35.141px] self-start flex items-center'}>
-                                    <p className={'desktop:min-w-[89px]'}>비밀번호변경</p>
-                                </div>
-                                <div className={'flex flex-col desktop:flex-col gap-[6px]'}>
-                                    <SSinput className={'mb-[0]  desktop:max-w-[141.8px]'}
-                                             onChange={(e) => setPostPwValue(e.target.value)}
-                                    />
-                                </div>
+                                className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
+                                <p className={'desktop:min-w-[89px]'}>아이디</p>
+                                <p className={''}>{fullUserInfo?.userInfo?.userEmail}</p>
                             </div>
-                        </form>
+
+                            <div
+                                className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
+                                <p className={'desktop:min-w-[89px]'}>이름</p>
+                                <p>{fullUserInfo?.userInfo?.userNm}</p>
+                            </div>
+                            <div
+                                className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
+                                <p className={'desktop:min-w-[89px]'}>핸드폰 번호</p>
+                                <p>{fullUserInfo?.userInfo?.phoneNumber}</p>
+                            </div>
+                            <form action=""
+                                  method={'post'}
+                                  encType={"application/json"}
+                            >
+                                <div
+                                    className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
+                                    <div
+                                        className={'h-fit desktop:h-[35.141px] desktop:max-h-[35.141px] self-start flex items-center'}>
+                                        <p className={'desktop:min-w-[89px]'}>비밀번호변경</p>
+                                    </div>
+                                    <div className={'flex flex-col desktop:flex-col gap-[6px]'}>
+                                        <SSinput className={'mb-[0]  desktop:max-w-[141.8px]'}
+                                                 onChange={(e) => setPostPwValue(e.target.value)}
+                                                 value={postPwValue}
+                                        />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div
+                        className={'w-full flex justify-center items-center gap-[16px] mt-[20px] tablet:mt-[40px] desktop:mt-[80px] '}>
+                        <SSbutton danger className={'px-[60px]'} onClick={handleCancel}>취소</SSbutton>
+                        <SSbutton type={'primary'} className={'px-[60px]'} onClick={handleSave}>저장</SSbutton>
                     </div>
                 </div>
-
-                <div
-                    className={'w-full flex justify-center items-center gap-[16px] mt-[20px] tablet:mt-[40px] desktop:mt-[80px] '}>
-                    <SSbutton danger className={'px-[60px]'} onClick={handleCancel}>취소</SSbutton>
-                    <SSbutton type={'primary'} className={'px-[60px]'} onClick={handleSave}>저장</SSbutton>
-                </div>
-
-            </div>
+            </Spin>
         </>
     )
 }
