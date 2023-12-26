@@ -56,7 +56,7 @@ const AdminMemberTable = () => {
             } else {
                 showMessage('error', resetProfileStatus.msg)
             }
-            dispatch(adminAction.initialize('resetPasswordStatus'))
+            dispatch(adminAction.initialize('resetProfileStatus'))
         }
     }, [resetProfileStatus]);
 

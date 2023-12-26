@@ -27,9 +27,15 @@ export const resetProfile = (param) =>
 
 
 //보드관리
-
 export const getBoardList = () =>
   client.get('admin/boards')
+
+export const setBoardPriorities = (param) =>
+  client.post('admin/boards/priorities', param)
+
+
+
+
 
 
 //연체가 관리

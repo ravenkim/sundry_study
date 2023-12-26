@@ -3,15 +3,18 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {getBoardList} from "../../adminAPI.jsx";
 import {adminAction} from "../../adminReducer.jsx";
+import showMessage from "../../../../common/components/notice/notice.js";
 
 const AdminBoardTable = () => {
 
     const dispatch = useDispatch()
 
     const {
-        boardListData
+        boardListData,
+        setBoardPrioritiesStatus
     } = useSelector(({adminReducer}) => ({
-            boardListData: adminReducer.boardList.data?.boardList
+            boardListData: adminReducer.boardList.data?.boardList,
+        setBoardPrioritiesStatus: adminReducer.setBoardPrioritiesStatus.data
 
         }),
         shallowEqual
@@ -23,6 +26,19 @@ const AdminBoardTable = () => {
     useEffect(() => {
         if (boardListData) setBoardList(boardListData)
     }, [boardListData]);
+
+
+    useEffect(() => {
+        if(setBoardPrioritiesStatus){
+            if (setBoardPrioritiesStatus.res) {
+                showMessage('success', setBoardPrioritiesStatus.msg)
+            } else {
+                showMessage('error', setBoardPrioritiesStatus.msg)
+            }
+            dispatch(adminAction.getBoardList())
+            dispatch(adminAction.initialize('setBoardPrioritiesStatus'))
+        }
+    }, [setBoardPrioritiesStatus]);
 
 
     useEffect(() => {

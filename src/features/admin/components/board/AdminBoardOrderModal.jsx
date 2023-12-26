@@ -2,21 +2,26 @@ import React, {useEffect, useState} from 'react';
 import {Modal} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SSorderDragTable from "../../../../common/components/table/SSorderDragTable.jsx";
+import {adminAction} from "../../adminReducer.jsx";
 
 const AdminBoardOrderModal = ({
                                   setModalVisible,
                                   modalVisible
                               }) => {
 
+        const dispatch = useDispatch()
+
+
 
     const {
         boardListData
+
     } = useSelector(({adminReducer}) => ({
             boardListData: adminReducer.boardList.data?.boardList
 
         }),
         shallowEqual
-    );
+    )
 
 
     const cancelHandler = () => {
@@ -29,8 +34,8 @@ const AdminBoardOrderModal = ({
 
 
     const submitHandler = () => {
-
-        console.log(finalData)
+        dispatch(adminAction.setBoardPriorities(finalData))
+        setModalVisible(false)
     }
 
 

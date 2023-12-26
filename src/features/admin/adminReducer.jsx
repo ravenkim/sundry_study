@@ -1,7 +1,15 @@
 import {
     reducerUtils, reduxMaker
 } from "src/common/utils/asyncUtils.jsx";
-import {addUser, getAuthList, getBoardList, getUsers, resetPassword, resetProfile} from "./adminAPI.jsx";
+import {
+    addUser,
+    getAuthList,
+    getBoardList,
+    getUsers,
+    resetPassword,
+    resetProfile,
+    setBoardPriorities
+} from "./adminAPI.jsx";
 
 
 const prefix = 'admin'
@@ -43,10 +51,24 @@ const asyncRequest = {
 
 
 
+
+
+
      getBoardList:[
         {boardList: reducerUtils.init()},
         getBoardList
     ],
+
+
+    setBoardPriorities:[
+        {setBoardPrioritiesStatus: reducerUtils.init()},
+        setBoardPriorities
+    ],
+
+
+
+
+
 
 }
 
