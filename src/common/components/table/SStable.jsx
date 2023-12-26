@@ -115,7 +115,7 @@ const SStable = ({
     useEffect(() => {
         if (columns) {
             if (useIndex) {
-                const olumnsWithNo = [
+                const columnsWithNo = [
                     {
                         title: 'No',
                         dataIndex: 'key',
@@ -123,7 +123,7 @@ const SStable = ({
                     },
                 ]
                 setIndexColumns([
-                    ...olumnsWithNo,
+                    ...columnsWithNo,
                     ...columns
                 ])
             } else {

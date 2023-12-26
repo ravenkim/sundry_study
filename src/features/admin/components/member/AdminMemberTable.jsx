@@ -64,7 +64,6 @@ const AdminMemberTable = () => {
     useEffect(() => {
         dispatch(adminAction.getUsers())
         dispatch(adminAction.getAuthList())
-
     }, []);
 
 
@@ -92,7 +91,7 @@ const AdminMemberTable = () => {
         },
         {
             title: '재직 상태',
-            dataIndex: 'userStat',
+            dataIndex: 'userStatNm',
         },
         {
             title: '비밀번호',

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {useDispatch} from "react-redux";
+import SSorderDragTable from "../../../../common/components/table/SSorderDragTable.jsx";
 
 const AdminDelinquentTable = () => {
 
@@ -22,9 +23,7 @@ const AdminDelinquentTable = () => {
 
 
     return (
-        <div>
-            
-        </div>
+        <SSorderDragTable/>
     );
 };
 

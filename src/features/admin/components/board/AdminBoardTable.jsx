@@ -54,11 +54,13 @@ const AdminBoardTable = () => {
     ]
 
 
+
+
+
     return (
         <SStable
             columns={columns}
             dataSource={boardList}
-            useIndex={true}
         >
 
         </SStable>

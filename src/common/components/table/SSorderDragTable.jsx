@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {DndContext, PointerSensor, useSensor, useSensors} from '@dnd-kit/core';
 import {restrictToVerticalAxis} from '@dnd-kit/modifiers';
 import {
@@ -10,21 +10,16 @@ import {
 import {CSS} from '@dnd-kit/utilities';
 import {Table} from 'antd';
 
-const SSorderDragTable = () => {
-    const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-        },
-        {
-            title: 'Age',
-            dataIndex: 'age',
-        },
-        {
-            title: 'Address',
-            dataIndex: 'address',
-        },
-    ]
+const SSorderDragTable = ({
+
+                              columns,
+                              reset,
+                              data,
+                              setFinalData
+
+                          }) => {
+
+
 
     const Row = (props) => {
         const {attributes, listeners, setNodeRef, transform, transition, isDragging} = useSortable({
@@ -51,35 +46,41 @@ const SSorderDragTable = () => {
     };
 
 
-    const [dataSource, setDataSource] = useState([
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address:
-                'Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text Long text',
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-        },
-    ]);
+    const [dataSource, setDataSource] = useState([]);
+
+    useEffect(() => {
+        if (reset) {
+            setDataSource(data.map((i, index) => {
+                return {
+                    ...i,
+                    key: index + 1
+                }
+            }))
+        }
+    }, [reset, data]);
+
+
+
+
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                // https://docs.dndkit.com/api-documentation/sensors/pointer#activation-constraints
                 distance: 1,
             },
         }),
     );
+
+
+    useEffect(() => {
+        setFinalData(dataSource.map((item, index) => {
+                return {
+                    boardSn: index + 1,
+                    boardId: item.boardId
+                }
+            }
+        ))
+    }, [dataSource]);
+
     const onDragEnd = ({active, over}) => {
         if (active.id !== over?.id) {
             setDataSource((prev) => {
@@ -90,25 +91,34 @@ const SSorderDragTable = () => {
         }
     };
 
+
     return (
-         <DndContext sensors={sensors} modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
-      <SortableContext
-        // rowKey array
-        items={dataSource.map((i) => i.key)}
-        strategy={verticalListSortingStrategy}
-      >
-        <Table
-          components={{
-            body: {
-              row: Row,
-            },
-          }}
-          rowKey="key"
-          columns={columns}
-          dataSource={dataSource}
-        />
-      </SortableContext>
-    </DndContext>
+        <DndContext sensors={sensors} modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
+            <SortableContext
+                // rowKey array
+                items={dataSource.map((i) => i.key)}
+                strategy={verticalListSortingStrategy}
+            >
+                <Table
+                    components={{
+                        body: {
+                            row: Row,
+                        },
+                    }}
+                    rowKey={'key'}
+                    columns={[
+                        {
+                            title: '순서',
+                            render: (text, record, index) => index + 1,
+                        },
+                        ...columns
+                    ]}
+                    dataSource={dataSource}
+                    pagination={false} // pagination 비활성화
+                    scroll={{y: 400, scrollToFirstRowOnChange: true}} // 인피니티 스크롤 적용
+                />
+            </SortableContext>
+        </DndContext>
     );
 };
 
