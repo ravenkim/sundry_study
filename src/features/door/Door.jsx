@@ -60,9 +60,6 @@ const Door = () => {
                     ))}
                 </SScardWrap>
 
-
-
-
             </SSsectionWrap>
         </>
     );
