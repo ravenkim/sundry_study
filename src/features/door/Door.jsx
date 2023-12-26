@@ -14,8 +14,6 @@ const Door = () => {
 
     const [serchAllText, setSerchAllText] = useState()
 
-
-
     return (
         <>
             <SSsectionWrap className={'tablet:py-[0] py-[0] desktop:py-[0]'}>
