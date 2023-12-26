@@ -23,7 +23,7 @@ const AdminDelinquentTable = () => {
 
 
     return (
-        <SSorderDragTable/>
+        <></>
     );
 };
 
