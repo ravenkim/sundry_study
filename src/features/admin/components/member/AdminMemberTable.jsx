@@ -4,20 +4,24 @@ import {removeRole} from "src/common/utils/dataProcessingUtils.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {adminAction} from "../../adminReducer.jsx";
 import {Spin} from 'antd';
-import SSbutton from "../../../../common/components/button/SSbutton.jsx";
-import showMessage from "../../../../common/components/notice/notice.js";
+import SSbutton from "src/common/components/button/SSbutton.jsx";
+import showMessage from "src/common/components/notice/notice.js";
+import {resetProfile} from "../../adminAPI.jsx";
 
 const AdminMemberTable = () => {
     const dispatch = useDispatch()
     const {
         users,
         usersDataLoading,
-        resetPasswordStatus
+        resetPasswordStatus,
+        resetProfileStatus
 
     } = useSelector(({adminReducer}) => ({
             users: adminReducer.users.data?.userList,
             usersDataLoading: adminReducer.users.loading,
-             resetPasswordStatus: adminReducer.resetPasswordStatus?.data
+            resetPasswordStatus: adminReducer.resetPasswordStatus?.data,
+            resetProfileStatus: adminReducer.resetProfileStatus?.data
+
         }),
         shallowEqual
     );
@@ -27,25 +31,34 @@ const AdminMemberTable = () => {
 
 
     useEffect(() => {
-        if(users)setUsersData(removeRole(users))
+        if (users) setUsersData(removeRole(users))
     }, [users]);
-
 
 
     //비밀번호 초기화 완료시
     useEffect(() => {
-        if(resetPasswordStatus){
-            if (resetPasswordStatus.res){
-                showMessage('success', resetPasswordStatus.msg )
+        if (resetPasswordStatus) {
+            if (resetPasswordStatus.res) {
+                showMessage('success', resetPasswordStatus.msg)
             } else {
-                showMessage('error', resetPasswordStatus.msg )
+                showMessage('error', resetPasswordStatus.msg)
             }
             dispatch(adminAction.initialize('resetPasswordStatus'))
         }
     }, [resetPasswordStatus]);
 
 
-
+    //회원 프로필 삭제시
+    useEffect(() => {
+        if (resetProfileStatus) {
+            if (resetProfileStatus.res) {
+                showMessage('success', resetProfileStatus.msg)
+            } else {
+                showMessage('error', resetProfileStatus.msg)
+            }
+            dispatch(adminAction.initialize('resetPasswordStatus'))
+        }
+    }, [resetProfileStatus]);
 
 
     useEffect(() => {
@@ -87,10 +100,21 @@ const AdminMemberTable = () => {
             render: (text, record, value) => (
                 <SSbutton
 
-                    onClick={ () =>
-                        dispatch(adminAction.resetPassword({userId:value}))
-                }
+                    onClick={() =>
+                        dispatch(adminAction.resetPassword({userId: value}))
+                    }
                 >초기화</SSbutton>
+            )
+        },
+        {
+            title: '프로필 사진',
+            dataIndex: 'userId',
+            render: (text, record, value) => (
+                <SSbutton
+                    onClick={() =>
+                        dispatch(adminAction.resetProfile({userId: value}))
+                    }
+                >삭제</SSbutton>
             )
         }
     ]
@@ -104,7 +128,7 @@ const AdminMemberTable = () => {
             <SStable
                 columns={columns}
                 dataSource={usersData}
-                useIndex ={true}
+                useIndex={true}
             >
 
             </SStable>

@@ -19,13 +19,21 @@ export const addUser = (param) =>
 export const resetPassword = (param) =>
   client.post('admin/users/reset-pw', param)
 
+export const resetProfile = (param) =>
+  client.post('admin/users/delete-profile', param)
 
 
 
 
 
-
-
+//보드관리
 
 export const getBoardList = () =>
   client.get('admin/boards')
+
+
+//연체가 관리
+export const getOverdues = () =>
+  client.get('')
+
+

@@ -11,7 +11,7 @@ const AdminBoardTable = () => {
     const {
         boardListData
     } = useSelector(({adminReducer}) => ({
-            boardListData: adminReducer.boardList.data?.boardListData
+            boardListData: adminReducer.boardList.data?.boardList
 
         }),
         shallowEqual

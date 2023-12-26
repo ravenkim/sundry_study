@@ -17,14 +17,18 @@ const AdminBoard = () => {
             <div>
                 <SSbutton
 
-                >회원 추가</SSbutton>
+                >보드 추가</SSbutton>
 
 
-                {/* todo 2차 기능 구현 예정*/}
-                {/* 테이블 왼쪽에 select 추가후 버튼 누를시 메시지 입력 모달 */}
                 <SSbutton
-                    disabled = {true}
-                >알림 보내기</SSbutton>
+
+                >새로고침</SSbutton>
+                
+                  <SSbutton
+
+                >배치 순서 변경</SSbutton>
+
+
             </div>
 
             <div>

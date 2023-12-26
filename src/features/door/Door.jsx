@@ -15,13 +15,6 @@ const Door = () => {
     const [serchAllText, setSerchAllText] = useState()
 
 
-        const {
-        bgColor
-    } = useSelector(({adminReducer}) => ({
-            bgColor: adminReducer.test.data,
-        }),
-        shallowEqual
-    );
 
     return (
         <>
@@ -69,11 +62,6 @@ const Door = () => {
 
 
 
-
-                <button
-                    onClick={() => dispatch(adminAction.test())}
-                >asdads</button>
-                <img src={bgColor} alt={'이미지'}/>
 
             </SSsectionWrap>
         </>

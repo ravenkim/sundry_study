@@ -1,7 +1,7 @@
 import {
     reducerUtils, reduxMaker
 } from "src/common/utils/asyncUtils.jsx";
-import {addUser, getAuthList, getBoardList, getUsers, resetPassword} from "./adminAPI.jsx";
+import {addUser, getAuthList, getBoardList, getUsers, resetPassword, resetProfile} from "./adminAPI.jsx";
 
 
 const prefix = 'admin'
@@ -29,6 +29,11 @@ const asyncRequest = {
     resetPassword:[
         {resetPasswordStatus: reducerUtils.init()},
         resetPassword
+    ],
+
+    resetProfile:[
+        {resetProfileStatus: reducerUtils.init()},
+        resetProfile
     ],
 
 
