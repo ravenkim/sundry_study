@@ -1,10 +1,9 @@
-import client from "../../api/client.jsx";
-import imgClient from "../../api/imgClient.jsx";
-
-export const test = (param) =>
-  imgClient.get('profile/user/img')
+import client from "src/api/client.jsx";
 
 
+
+
+//회원관리
 export const getUsers = () =>
   client.get('admin/users')
 
@@ -17,7 +16,8 @@ export const addUser = (param) =>
   client.post('admin/users/add', param)
 
 
-
+export const resetPassword = (param) =>
+  client.post('admin/users/reset-pw', param)
 
 
 
