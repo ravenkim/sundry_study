@@ -18,7 +18,7 @@ const AdminBoard = () => {
 
             <div>
                 <SSbutton
-
+                    disabled ={true}
                 >보드 추가</SSbutton>
 
 
