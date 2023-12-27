@@ -1,62 +1,47 @@
-import React from 'react';
-import {useDispatch} from "react-redux";
+import React, {useEffect, useState} from 'react';
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "/src/common/components/table/SStable.jsx";
+import {adminAction} from "../../adminReducer.jsx";
 
 const AdminAuth = () => {
 
     const dispatch = useDispatch();
 
+
+      const {
+        authListData,
+
+    } = useSelector(({adminReducer}) => ({
+            authListData: adminReducer.authList.data?.authenticationList,
+        }),
+        shallowEqual
+    )
+
+
+    useEffect(() => {
+        dispatch(adminAction.getAuthList())
+    }, []);
+
     const columns = [
         {
-              title: '이름',
-              dataIndex: 'name',
-              width: '30%',
-              searchAllow : true
+              title: 'id',
+              dataIndex: 'authId',
 
         },
         {
-              title: '팀',
-              dataIndex: 'team',
-              width: '30%',
+              title: '권한',
+              dataIndex: 'authNm',
 
         },
-        {
-              title: '나이',
-              dataIndex: 'age',
-              width: '30%',
-
-        }
     ]
 
 
+    const [dataSource, setDataSource] = useState([])
 
-    const dataSource = [
-     {
-        name: '해준Raven',
-        team: 'front',
-        age: 27,
-    },
-    {
-        name: '민교',
-        team: 'back',
-        age: '??',
-    },
-    {
-        name: '찬민',
-        team: 'front',
-        age: '28',
-    },
-    {
-        name: '소현',
-        team: 'back',
-        age: 28,
-    },
-    {
-        name: '효진',
-        team: 'back',
-        age: 23,
-    },
-]
+    useEffect(() => {
+        if(authListData) setDataSource(authListData)
+    }, [authListData]);
+
 
     return (
         <div>
