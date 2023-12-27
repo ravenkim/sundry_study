@@ -4,7 +4,7 @@ import {Input} from "antd";
 const SSsearchInput = ({
 
                            title,
-                           onPressEnter,
+                           onSearch,
                            onChange,
                            value,
                            placeholder = "",
@@ -38,12 +38,14 @@ const SSsearchInput = ({
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    onPressEnter={onPressEnter}
+                    onPressEnter={onSearch}
                     {...inputOtherProps}
                     className={'rounded-[5px] placeholder:text-[16px] px-[22px] text-[16px] text-[#ACACBA] placeholder:text-[#ACACBA] ' + (inputClassName ? ' h-[40px]' : ' h-[60px]')}
                 >
                 </Input>
-                <img src="/src/assets/img/icon_search.svg" alt="#" className={'absolute top-1/2 -translate-y-1/2 right-[22px] ' + (inputClassName ? 'h-[16px]' : '')}/>
+                <img
+                    onClick={onSearch}
+                    src="/src/assets/img/icon_search.svg" alt="#" className={'absolute top-1/2 -translate-y-1/2 right-[22px] ' + (inputClassName ? 'h-[16px]' : '')}/>
             </div>
         </div>
     );
