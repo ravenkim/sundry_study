@@ -65,7 +65,7 @@ const IndexRoute = () => {
 
 
             <Route
-                path="/contents/:board/:content"
+                path="/content/:content"
                 element={
                     <PrivateRoute>
                         <ContentPage/>
@@ -75,7 +75,7 @@ const IndexRoute = () => {
 
             {/*임시 보드 페이지*/}
             <Route
-                path="/contents/:board/"
+                path="/board/:board/"
                 element={
                     <PrivateRoute>
                         <BoardPage />
