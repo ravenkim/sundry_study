@@ -14,19 +14,33 @@ const MiniProfile = () => {
     const {
         user,
         userProfileImg,
+        notificationsData
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
             userProfileImg: profileReducer.userProfileImg.data,
-
+            notificationsData:profileReducer.notifications.data
         }),
         shallowEqual
     )
 
     useEffect(() => {
-        dispatch(profileAction.getUserProfileImg())
+        /*dispatch(profileAction.getUserProfileImg());*/
+        /*dispatch(profileAction.getNotifications()); // 사용자 알림 상태 가져오기*/
+        dispatch(profileAction.getUserNotifications());
 
-        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+        /*if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))*/
+
+        if (userProfileImg === undefined) {
+            dispatch(profileAction.getUserProfileImg(''));
+        } else if (userProfileImg === '') {
+            dispatch(profileAction.getUserProfileImg());
+        }
+
+        /*if (!notificationsData) dispatch(profileAction.getNotifications(null))*/
+        if(!notificationsData) dispatch(profileAction.getUserNotifications(null))
+
+        console.log('notifications',notificationsData)
     }, []);
 
     return (
@@ -94,6 +108,8 @@ const MiniProfile = () => {
                 <SSbutton danger className={'w-full'} onClick={() => {
                     dispatch(userAction.logout())
                 }}>로그아웃</SSbutton>
+
+                {/*{notifications ? <div>이거{notifications}</div> : null}*/}
             </div>
         </div>
     );

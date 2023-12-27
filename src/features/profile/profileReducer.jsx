@@ -5,7 +5,7 @@ import {
 import client from "../../api/client.jsx";
 import imgClient from "../../api/imgClient.jsx";
 import {
-    getFullUserInfo,
+    getFullUserInfo, getUserNotifications,
     getUserProfileImg, postBoardLikes,
     postBoardRentals,
     postBoardReservations,
@@ -55,6 +55,11 @@ const asyncRequest = {
         {BoardLikes:reducerUtils.init()},
         postBoardLikes
     ], // 예약목록 보드 사용자 정보 넘겨주기
+
+    getUserNotifications : [
+        {notifications:reducerUtils.init()},
+        getUserNotifications
+    ]
 
 }
 
