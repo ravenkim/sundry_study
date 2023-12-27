@@ -25,7 +25,7 @@ const SubMenuButtonWrap = ({
             dispatch(profileAction.setTab(tab))
             dispatch(push('/profile'))
         } else if (selectedButton === 'CONTENTS') {
-            dispatch(push(`/contents/${boardId}`))
+            dispatch(push(`/board/${boardId}`))
         }
 
         setMenuOpen(false)

@@ -87,7 +87,6 @@ const Menu = ({
 
                         <MenuButtonWrap
                             text={"MY PAGE"}
-                            url={'/asd'}
                             onMouseOver={() => {
                                 setSelectedButton('MY PAGE')
                             }}
@@ -99,7 +98,6 @@ const Menu = ({
                         />
                         <MenuButtonWrap
                             text={"CONTENTS"}
-                            url={'/asd'}
                             onMouseOver={() => {
                                 setSelectedButton('CONTENTS')
                             }}
@@ -109,7 +107,6 @@ const Menu = ({
                         />
                         <MenuButtonWrap
                             text={"MANAGER"}
-                            url={'/asd'}
                             onMouseOver={() => {
                                 setSelectedButton('MANAGER')
                             }}
