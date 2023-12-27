@@ -3,6 +3,8 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {adminAction} from "../../../admin/adminReducer.jsx";
 import {getBoardList} from "../../../admin/adminAPI.jsx";
+import {profileAction} from "../../profileReducer.jsx";
+import {postBoardRentals} from "../../profileAPI.jsx";
 
 const ProfileBoardTable = () => {
 
@@ -12,25 +14,49 @@ const ProfileBoardTable = () => {
     const dispatch = useDispatch()
 
     const {
-        boardListData
-    } = useSelector(({adminReducer}) => ({
-            boardListData: adminReducer.boardList.data?.boardList,
-        // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
+
+        BoardRentals,
+        fullUserInfo,
+    } = useSelector(({profileReducer}) => ({
+            BoardRentals: profileReducer.BoardRentals,
+            fullUserInfo: profileReducer.fullUserInfo.data,
+            // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
         }),
         shallowEqual
     );
 
 
     const [boardList, setBoardList] = useState([])
+    const [userData, setUserData] = useState('')
 
     useEffect(() => {
-        if (boardListData) setBoardList(boardListData)
-    }, [boardListData]);
+        if (fullUserInfo) {
+            setUserData(JSON.stringify(fullUserInfo?.userInfo?.userId).trim())
 
+            const userIdString = fullUserInfo?.userInfo?.userId;
+            console.log('보내는 데이터', userIdString)
+            dispatch(profileAction.postBoardRentals({userId: userIdString}))
+        }
+    }, [fullUserInfo]);
+
+    const onClickAction = () => {
+
+        if (userData) {
+            dispatch(profileAction.postBoardRentals({
+                userId: userData
+            }));
+        }
+    }
 
     useEffect(() => {
-        dispatch(adminAction.getBoardList())
+        /*dispatch(adminAction.getBoardList())*/
+        dispatch(profileAction.getFullUserInfo())
     }, []);
+
+    useEffect(() => {
+
+    }, [fullUserInfo]);
+
 
     const columns = [
         {
@@ -57,14 +83,16 @@ const ProfileBoardTable = () => {
     ]
 
 
-    return (
-        <SStable
-            columns={columns}
-            dataSource={boardList}
-            useIndex={true}
-        >
+    return (<>
+            <SStable
+                columns={columns}
+                dataSource={boardList}
+                useIndex={true}
+            >
 
-        </SStable>
+            </SStable>
+            <div onClick={onClickAction}>post 요청 버튼</div>
+        </>
     );
 };
 
