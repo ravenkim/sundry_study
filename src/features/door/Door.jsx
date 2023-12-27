@@ -8,11 +8,15 @@ import DoorCard from '/src/data/DoorCard.jsx'
 import {push} from "redux-first-history";
 import {adminAction} from "../admin/adminReducer.jsx";
 import {profileAction} from "../profile/profileReducer.jsx";
+import SStable from "../../common/components/table/SStable.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
 
-    const [serchAllText, setSerchAllText] = useState()
+    const [serchAllText, setSerchAllText] = useState('')
+
+
+
 
     return (
         <>
@@ -22,8 +26,25 @@ const Door = () => {
                     onChange={(e) => setSerchAllText(e.target.value)}
                     placeholder={'찾고자 하는 항목을 입력하세요. (전체 항목에서 검색됩니다)'}
                     title={'무엇을 찾으시나요?'}
+                    onSearch={() => console.log(serchAllText)}
                 />
             </SSsectionWrap>
+
+
+
+
+            <SSsectionWrap className={'tablet:py-[0] py-[0] desktop:py-[0]'}>
+
+            </SSsectionWrap>
+
+
+
+
+
+
+
+
+
             <SSsectionWrap className={'desktop:gap-[20px] tablet:gap-[20px] gap-[20px]'}>
                 <div className='flex flex-row justify-start items-center gap-[6px] h-[38px]'>
                     <span className={'-mb-[3px]'}>

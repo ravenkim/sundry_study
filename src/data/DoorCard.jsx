@@ -28,7 +28,7 @@ const DoorCard = [
 </defs>
 </svg>
 `},
-    {title: '영상강의', root:'/contents/2', doorId: 2, svg: `<svg width="101" height="88" viewBox="0 0 101 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {title: '영상강의', root:'/board/2', doorId: 2, svg: `<svg width="101" height="88" viewBox="0 0 101 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2342_438)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.35669 1.35599H95.2102V12.2033H5.35669V1.35599Z" fill="white"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.35596 12.2035H95.2095V58.3055H5.35596V12.2035Z" fill="#ABE6FC"/>
