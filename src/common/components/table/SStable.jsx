@@ -51,7 +51,6 @@ columns = [
 
 const SStable = ({
                      useSearch = true,
-
                      useIndex = false,
                      columns,
                      dataSource,
@@ -183,7 +182,8 @@ const SStable = ({
 
                     value={searchText}
                     onChange={e => setSearchText(e.target.value)}
-
+                    inputClassName={true}
+                    inputStyle={true}
 
                 />}
 

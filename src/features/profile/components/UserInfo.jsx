@@ -42,9 +42,14 @@ const UserInfo = () => {
 
         if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
         if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
+        // 요청 초기화하기 투두 -> 대여목록에 갔다가 회원정보 다시 들어오면 요청되도록 작성되어 있는 상태임
 
 
         // 요청 초기화 작성
+        return() => {
+            dispatch(profileAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
     }, []);
 
     const validatePassword = (password) => {
@@ -92,6 +97,7 @@ const UserInfo = () => {
 
                     setFileList([])
                     dispatch(profileAction.getUserProfileImg())
+                    dispatch(profileAction.initialize('postUserProfileImg'))
 
                     // 업로드 후 필요한 작업을 수행합니다.
                 })
@@ -101,7 +107,6 @@ const UserInfo = () => {
                     // 오류 처리를 수행합니다.
                     console.log('error', error)
                 });
-            dispatch(profileAction.initialize('postUserProfileImg'));
         }
 
         if (postPwValue.trim() !== '') {

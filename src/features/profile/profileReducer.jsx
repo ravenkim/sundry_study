@@ -4,7 +4,14 @@ import {
 } from "src/common/utils/asyncUtils.jsx";
 import client from "../../api/client.jsx";
 import imgClient from "../../api/imgClient.jsx";
-import {getFullUserInfo, getUserProfileImg, postUserProfileImg, postUserPW} from "./profileAPI.jsx";
+import {
+    getFullUserInfo,
+    getUserProfileImg, postBoardLikes,
+    postBoardRentals,
+    postBoardReservations,
+    postUserProfileImg,
+    postUserPW
+} from "./profileAPI.jsx";
 
 
 const prefix = 'profile'
@@ -32,8 +39,22 @@ const asyncRequest = {
     postUserPW:[
         {userPW:reducerUtils.init()},
         postUserPW
-    ]
+    ],
 
+    postBoardRentals : [
+        {BoardRentals:reducerUtils.init()},
+        postBoardRentals
+    ], // 대여목록 보드 사용자 정보 넘겨주기
+
+    postBoardReservations : [
+        {BoardReservations:reducerUtils.init()},
+        postBoardReservations
+    ], // 예약목록 보드 사용자 정보 넘겨주기
+
+    postBoardLikes : [
+        {BoardLikes:reducerUtils.init()},
+        postBoardLikes
+    ], // 예약목록 보드 사용자 정보 넘겨주기
 
 }
 
