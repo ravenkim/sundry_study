@@ -111,3 +111,12 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top >.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom >.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top >div>.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom >div>.ant-tabs-nav .ant-tabs-ink-bar {
     height: 1px;
 }
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-inner {
+    padding: 0;
+
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-arrow::after {
+    background: rgba(85,101,246,.6);
+}
