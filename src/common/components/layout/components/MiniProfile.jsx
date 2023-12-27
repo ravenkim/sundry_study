@@ -25,11 +25,7 @@ const MiniProfile = () => {
     )
 
     useEffect(() => {
-        /*dispatch(profileAction.getUserProfileImg());*/
-        /*dispatch(profileAction.getNotifications()); // 사용자 알림 상태 가져오기*/
         dispatch(profileAction.getUserNotifications());
-
-        /*if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))*/
 
         if (userProfileImg === undefined) {
             dispatch(profileAction.getUserProfileImg(''));
@@ -37,10 +33,13 @@ const MiniProfile = () => {
             dispatch(profileAction.getUserProfileImg());
         }
 
-        /*if (!notificationsData) dispatch(profileAction.getNotifications(null))*/
         if(!notificationsData) dispatch(profileAction.getUserNotifications(null))
 
-        console.log('notifications',notificationsData)
+        if(notificationsData) {
+            console.log('notifications',notificationsData)
+        }
+
+
     }, []);
 
     return (
@@ -109,7 +108,12 @@ const MiniProfile = () => {
                     dispatch(userAction.logout())
                 }}>로그아웃</SSbutton>
 
-                {/*{notifications ? <div>이거{notifications}</div> : null}*/}
+                {notificationsData?.notiList?.map((item, idx)=> (
+                    <div key={idx}>
+                        {item.notiContent}
+                        {item.joinDt}
+                    </div>
+                ))}
             </div>
         </div>
     );
