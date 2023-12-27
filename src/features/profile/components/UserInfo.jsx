@@ -106,8 +106,8 @@ const UserInfo = () => {
                     // 오류 처리를 수행합니다.
                     console.log('error', error)
                 });*/
-            dispatch(profileAction.postUserProfileImg(formData));
-            dispatch(profileAction.getUserProfileImg());
+            dispatch(profileAction.postUserProfileImg(formData)); // response 가져오는 방법 알아내기
+            dispatch(profileAction.getUserProfileImg()); // 이미지 변경시 다시 이미지 가져오기 -> loading 사용해서 처리할 것
         }
 
         if (postPwValue.trim() !== '') {
@@ -123,11 +123,11 @@ const UserInfo = () => {
             }
 
             if (!passwordError) {
-                dispatch(profileAction.postUserPW(postData));
-                client.post('/profile/user/save-pwd', postData)
+                dispatch(profileAction.postUserPW(postData)); // redux에서 fail이라고 뜨는데 값은 저장이 된다
+                /*client.post('/profile/user/save-pwd', postData)
                     .then(response => {
                         showMessage('success', response.data.msg)
-                        /*message.success('성공적으로 패스워드를 변경하였습니다.');*/
+                        /!*message.success('성공적으로 패스워드를 변경하였습니다.');*!/
                         console.log(response.data.msg)
                         setPostPwValue('') // 성공하면 인풋 값 초기화
 
@@ -136,7 +136,7 @@ const UserInfo = () => {
                     .catch(error => {
                         showMessage('error', '비밀번호 변경 중 알 수 없는 오류가 발생하였습니다.')
                         console.log('error', error) // 에러 로그 보기
-                    });
+                    });*/
 
                 dispatch(profileAction.initialize('postUserPW'));
                 // 정규식 추가해야됨
