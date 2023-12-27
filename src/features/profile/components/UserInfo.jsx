@@ -18,15 +18,13 @@ const UserInfo = () => {
     const dispatch = useDispatch()
 
     const {
-        user,
         userProfileImg,
         postUserProfileImg,
         fullUserInfo,
         postUserPW,
         userDataLoading
 
-    } = useSelector(({userReducer, profileReducer}) => ({
-            user: userReducer.user,
+    } = useSelector(({profileReducer}) => ({
             userProfileImg: profileReducer.userProfileImg.data,
             postUserProfileImg: profileReducer.postUserProfileImg,
             fullUserInfo: profileReducer.fullUserInfo.data,
