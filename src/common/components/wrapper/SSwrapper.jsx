@@ -13,11 +13,11 @@ const SSwrapper = ({
                 flexDirection: "column",
                 boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.30000001192092896)',
                 backgroundColor: 'rgba(255, 255, 255, 1)',
-                minHeight: '400px',
-                minWidth: '400px',
+                minHeight: '100px',
+                minWidth: '100px',
                 borderRadius: '20px',
                 boxSizing: "border-box",
-                margin: '20px',
+                marginTop: '20px',
                 ...style
             }}
             className={
