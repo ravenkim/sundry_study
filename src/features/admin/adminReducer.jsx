@@ -28,10 +28,7 @@ const asyncRequest = {
         {users: reducerUtils.init()},
         getUsers
     ],
-    getAuthList: [
-        {authList: reducerUtils.init()},
-        getAuthList
-    ],
+
 
     addUser:[
         {addUserStatus: reducerUtils.init()},
@@ -53,7 +50,7 @@ const asyncRequest = {
 
 
 
-
+     // 보드 관리
      getBoardList:[
         {boardList: reducerUtils.init()},
         getBoardList
@@ -67,13 +64,19 @@ const asyncRequest = {
 
 
 
-
+    // 연체자
     getOverdues:[
         {overdues: reducerUtils.init()},
         getOverdues
     ],
 
 
+
+        // 권한
+        getAuthList: [
+        {authList: reducerUtils.init()},
+        getAuthList
+    ],
 
 
 
