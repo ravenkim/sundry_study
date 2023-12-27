@@ -14,8 +14,8 @@ const ProfileBoardTable = () => {
     const {
         boardListData
     } = useSelector(({adminReducer}) => ({
-            boardListData: adminReducer.boardList.data?.boardList
-
+            boardListData: adminReducer.boardList.data?.boardList,
+        // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
         }),
         shallowEqual
     );

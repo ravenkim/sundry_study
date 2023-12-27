@@ -15,3 +15,15 @@ export const getFullUserInfo = () =>
 export const postUserPW = (param) => {
     userClient.post('/profile/user/save-pwd', param);
 }
+
+export const postBoardRentals = (param) => {
+    userClient.post('/profile/rentals', param);
+}
+
+export const postBoardReservations = (param) => {
+    userClient.post('/profile/reservations', param);
+}
+
+export const postBoardLikes = (param) => {
+    userClient.post('/profile/likes', param);
+}
