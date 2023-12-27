@@ -9,6 +9,7 @@ import axios from "axios";
 import {userAction} from "./userReducer.jsx";
 import {getCookie, setCookie} from "../../app/cookie.jsx";
 import {push} from "redux-first-history";
+import showMessage from "../../common/components/notice/notice.js";
 
 
 const Login = () => {
@@ -16,9 +17,14 @@ const Login = () => {
 
 
       const {
-        user
+        user,
+          loginErrorMsg
+
     } = useSelector(({userReducer}) => ({
-        user: userReducer.user
+        user: userReducer.user,
+          loginErrorMsg: userReducer.loginErrorMsg
+
+
     }),
         shallowEqual
         )
@@ -29,6 +35,14 @@ const Login = () => {
             dispatch(push('/door'))
         }
     }, [user]);
+
+
+    useEffect(() => {
+        if(loginErrorMsg){
+            showMessage('error', loginErrorMsg)
+            dispatch(userAction.initializeMsg('loginErrorMsg'))
+        }
+    }, [loginErrorMsg]);
 
 
     const [userID, setUserID] = useState("")
