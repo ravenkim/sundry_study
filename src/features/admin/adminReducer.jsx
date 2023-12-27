@@ -4,7 +4,7 @@ import {
 import {
     addUser,
     getAuthList,
-    getBoardList,
+    getBoardList, getOverdues,
     getUsers,
     resetPassword,
     resetProfile,
@@ -63,6 +63,14 @@ const asyncRequest = {
     setBoardPriorities:[
         {setBoardPrioritiesStatus: reducerUtils.init()},
         setBoardPriorities
+    ],
+
+
+
+
+    getOverdues:[
+        {overdues: reducerUtils.init()},
+        getOverdues
     ],
 
 

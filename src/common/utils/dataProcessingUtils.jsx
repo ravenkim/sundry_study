@@ -7,3 +7,10 @@ export const removeRole = (data) => {
         }
     });
 }
+
+
+export const formatDate = (dateString) => {
+    const options = {year: 'numeric', month: '2-digit', day: '2-digit'};
+    const event = new Date(dateString);
+    return event.toLocaleDateString('ko-KR', options).replace(/. /g, '년 ').replace('. ', '월 ').replace('.', '일');
+}

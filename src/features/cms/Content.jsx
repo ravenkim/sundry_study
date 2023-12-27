@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SSeditor from "../../common/components/editor/SSeditor.jsx";
-import ContentView from "./content/ContentView.jsx";
+import RentalContentView from "./content/rental/RentalContentView.jsx";
 import background from "../../common/components/layout/components/Background.jsx";
 
 const Content = () => {
@@ -58,8 +58,8 @@ const Content = () => {
        >
 
 
-           <ContentView/>
-            <ContentView/>
+           <RentalContentView/>
+            <RentalContentView/>
        </div>
         
         

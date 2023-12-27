@@ -40,6 +40,6 @@ export const setBoardPriorities = (param) =>
 
 //연체가 관리
 export const getOverdues = () =>
-  client.get('')
+  client.get('admin/overdues')
 
 

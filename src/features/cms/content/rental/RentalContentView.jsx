@@ -1,9 +1,9 @@
 import React from 'react';
-import SSeditor from "../../../common/components/editor/SSeditor.jsx";
-import SSwrapper from "../../../common/components/wrapper/SSwrapper.jsx";
-import SSbutton from "../../../common/components/button/SSbutton.jsx";
+import SSeditor from "../../../../common/components/editor/SSeditor.jsx";
+import SSwrapper from "../../../../common/components/wrapper/SSwrapper.jsx";
+import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 
-const ContentView = () => {
+const RentalContentView = () => {
 
 
     return (
@@ -16,7 +16,6 @@ const ContentView = () => {
             }}
         >
             <div
-
                 className={'w-full '}
                 style={{
                     backgroundColor: "rgba(79,95,245,0.9)",
@@ -34,23 +33,30 @@ const ContentView = () => {
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
-                        alignItems: "center",
                     }}
                 >
+                    <SSwrapper
+                        style={{
+                            width: '300px',
+                            height: '300px',
+                            marginBottom: '20px',
+                            boxSizing: 'border-box'
+                        }}
+                    ></SSwrapper>
+
+
+
+
                     <div
                         style={{
-                            width: 100,
+                            width: 'calc(100% - 320px)',
                             height: 100,
-                            backgroundColor: "tomato"
+                            backgroundColor: "tomato",
+                            marginTop: '20px'
                         }}
-                    ></div>
-                    <div
-                        style={{
-                            width: 100,
-                            height: 100,
-                            backgroundColor: "tomato"
-                        }}
-                    ></div>
+                    >
+
+                    </div>
                 </div>
 
 
@@ -121,4 +127,4 @@ const ContentView = () => {
     );
 };
 
-export default ContentView;
+export default RentalContentView;
