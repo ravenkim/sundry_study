@@ -33,9 +33,10 @@ const MiniProfile = () => {
 
         if (userProfileImg === undefined) {
             dispatch(profileAction.getUserProfileImg(''));
-        } else if (userProfileImg === null) {
+        } else if (userProfileImg === '') {
             dispatch(profileAction.getUserProfileImg());
         }
+
         /*if (!notificationsData) dispatch(profileAction.getNotifications(null))*/
         if(!notificationsData) dispatch(profileAction.getUserNotifications(null))
 
