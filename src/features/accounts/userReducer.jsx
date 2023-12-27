@@ -4,6 +4,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import {removeCookie, setCookie} from "../../app/cookie.jsx";
 import client from "../../api/client.jsx";
 import {jwtDecode} from "jwt-decode";
+import {reducerUtils} from "../../common/utils/asyncUtils.jsx";
+
 
 
 const initialState = {
@@ -61,8 +63,8 @@ export const userSlice = createSlice({
         initializeAll: (state, action) => {
             return initialState;
         },
-        initialize: (state, action) => {
-            //todo 하나만 초기화
+        initializeMsg: (state, action) => {
+            state.loginErrorMsg = null
         },
         login: (state, action) => {
         },
@@ -71,6 +73,7 @@ export const userSlice = createSlice({
         },
         loginFailure: (state, action) => {
             state.loginErrorMsg = action.payload
+
         },
         //로그인 완료시 사용자 등록 (클라이언트가 인식하게끔)
         setUser: (state, action) => {

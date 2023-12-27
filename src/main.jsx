@@ -16,7 +16,6 @@ import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 
 setUserHandler()
 
- store.dispatch(cmsAction.getBoardList())
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <CookiesProvider defaultSetOptions={{path: '/'}}>

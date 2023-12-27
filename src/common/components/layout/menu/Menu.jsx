@@ -6,6 +6,7 @@ import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {push} from "redux-first-history";
 import SubMenuButtonWrap from "./components/SubMenuButtonWrap.jsx";
 import MobileButton from "./components/MobileButton.jsx";
+import {cmsAction} from "../../../../features/cms/cmsReducer.jsx";
 
 
 const Menu = ({
@@ -17,12 +18,23 @@ const Menu = ({
 
 
     const {
-        boardListData
-    } = useSelector(({cmsReducer}) => ({
-            boardListData: cmsReducer.boardList.data?.boardList
+        boardListData,
+        user
+    } = useSelector(({cmsReducer, userReducer}) => ({
+            boardListData: cmsReducer.boardList.data?.boardList,
+            user: userReducer.user
         }),
         shallowEqual
     );
+
+
+    useEffect(() => {
+        if(user){
+            dispatch(cmsAction.getBoardList())
+        }
+    }, [user]);
+
+
 
 
     // 선택된 대분류
