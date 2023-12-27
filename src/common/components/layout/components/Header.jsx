@@ -1,4 +1,4 @@
-import {MenuOutlined,UserOutlined} from "@ant-design/icons";
+import {MenuOutlined, UserOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {push} from "redux-first-history";
@@ -27,9 +27,14 @@ const Header = ({
     );
 
     useEffect(() => {
-        dispatch(profileAction.getUserProfileImg())
-        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+        /*if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+        dispatch(profileAction.getUserProfileImg())*/
 
+        if (userProfileImg === undefined) {
+            dispatch(profileAction.getUserProfileImg(''));
+        } else if (userProfileImg === '') {
+            dispatch(profileAction.getUserProfileImg());
+        }
     }, []);
 
 
@@ -97,7 +102,8 @@ const Header = ({
             {/*프로필 영역*/}
 
             {/*상세정보*/}
-            <Popover className={'p-[0]'}  content={ <MiniProfile />} trigger="click" placement="bottomRight"  arrow={{pointAtCenter: true}}>
+            <Popover className={'p-[0]'} content={<MiniProfile/>} trigger="click" placement="bottomRight"
+                     arrow={{pointAtCenter: true}}>
 
                 {/*프로필 사진 부분*/}
                 <div className={'w-[63px] h-[63px] flex justify-center items-center relative'}>
@@ -105,18 +111,15 @@ const Header = ({
                         className={'after:overflow-hidden rounded-full overflow-hidden max-w-[63px] max-h-[63px] flex justify-center items-center cursor-pointer bg-[#ffffff]'}
                     >
                         {userProfileImg == null ? <Space direction='vertical' wrap size={40}>
-                                <Avatar size={40} icon={<UserOutlined/>}/>
-                            </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full]'}/>
+                            <Avatar size={40} icon={<UserOutlined/>}/>
+                        </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full]'}/>
                         }
 
-                        
+
                     </div>
 
                 </div>
             </Popover>
-
-
-
 
 
         </header>
