@@ -27,9 +27,6 @@ const Header = ({
     );
 
     useEffect(() => {
-        /*if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
-        dispatch(profileAction.getUserProfileImg())*/
-
         if (userProfileImg === undefined) {
             dispatch(profileAction.getUserProfileImg(''));
         } else if (userProfileImg === '') {
