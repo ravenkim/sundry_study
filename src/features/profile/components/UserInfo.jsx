@@ -6,8 +6,9 @@ import {Avatar, Space, Button, message, Upload, Spin} from 'antd';
 import SSbutton from "../../../common/components/button/SSbutton.jsx";
 import SSinput from "../../../common/components/input/SSinput.jsx";
 import imgClient from "../../../api/imgClient.jsx";
-import userClient from "../../../api/userClient.jsx";
+import client from "../../../api/client.jsx";
 import showMessage from "src/common/components/notice/notice.js";
+import {postUserProfileImg} from "../profileAPI.jsx";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -88,9 +89,9 @@ const UserInfo = () => {
                 formData.append('file', file);
             });
 
-            imgClient.post('/profile/user/save-img', formData) // imgClient.post 메소드를 사용하여 이미지를 업로드합니다.
+            /*imgClient.post('/profile/user/save-img', formData) // imgClient.post 메소드를 사용하여 이미지를 업로드합니다.
                 .then(response => {
-                    /*message.success('이미지 업로드가 완료되었습니다.');*/
+                    /!*message.success('이미지 업로드가 완료되었습니다.');*!/
                     showMessage('success', '이미지 업로드가 완료되었습니다.')
 
                     setFileList([])
@@ -100,11 +101,13 @@ const UserInfo = () => {
                     // 업로드 후 필요한 작업을 수행합니다.
                 })
                 .catch(error => {
-                    /*message.error('이미지 업로드 중 오류가 발생했습니다.');*/
+                    /!*message.error('이미지 업로드 중 오류가 발생했습니다.');*!/
                     showMessage('error', '이미지 업로드가 완료되었습니다.')
                     // 오류 처리를 수행합니다.
                     console.log('error', error)
-                });
+                });*/
+            dispatch(profileAction.postUserProfileImg(formData));
+            dispatch(profileAction.getUserProfileImg());
         }
 
         if (postPwValue.trim() !== '') {
@@ -121,7 +124,7 @@ const UserInfo = () => {
 
             if (!passwordError) {
                 dispatch(profileAction.postUserPW(postData));
-                userClient.post('/profile/user/save-pwd', postData)
+                client.post('/profile/user/save-pwd', postData)
                     .then(response => {
                         showMessage('success', response.data.msg)
                         /*message.success('성공적으로 패스워드를 변경하였습니다.');*/
