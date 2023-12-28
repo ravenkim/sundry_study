@@ -82,11 +82,21 @@ export const initialStateHandler = (apiAction) => {
 export const createRequestSaga = (prefix, reducerName, apiRequest) => {
     return function* fetchApiData(action) {
         try {
+
+
             const response = yield call(() => apiRequest(action.payload)); // 여기서 apiCall은 실제 API 호출 함수입니다.
-            yield put({
-                type: `${prefix}/${reducerName}Success`,
-                payload: response
-            });
+            if (response.data.res) {
+                yield put({
+                    type: `${prefix}/${reducerName}Success`,
+                    payload: response.data
+                });
+            } else {
+                 yield put({
+                    type: `${prefix}/${reducerName}Fail`,
+                    payload: response.data
+                });
+            }
+
         } catch (error) {
             yield put({
                 type: `${prefix}/${reducerName}Fail`,
@@ -111,11 +121,11 @@ export const extraReducers = (prefix, asyncRequest) => {
                     const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
                     const requestInfo = asyncRequest[key][0];
 
-                    if (action.payload.data instanceof Blob){
+                    if (action.payload.data instanceof Blob) {
                         const blobUrl = URL.createObjectURL(action.payload.data)
                         state[Object.keys(requestInfo)[0]] = reducerUtils.success(blobUrl);
                     } else {
-                        state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload.data);
+                        state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload?.data);
                     }
 
 
@@ -123,7 +133,7 @@ export const extraReducers = (prefix, asyncRequest) => {
                 if (action.type.endsWith('Fail')) {
                     const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Fail$/, '');
                     const requestInfo = asyncRequest[key][0];
-                    state[Object.keys(requestInfo)[0]] = reducerUtils.error(action.payload.data);
+                    state[Object.keys(requestInfo)[0]] = reducerUtils.error(action.payload?.msg);
                 }
             }
         )
