@@ -6,6 +6,7 @@ import React, {useEffect, useState} from "react";
 import MiniProfile from "./MiniProfile.jsx";
 import {Popover, Avatar, Space} from "antd";
 import {profileAction} from "../../../../features/profile/profileReducer.jsx";
+import {adminAction} from "../../../../features/admin/adminReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
@@ -18,22 +19,22 @@ const Header = ({
 
     const {
         bgcolor1,
-        userProfileImg
+        userProfileImg,
+        userProfileImgLoading
     } = useSelector(({assetsReducer, profileReducer}) => ({
             bgcolor1: assetsReducer.colors.bgcolor,
             userProfileImg: profileReducer.userProfileImg.data,
+            userProfileImgLoading: profileReducer.userProfileImg.loading,
         }),
         shallowEqual
     );
 
     useEffect(() => {
-        if (userProfileImg === undefined) {
-            dispatch(profileAction.getUserProfileImg(''));
-        } else if (userProfileImg === '') {
-            dispatch(profileAction.getUserProfileImg());
-        }
-    }, []);
 
+        dispatch(profileAction.getUserProfileImg());
+        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+
+    }, []);
 
     return (
         <header
