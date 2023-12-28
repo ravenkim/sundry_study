@@ -14,8 +14,7 @@ const AdminMemberDetail = ({
                            }) => {
 
 
-
-        const {
+    const {
         userDetail,
 
     } = useSelector(({adminReducer}) => ({
@@ -25,12 +24,12 @@ const AdminMemberDetail = ({
     );
 
 
-        const resetHandler = () => {
-            setUserNm(null)
-            setUserEmail(null)
-            setPhoneNumber(null)
-            setAuthNm(null)
-        }
+    const resetHandler = () => {
+        setUserNm(null)
+        setUserEmail(null)
+        setPhoneNumber(null)
+        setAuthNm(null)
+    }
 
 
     const [userNm, setUserNm] = useState(null)
@@ -40,29 +39,29 @@ const AdminMemberDetail = ({
 
 
     useEffect(() => {
-        if(userDetail){
+        if (userDetail) {
             const data = userDetail?.userInfo
             setUserNm(data?.userNm)
             setUserEmail(data?.userEmail)
-            setPhoneNumber(data?.authNm)
-            setAuthNm(data?.phoneNumber)
-            
+            setPhoneNumber(data?.phoneNumber)
+                        //     todo data 정제
+            setAuthNm(data?.authNm)
+
+
         }
-        
+
     }, [userDetail]);
 
 
-
-
     const addHandler = () => {
-    //     인풋 초기화
+        //     인풋 초기화
     }
 
 
     const cancelHandler = () => {
         setModalVisible(false)
 
-            //     인풋 초기화
+        //     인풋 초기화
 
     }
 
@@ -104,30 +103,29 @@ const AdminMemberDetail = ({
                 </div>
 
 
-
                 <div>
-                     <SSlabelForInput label={'이름'}>
-                         <Input
-                            value = {userNm}
-                         />
-                     </SSlabelForInput>
-                        <SSlabelForInput label={'이메일'}>
-                         <Input
-                         value = {userEmail}
-                         />
-                     </SSlabelForInput>
+                    <SSlabelForInput label={'이름'}>
+                        <Input
+                            value={userNm}
+                        />
+                    </SSlabelForInput>
+                    <SSlabelForInput label={'이메일'}>
+                        <Input
+                            value={userEmail}
+                        />
+                    </SSlabelForInput>
 
 
                     <SSlabelForInput label={'전화번호'}>
-                         <Input
-                         value = {phoneNumber}
-                         />
-                     </SSlabelForInput>
+                        <Input
+                            value={phoneNumber}
+                        />
+                    </SSlabelForInput>
                     <SSlabelForInput label={'권한'}>
-                         <Input
-                         value = {authNm}
-                         />
-                     </SSlabelForInput>
+                        <Input
+                            value={authNm}
+                        />
+                    </SSlabelForInput>
 
 
                 </div>
