@@ -26,9 +26,8 @@ function* login(action) {
             () => client.post("login", action.payload)
         )
 
-        console.log(response)
         if (response.data?.res) {
-            const tk = response.data?.msg
+            const tk = response.data?.data.AccessToken
             setCookie('tk', tk)
             yield put({
                 type: 'user/loginSuccess',
@@ -62,6 +61,9 @@ export const userSlice = createSlice({
     reducers: {
         initializeAll: (state, action) => {
             return initialState;
+        },
+        initializeUser: (state, action) => {
+            state.user = null
         },
         initializeMsg: (state, action) => {
             state.loginErrorMsg = null

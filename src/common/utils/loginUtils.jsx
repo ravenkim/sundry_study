@@ -12,7 +12,7 @@ const jwtDecodeHandler = (data) => {
 export const setUserHandler = () => {
     try {
         const userToken = getCookie('tk')  // 쿠키에서 가져오지
-        if (!userToken) {store.dispatch(userAction.initialize('user'))
+        if (!userToken) {store.dispatch(userAction.initializeUser())
             return ;
         }
         store.dispatch(userAction.setUser(jwtDecodeHandler(userToken)))
