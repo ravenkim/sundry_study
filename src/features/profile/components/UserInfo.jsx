@@ -36,13 +36,15 @@ const UserInfo = () => {
     )
 
     useEffect(() => {
-        dispatch(profileAction.getUserProfileImg())
         dispatch(profileAction.getFullUserInfo())
-
-        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
         if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
         // 요청 초기화하기 투두 -> 대여목록에 갔다가 회원정보 다시 들어오면 요청되도록 작성되어 있는 상태임
 
+        if (userProfileImg === undefined) {
+            dispatch(profileAction.getUserProfileImg(''));
+        } else if (userProfileImg === null) {
+            dispatch(profileAction.getUserProfileImg());
+        } // 프로필 이미지 요청하기 // null 넣을 시 이미지를 설정하지 않은 상태에서는 400 에러가 발생함
 
         // 요청 초기화 작성
         return() => {
