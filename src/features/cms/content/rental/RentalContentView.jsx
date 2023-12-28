@@ -1,9 +1,50 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SSeditor from "../../../../common/components/editor/SSeditor.jsx";
 import SSwrapper from "../../../../common/components/wrapper/SSwrapper.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
+import {shallowEqual, useSelector} from "react-redux";
 
 const RentalContentView = () => {
+
+
+    const {
+        detail,
+    } = useSelector(({router, cmsReducer}) => ({
+            detail: cmsReducer.contentDetail.data
+
+        }),
+        shallowEqual
+    )
+
+
+    useEffect(() => {
+        if (detail) {
+            //state 세팅
+            const data = detail?.contentDtl
+
+
+            setContentNm(data?.contentNm)
+            setContentDesc(data?.contentDesc)
+            setCateNm(data?.cateNm)
+
+            setContentHtml(data?.contentHtml)
+
+        }
+    }, [detail]);
+
+    // 제목
+    const [contentNm, setContentNm] = useState('')
+    // 설명
+    const [contentDesc, setContentDesc] = useState('')
+    // 카테고리
+    const [cateNm, setCateNm] = useState('')
+
+
+    // 본문
+    const [contentHtml, setContentHtml] = useState()
+
+
+    //자유공간
 
 
     return (
@@ -45,16 +86,26 @@ const RentalContentView = () => {
                     ></SSwrapper>
 
 
-
-
                     <div
                         style={{
                             width: 'calc(100% - 320px)',
                             height: 100,
-                            backgroundColor: "tomato",
-                            marginTop: '20px'
+                            marginTop: '20px',
+                            color: "red"
                         }}
                     >
+
+                        <h5
+                            className={"text-[#ffffff] mb-[15px]"}
+                        >{cateNm}</h5>
+
+
+                        <h1
+                            className={"text-[#ffffff] mb-[40px]"}
+                        >{contentNm}</h1>
+                        <h5
+                            className={"text-[#ffffff]"}
+                        >{contentDesc}</h5>
 
                     </div>
                 </div>
@@ -66,7 +117,6 @@ const RentalContentView = () => {
                 style={{
                     width: '63%',
                     minHeight: '500px',
-                    backgroundColor: "tomato",
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between"
@@ -79,11 +129,12 @@ const RentalContentView = () => {
                     }}
                 >
                     <SSeditor
-                        height={'1000px'}
-                        isEditMode={true}
+                        height={'90vh'}
+                        isEditMode={false}
                         changeHandler={(contents) => {
                             console.log(contents)
                         }}
+                        initContents={contentHtml}
                     />
 
                 </div>

@@ -128,6 +128,7 @@ const AdminMemberTable = () => {
                 columns={columns}
                 dataSource={usersData}
                 useIndex={true}
+                onRowClick={(data) => console.log(data)}
             >
 
             </SStable>
