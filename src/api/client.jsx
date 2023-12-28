@@ -4,7 +4,7 @@ import {jwtDecode} from "jwt-decode";
 
 
 const client = axios.create({
-    baseURL: import.meta.env.VITE_API_HOST,
+    baseURL: import.meta.env.VITE_API_HOST
 })
 
 
