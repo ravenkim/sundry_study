@@ -40,12 +40,6 @@ const UserInfo = () => {
         if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
         // 요청 초기화하기 투두 -> 대여목록에 갔다가 회원정보 다시 들어오면 요청되도록 작성되어 있는 상태임
 
-        if (userProfileImg === undefined) {
-            dispatch(profileAction.getUserProfileImg(''));
-        } else if (userProfileImg === null) {
-            dispatch(profileAction.getUserProfileImg());
-        } // 프로필 이미지 요청하기 // null 넣을 시 이미지를 설정하지 않은 상태에서는 400 에러가 발생함
-
         // 요청 초기화 작성
         return() => {
             dispatch(profileAction.initializeAll())
@@ -147,6 +141,17 @@ const UserInfo = () => {
         }
     };
 
+    useEffect(() => {
+        if(postUserProfileImg) {
+                if(postUserProfileImg.data.res) {
+                    setFileList([])
+                    showMessage('success', postUserProfileImg.data.msg)
+                } else {
+                    showMessage('error', postUserProfileImg.data.msg)
+                }
+            }
+    }, [postUserProfileImg]);
+
     const handleSave = () => {
         onSave();
     }
@@ -192,7 +197,7 @@ const UserInfo = () => {
                 <div className={'w-full'}>
                     <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
                         <div className={'flex flex-col items-center gap-[8px]'}>
-                            {userProfileImg == null
+                            {userProfileImg === null
                                 ? <Space direction='vertical' wrap size={180}>
                                     <Avatar size={180} icon={<UserOutlined/>}/>
                                 </Space>
