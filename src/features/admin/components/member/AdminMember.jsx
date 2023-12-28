@@ -6,11 +6,14 @@ import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 import SStitleLabel from "../../../../common/components/label/SStitleLabel.jsx";
 import AdminMemberTable from "./AdminMemberTable.jsx";
 import AdminMemberAddModal from "./AdminMemberAddModal.jsx";
+import AdminMemberDetail from "./AdminMemberDetail.jsx";
 
 const AdminMember = () => {
     const dispatch = useDispatch();
 
     const [modalVisible, setModalVisible] = useState(false)
+
+
 
 
     return (
@@ -40,6 +43,7 @@ const AdminMember = () => {
                 modalVisible ={modalVisible}
                 setModalVisible = {setModalVisible}
             />
+
 
 
         </div>

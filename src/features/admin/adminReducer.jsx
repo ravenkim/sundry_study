@@ -5,7 +5,7 @@ import {
     addUser,
     getAuthList,
     getBoardList, getOverdues,
-    getUsers,
+    getUsers, getUsersDetail,
     resetPassword,
     resetProfile,
     setBoardPriorities
@@ -27,6 +27,11 @@ const asyncRequest = {
     getUsers: [
         {users: reducerUtils.init()},
         getUsers
+    ],
+
+      getUsersDetail: [
+        {userDetail: reducerUtils.init()},
+        getUsersDetail
     ],
 
 

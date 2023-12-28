@@ -7,6 +7,21 @@ export const removeRole = (data) => {
         }
     });
 }
+// export const removeRole = (data) => {
+//     if (Array.isArray(data)) {
+//         return data.map(user => {
+//             return {
+//                 ...user,
+//                 authNm: user.authNm.replace('ROLE', '').replace(/_/g, ' ').trim()
+//             }
+//         });
+//     } else if (typeof data === 'object' && data !== null) {
+//         return {
+//             ...data,
+//             authNm: data.authNm.replace('ROLE', '').replace(/_/g, ' ').trim()
+//         }
+//     }
+// }
 
 
 export const formatDate = (dateString) => {

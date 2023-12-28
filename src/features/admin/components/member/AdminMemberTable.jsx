@@ -7,6 +7,7 @@ import {Spin} from 'antd';
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import {resetProfile} from "../../adminAPI.jsx";
+import AdminMemberDetail from "./AdminMemberDetail.jsx";
 
 const AdminMemberTable = () => {
     const dispatch = useDispatch()
@@ -118,6 +119,12 @@ const AdminMemberTable = () => {
         }
     ]
 
+    const [memberDetailModalVisible, setMemberDetailModalVisible] = useState(false)
+
+
+
+
+
 
     return (
 
@@ -128,10 +135,21 @@ const AdminMemberTable = () => {
                 columns={columns}
                 dataSource={usersData}
                 useIndex={true}
-                onRowClick={(data) => console.log(data)}
+                onRowClick={(data) => {
+                    setMemberDetailModalVisible(true)
+
+                    dispatch(adminAction.getUsersDetail({userId: data.userId}))
+                }}
             >
 
             </SStable>
+
+
+                 <AdminMemberDetail
+                    modalVisible ={memberDetailModalVisible}
+                setModalVisible = {setMemberDetailModalVisible}
+            />
+
         </Spin>
 
 
