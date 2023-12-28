@@ -53,7 +53,7 @@ const MiniProfile = () => {
         // {notiId : 1}
     };
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     useEffect(() => {
         console.log('open', open)
@@ -141,8 +141,8 @@ const MiniProfile = () => {
                 </div>
                 <div className={'absolute -left-[10px] w-[30px] h-auto z-2 top-1/2 bg-[#ffffff] rounded-full'}
                      onClick={() => setOpen(!open)}>
-                    {!open ? <RightCircleOutlined className={'w-full cursor-pointer'} style={{fontSize: '20px'}}/> :
-                        <LeftCircleOutlined className={'w-full cursor-pointer'} style={{fontSize: '20px'}}/>}
+                    {!open ? < LeftCircleOutlined className={'w-full cursor-pointer'} style={{fontSize: '20px'}}/> :
+                        <RightCircleOutlined className={'w-full cursor-pointer'} style={{fontSize: '20px'}}/>}
                 </div>
                 <div className={'pt-[50px] w-auto flex-auto max-w-[300px] ' + (open ? 'pl-[20px] ' : ' ')}>
                     <div
