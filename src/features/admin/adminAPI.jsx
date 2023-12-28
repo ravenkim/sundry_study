@@ -7,6 +7,11 @@ import client from "src/api/client.jsx";
 export const getUsers = () =>
   client.get('admin/users')
 
+export const getUsersDetail = (param) =>
+  client.post('admin/user-detail',param)
+
+
+
 export const getAuthList = () =>
   client.get('admin/auth-list')
 
