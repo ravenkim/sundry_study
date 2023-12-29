@@ -2,10 +2,14 @@ import React from 'react';
 
 
 import { Typography } from 'antd';
-const { Paragraph, Text } = Typography;
 
 
 const SStext = (children) => {
+
+    const { Paragraph, Text } = Typography;
+
+
+
     return (
         <Text>
             {children}
