@@ -158,12 +158,10 @@ const MiniProfile = () => {
                                             {user?.userNm}님! 알림이 도착했어요.
                                             <br/>
                                              <p className={'w-auto text-wrap text-ellipsis break-all'}>{item.notiContent}</p>
-                                            {/*<SStext>*/}
-                                            {/*    대여중인 컨텐츠 'MS*/}
-                                            {/*    Azure*/}
-                                            {/*    애저*/}
-                                            {/*    클라우드 서비스 구축 이해와 보안'의 반납 기한이 지났습니다. 빠른 시일 내에 반납 해주시길 바랍니다.*/}
-                                            {/*</SStext>*/}
+                                            <SStext>
+                                                대여중인 컨텐츠 'MS Azure 애저 클라우드 서비스 구축 이해와 보안'의 반납 기한이 지났습니다. 빠른 시일 내에 반납
+                                                    해주시길 바랍니다.
+                                            </SStext>
 
                                             <p className={'w-auto text-wrap text-ellipsis break-all'}></p>
                                         </div>
