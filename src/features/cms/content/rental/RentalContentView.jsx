@@ -17,6 +17,15 @@ const RentalContentView = () => {
     )
 
 
+
+
+
+    const [userId, setUserId] = useState()
+    const [contentId, setContentId] = useState()
+    
+    
+
+
     useEffect(() => {
         if (detail) {
             //state 세팅
@@ -28,6 +37,8 @@ const RentalContentView = () => {
             setCateNm(data?.cateNm)
 
             setContentHtml(data?.contentHtml)
+            setRentalStatNm(data?.rentalStatNm)
+            setContentId(data?.contentId)
 
         }
     }, [detail]);
@@ -41,8 +52,10 @@ const RentalContentView = () => {
 
 
     // 본문
-    const [contentHtml, setContentHtml] = useState()
+    const [contentHtml, setContentHtml] = useState(null)
 
+
+    const [rentalStatNm, setRentalStatNm] = useState('')
 
     //자유공간
 
@@ -125,17 +138,19 @@ const RentalContentView = () => {
                 <div
                     style={{
                         width: '58%',
-                        backgroundColor: "salmon"
                     }}
                 >
-                    <SSeditor
+                    <div
+                        style={{marginTop: '20px'}}
+                    ><SSeditor
+
                         height={'90vh'}
                         isEditMode={false}
                         changeHandler={(contents) => {
                             console.log(contents)
                         }}
                         initContents={contentHtml}
-                    />
+                    /></div>
 
                 </div>
 
@@ -152,11 +167,18 @@ const RentalContentView = () => {
                     <SSwrapper
                         style={{
                             width: '100%',
-                            alignItems: 'center'
+                            boxSizing: 'border-box',
+                            padding: '20px'
 
                         }}
                     >
-                        대여 버튼
+                        현재 상태: {rentalStatNm}
+
+                        <SSbutton
+                            style={{marginTop: '20px'}}
+                        > 대여하기 </SSbutton>
+                        <SSbutton style={{marginTop: '10px'}}> 예약하기 </SSbutton>
+                        <SSbutton style={{marginTop: '10px'}}> 찜하기 </SSbutton>
 
                     </SSwrapper>
 
