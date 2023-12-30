@@ -24,3 +24,6 @@ export const postBoardLikes = (param) =>
 
 export const getUserNotifications = () =>
     client.get('notifications');
+
+export const postUserNotifications = (param) =>
+    client.post('notifications/update',param);
