@@ -32,7 +32,6 @@ const Header = ({
     useEffect(() => {
 
         dispatch(profileAction.getUserProfileImg());
-        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
 
     }, []);
 

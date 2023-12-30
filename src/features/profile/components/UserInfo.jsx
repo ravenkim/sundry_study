@@ -37,7 +37,6 @@ const UserInfo = () => {
 
     useEffect(() => {
         dispatch(profileAction.getFullUserInfo())
-        if (!fullUserInfo) dispatch(profileAction.getFullUserInfo(null))
         // 요청 초기화하기 투두 -> 대여목록에 갔다가 회원정보 다시 들어오면 요청되도록 작성되어 있는 상태임
 
         // 요청 초기화 작성
