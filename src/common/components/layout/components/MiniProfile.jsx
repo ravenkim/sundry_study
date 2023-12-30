@@ -34,11 +34,6 @@ const MiniProfile = () => {
         dispatch(profileAction.getUserNotifications());
         dispatch(profileAction.getUserProfileImg());
 
-        if (!notificationsData) dispatch(profileAction.getUserNotifications(null))
-        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
-
-
-        console.log('userProfileImg', userProfileImg)
         return () => {
             dispatch(profileAction.initializeAll())
             // 페이지 나가면 초기화
@@ -52,7 +47,7 @@ const MiniProfile = () => {
         // {notiId : 1}
     };
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         console.log('open', open)
