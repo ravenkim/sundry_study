@@ -78,7 +78,7 @@ const MiniProfile = () => {
                     }
                 </div>
             </div>
-            <div className={'flex flex-row-reverse relative overflow-visible w-full'}>
+            <div className={'flex flex-row-reverse relative overflow-visible w-full max-h-[340px]'}>
                 <div className={'w-full desktop:min-w-[300px]'}>
                     <div className={'p-[20px] pt-[50px] flex flex-col justify-center items-center gap-[8px]'}>
                         <div className={'flex justify-center items-center flex-col mb-[20px]'}>
@@ -138,13 +138,13 @@ const MiniProfile = () => {
                     {!open ? < LeftCircleOutlined className={'w-full cursor-pointer'} style={{fontSize: '20px'}}/> :
                         <RightCircleOutlined className={'w-full cursor-pointer'} style={{fontSize: '20px'}}/>}
                 </div>
-                <div className={'pt-[50px] w-auto flex-auto max-w-[300px] ' + (open ? 'pl-[20px] ' : ' ')}>
+                <div className={'mt-[50px] w-auto flex-auto max-w-[300px] mb-[20px] overflow-auto ' + (open ? 'pl-[20px] ' : ' ')}>
                     <div
-                        className={'max-h-[520px] flex flex-col gap-[6px] overflow-hidden overflow-y-auto box-border px-[4px] transition-all duration-300 ' + (open ? ' w-full opacity-100 visible' : ' w-0 opacity-0 hidden')}>
+                        className={'flex flex-col gap-[6px] overflow-hidden overflow-y-auto box-border px-[4px] transition-all duration-300 pb-[6px] ' + (open ? ' w-full opacity-100 visible' : ' w-0 opacity-0 hidden')}>
                         {notificationsData?.notiList?.map((item, idx) => {
                             return (
                                 <Tag closeIcon={<CloseCircleOutlined/>} onClose={log}
-                                     className={'bg-white w-full mx-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)] flex flex-row gap-[8px]'}
+                                     className={'bg-white w-full mx-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)] flex flex-row gap-[8px] box-border p-[6px]'}
                                      key={idx}
                                 >
                                     <div
@@ -152,10 +152,11 @@ const MiniProfile = () => {
                                         <div className={'text-wrap w-full'}>
                                             {user?.userNm}님! 알림이 도착했어요.
                                             <br/>
-                                             <p className={'w-auto text-wrap text-ellipsis break-all'}>{item.notiContent}</p>
-                                            <SStext>
-                                                대여중인 컨텐츠 'MS Azure 애저 클라우드 서비스 구축 이해와 보안'의 반납 기한이 지났습니다. 빠른 시일 내에 반납
-                                                    해주시길 바랍니다.
+                                             <p className={'w-auto text-wrap text-ellipsis break-all'}></p>
+                                            <SStext
+                                                className={'w-full text-wrap text-ellipsis break-all'}
+                                            >
+                                                {item.notiContent}
                                             </SStext>
 
                                             <p className={'w-auto text-wrap text-ellipsis break-all'}></p>

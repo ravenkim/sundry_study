@@ -120,3 +120,7 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-arrow::after {
     background: rgba(85,101,246,.6);
 }
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tag {
+    white-space: wrap;
+}
