@@ -8,7 +8,7 @@ import {
     getFullUserInfo, getUserNotifications,
     getUserProfileImg, postBoardLikes,
     postBoardRentals,
-    postBoardReservations,
+    postBoardReservations, postUserNotifications,
     postUserProfileImg,
     postUserPW
 } from "./profileAPI.jsx";
@@ -59,6 +59,11 @@ const asyncRequest = {
     getUserNotifications : [
         {notifications:reducerUtils.init()},
         getUserNotifications
+    ],
+
+    postUserNotifications : [
+        {notiIds:reducerUtils.init()},
+        postUserNotifications
     ]
 
 }

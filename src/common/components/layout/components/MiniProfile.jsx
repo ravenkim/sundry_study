@@ -20,12 +20,14 @@ const MiniProfile = () => {
     const {
         user,
         userProfileImg,
-        notificationsData
+        notificationsData,
+        postNotiId
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
             userProfileImg: profileReducer.userProfileImg.data,
-            notificationsData: profileReducer.notifications.data
+            notificationsData: profileReducer.notifications.data,
+            postNotiId: profileReducer.notiIds,
         }),
         shallowEqual
     )
@@ -40,11 +42,12 @@ const MiniProfile = () => {
         }
     }, []);
 
-    const log = (e) => {
-        console.log(e);
+    const log = (itemsNotiId) => {
+        console.log(itemsNotiId);
         // 리스트를 제거해야 하는지 보이지 않게만 해야 하는지 확인 후 작업 진행
         // post /notifications/update -> 미확인에서 확인으로 변경
         // {notiId : 1}
+        dispatch(profileAction.postUserNotifications({notiId:itemsNotiId}))
     };
 
     const [open, setOpen] = useState(false);
@@ -141,11 +144,11 @@ const MiniProfile = () => {
                 <div className={'mt-[50px] w-auto flex-auto max-w-[300px] mb-[20px] overflow-auto ' + (open ? 'pl-[20px] ' : ' ')}>
                     <div
                         className={'flex flex-col gap-[6px] overflow-hidden overflow-y-auto box-border px-[4px] transition-all duration-300 pb-[6px] ' + (open ? ' w-full opacity-100 visible' : ' w-0 opacity-0 hidden')}>
-                        {notificationsData?.notiList?.map((item, idx) => {
+                        {notificationsData?.notiList?.map((item) => {
                             return (
-                                <Tag closeIcon={<CloseCircleOutlined/>} onClose={log}
+                                <Tag closeIcon={<CloseCircleOutlined/>} onClose={()=> log(item.notiId)}
                                      className={'bg-white w-full mx-0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)] flex flex-row gap-[8px] box-border p-[6px]'}
-                                     key={idx}
+                                     key={item.notiId}
                                 >
                                     <div
                                         className={'flex flex-row w-full justify-between gap-[8px] flex-wrap flex-auto'}>
@@ -163,6 +166,8 @@ const MiniProfile = () => {
                                         </div>
                                         <div className={'flex-auto'}>
                                             {item.joinDt}
+                                            <br/>
+                                            {item.notiId}
                                         </div>
                                     </div>
                                 </Tag>
