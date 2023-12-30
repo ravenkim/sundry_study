@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 
 const { Text } = Typography;
 
-const SStext = ({ children }) => {
+const SStext = ({ children, className }) => {
     return (
         <Text>
             {children}
