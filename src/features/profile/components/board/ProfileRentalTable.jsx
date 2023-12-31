@@ -6,7 +6,7 @@ import {getBoardList} from "../../../admin/adminAPI.jsx";
 import {profileAction} from "../../profileReducer.jsx";
 import {postBoardRentals} from "../../profileAPI.jsx";
 
-const ProfileBoardTable = () => {
+const ProfileRentalTable = () => {
 
     // post 요청으로 userId 값을 보내면 리턴으로 테이블에 대한 값이 옴
 
@@ -35,10 +35,6 @@ const ProfileBoardTable = () => {
             const userIdString = fullUserInfo?.userInfo?.userId;
             dispatch(profileAction.postBoardRentals({userId: userIdString}))
             // 유저 키값 보내서 해당 유저에 대한 데이터 받아오기
-
-            if(BoardRentals) {
-                setBoardList(BoardRentals?.rentalInfo)
-            } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
         }
     }, [fullUserInfo]);
 
@@ -55,27 +51,44 @@ const ProfileBoardTable = () => {
         dispatch(profileAction.getFullUserInfo())
     }, []);
 
+    useEffect(() => {
+        if(BoardRentals) {
+                setBoardList(BoardRentals?.rentalInfo)
+            } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
+    }, [BoardRentals]);
+
     const columns = [
         {
-            title: '순서',
-            dataIndex: 'boardSn',
+            title: '카테고리',
+            dataIndex: 'cateNm',
         },
         {
-            title: '이름',
-            dataIndex: 'boardNm',
+            title: '컨텐츠 제목',
+            dataIndex: 'contentNm',
         },
         {
-            title: '생성일',
-            dataIndex: 'regDt',
+            title: '대여일',
+            dataIndex: 'rentalDt',
         },
         {
-            title: '게시물 수',
-            dataIndex: 'contentNum',
+            title: '반납예정일',
+            dataIndex: 'predReturnDt',
         },
         {
-            title: '상태',
-            dataIndex: 'boardStat',
+            title: '대여상태',
+            dataIndex: 'rentalStatNm',
         },
+        /*{
+            title: '상태변경',
+            dataIndex: 'rentalStatNm',
+            render: (text, record, value) => (
+                <SSbutton
+                    onClick={() =>
+                        dispatch(adminAction.resetProfile({userId: value}))
+                    }
+                >삭제</SSbutton>
+            )
+        },*/ // 상태변경 버튼 추가
 
     ]
 
@@ -88,9 +101,8 @@ const ProfileBoardTable = () => {
             >
 
             </SStable>
-            {/*<div onClick={onClickAction}>post 요청 버튼</div>*/}
         </>
     );
 };
 
-export default ProfileBoardTable;
+export default ProfileRentalTable;
