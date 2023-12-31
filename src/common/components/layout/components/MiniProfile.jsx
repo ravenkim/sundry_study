@@ -43,19 +43,19 @@ const MiniProfile = () => {
     }, []);
 
     const log = (itemsNotiId) => {
-        console.log(itemsNotiId);
         // 리스트를 제거해야 하는지 보이지 않게만 해야 하는지 확인 후 작업 진행
         // 논리적 제거로 진행중
         // post /notifications/update -> 미확인에서 확인으로 변경
         // {notiId : 1}
         dispatch(profileAction.postUserNotifications({notiId:itemsNotiId}))
+        // 에러 발견 - sql문 오류 확인 후 진행
+        // ### Error updating database. Cause: java.sql.SQLSyntaxErrorException: (conn=29908) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE notiId = 1' at line 3 ### The error may exist in class path resource [mapper/NotificationMapper.xml] ### The error may involve defaultParameterMap ### The error occurred while setting parameters ### SQL: UPDATE Notification SET notiStatus = 'CD005002', WHERE notiId = ? ### Cause: java.sql.SQLSyntaxErrorException: (conn=29908) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE notiId = 1' at line 3 ; bad SQL grammar []
     };
 
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        console.log('open', open)
-    }, [open]);
+    }, []);
 
     return (
         <div
