@@ -18,7 +18,7 @@ const ProfileBoardTable = () => {
         BoardRentals,
         fullUserInfo,
     } = useSelector(({profileReducer}) => ({
-            BoardRentals: profileReducer.BoardRentals,
+            BoardRentals: profileReducer.BoardRentals.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
             // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
         }),
@@ -32,31 +32,28 @@ const ProfileBoardTable = () => {
     useEffect(() => {
         if (fullUserInfo) {
             setUserData(JSON.stringify(fullUserInfo?.userInfo?.userId).trim())
-
             const userIdString = fullUserInfo?.userInfo?.userId;
-            console.log('보내는 데이터', userIdString)
             dispatch(profileAction.postBoardRentals({userId: userIdString}))
+            // 유저 키값 보내서 해당 유저에 대한 데이터 받아오기
+
+            if(BoardRentals) {
+                setBoardList(BoardRentals?.rentalInfo)
+            } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
         }
     }, [fullUserInfo]);
 
-    const onClickAction = () => {
+    /*const onClickAction = () => {
 
         if (userData) {
             dispatch(profileAction.postBoardRentals({
                 userId: userData
             }));
         }
-    }
+    }*/
 
     useEffect(() => {
-        /*dispatch(adminAction.getBoardList())*/
         dispatch(profileAction.getFullUserInfo())
     }, []);
-
-    useEffect(() => {
-
-    }, [fullUserInfo]);
-
 
     const columns = [
         {
@@ -91,7 +88,7 @@ const ProfileBoardTable = () => {
             >
 
             </SStable>
-            <div onClick={onClickAction}>post 요청 버튼</div>
+            {/*<div onClick={onClickAction}>post 요청 버튼</div>*/}
         </>
     );
 };
