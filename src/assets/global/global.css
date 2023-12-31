@@ -124,3 +124,29 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-tag {
     white-space: wrap;
 }
+
+*::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    width: 8px;
+    /*background-color: #313131;*/
+    border-radius: 6px;
+    border: 1px solid transparent;
+    outline: none;
+    box-shadow: inset 6px 6px 0 rgba(154, 157, 173, 1);
+}
+
+*::-webkit-scrollbar-track {
+    /*background-color: #313131;*/
+    box-shadow: none;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #ffffff;
+    box-shadow: none;
+}
