@@ -16,11 +16,20 @@ export const postUserPW = (param) =>
 export const postBoardRentals = (param) =>
     client.post('profile/rentals', param);
 
+
+
+
 export const postBoardReservations = (param) =>
     client.post('profile/reservations', param);
 
+
+
+
 export const postBoardLikes = (param) =>
     client.post('profile/likes', param);
+
+
+
 
 export const getUserNotifications = () =>
     client.get('notifications');
