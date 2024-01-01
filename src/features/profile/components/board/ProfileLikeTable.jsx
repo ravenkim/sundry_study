@@ -3,6 +3,7 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {profileAction} from "../../profileReducer.jsx";
 import {postBoardLikes} from "../../profileAPI.jsx";
+import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 
 const ProfileLikeTable = () => {
 
@@ -59,17 +60,19 @@ const ProfileLikeTable = () => {
             title: '대여상태',
             dataIndex: 'rentalStatNm',
         },
-        /*{
+        {
             title: '상태변경',
             dataIndex: 'rentalStatNm',
             render: (text, record, value) => (
                 <SSbutton
                     onClick={() =>
-                        dispatch(adminAction.resetProfile({userId: value}))
+                        /*dispatch(profileAction.BoardLikesDelete({contentId: value}))*/
+                        console.log(value,'value')
                     }
+                    danger
                 >삭제</SSbutton>
             )
-        },*/ // 좋아요 취소 버튼 추가
+        }, // 좋아요 취소 버튼 추가
         // put /likes/delete
         // {
         //   "contentId": 1

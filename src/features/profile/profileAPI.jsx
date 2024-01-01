@@ -28,7 +28,8 @@ export const postBoardReservations = (param) =>
 export const postBoardLikes = (param) =>
     client.post('profile/likes', param);
 
-
+export const deleteBoardLikes = (param) =>
+    client.put('likes/delete', param)
 
 
 export const getUserNotifications = () =>
