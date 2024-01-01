@@ -66,8 +66,9 @@ const ProfileLikeTable = () => {
             render: (text, record, value) => (
                 <SSbutton
                     onClick={() =>
-                        /*dispatch(profileAction.BoardLikesDelete({contentId: value}))*/
-                        console.log(value,'value')
+                        /*dispatch(profileAction.BoardLikesDelete({contentId: BoardLikes?.likeList[value]?.contentId}))*/
+                        /*console.log('value = '+ value + 'text = '+ text + 'record ='+ record);*/
+                        console.log('contentId = ', BoardLikes?.likeList[value]?.contentId)
                     }
                     danger
                 >삭제</SSbutton>
