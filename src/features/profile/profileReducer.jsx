@@ -5,6 +5,7 @@ import {
 import client from "../../api/client.jsx";
 import imgClient from "../../api/imgClient.jsx";
 import {
+    deleteBoardLikes,
     getFullUserInfo, getUserNotifications,
     getUserProfileImg, postBoardLikes,
     postBoardRentals,
@@ -56,6 +57,11 @@ const asyncRequest = {
         postBoardLikes
     ], // 예약목록 보드 사용자 정보 넘겨주기
 
+    deleteBoardLikes : [
+        {BoardLikesDelete:reducerUtils.init()},
+        deleteBoardLikes
+    ],
+
     getUserNotifications : [
         {notifications:reducerUtils.init()},
         getUserNotifications
@@ -64,7 +70,7 @@ const asyncRequest = {
     postUserNotifications : [
         {notiIds:reducerUtils.init()},
         postUserNotifications
-    ]
+    ],
 
 }
 
