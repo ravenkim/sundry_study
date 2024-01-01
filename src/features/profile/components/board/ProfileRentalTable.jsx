@@ -5,6 +5,7 @@ import {adminAction} from "../../../admin/adminReducer.jsx";
 import {getBoardList} from "../../../admin/adminAPI.jsx";
 import {profileAction} from "../../profileReducer.jsx";
 import {postBoardRentals} from "../../profileAPI.jsx";
+import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 
 const ProfileRentalTable = () => {
 
@@ -28,6 +29,7 @@ const ProfileRentalTable = () => {
 
     const [boardList, setBoardList] = useState([])
     const [userData, setUserData] = useState('')
+    const [rentStatus,setRentStatus] = useState(true)
 
     useEffect(() => {
         if (fullUserInfo) {
@@ -52,9 +54,9 @@ const ProfileRentalTable = () => {
     }, []);
 
     useEffect(() => {
-        if(BoardRentals) {
-                setBoardList(BoardRentals?.rentalInfo)
-            } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
+        if (BoardRentals) {
+            setBoardList(BoardRentals?.rentalInfo)
+        } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
     }, [BoardRentals]);
 
     const columns = [
@@ -78,17 +80,29 @@ const ProfileRentalTable = () => {
             title: '대여상태',
             dataIndex: 'rentalStatNm',
         },
-        /*{
+        {
             title: '상태변경',
             dataIndex: 'rentalStatNm',
             render: (text, record, value) => (
-                <SSbutton
-                    onClick={() =>
-                        dispatch(adminAction.resetProfile({userId: value}))
-                    }
-                >삭제</SSbutton>
+                <>
+                    <SSbutton
+                        onClick={() =>
+                            /*dispatch(adminAction.resetProfile({userId: value}))*/
+                            console.log('aa')
+                        }
+                        className={'mr-[6px]'}
+                        type={'primary'}
+                    >반납</SSbutton>
+                    <SSbutton
+                        onClick={() =>
+                            console.log('bb')
+                            /*dispatch(adminAction.resetProfile({userId: value}))*/
+                        }
+                        type={'primary'}
+                    >연체</SSbutton>
+                </>
             )
-        },*/ // 상태변경 버튼 추가
+        }, // 상태변경 버튼 추가
 
     ]
 
