@@ -35,7 +35,7 @@ const asyncRequest = {
     getFullUserInfo: [
         {fullUserInfo:reducerUtils.init()},
         getFullUserInfo
-    ], // 유지 언포메이션 데이터 콘솔 찍는게 안됨
+    ],
 
     postUserPW:[
         {userPW:reducerUtils.init()},
