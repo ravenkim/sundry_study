@@ -6,7 +6,10 @@ const SSbutton = ({
     style,
     onClick,
     className,
+    disabled,
+    type,
     ...otherProps
+
 }) => {
 
     return (
@@ -18,6 +21,8 @@ const SSbutton = ({
             {...otherProps}
             onClick={onClick}
             className={className}
+            disabled={disabled}
+            type={type}
         >
             {children}
         </Button>

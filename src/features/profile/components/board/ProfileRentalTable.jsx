@@ -4,7 +4,7 @@ import SStable from "src/common/components/table/SStable.jsx";
 import {adminAction} from "../../../admin/adminReducer.jsx";
 import {getBoardList} from "../../../admin/adminAPI.jsx";
 import {profileAction} from "../../profileReducer.jsx";
-import {postBoardRentals} from "../../profileAPI.jsx";
+import {postBoardRentals, putBoardRentalsReturn} from "../../profileAPI.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 
 const ProfileRentalTable = () => {
@@ -18,10 +18,13 @@ const ProfileRentalTable = () => {
 
         BoardRentals,
         fullUserInfo,
+        BoardRentalsReturn
+
     } = useSelector(({profileReducer}) => ({
             BoardRentals: profileReducer.BoardRentals.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
             // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
+            BoardRentalsReturn: profileReducer.RentalsReturn.data,
         }),
         shallowEqual
     );
@@ -29,7 +32,6 @@ const ProfileRentalTable = () => {
 
     const [boardList, setBoardList] = useState([])
     const [userData, setUserData] = useState('')
-    const [rentStatus,setRentStatus] = useState(true)
 
     useEffect(() => {
         if (fullUserInfo) {
@@ -40,17 +42,14 @@ const ProfileRentalTable = () => {
         }
     }, [fullUserInfo]);
 
-    /*const onClickAction = () => {
-
-        if (userData) {
-            dispatch(profileAction.postBoardRentals({
-                userId: userData
-            }));
-        }
-    }*/
 
     useEffect(() => {
         dispatch(profileAction.getFullUserInfo())
+
+        return () => {
+            dispatch(profileAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
     }, []);
 
     useEffect(() => {
@@ -58,6 +57,9 @@ const ProfileRentalTable = () => {
             setBoardList(BoardRentals?.rentalInfo)
         } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
     }, [BoardRentals]);
+
+    useEffect(() => {
+    }, [boardList]);
 
     const columns = [
         {
@@ -85,21 +87,51 @@ const ProfileRentalTable = () => {
             dataIndex: 'rentalStatNm',
             render: (text, record, value) => (
                 <>
-                    <SSbutton
-                        onClick={() =>
-                            /*dispatch(adminAction.resetProfile({userId: value}))*/
-                            console.log('aa')
-                        }
-                        className={'mr-[6px]'}
-                        type={'primary'}
-                    >반납</SSbutton>
-                    <SSbutton
-                        onClick={() =>
-                            console.log('bb')
-                            /*dispatch(adminAction.resetProfile({userId: value}))*/
-                        }
-                        type={'primary'}
-                    >연체</SSbutton>
+                    {BoardRentals?.rentalInfo[value]?.rentalStatNm === '반납' ? (
+                        <>
+                            <SSbutton
+                                onClick={() => {
+                                    dispatch(profileAction.putBoardRentalsReturn({
+                                        contentId: BoardRentals?.rentalInfo[value]?.contentId,
+                                        userId: fullUserInfo?.userInfo?.userId
+                                    })) // 반납 기능 구현 완료
+
+                                }}
+                                className={'mr-[6px]'}
+                                disabled={true}
+                            >반납</SSbutton>
+                            <SSbutton
+                                onClick={() =>
+                                    console.log('bb')
+                                    /*dispatch(adminAction.resetProfile({userId: value}))*/
+                                }
+                                disabled={true}
+                            >연체</SSbutton>
+                        </>
+                    ) : (
+                        <>
+                            <SSbutton
+                                onClick={() => {
+                                    dispatch(profileAction.putBoardRentalsReturn({
+                                        contentId: BoardRentals?.rentalInfo[value]?.contentId,
+                                        userId: fullUserInfo?.userInfo?.userId
+                                    })) // 반납 기능 구현 완료
+
+                                }}
+                                className={'mr-[6px]'}
+                                type={'primary'}
+                            >반납</SSbutton>
+                            <SSbutton
+                                onClick={() =>
+                                    console.log('bb')
+                                    /*dispatch(adminAction.resetProfile({userId: value}))*/
+                                }
+                                type={'primary'}
+                            >연체</SSbutton>
+                        </>
+                    )
+                    }
+
                 </>
             )
         }, // 상태변경 버튼 추가

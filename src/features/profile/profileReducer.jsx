@@ -11,7 +11,7 @@ import {
     postBoardRentals,
     postBoardReservations, postUserNotifications,
     postUserProfileImg,
-    postUserPW
+    postUserPW, putBoardRentalsReturn
 } from "./profileAPI.jsx";
 
 
@@ -46,6 +46,11 @@ const asyncRequest = {
         {BoardRentals:reducerUtils.init()},
         postBoardRentals
     ], // 대여목록 보드 사용자 정보 넘겨주기
+
+    putBoardRentalsReturn:[
+        {RentalsReturn:reducerUtils.init()},
+        putBoardRentalsReturn
+    ],// 대여중인 컨텐츠 반납으로 변경
 
     postBoardReservations : [
         {BoardReservations:reducerUtils.init()},

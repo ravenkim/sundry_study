@@ -35,6 +35,11 @@ const ProfileLikeTable = () => {
 
     useEffect(() => {
         dispatch(profileAction.getFullUserInfo())
+
+        return () => {
+            dispatch(profileAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
     }, []);
 
     useEffect(() => {
