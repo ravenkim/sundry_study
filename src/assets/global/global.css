@@ -150,3 +150,7 @@
     background-color: #ffffff;
     box-shadow: none;
 }
+
+.ant-table-cell {
+    vertical-align: middle;
+}
