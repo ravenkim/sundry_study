@@ -187,7 +187,7 @@ const RentalContentView = () => {
                         style={{marginTop: '20px'}}
                     >
                         <SSbutton> 수정 </SSbutton>
-                        <SSbutton> 삭제 </SSbutton>
+                        <SSbutton danger> 삭제 </SSbutton>
                     </div>
 
 

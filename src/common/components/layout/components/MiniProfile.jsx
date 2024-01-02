@@ -165,7 +165,7 @@ const MiniProfile = () => {
 
                                             <p className={'w-auto text-wrap text-ellipsis break-all'}></p>
                                         </div>
-                                        <div className={'flex-auto'}>
+                                        <div className={'flex-auto h-fit'}>
                                             {item.joinDt}
                                         </div>
                                     </div>
