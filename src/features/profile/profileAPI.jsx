@@ -16,7 +16,8 @@ export const postUserPW = (param) =>
 export const postBoardRentals = (param) =>
     client.post('profile/rentals', param);
 
-
+export const putBoardRentalsReturn = (param) =>
+    client.put('rentals/return', param);
 
 
 export const postBoardReservations = (param) =>
