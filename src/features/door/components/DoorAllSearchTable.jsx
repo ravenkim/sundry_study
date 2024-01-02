@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import SStable from "../../../common/components/table/SStable.jsx";
-import {shallowEqual, useSelector} from "react-redux";
-import SSbutton from "../../../common/components/button/SSbutton.jsx";
-import {adminAction} from "../../admin/adminReducer.jsx";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+
+import {push} from "redux-first-history";
 
 const DoorAllSearchTable = () => {
+
+
+        const dispatch = useDispatch()
 
     const {
         searchResult
@@ -46,10 +49,16 @@ const columns = [
     ]
 
     return (
+
+
+        // todo 로딩 처리
         <SStable
             useSearch={false}
             dataSource={dataSource}
             columns = {columns}
+             onRowClick={(data) => {
+                 dispatch(push(`/content/${data?.contentId}`))
+             }}
         >
 
         </SStable>

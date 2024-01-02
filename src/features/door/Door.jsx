@@ -18,6 +18,9 @@ const Door = () => {
     const [serchAllText, setSerchAllText] = useState('')
 
 
+    useEffect(() => {
+        //todo 초기화 처리
+    }, []);
 
     const {
         rentalUpdateStatus,
@@ -48,7 +51,7 @@ const Door = () => {
                     value={serchAllText}
                     onChange={(e) => setSerchAllText(e.target.value)}
                     placeholder={'찾고자 하는 항목을 입력하세요. (전체 항목에서 검색됩니다)'}
-                    title={'무엇을 찾으시나요?'}
+                    title={'무엇을 찾으시나요? (전체 항목에서 검색됩니다)'}
                     onSearch={() =>
                         // console.log(serchAllText)
                         dispatch(doorAction.getSearchAll(serchAllText))
@@ -71,7 +74,7 @@ const Door = () => {
 
 
 
-            <SSsectionWrap className={'desktop:gap-[20px] tablet:gap-[20px] gap-[20px]'}>
+            <SSsectionWrap className={'desktop:gap-[20px] tablet:gap-[20px] gap-[20px] '}>
                 <div className='flex flex-row justify-start items-center gap-[6px] h-[38px]'>
                     <span className={'-mb-[3px]'}>
                         <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
