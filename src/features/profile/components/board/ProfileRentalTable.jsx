@@ -88,7 +88,7 @@ const ProfileRentalTable = () => {
             render: (text, record, value) => (
                 <>
                     {BoardRentals?.rentalInfo[value]?.rentalStatNm === '반납' ? (
-                        <>
+                        <div className={'flex flex-row '}>
                             <SSbutton
                                 onClick={() => {
                                     dispatch(profileAction.putBoardRentalsReturn({
@@ -107,9 +107,9 @@ const ProfileRentalTable = () => {
                                 }
                                 disabled={true}
                             >연체</SSbutton>
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div className={'flex flex-row '}>
                             <SSbutton
                                 onClick={() => {
                                     dispatch(profileAction.putBoardRentalsReturn({
@@ -128,7 +128,7 @@ const ProfileRentalTable = () => {
                                 }
                                 type={'primary'}
                             >연체</SSbutton>
-                        </>
+                        </div>
                     )
                     }
 
