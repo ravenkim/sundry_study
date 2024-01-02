@@ -17,13 +17,8 @@ const RentalContentView = () => {
     )
 
 
-
-
-
     const [userId, setUserId] = useState()
     const [contentId, setContentId] = useState()
-    
-    
 
 
     useEffect(() => {
@@ -39,6 +34,29 @@ const RentalContentView = () => {
             setContentHtml(data?.contentHtml)
             setRentalStatNm(data?.rentalStatNm)
             setContentId(data?.contentId)
+
+            if (detail?.boardFreeFields) {
+                const obj = detail?.boardFreeFields
+                const arr = Object.values(obj);
+                const madeFreeField = arr.map((item, index) => (
+                    item.type === 'input' ?
+                        <li key={index}>
+                            <h6
+                                className={"text-[#ffffff]"}
+
+                            >
+                                {item.label}: {item.value}
+                            </h6>
+                        </li>
+                        : null
+
+
+                ))
+                setFreeFieldsData(madeFreeField);
+
+
+            }
+
 
         }
     }, [detail]);
@@ -58,6 +76,11 @@ const RentalContentView = () => {
     const [rentalStatNm, setRentalStatNm] = useState('')
 
     //자유공간
+    const [freeFieldsData, setFreeFieldsData] = useState()
+
+
+
+
 
 
     return (
@@ -117,8 +140,21 @@ const RentalContentView = () => {
                             className={"text-[#ffffff] mb-[40px]"}
                         >{contentNm}</h1>
                         <h5
-                            className={"text-[#ffffff]"}
+                            className={"text-[#ffffff] mb-[40px]"}
                         >{contentDesc}</h5>
+
+
+                        {/*자유 필드*/}
+
+
+                        <ul
+
+                            className={"text-[#ffffff]"}
+                        >
+
+                            {freeFieldsData}
+                        </ul>
+
 
                     </div>
                 </div>

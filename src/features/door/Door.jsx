@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SSsearchInput from "/src/common/components/input/SSsearchInput.jsx";
 import SSsectionWrap from "/src/common/components/wrapper/SSsectionWrap.jsx";
 import SScardWrap from "/src/common/components/Card/SScardWrap.jsx";
@@ -9,11 +9,34 @@ import {push} from "redux-first-history";
 import {adminAction} from "../admin/adminReducer.jsx";
 import {profileAction} from "../profile/profileReducer.jsx";
 import SStable from "../../common/components/table/SStable.jsx";
+import {doorAction} from "./doorReducer.jsx";
+import DoorAllSearchTable from "./components/DoorAllSearchTable.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
 
     const [serchAllText, setSerchAllText] = useState('')
+
+
+
+    const {
+        rentalUpdateStatus,
+        searchResult
+    } = useSelector(({adminReducer, doorReducer}) => ({
+            //임시로 업데이트 해주는 api 향후 삭제 예정
+            rentalUpdateStatus: adminReducer.rentalUpdateStatus,
+            searchResult: doorReducer.searchResult.data
+
+        }),
+        shallowEqual
+    );
+
+
+
+    //임시로 업데이트 해주는 api 향후 삭제 예정
+    useEffect(() => {
+        dispatch(adminAction.rentalUpdate())
+    }, []);
 
 
 
@@ -26,7 +49,10 @@ const Door = () => {
                     onChange={(e) => setSerchAllText(e.target.value)}
                     placeholder={'찾고자 하는 항목을 입력하세요. (전체 항목에서 검색됩니다)'}
                     title={'무엇을 찾으시나요?'}
-                    onSearch={() => console.log(serchAllText)}
+                    onSearch={() =>
+                        // console.log(serchAllText)
+                        dispatch(doorAction.getSearchAll(serchAllText))
+                }
                 />
             </SSsectionWrap>
 
@@ -34,7 +60,7 @@ const Door = () => {
 
 
             <SSsectionWrap className={'tablet:py-[0] py-[0] desktop:py-[0]'}>
-
+                {searchResult && <DoorAllSearchTable/>}
             </SSsectionWrap>
 
 

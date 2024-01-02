@@ -11,21 +11,18 @@ const Content = () => {
 
 
     const {
-            path,
-            contentype,
+        path,
+        contentype,
     } = useSelector(({router, cmsReducer}) => ({
             path: router.location?.pathname,
-        contentype:cmsReducer.contentDetail.data,
+            contentype: cmsReducer.contentDetail.data,
 
         }),
         shallowEqual
     )
 
 
-
-
     const [editMode, setEditMode] = useState(false)
-
 
 
     //1. url에서 아이디 확인
@@ -42,11 +39,12 @@ const Content = () => {
 
     //2. 아이디 확인하고 대이터 요청
     useEffect(() => {
-        if(contentId)dispatch(cmsAction.getContentDetail(contentId))
+        if (contentId) {
+            dispatch(cmsAction.getContentDetail(contentId))
+            dispatch(cmsAction.getContentDetailImg(contentId))
+
+        }
     }, [contentId]);
-
-
-
 
 
     //3. 데이터 들어오면 타입 설정
@@ -54,37 +52,36 @@ const Content = () => {
 
 
     useEffect(() => {
-        if(contentype){
+        if (contentype) {
             setType(contentype?.boardInfo?.contentViewType)
 
         }
     }, [contentype]);
 
 
-    useEffect(() => {
-        console.log(type)
-    }, [type]);
+    // useEffect(() => {
+    //     console.log(type)
+    // }, [type]);
 
 
     const [mode, setMode] = useState()
 
 
-
     return (
-       <div
-        style={{
-            backgroundColor: '#F5F5F5',
-            width:' 100%'
-       }}
-       >
+        <div
+            style={{
+                backgroundColor: '#F5F5F5',
+                width: ' 100%'
+            }}
+        >
 
-           {/*상세 타입에 따라 나누는 구간*/}
-           {type === 'rental' &&
-               <RentalContentView/>
-           }
-       </div>
-        
-        
+            {/*상세 타입에 따라 나누는 구간*/}
+            {type === 'rental' &&
+                <RentalContentView/>
+            }
+        </div>
+
+
     );
 };
 
