@@ -48,3 +48,12 @@ export const getOverdues = () =>
   client.get('admin/overdues')
 
 
+
+
+
+//연체 상태 관리
+export const rentalUpdate = () =>
+  client.put('rentals/update')
+
+
+

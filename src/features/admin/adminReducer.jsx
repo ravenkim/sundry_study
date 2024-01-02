@@ -5,7 +5,7 @@ import {
     addUser,
     getAuthList,
     getBoardList, getOverdues,
-    getUsers, getUsersDetail,
+    getUsers, getUsersDetail, rentalUpdate,
     resetPassword,
     resetProfile,
     setBoardPriorities
@@ -13,8 +13,6 @@ import {
 
 
 const prefix = 'admin'
-
-
 
 
 //비동기 처리용 input
@@ -29,61 +27,60 @@ const asyncRequest = {
         getUsers
     ],
 
-      getUsersDetail: [
+    getUsersDetail: [
         {userDetail: reducerUtils.init()},
         getUsersDetail
     ],
 
 
-    addUser:[
+    addUser: [
         {addUserStatus: reducerUtils.init()},
         addUser
     ],
 
-    resetPassword:[
+    resetPassword: [
         {resetPasswordStatus: reducerUtils.init()},
         resetPassword
     ],
 
-    resetProfile:[
+    resetProfile: [
         {resetProfileStatus: reducerUtils.init()},
         resetProfile
     ],
 
 
-
-
-
-
-     // 보드 관리
-     getBoardList:[
+    // 보드 관리
+    getBoardList: [
         {boardList: reducerUtils.init()},
         getBoardList
     ],
 
 
-    setBoardPriorities:[
+    setBoardPriorities: [
         {setBoardPrioritiesStatus: reducerUtils.init()},
         setBoardPriorities
     ],
 
 
-
     // 연체자
-    getOverdues:[
+    getOverdues: [
         {overdues: reducerUtils.init()},
         getOverdues
     ],
 
 
-
-        // 권한
-        getAuthList: [
+    // 권한
+    getAuthList: [
         {authList: reducerUtils.init()},
         getAuthList
     ],
 
 
+    //삭제 예정 상태 업데이트
+    rentalUpdate: [
+        {rentalUpdateStatus: reducerUtils.init()},
+        rentalUpdate
+    ],
 
 
 }

@@ -8,6 +8,7 @@ import {userSaga, userSlice} from "src/features/accounts/userReducer.jsx";
 import {adminSaga, adminSlice} from "src/features/admin/adminReducer.jsx";
 import {profileSaga, profileSlice} from "src/features/profile/profileReducer.jsx";
 import {cmsSaga, cmsSlice} from "src/features/cms/cmsReducer.jsx";
+import {doorSaga, doorSlice} from "src/features/door/doorReducer.jsx";
 
 const {
     createReduxHistory,
@@ -23,7 +24,10 @@ const reducers = {
     adminReducer: adminSlice.reducer,
     profileReducer: profileSlice.reducer,
     cmsReducer: cmsSlice.reducer,
+    doorReducer: doorSlice.reducer
 }
+
+
 
 
 export function* rootSaga() {
@@ -31,7 +35,8 @@ export function* rootSaga() {
         userSaga(),
         adminSaga(),
         profileSaga(),
-        cmsSaga()
+        cmsSaga(),
+        doorSaga()
     ]);
 }
 

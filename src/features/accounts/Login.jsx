@@ -32,6 +32,7 @@ const Login = () => {
 
     useEffect(() => {
         if(user){
+
             dispatch(push('/door'))
         }
     }, [user]);
