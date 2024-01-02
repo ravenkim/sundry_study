@@ -103,6 +103,7 @@ const AdminMemberTable = () => {
                     onClick={() =>
                         dispatch(adminAction.resetPassword({userId: value}))
                     }
+
                 >초기화</SSbutton>
             )
         },
@@ -114,6 +115,7 @@ const AdminMemberTable = () => {
                     onClick={() =>
                         dispatch(adminAction.resetProfile({userId: value}))
                     }
+                    danger
                 >삭제</SSbutton>
             )
         }

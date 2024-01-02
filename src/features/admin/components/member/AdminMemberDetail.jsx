@@ -79,7 +79,6 @@ const AdminMemberDetail = ({
             okText="추가하기"
             cancelText="취소"
             width={800}
-
         >
             <div className={'w-full flex flex-row'}>
 

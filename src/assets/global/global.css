@@ -154,3 +154,18 @@
 .ant-table-cell {
     vertical-align: middle;
 }
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tag .ant-tag-close-icon {
+    height: fit-content;
+    font-size: 15px;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-modal .ant-modal-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-modal .ant-modal-footer button {
+    width: 100%;
+}

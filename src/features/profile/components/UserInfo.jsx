@@ -9,6 +9,7 @@ import imgClient from "../../../api/imgClient.jsx";
 import client from "../../../api/client.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import {postUserProfileImg} from "../profileAPI.jsx";
+import AlertModal from "../../../common/components/modal/AlertModal.jsx";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -255,6 +256,10 @@ const UserInfo = () => {
                     </div>
                 </div>
             </Spin>
+            <AlertModal
+                open={false}
+
+            ></AlertModal>
         </>
     )
 }
