@@ -42,6 +42,7 @@ const ErrorPage = () => {
                     flexDirection: 'column',
                     top: "40%"
                 }}
+                className={'justify-center items-center'}
             >
 
                 <h1>
@@ -54,7 +55,7 @@ const ErrorPage = () => {
 
                 <SSbutton
                     onClick={() => dispatch(push('/'))}
-
+                    className={'mt-[20px]'}
                 >
                     홈으로 돌아가기
                 </SSbutton>
