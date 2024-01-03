@@ -62,9 +62,12 @@ export default CheckModal*/
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: "btn btn-success",
-    cancelButton: "btn btn-danger"
+    cancelButton: "btn btn-danger",
+
   },
-  buttonsStyling: false
+  buttonsStyling: true,
+	confirmButtonColor:'#4F5FF5',
+	confirmButtonText:'닫기'
 });
 
 const CheckModal = (title,text,icon,okFn,html) => {
