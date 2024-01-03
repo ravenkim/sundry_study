@@ -23,9 +23,6 @@ export const putBoardRentalsReturn = (param) =>
 export const postBoardReservations = (param) =>
     client.post('profile/reservations', param);
 
-
-
-
 export const postBoardLikes = (param) =>
     client.post('profile/likes', param);
 

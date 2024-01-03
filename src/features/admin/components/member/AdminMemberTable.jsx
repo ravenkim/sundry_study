@@ -149,7 +149,7 @@ const AdminMemberTable = () => {
 
                  <AdminMemberDetail
                     modalVisible ={memberDetailModalVisible}
-                setModalVisible = {setMemberDetailModalVisible}
+                    setModalVisible = {setMemberDetailModalVisible}
             />
 
         </Spin>
