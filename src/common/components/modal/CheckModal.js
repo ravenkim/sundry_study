@@ -4,6 +4,47 @@ import React, { useState } from 'react';
 import Swal from "sweetalert2/src/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss'
 
+// icon : warning, error, success, info, question
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-success",
+    cancelButton: "btn btn-danger",
+
+  },
+  buttonsStyling: true,
+	confirmButtonColor:'#4F5FF5',
+	confirmButtonText:'닫기'
+});
+
+const CheckModal = (title,text,icon,okFn,html) => {
+    Swal.fire({
+        title:title,
+        text:text,
+        icon:icon,
+        showCancelButton:true,
+        confirmButtonText:'확인',
+        cancelButtonText:'취소',
+		confirmButtonColor:'#4F5FF5',
+		cancelButtonColor:'#ff4d4f',
+        reverseButtons:true,
+        html:html,
+		position:'center',
+
+    }).then((result)=> {
+        if(result.isConfirmed) {
+			okFn()
+            .then(swalWithBootstrapButtons.fire({
+                title:'성공하였습니다.',
+                icon:'success'
+            })
+			)
+        }
+    })
+}
+export default CheckModal
+
+
 /*const CheckModal = ({
                         className,
                         onClick,
@@ -56,42 +97,3 @@ import 'sweetalert2/src/sweetalert2.scss'
 }
 
 export default CheckModal*/
-
-// icon : warning, error, success, info, question
-
-const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: "btn btn-success",
-    cancelButton: "btn btn-danger",
-
-  },
-  buttonsStyling: true,
-	confirmButtonColor:'#4F5FF5',
-	confirmButtonText:'닫기'
-});
-
-const CheckModal = (title,text,icon,okFn,html) => {
-    Swal.fire({
-        title:title,
-        text:text,
-        icon:icon,
-        showCancelButton:true,
-        confirmButtonText:'확인',
-        cancelButtonText:'취소',
-		confirmButtonColor:'#4F5FF5',
-		cancelButtonColor:'#ff4d4f',
-        reverseButtons:true,
-        html:html,
-		position:'center',
-
-    }).then((result)=> {
-        if(result.isConfirmed) {
-            swalWithBootstrapButtons.fire({
-                title:'성공하였습니다.',
-                icon:'success'
-            });
-            okFn()
-        }
-    })
-}
-export default CheckModal
