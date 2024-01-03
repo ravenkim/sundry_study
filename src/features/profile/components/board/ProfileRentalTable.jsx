@@ -10,20 +10,15 @@ import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 const ProfileRentalTable = () => {
 
     // post 요청으로 userId 값을 보내면 리턴으로 테이블에 대한 값이 옴
-
-
     const dispatch = useDispatch()
 
     const {
-
         BoardRentals,
         fullUserInfo,
         BoardRentalsReturn
-
     } = useSelector(({profileReducer}) => ({
             BoardRentals: profileReducer.BoardRentals.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
-            // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
             BoardRentalsReturn: profileReducer.RentalsReturn.data,
         }),
         shallowEqual
@@ -45,7 +40,6 @@ const ProfileRentalTable = () => {
 
     useEffect(() => {
         dispatch(profileAction.getFullUserInfo())
-
         return () => {
             dispatch(profileAction.initializeAll())
             // 페이지 나가면 초기화
@@ -104,6 +98,7 @@ const ProfileRentalTable = () => {
                                 onClick={() =>
                                     console.log('bb')
                                     /*dispatch(adminAction.resetProfile({userId: value}))*/
+                                    // 연체 기능을 여기서 추가하는게 맞는지 확인 후 작성
                                 }
                                 disabled={true}
                             >연체</SSbutton>
@@ -125,6 +120,7 @@ const ProfileRentalTable = () => {
                                 onClick={() =>
                                     console.log('bb')
                                     /*dispatch(adminAction.resetProfile({userId: value}))*/
+                                    // 연체 기능을 여기서 추가하는게 맞는지 확인 후 작성
                                 }
                                 type={'primary'}
                             >연체</SSbutton>
