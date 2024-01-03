@@ -169,3 +169,7 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-modal .ant-modal-footer button {
     width: 100%;
 }
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-upload-wrapper .ant-upload-list {
+    max-width: 180px;
+}

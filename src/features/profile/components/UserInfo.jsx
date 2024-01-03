@@ -42,7 +42,7 @@ const UserInfo = () => {
         dispatch(profileAction.getFullUserInfo())
 
         // 요청 초기화 작성
-        return() => {
+        return () => {
             dispatch(profileAction.initializeAll())
             // 페이지 나가면 초기화
         }
@@ -119,8 +119,8 @@ const UserInfo = () => {
                         console.log('error', error) // 에러 로그 보기
                     });*/
 
-                if(postUserPW) {
-                    if(postUserPW.loading !== true) {
+                if (postUserPW) {
+                    if (postUserPW.loading !== true) {
                         dispatch(profileAction.initialize('postUserPW'));
                     }
                 } // 성공해서 로딩에 대한 값이 변하면 초기화
@@ -131,15 +131,15 @@ const UserInfo = () => {
     };
 
     useEffect(() => {
-        if(postUserProfileImg) { // 이미지 변경시 메세지와 초기화 처리
-                if(postUserProfileImg.data.res) {
-                    setFileList([])
-                    showMessage('success', postUserProfileImg.data.msg)
-                    dispatch(profileAction.getUserProfileImg());
-                } else {
-                    showMessage('error', postUserProfileImg.data.msg)
-                }
+        if (postUserProfileImg) { // 이미지 변경시 메세지와 초기화 처리
+            if (postUserProfileImg.data.res) {
+                setFileList([])
+                showMessage('success', postUserProfileImg.data.msg)
+                dispatch(profileAction.getUserProfileImg());
+            } else {
+                showMessage('error', postUserProfileImg.data.msg)
             }
+        }
     }, [postUserProfileImg]);
 
     const handleSave = () => {
@@ -166,15 +166,22 @@ const UserInfo = () => {
 
     const props = {
         action: 'http://110.35.15.168:8088/swagger-ui/index.html#/ProfileController/saveProfileImg',
-        fileList,
+
         beforeUpload: file => {
             if (fileList.length >= 1) {
-                showMessage('error','이미지는 한 개씩만 업로드할 수 있습니다.');
+                showMessage('error', '이미지는 한 개씩만 업로드할 수 있습니다.');
                 return false; // 두개 이상 올리려고 하면 리턴
             }
             setFileList([...fileList, file]);
             return false; // 업로드 전에 파일 리스트에 추가하고 업로드 막기
         },
+        onRemove: (file) => {
+            const index = fileList.indexOf(file);
+            const newFileList = fileList.slice();
+            newFileList.splice(index, 1);
+            setFileList(newFileList);
+        },
+        fileList,
     };
 
 
@@ -195,7 +202,7 @@ const UserInfo = () => {
                             }
 
                             <form action="/item" method={'post'} encType={"multipart/form-data"}>
-                                <Upload {...props} defaultFileList={[...fileList]}>
+                                <Upload {...props} defaultFileList={[...fileList]} className={'flex flex-col justify-center items-center'}>
                                     <Button icon={<UploadOutlined/>}>프로필 변경</Button>
                                 </Upload>
                             </form>
