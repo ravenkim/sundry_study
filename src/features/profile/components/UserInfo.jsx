@@ -9,7 +9,8 @@ import imgClient from "../../../api/imgClient.jsx";
 import client from "../../../api/client.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import {postUserProfileImg} from "../profileAPI.jsx";
-import AlertModal from "../../../common/components/modal/AlertModal.jsx";
+import AlertModal from "/src/common/components/modal/AlertModal.jsx";
+import CheckModal from "/src/common/components/modal/CheckModal.jsx";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -184,6 +185,7 @@ const UserInfo = () => {
         fileList,
     };
 
+    const [modal, setModal] = useState(false)
 
     return (
         <>
@@ -252,10 +254,6 @@ const UserInfo = () => {
                     </div>
                 </div>
             </Spin>
-            <AlertModal
-                open={false}
-
-            ></AlertModal>
         </>
     )
 }
