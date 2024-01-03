@@ -1,6 +1,17 @@
 import React from 'react';
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 const Board = () => {
+
+    const dispatch = useDispatch()
+
+    const {
+        boardType
+    } = useSelector(({cmsReducer})=> ({
+        boardType:cmsReducer.boardList.data
+    }),
+        shallowEqual
+    )
     /*
      {
          name : book,

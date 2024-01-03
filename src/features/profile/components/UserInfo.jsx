@@ -10,7 +10,7 @@ import client from "../../../api/client.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import {postUserProfileImg} from "../profileAPI.jsx";
 import AlertModal from "/src/common/components/modal/AlertModal.jsx";
-import CheckModal from "/src/common/components/modal/CheckModal.jsx";
+import CheckModal from "/src/common/components/modal/CheckModal.js";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -254,6 +254,12 @@ const UserInfo = () => {
                     </div>
                 </div>
             </Spin>
+
+            <button
+                onClick={()=>CheckModal('안녕하세요', '이사입니다', 'warning', function () {
+                    console.log('success')
+                })}
+            >확인버튼</button>
         </>
     )
 }
