@@ -34,11 +34,10 @@ const CheckModal = (title,text,icon,okFn,html) => {
     }).then((result)=> {
         if(result.isConfirmed) {
 			okFn()
-            .then(swalWithBootstrapButtons.fire({
+            swalWithBootstrapButtons.fire({
                 title:'성공하였습니다.',
                 icon:'success'
-            })
-			)
+            });
         }
     })
 }
