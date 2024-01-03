@@ -94,14 +94,6 @@ const ProfileRentalTable = () => {
                                 className={'mr-[6px]'}
                                 disabled={true}
                             >반납</SSbutton>
-                            <SSbutton
-                                onClick={() =>
-                                    console.log('bb')
-                                    /*dispatch(adminAction.resetProfile({userId: value}))*/
-                                    // 연체 기능을 여기서 추가하는게 맞는지 확인 후 작성
-                                }
-                                disabled={true}
-                            >연체</SSbutton>
                         </div>
                     ) : (
                         <div className={'flex flex-row '}>
@@ -116,14 +108,6 @@ const ProfileRentalTable = () => {
                                 className={'mr-[6px]'}
                                 type={'primary'}
                             >반납</SSbutton>
-                            <SSbutton
-                                onClick={() =>
-                                    console.log('bb')
-                                    /*dispatch(adminAction.resetProfile({userId: value}))*/
-                                    // 연체 기능을 여기서 추가하는게 맞는지 확인 후 작성
-                                }
-                                type={'primary'}
-                            >연체</SSbutton>
                         </div>
                     )
                     }
