@@ -59,9 +59,11 @@ const RAW_RUNTIME_STATE =
           ["redux", "npm:4.2.1"],\
           ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
           ["redux-saga", "npm:1.2.3"],\
+          ["sass", "npm:1.69.7"],\
           ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
           ["suneditor", "npm:2.45.1"],\
           ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
+          ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
         ],\
@@ -6476,9 +6478,11 @@ const RAW_RUNTIME_STATE =
           ["redux", "npm:4.2.1"],\
           ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
           ["redux-saga", "npm:1.2.3"],\
+          ["sass", "npm:1.69.7"],\
           ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
           ["suneditor", "npm:2.45.1"],\
           ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
+          ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
         ],\
@@ -6548,6 +6552,18 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../Users/cmpark/AppData/Local/Yarn/Berry/cache/safer-buffer-npm-2.1.2-8d5c0b705e-10c0.zip/node_modules/safer-buffer/",\
         "packageDependencies": [\
           ["safer-buffer", "npm:2.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["sass", [\
+      ["npm:1.69.7", {\
+        "packageLocation": "../../Users/cmpark/AppData/Local/Yarn/Berry/cache/sass-npm-1.69.7-ac434a094c-10c0.zip/node_modules/sass/",\
+        "packageDependencies": [\
+          ["sass", "npm:1.69.7"],\
+          ["chokidar", "npm:3.5.3"],\
+          ["immutable", "npm:4.3.4"],\
+          ["source-map-js", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6939,6 +6955,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["sweetalert2", [\
+      ["npm:11.10.2", {\
+        "packageLocation": "../../Users/cmpark/AppData/Local/Yarn/Berry/cache/sweetalert2-npm-11.10.2-7fc3791c48-10c0.zip/node_modules/sweetalert2/",\
+        "packageDependencies": [\
+          ["sweetalert2", "npm:11.10.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["tailwindcss", [\
       ["npm:3.3.6", {\
         "packageLocation": "../../Users/cmpark/AppData/Local/Yarn/Berry/cache/tailwindcss-npm-3.3.6-473baaff8e-10c0.zip/node_modules/tailwindcss/",\
@@ -7302,7 +7327,7 @@ const RAW_RUNTIME_STATE =
           ["lightningcss", null],\
           ["postcss", "npm:8.4.32"],\
           ["rollup", "npm:4.7.0"],\
-          ["sass", null],\
+          ["sass", "npm:1.69.7"],\
           ["stylus", null],\
           ["sugarss", null],\
           ["terser", null]\

@@ -173,3 +173,14 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-upload-wrapper .ant-upload-list {
     max-width: 180px;
 }
+
+.swal2-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
