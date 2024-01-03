@@ -184,3 +184,9 @@ html {
     font-size: 16px;
     box-sizing: border-box;
 }
+
+.swal2-container button {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 4px 60px;
+}
