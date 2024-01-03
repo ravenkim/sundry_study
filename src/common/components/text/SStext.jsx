@@ -1,11 +1,16 @@
 import React from 'react';
-import { Typography } from 'antd';
+import {Typography} from 'antd';
 
-const { Text } = Typography;
+const {Text} = Typography;
 
-const SStext = ({ children, className }) => {
+const SStext = ({
+                    children,
+                    className
+                }) => {
     return (
-        <Text>
+        <Text
+            className={className}
+        >
             {children}
         </Text>
     );
