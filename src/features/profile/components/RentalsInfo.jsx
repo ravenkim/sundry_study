@@ -9,8 +9,6 @@ const RentalsInfo = () => {
     return(
         <>
             <div className={'w-full flex flex-col'}>
-
-                {/*<SSsearchInput inputClassName={'h-[40px]'} iconClassName={'h-[20px]'} svgWidth={'16px'} />*/}
                 <ProfileRentalTable/>
             </div>
         </>
