@@ -36,9 +36,10 @@ const UserInfo = () => {
         shallowEqual
     )
 
+    const [fileList, setFileList] = useState([]);
+
     useEffect(() => {
         dispatch(profileAction.getFullUserInfo())
-        // 요청 초기화하기 투두 -> 대여목록에 갔다가 회원정보 다시 들어오면 요청되도록 작성되어 있는 상태임
 
         // 요청 초기화 작성
         return() => {
@@ -79,34 +80,18 @@ const UserInfo = () => {
 
     const onSave = () => {
 
-        if (fileList.length > 0) {
+        if (fileList.length > 0) { // 파일리스트에 이미지를 올렸을 때 실행
             const formData = new FormData();
             fileList.forEach(file => {
                 formData.append('file', file);
-            });
+                console.log('formData',formData)
+                console.log('fileList',fileList)
+            }); // form data 형식으로 img post 요청 보내기
 
-            /*imgClient.post('/profile/user/save-img', formData) // imgClient.post 메소드를 사용하여 이미지를 업로드합니다.
-                .then(response => {
-                    /!*message.success('이미지 업로드가 완료되었습니다.');*!/
-                    showMessage('success', '이미지 업로드가 완료되었습니다.')
-
-                    setFileList([])
-                    dispatch(profileAction.getUserProfileImg())
-                    dispatch(profileAction.initialize('postUserProfileImg'))
-
-                    // 업로드 후 필요한 작업을 수행합니다.
-                })
-                .catch(error => {
-                    /!*message.error('이미지 업로드 중 오류가 발생했습니다.');*!/
-                    showMessage('error', '이미지 업로드가 완료되었습니다.')
-                    // 오류 처리를 수행합니다.
-                    console.log('error', error)
-                });*/
-            dispatch(profileAction.postUserProfileImg(formData)); // response 가져오는 방법 알아내기
-            dispatch(profileAction.getUserProfileImg()); // 이미지 변경시 다시 이미지 가져오기 -> loading 사용해서 처리할 것
+            dispatch(profileAction.postUserProfileImg(formData));
         }
 
-        if (postPwValue.trim() !== '') {
+        if (postPwValue.trim() !== '') { // 비밀번호 변경하려는 시도일 때 실행
             const passwordError = validatePassword(postPwValue);
 
             const postData = {
@@ -114,12 +99,14 @@ const UserInfo = () => {
             };
 
             if (passwordError) {
-                message.error(passwordError);
+                showMessage('error', passwordError);
                 return; // 에러 발생 시 처리 중단
             }
 
-            if (!passwordError) {
-                dispatch(profileAction.postUserPW(postData)); // redux에서 fail이라고 뜨는데 값은 저장이 된다
+            if (!passwordError) { // 에러가 아니면 pw post 요청 처리
+                dispatch(profileAction.postUserPW(postData));
+                showMessage('success', '성공적으로 저장되었습니다.');
+                setPostPwValue('')
                 /*client.post('/profile/user/save-pwd', postData)
                     .then(response => {
                         showMessage('success', response.data.msg)
@@ -134,7 +121,11 @@ const UserInfo = () => {
                         console.log('error', error) // 에러 로그 보기
                     });*/
 
-                dispatch(profileAction.initialize('postUserPW'));
+                if(postUserPW) {
+                    if(postUserPW.loading !== true) {
+                        dispatch(profileAction.initialize('postUserPW'));
+                    }
+                } // 성공해서 로딩에 대한 값이 변하면 초기화
                 // 정규식 추가해야됨
                 // REGEX = "^((?=.\\d)(?=.[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$"
             }
@@ -142,10 +133,11 @@ const UserInfo = () => {
     };
 
     useEffect(() => {
-        if(postUserProfileImg) {
+        if(postUserProfileImg) { // 이미지 변경시 메세지와 초기화 처리
                 if(postUserProfileImg.data.res) {
                     setFileList([])
                     showMessage('success', postUserProfileImg.data.msg)
+                    dispatch(profileAction.getUserProfileImg());
                 } else {
                     showMessage('error', postUserProfileImg.data.msg)
                 }
@@ -170,21 +162,20 @@ const UserInfo = () => {
 
     ///////////////////////////////////////////////////////////////////////////////////
 
-    const [fileList, setFileList] = useState([]);
-
     const handleFileChange = ({fileList}) => {
         setFileList(fileList);
     };
 
     const props = {
+        action: 'http://110.35.15.168:8088/swagger-ui/index.html#/ProfileController/saveProfileImg',
         fileList,
         beforeUpload: file => {
             if (fileList.length >= 1) {
-                message.warning('이미지는 한 개씩만 업로드할 수 있습니다.');
+                showMessage('error','이미지는 한 개씩만 업로드할 수 있습니다.');
                 return false; // 두개 이상 올리려고 하면 리턴
             }
             setFileList([...fileList, file]);
-            return false; // 업로드 전에 파일 리스트에 추가하고 업로드를 막습니다.
+            return false; // 업로드 전에 파일 리스트에 추가하고 업로드 막기
         },
     };
 
@@ -206,7 +197,7 @@ const UserInfo = () => {
                             }
 
                             <form action="/item" method={'post'} encType={"multipart/form-data"}>
-                                <Upload {...props} >
+                                <Upload {...props} defaultFileList={[...fileList]}>
                                     <Button icon={<UploadOutlined/>}>프로필 변경</Button>
                                 </Upload>
                             </form>

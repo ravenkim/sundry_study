@@ -20,6 +20,12 @@ const AlertModal = ({
                 className={className}
                 okType={'danger'}
                 closeIcon={false}
+                /*footer={(_,{OkBtn,CancelBtn})=>(
+                    <>
+                        <CancelBtn />
+                        <OkBtn type={'primary'} danger />
+                    </>
+                )}*/
                 {...otherProps}
             >
                 <div className={'w-full flex flex-col box-border'}>

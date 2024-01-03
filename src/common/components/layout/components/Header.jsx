@@ -23,16 +23,14 @@ const Header = ({
         userProfileImgLoading
     } = useSelector(({assetsReducer, profileReducer}) => ({
             bgcolor1: assetsReducer.colors.bgcolor,
-            userProfileImg: profileReducer.userProfileImg.data,
+            userProfileImg: profileReducer.userProfileImg,
             userProfileImgLoading: profileReducer.userProfileImg.loading,
         }),
         shallowEqual
     );
 
     useEffect(() => {
-
         dispatch(profileAction.getUserProfileImg());
-
     }, []);
 
     return (
@@ -107,7 +105,7 @@ const Header = ({
                     <div
                         className={'after:overflow-hidden rounded-full overflow-hidden max-w-[63px] max-h-[63px] flex justify-center items-center cursor-pointer bg-[#ffffff]'}
                     >
-                        {userProfileImg == null ? <Space direction='vertical' wrap size={40}>
+                        {userProfileImg?.data === null ? <Space direction='vertical' wrap size={40}>
                             <Avatar size={40} icon={<UserOutlined/>}/>
                         </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full]'}/>
                         }

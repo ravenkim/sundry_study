@@ -36,7 +36,7 @@ const Profile = () => {
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg())
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
-        if (!userProfileImg) dispatch(profileAction.getUserProfileImg(null))
+
     }, [])
 
 
