@@ -84,8 +84,6 @@ const UserInfo = () => {
             const formData = new FormData();
             fileList.forEach(file => {
                 formData.append('file', file);
-                console.log('formData',formData)
-                console.log('fileList',fileList)
             }); // form data 형식으로 img post 요청 보내기
 
             dispatch(profileAction.postUserProfileImg(formData));
