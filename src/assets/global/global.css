@@ -190,3 +190,8 @@ html {
     font-weight: 400;
     padding: 4px 60px;
 }
+
+div:where(.swal2-icon) {
+    margin: 2.5em auto 0.6em;
+    border: 0.25em solid transparent;
+}
