@@ -1,5 +1,5 @@
 const DoorCard = [
-    {title: '도서관', root:'/content/1', doorId: 1, svg:`<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+    /*{title: '도서관', root:'/content/1', doorId: 1, svg:`<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2342_419)">
 <path d="M77.9998 73.0116H17.8967C13.9803 73.0116 10.8054 69.8308 10.8054 65.9072C10.8054 61.9836 13.9803 58.8028 17.8967 58.8028H77.9996C74.8676 63.0192 74.8676 68.795 77.9998 73.0116Z" fill="#FFF7E8"/>
 <path d="M77.9999 58.8026H71.7499C68.6179 63.0192 68.6179 68.795 71.7499 73.0115H77.9999C74.8677 68.795 74.8677 63.0192 77.9999 58.8026Z" fill="#FFF1D6"/>
@@ -67,7 +67,7 @@ const DoorCard = [
 </filter>
 </defs>
 </svg>
-`},
+`},*/
     {title: '프로필', root:'/profile', tab:'userInfo', action:'profileAction', doorId: 3, svg: `<svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2424_1784)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M78.9883 1.5625H9.0127C7.12143 1.5625 5.57125 3.10377 5.5625 4.99505V5.0127V18.0166H82.4386V5.01286C82.4386 3.11268 80.884 1.5625 78.9883 1.5625Z" fill="#FF7D95"/>
