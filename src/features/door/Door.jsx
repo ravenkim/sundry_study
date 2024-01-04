@@ -11,6 +11,8 @@ import {profileAction} from "../profile/profileReducer.jsx";
 import SStable from "../../common/components/table/SStable.jsx";
 import {doorAction} from "./doorReducer.jsx";
 import DoorAllSearchTable from "./components/DoorAllSearchTable.jsx";
+import {getBoardList} from "../cms/cmsAPI.jsx";
+import {cmsAction} from "../cms/cmsReducer.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -24,12 +26,13 @@ const Door = () => {
 
     const {
         rentalUpdateStatus,
-        searchResult
-    } = useSelector(({adminReducer, doorReducer}) => ({
+        searchResult,
+        boardType
+    } = useSelector(({adminReducer, doorReducer, cmsReducer}) => ({
             //임시로 업데이트 해주는 api 향후 삭제 예정
             rentalUpdateStatus: adminReducer.rentalUpdateStatus,
-            searchResult: doorReducer.searchResult.data
-
+            searchResult: doorReducer.searchResult.data,
+            boardType: cmsReducer.boardList.data,
         }),
         shallowEqual
     );
@@ -40,6 +43,10 @@ const Door = () => {
     useEffect(() => {
         dispatch(adminAction.rentalUpdate())
     }, []);
+
+    useEffect(() => {
+        dispatch(cmsAction.getBoardList())
+    }, []); // 원하는 서비스로 가장 빠르게 이동해보세요. 데이터 가져오기 // 프로필과 관리자는 하드매핑
 
 
 
@@ -90,19 +97,41 @@ const Door = () => {
                     </span>
                     <h2>원하는 서비스로 가장 빠르게 이동해보세요.</h2>
                 </div>
-                <SScardWrap>
+                <SScardWrap className={'flex flex-wrap w-full'}>
+                    {boardType?.boardList?.map((boardList, idx)=> (
+                        <SScard
+                            key={idx}
+                            className={'cursor-pointer min-w-[23.5%] max-w-[23.5%]'}
+                            onClick={()=> {
+                                dispatch(push(`/board/${boardList?.boardId}`))
+                            }}
+                        >
+                            <div className={'p-[20px] box-border flex flex-col justify-between w-full'}>
+                                <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
+                                    {boardList?.boardNm}
+                                </h3>
+                                {/*<div dangerouslySetInnerHTML={{__html: boardList?.svg}} className={'inline-flex justify-self-end self-end'}/>*/}
+                            </div>
+                        </SScard>
+                    ))}
                     {DoorCard.map((item, idx) => (
                         <SScard onClick={() => {
                             dispatch(push(item.root))
                             item?.action === 'profileAction' ? dispatch(profileAction.setTab(item?.tab)) : false
                             item?.action === 'adminAction' ? dispatch(adminAction.setTab(item?.tab)) : false
                         }
-                        } className={'cursor-pointer'} key={idx}>
+                        } className={'cursor-pointer min-w-[23.5%] max-w-[23.5%]'} key={idx}>
                             <div className={'p-[20px] box-border flex flex-col justify-between w-full'}>
                                 <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
                                     {item.title}
                                 </h3>
-                                <div dangerouslySetInnerHTML={{__html: item.svg}} className={'inline-flex justify-self-end self-end'}/>
+                                {/*<div dangerouslySetInnerHTML={{__html: item.svg}} className={'inline-flex justify-self-end self-end'}/>*/}
+                                {idx === 0 ? (
+                                    <img src="/src/assets/img/profile.svg" alt="#" className={'inline-flex justify-self-end self-end'}/>
+                                ) : null}
+                                {idx === 1 ? (
+                                    <img src="/src/assets/img/manager.svg" alt="#" className={'inline-flex justify-self-end self-end'}/>
+                                ) : null}
                             </div>
                         </SScard>
                     ))}
