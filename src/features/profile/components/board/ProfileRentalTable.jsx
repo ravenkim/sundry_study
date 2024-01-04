@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
-import {adminAction} from "../../../admin/adminReducer.jsx";
-import {getBoardList} from "../../../admin/adminAPI.jsx";
 import {profileAction} from "../../profileReducer.jsx";
-import {postBoardRentals, putBoardRentalsReturn} from "../../profileAPI.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
+import CheckModal from "../../../../common/components/modal/CheckModal.js";
+import Swal from "sweetalert2/src/sweetalert2.js";
+import 'sweetalert2/src/sweetalert2.scss';
 
 const ProfileRentalTable = () => {
 
@@ -53,6 +53,7 @@ const ProfileRentalTable = () => {
     }, [BoardRentals]);
 
     useEffect(() => {
+        setBoardList(BoardRentals?.rentalInfo)
     }, [boardList]);
 
     const columns = [
@@ -84,13 +85,6 @@ const ProfileRentalTable = () => {
                     {BoardRentals?.rentalInfo[value]?.rentalStatNm === '반납' ? (
                         <div className={'flex flex-row '}>
                             <SSbutton
-                                onClick={() => {
-                                    dispatch(profileAction.putBoardRentalsReturn({
-                                        contentId: BoardRentals?.rentalInfo[value]?.contentId,
-                                        userId: fullUserInfo?.userInfo?.userId
-                                    })) // 반납 기능 구현 완료
-
-                                }}
                                 className={'mr-[6px]'}
                                 disabled={true}
                             >반납</SSbutton>
@@ -99,11 +93,25 @@ const ProfileRentalTable = () => {
                         <div className={'flex flex-row '}>
                             <SSbutton
                                 onClick={() => {
-                                    dispatch(profileAction.putBoardRentalsReturn({
-                                        contentId: BoardRentals?.rentalInfo[value]?.contentId,
-                                        userId: fullUserInfo?.userInfo?.userId
-                                    })) // 반납 기능 구현 완료
-
+                                    CheckModal('정말 반납하시겠어요?', '', 'question', function () {
+                                        dispatch(profileAction.putBoardRentalsReturn({
+                                            contentId: BoardRentals?.rentalInfo[value]?.contentId,
+                                            userId: fullUserInfo?.userInfo?.userId
+                                        }));
+                                        /*if (BoardRentalsReturn) {
+                                            if (BoardRentalsReturn.res) {
+                                                Swal.fire({
+                                                    title: '반납에 성공했어요!',
+                                                    icon: 'success',
+                                                })
+                                            } else {
+                                                Swal.fire({
+                                                    title: '알 수 없는 오류로 반납에 실패했어요.',
+                                                    icon: 'error',
+                                                })
+                                            }
+                                        }*/ // --> put 성공 시 res값을 돌려주지 않는 상태이다. 요청할 것
+                                    },`문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`)
                                 }}
                                 className={'mr-[6px]'}
                                 type={'primary'}

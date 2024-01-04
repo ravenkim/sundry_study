@@ -4,6 +4,7 @@ import SStable from "src/common/components/table/SStable.jsx";
 import {profileAction} from "../../profileReducer.jsx";
 import {postBoardLikes} from "../../profileAPI.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
+import CheckModal from "../../../../common/components/modal/CheckModal.js";
 
 const ProfileLikeTable = () => {
 
@@ -70,10 +71,12 @@ const ProfileLikeTable = () => {
             dataIndex: 'rentalStatNm',
             render: (text, record, value) => (
                 <SSbutton
-                    onClick={() =>
-                        dispatch(profileAction.BoardLikesDelete({contentId: BoardLikes?.likeList[value]?.contentId}))
-                        /*console.log('value = '+ value + 'text = '+ text + 'record ='+ record);*/
-                    }
+                    onClick={() =>{
+                        CheckModal('정말 삭제하시겠어요?','', 'warning', function () {
+                            dispatch(profileAction.BoardLikesDelete({contentId: BoardLikes?.likeList[value]?.contentId}))
+                        });
+
+                    }}
                     danger
                 >삭제</SSbutton>
             )
