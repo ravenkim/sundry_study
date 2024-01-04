@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {profileAction} from "../../profileReducer.jsx";
-import {postBoardLikes} from "../../profileAPI.jsx";
+import {deleteBoardLikes, postBoardLikes} from "../../profileAPI.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 import CheckModal from "../../../../common/components/modal/CheckModal.js";
 
@@ -14,9 +14,11 @@ const ProfileLikeTable = () => {
 
         BoardLikes,
         fullUserInfo,
+        LikeDeleteData
     } = useSelector(({profileReducer}) => ({
             BoardLikes: profileReducer.BoardLikes.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
+            LikeDeleteData: profileReducer.BoardLikesDelete.data
             // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
         }),
         shallowEqual
@@ -49,6 +51,10 @@ const ProfileLikeTable = () => {
             } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
     }, [BoardLikes]);
 
+    useEffect(() => {
+        setBoardList(BoardLikes?.likeList)
+    }, [boardList]);
+
     const columns = [
         {
             title: '카테고리',
@@ -73,8 +79,8 @@ const ProfileLikeTable = () => {
                 <SSbutton
                     onClick={() =>{
                         CheckModal('정말 삭제하시겠어요?','', 'warning', function () {
-                            dispatch(profileAction.BoardLikesDelete({contentId: BoardLikes?.likeList[value]?.contentId}))
-                        });
+                            dispatch(profileAction.deleteBoardLikes({contentId: BoardLikes?.likeList[value]?.contentId}))
+                        }); // 알림 기능 추가
 
                     }}
                     danger
