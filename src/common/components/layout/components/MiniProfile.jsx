@@ -52,13 +52,6 @@ const MiniProfile = () => {
 
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        if (notificationsData?.notiList == null) {
-            console.log('notificationsData?.notiList', notificationsData?.notiList)
-        }
-
-    }, []);
-
     return (
         <div
             className={' tablet:right-[23px] text-[#000000] rounded-[10px] overflow-visible box-border w-[calc(100%-40px)] tablet:w-fit tablet:min-w-[400px] desktop:min-w-[300px] z-[90] bg-[#ffffff] '}
@@ -162,7 +155,7 @@ const MiniProfile = () => {
                                         <div className={'text-wrap w-full'}>
                                             {user?.userNm}님! 알림이 도착했어요.
                                             <br/>
-                                            <SStext className={'w-full text-wrap text-ellipsis break-all'}>
+                                            <SStext className={'w-full text-wrap text-ellipsis break-all font-[NotoSansKR-700]'}>
                                                 {item.notiContent}
                                             </SStext>
                                         </div>
