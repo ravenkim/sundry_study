@@ -8,7 +8,6 @@ const SSbutton = ({
     className,
     disabled,
     type,
-    ...otherProps
 
 }) => {
 
