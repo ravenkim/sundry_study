@@ -254,12 +254,6 @@ const UserInfo = () => {
                     </div>
                 </div>
             </Spin>
-
-            <button
-                onClick={()=>CheckModal('안녕하세요', '이사입니다', 'warning', function () {
-                    console.log('success')
-                })}
-            >확인버튼</button>
         </>
     )
 }
