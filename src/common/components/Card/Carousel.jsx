@@ -44,8 +44,7 @@ const Carousel = ({
 
     return (
         <>
-            <div className={'w-full h-fit flex flex-col gap-[16px]'}
-            >
+            <div className={`w-full h-fit flex flex-col gap-[16px] mt-[60px] ${className} `}>
                 <h3>{title}</h3>
                 <Slider {...settings} {...otherProps}>
                     {children}
