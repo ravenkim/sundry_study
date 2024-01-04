@@ -1,18 +1,70 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
+import {cmsAction} from "./cmsReducer.jsx";
+import Carousel from "../../common/components/Card/Carousel.jsx";
+import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
+import {push} from "redux-first-history";
 
 const Board = () => {
 
     const dispatch = useDispatch()
 
     const {
-        boardType
-    } = useSelector(({cmsReducer})=> ({
-        boardType:cmsReducer.boardList.data
-    }),
+        boardType,
+        path,
+        boardDetail
+    } = useSelector(({cmsReducer, router}) => ({
+            boardType: cmsReducer.boardList.data,
+            path: router.location?.pathname,
+            boardDetail: cmsReducer.boardDetail.data,
+        }),
         shallowEqual
     )
-    /*
+
+    const [boardId, setBoardId] = useState(null)
+
+    useEffect(() => {
+        if (path) {
+            // console.log('path', path) // path = /board/{boardId}
+            const data = path.split('/')
+            setBoardId(Number(data[2])) // {boardId}
+        }
+    }, [path]); // url 값 확인 -- doorCard로 넘겨준 id값 확인
+
+    useEffect(() => {
+        if (boardId) {
+            dispatch(cmsAction.getBoardDetail(boardId))
+        }
+    }, [boardId]); // boardId로 detail 데이터 요청
+
+
+    return (
+        <div>
+            <SSsearchInput
+                title={`원하는 ${boardDetail?.boardInfo?.boardNm}를 빠르게 찾아보세요!`}
+                placeholder={'검색어를 입력해주세요.'}
+            ></SSsearchInput>
+
+            {/*추천 컨텐츠*/}
+            <Carousel title={"당신에게 추천할게요."}>
+                {boardDetail?.contentInfoList?.map((item, idx) => (
+                    <ContentsCard key={item.index} item={item} idx={idx} onClick={() => {
+                        dispatch(push(`/content/${item?.contentId}`))
+                    }}/>
+                ))}
+            </Carousel>
+
+            {/*리스트 형식*/}
+
+            {/*카드 형식*/}
+        </div>
+    );
+};
+
+export default Board;
+
+/*
      {
          name : book,
          id: 1,
@@ -70,13 +122,3 @@ const Board = () => {
 
      }
      */
-
-
-    return (
-        <div>
-
-        </div>
-    );
-};
-
-export default Board;
