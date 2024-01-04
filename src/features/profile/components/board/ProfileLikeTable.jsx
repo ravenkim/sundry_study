@@ -80,7 +80,7 @@ const ProfileLikeTable = () => {
                     onClick={() =>{
                         CheckModal('정말 삭제하시겠어요?','', 'warning', function () {
                             dispatch(profileAction.deleteBoardLikes({contentId: BoardLikes?.likeList[value]?.contentId}))
-                        }); // 알림 기능 추가
+                        }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`); // 알림 기능 추가
 
                     }}
                     danger
