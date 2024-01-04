@@ -6,10 +6,44 @@ import Carousel from "../../common/components/Card/Carousel.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
+import Board from "../../features/cms/Board.jsx";
 
 
+const BoardPage = () => {
 
-const BackgroundImage = [
+
+    return (
+        <SSlayout>
+            <SSsectionWrap>
+                {/*임시 섹션 스타일 작성*/}
+                <Board/>
+            </SSsectionWrap>
+        </SSlayout>
+    );
+};
+
+export default BoardPage;
+
+
+{/*추천 컨텐츠 임시*/
+}
+{/*<Carousel title={"당신에게 추천할게요."}>
+                    {BackgroundImage.map((item, idx) => (
+                        <ContentsCard key={item.index} item={item} idx={idx} onClick={()=>{console.log('/contents/:board/:content 로 이동시키기')}}  />
+                    ))}
+                </Carousel>*/
+}
+
+{/*모든컨텐츠 한눈에 보기 임시*/
+}
+{/*<Carousel title={"모든 컨텐츠 한 눈에 보기"}>
+                    {BackgroundImage.map((item, idx) => (
+                        <ContentsCard key={item.index} item={item} idx={idx} onClick={()=>{console.log(`${item?.route} 로 이동시키기`)}}  />
+                    ))}
+                </Carousel>*/
+}
+
+/*const BackgroundImage = [
     {
         index: 1,
         title: '팀 개발을 위한 Git, GitHub 입문',
@@ -76,34 +110,4 @@ const BackgroundImage = [
         subTitle: '개인 프로젝트부터 현업 개발까지, 팀 개발에 필수적인 기술인 Git과 GitHub를 그림을 통해 쉽게 익힙니다.',
         Src: '/src/assets/img/temporary/card_img_4.png',
     },
-] // 임시 카드 map 이미지 데이터
-
-const BoardPage = () => {
-    return (
-        <SSlayout>
-            <SSsectionWrap>
-                {/*임시 섹션 스타일 작성*/}
-                <SSsearchInput
-                    title={'원하는 강의를 빠르게 찾아보세요!'}
-                    placeholder={'검색어를 입력해주세요.'}
-                ></SSsearchInput>
-
-                {/*추천 컨텐츠 임시*/}
-                <Carousel title={"당신에게 추천할게요."}>
-                    {BackgroundImage.map((item, idx) => (
-                        <ContentsCard key={item.index} item={item} idx={idx} onClick={()=>{console.log('/contents/:board/:content 로 이동시키기')}}  />
-                    ))}
-                </Carousel>
-
-                {/*모든컨텐츠 한눈에 보기 임시*/}
-                <Carousel title={"모든 컨텐츠 한 눈에 보기"}>
-                    {BackgroundImage.map((item, idx) => (
-                        <ContentsCard key={item.index} item={item} idx={idx} onClick={()=>{console.log(`${item?.route} 로 이동시키기`)}}  />
-                    ))}
-                </Carousel>
-            </SSsectionWrap>
-        </SSlayout>
-    );
-};
-
-export default BoardPage;
+] // 임시 카드 map 이미지 데이터*/
