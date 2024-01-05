@@ -37,6 +37,10 @@ const Profile = () => {
         dispatch(profileAction.getUserProfileImg())
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
 
+        return () => {
+            dispatch(profileAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
     }, [])
 
 

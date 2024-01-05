@@ -6,6 +6,7 @@ import Carousel from "../../common/components/Card/Carousel.jsx";
 import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
 import BoardSearchTable from "./components/BoardSearchTable.jsx";
+import {profileAction} from "../profile/profileReducer.jsx";
 
 const Board = () => {
 
@@ -33,6 +34,7 @@ const Board = () => {
             const data = path.split('/')
             setBoardId(Number(data[2])) // {boardId}
         }
+
     }, [path]); // url 값 확인 -- doorCard로 넘겨준 id값 확인
 
     useEffect(() => {
@@ -40,6 +42,13 @@ const Board = () => {
             dispatch(cmsAction.getBoardDetail(boardId))
         }
     }, [boardId]); // boardId로 detail 데이터 요청
+
+    useEffect(() => {
+        return () => {
+            dispatch(profileAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
+    }, []);
 
 
     //////////////////////////////////////////////////////////////////////////////
@@ -120,9 +129,10 @@ const Board = () => {
 
     useEffect(() => {
         if(searchResult) {
-            setFullContentView(!fullContentView)
+            setFullContentView(true)
         }
     }, [searchResult]);
+    // 검색 한 후 검색을 초기화하고 싶으면 어떻게 해야할까?
 
     return (
         <div>
@@ -141,7 +151,7 @@ const Board = () => {
             }
             ></SSsearchInput>
 
-            {searchResult && <BoardSearchTable/>}
+            {searchResult && <BoardSearchTable path={path}/>}
 
 
 
