@@ -7,7 +7,7 @@ const ContentsCard = ({
     return (
         <>
             <div key={item?.contentId}
-                 className={"group relative rounded-[10px] overflow-hidden max-w-[188px] max-h-[188px] desktop:w-[188px] desktop:h-[188px] transition-all cursor-pointer"}
+                 className={"group relative rounded-[10px] overflow-hidden max-w-[188px] max-h-[188px] desktop:w-[188px] desktop:h-[188px] transition-all cursor-pointer bg-[#015674] bg-opacity-70"}
                  onClick={onClick}
             >
                 <img src={item?.Src} alt="#" className={'w-full h-full'}/>
