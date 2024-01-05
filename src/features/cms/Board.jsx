@@ -5,6 +5,7 @@ import {cmsAction} from "./cmsReducer.jsx";
 import Carousel from "../../common/components/Card/Carousel.jsx";
 import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
+import BoardSearchTable from "./components/BoardSearchTable.jsx";
 
 const Board = () => {
 
@@ -13,11 +14,13 @@ const Board = () => {
     const {
         boardType,
         path,
-        boardDetail
+        boardDetail,
+        searchResult
     } = useSelector(({cmsReducer, router}) => ({
             boardType: cmsReducer.boardList.data,
             path: router.location?.pathname,
             boardDetail: cmsReducer.boardDetail.data,
+            searchResult:cmsReducer.boardSearchResult.data,
         }),
         shallowEqual
     )
@@ -107,29 +110,70 @@ const Board = () => {
             observer.observe(entry.target);
         }
     }
+    
+    //////////////////////////////////////////////////////////////////////////////
+    // search
+
+    const [searchBoardText, setSearchBoardText] = useState()
+    // 검색결과가 있으면 모든 컨텐츠 안보여주기
+    const [fullContentView, setFullContentView] = useState(false)
+
+    useEffect(() => {
+        if(searchResult) {
+            setFullContentView(!fullContentView)
+        }
+    }, [searchResult]);
 
     return (
         <div>
             <SSsearchInput
+                value={searchBoardText}
                 title={`원하는 ${boardDetail?.boardInfo?.boardNm}를 빠르게 찾아보세요!`}
                 placeholder={'검색어를 입력해주세요.'}
+                onChange={(e)=> setSearchBoardText(e.target.value) }
+                onSearch={()=> {
+                    dispatch(cmsAction.getSearchBoard({
+                        param:searchBoardText,
+                        boardId:boardId
+                    }))
+                    console.log('boardId',boardId) // board 1 리턴됨 근데 undefined가 뜸 이거 어케함;;
+                }
+            }
             ></SSsearchInput>
 
-            {/*추천 컨텐츠*/}
+            {searchResult && <BoardSearchTable/>}
+
+
+
+
+
+
+            {/*추천 컨텐츠 임시 최대 5개 slice -- 추후 변경 */}
             <Carousel title={"당신에게 추천할게요."}>
-                {boardDetail?.contentInfoList?.map((item, idx) => (
+                {boardDetail?.contentInfoList?.slice(0,5).map((item, idx) => (
                     <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
                         dispatch(push(`/content/${item?.contentId}`))
                     }}/>
                 ))}
             </Carousel>
 
+
+
+
+
+
+
+
+
+
             {/*리스트 형식*/}
             {boardDetail?.boardInfo?.boardViewType !== 'list' ? (
                 <div>리스트</div>
             ) : (
                 /*카드 형식*/
-                <div className={'w-full h-fit flex flex-col gap-[16px] mt-[60px] flex-wrap'}>
+                <div className={'w-full h-fit flex-col gap-[16px] mt-[60px] flex-wrap ' + (fullContentView ? 'hidden ' : ' flex ')}
+
+                >
                     <h3>모든 컨텐츠 한 눈에 보기</h3>
                     <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px]'}>
                         {fullList.map((item, idx) => (

@@ -14,6 +14,7 @@ export const getContentDetail = (param) =>
 export const getContentDetailImg = (param) =>
     imgClient.get(`contents/${param}/img`  )
 
-
+export const getSearchBoard = (param) =>
+    client.get(`search?keyword=${param.param}&boardId=${param.boardId}`)
 
 

@@ -1,5 +1,5 @@
 import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
-import {getBoardDetail, getBoardList, getContentDetail, getContentDetailImg} from "./cmsAPI.jsx";
+import {getBoardDetail, getBoardList, getContentDetail, getContentDetailImg, getSearchBoard} from "./cmsAPI.jsx";
 
 
 const prefix = 'cms'
@@ -15,12 +15,17 @@ const asyncRequest = {
     getBoardList: [
         {boardList: reducerUtils.init()},
         getBoardList
-    ],
+    ], // door에서 사용하는 보드 리스트
 
     getBoardDetail: [
         {boardDetail:reducerUtils.init()},
         getBoardDetail
-    ],
+    ], // 보드 컨텐츠 리턴
+
+    getSearchBoard:[
+        {boardSearchResult: reducerUtils.init()},
+        getSearchBoard
+    ], // 보드 검색결과
 
     getContentDetail: [
         {contentDetail: reducerUtils.init()},
