@@ -187,7 +187,7 @@ const SStable = ({
 
             <Table
                 size={"small"}
-                className={'mt-[16px]'}
+                className={'mt-[16px] cursor-pointer'}
                 dataSource={filteredData}
                 columns={colorFeaturesColumns}
                 onRow={(record, rowIndex) => {

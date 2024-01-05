@@ -39,6 +39,75 @@ const Board = () => {
     }, [boardId]); // boardId로 detail 데이터 요청
 
 
+    //////////////////////////////////////////////////////////////////////////////
+    // infinite scroll
+
+    const [fullList, setFullList] = useState([]) // 전체 리스트
+    const [offset, setOffset] = useState(0) // back에 요청할 페이지 데이터 순서 정보
+    // offset 이후 순서의 데이터부터 12개씩 데이터를 받아올 것
+    const [target, setTarget] = useState(null) // 관찰대상 target
+    const [isLoaded, setIsLoaded] = useState(false) // load 중인지 받아오기
+    // 요청이 여러번 가는 것을 막기 위함
+    const [stop, setStop] = useState(false) // 마지막 데이터까지 다 불러온 경우 더이상 요청을 보내지 않도록 설정
+
+    // 카드 형식일 때만 인피니티 스크롤 적용
+    useEffect(() => {
+        let observer;
+
+        if (target && !stop) {
+            // callback 함수로 onIntersect를 지정
+            observer = new IntersectionObserver(onIntersect, {
+                threshold: 1, // 타겟이 100% 보였을 때 실행
+            });
+            observer.observe(target);
+        }
+        return () => observer && observer.disconnect();
+
+    }, [target, isLoaded]);
+
+    // isLoaded 관찰에 대한 상태가 변할 때 실행
+    // get 요청 보내기
+    useEffect(() => {
+        if (isLoaded && !stop) {
+            // 가져오는 데이터가 초기에 한번에 들어오기 때문에 한번에 들어오는 게 12개 보다 크면 잘라내기
+            const batchSize = boardDetail?.contentInfoList?.length > 12 ? 12 : boardDetail?.contentInfoList?.length;
+            // 12개씩 로드되도록 slice
+            const loadedItems = boardDetail?.contentInfoList?.slice(offset, offset + batchSize);
+            // 보드 리스트 데이터를 보여줄 전체 리스트에 넣어준다.
+            setFullList((prevList) => [...prevList, ...loadedItems]);
+            // 다음 요청할 데이터의 offset 정보
+            setOffset((prevOffset) => prevOffset + batchSize);
+            // 다음 요청 전까지 요청 그만 보내도록 false로 변경
+            setIsLoaded(false);
+
+            if (batchSize < 12) {
+                // 전체 데이터를 다 불러온 후 ( 불러온 값이 12보다 적어지면 다 불러온 것이니 )
+                // 해당 값보다 적으면 마지막 페이지라고 생각하고 아예 로드를 중지시킨다.
+                setStop(true);
+            }
+        }
+
+    }, [isLoaded]);
+
+    const getMoreItem = () => {
+        setIsLoaded(true);
+    };
+
+    // callback
+    const onIntersect = async ([entry], observer) => {
+        // entry 요소가 교차되거나 Load중이 아니면
+
+        if (entry.isIntersecting && !isLoaded) {
+            // 관찰은 일단 멈추고
+            observer.unobserve(entry.target);
+            // 데이터 불러오기
+            await getMoreItem();
+
+            // 불러온 후 다시 관찰 실행
+            observer.observe(entry.target);
+        }
+    }
+
     return (
         <div>
             <SSsearchInput
@@ -56,69 +125,26 @@ const Board = () => {
             </Carousel>
 
             {/*리스트 형식*/}
+            {boardDetail?.boardInfo?.boardViewType !== 'list' ? (
+                <div>리스트</div>
+            ) : (
+                /*카드 형식*/
+                <div className={'w-full h-fit flex flex-col gap-[16px] mt-[60px] flex-wrap'}>
+                    <h3>모든 컨텐츠 한 눈에 보기</h3>
+                    <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px]'}>
+                        {fullList.map((item, idx) => (
+                            <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
+                                dispatch(push(`/content/${item?.contentId}`))
+                            }}/>
+                        ))}
+                        <div ref={setTarget}></div>
+                    </div>
+                </div>
+            )}
 
-            {/*카드 형식*/}
+
         </div>
     );
 };
 
 export default Board;
-
-/*
-     {
-         name : book,
-         id: 1,
-         layout: [
-            title : {
-                order: 1,
-
-                useLabel: 'N'
-                label: '게시판 이름',
-
-
-
-                type: text_title, >> 이거에 따라서 컴포 넌트를 구현
-                data: 대여 개시판',
-                (dataType: text)
-
-            },
-
-            subTitle: {
-                order: 2,
-
-
-                useLabel: 'N'
-                label: '게시판 설명',
-
-                type: text_subtitle,
-                value: 책을 대여할 수 있는 게시판 입니다
-                attribute: text,
-            },
-
-            recommendBook: {
-                label: '추천 도서',
-
-                order: 3,
-            },
-
-            main: {
-                name: 도서 목록
-                order: 4
-
-                data: {
-                    .....
-                    .....
-                    ....
-                    ....
-                    ....
-                    ....
-                    ....
-                    ....
-                },
-            }
-
-
-         ],
-
-     }
-     */
