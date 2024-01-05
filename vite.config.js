@@ -10,5 +10,21 @@ export default defineConfig({
 		}
 	},
 
+	build: {
+		rollupOptions: {
+			cache: true,
+			external: ['suneditor'],
+			output: {
+				manualChunks: {
+					react: ['react', 'react-dom'],
+					reactRouter: ['react-router-dom'],
+					axios: ['axios'],
+					antd: ['antd'],
+
+				},
+			},
+		},
+	},
+
 
 })
