@@ -46,3 +46,6 @@ yarn dev
 + nvm 을톨한 노드 버전 관리 
 + 배포 방법
 
+
+docker run -itd -p 801:80 --name rms_front rms:0.1
+

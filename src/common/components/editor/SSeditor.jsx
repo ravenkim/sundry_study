@@ -1,8 +1,8 @@
-import React from 'react';
-import SunEditor from 'suneditor-react';
-import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
-import ko from 'suneditor/src/lang/ko.js';
-import {LIME_EDITOR_OPTIONS} from "./EditorConstants.jsx";
+import React from 'react'
+import SunEditor from 'suneditor-react'
+import 'suneditor/dist/css/suneditor.min.css'
+import ko from 'suneditor/src/lang/ko.js'
+import {LIME_EDITOR_OPTIONS} from "./EditorConstants.jsx"
 
 const SSeditor = ({height = "500px", autoFocus, isEditMode, initContents, changeHandler, customOptions}) => {
     return (
