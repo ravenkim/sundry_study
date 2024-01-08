@@ -1,9 +1,38 @@
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getContentDetailImg} from "../../../features/cms/cmsAPI.jsx";
+import {cmsAction} from "../../../features/cms/cmsReducer.jsx";
+
+
 const ContentsCard = ({
     idx,
     item,
     onClick,
     ...otherProps
                       }) => {
+
+    /*const dispatch = useDispatch()
+
+    const {
+        contentImg
+    } = useSelector(({cmsReducer})=>({
+        contentImg:cmsReducer.contentDetailImg.data
+    }),
+        shallowEqual
+    )
+
+    useEffect(() => {
+
+        if(contentImg) {
+            dispatch(cmsAction.getContentDetailImg(item?.contentId))
+        }
+
+        return () => {
+            dispatch(cmsAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
+    }, []);*/
+
     return (
         <>
             <div key={item?.contentId}
