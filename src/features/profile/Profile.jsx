@@ -39,6 +39,7 @@ const Profile = () => {
 
         return () => {
             dispatch(profileAction.initializeAll())
+
             // 페이지 나가면 초기화
         }
     }, [])
