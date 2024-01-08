@@ -37,9 +37,7 @@ const Admin = () => {
 
     return (
         <SSwrapper
-
             className={'w-2/3 p-[30px] box-border'}
-
         >
 
 
