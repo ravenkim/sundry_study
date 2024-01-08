@@ -17,11 +17,10 @@ const SSwrapper = ({
                 minWidth: '100px',
                 borderRadius: '20px',
                 boxSizing: "border-box",
-                marginTop: '20px',
                 ...style
             }}
             className={
-
+            'my-[40px] ' +
                 className
             }
         >
