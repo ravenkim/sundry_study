@@ -6,6 +6,7 @@ import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 import CheckModal from "../../../../common/components/modal/CheckModal.js";
 import Swal from "sweetalert2/src/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss';
+import {Spin} from "antd";
 
 const ProfileRentalTable = () => {
 
@@ -15,11 +16,13 @@ const ProfileRentalTable = () => {
     const {
         BoardRentals,
         fullUserInfo,
-        BoardRentalsReturn
+        BoardRentalsReturn,
+        userDataLoading
     } = useSelector(({profileReducer}) => ({
             BoardRentals: profileReducer.BoardRentals.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
             BoardRentalsReturn: profileReducer.RentalsReturn.data,
+            userDataLoading: profileReducer.fullUserInfo.loading
         }),
         shallowEqual
     );
@@ -128,13 +131,17 @@ const ProfileRentalTable = () => {
 
 
     return (<>
-            <SStable
-                columns={columns}
-                dataSource={boardList}
-                useIndex={true}
+            <Spin
+                spinning={userDataLoading}
             >
+                <SStable
+                    columns={columns}
+                    dataSource={boardList}
+                    useIndex={true}
+                >
 
-            </SStable>
+                </SStable>
+            </Spin>
         </>
     );
 };
