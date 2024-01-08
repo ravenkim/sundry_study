@@ -149,7 +149,6 @@ const Board = () => {
                         param: searchBoardText,
                         boardId: boardId
                     }))
-                    console.log('boardId', boardId) // board 1 리턴됨 근데 undefined가 뜸 이거 어케함;;
                 }
                 }
             ></SSsearchInput>
