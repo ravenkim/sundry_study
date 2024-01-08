@@ -39,7 +39,7 @@ const Profile = () => {
 
         return () => {
             dispatch(profileAction.initializeAll())
-
+            dispatch(adminAction.initializeAll())
             // 페이지 나가면 초기화
         }
     }, [])
