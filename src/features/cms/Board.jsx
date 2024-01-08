@@ -45,7 +45,8 @@ const Board = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(profileAction.initializeAll())
+            dispatch(cmsAction.initializeAll())
+
             // 페이지 나가면 초기화
         }
     }, []);
