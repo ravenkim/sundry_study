@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import SStable from "../../../common/components/table/SStable.jsx";
 import {push} from "redux-first-history";
 import {profileAction} from "../../profile/profileReducer.jsx";
+import {cmsAction} from "../cmsReducer.jsx";
 
 const BoardSearchTable = ({path}) => {
 
@@ -26,7 +27,7 @@ const BoardSearchTable = ({path}) => {
 
     useEffect(() => {
         return () => {
-            dispatch(profileAction.initializeAll())
+            dispatch(cmsAction.initializeAll())
             // 페이지 나가면 초기화
         }
     }, []);

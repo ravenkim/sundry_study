@@ -7,6 +7,7 @@ import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
 import BoardSearchTable from "./components/BoardSearchTable.jsx";
 import {profileAction} from "../profile/profileReducer.jsx";
+import {Spin} from "antd";
 
 const Board = () => {
 
@@ -16,12 +17,14 @@ const Board = () => {
         boardType,
         path,
         boardDetail,
-        searchResult
+        boardDetailLoading,
+        searchResult,
     } = useSelector(({cmsReducer, router}) => ({
             boardType: cmsReducer.boardList.data,
             path: router.location?.pathname,
             boardDetail: cmsReducer.boardDetail.data,
-            searchResult:cmsReducer.boardSearchResult.data,
+            boardDetailLoading: cmsReducer.boardDetail.loading,
+            searchResult: cmsReducer.boardSearchResult.data,
         }),
         shallowEqual
     )
@@ -45,7 +48,7 @@ const Board = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(profileAction.initializeAll())
+            dispatch(cmsAction.initializeAll())
             // 페이지 나가면 초기화
         }
     }, []);
@@ -119,7 +122,7 @@ const Board = () => {
             observer.observe(entry.target);
         }
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////
     // search
 
@@ -128,7 +131,7 @@ const Board = () => {
     const [fullContentView, setFullContentView] = useState(false)
 
     useEffect(() => {
-        if(searchResult) {
+        if (searchResult) {
             setFullContentView(true)
         }
     }, [searchResult]);
@@ -140,63 +143,56 @@ const Board = () => {
                 value={searchBoardText}
                 title={`원하는 ${boardDetail?.boardInfo?.boardNm}를 빠르게 찾아보세요!`}
                 placeholder={'검색어를 입력해주세요.'}
-                onChange={(e)=> setSearchBoardText(e.target.value) }
-                onSearch={()=> {
+                onChange={(e) => setSearchBoardText(e.target.value)}
+                onSearch={() => {
                     dispatch(cmsAction.getSearchBoard({
-                        param:searchBoardText,
-                        boardId:boardId
+                        param: searchBoardText,
+                        boardId: boardId
                     }))
-                    console.log('boardId',boardId) // board 1 리턴됨 근데 undefined가 뜸 이거 어케함;;
                 }
-            }
+                }
             ></SSsearchInput>
 
             {searchResult && <BoardSearchTable path={path}/>}
 
 
+            <Spin
+                spinning={boardDetailLoading}
+            >
 
 
+                {/*추천 컨텐츠 임시 최대 5개 slice -- 추후 변경 */}
+                <Carousel title={"당신에게 추천할게요."}>
+                    {boardDetail?.contentInfoList?.slice(0, 5).map((item, idx) => (
+                        <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
+                            dispatch(push(`/content/${item?.contentId}`))
+                        }}/>
+                    ))}
+                </Carousel>
 
 
-            {/*추천 컨텐츠 임시 최대 5개 slice -- 추후 변경 */}
-            <Carousel title={"당신에게 추천할게요."}>
-                {boardDetail?.contentInfoList?.slice(0,5).map((item, idx) => (
-                    <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
-                        dispatch(push(`/content/${item?.contentId}`))
-                    }}/>
-                ))}
-            </Carousel>
-
-
-
-
-
-
-
-
-
-
-            {/*리스트 형식*/}
-            {boardDetail?.boardInfo?.boardViewType !== 'list' ? (
-                <div>리스트</div>
-            ) : (
-                /*카드 형식*/
-                <div className={'w-full h-fit flex-col gap-[16px] mt-[60px] flex-wrap ' + (fullContentView ? 'hidden ' : ' flex ')}
-
-                >
-                    <h3>모든 컨텐츠 한 눈에 보기</h3>
-                    <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px]'}>
-                        {fullList.map((item, idx) => (
-                            <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
-                                dispatch(push(`/content/${item?.contentId}`))
-                            }}/>
-                        ))}
-                        <div ref={setTarget}></div>
+                {/*리스트 형식*/}
+                {boardDetail?.boardInfo?.boardViewType !== 'list' ? (
+                    /*<div>리스트</div>*/
+                    <div></div>
+                ) : (
+                    /*카드 형식*/
+                    <div
+                        className={'w-full h-fit flex-col gap-[16px] mt-[60px] flex-wrap ' + (fullContentView || boardDetailLoading ? 'hidden ' : ' flex ')}
+                    >
+                        <h3>모든 컨텐츠 한 눈에 보기</h3>
+                        <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px]'}>
+                            {fullList.map((item, idx) => (
+                                <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
+                                    dispatch(push(`/content/${item?.contentId}`))
+                                }}/>
+                            ))}
+                            <div ref={setTarget}></div>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-
+            </Spin>
         </div>
     );
 };
