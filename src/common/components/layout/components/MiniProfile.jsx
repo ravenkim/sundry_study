@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons';
 import {adminAction} from "../../../../features/admin/adminReducer.jsx";
 import SStext from "../../text/SStext.jsx";
+import CheckModal from "../../modal/CheckModal.js";
 
 const MiniProfile = () => {
     const dispatch = useDispatch()
@@ -42,12 +43,24 @@ const MiniProfile = () => {
         }
     }, []);
 
+    const [deletedNotiIds, setDeletedNotiIds] = useState([])
+
+    useEffect(() => {
+        if (postNotiId.loading) {
+            dispatch(profileAction.getUserNotifications());
+        }
+    }, [postNotiId]);
+
     const log = (itemsNotiId) => {
         // 리스트를 제거해야 하는지 보이지 않게만 해야 하는지 확인 후 작업 진행
         // 논리적 제거로 진행중
         // post /notifications/update -> 미확인에서 확인으로 변경
         // {notiId : 1}
-        dispatch(profileAction.postUserNotifications({notiId: itemsNotiId}))
+        CheckModal('정말 알림을 삭제하시겠어요?', '', 'warning', function () {
+            dispatch(profileAction.postUserNotifications({notiId: itemsNotiId}))
+            setDeletedNotiIds([...deletedNotiIds, itemsNotiId]);
+
+        }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`)
     };
 
     const [open, setOpen] = useState(false);
@@ -143,7 +156,8 @@ const MiniProfile = () => {
                     {notificationsData?.notiList && notificationsData.notiList.length > 0 ? (
                         <div
                             className={'flex flex-col gap-[6px] overflow-hidden overflow-y-auto box-border px-[4px] transition-all duration-300 pb-[6px] ' + (open ? ' w-full opacity-100 visible' : ' w-0 opacity-0 hidden')}>
-                            {notificationsData.notiList.map((item) => (
+                            {notificationsData.notiList.filter(item => !deletedNotiIds.includes(item.notiId)) // 삭제된 알림 필터링
+                                .map((item) => (
                                 <Tag
                                     closeIcon={<CloseCircleOutlined/>}
                                     onClose={() => log(item.notiId)}
@@ -155,7 +169,8 @@ const MiniProfile = () => {
                                         <div className={'text-wrap w-full'}>
                                             {user?.userNm}님! 알림이 도착했어요.
                                             <br/>
-                                            <SStext className={'w-full text-wrap text-ellipsis break-all font-[NotoSansKR-700]'}>
+                                            <SStext
+                                                className={'w-full text-wrap text-ellipsis break-all font-[NotoSansKR-700]'}>
                                                 {item.notiContent}
                                             </SStext>
                                         </div>
