@@ -47,7 +47,7 @@ yarn dev
 + 배포 방법
 
 
+docker build --tag rms:0.1 . 
 
-
-docker run -itd -p 801:80 --name rms_front rms:0.1
+docker run -itd -p 5173:80 --name rms_front rms:0.1
 
