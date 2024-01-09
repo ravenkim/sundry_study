@@ -58,6 +58,14 @@ const ProfileLikeTable = () => {
         setBoardList(BoardLikes?.likeList)
     }, [boardList]);
 
+    useEffect(() => {
+        if(LikeDeleteData) {
+            if(LikeDeleteData.res) {
+                dispatch(profileAction.postBoardLikes({userId: fullUserInfo?.userInfo?.userId}))
+            }
+        }
+    }, [LikeDeleteData]); // post 성공하면 리스트 다시 불러오기
+
     const columns = [
         {
             title: '카테고리',
@@ -83,6 +91,7 @@ const ProfileLikeTable = () => {
                     onClick={() => {
                         CheckModal('정말 삭제하시겠어요?', '', 'warning', function () {
                             dispatch(profileAction.deleteBoardLikes({contentId: BoardLikes?.likeList[value]?.contentId}))
+
                         }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`); // 알림 기능 추가
 
                     }}
