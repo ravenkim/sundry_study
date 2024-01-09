@@ -57,7 +57,7 @@ const ProfileRentalTable = () => {
 
     useEffect(() => {
         setBoardList(BoardRentals?.rentalInfo)
-    }, [boardList]);
+    }, [boardList, BoardRentals?.rentalInfo?.rentalStatNm]);
 
     const columns = [
         {
@@ -101,7 +101,7 @@ const ProfileRentalTable = () => {
                                             contentId: BoardRentals?.rentalInfo[value]?.contentId,
                                             userId: fullUserInfo?.userInfo?.userId
                                         }));
-                                        /*if (BoardRentalsReturn) {
+                                        if (BoardRentalsReturn) {
                                             if (BoardRentalsReturn.res) {
                                                 Swal.fire({
                                                     title: '반납에 성공했어요!',
@@ -113,7 +113,7 @@ const ProfileRentalTable = () => {
                                                     icon: 'error',
                                                 })
                                             }
-                                        }*/ // --> put 성공 시 res값을 돌려주지 않는 상태이다. 요청할 것
+                                        } // --> put 성공 시 res값을 돌려주지 않는 상태이다. 요청할 것
                                     }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`)
                                 }}
                                 className={'mr-[6px]'}
