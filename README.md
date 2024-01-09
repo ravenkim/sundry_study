@@ -49,5 +49,5 @@ yarn dev
 
 docker build --tag rms:0.1 . 
 
-docker run -itd -p 5173:80 --name rms_front rms:0.1
+docker run -itd -p 8089:80 --name rms_front rms:0.1
 
