@@ -5,6 +5,7 @@ import {profileAction} from "../../profileReducer.jsx";
 import {deleteBoardLikes, postBoardLikes} from "../../profileAPI.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 import CheckModal from "../../../../common/components/modal/CheckModal.js";
+import {Spin} from "antd";
 
 const ProfileLikeTable = () => {
 
@@ -14,11 +15,13 @@ const ProfileLikeTable = () => {
 
         BoardLikes,
         fullUserInfo,
-        LikeDeleteData
+        LikeDeleteData,
+        userDataLoading
     } = useSelector(({profileReducer}) => ({
             BoardLikes: profileReducer.BoardLikes.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
-            LikeDeleteData: profileReducer.BoardLikesDelete.data
+            LikeDeleteData: profileReducer.BoardLikesDelete.data,
+            userDataLoading: profileReducer.fullUserInfo.loading
             // 보드 post 요청으로 유저정보 넘겨주고 리턴값으로 보드 정보 가져오기
         }),
         shallowEqual
@@ -46,14 +49,22 @@ const ProfileLikeTable = () => {
     }, []);
 
     useEffect(() => {
-        if(BoardLikes) {
-                setBoardList(BoardLikes?.likeList)
-            } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
+        if (BoardLikes) {
+            setBoardList(BoardLikes?.likeList)
+        } // 강의 데이터 받아오기에 성공하면 테이블에 강의에 대한 데이터 넣기
     }, [BoardLikes]);
 
     useEffect(() => {
         setBoardList(BoardLikes?.likeList)
     }, [boardList]);
+
+    useEffect(() => {
+        if(LikeDeleteData) {
+            if(LikeDeleteData.res) {
+                dispatch(profileAction.postBoardLikes({userId: fullUserInfo?.userInfo?.userId}))
+            }
+        }
+    }, [LikeDeleteData]); // post 성공하면 리스트 다시 불러오기
 
     const columns = [
         {
@@ -77,9 +88,10 @@ const ProfileLikeTable = () => {
             dataIndex: 'rentalStatNm',
             render: (text, record, value) => (
                 <SSbutton
-                    onClick={() =>{
-                        CheckModal('정말 삭제하시겠어요?','', 'warning', function () {
+                    onClick={() => {
+                        CheckModal('정말 삭제하시겠어요?', '', 'warning', function () {
                             dispatch(profileAction.deleteBoardLikes({contentId: BoardLikes?.likeList[value]?.contentId}))
+
                         }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`); // 알림 기능 추가
 
                     }}
@@ -94,15 +106,19 @@ const ProfileLikeTable = () => {
 
     ]
 
-    return(
+    return (
         <>
-            <SStable
-                columns={columns}
-                dataSource={boardList}
-                useIndex={true}
+            <Spin
+                spinning={userDataLoading}
             >
+                <SStable
+                    columns={columns}
+                    dataSource={boardList}
+                    useIndex={true}
+                >
 
-            </SStable>
+                </SStable>
+            </Spin>
         </>
     )
 }

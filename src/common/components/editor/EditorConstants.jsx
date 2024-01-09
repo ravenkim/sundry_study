@@ -43,13 +43,11 @@ export const LIME_EDITOR_OPTIONS = {
         [
             'link',
             'image',
-            // 'video',
-            //'fullScreen',
+
             'showBlocks',
             'codeView',
-            'preview',
-            // 'print',
-            // 'save'
+            'preview'
+
         ]
 
     ],
