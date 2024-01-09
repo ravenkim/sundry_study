@@ -60,8 +60,6 @@ const RAW_RUNTIME_STATE =
           ["redux-saga", "npm:1.2.3"],\
           ["sass", "npm:1.69.7"],\
           ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
-          ["suneditor", "npm:2.45.1"],\
-          ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
           ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
@@ -5865,8 +5863,6 @@ const RAW_RUNTIME_STATE =
           ["redux-saga", "npm:1.2.3"],\
           ["sass", "npm:1.69.7"],\
           ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
-          ["suneditor", "npm:2.45.1"],\
-          ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
           ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
           ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
@@ -6261,45 +6257,6 @@ const RAW_RUNTIME_STATE =
           ["mz", "npm:2.7.0"],\
           ["pirates", "npm:4.0.6"],\
           ["ts-interface-checker", "npm:0.1.13"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["suneditor", [\
-      ["npm:2.45.1", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/suneditor-npm-2.45.1-3ae8168f79-10c0.zip/node_modules/suneditor/",\
-        "packageDependencies": [\
-          ["suneditor", "npm:2.45.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["suneditor-react", [\
-      ["npm:3.6.1", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/suneditor-react-npm-3.6.1-21a44d7eba-10c0.zip/node_modules/suneditor-react/",\
-        "packageDependencies": [\
-          ["suneditor-react", "npm:3.6.1"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1", {\
-        "packageLocation": "./.yarn/__virtual__/suneditor-react-virtual-2e1bb1eed6/5/AppData/Local/Yarn/Berry/cache/suneditor-react-npm-3.6.1-21a44d7eba-10c0.zip/node_modules/suneditor-react/",\
-        "packageDependencies": [\
-          ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
-          ["@types/react", "npm:18.2.43"],\
-          ["@types/react-dom", "npm:18.2.17"],\
-          ["@types/suneditor", null],\
-          ["react", "npm:18.2.0"],\
-          ["react-dom", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:18.2.0"],\
-          ["suneditor", "npm:2.45.1"]\
-        ],\
-        "packagePeers": [\
-          "@types/react-dom",\
-          "@types/react",\
-          "@types/suneditor",\
-          "react-dom",\
-          "react",\
-          "suneditor"\
         ],\
         "linkType": "HARD"\
       }]\
