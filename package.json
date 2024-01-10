@@ -36,6 +36,8 @@
 		"redux-first-history": "^5.1.1",
 		"redux-saga": "^1.2.3",
 		"slick-carousel": "^1.8.1",
+		"suneditor": "git+https://github.com/JiHong88/SunEditor.git",
+		"suneditor-react": "^3.6.1",
 		"sweetalert2": "^11.10.2"
 	},
 	"peerDependencies": {
