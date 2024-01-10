@@ -41,13 +41,15 @@ yarn dev
 
 ---
 
-추가할것
-+ corepack 없을시 설치 
-+ nvm 을톨한 노드 버전 관리 
-+ 배포 방법
 
 
+# 배포
+```
+git pull
+```
+```
 docker build --tag rms:0.1 . 
-
+```
+```
 docker run -itd -p 8089:80 --name rms_front rms:0.1
-
+```
