@@ -9,14 +9,7 @@ export default defineConfig({
 			src: '/src',
 		}
 	},
-	server: {
-		proxy: {
-			'/api': {
-				target: 'http://110.35.15.168:8088',
-				changeOrigin: true,
-			},
-		},
-	},
+
 	build: {
 		rollupOptions: {
 			cache: true,
