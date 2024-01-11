@@ -1,5 +1,4 @@
-import {Button, Modal} from "antd";
-import SSbutton from "../button/SSbutton.jsx";
+import {Modal} from "antd";
 import SStext from "../text/SStext.jsx";
 
 const AlertModal = ({

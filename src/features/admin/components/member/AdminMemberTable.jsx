@@ -6,7 +6,6 @@ import {adminAction} from "../../adminReducer.jsx";
 import {Spin} from 'antd';
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import showMessage from "src/common/components/notice/notice.js";
-import {resetProfile} from "../../adminAPI.jsx";
 import AdminMemberDetail from "./AdminMemberDetail.jsx";
 
 const AdminMemberTable = () => {

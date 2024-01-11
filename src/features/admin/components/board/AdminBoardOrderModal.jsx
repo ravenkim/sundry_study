@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Modal} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SSorderDragTable from "../../../../common/components/table/SSorderDragTable.jsx";

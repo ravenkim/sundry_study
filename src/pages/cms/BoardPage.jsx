@@ -1,11 +1,8 @@
 import React from 'react';
 import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
 import SSlayout from "../../common/components/layout/SSlayout.jsx";
-import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
-import Carousel from "../../common/components/Card/Carousel.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
 import Board from "../../features/cms/Board.jsx";
 
 

@@ -1,7 +1,4 @@
-import {
-    reducerUtils,
-    reduxMaker
-} from "src/common/utils/asyncUtils.jsx";
+import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
 import {getSearchAll} from "./doorAPI.jsx";
 
 const prefix = 'door'

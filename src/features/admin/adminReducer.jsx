@@ -1,11 +1,12 @@
-import {
-    reducerUtils, reduxMaker
-} from "src/common/utils/asyncUtils.jsx";
+import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
 import {
     addUser,
     getAuthList,
-    getBoardList, getOverdues,
-    getUsers, getUsersDetail, rentalUpdate,
+    getBoardList,
+    getOverdues,
+    getUsers,
+    getUsersDetail,
+    rentalUpdate,
     resetPassword,
     resetProfile,
     setBoardPriorities

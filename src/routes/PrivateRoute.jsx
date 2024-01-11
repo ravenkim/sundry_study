@@ -1,6 +1,5 @@
 import {Navigate} from 'react-router-dom';
-import {useDispatch, useSelector, shallowEqual} from 'react-redux'
-import {push} from "redux-first-history";
+import {shallowEqual, useDispatch, useSelector} from 'react-redux'
 
 const PrivateRoute = ({
                           children

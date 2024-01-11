@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {profileAction} from "../../profileReducer.jsx";
-import {deleteBoardLikes, postBoardLikes} from "../../profileAPI.jsx";
 import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 import CheckModal from "../../../../common/components/modal/CheckModal.js";
 import {Spin} from "antd";

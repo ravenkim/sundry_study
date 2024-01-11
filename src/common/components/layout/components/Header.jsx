@@ -1,13 +1,12 @@
 import {MenuOutlined, UserOutlined} from "@ant-design/icons";
-import {shallowEqual, useSelector} from "react-redux";
-import {useDispatch} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {push} from "redux-first-history";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import MiniProfile from "./MiniProfile.jsx";
-import {Popover, Avatar, Space} from "antd";
+import {Avatar, Popover, Space} from "antd";
 import {profileAction} from "../../../../features/profile/profileReducer.jsx";
-import {adminAction} from "../../../../features/admin/adminReducer.jsx";
 import img_Logo_main_url from '/src/assets/logo/logo_main.png'
+
 const Header = ({
                     setMenuOpen,
                     menuOpen,
