@@ -11,8 +11,8 @@ import {
     RightCircleOutlined,
     UserOutlined
 } from '@ant-design/icons';
-import {adminAction} from "../../../../features/admin/adminReducer.jsx";
-import SStext from "../../text/SStext.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
+import SStext from "src/common/components/text/SStext.jsx";
 import CheckModal from "../../modal/CheckModal.js";
 
 const MiniProfile = () => {
