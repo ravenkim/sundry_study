@@ -15,6 +15,7 @@ import {getBoardList} from "../cms/cmsAPI.jsx";
 import {cmsAction} from "../cms/cmsReducer.jsx";
 import {Spin} from "antd";
 import img_manager_url from  '/src/assets/img/manager.svg'
+import img_profile_url from  '/src/assets/img/profile.svg'
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -136,7 +137,7 @@ const Door = () => {
                                     </h3>
                                     {/*<div dangerouslySetInnerHTML={{__html: item.svg}} className={'inline-flex justify-self-end self-end'}/>*/}
                                     {idx === 0 ? (
-                                        <img src="/src/assets/img/profile.sv" alt="#"
+                                        <img src={img_profile_url} alt="#"
                                              className={'inline-flex justify-self-end self-end'}/>
                                     ) : null}
                                     {idx === 1 ? (
