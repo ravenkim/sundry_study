@@ -7,7 +7,7 @@ import MiniProfile from "./MiniProfile.jsx";
 import {Popover, Avatar, Space} from "antd";
 import {profileAction} from "../../../../features/profile/profileReducer.jsx";
 import {adminAction} from "../../../../features/admin/adminReducer.jsx";
-
+import img_Logo_main_url from '/src/assets/logo/logo_main.png'
 const Header = ({
                     setMenuOpen,
                     menuOpen,
@@ -87,7 +87,7 @@ const Header = ({
                         height: 34
 
                     }}
-                    src={'/src/assets/logo/logo_main.png'} alt={'logo'}
+                    src={img_Logo_main_url} alt={'logo'}
                 />
 
 
