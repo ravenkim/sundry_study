@@ -1,8 +1,6 @@
 import client from "src/api/client.jsx";
 
 
-
-
 //회원관리
 export const getUsers = () =>
   client.get('admin/users')

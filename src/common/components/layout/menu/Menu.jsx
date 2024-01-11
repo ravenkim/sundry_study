@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {CloseOutlined} from "@ant-design/icons";
 import MenuButtonWrap from "./components/MenuButtonWrap.jsx";
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {push} from "redux-first-history";
 import SubMenuButtonWrap from "./components/SubMenuButtonWrap.jsx";
 import MobileButton from "./components/MobileButton.jsx";

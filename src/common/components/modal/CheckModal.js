@@ -1,6 +1,3 @@
-import {Modal} from "antd";
-import SStext from "../text/SStext.jsx";
-import React, { useState } from 'react';
 import Swal from "sweetalert2/src/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss'
 

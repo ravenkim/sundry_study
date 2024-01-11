@@ -8,14 +8,12 @@ import DoorCard from '/src/data/DoorCard.jsx'
 import {push} from "redux-first-history";
 import {adminAction} from "../admin/adminReducer.jsx";
 import {profileAction} from "../profile/profileReducer.jsx";
-import SStable from "../../common/components/table/SStable.jsx";
 import {doorAction} from "./doorReducer.jsx";
 import DoorAllSearchTable from "./components/DoorAllSearchTable.jsx";
-import {getBoardList} from "../cms/cmsAPI.jsx";
 import {cmsAction} from "../cms/cmsReducer.jsx";
 import {Spin} from "antd";
-import img_manager_url from  '/src/assets/img/manager.svg'
-import img_profile_url from  '/src/assets/img/profile.svg'
+import img_manager_url from '/src/assets/img/manager.svg'
+import img_profile_url from '/src/assets/img/profile.svg'
 
 const Door = () => {
     const dispatch = useDispatch()

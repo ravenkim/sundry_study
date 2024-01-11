@@ -1,4 +1,4 @@
-import imgClient, { imgClientPost } from "../../api/imgClient.jsx";
+import imgClient, {imgClientPost} from "../../api/imgClient.jsx";
 import client from "../../api/client.jsx";
 
 export const getUserProfileImg = () =>

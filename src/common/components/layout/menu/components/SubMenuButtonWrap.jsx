@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {push} from "redux-first-history";
 import {adminAction} from "/src/features/admin/adminReducer.jsx";

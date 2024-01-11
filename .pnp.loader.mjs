@@ -1,9 +1,9 @@
 import fs from 'fs';
-import { URL as URL$1, fileURLToPath, pathToFileURL } from 'url';
+import {fileURLToPath, pathToFileURL, URL as URL$1} from 'url';
 import path from 'path';
-import { createHash } from 'crypto';
-import { EOL } from 'os';
-import moduleExports, { isBuiltin } from 'module';
+import {createHash} from 'crypto';
+import {EOL} from 'os';
+import moduleExports, {isBuiltin} from 'module';
 import assert from 'assert';
 
 const SAFE_TIME = 456789e3;

@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import SSsearchInput from "../../../common/components/input/SSsearchInput.jsx";
+import React from 'react';
+import {useDispatch} from "react-redux";
 import ProfileRentalTable from "./board/ProfileRentalTable.jsx";
 
 const RentalsInfo = () => {

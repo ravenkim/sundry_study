@@ -1,8 +1,6 @@
 //비동기 처리에 관련된 함수 모음
 import {createSlice} from "@reduxjs/toolkit";
-import {takeLatest} from 'redux-saga/effects';
-import {call, put} from 'redux-saga/effects';
-import client from "../../api/client.jsx";
+import {call, put, takeLatest} from 'redux-saga/effects';
 
 //reducer data 상테
 export const reducerUtils = {

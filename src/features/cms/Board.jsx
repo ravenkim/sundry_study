@@ -6,7 +6,6 @@ import Carousel from "../../common/components/Card/Carousel.jsx";
 import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
 import BoardSearchTable from "./components/BoardSearchTable.jsx";
-import {profileAction} from "../profile/profileReducer.jsx";
 import {Spin} from "antd";
 
 const Board = () => {

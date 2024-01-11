@@ -1,11 +1,8 @@
-import {takeLatest} from "redux-saga/effects";
-import {call, put} from 'redux-saga/effects';
+import {call, put, takeLatest} from "redux-saga/effects";
 import {createSlice} from '@reduxjs/toolkit';
 import {removeCookie, setCookie} from "../../app/cookie.jsx";
 import client from "../../api/client.jsx";
 import {jwtDecode} from "jwt-decode";
-import {reducerUtils} from "../../common/utils/asyncUtils.jsx";
-
 
 
 const initialState = {
