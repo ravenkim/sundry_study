@@ -4,13 +4,8 @@ import App from './App.jsx'
 import {Provider} from "react-redux";
 import store from "./app/store.jsx";
 import {CookiesProvider} from "react-cookie";
-
-// css import
-import 'src/assets/reset.css';
-import 'src/assets/global/global.css';
-import 'src/assets/text/font.css';
 import {setUserHandler} from "src/common/utils/loginUtils.jsx";
-//
+
 
 
 setUserHandler()
