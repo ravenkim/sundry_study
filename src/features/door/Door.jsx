@@ -14,6 +14,7 @@ import DoorAllSearchTable from "./components/DoorAllSearchTable.jsx";
 import {getBoardList} from "../cms/cmsAPI.jsx";
 import {cmsAction} from "../cms/cmsReducer.jsx";
 import {Spin} from "antd";
+import imgManagerUrl from  '/src/assets/img/manager.svg'
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -135,11 +136,11 @@ const Door = () => {
                                     </h3>
                                     {/*<div dangerouslySetInnerHTML={{__html: item.svg}} className={'inline-flex justify-self-end self-end'}/>*/}
                                     {idx === 0 ? (
-                                        <img src="/src/assets/img/profile.svg" alt="#"
+                                        <img src="/src/assets/img/profile.sv" alt="#"
                                              className={'inline-flex justify-self-end self-end'}/>
                                     ) : null}
                                     {idx === 1 ? (
-                                        <img src="/src/assets/img/manager.svg" alt="#"
+                                        <img src={imgManagerUrl} alt="#"
                                              className={'inline-flex justify-self-end self-end'}/>
                                     ) : null}
                                 </div>
