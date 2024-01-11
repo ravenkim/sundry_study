@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import React from 'react';
 
 const ReservationsInfo = () => {
     return(

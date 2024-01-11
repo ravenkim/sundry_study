@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import SSlabelForInput from "../../../../common/components/label/SSlabelForInput.jsx";
 import {Avatar, Input, Modal, Space} from "antd";
-import SSinput from "../../../../common/components/input/SSinput.jsx";
 import {UserOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
-import {removeRole} from "../../../../common/utils/dataProcessingUtils.jsx";
 
 const AdminMemberDetail = ({
 

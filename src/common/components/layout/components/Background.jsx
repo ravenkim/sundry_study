@@ -1,5 +1,5 @@
-import { useSelector, shallowEqual } from 'react-redux';
-import {useState,useEffect} from "react"
+import {shallowEqual, useSelector} from 'react-redux';
+
 const Background = ( { children, className }) => {
 
 

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
 import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
-import {Divider, Tabs} from "antd";
+import {Avatar, Space, Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import UserInfo from "./components/UserInfo.jsx";
@@ -11,7 +11,6 @@ import ReservationsInfo from "./components/ReservationsInfo.jsx";
 import {profileAction} from "./profileReducer.jsx";
 
 import {UserOutlined} from '@ant-design/icons';
-import {Avatar, Space} from 'antd';
 import {adminAction} from "../admin/adminReducer.jsx";
 
 

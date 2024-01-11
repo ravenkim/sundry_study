@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
-import {Divider, Tabs} from "antd";
+import {Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {adminAction} from "./adminReducer.jsx";
 import AdminMember from "./components/member/AdminMember.jsx";
 import AdminBoard from "./components/board/AdminBoard.jsx";
 import AdminDelinquent from "./components/delinquent/AdminDelinquent.jsx";
 import AdminAuth from "./components/auth/AdminAuth.jsx";
-import SStable from "../../common/components/table/SStable.jsx";
 
 const Admin = () => {
 
