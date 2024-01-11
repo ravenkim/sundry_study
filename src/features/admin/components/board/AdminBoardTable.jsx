@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
-import {getBoardList} from "../../adminAPI.jsx";
 import {adminAction} from "../../adminReducer.jsx";
 import showMessage from "../../../../common/components/notice/notice.js";
 

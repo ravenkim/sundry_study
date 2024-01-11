@@ -1,10 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Background from "./components/Background.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Menu from "./menu/Menu.jsx";
 import {useDispatch} from "react-redux";
-import {cmsAction} from "../../../features/cms/cmsReducer.jsx";
 
 const SSlayout = ({
     children,

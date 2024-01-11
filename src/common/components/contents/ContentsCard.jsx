@@ -1,9 +1,3 @@
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {getContentDetailImg} from "../../../features/cms/cmsAPI.jsx";
-import {cmsAction} from "../../../features/cms/cmsReducer.jsx";
-
-
 const ContentsCard = ({
     idx,
     item,

@@ -1,17 +1,16 @@
-import axios from 'axios';
-import {
-    reducerUtils, reduxMaker
-} from "src/common/utils/asyncUtils.jsx";
-import client from "../../api/client.jsx";
-import imgClient from "../../api/imgClient.jsx";
+import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
 import {
     deleteBoardLikes,
-    getFullUserInfo, getUserNotifications,
-    getUserProfileImg, postBoardLikes,
+    getFullUserInfo,
+    getUserNotifications,
+    getUserProfileImg,
+    postBoardLikes,
     postBoardRentals,
-    postBoardReservations, postUserNotifications,
+    postBoardReservations,
+    postUserNotifications,
     postUserProfileImg,
-    postUserPW, putBoardRentalsReturn
+    postUserPW,
+    putBoardRentalsReturn
 } from "./profileAPI.jsx";
 
 

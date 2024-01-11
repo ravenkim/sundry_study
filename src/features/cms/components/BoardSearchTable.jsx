@@ -2,7 +2,6 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import SStable from "../../../common/components/table/SStable.jsx";
 import {push} from "redux-first-history";
-import {profileAction} from "../../profile/profileReducer.jsx";
 import {cmsAction} from "../cmsReducer.jsx";
 
 const BoardSearchTable = ({path}) => {

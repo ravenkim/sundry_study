@@ -1,6 +1,5 @@
 import Background from "/src/common/components/layout/components/Background.jsx";
 import Login from "/src/features/accounts/Login.jsx";
-import {useRef, useEffect, useState} from 'react';
 import El_1 from '/src/assets/img/Ellipse 1.png';
 import El_2 from '/src/assets/img/Ellipse 2.png';
 import El_3 from '/src/assets/img/Ellipse 3.png';

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import SSeditor from "../../common/components/editor/SSeditor.jsx";
 import RentalContentView from "./content/rental/RentalContentView.jsx";
-import background from "../../common/components/layout/components/Background.jsx";
 import {cmsAction} from "./cmsReducer.jsx";
 
 const Content = () => {
