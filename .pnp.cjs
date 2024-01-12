@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.17"],\
           ["@vitejs/plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.2.1"],\
           ["antd", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.12.1"],\
+          ["autoprefixer", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.4.16"],\
           ["axios", "npm:1.6.2"],\
           ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
           ["eslint-plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:7.33.2"],\
@@ -1881,6 +1882,34 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["autoprefixer", [\
+      ["npm:10.4.16", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/autoprefixer-npm-10.4.16-e5a0ee424d-10c0.zip/node_modules/autoprefixer/",\
+        "packageDependencies": [\
+          ["autoprefixer", "npm:10.4.16"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.4.16", {\
+        "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-241f42890b/5/AppData/Local/Yarn/Berry/cache/autoprefixer-npm-10.4.16-e5a0ee424d-10c0.zip/node_modules/autoprefixer/",\
+        "packageDependencies": [\
+          ["autoprefixer", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.4.16"],\
+          ["@types/postcss", null],\
+          ["browserslist", "npm:4.22.2"],\
+          ["caniuse-lite", "npm:1.0.30001576"],\
+          ["fraction.js", "npm:4.3.7"],\
+          ["normalize-range", "npm:0.1.2"],\
+          ["picocolors", "npm:1.0.0"],\
+          ["postcss", "npm:8.4.32"],\
+          ["postcss-value-parser", "npm:4.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/postcss",\
+          "postcss"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["available-typed-arrays", [\
       ["npm:1.0.5", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/available-typed-arrays-npm-1.0.5-88f321e4d3-10c0.zip/node_modules/available-typed-arrays/",\
@@ -2009,6 +2038,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/caniuse-lite-npm-1.0.30001568-f3cd98cf9b-10c0.zip/node_modules/caniuse-lite/",\
         "packageDependencies": [\
           ["caniuse-lite", "npm:1.0.30001568"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:1.0.30001576", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/caniuse-lite-npm-1.0.30001576-3d0983cdce-10c0.zip/node_modules/caniuse-lite/",\
+        "packageDependencies": [\
+          ["caniuse-lite", "npm:1.0.30001576"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2759,6 +2795,15 @@ const RAW_RUNTIME_STATE =
           ["asynckit", "npm:0.4.0"],\
           ["combined-stream", "npm:1.0.8"],\
           ["mime-types", "npm:2.1.35"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["fraction.js", [\
+      ["npm:4.3.7", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/fraction.js-npm-4.3.7-c2c7e95a8e-10c0.zip/node_modules/fraction.js/",\
+        "packageDependencies": [\
+          ["fraction.js", "npm:4.3.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3924,6 +3969,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/normalize-path-npm-3.0.0-658ba7d77f-10c0.zip/node_modules/normalize-path/",\
         "packageDependencies": [\
           ["normalize-path", "npm:3.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["normalize-range", [\
+      ["npm:0.1.2", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/normalize-range-npm-0.1.2-bec5e259e2-10c0.zip/node_modules/normalize-range/",\
+        "packageDependencies": [\
+          ["normalize-range", "npm:0.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5794,6 +5848,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.17"],\
           ["@vitejs/plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.2.1"],\
           ["antd", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.12.1"],\
+          ["autoprefixer", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.4.16"],\
           ["axios", "npm:1.6.2"],\
           ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
           ["eslint-plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:7.33.2"],\
