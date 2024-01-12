@@ -9,9 +9,10 @@ const RentalContentView = () => {
 
     const {
         detail,
+        contentDetailImg,
     } = useSelector(({router, cmsReducer}) => ({
-            detail: cmsReducer.contentDetail.data
-
+            detail: cmsReducer.contentDetail.data,
+            contentDetailImg: cmsReducer.contentDetailImg.data
         }),
         shallowEqual
     )
@@ -79,10 +80,6 @@ const RentalContentView = () => {
     const [freeFieldsData, setFreeFieldsData] = useState()
 
 
-
-
-
-
     return (
         <div
             style={{
@@ -117,9 +114,16 @@ const RentalContentView = () => {
                             width: '300px',
                             height: '300px',
                             marginBottom: '20px',
-                            boxSizing: 'border-box'
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                         }}
-                    ></SSwrapper>
+                    >
+                        <img src={contentDetailImg} alt="#" className={'max-w-[300px]] max-h-[full]'}/>
+
+
+                    </SSwrapper>
 
 
                     <div
@@ -214,7 +218,11 @@ const RentalContentView = () => {
                             style={{marginTop: '20px'}}
                         > 대여하기 </SSbutton>
                         <SSbutton style={{marginTop: '10px'}}> 예약하기 </SSbutton>
-                        <SSbutton style={{marginTop: '10px'}}> 찜하기 </SSbutton>
+
+
+
+                        <SSbutton style={{marginTop: '10px'}}> ♡ 좋아요 </SSbutton>
+                        <SSbutton style={{marginTop: '10px'}}> ❤️ 좋아요 취소</SSbutton>
 
                     </SSwrapper>
 
