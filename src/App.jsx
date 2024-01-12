@@ -6,9 +6,9 @@ import {HistoryRouter as Router} from "redux-first-history/rr6";
 
 
 //css import
-import '/src/assets/reset.css'
+import 'src/assets/reset.css'
 import 'src/assets/global/global.css';
-import '/src/assets/text/font.css'
+import 'src/assets/text/font.css'
 
 
 
