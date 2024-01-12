@@ -17,12 +17,11 @@ const Header = ({
     const dispatch = useDispatch()
 
     const {
-        bgcolor1,
+
         userProfileImg,
         userProfileImgLoading
-    } = useSelector(({assetsReducer, profileReducer}) => ({
-            bgcolor1: assetsReducer.colors.bgcolor,
-            userProfileImg: profileReducer.userProfileImg,
+    } = useSelector(({ profileReducer}) => ({
+            userProfileImg: profileReducer.userProfileImg.data,
             userProfileImgLoading: profileReducer.userProfileImg.loading,
         }),
         shallowEqual
