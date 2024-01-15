@@ -187,7 +187,6 @@ const RentalContentView = () => {
                         height={'90vh'}
                         isEditMode={false}
                         changeHandler={(contents) => {
-                            console.log(contents)
                         }}
                         initContents={contentHtml}
                     /></div>
