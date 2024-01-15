@@ -29,13 +29,15 @@ const Door = () => {
         rentalUpdateStatus,
         searchResult,
         boardType,
-        boardLoading
-    } = useSelector(({adminReducer, doorReducer, cmsReducer}) => ({
+        boardLoading,
+        user,
+    } = useSelector(({userReducer,adminReducer, doorReducer, cmsReducer}) => ({
             //임시로 업데이트 해주는 api 향후 삭제 예정
             rentalUpdateStatus: adminReducer.rentalUpdateStatus,
             searchResult: doorReducer.searchResult.data,
             boardType: cmsReducer.boardList.data,
             boardLoading: cmsReducer.boardList.loading,
+            user: userReducer.user,
         }),
         shallowEqual
     );
@@ -57,6 +59,8 @@ const Door = () => {
             dispatch(cmsAction.initializeAll())
         }
     }, []); // 원하는 서비스로 가장 빠르게 이동해보세요. 데이터 가져오기 // 프로필과 관리자는 하드매핑
+
+    console.log('user', user)
 
 
     return (
@@ -125,11 +129,11 @@ const Door = () => {
                                 item?.action === 'adminAction' ? dispatch(adminAction.setTab(item?.tab)) : false
                             }
                             }
-                                    className={'cursor-pointer min-w-[23.5%] max-w-[23.5%] ' + (boardLoading ? 'hidden ' : 'block ')}
+                                    className={'cursor-pointer min-w-[23.5%] max-w-[23.5%] ' + (boardLoading ? 'hidden ' : 'block ') + (user?.priority >= 4 && idx == 1 ? 'hidden ' : 'block ')}
                                     key={idx}
 
                             >
-                                <div className={'p-[20px] box-border flex flex-col justify-between w-full'}>
+                                <div className={'p-[20px] box-border flex flex-col justify-between w-full '}>
                                     <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
                                         {item.title}
                                     </h3>
