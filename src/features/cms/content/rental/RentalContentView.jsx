@@ -10,9 +10,11 @@ const RentalContentView = () => {
     const {
         detail,
         contentDetailImg,
+
     } = useSelector(({router, cmsReducer}) => ({
             detail: cmsReducer.contentDetail.data,
-            contentDetailImg: cmsReducer.contentDetailImg.data
+            contentDetailImg: cmsReducer.contentDetailImg.data,
+
         }),
         shallowEqual
     )
@@ -218,10 +220,19 @@ const RentalContentView = () => {
                         > 대여하기 </SSbutton>
                         <SSbutton style={{marginTop: '10px'}}> 예약하기 </SSbutton>
 
+                        
+                        {/*api 작성하기*/}
+
+                        {
+                            detail?.contentDtl?.likeYn === 'N'
+                            ? <SSbutton
+                                    style={{marginTop: '10px'}}
+                                    danger
+                                > ❤️ 좋아요 취소</SSbutton>
+                            : <SSbutton  style={{marginTop: '10px'}}> ♡ 좋아요 </SSbutton>
+                        }
 
 
-                        <SSbutton style={{marginTop: '10px'}}> ♡ 좋아요 </SSbutton>
-                        <SSbutton style={{marginTop: '10px'}}> ❤️ 좋아요 취소</SSbutton>
 
                     </SSwrapper>
 
