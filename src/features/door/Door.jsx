@@ -31,6 +31,7 @@ const Door = () => {
         boardType,
         boardLoading,
         user,
+
     } = useSelector(({userReducer,adminReducer, doorReducer, cmsReducer}) => ({
             //임시로 업데이트 해주는 api 향후 삭제 예정
             rentalUpdateStatus: adminReducer.rentalUpdateStatus,
@@ -38,6 +39,7 @@ const Door = () => {
             boardType: cmsReducer.boardList.data,
             boardLoading: cmsReducer.boardList.loading,
             user: userReducer.user,
+
         }),
         shallowEqual
     );
