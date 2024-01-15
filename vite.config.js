@@ -20,10 +20,11 @@ export default defineConfig({
 
 				//큰 라이브러리를 쪼개서 만들어준다
 				manualChunks: {
+					antd: ['antd'],
 					react: ['react', 'react-dom'],
 					reactRouter: ['react-router-dom'],
 					axios: ['axios'],
-					antd: ['antd'],
+
 
 				},
 			},
