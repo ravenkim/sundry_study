@@ -6,6 +6,7 @@ import MiniProfile from "./MiniProfile.jsx";
 import {Avatar, Popover, Space} from "antd";
 import {profileAction} from "../../../../features/profile/profileReducer.jsx";
 import img_logo_main_url from '/src/assets/logo/logo_main.png'
+import {cmsAction} from "../../../../features/cms/cmsReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
@@ -33,6 +34,13 @@ const Header = ({
 
     useEffect(() => {
         dispatch(profileAction.getUserProfileImg());
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            dispatch(cmsAction.initializeAll())
+            // 페이지 나가면 초기화
+        }
     }, []);
 
     return (
@@ -107,7 +115,7 @@ const Header = ({
                     <div
                         className={'after:overflow-hidden rounded-full overflow-hidden max-w-[63px] max-h-[63px] flex justify-center items-center cursor-pointer bg-[#ffffff]'}
                     >
-                        {userProfileImg === null ?
+                        {userProfileImg === null || userProfileImg === false ?
                             <Space direction='vertical' wrap size={40}>
                             <Avatar size={40} icon={<UserOutlined/>}/>
                         </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full] w-[40px] h-[40px] rounded-full '}/>
