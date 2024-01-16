@@ -11,7 +11,7 @@ const AdminDelinquent = () => {
        <div>
 
 
-            <div>
+            <div className={'flex gap-[6px]'}>
                 {/* todo 2차 기능 구현 예정*/}
                 {/* 테이블 왼쪽에 select 추가후 버튼 누를시 메시지 입력 모달 */}
                 <SSbutton
