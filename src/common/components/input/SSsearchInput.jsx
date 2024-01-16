@@ -1,5 +1,6 @@
 import React from 'react';
 import {Input} from "antd";
+import img_icon_searc_url  from '/src/assets/img/icon_search.svg'
 
 const SSsearchInput = ({
 
@@ -45,7 +46,7 @@ const SSsearchInput = ({
                 </Input>
                 <img
                     onClick={onSearch}
-                    src="/src/assets/img/icon_search.svg" alt="#" className={'absolute top-1/2 -translate-y-1/2 right-[22px] ' + (inputClassName ? 'h-[16px]' : '')}/>
+                    src={img_icon_searc_url} alt="#" className={'absolute top-1/2 -translate-y-1/2 right-[22px] ' + (inputClassName ? 'h-[16px]' : '')}/>
             </div>
         </div>
     );

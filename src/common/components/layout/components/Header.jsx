@@ -5,7 +5,7 @@ import React, {useEffect} from "react";
 import MiniProfile from "./MiniProfile.jsx";
 import {Avatar, Popover, Space} from "antd";
 import {profileAction} from "../../../../features/profile/profileReducer.jsx";
-import img_Logo_main_url from '/src/assets/logo/logo_main.png'
+import img_logo_main_url from '/src/assets/logo/logo_main.png'
 
 const Header = ({
                     setMenuOpen,
@@ -85,7 +85,7 @@ const Header = ({
                         height: 34
 
                     }}
-                    src={img_Logo_main_url} alt={'logo'}
+                    src={img_logo_main_url} alt={'logo'}
                 />
 
 
