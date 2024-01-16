@@ -21,7 +21,7 @@ const ProfileRentalTable = () => {
     } = useSelector(({profileReducer}) => ({
             BoardRentals: profileReducer.BoardRentals.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
-            BoardRentalsReturn: profileReducer.RentalsReturn.data,
+            BoardRentalsReturn: profileReducer.RentalsReturn,
             userDataLoading: profileReducer.fullUserInfo.loading
         }),
         shallowEqual
@@ -58,6 +58,7 @@ const ProfileRentalTable = () => {
     useEffect(() => {
         setBoardList(BoardRentals?.rentalInfo)
     }, [boardList, BoardRentals?.rentalInfo?.rentalStatNm]);
+    // 데이터 변경되면 다시 집어넣기
 
     const columns = [
         {
@@ -101,7 +102,7 @@ const ProfileRentalTable = () => {
                                             contentId: BoardRentals?.rentalInfo[value]?.contentId,
                                             userId: fullUserInfo?.userInfo?.userId
                                         }));
-                                        if (BoardRentalsReturn) {
+                                        /*if (BoardRentalsReturn) {
                                             if (BoardRentalsReturn.res) {
                                                 Swal.fire({
                                                     title: '반납에 성공했어요!',
@@ -113,7 +114,21 @@ const ProfileRentalTable = () => {
                                                     icon: 'error',
                                                 })
                                             }
-                                        } // --> put 성공 시 res값을 돌려주지 않는 상태이다. 요청할 것
+                                        }*/ // --> put 성공 시 res값을 돌려주지 않는 상태이다. 요청할 것
+
+                                        if(BoardRentalsReturn) {
+                                            if(BoardRentalsReturn.loading !== true && BoardRentalsReturn.data === true) {
+                                                Swal.fire({
+                                                    title: '반납에 성공했어요!',
+                                                    icon: 'success',
+                                                })
+                                            } else {
+                                                Swal.fire({
+                                                    title: '알 수 없는 오류로 반납에 실패했어요.',
+                                                    icon: 'error',
+                                                })
+                                            }
+                                        }
                                     }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`)
                                 }}
                                 className={'mr-[6px]'}

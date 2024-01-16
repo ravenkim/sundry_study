@@ -17,14 +17,14 @@ const UserInfo = () => {
 
     const {
         userProfileImg,
-        postUserProfileImg,
+        postUserProfileImgStatus,
         fullUserInfo,
         postUserPW,
         userDataLoading
 
     } = useSelector(({profileReducer}) => ({
             userProfileImg: profileReducer.userProfileImg.data,
-            postUserProfileImg: profileReducer.postUserProfileImg,
+            postUserProfileImgStatus: profileReducer.postUserProfileImgStatus,
             fullUserInfo: profileReducer.fullUserInfo.data,
             userDataLoading: profileReducer.userProfileImg.loading,
             postUserPW: profileReducer.userPW,
@@ -99,26 +99,13 @@ const UserInfo = () => {
 
             if (!passwordError) { // 에러가 아니면 pw post 요청 처리
                 dispatch(profileAction.postUserPW(postData));
-                showMessage('success', '성공적으로 저장되었습니다.');
+                showMessage('success', '비밀번호가 성공적으로 저장되었습니다.');
                 setPostPwValue('')
-                /*client.post('/profile/user/save-pwd', postData)
-                    .then(response => {
-                        showMessage('success', response.data.msg)
-                        /!*message.success('성공적으로 패스워드를 변경하였습니다.');*!/
-                        console.log(response.data.msg)
-                        setPostPwValue('') // 성공하면 인풋 값 초기화
-
-                        dispatch(profileAction.initialize('postUserPW'))
-                    })
-                    .catch(error => {
-                        showMessage('error', '비밀번호 변경 중 알 수 없는 오류가 발생하였습니다.')
-                        console.log('error', error) // 에러 로그 보기
-                    });*/
 
                 if (postUserPW) {
-                    if (postUserPW.loading !== true) {
+                    if (postUserPW.loading !== true && postUserPW.data === true) {
                         dispatch(profileAction.initialize('postUserPW'));
-                    }
+                    } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
                 } // 성공해서 로딩에 대한 값이 변하면 초기화
                 // 정규식 추가해야됨
                 // REGEX = "^((?=.\\d)(?=.[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$"
@@ -127,16 +114,21 @@ const UserInfo = () => {
     };
 
     useEffect(() => {
-        if (postUserProfileImg) { // 이미지 변경시 메세지와 초기화 처리
-            if (postUserProfileImg.data.res) {
+        if (postUserProfileImgStatus) { // 이미지 변경시 메세지와 초기화 처리
+            /*if (postUserProfileImg.data.res) {
                 setFileList([])
                 showMessage('success', postUserProfileImg.data.msg)
                 dispatch(profileAction.getUserProfileImg());
             } else {
                 showMessage('error', postUserProfileImg.data.msg)
-            }
+            }*/
+            if(postUserProfileImgStatus.loading !== true && postUserProfileImgStatus.data === true) {
+                setFileList([]);
+                showMessage('success', '이미지가 성공적으로 저장되었습니다.');
+                dispatch(profileAction.getUserProfileImg());
+            } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
         }
-    }, [postUserProfileImg]);
+    }, [postUserProfileImgStatus]);
 
     const handleSave = () => {
         onSave();
@@ -190,7 +182,7 @@ const UserInfo = () => {
                 <div className={'w-full'}>
                     <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
                         <div className={'flex flex-col items-center gap-[8px]'}>
-                            {userProfileImg === null
+                            {userProfileImg === false
                                 ? <Space direction='vertical' wrap size={180}>
                                     <Avatar size={180} icon={<UserOutlined/>}/>
                                 </Space>

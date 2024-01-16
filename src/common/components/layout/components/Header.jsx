@@ -110,7 +110,7 @@ const Header = ({
                         {userProfileImg === null ?
                             <Space direction='vertical' wrap size={40}>
                             <Avatar size={40} icon={<UserOutlined/>}/>
-                        </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full]'}/>
+                        </Space> : <img src={userProfileImg} alt="#" className={'max-w-[40px] max-h-[full] w-[40px] h-[40px] rounded-full '}/>
                         }
 
 
