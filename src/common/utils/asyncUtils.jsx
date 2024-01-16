@@ -85,20 +85,10 @@ export const createRequestSaga = (prefix, reducerName, apiRequest) => {
             const response = yield call(() => apiRequest(action.payload)); // 여기서 apiCall은 실제 API 호출 함수입니다.
 
             if (response.data instanceof Blob) {
-                console.log(response)
-                if (response.data.type === 'application/json') {
-                    yield put({
-                        type: `${prefix}/${reducerName}Success`,
-                        payload: false
-                    });
-                } else {
-                    yield put({
-                        type: `${prefix}/${reducerName}Success`,
-                        payload: response
-                    });
-                }
-
-
+                yield put({
+                    type: `${prefix}/${reducerName}Success`,
+                    payload: response
+                });
             } else if (response.data.res) {
                 yield put({
                     type: `${prefix}/${reducerName}Success`,
@@ -136,8 +126,16 @@ export const extraReducers = (prefix, asyncRequest) => {
                     const requestInfo = asyncRequest[key][0];
 
                     if (action.payload.data instanceof Blob) {
-                        const blobUrl = URL.createObjectURL(action.payload.data)
-                        state[Object.keys(requestInfo)[0]] = reducerUtils.success(blobUrl);
+
+
+                        if (action.payload.data.type === 'application/json') {
+                            state[Object.keys(requestInfo)[0]] = reducerUtils.success(false);
+                        } else {
+                            const blobUrl = URL.createObjectURL(action.payload.data)
+                            state[Object.keys(requestInfo)[0]] = reducerUtils.success(blobUrl);
+                        }
+
+
                     } else {
                         state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload?.data);
                     }
