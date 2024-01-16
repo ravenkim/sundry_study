@@ -182,7 +182,7 @@ const UserInfo = () => {
                 <div className={'w-full'}>
                     <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
                         <div className={'flex flex-col items-center gap-[8px]'}>
-                            {userProfileImg === false
+                            {userProfileImg === false || userProfileImg === null
                                 ? <Space direction='vertical' wrap size={180}>
                                     <Avatar size={180} icon={<UserOutlined/>}/>
                                 </Space>
