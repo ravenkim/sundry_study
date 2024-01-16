@@ -16,27 +16,33 @@
     border-color: #ACACBA !important;
 }
 
+
 :where(.css-dev-only-do-not-override-6j9yrn).ant-input-affix-wrapper::placeholder {
     color: #ACACBA !important;
     font-weight: 500 !important;
 }
 
+
 :where(.css-dev-only-do-not-override-6j9yrn).ant-input {
     color:#51525C !important;
 }
+
 
 :where(.css-dev-only-do-not-override-6j9yrn).ant-input::placeholder {
     color: #ACACBA !important;
     font-weight: 500 !important;
 }
 
+
 :where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary {
     background-color: #4F5FF5 !important;
 }
 
+
 :where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary:hover {
     background-color: #263BF2 !important;
 }
+
 
 .slick-slide img {
     object-fit: cover;
@@ -96,12 +102,9 @@
 :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab {
     color:#ACACBA;
 }
+
 :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab:hover {
     color:#232433 !important;
-}
-
-:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-
 }
 
 :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-ink-bar {
@@ -114,7 +117,6 @@
 
 :where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-inner {
     padding: 0;
-
 }
 
 :where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-arrow::after {
@@ -133,7 +135,6 @@
 
 *::-webkit-scrollbar-thumb {
     width: 8px;
-    /*background-color: #313131;*/
     border-radius: 6px;
     border: 1px solid transparent;
     outline: none;
@@ -194,4 +195,64 @@ html {
 div:where(.swal2-icon) {
     margin: 2.5em auto 0.6em;
     border: 0.25em solid transparent;
+}
+
+:where(.css-6j9yrn).ant-popover .ant-popover-inner {
+    padding: 0;
+}
+
+/**************************************************************************************************************************************************************************/
+
+.ant-popover-inner {
+    padding: 0 !important;
+}
+
+.ant-popover-arrow:before {
+    background: rgba(85, 101, 246,0.6) !important;
+    color: #5565f6;
+}
+
+.ant-tabs-tab-btn {
+    color:#ACACBA !important;
+}
+
+.ant-tabs-tab-btn:hover {
+    color:#232433 !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color:#232433 !important;
+}
+
+.ant-tabs-ink-bar {
+    background: #232433 !important;
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper:focus-within {
+    border-color: #4F5FF5 !important;
+    box-shadow: none !important;
+}
+
+.ant-input-affix-wrapper {
+    border-color: #ACACBA !important;
+}
+
+.ant-input-affix-wrapper::placeholder {
+    color: #ACACBA !important;
+    font-weight: 500 !important;
+}
+.ant-input {
+    color:#51525C !important;
+}
+.ant-input::placeholder {
+    color: #ACACBA !important;
+    font-weight: 500 !important;
+}
+
+.ant-btn-primary {
+    background-color: #4F5FF5 !important;
+}
+
+.ant-btn-primary:hover {
+    background-color: #263BF2 !important;
 }
