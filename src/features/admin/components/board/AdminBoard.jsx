@@ -16,7 +16,7 @@ const AdminBoard = () => {
         <div>
 
 
-            <div>
+            <div className={'flex gap-[6px]'}>
                 <SSbutton
                     disabled ={true}
                 >보드 추가</SSbutton>

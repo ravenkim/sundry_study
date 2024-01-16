@@ -16,7 +16,7 @@ const AdminMember = () => {
         <div>
 
 
-            <div>
+            <div className={'flex gap-[6px]'}>
                 <SSbutton
                     onClick={() => {setModalVisible(true)}}
 
