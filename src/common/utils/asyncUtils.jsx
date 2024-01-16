@@ -84,18 +84,28 @@ export const createRequestSaga = (prefix, reducerName, apiRequest) => {
 
             const response = yield call(() => apiRequest(action.payload)); // 여기서 apiCall은 실제 API 호출 함수입니다.
 
-            if(response.data instanceof Blob){
-                yield put({
-                    type: `${prefix}/${reducerName}Success`,
-                    payload: response
-                });
+            if (response.data instanceof Blob) {
+                console.log(response)
+                if (response.data.type === 'application/json') {
+                    yield put({
+                        type: `${prefix}/${reducerName}Success`,
+                        payload: false
+                    });
+                } else {
+                    yield put({
+                        type: `${prefix}/${reducerName}Success`,
+                        payload: response
+                    });
+                }
+
+
             } else if (response.data.res) {
                 yield put({
                     type: `${prefix}/${reducerName}Success`,
                     payload: response.data
                 });
             } else {
-                 yield put({
+                yield put({
                     type: `${prefix}/${reducerName}Fail`,
                     payload: response.data
                 });
