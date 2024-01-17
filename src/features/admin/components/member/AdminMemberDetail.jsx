@@ -90,7 +90,7 @@ const AdminMemberDetail = ({
                     }}
                 >
 
-                    {userProfileImg == null
+                    {userProfileImg === false
                         ? <Space direction='vertical' wrap size={180}>
                             <Avatar size={180} icon={<UserOutlined/>}/>
                         </Space>

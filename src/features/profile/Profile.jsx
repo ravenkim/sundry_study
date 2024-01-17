@@ -49,8 +49,7 @@ const Profile = () => {
             <SSsectionWrap>
                 <SSwrapper className={'w-full m-[0] bg-[#f5f5f5] bg-opacity-50 p-[16px] h-full'}>
                     <div className={'flex pb-[16px] items-center gap-[20px]'}>
-                        {/*<img src="" alt="#" className={'desktop:max-w-[80px] desktop:max-h-[80px]'}/>*/}
-                        {userProfileImg === null || userProfileImg === false ? <Space wrap size={80}>
+                        {userProfileImg === false ? <Space wrap size={80}>
                             <Avatar size={80} icon={<UserOutlined/>}/>
                         </Space> : <img src={userProfileImg} alt="#" className={'rounded-full w-[80px] h-full max-w-[80px] max-h-[80px]'}/>}
 
