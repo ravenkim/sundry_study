@@ -29,10 +29,6 @@ const Header = ({
     );
 
     useEffect(() => {
-        console.log(userProfileImg)
-    }, [userProfileImg]);
-
-    useEffect(() => {
         dispatch(profileAction.getUserProfileImg());
     }, []);
 
