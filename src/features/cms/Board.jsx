@@ -19,7 +19,7 @@ const Board = () => {
         boardDetailLoading,
         searchResult,
     } = useSelector(({cmsReducer, router}) => ({
-            boardType: cmsReducer.boardList.data,
+            boardType: cmsReducer.boardDetail.data?.boardInfo?.boardViewType,
             path: router.location?.pathname,
             boardDetail: cmsReducer.boardDetail.data,
             boardDetailLoading: cmsReducer.boardDetail.loading,
@@ -29,6 +29,11 @@ const Board = () => {
     )
 
     const [boardId, setBoardId] = useState(null)
+
+
+    useEffect(() => {
+        console.log(boardType)
+    }, [boardType]);
 
     useEffect(() => {
         if (path) {
@@ -171,11 +176,11 @@ const Board = () => {
 
 
                 {/*리스트 형식*/}
-                {boardDetail?.boardInfo?.boardViewType !== 'list' ? (
-                    /*<div>리스트</div>*/
-                    <div></div>
-                ) : (
-                    /*카드 형식*/
+                {boardType === 'list' &&
+                    <></>
+                }
+                {/*카드형식*/}
+                {boardType === 'card' &&
                     <div
                         className={'w-full h-fit flex-col gap-[16px] mt-[60px] flex-wrap ' + (fullContentView || boardDetailLoading ? 'hidden ' : ' flex ')}
                     >
@@ -189,7 +194,8 @@ const Board = () => {
                             <div ref={setTarget}></div>
                         </div>
                     </div>
-                )}
+                }
+
 
             </Spin>
         </div>
