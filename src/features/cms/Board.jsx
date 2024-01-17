@@ -3,10 +3,11 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
 import {cmsAction} from "./cmsReducer.jsx";
 import Carousel from "../../common/components/Card/Carousel.jsx";
-import ContentsCard from "../../common/components/contents/ContentsCard.jsx";
+import ContentsCard from "src/common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
 import BoardSearchTable from "./components/BoardSearchTable.jsx";
 import {Spin} from "antd";
+import imgClient from "src/api/imgClient.jsx";
 
 const Board = () => {
 
@@ -31,24 +32,22 @@ const Board = () => {
     const [boardId, setBoardId] = useState(null)
 
 
-    useEffect(() => {
-        console.log(boardType)
-    }, [boardType]);
-
+    //url에서 보드 id 할당
     useEffect(() => {
         if (path) {
-            // console.log('path', path) // path = /board/{boardId}
             const data = path.split('/')
-            setBoardId(Number(data[2])) // {boardId}
+            setBoardId(Number(data[2]))
         }
+    }, [path])
 
-    }, [path]); // url 값 확인 -- doorCard로 넘겨준 id값 확인
 
+    // boardId로 detail 데이터 요청
     useEffect(() => {
         if (boardId) {
             dispatch(cmsAction.getBoardDetail(boardId))
         }
-    }, [boardId]); // boardId로 detail 데이터 요청
+    }, [boardId]);
+
 
     useEffect(() => {
         return () => {
@@ -57,9 +56,6 @@ const Board = () => {
         }
     }, []);
 
-
-    //////////////////////////////////////////////////////////////////////////////
-    // infinite scroll
 
     const [fullList, setFullList] = useState([]) // 전체 리스트
     const [offset, setOffset] = useState(0) // back에 요청할 페이지 데이터 순서 정보
@@ -140,6 +136,49 @@ const Board = () => {
         }
     }, [searchResult]);
     // 검색 한 후 검색을 초기화하고 싶으면 어떻게 해야할까?
+
+
+    //이미지 url 처리
+    const [url, setUrl] = useState([])
+
+
+    useEffect(() => {
+        if (fullList.length > 0) {
+            fullList.map((item) => {
+                try {
+                    const response = imgClient.get(`contents/${item.contentId}/img`)
+                    response.then(result => {
+
+                        if (result.data?.type === 'application/json') {
+                                console.log(false)
+                            return {
+                            ...item,
+                            url: false
+                            };
+
+                        } else {
+                                 console.log(URL.createObjectURL(result.data))
+                            const url = URL.createObjectURL(result.data);
+                            return {
+                                ...item,
+                                url: url
+                            };
+                        }
+                    })
+                } catch (error) {
+                    console.error('이미지 요청 실패:', error);
+                }
+
+            })
+        }
+    }, [fullList]);
+
+
+    useEffect(() => {
+        console.log(fullList)
+    }, [fullList]);
+
+
 
     return (
         <div>
