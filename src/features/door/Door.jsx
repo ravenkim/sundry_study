@@ -87,9 +87,15 @@ const Door = () => {
             </SSsectionWrap>
 
 
-            <SSsectionWrap className={'desktop:gap-[20px] tablet:gap-[20px] gap-[20px] '}>
-                <div className='flex flex-row justify-start items-center gap-[6px] h-[38px]'>
-                    <span className={'-mb-[3px]'}>
+            <SSsectionWrap
+                className={'desktop:gap-[20px] tablet:gap-[20px] gap-[20px] '}
+            >
+                <div
+                    className='flex flex-row justify-start items-center gap-[6px] h-[38px]'
+                >
+                    <span
+                        className={'-mb-[3px]'}
+                    >
                         <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M11 0C8.21628 0.00344012 5.54756 1.11079 3.57918 3.07918C1.61079 5.04756 0.50344 7.71628 0.5 10.5C0.5 13.326 2.7 17.266 7.041 22.209C7.53604 22.7715 8.14526 23.2222 8.82808 23.5308C9.5109 23.8395 10.2517 23.9992 11.001 23.9992C11.7503 23.9992 12.4911 23.8395 13.1739 23.5308C13.8567 23.2222 14.466 22.7715 14.961 22.209C19.3 17.267 21.5 13.327 21.5 10.5C21.4966 7.71628 20.3892 5.04756 18.4208 3.07918C16.4524 1.11079 13.7837 0.00344012 11 0ZM12.706 20.231C12.4879 20.4654 12.2239 20.6524 11.9304 20.7802C11.6369 20.9081 11.3202 20.974 11 20.974C10.6798 20.974 10.3631 20.9081 10.0696 20.7802C9.77608 20.6524 9.51206 20.4654 9.294 20.231C5.611 16.036 3.494 12.489 3.494 10.501C3.494 8.51188 4.28418 6.60422 5.6907 5.1977C7.09722 3.79118 9.00488 3.001 10.994 3.001C12.9831 3.001 14.8908 3.79118 16.2973 5.1977C17.7038 6.60422 18.494 8.51188 18.494 10.501C18.5 12.489 16.389 16.036 12.706 20.231Z"
@@ -120,10 +126,11 @@ const Door = () => {
                                     <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
                                         {boardList?.boardNm}
                                     </h3>
-                                    {/*<div dangerouslySetInnerHTML={{__html: boardList?.svg}} className={'inline-flex justify-self-end self-end'}/>*/}
                                 </div>
                             </SScard>
                         ))}
+
+
                         {DoorCard.map((item, idx) => (
                             <SScard onClick={() => {
                                 dispatch(push(item.root))
@@ -139,7 +146,6 @@ const Door = () => {
                                     <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
                                         {item.title}
                                     </h3>
-                                    {/*<div dangerouslySetInnerHTML={{__html: item.svg}} className={'inline-flex justify-self-end self-end'}/>*/}
                                     {idx === 0 ? (
                                         <img src={img_profile_url} alt="#"
                                              className={'inline-flex justify-self-end self-end'}/>
