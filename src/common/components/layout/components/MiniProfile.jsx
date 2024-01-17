@@ -71,7 +71,7 @@ const MiniProfile = () => {
                 <div
                     className={'absolute rounded-full overflow-hidden border-[#ffffff] border-2 box-border border-solid -bottom-1/2 -translate-y-1/2 cursor-pointer bg-white'}>
 
-                    {userProfileImg === false || userProfileImg === null
+                    {userProfileImg === false
                         ? <Space direction='vertical' wrap size={63} onClick={() => {
                             dispatch(push('/profile'))
                         }}>
