@@ -165,9 +165,6 @@ const Board = () => {
     }, [fullList]);
 
 
-    useEffect(() => {
-        console.log(finalList)
-    }, [finalList]);
 
 
     return (
