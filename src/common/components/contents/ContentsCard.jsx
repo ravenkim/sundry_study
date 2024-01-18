@@ -10,6 +10,9 @@ const ContentsCard = ({
                       }) => {
 
 
+    console.log(item)
+
+
 
 
     return (
@@ -18,7 +21,7 @@ const ContentsCard = ({
                  className={"group relative rounded-[10px] overflow-hidden max-w-[188px] max-h-[188px] desktop:w-[188px] desktop:h-[188px] transition-all cursor-pointer bg-[#015674] bg-opacity-70"}
                  onClick={onClick}
             >
-                <img src={item?.src} alt="#" className={'w-full h-full'}/>
+                <img src={item?.url} alt="#" className={'w-full h-full'}/>
                 <div
                     className={'absolute border-box top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#232433] bg-opacity-70 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-[8px] overflow-hidden justify-between'}>
                     <div>

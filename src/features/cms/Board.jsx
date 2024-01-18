@@ -139,45 +139,35 @@ const Board = () => {
 
 
     //이미지 url 처리
-    const [url, setUrl] = useState([])
+    const [finalList, setfinalList] = useState([])
 
+    const addItem = (newitem) => {
+        setfinalList([...finalList, newitem]);
+    };
 
     useEffect(() => {
         if (fullList.length > 0) {
-            fullList.map((item) => {
-                try {
-                    const response = imgClient.get(`contents/${item.contentId}/img`)
-                    response.then(result => {
-
-                        if (result.data?.type === 'application/json') {
-                                console.log(false)
-                            return {
-                            ...item,
-                            url: false
-                            };
-
-                        } else {
-                                 console.log(URL.createObjectURL(result.data))
-                            const url = URL.createObjectURL(result.data);
-                            return {
-                                ...item,
-                                url: url
-                            };
-                        }
-                    })
-                } catch (error) {
+            const requests = fullList.map((item) => {
+                return imgClient.get(`contents/${item.contentId}/img`).then(result => {
+                    if (result.data?.type === 'application/json') {
+                        return {...item, url: false }
+                    } else {
+                        const url = URL.createObjectURL(result.data);
+                        return {...item, url: url}
+                    }
+                }).catch(error => {
                     console.error('이미지 요청 실패:', error);
-                }
+                });
+            });
 
-            })
+            Promise.all(requests).then(newItems => setfinalList(newItems));
         }
     }, [fullList]);
 
 
     useEffect(() => {
-        console.log(fullList)
-    }, [fullList]);
-
+        console.log(finalList)
+    }, [finalList]);
 
 
     return (
@@ -225,7 +215,7 @@ const Board = () => {
                     >
                         <h3>모든 컨텐츠 한 눈에 보기</h3>
                         <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px]'}>
-                            {fullList.map((item, idx) => (
+                            {finalList.map((item, idx) => (
                                 <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
                                     dispatch(push(`/content/${item?.contentId}`))
                                 }}/>
