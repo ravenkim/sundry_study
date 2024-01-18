@@ -192,13 +192,14 @@ const Board = () => {
 
 
                 {/*추천 컨텐츠 임시 최대 5개 slice -- 추후 변경 */}
-                <Carousel title={"당신에게 추천할게요."}>
-                    {boardDetail?.contentInfoList?.slice(0, 5).map((item, idx) => (
-                        <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
-                            dispatch(push(`/content/${item?.contentId}`))
-                        }}/>
-                    ))}
-                </Carousel>
+                {/*todo 향후 업데이트 예정*/}
+                {/*<Carousel title={"당신에게 추천할게요."}>*/}
+                {/*    {boardDetail?.contentInfoList?.slice(0, 5).map((item, idx) => (*/}
+                {/*        <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {*/}
+                {/*            dispatch(push(`/content/${item?.contentId}`))*/}
+                {/*        }}/>*/}
+                {/*    ))}*/}
+                {/*</Carousel>*/}
 
 
                 {/*리스트 형식*/}
