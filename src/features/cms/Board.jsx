@@ -19,12 +19,14 @@ const Board = () => {
         boardDetail,
         boardDetailLoading,
         searchResult,
+        contentsList,
     } = useSelector(({cmsReducer, router}) => ({
             boardType: cmsReducer.boardDetail.data?.boardInfo?.boardViewType,
             path: router.location?.pathname,
             boardDetail: cmsReducer.boardDetail.data,
             boardDetailLoading: cmsReducer.boardDetail.loading,
             searchResult: cmsReducer.boardSearchResult.data,
+            contentsList: cmsReducer.boardDetail.data?.contentInfoList
         }),
         shallowEqual
     )
@@ -105,20 +107,19 @@ const Board = () => {
     }, [isLoaded]);
 
     const getMoreItem = () => {
-        setIsLoaded(true);
+        if (!isLoaded) { // 이미 로드 중인 경우에는 추가 요청을 하지 않음
+            setIsLoaded(true);
+        }
+
     };
 
     // callback
     const onIntersect = async ([entry], observer) => {
         // entry 요소가 교차되거나 Load중이 아니면
 
-        if (entry.isIntersecting && !isLoaded) {
-            // 관찰은 일단 멈추고
+        if (entry.isIntersecting && !isLoaded) { // entry가 교차되고 로드 중이 아닌 경우에만 실행
             observer.unobserve(entry.target);
-            // 데이터 불러오기
             await getMoreItem();
-
-            // 불러온 후 다시 관찰 실행
             observer.observe(entry.target);
         }
     }
@@ -141,13 +142,11 @@ const Board = () => {
     //이미지 url 처리
     const [finalList, setfinalList] = useState([])
 
-    const addItem = (newitem) => {
-        setfinalList([...finalList, newitem]);
-    };
 
     useEffect(() => {
-        if (fullList.length > 0) {
-            const requests = fullList.map((item) => {
+
+        if (contentsList?.length > 0) {
+            const requests = contentsList.map((item) => {
                 return imgClient.get(`contents/${item.contentId}/img`).then(result => {
                     if (result.data?.type === 'application/json') {
                         return {...item, url: false }
@@ -162,9 +161,7 @@ const Board = () => {
 
             Promise.all(requests).then(newItems => setfinalList(newItems));
         }
-    }, [fullList]);
-
-
+    }, [contentsList]);
 
 
     return (
