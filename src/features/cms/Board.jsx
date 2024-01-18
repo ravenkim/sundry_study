@@ -141,11 +141,12 @@ const Board = () => {
 
     //이미지 url 처리
     const [finalList, setfinalList] = useState([])
-
+    const [imgLoading, setImgLoading] = useState(false)
 
     useEffect(() => {
 
         if (contentsList?.length > 0) {
+            setImgLoading(true)
             const requests = contentsList.map((item) => {
                 return imgClient.get(`contents/${item.contentId}/img`).then(result => {
                     if (result.data?.type === 'application/json') {
@@ -159,9 +160,18 @@ const Board = () => {
                 });
             });
 
-            Promise.all(requests).then(newItems => setfinalList(newItems));
+            Promise.all(requests).then(newItems => {
+                setfinalList(newItems)
+                setImgLoading(false)
+            });
+
         }
     }, [contentsList]);
+
+
+    useEffect(() => {
+        console.log(imgLoading)
+    }, [imgLoading]);
 
 
     return (
@@ -184,7 +194,7 @@ const Board = () => {
 
 
             <Spin
-                spinning={boardDetailLoading}
+                spinning={boardDetailLoading&& imgLoading }
             >
 
 
