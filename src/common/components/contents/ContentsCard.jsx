@@ -1,6 +1,3 @@
-import {useEffect} from "react";
-
-
 
 const ContentsCard = ({
     idx,
@@ -9,15 +6,10 @@ const ContentsCard = ({
     ...otherProps
                       }) => {
 
-
-
-
-
-
     return (
         <>
             <div key={item?.contentId}
-                 className={"group relative rounded-[10px] overflow-hidden max-w-[188px] max-h-[188px] desktop:w-[188px] desktop:h-[188px] transition-all cursor-pointer bg-[#015674] bg-opacity-70"}
+                 className={"group relative rounded-[10px] overflow-hidden max-w-[188px] max-h-[188px] desktop:w-[188px] desktop:h-[188px] transition-all cursor-pointer shadow-[0px_1px_4px_rgba(0,0,0,0.3)]"}
                  onClick={onClick}
             >
 
@@ -34,14 +26,9 @@ const ContentsCard = ({
                         </p>
                     </div>
                     <div className={'w-full flex flex-row justify-between items-end'}>
-                        <div className={'flex flex-row gap-[6px] line-clamp-1 max-w-[100px] flex-auto flex-nowrap'}>
-                            {/*{item?.cateNm?.map((cate,idx)=>(
-                                <span key={idx}
-                                className={'text-[#51525C] text-[8px] box-border bg-[#ffffff] px-[7px] py-[3px] rounded-[10px] w-fit min-w-fit'}>{cate?.title}</span>
-                            ))}*/}
+                        <div className={'flex flex-row gap-[6px] line-clamp-1 flex-auto flex-nowrap'}>
                             <span className={'text-[#51525C] text-[8px] box-border bg-[#ffffff] px-[7px] py-[3px] rounded-[10px] w-fit min-w-fit'}>{item?.cateNm}</span>
                         </div>
-                        <span className={'text-[#ffffff] text-[10px]'}>{item?.time}</span>
                     </div>
                 </div>
             </div>
