@@ -12,6 +12,9 @@ const asyncRequest = {
     //     () => axios.get('https://jsonplaceholder.typicode.com/posts')
     // ],
 
+
+
+
     getBoardList: [
         {boardList: reducerUtils.init()},
         getBoardList
