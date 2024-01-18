@@ -10,7 +10,6 @@ const ContentsCard = ({
                       }) => {
 
 
-    console.log(item)
 
 
 
