@@ -169,16 +169,14 @@ const Board = () => {
     }, [contentsList]);
 
 
-    useEffect(() => {
-        console.log(imgLoading)
-    }, [imgLoading]);
+
 
 
     return (
         <div>
             <SSsearchInput
                 value={searchBoardText}
-                title={`원하는 ${boardDetail?.boardInfo?.boardNm}를 빠르게 찾아보세요!`}
+                title={`다음 카테고리에서 검색합니다: ${boardDetail?.boardInfo?.boardNm? boardDetail?.boardInfo?.boardNm:''} `}
                 placeholder={'검색어를 입력해주세요.'}
                 onChange={(e) => setSearchBoardText(e.target.value)}
                 onSearch={() => {
