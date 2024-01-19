@@ -13,6 +13,7 @@ const Content = () => {
         contentype,
         likeContentStatus,
         dislikeContentStatus,
+
     } = useSelector(({router, cmsReducer}) => ({
             path: router.location?.pathname,
             contentype: cmsReducer.contentDetail.data,
