@@ -147,6 +147,7 @@ const Board = () => {
 
     useEffect(() => {
     if (finalList.length > 0) {
+        setImgLoading(true);
         const requests = finalList.map((item) => {
 
             if (item.url) {
@@ -162,10 +163,19 @@ const Board = () => {
                 }
             }).catch(error => {
                 console.error('이미지 요청 실패:', error);
+                return item;
             });
         });
 
-        Promise.all(requests).then(newItems => setfinalList(newItems));
+        Promise.all(requests)
+            .then(newItems => {
+                setfinalList(newItems);
+                setImgLoading(false);
+            })
+            .catch(error => {
+                console.log('이미지 로딩 중 오류:', error);
+                setImgLoading(false);
+            });
     }
 }, [fullList]);
 
