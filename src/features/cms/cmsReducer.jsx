@@ -1,5 +1,13 @@
 import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
-import {getBoardDetail, getBoardList, getContentDetail, getContentDetailImg, getSearchBoard} from "./cmsAPI.jsx";
+import {
+    dislikeContent,
+    getBoardDetail,
+    getBoardList,
+    getContentDetail,
+    getContentDetailImg,
+    getSearchBoard,
+    likeContent
+} from "./cmsAPI.jsx";
 
 
 const prefix = 'cms'
@@ -41,6 +49,18 @@ const asyncRequest = {
     ],
 
     //검색 결과
+
+
+
+    //컨텐츠 좋아요 취소
+    likeContent: [
+        {likeContentStatus: reducerUtils.init()},
+        likeContent
+    ],
+    dislikeContent: [
+        {dislikeContentStatus: reducerUtils.init()},
+        dislikeContent
+    ],
 
 
 

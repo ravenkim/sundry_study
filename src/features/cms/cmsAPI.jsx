@@ -18,3 +18,11 @@ export const getSearchBoard = (param) =>
     client.get(`search?keyword=${param.param}&boardId=${param.boardId}`)
 
 
+
+
+// 컨텐츠 좋아요, 좋아요 취소
+export const likeContent = (param)=>
+    client.post(`/likes`, param)
+
+export const dislikeContent = (param)=>
+    client.put(`/likes/delete`, param)
