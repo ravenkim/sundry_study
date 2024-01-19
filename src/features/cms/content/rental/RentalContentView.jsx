@@ -12,11 +12,11 @@ const RentalContentView = () => {
     const {
         detail,
         contentDetailImg,
-
-
+        readOnly,
     } = useSelector(({router, cmsReducer}) => ({
             detail: cmsReducer.contentDetail.data,
             contentDetailImg: cmsReducer.contentDetailImg.data,
+            readOnly: cmsReducer.contentDetail.data?.readOnly
 
 
         }),
@@ -253,12 +253,19 @@ const RentalContentView = () => {
                     </SSwrapper>
 
 
-                    <div
-                        style={{marginTop: '20px'}}
-                    >
-                        <SSbutton> 수정 </SSbutton>
-                        <SSbutton danger> 삭제 </SSbutton>
-                    </div>
+
+                    {/*수정 권한 있는지에 따라 보여줌*/}
+                    {!readOnly &&
+                        <div
+                            style={{
+                        }}
+                        >
+                            지다인 변경 예정 >>>
+
+                            <SSbutton disabled={true}> 수정 (2차 예정)</SSbutton>
+                            <SSbutton disabled={true} danger> 삭제 (2차 예정) </SSbutton>
+                        </div>
+                    }
 
 
                 </div>
