@@ -222,7 +222,7 @@ const RentalContentView = () => {
                         <SSbutton
                             style={{marginTop: '20px'}}
                             disabled={true}
-                        > 대여하기 </SSbutton>
+                        > 대여하기(배치로 인하여 2차 예정) </SSbutton>
 
 
                         <SSbutton disabled={true} style={{marginTop: '10px'}}> 예약하기 (2차 개발 예정)</SSbutton>
