@@ -19,14 +19,12 @@ const Board = () => {
         boardDetail,
         boardDetailLoading,
         searchResult,
-        contentsList,
     } = useSelector(({cmsReducer, router}) => ({
             boardType: cmsReducer.boardDetail.data?.boardInfo?.boardViewType,
             path: router.location?.pathname,
             boardDetail: cmsReducer.boardDetail.data,
             boardDetailLoading: cmsReducer.boardDetail.loading,
             searchResult: cmsReducer.boardSearchResult.data,
-            contentsList: cmsReducer.boardDetail.data?.contentInfoList
         }),
         shallowEqual
     )
@@ -49,6 +47,8 @@ const Board = () => {
             dispatch(cmsAction.getBoardDetail(boardId))
         }
     }, [boardId]);
+
+
 
 
     useEffect(() => {
@@ -86,12 +86,14 @@ const Board = () => {
     // get 요청 보내기
     useEffect(() => {
         if (isLoaded && !stop) {
+
             // 가져오는 데이터가 초기에 한번에 들어오기 때문에 한번에 들어오는 게 12개 보다 크면 잘라내기
             const batchSize = boardDetail?.contentInfoList?.length > 12 ? 12 : boardDetail?.contentInfoList?.length;
             // 12개씩 로드되도록 slice
             const loadedItems = boardDetail?.contentInfoList?.slice(offset, offset + batchSize);
+
             // 보드 리스트 데이터를 보여줄 전체 리스트에 넣어준다.
-            setFullList((prevList) => [...prevList, ...loadedItems]);
+            setfinalList((prevList) => [...prevList, ...loadedItems]);
             // 다음 요청할 데이터의 offset 정보
             setOffset((prevOffset) => prevOffset + batchSize);
             // 다음 요청 전까지 요청 그만 보내도록 false로 변경
@@ -144,29 +146,28 @@ const Board = () => {
     const [imgLoading, setImgLoading] = useState(false)
 
     useEffect(() => {
+    if (finalList.length > 0) {
+        const requests = finalList.map((item) => {
 
-        if (contentsList?.length > 0) {
-            setImgLoading(true)
-            const requests = contentsList.map((item) => {
-                return imgClient.get(`contents/${item.contentId}/img`).then(result => {
-                    if (result.data?.type === 'application/json') {
-                        return {...item, url: false }
-                    } else {
-                        const url = URL.createObjectURL(result.data);
-                        return {...item, url: url}
-                    }
-                }).catch(error => {
-                    console.error('이미지 요청 실패:', error);
-                });
+            if (item.url) {
+                return Promise.resolve(item);
+            } // 이미지 이미 로드 되어있으면 return
+
+            return imgClient.get(`contents/${item.contentId}/img`).then(result => {
+                if (result.data?.type === 'application/json') {
+                    return { ...item, url: false };
+                } else {
+                    const url = URL.createObjectURL(result.data);
+                    return { ...item, url: url };
+                }
+            }).catch(error => {
+                console.error('이미지 요청 실패:', error);
             });
+        });
 
-            Promise.all(requests).then(newItems => {
-                setfinalList(newItems)
-                setImgLoading(false)
-            });
-
-        }
-    }, [contentsList]);
+        Promise.all(requests).then(newItems => setfinalList(newItems));
+    }
+}, [fullList]);
 
 
 
@@ -217,7 +218,7 @@ const Board = () => {
                         className={'w-full h-fit flex-col gap-[16px] mt-[60px] flex-wrap ' + (fullContentView || boardDetailLoading ? 'hidden ' : ' flex ')}
                     >
                         <h3>모든 컨텐츠 한 눈에 보기</h3>
-                        <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px]'}>
+                        <div className={'flex w-full h-auto flex-row flex-wrap gap-[16px] justify-center items-center desktop:justify-start items-center'}>
                             {finalList.map((item, idx) => (
                                 <ContentsCard key={item?.contentId} item={item} idx={idx} onClick={() => {
                                     dispatch(push(`/content/${item?.contentId}`))
