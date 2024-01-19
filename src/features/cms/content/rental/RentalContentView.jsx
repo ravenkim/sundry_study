@@ -1,19 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import SSeditor from "../../../../common/components/editor/SSeditor.jsx";
-import SSwrapper from "../../../../common/components/wrapper/SSwrapper.jsx";
-import SSbutton from "../../../../common/components/button/SSbutton.jsx";
-import {shallowEqual, useSelector} from "react-redux";
+import SSeditor from "src/common/components/editor/SSeditor.jsx";
+import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
+import SSbutton from "src/common/components/button/SSbutton.jsx";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {cmsAction} from "../../cmsReducer.jsx";
 
 const RentalContentView = () => {
 
+    const dispatch = useDispatch()
 
     const {
         detail,
         contentDetailImg,
 
+
     } = useSelector(({router, cmsReducer}) => ({
             detail: cmsReducer.contentDetail.data,
             contentDetailImg: cmsReducer.contentDetailImg.data,
+
 
         }),
         shallowEqual
@@ -219,20 +223,31 @@ const RentalContentView = () => {
                             style={{marginTop: '20px'}}
                             disabled={true}
                         > 대여하기 </SSbutton>
-                        <SSbutton style={{marginTop: '10px'}}> 예약하기 </SSbutton>
 
-                        
-                        {/*api 작성하기*/}
+
+                        <SSbutton disabled={true} style={{marginTop: '10px'}}> 예약하기 (2차 개발 예정)</SSbutton>
+
 
                         {
-                            detail?.contentDtl?.likeYn === 'N'
-                            ? <SSbutton
+                            // 좋아요 버튼
+                            detail?.contentDtl?.likeYn === 'Y'
+                                ? <SSbutton
                                     style={{marginTop: '10px'}}
                                     danger
-                                > ❤️ 좋아요 취소</SSbutton>
-                            : <SSbutton  style={{marginTop: '10px'}}> ♡ 좋아요 </SSbutton>
-                        }
+                                    onClick={() => {
+                                        dispatch(cmsAction.dislikeContent({contentId: contentId}))
+                                    }}
 
+                                > ❤️ 좋아요 취소</SSbutton>
+                                : <SSbutton
+                                    onClick={() => {
+                                        dispatch(cmsAction.likeContent({contentId: contentId}))
+                                    }}
+                                    style={{marginTop: '10px'}}
+                                >
+                                    ♡ 좋아요
+                                </SSbutton>
+                        }
 
 
                     </SSwrapper>

@@ -11,13 +11,35 @@ const Content = () => {
     const {
         path,
         contentype,
+        likeContentStatus,
+        dislikeContentStatus,
     } = useSelector(({router, cmsReducer}) => ({
             path: router.location?.pathname,
             contentype: cmsReducer.contentDetail.data,
+            likeContentStatus: cmsReducer.likeContentStatus.data,
+            dislikeContentStatus: cmsReducer.dislikeContentStatus.data,
 
         }),
         shallowEqual
     )
+
+
+    useEffect(() => {
+        if (likeContentStatus) {
+            dispatch(cmsAction.getContentDetail(contentId))
+            dispatch(cmsAction.initialize('likeContentStatus'))
+        }
+    }, [likeContentStatus]);
+
+
+    useEffect(() => {
+        if (dislikeContentStatus) {
+            dispatch(cmsAction.getContentDetail(contentId))
+
+            dispatch(cmsAction.initialize('dislikeContentStatus'))
+        }
+
+    }, [dislikeContentStatus]);
 
 
     const [editMode, setEditMode] = useState(false)
