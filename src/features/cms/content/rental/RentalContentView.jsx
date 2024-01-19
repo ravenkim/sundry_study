@@ -260,7 +260,7 @@ const RentalContentView = () => {
                             style={{
                         }}
                         >
-                            지다인 변경 예정 >>>
+                            디자인 변경 예정
 
                             <SSbutton disabled={true}> 수정 (2차 예정)</SSbutton>
                             <SSbutton disabled={true} danger> 삭제 (2차 예정) </SSbutton>

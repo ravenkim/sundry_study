@@ -62,7 +62,6 @@ const Door = () => {
         }
     }, []); // 원하는 서비스로 가장 빠르게 이동해보세요. 데이터 가져오기 // 프로필과 관리자는 하드매핑
 
-    // console.log('user', user)
 
 
     return (
@@ -129,6 +128,9 @@ const Door = () => {
                                 </div>
                             </SScard>
                         ))}
+
+
+
 
 
                         {DoorCard.map((item, idx) => (
