@@ -238,7 +238,7 @@ const RentalContentView = () => {
                                         dispatch(cmsAction.dislikeContent({contentId: contentId}))
                                     }}
 
-                                > ❤️ 좋아요 취소</SSbutton>
+                                > ❤️ 진짜로 이렇게 멋진걸 취소 한다구요? </SSbutton>
                                 : <SSbutton
                                     onClick={() => {
                                         dispatch(cmsAction.likeContent({contentId: contentId}))
