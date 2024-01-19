@@ -194,7 +194,7 @@ const Board = () => {
 
 
             <Spin
-                spinning={boardDetailLoading&& imgLoading }
+                spinning={boardDetailLoading || imgLoading }
             >
 
 
