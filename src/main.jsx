@@ -6,9 +6,7 @@ import store from "./app/store.jsx";
 import {CookiesProvider} from "react-cookie";
 import {setUserHandler} from "src/common/utils/loginUtils.jsx";
 
-
 setUserHandler()
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <CookiesProvider defaultSetOptions={{path: '/'}}>
