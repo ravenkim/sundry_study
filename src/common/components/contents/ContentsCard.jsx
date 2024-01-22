@@ -20,16 +20,16 @@ const ContentsCard = ({
                     className={'absolute border-box top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#232433] bg-opacity-70 transition-all flex flex-col p-[8px] overflow-hidden justify-between ' +
                         (item?.url ? 'opacity-0 invisible group-hover:opacity-100 group-hover:visible ' : 'opacity-100 visible ')}>
                     <div>
-                        <h5 className={'text-[#ffffff] text-[16px] line-clamp-2 mb-[10px]'}>
+                        <h5 className={'text-[#ffffff] text-[20px] line-clamp-2 mb-[10px]'}>
                             {item?.contentNm}
                         </h5>
-                        <p className={'text-[#ffffff] text-[10px] font-[NotoSansKR-300] line-clamp-3'}>
+                        <p className={'text-[#ffffff] text-[12px] font-[NotoSansKR-300] line-clamp-3'}>
                             {item?.contentDesc}
                         </p>
                     </div>
                     <div className={'w-full flex flex-row justify-between items-end'}>
                         <div className={'flex flex-row gap-[6px] line-clamp-1 flex-auto flex-nowrap'}>
-                            <span className={'text-[#51525C] text-[8px] box-border bg-[#ffffff] px-[7px] py-[3px] rounded-[10px] w-fit min-w-fit'}>{item?.cateNm}</span>
+                            <span className={'text-[#51525C] text-[9px] box-border bg-[#ffffff] px-[7px] py-[3px] rounded-[10px] w-fit min-w-fit'}>{item?.cateNm}</span>
                         </div>
                     </div>
                 </div>
