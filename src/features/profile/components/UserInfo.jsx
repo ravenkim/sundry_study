@@ -122,7 +122,7 @@ const UserInfo = () => {
             } else {
                 showMessage('error', postUserProfileImg.data.msg)
             }*/
-            if(postUserProfileImgStatus.loading !== true && postUserProfileImgStatus.data === true) {
+            if(postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
                 dispatch(profileAction.getUserProfileImg());
