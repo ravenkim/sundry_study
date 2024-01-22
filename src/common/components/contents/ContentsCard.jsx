@@ -17,7 +17,8 @@ const ContentsCard = ({
                 {item?.url && <img src={item?.url} alt="#" className={'w-full h-auto'}/>}
                 <div
 
-                    className={'absolute border-box top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#232433] bg-opacity-70 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-[8px] overflow-hidden justify-between'}>
+                    className={'absolute border-box top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#232433] bg-opacity-70 transition-all flex flex-col p-[8px] overflow-hidden justify-between ' +
+                        (item?.url ? 'opacity-0 invisible group-hover:opacity-100 group-hover:visible ' : 'opacity-100 visible ')}>
                     <div>
                         <h5 className={'text-[#ffffff] text-[16px] line-clamp-2 mb-[10px]'}>
                             {item?.contentNm}
