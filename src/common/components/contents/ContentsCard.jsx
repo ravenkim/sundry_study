@@ -29,7 +29,7 @@ const ContentsCard = ({
                     </div>
                     <div className={'w-full flex flex-row justify-between items-end'}>
                         <div className={'flex flex-row gap-[6px] line-clamp-1 flex-auto flex-nowrap'}>
-                            <span className={'text-[#51525C] text-[8px] box-border bg-[#ffffff] px-[7px] py-[3px] rounded-[10px] w-fit min-w-fit'}>{item?.cateNm}</span>
+                            <span className={'text-[#51525C] text-[9px] box-border bg-[#ffffff] px-[7px] py-[3px] rounded-[10px] w-fit min-w-fit'}>{item?.cateNm}</span>
                         </div>
                     </div>
                 </div>
