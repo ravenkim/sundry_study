@@ -4,10 +4,8 @@ import SSsectionWrap from "/src/common/components/wrapper/SSsectionWrap.jsx";
 import SScardWrap from "/src/common/components/Card/SScardWrap.jsx";
 import SScard from "/src/common/components/Card/SScard.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import DoorCard from '/src/data/DoorCard.jsx'
 import {push} from "redux-first-history";
 import {adminAction} from "../admin/adminReducer.jsx";
-import {profileAction} from "../profile/profileReducer.jsx";
 import {doorAction} from "./doorReducer.jsx";
 import DoorAllSearchTable from "./components/DoorAllSearchTable.jsx";
 import {cmsAction} from "../cms/cmsReducer.jsx";
@@ -32,7 +30,7 @@ const Door = () => {
         boardLoading,
         user,
 
-    } = useSelector(({userReducer,adminReducer, doorReducer, cmsReducer}) => ({
+    } = useSelector(({userReducer, adminReducer, doorReducer, cmsReducer}) => ({
             //임시로 업데이트 해주는 api 향후 삭제 예정
             rentalUpdateStatus: adminReducer.rentalUpdateStatus,
             searchResult: doorReducer.searchResult.data,
@@ -61,7 +59,6 @@ const Door = () => {
             dispatch(cmsAction.initializeAll())
         }
     }, []); // 원하는 서비스로 가장 빠르게 이동해보세요. 데이터 가져오기 // 프로필과 관리자는 하드매핑
-
 
 
     return (
@@ -112,6 +109,9 @@ const Door = () => {
                     spinning={boardLoading}
                     className={'w-full'}
                 >
+                    
+                    
+                    {/*todo (to 찬민주임) 여기 공통부분 컴포넌트로 빼면 좋을거 같아요 일단 대충 정리했습니다*/}
                     <SScardWrap className={'flex flex-wrap w-full'}>
                         {boardType?.boardList?.map((boardList, idx) => (
                             <SScard
@@ -129,36 +129,52 @@ const Door = () => {
                             </SScard>
                         ))}
 
-
-
-
-
-                        {DoorCard.map((item, idx) => (
-                            <SScard onClick={() => {
-                                dispatch(push(item.root))
-                                item?.action === 'profileAction' ? dispatch(profileAction.setTab(item?.tab)) : false
-                                item?.action === 'adminAction' ? dispatch(adminAction.setTab(item?.tab)) : false
+                        <SScard
+                            onClick={() => {
+                                dispatch(push('/profile'))
+                            }}
+                            className={
+                                'cursor-pointer min-w-[23.5%] max-w-[23.5%] '
                             }
-                            }
-                                    className={'cursor-pointer min-w-[23.5%] max-w-[23.5%] ' + (boardLoading ? 'hidden ' : 'block ') + (user?.priority >= 4 && idx == 1 ? 'hidden ' : 'block ')}
-                                    key={idx}
 
+                        >
+                            <div className={'p-[20px] box-border flex flex-col justify-between w-full '}>
+                                <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
+                                    프로필
+                                </h3>
+                                <img src={img_profile_url} alt="#"
+                                     className={'inline-flex justify-self-end self-end'}/>
+
+                            </div>
+                        </SScard>
+
+                        {user?.priority <= 4 &&
+                            <SScard
+                                onClick={() => {
+                                    dispatch(push('/profile'))
+                                }}
+                                className={
+                                    'cursor-pointer min-w-[23.5%] max-w-[23.5%] block'
+                                }
                             >
                                 <div className={'p-[20px] box-border flex flex-col justify-between w-full '}>
-                                    <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
-                                        {item.title}
+                                    <h3
+                                        className={'text-[20px] font-[NotoSansKR-700]'}
+                                    >
+                                        관리자
                                     </h3>
-                                    {idx === 0 ? (
-                                        <img src={img_profile_url} alt="#"
-                                             className={'inline-flex justify-self-end self-end'}/>
-                                    ) : null}
-                                    {idx === 1 ? (
-                                        <img src={img_manager_url} alt="#"
-                                             className={'inline-flex justify-self-end self-end'}/>
-                                    ) : null}
+                                    <img
+                                        src={img_manager_url}
+                                        alt="#"
+                                        className={'inline-flex justify-self-end self-end'}
+                                    />
+
                                 </div>
+
                             </SScard>
-                        ))}
+                        }
+
+
                     </SScardWrap>
                 </Spin>
 
