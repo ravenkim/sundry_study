@@ -20,10 +20,10 @@ const ContentsCard = ({
                     className={'absolute border-box top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#232433] bg-opacity-70 transition-all flex flex-col p-[8px] overflow-hidden justify-between ' +
                         (item?.url ? 'opacity-0 invisible group-hover:opacity-100 group-hover:visible ' : 'opacity-100 visible ')}>
                     <div>
-                        <h5 className={'text-[#ffffff] text-[16px] line-clamp-2 mb-[10px]'}>
+                        <h5 className={'text-[#ffffff] text-[20px] line-clamp-2 mb-[10px]'}>
                             {item?.contentNm}
                         </h5>
-                        <p className={'text-[#ffffff] text-[10px] font-[NotoSansKR-300] line-clamp-3'}>
+                        <p className={'text-[#ffffff] text-[12px] font-[NotoSansKR-300] line-clamp-3'}>
                             {item?.contentDesc}
                         </p>
                     </div>
