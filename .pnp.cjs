@@ -2554,7 +2554,7 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["esbuild", [\
       ["npm:0.19.9", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/esbuild-npm-0.19.9-046a8fb7c4-10c0.zip/node_modules/esbuild/",\
+        "packageLocation": "./.yarn/unplugged/esbuild-npm-0.19.9-046a8fb7c4/node_modules/esbuild/",\
         "packageDependencies": [\
           ["esbuild", "npm:0.19.9"],\
           ["@esbuild/android-arm", "npm:0.19.9"],\

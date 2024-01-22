@@ -5,6 +5,9 @@ import {jwtDecode} from "jwt-decode";
 
 const imgClient = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    },
     responseType: 'blob',
 })
 
@@ -34,7 +37,7 @@ const imgClientPost = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
     headers: {
         'Content-Type': 'multipart/form-data'
-      },
+    },
 });
 
 imgClientPost.interceptors.request.use(
