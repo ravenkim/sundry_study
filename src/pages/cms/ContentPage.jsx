@@ -1,6 +1,6 @@
 import React from 'react';
 import SSlayout from "src/common/components/layout/SSlayout.jsx";
-import Content from "../../features/cms/Content.jsx";
+import Content from "src/features/cms/Content.jsx";
 
 const ContentPage = () => {
 

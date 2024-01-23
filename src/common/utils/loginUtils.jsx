@@ -1,4 +1,4 @@
-import store from "/src/app/store.jsx";
+import store from "src/app/store.jsx";
 import {jwtDecode} from "jwt-decode";
 import {userAction} from "src/features/accounts/userReducer.jsx";
 import {getCookie} from "src/app/cookie.jsx";
