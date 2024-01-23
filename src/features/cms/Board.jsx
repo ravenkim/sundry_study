@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
 import {cmsAction} from "./cmsReducer.jsx";
-import Carousel from "../../common/components/Card/Carousel.jsx";
 import ContentsCard from "src/common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
 import BoardSearchTable from "./components/BoardSearchTable.jsx";

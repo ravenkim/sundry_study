@@ -1,5 +1,5 @@
-import SSlayout from "../../common/components/layout/SSlayout.jsx";
-import Profile from "../../features/profile/Profile.jsx";
+import SSlayout from "src/common/components/layout/SSlayout.jsx";
+import Profile from "src/features/profile/Profile.jsx";
 
 const ProfilePage = () => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Input} from "antd";
-import img_icon_searc_url  from '/src/assets/img/icon_search.svg'
+import img_icon_searc_url from '/src/assets/img/icon_search.svg'
 
 const SSsearchInput = ({
 
