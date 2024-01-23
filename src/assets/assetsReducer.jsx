@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {basicTheme} from "./colors/colors.jsx";
+import {basicTheme} from "src/assets/colors/colors.jsx";
 
 
 const prefix = 'assets'

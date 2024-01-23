@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Background from "./components/Background.jsx";
+import Background from "src/common/components/layout/components/Background.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Menu from "./menu/Menu.jsx";

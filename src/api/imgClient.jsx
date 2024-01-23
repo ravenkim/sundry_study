@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {getCookie, removeCookie} from "../app/cookie.jsx";
+import {getCookie, removeCookie} from "src/app/cookie.jsx";
 import {jwtDecode} from "jwt-decode";
 
 

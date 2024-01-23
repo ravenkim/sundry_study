@@ -1,8 +1,8 @@
-import Background from "/src/common/components/layout/components/Background.jsx";
-import Login from "/src/features/accounts/Login.jsx";
-import El_1 from '/src/assets/img/Ellipse 1.png';
-import El_2 from '/src/assets/img/Ellipse 2.png';
-import El_3 from '/src/assets/img/Ellipse 3.png';
+import Background from "src/common/components/layout/components/Background.jsx";
+import Login from "src/features/accounts/Login.jsx";
+import El_1 from 'src/assets/img/Ellipse 1.png';
+import El_2 from 'src/assets/img/Ellipse 2.png';
+import El_3 from 'src/assets/img/Ellipse 3.png';
 
 const LoginPage = () => {
 
