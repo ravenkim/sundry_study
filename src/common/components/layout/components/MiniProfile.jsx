@@ -4,10 +4,9 @@ import {userAction} from "src/features/accounts/userReducer.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {push} from "redux-first-history";
 import {profileAction} from "/src/features/profile/profileReducer.jsx";
-import {Avatar, Space, Tag} from 'antd';
-import {CloseCircleOutlined, LeftCircleOutlined, RightCircleOutlined, UserOutlined} from '@ant-design/icons';
+import {Avatar, Space} from 'antd';
+import {LeftCircleOutlined, RightCircleOutlined, UserOutlined} from '@ant-design/icons';
 import {adminAction} from "src/features/admin/adminReducer.jsx";
-import SStext from "src/common/components/text/SStext.jsx";
 import CheckModal from "../../modal/CheckModal.js";
 import NotiDataList from "./notice/NotiDataList.jsx";
 

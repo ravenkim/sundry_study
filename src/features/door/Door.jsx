@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import SSsearchInput from "/src/common/components/input/SSsearchInput.jsx";
-import SSsectionWrap from "/src/common/components/wrapper/SSsectionWrap.jsx";
-import SScardWrap from "/src/common/components/Card/SScardWrap.jsx";
-import SScard from "/src/common/components/Card/SScard.jsx";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {push} from "redux-first-history";
-import {adminAction} from "../admin/adminReducer.jsx";
-import {doorAction} from "./doorReducer.jsx";
-import DoorAllSearchTable from "./components/DoorAllSearchTable.jsx";
-import {cmsAction} from "../cms/cmsReducer.jsx";
+import React, {useEffect, useState} from 'react'
+import SSsearchInput from "src/common/components/input/SSsearchInput.jsx"
+import SSsectionWrap from "src/common/components/wrapper/SSsectionWrap.jsx"
+import SScardWrap from "src/common/components/Card/SScardWrap.jsx"
+import SScard from "src/common/components/Card/SScard.jsx"
+import {shallowEqual, useDispatch, useSelector} from "react-redux"
+import {push} from "redux-first-history"
+
 import {Spin} from "antd";
-import img_manager_url from '/src/assets/img/manager.svg'
-import img_profile_url from '/src/assets/img/profile.svg'
+import img_manager_url from 'src/assets/img/manager.svg'
+import img_profile_url from 'src/assets/img/profile.svg'
+import DoorAllSearchTable from "src/features/door/components/DoorAllSearchTable.jsx";
+import {cmsAction} from "src/features/cms/cmsReducer.jsx";
+import {doorAction} from "src/features/door/doorReducer.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -24,33 +24,20 @@ const Door = () => {
     }, []);
 
     const {
-        rentalUpdateStatus,
         searchResult,
         boardType,
         boardLoading,
         user,
 
     } = useSelector(({userReducer, adminReducer, doorReducer, cmsReducer}) => ({
-            //임시로 업데이트 해주는 api 향후 삭제 예정
-            rentalUpdateStatus: adminReducer.rentalUpdateStatus,
             searchResult: doorReducer.searchResult.data,
             boardType: cmsReducer.boardList.data,
             boardLoading: cmsReducer.boardList.loading,
             user: userReducer.user,
-
         }),
         shallowEqual
     );
 
-
-    //임시로 업데이트 해주는 api 향후 삭제 예정
-    useEffect(() => {
-        dispatch(adminAction.rentalUpdate())
-
-        return () => {
-            dispatch(adminAction.initializeAll())
-        }
-    }, []);
 
     useEffect(() => {
         dispatch(cmsAction.getBoardList())
@@ -109,8 +96,8 @@ const Door = () => {
                     spinning={boardLoading}
                     className={'w-full'}
                 >
-                    
-                    
+
+
                     {/*todo (to 찬민주임) 여기 공통부분 컴포넌트로 빼면 좋을거 같아요 일단 대충 정리했습니다*/}
                     <SScardWrap className={'flex flex-wrap w-full'}>
                         {boardType?.boardList?.map((boardList, idx) => (

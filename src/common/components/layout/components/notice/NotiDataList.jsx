@@ -4,7 +4,6 @@ import {Tag} from "antd";
 import {CloseCircleOutlined} from "@ant-design/icons";
 
 
-
 const NotiDataList = ({
     open,
     deletedNotiIds
