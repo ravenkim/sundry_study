@@ -12,6 +12,7 @@ import {profileAction} from "./profileReducer.jsx";
 
 import {UserOutlined} from '@ant-design/icons';
 import {adminAction} from "../admin/adminReducer.jsx";
+import {userAction} from "src/features/accounts/userReducer.jsx";
 
 
 const Profile = () => {
@@ -26,14 +27,14 @@ const Profile = () => {
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
             activeTab: profileReducer.tab,
-            userProfileImg: profileReducer.userProfileImg.data,
+            userProfileImg: userReducer.userProfileImg.data,
 
         }),
         shallowEqual
     )
 
     useEffect(() => {
-        dispatch(profileAction.getUserProfileImg())
+        dispatch(userAction.getUserProfileImg())
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
 
         return () => {

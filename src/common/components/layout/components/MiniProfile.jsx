@@ -20,7 +20,7 @@ const MiniProfile = () => {
 
     } = useSelector(({userReducer, profileReducer}) => ({
             user: userReducer.user,
-            userProfileImg: profileReducer.userProfileImg.data,
+            userProfileImg: userReducer.userProfileImg.data,
             postNotiId: profileReducer.notiIds,
         }),
         shallowEqual
@@ -28,7 +28,7 @@ const MiniProfile = () => {
 
     useEffect(() => {
         dispatch(profileAction.getUserNotifications());
-        dispatch(profileAction.getUserProfileImg());
+        dispatch(userAction.getUserProfileImg());
 
         return () => {
             dispatch(profileAction.initializeAll())

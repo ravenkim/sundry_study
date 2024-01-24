@@ -3,7 +3,6 @@ import {
     deleteBoardLikes,
     getFullUserInfo,
     getUserNotifications,
-    getUserProfileImg,
     postBoardLikes,
     postBoardRentals,
     postBoardReservations,
@@ -21,10 +20,7 @@ const prefix = 'profile'
 
 //비동기 처리용 input
 const asyncRequest = {
-    getUserProfileImg: [
-        {userProfileImg: reducerUtils.init()},
-        getUserProfileImg
-    ],
+
 
     postUserProfileImg: [
         {postUserProfileImgStatus:reducerUtils.init()},

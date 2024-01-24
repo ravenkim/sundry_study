@@ -1,7 +1,8 @@
 
 import {removeCookie, setCookie} from "src/app/cookie.jsx";
 import {jwtDecode} from "jwt-decode";
-import { reduxMaker} from "src/common/utils/asyncUtils.jsx";
+import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
+import {getUserProfileImg} from "src/features/accounts/userAPI.jsx";
 
 
 
@@ -12,13 +13,16 @@ import { reduxMaker} from "src/common/utils/asyncUtils.jsx";
 const prefix = 'user'
 
 const asyncRequest = {
-
+    getUserProfileImg: [
+        {userProfileImg: reducerUtils.init()},
+        getUserProfileImg
+    ],
 }
 
 
 const localState = {
-    user: null,
     loginErrorMsg: null,
+    user: null,
 }
 
 //로컬 리듀서
