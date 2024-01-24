@@ -187,6 +187,7 @@ export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers 
     const initialState = initialStateHandler(asyncRequest)
     const final = {}
 
+    //슬라이스 만들기
     final[`${prefix}Slice`] = createSlice({
         name: prefix,
         initialState: {
@@ -204,9 +205,11 @@ export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers 
     })
 
 
-
+    //사가 만들기
     final[`${prefix}Saga`] = function* () {
+        //로그인 기능
         if(prefix === 'user') yield takeLatest('user/login', login)
+        //그외
         for (const reducerName in asyncRequest) {
             yield takeLatest(
                 `${prefix}/${reducerName}`,
@@ -215,7 +218,7 @@ export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers 
         }
     }
 
-
+    //액션 만들기
     final[`${prefix}Action`] = final[`${prefix}Slice`].actions;
 
 
