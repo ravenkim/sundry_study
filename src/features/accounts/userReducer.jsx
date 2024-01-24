@@ -1,62 +1,28 @@
-import {call, put, takeLatest} from "redux-saga/effects";
-import {createSlice} from '@reduxjs/toolkit';
+
 import {removeCookie, setCookie} from "src/app/cookie.jsx";
-import client from "src/api/client.jsx";
 import {jwtDecode} from "jwt-decode";
+import { reduxMaker} from "src/common/utils/asyncUtils.jsx";
 
 
-const initialState = {
+
+
+
+
+
+const prefix = 'user'
+
+const asyncRequest = {
+
+}
+
+
+const localState = {
     user: null,
     loginErrorMsg: null,
 }
 
-
-
-
-//로그인 비동기 처리 > 처리가 많아지면 따로 파일 뺼것
-function* login(action) {
-    try {
-
-        const response = yield call(
-            () => client.post("login", action.payload)
-        )
-
-        if (response.data?.res) {
-            const tk = response.data?.data.AccessToken
-            setCookie('tk', tk)
-            yield put({
-                type: 'user/loginSuccess',
-                payload: tk
-            });
-        } else {
-            yield put({
-                type: 'user/loginFailure',
-                payload: response.data?.msg
-            });
-        }
-
-
-    } catch (e) {
-        yield put({
-            type: 'user/loginFailure',
-            payload: e.message
-        });
-    }
-}
-
-
-export function* userSaga() {
-    yield takeLatest('user/login', login)
-}
-
-
-export const userSlice = createSlice({
-    name: 'user',
-    initialState: initialState,
-    reducers: {
-        initializeAll: (state, action) => {
-            return initialState;
-        },
+//로컬 리듀서
+const localReducers = {
         initializeUser: (state, action) => {
             state.user = null
         },
@@ -65,10 +31,10 @@ export const userSlice = createSlice({
         },
         login: (state, action) => {
         },
-        loginSuccess: (state, action) => {
+        loginSuccessd: (state, action) => {
             state.user = jwtDecode(action.payload)
         },
-        loginFailure: (state, action) => {
+        loginFailured: (state, action) => {
             state.loginErrorMsg = action.payload
 
         },
@@ -81,14 +47,9 @@ export const userSlice = createSlice({
             state.user = null
             removeCookie('tk')
         },
+}
 
-    }
-})
-
-export const userAction = userSlice.actions
-
-
-
+export const {userSlice, userSaga, userAction} = reduxMaker(prefix, asyncRequest, localState, localReducers);
 
 
 
