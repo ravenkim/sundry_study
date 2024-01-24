@@ -16,6 +16,7 @@ export const setUserHandler = () => {
             return ;
         }
         store.dispatch(userAction.setUser(jwtDecodeHandler(userToken)))
+        store.dispatch(userAction.getUserProfileImg());
     } catch (e) {
         console.error("User Setting Exception : ", e);
     }
