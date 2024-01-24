@@ -138,7 +138,7 @@ const Door = () => {
                         {user?.priority <= 4 &&
                             <SScard
                                 onClick={() => {
-                                    dispatch(push('/profile'))
+                                    dispatch(push('/admin'))
                                 }}
                                 className={
                                     'cursor-pointer min-w-[23.5%] max-w-[23.5%] block'
