@@ -1,6 +1,8 @@
 //비동기 처리에 관련된 함수 모음
 import {createSlice} from "@reduxjs/toolkit";
 import {call, put, takeLatest} from 'redux-saga/effects';
+import client from "src/api/client.jsx";
+import {setCookie} from "src/app/cookie.jsx";
 
 //reducer data 상테
 export const reducerUtils = {
@@ -120,14 +122,10 @@ export const extraReducers = (prefix, asyncRequest) => {
             },
             (state, action) => {
                 if (action.type.endsWith('Success')) {
-
-
                     const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
                     const requestInfo = asyncRequest[key][0];
 
                     if (action.payload.data instanceof Blob) {
-
-
                         if (action.payload.data.type === 'application/json') {
                             state[Object.keys(requestInfo)[0]] = reducerUtils.success(false);
                         } else {
@@ -152,6 +150,37 @@ export const extraReducers = (prefix, asyncRequest) => {
     }
 }
 
+//로그인 비동기 처리
+export function* login(action) {
+    try {
+
+        const response = yield call(
+            () => client.post("login", action.payload)
+        )
+
+        if (response.data?.res) {
+            const tk = response.data?.data.AccessToken
+            setCookie('tk', tk)
+            yield put({
+                type: 'user/loginSuccessd',
+                payload: tk
+            });
+        } else {
+            yield put({
+                type: 'user/loginFailured',
+                payload: response.data?.msg
+            });
+        }
+
+
+    } catch (e) {
+        yield put({
+            type: 'user/loginFailured',
+            payload: e.message
+        });
+    }
+}
+
 
 // 편리한 자동생성기
 export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers = {}) => {
@@ -168,12 +197,16 @@ export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers 
             ...initializeReducers(initialState),
             ...apiReducers(prefix, asyncRequest),
             ...localReducers
+
         },
         extraReducers: extraReducers(prefix, asyncRequest)
 
     })
 
+
+
     final[`${prefix}Saga`] = function* () {
+        if(prefix === 'user') yield takeLatest('user/login', login)
         for (const reducerName in asyncRequest) {
             yield takeLatest(
                 `${prefix}/${reducerName}`,
