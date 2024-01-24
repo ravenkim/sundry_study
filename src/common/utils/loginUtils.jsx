@@ -9,6 +9,7 @@ const jwtDecodeHandler = (data) => {
 };
 
 
+//로그인 되었을시 처리
 export const setUserHandler = () => {
     try {
         const userToken = getCookie('tk')  // 쿠키에서 가져오지
