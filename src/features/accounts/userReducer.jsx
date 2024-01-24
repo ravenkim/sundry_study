@@ -11,8 +11,6 @@ const initialState = {
 }
 
 
-export const loginT = (payload) =>
-    client.post("login", payload);
 
 
 //로그인 비동기 처리 > 처리가 많아지면 따로 파일 뺼것
