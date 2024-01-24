@@ -6,6 +6,7 @@ import {Avatar, Button, Space, Spin, Upload} from 'antd';
 import SSbutton from "../../../common/components/button/SSbutton.jsx";
 import SSinput from "../../../common/components/input/SSinput.jsx";
 import showMessage from "src/common/components/notice/notice.js";
+import {userAction} from "src/features/accounts/userReducer.jsx";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -22,8 +23,8 @@ const UserInfo = () => {
         postUserPW,
         userDataLoading
 
-    } = useSelector(({profileReducer}) => ({
-            userProfileImg: profileReducer.userProfileImg.data,
+    } = useSelector(({profileReducer, userReducer}) => ({
+            userProfileImg: userReducer.userProfileImg.data,
             postUserProfileImgStatus: profileReducer.postUserProfileImgStatus,
             fullUserInfo: profileReducer.fullUserInfo.data,
             userDataLoading: profileReducer.userProfileImg.loading,
@@ -125,7 +126,7 @@ const UserInfo = () => {
             if(postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
-                dispatch(profileAction.getUserProfileImg());
+                dispatch(userAction.getUserProfileImg());
             } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
         }
     }, [postUserProfileImgStatus]);

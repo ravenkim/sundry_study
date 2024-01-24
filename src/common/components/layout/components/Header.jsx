@@ -7,6 +7,7 @@ import {Avatar, Popover, Space} from "antd";
 import {profileAction} from "../../../../features/profile/profileReducer.jsx";
 import img_logo_main_url from '/src/assets/logo/logo_main.png'
 import {cmsAction} from "../../../../features/cms/cmsReducer.jsx";
+import {userAction} from "src/features/accounts/userReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
@@ -21,15 +22,15 @@ const Header = ({
 
         userProfileImg,
         userProfileImgLoading
-    } = useSelector(({ profileReducer}) => ({
-            userProfileImg: profileReducer.userProfileImg.data,
-            userProfileImgLoading: profileReducer.userProfileImg.loading,
+    } = useSelector(({ profileReducer, userReducer}) => ({
+            userProfileImg: userReducer.userProfileImg.data,
+            userProfileImgLoading: userReducer.userProfileImg.loading,
         }),
         shallowEqual
     );
 
     useEffect(() => {
-        dispatch(profileAction.getUserProfileImg());
+        dispatch(userAction.getUserProfileImg());
     }, []);
 
     useEffect(() => {
