@@ -53,3 +53,11 @@ docker build --tag rms:0.1 .
 ```
 docker run -itd -p 8089:80 --name rms_front rms:0.1
 ```
+
+
+
+
+## 코딩 규칙
+* Page를 만들고 그안에 features 및 컴포넌트 작성
+* Page 이름은 featuresPage로 통일
+* localReducers 안에는 'Success', 'Failure' 로 끝나는 함수 만들지 말것
