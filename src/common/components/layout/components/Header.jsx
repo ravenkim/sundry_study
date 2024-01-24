@@ -29,9 +29,7 @@ const Header = ({
         shallowEqual
     );
 
-    useEffect(() => {
-        dispatch(userAction.getUserProfileImg());
-    }, []);
+
 
     useEffect(() => {
         return () => {

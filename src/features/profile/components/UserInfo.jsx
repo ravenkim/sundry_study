@@ -126,7 +126,6 @@ const UserInfo = () => {
             if(postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
-                dispatch(userAction.getUserProfileImg());
             } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
         }
     }, [postUserProfileImgStatus]);

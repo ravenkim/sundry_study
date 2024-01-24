@@ -28,7 +28,7 @@ const MiniProfile = () => {
 
     useEffect(() => {
         dispatch(profileAction.getUserNotifications());
-        dispatch(userAction.getUserProfileImg());
+
 
         return () => {
             dispatch(profileAction.initializeAll())
