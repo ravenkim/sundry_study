@@ -44,7 +44,6 @@ const localReducers = {
         //로그인 완료시 사용자 등록 (클라이언트가 인식하게끔)
         setUser: (state, action) => {
             state.user = action.payload
-
         },
         logout: (state, action) => {
             // 만약 토큰 추가된다면 비동기 요청을 진행한주 석세스시 값 지우고 비우기

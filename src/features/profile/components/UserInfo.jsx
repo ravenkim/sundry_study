@@ -27,7 +27,7 @@ const UserInfo = () => {
             userProfileImg: userReducer.userProfileImg.data,
             postUserProfileImgStatus: profileReducer.postUserProfileImgStatus,
             fullUserInfo: profileReducer.fullUserInfo.data,
-            userDataLoading: profileReducer.userProfileImg.loading,
+            userDataLoading: userReducer.userProfileImg.loading,
             postUserPW: profileReducer.userPW,
         }),
         shallowEqual
