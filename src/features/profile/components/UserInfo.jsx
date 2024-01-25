@@ -7,6 +7,7 @@ import SSbutton from "../../../common/components/button/SSbutton.jsx";
 import SSinput from "../../../common/components/input/SSinput.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import {userAction} from "src/features/accounts/userReducer.jsx";
+import ChangePasswordModal from "src/features/profile/components/components/ChangePasswordModal.jsx";
 
 const UserInfo = () => {
     const [passwordInput, setPasswordInput] = useState(false)
@@ -20,7 +21,7 @@ const UserInfo = () => {
         userProfileImg,
         postUserProfileImgStatus,
         fullUserInfo,
-        postUserPW,
+        postUserPwStatus,
         userDataLoading
 
     } = useSelector(({profileReducer, userReducer}) => ({
@@ -28,10 +29,21 @@ const UserInfo = () => {
             postUserProfileImgStatus: profileReducer.postUserProfileImgStatus,
             fullUserInfo: profileReducer.fullUserInfo.data,
             userDataLoading: userReducer.userProfileImg.loading,
-            postUserPW: profileReducer.userPW,
+            postUserPwStatus: profileReducer.postUserPwStatus.data,
         }),
         shallowEqual
     )
+
+
+    useEffect(() => {
+        if (postUserPwStatus) {
+            showMessage('success', '비밀번호가 성공적으로 저장되었습니다.')
+            dispatch(profileAction.initialize('postUserPwStatus'))
+
+
+        }
+    }, [postUserPwStatus]);
+
 
     const [fileList, setFileList] = useState([]);
 
@@ -45,35 +57,6 @@ const UserInfo = () => {
         }
     }, []);
 
-    const validatePassword = (password) => {
-        const MIN = 8; // 최소값
-        const MAX = 20; // 최대값
-
-        const hasDigit = /[0-9]/.test(password);
-        const hasLetter = /[a-zA-Z]/.test(password);
-        const hasSpecialChar = /[\W_]/.test(password);
-        const isLengthValid = password.length >= MIN && password.length <= MAX;
-        /*const pwPattern = /^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[\\W])(?!.*(.)\\1\\1)(?!.*\\d\\d\\d)(?!.*[a-zA-Z]\\1\\1)[\\da-zA-Z\\W]{8,20}$/;
-        return pwPattern.test(password);*/
-
-        if (!hasDigit) {
-            return '비밀번호에 숫자가 포함되어야 합니다.';
-        }
-        if (!hasLetter) {
-            return '비밀번호에 영문자가 포함되어야 합니다.';
-        }
-        if (!hasSpecialChar) {
-            return '비밀번호에 특수문자가 포함되어야 합니다.';
-        }
-        if (!isLengthValid) {
-            return '비밀번호는 8자에서 20자 사이여야 합니다.';
-        }
-        /*if (!pwPattern) {
-            return '유효한 비밀번호 형식이 아닙니다.';
-        }*/
-
-        return null; // 유효한 경우
-    };
 
     const onSave = () => {
 
@@ -85,34 +68,7 @@ const UserInfo = () => {
 
             dispatch(profileAction.postUserProfileImg(formData));
         }
-       /*
-        if (postPwValue.trim() !== '') { // 비밀번호 변경하려는 시도일 때 실행
-            const passwordError = validatePassword(postPwValue);
 
-            const postData = {
-                password: postPwValue
-            };
-
-            if (passwordError) {
-                showMessage('error', passwordError);
-                return; // 에러 발생 시 처리 중단
-            }
-
-            if (!passwordError) { // 에러가 아니면 pw post 요청 처리
-                dispatch(profileAction.postUserPW(postData));
-                showMessage('success', '비밀번호가 성공적으로 저장되었습니다.');
-                setPostPwValue('')
-
-                if (postUserPW) {
-                    if (postUserPW.loading !== true && postUserPW.data === true) {
-                        dispatch(profileAction.initialize('postUserPW'));
-                    } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
-                } // 성공해서 로딩에 대한 값이 변하면 초기화
-                // 정규식 추가해야됨
-                // REGEX = "^((?=.\\d)(?=.[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$"
-            }
-        }
-        */
 
     };
 
@@ -125,7 +81,7 @@ const UserInfo = () => {
             } else {
                 showMessage('error', postUserProfileImg.data.msg)
             }*/
-            if(postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
+            if (postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
             } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
@@ -174,7 +130,8 @@ const UserInfo = () => {
         fileList,
     };
 
-    const [modal, setModal] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
+
 
     return (
         <>
@@ -185,15 +142,27 @@ const UserInfo = () => {
                     <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
                         <div className={'flex flex-col items-center gap-[8px]'}>
                             {userProfileImg === false
-                                ? <Space direction='vertical' wrap size={180}>
-                                    <Avatar size={180} icon={<UserOutlined/>}/>
+                                ?
+                                <Space
+                                    direction='vertical'
+                                    wrap size={180}
+                                >
+                                    <Avatar
+                                        size={180}
+                                        icon={<UserOutlined/>}
+                                    />
                                 </Space>
-                                : <img src={userProfileImg} alt="#"
-                                       className={'rounded-full w-[180px] h-full max-w-[180px] max-h-[180px]'}/>
+                                :
+                                <img
+                                    src={userProfileImg}
+                                    alt="#"
+                                    className={'rounded-full w-[180px] h-full max-w-[180px] max-h-[180px]'}
+                                />
                             }
 
                             <form action="/item" method={'post'} encType={"multipart/form-data"}>
-                                <Upload {...props} defaultFileList={[...fileList]} className={'flex flex-col justify-center items-center'}>
+                                <Upload {...props} defaultFileList={[...fileList]}
+                                        className={'flex flex-col justify-center items-center'}>
                                     <Button icon={<UploadOutlined/>}>프로필 변경</Button>
                                 </Upload>
                             </form>
@@ -222,13 +191,23 @@ const UserInfo = () => {
                                 <div
                                     className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
                                     <div
-                                        className={'h-fit desktop:h-[35.141px] desktop:max-h-[35.141px] self-start flex items-center'}>
-                                        <p className={'desktop:min-w-[89px]'}>비밀번호변경</p>
+                                        className={'h-fit desktop:h-[35.141px] desktop:max-h-[35.141px] self-start flex items-center'}
+                                    >
+                                        <p
+                                            className={'desktop:min-w-[89px]'}
+                                        >
+                                            비밀번호변경
+                                        </p>
                                     </div>
                                     <div className={'flex flex-col desktop:flex-col gap-[6px]'}>
-                                        <SSinput className={'mb-[0]  desktop:max-w-[141.8px]'}
-                                                 onChange={(e) => setPostPwValue(e.target.value)}
-                                                 value={postPwValue}
+                                        <SSbutton
+                                            onClick={() => {
+                                                setModalVisible(true)
+                                            }}
+                                        >비밀번호 변경하기</SSbutton>
+                                        <ChangePasswordModal
+                                            modalVisible={modalVisible}
+                                            setModalVisible={setModalVisible}
                                         />
                                     </div>
                                 </div>
@@ -242,6 +221,8 @@ const UserInfo = () => {
                         <SSbutton type={'primary'} className={'px-[60px]'} onClick={handleSave}>이미지 변경하기</SSbutton>
                     </div>
                 </div>
+
+
             </Spin>
         </>
     )

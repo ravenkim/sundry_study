@@ -33,7 +33,7 @@ const asyncRequest = {
     ],
 
     postUserPW:[
-        {userPW:reducerUtils.init()},
+        {postUserPwStatus:reducerUtils.init()},
         postUserPW
     ],
 
