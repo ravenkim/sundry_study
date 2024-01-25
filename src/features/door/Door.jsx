@@ -12,6 +12,8 @@ import img_profile_url from 'src/assets/img/profile.svg'
 import DoorAllSearchTable from "src/features/door/components/DoorAllSearchTable.jsx";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 import {doorAction} from "src/features/door/doorReducer.jsx";
+import store from "src/app/store.jsx";
+import {userAction} from "src/features/accounts/userReducer.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -41,7 +43,7 @@ const Door = () => {
 
     useEffect(() => {
         dispatch(cmsAction.getBoardList())
-
+        dispatch(userAction.getUserProfileImg());
         return () => {
             dispatch(cmsAction.initializeAll())
         }
