@@ -85,7 +85,7 @@ const UserInfo = () => {
 
             dispatch(profileAction.postUserProfileImg(formData));
         }
-
+       /*
         if (postPwValue.trim() !== '') { // 비밀번호 변경하려는 시도일 때 실행
             const passwordError = validatePassword(postPwValue);
 
@@ -112,6 +112,8 @@ const UserInfo = () => {
                 // REGEX = "^((?=.\\d)(?=.[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$"
             }
         }
+        */
+
     };
 
     useEffect(() => {
@@ -237,7 +239,7 @@ const UserInfo = () => {
                     <div
                         className={'w-full flex justify-center items-center gap-[16px] mt-[20px] tablet:mt-[40px] desktop:mt-[80px] '}>
                         <SSbutton danger className={'px-[60px]'} onClick={handleCancel}>취소</SSbutton>
-                        <SSbutton type={'primary'} className={'px-[60px]'} onClick={handleSave}>저장</SSbutton>
+                        <SSbutton type={'primary'} className={'px-[60px]'} onClick={handleSave}>이미지 변경하기</SSbutton>
                     </div>
                 </div>
             </Spin>
