@@ -69,6 +69,8 @@ const ChangePasswordModal = ({
             visible={modalVisible}
             onCancel={onCancel}
             onOk={onOk}
+              okText={'비밀번호 변경'}
+                cancelText={'취소'}
             okButtonProps={{
                 disabled: !valueCheack,
             }}

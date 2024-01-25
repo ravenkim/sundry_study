@@ -39,8 +39,6 @@ const UserInfo = () => {
         if (postUserPwStatus) {
             showMessage('success', '비밀번호가 성공적으로 저장되었습니다.')
             dispatch(profileAction.initialize('postUserPwStatus'))
-
-
         }
     }, [postUserPwStatus]);
 
