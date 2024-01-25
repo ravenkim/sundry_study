@@ -18,17 +18,33 @@ imgClient.interceptors.request.use(
             const tokenData = jwtDecode(userToken)
 
             if (tokenData.exp < Date.now() / 1000) {
+
+                //토큰 만료시 요청 취소
+                const cancelToken = axios.CancelToken;
+                const source = cancelToken.source();
+                config.cancelToken = source.token;
+                source.cancel('Token expired');
+
+
+                //쿠키 삭제후 리다이랙션
                 removeCookie('tk')
                 window.location = "/";
             } else {
                 config.headers["AccessToken"] = userToken
             }
 
+
+
+
         }
         return config;
     },
     function (error) {
-        return Promise.reject(error);
+         if (axios.isCancel(error)) {
+            console.log('Request cancelled due to token expiration.');
+        } else {
+            return Promise.reject(error);
+        }
     }
 );
 
