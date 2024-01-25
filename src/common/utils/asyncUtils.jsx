@@ -162,6 +162,7 @@ export function* login(action) {
         if (response.data?.res) {
             const tk = response.data?.data.AccessToken
             setCookie('tk', tk)
+
             yield put({
                 type: 'user/loginSuccessd',
                 payload: tk
