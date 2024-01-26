@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import SSmodal from "src/common/components/modal/SSmodal.jsx";
 import SSinput from "src/common/components/input/SSinput.jsx";
-import SStitleLabel from "src/common/components/label/SStitleLabel.jsx";
-import SSlabelForInput from "src/common/components/label/SSlabelForInput.jsx";
 import {validatePassword} from "src/common/utils/validateUtils.jsx";
 import {useDispatch} from "react-redux";
 import {profileAction} from "src/features/profile/profileReducer.jsx";
-import showMessage from "src/common/components/notice/notice.js";
 
 const ChangePasswordModal = ({
     setModalVisible,

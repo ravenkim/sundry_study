@@ -1,13 +1,7 @@
-
-import {removeCookie, setCookie} from "src/app/cookie.jsx";
+import {removeCookie} from "src/app/cookie.jsx";
 import {jwtDecode} from "jwt-decode";
 import {reducerUtils, reduxMaker} from "src/common/utils/asyncUtils.jsx";
 import {getUserProfileImg} from "src/features/accounts/userAPI.jsx";
-
-
-
-
-
 
 
 const prefix = 'user'

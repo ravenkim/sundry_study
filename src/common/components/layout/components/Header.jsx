@@ -4,10 +4,8 @@ import {push} from "redux-first-history";
 import React, {useEffect} from "react";
 import MiniProfile from "./MiniProfile.jsx";
 import {Avatar, Popover, Space} from "antd";
-import {profileAction} from "../../../../features/profile/profileReducer.jsx";
 import img_logo_main_url from '/src/assets/logo/logo_main.png'
 import {cmsAction} from "../../../../features/cms/cmsReducer.jsx";
-import {userAction} from "src/features/accounts/userReducer.jsx";
 
 const Header = ({
                     setMenuOpen,
