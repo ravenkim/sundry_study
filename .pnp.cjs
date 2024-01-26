@@ -64,8 +64,7 @@ const RAW_RUNTIME_STATE =
           ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
           ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
-          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"],\
-          ["vite-plugin-compression2", "npm:0.11.0"]\
+          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -1333,31 +1332,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@rollup/pluginutils", [\
-      ["npm:5.1.0", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@rollup-pluginutils-npm-5.1.0-6939820ef8-10c0.zip/node_modules/@rollup/pluginutils/",\
-        "packageDependencies": [\
-          ["@rollup/pluginutils", "npm:5.1.0"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:4c050dbb9b459f7ccfd083b011c54234d01dba61d28c1cffdc9d37aa840f2b81841fdc535e529a4140927242bee6b77a2f493ed6a09a73a268f3c424bad5a0a0#npm:5.1.0", {\
-        "packageLocation": "./.yarn/__virtual__/@rollup-pluginutils-virtual-daccff86b2/5/AppData/Local/Yarn/Berry/cache/@rollup-pluginutils-npm-5.1.0-6939820ef8-10c0.zip/node_modules/@rollup/pluginutils/",\
-        "packageDependencies": [\
-          ["@rollup/pluginutils", "virtual:4c050dbb9b459f7ccfd083b011c54234d01dba61d28c1cffdc9d37aa840f2b81841fdc535e529a4140927242bee6b77a2f493ed6a09a73a268f3c424bad5a0a0#npm:5.1.0"],\
-          ["@types/estree", "npm:1.0.5"],\
-          ["@types/rollup", null],\
-          ["estree-walker", "npm:2.0.2"],\
-          ["picomatch", "npm:2.3.1"],\
-          ["rollup", null]\
-        ],\
-        "packagePeers": [\
-          "@types/rollup",\
-          "rollup"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@rollup/rollup-android-arm-eabi", [\
       ["npm:4.7.0", {\
         "packageLocation": "./.yarn/unplugged/@rollup-rollup-android-arm-eabi-npm-4.7.0-9f6d0a30df/node_modules/@rollup/rollup-android-arm-eabi/",\
@@ -1525,15 +1499,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@types-cookie-npm-0.5.4-fa234f951d-10c0.zip/node_modules/@types/cookie/",\
         "packageDependencies": [\
           ["@types/cookie", "npm:0.5.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/estree", [\
-      ["npm:1.0.5", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@types-estree-npm-1.0.5-5b7faed3b4-10c0.zip/node_modules/@types/estree/",\
-        "packageDependencies": [\
-          ["@types/estree", "npm:1.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2723,15 +2688,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/estraverse-npm-5.3.0-03284f8f63-10c0.zip/node_modules/estraverse/",\
         "packageDependencies": [\
           ["estraverse", "npm:5.3.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["estree-walker", [\
-      ["npm:2.0.2", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/estree-walker-npm-2.0.2-dfab42f65c-10c0.zip/node_modules/estree-walker/",\
-        "packageDependencies": [\
-          ["estree-walker", "npm:2.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5920,8 +5876,7 @@ const RAW_RUNTIME_STATE =
           ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
           ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
-          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"],\
-          ["vite-plugin-compression2", "npm:0.11.0"]\
+          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -6728,16 +6683,6 @@ const RAW_RUNTIME_STATE =
           "stylus",\
           "sugarss",\
           "terser"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["vite-plugin-compression2", [\
-      ["npm:0.11.0", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/vite-plugin-compression2-npm-0.11.0-4c050dbb9b-10c0.zip/node_modules/vite-plugin-compression2/",\
-        "packageDependencies": [\
-          ["vite-plugin-compression2", "npm:0.11.0"],\
-          ["@rollup/pluginutils", "virtual:4c050dbb9b459f7ccfd083b011c54234d01dba61d28c1cffdc9d37aa840f2b81841fdc535e529a4140927242bee6b77a2f493ed6a09a73a268f3c424bad5a0a0#npm:5.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
