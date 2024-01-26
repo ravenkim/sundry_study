@@ -20,11 +20,11 @@ export default defineConfig({
 			output: {
 				//큰 라이브러리를 쪼개서 만들어준다
 				manualChunks: {
-					// antd: ['antd'],
+					antd: ['antd'],
 					react: ['react', 'react-dom'],
 					reactRouter: ['react-router-dom'],
 					axios: ['axios'],
-					// suneditor: ['suneditor', 'suneditor-react']
+					suneditor: ['suneditor', 'suneditor-react']
 
 
 				},
