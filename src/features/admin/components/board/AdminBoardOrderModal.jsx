@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Modal} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import SSorderDragTable from "../../../../common/components/table/SSorderDragTable.jsx";
-import {adminAction} from "../../adminReducer.jsx";
+import SSorderDragTable from "src/common/components/table/SSorderDragTable.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
 
 const AdminBoardOrderModal = ({
                                   setModalVisible,

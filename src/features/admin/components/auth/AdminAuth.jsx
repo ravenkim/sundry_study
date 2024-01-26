@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "/src/common/components/table/SStable.jsx";
-import {adminAction} from "../../adminReducer.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
 
 const AdminAuth = () => {
 

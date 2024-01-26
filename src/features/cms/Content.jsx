@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import RentalContentView from "./content/rental/RentalContentView.jsx";
-import {cmsAction} from "./cmsReducer.jsx";
+import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 
 const Content = () => {
 

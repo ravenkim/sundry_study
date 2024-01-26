@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import SSbutton from "../../../../common/components/button/SSbutton.jsx";
+import SSbutton from "src/common/components/button/SSbutton.jsx";
 import AdminMemberTable from "./AdminMemberTable.jsx";
 import AdminMemberAddModal from "./AdminMemberAddModal.jsx";
 

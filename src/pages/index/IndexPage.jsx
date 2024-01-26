@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import SSlayout from "../../common/components/layout/SSlayout.jsx";
+import SSlayout from "src/common/components/layout/SSlayout.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {push} from "redux-first-history";
 

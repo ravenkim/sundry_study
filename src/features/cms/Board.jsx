@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import SSsearchInput from "../../common/components/input/SSsearchInput.jsx";
+import SSsearchInput from "src/common/components/input/SSsearchInput.jsx";
 import {cmsAction} from "./cmsReducer.jsx";
 import ContentsCard from "src/common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";

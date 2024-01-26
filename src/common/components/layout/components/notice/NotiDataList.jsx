@@ -1,4 +1,4 @@
-import SStext from "../../../text/SStext.jsx";
+import SStext from "src/common/components/text/SStext.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {Tag} from "antd";
 import {CloseCircleOutlined} from "@ant-design/icons";

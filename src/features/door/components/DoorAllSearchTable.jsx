@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import SStable from "../../../common/components/table/SStable.jsx";
+import SStable from "src/common/components/table/SStable.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import {push} from "redux-first-history";

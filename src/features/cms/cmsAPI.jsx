@@ -1,5 +1,5 @@
-import client from "../../api/client.jsx";
-import imgClient from "../../api/imgClient.jsx";
+import client from "src/api/client.jsx";
+import imgClient from "src/api/imgClient.jsx";
 
 export const getBoardList = () =>
   client.get('board/list' )

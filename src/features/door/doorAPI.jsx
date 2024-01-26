@@ -1,4 +1,4 @@
-import client from "../../api/client.jsx";
+import client from "src/api/client.jsx";
 
 export const getSearchAll = (param) =>
     client.get(`search?keyword=${param}`  )

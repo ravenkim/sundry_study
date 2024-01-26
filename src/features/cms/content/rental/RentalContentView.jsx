@@ -3,7 +3,7 @@ import SSeditor from "src/common/components/editor/SSeditor.jsx";
 import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {cmsAction} from "../../cmsReducer.jsx";
+import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 
 const RentalContentView = () => {
 

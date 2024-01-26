@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import {Provider} from "react-redux";
-import store from "./app/store.jsx";
+import store from "src/app/store.jsx";
 import {CookiesProvider} from "react-cookie";
 import {setUserHandler} from "src/common/utils/loginUtils.jsx";
 

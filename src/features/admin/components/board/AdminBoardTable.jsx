@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
-import {adminAction} from "../../adminReducer.jsx";
-import showMessage from "../../../../common/components/notice/notice.js";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
+import showMessage from "src/common/components/notice/notice.js";
 
 const AdminBoardTable = () => {
 

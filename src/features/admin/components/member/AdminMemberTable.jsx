@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import SStable from "src/common/components/table/SStable.jsx";
 import {removeRole} from "src/common/utils/dataProcessingUtils.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {adminAction} from "../../adminReducer.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
 import {Spin} from 'antd';
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import showMessage from "src/common/components/notice/notice.js";

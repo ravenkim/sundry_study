@@ -7,7 +7,7 @@ import {profileAction} from "/src/features/profile/profileReducer.jsx";
 import {Avatar, Space} from 'antd';
 import {LeftCircleOutlined, RightCircleOutlined, UserOutlined} from '@ant-design/icons';
 import {adminAction} from "src/features/admin/adminReducer.jsx";
-import CheckModal from "../../modal/CheckModal.js";
+import CheckModal from "src/common/components/modal/CheckModal.js";
 import NotiDataList from "./notice/NotiDataList.jsx";
 
 const MiniProfile = () => {
