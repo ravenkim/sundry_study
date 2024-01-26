@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
-import SSsectionWrap from "../../common/components/wrapper/SSsectionWrap.jsx";
-import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
+import SSsectionWrap from "src/common/components/wrapper/SSsectionWrap.jsx";
+import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import {Avatar, Space, Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
-import UserInfo from "./components/UserInfo.jsx";
-import LikesInfo from "./components/LikesInfo.jsx";
-import RentalsInfo from "./components/RentalsInfo.jsx";
-import ReservationsInfo from "./components/ReservationsInfo.jsx";
-import {profileAction} from "./profileReducer.jsx";
+import UserInfo from "src/features/profile/components/UserInfo.jsx";
+import LikesInfo from "src/features/profile/components/LikesInfo.jsx";
+import RentalsInfo from "src/features/profile/components/RentalsInfo.jsx";
+import ReservationsInfo from "src/features/profile/components/ReservationsInfo.jsx";
+import {profileAction} from "src/features/profile/profileReducer.jsx";
 
 import {UserOutlined} from '@ant-design/icons';
-import {adminAction} from "../admin/adminReducer.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
 import {userAction} from "src/features/accounts/userReducer.jsx";
 
 

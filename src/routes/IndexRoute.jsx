@@ -1,13 +1,13 @@
 import {Route, Routes} from "react-router-dom";
-import LoginPage from "../pages/accounts/LoginPage.jsx";
-import PrivateRoute from "./PrivateRoute.jsx";
-import DoorPage from "../pages/door/DoorPage.jsx";
-import IndexPage from "../pages/index/IndexPage.jsx";
-import ErrorPage from "../pages/error/ErrorPage.jsx";
-import AdminPage from "../pages/admin/AdminPage.jsx";
-import ContentPage from "../pages/cms/ContentPage.jsx";
-import BoardPage from "../pages/cms/BoardPage.jsx";
-import ProfilePage from "../pages/accounts/ProfilePage.jsx";
+import LoginPage from "src/pages/accounts/LoginPage.jsx";
+import PrivateRoute from "src/routes/PrivateRoute.jsx";
+import DoorPage from "src/pages/door/DoorPage.jsx";
+import IndexPage from "src/pages/index/IndexPage.jsx";
+import ErrorPage from "src/pages/error/ErrorPage.jsx";
+import AdminPage from "src/pages/admin/AdminPage.jsx";
+import ContentPage from "src/pages/cms/ContentPage.jsx";
+import BoardPage from "src/pages/cms/BoardPage.jsx";
+import ProfilePage from "src/pages/accounts/ProfilePage.jsx";
 
 
 const IndexRoute = () => {

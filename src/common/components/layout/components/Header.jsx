@@ -2,10 +2,10 @@ import {MenuOutlined, UserOutlined} from "@ant-design/icons";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {push} from "redux-first-history";
 import React, {useEffect} from "react";
-import MiniProfile from "./MiniProfile.jsx";
+import MiniProfile from "src/common/components/layout/components/MiniProfile.jsx";
 import {Avatar, Popover, Space} from "antd";
 import img_logo_main_url from '/src/assets/logo/logo_main.png'
-import {cmsAction} from "../../../../features/cms/cmsReducer.jsx";
+import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 
 const Header = ({
                     setMenuOpen,

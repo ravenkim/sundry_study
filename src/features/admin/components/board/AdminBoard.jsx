@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import AdminBoardTable from "./AdminBoardTable.jsx";
 import AdminBoardOrderModal from "./AdminBoardOrderModal.jsx";
-import {adminAction} from "../../adminReducer.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
 
 const AdminBoard = () => {
 

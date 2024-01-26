@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {adminAction} from "../../adminReducer.jsx";
-import SStable from "../../../../common/components/table/SStable.jsx";
-import {formatDate} from "../../../../common/utils/dataProcessingUtils.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
+import SStable from "src/common/components/table/SStable.jsx";
+import {formatDate} from "src/common/utils/dataProcessingUtils.jsx";
 
 const AdminDelinquentTable = () => {
 

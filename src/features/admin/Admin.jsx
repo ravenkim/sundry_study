@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import SSwrapper from "../../common/components/wrapper/SSwrapper.jsx";
+import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import {Tabs} from "antd";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {adminAction} from "./adminReducer.jsx";

@@ -1,5 +1,5 @@
 import {Modal} from "antd";
-import SStext from "../text/SStext.jsx";
+import SStext from "src/common/components/text/SStext.jsx";
 
 const AlertModal = ({
                         className,

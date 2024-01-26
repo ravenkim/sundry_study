@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Table} from "antd";
-import SSsearchInput from "../input/SSsearchInput.jsx";
+import SSsearchInput from "src/common/components/input/SSsearchInput.jsx";
 import hangul from 'hangul-js';
 import Highlighter from 'react-highlight-words';
 

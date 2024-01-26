@@ -1,5 +1,5 @@
-import imgClient from "../../api/imgClient.jsx";
-import client from "../../api/client.jsx";
+import imgClient from "src/api/imgClient.jsx";
+import client from "src/api/client.jsx";
 
 
 export const postUserProfileImg = (param) =>

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {profileAction} from "../profileReducer.jsx";
+import {profileAction} from "src/features/profile/profileReducer.jsx";
 import {UploadOutlined, UserOutlined} from '@ant-design/icons';
 import {Avatar, Button, Space, Spin, Upload} from 'antd';
-import SSbutton from "../../../common/components/button/SSbutton.jsx";
+import SSbutton from "src/common/components/button/SSbutton.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import ChangePasswordModal from "src/features/profile/components/components/ChangePasswordModal.jsx";
 

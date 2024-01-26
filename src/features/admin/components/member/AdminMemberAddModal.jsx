@@ -5,7 +5,7 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {removeRole} from "src/common/utils/dataProcessingUtils.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import {validateEmail} from "src/common/utils/validateUtils.jsx";
-import {adminAction} from "../../adminReducer.jsx";
+import {adminAction} from "src/features/admin/adminReducer.jsx";
 
 const AdminMemberAddModal = ({
                                  setModalVisible,

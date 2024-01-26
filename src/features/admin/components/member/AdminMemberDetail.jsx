@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import SSlabelForInput from "../../../../common/components/label/SSlabelForInput.jsx";
+import SSlabelForInput from "src/common/components/label/SSlabelForInput.jsx";
 import {Avatar, Input, Modal, Space} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
