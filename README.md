@@ -44,15 +44,12 @@ yarn dev
 
 
 # 배포
+ssh 원격 접속후 
+추후 자동 배포 도입 예정
 ```
-git pull
+sh cleanup.sh
 ```
-```
-docker build --tag rms:0.1 . 
-```
-```
-docker run -itd -p 8089:80 --name rms_front rms:0.1
-```
+
 
 
 
