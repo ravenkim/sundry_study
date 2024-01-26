@@ -1,55 +1,17 @@
 import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import {
-	createStyleImportPlugin,
-	AndDesignVueResolve,
-	VantResolve,
-	ElementPlusResolve,
-	NutuiResolve,
-	AntdResolve
-} from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-
-	css: {
-		preprocessorOptions: {
-			less: {
-				javascriptEnabled: true,
-			},
-		},
-	},
-	plugins: [
-		react(),
-		createStyleImportPlugin({
-			resolves: [
-				AndDesignVueResolve(),
-				VantResolve(),
-				ElementPlusResolve(),
-				NutuiResolve(),
-				AntdResolve(),
-			],
-			libs: [
-				{
-					libraryName: 'ant-design-vue',
-					esModule: true,
-					resolveStyle: (name) => {
-						return `ant-design-vue/es/${name}/style/index`
-					},
-				},
-			],
-		}),
-
-	],
+	plugins: [react()],
 
 	//경로 확인
 	resolve: {
 		alias: {
-			src: path.resolve(__dirname, 'src'),
+			 src: path.resolve(__dirname, 'src'),
 		}
 	},
-
 
 	build: {
 		rollupOptions: {
