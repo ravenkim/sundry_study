@@ -4,9 +4,7 @@ import {profileAction} from "../profileReducer.jsx";
 import {UploadOutlined, UserOutlined} from '@ant-design/icons';
 import {Avatar, Button, Space, Spin, Upload} from 'antd';
 import SSbutton from "../../../common/components/button/SSbutton.jsx";
-import SSinput from "../../../common/components/input/SSinput.jsx";
 import showMessage from "src/common/components/notice/notice.js";
-import {userAction} from "src/features/accounts/userReducer.jsx";
 import ChangePasswordModal from "src/features/profile/components/components/ChangePasswordModal.jsx";
 
 const UserInfo = () => {

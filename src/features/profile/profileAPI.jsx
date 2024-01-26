@@ -2,7 +2,6 @@ import imgClient from "../../api/imgClient.jsx";
 import client from "../../api/client.jsx";
 
 
-
 export const postUserProfileImg = (param) =>
     imgClient.post('profile/user/save-img', param);
 

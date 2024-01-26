@@ -7,8 +7,6 @@ import {push} from "redux-first-history";
 import SubMenuButtonWrap from "./components/SubMenuButtonWrap.jsx";
 import MobileButton from "./components/MobileButton.jsx";
 import {cmsAction} from "../../../../features/cms/cmsReducer.jsx";
-import store from "src/app/store.jsx";
-import {userAction} from "src/features/accounts/userReducer.jsx";
 
 
 const Menu = ({
