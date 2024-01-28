@@ -7,12 +7,11 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux"
 import {push} from "redux-first-history"
 
 import {Spin} from "antd";
-import img_manager_url from 'src/assets/img/manager.svg'
-import img_profile_url from 'src/assets/img/profile.svg'
 import DoorAllSearchTable from "src/features/door/components/DoorAllSearchTable.jsx";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 import {doorAction} from "src/features/door/doorReducer.jsx";
 import {userAction} from "src/features/accounts/userReducer.jsx";
+import DoorContentsCard from "./components/DoorContentsCard.jsx";
 
 const Door = () => {
     const dispatch = useDispatch()
@@ -26,15 +25,11 @@ const Door = () => {
 
     const {
         searchResult,
-        boardType,
         boardLoading,
-        user,
 
-    } = useSelector(({userReducer, adminReducer, doorReducer, cmsReducer}) => ({
+    } = useSelector(({userReducer, doorReducer, cmsReducer}) => ({
             searchResult: doorReducer.searchResult.data,
-            boardType: cmsReducer.boardList.data,
             boardLoading: cmsReducer.boardList.loading,
-            user: userReducer.user,
         }),
         shallowEqual
     );
@@ -98,71 +93,9 @@ const Door = () => {
                     className={'w-full'}
                 >
 
-
-                    {/*todo (to 찬민주임) 여기 공통부분 컴포넌트로 빼면 좋을거 같아요 일단 대충 정리했습니다*/}
                     <SScardWrap className={'flex flex-wrap w-full'}>
-                        {boardType?.boardList?.map((boardList, idx) => (
-                            <SScard
-                                key={idx}
-                                className={'cursor-pointer min-w-[23.5%] max-w-[23.5%]'}
-                                onClick={() => {
-                                    dispatch(push(`/board/${boardList?.boardId}`))
-                                }}
-                            >
-                                <div className={'p-[20px] box-border flex flex-col justify-between w-full'}>
-                                    <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
-                                        {boardList?.boardNm}
-                                    </h3>
-                                </div>
-                            </SScard>
-                        ))}
-
-                        <SScard
-                            onClick={() => {
-                                dispatch(push('/profile'))
-                            }}
-                            className={
-                                'cursor-pointer min-w-[23.5%] max-w-[23.5%] '
-                            }
-
-                        >
-                            <div className={'p-[20px] box-border flex flex-col justify-between w-full '}>
-                                <h3 className={'text-[20px] font-[NotoSansKR-700]'}>
-                                    프로필
-                                </h3>
-                                <img src={img_profile_url} alt="#"
-                                     className={'inline-flex justify-self-end self-end'}/>
-
-                            </div>
-                        </SScard>
-
-                        {user?.priority <= 4 &&
-                            <SScard
-                                onClick={() => {
-                                    dispatch(push('/admin'))
-                                }}
-                                className={
-                                    'cursor-pointer min-w-[23.5%] max-w-[23.5%] block'
-                                }
-                            >
-                                <div className={'p-[20px] box-border flex flex-col justify-between w-full '}>
-                                    <h3
-                                        className={'text-[20px] font-[NotoSansKR-700]'}
-                                    >
-                                        관리자
-                                    </h3>
-                                    <img
-                                        src={img_manager_url}
-                                        alt="#"
-                                        className={'inline-flex justify-self-end self-end'}
-                                    />
-
-                                </div>
-
-                            </SScard>
-                        }
-
-
+                        {/* 보드 카드 + 프로필 카드 + 권한 카드 */}
+                        <DoorContentsCard/>
                     </SScardWrap>
                 </Spin>
 
