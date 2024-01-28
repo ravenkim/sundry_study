@@ -8,9 +8,7 @@ export const postUserProfileImg = (param) =>
 export const getFullUserInfo = () =>
     client.get('profile/user');
 
-
-// todo to 찬민 비밀번호준 알고 놀랐습니다. post 요청간은 경우 뒤쪽에 status 붙여주세요. 햇갈립니다
-export const postUserPW = (param) =>
+export const postUserPwStatus = (param) =>
     client.post('profile/user/save-pwd', param);
 
 export const postBoardRentals = (param) =>
