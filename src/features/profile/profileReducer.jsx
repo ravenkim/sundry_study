@@ -7,8 +7,7 @@ import {
     postBoardRentals,
     postBoardReservations,
     postUserNotifications,
-    postUserProfileImg,
-    postUserPW,
+    postUserProfileImg, postUserPwStatus,
     putBoardRentalsReturn
 } from "./profileAPI.jsx";
 
@@ -34,7 +33,7 @@ const asyncRequest = {
 
     postUserPW:[
         {postUserPwStatus:reducerUtils.init()},
-        postUserPW
+        postUserPwStatus
     ],
 
     postBoardRentals : [
