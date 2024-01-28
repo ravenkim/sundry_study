@@ -7,7 +7,8 @@ import {
     postBoardRentals,
     postBoardReservations,
     postUserNotifications,
-    postUserProfileImg, postUserPwStatus,
+    postUserProfileImg,
+    postUserPwStatus,
     putBoardRentalsReturn
 } from "./profileAPI.jsx";
 
