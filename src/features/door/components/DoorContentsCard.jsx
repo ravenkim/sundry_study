@@ -4,6 +4,7 @@ import {cmsAction} from "../../cms/cmsReducer.jsx";
 import SScard from "../../../common/components/Card/SScard.jsx";
 import img_profile_url from "../../../assets/img/profile.svg";
 import img_manager_url from "../../../assets/img/manager.svg";
+import {push} from "redux-first-history"
 
 
 const DoorContentsCard = () => {
