@@ -11,6 +11,11 @@ const ContentsCard = ({
 
     const [likeStatus, setLikeStatus] = useState(false)
 
+    const handleLikeClick = (event) => {
+        event.stopPropagation();
+        setLikeStatus(!likeStatus);
+    };
+
     return (
         <>
             {/*<div key={item?.contentId}
@@ -43,6 +48,7 @@ const ContentsCard = ({
 
             <div key={item?.contentId}
                  className={'group relative flex-auto w-[23%] max-w-[23.5%] rounded-[10px] overflow-hidden transition-all cursor-pointer shadow-[0px_1px_4px_rgba(0,0,0,0.3)] hover:-translate-y-1 '}
+                 onClick={onClick}
             >
                 {/*이미지 박스*/}
                 <div className={'w-full h-[150px] max-h-[150px] flex justify-center items-center overflow-hidden '}>
@@ -64,7 +70,7 @@ const ContentsCard = ({
                             <img src={likeStatus ? LikeHeart : UnLikedHeart}
                                  alt="좋아요"
                                  className={'transition-all hover:scale-125 relative z-2'}
-                                 onClick={() => setLikeStatus(!likeStatus)}
+                                 onClick={handleLikeClick}
 
                             />
                             <span className={''}>예약</span>
