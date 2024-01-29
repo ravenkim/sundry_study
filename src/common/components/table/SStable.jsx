@@ -52,6 +52,10 @@ columns = [
 const SStable = ({
                      useSearch = true,
                      useIndex = false,
+                     useFilter = {
+                         filterYn: false,
+                         filteringColumns: []
+                     },
                      columns,
                      dataSource,
                      onRowClick
@@ -165,6 +169,32 @@ const SStable = ({
     }, [indexColumns, filteredData]);
 
 
+    // 3. 컬럼 필터링 기능
+    const [filteringColumns, setFilteringColumns] = useState([]);
+
+    useEffect(() => {
+        if (colorFeaturesColumns && useFilter.filterYn) {
+            const updatedColumns = colorFeaturesColumns.map(column => {
+                if (useFilter.filteringColumns.some(filterCol => filterCol.title === column.title)) {
+                    const allData = filteredData.map(data => data[column.dataIndex]);
+                    const uniqueData = [...new Set(allData)];
+
+                    return {
+                        ...column,
+                        filters: uniqueData.map(data => ({ text: data, value: data })),
+                        onFilter: (value, record) => record[column.dataIndex].indexOf(value) === 0,
+                    };
+                }
+                return column;
+            });
+            setFilteringColumns(updatedColumns);
+        }
+        else {
+            setFilteringColumns(colorFeaturesColumns)
+        }
+    }, [filteredData, colorFeaturesColumns, useFilter]);
+
+
     const handleRowClick = (record, rowIndex) => {
         // 여기에 클릭한 행에 대한 액션을 정의합니다.
         onRowClick( record);
@@ -189,7 +219,7 @@ const SStable = ({
                 size={"small"}
                 className={'mt-[16px] cursor-pointer'}
                 dataSource={filteredData}
-                columns={colorFeaturesColumns}
+                columns={filteringColumns}
                 onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
