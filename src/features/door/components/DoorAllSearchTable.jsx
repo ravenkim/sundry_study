@@ -59,6 +59,10 @@ const columns = [
              onRowClick={(data) => {
                  dispatch(push(`/content/${data?.contentId}`))
              }}
+            useFilter={{
+                filterYn: true,
+                filteringColumns: columns.filter(column => column.title === '카테고리' || column.title === '상태')
+            }}
         >
 
         </SStable>
