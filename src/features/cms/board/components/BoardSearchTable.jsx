@@ -24,12 +24,6 @@ const BoardSearchTable = ({path}) => {
 
     }, [searchResult]);
 
-    useEffect(() => {
-        return () => {
-            dispatch(cmsAction.initializeAll())
-            // 페이지 나가면 초기화
-        }
-    }, []);
 
 
     const columns = [

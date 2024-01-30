@@ -8,6 +8,7 @@ import AdminPage from "src/pages/admin/AdminPage.jsx";
 import ContentPage from "src/pages/cms/ContentPage.jsx";
 import BoardPage from "src/pages/cms/BoardPage.jsx";
 import ProfilePage from "src/pages/accounts/ProfilePage.jsx";
+import CmsPage from "src/pages/cms/CmsPage.jsx";
 
 
 const IndexRoute = () => {
@@ -68,7 +69,7 @@ const IndexRoute = () => {
                 path="/content/:content"
                 element={
                     <PrivateRoute>
-                        <ContentPage/>
+                        <CmsPage/>
                     </PrivateRoute>
                 }
             />
@@ -78,7 +79,7 @@ const IndexRoute = () => {
                 path="/board/:board/"
                 element={
                     <PrivateRoute>
-                        <BoardPage />
+                        <CmsPage />
                     </PrivateRoute>
                 }
             />
