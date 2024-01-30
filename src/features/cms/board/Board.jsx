@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SSsearchInput from "src/common/components/input/SSsearchInput.jsx";
-import {cmsAction} from "./cmsReducer.jsx";
+import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 import ContentsCard from "src/common/components/contents/ContentsCard.jsx";
 import {push} from "redux-first-history";
-import BoardSearchTable from "./components/BoardSearchTable.jsx";
+import BoardSearchTable from "src/features/cms/board/components/BoardSearchTable.jsx";
 import {Spin} from "antd";
 import imgClient from "src/api/imgClient.jsx";
+import SSsectionWrap from "src/common/components/wrapper/SSsectionWrap.jsx";
+
 
 const Board = () => {
 
@@ -50,12 +52,7 @@ const Board = () => {
     }, [boardId]);
 
 
-    useEffect(() => {
-        return () => {
-            dispatch(cmsAction.initializeAll())
-            // 페이지 나가면 초기화
-        }
-    }, []);
+
 
 
     const [fullList, setFullList] = useState([]) // 전체 리스트
@@ -174,7 +171,7 @@ const Board = () => {
 
 
     return (
-        <div>
+      <SSsectionWrap>
             <SSsearchInput
                 value={searchBoardText}
                 title={`다음 카테고리에서 검색합니다: ${boardDetail?.boardInfo?.boardNm? boardDetail?.boardInfo?.boardNm:''} `}
@@ -231,7 +228,7 @@ const Board = () => {
 
 
             </Spin>
-        </div>
+        </SSsectionWrap>
     );
 };
 

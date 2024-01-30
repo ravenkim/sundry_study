@@ -1,17 +1,19 @@
 import React from 'react';
 import SSlayout from "src/common/components/layout/SSlayout.jsx";
-import Content from "src/features/cms/content/Content.jsx";
+import Cms from "src/features/cms/Cms.jsx";
 
-const ContentPage = () => {
+const CmsPage = () => {
+
+
 
 
 
 
     return (
         <SSlayout>
-            <Content/>
+            <Cms/>
         </SSlayout>
     );
 };
 
-export default ContentPage;
+export default CmsPage;
