@@ -81,6 +81,7 @@ const Menu = ({
             tabIndex="0"
             ref={menuRef}
             onKeyDown={(e) => e.key === 'Escape' && setMenuOpen(false)}
+            }}
         >
 
             {/*tablet~pc*/}
