@@ -88,57 +88,25 @@ const RentalContentView = () => {
 
     return (
         <div
-            style={{
-                width: '100%',
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-            }}
+            className={'w-full flex items-center flex-col'}
         >
             <div
-                className={'w-full '}
-                style={{
-                    backgroundColor: "rgba(79,95,245,0.9)",
-                    display: 'flex',
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: 'center',
-                    minHeight: '349px'
-                }}
-
+                className={'w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center min-h-[349px] '}
             >
                 <div
-                    style={{
-                        width: '63%',
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                    }}
+                    className={'w-[63%] flex justify-between '}
                 >
                     <SSwrapper
-                        style={{
-                            width: '300px',
-                            height: '300px',
-                            marginBottom: '20px',
-                            boxSizing: 'border-box',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}
+                        className={'w-[300px] h-[300px] mb-[20px] box-border flex justify-center items-center '}
                     >
-                        <img src={contentDetailImg} alt="#" className={'max-w-[300px]] max-h-[full]'}/>
+                        <img src={contentDetailImg} alt="#" className={'max-w-[300px] max-h-[full]'}/>
 
 
                     </SSwrapper>
 
 
                     <div
-                        style={{
-                            width: 'calc(100% - 320px)',
-                            height: 100,
-                            marginTop: '20px',
-                            color: "red"
-                        }}
+                        className={'w-[calc(100%-320px)] mt-[20px] min-h-[100px]'}
                     >
 
                         <h5
@@ -185,16 +153,17 @@ const RentalContentView = () => {
                     style={{
                         width: '58%',
                     }}
+
                 >
                     <div
-                        style={{marginTop: '20px'}}
+                        className={'mt-[40px]'}
                     ><SSeditor
-
                         height={'90vh'}
                         isEditMode={false}
                         changeHandler={(contents) => {
                         }}
                         initContents={contentHtml}
+
                     /></div>
 
                 </div>
@@ -216,6 +185,7 @@ const RentalContentView = () => {
                             padding: '20px'
 
                         }}
+
                     >
                         현재 상태: {rentalStatNm}
 
