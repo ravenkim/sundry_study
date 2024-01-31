@@ -34,7 +34,8 @@ const Profile = () => {
     )
 
     useEffect(() => {
-        dispatch(userAction.getUserProfileImg())
+
+
         //유저 프로필 정보 들고오기
         dispatch(profileAction.getFullUserInfo())
 
