@@ -9,8 +9,6 @@ WORKDIR /app
 COPY ./ /app
 
 
-
-
 # package.json 및 package-lock.json 파일에 명시된 의존성 패키지들을 설치
 RUN yarn install
 
@@ -28,6 +26,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 # custom 설정파일을 컨테이너 내부로 복사한다.
 COPY nginx/nginx.conf /etc/nginx/conf.d
+
 
 # 컨테이너의 80번 포트를 열어준다.
 EXPOSE 80
