@@ -38,7 +38,6 @@ const RAW_RUNTIME_STATE =
           ["antd", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.12.1"],\
           ["autoprefixer", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.4.16"],\
           ["axios", "npm:1.6.2"],\
-          ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
           ["eslint-plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:7.33.2"],\
           ["eslint-plugin-react-hooks", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:0.4.5"],\
@@ -2176,48 +2175,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["connected-react-router", [\
-      ["npm:6.9.3", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/connected-react-router-npm-6.9.3-87a887faf3-10c0.zip/node_modules/connected-react-router/",\
-        "packageDependencies": [\
-          ["connected-react-router", "npm:6.9.3"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3", {\
-        "packageLocation": "./.yarn/__virtual__/connected-react-router-virtual-4f3cc2c413/5/AppData/Local/Yarn/Berry/cache/connected-react-router-npm-6.9.3-87a887faf3-10c0.zip/node_modules/connected-react-router/",\
-        "packageDependencies": [\
-          ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
-          ["@types/history", null],\
-          ["@types/react", "npm:18.2.43"],\
-          ["@types/react-redux", null],\
-          ["@types/react-router", null],\
-          ["@types/redux", null],\
-          ["history", "npm:5.3.0"],\
-          ["immutable", "npm:4.3.4"],\
-          ["lodash.isequalwith", "npm:4.4.0"],\
-          ["prop-types", "npm:15.8.1"],\
-          ["react", "npm:18.2.0"],\
-          ["react-redux", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:8.1.3"],\
-          ["react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.20.1"],\
-          ["redux", "npm:4.2.1"],\
-          ["seamless-immutable", "npm:7.1.4"]\
-        ],\
-        "packagePeers": [\
-          "@types/history",\
-          "@types/react-redux",\
-          "@types/react-router",\
-          "@types/react",\
-          "@types/redux",\
-          "history",\
-          "react-redux",\
-          "react-router",\
-          "react",\
-          "redux"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["convert-source-map", [\
       ["npm:2.0.0", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/convert-source-map-npm-2.0.0-7ab664dc4e-10c0.zip/node_modules/convert-source-map/",\
@@ -3656,15 +3613,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/lodash.debounce-npm-4.0.8-f1d6e09799-10c0.zip/node_modules/lodash.debounce/",\
         "packageDependencies": [\
           ["lodash.debounce", "npm:4.0.8"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["lodash.isequalwith", [\
-      ["npm:4.4.0", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/lodash.isequalwith-npm-4.4.0-128278c097-10c0.zip/node_modules/lodash.isequalwith/",\
-        "packageDependencies": [\
-          ["lodash.isequalwith", "npm:4.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5850,7 +5798,6 @@ const RAW_RUNTIME_STATE =
           ["antd", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.12.1"],\
           ["autoprefixer", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.4.16"],\
           ["axios", "npm:1.6.2"],\
-          ["connected-react-router", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.9.3"],\
           ["eslint-plugin-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:7.33.2"],\
           ["eslint-plugin-react-hooks", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:0.4.5"],\
@@ -5976,15 +5923,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["scroll-into-view-if-needed", "npm:3.1.0"],\
           ["compute-scroll-into-view", "npm:3.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["seamless-immutable", [\
-      ["npm:7.1.4", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/seamless-immutable-npm-7.1.4-107e4aec08-10c0.zip/node_modules/seamless-immutable/",\
-        "packageDependencies": [\
-          ["seamless-immutable", "npm:7.1.4"]\
         ],\
         "linkType": "HARD"\
       }]\
