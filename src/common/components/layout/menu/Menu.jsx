@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {CloseOutlined} from "@ant-design/icons";
 import MenuButtonWrap from "./components/MenuButtonWrap.jsx";
@@ -27,14 +27,19 @@ const Menu = ({
         shallowEqual
     );
 
+     useEffect(() => {
 
-    // 메뉴가 열리면 메뉴에 포커스
-    const menuRef = useRef(null);
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setMenuOpen(false);
+            }
+        };
 
-    useEffect(() => {
-        if (menuRef.current) {
-            menuRef.current.focus();
-        }
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, []);
 
 
@@ -78,9 +83,7 @@ const Menu = ({
                 opacity: '0.97'
             }}
             className={'w-full h-full fixed z-[99]'}
-            tabIndex="0"
-            ref={menuRef}
-            onKeyDown={(e) => e.key === 'Escape' && setMenuOpen(false)}
+
         >
 
             {/*tablet~pc*/}
