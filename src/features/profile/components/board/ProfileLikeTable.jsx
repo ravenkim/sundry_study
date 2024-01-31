@@ -45,8 +45,8 @@ const ProfileLikeTable = () => {
     }, [BoardLikes]);
 
     useEffect(() => {
-        if (LikeDeleteData.data) {
-            if (LikeDeleteData.data.statusCode === 201) {
+        if (LikeDeleteData) {
+            if (LikeDeleteData.statusCode === 201) {
                 Swal.fire({
                     title: LikeDeleteData.data.msg,
                     icon: 'success',
