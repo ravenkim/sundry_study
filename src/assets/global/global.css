@@ -256,3 +256,13 @@ div:where(.swal2-icon) {
 .ant-btn-primary:hover {
     background-color: #263BF2 !important;
 }
+
+
+/*
+suneditor*/
+.sun-editor {
+    @apply rounded-[5px];
+    overflow: hidden;
+}
+/*
+suneditor*/
