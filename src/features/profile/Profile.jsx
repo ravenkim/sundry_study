@@ -34,16 +34,14 @@ const Profile = () => {
     )
 
     useEffect(() => {
-
-
         //유저 프로필 정보 들고오기
         dispatch(profileAction.getFullUserInfo())
 
+        //탭설정
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
 
         return () => {
             dispatch(profileAction.initializeAll())
-            // 페이지 나가면 초기화
         }
     }, [])
 
