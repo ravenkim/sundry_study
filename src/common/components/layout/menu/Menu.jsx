@@ -27,6 +27,21 @@ const Menu = ({
         shallowEqual
     );
 
+     useEffect(() => {
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
 
     useEffect(() => {
         if(user){
