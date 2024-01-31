@@ -54,15 +54,20 @@ const ProfileLikeTable = () => {
     }, [BoardLikes]);
 
     useEffect(() => {
-        setBoardList(BoardLikes?.likeList)
-    }, [boardList]);
-
-    useEffect(() => {
-        if(LikeDeleteData) {
-            if(LikeDeleteData.res) {
+        if (LikeDeleteData.data) {
+            if (LikeDeleteData.data.statusCode === 201) {
+                Swal.fire({
+                    title: LikeDeleteData.data.msg,
+                    icon: 'success',
+                })
                 dispatch(profileAction.postBoardLikes({userId: fullUserInfo?.userInfo?.userId}))
+            } else {
+                Swal.fire({
+                    title: LikeDeleteData.data.error,
+                    icon: 'error',
+                })
             }
-        }
+        } // --> 확인 메세지 띄우고 다시 불러오기
     }, [LikeDeleteData]); // post 성공하면 리스트 다시 불러오기
 
     const columns = [

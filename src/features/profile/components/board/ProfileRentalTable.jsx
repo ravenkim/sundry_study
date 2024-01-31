@@ -60,6 +60,23 @@ const ProfileRentalTable = () => {
     }, [boardList, BoardRentals?.rentalInfo?.rentalStatNm]);
     // 데이터 변경되면 다시 집어넣기
 
+    useEffect(() => {
+        if (BoardRentalsReturn.data) {
+            if (BoardRentalsReturn.data.statusCode === 201) {
+                Swal.fire({
+                    title: BoardRentalsReturn.data.msg,
+                    icon: 'success',
+                })
+                dispatch(profileAction.postBoardRentals({userId: fullUserInfo?.userInfo?.userId}));
+            } else {
+                Swal.fire({
+                    title: BoardRentalsReturn.data.error,
+                    icon: 'error',
+                })
+            }
+        } // --> 확인 메세지 띄우고 다시 불러오기
+    }, [BoardRentalsReturn]);
+
     const columns = [
         {
             title: '카테고리',
@@ -101,34 +118,8 @@ const ProfileRentalTable = () => {
                                         dispatch(profileAction.putBoardRentalsReturn({
                                             contentId: BoardRentals?.rentalInfo[value]?.contentId,
                                             userId: fullUserInfo?.userInfo?.userId
-                                        }));
-                                        /*if (BoardRentalsReturn) {
-                                            if (BoardRentalsReturn.res) {
-                                                Swal.fire({
-                                                    title: '반납에 성공했어요!',
-                                                    icon: 'success',
-                                                })
-                                            } else {
-                                                Swal.fire({
-                                                    title: '알 수 없는 오류로 반납에 실패했어요.',
-                                                    icon: 'error',
-                                                })
-                                            }
-                                        }*/ // --> put 성공 시 res값을 돌려주지 않는 상태이다. 요청할 것
+                                        }))
 
-                                        if(BoardRentalsReturn) {
-                                            if(BoardRentalsReturn.loading !== true && BoardRentalsReturn.data === true) {
-                                                Swal.fire({
-                                                    title: '반납에 성공했어요!',
-                                                    icon: 'success',
-                                                })
-                                            } else {
-                                                Swal.fire({
-                                                    title: '알 수 없는 오류로 반납에 실패했어요.',
-                                                    icon: 'error',
-                                                })
-                                            }
-                                        }
                                     }, `문의사항이 있으면 언제든지 알려주세요.<br/> 최대한 빠르게 확인할게요! :)`)
                                 }}
                                 className={'mr-[6px]'}
