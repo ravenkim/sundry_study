@@ -44,6 +44,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.16.16"],\
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
+          ["jquery", "npm:3.7.1"],\
           ["jwt-decode", "npm:4.0.0"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
@@ -3524,6 +3525,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["jquery", [\
+      ["npm:3.7.1", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/jquery-npm-3.7.1-eeeac0f21e-10c0.zip/node_modules/jquery/",\
+        "packageDependencies": [\
+          ["jquery", "npm:3.7.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["js-tokens", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/js-tokens-npm-4.0.0-0ac852e9e2-10c0.zip/node_modules/js-tokens/",\
@@ -5804,6 +5814,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.16.16"],\
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
+          ["jquery", "npm:3.7.1"],\
           ["jwt-decode", "npm:4.0.0"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
@@ -6022,7 +6033,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
           ["@types/jquery", null],\
-          ["jquery", null]\
+          ["jquery", "npm:3.7.1"]\
         ],\
         "packagePeers": [\
           "@types/jquery",\
