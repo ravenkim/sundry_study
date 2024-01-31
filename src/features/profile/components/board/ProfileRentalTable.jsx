@@ -28,26 +28,24 @@ const ProfileRentalTable = () => {
     );
 
 
-    const [boardList, setBoardList] = useState([])
-    const [userData, setUserData] = useState('')
 
+
+
+
+    //  유저에 대한 랜탈 목록 데이터 받아오기
     useEffect(() => {
         if (fullUserInfo) {
-            setUserData(JSON.stringify(fullUserInfo?.userInfo?.userId).trim())
-            const userIdString = fullUserInfo?.userInfo?.userId;
-            dispatch(profileAction.postBoardRentals({userId: userIdString}))
-            // 유저 키값 보내서 해당 유저에 대한 데이터 받아오기
+            dispatch(profileAction.postBoardRentals({
+                userId: fullUserInfo?.userInfo?.userId
+            }))
         }
     }, [fullUserInfo]);
 
 
-    useEffect(() => {
-        dispatch(profileAction.getFullUserInfo())
-        return () => {
-            dispatch(profileAction.initializeAll())
-            // 페이지 나가면 초기화
-        }
-    }, []);
+
+
+    const [boardList, setBoardList] = useState([])
+
 
     useEffect(() => {
         if (BoardRentals) {

@@ -35,14 +35,19 @@ const Profile = () => {
 
     useEffect(() => {
         dispatch(userAction.getUserProfileImg())
+        //유저 프로필 정보 들고오기
+        dispatch(profileAction.getFullUserInfo())
+
         if (!activeTab) dispatch(profileAction.setTab("userInfo"))
 
         return () => {
             dispatch(profileAction.initializeAll())
-            dispatch(adminAction.initializeAll())
             // 페이지 나가면 초기화
         }
     }, [])
+
+
+
 
 
     return (
