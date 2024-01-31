@@ -90,10 +90,7 @@ const Content = () => {
 
     return (
         <div
-            style={{
-                backgroundColor: '#F5F5F5',
-                width: ' 100%'
-            }}
+            className={'bg-[#f5f5f5] w-full pb-[40px]'}
         >
 
             {/*상세 타입에 따라 나누는 구간*/}
