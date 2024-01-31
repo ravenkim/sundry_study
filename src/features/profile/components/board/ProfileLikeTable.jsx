@@ -30,7 +30,8 @@ const ProfileLikeTable = () => {
             // 유저 키값 보내서 해당 유저에 대한 데이터 받아오기
     useEffect(() => {
         if (fullUserInfo) {
-            dispatch(profileAction.postBoardLikes({userId: fullUserInfo?.userInfo?.userId}))
+            dispatch(profileAction.postBoardLikes({
+                userId: fullUserInfo?.userInfo?.userId}))
         }
     }, [fullUserInfo]);
 
