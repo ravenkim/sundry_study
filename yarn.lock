@@ -2802,6 +2802,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jquery@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "jquery@npm:3.7.1"
+  checksum: 808cfbfb758438560224bf26e17fcd5afc7419170230c810dd11f5c1792e2263e2970cca8d659eb84fcd9acc301edb6d310096e450277d54be4f57071b0c82d9
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -4328,6 +4335,7 @@ __metadata:
     framer-motion: "npm:^10.16.12"
     hangul-js: "npm:^0.2.6"
     history: "npm:^5.3.0"
+    jquery: "npm:^3.7.1"
     jwt-decode: "npm:^4.0.0"
     postcss: "npm:^8.4.32"
     react: "npm:^18.2.0"
