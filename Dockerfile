@@ -5,9 +5,14 @@ FROM node:20.10.0 as build
 WORKDIR /app
 
 # app dependencies
-COPY package.json yarn.lock /app/
-RUN yarn install --frozen-lockfile
-COPY . /app/
+# 컨테이너 내부로 package.json 파일들을 복사
+COPY ./ /app
+
+
+
+
+# package.json 및 package-lock.json 파일에 명시된 의존성 패키지들을 설치
+RUN yarn install
 
 RUN yarn build
 
