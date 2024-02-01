@@ -159,8 +159,18 @@ const UserInfo = () => {
                             <form action="/item" method={'post'} encType={"multipart/form-data"}>
                                 <Upload {...props} defaultFileList={[...fileList]}
                                         className={'flex flex-col justify-center items-center'}>
-                                    <Button icon={<UploadOutlined/>}>프로필 변경</Button>
+                                    {fileList.length > 0 ? (
+                                        <></>
+                                    ) : (
+                                        <Button icon={<UploadOutlined />}>프로필 변경</Button>
+                                    )}
                                 </Upload>
+                                {fileList.length > 0 && (
+                                    <>
+                                        <SSbutton danger className={'px-[60px] mr-2'} onClick={handleCancel}>취소</SSbutton>
+                                        <SSbutton type={'primary'} className={'px-[30px]'} onClick={handleSave}>이미지 변경하기</SSbutton>
+                                    </>
+                                )}
                             </form>
                         </div>
                         <div className={'flex flex-col gap-[6px]'}>
@@ -213,8 +223,6 @@ const UserInfo = () => {
 
                     <div
                         className={'w-full flex justify-center items-center gap-[16px] mt-[20px] tablet:mt-[40px] desktop:mt-[80px] '}>
-                        <SSbutton danger className={'px-[60px]'} onClick={handleCancel}>취소</SSbutton>
-                        <SSbutton type={'primary'} className={'px-[60px]'} onClick={handleSave}>이미지 변경하기</SSbutton>
                     </div>
                 </div>
 
