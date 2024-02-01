@@ -13,6 +13,8 @@ export default defineConfig({
 		}
 	},
 
+
+
 	build: {
 		rollupOptions: {
 			cache: true, // 캐시 설정
@@ -21,12 +23,13 @@ export default defineConfig({
 			output: {
 				//큰 라이브러리를 쪼개서 만들어준다
 				manualChunks: {
-					antd: ['antd'],
-					react: ['react', 'react-dom'],
-					reactRouter: ['react-router-dom'],
+
+					react: ['react', 'react-dom', 'react-router', 'react-router-dom' ],
+					redux: ['react-redux', '@reduxjs/toolkit', 'redux', 'redux-first-history', 'redux-saga'],
+					antd: ['antd', '@ant-design/icons'],
+					dndkit: ['@dnd-kit/core', '@dnd-kit/modifiers', '@dnd-kit/sortable', '@dnd-kit/utilities'],
 					axios: ['axios'],
 					suneditor: ['suneditor', 'suneditor-react']
-
 
 				},
 			},
