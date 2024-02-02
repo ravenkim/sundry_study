@@ -9,10 +9,6 @@ import showMessage from "src/common/components/notice/notice.js";
 import ChangePasswordModal from "src/features/profile/components/components/ChangePasswordModal.jsx";
 
 const UserInfo = () => {
-    const [passwordInput, setPasswordInput] = useState(false)
-    const [postPwValue, setPostPwValue] = useState('')
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [userImg, setUserImg] = useState('')
 
     const dispatch = useDispatch()
 
@@ -100,7 +96,6 @@ const UserInfo = () => {
 
     const handleCancel = () => {
         setFileList([]); // 이미지 초기화
-        setPostPwValue(''); // 비밀번호 입력 값 초기화
     }; // 취소버튼 클릭 시 초기화
 
     ///////////////////////////////////////////////////////////////////////////////////
