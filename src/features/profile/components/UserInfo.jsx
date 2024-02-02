@@ -21,7 +21,7 @@ const UserInfo = () => {
 
     } = useSelector(({profileReducer, userReducer}) => ({
             userProfileImg: userReducer.userProfileImg.data,
-            postUserProfileImgStatus: profileReducer.postUserProfileImgStatus,
+            postUserProfileImgStatus: profileReducer.postUserProfileImgStatus.data,
             fullUserInfo: profileReducer.fullUserInfo.data,
             userDataLoading: userReducer.userProfileImg.loading,
             postUserPwStatus: profileReducer.postUserPwStatus.data,
@@ -65,21 +65,14 @@ const UserInfo = () => {
 
     };
 
+
+    // 이미지 변경시 메세지와 초기화 처리
     useEffect(() => {
-        if (postUserProfileImgStatus) { // 이미지 변경시 메세지와 초기화 처리
-            /*if (postUserProfileImg.data.res) {
-                setFileList([])
-                showMessage('success', postUserProfileImg.data.msg)
-                dispatch(profileAction.getUserProfileImg());
-            } else {
-                showMessage('error', postUserProfileImg.data.msg)
-            }*/
-            if (postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
+        if (postUserProfileImgStatus === false) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
                 dispatch(userAction.getUserProfileImg());
-                dispatch(profileAction.initialize('postUserProfileImg'))
-            } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
+                dispatch(profileAction.initialize('postUserProfileImgStatus'))
         }
     }, [postUserProfileImgStatus]);
 
