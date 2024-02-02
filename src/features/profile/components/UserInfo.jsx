@@ -68,7 +68,7 @@ const UserInfo = () => {
 
     // 이미지 변경시 메세지와 초기화 처리
     useEffect(() => {
-        if (postUserProfileImgStatus === false) {
+        if (postUserProfileImgStatus ) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
                 dispatch(userAction.getUserProfileImg());

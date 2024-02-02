@@ -128,7 +128,7 @@ export const extraReducers = (prefix, asyncRequest) => {
 
                     if (action.payload.data instanceof Blob) {
                         if (action.payload.data.type === 'application/json') {
-                            state[Object.keys(requestInfo)[0]] = reducerUtils.success(false);
+                            state[Object.keys(requestInfo)[0]] = reducerUtils.success(true);
                         } else {
                             const blobUrl = URL.createObjectURL(action.payload.data)
                             state[Object.keys(requestInfo)[0]] = reducerUtils.success(blobUrl);
