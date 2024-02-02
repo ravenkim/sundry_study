@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {profileAction} from "src/features/profile/profileReducer.jsx";
+import {userAction} from "src/features/accounts/userReducer.jsx";
 import {UploadOutlined, UserOutlined} from '@ant-design/icons';
 import {Avatar, Button, Space, Spin, Upload} from 'antd';
 import SSbutton from "src/common/components/button/SSbutton.jsx";
@@ -80,6 +81,8 @@ const UserInfo = () => {
             if (postUserProfileImgStatus.loading === false && postUserProfileImgStatus.data === false) {
                 setFileList([]);
                 showMessage('success', '이미지가 성공적으로 저장되었습니다.');
+                dispatch(userAction.getUserProfileImg());
+                dispatch(profileAction.initialize('postUserProfileImg'))
             } // 임시 data 성공시 로직 -> res 값으로 변경되면 다시 바꿔야 됨
         }
     }, [postUserProfileImgStatus]);
