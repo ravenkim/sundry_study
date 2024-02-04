@@ -93,9 +93,7 @@ const UserInfo = () => {
 
     ///////////////////////////////////////////////////////////////////////////////////
 
-    const handleFileChange = ({fileList}) => {
-        setFileList(fileList);
-    };
+
 
     const props = {
         action: 'http://110.35.15.168:8088/swagger-ui/index.html#/ProfileController/saveProfileImg',

@@ -87,24 +87,57 @@ export const createRequestSaga = (prefix, reducerName, apiRequest) => {
 
             const response = yield call(() => apiRequest(action.payload)); // 여기서 apiCall은 실제 API 호출 함수입니다.
 
+
             if (response.data instanceof Blob) {
-                yield put({
-                    type: `${prefix}/${reducerName}Success`,
-                    payload: response
-                });
-            } else if (response.data.res) {
-                yield put({
-                    type: `${prefix}/${reducerName}Success`,
-                    payload: response.data
-                });
+                 //들어온게 blob이면 예외 처리
+                if (response.data.type === 'application/json') {
+                    const reader = new FileReader();
+                    const result = yield new Promise((resolve, reject) => {
+                        reader.onload = e => resolve(e.target.result);
+                        reader.onerror = reject;
+                        reader.readAsText(response.data);
+                    });
+                    const jsonData = JSON.parse(result);
+                    if (jsonData.res) {
+                        yield put({
+                            type: `${prefix}/${reducerName}Success`,
+                            payload: jsonData
+                        });
+                    } else {
+                        yield put({
+                            type: `${prefix}/${reducerName}Fail`,
+                            payload: response
+                        });
+                    }
+
+
+                } else {
+                    yield put({
+                        type: `${prefix}/${reducerName}Success`,
+                        payload: response
+                    });
+                }
+
+
             } else {
-                yield put({
-                    type: `${prefix}/${reducerName}Fail`,
-                    payload: response.data
-                });
+
+                //일반 예외 처리
+                if (response.data.res) {
+                    yield put({
+                        type: `${prefix}/${reducerName}Success`,
+                        payload: response.data
+                    });
+                } else {
+                    yield put({
+                        type: `${prefix}/${reducerName}Fail`,
+                        payload: response.data
+                    });
+                }
             }
 
+
         } catch (error) {
+            //기타 예외처리
             yield put({
                 type: `${prefix}/${reducerName}Fail`,
                 payload: error.message,
@@ -126,15 +159,12 @@ export const extraReducers = (prefix, asyncRequest) => {
                     const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
                     const requestInfo = asyncRequest[key][0];
 
+                    console.log(requestInfo)
+                    console.log(action.payload)
+
                     if (action.payload.data instanceof Blob) {
-                        if (action.payload.data.type === 'application/json') {
-                            state[Object.keys(requestInfo)[0]] = reducerUtils.success(true);
-                        } else {
                             const blobUrl = URL.createObjectURL(action.payload.data)
                             state[Object.keys(requestInfo)[0]] = reducerUtils.success(blobUrl);
-                        }
-
-
                     } else {
                         state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload?.data);
                     }
@@ -210,7 +240,7 @@ export const reduxMaker = (prefix, asyncRequest, localState = {}, localReducers 
     //사가 만들기
     final[`${prefix}Saga`] = function* () {
         //로그인 기능
-        if(prefix === 'user') yield takeLatest('user/login', login)
+        if (prefix === 'user') yield takeLatest('user/login', login)
         //그외
         for (const reducerName in asyncRequest) {
             yield takeLatest(
