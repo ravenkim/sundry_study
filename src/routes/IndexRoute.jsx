@@ -5,8 +5,6 @@ import DoorPage from "src/pages/door/DoorPage.jsx";
 import IndexPage from "src/pages/index/IndexPage.jsx";
 import ErrorPage from "src/pages/error/ErrorPage.jsx";
 import AdminPage from "src/pages/admin/AdminPage.jsx";
-import ContentPage from "src/pages/cms/ContentPage.jsx";
-import BoardPage from "src/pages/cms/BoardPage.jsx";
 import ProfilePage from "src/pages/accounts/ProfilePage.jsx";
 import CmsPage from "src/pages/cms/CmsPage.jsx";
 

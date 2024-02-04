@@ -4,7 +4,6 @@ import SSinput from "src/common/components/input/SSinput.jsx";
 import {validatePassword} from "src/common/utils/validateUtils.jsx";
 import {useDispatch} from "react-redux";
 import {profileAction} from "src/features/profile/profileReducer.jsx";
-import {postUserPwStatus} from "../../profileAPI.jsx";
 
 const ChangePasswordModal = ({
     setModalVisible,

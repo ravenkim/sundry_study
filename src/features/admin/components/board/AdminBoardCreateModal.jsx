@@ -1,7 +1,5 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import SSmodal from "src/common/components/modal/SSmodal.jsx";
-import {Carousel} from 'antd';
-import {CaretLeftOutlined, CaretRightOutlined, RightOutlined, RightSquareTwoTone} from "@ant-design/icons";
 
 
 const AdminBoardCreateModal = ({
