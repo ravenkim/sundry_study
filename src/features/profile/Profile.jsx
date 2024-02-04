@@ -11,8 +11,6 @@ import ReservationsInfo from "src/features/profile/components/ReservationsInfo.j
 import {profileAction} from "src/features/profile/profileReducer.jsx";
 
 import {UserOutlined} from '@ant-design/icons';
-import {adminAction} from "src/features/admin/adminReducer.jsx";
-import {userAction} from "src/features/accounts/userReducer.jsx";
 
 
 const Profile = () => {

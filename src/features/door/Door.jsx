@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react'
 import SSsearchInput from "src/common/components/input/SSsearchInput.jsx"
 import SSsectionWrap from "src/common/components/wrapper/SSsectionWrap.jsx"
 import SScardWrap from "src/common/components/Card/SScardWrap.jsx"
-import SScard from "src/common/components/Card/SScard.jsx"
 import {shallowEqual, useDispatch, useSelector} from "react-redux"
-import {push} from "redux-first-history"
 
 import {Spin} from "antd";
 import DoorAllSearchTable from "src/features/door/components/DoorAllSearchTable.jsx";

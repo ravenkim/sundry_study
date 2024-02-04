@@ -1,5 +1,3 @@
-import img_profile_url from "../../../assets/img/profile.svg";
-
 const SScard = ({
                     children,
                     style,
