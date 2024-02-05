@@ -1,6 +1,7 @@
 import {useState} from "react";
 import UnLikedHeart from 'src/assets/img/heart.svg'
 import LikeHeart from 'src/assets/img/fill_heart.svg'
+import unImaged from 'src/assets/img/unImaged.svg'
 
 const ContentsCard = ({
                           idx,
@@ -51,8 +52,9 @@ const ContentsCard = ({
                  onClick={onClick}
             >
                 {/*이미지 박스*/}
-                <div className={'w-full h-[150px] max-h-[150px] flex justify-center items-center overflow-hidden '}>
-                    <img src={item?.url} alt="#" className={'w-full h-auto'}/>
+                <div className={'w-full h-[150px] max-h-[150px] flex justify-center items-center overflow-hidden border-b-[1px] border-b-[#E3E4E8] border-solid'}>
+                    {item?.url ? <img src={item?.url} alt="#" className={'w-full h-auto'}/> : <img src={unImaged} alt="#"/>}
+
                 </div>
 
                 {/*텍스트 박스*/}
