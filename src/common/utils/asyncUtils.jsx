@@ -159,8 +159,7 @@ export const extraReducers = (prefix, asyncRequest) => {
                     const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
                     const requestInfo = asyncRequest[key][0];
 
-                    console.log(requestInfo)
-                    console.log(action.payload)
+
 
                     if (action.payload.data instanceof Blob) {
                             const blobUrl = URL.createObjectURL(action.payload.data)
