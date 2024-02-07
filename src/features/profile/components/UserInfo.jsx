@@ -7,6 +7,7 @@ import {Avatar, Button, Space, Spin, Upload} from 'antd';
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import showMessage from "src/common/components/notice/notice.js";
 import ChangePasswordModal from "src/features/profile/components/components/ChangePasswordModal.jsx";
+import SSlabel from "../../../common/components/label/SSlabel.jsx";
 
 const UserInfo = () => {
 
@@ -68,11 +69,11 @@ const UserInfo = () => {
 
     // 이미지 변경시 메세지와 초기화 처리
     useEffect(() => {
-        if (postUserProfileImgStatus ) {
-                setFileList([]);
-                showMessage('success', '이미지가 성공적으로 저장되었습니다.');
-                dispatch(userAction.getUserProfileImg());
-                dispatch(profileAction.initialize('postUserProfileImgStatus'))
+        if (postUserProfileImgStatus) {
+            setFileList([]);
+            showMessage('success', '이미지가 성공적으로 저장되었습니다.');
+            dispatch(userAction.getUserProfileImg());
+            dispatch(profileAction.initialize('postUserProfileImgStatus'))
         }
     }, [postUserProfileImgStatus]);
 
@@ -92,7 +93,6 @@ const UserInfo = () => {
     }; // 취소버튼 클릭 시 초기화
 
     ///////////////////////////////////////////////////////////////////////////////////
-
 
 
     const props = {
@@ -151,68 +151,54 @@ const UserInfo = () => {
                                     {fileList.length > 0 ? (
                                         <></>
                                     ) : (
-                                        <Button icon={<UploadOutlined />}>프로필 변경</Button>
+                                        <Button icon={<UploadOutlined/>}>프로필 변경</Button>
                                     )}
                                 </Upload>
                                 {fileList.length > 0 && (
                                     <>
-                                        <SSbutton danger className={'px-[60px] mr-2'} onClick={handleCancel}>취소</SSbutton>
-                                        <SSbutton type={'primary'} className={'px-[30px]'} onClick={handleSave}>이미지 변경하기</SSbutton>
+                                        <SSbutton danger className={'px-[60px] mr-2'}
+                                                  onClick={handleCancel}>취소</SSbutton>
+                                        <SSbutton type={'primary'} className={'px-[30px]'} onClick={handleSave}>이미지
+                                            변경하기</SSbutton>
                                     </>
                                 )}
                             </form>
                         </div>
                         <div className={'flex flex-col gap-[6px]'}>
-                            <div
-                                className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
-                                <p className={'desktop:min-w-[89px]'}>아이디</p>
-                                <p className={''}>{fullUserInfo?.userInfo?.userEmail}</p>
-                            </div>
 
-                            <div
-                                className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
-                                <p className={'desktop:min-w-[89px]'}>이름</p>
-                                <p>{fullUserInfo?.userInfo?.userNm}</p>
-                            </div>
-                            <div
-                                className={'flex desktop:min-w-[80px] gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] '}>
-                                <p className={'desktop:min-w-[89px]'}>핸드폰 번호</p>
-                                <p>{fullUserInfo?.userInfo?.phoneNumber}</p>
-                            </div>
-                            <form action=""
-                                  method={'post'}
-                                  encType={"application/json"}
-                            >
-                                <div
-                                    className={'flex gap-[32px] font-[NotoSansKR-500] text-[16px] text-[#51525c] items-center '}>
-                                    <div
-                                        className={'h-fit desktop:h-[35.141px] desktop:max-h-[35.141px] self-start flex items-center'}
-                                    >
-                                        <p
-                                            className={'desktop:min-w-[89px]'}
-                                        >
-                                            비밀번호변경
-                                        </p>
-                                    </div>
-                                    <div className={'flex flex-col desktop:flex-col gap-[6px]'}>
-                                        <SSbutton
-                                            onClick={() => {
-                                                setModalVisible(true)
-                                            }}
-                                        >비밀번호 변경하기</SSbutton>
-                                        <ChangePasswordModal
-                                            modalVisible={modalVisible}
-                                            setModalVisible={setModalVisible}
-                                        />
-                                    </div>
-                                </div>
-                            </form>
+                            <SSlabel
+                                label={'아이디'}
+                                children={<p className={''}>{fullUserInfo?.userInfo?.userEmail}</p>}
+                            />
+                            <SSlabel
+                                label={'이름'}
+                                children={<p>{fullUserInfo?.userInfo?.userNm}</p>}
+                            />
+                            <SSlabel
+                                label={'핸드폰 번호'}
+                                children={<p>{fullUserInfo?.userInfo?.phoneNumber}</p>}
+                            />
+                            <SSlabel
+                                label={' 비밀번호변경'}
+                                children={<SSbutton
+                                    onClick={() => {
+                                        setModalVisible(true)
+                                    }}
+                                >비밀번호 변경하기</SSbutton>
+                                }
+                            />
+
+                            <ChangePasswordModal
+                                modalVisible={modalVisible}
+                                setModalVisible={setModalVisible}
+                            />
+
+
+
                         </div>
                     </div>
 
-                    <div
-                        className={'w-full flex justify-center items-center gap-[16px] mt-[20px] tablet:mt-[40px] desktop:mt-[80px] '}>
-                    </div>
+
                 </div>
 
 
