@@ -44,7 +44,6 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.16.16"],\
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
-          ["jquery", "npm:3.7.1"],\
           ["jwt-decode", "npm:4.0.0"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
@@ -59,12 +58,11 @@ const RAW_RUNTIME_STATE =
           ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
           ["redux-saga", "npm:1.2.3"],\
           ["sass", "npm:1.69.7"],\
-          ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
           ["suneditor", "https://github.com/JiHong88/SunEditor.git#commit=562fc01858870d7ee66f88739738e90655d53127"],\
           ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
           ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
-          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
+          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.12"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -1581,7 +1579,7 @@ const RAW_RUNTIME_STATE =
           ["@types/babel__core", "npm:7.20.5"],\
           ["@types/vite", null],\
           ["react-refresh", "npm:0.14.0"],\
-          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
+          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.12"]\
         ],\
         "packagePeers": [\
           "@types/vite",\
@@ -3521,15 +3519,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/jiti-npm-1.21.0-baebd5985a-10c0.zip/node_modules/jiti/",\
         "packageDependencies": [\
           ["jiti", "npm:1.21.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["jquery", [\
-      ["npm:3.7.1", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/jquery-npm-3.7.1-eeeac0f21e-10c0.zip/node_modules/jquery/",\
-        "packageDependencies": [\
-          ["jquery", "npm:3.7.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5814,7 +5803,6 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:10.16.16"],\
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
-          ["jquery", "npm:3.7.1"],\
           ["jwt-decode", "npm:4.0.0"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
@@ -5829,12 +5817,11 @@ const RAW_RUNTIME_STATE =
           ["redux-first-history", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.1.1"],\
           ["redux-saga", "npm:1.2.3"],\
           ["sass", "npm:1.69.7"],\
-          ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
           ["suneditor", "https://github.com/JiHong88/SunEditor.git#commit=562fc01858870d7ee66f88739738e90655d53127"],\
           ["suneditor-react", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:3.6.1"],\
           ["sweetalert2", "npm:11.10.2"],\
           ["tailwindcss", "npm:3.3.6"],\
-          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"]\
+          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.12"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -6016,28 +6003,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/signal-exit-npm-4.1.0-61fb957687-10c0.zip/node_modules/signal-exit/",\
         "packageDependencies": [\
           ["signal-exit", "npm:4.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["slick-carousel", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/slick-carousel-npm-1.8.1-8382d373c2-10c0.zip/node_modules/slick-carousel/",\
-        "packageDependencies": [\
-          ["slick-carousel", "npm:1.8.1"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1", {\
-        "packageLocation": "./.yarn/__virtual__/slick-carousel-virtual-3c4395ba08/5/AppData/Local/Yarn/Berry/cache/slick-carousel-npm-1.8.1-8382d373c2-10c0.zip/node_modules/slick-carousel/",\
-        "packageDependencies": [\
-          ["slick-carousel", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:1.8.1"],\
-          ["@types/jquery", null],\
-          ["jquery", "npm:3.7.1"]\
-        ],\
-        "packagePeers": [\
-          "@types/jquery",\
-          "jquery"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6589,17 +6554,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["vite", [\
-      ["npm:5.0.7", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/vite-npm-5.0.7-583fea8b6f-10c0.zip/node_modules/vite/",\
+      ["npm:5.0.12", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/vite-npm-5.0.12-37f95c18d1-10c0.zip/node_modules/vite/",\
         "packageDependencies": [\
-          ["vite", "npm:5.0.7"]\
+          ["vite", "npm:5.0.12"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7", {\
-        "packageLocation": "./.yarn/__virtual__/vite-virtual-e4536be618/5/AppData/Local/Yarn/Berry/cache/vite-npm-5.0.7-583fea8b6f-10c0.zip/node_modules/vite/",\
+      ["virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.12", {\
+        "packageLocation": "./.yarn/__virtual__/vite-virtual-998edd6e22/5/AppData/Local/Yarn/Berry/cache/vite-npm-5.0.12-37f95c18d1-10c0.zip/node_modules/vite/",\
         "packageDependencies": [\
-          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.7"],\
+          ["vite", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:5.0.12"],\
           ["@types/less", null],\
           ["@types/lightningcss", null],\
           ["@types/node", null],\
