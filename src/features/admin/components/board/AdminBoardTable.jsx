@@ -3,6 +3,7 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {adminAction} from "src/features/admin/adminReducer.jsx";
 import showMessage from "src/common/components/notice/notice.js";
+import SSbutton from "../../../../common/components/button/SSbutton.jsx";
 
 const AdminBoardTable = () => {
 
@@ -64,6 +65,11 @@ const AdminBoardTable = () => {
         {
             title: '상태',
             dataIndex: 'boardStat',
+        },
+        {
+            title: '이미지 수정',
+            dataIndex: 'boardId',
+            render: (text, record, index) => <SSbutton>이미지 수정하기</SSbutton>
         },
 
     ]
