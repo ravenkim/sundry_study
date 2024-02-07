@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import SSlabelForInput from "src/common/components/label/SSlabelForInput.jsx";
+import SSlabel from "src/common/components/label/SSlabel.jsx";
 import {Avatar, Input, Modal, Space} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {shallowEqual, useSelector} from "react-redux";
@@ -101,28 +101,28 @@ const AdminMemberDetail = ({
 
 
                 <div>
-                    <SSlabelForInput label={'이름'}>
+                    <SSlabel label={'이름'}>
                         <Input
                             value={userNm}
                         />
-                    </SSlabelForInput>
-                    <SSlabelForInput label={'이메일'}>
+                    </SSlabel>
+                    <SSlabel label={'이메일'}>
                         <Input
                             value={userEmail}
                         />
-                    </SSlabelForInput>
+                    </SSlabel>
 
 
-                    <SSlabelForInput label={'전화번호'}>
+                    <SSlabel label={'전화번호'}>
                         <Input
                             value={phoneNumber}
                         />
-                    </SSlabelForInput>
-                    <SSlabelForInput label={'권한'}>
+                    </SSlabel>
+                    <SSlabel label={'권한'}>
                         <Input
                             value={authNm}
                         />
-                    </SSlabelForInput>
+                    </SSlabel>
 
 
                 </div>

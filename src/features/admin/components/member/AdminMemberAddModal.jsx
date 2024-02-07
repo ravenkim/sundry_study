@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Divider, Input, Modal, Select} from "antd";
-import SSlabelForInput from "src/common/components/label/SSlabelForInput.jsx";
+import SSlabel from "src/common/components/label/SSlabel.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {removeRole} from "src/common/utils/dataProcessingUtils.jsx";
 import showMessage from "src/common/components/notice/notice.js";
@@ -116,7 +116,7 @@ const AdminMemberAddModal = ({
             width={800}
         >
             <Divider></Divider>
-            <SSlabelForInput
+            <SSlabel
                 label={'이름'}
             >
                 <Input
@@ -124,8 +124,8 @@ const AdminMemberAddModal = ({
                     value={userNm}
                     onChange={e => setUserNm(e.target.value)}
                 />
-            </SSlabelForInput>
-            <SSlabelForInput
+            </SSlabel>
+            <SSlabel
                 label={'이메일'}
             >
                 <Input
@@ -133,8 +133,8 @@ const AdminMemberAddModal = ({
                     value={userEmail}
                     onChange={e => setUserEmail(e.target.value)}
                 />
-            </SSlabelForInput>
-            <SSlabelForInput
+            </SSlabel>
+            <SSlabel
                 label={'전화번호'}
             >
                 <Input
@@ -142,8 +142,8 @@ const AdminMemberAddModal = ({
                     onChange={e => setPhoneNumber(e.target.value.replace(/\s|-/g, ''))}
                     placeholder="01012345678"
                 />
-            </SSlabelForInput>
-            <SSlabelForInput
+            </SSlabel>
+            <SSlabel
                 label={'권한'}
             >
                 <Select
@@ -156,7 +156,7 @@ const AdminMemberAddModal = ({
                     fieldNames={{label: 'authNm', value: 'authId'}}
                     placeholder="권한을 선택해 주세요."
                 />
-            </SSlabelForInput>
+            </SSlabel>
 
         </Modal>
     );

@@ -1,11 +1,14 @@
 import React from 'react';
 import SSmodal from "src/common/components/modal/SSmodal.jsx";
+import {Tabs} from "antd";
+import AdminMember from "../member/AdminMember.jsx";
+import AdminBoard from "./AdminBoard.jsx";
 
 
 const AdminBoardCreateModal = ({
-    modalVisible,
-    setModalVisible
-}) => {
+                                   modalVisible,
+                                   setModalVisible
+                               }) => {
 
 
     const onCancel = () => {
@@ -32,7 +35,26 @@ const AdminBoardCreateModal = ({
             cancelText={'취소'}
 
         >
+            <Tabs
+                type="card"
+                items={[
+                    {
+                        label: `기본정보`,
+                        key: `member`,
+                        children:
+                            <div>
 
+
+                            </div>,
+                    },
+                    {
+                        label: `템플릿`,
+                        key: `board`,
+                        children: <div/>,
+                    }
+
+                ]}
+            />
 
 
         </SSmodal>
