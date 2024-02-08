@@ -3,12 +3,17 @@ import SSmodal from "src/common/components/modal/SSmodal.jsx";
 import {Tabs} from "antd";
 import AdminMember from "../member/AdminMember.jsx";
 import AdminBoard from "./AdminBoard.jsx";
+import SSinput from "../../../../common/components/input/SSinput.jsx";
+import SSlabel from "../../../../common/components/label/SSlabel.jsx";
 
 
 const AdminBoardCreateModal = ({
                                    modalVisible,
                                    setModalVisible
                                }) => {
+
+
+
 
 
     const onCancel = () => {
@@ -43,6 +48,16 @@ const AdminBoardCreateModal = ({
                         key: `member`,
                         children:
                             <div>
+                                <SSlabel
+                                    label={'이름'}
+                                >
+                                    <SSinput/>
+                                </SSlabel>
+                                <SSlabel
+                                    label={'설명'}
+                                >
+                                    <SSinput/>
+                                </SSlabel>
 
 
                             </div>,
