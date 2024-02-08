@@ -3,9 +3,12 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import SStable from "src/common/components/table/SStable.jsx";
 import {adminAction} from "src/features/admin/adminReducer.jsx";
 import showMessage from "src/common/components/notice/notice.js";
-import SSbutton from "../../../../common/components/button/SSbutton.jsx";
+import SSbutton from "src/common/components/button/SSbutton.jsx";
+import AdminBoardImageEditModal from "./AdminBoardImageEditModal.jsx";
 
-const AdminBoardTable = () => {
+const AdminBoardTable = ({
+
+                         }) => {
 
     const dispatch = useDispatch()
 
@@ -14,11 +17,14 @@ const AdminBoardTable = () => {
         setBoardPrioritiesStatus
     } = useSelector(({adminReducer}) => ({
             boardListData: adminReducer.boardList.data?.boardList,
-        setBoardPrioritiesStatus: adminReducer.setBoardPrioritiesStatus.data
+            setBoardPrioritiesStatus: adminReducer.setBoardPrioritiesStatus.data
 
         }),
         shallowEqual
     );
+
+    const [boardImageModalVisible, setBoardImageModalVisible] = useState(false)
+    const [rowInfo, setRowInfo] = useState({})
 
 
     const [boardList, setBoardList] = useState([])
@@ -29,7 +35,7 @@ const AdminBoardTable = () => {
 
 
     useEffect(() => {
-        if(setBoardPrioritiesStatus){
+        if (setBoardPrioritiesStatus) {
             if (setBoardPrioritiesStatus.res) {
                 showMessage('success', setBoardPrioritiesStatus.msg)
             } else {
@@ -44,6 +50,8 @@ const AdminBoardTable = () => {
     useEffect(() => {
         dispatch(adminAction.getBoardList())
     }, []);
+
+
 
     const columns = [
         {
@@ -69,7 +77,15 @@ const AdminBoardTable = () => {
         {
             title: '이미지 수정',
             dataIndex: 'boardId',
-            render: (text, record, index) => <SSbutton>이미지 수정하기</SSbutton>
+            render: (text, record, index) =>
+                <SSbutton
+                    onClick={() => {
+                        setRowInfo(record)
+                        setBoardImageModalVisible(true)
+                    }}
+                >
+                    이미지 수정하기
+                </SSbutton>
         },
 
     ]
@@ -77,14 +93,23 @@ const AdminBoardTable = () => {
 
 
 
-
     return (
-        <SStable
-            columns={columns}
-            dataSource={boardList}
-        >
+        <>
+            <SStable
+                columns={columns}
+                dataSource={boardList}
+            >
 
-        </SStable>
+            </SStable>
+
+
+            <AdminBoardImageEditModal
+                setBoardImageModalVisible = {setBoardImageModalVisible}
+                boardImageModalVisible={boardImageModalVisible}
+                rowInfo = {rowInfo}
+            />
+        </>
+
     );
 };
 

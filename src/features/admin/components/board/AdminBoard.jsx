@@ -26,8 +26,8 @@ const AdminBoard = () => {
 
 
                 <SSbutton
-                    onClick={      () =>       dispatch(adminAction.getBoardList())
-}
+                    onClick={() => dispatch(adminAction.getBoardList())
+                    }
                 >새로고침</SSbutton>
 
                 <SSbutton
@@ -39,19 +39,16 @@ const AdminBoard = () => {
 
             </div>
 
-            <div>
-                <AdminBoardTable/>
-            </div>
+            <AdminBoardTable/>
 
 
-            
             {/*보드 추가*/}
             <AdminBoardCreateModal
-                modalVisible = {boardCreateModalVisible}
-                setModalVisible  = {setBoardCreateModalVisible}
+                modalVisible={boardCreateModalVisible}
+                setModalVisible={setBoardCreateModalVisible}
             />
-            
-            
+
+
             {/* 보드 순서 변경*/}
             <AdminBoardOrderModal
                 modalVisible={orderModalVisible}
