@@ -1,42 +1,36 @@
-import React, {useState} from 'react';
-import {Calendar, momentLocalizer} from 'react-big-calendar'
+import React, {useState, Fragment, useMemo } from 'react';
+import {
+  Calendar,
+  Views,
+  DateLocalizer,
+  momentLocalizer,
+} from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-const Toolbar = ({date}) => {
-    const navigate = (action) => {
-        date.onNavigate(action);
-    }
 
-    return (
-        <div className="rbc-toolbar">
-      <span className="rbc-btn-group">
-        <button type="button" onClick={navigate.bind(null, 'TODAY')}>
-          이번달
-        </button>
-        <button
-            type="button"
-            onClick={navigate.bind(null, 'PREV')}
-        >
-          이전
-        </button>
-        <span className="rbc-toolbar-label">{`${date.getFullYear()}년 ${date.getMonth() + 1}월`}</span>
-        <button
-            type="button"
-            onClick={navigate.bind(null, 'NEXT')}
-        >
-          다음
-        </button>
-      </span>
-        </div>
-    )
-}
+const ColoredDateCellWrapper = ({ children }) =>
+  React.cloneElement(React.Children.only(children), {
+    style: {
+      backgroundColor: 'lightblue',
+    },
+  })
+
 
 const SScalendar = () => {
     moment.locale('ko-KR'); // 시간 국가 설정 // https://github.com/moment/moment/tree/develop/locale
     const localizer = momentLocalizer(moment) // 시간 생성
 
     const [myEventsList, setMyEventsList] = useState()
+
+    const views = Object.keys(Views).map((k) => Views[k])
+
+    const components = useMemo(() => ({
+        components : {
+            timeSlotWrapper: ColoredDateCellWrapper,
+        }
+    }),
+    []);
 
     return (
         <>
@@ -45,12 +39,13 @@ const SScalendar = () => {
                 events={events}
                 startAccessor="start"
                 endAccessor="end"
-                view={'month'}
-                components={{
-                    toolbar: Toolbar,
-                }}
-                resizable
-                selectable
+                /*view={'month'}*/
+                components={components}
+                /*resizable
+                selectable*/
+                showMultiDayTimes
+                step={60}
+                views={views}
 
                 className={'w-full min-h-[400px] h-auto'} // 스타일 정의
             />
