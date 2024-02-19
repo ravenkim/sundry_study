@@ -4,6 +4,7 @@ import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
+import SScalendarWarp from "src/common/components/calendar/SScalendarWarp.jsx";
 
 const RentalContentView = () => {
 
@@ -84,6 +85,9 @@ const RentalContentView = () => {
 
     //자유공간
     const [freeFieldsData, setFreeFieldsData] = useState()
+
+    //예약 팝업 띄우기
+    const [calendarVisible, setCalendarVisible] = useState(false)
 
 
     return (
@@ -195,7 +199,9 @@ const RentalContentView = () => {
                         > 대여하기(배치로 인하여 2차 예정) </SSbutton>
 
 
-                        <SSbutton disabled={true} style={{marginTop: '10px'}}> 예약하기 (2차 개발 예정)</SSbutton>
+                        <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={()=>{
+                            setCalendarVisible(true)
+                        }}> 예약하기 (2차 개발 예정)</SSbutton>
 
 
                         {
@@ -242,7 +248,12 @@ const RentalContentView = () => {
 
 
             </div>
+
+            {/*임시 캘린더 팝업 띄우기*/}
+            <SScalendarWarp calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>
+
         </div>
+
 
     );
 };
