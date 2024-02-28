@@ -91,7 +91,7 @@ const ChangePasswordModal = ({
 
             </SSinput>
             {
-                <div>{valueCheackMessage}</div>
+                <div className={'' + (valueCheack ? 'text_checked ' : 'text_alert ')}>{valueCheackMessage}</div>
             }
 
 
