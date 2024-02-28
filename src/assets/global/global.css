@@ -251,6 +251,7 @@ div:where(.swal2-icon) {
 
 .ant-btn-primary {
     background-color: #4F5FF5 !important;
+    color: #ffffff !important;
 }
 
 .ant-btn-primary:hover {
@@ -266,3 +267,23 @@ suneditor*/
 }
 /*
 suneditor*/
+
+.text_alert {
+    color: #FF4040;
+}
+
+.text_checked {
+    color: #263BF2;
+}
+
+.ant-upload-list {
+    width: 100%;
+}
+
+.ant-upload-list-item {
+    margin-top: 0;
+}
+
+.rbc-today {
+
+}

@@ -123,7 +123,7 @@ const UserInfo = () => {
             <Spin
                 spinning={userDataLoading}
             >
-                <div className={'w-full'}>
+                <div className={'w-full py-[40px]'}>
                     <div className={'w-fit flex desktop:flex-row gap-[100px] desktop:m-0 desktop:mx-auto'}>
                         <div className={'flex flex-col items-center gap-[8px]'}>
                             {userProfileImg === false
@@ -155,12 +155,12 @@ const UserInfo = () => {
                                     )}
                                 </Upload>
                                 {fileList.length > 0 && (
-                                    <>
-                                        <SSbutton danger className={'px-[60px] mr-2'}
+                                    <div className={'flex flex-col items-center justify-center gap-[5px] pt-[8px]'}>
+                                        <SSbutton danger className={'w-full'}
                                                   onClick={handleCancel}>취소</SSbutton>
                                         <SSbutton type={'primary'} className={'px-[30px]'} onClick={handleSave}>이미지
                                             변경하기</SSbutton>
-                                    </>
+                                    </div>
                                 )}
                             </form>
                         </div>
