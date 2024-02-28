@@ -12,9 +12,11 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const ColoredDateCellWrapper = ({ children }) =>
   React.cloneElement(React.Children.only(children), {
     style: {
-      backgroundColor: 'lightblue',
+      backgroundColor: 'red',
     },
   })
+
+
 
 
 const SScalendar = () => {
@@ -32,6 +34,19 @@ const SScalendar = () => {
     }),
     []);
 
+    const dayPropGetter = (date) => {
+    // 오늘 날짜 색 변경
+    if (moment(date).isSame(moment(), 'day')) {
+      return {
+        style: {
+          backgroundColor: '#ffd014',
+        },
+      };
+    }
+
+    return {};
+  };
+
     return (
         <>
             <Calendar
@@ -45,7 +60,8 @@ const SScalendar = () => {
                 selectable*/
                 showMultiDayTimes
                 step={60}
-                views={views}
+                views={['month', 'week', 'day']}
+                dayPropGetter={dayPropGetter}
 
                 className={'w-full min-h-[400px] h-auto'} // 스타일 정의
             />
@@ -146,3 +162,4 @@ const events = [
     'end': new Date(2015, 3, 22, 2, 0, 0)
   }
 ]
+
