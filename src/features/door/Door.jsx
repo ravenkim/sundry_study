@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import SSsearchInput from "src/common/components/input/SSsearchInput.jsx"
 import SSsectionWrap from "src/common/components/wrapper/SSsectionWrap.jsx"
-import SScardWrap from "src/common/components/Card/SScardWrap.jsx"
+import SScardWrap from "src/common/components/card/SScardWrap.jsx"
 import {shallowEqual, useDispatch, useSelector} from "react-redux"
 
 import {Spin} from "antd";
