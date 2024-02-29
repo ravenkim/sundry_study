@@ -21,7 +21,6 @@ const SScalendarWarp = ({calendarVisible,setCalendarVisible}) => {
                 onOk={onOk}
                 okText={'확인'}
                 cancelText={'취소'}
-                className={'w-[50%]'}
             >
                 <SScalendar/>
             </SSmodal>

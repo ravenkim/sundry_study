@@ -199,7 +199,7 @@ const RentalContentView = () => {
                         > 대여하기(배치로 인하여 2차 예정) </SSbutton>
 
 
-                        <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={()=>{
+                        <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={() => {
                             setCalendarVisible(true)
                         }}> 예약하기 (2차 개발 예정)</SSbutton>
 
@@ -229,12 +229,10 @@ const RentalContentView = () => {
                     </SSwrapper>
 
 
-
                     {/*수정 권한 있는지에 따라 보여줌*/}
                     {!readOnly &&
                         <div
-                            style={{
-                        }}
+                            style={{}}
                         >
                             디자인 변경 예정
 
