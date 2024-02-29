@@ -4,7 +4,7 @@ import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
-import SScalendarWarp from "src/common/components/calendar/SScalendarWarp.jsx";
+// import SScalendarWarp from "src/common/components/calendar/SScalendarWarp.jsx";
 
 const RentalContentView = () => {
 
@@ -250,7 +250,7 @@ const RentalContentView = () => {
             </div>
 
             {/*임시 캘린더 팝업 띄우기*/}
-            <SScalendarWarp calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>
+            {/*<SScalendarWarp calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>*/}
 
         </div>
 
