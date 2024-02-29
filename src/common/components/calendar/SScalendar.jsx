@@ -12,11 +12,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const ColoredDateCellWrapper = ({ children }) =>
   React.cloneElement(React.Children.only(children), {
     style: {
-      backgroundColor: 'red',
+      backgroundColor: 'lightblue',
     },
   })
-
-
 
 
 const SScalendar = () => {
@@ -25,7 +23,7 @@ const SScalendar = () => {
 
     const [myEventsList, setMyEventsList] = useState()
 
-    const views = Object.keys(Views).map((k) => Views[k])
+    const views = Object.keys(Views).map((k) => Views[k]) // 상단 버튼바 기본 설정 - 모든 버튼이 나오게 하기
 
     const components = useMemo(() => ({
         components : {
@@ -33,19 +31,6 @@ const SScalendar = () => {
         }
     }),
     []);
-
-    const dayPropGetter = (date) => {
-    // 오늘 날짜 색 변경
-    if (moment(date).isSame(moment(), 'day')) {
-      return {
-        style: {
-          backgroundColor: '#ffd014',
-        },
-      };
-    }
-
-    return {};
-  };
 
     return (
         <>
@@ -60,8 +45,7 @@ const SScalendar = () => {
                 selectable*/
                 showMultiDayTimes
                 step={60}
-                views={['month', 'week', 'day']}
-                dayPropGetter={dayPropGetter}
+                views={views}
 
                 className={'w-full min-h-[400px] h-auto'} // 스타일 정의
             />
@@ -162,4 +146,3 @@ const events = [
     'end': new Date(2015, 3, 22, 2, 0, 0)
   }
 ]
-
