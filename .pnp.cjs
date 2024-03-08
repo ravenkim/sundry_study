@@ -46,6 +46,7 @@ const RAW_RUNTIME_STATE =
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
           ["jwt-decode", "npm:4.0.0"],\
+          ["moment", "npm:2.30.1"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
           ["react-cookie", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.1.1"],\
@@ -3843,6 +3844,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["moment", [\
+      ["npm:2.30.1", {\
+        "packageLocation": "../../Users/cmpar/AppData/Local/Yarn/Berry/cache/moment-npm-2.30.1-1c51a5c631-10c0.zip/node_modules/moment/",\
+        "packageDependencies": [\
+          ["moment", "npm:2.30.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["ms", [\
       ["npm:2.1.2", {\
         "packageLocation": "../../Users/cmpar/AppData/Local/Yarn/Berry/cache/ms-npm-2.1.2-ec0c1512ff-10c0.zip/node_modules/ms/",\
@@ -5814,6 +5824,7 @@ const RAW_RUNTIME_STATE =
           ["hangul-js", "npm:0.2.6"],\
           ["history", "npm:5.3.0"],\
           ["jwt-decode", "npm:4.0.0"],\
+          ["moment", "npm:2.30.1"],\
           ["postcss", "npm:8.4.32"],\
           ["react", "npm:18.2.0"],\
           ["react-cookie", "virtual:feb62554a42ecf1f3cd93194d3d6c9e2f027c6cabd1f4b1f01d26b0a4013749d6df0a54ce67f46f18544af2a64723c9341473a8f2eb83e24d0cb03aa016c53a8#npm:6.1.1"],\
