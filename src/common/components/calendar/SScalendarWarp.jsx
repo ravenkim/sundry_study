@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import SSmodal from "../modal/SSmodal.jsx";
 import SScalendar from "./SScalendar.jsx";
@@ -30,3 +31,4 @@ const SScalendarWarp = ({calendarVisible,setCalendarVisible}) => {
 };
 
 export default SScalendarWarp;
+*/
