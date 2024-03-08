@@ -4,7 +4,7 @@ import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
-// import SScalendarWarp from "src/common/components/calendar/SScalendarWarp.jsx";
+import SScalendarWarp from "src/common/components/calendar/SScalendarWarp.jsx";
 
 const RentalContentView = () => {
 
@@ -199,10 +199,12 @@ const RentalContentView = () => {
                         > 대여하기(배치로 인하여 2차 예정) </SSbutton>
 
 
-                        <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={()=>{
+                        <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={() => {
                             setCalendarVisible(true)
                         }}> 예약하기 (2차 개발 예정)</SSbutton>
 
+                        {/*임시 캘린더 팝업 띄우기*/}
+                        <SScalendarWarp calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>
 
                         {
                             // 좋아요 버튼
@@ -229,12 +231,10 @@ const RentalContentView = () => {
                     </SSwrapper>
 
 
-
                     {/*수정 권한 있는지에 따라 보여줌*/}
                     {!readOnly &&
                         <div
-                            style={{
-                        }}
+                            style={{}}
                         >
                             디자인 변경 예정
 
@@ -249,8 +249,7 @@ const RentalContentView = () => {
 
             </div>
 
-            {/*임시 캘린더 팝업 띄우기*/}
-            {/*<SScalendarWarp calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>*/}
+
 
         </div>
 
