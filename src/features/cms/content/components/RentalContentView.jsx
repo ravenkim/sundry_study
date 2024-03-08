@@ -4,7 +4,6 @@ import SSwrapper from "src/common/components/wrapper/SSwrapper.jsx";
 import SSbutton from "src/common/components/button/SSbutton.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
-// import SScalendarWarp from "src/common/components/calendar/SScalendarWarp.jsx";
 
 const RentalContentView = () => {
 
@@ -202,9 +201,6 @@ const RentalContentView = () => {
                         <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={() => {
                             setCalendarVisible(true)
                         }}> 예약하기 (2차 개발 예정)</SSbutton>
-
-                        {/*임시 캘린더 팝업 띄우기*/}
-                        {/*<SScalendarWarp calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>*/}
 
                         {
                             // 좋아요 버튼
