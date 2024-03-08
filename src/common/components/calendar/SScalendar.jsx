@@ -1,3 +1,4 @@
+/*
 import React, {useState, Fragment, useMemo} from 'react';
 import {
     Calendar,
@@ -198,7 +199,7 @@ const SScalendar = () => {
                     showMultiDayTimes
                     step={60}
                     views={{
-                        /*day: true, */
+                        /!*day: true, *!/
                         month: true
                     }}
                     onSelectSlot={handleSelectSlot} // 달력의 빈 곳을 클릭하면 실행 -- 새로운 예약 생성하기
@@ -238,3 +239,4 @@ const SScalendar = () => {
 
 export default SScalendar;
 
+*/
