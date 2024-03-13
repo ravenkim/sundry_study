@@ -366,6 +366,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@date-io/core@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@date-io/core@npm:3.0.0"
+  checksum: c8a725ad5729b38d3f73b7c2bf852ac18a980d6b610832db9f87eb6821e6377854112ba4b5f8510d3e3f49d5290a50dd79ae7724bbafeb146bfdfb5b4c8a13ed
+  languageName: node
+  linkType: hard
+
+"@date-io/dayjs@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@date-io/dayjs@npm:3.0.0"
+  dependencies:
+    "@date-io/core": "npm:^3.0.0"
+  peerDependencies:
+    dayjs: ^1.8.17
+  peerDependenciesMeta:
+    dayjs:
+      optional: true
+  checksum: 0c445e6ca6dd2e39a359645f817258cf6f5909455c3b41172a2e6ccfaad85dbe2683b7328b46399f8edaf2ecffd3441b5b2ac869126d1e8765116e2fc6526816
+  languageName: node
+  linkType: hard
+
 "@dnd-kit/accessibility@npm:^3.1.0":
   version: 3.1.0
   resolution: "@dnd-kit/accessibility@npm:3.1.0"
@@ -1727,7 +1748,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.11.1, dayjs@npm:^1.11.7":
+"dayjs@npm:^1.11.1, dayjs@npm:^1.11.10, dayjs@npm:^1.11.7":
   version: 1.11.10
   resolution: "dayjs@npm:1.11.10"
   checksum: 4de9af50639d47df87f2e15fa36bb07e0f9ed1e9c52c6caa1482788ee9a384d668f1dbd00c54f82aaab163db07d61d2899384b8254da3a9184fc6deca080e2fe
@@ -3218,7 +3239,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment@npm:^2.29.4, moment@npm:^2.30.1":
+"moment@npm:^2.29.4":
   version: 2.30.1
   resolution: "moment@npm:2.30.1"
   checksum: 865e4279418c6de666fca7786607705fd0189d8a7b7624e2e56be99290ac846f90878a6f602e34b4e0455c549b85385b1baf9966845962b313699e7cb847543a
@@ -4501,6 +4522,7 @@ __metadata:
   dependencies:
     "@ant-design/icons": "npm:^5.2.6"
     "@babel/runtime": "npm:7.24.0"
+    "@date-io/dayjs": "npm:^3.0.0"
     "@dnd-kit/core": "npm:^6.1.0"
     "@dnd-kit/modifiers": "npm:^7.0.0"
     "@dnd-kit/sortable": "npm:^8.0.0"
@@ -4512,6 +4534,7 @@ __metadata:
     antd: "npm:^5.12.1"
     autoprefixer: "npm:^10.4.16"
     axios: "npm:^1.6.2"
+    dayjs: "npm:^1.11.10"
     eslint-plugin-react: "npm:^7.33.2"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.4"
@@ -4519,7 +4542,6 @@ __metadata:
     hangul-js: "npm:^0.2.6"
     history: "npm:^5.3.0"
     jwt-decode: "npm:^4.0.0"
-    moment: "npm:^2.30.1"
     postcss: "npm:^8.4.32"
     react: "npm:^18.2.0"
     react-big-calendar: "npm:1.10.0"

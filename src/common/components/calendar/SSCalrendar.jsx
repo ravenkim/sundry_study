@@ -1,42 +1,27 @@
 import React, {useState, Fragment, useMemo} from 'react';
 import {
-    Calendar,
-    Views,
-    DateLocalizer,
-    momentLocalizer,
+    Calendar
 } from 'react-big-calendar'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import dayjsLocalizer from 'react-big-calendar/lib/localizers/dayjs';
 import SSbutton from "../button/SSbutton.jsx";
 import {DatePicker, message, Space} from "antd";
 import iconInfo from 'src/assets/img/icon_info.svg'
 
+const Toolbar = ({date, onNavigate}) => {
 
-const ColoredDateCellWrapper = ({children}) =>
-    React.cloneElement(React.Children.only(children), {
-        style: {
-            backgroundColor: 'black',
-        },
-    })
-
-
-const Toolbar = (props) => {
-    const {date} = props;
-
-    const navigate = (action) => {
-        props.onNavigate(action);
-    };
     return (
         <div className="rbc-toolbar">
           <span className="rbc-btn-group relative w-full flex justify-center items-center">
               <div>
 
-                  <SSbutton onClick={navigate.bind(null, 'PREV')}>이전</SSbutton>
+                  <SSbutton onClick={() => onNavigate('PREV')}>이전</SSbutton>
                   <span className="rbc-toolbar-label">{`${date.getFullYear()}년 ${date.getMonth() + 1}월`}</span>
-                  <SSbutton onClick={navigate.bind(null, 'NEXT')}>다음</SSbutton>
+                  <SSbutton onClick={() => onNavigate('NEXT')}>다음</SSbutton>
               </div>
               <div className={'absolute left-0 top-0'}>
-                  <SSbutton onClick={navigate.bind(null, 'TODAY')}>오늘로 돌아가기</SSbutton>
+                  <SSbutton onClick={() => onNavigate('TODAY')}>오늘로 돌아가기</SSbutton>
               </div>
 
           </span>
@@ -137,28 +122,24 @@ const SSCalendar = () => {
     }
 ]);
 
-
-    moment.locale('ko-KR'); // 시간 국가 설정 // https://github.com/moment/moment/tree/develop/locale
-    const localizer = momentLocalizer(moment) // 시간 생성
-    // const views = Object.keys(Views).map((k) => Views[k]) // 상단 버튼바 기본 설정 - 모든 버튼이 나오게 하기
-
+    const localizer = dayjsLocalizer(dayjs); // dayjs로 날짜 불러오기
     const [isModalVisible, setIsModalVisible] = useState(false); // 예약객체 나타나게 하기
     const [selectedRange, setSelectedRange] = useState({ start: null, end: null }); // 날짜 선택하기
 
     const components = useMemo(() => ({
-            components: {
-                timeSlotWrapper: ColoredDateCellWrapper,
-            },
             toolbar: Toolbar
         }),
         []);
 
-
     // 날짜 겹침 확인 함수
     const isOverlap = (newStart, newEnd) => {
         return events.some(event => {
+            const eventStart = dayjs(event.start);
+            const eventEnd = dayjs(event.end);
+            const newStartDayjs = dayjs(newStart);
+            const newEndDayjs = dayjs(newEnd);
             return (
-                (moment(newStart).isSameOrBefore(moment(event.end)) && moment(newEnd).isSameOrAfter(moment(event.start)))
+                newStartDayjs.isSameOrBefore(eventEnd) && newEndDayjs.isSameOrAfter(eventStart)
             );
         });
     };
@@ -170,7 +151,7 @@ const SSCalendar = () => {
         } else {
             // 겹치지 않는 경우 예약 진행
             const newEvent = {
-                title: 'New Event', // to-do 인풋 하나 만들어서 타이틀 정하기 해야될까?
+                title: 'New Event', // to-do 인풋 하나 만들어서 타이틀 정하기 해야될까? // 사용자 이름 나타내는게 제일 좋을듯?
                 start: selectedRange.start,
                 end: selectedRange.end,
                 allDay: false
