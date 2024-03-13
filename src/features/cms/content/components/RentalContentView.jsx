@@ -5,6 +5,10 @@ import SSbutton from "src/common/components/button/SSbutton.jsx";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {cmsAction} from "src/features/cms/cmsReducer.jsx";
 import SSCalendarWrap from "../../../../common/components/calendar/SSCalendarWrap.jsx";
+import author from 'src/assets/img/author.svg'
+import keyword from 'src/assets/img/keyword.svg'
+import level from 'src/assets/img/level.svg'
+import link from 'src/assets/img/link.svg'
 
 const RentalContentView = () => {
 
@@ -48,13 +52,12 @@ const RentalContentView = () => {
                 const arr = Object.values(obj);
                 const madeFreeField = arr.map((item, index) => (
                     item.type === 'input' ?
-                        <li key={index}>
-                            <h6
-                                className={"text-[#ffffff]"}
-
-                            >
-                                {item.label}: {item.value}
-                            </h6>
+                        <li key={index} className={'text-[#ffffff] flex justify-center items-center text-[15px] gap-[8px]'}>
+                            {/*{item.label}: {item.value}*/}
+                            {item?.label === '강사명' && <><img src={author} alt="#" className={'w-[16px] '}/> {item?.value}</>}
+                            {item?.label === '강의 키워드' && <><img src={keyword} alt="#" className={'w-[14px] mx-[1px]'}/> {item?.value}</>}
+                            {item?.label === '수준' && <><img src={level} alt="#" className={'w-[16px] '}/> {item?.value}</>}
+                            {item?.label === '강좌 링크' && <><img src={link} alt="#" className={'w-[16px]'}/>{item.value}</>}
                         </li>
                         : null
 
@@ -88,7 +91,6 @@ const RentalContentView = () => {
 
     //예약 팝업 띄우기
     const [calendarVisible, setCalendarVisible] = useState(false)
-
 
     return (
         <div
@@ -131,7 +133,7 @@ const RentalContentView = () => {
 
                         <ul
 
-                            className={"text-[#ffffff]"}
+                            className={"text-[#ffffff] flex flex-col gap-[6px] items-start"}
                         >
 
                             {freeFieldsData}
