@@ -9,6 +9,7 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import SSbutton from "../button/SSbutton.jsx";
 import {DatePicker, message, Space} from "antd";
+import iconInfo from 'src/assets/img/icon_info.svg'
 
 
 const ColoredDateCellWrapper = ({children}) =>
@@ -169,7 +170,7 @@ const SSCalendar = () => {
         } else {
             // 겹치지 않는 경우 예약 진행
             const newEvent = {
-                title: 'New Event',
+                title: 'New Event', // to-do 인풋 하나 만들어서 타이틀 정하기 해야될까?
                 start: selectedRange.start,
                 end: selectedRange.end,
                 allDay: false
@@ -187,7 +188,7 @@ const SSCalendar = () => {
 
     return (
         <>
-            <div className={'flex justify-start items-start gap-[20px]'}>
+            <div className={'flex justify-start items-start gap-[20px] h-full'}>
                 <Calendar
                     localizer={localizer}
                     events={events} // 달력에 이미 예약되어 있는 날 표시
@@ -205,30 +206,36 @@ const SSCalendar = () => {
 
                     className={'w-full min-h-[500px] h-auto'} // 스타일 정의
                 />
-                <div className={'flex flex-col transition-all overflow-hidden ' + (isModalVisible ? 'w-auto h-fit' : 'w-0 h-0')}>
-                    <div className={'flex flex-col'}>
-                        <p>예약 날짜를 지정해주세요.</p>
-                        <span>예약이 완료되면 알림으로 알려드려요. 꼭 시간 내에 반납해주세요.</span>
-                        <span>언제든지 취소할 수 있어요, 예약목록에서 확인해주세요.</span>
-                        <span>문의사항이 있으면 언제든지 알려주세요. 최대한 빠르게 확인할게요! :)</span>
+                <div className={'flex flex-col justify-between p-[10px] overflow-hidden gap-[8px] box-border border-[#ECEDF0] border-[1px] border-solid ' + (isModalVisible ? 'w-auto min-w-[330px] h-full min-h-[500px]' : 'w-0 h-0 p-0')}>
+                    <div className={'flex flex-col gap-[6px]'}>
+                        <div className={'flex flex-col text-[#232433]'}>
+                            <p>예약 날짜를 지정해주세요.</p>
+                            <span>예약이 완료되면 알림으로 알려드려요.</span>
+                            <span>언제든지 취소할 수 있어요, 예약목록에서 확인해주세요.</span>
+                        </div>
+                        <div className={'flex flex-col gap-[8px]'}>
+                            <Space wrap>
+                                <DatePicker.RangePicker
+                                    format={"YYYY-MM-DD"}
+                                    onChange={(dates, dateStrings)=>{
+                                        setSelectedRange({
+                                            start:dates ? dates[0].toDate() : null,
+                                            end: dates ? dates[1].toDate() : null
+                                        })
+                                    }}
+                                />
+                            </Space>
+                            <div className={'flex justify-start gap-[6px]'}>
+                                <SSbutton onClick={handleOk}>예약하기</SSbutton>
+                                <SSbutton onClick={()=>{
+                                    setIsModalVisible(false)
+                                    // 닫기 누른 후 데이트피커 value 값 초기화하기
+                                }}>접기</SSbutton>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                    <Space>
-                        <DatePicker.RangePicker
-                            format={"YYYY-MM-DD"}
-                            onChange={(dates, dateStrings)=>{
-                                setSelectedRange({
-                                    start:dates ? dates[0].toDate() : null,
-                                    end: dates ? dates[1].toDate() : null
-                                })
-                            }}
-                        />
-                    </Space>
-                    <SSbutton onClick={handleOk}>예약하기</SSbutton>
-                    <SSbutton onClick={()=>{
-                        setIsModalVisible(false)
-                        // 닫기 누른 후 데이트피커 value 값 초기화하기
-                    }}>돌아가기</SSbutton>
+                    <div className={'w-full flex gap-[6px] justify-start items-start'}>
+                        <img src={iconInfo} alt="#" className={'w-[20px]'}/><span className={'text-[#51525C]'}>문의사항이 있으면 언제든지 알려주세요. 최대한 빠르게 확인할게요! :)</span>
                     </div>
                 </div>
             </div>
