@@ -8,6 +8,8 @@ import dayjsLocalizer from 'react-big-calendar/lib/localizers/dayjs';
 import SSbutton from "../button/SSbutton.jsx";
 import {DatePicker, message, Space} from "antd";
 import iconInfo from 'src/assets/img/icon_info.svg'
+import Swal from "sweetalert2/src/sweetalert2.js";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 const Toolbar = ({date, onNavigate}) => {
 
@@ -30,6 +32,16 @@ const Toolbar = ({date, onNavigate}) => {
 }
 
 const SSCalendar = () => {
+
+    const dispatch = useDispatch()
+
+    const {
+        user
+    } = useSelector(({userReducer})=>({
+        user:userReducer.user
+    }),
+        shallowEqual
+    )
 
     const [events,setEvents] = useState([ // 예약목록 -- 나중에 데이터 리덕스로 불러오기로 변경
     {
@@ -151,25 +163,34 @@ const SSCalendar = () => {
         } else {
             // 겹치지 않는 경우 예약 진행
             const newEvent = {
-                title: 'New Event', // to-do 인풋 하나 만들어서 타이틀 정하기 해야될까? // 사용자 이름 나타내는게 제일 좋을듯?
+                title: user.userNm, // 사용자 이름 나타내는게 제일 좋을듯?
                 start: selectedRange.start,
                 end: selectedRange.end,
                 allDay: false
             };
             setEvents((currentEvents) => [...currentEvents, newEvent]);
             setIsModalVisible(false);
-            // 성공 메시지 추가하기
+            // to-do 성공 메시지 추가하기
+
+            // then !!!
+            Swal.fire({
+                title:"예약 성공",
+                text:"예약이 완료되었습니다. 예약목록에서 확인해주세요.",
+                icon:"success"
+            })
+            // then !!!
+            // 예약 캘린더 팝업 닫기 추가
         }
     };
 
     const handleSelectSlot = ({ start, end }) => {
         setSelectedRange({ start, end });
-        setIsModalVisible(true);
+        setIsModalVisible(true); // 오른쪽 선택창 열기
     };
 
     return (
         <>
-            <div className={'flex justify-start items-start gap-[20px] h-full'}>
+            <div className={'flex justify-start items-start h-full ' + (isModalVisible ? 'gap-[20px] ' : '')}>
                 <Calendar
                     localizer={localizer}
                     events={events} // 달력에 이미 예약되어 있는 날 표시
@@ -187,12 +208,12 @@ const SSCalendar = () => {
 
                     className={'w-full min-h-[500px] h-auto'} // 스타일 정의
                 />
-                <div className={'flex flex-col justify-between p-[10px] overflow-hidden gap-[8px] box-border border-[#ECEDF0] border-[1px] border-solid ' + (isModalVisible ? 'w-auto min-w-[330px] h-full min-h-[500px]' : 'w-0 h-0 p-0')}>
+                <div className={'flex flex-col justify-between overflow-hidden gap-[8px] box-border border-[#ECEDF0] border-[1px] ' + (isModalVisible ? 'w-auto min-w-[330px] h-full min-h-[500px] border-solid p-[10px]' : 'w-0 h-0 p-[0px] ')}>
                     <div className={'flex flex-col gap-[6px]'}>
-                        <div className={'flex flex-col text-[#232433]'}>
-                            <p>예약 날짜를 지정해주세요.</p>
-                            <span>예약이 완료되면 알림으로 알려드려요.</span>
-                            <span>언제든지 취소할 수 있어요, 예약목록에서 확인해주세요.</span>
+                        <div className={'flex flex-col text-[#232433] '}>
+                            <p className={'mb-[8px]'}>예약 날짜를 지정해주세요.</p>
+                            <span className={'text-[#FF4040]'}>1회 예약은 최대 14일까지 가능합니다. </span>
+                            <span className={'break-keep mb-[8px]'}>언제든지 취소할 수 있어요, <br/>예약목록에서 확인해주세요.</span>
                         </div>
                         <div className={'flex flex-col gap-[8px]'}>
                             <Space wrap>
@@ -216,7 +237,7 @@ const SSCalendar = () => {
                         </div>
                     </div>
                     <div className={'w-full flex gap-[6px] justify-start items-start'}>
-                        <img src={iconInfo} alt="#" className={'w-[20px]'}/><span className={'text-[#51525C]'}>문의사항이 있으면 언제든지 알려주세요. 최대한 빠르게 확인할게요! :)</span>
+                        <img src={iconInfo} alt="#" className={'w-[20px]'}/><span className={'text-[#51525C] break-keep'}>문의사항이 있으면 언제든지 알려주세요. 최대한 빠르게 확인할게요! :)</span>
                     </div>
                 </div>
             </div>
