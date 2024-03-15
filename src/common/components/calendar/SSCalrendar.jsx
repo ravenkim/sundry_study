@@ -157,11 +157,17 @@ const SSCalendar = () => {
     };
 
     const handleOk = () => {
-        if (isOverlap(selectedRange.start, selectedRange.end)) {
-            // 겹치는 경우 경고 메시지 표시
-            message.error('예약하고자 하는 날짜는 이미 예약중입니다. 다시 선택해주세요.'); // 경고 메시지 얼러트로 변경하기
+        // 14일을 초과하지 않게 하기!!
+        const startDayjs = dayjs(selectedRange.start);
+        const endDayjs = dayjs(selectedRange.end);
+        const daysDiff = endDayjs.diff(startDayjs, 'day'); // 간격이 14일을 초과하는지 확인하기
+
+        if (daysDiff > 13 || isOverlap(selectedRange.start, selectedRange.end)) { // 14일 미만이면서 이미 예약되어 있지 않은 경우에만 예약진행하기 위해 작성
+            let errorMessage = daysDiff > 13 ? '예약 기간은 최대 14일을 초과할 수 없습니다. 다시 선택해주세요.' : '예약하고자 하는 날짜는 이미 예약중입니다. 다시 선택해주세요.';
+            // 에러 메시지 띄우기
+            message.error(errorMessage);
         } else {
-            // 겹치지 않는 경우 예약 진행
+            // 예약 진행
             const newEvent = {
                 title: user.userNm, // 사용자 이름 나타내는게 제일 좋을듯?
                 start: selectedRange.start,
