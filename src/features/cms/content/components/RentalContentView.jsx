@@ -94,8 +94,8 @@ const RentalContentView = () => {
     const [calendarVisible, setCalendarVisible] = useState(false)
 
     return (
-        <div
-            className={'w-full flex items-center flex-col'}
+        <
+
         >
             <SSsectionWrap
                 className={'desktop:max-w-full desktop:py-0 w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center  min-h-[349px]'}
@@ -145,6 +145,12 @@ const RentalContentView = () => {
                 </div>
 
             </SSsectionWrap>
+
+            <SSsectionWrap>
+                {/*//todo 여기 부터 작업하면 됩니다.*/}
+            </SSsectionWrap>
+
+
 
 
             <div
@@ -253,7 +259,7 @@ const RentalContentView = () => {
 
 
 
-        </div>
+        </>
 
 
     );
