@@ -80,9 +80,6 @@ const Content = () => {
     }, [contentype]);
 
 
-    // useEffect(() => {
-    //     console.log(type)
-    // }, [type]);
 
 
     const [mode, setMode] = useState()

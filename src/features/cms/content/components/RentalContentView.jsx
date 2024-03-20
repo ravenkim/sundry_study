@@ -101,7 +101,7 @@ const RentalContentView = () => {
                 className={'desktop:max-w-full desktop:py-0 w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center  min-h-[349px]'}
             >
                 <div
-                    className={'w-[63%] flex justify-between '}
+                    className={'w-[63%] flex justify-between desktop:max-w-[1000px] '}
                 >
                     <SSwrapper
                         className={'w-[300px] h-[300px] mb-[20px] box-border flex justify-center items-center '}
@@ -146,13 +146,6 @@ const RentalContentView = () => {
 
             </SSsectionWrap>
 
-            <SSsectionWrap>
-                {/*//todo 여기 부터 작업하면 됩니다.*/}
-            </SSsectionWrap>
-
-
-
-
             <div
                 style={{
                     width: '63%',
@@ -161,6 +154,13 @@ const RentalContentView = () => {
                     flexDirection: "row",
                     justifyContent: "space-between"
                 }}
+            >
+
+
+            </div>
+
+            <SSsectionWrap
+                className={'desktop:flex-row'}
             >
                 <div
                     style={{
@@ -254,9 +254,7 @@ const RentalContentView = () => {
 
                 </div>
 
-
-            </div>
-
+            </SSsectionWrap>
 
 
         </>
