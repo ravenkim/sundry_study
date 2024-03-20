@@ -9,6 +9,7 @@ import author from 'src/assets/img/author.svg'
 import keyword from 'src/assets/img/keyword.svg'
 import level from 'src/assets/img/level.svg'
 import link from 'src/assets/img/link.svg'
+import SSsectionWrap from "../../../../common/components/wrapper/SSsectionWrap.jsx";
 
 const RentalContentView = () => {
 
@@ -96,8 +97,8 @@ const RentalContentView = () => {
         <div
             className={'w-full flex items-center flex-col'}
         >
-            <div
-                className={'w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center min-h-[349px] '}
+            <SSsectionWrap
+                className={'desktop:max-w-full desktop:py-0 w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center  min-h-[349px]'}
             >
                 <div
                     className={'w-[63%] flex justify-between '}
@@ -143,8 +144,8 @@ const RentalContentView = () => {
                     </div>
                 </div>
 
+            </SSsectionWrap>
 
-            </div>
 
             <div
                 style={{
