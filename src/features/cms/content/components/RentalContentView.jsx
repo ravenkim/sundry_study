@@ -146,21 +146,9 @@ const RentalContentView = () => {
 
             </SSsectionWrap>
 
-            <div
-                style={{
-                    width: '63%',
-                    minHeight: '500px',
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between"
-                }}
-            >
-
-
-            </div>
-
+ 
             <SSsectionWrap
-                className={'desktop:flex-row'}
+                className={'desktop:flex-row desktop:max-w-[1000px] desktop:min-h-[500px]'}
             >
                 <div
                     style={{
