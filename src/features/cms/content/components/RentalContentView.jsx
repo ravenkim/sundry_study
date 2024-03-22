@@ -146,9 +146,9 @@ const RentalContentView = () => {
 
             </SSsectionWrap>
 
- 
+
             <SSsectionWrap
-                className={'desktop:flex-row desktop:max-w-[1000px] desktop:min-h-[500px]'}
+                className={'desktop:flex-row desktop:max-w-[1000px] desktop:min-h-[500px]  desktop:py-[20px]'}
             >
                 <div
                     style={{
