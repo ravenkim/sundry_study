@@ -9,7 +9,10 @@ import author from 'src/assets/img/author.svg'
 import keyword from 'src/assets/img/keyword.svg'
 import level from 'src/assets/img/level.svg'
 import link from 'src/assets/img/link.svg'
+import ToBack from 'src/assets/img/to_back_icon.svg'
 import SSsectionWrap from "../../../../common/components/wrapper/SSsectionWrap.jsx";
+import LikeHeart from "../../../../assets/img/fill_heart.svg";
+import UnLikedHeart from "../../../../assets/img/heart.svg";
 
 const RentalContentView = () => {
 
@@ -32,6 +35,7 @@ const RentalContentView = () => {
 
     const [userId, setUserId] = useState()
     const [contentId, setContentId] = useState()
+    const [likeStatus, setLikeStatus] = useState(false) // 좋아요 눌렀는지 여부 -- 나중에 데이터로 받아오기
 
 
     useEffect(() => {
@@ -53,12 +57,17 @@ const RentalContentView = () => {
                 const arr = Object.values(obj);
                 const madeFreeField = arr.map((item, index) => (
                     item.type === 'input' ?
-                        <li key={index} className={'text-[#ffffff] flex justify-center items-center text-[15px] gap-[8px]'}>
+                        <li key={index}
+                            className={'text-[#ffffff] flex justify-center items-center text-[15px] gap-[8px]'}>
                             {/*{item.label}: {item.value}*/}
-                            {item?.label === '강사명' && <><img src={author} alt="#" className={'w-[16px] '}/> {item?.value}</>}
-                            {item?.label === '강의 키워드' && <><img src={keyword} alt="#" className={'w-[14px] mx-[1px]'}/> {item?.value}</>}
-                            {item?.label === '수준' && <><img src={level} alt="#" className={'w-[16px] '}/> {item?.value}</>}
-                            {item?.label === '강좌 링크' && <><img src={link} alt="#" className={'w-[16px]'}/>{item.value}</>}
+                            {item?.label === '강사명' && <><img src={author} alt="#"
+                                                             className={'w-[16px] '}/> {item?.value}</>}
+                            {item?.label === '강의 키워드' && <><img src={keyword} alt="#"
+                                                                className={'w-[14px] mx-[1px]'}/> {item?.value}</>}
+                            {item?.label === '수준' && <><img src={level} alt="#"
+                                                            className={'w-[16px] '}/> {item?.value}</>}
+                            {item?.label === '강좌 링크' && <><img src={link} alt="#"
+                                                               className={'w-[16px]'}/>{item.value}</>}
                         </li>
                         : null
 
@@ -92,40 +101,45 @@ const RentalContentView = () => {
 
     //예약 팝업 띄우기
     const [calendarVisible, setCalendarVisible] = useState(false)
+    
+    // 좋아요 버튼 누르기 -- 나중에 데이터로 변경
+    const handleLikeClick = (event) => {
+        event.stopPropagation();
+        setLikeStatus(!likeStatus);
+    };
 
     return (
-        <
-
-        >
+        <>
             <SSsectionWrap
                 className={'desktop:max-w-full desktop:py-0 w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center  min-h-[349px]'}
             >
                 <div
-                    className={'w-[63%] flex justify-between desktop:max-w-[1000px] '}
+                    className={'w-full flex justify-center max-w-none desktop:max-w-[1200px] flex-col tablet:flex-row tablet:justify-between gap-[20px]'}
                 >
                     <SSwrapper
-                        className={'w-[300px] h-[300px] mb-[20px] box-border flex justify-center items-center '}
+                        className={'tablet:min-w-[300px] tablet:max-h-[300px] tablet:mb-[20px] box-border flex justify-center items-center my-[0px] '}
                     >
-                        <img src={contentDetailImg} alt="#" className={'max-w-[300px] max-h-[full]'}/>
+                        <img src={contentDetailImg} alt="#"
+                             className={'tablet:max-w-[300px] p-[3%] px-[6%] tablet:p-[0px] tablet:px-[0px] w-auto'}/>
 
 
                     </SSwrapper>
 
 
                     <div
-                        className={'w-[calc(100%-320px)] mt-[20px] min-h-[100px]'}
+                        className={'w-full mt-[20px] min-h-[100px] flex-auto'}
                     >
 
-                        <h5
-                            className={"text-[#ffffff] mb-[15px]"}
-                        >{cateNm}</h5>
+                        {/*<h5
+                            className={"text-[#ffffff] mb-[15px] text-center tablet:text-left"}
+                        >{cateNm}</h5>*/}
 
 
                         <h1
-                            className={"text-[#ffffff] mb-[40px]"}
+                            className={"text-[#ffffff] mb-[20px] text-center tablet:text-left tablet:mb-[40px]"}
                         >{contentNm}</h1>
                         <h5
-                            className={"text-[#ffffff] mb-[40px]"}
+                            className={"text-[#ffffff] mb-[20px] tablet:mb-[40px]"}
                         >{contentDesc}</h5>
 
 
@@ -146,57 +160,36 @@ const RentalContentView = () => {
 
             </SSsectionWrap>
 
+            <div className={'w-full max-w-[1200px] m-0 mx-auto pt-[20px] px-[20px] tablet:px-[60px] desktop:px-[0px]'}>
+                <button className={'text-[#9A9DAD] flex items-center gap-[4px]'}><img src={ToBack} alt="#"/>뒤로가기
+                </button>
+            </div>
 
             <SSsectionWrap
-                className={'desktop:flex-row desktop:max-w-[1000px] desktop:min-h-[500px]  desktop:py-[20px]'}
+                className={'desktop:flex-row desktop:max-w-[1200px] desktop:min-h-[500px] desktop:py-[20px] tablet:py-[20px] py-[0px] pt-[20px]'}
             >
-                <div
-                    style={{
-                        width: '58%',
-                    }}
-
-                >
-                    <div
-                        className={'mt-[40px]'}
-                    ><SSeditor
+                <div>
+                    <SSeditor
                         height={'90vh'}
                         isEditMode={false}
                         changeHandler={(contents) => {
                         }}
                         initContents={contentHtml}
-
-                    /></div>
-
+                    />
                 </div>
 
-                <div
-                    style={{
-                        width: '38%',
-                        height: '500px',
-                        display: "flex",
-                        flexDirection: 'column'
-                    }}
-                >
-
-
+                <div className={'flex flex-col w-full h-fit min-w-[350px] gap-[30px]'}>
                     <SSwrapper
-                        style={{
-                            width: '100%',
-                            boxSizing: 'border-box',
-                            padding: '20px'
+                        className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px]'}>
+                        <p className={'text-[#232433]'}>현재 상태: {rentalStatNm}</p>
 
-                        }}
-
-                    >
-                        현재 상태: {rentalStatNm}
 
                         <SSbutton
-                            style={{marginTop: '20px'}}
                             disabled={true}
                         > 대여하기(배치로 인하여 2차 예정) </SSbutton>
 
 
-                        <SSbutton disabled={false} style={{marginTop: '10px'}} onClick={() => {
+                        <SSbutton disabled={false} onClick={() => {
                             setCalendarVisible(true)
                         }}> 예약하기 (2차 개발 예정)</SSbutton>
 
@@ -206,7 +199,6 @@ const RentalContentView = () => {
                             // 좋아요 버튼
                             detail?.contentDtl?.likeYn === 'Y'
                                 ? <SSbutton
-                                    style={{marginTop: '10px'}}
                                     danger
                                     onClick={() => {
                                         dispatch(cmsAction.dislikeContent({contentId: contentId}))
@@ -217,11 +209,18 @@ const RentalContentView = () => {
                                     onClick={() => {
                                         dispatch(cmsAction.likeContent({contentId: contentId}))
                                     }}
-                                    style={{marginTop: '10px'}}
                                 >
                                     ♡ 좋아요
                                 </SSbutton>
                         }
+                        <span className={'text-[#51525C] text-[14px] flex gap-[4px]'}>
+                            <img src={likeStatus ? LikeHeart : UnLikedHeart}
+                                 alt="좋아요"
+                                 className={'transition-all hover:scale-125 relative z-2 cursor-pointer'}
+                                 onClick={handleLikeClick}
+                            />
+                            4.7K
+                        </span>
 
 
                     </SSwrapper>
@@ -229,25 +228,22 @@ const RentalContentView = () => {
 
                     {/*수정 권한 있는지에 따라 보여줌*/}
                     {!readOnly &&
-                        <div
-                            style={{}}
-                        >
-                            디자인 변경 예정
+                        <SSwrapper
+                            className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px]'}>
 
-                            <SSbutton disabled={true}> 수정 (2차 예정)</SSbutton>
-                            <SSbutton disabled={true} danger> 삭제 (2차 예정) </SSbutton>
-                        </div>
+                            <p className={'-mb-[6px] text-[#232433]'}>보드 수정하기</p>
+                            <span className={'text-[14px] text-[#51525C] '}>
+                                보드 수정하기 전 필수적으로 확인해야 하는 정보들입니다.
+                            </span>
+
+                            <SSbutton disabled={false}> 수정 (2차 예정)</SSbutton>
+                            <SSbutton disabled={false} danger> 삭제 (2차 예정) </SSbutton>
+
+                        </SSwrapper>
                     }
-
-
                 </div>
-
             </SSsectionWrap>
-
-
         </>
-
-
     );
 };
 

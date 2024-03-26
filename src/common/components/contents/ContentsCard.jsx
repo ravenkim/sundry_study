@@ -48,9 +48,8 @@ const ContentsCard = ({
                         <div className={'flex gap-[4px]'}>
                             <img src={likeStatus ? LikeHeart : UnLikedHeart}
                                  alt="좋아요"
-                                 className={'transition-all hover:scale-125 relative z-2'}
+                                 className={'transition-all hover:scale-125 relative z-2 cursor-pointer'}
                                  onClick={handleLikeClick}
-
                             />
                             {/*<img src={bookMark} alt="#"
                                  onClick={onClick}
