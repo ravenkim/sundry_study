@@ -264,5 +264,13 @@ suneditor*/
     @apply rounded-[5px];
     overflow: hidden;
 }
+
+.sun-editor {
+    border: 1px solid #ACACBA;
+    box-shadow: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
 /*
 suneditor*/
+
