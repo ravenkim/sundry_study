@@ -101,7 +101,7 @@ const RentalContentView = () => {
 
     //예약 팝업 띄우기
     const [calendarVisible, setCalendarVisible] = useState(false)
-    
+
     // 좋아요 버튼 누르기 -- 나중에 데이터로 변경
     const handleLikeClick = (event) => {
         event.stopPropagation();
@@ -180,7 +180,7 @@ const RentalContentView = () => {
 
                 <div className={'flex flex-col w-full h-fit min-w-[350px] gap-[30px]'}>
                     <SSwrapper
-                        className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px]'}>
+                        className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px] mt-[0px]'}>
                         <p className={'text-[#232433]'}>현재 상태: {rentalStatNm}</p>
 
 
@@ -229,7 +229,7 @@ const RentalContentView = () => {
                     {/*수정 권한 있는지에 따라 보여줌*/}
                     {!readOnly &&
                         <SSwrapper
-                            className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px]'}>
+                            className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px] mt-[0px]'}>
 
                             <p className={'-mb-[6px] text-[#232433]'}>보드 수정하기</p>
                             <span className={'text-[14px] text-[#51525C] '}>
