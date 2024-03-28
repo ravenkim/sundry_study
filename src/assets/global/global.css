@@ -274,3 +274,12 @@ suneditor*/
 /*
 suneditor*/
 
+.message_textarea {
+    outline: none;
+    resize: none;
+}
+
+.message_textarea::placeholder {
+    color: #ACACBA;
+}
+
