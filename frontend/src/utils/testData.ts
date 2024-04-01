@@ -1,6 +1,4 @@
-import DiffLabeler from './components/diff-labeler/diff-labeler.component';
-
-const testDiffString = `diff --git a/.fikarc b/.fikarc
+export const testDiffString = `diff --git a/.fikarc b/.fikarc
 index c60c679..f1dbbcb 100644
 --- a/.fikarc
 +++ b/.fikarc
@@ -160,9 +158,3 @@ index 33e9df8..b98ffbb 100644
 +  ]
  }
 \ No newline at end of file`;
-
-function App() {
-  return <DiffLabeler diffString={testDiffString} />;
-}
-
-export default App;

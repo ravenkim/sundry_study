@@ -1,9 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .hidden {
   display: none;
 }
 .labeled {
   background-color: yellow;
 }
+

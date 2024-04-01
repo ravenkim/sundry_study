@@ -12,7 +12,7 @@ export const substractClass = (
 ): string => {
   const classNameWithSeperator = ` ${className}`;
   if (classString.includes(classNameWithSeperator)) {
-    return classString.replace(classNameWithSeperator, '');
+    return classString.replace(classNameWithSeperator, "");
   } else {
     return classString;
   }
