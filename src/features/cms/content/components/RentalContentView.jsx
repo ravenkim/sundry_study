@@ -62,8 +62,14 @@ const RentalContentView = () => {
                             {/*{item.label}: {item.value}*/}
                             {item?.label === '강사명' && <><img src={author} alt="#"
                                                              className={'w-[16px] '}/> {item?.value}</>}
-                            {item?.label === '강의 키워드' && <><img src={keyword} alt="#"
-                                                                className={'w-[14px] mx-[1px]'}/> {item?.value}</>}
+                            {item?.label === '강의 키워드' && (
+                                <>
+                                    <img src={keyword} alt="#" className={'w-[14px] mx-[1px]'}/>
+                                    {item?.value.split(',').map((value, index) => (
+                                        <span key={index} className={'box-border bg-[#F5F5F5] text-[#51525C] rounded-[10px] px-[7px] drop-shadow-[0_2px_1px_rgba(0,0,0,0.25)]'}>{"#"}{value.trim()}</span>
+                                    ))}
+                                </>
+                            )}
                             {item?.label === '수준' && <><img src={level} alt="#"
                                                             className={'w-[16px] '}/> {item?.value}</>}
                             {item?.label === '강좌 링크' && <><img src={link} alt="#"
