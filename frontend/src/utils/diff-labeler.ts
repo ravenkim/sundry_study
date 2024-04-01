@@ -1,9 +1,9 @@
-import { InclusionType, SelectedRange } from '.';
 import {
   DIFF2HTML_LINE_CLASS_NAME,
   LABEL_CLASS_NAME,
   LABEL_ID_PREFIX,
-} from './constants';
+} from "./constants";
+import { InclusionType, SelectedRange } from "./types";
 
 export const labelSelectedRange = (range: Range, id: number): SelectedRange => {
   const lines = findIncludedLinesFromAll(range);
@@ -88,7 +88,7 @@ const handleIncluded = (node: Node, range: Range, id: number) => {
 const needToMarkUp = (node: Node, range: Range, id: number) => {
   if (node.nodeType === 1) {
     const element = node as Element;
-    if (element.className!.includes('extracted-simple-text')) {
+    if (element.className!.includes("extracted-simple-text")) {
       return false;
     }
     if (node.hasChildNodes()) {
@@ -153,16 +153,14 @@ const isElementIncluded = (
     Range.START_TO_END,
     seletedRange
   );
-  // console.log(
-  //   `${element.textContent} ${startToStart}, ${endToEnd}, ${endToStart}, ${startToEnd}`
-  // );
+
   if (
     startToStart === 1 &&
     endToEnd === 1 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'EndIncluded';
+    return "EndIncluded";
   }
   if (
     startToStart === 1 &&
@@ -170,70 +168,70 @@ const isElementIncluded = (
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'EndIncluded';
+    return "EndIncluded";
   } else if (
     startToStart === -1 &&
     endToEnd === -1 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'StartIncluded';
+    return "StartIncluded";
   } else if (
     startToStart === 1 &&
     endToEnd === -1 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'Included';
+    return "Included";
   } else if (
     startToStart === 0 &&
     endToEnd === 0 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'Included';
+    return "Included";
   } else if (
     startToStart === 0 &&
     endToEnd === -1 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'Included';
+    return "Included";
   } else if (
     startToStart === -1 &&
     endToEnd === 1 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'Include';
+    return "Include";
   } else if (
     startToStart === -1 &&
     endToEnd === 0 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'Include';
+    return "Include";
   } else if (
     startToStart === 0 &&
     endToEnd === 1 &&
     endToStart === -1 &&
     startToEnd === 1
   ) {
-    return 'Include';
+    return "Include";
   } else {
-    return 'NotIncluded';
+    return "NotIncluded";
   }
 };
 
 const handleNode = (node: Node, range: Range, id: number) => {
   const inclusionType = isElementIncluded(node, range);
-  if (inclusionType === 'EndIncluded') {
+  if (inclusionType === "EndIncluded") {
     handleEndIncluded(node, range, id);
-  } else if (inclusionType === 'Included') {
+  } else if (inclusionType === "Included") {
     handleIncluded(node, range, id);
-  } else if (inclusionType === 'Include') {
+  } else if (inclusionType === "Include") {
     handleInclude(node, range, id);
-  } else if (inclusionType === 'StartIncluded') {
+  } else if (inclusionType === "StartIncluded") {
     handleStartIncluded(node, range, id);
   }
 };
@@ -242,7 +240,7 @@ const findIncludedLinesFromAll = (range: Range) =>
   Array.from(document.querySelectorAll(`.${DIFF2HTML_LINE_CLASS_NAME}`)).filter(
     (line) => {
       const isIncluded = isElementIncluded(line, range);
-      return isIncluded != 'NotIncluded';
+      return isIncluded != "NotIncluded";
     }
   );
 
@@ -304,7 +302,7 @@ const getPreviousSibling = (element: Node, siblings: Node[]): Node[] => {
 };
 
 const createSpan = (id: number): HTMLElement => {
-  const span = document.createElement('span');
+  const span = document.createElement("span");
   span.className = `${LABEL_CLASS_NAME} ${LABEL_ID_PREFIX}${id}`;
   return span;
 };
