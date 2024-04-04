@@ -65,8 +65,8 @@ const RentalContentView = () => {
                             {item?.label === '강의 키워드' && (
                                 <>
                                     <img src={keyword} alt="#" className={'w-[14px] mx-[1px]'}/>
-                                    {item?.value.split(',').map((value, index) => (
-                                        <span key={index} className={'box-border bg-[#F5F5F5] text-[#51525C] rounded-[10px] px-[7px] drop-shadow-[0_2px_1px_rgba(0,0,0,0.25)]'}>{"#"}{value.trim()}</span>
+                                    {item?.value.split(',').map((value, idx) => (
+                                        <span key={idx} className={'box-border bg-[#F5F5F5] text-[#51525C] rounded-[10px] px-[7px] drop-shadow-[0_2px_1px_rgba(0,0,0,0.25)]'}>{"#"}{value.trim()}</span>
                                     ))}
                                 </>
                             )}
@@ -117,7 +117,7 @@ const RentalContentView = () => {
     return (
         <>
             <SSsectionWrap
-                className={'desktop:max-w-full desktop:py-0 w-full bg-[#4f5ff5] bg-opacity-90 flex justify-center items-center  min-h-[349px]'}
+                className={'desktop:max-w-full desktop:py-0 w-full bg-gradient-to-r from-[#4F5FF5] to-[#656EC2] bg-opacity-90 flex justify-center items-center  min-h-[349px]'}
             >
                 <div
                     className={'w-full flex justify-center max-w-none desktop:max-w-[1200px] flex-col tablet:flex-row tablet:justify-between gap-[20px]'}
@@ -174,7 +174,7 @@ const RentalContentView = () => {
             <SSsectionWrap
                 className={'desktop:flex-row desktop:max-w-[1200px] desktop:min-h-[500px] desktop:py-[20px] tablet:py-[20px] py-[0px] pt-[20px]'}
             >
-                <div>
+                <div className={'flex flex-auto'}>
                     <SSeditor
                         height={'90vh'}
                         isEditMode={false}
@@ -184,7 +184,7 @@ const RentalContentView = () => {
                     />
                 </div>
 
-                <div className={'flex flex-col w-full h-fit min-w-[350px] gap-[30px]'}>
+                <div className={'flex flex-col w-full h-fit min-w-[350px] gap-[30px] flex-1 desktop:max-w-[400px]'}>
                     <SSwrapper
                         className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px] mt-[0px]'}>
                         <p className={'text-[#232433]'}>현재 상태: {rentalStatNm}</p>
