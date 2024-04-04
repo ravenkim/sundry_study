@@ -58,7 +58,7 @@ const RentalContentView = () => {
                 const madeFreeField = arr.map((item, index) => (
                     item.type === 'input' ?
                         <li key={index}
-                            className={'text-[#ffffff] flex justify-center items-center text-[15px] gap-[8px]'}>
+                            className={'text-[#ffffff] flex justify-start text-[15px] gap-[8px] break-all ' + (item?.label === '강좌 링크' ? 'flex-nowrap items-start' : 'flex-wrap items-center')}>
                             {/*{item.label}: {item.value}*/}
                             {item?.label === '강사명' && <><img src={author} alt="#"
                                                              className={'w-[16px] '}/> {item?.value}</>}
@@ -73,7 +73,7 @@ const RentalContentView = () => {
                             {item?.label === '수준' && <><img src={level} alt="#"
                                                             className={'w-[16px] '}/> {item?.value}</>}
                             {item?.label === '강좌 링크' && <><img src={link} alt="#"
-                                                               className={'w-[16px]'}/>{item.value}</>}
+                                                               className={'w-[16px] mt-[5px]'}/><span className={'break-all'}>{item.value}</span></>}
                         </li>
                         : null
 
@@ -184,7 +184,7 @@ const RentalContentView = () => {
                     />
                 </div>
 
-                <div className={'flex flex-col w-full h-fit min-w-[350px] gap-[30px] flex-1 desktop:max-w-[400px]'}>
+                <div className={'flex flex-col w-full h-fit desktop:min-w-[350px] gap-[30px] flex-1 desktop:max-w-[400px]'}>
                     <SSwrapper
                         className={'box-border p-[20px] h-auto border-[1px] border-solid border-[#ACACBA] shadow-none rounded-[5px] my-[0px] gap-[8px] mt-[0px]'}>
                         <p className={'text-[#232433]'}>현재 상태: {rentalStatNm}</p>
@@ -192,12 +192,15 @@ const RentalContentView = () => {
 
                         <SSbutton
                             disabled={true}
+                            className={'break-all whitespace-pre-wrap h-auto'}
                         > 대여하기(배치로 인하여 2차 예정) </SSbutton>
 
 
                         <SSbutton disabled={false} onClick={() => {
                             setCalendarVisible(true)
-                        }}> 예약하기 (2차 개발 예정)</SSbutton>
+                        }}
+                                  className={'break-all whitespace-pre-wrap h-auto'}
+                        > 예약하기 (2차 개발 예정)</SSbutton>
 
                         <SSCalendarWrap calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>
 
@@ -209,12 +212,14 @@ const RentalContentView = () => {
                                     onClick={() => {
                                         dispatch(cmsAction.dislikeContent({contentId: contentId}))
                                     }}
+                                    className={'break-all whitespace-pre-wrap h-auto'}
 
                                 > ❤️ 진짜로 이렇게 멋진걸 취소 한다구요? </SSbutton>
                                 : <SSbutton
                                     onClick={() => {
                                         dispatch(cmsAction.likeContent({contentId: contentId}))
                                     }}
+                                    className={'break-all'}
                                 >
                                     ♡ 좋아요
                                 </SSbutton>
