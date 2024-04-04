@@ -21,7 +21,7 @@ const MenuButtonWrap = ({
                 selected ? 'border-[#ffffff] text-[#ffffff] border-b-[1px] border-solid':
 
 
-                'border-b-[1px] border-[#51525c] border-solid  text-[#51525c] '
+                'border-b-[1px] border-[#51525c] border-solid text-[#51525c] '
 
              }
         >

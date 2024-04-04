@@ -166,9 +166,8 @@ const Board = () => {
 
 
     useEffect(() => {
-        console.log(imgLoading)
+        /*console.log('imgLoading', imgLoading)*/
     }, [imgLoading]);
-
 
     return (
       <SSsectionWrap>

@@ -1,8 +1,10 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import UnLikedHeart from 'src/assets/img/heart.svg'
 import LikeHeart from 'src/assets/img/fill_heart.svg'
 import unImaged from 'src/assets/img/unImaged.svg'
 import bookMark from 'src/assets/img/bookmark.svg'
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {cmsAction} from "../../../features/cms/cmsReducer.jsx";
 
 const ContentsCard = ({
                           idx,
@@ -10,6 +12,18 @@ const ContentsCard = ({
                           onClick,
                           ...otherProps
                       }) => {
+
+    const dispatch = useDispatch()
+
+    const {
+        likeContentStatus,
+        detail,
+    } = useSelector(({cmsReducer})=>({
+        likeContentStatus : cmsReducer.likeContentStatus.data,
+        detail: cmsReducer.contentDetail.data,
+    }),
+        shallowEqual
+    )
 
     const [likeStatus, setLikeStatus] = useState(false)
 
