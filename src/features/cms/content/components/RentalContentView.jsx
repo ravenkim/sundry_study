@@ -136,11 +136,6 @@ const RentalContentView = () => {
                         className={'w-full min-h-[100px] flex-auto'}
                     >
 
-                        {/*<h5
-                            className={"text-[#ffffff] mb-[15px] text-center tablet:text-left"}
-                        >{cateNm}</h5>*/}
-
-
                         <h1
                             className={"text-[#ffffff] mb-[20px] text-center tablet:text-left tablet:mb-[40px]"}
                         >{contentNm}</h1>
