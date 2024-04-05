@@ -123,7 +123,7 @@ const RentalContentView = () => {
                     className={'w-full flex justify-center max-w-none desktop:max-w-[1200px] flex-col tablet:flex-row tablet:justify-between gap-[20px]'}
                 >
                     <SSwrapper
-                        className={'tablet:min-w-[300px] tablet:max-h-[300px] tablet:mb-[20px] box-border flex justify-center items-center my-[0px] '}
+                        className={'tablet:min-w-[300px] tablet:max-h-[300px] box-border flex justify-center items-center my-0 '}
                     >
                         <img src={contentDetailImg} alt="#"
                              className={'tablet:max-w-[300px] p-[3%] px-[6%] tablet:p-[0px] tablet:px-[0px] w-auto'}/>
@@ -133,7 +133,7 @@ const RentalContentView = () => {
 
 
                     <div
-                        className={'w-full mt-[20px] min-h-[100px] flex-auto'}
+                        className={'w-full min-h-[100px] flex-auto'}
                     >
 
                         {/*<h5
