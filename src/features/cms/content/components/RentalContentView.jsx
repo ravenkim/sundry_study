@@ -185,17 +185,17 @@ const RentalContentView = () => {
                         <p className={'text-[#232433]'}>현재 상태: {rentalStatNm}</p>
 
 
-                        <SSbutton
-                            disabled={true}
-                            className={'break-all whitespace-pre-wrap h-auto'}
-                        > 대여하기(배치로 인하여 2차 예정) </SSbutton>
+                        {/*<SSbutton*/}
+                        {/*    disabled={true}*/}
+                        {/*    className={'break-all whitespace-pre-wrap h-auto'}*/}
+                        {/*> 대여하기(배치로 인하여 2차 예정) </SSbutton>*/}
 
 
                         <SSbutton disabled={false} onClick={() => {
                             setCalendarVisible(true)
                         }}
                                   className={'break-all whitespace-pre-wrap h-auto'}
-                        > 예약하기 (2차 개발 예정)</SSbutton>
+                        > 대여가능 날짜 보기  </SSbutton>
 
                         <SSCalendarWrap calendarVisible={calendarVisible} setCalendarVisible={setCalendarVisible}/>
 
