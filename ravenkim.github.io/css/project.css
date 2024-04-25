@@ -1,0 +1,411 @@
+.main_container_project{
+    
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    background:  #FCDDAB; 
+    box-sizing: border-box;
+}
+
+/* sidebar 시작 */
+.sidebar_container{
+    display: flex;
+    width: 5vw;
+    min-width: 5vw;
+    height: 100vh;
+    background-color: #FFB94A;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar_container2{
+    display: none;
+    width: 20vw;
+    min-width: 20vw;
+    height: 100vh;
+    background-color: #FFB94A;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FCDDAB;
+    position: sticky;
+    top: 0;
+    
+}
+
+.sidebar_list{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    white-space:nowrap;
+    font-size: 2vw;
+}
+
+.sidebar_icon{
+    font-size: 2vw;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    color: #FCDDAB;
+   
+}
+
+a{
+    color: #FCDDAB;
+}
+
+.sidebar_icon_li{
+    margin-bottom: 66px;
+    cursor: pointer;
+}
+
+.sidebar_fixed{
+    position: relative;
+}
+
+/* sidebar 끝 */
+
+
+.project_bigcover{
+    max-width: 95vw;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.project_page{
+    width: 100%;
+    height: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  
+}
+
+.project_cover{
+    font-family: 'Nanum Pen Script', cursive;
+    overflow: hidden;
+    width: 80% ;
+    height: 80%;
+    border-radius: 25px;
+    box-shadow: 0 0 6px black;
+    
+}
+
+.project_container{
+    display: flex;
+    width: 400%; /* 100 x 프로젝트수 */
+    height: 100%;
+    transition: transform 0.5s;
+}
+
+.project_inner{
+    width: calc(100% / 4 );
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+button{
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+#project_btn_prev{
+    color: #fac97a;
+    width: 90px;
+    height: 90px;
+}
+
+#project_btn_next{
+    color: #fac97a;
+    width: 90px;
+    height: 90px;
+}
+
+
+#project_btn_prev:active {
+    color: #f8b549;
+}
+
+#project_btn_next:active {
+    color: #f8b549;
+}
+
+
+.carousel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin: 0 5px;
+}
+
+.dots{
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: visible;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #fac97a;
+}
+
+#project_btn1.active{
+    background-color: #f8b549;
+}
+#project_btn2.active{
+    background-color: #f8b549;
+}
+#project_btn3.active{
+    background-color: #f8b549;
+}
+#project_btn4.active{
+    background-color: #f8b549;
+}
+
+.project_title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 45px;
+    padding-bottom: 15px;
+    color: black;
+}
+
+.project_summary{
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+}
+
+.project_explain{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    padding-bottom: 15px;
+    color: black;
+
+}
+
+
+
+.project_1{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+
+.project_1_pic{
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 30px;
+    
+}
+
+.proj_img1{
+    
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.project_2{
+    
+    font-size: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.project_3_pic{
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 30px;
+    flex-direction: column;
+    overflow: scroll;
+   
+}
+
+.project_3_pic::-webkit-scrollbar{
+    display:none;
+  }
+
+.proj_img3{
+    
+    width: 100%;
+    
+}
+
+
+.project_text{
+    box-sizing: border-box;
+    display: flex;
+    border: 3px dashed #8EA89B ;
+    border-radius: 5px;
+    width: 100%;
+    height: 87%;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.project_link_icon{
+    color: black;
+    font-size: 50px;
+}
+
+.project_link{
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    height: 10%;
+    border: 3px dashed #8EA89B ;
+    border-radius: 5px;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.project_2{
+    width: 100%;
+    height: 100%;
+  
+}
+.project_3{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}   
+
+.project_3_container{
+    width: 40%;
+    height: 80%;
+    background-color: aqua;
+}
+
+
+.project_4{
+    width: 100%;
+    height: 100%;
+}
+
+.project_4_title{
+    display: flex;
+    width: 100%;
+    height: 20%;
+    font-size: 100px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.project_4_container{
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.project_4_inner{
+margin: 8px;
+box-shadow: 0 0 2px black;
+border-radius: 3px;
+display: flex;
+flex-direction: row;
+box-sizing: border-box;
+justify-content: space-evenly;
+align-items: center;
+
+
+}
+
+.project_4_inner_pic{
+ width: 47%;
+ 
+}
+
+
+.project_4_inner_textcover{
+    width: 47%;
+    height: 95%;
+}
+
+
+.project_4_inner_text{
+    box-sizing: border-box;
+    display: flex;
+    border: 3px dashed #8EA89B ;
+    border-radius: 5px;
+    width: 100%;
+    height: 80%;
+    padding: 20px;
+    flex-direction: column;
+    font-size: 25px;
+    color: #333333;
+    text-align: center;
+
+}
+
+
+.project_4_inner_title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding-bottom: 15px;
+    color: black;
+    text-align: center;
+    
+}
+
+
+
+.project_4_inner_icon{
+    color: black;
+    font-size: 35px;
+}
+
+.project_4_inner_link{
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    height: 17%;
+    border: 3px dashed #8EA89B ;
+    border-radius: 5px;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
