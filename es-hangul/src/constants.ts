@@ -1,0 +1,191 @@
+export const COMPLETE_HANGUL_START_CHARCODE = '가'.charCodeAt(0);
+export const COMPLETE_HANGUL_END_CHARCODE = '힣'.charCodeAt(0);
+export const NUMBER_OF_JONGSUNG = 28;
+export const NUMBER_OF_JUNGSUNG = 21;
+
+/**
+ * ㄱ -> 'ㄱ'
+ * ㄳ -> 'ㄱㅅ' 으로 나눈다.
+ */
+export const DISASSEMBLED_CONSONANTS_BY_CONSONANT = {
+  // 종성이 없는 경우 '빈' 초성으로 관리하는 것이 편리하여, 빈 문자열도 포함한다.
+  '': '',
+  ㄱ: 'ㄱ',
+  ㄲ: 'ㄲ',
+  ㄳ: 'ㄱㅅ',
+  ㄴ: 'ㄴ',
+  ㄵ: 'ㄴㅈ',
+  ㄶ: 'ㄴㅎ',
+  ㄷ: 'ㄷ',
+  ㄸ: 'ㄸ',
+  ㄹ: 'ㄹ',
+  ㄺ: 'ㄹㄱ',
+  ㄻ: 'ㄹㅁ',
+  ㄼ: 'ㄹㅂ',
+  ㄽ: 'ㄹㅅ',
+  ㄾ: 'ㄹㅌ',
+  ㄿ: 'ㄹㅍ',
+  ㅀ: 'ㄹㅎ',
+  ㅁ: 'ㅁ',
+  ㅂ: 'ㅂ',
+  ㅃ: 'ㅃ',
+  ㅄ: 'ㅂㅅ',
+  ㅅ: 'ㅅ',
+  ㅆ: 'ㅆ',
+  ㅇ: 'ㅇ',
+  ㅈ: 'ㅈ',
+  ㅉ: 'ㅉ',
+  ㅊ: 'ㅊ',
+  ㅋ: 'ㅋ',
+  ㅌ: 'ㅌ',
+  ㅍ: 'ㅍ',
+  ㅎ: 'ㅎ',
+} as const;
+
+export const DISASSEMBLED_VOWELS_BY_VOWEL = {
+  ㅏ: 'ㅏ',
+  ㅐ: 'ㅐ',
+  ㅑ: 'ㅑ',
+  ㅒ: 'ㅒ',
+  ㅓ: 'ㅓ',
+  ㅔ: 'ㅔ',
+  ㅕ: 'ㅕ',
+  ㅖ: 'ㅖ',
+  ㅗ: 'ㅗ',
+  ㅘ: 'ㅗㅏ',
+  ㅙ: 'ㅗㅐ',
+  ㅚ: 'ㅗㅣ',
+  ㅛ: 'ㅛ',
+  ㅜ: 'ㅜ',
+  ㅝ: 'ㅜㅓ',
+  ㅞ: 'ㅜㅔ',
+  ㅟ: 'ㅜㅣ',
+  ㅠ: 'ㅠ',
+  ㅡ: 'ㅡ',
+  ㅢ: 'ㅡㅣ',
+  ㅣ: 'ㅣ',
+} as const;
+
+/**
+ * 초성으로 올 수 있는 한글 글자
+ */
+export const HANGUL_CHARACTERS_BY_FIRST_INDEX = [
+  'ㄱ',
+  'ㄲ',
+  'ㄴ',
+  'ㄷ',
+  'ㄸ',
+  'ㄹ',
+  'ㅁ',
+  'ㅂ',
+  'ㅃ',
+  'ㅅ',
+  'ㅆ',
+  'ㅇ',
+  'ㅈ',
+  'ㅉ',
+  'ㅊ',
+  'ㅋ',
+  'ㅌ',
+  'ㅍ',
+  'ㅎ',
+] as const;
+
+/**
+ * 중성으로 올 수 있는 한글 글자
+ */
+export const HANGUL_CHARACTERS_BY_MIDDLE_INDEX = Object.values(DISASSEMBLED_VOWELS_BY_VOWEL);
+
+/**
+ * 종성으로 올 수 있는 한글 글자
+ */
+export const HANGUL_CHARACTERS_BY_LAST_INDEX = (
+  [
+    '',
+    'ㄱ',
+    'ㄲ',
+    'ㄳ',
+    'ㄴ',
+    'ㄵ',
+    'ㄶ',
+    'ㄷ',
+    'ㄹ',
+    'ㄺ',
+    'ㄻ',
+    'ㄼ',
+    'ㄽ',
+    'ㄾ',
+    'ㄿ',
+    'ㅀ',
+    'ㅁ',
+    'ㅂ',
+    'ㅄ',
+    'ㅅ',
+    'ㅆ',
+    'ㅇ',
+    'ㅈ',
+    'ㅊ',
+    'ㅋ',
+    'ㅌ',
+    'ㅍ',
+    'ㅎ',
+  ] as const
+).map(consonant => DISASSEMBLED_CONSONANTS_BY_CONSONANT[consonant]);
+
+/**
+ * qwerty 키보드 자판의 대소문자를 구분한 영어 알파벳을 한글 음소와 맵핑한 객체
+ */
+export const QWERTY_KEYBOARD_MAP = {
+  q: 'ㅂ',
+  Q: 'ㅃ',
+  w: 'ㅈ',
+  W: 'ㅉ',
+  e: 'ㄷ',
+  E: 'ㄸ',
+  r: 'ㄱ',
+  R: 'ㄲ',
+  t: 'ㅅ',
+  T: 'ㅆ',
+  y: 'ㅛ',
+  Y: 'ㅛ',
+  u: 'ㅕ',
+  U: 'ㅕ',
+  i: 'ㅑ',
+  I: 'ㅑ',
+  o: 'ㅐ',
+  O: 'ㅒ',
+  p: 'ㅔ',
+  P: 'ㅖ',
+  a: 'ㅁ',
+  A: 'ㅁ',
+  s: 'ㄴ',
+  S: 'ㄴ',
+  d: 'ㅇ',
+  D: 'ㅇ',
+  f: 'ㄹ',
+  F: 'ㄹ',
+  g: 'ㅎ',
+  G: 'ㅎ',
+  h: 'ㅗ',
+  H: 'ㅗ',
+  j: 'ㅓ',
+  J: 'ㅓ',
+  k: 'ㅏ',
+  K: 'ㅏ',
+  l: 'ㅣ',
+  L: 'ㅣ',
+  z: 'ㅋ',
+  Z: 'ㅋ',
+  x: 'ㅌ',
+  X: 'ㅌ',
+  c: 'ㅊ',
+  C: 'ㅊ',
+  v: 'ㅍ',
+  V: 'ㅍ',
+  b: 'ㅠ',
+  B: 'ㅠ',
+  n: 'ㅜ',
+  N: 'ㅜ',
+  m: 'ㅡ',
+  M: 'ㅡ',
+} as const;

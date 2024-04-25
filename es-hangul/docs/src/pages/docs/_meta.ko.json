@@ -1,0 +1,10 @@
+{
+  "introduction": "소개",
+  "installation": "설치하기",
+  "api": {
+    "title": "API",
+    "theme": {
+      "collapsed": false
+    }
+  }
+}
