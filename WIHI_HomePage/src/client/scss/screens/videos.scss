@@ -1,0 +1,66 @@
+.videosCover{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 100px;
+    min-height: calc(100vh - 160px);
+
+    .search__form {
+        margin-bottom: 60px;
+        display: flex;
+        flex-direction: row;
+        
+
+        input {
+          all: unset;
+          padding: 15px 20px;
+          border-radius: 5px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background-color: black;
+          margin-bottom: 5px;
+          font-size: 16px;
+          color: white;
+          width: 530px;
+          height: 60px;
+          padding: 0;
+          padding-left: 20px;
+          
+
+        }
+
+        button{
+            all:unset
+        }
+        button{
+            width: 55px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: black;
+            margin-bottom: 5px;
+        }
+        
+        
+      }
+      
+    
+  .video-grid{
+    margin: 0 auto;
+    width: 90%;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-auto-flow: 480px;
+    justify-items: center;
+  }
+
+
+
+    //display: grid;
+    //gap: 50px;
+    //grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+}
