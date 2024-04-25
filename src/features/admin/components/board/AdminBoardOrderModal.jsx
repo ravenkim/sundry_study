@@ -34,6 +34,8 @@ const AdminBoardOrderModal = ({
 
 
     const submitHandler = () => {
+
+
         dispatch(adminAction.setBoardPriorities(finalData))
         setModalVisible(false)
     }

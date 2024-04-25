@@ -36,10 +36,10 @@ const AdminBoardTable = ({
 
     useEffect(() => {
         if (setBoardPrioritiesStatus) {
-            if (setBoardPrioritiesStatus.res) {
-                showMessage('success', setBoardPrioritiesStatus.msg)
+            if (setBoardPrioritiesStatus) {
+                showMessage('success', '성공적으로 순서가 변경되었습니다.')
             } else {
-                showMessage('error', setBoardPrioritiesStatus.msg)
+                showMessage('error', '순서변경 실패')
             }
             dispatch(adminAction.getBoardList())
             dispatch(adminAction.initialize('setBoardPrioritiesStatus'))
