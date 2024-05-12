@@ -13,6 +13,8 @@ import ToBack from 'src/assets/img/to_back_icon.svg'
 import SSsectionWrap from "../../../../common/components/wrapper/SSsectionWrap.jsx";
 import LikeHeart from "../../../../assets/img/fill_heart.svg";
 import UnLikedHeart from "../../../../assets/img/heart.svg";
+import {Tabs} from "antd";
+import CommentContainer from "src/features/cms/content/components/CommentContainer.jsx";
 
 const RentalContentView = () => {
 
@@ -22,10 +24,14 @@ const RentalContentView = () => {
         detail,
         contentDetailImg,
         readOnly,
+        getCommentList,
+        activeTab,
     } = useSelector(({router, cmsReducer}) => ({
             detail: cmsReducer.contentDetail.data,
             contentDetailImg: cmsReducer.contentDetailImg.data,
-            readOnly: cmsReducer.contentDetail.data?.readOnly
+            readOnly: cmsReducer.contentDetail.data?.readOnly,
+            getCommentList: cmsReducer.getCommentList.data,
+            activeTab: cmsReducer.tab,
 
 
         }),
@@ -37,6 +43,10 @@ const RentalContentView = () => {
     const [contentId, setContentId] = useState()
     const [likeStatus, setLikeStatus] = useState(false) // 좋아요 눌렀는지 여부 -- 나중에 데이터로 받아오기
 
+    useEffect(() => {
+        if (!activeTab)
+            dispatch(cmsAction.setTab("lecture"))
+    }, []);
 
     useEffect(() => {
         if (detail) {
@@ -114,6 +124,30 @@ const RentalContentView = () => {
         setLikeStatus(!likeStatus);
     };
 
+
+    // 백단에서 넘어오는 댓글 오브젝트의 key 이름 변경, 계층 추가
+    const initComments = getCommentList.CommentInfo
+        .map(({comment, userId, userNm, ...rest}) => ({
+            ...rest,
+            commentContent: comment,
+            authorId: userId,
+            authorNm: userNm,
+            children: []
+        }))
+
+    // 재귀적으로 children을 찾는 함수
+    function findChildren(comments, parentId = null) {
+        return comments
+            .filter(comment => comment.parentCommentId === parentId)
+            .map(comment => ({
+                ...comment,
+                children: findChildren(comments, comment.commentId)
+            }));
+    }
+
+    // 댓글 배열을 최상위 댓글과 그 자식 댓글로 구성된 구조로 변환
+    const comments = findChildren(initComments).reverse();
+
     return (
         <>
             <SSsectionWrap
@@ -170,13 +204,36 @@ const RentalContentView = () => {
                 className={'desktop:flex-row desktop:max-w-[1200px] desktop:min-h-[500px] desktop:py-[20px] tablet:py-[20px] py-[0px] pt-[20px]'}
             >
                 <div className={'flex flex-auto'}>
-                    <SSeditor
-                        height={'90vh'}
-                        isEditMode={false}
-                        changeHandler={(contents) => {
-                        }}
-                        initContents={contentHtml}
-                    />
+                    <div
+                        className="container rounded-[5px] p-[10px] border-solid border-[#ACACBA] border-[1px] bg-white overflow-hidden p-0">
+                        <Tabs
+                            type=""
+                            size={'small'}
+                            activeKey={activeTab}
+                            onChange={(activeKey) => dispatch(cmsAction.setTab(activeKey))}
+                            items={[
+                                {
+                                    label: `강의 소개`,
+                                    key: `lecture`,
+                                    children: <SSeditor
+                                        height={'90vh'}
+                                        isEditMode={false}
+                                        changeHandler={(contents) => {
+                                        }}
+                                        initContents={contentHtml}
+                                    />,
+                                },
+                                {
+                                    label: `댓글`,
+                                    key: `comment`,
+                                    children: <CommentContainer
+                                        contentId={contentId}
+                                        comments={comments}
+                                    />,
+                                }
+                            ]}
+                        />
+                    </div>
                 </div>
 
                 <div className={'flex flex-col w-full h-fit desktop:min-w-[350px] gap-[30px] flex-1 desktop:max-w-[400px]'}>

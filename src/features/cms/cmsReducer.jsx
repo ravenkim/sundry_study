@@ -3,11 +3,16 @@ import {
     dislikeContent,
     getBoardDetail,
     getBoardList,
+    getCommentList,
     getContentDetail,
     getContentDetailImg,
     getSearchBoard,
-    likeContent
+    likeContent,
+    saveComment,
+    deleteComment,
+    modifyComment,
 } from "./cmsAPI.jsx";
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 
 const prefix = 'cms'
@@ -63,17 +68,94 @@ const asyncRequest = {
     ],
 
 
-
+    // 댓글 조회 관련
+    getCommentList: [
+        {getCommentList: reducerUtils.init()},
+        getCommentList
+    ],
+    saveComment: [
+        {saveComment: reducerUtils.init()},
+    ],
+    modifyComment: [
+        {modifyComment: reducerUtils.init()},
+    ],
+    deleteComment: [
+        {deleteComment: reducerUtils.init()},
+    ]
 
 }
 
 
-const localState = {}
+const localState = {
+    tab: ""
+}
 
 //로컬 리듀서
-const localReducers = {}
+const localReducers = {
+    setTab: (state, action) => {
+        state.tab = action.payload
+        return state
+    },
+}
+
+
+// 댓글 등록, 수정, 삭제 즉시 댓글 목록을 다시 불러오는 기능
+function* fetchComments(contentId) {
+    try {
+        const commentList = yield call(getCommentList, {contentId: contentId});
+        yield put({type: `${prefix}/getCommentListSuccess`, payload: commentList.data});
+    } catch (commentError) {
+        yield put({type: `${prefix}/getCommentListFail`, payload: commentError});
+    }
+}
+
+function* saveCommentSaga(action) {
+    try {
+        const response = yield call(saveComment, action.payload);
+        yield put({type: `${prefix}/saveCommentSuccess`, payload: response});
+        yield* fetchComments(action.payload.contentId);
+    } catch (error) {
+        yield put({type: `${prefix}/saveCommentFail`, payload: error});
+    }
+}
+
+function* deleteCommentSaga(action) {
+    try {
+        const response = yield call(deleteComment, action.payload);
+        yield put({type: `${prefix}/deleteCommentSuccess`, payload: response});
+        yield* fetchComments(action.payload.contentId);
+    } catch (error) {
+        yield put({type: `${prefix}/deleteCommentFail`, payload: error});
+    }
+}
+
+function* modifyCommentSaga(action) {
+    try {
+        const response = yield call(modifyComment, action.payload);
+        yield put({type: `${prefix}/modifyCommentSuccess`, payload: response});
+        yield* fetchComments(action.payload.contentId);
+    } catch (error) {
+        yield put({type: `${prefix}/modifyCommentFail`, payload: error});
+    }
+}
+
+function* watchCommentUpdates() {
+    yield all([
+        takeEvery(`${prefix}/saveComment`, saveCommentSaga),
+        takeEvery(`${prefix}/deleteComment`, deleteCommentSaga),
+        takeEvery(`${prefix}/modifyComment`, modifyCommentSaga),
+    ]);
+}
 
 //이름만 바꿔서 사용
-export const {cmsSlice, cmsSaga, cmsAction} = reduxMaker(prefix, asyncRequest, localState, localReducers);
+const {cmsSlice, cmsSaga, cmsAction} = reduxMaker(prefix, asyncRequest, localState, localReducers);
+
+// 기존 사가에 새로운 watchSaveComment 추가
+const combinedCmsSaga = function* () {
+    yield* cmsSaga();
+    yield* watchCommentUpdates();
+};
+
+export { cmsSlice, combinedCmsSaga as cmsSaga, cmsAction };
 
 
