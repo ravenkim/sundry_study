@@ -26,3 +26,17 @@ export const likeContent = (param)=>
 
 export const dislikeContent = (param)=>
     client.put(`/likes/delete`, param)
+
+
+// 댓글 조회 관련
+export const getCommentList = (param) =>
+    client.post(`/comment/list`, param)
+
+export const saveComment = (param) =>
+    client.post(`/comment`, param)
+
+export const modifyComment = (param) =>
+    client.post(`/comment/modify`, param)
+
+export const deleteComment = (param) =>
+    client.put(`/comment/delete`, param)

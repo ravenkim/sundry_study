@@ -63,7 +63,7 @@ const Content = () => {
         if (contentId) {
             dispatch(cmsAction.getContentDetail(contentId))
             dispatch(cmsAction.getContentDetailImg(contentId))
-
+            dispatch(cmsAction.getCommentList({contentId: contentId}))
         }
     }, [contentId]);
 
