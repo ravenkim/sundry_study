@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playlist</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Open+Sans:wght@400;600&display=swap");
+      body {
+        border: 10px aquamarine solid;
+        font-family: "Lato", sans-serif;
+        font-family: "Open Sans", sans-serif;
+      }
+      .width33 {
+        width: 33%;
+      }
+
+      .playlist_bar {
+        display: flex;
+        justify-content: center;
+      }
+
+      .playlist_bar__playlist {
+        display: flex;
+        justify-content: center;
+      }
+
+      .photobox {
+        width: 150px;
+        height: 150px;
+        background-color: yellow;
+        border: 3px black solid;
+        border-radius: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .rphotobox {
+        margin-left: 20px;
+        width: 300px;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .photobox__BigL {
+        font-size: 45px;
+        font-weight: bolder;
+        margin-bottom: 10px;
+        line-height: 30pt;
+      }
+
+      .photobox__SmallL {
+        font-size: 15px;
+      }
+
+      .mainbox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 20px 0;
+      }
+
+      .box2___long {
+        width: 150px;
+        border: 3px black solid;
+        border-width: 3px 6px 6px 3px;
+        align-items: center;
+        height: 50px;
+        justify-content: center;
+        display: flex;
+        border-radius: 10pt;
+        border-style: outset;
+      }
+
+      .box2___short {
+        width: 50px;
+        height: 50px;
+        border-radius: 100pt;
+        border: 3px black solid;
+        border-width: 3px 6px 6px 3px;
+
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        border-style: outset;
+      }
+
+      .marginleft10 {
+        margin-left: 10pt;
+      }
+
+      .liststyle {
+        list-style: none;
+        padding: 0px;
+      }
+
+      .list__square {
+        width: 100px;
+        height: 100px;
+        border: 3px black solid;
+        border-radius: 10px;
+      }
+      .list__test {
+        width: 350px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .backgroundcolour1 {
+        background-color: crimson;
+      }
+
+      .backgroundcolour2 {
+        background-color: cyan;
+      }
+      .backgroundcolour3 {
+        background-color: rgb(223, 245, 125);
+      }
+      .backgroundcolour4 {
+        background-color: rgb(10, 45, 161);
+      }
+
+      main {
+        flex-direction: column;
+        width: 100%;
+        height: inherit;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <div class="mainbox">
+          <span class="playlist_bar__x width33">
+            <i class="fas fa-times fa-lg"></i>
+          </span>
+          <span class="playlist_bar__playlist width33"><b>Playlist</b> </span>
+          <span class="width33"> </span>
+        </div>
+        <div class="mainbox">
+          <div class="photobox"><i class="far fa-image fa-5x"></i></div>
+          <div class="rphotobox">
+            <span class="photobox__BigL">
+              Random <br />
+              Love</span
+            >
+            <span class="photobox__SmallL"> by Divay Kapoor </span>
+          </div>
+        </div>
+
+        <div class="mainbox">
+          <div class="box2___long">
+            <i class="fas fa-play"></i> <span class="marginleft10">play</span>
+          </div>
+          <div class="box2___short"><i class="far fa-heart"></i></div>
+          <div class="box2___short"><i class="fas fa-plus"></i></div>
+        </div>
+        <ul class="liststyle">
+          <li>
+            <div class="mainbox">
+              <div class="list__square backgroundcolour1"></div>
+              <div class="list__test">
+                <span class="photobox__BigL"> Song NO.1</span>
+                <span> Singer1</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="mainbox">
+              <div class="list__square backgroundcolour2"></div>
+              <div class="list__test">
+                <span class="photobox__BigL"> Song NO.2</span>
+                <span> Singer2</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="mainbox">
+              <div class="list__square backgroundcolour3"></div>
+              <div class="list__test">
+                <span class="photobox__BigL"> Song NO.3</span>
+                <span> Singer3</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="mainbox">
+              <div class="list__square backgroundcolour4"></div>
+              <div class="list__test">
+                <span class="photobox__BigL"> Song NO.4</span>
+                <span> Singer4</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/a8c5f49f4e.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

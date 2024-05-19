@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFD180"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+
+    <Button
+        android:id="@+id/Bucket_we"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:text="우리의 버킷리스트"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/Bucket_my"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:text="나의 버킷리스트"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/Bucket_you"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:text="상대의 버킷리스트"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/Bucket_recommend"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:text="추천 버킷리트"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

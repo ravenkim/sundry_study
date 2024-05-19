@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Random Number Game</title>
+  </head>
+  <body>
+    <div>
+      <h1 class="TextBold">Random Number Game</h1>
+    </div>
+    <form id="NumGameForm">
+      <div class="generateNum">
+        <h3 class="TextBold">Generate a number between 0 and</h3>
+        <input
+          required
+          id="generateNum_A"
+          type="number"
+          class="generateNum_picNum"
+          min="0"
+        />
+      </div>
+
+      <div class="guessNum">
+        Guess the number:
+        <input
+          required
+          id="guessNum_A"
+          type="number"
+          class="guessNum_Num"
+          min="0"
+        />
+        <input
+          id="guessNum_btn"
+          type="submit"
+          class="guessNum_Submmit"
+          value="Play!"
+        />
+      </div>
+
+      <div id="result" class="hidden"></div>
+
+      <div id="LoseMesg" class="hidden">
+        <h1>You Lose!</h1>
+      </div>
+      <div id="WinMesg" class="hidden">
+        <h1>You win!</h1>
+      </div>
+    </form>
+
+    <script src="app.js"></script>
+  </body>
+</html>
