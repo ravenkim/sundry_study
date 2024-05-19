@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.skydoves.elasticviews.ElasticLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:background="@android:color/transparent"
+  app:layout_duration="150"
+  app:layout_scale="0.8">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+      android:id="@+id/item_icon"
+      android:layout_width="52dp"
+      android:layout_height="52dp"
+      android:layout_centerInParent="true"
+      android:padding="5dp"
+      android:scaleType="fitXY"
+      android:tint="@color/white_two"
+      tools:src="@drawable/ic_glass0" />
+
+    <ImageView
+      android:id="@+id/item_check"
+      android:layout_width="28dp"
+      android:layout_height="28dp"
+      android:layout_centerInParent="true"
+      android:src="@drawable/ic_check"
+      android:tint="@color/waterBlue"
+      android:visibility="gone"
+      tools:visibility="visible" />
+  </RelativeLayout>
+</com.skydoves.elasticviews.ElasticLayout>

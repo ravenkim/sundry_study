@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/background">
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar_default" />
+      </com.google.android.material.appbar.AppBarLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="10dp">
+
+          <ImageView
+            android:id="@+id/circle"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/circle"
+            android:tint="@color/waterBlue" />
+
+          <ImageView
+            android:id="@+id/circle_icon"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_date"
+            android:tint="@color/white" />
+        </RelativeLayout>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:gravity="start"
+          android:scrollbars="vertical"
+          android:text="@string/label_title"
+          android:textColor="@color/waterBlue"
+          android:textSize="15sp"
+          android:textStyle="bold" />
+
+        <EditText
+          android:id="@+id/input_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/label_type_title"
+          android:imeOptions="actionNext"
+          android:maxEms="10"
+          android:maxLength="20"
+          android:maxLines="1"
+          android:nextFocusDown="@+id/content"
+          android:singleLine="true"
+          android:textColor="@color/white_two"
+          android:textColorHint="@color/white_56" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="19dp"
+          android:gravity="start"
+          android:scrollbars="vertical"
+          android:text="@string/label_content"
+          android:textColor="@color/waterBlue"
+          android:textSize="15sp"
+          android:textStyle="bold" />
+
+        <EditText
+          android:id="@+id/input_content"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/label_type_content"
+          android:imeOptions="actionNext"
+          android:maxEms="10"
+          android:maxLength="20"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:textColor="@color/white_two"
+          android:textColorHint="@color/white_56" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="19dp"
+          android:gravity="start"
+          android:scrollbars="vertical"
+          android:text="@string/label_color"
+          android:textColor="@color/waterBlue"
+          android:textSize="15sp"
+          android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recyclerView_color"
+          android:layout_width="match_parent"
+          android:layout_height="62dp"
+          android:layout_marginTop="8dp"
+          tools:itemCount="1"
+          tools:listitem="@layout/item_color" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="19dp"
+          android:gravity="start"
+          android:scrollbars="vertical"
+          android:text="@string/label_icon"
+          android:textColor="@color/waterBlue"
+          android:textSize="15sp"
+          android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recyclerView_icon"
+          android:layout_width="match_parent"
+          android:layout_height="62dp"
+          android:layout_marginTop="8dp"
+          tools:itemCount="1"
+          tools:listitem="@layout/item_icon" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="19dp"
+          android:gravity="start"
+          android:scrollbars="vertical"
+          android:text="@string/label_alarm"
+          android:textColor="@color/waterBlue"
+          android:textSize="15sp"
+          android:textStyle="bold" />
+
+        <com.skydoves.elasticviews.ElasticButton
+          android:id="@+id/time"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:layout_marginBottom="60dp"
+          android:background="@color/background800"
+          android:gravity="start|center_vertical"
+          android:paddingStart="15dp"
+          android:text="@string/label_require_time"
+          android:textColor="@color/white"
+          android:textSize="15sp"
+          app:button_duration="150"
+          app:button_round="10"
+          app:button_scale="0.8"
+          tools:ignore="RtlSymmetry" />
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+
+  <com.skydoves.elasticviews.ElasticButton
+    android:id="@+id/save"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:alpha="0.7"
+    android:background="@color/waterBlue"
+    android:text="@string/label_save"
+    android:textColor="@color/white"
+    android:textSize="15sp"
+    app:button_duration="150"
+    app:button_round="10"
+    app:button_scale="0.8" />
+</RelativeLayout>

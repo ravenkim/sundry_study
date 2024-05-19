@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def getProperty(String filename, String propName) {
+    def propsFile = rootProject.file(filename)
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        if (props[propName] != null) {
+            return props[propName]
+        } else {
+            print("No such property " + propName + " in file " + filename)
+        }
+    } else {
+        print(filename + " does not exist!")
+    }
+}
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.skydoves.allinone"
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GOKR_API_KEY", "\"${getProperty("local.properties", "gokr_api_key")}\""
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    androidExtensions {
+        experimental = true
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    // support library
+    implementation "androidx.appcompat:appcompat:$accompatVersion"
+    implementation "androidx.activity:activity:$androidActivity"
+    implementation "androidx.activity:activity-ktx:$androidActivity"
+    implementation "androidx.fragment:fragment:$androidFragment"
+    implementation "androidx.fragment:fragment-ktx:$androidFragment"
+    implementation "androidx.palette:palette:$androidxVersion"
+    implementation "androidx.cardview:cardview:$androidxVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+
+    implementation "com.google.android.material:material:$materialVersion"
+
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
+
+    // architecture components
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    testImplementation "androidx.arch.core:core-testing:$archCompomentVersion"
+
+    // dependency injection
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // network
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-simplexml:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$gsonConverterVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    // preference room
+    implementation "com.github.skydoves:preferenceroom:$preferenceroomVersion"
+    kapt "com.github.skydoves:preferenceroom-processor:$preferenceroomVersion"
+
+    // adapter
+    implementation "com.github.skydoves:baserecyclerviewadapter:$baseAdapterVersion"
+
+    // timestamp
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabpVersion"
+
+    // dsl persistence
+    implementation "com.github.skydoves:only:$onlyVersion"
+
+    // custom views
+    implementation "com.github.AppIntro:AppIntro:$appIntroVersion"
+    implementation "devlight.io:navigationtabbar:$navigationTabVersion"
+    implementation "com.github.PhilJay:MPAndroidChart:$mpChartVersion"
+    implementation "com.github.jorgecastilloprz:fillableloaders:$fillableVersion"
+    implementation "com.github.skydoves:needs:$needsVersion"
+    implementation "com.github.skydoves:balloon:$balloonVersion"
+    implementation "com.github.skydoves:powermenu:$powermenuVersion"
+    implementation "com.github.skydoves:colorpickerview:$colorpickerviewVersion"
+    implementation "com.github.skydoves:elasticviews:$elasticviewVersion"
+    implementation "com.github.Yalantis:GuillotineMenu-Android:$guillotineMenuVersion"
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$smartRefreshVersion"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$smartRefreshVersion"
+    implementation "com.skyfishjy.ripplebackground:library:$rippleVersion"
+
+    // multi dex
+    implementation "com.android.support:multidex:1.0.3"
+
+    // debugging
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // unit test
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+}
+
+apply from: '../spotless.gradle'
