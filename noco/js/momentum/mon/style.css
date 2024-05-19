@@ -1,0 +1,36 @@
+.hidden {
+  display: none;
+}
+
+.generateNum {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.generateNum_picNum {
+  margin-left: 10px;
+  width: 50px;
+  height: 100%;
+}
+
+.guessNum {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.guessNum_Num {
+  margin-left: 10px;
+  width: 50px;
+  height: 100%;
+}
+
+.guessNum_Submmit {
+  margin-left: 10px;
+}
+
+.TextBold {
+  font-weight: bolder;
+}

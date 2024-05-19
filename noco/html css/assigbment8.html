@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>assignment7</title>
+
+    <style>
+      @keyframes around1 {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-80px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      @keyframes spahspah {
+        0% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(1.4);
+        }
+        100% {
+          transform: scaleY(1);
+        }
+      }
+
+      @keyframes around2 {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(140px);
+        }
+      }
+
+      @keyframes around3 {
+        100% {
+          transform: rotate(180deg);
+        }
+      }
+
+      body {
+        background-color: black;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        height: 100vh;
+      }
+
+      .firstdiv {
+        background-color: cadetblue;
+        height: 500px;
+        width: 500px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+      .circlediv {
+        height: 250px;
+        width: 500px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+      .circle {
+        width: 10px;
+        height: 10px;
+        margin: 10px;
+        background: white;
+        border-radius: 50%;
+      }
+      .spah {
+        width: 30px;
+        height: 70px;
+        margin: 10px;
+        background: white;
+      }
+
+      .firstcircle {
+        animation: around1 1s infinite ease-in;
+      }
+      .firstcircle::after {
+        animation: around2 1s infinite ease-out;
+      }
+
+      .rotate {
+        animation: around3 1s infinite;
+      }
+
+      .spahanqld1 {
+        animation: spahspah 1s infinite;
+      }
+      .spahanqld2 {
+        animation: spahspah 1s infinite;
+        animation-delay: 0.1s;
+      }
+      .spahanqld3 {
+        animation: spahspah 1s infinite;
+        animation-delay: 0.2s;
+      }
+      .spahanqld4 {
+        animation: spahspah 1s infinite;
+        animation-delay: 0.3s;
+      }
+      .spahanqld5 {
+        animation: spahspah 1s infinite;
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="firstdiv">
+      <div>
+        <div class="circlediv rotate">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+
+        <div class="circlediv">
+          <div class="spah spahanqld1"></div>
+          <div class="spah spahanqld2"></div>
+          <div class="spah spahanqld3"></div>
+          <div class="spah spahanqld4"></div>
+          <div class="spah spahanqld5"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

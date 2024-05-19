@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music of WIHI</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Comforter&family=Lato:ital@1&family=Neonderthaw&family=Open+Sans:wght@400;600&display=swap");
+
+      .songtitlefont {
+        font-family: "Lato", sans-serif;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .singerfont {
+        font-family: "Lato", sans-serif;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .t {
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+      }
+
+      body {
+        min-width: 1000px;
+        margin: 0;
+        padding: 0;
+      }
+
+      main {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        background-color: rgb(138, 143, 143);
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: row;
+      }
+
+      .bigpage {
+        background-color: whitesmoke;
+        border-radius: 30px;
+        width: 40%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 15px 25px;
+        position: relative;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 10%;
+        box-sizing: border-box;
+      }
+
+      .pageone_mainsong {
+        height: 35%;
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .pageone_mainsong__photo_img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50px;
+      }
+
+      .pageone_mainsong__text {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .pageone_mainsong__text__title {
+        color: black;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: "Comforter", cursive;
+        margin-bottom: 5px;
+      }
+
+      .pageone_mainsong__text__singer {
+        font-size: 15px;
+        color: gray;
+        font-family: "Neonderthaw", cursive;
+        margin-bottom: 15px;
+      }
+
+      .page2_mainsong__text__title {
+        color: black;
+        font-size: 40px;
+        font-weight: bold;
+        font-family: "Comforter", cursive;
+        margin-bottom: 10px;
+      }
+
+      .page2_mainsong__text__singer {
+        font-size: 20px;
+        color: gray;
+        font-family: "Neonderthaw", cursive;
+        margin-bottom: 15px;
+      }
+
+      .pageone_mainsong__button {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+      }
+
+      .pageone_mainsong__button_shuffle {
+        font-family: "Lato", sans-serif;
+        background-color: black;
+        display: flex;
+        width: 40%;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-radius: 18px;
+        box-shadow: 2px 2px grey;
+        text-overflow: visible;
+      }
+
+      .pageone_mainsong__button_heart {
+        font-family: "Lato", sans-serif;
+        display: flex;
+        width: 40%;
+        color: gray;
+        background-color: honeydew;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-radius: 18px;
+        box-shadow: 2px 2px rgba(185, 183, 183, 0.986);
+        text-overflow: visible;
+      }
+
+      .pageone_scroll {
+        display: flex;
+        height: 50%;
+        overflow: auto;
+        flex-direction: column;
+        -ms-overflow-style: none;
+      }
+
+      .pageone_scroll::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+      }
+
+      .pageone_scroll_box {
+        background-color: rgb(244, 244, 252);
+        width: 100%;
+        height: 70px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 15px;
+        margin-bottom: 15px;
+      }
+      .pageone_scroll_box_sel {
+        background-color: rgba(244, 244, 253);
+        width: 100%;
+        height: 70px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 15px;
+        margin-bottom: 15px;
+        border: 1pt rgba(0, 0, 0, 0.08) solid;
+      }
+
+      .pageone_scroll_box_photo {
+        height: 65px;
+        width: 20%;
+      }
+
+      .pageone_scroll_box_text {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding-left: 10px;
+      }
+      .pageone_scroll_box_icon {
+        width: 15%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .pageone_scroll_box_photo_img {
+        height: 100%;
+        align-items: center;
+        width: 100%;
+        border-radius: 15px;
+        justify-content: flex-start;
+      }
+      .pageone_scroll_box_photo_img_sel {
+        height: 100%;
+        align-items: center;
+        width: 100%;
+        border-radius: 15px;
+        justify-content: flex-start;
+        opacity: 0.8;
+      }
+
+      .pageone_scroll_box_text_title {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Comforter", cursive;
+      }
+
+      .pageone_scroll_box_text_singer {
+        font-size: 15px;
+        color: gray;
+        font-family: "Neonderthaw", cursive;
+      }
+
+      .pageone_remo_box_text_singer {
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: rgb(224, 218, 218);
+        font-family: "Neonderthaw", cursive;
+      }
+
+      .pageone_remo_box_text_title {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Comforter", cursive;
+      }
+
+      .pageone_scroll_box_selected_icon {
+        color: white;
+        font-size: 40px;
+        position: relative;
+        top: -55px;
+        left: 10px;
+      }
+      .pageone_remocon {
+        width: 90%;
+        height: 13%;
+        display: flex;
+        flex-direction: row;
+        background-color: black;
+        box-sizing: border-box;
+        opacity: 0.9;
+        border-radius: 40px;
+        position: absolute;
+        bottom: 20px;
+        padding: 10px 20px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .pageone_remocon_control {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+      }
+
+      .icon {
+        color: white;
+        margin: 0 10px;
+      }
+      .page2 {
+        width: 100%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .page_two_photo {
+        width: 300px;
+        height: 300px;
+        border-radius: 30px;
+      }
+      .time {
+        width: 100%;
+        height: 50px;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .bar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .bar_left {
+        width: 66%;
+        height: 5px;
+        background-color: black;
+        border-radius: 2.5px;
+        position: relative;
+        right: -3px;
+      }
+      .bar_center {
+        width: 15px;
+        height: 15px;
+        border-radius: 7.5px;
+        background-color: black;
+        z-index: 1;
+      }
+      .bar_right {
+        position: relative;
+        right: 3px;
+        width: 33%;
+        height: 5px;
+        border-radius: 2.5px;
+        z-index: 2;
+        background-color: rgb(133, 133, 133);
+      }
+      .time_time {
+        color: grey;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .last {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-bottom: 20px;
+        align-items: center;
+      }
+
+      .last_1 {
+        font-size: 20px;
+        color: rgb(185, 180, 180);
+      }
+
+      .last-2 {
+        font-size: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="bigpage">
+        <div class="header">
+          <i class="fas fa-arrow-left fa-lg"></i>
+          <i class="fas fa-search fa-lg"></i>
+        </div>
+
+        <div class="pageone_mainsong">
+          <div class="pageone_mainsong__photo">
+            <img
+              class="pageone_mainsong__photo_img"
+              src="https://search.pstatic.net/common?type=b&size=216&expire=1&refresh=true&quality=100&direct=true&src=http%3A%2F%2Fsstatic.naver.net%2Fpeople%2F166%2F202008191553505781.jpg"
+            />
+          </div>
+          <div class="pageone_mainsong__text">
+            <div class="pageone_mainsong__text__title">Popsick, The Rapper</div>
+            <div class="pageone_mainsong__text__singer">
+              Rap, Hip-Hop, Singing
+            </div>
+          </div>
+          <div class="pageone_mainsong__button">
+            <span class="pageone_mainsong__button_shuffle">Shuffle</span>
+            <span class="pageone_mainsong__button_heart"
+              ><i class="fas fa-heart"></i> 212 971</span
+            >
+          </div>
+        </div>
+
+        <div class="pageone_scroll">
+          <div class="pageone_scroll_box">
+            <div class="pageone_scroll_box_photo">
+              <img
+                class="pageone_scroll_box_photo_img"
+                src="https://i.ytimg.com/vi/-NQrnFzspcw/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCniN6eI6c5FwNS-E-BrHEaENFRQg"
+              />
+            </div>
+            <div class="pageone_scroll_box_text">
+              <div class="pageone_scroll_box_text_singer">
+                Popsick, the rapper
+              </div>
+              <div class="pageone_scroll_box_text_title">너의 산타클로스</div>
+            </div>
+
+            <div class="pageone_scroll_box_icon">
+              <i class="fas fa-ellipsis-v fa-lg"></i>
+            </div>
+          </div>
+          <div class="pageone_scroll_box">
+            <div class="pageone_scroll_box_photo">
+              <img
+                class="pageone_scroll_box_photo_img"
+                src="https://i.ytimg.com/vi/xAhwGk3eme4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLAzQKnBj3HPlk091rgJoBiqX5RiOg"
+              />
+            </div>
+            <div class="pageone_scroll_box_text">
+              <div class="pageone_scroll_box_text_singer">
+                The Paradice, the singer
+              </div>
+              <div class="pageone_scroll_box_text_title">바보</div>
+            </div>
+
+            <div class="pageone_scroll_box_icon">
+              <i class="fas fa-ellipsis-v fa-lg"></i>
+            </div>
+          </div>
+          <div class="pageone_scroll_box_sel">
+            <div class="pageone_scroll_box_photo">
+              <img
+                class="pageone_scroll_box_photo_img_sel"
+                src="https://i.ytimg.com/vi/2SIEofv9wbw/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCIqo3ccBOplZkB8Jow73atyXSUZw"
+              />
+              <i
+                class="pageone_scroll_box_selected_icon fab fa-creative-commons-sampling"
+              ></i>
+            </div>
+            <div class="pageone_scroll_box_text">
+              <div class="pageone_scroll_box_text_singer">
+                Popsick, the rapper
+              </div>
+              <div class="pageone_scroll_box_text_title">Special</div>
+            </div>
+
+            <div class="pageone_scroll_box_icon">
+              <i class="fas fa-ellipsis-v fa-lg"></i>
+            </div>
+          </div>
+          <div class="pageone_scroll_box">
+            <div class="pageone_scroll_box_photo">
+              <img
+                class="pageone_scroll_box_photo_img"
+                src="https://i.ytimg.com/vi/xAhwGk3eme4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLAzQKnBj3HPlk091rgJoBiqX5RiOg"
+              />
+            </div>
+            <div class="pageone_scroll_box_text">
+              <div class="pageone_scroll_box_text_singer">
+                The Paradice, the singer
+              </div>
+              <div class="pageone_scroll_box_text_title">선(The Line)</div>
+            </div>
+
+            <div class="pageone_scroll_box_icon">
+              <i class="fas fa-ellipsis-v fa-lg"></i>
+            </div>
+          </div>
+
+          <div class="pageone_scroll_box">
+            <div class="pageone_scroll_box_photo">
+              <img
+                class="pageone_scroll_box_photo_img"
+                src="https://i.ytimg.com/vi/8ywD0HjkO10/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCWasWAiVqPYQiW8CHtMQAAud8Ccw"
+              />
+            </div>
+            <div class="pageone_scroll_box_text">
+              <div class="pageone_scroll_box_text_singer">
+                Popsick, the rapper
+              </div>
+              <div class="pageone_scroll_box_text_title">힘내쏭 챌린지</div>
+            </div>
+
+            <div class="pageone_scroll_box_icon">
+              <i class="fas fa-ellipsis-v fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <div class="pageone_remocon">
+          <div>
+            <div class="pageone_remo_box_text_singer">Popsick, the rapper</div>
+            <div class="pageone_remo_box_text_title">Special</div>
+          </div>
+          <div class="pageone_remocon_control">
+            <i class="icon fa-lg fas fa-step-backward"></i>
+            <i class="icon fa-2x fas fa-pause"></i>
+            <i class="icon fa-lg fas fa-step-forward"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bigpage">
+        <div class="header">
+          <i class="fas fa-arrow-left fa-lg"></i>
+          <i class="fas fa-ellipsis-v fa-lg"></i>
+        </div>
+        <div class="page2">
+          <div>
+            <img
+              class="page_two_photo"
+              src="https://i.ytimg.com/vi/2SIEofv9wbw/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCIqo3ccBOplZkB8Jow73atyXSUZw"
+            />
+          </div>
+          <div>
+            <div class="pageone_mainsong__text">
+              <div class="page2_mainsong__text__title">Speical</div>
+              <div class="page2_mainsong__text__singer">
+                Popsick, The Rapper
+              </div>
+            </div>
+          </div>
+          <div class="time">
+            <div class="time_time">
+              <div>1:53</div>
+              <div>3:11</div>
+            </div>
+
+            <div class="bar">
+              <div class="bar_left"></div>
+              <div class="bar_center"></div>
+              <div class="bar_right"></div>
+            </div>
+          </div>
+          <div class="last">
+            <i class="last_1 fa-2x fas fa-redo"></i>
+            <i class="last-2 fa-2x fas fa-step-backward"></i>
+            <i class="last-3 fa-4x fas fa-play-circle"></i>
+            <i class="last-2 fa-2x fas fa-step-forward"></i>
+            <i class="last_1 fa-2x fas fa-random"></i>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/a8c5f49f4e.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

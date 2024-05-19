@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>assignment10</title>
+
+    <style>
+      body {
+          background-color: turquoise;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+      }
+
+      .margin {
+        margin: 20px;
+      }
+
+      .title {
+        font-size: 40px;
+        font-weight: bold;
+      }
+      header {
+        padding: 50px 20px 70px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: orangered;
+      }
+
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .main__box {
+        position: relative;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: whitesmoke;
+        border-radius: 20px;
+        padding: 20px 40px;
+        top: -30px;
+        box-shadow: 5px 5px 5px gray;
+      }
+      .main_in_search {
+        width: 100%;
+        margin-right: 20px;
+        font-size: 30px;
+        border: none;
+        background-color: whitesmoke;
+      }
+
+      .main_in_icon {
+        color: gray;
+      }
+
+      .main__BOD {
+        width: 90%;
+      }
+
+      .main_BOD_Main {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 30px;
+
+        max-width: 600px;
+      }
+
+      .main_BOD_Main_image {
+        width: 40%;
+        height: 100%;
+        overflow:auto;
+        margin: 0 auto;
+      }
+
+      .main_BOD_Main_image_re {
+        width: 100%;
+        height: 300px;
+        object-fit: scale-down;
+      }
+
+      .main_scrol_image_re {
+        width: 150px;
+        height: 300px;
+        object-fit: scale-down;
+        margin: 0 20px;
+      }
+
+      .main_BOD_Main_text {
+        width: 55%;
+        height: 300px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+
+      .j{
+        display: flex;
+align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+
+      }
+
+      .main_BOD_Main_text_title {
+        font-size: 30px;
+      }
+      .main_BOD_Main_text_author {
+        font-size: 20px;
+        color: gray;
+      }
+
+      .rating {
+          display: inline-block;
+         position: relative;
+         height: 20px;
+          line-height: 20px;
+         font-size: 20px;
+        }
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: rgb(124, 20, 20);
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: rgb(124, 20, 20);
+  text-shadow: 0 0 5px #09f;
+}
+
+.main_BOD_Main_text_type{
+    background-color: gray;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+  margin: 0 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.main_scroll {
+    overflow: auto;
+    width: 90%;
+    height: 240px;
+    background-color: gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.main_BOD_Main_text_type2{
+border-radius: 100px;
+background-color: yellow; 
+height: 10px;
+
+}
+.main_BOD_Main_text_type3{
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    background-color: black;
+
+}
+.cir{
+    background-color: yellow;
+    border-radius: 100px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+    </style>
+  </head>
+  <body>
+    <div class="margin">
+      <header>
+        <i class="fas fa-list fa-3x"></i>
+        <span class="title">library </span>
+        <i class="fas fa-shopping-basket fa-3x"></i>
+      </header>
+
+      <main>
+        <div class="main__box">
+          <input
+            placeholder="Search books...."
+            class="main_in_search"
+            type="text"
+          />
+          <i class="main_in_icon fas fa-search"></i>
+        </div>
+        <div class="main__BOD"><h1>Book of the day</h1></div>
+
+        <div class="main_BOD_Main">
+          <div class="main_BOD_Main_image">
+            <img
+              class="main_BOD_Main_image_re"
+              src="https://image.aladin.co.kr/product/38/56/cover500/898392067x_3.jpg"
+            />
+          </div>
+          <div class="main_BOD_Main_text">
+            <div class="main_BOD_Main_text_title">해리포터</div>
+            <div class="main_BOD_Main_text_author">K.loling</div class="">
+                <form class="rating">
+                    <label>
+                      <input type="radio" name="stars" value="1" />
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="stars" value="2" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="stars" value="3" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>   
+                    </label>
+                    <label>
+                      <input type="radio" name="stars" value="4" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="stars" value="5" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                  </form>
+                <div>
+                <span class="main_BOD_Main_text_type"> journey</span><span class="main_BOD_Main_text_type"> fantasy</span>
+                 </div>
+
+                <div class="j">
+                    <div class="cir"> <i class="main_BOD_Main_text_type2 fas fa-bookmark fa-2x"></i></div>
+                  <span class="main_BOD_Main_text_type3"> Book Now </span>
+                </div>
+          </div>
+        </div>
+
+
+
+<div class="main_scroll">
+    <div class="center">
+        <div class="main_scrol_image_re">
+        <img
+          class="main_BOD_Main_image_re"
+          src="https://image.aladin.co.kr/product/38/56/cover500/898392067x_3.jpg"
+        />
+      </div>
+    <form class="rating">
+        <label>
+          <input type="radio" name="stars" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="2" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="3" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>   
+        </label>
+        <label>
+          <input type="radio" name="stars" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="5" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+      </form>
+</div>
+<div class="center">
+    <div class="main_scrol_image_re">
+        <img
+          class="main_BOD_Main_image_re"
+          src="https://image.aladin.co.kr/product/38/56/cover500/898392067x_3.jpg"
+        />
+      </div>
+    <form class="rating">
+        <label>
+          <input type="radio" name="stars" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="2" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="3" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>   
+        </label>
+        <label>
+          <input type="radio" name="stars" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="5" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+      </form>
+</div>
+
+<div class="center">
+    <div class="main_scrol_image_re">
+        <img
+          class="main_BOD_Main_image_re"
+          src="https://image.aladin.co.kr/product/38/56/cover500/898392067x_3.jpg"
+        />
+      </div>
+    <form class="rating">
+        <label>
+          <input type="radio" name="stars" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="2" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="3" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>   
+        </label>
+        <label>
+          <input type="radio" name="stars" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="5" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+      </form>
+</div>
+<div class="center">
+    <div class="main_scrol_image_re">
+        <img
+          class="main_BOD_Main_image_re"
+          src="https://image.aladin.co.kr/product/38/56/cover500/898392067x_3.jpg"
+        />
+      </div>
+    <form class="rating">
+        <label>
+          <input type="radio" name="stars" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="2" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="3" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>   
+        </label>
+        <label>
+          <input type="radio" name="stars" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="5" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+      </form>
+</div>
+
+
+</div>
+<div class="main__BOD"><h1> 유명한 작가분</h1></div>
+
+        <div class="main_BOD_Main">
+          <div class="main_BOD_Main_image">
+            <img
+              class="main_BOD_Main_image_re"
+              src="https://image.aladin.co.kr/product/38/56/cover500/898392067x_3.jpg"
+            />
+          </div>
+          <div class="main_BOD_Main_text">
+            <div class="main_BOD_Main_text_title">이건 그사람 이름</div>
+            <div class="main_BOD_Main_text_author">이사람의 위대한 업적에 대해 설명해 볼까 한다.... 가나다라 마바사 동해불과 백두산이 마르고 닳도록 하느님이 보우하ㅏ 우리나라 만세</div class="">
+               
+                
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/a8c5f49f4e.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

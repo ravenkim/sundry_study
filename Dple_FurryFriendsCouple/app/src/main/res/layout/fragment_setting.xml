@@ -1,0 +1,65 @@
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFD180"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/account_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorwhite2"
+            android:padding="10dp"
+            android:text="계정"
+           />
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.Branded"
+            android:padding="10dp"
+            android:text="로그아웃"/>
+
+        <TextView
+            android:id="@+id/info_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorwhite2"
+            android:padding="10dp"
+            android:text="정보"/>
+        <Button
+            android:id="@+id/version_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.Branded"
+            android:padding="10dp"
+            android:text="버전정보"/>
+        <Button
+            android:id="@+id/query_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.Branded"
+            android:padding="10dp"
+            android:text="도움말"/>
+
+        <Button
+            android:id="@+id/develop_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.Branded"
+            android:padding="10dp"
+            android:text="개발자"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+

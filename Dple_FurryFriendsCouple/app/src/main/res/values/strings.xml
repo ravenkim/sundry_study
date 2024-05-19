@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">20171536 김해준</string>
+    <string name="tab_title1">목록</string>
+    <string name="tab_title2">작성</string>
+    <string name="tab_title3">통계</string>
+
+    <string name="write_today">오늘 작성</string>
+
+    <string name="today_date_format">MM월 dd일</string>
+    <string name="today_date_string">O월 O일</string>
+    <string name="address_string">OO구 OO동</string>
+    <string name="input_contents_hint">내용 입력</string>
+    <string name="save_button">저장</string>
+    <string name="delete_button">삭제</string>
+    <string name="close_button">닫기</string>
+
+    <string name="graph1_title">기분별 비율</string>
+    <string name="graph2_title">요일별 기분</string>
+    <string name="graph3_title">기분 변화</string>
+    <string name="title_home">홈</string>
+    <string name="title_board">게시판</string>
+    <string name="title_schedule">시간표</string>
+    <string name="title_calendar">캘린더</string>
+    <string name="title_notice">공지사항</string>
+    <string name="sign_in_with_google">Sign In With Google</string>
+    <string name="todo">TODO</string>
+    <string name="sign_out_with_google">Sign out With Google</string>
+    <string name="action_settings">setting</string>
+    <string name="title_home_e">HOME</string>
+    <string name="title_board_e">NOTICE BOARD</string>
+    <string name="title_schedule_e">SCHEDULE</string>
+    <string name="title_calendar_e">CALENDER</string>
+    <string name="title_notice_e">NOTICE</string>
+    <string name="board_one">익명자유</string>
+    <string name="board_two">수업평가</string>
+    <string name="board_three">분실물신고</string>
+    <string name="board_four">중고거래</string>
+    <string name="class_name">수업 이름</string>
+    <string name="class_name_hint">수업 이름을 입력해주세요.</string>
+    <string name="class_room_hint">강의실을 입력해주세요</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title">제목</string>
+    <string name="contents">내용</string>
+    <string name="write">write_notice</string>
+    <string name="write_comment">댓글 입력</string>
+    <string name="watch_comment">댓글 보기</string>
+    <string name="search">search</string>
+    <string name="write_post">게시글 작성</string>
+    <string-array name="board_spinner">
+        <item>수업평가</item>
+        <item>중고거래</item>
+        <item>익명자유</item>
+        <item>분실물신고</item>
+    </string-array>
+    <string name="no_note">메모가 없습니다.</string>
+    <string name="save">저장하기</string>
+    <string name="write_note">노트 작성</string>
+    <string name="ellipsis">…</string>
+    <string name="class_delete">해당 강의를 삭제하시겠습니까?</string>
+</resources>
