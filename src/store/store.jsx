@@ -2,11 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import {all} from 'redux-saga/effects'
 import {createBrowserHistory} from "history";
+import {routerSlice} from 'src/routes/routerReducer.jsx';
 
 console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 
 const reducers = {
-
+    routerReducer: routerSlice.reducer
 }
 
 export function* rootSaga() {
