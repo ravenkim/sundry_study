@@ -3,10 +3,17 @@ import {ThemeProvider} from "src/assets/shadcn/ThemeProvider.jsx";
 import 'src/styles/shadcn.css'
 import {router} from "src/routes/router.jsx";
 import {
-    RouterProvider,
+    RouterProvider, useLocation,
 } from "react-router-dom";
+import {useEffect} from "react";
+
+
 
 function App() {
+
+
+
+
 
   return (
 
