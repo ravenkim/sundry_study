@@ -1,12 +1,8 @@
-import {reduxMaker} from "src/utils/reduxUtils.jsx";
-
+import { reduxMaker } from 'src/utils/reduxUtils.jsx'
 
 const prefix = 'router'
 
-
-const asyncRequest = {
-
-}
+const asyncRequest = {}
 
 const localState = {
     location: null,
@@ -18,6 +14,9 @@ const localReducers = {
     },
 }
 
-
-
-export const {routerSlice, routerSaga, routerAction} = reduxMaker(prefix, asyncRequest, localState, localReducers);
+export const { routerSlice, routerSaga, routerAction } = reduxMaker(
+    prefix,
+    asyncRequest,
+    localState,
+    localReducers,
+)

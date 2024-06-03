@@ -1,32 +1,46 @@
-import { useNavigate } from 'react-router-dom';
-import {useDispatch} from "react-redux";
-import {routerAction} from "src/routes/routerReducer.jsx";
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { routerAction } from 'src/routes/routerReducer.jsx'
 
 const Test1 = () => {
     const dispatch = useDispatch()
 
-
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     return (
         <div>
             <button
-                onClick={() => dispatch(routerAction.locationChange(111111111))}
-            >aaaaaa
+                onClick={() =>
+                    navigate('/bb', {
+                        state: {
+                            aaa: 123,
+                            state: [123, 23, 51],
+                            vvv: 4456,
+                        },
+                    })
+                }
+            >
+                aaaaaa
+            </button>
+            <button onClick={() => dispatch(routerAction.initializeAll())}>
+                bbbbbbbbbbbbbbbbbbbb
             </button>
             <button
-                onClick={() => dispatch(routerAction.initializeAll())}
-
-            >bbbbbbbbbbbbbbbbbbbb
+                onClick={() =>
+                    navigate('/bb', {
+                        state: {
+                            aaa: 123,
+                            state: [123, 23, 51],
+                            vvv: 4456,
+                        },
+                    })
+                }
+            >
+                bvvvvvvvvvvvvvvvvvvvvvvvvv
             </button>
-            <button
-                onClick={() => navigate('/bb', {state: [1, 2, 3]})}
-            >bvvvvvvvvvvvvvvvvvvvvvvvvv
-            </button>
-
             1111111111111111111111
         </div>
-    );
-};
+    )
+}
 
-export default Test1;
+export default Test1

@@ -1,13 +1,13 @@
 {
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "baseUrl": "./",
-    "paths": {
-      "src/*": ["src/*"]
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "baseUrl": "./",
+        "paths": {
+            "src/*": ["src/*"]
+        },
+        "checkJs": true
     },
-    "checkJs": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist"]
 }
