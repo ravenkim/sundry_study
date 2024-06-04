@@ -52,11 +52,11 @@ function App() {
         dispatch(routerAction.locationChange(route))
     }, [route])
 
-    const [count, setCount] = useState(0)
-
-    useEffect(() => {
-        console.log(`You clicked ${count} times`)
-    }, [])
+    // const [count, setCount] = useState(0)
+    //
+    // useEffect(() => {
+    //     console.log(`You clicked ${count} times`)
+    // }, [])
 
     return (
         <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">

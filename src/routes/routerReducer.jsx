@@ -5,7 +5,10 @@ const prefix = 'router'
 const asyncRequest = {}
 
 const localState = {
-    location: null,
+    location: {
+        state: {},
+        route: '',
+    },
 }
 
 const localReducers = {
