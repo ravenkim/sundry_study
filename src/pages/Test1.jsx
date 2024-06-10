@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { routerAction } from 'src/routes/routerReducer.jsx'
+import SSbutton from 'src/common/button/SSbutton.jsx'
 
 const Test1 = () => {
     const dispatch = useDispatch()
@@ -9,7 +10,7 @@ const Test1 = () => {
 
     return (
         <div>
-            <button
+            <SSbutton
                 onClick={() =>
                     navigate('/bb', {
                         state: {
@@ -21,7 +22,7 @@ const Test1 = () => {
                 }
             >
                 aaaaaa
-            </button>
+            </SSbutton>
             <button onClick={() => dispatch(routerAction.initializeAll())}>
                 bbbbbbbbbbbbbbbbbbbb
             </button>
