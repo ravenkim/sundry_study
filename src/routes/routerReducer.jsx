@@ -1,4 +1,4 @@
-import { reduxMaker } from 'src/utils/reduxUtils.jsx'
+import { reduxMaker } from 'src/common/utils/reduxUtils.jsx'
 
 const prefix = 'router'
 

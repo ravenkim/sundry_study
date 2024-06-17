@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { routerAction } from 'src/routes/routerReducer.jsx'
-import SSbutton from 'src/common/button/SSbutton.jsx'
+import SSbutton from 'src/common/components/button/SSbutton.jsx'
 
 const Test1 = () => {
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
+
 
     return (
         <div>
@@ -16,8 +17,8 @@ const Test1 = () => {
                         state: {
                             aaa: 123,
                             state: [123, 23, 51],
-                            vvv: 4456,
-                        },
+                            vvv: 4456
+                        }
                     })
                 }
             >
@@ -32,8 +33,8 @@ const Test1 = () => {
                         state: {
                             aaa: 123,
                             state: [123, 23, 51],
-                            vvv: 4456,
-                        },
+                            vvv: 4456
+                        }
                     })
                 }
             >

@@ -50,7 +50,7 @@ function App() {
 
     useEffect(() => {
         dispatch(routerAction.locationChange(route))
-    }, [route])
+    }, [dispatch, route])
 
     // const [count, setCount] = useState(0)
     //
@@ -59,7 +59,7 @@ function App() {
     // }, [])
 
     return (
-        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="root" storageKey="vite-ui-theme">
             <RouterProvider router={router} />
         </ThemeProvider>
     )
