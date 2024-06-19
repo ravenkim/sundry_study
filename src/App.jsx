@@ -1,11 +1,16 @@
 import { ThemeProvider } from 'src/assets/shadcn/ThemeProvider.jsx'
 
-import 'src/styles/shadcn.css'
+
 import { router } from 'src/routes/router.jsx'
 import { RouterProvider } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { routerAction } from 'src/routes/routerReducer.jsx'
+
+//styles
+import 'src/styles/shadcn.css'
+import 'src/styles/global.css'
+
 
 function App() {
     const dispatch = useDispatch()
