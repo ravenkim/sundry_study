@@ -6,14 +6,13 @@ import { Pool } from 'pg';
     {
       provide: 'DATABASE_CONNECTION',
       useFactory: async () => {
-        const pool = new Pool({
-          user: 'ting',
+        return new Pool({
+          user: 'root',
           host: '219.250.205.19',
           database: 'ting',
           password: 'ting1!',
           port: 6075,
         });
-        return pool;
       },
     },
   ],
