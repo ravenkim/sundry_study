@@ -5,7 +5,7 @@ export const databaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',
     useFactory: async (configService: ConfigService) => {
-      const pool = await createPool({
+      return createPool({
         host: configService.get<string>('database.host'),
         port: configService.get<number>('database.port'),
         user: configService.get<string>('database.username'),
@@ -13,7 +13,6 @@ export const databaseProviders = [
         database: configService.get<string>('database.database'),
         connectionLimit: 10,
       });
-      return pool;
     },
     inject: [ConfigService],
   },
