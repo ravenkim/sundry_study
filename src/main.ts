@@ -6,4 +6,6 @@ async function bootstrap() {
     await app.listen(7312)
 }
 
-bootstrap()
+bootstrap().catch((err) => {
+    console.error('An error occurred during the bootstrap process:', err)
+})
