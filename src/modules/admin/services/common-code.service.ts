@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { CommonCodeDto } from '../dto/common-code.dto'
 
+
 @Injectable()
 export class CommonCodeService {
+
+
     private commonCodes: CommonCodeDto[] = [
         {
             high_common_code: 'HIGH_1',
