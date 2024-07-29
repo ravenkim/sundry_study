@@ -1,1 +1,1 @@
-SELECT * FROM common_code
+SELECT * FROM common_code;
