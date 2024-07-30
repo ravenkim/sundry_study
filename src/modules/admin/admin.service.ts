@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { CommonCodeService } from './services/common-code.service'
+import { CommonCodeService } from './common-code-management/common-code.service'
 
 @Injectable()
 export class AdminService {
