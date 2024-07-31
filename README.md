@@ -5,7 +5,8 @@ npm i -g @nestjs/cli
 yarn
 
 
-yarn start
+yarn dev
+(env 파일 수정시는 재시작 필요)
 
 
 

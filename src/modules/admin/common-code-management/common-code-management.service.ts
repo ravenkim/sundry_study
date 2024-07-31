@@ -8,7 +8,8 @@ export class CommonCodeManagementService {
     async getCommonCodes() {
         const query = 'SELECT * FROM common_code'
         const result = await this.databaseService.query(query)
+        console.log(111)
         // 실제 데이터 로직을 여기에 추가합니다.
-        return await { message: result }
+        return { message: result }
     }
 }
