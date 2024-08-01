@@ -9,7 +9,6 @@ export class CommonCodeManagementController {
         private readonly CommonCodeManagementService: CommonCodeManagementService,
     ) {}
 
-
     @Get('get-common-codes')
     getCommonCodes() {
         return this.CommonCodeManagementService.getCommonCodes()
