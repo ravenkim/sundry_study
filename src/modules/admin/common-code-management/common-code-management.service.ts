@@ -10,22 +10,23 @@ export class CommonCodeManagementService {
         )
         return { message: result }
     }
-
-    // async getUserById(userId: number) {
-    //     const query = 'SELECT * FROM users WHERE id = ?';
-    //     const params = [userId];
-    //     return await this.databaseService.query(query, params);
-    // }
-    //
-    // async getUsersByStatus(status: string) {
-    //     const query = 'SELECT * FROM users WHERE status = ?';
-    //     const params = [status];
-    //     return await this.databaseService.query(query, params);
-    // }
-    //
-    // async createUser(name: string, email: string, status: string) {
-    //     const query = 'INSERT INTO users (name, email, status) VALUES (?, ?, ?)';
-    //     const params = [name, email, status];
-    //     return await this.databaseService.query(query, params);
-    // }
 }
+
+
+// async getUserById(userId: number) {
+//     const query = 'SELECT * FROM users WHERE id = ?';
+//     const params = [userId];
+//     return await this.databaseService.query(query, params);
+// }
+//
+// async getUsersByStatus(status: string) {
+//     const query = 'SELECT * FROM users WHERE status = ?';
+//     const params = [status];
+//     return await this.databaseService.query(query, params);
+// }
+//
+// async createUser(name: string, email: string, status: string) {
+//     const query = 'INSERT INTO users (name, email, status) VALUES (?, ?, ?)';
+//     const params = [name, email, status];
+//     return await this.databaseService.query(query, params);
+// }
