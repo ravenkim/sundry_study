@@ -5,9 +5,7 @@ import { ResponseInterceptor } from './utils/response.interceptor'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
-
     app.useGlobalInterceptors(new ResponseInterceptor())
-
 
     const config = new DocumentBuilder()
         .setTitle('Ting')
@@ -17,6 +15,7 @@ async function bootstrap() {
         .build()
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api', app, document)
+
 
     await app.listen(7312)
 }
