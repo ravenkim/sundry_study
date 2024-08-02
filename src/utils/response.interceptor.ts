@@ -24,12 +24,11 @@ export class ResponseInterceptor implements NestInterceptor {
         data: any,
         error: boolean = false,
         errorMsg: string = '',
-    ): { data: any; error: boolean; errorMsg: string } {
+    ): { data: string; error: boolean } {
         if (error) {
             return {
-                data: null,
+                data: errorMsg,
                 error: true,
-                errorMsg: errorMsg,
             }
         }
 
@@ -37,7 +36,6 @@ export class ResponseInterceptor implements NestInterceptor {
         return {
             data: data,
             error: hasError,
-            errorMsg: hasError ? '데이터에 오류가 있습니다.' : '',
         }
     }
 
