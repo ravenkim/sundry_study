@@ -15,16 +15,16 @@ export class UsersService {
 
     }
 
-    async createUserDetail() {
+    async createUser() {
 
     }
 
-    async updateUserDetail() {
+    async updateUser() {
 
     }
 
 
-    async deleteUserDetail() {
+    async deleteUser() {
 
     }
 
