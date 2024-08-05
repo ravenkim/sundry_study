@@ -13,4 +13,19 @@ export class CommonCodeManagementController {
     getCommonCodes() {
         return this.CommonCodeManagementService.getCommonCodes()
     }
+
+
+
 }
+
+
+
+// import { Controller, Get, Query } from '@nestjs/common';
+//
+// @Controller('cats')
+// export class CatsController {
+//     @Get()
+//     findAll(@Query('age') age: number): string {
+//         return `Cats with age ${age}`;
+//     }
+// }
