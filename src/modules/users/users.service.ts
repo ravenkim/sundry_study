@@ -25,6 +25,7 @@ export class UsersService {
 
 
     async deleteUser() {
+        // 탈퇴된 사용자로 면동
 
     }
 
