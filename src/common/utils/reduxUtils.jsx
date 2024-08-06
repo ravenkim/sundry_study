@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { useDispatch } from 'react-redux'
-import { useCallback } from 'react'
 
 export const reducerUtils = {
     init: (defaultType = null) => ({
@@ -9,7 +7,6 @@ export const reducerUtils = {
         loading: false,
         error: false,
         errorMsg: false,
-
     }),
 
     loading: (prevData = null) => ({
@@ -26,11 +23,11 @@ export const reducerUtils = {
         errorMsg: false,
     }),
 
-    error: () => ({
+    error: (errorMsg) => ({
         data: null,
         loading: false,
         error: true,
-        errorMsg: false,
+        errorMsg: errorMsg,
     }),
 }
 
@@ -55,7 +52,7 @@ const apiReducers = (prefix, asyncRequest) => {
             const requestInfo = asyncRequest[key][0]
 
             state[Object.keys(requestInfo)[0]] = reducerUtils.loading(
-                 // state[Object.keys(requestInfo)[0]].data,
+                 state[Object.keys(requestInfo)[0]].data,
             )
         }
     }
