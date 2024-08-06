@@ -1,6 +1,7 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import SSbutton from 'src/common/components/button/SSbutton.jsx'
 import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
+import { useEffect } from 'react'
 
 const Sample = () => {
 
@@ -9,10 +10,16 @@ const Sample = () => {
     const {
         data,
     } = useSelector(({ sampleReducer }) => ({
-            data: sampleReducer,
+            data: sampleReducer.commonCode.data,
         }),
         shallowEqual,
     )
+
+
+    useEffect(() => {
+        console.log(data)
+
+    }, [data])
 
 
     return (

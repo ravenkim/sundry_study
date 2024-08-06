@@ -53,8 +53,9 @@ const apiReducers = (prefix, asyncRequest) => {
         reducers[type] = (state, action) => {
             const key = action.type.replace(new RegExp(`^${prefix}/`), '')
             const requestInfo = asyncRequest[key][0]
+
             state[Object.keys(requestInfo)[0]] = reducerUtils.loading(
-                state[Object.keys(requestInfo)[0]].data,
+                 // state[Object.keys(requestInfo)[0]].data,
             )
         }
     }
@@ -67,17 +68,24 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
             const response = yield call(() => apiRequest(action.payload)) // 여기서 apiCall은 실제 API 호출 함수입니다.
             // 여기서 값에 따라서 페이로드 작성
             //일반 예외 처리
-            if (response.data) {
-                yield put({
-                    type: `${prefix}/${reducerName}Success`,
-                    payload: response.data,
+
+
+            const result = response.data
+
+
+            if(result['error']){
+                    yield put({
+                    type: `${prefix}/${reducerName}Fail`,
+                    payload: result['data'],
                 })
             } else {
+
                 yield put({
-                    type: `${prefix}/${reducerName}Fail`,
-                    payload: response.data,
+                    type: `${prefix}/${reducerName}Success`,
+                    payload:  result['data'],
                 })
             }
+
         } catch (error) {
             //기타 예외처리
             yield put({
@@ -88,6 +96,39 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
     }
 }
 
+
+
+//비동기 처리 성공 실패 처리해주는 추가적인 리듀서
+export const extraReducers = (prefix, asyncRequest) => {
+    return (builder) => {
+        builder.addMatcher(
+            (action) => {
+                return action.type.includes(prefix)
+            },
+            (state, action) => {
+                if (action.type.endsWith('Success')) {
+                    const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
+                    const requestInfo = asyncRequest[key][0];
+                    state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload);
+                }
+                if (action.type.endsWith('Fail')) {
+                    const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Fail$/, '');
+                    const requestInfo = asyncRequest[key][0];
+                    state[Object.keys(requestInfo)[0]] = reducerUtils.error(action.payload);
+                }
+            }
+        )
+    }
+}
+
+
+
+
+
+
+
+
+
 // 최종 리더스
 export const reduxMaker = (
     prefix,
@@ -95,6 +136,8 @@ export const reduxMaker = (
     localState = {},
     localReducers = {},
 ) => {
+
+
     const asyncInitialState = initialStateMaker(asyncRequest)
     const final = {}
     const allInitialState = {
@@ -118,10 +161,11 @@ export const reduxMaker = (
                     state[itemName] = allInitialState[itemName]
                 }
             },
+
             ...apiReducers(prefix, asyncRequest),
             ...localReducers,
         },
-        // extraReducers: extraReducers(prefix, asyncRequest)
+        extraReducers: extraReducers(prefix, asyncRequest)
     })
 
     //사가 만들기

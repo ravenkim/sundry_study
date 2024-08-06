@@ -1,11 +1,11 @@
-import { reduxMaker } from 'src/common/utils/reduxUtils.jsx'
+import { reducerUtils, reduxMaker } from 'src/common/utils/reduxUtils.jsx'
 import { getCommonCode } from 'src/features/sample/sampleAPI.jsx'
 
 const prefix = 'sample'
 
 const asyncRequest = {
     getCode: [
-        {commonCode: null},
+        {commonCode: reducerUtils.init([])},
         getCommonCode
     ],
 }
