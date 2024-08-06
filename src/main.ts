@@ -7,6 +7,13 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule)
     app.useGlobalInterceptors(new ResponseInterceptor())
 
+    // cors 열어줄곳
+    app.enableCors({
+        origin: 'http://localhost:8619',
+        methods: 'GET,POST',
+        credentials: true, //자격 증명(예: 쿠키, 인증 헤더 또는 TLS 클라이언트 인증서)을 포함하는 설정
+    })
+
     const config = new DocumentBuilder()
         .setTitle('Ting')
         .setDescription('API 명세서 입니다')
