@@ -6,21 +6,21 @@ export const reducerUtils = {
         data: defaultType,
         loading: false,
         error: false,
-        errorMsg: false,
+        errorMsg: '',
     }),
 
     loading: (prevData = null) => ({
         data: prevData,
         loading: true,
         error: false,
-        errorMsg: false,
+        errorMsg: '',
     }),
 
     success: (data = null) => ({
         data: data,
         loading: false,
         error: false,
-        errorMsg: false,
+        errorMsg: '',
     }),
 
     error: (errorMsg) => ({
@@ -63,13 +63,10 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
     return function* fetchApiData(action) {
         try {
             const response = yield call(() => apiRequest(action.payload)) // 여기서 apiCall은 실제 API 호출 함수입니다.
-            // 여기서 값에 따라서 페이로드 작성
-            //일반 예외 처리
-
 
             const result = response.data
 
-
+            // 통신은 정상이나 오류가 있는경우 (데이터 예외처리)
             if(result['error']){
                     yield put({
                     type: `${prefix}/${reducerName}Fail`,
@@ -84,7 +81,7 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
             }
 
         } catch (error) {
-            //기타 예외처리
+            //서버 자체의 오류인경우
             yield put({
                 type: `${prefix}/${reducerName}Fail`,
                 payload: error.message,
