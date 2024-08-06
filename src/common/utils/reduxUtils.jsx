@@ -4,28 +4,33 @@ import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 
 export const reducerUtils = {
-    init: () => ({
-        data: null,
+    init: (defaultType = null) => ({
+        data: defaultType,
         loading: false,
         error: false,
+        errorMsg: false,
+
     }),
 
     loading: (prevData = null) => ({
         data: prevData,
         loading: true,
         error: false,
+        errorMsg: false,
     }),
 
     success: (data = null) => ({
         data: data,
         loading: false,
         error: false,
+        errorMsg: false,
     }),
 
     error: () => ({
         data: null,
         loading: false,
         error: true,
+        errorMsg: false,
     }),
 }
 
@@ -60,7 +65,6 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
     return function* fetchApiData(action) {
         try {
             const response = yield call(() => apiRequest(action.payload)) // 여기서 apiCall은 실제 API 호출 함수입니다.
-
             // 여기서 값에 따라서 페이로드 작성
             //일반 예외 처리
             if (response.data) {
@@ -136,7 +140,6 @@ export const reduxMaker = (
 
     //액션 만들기
     final[`${prefix}Action`] = final[`${prefix}Slice`].actions
-    console.log(final[`${prefix}Slice`].actions)
     return final
 }
 
