@@ -1,12 +1,14 @@
 import { Button } from 'src/assets/shadcn/components/ui/button.jsx'
 
-const SSbutton = ({children, style = {}, ...props }) => {
+const SSbutton = ({children, style = {},onClick, ...props }) => {
 
 
 
 
     return (
-        <Button style={{ ...style }} {...props}>
+        <Button
+            onClick = {onClick}
+            style={{ ...style }} {...props}>
             {children}
         </Button>
     )

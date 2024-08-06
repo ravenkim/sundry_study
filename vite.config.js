@@ -6,6 +6,10 @@ import path from 'path'
 export default defineConfig({
     plugins: [react()],
 
+    server: {
+        port: 8619
+    },
+
     //절대경로 지정
     resolve: {
         alias: {
