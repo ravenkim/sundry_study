@@ -1,11 +1,12 @@
-import SSmLayout from 'src/common/layouts/SSmLayout.jsx'
 import Login from 'src/features/login/Login.jsx'
+import SSlayout from 'src/common/layouts/SSlayout.jsx'
 
 const LoginPage = () => {
     return (
-<SSmLayout>
-    <Login/>
-</SSmLayout>
+        <SSlayout
+        >
+            <Login/>
+        </SSlayout>
     )
 }
 
