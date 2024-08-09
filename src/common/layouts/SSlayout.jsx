@@ -1,6 +1,12 @@
-const SSlayout = () => {
+const SSlayout = ({children}) => {
     return (
-        <div>
+        <div
+            style={{
+                backgroundColor: 'aqua',
+                width: '100dvw',
+                height: '100dvh'
+            }}
+        >
             <div></div>
             <div>
                 <header></header>
