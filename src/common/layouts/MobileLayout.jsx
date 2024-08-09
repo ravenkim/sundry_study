@@ -6,6 +6,7 @@ const MobileLayout = ({
         //todo class로 글로벌 css로 변경
 
         <div
+            id={'mobileLayout'}
             style={{
                 backgroundColor: '#000000',
                 width: '100dvw',
