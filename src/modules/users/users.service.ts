@@ -9,6 +9,7 @@ export class UsersService {
 
     //로그인시 유저 정보 확인
     async getUser() {
+
     }
 
     //유저 상세 정보 가져오기
