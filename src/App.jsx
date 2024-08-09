@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { routerAction } from 'src/routes/routerReducer.jsx'
 
 //styles
+import 'src/styles/reset.css'
 import 'src/styles/shadcn.css'
 import 'src/styles/global.css'
 

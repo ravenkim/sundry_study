@@ -3,6 +3,7 @@ import Test2 from 'src/pages/Test2.jsx'
 import Test1 from 'src/pages/Test1.jsx'
 import ErrorPage from 'src/pages/ErrorPage/ErrorPage.jsx'
 import SamplePage from 'src/pages/SamplePage.jsx'
+import LoginPage from 'src/pages/login/LoginPage.jsx'
 
 export const router = createBrowserRouter([
     {
@@ -10,6 +11,12 @@ export const router = createBrowserRouter([
         element: <SamplePage />,
         errorElement: <ErrorPage />,
     },
+
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
+
     {
         path: '/aa',
         element: <Test1 />,
