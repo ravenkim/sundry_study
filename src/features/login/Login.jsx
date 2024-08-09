@@ -5,8 +5,9 @@ const Login = () => {
             style={{
                 width:'100%',
                 height: 50,
-                backgroundColor: 'aqua'
+
             }}
+            className={'bg-primary'}
         >
 
         </div>

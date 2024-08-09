@@ -1,19 +1,20 @@
-const SSlayout = ({children}) => {
+import MobileLayout from 'src/common/layouts/MobileLayout.jsx'
+
+const SSlayout = ({
+                     layoutType='mobile',
+                      children
+
+}) => {
     return (
-        <div
+        layoutType && <MobileLayout
             style={{
                 backgroundColor: 'aqua',
                 width: '100dvw',
                 height: '100dvh'
             }}
         >
-            <div></div>
-            <div>
-                <header></header>
-                <main></main>
-                <footer></footer>
-            </div>
-        </div>
+            {children}
+        </MobileLayout>
     )
 }
 
