@@ -1,6 +1,6 @@
-import { Controller } from '@nestjs/common'
+import { Controller, Get, Post } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { DatabaseService } from '../../database/database.service'
+import { UsersService } from './users.service'
 
 
 @Controller('users')
@@ -8,5 +8,20 @@ import { DatabaseService } from '../../database/database.service'
 export class UsersController {
 
 
+    constructor(
+        private readonly UsersService: UsersService,
+    ) {}
 
+    @Post('get-user')
+    getUser() {
+        return this.UsersService.getUser()
+    }
+
+
+    // 회원가입
+    @Post('create-user')
+    createUser() {
+
+        return this.UsersService.createUser()
+    }
 }
