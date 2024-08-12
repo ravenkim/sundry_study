@@ -9,16 +9,22 @@ export class UsersService {
 
     //로그인시 유저 정보 확인
     async getUser() {
+        //들고올 유저정보 (프로필 처럼 보일 정보)
+        //유저아이디, 유저 프로필, 유저 닉네임, 유저 권한, 유저 재화,
 
     }
 
+
+
     //유저 상세 정보 가져오기
     async getUserDetail() {
-
+        //들고올 유저정보 (프로필 처럼 보일 정보)
+        // getUser() 정보 + 기타 학교|| 회사 정보
     }
 
     //회원가입
     async createUser() {
+        // 로그인아이디, 비밀번호, 이름, 생일,
 
     }
 
