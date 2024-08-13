@@ -3,9 +3,8 @@ import SSlayout from 'src/common/layouts/SSlayout.jsx'
 
 const LoginPage = () => {
     return (
-        <SSlayout
-        >
-            <Login/>
+        <SSlayout>
+            <Login />
         </SSlayout>
     )
 }

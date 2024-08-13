@@ -3,7 +3,6 @@ import { router } from 'src/routes/router.jsx'
 import { RouterProvider } from 'react-router-dom'
 import useRouteListener from 'src/routes/useRouteListener.jsx'
 
-
 //styles
 import 'src/styles/reset.css'
 import 'src/styles/shadcn.css'
