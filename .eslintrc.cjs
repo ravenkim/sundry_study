@@ -20,7 +20,7 @@ module.exports = {
 
     },
 
-    plugins: ['react-refresh'],
+    plugins: ['react-refresh',],
     rules: {
         'no-unused-vars': 'warn',
         'react/jsx-no-target-blank': 'off',
@@ -29,12 +29,12 @@ module.exports = {
             { allowConstantExport: true }
         ],
         "react/prop-types": "off",
-        'prettier/prettier': [
-            'error',
-            {
-                endOfLine: 'auto',
-            },
-        ],
+        // 'prettier/prettier': [
+        //     'error',
+        //     {
+        //         endOfLine: 'auto',
+        //     },
+        // ],
 
 
     }
