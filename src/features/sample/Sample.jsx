@@ -2,6 +2,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import SSbutton from 'src/common/components/button/SSbutton.jsx'
 import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
 import { useEffect } from 'react'
+import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
 
 const Sample = () => {
 
@@ -28,6 +29,12 @@ const Sample = () => {
                 onClick={() => dispatch(sampleAction.getCode())}
 
             >데이터 가져오기</SSbutton>
+
+
+
+            <SScollapsible>
+                sdsd
+            </SScollapsible>
 
 
 

@@ -6,6 +6,8 @@ import { RouterProvider } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { routerAction } from 'src/routes/routerReducer.jsx'
+import useRouteListener from 'src/routes/useRouteListener.jsx'
+
 
 //styles
 import 'src/styles/reset.css'
@@ -14,55 +16,9 @@ import 'src/styles/global.css'
 
 
 function App() {
-    const dispatch = useDispatch()
 
-    const [route, setRoute] = useState({
-        path: window.location.pathname || null,
-        state: window.history.state?.usr || null,
-    })
 
-    useEffect(() => {
-        const originalPushState = window.history.pushState
-        const originalReplaceState = window.history.replaceState
-
-        const handleStateChange = (method, ...args) => {
-            const event = new CustomEvent('locationChange')
-            method.apply(window.history, args)
-            window.dispatchEvent(event)
-        }
-
-        window.history.pushState = (...args) =>
-            handleStateChange(originalPushState, ...args)
-        window.history.replaceState = (...args) =>
-            handleStateChange(originalReplaceState, ...args)
-
-        const handleLocationChange = () => {
-            setRoute({
-                path: window.location.pathname || null,
-                state: window.history.state?.usr || null,
-            })
-        }
-
-        window.addEventListener('locationChange', handleLocationChange)
-        window.addEventListener('popstate', handleLocationChange)
-
-        return () => {
-            window.history.pushState = originalPushState
-            window.history.replaceState = originalReplaceState
-            window.removeEventListener('locationChange', handleLocationChange)
-            window.removeEventListener('popstate', handleLocationChange)
-        }
-    }, [])
-
-    useEffect(() => {
-        dispatch(routerAction.locationChange(route))
-    }, [dispatch, route])
-
-    // const [count, setCount] = useState(0)
-    //
-    // useEffect(() => {
-    //     console.log(`You clicked ${count} times`)
-    // }, [])
+    useRouteListener();
 
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
