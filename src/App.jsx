@@ -1,11 +1,6 @@
 import { ThemeProvider } from 'src/assets/shadcn/ThemeProvider.jsx'
-
-
 import { router } from 'src/routes/router.jsx'
 import { RouterProvider } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { routerAction } from 'src/routes/routerReducer.jsx'
 import useRouteListener from 'src/routes/useRouteListener.jsx'
 
 
@@ -21,7 +16,7 @@ function App() {
     useRouteListener();
 
     return (
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="root" storageKey="vite-ui-theme">
             <RouterProvider router={router} />
         </ThemeProvider>
     )
