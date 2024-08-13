@@ -24,7 +24,14 @@ const Sample = () => {
 
 
     return (
-        <div>
+        <div
+            style={{
+                padding:50,
+                display: 'flex',
+                height: '100vh',
+                width: '100vw',
+            }}
+        >
             <SSbutton
                 onClick={() => dispatch(sampleAction.getCode())}
 
