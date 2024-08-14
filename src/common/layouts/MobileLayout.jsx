@@ -1,33 +1,55 @@
-const MobileLayout = ({
-                          children,
-                      }) => {
+const MobileLayout = ({ children }) => {
     return (
-
         //todo class로 글로벌 css로 변경
 
         <div
             id={'mobileLayout'}
             style={{
-                backgroundColor: '#000000',
+                background: 'linear-gradient(270deg, #D9F5FD 0%, #B1DDE3 100%)',
                 width: '100dvw',
                 height: '100dvh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexDirection:'row',
             }}
         >
-            <div className="
+            <div
+                className={'leftSpace'}
+                style={{
+                    flexGrow: 1,
+                    height: '100%',
+                    // backgroundColor: 'tomato'
+                }}
+            >
+
+
+
+            </div>
+            <div
+
+
+
+                className="
                 w-full
                 h-full
-                max-w-[400px]
+                max-w-[500px]
                 overflow-y-auto
                 overflow-x-hidden
-                bg-background"
+                bg-background
+
+                "
             >
                 {children}
             </div>
 
-
+            <div
+                className={'leftSpace'}
+                style={{
+                    flexGrow: 1,
+                }}
+            >
+            </div>
         </div>
     )
 }

@@ -1,16 +1,29 @@
+import SSwrapper from 'src/common/components/wrapper/SSwrapper.jsx'
 
 const Login = () => {
     return (
-        <div
-            style={{
-                width:'100%',
-                height: 50,
+        <
 
-            }}
-            className={'bg-primary'}
         >
+            <SSwrapper
 
-        </div>
+            >
+
+                안녕
+
+
+            </SSwrapper>
+
+            <SSwrapper
+
+            >
+
+                안녕
+
+
+            </SSwrapper>
+
+        </>
     )
 }
 

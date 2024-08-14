@@ -1,8 +1,13 @@
 import MobileLayout from 'src/common/layouts/MobileLayout.jsx'
+import { useState } from 'react'
 
 const SSlayout = ({ layoutType = 'mobile', children }) => {
+
+    const [paddingTop, setPaddingTop] = useState(24)
+
+
     return (
-        layoutType && (
+        layoutType === 'mobile' && (
             <MobileLayout
                 style={{
                     backgroundColor: 'aqua',
@@ -10,7 +15,29 @@ const SSlayout = ({ layoutType = 'mobile', children }) => {
                     height: '100dvh',
                 }}
             >
-                {children}
+                <section
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        overflowY: 'auto',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <div
+                        style={{
+                            paddingTop: paddingTop,
+                            width: '85%',
+                            boxSizing: 'border-box'
+                        }}
+                    >
+                        {children}
+                    </div>
+
+                </section>
+
+                <footer></footer>
             </MobileLayout>
         )
     )
