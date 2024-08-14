@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const SSlayout = ({ layoutType = 'mobile', children }) => {
 
-    const [paddingTop, setPaddingTop] = useState(24)
+    const [paddingTop, setPaddingTop] = useState(48)
 
 
     return (
