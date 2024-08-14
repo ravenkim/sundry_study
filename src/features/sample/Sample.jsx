@@ -5,56 +5,40 @@ import { useEffect } from 'react'
 import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
 
 const Sample = () => {
-
     const dispatch = useDispatch()
 
-    const {
-        data,
-    } = useSelector(({ sampleReducer }) => ({
+    const { data } = useSelector(
+        ({ sampleReducer }) => ({
             data: sampleReducer.commonCode.data,
         }),
         shallowEqual,
     )
 
-
     useEffect(() => {
         console.log(data)
-
     }, [data])
-
 
     return (
         <div
             style={{
-                padding:50,
+                padding: 50,
                 display: 'flex',
                 height: '100vh',
                 width: '100vw',
             }}
         >
-            <SSbutton
-                onClick={() => dispatch(sampleAction.getCode())}
+            <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
+                데이터 가져오기
+            </SSbutton>
 
-            >데이터 가져오기</SSbutton>
-
-
-
-            <SScollapsible>
-                sdsd
-            </SScollapsible>
-
-
+            <SScollapsible>sdsd</SScollapsible>
 
             <div>
                 이곳에 데이터가 표시됩니다
-                <div>
-
-                </div>
+                <div></div>
             </div>
 
-
             {/*    본가의 업데이트*/}
-
         </div>
     )
 }
