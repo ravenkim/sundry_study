@@ -7,6 +7,46 @@ export class UsersService {
     constructor(private readonly databaseService: DatabaseService) {
     }
 
+
+
+    //
+    /* todo
+
+    1. id 중복 체크
+
+
+    2. id 와 비밀번호를 저장
+    -id 중복체크
+    -비밀번호 해쉬화
+    저장
+
+
+    본인인증
+    3. 이름, 이메일, 이메일 광고 수신여부, 생년월일 , 전화번호 입력받음
+
+
+
+     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //로그인시 유저 정보 확인
     async getUser() {
         //들고올 유저정보 (프로필 처럼 보일 정보)
@@ -16,11 +56,18 @@ export class UsersService {
 
 
 
+
+
+
     //유저 상세 정보 가져오기
     async getUserDetail() {
         //들고올 유저정보 (프로필 처럼 보일 정보)
         // getUser() 정보 + 기타 학교|| 회사 정보
     }
+
+
+
+    //유저 인증
 
 
     // 전화번호 인증

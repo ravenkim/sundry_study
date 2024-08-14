@@ -1,4 +1,4 @@
-import { Module, Global } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 import { DatabaseService } from './database.service'
 import { databaseProviders } from './database.providers'
 
