@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { Pool } from 'mysql2/promise'
 import * as fs from 'fs'
 import * as path from 'path'
