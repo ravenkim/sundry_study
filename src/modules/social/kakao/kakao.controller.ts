@@ -9,7 +9,7 @@ export class KakaoController {
 
     @Get('redirect')
     async handleKakaoRedirect(@Query('code') code: string, @Res() res: Response) {
-        const result = await this.kakaoService.handleKakaoRedirect(code)
-        res.json(result)
+        // const result = await this.kakaoService.handleKakaoRedirect(code)
+        // res.json(result)
     }
 }

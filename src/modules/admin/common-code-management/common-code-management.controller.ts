@@ -14,8 +14,6 @@ export class CommonCodeManagementController {
         return this.CommonCodeManagementService.getCommonCodes()
     }
 
-
-
 }
 
 
