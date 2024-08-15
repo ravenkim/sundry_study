@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 const SSlayout = ({ layoutType = 'mobile', children }) => {
 
-    const [paddingTop, setPaddingTop] = useState(48)
 
 
     return (
@@ -27,7 +26,6 @@ const SSlayout = ({ layoutType = 'mobile', children }) => {
                 >
                     <div
                         style={{
-                            paddingTop: paddingTop,
                             width: '85%',
                             boxSizing: 'border-box'
                         }}
