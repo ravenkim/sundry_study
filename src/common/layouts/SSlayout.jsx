@@ -24,6 +24,7 @@ const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
                     <div
                         style={{
                             width: '85%',
+height:'100%',
                             boxSizing: 'border-box'
                         }}
                     >
