@@ -1,23 +1,20 @@
 import MobileLayout from 'src/common/layouts/MobileLayout.jsx'
 import { useState } from 'react'
+import NavigationBar from 'src/common/layouts/NavigationBar.jsx'
 
-const SSlayout = ({ layoutType = 'mobile', children }) => {
+const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
 
+    const navBarSize = '50px';
 
 
     return (
         layoutType === 'mobile' && (
             <MobileLayout
-                style={{
-                    backgroundColor: 'aqua',
-                    width: '100dvw',
-                    height: '100dvh',
-                }}
             >
                 <section
                     style={{
                         width: '100%',
-                        height: '100%',
+                        height: useNav ? `calc(100% - ${navBarSize})` : '100%',
                         overflowY: 'auto',
                         display: 'flex',
                         flexDirection: 'column',
@@ -32,10 +29,15 @@ const SSlayout = ({ layoutType = 'mobile', children }) => {
                     >
                         {children}
                     </div>
-
                 </section>
+                {useNav && <NavigationBar
 
-                <footer></footer>
+                    navBarSize = { navBarSize }
+                   />}
+
+
+
+
             </MobileLayout>
         )
     )
