@@ -1,11 +1,12 @@
-import logoIconUrl from 'src/assets/images/logo/logo.svg'
+import Logo from 'src/assets/images/logo/logo.svg?react'
 
 const Main = () => {
+    //
+    //
+    // const  mainLogoUrl= logoIconUrl
+    // console.log(mainLogoUrl)
 
-
-
-    const  mainLogoUrl= logoIconUrl
-    console.log(mainLogoUrl)
+    console.log(Logo)
     return (
         <>
             <div
@@ -18,27 +19,23 @@ const Main = () => {
                     flexDirection: 'column',
                 }}
             >
-                <img
-                    width={'55%'}
-                    height={'50%'}
-                    src={`${mainLogoUrl}`}
-                    alt={'메인 로고 '}
-                />
-                <img
-                    width={'55%'}
-                    height={'50%'}
-                    src={mainLogoUrl}
-                    alt={'메인 로고 '}
-                />
+                <Logo width={'290px'} height={'290px'} />
 
-                <h1>Ting</h1>
+                <h1
+                    style={{
+                        fontSize: 88,
+                        fontWeight: 'bolder',
+                    }}
+                    className={'text-primary'}
+                >
+                    Ting
+                </h1>
             </div>
 
             <div
                 style={{
                     width: '100%',
                     height: '25%',
-                    backgroundColor: 'tomato',
                 }}
             ></div>
         </>
