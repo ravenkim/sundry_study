@@ -11,7 +11,7 @@ const MobileLayout = ({ children }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexDirection:'row',
+                flexDirection: 'row',
             }}
         >
             <div
@@ -21,24 +21,17 @@ const MobileLayout = ({ children }) => {
                     height: '100%',
                     // backgroundColor: 'tomato'
                 }}
-            >
-
-
-
-            </div>
+            ></div>
             <div
-
-
-
                 className="
-                w-full
-                h-full
-                max-w-[500px]
-                overflow-y-auto
-                overflow-x-hidden
                 bg-background
-
                 "
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    maxWidth: 500,
+                    zIndex:888
+                }}
             >
                 {children}
             </div>
@@ -46,10 +39,11 @@ const MobileLayout = ({ children }) => {
             <div
                 className={'leftSpace'}
                 style={{
+                    height: '100%',
+                    // backgroundColor: 'tomato',
                     flexGrow: 1,
                 }}
-            >
-            </div>
+            ></div>
         </div>
     )
 }
