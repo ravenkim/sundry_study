@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { Pool } from 'mysql2/promise'
 import * as fs from 'fs'
 import * as path from 'path'
+import { ResultSetHeader } from 'mysql2';
 
 @Injectable()
 export class DatabaseService {
@@ -10,9 +11,20 @@ export class DatabaseService {
     ) {}
 
     async query(queryUrl: string, params: any[] = []) {
+        // todo 여기 애러 처리 해야할지 고민중입니다
         const queryPath = path.resolve(queryUrl)
         const query = fs.readFileSync(queryPath, 'utf8')
         const [results] = await this.connection.execute(query, params)
         return results
+    }
+
+    async queryLastInsertId(queryUrl: string, params: any[] = []) {
+        const queryPath = path.resolve(queryUrl)
+        const query = fs.readFileSync(queryPath, 'utf8')
+        const [results] = (await this.connection.execute(query, params)) as [
+            ResultSetHeader,
+            any,
+        ]
+        return results.insertId
     }
 }
