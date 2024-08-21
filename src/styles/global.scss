@@ -1,0 +1,21 @@
+html, body {
+    font-family: 'NanumSquareNeo', serif;
+}
+
+
+@mixin dynamic-height {
+    @supports (height: 100dvh) {
+        height: 100dvh;
+    }
+    @supports not (height: 100dvh) {
+        height: 100vh;
+    }
+}
+
+
+#mobileLayout{
+    background: linear-gradient(270deg, #D9F5FD 0%, #B1DDE3 100%);
+    width: 100dvw;
+    @include dynamic-height();
+}
+

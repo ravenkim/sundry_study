@@ -1,4 +1,5 @@
 import Logo from 'src/assets/images/logo/logo.svg?react'
+import SSbutton from 'src/common/components/button/SSbutton.jsx'
 
 const Main = () => {
     //
@@ -12,18 +13,19 @@ const Main = () => {
             <div
                 style={{
                     width: '100%',
-                    height: '75%',
+                    height: '60%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'column',
                 }}
             >
-                <Logo width={'290px'} height={'290px'} />
+                <Logo width={'150px'} height={'150px'} />
 
                 <h1
                     style={{
-                        fontSize: 88,
+                        marginTop: 20,
+                        fontSize: 50,
                         fontWeight: 'bolder',
                     }}
                     className={'text-primary'}
@@ -35,9 +37,25 @@ const Main = () => {
             <div
                 style={{
                     width: '100%',
-                    height: '25%',
+                    height: '40%',
+                    display:'flex',
+                    alignItems:'center',
+                    flexDirection:'column',
+                    justifyContent: 'center'
                 }}
-            ></div>
+            >
+                <SSbutton
+                    text={'회원가입'}
+                style={{marginBottom: 20}}
+                >
+                </SSbutton>
+
+                <SSbutton
+                    text={'로그인'}
+                    variant={'secondary'}
+                />
+
+            </div>
         </>
     )
 }

@@ -45,7 +45,8 @@ const Sample = () => {
             <div
                 style={{
                     fontFamily: "NanumSquareNeo",
-                    fontWeight: '300'
+                    fontWeight: '900',
+                    fontSize: 32
                 }}
             >
 
