@@ -3,6 +3,7 @@ import SSbutton from 'src/common/components/button/SSbutton.jsx'
 import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
 import { useEffect } from 'react'
 import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
+import SSdivider from 'src/common/components/divider/SSdivider.jsx'
 
 const Sample = () => {
     const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const Sample = () => {
                 display: 'flex',
                 height: '100vh',
                 width: '100vw',
+                flexDirection: 'column'
             }}
         >
             <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
@@ -33,9 +35,42 @@ const Sample = () => {
 
             <SScollapsible>sdsd</SScollapsible>
 
+
+            <SSdivider />
+
             <div>
-                이곳에 데이터가 표시됩니다
-                <div></div>
+
+                asdasd
+            </div>
+            <div
+                style={{
+                    fontFamily: "NanumSquareNeo",
+                    fontWeight: '300'
+                }}
+            >
+
+                asdasd
+            </div>
+            <div
+                style={{
+                    fontFamily: "NanumSquareNeo",
+                }}
+            >
+
+                asdasd
+            </div>
+            <div
+                style={{
+                    fontFamily: "NanumSquareNeo",
+                    fontWeight: '500'
+                }}
+            >
+
+                asdasd
+            </div>
+            <div>
+
+                asdasd
             </div>
 
             {/*    본가의 업데이트*/}

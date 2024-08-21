@@ -8,7 +8,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
     plugins: [  react(),svgr()],
 
-
+//포트 지정
     server: {
         port: 8619
     },
@@ -16,7 +16,6 @@ export default defineConfig({
     //절대경로 지정
     resolve: {
         alias: {
-
             src: path.resolve(__dirname, 'src'),
         },
     },
