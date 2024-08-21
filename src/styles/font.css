@@ -1,37 +1,48 @@
-
-
 @font-face {
     font-family: "NanumSquareNeo";
     src: local("NanumSquareNeo-aLt"),
     url('src/assets/fonts/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-display: block
+
 }
 @font-face {
     font-family: "NanumSquareNeo";
     font-weight: 300;
     src: local("NanumSquareNeo-bRg"),
     url('src/assets/fonts/NanumSquareNeoTTF-aLt.woff2') format('woff2');
+    font-display: block
+
 }
 @font-face {
     font-family: "NanumSquareNeo";
     font-weight: 400;
     src: local("NanumSquareNeo-bRg"),
     url('src/assets/fonts/NanumSquareNeoTTF-bRg.woff2') format('woff2');
+    font-display: block
+
 }
 @font-face {
     font-family: "NanumSquareNeo";
     font-weight: 700;
     src: local("NanumSquareNeo-cBd"),
     url('src/assets/fonts/NanumSquareNeoTTF-cBd.woff2') format('woff2');
+    font-display: block
+
 }
 @font-face {
     font-family: "NanumSquareNeo";
     font-weight: 800;
     src: local("NanumSquareNeo-dEb"),
     url('src/assets/fonts/NanumSquareNeoTTF-dEb.woff2') format('woff2');
+    font-display: block
+
 }
 @font-face {
     font-family: "NanumSquareNeo";
     font-weight: 900;
     src: local("NanumSquareNeo-eHv"),
     url('src/assets/fonts/NanumSquareNeoTTF-eHv.woff2') format('woff2');
+    font-display: block
+
 }
+

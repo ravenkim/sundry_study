@@ -6,7 +6,7 @@ import store from 'src/store/store.jsx'
 //styles
 import 'src/styles/reset.css'
 import 'src/styles/shadcn.css'
-import 'src/styles/global.css'
+import 'src/styles/global.scss'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

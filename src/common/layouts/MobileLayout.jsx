@@ -4,11 +4,7 @@ const MobileLayout = ({ children }) => {
 
         <div
             id={'mobileLayout'}
-
             style={{
-                background: 'linear-gradient(270deg, #D9F5FD 0%, #B1DDE3 100%)',
-                width: '100dvw',
-                height: '100dvh',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -31,7 +27,7 @@ const MobileLayout = ({ children }) => {
                     width: '100%',
                     height: '100%',
                     maxWidth: 500,
-                    zIndex:888
+                    minHeight: 600
                 }}
             >
                 {children}
