@@ -55,8 +55,6 @@ export class UsersService {
     async createAccount(props: CreateAccountRequestDto) {
         const password = props['userPassword']
         const hashedPassword = await bcrypt.hash(password, 10)
-
-        const finalData = { ...props, userPassword: hashedPassword }
         const result = await this.databaseService.query(
             'src/modules/users/sql/createAccount.sql',
             [
@@ -72,13 +70,6 @@ export class UsersService {
         //아이디 만들기
     }
 
-    //본인인증
-    //  1. 전화번호 인증 테이블에 코드 값과 일치하는지 확인
-    /*
-     * 1. 약관 동의 처리
-     * 2. 비밀번호 암호화
-     * 3. 아이디, 암호화된 비번, 이름, 전화번호, 전화번호 인증 번호
-     */
 
     async checkUserAuthentication() {
         // 유저 정보 들고옴
