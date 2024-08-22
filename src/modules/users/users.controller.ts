@@ -13,13 +13,7 @@ export class UsersController {
         return this.UsersService.getUser()
     }
 
-    // @Post('create-account')
-    // @ApiBody({ type: CreateAccountRequestDto })
-    // async createAccount(
-    //     @Body() data: CreateAccountRequestDto,
-    // ) {
-    //     return await this.UsersService.createUser(data)
-    // }
+
 
     // 회원가입
     @Post('create-account')
@@ -28,8 +22,8 @@ export class UsersController {
         // description: '설명',
     })
     @ApiBody({ type: CreateAccountRequestDto })
-    createAccount(@Body() props: CreateAccountRequestDto) {
-        return this.UsersService.createAccount(props)
+    createAccount(@Body() request: CreateAccountRequestDto) {
+        return this.UsersService.createAccount(request)
     }
 
     // 회원가입
