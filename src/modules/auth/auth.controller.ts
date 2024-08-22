@@ -11,5 +11,4 @@ export class AuthController {
     login(@Body() loginInfo: any) {
         return this.authService.login(loginInfo)
     }
-
 }
