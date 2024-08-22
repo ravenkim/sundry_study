@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsersService {
@@ -52,8 +53,21 @@ export class UsersService {
 
     //***************************************회원가입****************************************************//
     async createAccount(props: CreateAccountRequestDto) {
-        console.log(props)
-        return props
+        const password = props['userPassword']
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        const finalData = { ...props, userPassword: hashedPassword }
+        const result = await this.databaseService.query(
+            'src/modules/users/sql/createAccount.sql',
+            [
+                props['userLoginId'],
+                hashedPassword,
+                props['userEmail'],
+                props['userSignupChannel'],
+            ],
+        )
+        console.log(result)
+        return result
         //중복확인,
         //아이디 만들기
     }

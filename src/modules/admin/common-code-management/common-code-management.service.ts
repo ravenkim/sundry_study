@@ -9,6 +9,7 @@ export class CommonCodeManagementService {
         const result = await this.databaseService.query(
             'src/modules/admin/common-code-management/sql/get-common-code.sql',
         )
+        console.log(result)
         return result
     }
 }

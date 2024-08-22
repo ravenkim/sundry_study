@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { JwtService } from '@nestjs/jwt'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,10 @@ export class AuthService {
 
     async login(loginInfo: any) {
 
-
+        // const result = await bcrypt.compare(
+        //     'string',
+        //     '$2b$10$9VUffo3MkgPZeNLojzZi7exEYM2AHHEDDa2HQnx89g2x4WDky2t4u',
+        // )
 
         const result = await this.databaseService.query(
             'src/modules/auth/sql/login.sql',['1']
