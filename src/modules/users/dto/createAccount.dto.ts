@@ -2,12 +2,16 @@ import { ApiProperty } from '@nestjs/swagger'
 
 export class CreateAccountRequestDto {
     @ApiProperty()
-    name: string
+    userLoginId: string
 
     @ApiProperty()
-    age: number
+    userPassword: string
+
+    @ApiProperty()
+    userEmail: string
+
+    @ApiProperty()
+    userSignupChannel: string
 }
 
-export class CreateAccountResponseDto {
-
-}
+export class CreateAccountResponseDto {}

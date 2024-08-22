@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
+import { CreateAccountRequestDto } from './dto/createAccount.dto'
 
 @Injectable()
 export class UsersService {
@@ -50,7 +51,9 @@ export class UsersService {
     }
 
     //***************************************회원가입****************************************************//
-    async createAccount() {
+    async createAccount(props: CreateAccountRequestDto) {
+        console.log(props)
+        return props
         //중복확인,
         //아이디 만들기
     }
