@@ -9,7 +9,7 @@ const MobileLayout = ({ children }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
-                minHeight: 400
+                // minHeight: 400
             }}
         >
             <div
