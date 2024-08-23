@@ -14,7 +14,7 @@ const Main = () => {
             <div
                 style={{
                     width: '100%',
-                    height: '60%',
+                    height: '50%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -38,7 +38,7 @@ const Main = () => {
             <div
                 style={{
                     width: '100%',
-                    height: '40%',
+                    height: '50%',
                     display:'flex',
                     alignItems:'center',
                     flexDirection:'column',
