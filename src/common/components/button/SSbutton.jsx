@@ -1,6 +1,6 @@
 import { Button } from 'src/assets/shadcn/components/ui/button.jsx'
 
-const SSbutton = ({ text, children, style = {}, onClick, variant, ...props }) => {
+const SSbutton = ({ text, size='block', children, style = {}, onClick, variant, ...props }) => {
     return (
         <Button
             onClick={onClick}
