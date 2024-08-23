@@ -52,26 +52,38 @@ export class UsersService {
     }
 
     //***************************************회원가입****************************************************//
-    async createAccount(props: CreateAccountRequestDto) {
-        const password = props['userPassword']
+
+    // 아이디 중복 확인
+
+    // 계정 만들기
+    async createAccount(request: CreateAccountRequestDto) {
+        const password = request['userPassword']
         const hashedPassword = await bcrypt.hash(password, 10)
         const result = await this.databaseService.query(
             'src/modules/users/sql/createAccount.sql',
             [
-                props['userLoginId'],
+                request['userLoginId'],
                 hashedPassword,
-                props['userEmail'],
-                props['userSignupChannel'],
+                request['userEmail'],
+                'normal',
             ],
         )
         console.log(result)
         return result
-        //중복확인,
-        //아이디 만들기
     }
 
-
     async checkUserAuthentication() {
+        //todo 전화번호 인증으로 변경 예정
+        /** 전화번호 인증으로 받아올 값들 {
+         //이름
+         //성별
+         //유저 생일
+         //유저 국가
+         //유저 전화번호
+         **/
+        // }
+        // 본인인증여부 변경
+        //현시간으로 회원가입 날짜
         // 유저 정보 들고옴
         //본인인증 안하고 나간경우 임시로 만들어둔 계정 삭제
     }
