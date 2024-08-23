@@ -1,5 +1,6 @@
 import Logo from 'src/assets/images/logo/logo.svg?react'
 import SSbutton from 'src/common/components/button/SSbutton.jsx'
+import SSdivider from 'src/common/components/divider/SSdivider.jsx'
 
 const Main = () => {
     //
@@ -53,8 +54,36 @@ const Main = () => {
                 <SSbutton
                     text={'로그인'}
                     variant={'secondary'}
+                    style={{marginBottom: 20}}
                 />
 
+                <SSdivider
+                    text={'SNS로 로그인'}
+                />
+                <div>
+                    가로로 아이콘으로 들어가자
+
+                    <SSbutton
+                        text={'회원가입'}
+                        style={{
+                            marginTop: 20,
+                            marginBottom: 20,
+                        }}
+                    >
+                    </SSbutton>
+
+
+                    <SSbutton
+                        text={'로그인'}
+                        variant={'secondary'}
+                        style={{ marginBottom: 20 }}
+                    />
+                    <SSbutton
+                        text={'회원가입'}
+                        style={{ marginBottom: 20 }}
+                    >
+                    </SSbutton>
+                </div>
             </div>
         </>
     )

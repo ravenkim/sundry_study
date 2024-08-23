@@ -19,6 +19,7 @@ const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        boxSizing:'border-box'
                     }}
                 >
                     <div
