@@ -3,14 +3,11 @@ import { useState } from 'react'
 import NavigationBar from 'src/common/layouts/NavigationBar.jsx'
 
 const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
-
-    const navBarSize = '50px';
-
+    const navBarSize = '50px'
 
     return (
         layoutType === 'mobile' && (
-            <MobileLayout
-            >
+            <MobileLayout>
                 <section
                     style={{
                         width: '100%',
@@ -19,27 +16,20 @@ const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        boxSizing:'border-box'
+                        boxSizing: 'border-box',
                     }}
                 >
                     <div
                         style={{
                             width: '85%',
-height:'100%',
-                            boxSizing: 'border-box'
+                            height: '100%',
+                            boxSizing: 'border-box',
                         }}
                     >
                         {children}
                     </div>
                 </section>
-                {useNav && <NavigationBar
-
-                    navBarSize = { navBarSize }
-                   />}
-
-
-
-
+                {useNav && <NavigationBar navBarSize={navBarSize} />}
             </MobileLayout>
         )
     )
