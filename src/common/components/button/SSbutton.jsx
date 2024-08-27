@@ -3,6 +3,7 @@ import { Button } from 'src/assets/shadcn/components/ui/button.jsx'
 const SSbutton = ({ text, size='block', children, style = {}, onClick, variant, ...props }) => {
     return (
         <Button
+
             onClick={onClick}
             style={{
                 height: '45px',

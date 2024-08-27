@@ -36,7 +36,9 @@ const Sample = () => {
             <SScollapsible>sdsd</SScollapsible>
 
 
-            <SSdivider />
+            <SSdivider 
+                text={'안녕'}
+                />
 
             <div>
 
