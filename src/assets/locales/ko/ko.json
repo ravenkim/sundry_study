@@ -13,5 +13,11 @@
   },
   "home": {
     "join": "회원가입"
+  },
+  "text": {
+    "Welcome to React": "어서오시라요"
+  },
+  "numbar": {
+    "aaaaa": "1111111111111"
   }
 }
