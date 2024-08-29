@@ -13,5 +13,11 @@
   },
   "home": {
     "join": "join"
+  },
+  "text": {
+    "Welcome to React": "영어영어"
+  },
+  "numbar": {
+    "aaaaa": "22222222222222222"
   }
 }

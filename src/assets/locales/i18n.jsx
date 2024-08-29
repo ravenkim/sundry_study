@@ -13,7 +13,7 @@ const resources = {
     },
 }
 
-const language = localStorage.getItem('language') || 'ko';
+const language = localStorage.getItem('i18nextLng') || 'ko';
 
 
 
@@ -21,10 +21,15 @@ i18n.use(initReactI18next)
     .use(LanguageDetector)
     .init({
         resources,
-        lng: 'language',
-        fallbackLng: 'en',
+        supportedLngs: ['ko', 'en'],
+        lng: language, //로컬 스토리지에 저장된 언어
+        fallbackLng: 'en', //ko가 없으면 나오는 언어
         interpolation: {
-            escapeValue: false, // react already safes from xss
+            escapeValue: false, //리액트는 xss 방지가 따로 되어있어서 불필요
+        },
+        detection: {
+            order: ['localStorage', 'navigator'],
+            caches: ['localStorage'],
         },
     })
 

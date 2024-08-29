@@ -4,7 +4,9 @@ import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
 import { useEffect } from 'react'
 import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
 import SSdivider from 'src/common/components/divider/SSdivider.jsx'
-import { Trans } from 'react-i18next';
+import { Trans } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
+
 const Sample = () => {
     const dispatch = useDispatch()
 
@@ -19,6 +21,11 @@ const Sample = () => {
         console.log(data)
     }, [data])
 
+    const { t, i18n } = useTranslation()
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng)
+        // 언어 변경 시 로컬 스토리지에 저장
+    }
 
     return (
         <div
@@ -32,6 +39,9 @@ const Sample = () => {
         >
             <Trans>text.Welcome to React</Trans>
             <Trans>numbar.aaaaa</Trans>
+            <SSbutton onClick={() => changeLanguage('en')}>English</SSbutton>
+            <SSbutton onClick={() => changeLanguage('ko')}>English</SSbutton>
+
             <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
                 데이터 가져오기
             </SSbutton>
