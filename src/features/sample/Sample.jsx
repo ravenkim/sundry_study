@@ -4,7 +4,7 @@ import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
 import { useEffect } from 'react'
 import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
 import SSdivider from 'src/common/components/divider/SSdivider.jsx'
-
+import { Trans } from 'react-i18next';
 const Sample = () => {
     const dispatch = useDispatch()
 
@@ -19,6 +19,7 @@ const Sample = () => {
         console.log(data)
     }, [data])
 
+
     return (
         <div
             style={{
@@ -26,55 +27,45 @@ const Sample = () => {
                 display: 'flex',
                 height: '100vh',
                 width: '100vw',
-                flexDirection: 'column'
+                flexDirection: 'column',
             }}
         >
+            <Trans>Welcome to React</Trans>
+            <Trans>aaaaa</Trans>
             <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
                 데이터 가져오기
             </SSbutton>
 
             <SScollapsible>sdsd</SScollapsible>
 
+            <SSdivider text={'안녕'} />
 
-            <SSdivider 
-                text={'안녕'}
-                />
-
-            <div>
-
-                asdasd
-            </div>
+            <div>asdasd</div>
             <div
                 style={{
-                    fontFamily: "NanumSquareNeo",
+                    fontFamily: 'NanumSquareNeo',
                     fontWeight: '900',
-                    fontSize: 32
+                    fontSize: 32,
                 }}
             >
-
                 asdasd
             </div>
             <div
                 style={{
-                    fontFamily: "NanumSquareNeo",
+                    fontFamily: 'NanumSquareNeo',
                 }}
             >
-
                 asdasd
             </div>
             <div
                 style={{
-                    fontFamily: "NanumSquareNeo",
-                    fontWeight: '500'
+                    fontFamily: 'NanumSquareNeo',
+                    fontWeight: '500',
                 }}
             >
-
                 asdasd
             </div>
-            <div>
-
-                asdasd
-            </div>
+            <div>asdasd</div>
 
             {/*    본가의 업데이트*/}
         </div>
