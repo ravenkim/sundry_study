@@ -24,7 +24,6 @@ const Sample = () => {
     const { t, i18n } = useTranslation()
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng)
-        // 언어 변경 시 로컬 스토리지에 저장
     }
 
     return (
