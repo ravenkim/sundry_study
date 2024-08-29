@@ -30,8 +30,8 @@ const Sample = () => {
                 flexDirection: 'column',
             }}
         >
-            <Trans>Welcome to React</Trans>
-            <Trans>aaaaa</Trans>
+            <Trans>text.Welcome to React</Trans>
+            <Trans>numbar.aaaaa</Trans>
             <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
                 데이터 가져오기
             </SSbutton>

@@ -48,9 +48,11 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:0.4.11"],\
           ["history", "npm:5.3.0"],\
           ["i18next", "npm:23.14.0"],\
+          ["i18next-browser-languagedetector", "npm:8.0.0"],\
           ["postcss", "npm:8.4.41"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
+          ["react-cookie", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:7.2.0"],\
           ["react-dom", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:18.3.1"],\
           ["react-i18next", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:15.0.1"],\
           ["react-redux", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:9.1.2"],\
@@ -2226,11 +2228,31 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/cookie", [\
+      ["npm:0.6.0", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-cookie-npm-0.6.0-1f4c3f48f0-10c0.zip/node_modules/@types/cookie/",\
+        "packageDependencies": [\
+          ["@types/cookie", "npm:0.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/estree", [\
       ["npm:1.0.5", {\
         "packageLocation": "../../.yarn/berry/cache/@types-estree-npm-1.0.5-5b7faed3b4-10c0.zip/node_modules/@types/estree/",\
         "packageDependencies": [\
           ["@types/estree", "npm:1.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/hoist-non-react-statics", [\
+      ["npm:3.3.5", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-hoist-non-react-statics-npm-3.3.5-98b8d8e47b-10c0.zip/node_modules/@types/hoist-non-react-statics/",\
+        "packageDependencies": [\
+          ["@types/hoist-non-react-statics", "npm:3.3.5"],\
+          ["@types/react", "npm:18.3.4"],\
+          ["hoist-non-react-statics", "npm:3.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2916,6 +2938,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/convert-source-map-npm-2.0.0-7ab664dc4e-10c0.zip/node_modules/convert-source-map/",\
         "packageDependencies": [\
           ["convert-source-map", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["cookie", [\
+      ["npm:0.6.0", {\
+        "packageLocation": "../../.yarn/berry/cache/cookie-npm-0.6.0-362d6a2e45-10c0.zip/node_modules/cookie/",\
+        "packageDependencies": [\
+          ["cookie", "npm:0.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4095,6 +4126,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["hoist-non-react-statics", [\
+      ["npm:3.3.2", {\
+        "packageLocation": "../../.yarn/berry/cache/hoist-non-react-statics-npm-3.3.2-e7b709e6c1-10c0.zip/node_modules/hoist-non-react-statics/",\
+        "packageDependencies": [\
+          ["hoist-non-react-statics", "npm:3.3.2"],\
+          ["react-is", "npm:16.13.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["html-parse-stringify", [\
       ["npm:3.0.1", {\
         "packageLocation": "../../.yarn/berry/cache/html-parse-stringify-npm-3.0.1-5762cd4b01-10c0.zip/node_modules/html-parse-stringify/",\
@@ -4141,6 +4182,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/i18next-npm-23.14.0-60f97764b5-10c0.zip/node_modules/i18next/",\
         "packageDependencies": [\
           ["i18next", "npm:23.14.0"],\
+          ["@babel/runtime", "npm:7.25.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["i18next-browser-languagedetector", [\
+      ["npm:8.0.0", {\
+        "packageLocation": "../../.yarn/berry/cache/i18next-browser-languagedetector-npm-8.0.0-fcff5207d7-10c0.zip/node_modules/i18next-browser-languagedetector/",\
+        "packageDependencies": [\
+          ["i18next-browser-languagedetector", "npm:8.0.0"],\
           ["@babel/runtime", "npm:7.25.4"]\
         ],\
         "linkType": "HARD"\
@@ -4775,9 +4826,11 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:0.4.11"],\
           ["history", "npm:5.3.0"],\
           ["i18next", "npm:23.14.0"],\
+          ["i18next-browser-languagedetector", "npm:8.0.0"],\
           ["postcss", "npm:8.4.41"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
+          ["react-cookie", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:7.2.0"],\
           ["react-dom", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:18.3.1"],\
           ["react-i18next", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:15.0.1"],\
           ["react-redux", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:9.1.2"],\
@@ -5636,6 +5689,31 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["react", "npm:18.3.1"],\
           ["loose-envify", "npm:1.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-cookie", [\
+      ["npm:7.2.0", {\
+        "packageLocation": "../../.yarn/berry/cache/react-cookie-npm-7.2.0-ca92e0b084-10c0.zip/node_modules/react-cookie/",\
+        "packageDependencies": [\
+          ["react-cookie", "npm:7.2.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:7.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/react-cookie-virtual-408d7007ac/3/.yarn/berry/cache/react-cookie-npm-7.2.0-ca92e0b084-10c0.zip/node_modules/react-cookie/",\
+        "packageDependencies": [\
+          ["react-cookie", "virtual:fa0456268ecc9b60e92a069927931197fa291e4ad830a8c7a9273632f5e6509757b2aca142c77306c1caacacfae8a5e0c75384408e3a97feba80e51c9fbd96fa#npm:7.2.0"],\
+          ["@types/hoist-non-react-statics", "npm:3.3.5"],\
+          ["@types/react", "npm:18.3.4"],\
+          ["hoist-non-react-statics", "npm:3.3.2"],\
+          ["react", "npm:18.3.1"],\
+          ["universal-cookie", "npm:7.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6735,6 +6813,17 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["unique-slug", "npm:4.0.0"],\
           ["imurmurhash", "npm:0.1.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["universal-cookie", [\
+      ["npm:7.2.0", {\
+        "packageLocation": "../../.yarn/berry/cache/universal-cookie-npm-7.2.0-eb2c0ed6f9-10c0.zip/node_modules/universal-cookie/",\
+        "packageDependencies": [\
+          ["universal-cookie", "npm:7.2.0"],\
+          ["@types/cookie", "npm:0.6.0"],\
+          ["cookie", "npm:0.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
