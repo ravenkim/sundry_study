@@ -2,17 +2,24 @@ import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 import { ResponseInterceptor } from './utils/response.interceptor'
+import { AllExceptionsFilter } from './utils/exceptions.filter'
 import { ValidationPipe } from '@nestjs/common'
+import { validationExceptionFactory } from './utils/exceptions/validation-exception.factory'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
     //형식 검증
-    app.useGlobalPipes(new ValidationPipe())
+    app.useGlobalPipes(
+        new ValidationPipe({
+            exceptionFactory: validationExceptionFactory,
+        }),
+    )
 
     //성공시 원하는 형식으로 데이터를 만들어줌
     app.useGlobalInterceptors(new ResponseInterceptor())
 
     // 에러 발생시 가로챔
+    app.useGlobalFilters(new AllExceptionsFilter())
 
     // cors 열어줄곳
     app.enableCors({

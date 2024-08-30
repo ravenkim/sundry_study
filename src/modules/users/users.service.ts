@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
+import { checkEmailDuplicate } from './exceptions/duplicate-email.exception'
 
 @Injectable()
 export class UsersService {
@@ -57,16 +58,16 @@ export class UsersService {
 
     // 계정 만들기
     async createAccount(request: CreateAccountRequestDto) {
-        const password = request['userPassword']
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const { userLoginId, userEmail, userPassword } = request
+
+        //이메일 중복 확인
+        await checkEmailDuplicate(userEmail, this.databaseService)
+
+        const hashedPassword = await bcrypt.hash(userPassword, 10)
+
         const result = await this.databaseService.query(
             'src/modules/users/sql/createAccount.sql',
-            [
-                request['userLoginId'],
-                hashedPassword,
-                request['userEmail'],
-                'normal',
-            ],
+            [userLoginId, hashedPassword, userEmail, 'normal'],
         )
         console.log(result)
         return result
