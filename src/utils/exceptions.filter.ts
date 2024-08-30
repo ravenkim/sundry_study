@@ -1,3 +1,5 @@
+// src/utils/exceptions.filter.ts
+
 import {
     ExceptionFilter,
     Catch,
@@ -5,20 +7,34 @@ import {
     HttpException,
     HttpStatus,
 } from '@nestjs/common'
+import { Request, Response } from 'express'
 
 @Catch()
-export class ExceptionsFilter implements ExceptionFilter {
-    catch(exception: unknown, host: ArgumentsHost) {
+export class AllExceptionsFilter implements ExceptionFilter {
+    catch(exception: any, host: ArgumentsHost) {
         const ctx = host.switchToHttp()
-        const response = ctx.getResponse()
-        let status = HttpStatus.INTERNAL_SERVER_ERROR
-        let errorMsg = 'Internal Server Error'
+        const response = ctx.getResponse<Response>()
+        const status = exception.getStatus
+            ? exception.getStatus()
+            : HttpStatus.INTERNAL_SERVER_ERROR
+        const exceptionResponse = exception.getResponse
+            ? exception.getResponse()
+            : exception.message
+              ? exception.message
+              : null
 
-        if (exception instanceof HttpException) {
-            status = exception.getStatus()
-            errorMsg = exception.message
-        } else if (typeof exception === 'string') {
-            errorMsg = exception
+        let errorMsg: string
+
+        if (Array.isArray(exceptionResponse)) {
+            errorMsg = exceptionResponse.join(', ')
+        } else if (typeof exceptionResponse === 'object') {
+            if (Array.isArray((exceptionResponse as any).message)) {
+                errorMsg = (exceptionResponse as any).message.join(', ')
+            } else {
+                errorMsg = (exceptionResponse as any).message
+            }
+        } else {
+            errorMsg = exceptionResponse
         }
 
         response.status(status).json({
