@@ -4,6 +4,7 @@ import { AppModule } from './app.module'
 import { ResponseInterceptor } from './utils/response.interceptor'
 import { ValidationPipe } from '@nestjs/common'
 import { BadRequestException } from '@nestjs/common'
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
@@ -14,6 +15,7 @@ async function bootstrap() {
     app.useGlobalInterceptors(new ResponseInterceptor())
 
     // 에러 발생시 가로챔
+
 
     // cors 열어줄곳
     app.enableCors({
@@ -31,7 +33,11 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api', app, document)
 
-    await app.listen(7312)
+    await app.listen(7312, () => {
+        if (process.env.NODE_ENV === 'development') {
+            console.log('➜  Local:   http://localhost:7312/')
+        }
+    })
 }
 
 bootstrap().catch((err) => {
