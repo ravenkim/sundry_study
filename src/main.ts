@@ -3,8 +3,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 import { ResponseInterceptor } from './utils/response.interceptor'
 import { ValidationPipe } from '@nestjs/common'
-import { BadRequestException } from '@nestjs/common'
-import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
@@ -15,7 +13,6 @@ async function bootstrap() {
     app.useGlobalInterceptors(new ResponseInterceptor())
 
     // 에러 발생시 가로챔
-
 
     // cors 열어줄곳
     app.enableCors({
@@ -33,7 +30,9 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api', app, document)
 
+    //포트번호
     await app.listen(7312, () => {
+        //yarn dev 시에만 로그
         if (process.env.NODE_ENV === 'development') {
             console.log('➜  Local:   http://localhost:7312/')
         }
