@@ -15,7 +15,7 @@ const Test1 = () => {
                     navigate('/bb', {
                         state: {
                             aaa: 123,
-                            state: [123, 23, 51],
+                        
                             vvv: 4456,
                         },
                     })
