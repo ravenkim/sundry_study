@@ -6,6 +6,7 @@ import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
 import SSdivider from 'src/common/components/divider/SSdivider.jsx'
 import { Trans } from 'react-i18next'
 import { useTranslation } from 'react-i18next'
+import SSinnerWrapper from 'src/common/components/wrapper/SSinnerWrapper.jsx'
 
 const Sample = () => {
     const dispatch = useDispatch()
@@ -27,57 +28,74 @@ const Sample = () => {
     }
 
     return (
+
         <div
             style={{
-                padding: 50,
-                display: 'flex',
-                height: '100vh',
-                width: '100vw',
-                flexDirection: 'column',
+                backgroundColor:'tomato',
+                height:800,
+                width:300
             }}
-        >
-            <Trans>text.Welcome to React</Trans>
-            <Trans>numbar.aaaaa</Trans>
-            <SSbutton onClick={() => changeLanguage('en')}>English</SSbutton>
-            <SSbutton onClick={() => changeLanguage('ko')}>English</SSbutton>
-
-            <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
-                데이터 가져오기
-            </SSbutton>
-
-            <SScollapsible>sdsd</SScollapsible>
-
-            <SSdivider text={'안녕'} />
-
-            <div>asdasd</div>
-            <div
-                style={{
-                    fontFamily: 'NanumSquareNeo',
-                    fontWeight: '900',
-                    fontSize: 32,
-                }}
-            >
+        ><SSinnerWrapper>
+            <SSinnerWrapper.Top>
                 asdasd
-            </div>
-            <div
-                style={{
-                    fontFamily: 'NanumSquareNeo',
-                }}
-            >
+            </SSinnerWrapper.Top>
+            <SSinnerWrapper.Bottom>
                 asdasd
-            </div>
-            <div
-                style={{
-                    fontFamily: 'NanumSquareNeo',
-                    fontWeight: '500',
-                }}
-            >
-                asdasd
-            </div>
-            <div>asdasd</div>
+            </SSinnerWrapper.Bottom>
 
-            {/*    본가의 업데이트*/}
-        </div>
+        </SSinnerWrapper></div>
+
+        // <div
+        //     style={{
+        //         padding: 50,
+        //         display: 'flex',
+        //         height: '100vh',
+        //         width: '100vw',
+        //         flexDirection: 'column',
+        //     }}
+        // >
+        //     <Trans>text.Welcome to React</Trans>
+        //     <Trans>numbar.aaaaa</Trans>
+        //     <SSbutton onClick={() => changeLanguage('en')}>English</SSbutton>
+        //     <SSbutton onClick={() => changeLanguage('ko')}>English</SSbutton>
+        //
+        //     <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
+        //         데이터 가져오기
+        //     </SSbutton>
+        //
+        //     <SScollapsible>sdsd</SScollapsible>
+        //
+        //     <SSdivider text={'안녕'} />
+        //
+        //     <div>asdasd</div>
+        //     <div
+        //         style={{
+        //             fontFamily: 'NanumSquareNeo',
+        //             fontWeight: '900',
+        //             fontSize: 32,
+        //         }}
+        //     >
+        //         asdasd
+        //     </div>
+        //     <div
+        //         style={{
+        //             fontFamily: 'NanumSquareNeo',
+        //         }}
+        //     >
+        //         asdasd
+        //     </div>
+        //     <div
+        //         style={{
+        //             fontFamily: 'NanumSquareNeo',
+        //             fontWeight: '500',
+        //         }}
+        //     >
+        //         asdasd
+        //     </div>
+        //     <div>asdasd</div>
+        //
+        //     {/*    본가의 업데이트*/}
+        // </div>
     )
 }
 
