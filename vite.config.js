@@ -8,7 +8,8 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
     plugins: [  react(),svgr()],
 
-
+    // 캐시 생성 위치 (없으면 node_modules 안에 생김)
+    cacheDir: './.vite',
 
 //포트 지정
     server: {
