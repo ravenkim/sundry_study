@@ -37,6 +37,9 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api', app, document)
 
+
+
+
     //포트번호
     await app.listen(7312, () => {
         //yarn dev 시에만 로그
