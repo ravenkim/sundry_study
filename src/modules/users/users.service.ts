@@ -66,7 +66,7 @@ export class UsersService {
         const hashedPassword = await bcrypt.hash(userPassword, 10)
 
         const result = await this.databaseService.query(
-            'src/modules/users/sql/createAccount.sql',
+            'src/modules/users/sql/create_account.sql',
             [userLoginId, hashedPassword, userEmail, 'normal'],
         )
         console.log(result)
