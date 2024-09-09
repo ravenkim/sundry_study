@@ -12,11 +12,10 @@ import { Request, Response } from 'express'
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
     catch(exception: any, host: ArgumentsHost) {
+
         const ctx = host.switchToHttp()
         const response = ctx.getResponse<Response>()
-        const status = exception.getStatus
-            ? exception.getStatus()
-            : HttpStatus.INTERNAL_SERVER_ERROR
+
         const exceptionResponse = exception.getResponse
             ? exception.getResponse()
             : exception.message
@@ -37,7 +36,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
             errorMsg = exceptionResponse
         }
 
-        response.status(status).json({
+        // 어떤 애러가 발생했는지 백에서도 찍어줌
+        console.error(errorMsg)
+
+
+        // 예외가 발생해도 통신은 정상적으로 작동했기에 200으로 처리
+        response.status(HttpStatus.OK).json({
             data: errorMsg,
             error: true,
         })

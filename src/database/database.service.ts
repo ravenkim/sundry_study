@@ -14,7 +14,16 @@ export class DatabaseService {
         // todo 여기 애러 처리 해야할지 고민중입니다
         const queryPath = path.resolve(queryUrl)
         const query = fs.readFileSync(queryPath, 'utf8')
-        const [results] = await this.connection.execute(query, params)
-        return results
+
+        try {
+            const [results] = await this.connection.execute(query, params)
+            return results
+        } catch (err) {
+            if (err.code === 'ECONNREFUSED') {
+                throw new Error('디비 죽음')
+            } else {
+                throw new Error(`디비에서 쿼리실행에 실패`)
+            }
+        }
     }
 }
