@@ -1,5 +1,5 @@
 // 임시 헤더
-import icon_out from 'src/assets/images/icon/icon_out.svg'
+import icon_out from 'src/assets/images/icon/Icon_out.svg'
 import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
