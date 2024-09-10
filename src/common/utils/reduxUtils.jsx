@@ -102,6 +102,9 @@ export const extraReducers = (prefix, asyncRequest) => {
                 if (action.type.endsWith('Success')) {
                     const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
                     const requestInfo = asyncRequest[key][0];
+
+                    console.log(prefix)
+                    console.log(key)
                     state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload);
                 }
                 if (action.type.endsWith('Fail')) {
@@ -180,5 +183,7 @@ export const reduxMaker = (
     //액션 만들기
     final[`${prefix}Action`] = final[`${prefix}Slice`].actions
     return final
+
+
 }
 
