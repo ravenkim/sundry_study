@@ -26,6 +26,7 @@ dist-ssr
 *.sw?
 
 
+
 ### yarn ###
 # used Zero-Install
 .yarn/*
@@ -35,3 +36,6 @@ dist-ssr
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.yarn/install-state.gz
+
+
