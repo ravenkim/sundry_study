@@ -44,7 +44,7 @@ async function bootstrap() {
     await app.listen(7312, () => {
         //yarn dev 시에만 로그
         if (process.env.NODE_ENV === 'development') {
-            console.log('➜  Local:   http://localhost:7312/')
+            console.log('➜  Local:   http://localhost:7312/api')
         }
     })
 }
