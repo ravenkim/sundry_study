@@ -5,7 +5,7 @@ const prefix = 'auth'
 
 const asyncRequest = {
     login: [
-        {login: reducerUtils.init(false)},
+        {isLoggedIn: reducerUtils.init(false)},
         login
     ],
     // getCode: [
