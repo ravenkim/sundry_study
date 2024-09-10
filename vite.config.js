@@ -6,7 +6,7 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [  react(),svgr()],
+    plugins: [  react({}),svgr()],
 
     // 캐시 생성 위치 (없으면 node_modules 안에 생김)
     cacheDir: './.vite',

@@ -6,6 +6,7 @@ import LoginPage from 'src/pages/login/LoginPage.jsx'
 import HomePage from 'src/pages/home/HomePage.jsx'
 import MainPage from 'src/pages/main/MainPage.jsx'
 import SamplePage from 'src/pages/SamplePage.jsx'
+import Onboarding from './../pages/onboarding/OnBoarding'
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +23,11 @@ export const router = createBrowserRouter([
     {
         path: '/home',
         element: <HomePage />,
+    },
+
+    {
+        path: '/onboarding',
+        element: <Onboarding />,
     },
 
 
