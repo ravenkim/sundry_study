@@ -1,5 +1,5 @@
 SELECT EXISTS (
     SELECT 1
     FROM users
-    WHERE user_email = 'user@example.com'
+    WHERE user_login_id = ?
 ) AS is_duplicate;
