@@ -10,16 +10,8 @@ import logoIconUrl from 'src/assets/images/logo/logo.svg'
 const NavigationBar = ({ navBarSize }) => {
     return (
         <nav
-            style={{
-                width: '100%',
-                height: navBarSize,
-                display: 'flex',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                boxSizing: 'border-box',
-                overflow: 'hidden',
-            }}
-            className={'border-t'}
+
+            className={`w-full h-[calc(100% - (100%-${navBarSize}))] flex justify-around items-center box-border border-t`}
         >
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <HomeIcon
@@ -38,11 +30,7 @@ const NavigationBar = ({ navBarSize }) => {
                 />
             </NavigationButton>
             <NavigationButton isActive={true} navBarSize={navBarSize}>
-                <img
-                    src={logoIconUrl}
-
-                 alt={'logoIcon'}
-                />
+                <img src={logoIconUrl} alt={'logoIcon'} />
             </NavigationButton>
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <ChatBubbleIcon
