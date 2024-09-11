@@ -1,7 +1,7 @@
 @font-face {
     /*이름*/
     font-family: "NanumSquareNeo";
-    /*경로*/
+    /*경로 이미 운영체제에 설치 되어있는지 확인 없으면 다운*/
     src: local("NanumSquareNeo-aLt"),
     /*위치*/
     url('src/assets/fonts/NanumSquareNeo-Variable.woff2') format('woff2');
