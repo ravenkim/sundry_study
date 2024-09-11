@@ -2,7 +2,7 @@ import MobileLayout from 'src/common/layouts/MobileLayout.jsx'
 import NavigationBar from 'src/common/layouts/NavigationBar.jsx'
 
 const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
-    const navBarSize = '60px'
+    const navBarSize = '68px'
 
 
     // todo 500 까지는 모바일, 일단 500보다 커도 배경 나오게끔 설정함 향후 큰 화면 개발시 레이아웃 수정 필요
