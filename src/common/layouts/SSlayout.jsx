@@ -1,5 +1,4 @@
 import MobileLayout from 'src/common/layouts/MobileLayout.jsx'
-import { useState } from 'react'
 import NavigationBar from 'src/common/layouts/NavigationBar.jsx'
 
 const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {

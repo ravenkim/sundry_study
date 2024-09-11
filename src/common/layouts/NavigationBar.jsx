@@ -3,7 +3,6 @@ import {
     HomeIcon,
     MixIcon,
     PersonIcon,
-    TextIcon,
 } from '@radix-ui/react-icons'
 import logoIconUrl from 'src/assets/images/logo/logo.svg'
 
