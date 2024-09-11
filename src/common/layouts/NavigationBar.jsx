@@ -7,20 +7,17 @@ import {
 } from '@radix-ui/react-icons'
 import logoIconUrl from 'src/assets/images/logo/logo.svg'
 
-const NavigationBar = ({ navBarSize = '50px' }) => {
+const NavigationBar = ({ navBarSize }) => {
     return (
         <nav
             style={{
                 width: '100%',
                 height: navBarSize,
-                // Same as the navBarHeight in SSlayout
-                position: 'fixed',
-                bottom: 0,
                 display: 'flex',
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 boxSizing: 'border-box',
-                maxWidth: 500,
+                overflow: 'hidden',
             }}
             className={'border-t'}
         >
