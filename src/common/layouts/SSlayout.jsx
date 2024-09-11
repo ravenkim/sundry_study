@@ -3,31 +3,18 @@ import { useState } from 'react'
 import NavigationBar from 'src/common/layouts/NavigationBar.jsx'
 
 const SSlayout = ({ layoutType = 'mobile', children, useNav = true }) => {
-    const navBarSize = '50px'
+    const navBarSize = '60px'
+
+
+    // todo 500 까지는 모바일, 일단 500보다 커도 배경 나오게끔 설정함 향후 큰 화면 개발시 레이아웃 수정 필요
 
     return (
         layoutType === 'mobile' && (
             <MobileLayout>
                 <section
-                    style={{
-                        width: '100%',
-                        height: useNav ? `calc(100% - ${navBarSize})` : '100%',
-                        overflowY: 'auto',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        boxSizing: 'border-box',
-                    }}
+                    className={`w-full ${useNav ? `h-[calc(100%-${navBarSize})]` : 'h-full'} flex flex-col items-center box-border`}
                 >
-                    <div
-                        style={{
-                            width: '85%',
-                            height: '100%',
-                            boxSizing: 'border-box',
-                        }}
-                    >
-                        {children}
-                    </div>
+                    {children}
                 </section>
                 {useNav && <NavigationBar navBarSize={navBarSize} />}
             </MobileLayout>
