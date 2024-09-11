@@ -4,46 +4,46 @@ import {
     MixIcon,
     PersonIcon,
 } from '@radix-ui/react-icons'
-import logoIconUrl from 'src/assets/images/logo/logo.svg'
+import Logo from 'src/assets/images/logo/logo.svg?react'
 
 const NavigationBar = ({ navBarSize }) => {
     return (
         <nav
-
-            className={`w-full h-[calc(100% - (100%-${navBarSize}))] flex justify-around items-center box-border border-t`}
+            className={`w-full h-[calc(100% - (100%-${navBarSize}))] flex justify-around box-border border-t py-[12]`}
         >
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <HomeIcon
                     style={{
-                        width: 35,
-                        height: 35,
+                        width: 44,
+                        height: 44,
                     }}
                 />
             </NavigationButton>
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <MixIcon
                     style={{
-                        width: 35,
-                        height: 35,
+                        width: 44,
+                        height: 44,
                     }}
                 />
             </NavigationButton>
             <NavigationButton isActive={true} navBarSize={navBarSize}>
-                <img src={logoIconUrl} alt={'logoIcon'} />
+                <Logo width={44} height={44} />
+
             </NavigationButton>
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <ChatBubbleIcon
                     style={{
-                        width: 35,
-                        height: 35,
+                        width: 44,
+                        height: 44,
                     }}
                 />
             </NavigationButton>
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <PersonIcon
                     style={{
-                        width: 35,
-                        height: 35,
+                        width: 44,
+                        height: 44,
                     }}
                 />
             </NavigationButton>
