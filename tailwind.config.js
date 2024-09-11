@@ -8,7 +8,15 @@ module.exports = {
         './src/**/*.{js,jsx}',
     ],
     prefix: '',
+
+
     theme: {
+        screens:{
+            mobile: '500px',
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+        },
         container: {
             center: true,
             padding: '2rem',
