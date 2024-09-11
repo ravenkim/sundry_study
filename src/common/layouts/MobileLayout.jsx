@@ -2,45 +2,14 @@ const MobileLayout = ({ children }) => {
     return (
         //todo class로 글로벌 css로 변경
 
-        <div
-            id={'mobileLayout'}
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'row',
-                // minHeight: 400
-            }}
-        >
+        <div className={'flex justify-center h-dvh w-dvw bg-primary bg-gradient-to-l from-primary-foreground via-primary to-primary-foreground'}>
+
             <div
-                className={'leftSpace'}
-                style={{
-                    flexGrow: 1,
-                    height: '100%',
-                    // backgroundColor: 'tomato'
-                }}
-            ></div>
-            <div
-                className="
-                bg-background
-                "
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    maxWidth: 500,
-                }}
+                className={'w-full h-full max-w-screen-mobile bg-background'}
             >
                 {children}
             </div>
 
-            <div
-                className={'leftSpace'}
-                style={{
-                    height: '100%',
-                    // backgroundColor: 'tomato',
-                    flexGrow: 1,
-                }}
-            ></div>
         </div>
     )
 }
