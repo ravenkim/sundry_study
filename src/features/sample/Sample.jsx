@@ -32,8 +32,14 @@ const Sample = () => {
     <SSinnerWrapper>
             <SSinnerWrapper.Top>
                 asdasd
-            </SSinnerWrapper.Top>
 
+                <SSbutton></SSbutton>
+            </SSinnerWrapper.Top>
+        <SSinnerWrapper.Bottom>
+            asdasd
+
+            <SSbutton></SSbutton>
+        </SSinnerWrapper.Bottom>
 
         </SSinnerWrapper>
 

@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
-import { cva } from 'class-variance-authority'
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva } from "class-variance-authority";
 
 import { cn } from 'src/assets/shadcn/utils'
 
@@ -25,6 +25,7 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        block: "h-9 w-full",
       },
     },
     defaultVariants: {
