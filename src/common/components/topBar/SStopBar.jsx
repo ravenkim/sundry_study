@@ -1,7 +1,7 @@
 const SStopBar = () => {
     return (
         <div
-            className={`w-full h-[38px]  `}
+            className={` h-[38px] w-full  `}
         >
 
         </div>

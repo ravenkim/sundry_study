@@ -19,8 +19,6 @@ const Intro = () => {
     const [pageNumber, setPageNumber] = useState(0)
 
 
-
-
     return (
         <SSinnerWrapper>
             <SSinnerWrapper.Top>{pageNumber}</SSinnerWrapper.Top>
