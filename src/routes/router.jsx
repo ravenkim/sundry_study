@@ -6,6 +6,8 @@ import LoginPage from 'src/pages/login/LoginPage.jsx'
 import HomePage from 'src/pages/home/HomePage.jsx'
 import MainPage from 'src/pages/main/MainPage.jsx'
 import SamplePage from 'src/pages/SamplePage.jsx'
+import UserJoinPage from 'src/pages/user/join/UserJoinPage.jsx'
+import IntroPage from 'src/pages/intro/IntroPage.jsx'
 
 export const router = createBrowserRouter([
     {
@@ -19,10 +21,28 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
     },
 
+
+    {
+        path: 'intro',
+        element: <IntroPage />,
+    },
+
+
+
+    {
+        path: '/user/join',
+        element: <UserJoinPage />,
+    },
+
+
+
+
+
     {
         path: '/home',
         element: <HomePage />,
     },
+
 
 
     {
