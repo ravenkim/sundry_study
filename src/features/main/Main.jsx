@@ -12,30 +12,32 @@ const Main = () => {
 
 
     return (<SSinnerWrapper>
-            {!introVisible && (<>
-                    <div
-                        className={'w-full h-auto flex flex-col items-center pt-[210px] pb-[160px]'}
-                    >
-                        <Logo width={82} height={82} />
-                    </div>
-                    <div>
-                        <SSbutton
-                            onClick={() => navigate('/intro', {
-                                state: 'userJoin',
-                            })}
-                            text={'시작하기'}
-                            className={'rounded-full'}
-                        ></SSbutton>
-                        <SSbutton
-                            variant={'outline'}
-                            text={'로그인'}
-                            className={'rounded-full'}
-                        ></SSbutton>
-                    </div>
+        {!introVisible && (<>
+            <div
+                className={'w-full  flex  h-auto flex-col items-center pt-[210px] pb-[160px]'}
+            >
+                <Logo width={82} height={82} />
+            </div>
+            <div>
+                <SSbutton
+                    onClick={() => navigate('/intro', {
+                        state: 'userJoin',
+                    })}
+                    text={'시작하기'}
+                    className={'rounded-full'}
+                ></SSbutton>
+                <SSbutton
+                    variant={'outline'}
+                    text={'로그인'}
+                    className={'rounded-full'}
+                ></SSbutton>
+            </div>
 
-                    <SSdivider text={'또는'} />
-                </>)}
-        </SSinnerWrapper>)
+            <SSdivider text={'또는'} />
+        </>)}
+    </SSinnerWrapper>)
 }
 
 export default Main
+
+
