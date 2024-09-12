@@ -17,10 +17,13 @@ const Main = () => {
                 </div>
                 <div>
                     <SSbutton
+                        disabled={true}
                         text={'시작하기'}
                         className={'rounded-full'}
                         ></SSbutton>
                     <SSbutton
+                        disabled={true}
+
                         variant={'outline'}
                         text={'로그인'}
                         className={'rounded-full'}
