@@ -1,16 +1,18 @@
-import Main from 'src/features/main/Main.jsx'
 import SSlayout from 'src/common/layouts/SSlayout.jsx'
+import Intro from 'src/features/intro/Intro.jsx'
 
-const MainPage = () => {
-
-
+const IntroPage = () => {
     return (
         <SSlayout
             useNav={false}
         >
-            <Main />
+            <Intro/>
+
+
+
+
         </SSlayout>
     )
 }
 
-export default MainPage
+export default IntroPage
