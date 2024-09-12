@@ -4,11 +4,10 @@ import { RouterProvider } from 'react-router-dom'
 import useRouteListener from 'src/routes/useRouteListener.jsx'
 
 
-
 function App() {
 
 
-    useRouteListener();
+    useRouteListener()
 
     return (
         <ThemeProvider defaultTheme="root" storageKey="vite-ui-theme">

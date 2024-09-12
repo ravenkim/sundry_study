@@ -3,7 +3,7 @@ const SStopBar = () => {
         <div
             className={`w-full h-[38px]  `}
         >
-            
+
         </div>
     )
 }

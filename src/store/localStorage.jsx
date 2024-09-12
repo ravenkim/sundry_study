@@ -1,7 +1,3 @@
-
-
-
-
 const LocalStorage = () => {
     return (
         <div>
