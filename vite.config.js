@@ -15,17 +15,10 @@ export default defineConfig({
         port: 8619,
     },
 
-
-
-
-
-
     //절대경로 지정
+
+
     resolve: {
-
-
-
-
         alias: {
             src: path.resolve(__dirname, 'src'),
         },
