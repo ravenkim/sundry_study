@@ -28,21 +28,16 @@ export const router = createBrowserRouter([
     },
 
 
-
     {
         path: '/user/join',
         element: <UserJoinPage />,
     },
 
 
-
-
-
     {
         path: '/home',
         element: <HomePage />,
     },
-
 
 
     {

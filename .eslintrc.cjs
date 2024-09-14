@@ -6,18 +6,18 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
-        'prettier'
+        'prettier',
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
     settings: {
         react: { version: '18.2' },
-        "import/resolver": {
-            "node": {
-                "paths": ["src"],
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
-            }
-        }
+        'import/resolver': {
+            'node': {
+                'paths': ['src'],
+                'extensions': ['.js', '.jsx', '.ts', '.tsx'],
+            },
+        },
 
     },
 
@@ -27,9 +27,9 @@ module.exports = {
         'react/jsx-no-target-blank': 'off',
         'react-refresh/only-export-components': [
             'warn',
-            { allowConstantExport: true }
+            { allowConstantExport: true },
         ],
-        "react/prop-types": "off",
+        'react/prop-types': 'off',
 
-    }
+    },
 }
