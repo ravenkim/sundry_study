@@ -18,7 +18,7 @@ const Intro = () => {
         <SSinnerWrapper
         >
             <SSinnerWrapper.Top>
-                asdasddssa
+
                 {pageNumber === 1 && <IntroPage1 />}
             </SSinnerWrapper.Top>
             <SSinnerWrapper.Bottom>

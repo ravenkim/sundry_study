@@ -1,7 +1,7 @@
 const IntroPage1 = () => {
     return (
         <div>
-            
+            asd
         </div>
     )
 }
