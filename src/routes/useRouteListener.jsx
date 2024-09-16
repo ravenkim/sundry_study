@@ -48,4 +48,4 @@ const useRouteListener = () => {
     }, [dispatch, route])
 }
 
-export default useRouteListener;
+export default useRouteListener

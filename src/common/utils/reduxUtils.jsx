@@ -23,7 +23,7 @@ export const reducerUtils = {
         errorMsg: '',
     }),
 
-    error: (prevData= null, errorMsg) => ({
+    error: (prevData = null, errorMsg) => ({
         data: prevData,
         loading: false,
         error: true,
@@ -52,7 +52,7 @@ const apiReducers = (prefix, asyncRequest) => {
             const requestInfo = asyncRequest[key][0]
 
             state[Object.keys(requestInfo)[0]] = reducerUtils.loading(
-                 state[Object.keys(requestInfo)[0]].data,
+                state[Object.keys(requestInfo)[0]].data,
             )
         }
     }
@@ -66,8 +66,8 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
 
             const result = response.data
             // 통신은 정상이나 오류가 있는경우 (데이터 예외처리)
-            if(result['error']){
-                    yield put({
+            if (result['error']) {
+                yield put({
                     type: `${prefix}/${reducerName}Fail`,
                     payload: result['data'],
                 })
@@ -75,10 +75,9 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
                 //정상 작동
                 yield put({
                     type: `${prefix}/${reducerName}Success`,
-                    payload:  result['data'],
+                    payload: result['data'],
                 })
             }
-
         } catch (error) {
             //서버 자체의 오류인경우 (서버가 죽음)
             yield put({
@@ -89,8 +88,6 @@ const createRequestSaga = (prefix, reducerName, apiRequest) => {
     }
 }
 
-
-
 //비동기 처리 성공 실패 처리해주는 추가적인 리듀서
 export const extraReducers = (prefix, asyncRequest) => {
     return (builder) => {
@@ -100,30 +97,31 @@ export const extraReducers = (prefix, asyncRequest) => {
             },
             (state, action) => {
                 if (action.type.endsWith('Success')) {
-                    const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Success$/, '');
-                    const requestInfo = asyncRequest[key][0];
+                    const key = action.type
+                        .replace(new RegExp(`^${prefix}/`), '')
+                        .replace(/Success$/, '')
+                    const requestInfo = asyncRequest[key][0]
 
                     console.log(prefix)
                     console.log(key)
-                    state[Object.keys(requestInfo)[0]] = reducerUtils.success(action.payload);
+                    state[Object.keys(requestInfo)[0]] = reducerUtils.success(
+                        action.payload,
+                    )
                 }
                 if (action.type.endsWith('Fail')) {
-                    const key = action.type.replace(new RegExp(`^${prefix}/`), '').replace(/Fail$/, '');
-                    const requestInfo = asyncRequest[key][0];
-                    state[Object.keys(requestInfo)[0]] = reducerUtils.error(state[Object.keys(requestInfo)[0]].data, action.payload);
+                    const key = action.type
+                        .replace(new RegExp(`^${prefix}/`), '')
+                        .replace(/Fail$/, '')
+                    const requestInfo = asyncRequest[key][0]
+                    state[Object.keys(requestInfo)[0]] = reducerUtils.error(
+                        state[Object.keys(requestInfo)[0]].data,
+                        action.payload,
+                    )
                 }
-            }
+            },
         )
     }
 }
-
-
-
-
-
-
-
-
 
 // 최종 리더스
 export const reduxMaker = (
@@ -132,8 +130,6 @@ export const reduxMaker = (
     localState = {},
     localReducers = {},
 ) => {
-
-
     const asyncInitialState = initialStateMaker(asyncRequest)
     const final = {}
     const allInitialState = {
@@ -161,13 +157,11 @@ export const reduxMaker = (
             ...apiReducers(prefix, asyncRequest),
             ...localReducers,
         },
-        extraReducers: extraReducers(prefix, asyncRequest)
+        extraReducers: extraReducers(prefix, asyncRequest),
     })
 
     //사가 만들기
     final[`${prefix}Saga`] = function* () {
-
-
         for (const reducerName in asyncRequest) {
             yield takeLatest(
                 `${prefix}/${reducerName}`,
@@ -183,7 +177,4 @@ export const reduxMaker = (
     //액션 만들기
     final[`${prefix}Action`] = final[`${prefix}Slice`].actions
     return final
-
-
 }
-

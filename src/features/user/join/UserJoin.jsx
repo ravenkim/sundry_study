@@ -36,7 +36,6 @@ const UserJoin = () => {
         <>
             {state === 'intro' && <div></div>}
             {state === 'intro' && <div></div>}
-
         </>
     )
 }

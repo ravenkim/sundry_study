@@ -1,12 +1,6 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import SSbutton from 'src/common/components/button/SSbutton.jsx'
-import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
 import { useEffect } from 'react'
-import SScollapsible from 'src/common/components/collapsible/SScollapsible.jsx'
-import SSdivider from 'src/common/components/divider/SSdivider.jsx'
-import { Trans } from 'react-i18next'
 import { useTranslation } from 'react-i18next'
-import SSinnerWrapper from 'src/common/components/wrapper/SSinnerWrapper.jsx'
 import SSinput from 'src/common/components/input/SSinput.jsx'
 
 const Sample = () => {
@@ -29,29 +23,23 @@ const Sample = () => {
     }
 
     return (
-
         <>
-<SSinput
-/>
-
+            <SSinput />
         </>
 
-
-
-
-    // <SSinnerWrapper>
-    //         <SSinnerWrapper.Top>
-    //             asdasd
-    //
-    //             <SSbutton></SSbutton>
-    //         </SSinnerWrapper.Top>
-    //     <SSinnerWrapper.Bottom>
-    //         asdasd
-    //
-    //         <SSbutton></SSbutton>
-    //     </SSinnerWrapper.Bottom>
-    //
-    //     </SSinnerWrapper>
+        // <SSinnerWrapper>
+        //         <SSinnerWrapper.Top>
+        //             asdasd
+        //
+        //             <SSbutton></SSbutton>
+        //         </SSinnerWrapper.Top>
+        //     <SSinnerWrapper.Bottom>
+        //         asdasd
+        //
+        //         <SSbutton></SSbutton>
+        //     </SSinnerWrapper.Bottom>
+        //
+        //     </SSinnerWrapper>
 
         // <div
         //     style={{

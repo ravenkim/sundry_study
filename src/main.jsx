@@ -11,8 +11,6 @@ import 'src/styles/global.scss'
 //translator
 import 'src/assets/locales/i18n'
 
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
         <App />

@@ -1,11 +1,9 @@
 import { Button } from 'src/assets/shadcn/components/ui/button.jsx'
 import STh4 from 'src/common/components/typography/STh4.jsx'
 
-
 /**
  * @typedef {'default' | 'destructive' | 'outline' | 'ghost'} Variant
  */
-
 
 /**
  * SSbutton 컴포넌트
@@ -20,11 +18,15 @@ import STh4 from 'src/common/components/typography/STh4.jsx'
  * @param {...Object} props.props - 나머지 props
  */
 
-const SSbutton = ({ text, size='block', style = {}, onClick, variant,className, ...props }) => {
-
-
-
-
+const SSbutton = ({
+    text,
+    size = 'block',
+    style = {},
+    onClick,
+    variant,
+    className,
+    ...props
+}) => {
     return (
         <Button
             className={`mb-[12px] ${className}`}
@@ -33,10 +35,7 @@ const SSbutton = ({ text, size='block', style = {}, onClick, variant,className, 
             variant={variant}
             {...props}
         >
-            <STh4>
-                {text}
-            </STh4>
-
+            <STh4>{text}</STh4>
         </Button>
     )
 }

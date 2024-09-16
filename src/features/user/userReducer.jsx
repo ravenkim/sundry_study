@@ -1,4 +1,4 @@
-import { reducerUtils, reduxMaker } from 'src/common/utils/reduxUtils.jsx'
+import { reduxMaker } from 'src/common/utils/reduxUtils.jsx'
 
 const prefix = 'user'
 
@@ -9,13 +9,9 @@ const asyncRequest = {
     // ],
 }
 
-const localState = {
+const localState = {}
 
-}
-
-const localReducers = {
-
-}
+const localReducers = {}
 
 export const { userSlice, userSaga, userAction } = reduxMaker(
     prefix,

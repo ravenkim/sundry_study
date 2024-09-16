@@ -9,7 +9,7 @@ import Logo from 'src/assets/images/logo/logo.svg?react'
 const NavigationBar = ({ navBarSize }) => {
     return (
         <nav
-            className={`w-full h-[calc(100% - (100%-${navBarSize}))] flex justify-around box-border border-t py-[12]`}
+            className={`h-[calc(100% - w-full (100%-${navBarSize}))] box-border flex justify-around border-t py-[12]`}
         >
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <HomeIcon
@@ -29,7 +29,6 @@ const NavigationBar = ({ navBarSize }) => {
             </NavigationButton>
             <NavigationButton isActive={true} navBarSize={navBarSize}>
                 <Logo width={44} height={44} />
-
             </NavigationButton>
             <NavigationButton isActive={false} navBarSize={navBarSize}>
                 <ChatBubbleIcon
@@ -62,7 +61,7 @@ const NavigationButton = ({ navBarSize, children, isActive }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
             }}
             className={isActive ? 'text-primary' : 'text-muted'}
         >
