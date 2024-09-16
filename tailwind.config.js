@@ -26,11 +26,23 @@ module.exports = {
         },
         extend: {
             fontSize: {
+                'h1': '2rem', // 기본값: 32px
+                'h2': '1.75rem', // 기본값: 28px
+                'h3': '1.5rem', // 기본값: 24px
+
+                'b1': '1rem', // 기본값: 16px
+
+
                 'xs': '0.75rem', // 기본값: 12px
                 'sm': '0.875rem', // 기본값: 14px
-                'base': '1rem', // 기본값: 16px
                 'lg': '1.125rem', // 기본값: 18px
                 'xl': '1.25rem', // 기본값: 20px
+
+
+
+
+
+
             },
             colors: {
                 border: 'hsl(var(--border))',

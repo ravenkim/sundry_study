@@ -1,13 +1,8 @@
 //제목
 
-
-const STh2 = ({children}) => {
+const STh2 = ({ children }) => {
     return (
-        <p
-            className={`text-[28px] font-bold text-center`}
-        >
-            {children}
-        </p>
+        <p className={`text-h2 text-center font-bold leading-8`}>{children}</p>
     )
 }
 

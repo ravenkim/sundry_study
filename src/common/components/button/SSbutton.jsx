@@ -1,5 +1,12 @@
 import { Button } from 'src/assets/shadcn/components/ui/button.jsx'
 import STh4 from 'src/common/components/typography/STh4.jsx'
+
+
+/**
+ * @typedef {'default' | 'destructive' | 'outline' | 'ghost'} Variant
+ */
+
+
 /**
  * SSbutton 컴포넌트
  *
@@ -8,7 +15,7 @@ import STh4 from 'src/common/components/typography/STh4.jsx'
  * @param {string} [props.size='block'] - 버튼의 크기
  * @param {Object} [props.style={}] - 스타일 객체
  * @param {Function} props.onClick - 클릭 이벤트 핸들러
- * @param {string} [props.variant='default'] - 버튼의 다양성 옵션 ('default', 'destructive', 'outline', 'ghost')
+ * @param {string} [props.variant='default'] - 버튼의 다양성 옵션
  * @param {string} [props.className] - 추가적인 클래스 이름
  * @param {...Object} props.props - 나머지 props
  */
