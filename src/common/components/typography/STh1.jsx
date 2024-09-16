@@ -1,5 +1,5 @@
 import { Trans } from 'react-i18next'
-
+//로고와 같은 메인
 
 const STh1 = ({children}) => {
 

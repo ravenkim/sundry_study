@@ -7,6 +7,7 @@ import SSdivider from 'src/common/components/divider/SSdivider.jsx'
 import { Trans } from 'react-i18next'
 import { useTranslation } from 'react-i18next'
 import SSinnerWrapper from 'src/common/components/wrapper/SSinnerWrapper.jsx'
+import SSinput from 'src/common/components/input/SSinput.jsx'
 
 const Sample = () => {
     const dispatch = useDispatch()
@@ -29,19 +30,28 @@ const Sample = () => {
 
     return (
 
-    <SSinnerWrapper>
-            <SSinnerWrapper.Top>
-                asdasd
+        <>
+<SSinput
+/>
 
-                <SSbutton></SSbutton>
-            </SSinnerWrapper.Top>
-        <SSinnerWrapper.Bottom>
-            asdasd
+        </>
 
-            <SSbutton></SSbutton>
-        </SSinnerWrapper.Bottom>
 
-        </SSinnerWrapper>
+
+
+    // <SSinnerWrapper>
+    //         <SSinnerWrapper.Top>
+    //             asdasd
+    //
+    //             <SSbutton></SSbutton>
+    //         </SSinnerWrapper.Top>
+    //     <SSinnerWrapper.Bottom>
+    //         asdasd
+    //
+    //         <SSbutton></SSbutton>
+    //     </SSinnerWrapper.Bottom>
+    //
+    //     </SSinnerWrapper>
 
         // <div
         //     style={{
