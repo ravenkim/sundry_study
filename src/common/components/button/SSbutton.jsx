@@ -1,4 +1,5 @@
 import { Button } from 'src/assets/shadcn/components/ui/button.jsx'
+import STh4 from 'src/common/components/typography/STh4.jsx'
 /**
  * SSbutton 컴포넌트
  *
@@ -25,7 +26,10 @@ const SSbutton = ({ text, size='block', style = {}, onClick, variant,className, 
             variant={variant}
             {...props}
         >
-            {text}
+            <STh4>
+                {text}
+            </STh4>
+
         </Button>
     )
 }
