@@ -1,15 +1,13 @@
-import SSbutton from 'src/common/components/button/SSbutton.jsx'
+import ChevronLeftIcon from 'src/assets/images/icon/chevronLeftIcon.svg?react'
+import XIcon from 'src/assets/images/icon/xIcon.svg?react'
 
-const SStopBar = () => {
+const SStopBar = ({ useBackButton = true, useCloseButton = true, onBackClick = () => {}, onCloseClick = () => {} }) => {
     return (
         <div
-            className={` h-[38px] w-full items-center justify-between `}
+            className={`mb-[33px] mt-[20px] flex h-[38px] w-full flex-row items-center justify-between`}
         >
-            <SSbutton
-                variant={''}
-
-            />
-
+            <div>{useBackButton && <ChevronLeftIcon onClick={onBackClick} />}</div>
+            <div>{useCloseButton && <XIcon onClick={onCloseClick} />}</div>
         </div>
     )
 }

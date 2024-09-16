@@ -5,18 +5,14 @@ import { useEffect, useState } from 'react'
 import IntroPage1 from 'src/features/intro/page/IntroPage1.jsx'
 import IntroPage2 from 'src/features/intro/page/IntroPage2.jsx'
 import { useNavigate } from 'react-router-dom'
+import IntroPage3 from 'src/features/intro/page/IntroPage3.jsx'
+import IntroPage4 from 'src/features/intro/page/IntroPage4.jsx'
 
 const Intro = () => {
     const maxPage = 4
 
 
 
-    const { from } = useSelector(
-        ({ routerReducer }) => ({
-            from: routerReducer.location.state,
-        }),
-        shallowEqual,
-    )
 
 
     const navigate = useNavigate()
@@ -38,13 +34,23 @@ const Intro = () => {
             <SSinnerWrapper.Top>
 
                 {pageNumber === 1 && <IntroPage1 />}
-                {pageNumber === 2 && <IntroPage2 />}
-                {pageNumber === 3 && <IntroPage1 />}
+                {pageNumber === 2 && <IntroPage2
+                    setPageNumber={setPageNumber}
+                />}
+                {pageNumber === 3 && <IntroPage3
+                    setPageNumber={setPageNumber}
+
+                />}
+                {pageNumber === 4 && <IntroPage4
+                    setPageNumber={setPageNumber}
+
+                />}
             </SSinnerWrapper.Top>
             <SSinnerWrapper.Bottom>
                 <SSbutton
                     text={'다음'}
-                    onClick={() => setPageNumber(pageNumber + 1)}
+                    onClick={() => setPageNumber((currentPageNumber) => currentPageNumber + 1)
+                    }
                 />
             </SSinnerWrapper.Bottom>
         </SSinnerWrapper>
