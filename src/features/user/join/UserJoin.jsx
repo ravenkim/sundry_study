@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import SSinnerWrapper from 'src/common/components/wrapper/SSinnerWrapper.jsx'
+import SStopBar from 'src/common/components/topBar/SStopBar.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const UserJoin = () => {
-    const [state, setState] = useState('intro')
+    const navigate = useNavigate()
 
     //기본 유저 입력 정보
     const [userLoginId, setUserLoginId] = useState('')
@@ -23,20 +26,23 @@ const UserJoin = () => {
     const [createAccountData, setCreateAccountData] = useState([])
 
     return (
-        // 회원가입
+        <SSinnerWrapper>
+            <SSinnerWrapper.Top>
+                <SStopBar
+                    onBackClick={() =>
+                        navigate('/intro', {
+                            state: 'userJoin',
+                        })
+                    }
+                    onCloseClick={() => navigate('/')}
+                />
+            </SSinnerWrapper.Top>
 
-        // 순차적으로
-        // 1. intro
-        // 2. 계정생성
-        // 3. 본인 확인 - 나이스로 변경
-        // 4. 로그인 페이지로
+            <SSinnerWrapper.Bottom>
 
-        // 카카오 싱크 추가  네이버 로그인 플러스
 
-        <>
-            {state === 'intro' && <div></div>}
-            {state === 'intro' && <div></div>}
-        </>
+            </SSinnerWrapper.Bottom>
+        </SSinnerWrapper>
     )
 }
 
