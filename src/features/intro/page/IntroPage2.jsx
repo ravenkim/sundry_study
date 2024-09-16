@@ -3,7 +3,7 @@ import TitleWithSubtitle from 'src/features/intro/components/TitleWithSubtitle.j
 import { useNavigate } from 'react-router-dom'
 
 const IntroPage2 = ({ setPageNumber }) => {
-    const titles = ['혼자 가긴 무섭고', '너무 진지한 소개팅이', '질렸다면?']
+    const titles = ['222222', '너무 진지한 소개팅이', '질렸다면?']
     const description = '친구랑 같이 편하게 시작해요'
 
     const navigate = useNavigate()

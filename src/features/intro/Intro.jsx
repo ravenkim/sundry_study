@@ -6,6 +6,7 @@ import IntroPage2 from 'src/features/intro/page/IntroPage2.jsx'
 import { useNavigate } from 'react-router-dom'
 import IntroPage3 from 'src/features/intro/page/IntroPage3.jsx'
 import IntroPage4 from 'src/features/intro/page/IntroPage4.jsx'
+import { shallowEqual, useSelector } from 'react-redux'
 
 const Intro = () => {
     const maxPage = 4
@@ -14,13 +15,31 @@ const Intro = () => {
 
     const [pageNumber, setPageNumber] = useState(1)
 
+
+
+    const { from } = useSelector(
+        ({ routerReducer }) => ({
+            from: routerReducer.location.state,
+        }),
+        shallowEqual,
+    )
+
     useEffect(() => {
-        if (pageNumber === maxPage + 1) {
-            navigate('/user/join')
+        if(pageNumber === maxPage + 1) {
+
+            // todo 소셜 로그인 분기 처리
+
+            if(from === 'userJoin'){
+                navigate('/user/join')
+            }
         }
     }, [pageNumber])
 
+
+
     return (
+        
+        
         <SSinnerWrapper>
             <SSinnerWrapper.Top>
                 {pageNumber === 1 && <IntroPage1 />}
@@ -35,6 +54,16 @@ const Intro = () => {
                 )}
             </SSinnerWrapper.Top>
             <SSinnerWrapper.Bottom>
+                <div>
+                {/*    todo
+                    라디오? 페이지네이션? 인디케이터
+                    만들음
+
+                    필요 props >> maxPage, 활성화된 페이지
+                */}
+                </div>
+
+
                 <SSbutton
                     text={'다음'}
                     onClick={() =>
