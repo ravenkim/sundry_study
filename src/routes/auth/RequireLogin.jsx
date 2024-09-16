@@ -11,4 +11,3 @@ const RequireLogin = ({ children }) => {
 }
 
 export default RequireLogin
-

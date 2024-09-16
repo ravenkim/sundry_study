@@ -1,4 +1,3 @@
-import { shallowEqual, useSelector } from 'react-redux'
 import SSinnerWrapper from 'src/common/components/wrapper/SSinnerWrapper.jsx'
 import SSbutton from 'src/common/components/button/SSbutton.jsx'
 import { useEffect, useState } from 'react'
@@ -11,45 +10,37 @@ import IntroPage4 from 'src/features/intro/page/IntroPage4.jsx'
 const Intro = () => {
     const maxPage = 4
 
-
-
-
-
     const navigate = useNavigate()
-
 
     const [pageNumber, setPageNumber] = useState(1)
 
-
     useEffect(() => {
-        if(pageNumber === maxPage +1 ){
+        if (pageNumber === maxPage + 1) {
             navigate('/user/join')
         }
-
     }, [pageNumber])
 
     return (
-        <SSinnerWrapper
-        >
+        <SSinnerWrapper>
             <SSinnerWrapper.Top>
-
                 {pageNumber === 1 && <IntroPage1 />}
-                {pageNumber === 2 && <IntroPage2
-                    setPageNumber={setPageNumber}
-                />}
-                {pageNumber === 3 && <IntroPage3
-                    setPageNumber={setPageNumber}
-
-                />}
-                {pageNumber === 4 && <IntroPage4
-                    setPageNumber={setPageNumber}
-
-                />}
+                {pageNumber === 2 && (
+                    <IntroPage2 setPageNumber={setPageNumber} />
+                )}
+                {pageNumber === 3 && (
+                    <IntroPage3 setPageNumber={setPageNumber} />
+                )}
+                {pageNumber === 4 && (
+                    <IntroPage4 setPageNumber={setPageNumber} />
+                )}
             </SSinnerWrapper.Top>
             <SSinnerWrapper.Bottom>
                 <SSbutton
                     text={'다음'}
-                    onClick={() => setPageNumber((currentPageNumber) => currentPageNumber + 1)
+                    onClick={() =>
+                        setPageNumber(
+                            (currentPageNumber) => currentPageNumber + 1,
+                        )
                     }
                 />
             </SSinnerWrapper.Bottom>

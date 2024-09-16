@@ -6,7 +6,6 @@ const SamplePage = () => {
         <SSlayout useNav={true}>
             <Sample />
         </SSlayout>
-
     )
 }
 

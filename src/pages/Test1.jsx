@@ -15,13 +15,12 @@ const Test1 = () => {
                     navigate('/bb', {
                         state: {
                             aaa: 123,
-                        
+
                             vvv: 4456,
                         },
                     })
                 }
             >
-
                 aaaaaa
             </SSbutton>
             <button onClick={() => dispatch(routerAction.initializeAll())}>

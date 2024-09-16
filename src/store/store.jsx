@@ -9,17 +9,10 @@ const reducers = {
     routerReducer: routerSlice.reducer,
     sampleReducer: sampleSlice.reducer,
     authReducer: authSlice.reducer,
-
 }
 
 export function* rootSaga() {
-    yield all([
-        routerSaga(),
-        sampleSaga(),
-        authSaga(),
-
-    ])
-
+    yield all([routerSaga(), sampleSaga(), authSaga()])
 }
 
 const sagaMiddleware = createSagaMiddleware()

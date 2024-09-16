@@ -4,8 +4,6 @@ const client = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
 })
 
-
-
 // client.interceptors.request.use(
 //     async (config) => {
 //         console.log('토큰 처리 추가 예정')
@@ -27,6 +25,5 @@ const client = axios.create({
 //     //     return Promise.reject(error);
 //      }
 // )
-
 
 export default client

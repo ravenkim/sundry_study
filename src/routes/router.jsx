@@ -21,24 +21,20 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
     },
 
-
     {
         path: 'intro',
         element: <IntroPage />,
     },
-
 
     {
         path: '/user/join',
         element: <UserJoinPage />,
     },
 
-
     {
         path: '/home',
         element: <HomePage />,
     },
-
 
     {
         path: '/sample',

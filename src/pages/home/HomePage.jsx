@@ -3,8 +3,7 @@ import Home from 'src/features/home/Home.jsx'
 
 const HomePage = () => {
     return (
-        <SSlayout
-        >
+        <SSlayout>
             <Home />
         </SSlayout>
     )

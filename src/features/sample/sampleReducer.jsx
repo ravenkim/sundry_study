@@ -4,19 +4,12 @@ import { getCommonCode } from 'src/features/sample/sampleAPI.jsx'
 const prefix = 'sample'
 
 const asyncRequest = {
-    getCode: [
-        {commonCode: reducerUtils.init([])},
-        getCommonCode
-    ],
+    getCode: [{ commonCode: reducerUtils.init([]) }, getCommonCode],
 }
 
-const localState = {
+const localState = {}
 
-}
-
-const localReducers = {
-
-}
+const localReducers = {}
 
 export const { sampleSlice, sampleSaga, sampleAction } = reduxMaker(
     prefix,
