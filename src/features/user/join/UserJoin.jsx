@@ -2,6 +2,8 @@ import { useState } from 'react'
 import SSinnerWrapper from 'src/common/components/wrapper/SSinnerWrapper.jsx'
 import SStopBar from 'src/common/components/topBar/SStopBar.jsx'
 import { useNavigate } from 'react-router-dom'
+import SSprogressBar from 'src/common/components/progressbar/SSprogressBar.jsx'
+import SSbutton from 'src/common/components/button/SSbutton.jsx'
 
 const UserJoin = () => {
     const navigate = useNavigate()
@@ -25,6 +27,12 @@ const UserJoin = () => {
 
     const [createAccountData, setCreateAccountData] = useState([])
 
+    const maxJoinState = 6
+    // 현재 단계
+    const [joinState, setJoinState] = useState(1)
+    //통과 가능 여부
+    const [canPassState, setCanPassState] = useState(false)
+
     return (
         <SSinnerWrapper>
             <SSinnerWrapper.Top>
@@ -36,11 +44,23 @@ const UserJoin = () => {
                     }
                     onCloseClick={() => navigate('/')}
                 />
+                <SSprogressBar
+                    currentValue={joinState-1} //완료 한거 보여주기위해 -1
+                    totalValue={maxJoinState}
+                />
             </SSinnerWrapper.Top>
 
             <SSinnerWrapper.Bottom>
 
-
+                <SSbutton
+                    disabled={!canPassState}
+                    text={'다음'}
+                    onClick={() =>
+                        setJoinState(
+                            (currentPageNumber) => currentPageNumber + 1,
+                        )
+                    }
+                />
             </SSinnerWrapper.Bottom>
         </SSinnerWrapper>
     )

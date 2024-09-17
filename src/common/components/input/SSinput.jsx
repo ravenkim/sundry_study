@@ -1,30 +1,51 @@
 import { Input } from 'src/assets/shadcn/components/ui/input.jsx'
-import STlabel from 'src/common/components/typography/STlabel.jsx'
+import { useCallback, useEffect, useState } from 'react'
+import debounce from 'lodash.debounce'
 
-const SSinput = ({onChange = () => {}, value='', placeholder, error = false , disabled = false, success= false}) => {
-    //todo
-
-    // 포커스시 처리
-    // 호버시 처리
-    // 애러 핸들 함수
-    // 애러 처리 과정
-    // 디자인 맞게
-    // 값입력받기
-    // 값처리 방법
-    // 디바운스 처리
+const SSinput = ({
+    value,
+    onChange,
+    description = '',
+    label,
+    type = 'text',
+}) => {
+    const [inputValue, setInputValue] = useState(value)
 
 
+    // 포커스 잊었는지 처리
+    const [isFocused, setIsFocused] = useState(false)
+    const onFocus = () => {
+        setIsFocused(true)
+    }
+    const onBlur = () => {
+        setIsFocused(false)
+    }
 
+    // onChange 디바운스 처리
+    const debouncedOnChange = useCallback(
+        debounce((value) => {
+            onChange(value)
+        }, 300),
+        []
+    )
 
-
+    useEffect(() => {
+        debouncedOnChange(inputValue)
+        return () => {
+            debouncedOnChange.cancel()
+        }
+    }, [inputValue, debouncedOnChange])
 
     return (
         <div>
+            {label}
             <Input
-
-
-                placeholder={placeholder} className={``}></Input>
-            <STlabel></STlabel>
+                value={inputValue}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onChange={(e) => setInputValue(e.target.value)}
+            ></Input>
+            {description}
         </div>
     )
 }
