@@ -1,5 +1,5 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SSinput from 'src/common/components/input/SSinput.jsx'
 
@@ -13,18 +13,26 @@ const Sample = () => {
         shallowEqual,
     )
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
 
     const { t, i18n } = useTranslation()
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng)
     }
 
+
+    const [aaaa, setAaaa] = useState('zzz')
+
+    useEffect(() => {
+        console.log(aaaa)
+    }, [aaaa])
+
+
     return (
         <>
-            <SSinput />
+            <SSinput
+                value={aaaa}
+                onChange={(e) => setAaaa(e)}
+            />
         </>
 
         // <SSinnerWrapper>
