@@ -25,7 +25,7 @@ const Main = () => {
                         <SSbutton
                             onClick={() =>
                                 navigate('/intro', {
-                                    state: 'userJoin',
+                                    state: { to: 'userJoin' },
                                 })
                             }
                             text={'시작하기'}

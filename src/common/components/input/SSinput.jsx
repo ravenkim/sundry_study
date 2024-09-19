@@ -1,5 +1,5 @@
 import { Input } from 'src/assets/shadcn/components/ui/input.jsx'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useId, useState } from 'react'
 import debounce from 'lodash.debounce'
 
 const SSinput = ({
@@ -9,7 +9,17 @@ const SSinput = ({
     label,
     type = 'text',
 }) => {
+    const inputId = useId()
+
+
+
     const [inputValue, setInputValue] = useState(value)
+
+    //todo type 이 num 일떄 동작하기 위해 추가 필요
+    const [textLength, setTextLength] = useState(0)
+    useEffect(() => {
+        setTextLength(inputValue)
+    }, [inputValue])
 
 
     // 포커스 잊었는지 처리
@@ -36,16 +46,23 @@ const SSinput = ({
         }
     }, [inputValue, debouncedOnChange])
 
+
+    const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+    
     return (
         <div>
-            {label}
+            <label htmlFor={inputId}>{label}</label>
             <Input
+                id={inputId}
+                type={'text'}
                 value={inputValue}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onChange={(e) => setInputValue(e.target.value)}
             ></Input>
-            {description}
+            {isError ? <>{errorMessage}</> : <>            {description}
+            </>}
         </div>
     )
 }
