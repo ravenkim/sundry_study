@@ -9,7 +9,7 @@ const SStopBar = ({
 }) => {
     return (
         <div
-            className={`mb-[33px] mt-[20px] flex h-[38px] w-full flex-row items-center justify-between`}
+            className={`mb-[32px] mt-[20px] flex h-[38px] w-full flex-row items-center justify-between`}
         >
             <div>
                 {useBackButton && <ChevronLeftIcon onClick={onBackClick} />}

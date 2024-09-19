@@ -1,10 +1,16 @@
 //로그인 페이지
 
+import SSlayout from 'src/common/layouts/SSlayout.jsx'
+import Login from 'src/features/login/Login.jsx'
+
 const LoinPage = () => {
     return (
-        <div>
+        <SSlayout
+            useNav={false}
 
-        </div>
+        >
+            <Login/>
+        </SSlayout>
     )
 }
 
