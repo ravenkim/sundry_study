@@ -17,9 +17,9 @@ const Intro = () => {
 
 
 
-    const { from } = useSelector(
+    const { state } = useSelector(
         ({ routerReducer }) => ({
-            from: routerReducer.location.state,
+            state: routerReducer.location.state,
         }),
         shallowEqual,
     )
@@ -28,12 +28,19 @@ const Intro = () => {
         if(pageNumber === maxPage + 1) {
 
             // todo 소셜 로그인 분기 처리
-
-            if(from === 'userJoin'){
+            if(state?.to === 'userJoin'){
                 navigate('/user/join')
             }
+
         }
     }, [pageNumber])
+
+
+    useEffect(() => {
+        if(state?.from === 'userJoin'){
+            setPageNumber(maxPage)
+        }
+    }, [state])
 
 
 

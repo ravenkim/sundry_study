@@ -4,6 +4,11 @@ import SStopBar from 'src/common/components/topBar/SStopBar.jsx'
 import { useNavigate } from 'react-router-dom'
 import SSprogressBar from 'src/common/components/progressbar/SSprogressBar.jsx'
 import SSbutton from 'src/common/components/button/SSbutton.jsx'
+import CreateAccount2Id from 'src/features/user/join/createAccount/CreateAccount2Id.jsx'
+import CreateAccount1Terms from 'src/features/user/join/createAccount/CreateAccount1Terms.jsx'
+import CreateAccount3Pwd from 'src/features/user/join/createAccount/CreateAccount3Pwd.jsx'
+import CreateAccount4Email from 'src/features/user/join/createAccount/CreateAccount4Email.jsx'
+import UserJoinVerificationTemp from 'src/features/user/join/verification/UserJoinVerificationTemp.jsx'
 
 const UserJoin = () => {
     const navigate = useNavigate()
@@ -39,27 +44,50 @@ const UserJoin = () => {
                 <SStopBar
                     onBackClick={() =>
                         navigate('/intro', {
-                            state: 'userJoin',
+                            state: {
+                                to: 'userJoin',
+                                from: 'userJoin'
+                            },
+
+
                         })
                     }
                     onCloseClick={() => navigate('/')}
                 />
                 <SSprogressBar
-                    currentValue={joinState-1} //완료 한거 보여주기위해 -1
+                    currentValue={joinState - 1} //완료 한거 보여주기위해 -1
                     totalValue={maxJoinState}
                 />
+
+                {joinState === 1 && (
+                    <CreateAccount1Terms setCanPassState={setCanPassState} />
+                )}
+                {joinState === 2 && (
+                    <CreateAccount2Id setCanPassState={setCanPassState} />
+                )}
+                {joinState === 3 && (
+                    <CreateAccount3Pwd setCanPassState={setCanPassState} />
+                )}
+                {joinState === 4 && (
+                    <CreateAccount4Email setCanPassState={setCanPassState} />
+                )}
+                {joinState === 5 && (
+                    <UserJoinVerificationTemp
+                        setCanPassState={setCanPassState}
+                    />
+                )}
             </SSinnerWrapper.Top>
 
             <SSinnerWrapper.Bottom>
-
                 <SSbutton
                     disabled={!canPassState}
                     text={'다음'}
-                    onClick={() =>
+                    onClick={() => {
+                        setCanPassState(false)
                         setJoinState(
                             (currentPageNumber) => currentPageNumber + 1,
                         )
-                    }
+                    }}
                 />
             </SSinnerWrapper.Bottom>
         </SSinnerWrapper>
