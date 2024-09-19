@@ -1,12 +1,17 @@
-import Login from 'src/features/login/Login.jsx'
-import SSlayout from 'src/common/layouts/SSlayout.jsx'
+//로그인 페이지
 
-const LoginPage = () => {
+import SSlayout from 'src/common/layouts/SSlayout.jsx'
+import Login from 'src/features/login/Login.jsx'
+
+const LoinPage = () => {
     return (
-        <SSlayout>
-            <Login />
+        <SSlayout
+            useNav={false}
+
+        >
+            <Login/>
         </SSlayout>
     )
 }
 
-export default LoginPage
+export default LoinPage

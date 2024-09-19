@@ -31,6 +31,7 @@ const SSinput = ({
                      validationRules = defaultValidationSchema,
                      description = '',
                      disabled = false,
+                     className,
                  }) => {
     const [inputValue, setInputValue] = useState(value)
     const [isFocused, setIsFocused] = useState(false)
@@ -81,7 +82,7 @@ const SSinput = ({
                         disabled={disabled}
                         className={`${
                             isFocused ? 'focus:border-blue-500' : ''
-                        } ${hover ? 'hover:border-gray-500' : ''}`}
+                        } ${hover ? 'hover:border-gray-500' : ''} ${className}`}
                     />
                 )}
             />
