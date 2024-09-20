@@ -4,6 +4,7 @@ import SStopBar from 'src/common/components/topBar/SStopBar.jsx'
 import LogoWithTitle from 'src/assets/images/logo/logoWithTitle.svg?react'
 import SSinput from 'src/features/sample/Taaa.jsx'
 import SSbutton from 'src/common/components/button/SSbutton.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     /*
@@ -28,9 +29,14 @@ const Login = () => {
 
     const loginHandler = (id, password) => {}
 
+    const navigate = useNavigate()
+
     return (
         <SSinnerWrapper>
-            <SStopBar />
+            <SStopBar
+                useCloseButton={false}
+                onBackClick={() => navigate(-1)}
+            />
 
 
             {/*todo 크기 수정*/}
