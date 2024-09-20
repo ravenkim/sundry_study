@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import SStextarea from 'src/common/components/input/SStextarea.jsx'
 
 const CreateAccount1Terms = () => {
 
@@ -6,18 +7,23 @@ const CreateAccount1Terms = () => {
 
 
     useEffect(() => {
-        // 이용약관 요청
+        // todo 이용약관 요청 언어에 따라서 다른 값 요청
     }, [])
+
+
 
 
 
     return (
         <div>
-            이용약관1
+            <SStextarea/>
 
 
 
-            이용약관 2
+            <SStextarea/>
+
+
+
 
 
 

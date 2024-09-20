@@ -34,6 +34,7 @@ const Main = () => {
                         <SSbutton
                             variant={'outline'}
                             text={'로그인'}
+                            onClick={() => navigate('/login')}
                             className={'rounded-full'}
                         ></SSbutton>
                     </div>

@@ -5,13 +5,11 @@ import debounce from 'lodash.debounce'
 const SSinput = ({
     value,
     onChange,
-    description = '',
+    description ,
     label,
     type = 'text',
 }) => {
     const inputId = useId()
-
-
 
     const [inputValue, setInputValue] = useState(value)
 
@@ -20,7 +18,6 @@ const SSinput = ({
     useEffect(() => {
         setTextLength(inputValue)
     }, [inputValue])
-
 
     // 포커스 잊었는지 처리
     const [isFocused, setIsFocused] = useState(false)
@@ -36,7 +33,7 @@ const SSinput = ({
         debounce((value) => {
             onChange(value)
         }, 300),
-        []
+        [],
     )
 
     useEffect(() => {
@@ -46,10 +43,9 @@ const SSinput = ({
         }
     }, [inputValue, debouncedOnChange])
 
-
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-    
+
     return (
         <div>
             <label htmlFor={inputId}>{label}</label>
@@ -61,8 +57,7 @@ const SSinput = ({
                 onBlur={onBlur}
                 onChange={(e) => setInputValue(e.target.value)}
             ></Input>
-            {isError ? <>{errorMessage}</> : <>            {description}
-            </>}
+            {isError ? <>{errorMessage}</> : <> {description}</>}
         </div>
     )
 }
