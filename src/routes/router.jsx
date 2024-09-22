@@ -9,6 +9,7 @@ import SamplePage from 'src/pages/SamplePage.jsx'
 import UserJoinPage from 'src/pages/user/join/UserJoinPage.jsx'
 import IntroPage from 'src/pages/intro/IntroPage.jsx'
 
+
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -35,7 +36,6 @@ export const router = createBrowserRouter([
         path: '/home',
         element: <HomePage />,
     },
-
     {
         path: '/sample',
         element: <SamplePage />,
