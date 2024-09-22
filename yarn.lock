@@ -2451,7 +2451,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "embla-carousel-react@npm:^8.3.0":
   version: 8.3.0
   resolution: "embla-carousel-react@npm:8.3.0"
@@ -2477,33 +2476,6 @@ __metadata:
   version: 8.3.0
   resolution: "embla-carousel@npm:8.3.0"
   checksum: 10c0/0240156d6a736603d82ddfe93b03ce296e385e9c18ed2cca9465634c8adb7560bfc2fbef6368a4da2a54926c4ba6de1012ebb33d2fc92c052030ea2288e4cc92
-=======
-"embla-carousel-react@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "embla-carousel-react@npm:8.2.0"
-  dependencies:
-    embla-carousel: "npm:8.2.0"
-    embla-carousel-reactive-utils: "npm:8.2.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.1 || ^18.0.0
-  checksum: 10c0/0ec9f1eab2f869a56c8f87fdafd0c3cbfcff8124fa68b72079ee6f912179b0f082e07144a07ffa1740344aac6afe6cc1fa084d1cc705bd4376ff605910b8b296
-  languageName: node
-  linkType: hard
-
-"embla-carousel-reactive-utils@npm:8.2.0":
-  version: 8.2.0
-  resolution: "embla-carousel-reactive-utils@npm:8.2.0"
-  peerDependencies:
-    embla-carousel: 8.2.0
-  checksum: 10c0/8b29914d557aed3f592af6c84722310f57fd722a97a88e9ecb5710fa015851d16fc66643202ce73ca4898bb07661ea017317320bd1547d0fe236868d35fc5e7d
-  languageName: node
-  linkType: hard
-
-"embla-carousel@npm:8.2.0":
-  version: 8.2.0
-  resolution: "embla-carousel@npm:8.2.0"
-  checksum: 10c0/17736c2042d21cd54e978b7382acffb6035cec6ec3899f000c953ba9335ed03499fb1fcdbaa7e1400c379bd296a5bbd7a4d27ddc5ccf1d738862cfdb2421259a
->>>>>>> onboarding_jah
   languageName: node
   linkType: hard
 
@@ -3994,11 +3966,7 @@ __metadata:
     axios: "npm:^1.7.2"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
-<<<<<<< HEAD
     embla-carousel-react: "npm:^8.3.0"
-=======
-    embla-carousel-react: "npm:^8.2.0"
->>>>>>> onboarding_jah
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-react: "npm:^7.34.1"
