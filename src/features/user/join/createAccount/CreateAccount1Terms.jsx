@@ -16,7 +16,9 @@ const CreateAccount1Terms = () => {
 
     return (
         <div>
-            <SStextarea/>
+            <SStextarea
+
+            />
 
 
 
