@@ -6,7 +6,7 @@ import {
 } from 'src/assets/shadcn/components/ui/carousel.jsx'
 
 const SScarousel = ({ children }) => {
-    //이런식으로 만들수 있지만 그러면 SSinnerWrapper 부분이 애매해 지기에 패스  >> SSinnerWrapper 안에 SSinnerWrapper 를 넣을지 이걸 위한 공간을 만들어주고 만들어야해서 이부분 생각이 필요하다고 생각함
+    // todo 이런식으로 만들수 있지만 그러면 SSinnerWrapper 부분이 애매해 지기에 패스  >> SSinnerWrapper 안에 SSinnerWrapper 를 넣을지 이걸 위한 공간을 만들어주고 만들어야해서 이부분 생각이 필요하다고 생각함
 
     const [count, setCount] = useState(0)
 
