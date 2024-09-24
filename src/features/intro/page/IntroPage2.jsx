@@ -1,23 +1,15 @@
-import SStopBar from 'src/common/components/topBar/SStopBar.jsx'
-import TitleWithSubtitle from 'src/features/intro/components/TitleWithSubtitle.jsx'
-import { useNavigate } from 'react-router-dom'
+import IntroExImage from 'src/assets/images/image/introExImage.svg'
+import CarouselCard from 'src/features/intro/components/CarouselCard';
 
 const IntroPage2 = ({ setPageNumber }) => {
-    const titles = ['222222', '너무 진지한 소개팅이', '질렸다면?']
-    const description = '친구랑 같이 편하게 시작해요'
+    const titles = ['소개팅은 하고 싶은데', '어색할까봐 걱정된다면?']
+    const description = '친구와 함께라면 걱정없어요!'
 
-    const navigate = useNavigate()
 
     return (
         <div className={'w-full'}>
-            <SStopBar
-                onBackClick={() =>
-                    setPageNumber((currentPageNumber) => currentPageNumber - 1)
-                }
-                onCloseClick={() => navigate('/')}
-            />
-
-            <TitleWithSubtitle titles={titles} description={description} />
+            <CarouselCard titles={titles} description={description} imgUlr={IntroExImage}/>
+            {/* <TitleWithSubtitle titles={titles} description={description} /> */}
         </div>
     )
 }

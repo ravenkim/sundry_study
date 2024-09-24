@@ -4,11 +4,13 @@ import STb1 from 'src/common/components/typography/STb1.jsx'
 const TitleWithSubtitle = ({ titles, description }) => {
     return (
         <div
-            className={`flex h-[161px] w-full flex-col items-center justify-center`}
+            className={`flex h-[161px] w-full flex-col items-start justify-center`}
         >
-            <div className={`mb-[12px] w-full`}>
+            <div className={`mb-[12px]`}>
                 {titles.map((title, index) => (
-                    <STh2 key={index}>{title}</STh2>
+                    <div key={index} className={`w-max`}>
+                        <STh2 >{title}</STh2>
+                    </div>
                 ))}
             </div>
             <STb1 center={true}>{description}</STb1>
