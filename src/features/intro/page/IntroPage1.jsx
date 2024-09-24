@@ -1,7 +1,8 @@
-import TitleWithSubtitle from 'src/features/intro/components/TitleWithSubtitle.jsx'
-import SStopBar from 'src/common/components/topBar/SStopBar.jsx'
 import { shallowEqual, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+import IntroExImage from 'src/assets/images/image/introExImage.svg'
+import CarouselCard from 'src/features/intro/components/CarouselCard';
 
 const IntroPage1 = () => {
     const titles = ['혼자 가긴 무섭고', '너무 진지한 소개팅이', '질렸다면?']
@@ -18,12 +19,8 @@ const IntroPage1 = () => {
 
     return (
         <div className={'w-full'}>
-            <SStopBar
-                onBackClick={() => navigate(-1)}
-                onCloseClick={() => navigate('/')}
-            />
-
-            <TitleWithSubtitle titles={titles} description={description} />
+            <CarouselCard titles={titles} description={description} imgUlr={IntroExImage}/>
+            {/* <TitleWithSubtitle titles={titles} description={description} /> */}
         </div>
     )
 }
