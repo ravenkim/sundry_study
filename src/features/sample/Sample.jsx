@@ -22,9 +22,6 @@ const Sample = () => {
 
     const [aaaa, setAaaa] = useState('zzz')
 
-    useEffect(() => {
-        console.log(aaaa)
-    }, [aaaa])
 
 
     return (

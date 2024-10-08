@@ -102,8 +102,7 @@ export const extraReducers = (prefix, asyncRequest) => {
                         .replace(/Success$/, '')
                     const requestInfo = asyncRequest[key][0]
 
-                    console.log(prefix)
-                    console.log(key)
+
                     state[Object.keys(requestInfo)[0]] = reducerUtils.success(
                         action.payload,
                     )
