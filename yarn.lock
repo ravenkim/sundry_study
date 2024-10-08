@@ -3944,59 +3944,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lime_boil@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "lime_boil@workspace:."
-  dependencies:
-    "@hookform/resolvers": "npm:^3.9.0"
-    "@radix-ui/react-checkbox": "npm:^1.1.1"
-    "@radix-ui/react-collapsible": "npm:^1.1.0"
-    "@radix-ui/react-icons": "npm:^1.3.0"
-    "@radix-ui/react-label": "npm:^2.1.0"
-    "@radix-ui/react-scroll-area": "npm:^1.0.5"
-    "@radix-ui/react-select": "npm:^2.0.0"
-    "@radix-ui/react-separator": "npm:^1.1.0"
-    "@radix-ui/react-slot": "npm:^1.1.0"
-    "@reduxjs/toolkit": "npm:^2.2.5"
-    "@types/node": "npm:^22.5.4"
-    "@types/react": "npm:^18.3.5"
-    "@types/react-dom": "npm:^18.2.22"
-    "@vitejs/plugin-react-swc": "npm:^3.5.0"
-    autoprefixer: "npm:^10.4.19"
-    axios: "npm:^1.7.2"
-    class-variance-authority: "npm:^0.7.0"
-    clsx: "npm:^2.1.1"
-    embla-carousel-react: "npm:^8.3.0"
-    eslint: "npm:^8.57.0"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-react: "npm:^7.34.1"
-    eslint-plugin-react-hooks: "npm:^4.6.0"
-    eslint-plugin-react-refresh: "npm:^0.4.6"
-    history: "npm:^5.3.0"
-    i18next: "npm:^23.14.0"
-    i18next-browser-languagedetector: "npm:^8.0.0"
-    lodash.debounce: "npm:^4.0.8"
-    postcss: "npm:^8.4.38"
-    prettier: "npm:^3.3.3"
-    prettier-plugin-tailwindcss: "npm:^0.6.6"
-    react: "npm:^18.2.0"
-    react-cookie: "npm:^7.2.0"
-    react-dom: "npm:^18.2.0"
-    react-hook-form: "npm:^7.53.0"
-    react-i18next: "npm:^15.0.1"
-    react-redux: "npm:^9.1.2"
-    react-router-dom: "npm:^6.23.1"
-    redux-saga: "npm:^1.3.0"
-    sass: "npm:^1.77.8"
-    tailwind-merge: "npm:^2.3.0"
-    tailwindcss: "npm:^3.4.3"
-    tailwindcss-animate: "npm:^1.0.7"
-    vite: "npm:^5.4.8"
-    vite-plugin-svgr: "npm:^4.2.0"
-    zod: "npm:^3.23.8"
-  languageName: unknown
-  linkType: soft
-
 "lines-and-columns@npm:^1.1.6":
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
@@ -5620,6 +5567,59 @@ __metadata:
   checksum: 10c0/f375aeb2b05c100a456a30bc3ed07ef03a39cbdefe02e0403fb714b8c7e57eeaad1a2f5c4ecfb9ce554ce3db9c2b024eba144843cd9e344566d9fcee73b04767
   languageName: node
   linkType: hard
+
+"ting_fe@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "ting_fe@workspace:."
+  dependencies:
+    "@hookform/resolvers": "npm:^3.9.0"
+    "@radix-ui/react-checkbox": "npm:^1.1.1"
+    "@radix-ui/react-collapsible": "npm:^1.1.0"
+    "@radix-ui/react-icons": "npm:^1.3.0"
+    "@radix-ui/react-label": "npm:^2.1.0"
+    "@radix-ui/react-scroll-area": "npm:^1.0.5"
+    "@radix-ui/react-select": "npm:^2.0.0"
+    "@radix-ui/react-separator": "npm:^1.1.0"
+    "@radix-ui/react-slot": "npm:^1.1.0"
+    "@reduxjs/toolkit": "npm:^2.2.5"
+    "@types/node": "npm:^22.5.4"
+    "@types/react": "npm:^18.3.5"
+    "@types/react-dom": "npm:^18.2.22"
+    "@vitejs/plugin-react-swc": "npm:^3.5.0"
+    autoprefixer: "npm:^10.4.19"
+    axios: "npm:^1.7.2"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
+    embla-carousel-react: "npm:^8.3.0"
+    eslint: "npm:^8.57.0"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-react: "npm:^7.34.1"
+    eslint-plugin-react-hooks: "npm:^4.6.0"
+    eslint-plugin-react-refresh: "npm:^0.4.6"
+    history: "npm:^5.3.0"
+    i18next: "npm:^23.14.0"
+    i18next-browser-languagedetector: "npm:^8.0.0"
+    lodash.debounce: "npm:^4.0.8"
+    postcss: "npm:^8.4.38"
+    prettier: "npm:^3.3.3"
+    prettier-plugin-tailwindcss: "npm:^0.6.6"
+    react: "npm:^18.2.0"
+    react-cookie: "npm:^7.2.0"
+    react-dom: "npm:^18.2.0"
+    react-hook-form: "npm:^7.53.0"
+    react-i18next: "npm:^15.0.1"
+    react-redux: "npm:^9.1.2"
+    react-router-dom: "npm:^6.23.1"
+    redux-saga: "npm:^1.3.0"
+    sass: "npm:^1.77.8"
+    tailwind-merge: "npm:^2.3.0"
+    tailwindcss: "npm:^3.4.3"
+    tailwindcss-animate: "npm:^1.0.7"
+    vite: "npm:^5.4.8"
+    vite-plugin-svgr: "npm:^4.2.0"
+    zod: "npm:^3.23.8"
+  languageName: unknown
+  linkType: soft
 
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
