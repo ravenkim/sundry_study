@@ -2,30 +2,54 @@ import { Input } from 'src/assets/shadcn/components/ui/input.jsx'
 import { useCallback, useEffect, useId, useState } from 'react'
 import debounce from 'lodash.debounce'
 
+
+
+// todo import { z } from "zod" 추가해서 검증 로직 추가 할것
+
+
+
+
 const SSinput = ({
-    value,
-    onChange,
-    description ,
-    label,
-    type = 'text',
-}) => {
+                     value,
+                     onChange,
+                     description,
+                     label,
+                     className,
+                     type = 'text',
+                     onKeyDown,
+                 }) => {
+
+
+    //고유 id 생성
     const inputId = useId()
 
-    const [inputValue, setInputValue] = useState(value)
 
-    //todo type 이 num 일떄 동작하기 위해 추가 필요
+    // 입력 필드의 값
+    const [inputValue, setInputValue] = useState(value)
+    // 컴포넌트 밖에서 값이 바뀐 경우 처리
+    useEffect(() => {
+        setInputValue(value)
+    }, [value])
+
+    // 텍스트 길이 관리
     const [textLength, setTextLength] = useState(0)
     useEffect(() => {
         setTextLength(inputValue)
     }, [inputValue])
 
-    // 포커스 잊었는지 처리
+
+
+
+    //포커스 여부 관리
     const [isFocused, setIsFocused] = useState(false)
     const onFocus = () => {
         setIsFocused(true)
     }
+    // 포커스에서 벗어나면 디바운스 처리 멈추고 바로 set
     const onBlur = () => {
         setIsFocused(false)
+        debouncedOnChange.cancel()
+        onChange(inputValue)
     }
 
     // onChange 디바운스 처리
@@ -33,30 +57,42 @@ const SSinput = ({
         debounce((value) => {
             onChange(value)
         }, 300),
-        [],
+        [onChange]
     )
 
+
     useEffect(() => {
-        debouncedOnChange(inputValue)
-        return () => {
-            debouncedOnChange.cancel()
+        if (isFocused) {
+            debouncedOnChange(inputValue)
         }
-    }, [inputValue, debouncedOnChange])
+    }, [inputValue, debouncedOnChange, isFocused])
+
+
+    // 버튼 누르면 디바운스 멈추고 동작
+    const handleKeyDown = (event) => {
+        debouncedOnChange.cancel()
+        onChange(inputValue)
+        if (onKeyDown) {
+            onKeyDown(event)
+        }
+    }
 
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
     return (
-        <div>
+        <div className={`w-full`}>
             <label htmlFor={inputId}>{label}</label>
             <Input
+                className={` ${className}`}
                 id={inputId}
-                type={'text'}
+                type={type}
                 value={inputValue}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onChange={(e) => setInputValue(e.target.value)}
-            ></Input>
+                onKeyDown={handleKeyDown}
+            />
             {isError ? <>{errorMessage}</> : <> {description}</>}
         </div>
     )
