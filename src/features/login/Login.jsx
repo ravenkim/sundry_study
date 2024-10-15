@@ -33,37 +33,19 @@ const Login = () => {
 
     return (
         <SSinnerWrapper>
-            <SStopBar
-                useCloseButton={false}
-                onBackClick={() => navigate(-1)}
-            />
-
+            <SStopBar useCloseButton={false} onBackClick={() => navigate(-1)} />
 
             {/*todo 크기 수정*/}
-            <div className={` w-full h-[140px] flex items-center justify-center`}>
-                <LogoWithTitle
-
-                />
-
-
+            <div
+                className={`flex h-[140px] w-full items-center justify-center`}
+            >
+                <LogoWithTitle />
             </div>
 
-            <SSinput
-                className={` mb-[8px]`}
-            />
-            <SSinput
-                className={` mb-[16px]`}
+            <SSinput className={`mb-[8px]`} />
+            <SSinput className={`mb-[16px]`} type={`password`} />
 
-                type={`password`}
-            />
-            
-
-            <SSbutton
-                text={'로그인'}
-            />
-
-
-
+            <SSbutton text={'로그인'} />
         </SSinnerWrapper>
     )
 }

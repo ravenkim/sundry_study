@@ -2,6 +2,9 @@ import axios from 'axios'
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
+    headers: {
+        "Content-Type":"application/json"
+    }
 })
 
 // client.interceptors.request.use(
