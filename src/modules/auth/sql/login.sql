@@ -1,1 +1,1 @@
-SELECT user_password FROM users where user_login_id = ?;
+SELECT * FROM users where user_login_id = ?;
