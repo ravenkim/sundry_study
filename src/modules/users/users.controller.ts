@@ -13,10 +13,9 @@ export class UsersController {
         return this.UsersService.getUser()
     }
 
-    // 회원가입
     @Post('create-account')
     @ApiOperation({
-        summary: '요약설명',
+        summary: '회원가입',
         // description: '설명',
     })
     @ApiBody({ type: CreateAccountRequestDto })

@@ -3,6 +3,7 @@ import { DatabaseService } from '../../database/database.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
 import { checkEmailDuplicate } from './exceptions/duplicate-email.exception'
+import { checkIdDuplicate } from './exceptions/duplicate-id.exception'
 
 @Injectable()
 export class UsersService {
@@ -60,16 +61,19 @@ export class UsersService {
     async createAccount(request: CreateAccountRequestDto) {
         const { userLoginId, userEmail, userPassword } = request
 
+        //아이디 중복 확인
+        await checkIdDuplicate(userLoginId, this.databaseService)
+
         //이메일 중복 확인
         await checkEmailDuplicate(userEmail, this.databaseService)
 
         const hashedPassword = await bcrypt.hash(userPassword, 10)
 
-        // const result = await this.databaseService.query(
-        //     'src/modules/users/sql/create_account.sql',
-        //     [userLoginId, hashedPassword, userEmail, 'normal'],
-        // )
-        // console.log(result)
+        const result = await this.databaseService.query(
+            'src/modules/users/sql/create_account.sql',
+            [userLoginId, hashedPassword, userEmail, 'normal'],
+        )
+
         return '성공적으로 만들어짐'
     }
 

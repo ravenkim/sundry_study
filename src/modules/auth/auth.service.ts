@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
+import { LoginRequestDto } from './dto/login.dto'
 
 @Injectable()
 export class AuthService {
@@ -10,28 +11,30 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async login(loginInfo: any) {
+    async login(request: LoginRequestDto) {
         // const result = await bcrypt.compare(
         //     'string',
         //     '$2b$10$9VUffo3MkgPZeNLojzZi7exEYM2AHHEDDa2HQnx89g2x4WDky2t4u',
         // )
 
+        console.log(request)
+
+        const userLoginId = request.userLoginId
+        const userPassword = request.userPassword
+
         const result = await this.databaseService.query(
             'src/modules/auth/sql/login.sql',
-            ['1'],
+            [userLoginId],
         )
 
-        console.log('result Data: ', result)
+        if (await bcrypt.compare(userPassword, result[0].user_password)) {
+            console.log('로그인 성곤')
+            console.log(result)
+        } else {
+            console.log('로그인 실패 ')
+        }
 
-        // const result = await this.databaseService.query(
-        //     'src/modules/admin/common-code-management/sql/get-common-code.sql',
-        // )
-        //
-        //
-        // console.log(111111111111)
-        //
-        //
-        // //비밀번호 일치 여부 확인
+
         //
         //
         // //들고올 유저정보 (프로필 처럼 보일 정보)
