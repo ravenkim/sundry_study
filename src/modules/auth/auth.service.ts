@@ -5,25 +5,23 @@ import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
-
     constructor(
         private readonly databaseService: DatabaseService,
-        private jwtService: JwtService
+        private jwtService: JwtService,
     ) {}
 
     async login(loginInfo: any) {
-
         // const result = await bcrypt.compare(
         //     'string',
         //     '$2b$10$9VUffo3MkgPZeNLojzZi7exEYM2AHHEDDa2HQnx89g2x4WDky2t4u',
         // )
 
         const result = await this.databaseService.query(
-            'src/modules/auth/sql/login.sql',['1']
+            'src/modules/auth/sql/login.sql',
+            ['1'],
         )
 
         console.log('result Data: ', result)
-
 
         // const result = await this.databaseService.query(
         //     'src/modules/admin/common-code-management/sql/get-common-code.sql',
@@ -56,12 +54,9 @@ export class AuthService {
         // }
 
         return {
-            aa:11
+            aa: 11,
         }
     }
 
-    async logout() {
-    }
-
-
+    async logout() {}
 }
