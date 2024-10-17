@@ -12,16 +12,13 @@ export class AuthService {
     ) {}
 
     async login(request: LoginRequestDto) {
-        // const result = await bcrypt.compare(
-        //     'string',
-        //     '$2b$10$9VUffo3MkgPZeNLojzZi7exEYM2AHHEDDa2HQnx89g2x4WDky2t4u',
-        // )
 
-        console.log(request)
+
 
         const userLoginId = request.userLoginId
         const userPassword = request.userPassword
 
+        //아이디로 유저 정보 조회
         const result = await this.databaseService.query(
             'src/modules/auth/sql/login.sql',
             [userLoginId],
