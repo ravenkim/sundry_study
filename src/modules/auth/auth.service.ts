@@ -12,9 +12,6 @@ export class AuthService {
     ) {}
 
     async login(request: LoginRequestDto) {
-
-
-
         const userLoginId = request.userLoginId
         const userPassword = request.userPassword
 
@@ -24,13 +21,22 @@ export class AuthService {
             [userLoginId],
         )
 
+        //로그인시 줄 정보들 모음
+        const { user_id, user_login_id, user_email, user_authority } = result[0]
+        const payload = {
+            user_id: user_id,
+            user_login_id: user_login_id,
+            user_email: user_email,
+        }
+        const accessToken = this.jwtService.sign(payload, { expiresIn: '300s' })
+
+        console.log(accessToken)
+
         if (await bcrypt.compare(userPassword, result[0].user_password)) {
             console.log('로그인 성곤')
-            console.log(result)
         } else {
             console.log('로그인 실패 ')
         }
-
 
         //
         //
