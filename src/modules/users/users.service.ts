@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
@@ -42,12 +42,11 @@ export class UsersService {
             [userId],
         )
 
-        if (userInfo.length === 0) {
-            console.log(111111111111)
+        if (!userInfo || Object.keys(userInfo).length === 0) {
+            throw new BadRequestException('없는 유저 ID 입니다.')
         }
 
         return userInfo
-
         //들고올 유저정보 (프로필 처럼 보일 정보)
         //유저아이디, 유저 프로필, 유저 닉네임, 유저 권한, 유저 재화,
     }
