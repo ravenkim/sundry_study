@@ -6,7 +6,7 @@ import { PassportModule } from '@nestjs/passport'
 
 @Module({
     imports: [
-        PassportModule.register({ defaultStrategy: 'jwt', session: false }),
+        PassportModule,
         JwtModule.register({ global: true, secret: 'SECRET' }),
     ],
     controllers: [AuthController],

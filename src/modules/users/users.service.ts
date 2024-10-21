@@ -4,6 +4,7 @@ import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
 import { checkEmailDuplicate } from './exceptions/duplicate-email.exception'
 import { checkIdDuplicate } from './exceptions/duplicate-id.exception'
+import { getUserInfoRequestDto } from './dto/user.dto'
 
 @Injectable()
 export class UsersService {
@@ -33,7 +34,20 @@ export class UsersService {
     }
 
     //로그인시 유저 정보 확인
-    async getUser() {
+    async getUser(request: getUserInfoRequestDto) {
+        const { userId } = request
+
+        const userInfo = await this.databaseService.query(
+            'src/modules/users/sql/get_user_info_by_id.sql',
+            [userId],
+        )
+
+        if (userInfo.length === 0) {
+            console.log(111111111111)
+        }
+
+        return userInfo
+
         //들고올 유저정보 (프로필 처럼 보일 정보)
         //유저아이디, 유저 프로필, 유저 닉네임, 유저 권한, 유저 재화,
     }
