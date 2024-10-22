@@ -1,11 +1,90 @@
 import axios from 'axios'
+import { getCookie, removeCookie } from 'src/store/cookie.jsx'
+import {jwtDecode} from "jwt-decode";
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
     headers: {
-        "Content-Type":"application/json"
-    }
+        "Content-Type":"application/json",
+    },
+    withCredentials: true
 })
+
+
+/*
+* interceptors.request 만약 accessToken 이 있다면 쿠키에 accessToken 을 담아서 요청을 보냄
+* 만약 만료되었다고 오면 쿠키에 refreshToken을 담아서 보냄
+* 새로운 accessToken 을 쿠키에서 가져와 저장함 혹은
+* refreshToken이 만료 되었다고 오면 다 삭제하고 로그인 페이지로 이동시킴
+*
+* */
+
+
+// client.interceptors.request.use(
+//     async (config) => {
+//         const accessToken = getCookie('accessToken');
+//         if (accessToken) {
+//             const tokenExpires = jwtDecode(accessToken).exp * 1000;
+//
+//             if (Date.now() < tokenExpires) {
+//                 config.headers.Authorization = `Bearer ${accessToken}`;
+//             } else {
+//                 const refreshToken = getCookie('refreshToken');
+//                 if (refreshToken) {
+//                     // Assuming a function to refresh the token
+//                     try {
+//                         const response = await axios.post(`${import.meta.env.VITE_API_HOST}/refreshToken`, { token: refreshToken });
+//                         const newAccessToken = response.data.accessToken;
+//                         document.cookie = `accessToken=${newAccessToken}`;
+//                         config.headers.Authorization = `Bearer ${newAccessToken}`;
+//                     } catch (error) {
+//                         removeCookie('accessToken');
+//                         removeCookie('refreshToken');
+//                         window.location.href = '/login'; // Redirect to login
+//                     }
+//                 } else {
+//                     removeCookie('accessToken');
+//                     removeCookie('refreshToken');
+//                     window.location.href = '/login'; // Redirect to login
+//                 }
+//             }
+//         }
+//         return config;
+//     },
+//     (error) => {
+//         return Promise.reject(error);
+//     }
+// );
+
+
+
+
+// //프런트에서 점검
+// client.interceptors.request.use(
+//     async (config) => {
+//         const userToken = getCookie('accessToken')
+//         if (userToken) {
+//             const tokenData = jwtDecode(userToken)
+//
+//             if (tokenData.exp < Date.now() / 1000) {
+//                 removeCookie('accessToken')
+//                 window.location = "/";
+//             } else {
+//
+//
+//
+//                 config.headers["AccessToken"] = userToken
+//             }
+//
+//         }
+//         return config;
+//     },
+//     function (error) {
+//         return Promise.reject(error);
+//     }
+// );
+
+
 
 // client.interceptors.request.use(
 //     async (config) => {
@@ -28,5 +107,42 @@ const client = axios.create({
 //     //     return Promise.reject(error);
 //      }
 // )
+
+
+
+// client.interceptors.response.use(
+//     response => response,
+//     async error => {
+//         const originalRequest = error.config;
+//
+//         if (error.response.status === 401 && !originalRequest._retry) {
+//             originalRequest._retry = true;
+//
+//             try {
+//                 // 쿠키에서 리프레시 토큰 가져오기
+//                 const refreshToken = getCookie("refreshToken");
+//
+//                 const tokenResponse = await axios.post(`${import.meta.env.VITE_API_HOST}/refresh-token`, {
+//                     refreshToken
+//                 });
+//
+//                 const newAccessToken = tokenResponse.data.accessToken;
+//
+//                 // 신규 액세스 토큰 헤더 설정
+//                 setCookie("accessToken", newAccessToken, { path: '/', maxAge: 3600 });
+//
+//                 originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+//
+//                 // 수정된 요청을 다시 시도
+//                 return client(originalRequest);
+//             } catch (err) {
+//                 // 리프레시 토큰 또한 실패 시 필요한 작업 수행
+//                 console.error("Token refresh failed", err);
+//             }
+//         }
+//         return Promise.reject(error);
+//     }
+// );
+
 
 export default client
