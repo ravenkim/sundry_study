@@ -2,6 +2,9 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SSinput from 'src/common/components/input/SSinput.jsx'
+import SSbutton from 'src/common/components/button/SSbutton.jsx'
+import { sampleAction } from 'src/features/sample/sampleReducer.jsx'
+import { setCookie } from 'src/store/cookie.jsx'
 
 const Sample = () => {
     const dispatch = useDispatch()
@@ -13,23 +16,27 @@ const Sample = () => {
         shallowEqual,
     )
 
-
     const { t, i18n } = useTranslation()
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng)
     }
 
-
     const [aaaa, setAaaa] = useState('zzz')
-
-
 
     return (
         <>
-            <SSinput
-                value={aaaa}
-                onChange={(e) => setAaaa(e)}
-            />
+            <SSbutton
+                text={' 데이터 가져오기'}
+                onClick={() => dispatch(sampleAction.getCode())}
+            ></SSbutton>
+
+            <SSbutton
+                text={'쿠키추가'}
+                onClick={() => setCookie('aaa',123)}
+            >
+                데이터 가져오기
+            </SSbutton>
+            <SSinput value={aaaa} onChange={(e) => setAaaa(e)} />
         </>
 
         // <SSinnerWrapper>
@@ -60,9 +67,7 @@ const Sample = () => {
         //     <SSbutton onClick={() => changeLanguage('en')}>English</SSbutton>
         //     <SSbutton onClick={() => changeLanguage('ko')}>English</SSbutton>
         //
-        //     <SSbutton onClick={() => dispatch(sampleAction.getCode())}>
-        //         데이터 가져오기
-        //     </SSbutton>
+
         //
         //     <SScollapsible>sdsd</SScollapsible>
         //
