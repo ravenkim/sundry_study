@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Req } from '@nestjs/common'
 import { CommonCodeManagementService } from './common-code-management.service'
 import { ApiTags } from '@nestjs/swagger'
 
@@ -10,12 +10,10 @@ export class CommonCodeManagementController {
     ) {}
 
     @Get('get-common-codes')
-    getCommonCodes() {
-        return this.CommonCodeManagementService.getCommonCodes()
+    getCommonCodes(@Req() request: Request) {
+        return this.CommonCodeManagementService.getCommonCodes(request)
     }
-
 }
-
 
 
 // import { Controller, Get, Query } from '@nestjs/common';

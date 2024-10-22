@@ -5,9 +5,13 @@ import { ResponseInterceptor } from './utils/response.interceptor'
 import { AllExceptionsFilter } from './utils/exceptions.filter'
 import { ValidationPipe } from '@nestjs/common'
 import { validationExceptionFactory } from './utils/exceptions/validation-exception.factory'
+import * as cookieParser from 'cookie-parser'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
+
+    app.use(cookieParser())
+
     //형식 검증
     app.useGlobalPipes(
         new ValidationPipe({
@@ -23,7 +27,7 @@ async function bootstrap() {
 
     // cors 열어줄곳
     app.enableCors({
-        origin: 'http://localhost:8619',
+        origin: ['http://localhost:8619', 'http://localhost:8620'],
         methods: ['GET', 'POST'],
         credentials: true, //자격 증명(예: 쿠키, 인증 헤더 또는 TLS 클라이언트 인증서)을 포함하는 설정
     })
@@ -36,9 +40,6 @@ async function bootstrap() {
         .build()
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api', app, document)
-
-
-
 
     //포트번호
     await app.listen(7312, () => {

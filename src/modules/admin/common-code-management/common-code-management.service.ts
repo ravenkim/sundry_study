@@ -5,11 +5,12 @@ import { DatabaseService } from 'database/database.service'
 export class CommonCodeManagementService {
     constructor(private readonly databaseService: DatabaseService) {}
 
-    async getCommonCodes() {
+    async getCommonCodes(request) {
+        const cookies = Object.assign({}, request.cookies)
+        console.log(cookies)
         const result = await this.databaseService.query(
             'src/modules/admin/common-code-management/sql/get-common-code.sql',
         )
-        console.log(result)
         return result
     }
 }
