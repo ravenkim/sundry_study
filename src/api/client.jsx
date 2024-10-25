@@ -7,9 +7,9 @@ const client = axios.create({
     headers: {
         "Content-Type":"application/json",
     },
+    // 쿠키를 같이 보냄
     withCredentials: true
 })
-
 
 /*
 * interceptors.request 만약 accessToken 이 있다면 쿠키에 accessToken 을 담아서 요청을 보냄
