@@ -11,6 +11,8 @@ const client = axios.create({
 
 
 
+
+
 const cookieClient= axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
     headers: {
@@ -123,39 +125,6 @@ const cookieClient= axios.create({
 
 
 
-// client.interceptors.response.use(
-//     response => response,
-//     async error => {
-//         const originalRequest = error.config;
-//
-//         if (error.response.status === 401 && !originalRequest._retry) {
-//             originalRequest._retry = true;
-//
-//             try {
-//                 // 쿠키에서 리프레시 토큰 가져오기
-//                 const refreshToken = getCookie("refreshToken");
-//
-//                 const tokenResponse = await axios.post(`${import.meta.env.VITE_API_HOST}/refresh-token`, {
-//                     refreshToken
-//                 });
-//
-//                 const newAccessToken = tokenResponse.data.accessToken;
-//
-//                 // 신규 액세스 토큰 헤더 설정
-//                 setCookie("accessToken", newAccessToken, { path: '/', maxAge: 3600 });
-//
-//                 originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-//
-//                 // 수정된 요청을 다시 시도
-//                 return client(originalRequest);
-//             } catch (err) {
-//                 // 리프레시 토큰 또한 실패 시 필요한 작업 수행
-//                 console.error("Token refresh failed", err);
-//             }
-//         }
-//         return Promise.reject(error);
-//     }
-// );
 
 
 export default client
