@@ -2,7 +2,21 @@ import axios from 'axios'
 import { getCookie, removeCookie } from 'src/store/cookie.jsx'
 import {jwtDecode} from "jwt-decode";
 
+
+
+
+
+
 const client = axios.create({
+    baseURL: import.meta.env.VITE_API_HOST,
+    headers: {
+        "Content-Type":"application/json",
+    },
+})
+
+
+
+const cookieClient= axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
     headers: {
         "Content-Type":"application/json",
@@ -10,6 +24,10 @@ const client = axios.create({
     // 쿠키를 같이 보냄
     withCredentials: true
 })
+
+
+
+
 
 /*
 * interceptors.request 만약 accessToken 이 있다면 쿠키에 accessToken 을 담아서 요청을 보냄
