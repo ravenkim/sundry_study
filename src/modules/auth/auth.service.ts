@@ -3,12 +3,14 @@ import { DatabaseService } from '../../database/database.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 import { LoginRequestDto } from './dto/login.dto'
+import { PrismaService } from '../../database/prisma.service'
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly databaseService: DatabaseService,
         private jwtService: JwtService,
+        private prisma: PrismaService,
     ) {}
 
     async createAccessToken(user_id: number) {
@@ -19,12 +21,26 @@ export class AuthService {
     }
 
     async login(request: LoginRequestDto) {
-        const userLoginId = request.loginId
-        const userPassword = request.password
+        const loginId = request.loginId
+        const password = request.password
 
-        console.log(userLoginId)
-        console.log(userPassword)
+        const userInfo = await this.prisma.user.findUnique({
+            where: {
+                login_id: loginId,
+            },
+        })
 
+        if (await bcrypt.compare(password, userInfo.password)) {
+            console.log('로그인 성곤')
+            const payload = {
+                id: userInfo.id,
+                email: userInfo.email,
+            }
+
+            //     토큰 2개 만들어 보내기 하나 저장
+        } else {
+            console.log('로그인 실패 ')
+        }
 
         // //아이디로 유저 정보 조회
         // const result = await this.databaseService.query(
@@ -43,13 +59,6 @@ export class AuthService {
         //
         // console.log(accessToken)
         //
-        // if (await bcrypt.compare(userPassword, result[0].user_password)) {
-        //     console.log('로그인 성곤')
-        //
-        //     //     토큰 2개 만들어 보내기 하나 저장
-        // } else {
-        //     console.log('로그인 실패 ')
-        // }
 
         //
         //
