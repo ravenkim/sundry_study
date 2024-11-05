@@ -19,33 +19,37 @@ export class AuthService {
     }
 
     async login(request: LoginRequestDto) {
-        const userLoginId = request.userLoginId
-        const userPassword = request.userPassword
+        const userLoginId = request.loginId
+        const userPassword = request.password
 
-        //아이디로 유저 정보 조회
-        const result = await this.databaseService.query(
-            'src/modules/auth/sql/login.sql',
-            [userLoginId],
-        )
+        console.log(userLoginId)
+        console.log(userPassword)
 
-        //로그인시 줄 정보들 모음
-        const { user_id, user_email, user_authority } = result[0]
-        const payload = {
-            user_id: user_id,
-            user_email: user_email,
-        }
 
-        const accessToken = this.jwtService.sign(payload, { expiresIn: '300s' })
-
-        console.log(accessToken)
-
-        if (await bcrypt.compare(userPassword, result[0].user_password)) {
-            console.log('로그인 성곤')
-
-            //     토큰 2개 만들어 보내기 하나 저장
-        } else {
-            console.log('로그인 실패 ')
-        }
+        // //아이디로 유저 정보 조회
+        // const result = await this.databaseService.query(
+        //     'src/modules/auth/sql/login.sql',
+        //     [userLoginId],
+        // )
+        //
+        // //로그인시 줄 정보들 모음
+        // const { user_id, user_email, user_authority } = result[0]
+        // const payload = {
+        //     user_id: user_id,
+        //     user_email: user_email,
+        // }
+        //
+        // const accessToken = this.jwtService.sign(payload, { expiresIn: '300s' })
+        //
+        // console.log(accessToken)
+        //
+        // if (await bcrypt.compare(userPassword, result[0].user_password)) {
+        //     console.log('로그인 성곤')
+        //
+        //     //     토큰 2개 만들어 보내기 하나 저장
+        // } else {
+        //     console.log('로그인 실패 ')
+        // }
 
         //
         //

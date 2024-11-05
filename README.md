@@ -26,3 +26,6 @@ prisma generate
 todo
 prisma 에서 가져올때 커맨트도 같이 가져 오는 방법
 prisma erd generator 추가
+
+
+서버 - ntopng grafana 추가 
