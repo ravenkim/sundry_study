@@ -14,7 +14,7 @@ const Guide = () => {
             <Button onClick={() => {
                 client
                     .post('/auth/login', {
-                        loginId: 'aaa',
+                        loginId: 'string',
                         password: 'asd',
                     })
                     .then((response) => {
