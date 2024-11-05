@@ -1,9 +1,4 @@
 import axios from 'axios'
-import { getCookie, removeCookie } from 'src/store/cookie.jsx'
-import {jwtDecode} from "jwt-decode";
-
-
-
 
 
 

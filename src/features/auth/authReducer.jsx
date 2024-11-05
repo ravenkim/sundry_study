@@ -14,7 +14,7 @@ const asyncRequest = {
 }
 
 const localState = {
-    ac: null,
+    accessToken: 'asdsadasdsa12313',
 }
 
 const localReducers = {}
