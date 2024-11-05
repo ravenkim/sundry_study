@@ -11,7 +11,9 @@ const asyncRequest = {
     // ],
 }
 
-const localState = {}
+const localState = {
+
+}
 
 const localReducers = {}
 
