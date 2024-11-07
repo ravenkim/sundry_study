@@ -7,21 +7,18 @@ import client from 'src/api/client.jsx'
 const Guide = () => {
     const dispatch = useDispatch()
 
-
-
     return (
         <div>
-            <Button onClick={() => {
-                client
-                    .post('/auth/login', {
-                        loginId: 'string',
-                        password: 'asd',
-                    })
-                    .then((response) => {
-                        console.log('Data:', response.data)
-                    })
-
-            }}>
+            <Button
+                onClick={() => {
+                    dispatch(
+                        authAction.login({
+                            loginId: 'string',
+                            password: 'string',
+                        }),
+                    )
+                }}
+            >
                 aaaaaaaa
             </Button>
         </div>

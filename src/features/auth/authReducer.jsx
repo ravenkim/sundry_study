@@ -4,7 +4,7 @@ import { login } from 'src/features/auth/authAPI.jsx'
 const prefix = 'auth'
 
 const asyncRequest = {
-    login: [{ isLoggedIn: reducerUtils.init(false) }, login],
+    login: [{ accessToken: reducerUtils.init(null) }, login],
     // getCode: [
     //     {commonCode: reducerUtils.init([])},
     //     getCommonCode
@@ -14,7 +14,6 @@ const asyncRequest = {
 }
 
 const localState = {
-    accessToken: 'asdsadasdsa12313',
 }
 
 const localReducers = {}
