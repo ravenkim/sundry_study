@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 import { LoginRequestDto } from './dto/login.dto'
 import { PrismaService } from '../../database/prisma.service'
+import { Response } from 'express'
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
         )
     }
 
-    async login(request: LoginRequestDto) {
+    async login(request: LoginRequestDto, res: Response) {
         const loginId = request.loginId
         const password = request.password
 
@@ -36,7 +37,13 @@ export class AuthService {
                 id: userInfo.id,
                 email: userInfo.email,
             }
-
+            const token = this.jwtService.sign(payload)
+            res.cookie('set-aaa', 'bbbb', {
+                domain: 'localhost',
+                path: '/',
+                httpOnly: false,
+            })
+            return 'aaaaaaaavvvvvvvvvv'
             //     토큰 2개 만들어 보내기 하나 저장
         } else {
             console.log('로그인 실패 ')
@@ -81,9 +88,7 @@ export class AuthService {
         //     refresh_token: refreshToken,
         // }
 
-        return {
-            aa: 11,
-        }
+        return 'aaa'
     }
 
     async logout() {
