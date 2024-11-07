@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common'
+import {BadRequestException, HttpStatus, Injectable} from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
@@ -14,11 +14,29 @@ export class AuthService {
         private prisma: PrismaService,
     ) {}
 
-    async createAccessToken(user_id: number) {
-        const user_info = await this.databaseService.query(
-            'src/modules/auth/sql/login.sql',
-            [user_id],
-        )
+    async createAccessToken(id: number) {
+        const userInfo = await this.prisma.user.findUnique({
+            where: {
+                id: id,
+            },
+        })
+        const payload = {
+            id: userInfo.id,
+            email: userInfo.email,
+            role: userInfo.role,
+        }
+        return this.jwtService.sign(payload, {
+            secret: process.env.ACCESS_TOKEN_SECRET,
+            expiresIn: '15m', // 예: 15분
+        })
+    }
+
+    async createRefreshToken(id: number) {
+        const payload = { id: id }
+        return this.jwtService.sign(payload, {
+            secret: process.env.REFRESH_TOKEN_SECRET,
+            expiresIn: '7d', // 예: 7일
+        })
     }
 
     async login(request: LoginRequestDto, res: Response) {
@@ -32,21 +50,19 @@ export class AuthService {
         })
 
         if (await bcrypt.compare(password, userInfo.password)) {
-            console.log('로그인 성곤')
-            const payload = {
-                id: userInfo.id,
-                email: userInfo.email,
-            }
-            const token = this.jwtService.sign(payload)
-            res.cookie('set-aaa', 'bbbb', {
+            const accessToken = this.createAccessToken(userInfo.id)
+            const refreshToken = this.createRefreshToken(userInfo.id)
+
+            res.cookie('refreshToken', refreshToken, {
                 domain: 'localhost',
                 path: '/',
                 httpOnly: false,
             })
-            return 'aaaaaaaavvvvvvvvvv'
+            return accessToken
             //     토큰 2개 만들어 보내기 하나 저장
         } else {
-            console.log('로그인 실패 ')
+            // todo 로그인 실패 여러번 할시 로그인 제한 https://velog.io/@dldldl1022/Node.js%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%8B%9C%EB%8F%84-%ED%9A%9F%EC%88%98-%EC%A0%9C%ED%95%9C%ED%95%98%EA%B8%B0%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%8B%A4%ED%8C%A8-%EC%8B%9C-10%EB%B6%84%EA%B0%84-%EC%9E%A0%EA%B8%88
+            throw new BadRequestException('잘못된 ID 혹은 비밀번호 입니다')
         }
 
         // //아이디로 유저 정보 조회
