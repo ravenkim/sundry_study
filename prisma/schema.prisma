@@ -141,11 +141,8 @@ model user {
   birth                   DateTime?                 @db.Date
   info_fill_yn            String?                   @default("N") @db.VarChar(1)
   alcohol                 Float?                    @db.Float
-  cigarette               String?                   @db.VarChar(1)
-  mbti_ei                 Int?
-  mbti_sn                 Int?
-  mbti_tf                 Int?
-  mbti_jp                 Int?
+  cigarette_yn            String?                   @db.VarChar(1)
+  mbti                    String?                   @db.VarChar(4)
   photos_problem_yn       String?                   @default("Y") @db.VarChar(1)
   ci                      String?                   @unique(map: "users_unique_2") @db.VarChar(100)
   create_at               DateTime                  @default(now()) @db.Timestamp(0)

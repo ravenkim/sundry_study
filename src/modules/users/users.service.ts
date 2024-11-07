@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { DatabaseService } from '../../database/database.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
 import { getUserInfoRequestDto } from './dto/user.dto'
@@ -7,10 +6,7 @@ import { PrismaService } from '../../database/prisma.service'
 
 @Injectable()
 export class UsersService {
-    constructor(
-        private readonly databaseService: DatabaseService,
-        private prisma: PrismaService,
-    ) {}
+    constructor(private prisma: PrismaService) {}
 
     // 중복 로그인 아이디 체크
     async checkLoginIdDuplicate(userId: string) {
@@ -61,6 +57,8 @@ export class UsersService {
     본인인증
     3. 이름, 이메일, 이메일 광고 수신여부, 생년월일 , 전화번호 입력받음
      */
+
+    //}
 
     // 계정 만들기
     async createAccount(request: CreateAccountRequestDto) {
