@@ -2,18 +2,48 @@ import { BadRequestException, Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
-import { checkEmailDuplicate } from './exceptions/duplicate-email.exception'
-import { checkIdDuplicate } from './exceptions/duplicate-id.exception'
 import { getUserInfoRequestDto } from './dto/user.dto'
+import { PrismaService } from '../../database/prisma.service'
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly databaseService: DatabaseService) {}
+    constructor(
+        private readonly databaseService: DatabaseService,
+        private prisma: PrismaService,
+    ) {}
+
+    // 중복 로그인 아이디 체크
+    async checkLoginIdDuplicate(userId: string) {
+        const userExists = await this.prisma.user.findUnique({
+            where: {
+                login_id: userId,
+            },
+        })
+        if (userExists) {
+            throw new BadRequestException('중복된 아이디 입니다.')
+        }
+    }
+
+    // 중복 이메일 체크
+    async checkEmailDuplicate(email: string) {
+        const is_duplicate = await this.prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        })
+        if (is_duplicate) {
+            throw new BadRequestException('중복된 이메일입니다.')
+        }
+    }
 
     //
     /* todo
 
     1. id 중복 체크
+    
+    
+    
+    
 
 
     2. id 와 비밀번호를 저장
@@ -37,10 +67,16 @@ export class UsersService {
     async getUser(request: getUserInfoRequestDto) {
         const { userId } = request
 
-        const userInfo = await this.databaseService.query(
-            'src/modules/users/sql/get_user_info_by_id.sql',
-            [userId],
-        )
+        // const userInfo = await this.databaseService.query(
+        //     'src/modules/users/sql/get_user_info_by_id.sql',
+        //     [userId],
+        // )
+
+        const userInfo = await this.prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+        })
 
         if (!userInfo || Object.keys(userInfo).length === 0) {
             throw new BadRequestException('없는 유저 ID 입니다.')
@@ -72,20 +108,20 @@ export class UsersService {
 
     // 계정 만들기
     async createAccount(request: CreateAccountRequestDto) {
-        const { userLoginId, userEmail, userPassword } = request
+        const { loginId, email, password } = request
 
-        //아이디 중복 확인
-        await checkIdDuplicate(userLoginId, this.databaseService)
+        //중복 여부 확인
+        //ttt 아래의 두개의 검증은 디비를 두번 탑니다. 한번에 타게끔 하는 함수를 따로 만들어야 할까요?
+        await this.checkLoginIdDuplicate(loginId)
+        await this.checkEmailDuplicate(email)
 
-        //이메일 중복 확인
-        await checkEmailDuplicate(userEmail, this.databaseService)
-
-        const hashedPassword = await bcrypt.hash(userPassword, 10)
-
-        const result = await this.databaseService.query(
-            'src/modules/users/sql/create_account.sql',
-            [userLoginId, hashedPassword, userEmail, 'normal'],
-        )
+        // 아이디 생성
+        // const hashedPassword = await bcrypt.hash(userPassword, 10)
+        //
+        // const result = await this.databaseService.query(
+        //     'src/modules/users/sql/create_account.sql',
+        //     [userLoginId, hashedPassword, userEmail, 'normal'],
+        // )
 
         return '성공적으로 만들어짐'
     }
