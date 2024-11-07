@@ -4,15 +4,15 @@ import { IsEmail, IsString } from 'class-validator'
 export class CreateAccountRequestDto {
     @ApiProperty()
     @IsString()
-    userLoginId: string
+    loginId: string
 
     @ApiProperty()
     @IsString()
-    userPassword: string
+    password: string
 
     @ApiProperty({ format: 'email' })
     @IsEmail()
-    userEmail: string
+    email: string
 }
 
 export class CreateAccountResponseDto {}
