@@ -11,6 +11,12 @@
 
 
 
+쿠키가 필요한 요청 혹은 응답의 경우 
+API 파일에 다음과 같이 추가 
+```
+export const [api이름] = (param) =>
+    client.post('/[주소]', param, { withCredentials: true })
+```
 
 
 # Git 커밋 규칙 

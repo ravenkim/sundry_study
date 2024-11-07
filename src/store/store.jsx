@@ -7,13 +7,13 @@ import { authSaga, authSlice } from 'src/features/auth/authReducer.jsx'
 
 
 const reducers = {
+    authReducer: authSlice.reducer,
     routerReducer: routerSlice.reducer,
     sampleReducer: sampleSlice.reducer,
-    authReducer: authSlice.reducer,
 }
 
 export function* rootSaga() {
-    yield all([routerSaga(), sampleSaga(), authSaga()])
+    yield all([ authSaga(), routerSaga(), sampleSaga()])
 }
 
 const sagaMiddleware = createSagaMiddleware()
