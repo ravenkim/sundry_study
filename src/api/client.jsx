@@ -7,18 +7,19 @@ const client = axios.create({
     headers: {
         "Content-Type":"application/json",
     },
+
 })
 
 
 
 
 
-const cookieClient= axios.create({
+export const cookieClient= axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
     headers: {
         "Content-Type":"application/json",
     },
-    // 쿠키를 같이 보냄
+    // 쿠키를 같이 보냄 받을떄도 필요
     withCredentials: true
 })
 

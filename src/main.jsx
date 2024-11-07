@@ -17,6 +17,7 @@ function setupInterceptors(store) {
     client.interceptors.request.use(
         (config) => {
             const token = store.getState().authReducer.accessToken
+
             if (token) {
                 config.headers['Authorization'] = `Bearer ${token}`
             }
@@ -27,8 +28,11 @@ function setupInterceptors(store) {
         },
     )
     client.interceptors.response.use(
-        response => response,
-        async error => {
+        (response) => {
+            console.log('response', response)
+            return response
+        },
+        async (error) => {
             // todo ac 가 없거나 여튼 실패한 경우 처리
             // const originalRequest = error.config;
             //
@@ -58,8 +62,8 @@ function setupInterceptors(store) {
             //     }
             // }
             // return Promise.reject(error);
-        }
-    );
+        },
+    )
 
 }
 
