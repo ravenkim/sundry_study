@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { DatabaseService } from 'database/database.service'
+import { Request } from 'express'
 
 @Injectable()
 export class CommonCodeManagementService {
     constructor(private readonly databaseService: DatabaseService) {}
 
-    async getCommonCodes(request) {
-        const cookies = Object.assign({}, request.cookies)
+    async getCommonCodes(req: Request) {
+        const cookies = Object.assign({}, req.cookies)
         console.log(cookies)
         const result = await this.databaseService.query(
             'src/modules/admin/common-code-management/sql/get-common-code.sql',

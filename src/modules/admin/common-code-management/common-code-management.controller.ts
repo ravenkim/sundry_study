@@ -1,6 +1,7 @@
 import { Controller, Get, Req } from '@nestjs/common'
 import { CommonCodeManagementService } from './common-code-management.service'
 import { ApiTags } from '@nestjs/swagger'
+import { Request } from 'express'
 
 @Controller('admin/common-code')
 @ApiTags('admin/common-code')
@@ -10,8 +11,8 @@ export class CommonCodeManagementController {
     ) {}
 
     @Get('get-common-codes')
-    getCommonCodes(@Req() request: Request) {
-        return this.CommonCodeManagementService.getCommonCodes(request)
+    getCommonCodes(@Req() req: Request) {
+        return this.CommonCodeManagementService.getCommonCodes(req)
     }
 }
 
