@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common'
+import { Body, Controller, Post, Req, Res } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { CreateAccountRequestDto } from '../users/dto/createAccount.dto'
@@ -20,5 +20,13 @@ export class AuthController {
         @Res({ passthrough: true }) res: Response,
     ) {
         return this.authService.login(request, res)
+    }
+
+    @Post('create-user')
+    reissueToken(
+        @Req() req: Request,
+        @Res({ passthrough: true }) res: Response,
+    ) {
+        return this.authService.reissueToken(req, res)
     }
 }

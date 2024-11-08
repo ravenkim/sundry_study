@@ -1,4 +1,4 @@
-import {BadRequestException, HttpStatus, Injectable} from '@nestjs/common'
+import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common'
 import { DatabaseService } from '../../database/database.service'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
@@ -37,6 +37,21 @@ export class AuthService {
             secret: process.env.REFRESH_TOKEN_SECRET,
             expiresIn: '7d', // 예: 7일
         })
+    }
+
+    //리프래시 토큰 검증 >  토큰 재발급
+    async reissueToken(req, res: Response) {
+        const user = 1
+
+        const accessToken = this.createAccessToken(user)
+        const newRefreshToken = this.createRefreshToken(user)
+
+        res.cookie('refreshToken', newRefreshToken, {
+            domain: 'localhost',
+            path: '/',
+            httpOnly: false,
+        })
+        return accessToken
     }
 
     async login(request: LoginRequestDto, res: Response) {
