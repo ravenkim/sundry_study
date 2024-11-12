@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class KakaoService {
-
     /**
      * Kakao Redirect를 처리합니다.
      * 받은 인가 코드로 액세스 토큰을 발급받고, 사용자 정보를 조회하여
@@ -28,7 +27,6 @@ export class KakaoService {
     //
     //
     // }
-
     /**
      * Kakao로부터 액세스 토큰을 발급받습니다.
      *
@@ -50,8 +48,6 @@ export class KakaoService {
     //     )
     //     return response.data.access_token
     // }
-
-
     /**
      * 발급받은 액세스 토큰으로 Kakao 사용자 정보를 조회합니다.
      *

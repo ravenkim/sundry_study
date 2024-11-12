@@ -10,5 +10,4 @@ import { KakaoModule } from './kakao/kakao.module'
         // NaverModule
     ],
 })
-export class SocialModule {
-}
+export class SocialModule {}

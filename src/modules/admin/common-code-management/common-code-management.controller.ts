@@ -16,7 +16,6 @@ export class CommonCodeManagementController {
     }
 }
 
-
 // import { Controller, Get, Query } from '@nestjs/common';
 //
 // @Controller('cats')

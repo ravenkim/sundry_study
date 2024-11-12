@@ -8,5 +8,4 @@ import { UsersModule } from '../../users/users.module'
     controllers: [KakaoController],
     providers: [KakaoService],
 })
-export class KakaoModule {
-}
+export class KakaoModule {}
