@@ -16,7 +16,6 @@ export class CommonCodeManagementService {
     }
 }
 
-
 // async getUserById(userId: number) {
 //     const query = 'SELECT * FROM users WHERE id = ?';
 //     const params = [userId];
