@@ -36,7 +36,7 @@ async function bootstrap() {
         .setTitle('Ting')
         .setDescription('API 명세서 입니다')
         .setVersion('1.0')
-        .addTag('admin')
+        .addBearerAuth()
         .build()
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup('api', app, document)
