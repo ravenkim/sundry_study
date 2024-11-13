@@ -3,13 +3,12 @@ import { Module } from '@nestjs/common'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { PassportModule } from '@nestjs/passport'
+import { JwtAccessTokenStrategy } from './strategy/accessToken.strategy'
+import { JwtAccessTokenGuard } from './guard/accessToken.guard'
 
 @Module({
-    imports: [
-        PassportModule,
-        JwtModule.register({ global: true, secret: 'SECRET' }),
-    ],
+    imports: [PassportModule, JwtModule.register({ global: true })],
     controllers: [AuthController],
-    providers: [AuthService],
+    providers: [AuthService, JwtAccessTokenStrategy, JwtAccessTokenGuard],
 })
 export class AuthModule {}
