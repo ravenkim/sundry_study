@@ -6,9 +6,15 @@ import { AllExceptionsFilter } from './utils/exceptions.filter'
 import { ValidationPipe } from '@nestjs/common'
 import { validationExceptionFactory } from './utils/exceptions/validation-exception.factory'
 import * as cookieParser from 'cookie-parser'
+import { Reflector } from '@nestjs/core'
+import { JwtAuthGuard } from './modules/auth/guard/jwt-auth.guard'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
+
+    // at 가 없으면 반사
+    const reflector = app.get(Reflector)
+    app.useGlobalGuards(new JwtAuthGuard(reflector))
 
     app.use(cookieParser())
 

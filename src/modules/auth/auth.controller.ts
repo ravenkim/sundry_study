@@ -13,6 +13,7 @@ import { CreateAccountRequestDto } from '../users/dto/createAccount.dto'
 import { LoginRequestDto } from './dto/login.dto'
 import { Response } from 'express'
 import { JwtAccessTokenGuard } from './guard/accessToken.guard'
+import { Public } from './guard/jwt-auth.guard'
 
 @Controller('auth')
 @ApiTags('auth')
@@ -20,12 +21,13 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @ApiBearerAuth()
-    @UseGuards(JwtAccessTokenGuard)
     @Get('test')
     test() {
         return 'ahha'
     }
 
+  
+    @Public()
     @Post('login')
     @ApiOperation({
         summary: '로그인',
@@ -37,6 +39,7 @@ export class AuthController {
     ) {
         return this.authService.login(request, res)
     }
+
 
     @Post('create-user')
     reissueToken(
