@@ -2,7 +2,7 @@ import { Body, Controller, Post, Req, Res, Get } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { LoginRequestDto } from './dto/login.dto'
-import { Response } from 'express'
+import { request, Response } from 'express'
 import { Public } from './decorators/public.decorator'
 
 @Controller('auth')
@@ -19,7 +19,8 @@ export class AuthController {
     @ApiBearerAuth() //todo 이거 안써도 public 제외 하고 일괄 적용 하는 방법
     @Post('postTest')
     @ApiBody({ type: LoginRequestDto })
-    postTest(@Body() request: LoginRequestDto) {
+    postTest(@Req() req: any, @Body() props: LoginRequestDto) {
+        console.log(req.user)
         return 'aaa'
     }
 
