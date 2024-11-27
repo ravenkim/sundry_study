@@ -24,12 +24,11 @@ async function bootstrap() {
             exceptionFactory: validationExceptionFactory,
         }),
     )
+    // 에러 발생시 가로챔
+    app.useGlobalFilters(new AllExceptionsFilter())
 
     //성공시 원하는 형식으로 데이터를 만들어줌
     app.useGlobalInterceptors(new ResponseInterceptor())
-
-    // 에러 발생시 가로챔
-    app.useGlobalFilters(new AllExceptionsFilter())
 
     // cors 열어줄곳
     app.enableCors({

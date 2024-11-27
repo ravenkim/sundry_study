@@ -15,33 +15,20 @@ export class AllExceptionsFilter implements ExceptionFilter {
         const ctx = host.switchToHttp()
         const response = ctx.getResponse<Response>()
 
-        const exceptionResponse = exception.getResponse
-            ? exception.getResponse()
-            : exception.message
-              ? exception.message
-              : null
+        // console.log(exception)
+        const exceptionResponse = exception.getResponse()
 
-        let errorMsg: string
-
-        if (Array.isArray(exceptionResponse)) {
-            errorMsg = exceptionResponse.join(', ')
-        } else if (typeof exceptionResponse === 'object') {
-            if (Array.isArray((exceptionResponse as any).message)) {
-                errorMsg = (exceptionResponse as any).message.join(', ')
-            } else {
-                errorMsg = (exceptionResponse as any).message
-            }
-        } else {
-            errorMsg = exceptionResponse
-        }
+        const message = exceptionResponse.message
+        const statusCode = exceptionResponse.statusCode
 
         // 어떤 애러가 발생했는지 백에서도 찍어줌
-        console.error(errorMsg)
+        console.error(message)
 
         // 예외가 발생해도 통신은 정상적으로 작동했기에 200으로 처리
         response.status(HttpStatus.OK).json({
-            data: errorMsg,
+            data: message,
             error: true,
+            errorType: statusCode,
         })
     }
 }
