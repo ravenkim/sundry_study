@@ -13,20 +13,20 @@ import { CreateAccountRequestDto } from '../users/dto/createAccount.dto'
 import { LoginRequestDto } from './dto/login.dto'
 import { Response } from 'express'
 import { JwtAccessTokenGuard } from './guard/accessToken.guard'
-import { Public } from './guard/jwt-auth.guard'
+import { Public } from './decorators/public.decorator'
+
 
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @ApiBearerAuth()
+    @ApiBearerAuth() //todo 이거 안써도 public 제외 하고 일괄 적용 하는 방법
     @Get('test')
     test() {
         return 'ahha'
     }
 
-  
     @Public()
     @Post('login')
     @ApiOperation({
@@ -39,7 +39,6 @@ export class AuthController {
     ) {
         return this.authService.login(request, res)
     }
-
 
     @Post('create-user')
     reissueToken(
