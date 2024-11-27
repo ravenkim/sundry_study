@@ -1,5 +1,20 @@
-import { ValidationError, BadRequestException } from '@nestjs/common'
+import {
+    ValidationError,
+    BadRequestException,
+    HttpStatus,
+} from '@nestjs/common'
 
 export const validationExceptionFactory = (errors: ValidationError[]) => {
-    throw new Error('입력된 데이터의 형식이 맞지 않습니다')
+    const messages = errors.map((error) => ({
+        property: error.property,
+        constraints: error.constraints,
+    }))
+
+    const errorDetails = {
+        message: '잘못된 데이터 형식입니다',
+        statusCode: HttpStatus.BAD_REQUEST,
+        errors: messages,
+    }
+
+    throw new BadRequestException(errorDetails)
 }
