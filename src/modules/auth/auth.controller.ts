@@ -5,14 +5,11 @@ import {
     Req,
     Res,
     Get,
-    UseGuards,
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
-import { CreateAccountRequestDto } from '../users/dto/createAccount.dto'
 import { LoginRequestDto } from './dto/login.dto'
 import { Response } from 'express'
-import { JwtAccessTokenGuard } from './guard/accessToken.guard'
 import { Public } from './decorators/public.decorator'
 
 
@@ -24,7 +21,7 @@ export class AuthController {
     @ApiBearerAuth() //todo 이거 안써도 public 제외 하고 일괄 적용 하는 방법
     @Get('test')
     test() {
-        return 'ahha'
+        return '연결됨'
     }
 
     @Public()

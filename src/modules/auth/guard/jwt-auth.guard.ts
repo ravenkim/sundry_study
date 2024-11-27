@@ -4,12 +4,15 @@ import {
     ExecutionContext,
     SetMetadata,
 } from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
 import { Reflector } from '@nestjs/core'
-import { JwtAccessTokenGuard } from './accessToken.guard'
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator'
 
 @Injectable()
-export class JwtAuthGuard extends JwtAccessTokenGuard implements CanActivate {
+export class JwtAuthGuard
+    extends AuthGuard('access_token')
+    implements CanActivate
+{
     constructor(private reflector: Reflector) {
         super()
     }
@@ -22,7 +25,6 @@ export class JwtAuthGuard extends JwtAccessTokenGuard implements CanActivate {
         if (isPublic) {
             return true
         }
-
 
         return <boolean>super.canActivate(context)
     }
