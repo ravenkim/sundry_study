@@ -12,8 +12,10 @@ import { Request, Response } from 'express'
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
     catch(exception: any, host: ArgumentsHost) {
+
         const ctx = host.switchToHttp()
         const response = ctx.getResponse<Response>()
+
 
         // console.log(exception)
         const exceptionResponse = exception.getResponse()

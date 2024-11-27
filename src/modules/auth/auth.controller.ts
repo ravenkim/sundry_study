@@ -1,17 +1,9 @@
-import {
-    Body,
-    Controller,
-    Post,
-    Req,
-    Res,
-    Get,
-} from '@nestjs/common'
+import { Body, Controller, Post, Req, Res, Get } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { LoginRequestDto } from './dto/login.dto'
 import { Response } from 'express'
 import { Public } from './decorators/public.decorator'
-
 
 @Controller('auth')
 @ApiTags('auth')
@@ -22,6 +14,13 @@ export class AuthController {
     @Get('test')
     test() {
         return '연결됨'
+    }
+
+    @ApiBearerAuth() //todo 이거 안써도 public 제외 하고 일괄 적용 하는 방법
+    @Post('postTest')
+    @ApiBody({ type: LoginRequestDto })
+    postTest(@Body() request: LoginRequestDto) {
+        return 'aaa'
     }
 
     @Public()
