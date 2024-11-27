@@ -6,10 +6,7 @@ import {
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { JwtAccessTokenGuard } from './accessToken.guard'
-
-export const IS_PUBLIC_KEY = 'isPublic'
-export const Public = () => SetMetadata(IS_PUBLIC_KEY, true)
-
+import { IS_PUBLIC_KEY } from '../decorators/public.decorator'
 
 @Injectable()
 export class JwtAuthGuard extends JwtAccessTokenGuard implements CanActivate {
@@ -25,6 +22,8 @@ export class JwtAuthGuard extends JwtAccessTokenGuard implements CanActivate {
         if (isPublic) {
             return true
         }
+
+
         return <boolean>super.canActivate(context)
     }
 }
