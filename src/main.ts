@@ -18,14 +18,18 @@ async function bootstrap() {
 
     app.use(cookieParser())
 
+
+    // 에러 발생시 가로챔
+    app.useGlobalFilters(new AllExceptionsFilter())
+
+
     //형식 검증
     app.useGlobalPipes(
         new ValidationPipe({
             exceptionFactory: validationExceptionFactory,
         }),
     )
-    // 에러 발생시 가로챔
-    app.useGlobalFilters(new AllExceptionsFilter())
+
 
     //성공시 원하는 형식으로 데이터를 만들어줌
     app.useGlobalInterceptors(new ResponseInterceptor())
