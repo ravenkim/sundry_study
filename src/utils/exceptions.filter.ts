@@ -17,6 +17,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         const response = ctx.getResponse<Response>()
 
 
+
         // console.log(exception)
         const exceptionResponse = exception.getResponse()
 
