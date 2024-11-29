@@ -4,13 +4,16 @@ import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { LoginRequestDto } from './dto/login.dto'
 import { request, Response } from 'express'
 import { Public } from './decorators/public.decorator'
+import { Roles } from './decorators/roles.decorator'
 
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
+
     @ApiBearerAuth() //todo 이거 안써도 public 제외 하고 일괄 적용 하는 방법
+    @Roles(1)
     @Get('test')
     test() {
         return '연결됨'
