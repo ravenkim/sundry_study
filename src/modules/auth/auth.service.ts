@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 import { LoginRequestDto } from './dto/login.dto'
 import { PrismaService } from '../../database/prisma.service'
-import { Response } from 'express'
+import { Request, Response } from 'express'
 
 @Injectable()
 export class AuthService {
@@ -40,11 +40,27 @@ export class AuthService {
     }
 
     //리프래시 토큰 검증 >  토큰 재발급
-    async reissueToken(req, res: Response) {
-        const user = 1
+    async reissueToken(req: Request, res: Response) {
+        const cookies = Object.assign({}, req.cookies)
+        const refreshToken = undefined //cookies.refreshToken
+
+        if (!refreshToken) {
+            throw new BadRequestException('refreshToken 이 없습니다.')
+            // errotype 이 400 이라서 나중에 수정해야함
+        }
+
+        // 만료확인 // 유저 정보 확인
+        // 같은 리프래시 인지 확인
+
+        console.log(cookies)
+        console.log(refreshToken)
+
+        const user = 1 // 쿠키에서 가져오게끔 수정
 
         const accessToken = this.createAccessToken(user)
         const newRefreshToken = this.createRefreshToken(user)
+
+        // 디비에 갈아끼기
 
         res.cookie('refreshToken', newRefreshToken, {
             domain: 'localhost',
@@ -54,9 +70,8 @@ export class AuthService {
         return accessToken
     }
 
-    async login(request: LoginRequestDto, res: Response) {
-        const loginId = request.loginId
-        const password = request.password
+    async login(props: LoginRequestDto, res: Response) {
+        const { loginId, password } = props
 
         const userInfo = await this.prisma.user.findUnique({
             where: {
@@ -66,6 +81,8 @@ export class AuthService {
 
         if (await bcrypt.compare(password, userInfo.password)) {
             const accessToken = this.createAccessToken(userInfo.id)
+
+            // todo 자동 로그인시 발급 시간 길게
             const refreshToken = this.createRefreshToken(userInfo.id)
 
             res.cookie('refreshToken', refreshToken, {

@@ -10,7 +10,7 @@ export class UsersController {
     constructor(private readonly UsersService: UsersService) {}
 
     @Post('test')
-    test(@Body() request: any) {
+    test(@Body() props: any) {
         return []
     }
 
@@ -19,8 +19,8 @@ export class UsersController {
         summary: 'id 로 유저 정보 조회',
     })
     @ApiBody({ type: getUserInfoRequestDto })
-    getUserInfo(@Body() request: getUserInfoRequestDto) {
-        return this.UsersService.getUser(request)
+    getUserInfo(@Body() props: getUserInfoRequestDto) {
+        return this.UsersService.getUser(props)
     }
 
     @Post('create-account')
@@ -29,8 +29,8 @@ export class UsersController {
         // description: '설명',
     })
     @ApiBody({ type: CreateAccountRequestDto })
-    createAccount(@Body() request: CreateAccountRequestDto) {
-        return this.UsersService.createAccount(request)
+    createAccount(@Body() props: CreateAccountRequestDto) {
+        return this.UsersService.createAccount(props)
     }
 
     // 회원가입

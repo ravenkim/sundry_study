@@ -1,20 +1,26 @@
 import { Controller, Get } from '@nestjs/common'
 import { AppService } from './app.service'
 import { ApiBearerAuth } from '@nestjs/swagger'
+import { Public } from './modules/auth/decorators/public.decorator'
 
 @Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
-    @ApiBearerAuth()
     @Get()
     getHello(): object {
         return this.appService.getHello()
     }
 
-    @ApiBearerAuth()
     @Get('test')
+    @Public()
     test() {
+        return '연결됨'
+    }
+
+    @Get('loginTest')
+    @Public()
+    loginTest() {
         return '연결됨'
     }
 }

@@ -2,7 +2,7 @@ import { Body, Controller, Post, Req, Res, Get } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { LoginRequestDto } from './dto/login.dto'
-import { request, Response } from 'express'
+import { Request, Response } from 'express'
 import { Public } from './decorators/public.decorator'
 import { Roles } from './decorators/roles.decorator'
 
@@ -10,7 +10,6 @@ import { Roles } from './decorators/roles.decorator'
 @ApiTags('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
-
 
     @ApiBearerAuth() //todo 이거 안써도 public 제외 하고 일괄 적용 하는 방법
     @Roles(1)
@@ -23,28 +22,30 @@ export class AuthController {
     @Post('postTest')
     @ApiBody({ type: LoginRequestDto })
     postTest(@Req() req: any, @Body() props: LoginRequestDto) {
-        console.log(req.user)
         return 'aaa'
     }
 
-    @Public()
     @Post('login')
+    @Public()
     @ApiOperation({
         summary: '로그인',
     })
     @ApiBody({ type: LoginRequestDto })
     login(
-        @Body() request: LoginRequestDto,
+        @Body() props: LoginRequestDto,
         @Res({ passthrough: true }) res: Response,
     ) {
-        return this.authService.login(request, res)
+        return this.authService.login(props, res)
     }
 
-    @Post('create-user')
+    @Post('reissueToken')
+    @Public()
     reissueToken(
         @Req() req: Request,
         @Res({ passthrough: true }) res: Response,
     ) {
         return this.authService.reissueToken(req, res)
     }
+
+
 }
