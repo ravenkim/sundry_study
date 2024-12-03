@@ -11,9 +11,6 @@ const client = axios.create({
 })
 
 
-
-
-
 export const cookieClient= axios.create({
     baseURL: import.meta.env.VITE_API_HOST,
     headers: {
