@@ -61,8 +61,8 @@ export class UsersService {
     //}
 
     // 계정 만들기
-    async createAccount(request: CreateAccountRequestDto) {
-        const { loginId, email, password } = request
+    async createAccount(props: CreateAccountRequestDto) {
+        const { loginId, email, password } = props
 
         //중복 여부 확인
         //ttt 아래의 두개의 검증은 디비를 두번 탑니다. 한번에 타게끔 하는 함수를 따로 만들어야 할까요?
