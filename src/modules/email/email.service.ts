@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import * as nodemailer from 'nodemailer'
 
 @Injectable()
@@ -7,6 +7,7 @@ export class EmailService {
 
     constructor() {
         this.transporter = nodemailer.createTransport({
+            //todo smtp 메일서버 제한 없는거로 변경
             service: 'gmail',
             auth: {
                 user: 'tingdevteam@gmail.com', // 발송자 이메일
@@ -28,7 +29,7 @@ export class EmailService {
             return info.messageId
         } catch (error) {
             console.error('Error sending email', error)
-            throw error
+            throw new BadRequestException(error)
         }
     }
 }
