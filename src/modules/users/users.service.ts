@@ -3,10 +3,14 @@ import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import * as bcrypt from 'bcrypt'
 import { getUserInfoRequestDto } from './dto/user.dto'
 import { PrismaService } from '../../database/prisma.service'
+import { EmailService } from '../email/email.service'
 
 @Injectable()
 export class UsersService {
-    constructor(private prisma: PrismaService) {}
+    constructor(
+        private prisma: PrismaService,
+        private readonly emailService: EmailService,
+    ) {}
 
     // 중복 로그인 아이디 체크
     async checkLoginIdDuplicate(userId: string) {
@@ -161,5 +165,14 @@ export class UsersService {
 
     async deleteUser() {
         // 탈퇴된 사용자로 면동
+    }
+
+    async sendTestEmail() {
+        await this.emailService.sendMail(
+            'ravenkim97@naver.com',
+            'Test Subject',
+            'Test Email Body',
+        )
+        return '발송완료'
     }
 }
