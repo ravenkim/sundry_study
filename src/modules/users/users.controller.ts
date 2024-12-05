@@ -3,6 +3,7 @@ import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { UsersService } from './users.service'
 import { CreateAccountRequestDto } from './dto/createAccount.dto'
 import { getUserInfoRequestDto } from './dto/user.dto'
+import { Public } from '../auth/decorators/public.decorator'
 
 @Controller('users')
 @ApiTags('users')
@@ -37,5 +38,11 @@ export class UsersController {
     @Post('create-user')
     createUser() {
         return this.UsersService.createUser()
+    }
+
+    @Post('testemail')
+    @Public()
+    testemail() {
+        return this.UsersService.sendTestEmail()
     }
 }
