@@ -132,7 +132,7 @@ const ButtonPreview = ({
     transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
     ...variantStyles[variant],
     // Move color after variantStyles to ensure it takes precedence
-    color: isHovered ? styles.hoverTextColor : styles.textColor,
+    color: isHovered ? styles.hoverTextColor : variantStyles[variant].color,
   };
 
   return (
