@@ -96,7 +96,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           <ResizableHandle />
           <ResizablePanel defaultSize={75}>
             <ResizablePanelGroup direction="horizontal" className="h-full">
-              <ResizablePanel defaultSize={60} minSize={40}>
+              <ResizablePanel defaultSize={75} minSize={40}>
                 <div className="h-full p-4">
                   <Preview
                     styles={styles}
@@ -107,7 +107,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                 </div>
               </ResizablePanel>
               <ResizableHandle />
-              <ResizablePanel defaultSize={40} minSize={30}>
+              <ResizablePanel defaultSize={25} minSize={20}>
                 <CodePanel
                   code={config.codeGenerator.generateComponentCode(styles)}
                   editorType={config.type}
