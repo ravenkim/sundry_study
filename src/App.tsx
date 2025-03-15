@@ -16,7 +16,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/editor/button" replace />} />
+          <Route path="/" element={<Navigate to="/editor/theme" replace />} />
           <Route path="/editor/:editorType" element={<Index />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
