@@ -241,7 +241,7 @@ const ControlPanel = ({
               onChange={(value) => updateStyle('hoverBackgroundOpacity', value)} 
               min={0} 
               max={100} 
-              step={1} 
+              step={5} 
               label="Hover Background Opacity" 
               unit="%"
             />
@@ -254,44 +254,6 @@ const ControlPanel = ({
               color={styles.hoverBorderColor} 
               onChange={(color) => updateStyle('hoverBorderColor', color)} 
               label="Hover Border" 
-            />
-          </ControlSection>
-          
-          <ControlSection title="Focus State">
-            <ColorPicker 
-              color={styles.focusBorderColor} 
-              onChange={(color) => updateStyle('focusBorderColor', color)} 
-              label="Focus Border" 
-            />
-            <ColorPicker 
-              color={styles.focusRingColor} 
-              onChange={(color) => updateStyle('focusRingColor', color)} 
-              label="Focus Ring" 
-            />
-            <SliderWithInput 
-              value={styles.focusRingWidth} 
-              onChange={(value) => updateStyle('focusRingWidth', value)} 
-              min={0} 
-              max={8} 
-              label="Focus Ring Width" 
-            />
-          </ControlSection>
-          
-          <ControlSection title="Active State">
-            <ColorPicker 
-              color={styles.activeBackgroundColor} 
-              onChange={(color) => updateStyle('activeBackgroundColor', color)} 
-              label="Active Background" 
-            />
-            <ColorPicker 
-              color={styles.activeTextColor} 
-              onChange={(color) => updateStyle('activeTextColor', color)} 
-              label="Active Text" 
-            />
-            <ColorPicker 
-              color={styles.activeBorderColor} 
-              onChange={(color) => updateStyle('activeBorderColor', color)} 
-              label="Active Border" 
             />
           </ControlSection>
         </TabsContent>

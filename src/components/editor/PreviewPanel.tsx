@@ -52,6 +52,12 @@ const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = 
               <ButtonPreview styles={styles} variant={variant} size="sm" />
             </div>
             <div className="flex flex-col gap-2 items-center">
+              <p className="text-xs text-muted-foreground">Icon</p>
+              <ButtonPreview styles={styles} variant={variant} size="icon"
+               label="+"
+               />
+            </div>
+            <div className="flex flex-col gap-2 items-center">
               <p className="text-xs text-muted-foreground">Default</p>
               <ButtonPreview styles={styles} variant={variant} size="default" />
             </div>

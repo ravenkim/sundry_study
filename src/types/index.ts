@@ -16,16 +16,6 @@ export type ButtonStyleProps = {
   hoverBorderColor: string;
   hoverBackgroundOpacity: number;
   
-  // Focus states
-  focusBorderColor: string;
-  focusRingColor: string;
-  focusRingWidth: number;
-  
-  // Active states
-  activeBackgroundColor: string;
-  activeTextColor: string;
-  activeBorderColor: string;
-  
   // Transitions
   transitionDuration: number;
   transitionEasing: string;

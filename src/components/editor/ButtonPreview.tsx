@@ -97,14 +97,13 @@ const ButtonPreview = ({
     }
   };
 
-  // Size classes remain the same as they're just for dimensions
+  // Size classes without padding (we'll apply custom padding from styles)
   const sizeClasses = {
-    default: "h-10 px-4 py-2",
-    sm: "h-9 rounded-md px-3 text-sm",
-    lg: "h-11 rounded-md px-8 text-lg",
+    default: "h-10",
+    sm: "h-9 rounded-md text-sm",
+    lg: "h-11 rounded-md text-lg",
     icon: "h-10 w-10"
   };
-
 
   // Combine custom styles with variant styles
   const customStyles = {
@@ -114,6 +113,11 @@ const ButtonPreview = ({
     letterSpacing: `${styles.letterSpacing}em`,
     lineHeight: styles.lineHeight,
     textTransform: styles.textTransform as any,
+    // Add custom padding
+    paddingLeft: `${styles.paddingX}px`,
+    paddingRight: `${styles.paddingX}px`,
+    paddingTop: `${styles.paddingY}px`,
+    paddingBottom: `${styles.paddingY}px`,
     // Add box shadow only if opacity > 0
     ...(styles.shadowOpacity > 0 && {
       boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}`
@@ -123,9 +127,10 @@ const ButtonPreview = ({
       borderWidth: `${styles.borderWidth}px`,
       borderColor: isHovered ? styles.hoverBorderColor : styles.borderColor
     }),
-    color: isHovered ? styles.hoverTextColor : styles.textColor,
     transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
     ...variantStyles[variant],
+    // Move color after variantStyles to ensure it takes precedence
+    color: isHovered ? styles.hoverTextColor : styles.textColor,
   };
 
   return (

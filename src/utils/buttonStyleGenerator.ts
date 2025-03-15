@@ -52,14 +52,7 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
     hoverBackgroundColor: '#2a2a2a',
     hoverTextColor: '#ffffff',
     hoverBorderColor: 'transparent',
-    
-    focusBorderColor: '#2563eb',
-    focusRingColor: '#2563eb',
-    focusRingWidth: 2,
-    
-    activeBackgroundColor: '#0f0f0f',
-    activeTextColor: '#ffffff',
-    activeBorderColor: 'transparent',
+    hoverBackgroundOpacity: 90,
     
     transitionDuration: 200,
     transitionEasing: 'ease',
@@ -85,15 +78,12 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
         textColor: '#1f2937',
         hoverBackgroundColor: '#e5e7eb',
         hoverTextColor: '#1f2937',
-        activeBackgroundColor: '#d1d5db',
-        activeTextColor: '#1f2937',
       };
     case 'destructive':
       return {
         ...baseStyles,
         backgroundColor: '#ef4444',
         hoverBackgroundColor: '#dc2626',
-        activeBackgroundColor: '#b91c1c',
       };
     case 'outline':
       return {
@@ -103,8 +93,6 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
         borderColor: '#e5e7eb',
         hoverBackgroundColor: '#f9fafb',
         hoverTextColor: '#1f2937',
-        activeBackgroundColor: '#f3f4f6',
-        activeTextColor: '#1f2937',
       };
     case 'ghost':
       return {
@@ -114,8 +102,6 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
         borderColor: 'transparent',
         hoverBackgroundColor: '#f3f4f6',
         hoverTextColor: '#1f2937',
-        activeBackgroundColor: '#e5e7eb',
-        activeTextColor: '#1f2937',
       };
     case 'link':
       return {
@@ -127,8 +113,6 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
         hoverTextColor: '#1d4ed8',
         textTransform: 'none',
         fontWeight: '400',
-        activeBackgroundColor: 'transparent',
-        activeTextColor: '#1e40af',
         shadowOpacity: 0,
         paddingX: 2,
         paddingY: 0,
@@ -138,89 +122,88 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
   }
 };
 
-export const generateCssOutput = (
-  styles: ButtonStyleProps,
-  variant: ButtonVariant,
-  size: ButtonSize
-): string => {
-  // Generate CSS variables for the button
-  return `/* ShadCN Button Override */
-.button-override {
-  /* Base styles */
-  background-color: ${styles.backgroundColor};
-  color: ${styles.textColor};
-  border: ${styles.borderWidth}px solid ${styles.borderColor};
-  border-radius: ${styles.borderRadius}px;
-  font-size: ${styles.fontSize}px;
-  font-weight: ${styles.fontWeight};
-  padding: ${styles.paddingY}px ${styles.paddingX}px;
-  box-shadow: ${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')};
-  letter-spacing: ${styles.letterSpacing}em;
-  line-height: ${styles.lineHeight};
-  text-transform: ${styles.textTransform};
-  transition: all ${styles.transitionDuration}ms ${styles.transitionEasing};
-  
-  /* Hover state */
-  &:hover {
-    background-color: ${styles.hoverBackgroundColor};
-    color: ${styles.hoverTextColor};
-    border-color: ${styles.hoverBorderColor};
-  }
-  
-  /* Focus state */
-  &:focus {
-    border-color: ${styles.focusBorderColor};
-    outline: none;
-    box-shadow: 0 0 0 ${styles.focusRingWidth}px ${styles.focusRingColor};
-  }
-  
-  /* Active state */
-  &:active {
-    background-color: ${styles.activeBackgroundColor};
-    color: ${styles.activeTextColor};
-    border-color: ${styles.activeBorderColor};
-  }
-}
-
-/* ShadCN Button Component Override */
-.button-${variant} {
-  /* Add your variant specific styles here */
-}
-
-.button-${size} {
-  /* Add your size specific styles here */
-}`;
-};
 
 export const generateButtonComponentCode = (
   styles: ButtonStyleProps,
   variant: ButtonVariant,
   size: ButtonSize
 ): string => {
+  // Generate Tailwind utility classes for each style property
+  const generateTailwindClasses = (styles: ButtonStyleProps, variant: ButtonVariant) => {
+    // Convert hex color to Tailwind format for inline classes
+    const formatColor = (color: string) => color;
+    
+    // Transform styling properties to Tailwind utility classes
+    const baseClasses = `
+      bg-primary 
+      text-primary-foreground 
+      border-[${styles.borderWidth}px] 
+      border-[${formatColor(styles.borderColor)}] 
+      rounded-[${styles.borderRadius}px] 
+      text-[${styles.fontSize}px] 
+      font-[${styles.fontWeight}] 
+      px-[${styles.paddingX}px] 
+      py-[${styles.paddingY}px] 
+      ${styles.shadowOpacity > 0 ? `shadow-[${styles.shadowOffsetX}px_${styles.shadowOffsetY}px_${styles.shadowBlur}px_${styles.shadowSpread}px_${formatColor(styles.shadowColor)}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}]` : ''}
+      tracking-[${styles.letterSpacing}em] 
+      leading-[${styles.lineHeight}] 
+      ${styles.textTransform !== 'none' ? `${styles.textTransform}` : ''} 
+      transition-all duration-[${styles.transitionDuration}ms] ease-[${styles.transitionEasing}]
+      hover:bg-primary/${styles.hoverBackgroundOpacity} 
+      hover:text-[${formatColor(styles.hoverTextColor)}] 
+      hover:border-[${formatColor(styles.hoverBorderColor)}]
+    `;
+    
+    return baseClasses.replace(/\s+/g, ' ').trim();
+  };
+  
+  // Size classes object to be used in the cva function
+  const getSizeClasses = () => {
+    return {
+      default: "h-9",
+      sm: "h-8 text-xs",
+      lg: "h-10",
+      icon: "h-9 w-9",
+    };
+  };
+
+  // Generate tailwind classes for each variant
+  const variantClasses = {
+    default: generateTailwindClasses(styles, 'default'),
+    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+    outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+    ghost: "hover:bg-accent hover:text-accent-foreground",
+    link: "text-primary underline-offset-4 hover:underline",
+  };
+
+  // Update the variant we're currently generating
+  variantClasses[variant] = generateTailwindClasses(styles, variant);
+
   return `import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "${variantClasses.default}",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "${variantClasses.destructive}",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "${variantClasses.outline}",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "${variantClasses.secondary}",
+        ghost: "${variantClasses.ghost}",
+        link: "${variantClasses.link}",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3 text-sm",
-        lg: "h-11 rounded-md px-8 text-lg",
-        icon: "h-10 w-10",
+        default: "${getSizeClasses().default}",
+        sm: "${getSizeClasses().sm}",
+        lg: "${getSizeClasses().lg}",
+        icon: "${getSizeClasses().icon}",
       },
     },
     defaultVariants: {
@@ -248,85 +231,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button"
 
 export { Button, buttonVariants }`;
-};
-
-export const generateTailwindConfig = (
-  styles: ButtonStyleProps,
-  variant: ButtonVariant
-): string => {
-  return `// tailwind.config.js extension
-// Add this to your existing tailwind.config.js file
-// under the theme.extend section
-
-theme: {
-  extend: {
-    // ...your existing extensions
-    
-    // Custom button styles for ${variant} variant
-    components: {
-      '.btn-${variant}': {
-        backgroundColor: '${styles.backgroundColor}',
-        color: '${styles.textColor}',
-        borderWidth: '${styles.borderWidth}px',
-        borderColor: '${styles.borderColor}',
-        borderRadius: '${styles.borderRadius}px',
-        fontSize: '${styles.fontSize}px',
-        fontWeight: '${styles.fontWeight}',
-        padding: '${styles.paddingY}px ${styles.paddingX}px',
-        boxShadow: '${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}',
-        letterSpacing: '${styles.letterSpacing}em',
-        lineHeight: '${styles.lineHeight}',
-        textTransform: '${styles.textTransform}',
-        transition: 'all ${styles.transitionDuration}ms ${styles.transitionEasing}',
-        '&:hover': {
-          backgroundColor: '${styles.hoverBackgroundColor}',
-          color: '${styles.hoverTextColor}',
-          borderColor: '${styles.hoverBorderColor}',
-        },
-        '&:focus': {
-          borderColor: '${styles.focusBorderColor}',
-          outline: 'none',
-          boxShadow: '0 0 0 ${styles.focusRingWidth}px ${styles.focusRingColor}',
-        },
-        '&:active': {
-          backgroundColor: '${styles.activeBackgroundColor}',
-          color: '${styles.activeTextColor}',
-          borderColor: '${styles.activeBorderColor}',
-        },
-      },
-    },
-  },
-}`;
-};
-
-export const generateShadcnConfig = (
-  styles: ButtonStyleProps,
-  variant: ButtonVariant
-): string => {
-  return `// components.json configuration
-{
-  "style": "default",
-  "rsc": false,
-  "tailwind": {
-    "config": "tailwind.config.js",
-    "css": "app/globals.css",
-    "baseColor": "slate",
-    "cssVariables": true
-  },
-  "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
-  },
-  "components": {
-    "button": {
-      "variants": {
-        "${variant}": {
-          "backgroundColor": "${styles.backgroundColor}",
-          "textColor": "${styles.textColor}",
-          "hoverBackgroundColor": "${styles.hoverBackgroundColor}"
-        }
-      }
-    }
-  }
-}`;
 };
