@@ -1,7 +1,7 @@
 
 import { EditorConfig } from '@/types/editor';
 import { ButtonEditorState } from '@/types/editor';
-import { ButtonStyleProps, ButtonVariant, ButtonSize } from '@/types/button';
+import { ButtonStyleProps, ButtonVariant, ButtonSize } from '@/types/index';
 import ControlPanel from '@/components/editor/ControlPanel';
 import PreviewPanel from '@/components/editor/PreviewPanel';
 import { generateButtonComponentCode } from '@/utils/buttonStyleGenerator';
@@ -28,6 +28,9 @@ const defaultButtonStyles: ButtonStyleProps = {
   hoverBackgroundColor: '#2a2a2a',
   hoverTextColor: '#ffffff',
   hoverBorderColor: '#000000',
+  hoverBackgroundOpacity: 90,
+  transitionDuration: 200,
+  transitionEasing: 'ease',
   focusBorderColor: '#000000',
   focusRingColor: '#000000',
   focusRingWidth: 2,

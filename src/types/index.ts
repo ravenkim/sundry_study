@@ -1,3 +1,4 @@
+
 export type ButtonStyleProps = {
   // Base properties
   backgroundColor: string;
@@ -32,6 +33,16 @@ export type ButtonStyleProps = {
   textTransform: string;
   letterSpacing: number;
   lineHeight: number;
+  
+  // Focus states
+  focusBorderColor: string;
+  focusRingColor: string;
+  focusRingWidth: number;
+  
+  // Active states
+  activeBackgroundColor: string;
+  activeTextColor: string;
+  activeBorderColor: string;
 };
 
 export type ButtonVariant = 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
@@ -92,4 +103,10 @@ export type ButtonPreviewProps = {
   size: ButtonSize;
   label?: string;
   className?: string;
+};
+
+export type ReadOnlyColorDisplayProps = {
+  color: string;
+  label: string;
+  linkTo: string;
 };

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ControlPanelProps } from '@/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,6 +9,53 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import ControlSection from './ControlSection';
 import ColorPicker from './ColorPicker';
 import ResetButton from './ResetButton';
+import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
+
+// Readonly color display component for theme-controlled properties
+const ReadOnlyColorDisplay = ({ 
+  color, 
+  label, 
+  linkTo 
+}: { 
+  color: string; 
+  label: string; 
+  linkTo: string;
+}) => {
+  return (
+    <div className="mb-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <div className="flex items-center">
+          <Label htmlFor={`color-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+            {label}
+          </Label>
+          <Link 
+            to={linkTo} 
+            className="ml-1.5 text-xs text-muted-foreground hover:text-foreground flex items-center gap-0.5"
+            title="Edit in Theme Editor"
+          >
+            (Theme) <ExternalLink size={10} />
+          </Link>
+        </div>
+        <div className="text-xs text-muted-foreground">{color}</div>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <div 
+          className="h-8 w-8 rounded border overflow-hidden relative flex items-center justify-center"
+          style={{ backgroundColor: color, cursor: 'default', opacity: 0.8 }}
+        />
+        
+        <input
+          type="text"
+          value={color}
+          readOnly
+          className="flex-1 h-8 px-2 text-sm rounded-md border bg-muted/50 text-muted-foreground cursor-not-allowed"
+        />
+      </div>
+    </div>
+  );
+};
 
 const ControlPanel = ({ 
   styles, 
@@ -101,15 +149,16 @@ const ControlPanel = ({
 
         <TabsContent value="appearance" className="mt-0 animate-in">
           <ControlSection title="Colors" expanded>
-            <ColorPicker 
+            {/* Theme-controlled colors (read-only) */}
+            <ReadOnlyColorDisplay 
               color={styles.backgroundColor} 
-              onChange={(color) => updateStyle('backgroundColor', color)} 
               label="Background Color" 
+              linkTo="/editor/theme"
             />
-            <ColorPicker 
+            <ReadOnlyColorDisplay 
               color={styles.textColor} 
-              onChange={(color) => updateStyle('textColor', color)} 
               label="Text Color" 
+              linkTo="/editor/theme"
             />
             <ColorPicker 
               color={styles.borderColor} 
@@ -231,10 +280,11 @@ const ControlPanel = ({
         
         <TabsContent value="states" className="mt-0 animate-in">
           <ControlSection title="Hover State" expanded>
-            <ColorPicker 
+            {/* Theme-controlled hover background (read-only) */}
+            <ReadOnlyColorDisplay 
               color={styles.hoverBackgroundColor} 
-              onChange={(color) => updateStyle('hoverBackgroundColor', color)} 
               label="Hover Background" 
+              linkTo="/editor/theme"
             />
             <SliderWithInput 
               value={styles.hoverBackgroundOpacity ?? 90} 
@@ -254,6 +304,45 @@ const ControlPanel = ({
               color={styles.hoverBorderColor} 
               onChange={(color) => updateStyle('hoverBorderColor', color)} 
               label="Hover Border" 
+            />
+          </ControlSection>
+          
+          <ControlSection title="Focus State">
+            <ColorPicker 
+              color={styles.focusBorderColor}
+              onChange={(color) => updateStyle('focusBorderColor', color)}
+              label="Focus Border"
+            />
+            <ColorPicker 
+              color={styles.focusRingColor}
+              onChange={(color) => updateStyle('focusRingColor', color)}
+              label="Focus Ring"
+            />
+            <SliderWithInput 
+              value={styles.focusRingWidth}
+              onChange={(value) => updateStyle('focusRingWidth', value)}
+              min={0}
+              max={5}
+              step={0.5}
+              label="Focus Ring Width"
+            />
+          </ControlSection>
+          
+          <ControlSection title="Active State">
+            <ColorPicker 
+              color={styles.activeBackgroundColor}
+              onChange={(color) => updateStyle('activeBackgroundColor', color)}
+              label="Active Background"
+            />
+            <ColorPicker 
+              color={styles.activeTextColor}
+              onChange={(color) => updateStyle('activeTextColor', color)}
+              label="Active Text"
+            />
+            <ColorPicker 
+              color={styles.activeBorderColor}
+              onChange={(color) => updateStyle('activeBorderColor', color)}
+              label="Active Border"
             />
           </ControlSection>
         </TabsContent>
