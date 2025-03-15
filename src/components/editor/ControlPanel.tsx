@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ControlPanelProps } from '@/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -10,7 +9,8 @@ import ControlSection from './ControlSection';
 import ColorPicker from './ColorPicker';
 import ResetButton from './ResetButton';
 import { Link } from 'react-router-dom';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Palette } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Readonly color display component for theme-controlled properties
 const ReadOnlyColorDisplay = ({ 
@@ -25,18 +25,9 @@ const ReadOnlyColorDisplay = ({
   return (
     <div className="mb-3">
       <div className="flex items-center justify-between mb-1.5">
-        <div className="flex items-center">
-          <Label htmlFor={`color-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
-            {label}
-          </Label>
-          <Link 
-            to={linkTo} 
-            className="ml-1.5 text-xs text-muted-foreground hover:text-foreground flex items-center gap-0.5"
-            title="Edit in Theme Editor"
-          >
-            (Theme) <ExternalLink size={10} />
-          </Link>
-        </div>
+        <Label htmlFor={`color-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+          {label}
+        </Label>
         <div className="text-xs text-muted-foreground">{color}</div>
       </div>
       
@@ -46,16 +37,97 @@ const ReadOnlyColorDisplay = ({
           style={{ backgroundColor: color, cursor: 'default', opacity: 0.8 }}
         />
         
-        <input
-          type="text"
-          value={color}
-          readOnly
-          className="flex-1 h-8 px-2 text-sm rounded-md border bg-muted/50 text-muted-foreground cursor-not-allowed"
-        />
+        <div className="flex-1 relative">
+          <input
+            type="text"
+            value={color}
+            readOnly
+            className="w-full h-8 px-2 text-sm rounded-md border bg-muted/50 text-muted-foreground cursor-not-allowed"
+          />
+          <Button
+            variant="outline"
+            size="sm"
+            asChild
+            className="absolute right-1 top-1 h-6 px-2 text-xs"
+          >
+            <Link 
+              to={linkTo} 
+              className="flex items-center gap-1"
+              title="Edit in Theme Editor"
+            >
+              <Palette size={12} />
+              <span>Theme</span>
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
 };
+
+// Helper function for slider with numeric input
+const SliderWithInput = React.useCallback(({ 
+  value, 
+  onChange,
+  min, 
+  max, 
+  step = 1,
+  label,
+  unit = 'px'
+}: {
+  value: number;
+  onChange: (value: number) => void;
+  min: number;
+  max: number;
+  step?: number;
+  label: string;
+  unit?: string;
+}) => {
+  const [localValue, setLocalValue] = React.useState(value);
+
+  React.useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  return (
+    <div className="mb-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <Label htmlFor={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+          {label}
+        </Label>
+        <div className="flex items-center gap-1">
+          <Input
+            id={`input-${label.replace(/\s+/g, '-').toLowerCase()}`}
+            type="number"
+            value={localValue}
+            onChange={(e) => {
+              const newValue = Number(e.target.value);
+              setLocalValue(newValue);
+              onChange(newValue);
+            }}
+            min={min}
+            max={max}
+            step={step}
+            className="h-6 w-16 text-xs px-2"
+          />
+          <span className="text-xs text-muted-foreground">{unit}</span>
+        </div>
+      </div>
+      <Slider
+        id={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`}
+        value={[localValue]}
+        min={min}
+        max={max}
+        step={step}
+        onValueChange={(values) => {
+          setLocalValue(values[0]);
+          onChange(values[0]);
+        }}
+        className="py-1"
+      />
+    </div>
+  );
+}, []);
 
 const ControlPanel = ({ 
   styles, 
@@ -66,70 +138,6 @@ const ControlPanel = ({
   const updateStyle = React.useCallback(<K extends keyof typeof styles>(key: K, value: typeof styles[K]) => {
     onChange({ ...styles, [key]: value });
   }, [onChange, styles]);
-
-  // Helper function for slider with numeric input
-  const SliderWithInput = React.useCallback(({ 
-    value, 
-    onChange,
-    min, 
-    max, 
-    step = 1,
-    label,
-    unit = 'px'
-  }: {
-    value: number;
-    onChange: (value: number) => void;
-    min: number;
-    max: number;
-    step?: number;
-    label: string;
-    unit?: string;
-  }) => {
-    const [localValue, setLocalValue] = React.useState(value);
-
-    React.useEffect(() => {
-      setLocalValue(value);
-    }, [value]);
-
-    return (
-      <div className="mb-3">
-        <div className="flex items-center justify-between mb-1.5">
-          <Label htmlFor={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
-            {label}
-          </Label>
-          <div className="flex items-center gap-1">
-            <Input
-              id={`input-${label.replace(/\s+/g, '-').toLowerCase()}`}
-              type="number"
-              value={localValue}
-              onChange={(e) => {
-                const newValue = Number(e.target.value);
-                setLocalValue(newValue);
-                onChange(newValue);
-              }}
-              min={min}
-              max={max}
-              step={step}
-              className="h-6 w-16 text-xs px-2"
-            />
-            <span className="text-xs text-muted-foreground">{unit}</span>
-          </div>
-        </div>
-        <Slider
-          id={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`}
-          value={[localValue]}
-          min={min}
-          max={max}
-          step={step}
-          onValueChange={(values) => {
-            setLocalValue(values[0]);
-            onChange(values[0]);
-          }}
-          className="py-1"
-        />
-      </div>
-    );
-  }, []);
 
   return (
     <div className="h-full overflow-y-auto pb-4 scrollbar-hide">

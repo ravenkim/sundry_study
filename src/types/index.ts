@@ -30,7 +30,7 @@ export type ButtonStyleProps = {
   shadowSpread: number;
   
   // Text properties
-  textTransform: string;
+  textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
   letterSpacing: number;
   lineHeight: number;
   
