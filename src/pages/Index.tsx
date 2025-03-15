@@ -1,6 +1,4 @@
-
 import React, { useState, useEffect } from 'react';
-import { Resizable } from '@/components/ui/resizable';
 import { 
   ResizableHandle, 
   ResizablePanel, 

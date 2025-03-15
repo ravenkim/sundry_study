@@ -1,4 +1,3 @@
-
 import { ButtonStyleProps, ButtonVariant, ButtonSize } from '@/types';
 
 export const generateButtonClassName = (
@@ -6,7 +5,7 @@ export const generateButtonClassName = (
   variant: ButtonVariant,
   size: ButtonSize
 ): string => {
-  // Base styles
+  // Base styles - we're using inline styles for most properties, so we'll keep this minimal
   let className = `
     inline-flex 
     items-center 
@@ -15,53 +14,25 @@ export const generateButtonClassName = (
     font-medium
     transition-colors
     focus-visible:outline-none 
-    focus-visible:ring-1
     disabled:pointer-events-none 
     disabled:opacity-50
   `;
 
-  // Add size-specific styles
+  // Add size-specific styles - using inline styles for flexibility
   switch (size) {
     case 'sm':
-      className += ` text-xs h-8`;
+      className += ` h-8`;
       break;
     case 'default':
-      className += ` text-sm h-9`;
+      className += ` h-9`;
       break;
     case 'lg':
-      className += ` text-base h-10`;
+      className += ` h-10`;
       break;
     case 'icon':
       className += ` h-9 w-9`;
       break;
   }
-
-  // Add custom styles based on user input
-  className += ` 
-    bg-[${styles.backgroundColor}] 
-    text-[${styles.textColor}] 
-    border-[${styles.borderColor}] 
-    border-[${styles.borderWidth}px] 
-    rounded-[${styles.borderRadius}px]
-    text-[${styles.fontSize}px]
-    font-[${styles.fontWeight}]
-    px-[${styles.paddingX}px]
-    py-[${styles.paddingY}px]
-    shadow-[${styles.shadowOffsetX}px_${styles.shadowOffsetY}px_${styles.shadowBlur}px_${styles.shadowSpread}px_${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}]
-    tracking-[${styles.letterSpacing}em]
-    leading-[${styles.lineHeight}]
-    ${styles.textTransform !== 'none' ? `${styles.textTransform}` : ''}
-    transition-all duration-[${styles.transitionDuration}ms] ${styles.transitionEasing}
-    hover:bg-[${styles.hoverBackgroundColor}]
-    hover:text-[${styles.hoverTextColor}]
-    hover:border-[${styles.hoverBorderColor}]
-    focus:border-[${styles.focusBorderColor}]
-    focus:ring-[${styles.focusRingWidth}px]
-    focus:ring-[${styles.focusRingColor}]
-    active:bg-[${styles.activeBackgroundColor}]
-    active:text-[${styles.activeTextColor}]
-    active:border-[${styles.activeBorderColor}]
-  `;
 
   return className.replace(/\s+/g, ' ').trim();
 };

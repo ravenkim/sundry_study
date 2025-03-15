@@ -10,6 +10,37 @@ const PreviewPanel = ({ styles, variant, size }: PreviewPanelProps) => {
   const [previewMode, setPreviewMode] = useState<'light' | 'dark'>('light');
   const [viewportSize, setViewportSize] = useState<'desktop' | 'mobile'>('desktop');
   
+  // Create a hover style button which always shows the hover state
+  const createHoverButton = () => {
+    const hoverStyles = {
+      ...styles,
+      backgroundColor: styles.hoverBackgroundColor,
+      textColor: styles.hoverTextColor,
+      borderColor: styles.hoverBorderColor
+    };
+    
+    return <ButtonPreview styles={hoverStyles} variant={variant} size={size} label="Hover State" />;
+  };
+  
+  // Create a focus style button
+  const createFocusButton = () => {
+    const focusStyles = {
+      ...styles,
+      borderColor: styles.focusBorderColor,
+      // Apply focus ring through inline styles in the component
+    };
+    
+    return (
+      <ButtonPreview 
+        styles={focusStyles} 
+        variant={variant} 
+        size={size} 
+        className="focus:outline-none" 
+        label="Focus State"
+      />
+    );
+  };
+  
   return (
     <div className="h-full flex flex-col">
       <div className="px-2 mb-4 flex justify-between items-center">
@@ -129,25 +160,12 @@ const PreviewPanel = ({ styles, variant, size }: PreviewPanelProps) => {
                   
                   <div className="flex flex-col items-center">
                     <span className="text-xs text-muted-foreground mb-2">Hover State</span>
-                    <ButtonPreview 
-                      styles={styles} 
-                      variant={variant} 
-                      size={size} 
-                      className="[&:not(:hover)]:bg-[var(--hover-bg)]" 
-                      label="Hover State"
-                      // Apply hover styles
-                    />
+                    {createHoverButton()}
                   </div>
                   
                   <div className="flex flex-col items-center">
                     <span className="text-xs text-muted-foreground mb-2">Focus State</span>
-                    <ButtonPreview 
-                      styles={styles} 
-                      variant={variant} 
-                      size={size} 
-                      className="focus:outline-none focus:ring-2" 
-                      label="Focus State"
-                    />
+                    {createFocusButton()}
                   </div>
                 </div>
               </TabsContent>
