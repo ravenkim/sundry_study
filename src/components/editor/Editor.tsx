@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EditorConfig, BaseEditorState, ButtonEditorState, ThemeEditorState } from '@/types/editor';
 import { ThemeStyles } from '@/types/theme';
+import { ButtonStyleProps } from '@/types/button';
 import CodePanel from './CodePanel';
 import { Sliders } from 'lucide-react';
+import { useEditorStore } from '@/store/editorStore';
 
 interface EditorProps {
   config: EditorConfig;
@@ -15,34 +17,28 @@ const isThemeStyles = (styles: any): styles is ThemeStyles => {
   return 'light' in styles && 'dark' in styles;
 };
 
-const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
-  const [state, setState] = useState<BaseEditorState>(initialState || config.defaultState);
+const Editor: React.FC<EditorProps> = ({ config }) => {
+  const { buttonState, themeState, setButtonState, setThemeState } = useEditorStore();
   const Controls = config.controls;
   const Preview = config.preview;
   
-  // Reset state when config changes (i.e., when switching editor types)
-  useEffect(() => {
-    if (config.defaultState) {
-      setState(config.defaultState);
+  const state = config.type === 'theme' ? themeState : buttonState;
+  
+  const handleStyleChange = (newStyles: ThemeStyles | ButtonStyleProps) => {
+    if (config.type === 'theme') {
+      setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
+    } else {
+      setButtonState({ ...buttonState, styles: newStyles as ButtonStyleProps });
     }
-  }, [config]);
-
-  const handleStyleChange = (newStyles: BaseEditorState['styles']) => {
-    setState(prev => ({ ...prev, styles: newStyles }));
   };
 
   const handleModeChange = (mode: 'light' | 'dark') => {
     if (config.type === 'theme') {
-      setState(prev => ({
-        ...prev,
-        currentMode: mode
-      }));
+      setThemeState({ ...themeState, currentMode: mode });
     }
   };
 
   const isThemeEditor = config.type === 'theme';
-  const themeState = state as ThemeEditorState;
-  const buttonState = state as ButtonEditorState;
 
   // Ensure we have valid theme styles for theme editor
   const styles = isThemeEditor && !isThemeStyles(state.styles) 
@@ -60,7 +56,7 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
                 styles={state.styles}
                 onChange={handleStyleChange}
                 {...(isThemeEditor && {
-                  currentMode: themeState.currentMode,
+                  currentMode: (state as ThemeEditorState).currentMode,
                   onModeChange: handleModeChange
                 })}
               />
@@ -74,7 +70,7 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
                   <Preview
                     styles={styles}
                     {...(isThemeEditor && {
-                      currentMode: themeState.currentMode,
+                      currentMode: (state as ThemeEditorState).currentMode,
                       onModeChange: handleModeChange
                     })}
                   />
@@ -109,7 +105,7 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
                 styles={styles}
                 onChange={handleStyleChange}
                 {...(isThemeEditor && {
-                  currentMode: themeState.currentMode,
+                  currentMode: (state as ThemeEditorState).currentMode,
                   onModeChange: handleModeChange
                 })}
               />
@@ -120,7 +116,7 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
               <Preview
                 styles={styles}
                 {...(isThemeEditor && {
-                  currentMode: themeState.currentMode,
+                  currentMode: (state as ThemeEditorState).currentMode,
                   onModeChange: handleModeChange
                 })}
               />
