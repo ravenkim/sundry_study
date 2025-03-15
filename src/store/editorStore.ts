@@ -4,40 +4,7 @@ import { BaseEditorState, ButtonEditorState, ThemeEditorState, EditorType } from
 import { ButtonStyleProps, ButtonVariant, ButtonSize } from '@/types/button';
 import { isEqual } from 'lodash';
 import { defaultThemeState } from '@/config/theme';
-
-// Default button styles
-const defaultButtonStyles: ButtonStyleProps = {
-  backgroundColor: '#000000',
-  textColor: '#ffffff',
-  borderColor: '#000000',
-  borderWidth: 0,
-  borderRadius: 6,
-  paddingX: 16,
-  paddingY: 8,
-  fontSize: 14,
-  fontWeight: '500',
-  textTransform: 'none',
-  letterSpacing: 0,
-  lineHeight: 1.5,
-  shadowOpacity: 0,
-  shadowColor: '#000000',
-  shadowOffsetX: 0,
-  shadowOffsetY: 0,
-  shadowBlur: 0,
-  shadowSpread: 0,
-  hoverBackgroundColor: '#2a2a2a',
-  hoverBackgroundOpacity: 90,
-  hoverTextColor: '#ffffff',
-  hoverBorderColor: '#000000',
-  focusBorderColor: '#000000',
-  focusRingColor: '#000000',
-  focusRingWidth: 2,
-  activeBackgroundColor: '#1a1a1a',
-  activeTextColor: '#ffffff',
-  activeBorderColor: '#000000',
-  transitionDuration: 200,
-  transitionEasing: 'ease',
-};
+import defaultButtonStyles from '@/config/button';
 
 // Default button state
 const defaultButtonState: ButtonEditorState = {

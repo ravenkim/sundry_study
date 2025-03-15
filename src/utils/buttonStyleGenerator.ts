@@ -1,3 +1,4 @@
+import defaultButtonStyles from '@/config/button';
 import { ButtonStyleProps, ButtonVariant, ButtonSize } from '@/types';
 
 export const generateButtonClassName = (
@@ -38,36 +39,7 @@ export const generateButtonClassName = (
 };
 
 export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): ButtonStyleProps => {
-  const baseStyles: ButtonStyleProps = {
-    backgroundColor: '#1a1a1a',
-    textColor: '#ffffff',
-    borderColor: 'transparent',
-    borderWidth: 1,
-    borderRadius: 6,
-    fontSize: 14,
-    fontWeight: '500',
-    paddingX: 16,
-    paddingY: 8,
-    
-    hoverBackgroundColor: '#2a2a2a',
-    hoverTextColor: '#ffffff',
-    hoverBorderColor: 'transparent',
-    hoverBackgroundOpacity: 90,
-    
-    transitionDuration: 200,
-    transitionEasing: 'ease',
-    
-    shadowColor: '#000000',
-    shadowOpacity: 0,
-    shadowOffsetX: 0,
-    shadowOffsetY: 0,
-    shadowBlur: 0,
-    shadowSpread: 0,
-    
-    textTransform: 'none',
-    letterSpacing: 0,
-    lineHeight: 1.5,
-  };
+  const baseStyles: ButtonStyleProps = defaultButtonStyles;
 
   // Apply variant-specific styles
   switch (variant) {
