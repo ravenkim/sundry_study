@@ -5,15 +5,15 @@ import EditorTypeSelect from '@/components/editor/EditorTypeSelect';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Index = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const editorType = searchParams.get('editor') || 'button';
+  const { editorType = 'button' } = useParams();
+  const navigate = useNavigate();
   const editorConfig = getEditorConfig(editorType);
 
   const handleEditorChange = (value: string) => {
-    setSearchParams({ editor: value });
+    navigate(`/editor/${value}`);
   };
 
   return (
