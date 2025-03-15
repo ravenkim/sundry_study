@@ -78,13 +78,6 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
 
   // Apply variant-specific styles
   switch (variant) {
-    case 'primary':
-      return {
-        ...baseStyles,
-        backgroundColor: '#2563eb',
-        hoverBackgroundColor: '#1d4ed8',
-        activeBackgroundColor: '#1e40af',
-      };
     case 'secondary':
       return {
         ...baseStyles,

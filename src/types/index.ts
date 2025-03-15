@@ -1,4 +1,3 @@
-
 export type ButtonStyleProps = {
   // Base properties
   backgroundColor: string;
@@ -44,7 +43,7 @@ export type ButtonStyleProps = {
   lineHeight: number;
 };
 
-export type ButtonVariant = 'default' | 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
+export type ButtonVariant = 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
 
 export type ControlSectionProps = {

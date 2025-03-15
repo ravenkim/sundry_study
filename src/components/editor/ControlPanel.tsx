@@ -98,7 +98,6 @@ const ControlPanel = ({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="default">Default</SelectItem>
-                <SelectItem value="primary">Primary</SelectItem>
                 <SelectItem value="secondary">Secondary</SelectItem>
                 <SelectItem value="destructive">Destructive</SelectItem>
                 <SelectItem value="outline">Outline</SelectItem>
