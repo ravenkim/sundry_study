@@ -1,9 +1,11 @@
 import { EditorConfig } from '@/types/editor';
 import { buttonEditorConfig } from './button';
+import { themeEditorConfig } from './theme';
 
 // Registry of all available editors
 export const editorRegistry: Record<string, EditorConfig> = {
   button: buttonEditorConfig,
+  theme: themeEditorConfig,
   // Add more editors here as they are created
 };
 

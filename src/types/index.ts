@@ -79,10 +79,6 @@ export type ToggleOptionProps<T> = {
 export type ControlPanelProps = {
   styles: ButtonStyleProps;
   onChange: (styles: ButtonStyleProps) => void;
-  variant: ButtonVariant;
-  onVariantChange: (variant: ButtonVariant) => void;
-  size: ButtonSize;
-  onSizeChange: (size: ButtonSize) => void;
 };
 
 export type PreviewPanelProps = {

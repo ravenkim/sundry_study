@@ -1,5 +1,5 @@
 import React from 'react';
-import { ControlPanelProps, ButtonVariant, ButtonSize } from '@/types';
+import { ControlPanelProps } from '@/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
@@ -10,11 +10,7 @@ import ColorPicker from './ColorPicker';
 
 const ControlPanel = ({ 
   styles, 
-  onChange,
-  variant,
-  onVariantChange,
-  size,
-  onSizeChange
+  onChange
 }: ControlPanelProps) => {
   const updateStyle = React.useCallback(<K extends keyof typeof styles>(key: K, value: typeof styles[K]) => {
     onChange({ ...styles, [key]: value });
@@ -86,42 +82,8 @@ const ControlPanel = ({
 
   return (
     <div className="h-full overflow-y-auto pb-4 scrollbar-hide">
-      <div className="sticky top-0 z-10 bg-editor pb-2 mb-2">
+      <div className="sticky top-0 z-10 pb-2 mb-2">
         <h2 className="text-lg font-medium mb-4">Button Editor</h2>
-        
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <Label htmlFor="button-variant" className="text-xs mb-1.5 block">Variant</Label>
-            <Select value={variant} onValueChange={(v) => onVariantChange(v as ButtonVariant)}>
-              <SelectTrigger id="button-variant" className="h-9">
-                <SelectValue placeholder="Select variant" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="default">Default</SelectItem>
-                <SelectItem value="secondary">Secondary</SelectItem>
-                <SelectItem value="destructive">Destructive</SelectItem>
-                <SelectItem value="outline">Outline</SelectItem>
-                <SelectItem value="ghost">Ghost</SelectItem>
-                <SelectItem value="link">Link</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div>
-            <Label htmlFor="button-size" className="text-xs mb-1.5 block">Size</Label>
-            <Select value={size} onValueChange={(v) => onSizeChange(v as ButtonSize)}>
-              <SelectTrigger id="button-size" className="h-9">
-                <SelectValue placeholder="Select size" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="default">Default</SelectItem>
-                <SelectItem value="sm">Small</SelectItem>
-                <SelectItem value="lg">Large</SelectItem>
-                <SelectItem value="icon">Icon</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
       </div>
       
       <Tabs defaultValue="appearance">

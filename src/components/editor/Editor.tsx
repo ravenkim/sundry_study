@@ -18,14 +18,6 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
     setState(prev => ({ ...prev, styles: newStyles }));
   };
 
-  const handleVariantChange = (newVariant: string) => {
-    setState(prev => ({ ...prev, variant: newVariant }));
-  };
-
-  const handleSizeChange = (newSize: string) => {
-    setState(prev => ({ ...prev, size: newSize }));
-  };
-
   return (
     <div className="h-full overflow-hidden">
       {/* Desktop Layout */}
@@ -36,10 +28,6 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
               <Controls
                 styles={state.styles}
                 onChange={handleStyleChange}
-                variant={state.variant}
-                onVariantChange={handleVariantChange}
-                size={state.size}
-                onSizeChange={handleSizeChange}
               />
             </div>
           </ResizablePanel>
@@ -50,8 +38,6 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
             <div className="h-full p-4">
               <Preview
                 styles={state.styles}
-                variant={state.variant}
-                size={state.size}
               />
             </div>
           </ResizablePanel>
@@ -62,9 +48,8 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
             <div className="h-full p-4 overflow-hidden">
               <CodePanel
                 styles={state.styles}
-                variant={state.variant}
-                size={state.size}
                 codeGenerator={config.codeGenerator}
+                editorType={config.type}
               />
             </div>
           </ResizablePanel>
@@ -85,10 +70,6 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
               <Controls
                 styles={state.styles}
                 onChange={handleStyleChange}
-                variant={state.variant}
-                onVariantChange={handleVariantChange}
-                size={state.size}
-                onSizeChange={handleSizeChange}
               />
             </TabsContent>
             
@@ -96,8 +77,6 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
               <div className="h-full">
                 <Preview
                   styles={state.styles}
-                  variant={state.variant}
-                  size={state.size}
                 />
               </div>
             </TabsContent>
@@ -106,9 +85,8 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
               <div className="h-full">
                 <CodePanel
                   styles={state.styles}
-                  variant={state.variant}
-                  size={state.size}
                   codeGenerator={config.codeGenerator}
+                  editorType={config.type}
                 />
               </div>
             </TabsContent>

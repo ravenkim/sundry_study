@@ -1,0 +1,74 @@
+import { ThemeStyleProps } from '@/types/theme';
+
+export const generateThemeCode = (styles: ThemeStyleProps): string => {
+  return `:root {
+  --background: ${styles.background};
+  --foreground: ${styles.foreground};
+  --card: ${styles.card};
+  --card-foreground: ${styles['card-foreground']};
+  --popover: ${styles.popover};
+  --popover-foreground: ${styles['popover-foreground']};
+  --primary: ${styles.primary};
+  --primary-foreground: ${styles['primary-foreground']};
+  --secondary: ${styles.secondary};
+  --secondary-foreground: ${styles['secondary-foreground']};
+  --muted: ${styles.muted};
+  --muted-foreground: ${styles['muted-foreground']};
+  --accent: ${styles.accent};
+  --accent-foreground: ${styles['accent-foreground']};
+  --destructive: ${styles.destructive};
+  --destructive-foreground: ${styles['destructive-foreground']};
+  --border: ${styles.border};
+  --input: ${styles.input};
+  --ring: ${styles.ring};
+  --chart-1: ${styles['chart-1']};
+  --chart-2: ${styles['chart-2']};
+  --chart-3: ${styles['chart-3']};
+  --chart-4: ${styles['chart-4']};
+  --chart-5: ${styles['chart-5']};
+  --radius: ${styles.radius};
+  --sidebar: ${styles.sidebar};
+  --sidebar-foreground: ${styles['sidebar-foreground']};
+  --sidebar-primary: ${styles['sidebar-primary']};
+  --sidebar-primary-foreground: ${styles['sidebar-primary-foreground']};
+  --sidebar-accent: ${styles['sidebar-accent']};
+  --sidebar-accent-foreground: ${styles['sidebar-accent-foreground']};
+  --sidebar-border: ${styles['sidebar-border']};
+  --sidebar-ring: ${styles['sidebar-ring']};
+}
+
+.dark {
+  --background: ${styles.background};
+  --foreground: ${styles.foreground};
+  --card: ${styles.card};
+  --card-foreground: ${styles['card-foreground']};
+  --popover: ${styles.popover};
+  --popover-foreground: ${styles['popover-foreground']};
+  --primary: ${styles.primary};
+  --primary-foreground: ${styles['primary-foreground']};
+  --secondary: ${styles.secondary};
+  --secondary-foreground: ${styles['secondary-foreground']};
+  --muted: ${styles.muted};
+  --muted-foreground: ${styles['muted-foreground']};
+  --accent: ${styles.accent};
+  --accent-foreground: ${styles['accent-foreground']};
+  --destructive: ${styles.destructive};
+  --destructive-foreground: ${styles['destructive-foreground']};
+  --border: ${styles.border};
+  --input: ${styles.input};
+  --ring: ${styles.ring};
+  --chart-1: ${styles['chart-1']};
+  --chart-2: ${styles['chart-2']};
+  --chart-3: ${styles['chart-3']};
+  --chart-4: ${styles['chart-4']};
+  --chart-5: ${styles['chart-5']};
+  --sidebar: ${styles.sidebar};
+  --sidebar-foreground: ${styles['sidebar-foreground']};
+  --sidebar-primary: ${styles['sidebar-primary']};
+  --sidebar-primary-foreground: ${styles['sidebar-primary-foreground']};
+  --sidebar-accent: ${styles['sidebar-accent']};
+  --sidebar-accent-foreground: ${styles['sidebar-accent-foreground']};
+  --sidebar-border: ${styles['sidebar-border']};
+  --sidebar-ring: ${styles['sidebar-ring']};
+}`;
+}; 
