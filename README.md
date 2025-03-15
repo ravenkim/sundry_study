@@ -11,8 +11,6 @@ Currently in beta, we're starting with the button component. Support for all oth
 ## Current Features
 
 - Visual button customizer with real-time preview
-- Support for all button variants (default, primary, secondary, destructive, outline, ghost, link)
-- Customizable button sizes (default, sm, lg, icon)
 - Full control over:
   - Colors (background, text, border)
   - Dimensions (padding, border radius)
