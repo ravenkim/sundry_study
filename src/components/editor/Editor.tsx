@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EditorConfig, BaseEditorState } from '@/types/editor';
@@ -13,6 +14,11 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
   const [state, setState] = useState<BaseEditorState>(initialState || config.defaultState);
   const Controls = config.controls;
   const Preview = config.preview;
+  
+  // Reset state when config changes (i.e., when switching editor types)
+  useEffect(() => {
+    setState(config.defaultState);
+  }, [config]);
 
   const handleStyleChange = (newStyles: Record<string, any>) => {
     setState(prev => ({ ...prev, styles: newStyles }));
@@ -97,4 +103,4 @@ const Editor: React.FC<EditorProps> = ({ config, initialState }) => {
   );
 };
 
-export default Editor; 
+export default Editor;
