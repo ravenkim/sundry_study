@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeEditorControlsProps } from '@/types/theme';
 import ControlSection from './ControlSection';
 import ColorPicker from './ColorPicker';
 import { Sun, Moon } from 'lucide-react';
 import ResetButton from './ResetButton';
+import { useLocation } from 'react-router-dom';
 
 const ThemeControlPanel = ({ styles, currentMode, onChange, onModeChange, onReset, hasChanges = false }: ThemeEditorControlsProps) => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Handle hash navigation
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        // Add a small delay to ensure the sections are expanded
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
+
   // Ensure we have valid styles for the current mode
   const currentStyles = styles?.[currentMode];
   if (!currentStyles) {
@@ -97,7 +113,7 @@ const ThemeControlPanel = ({ styles, currentMode, onChange, onModeChange, onRese
         />
       </ControlSection>
 
-      <ControlSection title="Primary Colors" expanded>
+      <ControlSection title="Primary Colors" expanded id="primary-colors">
         <ColorPicker
           color={currentStyles.primary}
           onChange={(color) => updateStyle('primary', color)}

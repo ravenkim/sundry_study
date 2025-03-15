@@ -11,6 +11,7 @@ import ResetButton from './ResetButton';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Palette } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useEditorStore } from '@/store/editorStore';
 
 // Readonly color display component for theme-controlled properties
 const ReadOnlyColorDisplay = ({ 
@@ -22,6 +23,18 @@ const ReadOnlyColorDisplay = ({
   label: string; 
   linkTo: string;
 }) => {
+  // Map labels to theme section IDs
+  const getSectionId = (label: string) => {
+    switch (label.toLowerCase()) {
+      case 'background color':
+      case 'text color':
+      case 'hover background':
+        return '#primary-colors';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="mb-3">
       <div className="flex items-center justify-between mb-1.5">
@@ -51,7 +64,7 @@ const ReadOnlyColorDisplay = ({
             className="absolute right-1 top-1 h-6 px-2 text-xs"
           >
             <Link 
-              to={linkTo} 
+              to={`${linkTo}${getSectionId(label)}`}
               className="flex items-center gap-1"
               title="Edit in Theme Editor"
             >
@@ -139,6 +152,10 @@ const ControlPanel = ({
     onChange({ ...styles, [key]: value });
   }, [onChange, styles]);
 
+  const themeState = useEditorStore(state => state.themeState);
+  const mode = 'light';
+  const themeStyles = themeState?.styles[mode];
+
   return (
     <div className="h-full overflow-y-auto pb-4 scrollbar-hide">
       <div className="sticky top-0 z-10 pb-2 mb-2 bg-background">
@@ -146,6 +163,32 @@ const ControlPanel = ({
           <h2 className="text-lg font-medium">Button Editor</h2>
           {hasChanges && <ResetButton onReset={onReset} label="Reset button styles" />}
         </div>
+      </div>
+
+
+      <div className="mt-4 mb-3">
+        <Label htmlFor="button-variant" className="text-xs mb-1.5 block">Button Variant</Label>
+        <Select
+          value="default"
+          onValueChange={(value) => {
+            // For now, we only support default variant
+            if (value === "default") {
+              updateStyle('variant', value);
+            }
+          }}
+        >
+          <SelectTrigger id="button-variant" className="h-9">
+            <SelectValue placeholder="Select variant" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="default">Default</SelectItem>
+            <SelectItem value="secondary" disabled>Secondary (Coming Soon)</SelectItem>
+            <SelectItem value="destructive" disabled>Destructive (Coming Soon)</SelectItem>
+            <SelectItem value="outline" disabled>Outline (Coming Soon)</SelectItem>
+            <SelectItem value="ghost" disabled>Ghost (Coming Soon)</SelectItem>
+            <SelectItem value="link" disabled>Link (Coming Soon)</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       
       <Tabs defaultValue="appearance">
@@ -159,12 +202,12 @@ const ControlPanel = ({
           <ControlSection title="Colors" expanded>
             {/* Theme-controlled colors (read-only) */}
             <ReadOnlyColorDisplay 
-              color={styles.backgroundColor} 
+              color={themeStyles?.primary}
               label="Background Color" 
               linkTo="/editor/theme"
             />
             <ReadOnlyColorDisplay 
-              color={styles.textColor} 
+              color={themeStyles?.['primary-foreground']} 
               label="Text Color" 
               linkTo="/editor/theme"
             />
@@ -290,7 +333,7 @@ const ControlPanel = ({
           <ControlSection title="Hover State" expanded>
             {/* Theme-controlled hover background (read-only) */}
             <ReadOnlyColorDisplay 
-              color={styles.hoverBackgroundColor} 
+              color={themeStyles.primary} 
               label="Hover Background" 
               linkTo="/editor/theme"
             />

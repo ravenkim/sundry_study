@@ -1,4 +1,3 @@
-
 export type ButtonStyleProps = {
   // Base properties
   backgroundColor: string;
@@ -53,6 +52,7 @@ export type ControlSectionProps = {
   children: React.ReactNode;
   expanded?: boolean;
   className?: string;
+  id?: string;
 };
 
 export type ColorPickerProps = {

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,12 +7,13 @@ const ControlSection = ({
   title, 
   children, 
   expanded = false,
-  className
+  className,
+  id
 }: ControlSectionProps) => {
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   return (
-    <div className={cn("mb-4 border rounded-lg overflow-hidden transition-all", className)}>
+    <div id={id} className={cn("mb-4 border rounded-lg overflow-hidden transition-all", className)}>
       <div 
         className="flex items-center justify-between p-3 cursor-pointer bg-editor-panel hover:bg-editor-panel-hover"
         onClick={() => setIsExpanded(!isExpanded)}
