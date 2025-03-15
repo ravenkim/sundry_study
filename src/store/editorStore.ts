@@ -37,7 +37,8 @@ export const useEditorStore = create<EditorStore>()(
         if (type === "button") {
           set({ buttonState: defaultButtonState });
         } else if (type === "theme") {
-          set({ themeState: defaultThemeState });
+          const mode = get().themeState.currentMode;
+          set({ themeState: { ...defaultThemeState, currentMode: mode } });
         }
       },
       hasStateChanged: (type: EditorType) => {
@@ -55,4 +56,3 @@ export const useEditorStore = create<EditorStore>()(
     },
   ),
 );
-

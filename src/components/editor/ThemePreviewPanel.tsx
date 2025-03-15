@@ -44,7 +44,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
 
-          <div className={cn(
+          <div className={cn("bg-background text-foreground",
             {
               "preview-theme": currentMode === 'light',
               "preview-theme-dark": currentMode === 'dark',
@@ -105,7 +105,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                         }}
                       />
                     </div>
-                    <Button size="sm" style={{ backgroundColor: styles[currentMode].primary, color: styles[currentMode]['primary-foreground'] }}>
+                    <Button style={{ backgroundColor: styles[currentMode].primary, color: styles[currentMode]['primary-foreground'] }}>
                       <Plus size={16} /> New
                     </Button>
                   </div>
