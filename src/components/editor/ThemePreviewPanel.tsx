@@ -66,7 +66,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
 
-          <div className={cn("bg-background text-foreground h-full",
+          <div className={cn("bg-background text-foreground",
             {
               "preview-theme": currentMode === 'light',
               "preview-theme-dark": currentMode === 'dark',
@@ -201,7 +201,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                       </div>
                     </CardContent>
                   </Card>
-                  
+
                   <Card className="relative">
                     <CardContent className="p-4 flex items-start gap-3">
                       <div className="bg-secondary rounded-full p-2 mt-1">
@@ -233,7 +233,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   {renderColorPreview('Primary Foreground', styles[currentMode]['primary-foreground'])}
                 </div>
               </div>
-              
+
               {/* Secondary & Accent Colors */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium border-b pb-2">Secondary & Accent Colors</h3>
@@ -244,7 +244,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   {renderColorPreview('Accent Foreground', styles[currentMode]['accent-foreground'])}
                 </div>
               </div>
-              
+
               {/* Component Colors */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium border-b pb-2">Component Colors</h3>
@@ -255,7 +255,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   {renderColorPreview('Popover Foreground', styles[currentMode]['popover-foreground'])}
                 </div>
               </div>
-              
+
               {/* Utility Colors */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium border-b pb-2">Utility Colors</h3>
@@ -267,7 +267,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   {renderColorPreview('Ring', styles[currentMode].ring)}
                 </div>
               </div>
-              
+
               {/* Status Colors */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium border-b pb-2">Status Colors</h3>
@@ -276,7 +276,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   {renderColorPreview('Destructive Foreground', styles[currentMode]['destructive-foreground'])}
                 </div>
               </div>
-              
+
               {/* Chart Colors */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium border-b pb-2">Chart Colors</h3>
@@ -288,7 +288,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   {renderColorPreview('Chart 5', styles[currentMode]['chart-5'])}
                 </div>
               </div>
-              
+
               {/* Sidebar Colors */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium border-b pb-2">Sidebar Colors</h3>
