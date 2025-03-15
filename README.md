@@ -2,8 +2,6 @@
 
 A visual editor for ShadCN UI components. Currently in beta with button component support.
 
-![tweakcn](https://github.com/jnsahaj/tweakcn/assets/1234567890/preview.png)
-
 ## About
 
 tweakcn is a tool that helps you customize ShadCN UI components visually. Instead of writing code manually, you can use the visual editor to create and customize components, then copy the generated code into your project.
