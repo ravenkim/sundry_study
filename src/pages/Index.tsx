@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { getEditorConfig, editorTypes } from '@/config/editors';
+import { getEditorConfig } from '@/config/editors';
 import Editor from '@/components/editor/Editor';
-import EditorTypeSelect from '@/components/editor/EditorTypeSelect';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import EditorCombobox from '../components/editor/EditorCombobox';
 
 const Index = () => {
   const { editorType = 'button' } = useParams();
-  const navigate = useNavigate();
   const editorConfig = getEditorConfig(editorType);
-
-  const handleEditorChange = (value: string) => {
-    navigate(`/editor/${value}`);
-  };
 
   return (
     <div className="h-screen flex flex-col">
@@ -24,7 +18,7 @@ const Index = () => {
             <h1 className="text-2xl font-bold">tweakcn</h1>
             <Badge variant="secondary" className='bg-blue-100 text-blue-500 hidden md:block'>BETA</Badge>
             <div className='ml-2'>
-              <EditorTypeSelect value={editorType} onValueChange={handleEditorChange} />
+              <EditorCombobox />
             </div>
           </div>
           <div className="flex items-center gap-4">
