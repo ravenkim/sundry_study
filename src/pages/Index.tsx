@@ -23,8 +23,10 @@ const Index = () => {
           <div className='flex items-center gap-1'>
             <h1 className="text-2xl font-bold">tweakcn</h1>
             <Badge variant="secondary" className='bg-blue-100 text-blue-500 hidden md:block'>BETA</Badge>
+            <div className='md:ml-2'>
+              <EditorTypeSelect value={editorType} onValueChange={handleEditorChange} />
+            </div>
           </div>
-          <EditorTypeSelect value={editorType} onValueChange={handleEditorChange} />
           <div className="flex items-center gap-4">
             <Button variant="link" asChild>
               <a href="https://github.com/jnsahaj/tweakcn" target="_blank" rel="noopener noreferrer">
@@ -34,7 +36,7 @@ const Index = () => {
           </div>
         </div>
       </header>
-      
+
       <main className="flex-1 overflow-hidden">
         <Editor config={editorConfig} />
       </main>
