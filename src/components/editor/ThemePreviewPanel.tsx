@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { ThemeEditorPreviewProps } from '@/types/theme';
 import { Sun, Moon, Mail, Check, Settings, Trash, Plus, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { cn } from '../../lib/utils';
 
 const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {
@@ -16,8 +15,8 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
 
   const renderColorPreview = (label: string, color: string) => (
     <div className="flex items-center gap-4">
-      <div 
-        className="w-12 h-12 rounded-md" 
+      <div
+        className="w-12 h-12 rounded-md"
         style={{ backgroundColor: color }}
       />
       <div className="flex-1">
@@ -35,11 +34,10 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
           <button
             type="button"
             onClick={() => onModeChange('light')}
-            className={`p-1.5 ${
-              currentMode === 'light' 
-                ? 'bg-muted text-foreground' 
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-            }`}
+            className={`p-1.5 ${currentMode === 'light'
+              ? 'bg-muted text-foreground'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              }`}
             aria-label="Light mode"
           >
             <Sun className="h-4 w-4" />
@@ -47,11 +45,10 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
           <button
             type="button"
             onClick={() => onModeChange('dark')}
-            className={`p-1.5 ${
-              currentMode === 'dark' 
-                ? 'bg-muted text-foreground' 
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-            }`}
+            className={`p-1.5 ${currentMode === 'dark'
+              ? 'bg-muted text-foreground'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              }`}
             aria-label="Dark mode"
           >
             <Moon className="h-4 w-4" />
@@ -59,91 +56,98 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
         </div>
       </div>
 
-      <div className={`flex-1 rounded-lg border overflow-y-auto ${currentMode === 'dark' ? 'dark' : ''}`}>
-        <Tabs defaultValue="components" className="w-full">
+      <div className={`flex-1 rounded-lg border overflow-y-auto`}>
+        <Tabs defaultValue="components" className="w-full h-full">
           <TabsList className="w-full grid grid-cols-2">
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
-          
-          <TabsContent value="components" className="p-4 space-y-6">
-            {/* Button showcase */}
-            <section className="space-y-4">
-              <h3 className="text-sm font-medium">Buttons</h3>
-              <div className="flex flex-wrap gap-3">
-                <Button variant="default">Default</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="outline">Outline</Button>
-                <Button variant="ghost">Ghost</Button>
-                <Button variant="destructive">Destructive</Button>
-                <Button variant="link">Link</Button>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Button disabled>Disabled</Button>
-                <Button size="sm">Small</Button>
-                <Button size="lg">Large</Button>
-                <Button><Mail className="mr-2 h-4 w-4" /> With Icon</Button>
-              </div>
-            </section>
 
-            {/* Card showcase */}
-            <section className="space-y-4">
-              <h3 className="text-sm font-medium">Card</h3>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Card Title</CardTitle>
-                  <CardDescription>Card description goes here</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm">This is the main content of the card.</p>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                  <Button variant="ghost">Cancel</Button>
-                  <Button>Submit</Button>
-                </CardFooter>
-              </Card>
-            </section>
+          <div className={cn("bg-background text-foreground h-full",
+            {
+              "preview-theme": currentMode === 'light',
+              "preview-theme-dark": currentMode === 'dark',
+            }
+          )}>
+            <TabsContent value="components" className="p-4 space-y-6 mt-0">
+              {/* Button showcase */}
+              <section className="space-y-4">
+                <h3 className="text-sm font-medium">Buttons</h3>
+                <div className="flex flex-wrap gap-3">
+                  <Button variant="default">Default</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="outline">Outline</Button>
+                  <Button variant="ghost">Ghost</Button>
+                  <Button variant="destructive">Destructive</Button>
+                  <Button variant="link">Link</Button>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Button disabled>Disabled</Button>
+                  <Button size="sm">Small</Button>
+                  <Button size="lg">Large</Button>
+                  <Button><Mail className="mr-2 h-4 w-4" /> With Icon</Button>
+                </div>
+              </section>
 
-            {/* Badge & Alert showcase */}
-            <section className="space-y-4">
-              <h3 className="text-sm font-medium">Badges & Alerts</h3>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <Badge>Default</Badge>
-                <Badge variant="secondary">Secondary</Badge>
-                <Badge variant="outline">Outline</Badge>
-                <Badge variant="destructive">Destructive</Badge>
-              </div>
-              <Alert>
-                <Settings className="h-4 w-4" />
-                <AlertTitle>Settings Updated</AlertTitle>
-                <AlertDescription>
-                  Your settings have been updated successfully.
-                </AlertDescription>
-              </Alert>
-              <Alert variant="destructive">
-                <Trash className="h-4 w-4" />
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>
-                  There was an error processing your request.
-                </AlertDescription>
-              </Alert>
-            </section>
+              {/* Card showcase */}
+              <section className="space-y-4">
+                <h3 className="text-sm font-medium">Card</h3>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Card Title</CardTitle>
+                    <CardDescription>Card description goes here</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm">This is the main content of the card.</p>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <Button variant="ghost">Cancel</Button>
+                    <Button>Submit</Button>
+                  </CardFooter>
+                </Card>
+              </section>
 
-            {/* Interactive components */}
-            <section className="space-y-4">
-              <h3 className="text-sm font-medium">Interactive Elements</h3>
-              <div className="flex items-center space-x-2 mb-4">
-                <Switch id="airplane-mode" />
-                <label htmlFor="airplane-mode">Airplane Mode</label>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Button><Plus className="mr-2 h-4 w-4" /> Create New</Button>
-                <Button variant="outline"><Check className="mr-2 h-4 w-4" /> Confirm</Button>
-                <Button variant="secondary">Continue <ArrowRight className="ml-2 h-4 w-4" /></Button>
-              </div>
-            </section>
-          </TabsContent>
-          
+              {/* Badge & Alert showcase */}
+              <section className="space-y-4">
+                <h3 className="text-sm font-medium">Badges & Alerts</h3>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge>Default</Badge>
+                  <Badge variant="secondary">Secondary</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                  <Badge variant="destructive">Destructive</Badge>
+                </div>
+                <Alert>
+                  <Settings className="h-4 w-4" />
+                  <AlertTitle>Settings Updated</AlertTitle>
+                  <AlertDescription>
+                    Your settings have been updated successfully.
+                  </AlertDescription>
+                </Alert>
+                <Alert variant="destructive">
+                  <Trash className="h-4 w-4" />
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>
+                    There was an error processing your request.
+                  </AlertDescription>
+                </Alert>
+              </section>
+
+              {/* Interactive components */}
+              <section className="space-y-4">
+                <h3 className="text-sm font-medium">Interactive Elements</h3>
+                <div className="flex items-center space-x-2 mb-4">
+                  <Switch id="airplane-mode" />
+                  <label htmlFor="airplane-mode">Airplane Mode</label>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Button><Plus className="mr-2 h-4 w-4" /> Create New</Button>
+                  <Button variant="outline"><Check className="mr-2 h-4 w-4" /> Confirm</Button>
+                  <Button variant="secondary">Continue <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                </div>
+              </section>
+            </TabsContent>
+          </div>
+
           <TabsContent value="colors" className="p-4 space-y-4">
             <div className="space-y-4">
               {renderColorPreview('Background', styles[currentMode].background)}

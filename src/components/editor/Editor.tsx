@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EditorConfig, BaseEditorState, ButtonEditorState, ThemeEditorState } from '@/types/editor';
@@ -9,6 +9,7 @@ import { Sliders, RotateCcw } from 'lucide-react';
 import { useEditorStore } from '@/store/editorStore';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { convertToHSL } from '../../utils/colorConverter';
 
 interface EditorProps {
   config: EditorConfig;
@@ -24,10 +25,10 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
   const { toast } = useToast();
   const Controls = config.controls;
   const Preview = config.preview;
-  
+
   const state = config.type === 'theme' ? themeState : buttonState;
   const hasChanges = hasStateChanged(config.type);
-  
+
   const handleStyleChange = (newStyles: ThemeStyles | ButtonStyleProps) => {
     if (config.type === 'theme') {
       setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
@@ -53,9 +54,33 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
   const isThemeEditor = config.type === 'theme';
 
   // Ensure we have valid theme styles for theme editor
-  const styles = isThemeEditor && !isThemeStyles(state.styles) 
-    ? (config.defaultState as ThemeEditorState).styles 
+  const styles = isThemeEditor && !isThemeStyles(state.styles)
+    ? (config.defaultState as ThemeEditorState).styles
     : state.styles;
+
+  useLayoutEffect(() => {
+    const mode = themeState.currentMode;
+    let root: Element | null = null;
+    if (mode === 'light') {
+      root = document.querySelector('.preview-theme');
+    } else if (mode === 'dark') {
+      root = document.querySelector('.preview-theme-dark');
+    }
+    if (!root) {
+      console.error('Preview root not found');
+      return;
+    }
+
+    const themeStyles = themeState.styles;
+
+    Object.entries(themeStyles[mode]).forEach(([key, value]) => {
+      if (typeof value === 'string' && (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl'))) {
+        // Convert the color to HSL format
+        const hslValue = convertToHSL(value);
+        root.style.setProperty(`--${key}`, hslValue);
+      }
+    });
+  }, [themeState]);
 
   return (
     <div className="h-full overflow-hidden">
