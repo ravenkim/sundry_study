@@ -8,8 +8,8 @@ import { Check, ArrowRight, Info } from 'lucide-react';
 
 const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = (props) => {
   // If this is a button editor state with styles, variant, and size
-  if ('styles' in props && 'variant' in props && 'size' in props) {
-    const { styles, variant, size } = props as ButtonEditorState;
+  if ('styles' in props) {
+    const { styles, variant = "default", size = "default" } = props as ButtonEditorState;
     
     return (
       <div className="h-full flex flex-col">
