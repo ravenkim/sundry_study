@@ -11,6 +11,7 @@ import PreviewPanel from '@/components/editor/PreviewPanel';
 import CodePanel from '@/components/editor/CodePanel';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { GitHubIcon } from '@/components/icons/GitHubIcon';
 
 const Index = () => {
   const [variant, setVariant] = useState<ButtonVariant>('default');
@@ -36,6 +37,15 @@ const Index = () => {
         </div>
         
         <div className="flex items-center gap-2">
+          <a
+            href="https://github.com/jnsahaj/tweakcn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <GitHubIcon />
+            <span>GitHub</span>
+          </a>
           <button
             className="md:hidden block p-2"
             onClick={() => setShowMobileNav(!showMobileNav)}

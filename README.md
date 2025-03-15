@@ -1,69 +1,69 @@
-# Welcome to your Lovable project
+# tweakcn
 
-## Project info
+A visual editor for ShadCN UI components. Currently in beta with button component support.
 
-**URL**: https://lovable.dev/projects/f56d59d6-f0f5-4f26-8b99-e177935f4248
+![tweakcn](https://github.com/jnsahaj/tweakcn/assets/1234567890/preview.png)
 
-## How can I edit this code?
+## About
 
-There are several ways of editing your application.
+tweakcn is a tool that helps you customize ShadCN UI components visually. Instead of writing code manually, you can use the visual editor to create and customize components, then copy the generated code into your project.
 
-**Use Lovable**
+Currently in beta, we're starting with the button component. Support for all other ShadCN components will be added in future releases.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f56d59d6-f0f5-4f26-8b99-e177935f4248) and start prompting.
+## Current Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- Visual button customizer with real-time preview
+- Support for all button variants (default, primary, secondary, destructive, outline, ghost, link)
+- Customizable button sizes (default, sm, lg, icon)
+- Full control over:
+  - Colors (background, text, border)
+  - Dimensions (padding, border radius)
+  - Typography (font size, weight, transform)
+  - Effects (shadow, transitions)
+  - States (hover, focus, active)
+- Export to multiple formats:
+  - React component
+  - CSS
+  - Tailwind config
+  - ShadCN config
+- Responsive design with mobile support
 
-**Use your preferred IDE**
+## Roadmap
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- [ ] Add support to import `ui` folder
+- [ ] Add support for all ShadCN components
+- [ ] Add component templates
+- [ ] Add theme support
+- [ ] Add component library export
+- [ ] Add collaboration features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Getting Started
 
-Follow these steps:
+### Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Node.js 18+ 
+- npm / yarn / pnpm
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. Clone the repository:
+```bash
+git clone https://github.com/jnsahaj/tweakcn.git
+cd tweakcn
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Contributing
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f56d59d6-f0f5-4f26-8b99-e177935f4248) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+Contributions are welcome! Please feel free to submit a Pull Request.
