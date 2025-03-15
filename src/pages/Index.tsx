@@ -1,30 +1,64 @@
-import { getEditorConfig } from '@/config/editors';
-import Editor from '@/components/editor/Editor';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { GitHubIcon } from '@/components/icons/GitHubIcon';
-import { useParams } from 'react-router-dom';
-import EditorCombobox from '../components/editor/EditorCombobox';
+import { getEditorConfig } from "@/config/editors";
+import Editor from "@/components/editor/Editor";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useParams } from "react-router-dom";
+import EditorCombobox from "../components/editor/EditorCombobox";
+import { Moon, Sun } from "lucide-react";
+import { useEditorStore } from "../store/editorStore";
+import GitHubIcon from "@/assets/github.svg?react";
+import { cn } from "../lib/utils";
+import { useEffect } from "react";
 
 const Index = () => {
-  const { editorType = 'button' } = useParams();
+  const { editorType = "button" } = useParams();
   const editorConfig = getEditorConfig(editorType);
+  const { themeState, setThemeState } = useEditorStore();
+
+  const toggleTheme = () => {
+    const newMode = themeState.currentMode === "light" ? "dark" : "light";
+    setThemeState({ ...themeState, currentMode: newMode });
+  };
+
+  useEffect(() => {
+    if (themeState.currentMode === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [themeState.currentMode]);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className={cn("h-screen flex flex-col text-foreground bg-background transition-colors")}>
       <header className="border-b">
         <div className="px-4 py-4 flex items-center gap-2 justify-between">
-          <div className='flex items-center gap-1'>
+          <div className="flex items-center gap-1">
             <h1 className="text-2xl font-bold">tweakcn</h1>
-            <Badge variant="secondary" className='bg-blue-100 text-blue-500 hidden md:block'>BETA</Badge>
-            <div className='ml-2'>
+            <Badge
+              variant="secondary"
+              className="hidden md:block"
+            >
+              BETA
+            </Badge>
+            <div className="ml-2">
               <EditorCombobox />
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Button variant="link" asChild>
-              <a href="https://github.com/jnsahaj/tweakcn" target="_blank" rel="noopener noreferrer">
-                <GitHubIcon />
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+              {themeState.currentMode === "light" ? (
+                <Sun className="h-6 w-6" />
+              ) : (
+                <Moon className="h-6 w-6" />
+              )}
+            </Button>
+            <Button variant="ghost" asChild size="icon">
+              <a
+                href="https://github.com/jnsahaj/tweakcn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHubIcon className="h-5 w-5" />
               </a>
             </Button>
           </div>

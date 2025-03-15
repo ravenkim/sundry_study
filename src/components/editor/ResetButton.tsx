@@ -14,12 +14,11 @@ const ResetButton = ({ onReset, label = 'Reset to default' }: ResetButtonProps) 
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
-            variant="ghost"
-            size="sm"
+            variant="link"
             onClick={onReset}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground h-6"
           >
-            <RotateCcw className="h-3 w-3" /> Reset
+            <RotateCcw className="h-1 w-1" /> Reset
           </Button>
         </TooltipTrigger>
         <TooltipContent>

@@ -192,15 +192,6 @@
     @apply rounded-lg border bg-editor-panel p-4 shadow-sm transition-all duration-200;
   }
 
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
   .animate-in {
     animation: fadeIn 0.3s ease forwards;
   }

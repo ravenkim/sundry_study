@@ -1,11 +1,11 @@
-import { EditorConfig } from '@/types/editor';
-import { buttonEditorConfig } from './button';
-import { themeEditorConfig } from './theme';
+import { EditorConfig } from "@/types/editor";
+import { buttonEditorConfig } from "./button";
+import { themeEditorConfig } from "./theme";
 
 // Registry of all available editors
 export const editorRegistry: Record<string, EditorConfig> = {
-  button: buttonEditorConfig,
   theme: themeEditorConfig,
+  button: buttonEditorConfig,
   // Add more editors here as they are created
 };
 
@@ -19,4 +19,5 @@ export const getEditorConfig = (type: string): EditorConfig => {
 };
 
 // Export all editor types
-export const editorTypes = Object.keys(editorRegistry); 
+export const editorTypes = Object.keys(editorRegistry);
+

@@ -1,6 +1,5 @@
-
 import { ThemeEditorPreviewProps } from '@/types/theme';
-import { Sun, Moon, Mail, Check, Settings, Trash, Plus, ArrowRight, Info, AlertTriangle, Bell } from 'lucide-react';
+import { Mail, Check, Settings, Plus, ArrowRight, Info, AlertTriangle, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,10 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { cn } from '../../lib/utils';
-import { Separator } from '@/components/ui/separator';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
+import { ScrollArea } from '../ui/scroll-area';
 
-const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPreviewProps) => {
+const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {
     return null;
   }
@@ -33,40 +32,16 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
     <div className="h-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Theme Preview</h2>
-        <div className="flex border rounded-md overflow-hidden">
-          <button
-            type="button"
-            onClick={() => onModeChange('light')}
-            className={`p-1.5 ${currentMode === 'light'
-              ? 'bg-muted text-foreground'
-              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-              }`}
-            aria-label="Light mode"
-          >
-            <Sun className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => onModeChange('dark')}
-            className={`p-1.5 ${currentMode === 'dark'
-              ? 'bg-muted text-foreground'
-              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-              }`}
-            aria-label="Dark mode"
-          >
-            <Moon className="h-4 w-4" />
-          </button>
-        </div>
       </div>
 
-      <div className={`flex-1 rounded-lg border overflow-y-auto`}>
+      <ScrollArea className="flex-1 rounded-lg border">
         <Tabs defaultValue="components" className="w-full h-full">
           <TabsList className="w-full grid grid-cols-2">
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
 
-          <div className={cn("bg-background text-foreground",
+          <div className={cn(
             {
               "preview-theme": currentMode === 'light',
               "preview-theme-dark": currentMode === 'dark',
@@ -88,7 +63,6 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   <Button disabled>Disabled</Button>
                   <Button size="sm">Small</Button>
                   <Button size="lg">Large</Button>
-                  <Button><Mail className="mr-2 h-4 w-4" /> With Icon</Button>
                 </div>
               </section>
 
@@ -142,11 +116,6 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                   <Switch id="airplane-mode" />
                   <label htmlFor="airplane-mode">Airplane Mode</label>
                 </div>
-                <div className="flex flex-wrap gap-3">
-                  <Button><Plus className="mr-2 h-4 w-4" /> Create New</Button>
-                  <Button variant="outline"><Check className="mr-2 h-4 w-4" /> Confirm</Button>
-                  <Button variant="secondary">Continue <ArrowRight className="ml-2 h-4 w-4" /></Button>
-                </div>
               </section>
 
               {/* Table showcase */}
@@ -172,7 +141,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                     </TableRow>
                     <TableRow>
                       <TableCell className="font-medium">Sarah Chen</TableCell>
-                      <TableCell><Badge variant="outline" className="bg-red-100 text-red-800 border-red-200">Inactive</Badge></TableCell>
+                      <TableCell><Badge variant="outline" className="bg-destructive/10 text-destructive">Inactive</Badge></TableCell>
                       <TableCell>Designer</TableCell>
                       <TableCell className="text-right">
                         <Button variant="ghost" size="sm"><Settings className="h-4 w-4" /></Button>
@@ -180,43 +149,6 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
                     </TableRow>
                   </TableBody>
                 </Table>
-              </section>
-
-              {/* Notification-like card */}
-              <section className="space-y-4">
-                <h3 className="text-sm font-medium">Notifications</h3>
-                <div className="space-y-3">
-                  <Card className="relative">
-                    <CardContent className="p-4 flex items-start gap-3">
-                      <div className="bg-primary rounded-full p-2 mt-1">
-                        <Bell className="h-4 w-4 text-primary-foreground" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-sm font-medium">New message received</h4>
-                        <p className="text-sm text-muted-foreground mt-1">You have a new message from Jake in your inbox.</p>
-                        <div className="flex gap-2 mt-3">
-                          <Button size="sm" variant="default">View</Button>
-                          <Button size="sm" variant="ghost">Dismiss</Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="relative">
-                    <CardContent className="p-4 flex items-start gap-3">
-                      <div className="bg-secondary rounded-full p-2 mt-1">
-                        <Settings className="h-4 w-4 text-secondary-foreground" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-sm font-medium">Settings updated</h4>
-                        <p className="text-sm text-muted-foreground mt-1">Your account settings were updated successfully.</p>
-                        <div className="flex gap-2 mt-3">
-                          <Button size="sm" variant="ghost">Dismiss</Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
               </section>
             </TabsContent>
           </div>
@@ -306,7 +238,7 @@ const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPre
             </div>
           </TabsContent>
         </Tabs>
-      </div>
+      </ScrollArea>
     </div>
   );
 };

@@ -1,13 +1,12 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { EditorConfig, BaseEditorState, ButtonEditorState, ThemeEditorState } from '@/types/editor';
+import { EditorConfig, BaseEditorState, ThemeEditorState } from '@/types/editor';
 import { ThemeStyles } from '@/types/theme';
 import { ButtonStyleProps } from '@/types/button';
 import CodePanel from './CodePanel';
-import { Sliders, RotateCcw } from 'lucide-react';
+import { Sliders } from 'lucide-react';
 import { useEditorStore } from '@/store/editorStore';
-import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { convertToHSL } from '../../utils/colorConverter';
 
@@ -34,12 +33,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
     } else {
       setButtonState({ ...buttonState, styles: newStyles as ButtonStyleProps });
-    }
-  };
-
-  const handleModeChange = (mode: 'light' | 'dark') => {
-    if (config.type === 'theme') {
-      setThemeState({ ...themeState, currentMode: mode });
     }
   };
 
@@ -88,7 +81,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       <div className="h-full hidden md:block">
         <ResizablePanelGroup direction="horizontal" className="h-full">
           <ResizablePanel defaultSize={25} minSize={20} maxSize={40}>
-            <div className="h-full p-4 overflow-y-auto">
+            <div className="h-full p-4">
               <Controls
                 styles={state.styles}
                 onChange={handleStyleChange}
@@ -96,7 +89,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                 hasChanges={hasChanges}
                 {...(isThemeEditor && {
                   currentMode: (state as ThemeEditorState).currentMode,
-                  onModeChange: handleModeChange
                 })}
               />
             </div>
@@ -110,7 +102,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                     styles={styles}
                     {...(isThemeEditor && {
                       currentMode: (state as ThemeEditorState).currentMode,
-                      onModeChange: handleModeChange
                     })}
                   />
                 </div>
@@ -139,7 +130,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             <TabsTrigger value="code" className="flex-1">Code</TabsTrigger>
           </TabsList>
           <TabsContent value="controls" className="h-[calc(100%-2.5rem)]">
-            <div className="h-full p-4 overflow-y-auto">
+            <div className="h-full p-4">
               <Controls
                 styles={styles}
                 onChange={handleStyleChange}
@@ -147,7 +138,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                 hasChanges={hasChanges}
                 {...(isThemeEditor && {
                   currentMode: (state as ThemeEditorState).currentMode,
-                  onModeChange: handleModeChange
                 })}
               />
             </div>
@@ -158,7 +148,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                 styles={styles}
                 {...(isThemeEditor && {
                   currentMode: (state as ThemeEditorState).currentMode,
-                  onModeChange: handleModeChange
                 })}
               />
             </div>
