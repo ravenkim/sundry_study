@@ -1,8 +1,9 @@
 import { ButtonStyleProps, ButtonVariant, ButtonSize } from './button';
+import { ThemeStyles } from './theme';
 
 // Base interface for any editor's state
 export interface BaseEditorState {
-  styles: Record<string, any>;
+  styles: ButtonStyleProps | ThemeStyles;
 }
 
 // Interface for editor-specific controls
@@ -12,17 +13,23 @@ export interface EditorControls {
 
 // Interface for editor-specific preview props
 export interface EditorPreviewProps {
-  styles: Record<string, any>;
+  styles: ButtonStyleProps | ThemeStyles;
 }
 
 // Interface for editor-specific code generation
 export interface EditorCodeGenerator {
-  generateComponentCode: (styles: Record<string, any>) => string;
+  generateComponentCode: (styles: ButtonStyleProps | ThemeStyles) => string;
 }
 
 // Button-specific editor state
 export interface ButtonEditorState extends BaseEditorState {
   styles: ButtonStyleProps;
+}
+
+// Theme-specific editor state
+export interface ThemeEditorState extends BaseEditorState {
+  styles: ThemeStyles;
+  currentMode: 'light' | 'dark';
 }
 
 // Type for available editors

@@ -34,15 +34,25 @@ export interface ThemeStyleProps {
   'sidebar-ring': string;
 }
 
+export interface ThemeStyles {
+  light: ThemeStyleProps;
+  dark: ThemeStyleProps;
+}
+
 export interface ThemeEditorState {
-  styles: ThemeStyleProps;
+  styles: ThemeStyles;
+  currentMode: 'light' | 'dark';
 }
 
 export interface ThemeEditorPreviewProps {
-  styles: ThemeStyleProps;
+  styles: ThemeStyles;
+  currentMode: 'light' | 'dark';
+  onModeChange: (mode: 'light' | 'dark') => void;
 }
 
 export interface ThemeEditorControlsProps {
-  styles: ThemeStyleProps;
-  onChange: (styles: ThemeStyleProps) => void;
+  styles: ThemeStyles;
+  currentMode: 'light' | 'dark';
+  onChange: (styles: ThemeStyles) => void;
+  onModeChange: (mode: 'light' | 'dark') => void;
 } 

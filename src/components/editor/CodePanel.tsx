@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Copy, Check } from 'lucide-react';
-import { EditorCodeGenerator, EditorType } from '@/types/editor';
+import { EditorType } from '@/types/editor';
 
 interface CodePanelProps {
-  styles: Record<string, any>;
-  codeGenerator: EditorCodeGenerator;
+  code: string;
   editorType: EditorType;
 }
 
-const CodePanel: React.FC<CodePanelProps> = ({ styles, codeGenerator, editorType }) => {
+const CodePanel: React.FC<CodePanelProps> = ({ code, editorType }) => {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async (text: string) => {
@@ -21,8 +20,6 @@ const CodePanel: React.FC<CodePanelProps> = ({ styles, codeGenerator, editorType
       console.error('Failed to copy text:', err);
     }
   };
-
-  const componentCode = codeGenerator.generateComponentCode(styles);
 
   const getFileName = () => {
     switch (editorType) {
@@ -36,7 +33,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ styles, codeGenerator, editorType
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col p-4">
       <div className="flex-none px-2 mb-4">
         <h2 className="text-lg font-medium">Code</h2>
       </div>
@@ -47,15 +44,26 @@ const CodePanel: React.FC<CodePanelProps> = ({ styles, codeGenerator, editorType
           <Button 
             variant="ghost" 
             size="sm" 
-            onClick={() => copyToClipboard(componentCode)}
+            onClick={() => copyToClipboard(code)}
             className="h-8 px-2"
           >
-            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            <span className="ml-1 text-xs">Copy</span>
+            {copied ? (
+              <>
+                <Check className="h-4 w-4 mr-2" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="h-4 w-4 mr-2" />
+                Copy
+              </>
+            )}
           </Button>
         </div>
-        <div className="flex-1 overflow-auto bg-slate-950 p-4">
-          <pre className="text-sm font-mono text-slate-50 whitespace-pre-wrap">{componentCode}</pre>
+        <div className="flex-1 overflow-auto">
+          <pre className="h-full p-4 text-sm">
+            <code>{code}</code>
+          </pre>
         </div>
       </div>
     </div>

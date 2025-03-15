@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeEditorPreviewProps } from '@/types/theme';
 import { Sun, Moon } from 'lucide-react';
 
-const ThemePreviewPanel = ({ styles }: ThemeEditorPreviewProps) => {
-  const [previewMode, setPreviewMode] = useState<'light' | 'dark'>('light');
+const ThemePreviewPanel = ({ styles, currentMode, onModeChange }: ThemeEditorPreviewProps) => {
+  if (!styles || !styles[currentMode]) {
+    return null;
+  }
 
   const renderColorPreview = (label: string, color: string) => (
     <div className="flex items-center gap-4">
@@ -25,9 +27,9 @@ const ThemePreviewPanel = ({ styles }: ThemeEditorPreviewProps) => {
         <div className="flex border rounded-md overflow-hidden">
           <button
             type="button"
-            onClick={() => setPreviewMode('light')}
+            onClick={() => onModeChange('light')}
             className={`p-1.5 ${
-              previewMode === 'light' 
+              currentMode === 'light' 
                 ? 'bg-muted text-foreground' 
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             }`}
@@ -37,9 +39,9 @@ const ThemePreviewPanel = ({ styles }: ThemeEditorPreviewProps) => {
           </button>
           <button
             type="button"
-            onClick={() => setPreviewMode('dark')}
+            onClick={() => onModeChange('dark')}
             className={`p-1.5 ${
-              previewMode === 'dark' 
+              currentMode === 'dark' 
                 ? 'bg-muted text-foreground' 
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             }`}
@@ -50,40 +52,40 @@ const ThemePreviewPanel = ({ styles }: ThemeEditorPreviewProps) => {
         </div>
       </div>
 
-      <div className={`flex-1 rounded-lg border p-4 overflow-y-auto ${previewMode === 'dark' ? 'dark' : ''}`}>
+      <div className={`flex-1 rounded-lg border p-4 overflow-y-auto ${currentMode === 'dark' ? 'dark' : ''}`}>
         <div className="space-y-4">
-          {renderColorPreview('Background', styles.background)}
-          {renderColorPreview('Foreground', styles.foreground)}
-          {renderColorPreview('Card Background', styles.card)}
-          {renderColorPreview('Card Foreground', styles['card-foreground'])}
-          {renderColorPreview('Popover Background', styles.popover)}
-          {renderColorPreview('Popover Foreground', styles['popover-foreground'])}
-          {renderColorPreview('Primary', styles.primary)}
-          {renderColorPreview('Primary Foreground', styles['primary-foreground'])}
-          {renderColorPreview('Secondary', styles.secondary)}
-          {renderColorPreview('Secondary Foreground', styles['secondary-foreground'])}
-          {renderColorPreview('Muted', styles.muted)}
-          {renderColorPreview('Muted Foreground', styles['muted-foreground'])}
-          {renderColorPreview('Accent', styles.accent)}
-          {renderColorPreview('Accent Foreground', styles['accent-foreground'])}
-          {renderColorPreview('Destructive', styles.destructive)}
-          {renderColorPreview('Destructive Foreground', styles['destructive-foreground'])}
-          {renderColorPreview('Border', styles.border)}
-          {renderColorPreview('Input', styles.input)}
-          {renderColorPreview('Ring', styles.ring)}
-          {renderColorPreview('Chart 1', styles['chart-1'])}
-          {renderColorPreview('Chart 2', styles['chart-2'])}
-          {renderColorPreview('Chart 3', styles['chart-3'])}
-          {renderColorPreview('Chart 4', styles['chart-4'])}
-          {renderColorPreview('Chart 5', styles['chart-5'])}
-          {renderColorPreview('Sidebar Background', styles.sidebar)}
-          {renderColorPreview('Sidebar Foreground', styles['sidebar-foreground'])}
-          {renderColorPreview('Sidebar Primary', styles['sidebar-primary'])}
-          {renderColorPreview('Sidebar Primary Foreground', styles['sidebar-primary-foreground'])}
-          {renderColorPreview('Sidebar Accent', styles['sidebar-accent'])}
-          {renderColorPreview('Sidebar Accent Foreground', styles['sidebar-accent-foreground'])}
-          {renderColorPreview('Sidebar Border', styles['sidebar-border'])}
-          {renderColorPreview('Sidebar Ring', styles['sidebar-ring'])}
+          {renderColorPreview('Background', styles[currentMode].background)}
+          {renderColorPreview('Foreground', styles[currentMode].foreground)}
+          {renderColorPreview('Card Background', styles[currentMode].card)}
+          {renderColorPreview('Card Foreground', styles[currentMode]['card-foreground'])}
+          {renderColorPreview('Popover Background', styles[currentMode].popover)}
+          {renderColorPreview('Popover Foreground', styles[currentMode]['popover-foreground'])}
+          {renderColorPreview('Primary', styles[currentMode].primary)}
+          {renderColorPreview('Primary Foreground', styles[currentMode]['primary-foreground'])}
+          {renderColorPreview('Secondary', styles[currentMode].secondary)}
+          {renderColorPreview('Secondary Foreground', styles[currentMode]['secondary-foreground'])}
+          {renderColorPreview('Muted', styles[currentMode].muted)}
+          {renderColorPreview('Muted Foreground', styles[currentMode]['muted-foreground'])}
+          {renderColorPreview('Accent', styles[currentMode].accent)}
+          {renderColorPreview('Accent Foreground', styles[currentMode]['accent-foreground'])}
+          {renderColorPreview('Destructive', styles[currentMode].destructive)}
+          {renderColorPreview('Destructive Foreground', styles[currentMode]['destructive-foreground'])}
+          {renderColorPreview('Border', styles[currentMode].border)}
+          {renderColorPreview('Input', styles[currentMode].input)}
+          {renderColorPreview('Ring', styles[currentMode].ring)}
+          {renderColorPreview('Chart 1', styles[currentMode]['chart-1'])}
+          {renderColorPreview('Chart 2', styles[currentMode]['chart-2'])}
+          {renderColorPreview('Chart 3', styles[currentMode]['chart-3'])}
+          {renderColorPreview('Chart 4', styles[currentMode]['chart-4'])}
+          {renderColorPreview('Chart 5', styles[currentMode]['chart-5'])}
+          {renderColorPreview('Sidebar Background', styles[currentMode].sidebar)}
+          {renderColorPreview('Sidebar Foreground', styles[currentMode]['sidebar-foreground'])}
+          {renderColorPreview('Sidebar Primary', styles[currentMode]['sidebar-primary'])}
+          {renderColorPreview('Sidebar Primary Foreground', styles[currentMode]['sidebar-primary-foreground'])}
+          {renderColorPreview('Sidebar Accent', styles[currentMode]['sidebar-accent'])}
+          {renderColorPreview('Sidebar Accent Foreground', styles[currentMode]['sidebar-accent-foreground'])}
+          {renderColorPreview('Sidebar Border', styles[currentMode]['sidebar-border'])}
+          {renderColorPreview('Sidebar Ring', styles[currentMode]['sidebar-ring'])}
         </div>
       </div>
     </div>
