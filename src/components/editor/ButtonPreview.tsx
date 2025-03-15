@@ -8,10 +8,11 @@ const ButtonPreview = ({
   variant,
   size,
   label = 'Button',
+  disabled = false,
   className,
-  disabled = false
-}: ButtonPreviewProps & { disabled?: boolean }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  hover = false,
+}: ButtonPreviewProps) => {
+  const [isHovered, setIsHovered] = React.useState(hover);
   const themeState = useEditorStore(state => state.themeState?.styles);
   const mode = 'light'; // You might want to make this dynamic based on your app's theme mode
 
@@ -26,7 +27,7 @@ const ButtonPreview = ({
         const r = parseInt(result[1], 16);
         const g = parseInt(result[2], 16);
         const b = parseInt(result[3], 16);
-        return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
       }
     }
 
@@ -35,7 +36,7 @@ const ButtonPreview = ({
       const values = color.match(/\d+/g);
       if (values && values.length >= 3) {
         const [r, g, b] = values;
-        return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
       }
     }
 
@@ -45,7 +46,7 @@ const ButtonPreview = ({
       const values = color.match(/[\d.]+/g);
       if (values && values.length >= 3) {
         // Keep the original oklch values but add opacity
-        return color.replace(')', ` / ${opacity / 100})`);
+        return color.replace(')', ` / ${opacity})`);
       }
     }
 
@@ -54,7 +55,7 @@ const ButtonPreview = ({
       const values = color.match(/[\d.]+/g);
       if (values && values.length >= 3) {
         const [h, s, l] = values;
-        return `hsla(${h}, ${s}%, ${l}%, ${opacity / 100})`;
+        return `hsla(${h}, ${s}%, ${l}%, ${opacity})`;
       }
     }
 
@@ -67,13 +68,13 @@ const ButtonPreview = ({
     default: {
       color: themeState[mode]['primary-foreground'],
       backgroundColor: isHovered
-        ? parseColor(themeState[mode].primary, (styles.hoverBackgroundOpacity))
+        ? parseColor(themeState[mode].primary, (styles.hoverBackgroundOpacity) / 100)
         : themeState[mode].primary,
     },
     destructive: {
       color: themeState[mode]['destructive-foreground'],
       backgroundColor: isHovered
-        ? parseColor(themeState[mode].destructive, (styles.hoverBackgroundOpacity))
+        ? parseColor(themeState[mode].destructive, (styles.hoverBackgroundOpacity) / 100)
         : themeState[mode].destructive,
     },
     outline: {
@@ -83,7 +84,7 @@ const ButtonPreview = ({
       borderWidth: '1px',
     },
     secondary: {
-      backgroundColor: isHovered ? parseColor(themeState[mode].secondary, (styles.hoverBackgroundOpacity)) : themeState[mode].secondary,
+      backgroundColor: isHovered ? parseColor(themeState[mode].secondary, (styles.hoverBackgroundOpacity) / 100) : themeState[mode].secondary,
       color: themeState[mode]['secondary-foreground'],
     },
     ghost: {
@@ -132,23 +133,20 @@ const ButtonPreview = ({
     ...variantStyles[variant],
     // Move color after variantStyles to ensure it takes precedence
     color: isHovered ? styles.hoverTextColor : styles.textColor,
-    // Add disabled styles
-    opacity: disabled ? 0.5 : 1,
-    cursor: disabled ? 'not-allowed' : 'pointer',
   };
 
   return (
     <button
-      className={cn(
+    className={cn(
         baseClasses,
         sizeClasses[size],
-        className
+        className,
+        disabled && 'opacity-50 cursor-not-allowed'
       )}
       type="button"
       style={customStyles}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      disabled={disabled}
+      onMouseEnter={() => { if (!disabled) setIsHovered(true)} }
+      onMouseLeave={() => { if (!hover) setIsHovered(false)} }
     >
       {label}
     </button>

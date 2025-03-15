@@ -103,6 +103,8 @@ export type ButtonPreviewProps = {
   size: ButtonSize;
   label?: string;
   className?: string;
+  disabled?: boolean;
+  hover?: boolean;
 };
 
 export type ReadOnlyColorDisplayProps = {

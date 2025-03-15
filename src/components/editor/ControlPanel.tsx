@@ -66,7 +66,7 @@ const ReadOnlyColorDisplay = ({
 };
 
 // Helper function for slider with numeric input
-const SliderWithInput = React.useCallback(({ 
+const SliderWithInput = ({ 
   value, 
   onChange,
   min, 
@@ -127,7 +127,7 @@ const SliderWithInput = React.useCallback(({
       />
     </div>
   );
-}, []);
+};
 
 const ControlPanel = ({ 
   styles, 
