@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CodePanelProps } from '@/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -36,16 +35,16 @@ const CodePanel = ({ styles, variant, size }: CodePanelProps) => {
         </p>
       </div>
       
-      <Tabs defaultValue="component" className="flex-1 flex flex-col">
+      <Tabs defaultValue="component" className="flex-1 flex flex-col min-h-0">
         <TabsList className="mb-4">
           <TabsTrigger value="component">Component</TabsTrigger>
-          <TabsTrigger value="css">CSS</TabsTrigger>
+          {/* <TabsTrigger value="css">CSS</TabsTrigger>
           <TabsTrigger value="tailwind">Tailwind Config</TabsTrigger>
-          <TabsTrigger value="shadcn">ShadCN Config</TabsTrigger>
+          <TabsTrigger value="shadcn">ShadCN Config</TabsTrigger> */}
         </TabsList>
         
-        <div className="flex-1 overflow-hidden">
-          <TabsContent value="component" className="h-full mt-0 flex flex-col">
+        <div className="flex-1 overflow-hidden min-h-0">
+          <TabsContent value="component" className="h-full mt-0 flex flex-col min-h-0">
             <div className="flex justify-between items-center mb-2 px-4 py-2 border-b">
               <span className="text-xs font-medium">button.tsx</span>
               <Button 
@@ -58,7 +57,7 @@ const CodePanel = ({ styles, variant, size }: CodePanelProps) => {
                 <span className="ml-1 text-xs">Copy</span>
               </Button>
             </div>
-            <div className="flex-1 overflow-auto bg-slate-950 rounded-md p-4 text-sm font-mono text-slate-50">
+            <div className="flex-1 overflow-auto bg-slate-950 rounded-md p-4 text-sm font-mono text-slate-50 min-h-0">
               <pre className="whitespace-pre-wrap">{componentCode}</pre>
             </div>
           </TabsContent>

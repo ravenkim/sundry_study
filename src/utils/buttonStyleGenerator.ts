@@ -253,17 +253,30 @@ export const generateButtonComponentCode = (
   variant: ButtonVariant,
   size: ButtonSize
 ): string => {
-  return `// Modified button.tsx component
-import * as React from "react"
+  // Helper function to get text transform class
+  const getTextTransformClass = (transform: string) => {
+    switch (transform) {
+      case 'uppercase':
+        return 'uppercase';
+      case 'lowercase':
+        return 'lowercase';
+      case 'capitalize':
+        return 'capitalize';
+      default:
+        return '';
+    }
+  };
+
+  return `import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-[${styles.backgroundColor}] text-[${styles.textColor}] hover:bg-[${styles.hoverBackgroundColor}]",
+        default: \`bg-[${styles.backgroundColor}] text-[${styles.textColor}] border-[${styles.borderWidth}px] border-[${styles.borderColor}] rounded-[${styles.borderRadius}px] text-[${styles.fontSize}px] font-[${styles.fontWeight}] px-[${styles.paddingX}px] py-[${styles.paddingY}px] shadow-[${styles.shadowOffsetX}px_${styles.shadowOffsetY}px_${styles.shadowBlur}px_${styles.shadowSpread}px_${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}] tracking-[${styles.letterSpacing}em] leading-[${styles.lineHeight}] ${getTextTransformClass(styles.textTransform)} transition-all duration-[${styles.transitionDuration}ms] ease-[${styles.transitionEasing}] hover:bg-[${styles.hoverBackgroundColor}] hover:text-[${styles.hoverTextColor}] hover:border-[${styles.hoverBorderColor}] focus:border-[${styles.focusBorderColor}] focus:shadow-[0_0_0_${styles.focusRingWidth}px_${styles.focusRingColor}] active:bg-[${styles.activeBackgroundColor}] active:text-[${styles.activeTextColor}] active:border-[${styles.activeBorderColor}]\`,
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -274,9 +287,9 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
+        default: "h-9",
+        sm: "h-8 text-xs",
+        lg: "h-10",
         icon: "h-9 w-9",
       },
     },

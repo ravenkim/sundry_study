@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ControlPanelProps, ButtonVariant, ButtonSize } from '@/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -17,12 +16,12 @@ const ControlPanel = ({
   size,
   onSizeChange
 }: ControlPanelProps) => {
-  const updateStyle = <K extends keyof typeof styles>(key: K, value: typeof styles[K]) => {
+  const updateStyle = React.useCallback(<K extends keyof typeof styles>(key: K, value: typeof styles[K]) => {
     onChange({ ...styles, [key]: value });
-  };
+  }, [onChange, styles]);
 
   // Helper function for slider with numeric input
-  const SliderWithInput = ({ 
+  const SliderWithInput = React.useCallback(({ 
     value, 
     onChange,
     min, 
@@ -38,37 +37,52 @@ const ControlPanel = ({
     step?: number;
     label: string;
     unit?: string;
-  }) => (
-    <div className="mb-3">
-      <div className="flex items-center justify-between mb-1.5">
-        <Label htmlFor={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
-          {label}
-        </Label>
-        <div className="flex items-center gap-1">
-          <Input
-            id={`input-${label.replace(/\s+/g, '-').toLowerCase()}`}
-            type="number"
-            value={value}
-            onChange={(e) => onChange(Number(e.target.value))}
-            min={min}
-            max={max}
-            step={step}
-            className="h-6 w-16 text-xs px-2"
-          />
-          <span className="text-xs text-muted-foreground">{unit}</span>
+  }) => {
+    const [localValue, setLocalValue] = React.useState(value);
+
+    React.useEffect(() => {
+      setLocalValue(value);
+    }, [value]);
+
+    return (
+      <div className="mb-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <Label htmlFor={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+            {label}
+          </Label>
+          <div className="flex items-center gap-1">
+            <Input
+              id={`input-${label.replace(/\s+/g, '-').toLowerCase()}`}
+              type="number"
+              value={localValue}
+              onChange={(e) => {
+                const newValue = Number(e.target.value);
+                setLocalValue(newValue);
+                onChange(newValue);
+              }}
+              min={min}
+              max={max}
+              step={step}
+              className="h-6 w-16 text-xs px-2"
+            />
+            <span className="text-xs text-muted-foreground">{unit}</span>
+          </div>
         </div>
+        <Slider
+          id={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`}
+          value={[localValue]}
+          min={min}
+          max={max}
+          step={step}
+          onValueChange={(values) => {
+            setLocalValue(values[0]);
+            onChange(values[0]);
+          }}
+          className="py-1"
+        />
       </div>
-      <Slider
-        id={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`}
-        value={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(values) => onChange(values[0])}
-        className="py-1"
-      />
-    </div>
-  );
+    );
+  }, []);
 
   return (
     <div className="h-full overflow-y-auto pb-4 scrollbar-hide">

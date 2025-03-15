@@ -22,27 +22,20 @@ const Index = () => {
   useEffect(() => {
     setStyles(getDefaultButtonStyles(variant));
   }, [variant]);
+
+  const handleStyleChange = React.useCallback((newStyles: ButtonStyleProps) => {
+    setStyles(newStyles);
+  }, []);
   
   return (
     <div className="h-screen w-full bg-editor overflow-hidden flex flex-col">
       <header className="h-14 border-b px-4 flex items-center justify-between bg-background/80 backdrop-blur-sm z-10">
-        <div className="flex items-center">
-          <h1 className="text-xl font-medium">Button Magic Editor</h1>
-          <div className="ml-4 text-sm text-muted-foreground hidden md:block">
-            ShadCN Button Customizer
-          </div>
+        <div className="flex items-center gap-2">
+          <h1 className="text-xl font-bold">tweakcn</h1>
+          <span className="bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-full">BETA</span>
         </div>
         
         <div className="flex items-center gap-2">
-          <a 
-            href="https://ui.shadcn.com/docs/components/button" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-sm text-muted-foreground hover:text-foreground hidden md:block"
-          >
-            ShadCN Button Docs
-          </a>
-          
           <button
             className="md:hidden block p-2"
             onClick={() => setShowMobileNav(!showMobileNav)}
@@ -76,7 +69,7 @@ const Index = () => {
               <div className="h-full p-4 overflow-y-auto">
                 <ControlPanel 
                   styles={styles} 
-                  onChange={setStyles}
+                  onChange={handleStyleChange}
                   variant={variant}
                   onVariantChange={setVariant}
                   size={size}
@@ -96,7 +89,7 @@ const Index = () => {
             <ResizableHandle withHandle />
             
             <ResizablePanel defaultSize={30}>
-              <div className="h-full p-4">
+              <div className="h-full p-4 overflow-hidden">
                 <CodePanel styles={styles} variant={variant} size={size} />
               </div>
             </ResizablePanel>
@@ -116,7 +109,7 @@ const Index = () => {
               <TabsContent value="controls" className="h-full m-0 overflow-y-auto p-4">
                 <ControlPanel 
                   styles={styles} 
-                  onChange={setStyles}
+                  onChange={handleStyleChange}
                   variant={variant}
                   onVariantChange={setVariant}
                   size={size}
@@ -170,27 +163,6 @@ const Index = () => {
                 </svg>
               </button>
               <h2 className="text-xl font-medium">Menu</h2>
-            </div>
-            
-            <div className="p-4">
-              <nav className="space-y-4">
-                <a 
-                  href="https://ui.shadcn.com/docs/components/button" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block p-2 hover:bg-muted rounded-md"
-                >
-                  ShadCN Button Docs
-                </a>
-                <a 
-                  href="https://github.com/shadcn-ui/ui" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block p-2 hover:bg-muted rounded-md"
-                >
-                  ShadCN GitHub
-                </a>
-              </nav>
             </div>
           </div>
         </div>
