@@ -43,7 +43,7 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
     textColor: '#ffffff',
     borderColor: 'transparent',
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 6,
     fontSize: 14,
     fontWeight: '500',
     paddingX: 16,

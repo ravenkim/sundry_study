@@ -11,7 +11,7 @@ const defaultButtonStyles: ButtonStyleProps = {
   textColor: '#ffffff',
   borderColor: '#000000',
   borderWidth: 0,
-  borderRadius: 4,
+  borderRadius: 6,
   paddingX: 16,
   paddingY: 8,
   fontSize: 14,

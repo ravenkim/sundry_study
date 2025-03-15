@@ -14,6 +14,7 @@ export type ButtonStyleProps = {
   hoverBackgroundColor: string;
   hoverTextColor: string;
   hoverBorderColor: string;
+  hoverBackgroundOpacity: number;
   
   // Focus states
   focusBorderColor: string;

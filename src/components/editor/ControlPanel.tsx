@@ -85,7 +85,7 @@ const ControlPanel = ({
 
   return (
     <div className="h-full overflow-y-auto pb-4 scrollbar-hide">
-      <div className="sticky top-0 z-10 pb-2 mb-2">
+      <div className="sticky top-0 z-10 pb-2 mb-2 bg-background">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-medium">Button Editor</h2>
           {hasChanges && <ResetButton onReset={onReset} label="Reset button styles" />}
@@ -235,6 +235,15 @@ const ControlPanel = ({
               color={styles.hoverBackgroundColor} 
               onChange={(color) => updateStyle('hoverBackgroundColor', color)} 
               label="Hover Background" 
+            />
+            <SliderWithInput 
+              value={styles.hoverBackgroundOpacity ?? 90} 
+              onChange={(value) => updateStyle('hoverBackgroundOpacity', value)} 
+              min={0} 
+              max={100} 
+              step={1} 
+              label="Hover Background Opacity" 
+              unit="%"
             />
             <ColorPicker 
               color={styles.hoverTextColor} 

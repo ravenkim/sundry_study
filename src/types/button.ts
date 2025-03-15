@@ -21,6 +21,7 @@ export interface ButtonStyleProps {
   shadowBlur: number;
   shadowSpread: number;
   hoverBackgroundColor: string;
+  hoverBackgroundOpacity: number;
   hoverTextColor: string;
   hoverBorderColor: string;
   focusBorderColor: string;
@@ -29,4 +30,6 @@ export interface ButtonStyleProps {
   activeBackgroundColor: string;
   activeTextColor: string;
   activeBorderColor: string;
+  transitionDuration: number;
+  transitionEasing: string;
 } 

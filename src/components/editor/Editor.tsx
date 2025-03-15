@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -88,7 +87,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
               <ResizableHandle />
               <ResizablePanel defaultSize={40} minSize={30}>
                 <CodePanel
-                  code={config.codeGenerator.generateComponentCode(state)}
+                  code={config.codeGenerator.generateComponentCode(isThemeEditor ? state.styles : state)}
                   editorType={config.type}
                 />
               </ResizablePanel>
@@ -143,7 +142,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           </TabsContent>
           <TabsContent value="code" className="h-[calc(100%-2.5rem)]">
             <CodePanel
-              code={config.codeGenerator.generateComponentCode(state)}
+              code={config.codeGenerator.generateComponentCode(isThemeEditor ? state.styles : state)}
               editorType={config.type}
             />
           </TabsContent>
