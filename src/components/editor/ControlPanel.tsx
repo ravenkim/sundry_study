@@ -7,10 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import ControlSection from './ControlSection';
 import ColorPicker from './ColorPicker';
+import ResetButton from './ResetButton';
 
 const ControlPanel = ({ 
   styles, 
-  onChange
+  onChange,
+  onReset,
+  hasChanges = false
 }: ControlPanelProps) => {
   const updateStyle = React.useCallback(<K extends keyof typeof styles>(key: K, value: typeof styles[K]) => {
     onChange({ ...styles, [key]: value });
@@ -83,7 +86,10 @@ const ControlPanel = ({
   return (
     <div className="h-full overflow-y-auto pb-4 scrollbar-hide">
       <div className="sticky top-0 z-10 pb-2 mb-2">
-        <h2 className="text-lg font-medium mb-4">Button Editor</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-medium">Button Editor</h2>
+          {hasChanges && <ResetButton onReset={onReset} label="Reset button styles" />}
+        </div>
       </div>
       
       <Tabs defaultValue="appearance">

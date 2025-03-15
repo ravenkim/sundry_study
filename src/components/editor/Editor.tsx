@@ -5,8 +5,10 @@ import { EditorConfig, BaseEditorState, ButtonEditorState, ThemeEditorState } fr
 import { ThemeStyles } from '@/types/theme';
 import { ButtonStyleProps } from '@/types/button';
 import CodePanel from './CodePanel';
-import { Sliders } from 'lucide-react';
+import { Sliders, RotateCcw } from 'lucide-react';
 import { useEditorStore } from '@/store/editorStore';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 interface EditorProps {
   config: EditorConfig;
@@ -18,11 +20,13 @@ const isThemeStyles = (styles: any): styles is ThemeStyles => {
 };
 
 const Editor: React.FC<EditorProps> = ({ config }) => {
-  const { buttonState, themeState, setButtonState, setThemeState } = useEditorStore();
+  const { buttonState, themeState, setButtonState, setThemeState, resetToDefault, hasStateChanged } = useEditorStore();
+  const { toast } = useToast();
   const Controls = config.controls;
   const Preview = config.preview;
   
   const state = config.type === 'theme' ? themeState : buttonState;
+  const hasChanges = hasStateChanged(config.type);
   
   const handleStyleChange = (newStyles: ThemeStyles | ButtonStyleProps) => {
     if (config.type === 'theme') {
@@ -36,6 +40,14 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
     if (config.type === 'theme') {
       setThemeState({ ...themeState, currentMode: mode });
     }
+  };
+
+  const handleReset = () => {
+    resetToDefault(config.type);
+    toast({
+      title: "Reset successful",
+      description: "All settings have been restored to their default values.",
+    });
   };
 
   const isThemeEditor = config.type === 'theme';
@@ -55,6 +67,8 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
               <Controls
                 styles={state.styles}
                 onChange={handleStyleChange}
+                onReset={handleReset}
+                hasChanges={hasChanges}
                 {...(isThemeEditor && {
                   currentMode: (state as ThemeEditorState).currentMode,
                   onModeChange: handleModeChange
@@ -101,9 +115,25 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           </TabsList>
           <TabsContent value="controls" className="h-[calc(100%-2.5rem)]">
             <div className="h-full p-4 overflow-y-auto">
+              <div className="sticky top-0 z-10 pb-2 mb-2 flex items-center justify-between">
+                <h2 className="text-lg font-medium">Controls</h2>
+                {hasChanges && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleReset}
+                    className="gap-2"
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                    Reset
+                  </Button>
+                )}
+              </div>
               <Controls
                 styles={styles}
                 onChange={handleStyleChange}
+                onReset={handleReset}
+                hasChanges={hasChanges}
                 {...(isThemeEditor && {
                   currentMode: (state as ThemeEditorState).currentMode,
                   onModeChange: handleModeChange

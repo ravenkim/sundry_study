@@ -79,6 +79,8 @@ export type ToggleOptionProps<T> = {
 export type ControlPanelProps = {
   styles: ButtonStyleProps;
   onChange: (styles: ButtonStyleProps) => void;
+  onReset: () => void;
+  hasChanges?: boolean;
 };
 
 export type PreviewPanelProps = {
