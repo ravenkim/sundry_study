@@ -1,20 +1,15 @@
 # tweakcn
 
-A visual editor for ShadCN UI components. Currently in beta with button component support.
-
-![tweakcn](https://github.com/jnsahaj/tweakcn/assets/1234567890/preview.png)
+A visual editor for shadcn/ui components. Currently in beta with button component support.
 
 ## About
 
-tweakcn is a tool that helps you customize ShadCN UI components visually. Instead of writing code manually, you can use the visual editor to create and customize components, then copy the generated code into your project.
-
-Currently in beta, we're starting with the button component. Support for all other ShadCN components will be added in future releases.
+Websites made with shadcn/ui famously look the same. tweakcn is a tool that helps you customize shadcn/ui components visually, to make your components stand-out.
+Currently in beta, only starting with the button component. Support for all other shadcn/ui components will be added in future releases.
 
 ## Current Features
 
 - Visual button customizer with real-time preview
-- Support for all button variants (default, primary, secondary, destructive, outline, ghost, link)
-- Customizable button sizes (default, sm, lg, icon)
 - Full control over:
   - Colors (background, text, border)
   - Dimensions (padding, border radius)
