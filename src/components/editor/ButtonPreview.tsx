@@ -2,7 +2,6 @@
 import React from 'react';
 import { ButtonPreviewProps } from '@/types';
 import { cn } from '@/lib/utils';
-import { generateButtonClassName } from '@/utils/buttonStyleGenerator';
 
 const ButtonPreview = ({ 
   styles, 
@@ -11,72 +10,56 @@ const ButtonPreview = ({
   label = 'Button',
   className 
 }: ButtonPreviewProps) => {
-  // Generate the className for the button based on the current styles
-  const buttonClassName = generateButtonClassName(styles, variant, size);
+  // Base Tailwind classes
+  const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
   
-  // Apply inline styles for properties that can't be reliably set through className
-  const inlineStyle = {
-    // Ensure colors are applied correctly
-    backgroundColor: styles.backgroundColor,
-    color: styles.textColor,
-    borderColor: styles.borderColor,
-    borderWidth: `${styles.borderWidth}px`,
+  // Variant classes
+  const variantClasses = {
+    default: "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/70",
+    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/70",
+    outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:bg-accent/80",
+    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/60",
+    ghost: "hover:bg-accent hover:text-accent-foreground active:bg-accent/80",
+    link: "text-primary underline-offset-4 hover:underline"
+  };
+  
+  // Size classes
+  const sizeClasses = {
+    default: "h-10 px-4 py-2",
+    sm: "h-9 rounded-md px-3 text-sm",
+    lg: "h-11 rounded-md px-8 text-lg",
+    icon: "h-10 w-10"
+  };
+  
+  // Apply custom styles that cannot be handled by Tailwind classes
+  const customStyles = {
     borderRadius: `${styles.borderRadius}px`,
     fontSize: `${styles.fontSize}px`,
     fontWeight: styles.fontWeight,
-    padding: `${styles.paddingY}px ${styles.paddingX}px`,
-    boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}`,
     letterSpacing: `${styles.letterSpacing}em`,
     lineHeight: styles.lineHeight,
     textTransform: styles.textTransform as any,
-    transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
+    // Add box shadow only if opacity > 0
+    ...(styles.shadowOpacity > 0 && {
+      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}`
+    }),
+    // Add border only if width > 0
+    ...(styles.borderWidth > 0 && {
+      borderWidth: `${styles.borderWidth}px`,
+      borderColor: styles.borderColor
+    })
   };
   
   return (
     <button 
-      className={cn(buttonClassName, className)}
+      className={cn(
+        baseClasses, 
+        variantClasses[variant], 
+        sizeClasses[size], 
+        className
+      )}
       type="button"
-      style={inlineStyle}
-      onMouseOver={(e) => {
-        // Apply hover styles on mouseover
-        const target = e.currentTarget;
-        target.style.backgroundColor = styles.hoverBackgroundColor;
-        target.style.color = styles.hoverTextColor;
-        target.style.borderColor = styles.hoverBorderColor;
-      }}
-      onMouseOut={(e) => {
-        // Revert to normal styles on mouseout
-        const target = e.currentTarget;
-        target.style.backgroundColor = styles.backgroundColor;
-        target.style.color = styles.textColor;
-        target.style.borderColor = styles.borderColor;
-      }}
-      onFocus={(e) => {
-        // Apply focus styles on focus
-        const target = e.currentTarget;
-        target.style.borderColor = styles.focusBorderColor;
-        target.style.boxShadow = `0 0 0 ${styles.focusRingWidth}px ${styles.focusRingColor}`;
-      }}
-      onBlur={(e) => {
-        // Revert to normal styles on blur
-        const target = e.currentTarget;
-        target.style.borderColor = styles.borderColor;
-        target.style.boxShadow = `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}`;
-      }}
-      onMouseDown={(e) => {
-        // Apply active styles on mousedown
-        const target = e.currentTarget;
-        target.style.backgroundColor = styles.activeBackgroundColor;
-        target.style.color = styles.activeTextColor;
-        target.style.borderColor = styles.activeBorderColor;
-      }}
-      onMouseUp={(e) => {
-        // Revert to hover styles on mouseup (assuming we're still hovering)
-        const target = e.currentTarget;
-        target.style.backgroundColor = styles.hoverBackgroundColor;
-        target.style.color = styles.hoverTextColor;
-        target.style.borderColor = styles.hoverBorderColor;
-      }}
+      style={customStyles}
     >
       {label}
     </button>

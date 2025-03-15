@@ -1,3 +1,4 @@
+
 import { ButtonStyleProps, ButtonVariant, ButtonSize } from './button';
 import { ThemeStyles } from './theme';
 
@@ -18,12 +19,14 @@ export interface EditorPreviewProps {
 
 // Interface for editor-specific code generation
 export interface EditorCodeGenerator {
-  generateComponentCode: (styles: ButtonStyleProps | ThemeStyles) => string;
+  generateComponentCode: (styles: any) => string;
 }
 
 // Button-specific editor state
 export interface ButtonEditorState extends BaseEditorState {
   styles: ButtonStyleProps;
+  variant: ButtonVariant;
+  size: ButtonSize;
 }
 
 // Theme-specific editor state
@@ -42,6 +45,6 @@ export interface EditorConfig {
   description: string;
   defaultState: BaseEditorState;
   controls: React.ComponentType<any>;
-  preview: React.ComponentType<EditorPreviewProps>;
+  preview: React.ComponentType<any>;
   codeGenerator: EditorCodeGenerator;
-} 
+}

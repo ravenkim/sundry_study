@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -52,10 +53,10 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
 
   const isThemeEditor = config.type === 'theme';
 
-  // Ensure we have valid theme styles for theme editor
-  const styles = isThemeEditor && !isThemeStyles(state.styles) 
-    ? (config.defaultState as ThemeEditorState).styles 
-    : state.styles;
+  // For button editor, pass the entire state
+  const previewProps = isThemeEditor 
+    ? { styles: state.styles, currentMode: (state as ThemeEditorState).currentMode, onModeChange: handleModeChange }
+    : { ...state };
 
   return (
     <div className="h-full overflow-hidden">
@@ -81,19 +82,13 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             <ResizablePanelGroup direction="horizontal" className="h-full">
               <ResizablePanel defaultSize={60} minSize={40}>
                 <div className="h-full p-4">
-                  <Preview
-                    styles={styles}
-                    {...(isThemeEditor && {
-                      currentMode: (state as ThemeEditorState).currentMode,
-                      onModeChange: handleModeChange
-                    })}
-                  />
+                  <Preview {...previewProps} />
                 </div>
               </ResizablePanel>
               <ResizableHandle />
               <ResizablePanel defaultSize={40} minSize={30}>
                 <CodePanel
-                  code={config.codeGenerator.generateComponentCode(styles)}
+                  code={config.codeGenerator.generateComponentCode(state)}
                   editorType={config.type}
                 />
               </ResizablePanel>
@@ -130,7 +125,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                 )}
               </div>
               <Controls
-                styles={styles}
+                styles={state.styles}
                 onChange={handleStyleChange}
                 onReset={handleReset}
                 hasChanges={hasChanges}
@@ -143,18 +138,12 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           </TabsContent>
           <TabsContent value="preview" className="h-[calc(100%-2.5rem)]">
             <div className="h-full p-4">
-              <Preview
-                styles={styles}
-                {...(isThemeEditor && {
-                  currentMode: (state as ThemeEditorState).currentMode,
-                  onModeChange: handleModeChange
-                })}
-              />
+              <Preview {...previewProps} />
             </div>
           </TabsContent>
           <TabsContent value="code" className="h-[calc(100%-2.5rem)]">
             <CodePanel
-              code={config.codeGenerator.generateComponentCode(styles)}
+              code={config.codeGenerator.generateComponentCode(state)}
               editorType={config.type}
             />
           </TabsContent>
