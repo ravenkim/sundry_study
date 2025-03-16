@@ -1,14 +1,16 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EditorConfig, BaseEditorState, ThemeEditorState } from '@/types/editor';
 import { ThemeStyles } from '@/types/theme';
 import { ButtonStyleProps } from '@/types/button';
 import CodePanel from './CodePanel';
-import { Sliders } from 'lucide-react';
+import { PanelRightClose, PanelRightOpen, Sliders } from 'lucide-react';
 import { useEditorStore } from '@/store/editorStore';
 import { useToast } from '@/components/ui/use-toast';
 import { convertToHSL } from '../../utils/colorConverter';
+import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 interface EditorProps {
   config: EditorConfig;
@@ -24,6 +26,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
   const { toast } = useToast();
   const Controls = config.controls;
   const Preview = config.preview;
+  const [isCodePanelOpen, setIsCodePanelOpen] = useState(true);
 
   const state = config.type === 'theme' ? themeState : buttonState;
   const hasChanges = hasStateChanged(config.type);
@@ -53,10 +56,8 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
 
   useLayoutEffect(() => {
     const mode = themeState.currentMode;
-    let root: Element | null = null;
-    if (mode === 'light') {
-      root = document.querySelector('.preview-theme');
-    } else if (mode === 'dark') {
+    let root = document.querySelector('.preview-theme');
+    if (mode === 'dark') {
       root = document.querySelector('.preview-theme-dark');
     }
     if (!root) {
@@ -70,7 +71,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       if (typeof value === 'string' && (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl'))) {
         // Convert the color to HSL format
         const hslValue = convertToHSL(value);
-        root.style.setProperty(`--${key}`, hslValue);
+        root?.setAttribute(`style`, `${root.getAttribute('style') || ''}--${key}: ${hslValue};`);
       }
     });
   }, [themeState]);
@@ -95,25 +96,52 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           </ResizablePanel>
           <ResizableHandle />
           <ResizablePanel defaultSize={75}>
-            <ResizablePanelGroup direction="horizontal" className="h-full">
-              <ResizablePanel defaultSize={75} minSize={40}>
-                <div className="h-full p-4">
-                  <Preview
-                    styles={styles}
-                    {...(isThemeEditor && {
-                      currentMode: (state as ThemeEditorState).currentMode,
-                    })}
-                  />
-                </div>
-              </ResizablePanel>
-              <ResizableHandle />
-              <ResizablePanel defaultSize={25} minSize={20}>
-                <CodePanel
-                  code={config.codeGenerator.generateComponentCode(styles)}
-                  editorType={config.type}
-                />
-              </ResizablePanel>
-            </ResizablePanelGroup>
+            <div className="h-full flex flex-col">
+              <div className="flex-1 min-h-0">
+                <Collapsible
+                  open={isCodePanelOpen}
+                  onOpenChange={setIsCodePanelOpen}
+                  className="h-full"
+                >
+                  <div className="h-full flex">
+                    <div className="flex-1 p-4">
+                      <Preview
+                        styles={styles}
+                        {...(isThemeEditor && {
+                          currentMode: (state as ThemeEditorState).currentMode,
+                        })}
+                      />
+                    </div>
+
+                    <CollapsibleContent className="w-1/3 border-l transition-all">
+                      <CodePanel
+                        code={config.codeGenerator.generateComponentCode(styles)}
+                        editorType={config.type}
+                      />
+                    </CollapsibleContent>
+                  </div>
+
+                  <CollapsibleTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-2 top-20 z-10"
+                      aria-label={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
+                      title={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
+                    >
+                      {isCodePanelOpen ? (
+                        <PanelRightClose className="h-4 w-4" />
+                      ) : (
+                        <>
+                          <PanelRightOpen className="h-4 w-4" />
+                          Code
+                        </>
+                      )}
+                    </Button>
+                  </CollapsibleTrigger>
+                </Collapsible>
+              </div>
+            </div>
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>

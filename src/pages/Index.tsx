@@ -33,25 +33,16 @@ const Index = () => {
       <header className="border-b">
         <div className="px-4 py-4 flex items-center gap-2 justify-between">
           <div className="flex items-center gap-1">
-            <h1 className="text-2xl font-bold">tweakcn</h1>
-            <Badge
-              variant="secondary"
-              className="hidden md:block"
-            >
-              BETA
-            </Badge>
-            <div className="ml-2">
-              <EditorCombobox />
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            <EditorCombobox />
+            <Button variant="secondary" size="icon" onClick={toggleTheme}>
               {themeState.currentMode === "light" ? (
                 <Sun className="h-6 w-6" />
               ) : (
                 <Moon className="h-6 w-6" />
               )}
             </Button>
+          </div>
+          <div className="flex items-center gap-2">
             <Button variant="ghost" asChild size="icon">
               <a
                 href="https://github.com/jnsahaj/tweakcn"

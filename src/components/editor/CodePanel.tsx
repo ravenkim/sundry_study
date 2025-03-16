@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Copy, Check } from 'lucide-react';
@@ -47,16 +48,17 @@ const CodePanel: React.FC<CodePanelProps> = ({ code, editorType }) => {
             size="sm"
             onClick={() => copyToClipboard(code)}
             className="h-8 px-2"
+            aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
           >
             {copied ? (
               <>
                 <Check className="h-4 w-4 mr-2" />
-                Copied!
+                <span className="sr-only md:not-sr-only">Copied!</span>
               </>
             ) : (
               <>
                 <Copy className="h-4 w-4 mr-2" />
-                Copy
+                <span className="sr-only md:not-sr-only">Copy</span>
               </>
             )}
           </Button>
