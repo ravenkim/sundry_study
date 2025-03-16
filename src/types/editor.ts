@@ -1,6 +1,5 @@
-
-import { ButtonStyleProps, ButtonVariant, ButtonSize } from './button';
-import { ThemeStyles } from './theme';
+import { ButtonStyleProps, ButtonVariant, ButtonSize } from "./button";
+import { ThemeStyles } from "./theme";
 
 // Base interface for any editor's state
 export interface BaseEditorState {
@@ -31,12 +30,13 @@ export interface ButtonEditorState extends BaseEditorState {
 
 // Theme-specific editor state
 export interface ThemeEditorState extends BaseEditorState {
+  preset?: string;
   styles: ThemeStyles;
-  currentMode: 'light' | 'dark';
+  currentMode: "light" | "dark";
 }
 
 // Type for available editors
-export type EditorType = 'button' | 'input' | 'card' | 'dialog' | 'theme';
+export type EditorType = "button" | "input" | "card" | "dialog" | "theme";
 
 // Interface for editor configuration
 export interface EditorConfig {

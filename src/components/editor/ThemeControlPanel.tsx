@@ -5,6 +5,10 @@ import ColorPicker from "./ColorPicker";
 import ResetButton from "./ResetButton";
 import { useLocation } from "react-router-dom";
 import { ScrollArea } from "../ui/scroll-area";
+import ThemePresetSelect from "./ThemePresetSelect";
+import { presets } from "../../utils/themePresets";
+import { useEditorStore } from "../../store/editorStore";
+import { Label } from "../ui/label";
 
 const ThemeControlPanel = ({
   styles,
@@ -14,6 +18,7 @@ const ThemeControlPanel = ({
   hasChanges = false,
 }: ThemeEditorControlsProps) => {
   const location = useLocation();
+  const { applyThemePreset, themeState } = useEditorStore();
 
   useEffect(() => {
     // Handle hash navigation
@@ -28,11 +33,8 @@ const ThemeControlPanel = ({
     }
   }, [location.hash]);
 
-  // Ensure we have valid styles for the current mode
+
   const currentStyles = styles?.[currentMode];
-  if (!currentStyles) {
-    return null; // Or some fallback UI
-  }
 
   const updateStyle = React.useCallback(
     <K extends keyof typeof currentStyles>(
@@ -50,6 +52,11 @@ const ThemeControlPanel = ({
     [onChange, styles, currentMode, currentStyles],
   );
 
+  // Ensure we have valid styles for the current mode
+  if (!currentStyles) {
+    return null; // Or some fallback UI
+  }
+
   return (
     <div className="space-y-4 h-full">
       <div className="flex items-center justify-between">
@@ -62,6 +69,10 @@ const ThemeControlPanel = ({
       </div>
 
       <ScrollArea className="h-full pb-4">
+        <div className="mb-4 m-1 -p-1">
+          <Label htmlFor="theme-preset" className="text-xs mb-1.5 block">Preset</Label>
+          <ThemePresetSelect presets={presets} currentPreset={themeState.preset} onPresetChange={applyThemePreset} />
+        </div>
         <ControlSection title="Primary Colors" id="primary-colors" expanded>
           <ColorPicker
             color={currentStyles.primary}
@@ -75,7 +86,7 @@ const ThemeControlPanel = ({
           />
         </ControlSection>
 
-        <ControlSection title="Secondary Colors">
+        <ControlSection title="Secondary Colors" expanded>
           <ColorPicker
             color={currentStyles.secondary}
             onChange={(color) => updateStyle("secondary", color)}
@@ -88,7 +99,7 @@ const ThemeControlPanel = ({
           />
         </ControlSection>
 
-        <ControlSection title="Accent Colors">
+        <ControlSection title="Accent Colors" expanded>
           <ColorPicker
             color={currentStyles.accent}
             onChange={(color) => updateStyle("accent", color)}
