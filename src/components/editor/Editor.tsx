@@ -54,27 +54,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
     ? (config.defaultState as ThemeEditorState).styles
     : state.styles;
 
-  useLayoutEffect(() => {
-    const mode = themeState.currentMode;
-    let root = document.querySelector('.preview-theme');
-    if (mode === 'dark') {
-      root = document.querySelector('.preview-theme-dark');
-    }
-    if (!root) {
-      console.error('Preview root not found');
-      return;
-    }
-
-    const themeStyles = themeState.styles;
-
-    Object.entries(themeStyles[mode]).forEach(([key, value]) => {
-      if (typeof value === 'string' && (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl'))) {
-        // Convert the color to HSL format
-        const hslValue = convertToHSL(value);
-        root?.setAttribute(`style`, `${root.getAttribute('style') || ''}--${key}: ${hslValue};`);
-      }
-    });
-  }, [themeState]);
 
   return (
     <div className="h-full overflow-hidden">
