@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-
 import { DemoCookieSettings } from "./cards/cookie-settings"
 import { DemoCreateAccount } from "./cards/create-account"
 import { DemoDatePicker } from "./cards/date-picker"
@@ -9,7 +8,6 @@ import { DemoPaymentMethod } from "./cards/payment-method"
 import { DemoReportAnIssue } from "./cards/report-an-issue"
 import { DemoShareDocument } from "./cards/share-document"
 import { DemoTeamMembers } from "./cards/team-members"
-import { useEffect } from "react"
 
 export function DemoContainer({
 	className,
@@ -28,31 +26,27 @@ export function DemoContainer({
 
 export function DemoCards() {
 	return (
-		<>
-			<div className="items-start justify-center gap-1 rounded-lg grid grid-cols-1">
-				<div className="grid items-start gap-2">
+		<div className="@container">
+			<div className="grid grid-cols-1 @2xl:grid-cols-2 mx-auto gap-4 w-full">
+				{/* First column */}
+				<div className="flex flex-col gap-4 max-w-lg mx-auto">
 					<DemoContainer>
 						<DemoCreateAccount />
 					</DemoContainer>
 					<DemoContainer>
 						<DemoPaymentMethod />
 					</DemoContainer>
-				</div>
-				<div className="grid items-start gap-2">
+					<DemoContainer>
+						<DemoCookieSettings />
+					</DemoContainer>
 					<DemoContainer>
 						<DemoTeamMembers />
 					</DemoContainer>
-					<DemoContainer>
-						<DemoShareDocument />
-					</DemoContainer>
-					<DemoContainer>
-						<DemoDatePicker />
-					</DemoContainer>
-					<DemoContainer>
-						<DemoNotifications />
-					</DemoContainer>
 				</div>
-				<div className="grid items-start gap-2">
+
+
+				{/* Third column */}
+				<div className="flex flex-col gap-4 max-w-lg mx-auto">
 					<DemoContainer>
 						<DemoReportAnIssue />
 					</DemoContainer>
@@ -60,10 +54,16 @@ export function DemoCards() {
 						<DemoGithub />
 					</DemoContainer>
 					<DemoContainer>
-						<DemoCookieSettings />
+						<DemoDatePicker />
+					</DemoContainer>
+					<DemoContainer>
+						<DemoShareDocument />
+					</DemoContainer>
+					<DemoContainer>
+						<DemoNotifications />
 					</DemoContainer>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

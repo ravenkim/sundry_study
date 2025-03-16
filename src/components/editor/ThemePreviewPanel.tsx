@@ -38,16 +38,16 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
       </div>
 
       <ScrollArea className="flex-1 rounded-lg border">
-        <Tabs defaultValue="dashboard" className="w-full h-full">
+        <Tabs defaultValue="examples" className="w-full h-full">
           <TabsList className="w-full grid grid-cols-3">
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+            <TabsTrigger value="examples">Examples</TabsTrigger>
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
 
           <div>
-            {/* Dashboard Preview */}
-            <TabsContent value="dashboard" className="p-4 space-y-6 mt-0">
+            {/* Examples Preview */}
+            <TabsContent value="examples" className="p-4 space-y-6 mt-0">
               <DemoCards />
             </TabsContent>
 

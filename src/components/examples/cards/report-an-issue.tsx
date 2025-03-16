@@ -49,7 +49,6 @@ export function DemoReportAnIssue() {
 						<Select defaultValue="2">
 							<SelectTrigger
 								id="security-level"
-								className="line-clamp-1 w-[160px] truncate"
 							>
 								<SelectValue placeholder="Select level" />
 							</SelectTrigger>
