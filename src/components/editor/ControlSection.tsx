@@ -3,9 +3,9 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ControlSectionProps } from '@/types';
 
-const ControlSection = ({ 
-  title, 
-  children, 
+const ControlSection = ({
+  title,
+  children,
   expanded = false,
   className,
   id
@@ -13,14 +13,14 @@ const ControlSection = ({
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   return (
-    <div id={id} className={cn("mb-4 border rounded-lg overflow-hidden transition-all", className)}>
-      <div 
-        className="flex items-center justify-between p-3 cursor-pointer bg-editor-panel hover:bg-editor-panel-hover"
+    <div id={id} className={cn("mb-4 border rounded-lg overflow-hidden", className)}>
+      <div
+        className="flex items-center justify-between p-3 cursor-pointer bg-background hover:bg-muted"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <h3 className="font-medium text-sm">{title}</h3>
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="text-muted-foreground hover:text-foreground transition-colors"
           aria-label={isExpanded ? "Collapse section" : "Expand section"}
         >
@@ -31,10 +31,10 @@ const ControlSection = ({
           )}
         </button>
       </div>
-      
-      <div 
+
+      <div
         className={cn(
-          "overflow-hidden transition-all duration-300", 
+          "overflow-hidden transition-all duration-200",
           isExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
         )}
       >

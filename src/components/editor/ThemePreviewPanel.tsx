@@ -45,12 +45,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
 
-          <div className={cn("bg-background text-foreground",
-            {
-              "preview-theme": currentMode === 'light',
-              "preview-theme-dark": currentMode === 'dark',
-            }
-          )}>
+          <div>
             {/* Dashboard Preview */}
             <TabsContent value="dashboard" className="p-4 space-y-6 mt-0">
               <DemoCards />
