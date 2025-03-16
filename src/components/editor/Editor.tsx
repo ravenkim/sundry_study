@@ -1,4 +1,3 @@
-
 import React, { useLayoutEffect, useState } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -6,7 +5,7 @@ import { EditorConfig, BaseEditorState, ThemeEditorState } from '@/types/editor'
 import { ThemeStyles } from '@/types/theme';
 import { ButtonStyleProps } from '@/types/button';
 import CodePanel from './CodePanel';
-import { ChevronLeft, ChevronRight, Sliders } from 'lucide-react';
+import { PanelRightClose, PanelRightOpen, Sliders } from 'lucide-react';
 import { useEditorStore } from '@/store/editorStore';
 import { useToast } from '@/components/ui/use-toast';
 import { convertToHSL } from '../../utils/colorConverter';
@@ -113,28 +112,30 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                         })}
                       />
                     </div>
-                    
-                    <CollapsibleContent className="w-1/3 border-l transition-all" asChild>
-                      <div className="h-full">
-                        <CodePanel
-                          code={config.codeGenerator.generateComponentCode(styles)}
-                          editorType={config.type}
-                        />
-                      </div>
+
+                    <CollapsibleContent className="w-1/3 border-l transition-all">
+                      <CodePanel
+                        code={config.codeGenerator.generateComponentCode(styles)}
+                        editorType={config.type}
+                      />
                     </CollapsibleContent>
                   </div>
-                  
+
                   <CollapsibleTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       className="absolute right-2 top-20 z-10"
                       aria-label={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
+                      title={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
                     >
                       {isCodePanelOpen ? (
-                        <ChevronRight className="h-4 w-4" />
+                        <PanelRightClose className="h-4 w-4" />
                       ) : (
-                        <ChevronLeft className="h-4 w-4" />
+                        <>
+                          <PanelRightOpen className="h-4 w-4" />
+                          Code
+                        </>
                       )}
                     </Button>
                   </CollapsibleTrigger>
