@@ -21,7 +21,7 @@ import { CommandList } from 'cmdk';
 const EditorCombobox = ({ className }: { className?: string }) => {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-  const { editorType = 'button' } = useParams();
+  const { editorType = 'theme' } = useParams();
 
   // Create a list of editors from the registry
   const editors = editorTypes.map(getEditorConfig).map((config) => ({
@@ -33,10 +33,10 @@ const EditorCombobox = ({ className }: { className?: string }) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant="secondary"
           role="combobox"
           aria-expanded={open}
-          className={cn("w-[180px] justify-between", className)}
+          className={cn("md:w-[180px] justify-between", className)}
         >
           {editorType ?
             editors.find((editor) => editor.value === editorType)?.label :
