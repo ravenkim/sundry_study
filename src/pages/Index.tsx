@@ -8,7 +8,7 @@ import { Moon, Sun } from "lucide-react";
 import { useEditorStore } from "../store/editorStore";
 import GitHubIcon from "@/assets/github.svg?react";
 import { cn } from "../lib/utils";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 const Index = () => {
   const { editorType = "button" } = useParams();
@@ -20,7 +20,7 @@ const Index = () => {
     setThemeState({ ...themeState, currentMode: newMode });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (themeState.currentMode === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
