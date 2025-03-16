@@ -9,6 +9,7 @@ import { ButtonVariant, ButtonSize } from "@/types/button";
 import { isEqual } from "lodash";
 import { defaultThemeState } from "@/config/theme";
 import defaultButtonStyles from "@/config/button";
+import { getPresetThemeStyles } from "../utils/themePresets";
 
 // Default button state
 const defaultButtonState: ButtonEditorState = {
@@ -22,6 +23,7 @@ interface EditorStore {
   themeState: ThemeEditorState;
   setButtonState: (state: ButtonEditorState) => void;
   setThemeState: (state: ThemeEditorState) => void;
+  applyThemePreset: (preset: string) => void;
   resetToDefault: (type: EditorType) => void;
   hasStateChanged: (type: EditorType) => boolean;
 }
@@ -33,6 +35,16 @@ export const useEditorStore = create<EditorStore>()(
       themeState: defaultThemeState,
       setButtonState: (state: ButtonEditorState) => set({ buttonState: state }),
       setThemeState: (state: ThemeEditorState) => set({ themeState: state }),
+      applyThemePreset: (preset: string) => {
+        const themeState = get().themeState;
+        set({
+          themeState: {
+            ...themeState,
+            preset,
+            styles: getPresetThemeStyles(preset),
+          },
+        });
+      },
       resetToDefault: (type: EditorType) => {
         if (type === "button") {
           set({ buttonState: defaultButtonState });

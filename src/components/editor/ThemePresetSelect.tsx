@@ -1,0 +1,65 @@
+import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ThemePreset } from "../../types/theme";
+import { useEditorStore } from "../../store/editorStore";
+import { getPresetThemeStyles } from "../../utils/themePresets";
+
+interface ThemePresetSelectProps {
+  presets: Record<string, ThemePreset>;
+  currentPreset: string | null;
+  onPresetChange: (preset: string) => void;
+}
+
+const ColorBox = ({ color }: { color: string }) => {
+  return (
+    <div
+      className="w-3 h-3 rounded-sm border border-muted"
+      style={{ backgroundColor: color }}
+    />
+  );
+};
+
+const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
+  presets,
+  currentPreset,
+  onPresetChange,
+}) => {
+  const { themeState } = useEditorStore();
+  const mode = themeState.currentMode;
+  const presetNames = ["default", ...Object.keys(presets)];
+  const value = presetNames?.find(name => name === currentPreset);
+
+  return (
+    <Select value={value || ""} onValueChange={onPresetChange}>
+      <SelectTrigger className="w-full md:w-64">
+        <SelectValue placeholder="Select theme preset" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {presetNames.map((presetName) => (
+            <SelectItem key={presetName} value={presetName}>
+              <div className="flex items-center justify-between w-full">
+                <div className="flex">
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].primary} />
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].accent} />
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].secondary} />
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].border} />
+                </div>
+                <span className="capitalize ml-2">{presetName.replace(/-/g, " ")}</span>
+              </div>
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+};
+
+export default ThemePresetSelect;

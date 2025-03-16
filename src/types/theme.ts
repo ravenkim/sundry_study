@@ -57,3 +57,7 @@ export interface ThemeEditorControlsProps {
   hasChanges?: boolean;
 }
 
+export type ThemePreset = {
+  light?: Partial<ThemeStyleProps>;
+  dark?: Partial<ThemeStyleProps>;
+};
