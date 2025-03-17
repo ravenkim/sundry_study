@@ -1,16 +1,22 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Copy, Check } from 'lucide-react';
-import { EditorType } from '@/types/editor';
+import { Copy, Check, ChevronDown } from 'lucide-react';
+import { EditorConfig } from '@/types/editor';
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
+import { ThemeStyles } from '../../types/theme';
+import { ButtonStyleProps, ColorFormat } from '../../types';
+import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from '../ui/select';
 
 interface CodePanelProps {
-  code: string;
-  editorType: EditorType;
+  config: EditorConfig;
+  styles: ThemeStyles | ButtonStyleProps;
 }
 
-const CodePanel: React.FC<CodePanelProps> = ({ code, editorType }) => {
+const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
+  const { type: editorType } = config;
+  const [colorFormat, setColorFormat] = useState<ColorFormat>('hsl');
+  const code = config.codeGenerator.generateComponentCode(styles, colorFormat);
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async (text: string) => {
@@ -63,14 +69,37 @@ const CodePanel: React.FC<CodePanelProps> = ({ code, editorType }) => {
             )}
           </Button>
         </div>
-        <ScrollArea className="flex-1">
+
+        <ScrollArea className="flex-1 relative">
+          <Select value={colorFormat} onValueChange={(value: ColorFormat) => setColorFormat(value)}>
+            <SelectTrigger className='absolute w-fit top-0 right-0 focus:ring-0 text-muted-foreground bg-transparent backdrop-blur-sm'>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="hsl">
+                HSL
+              </SelectItem>
+              <SelectItem value="oklch">
+                OKLCH
+              </SelectItem>
+              <SelectItem value="rgb">
+                RGB
+              </SelectItem>
+              <SelectItem value="hex">
+                HEX
+              </SelectItem>
+              <SelectItem value="cmyk">
+                CMYK
+              </SelectItem>
+            </SelectContent>
+          </Select>
           <pre className="h-full p-4 text-sm">
             <code>{code}</code>
           </pre>
           <ScrollBar orientation='horizontal' />
         </ScrollArea>
       </div>
-    </div>
+    </div >
   );
 };
 

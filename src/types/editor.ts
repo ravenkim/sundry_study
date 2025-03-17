@@ -1,3 +1,4 @@
+import { ColorFormat } from ".";
 import { ButtonStyleProps, ButtonVariant, ButtonSize } from "./button";
 import { ThemeStyles } from "./theme";
 
@@ -18,7 +19,10 @@ export interface EditorPreviewProps {
 
 // Interface for editor-specific code generation
 export interface EditorCodeGenerator {
-  generateComponentCode: (styles: any) => string;
+  generateComponentCode: (
+    styles: ThemeStyles | ButtonStyleProps,
+    colorFormat?: ColorFormat,
+  ) => string;
 }
 
 // Button-specific editor state

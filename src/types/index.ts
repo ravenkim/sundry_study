@@ -9,17 +9,17 @@ export type ButtonStyleProps = {
   fontWeight: string;
   paddingX: number;
   paddingY: number;
-  
+
   // Hover states
   hoverBackgroundColor: string;
   hoverTextColor: string;
   hoverBorderColor: string;
   hoverBackgroundOpacity: number;
-  
+
   // Transitions
   transitionDuration: number;
   transitionEasing: string;
-  
+
   // Shadow
   shadowColor: string;
   shadowOpacity: number;
@@ -27,25 +27,31 @@ export type ButtonStyleProps = {
   shadowOffsetY: number;
   shadowBlur: number;
   shadowSpread: number;
-  
+
   // Text properties
   textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
   letterSpacing: number;
   lineHeight: number;
-  
+
   // Focus states
   focusBorderColor: string;
   focusRingColor: string;
   focusRingWidth: number;
-  
+
   // Active states
   activeBackgroundColor: string;
   activeTextColor: string;
   activeBorderColor: string;
 };
 
-export type ButtonVariant = 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
-export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
+export type ButtonVariant =
+  | "default"
+  | "secondary"
+  | "destructive"
+  | "outline"
+  | "ghost"
+  | "link";
+export type ButtonSize = "default" | "sm" | "lg" | "icon";
 
 export type ControlSectionProps = {
   title: string;
@@ -112,3 +118,5 @@ export type ReadOnlyColorDisplayProps = {
   label: string;
   linkTo: string;
 };
+
+export type ColorFormat = "hex" | "rgb" | "hsl" | "oklch" | "cmyk";

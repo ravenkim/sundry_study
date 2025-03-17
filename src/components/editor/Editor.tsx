@@ -94,8 +94,8 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
 
                     <CollapsibleContent className="w-1/3 border-l transition-all">
                       <CodePanel
-                        code={config.codeGenerator.generateComponentCode(styles)}
-                        editorType={config.type}
+                        config={config}
+                        styles={styles}
                       />
                     </CollapsibleContent>
                   </div>
@@ -161,8 +161,8 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           </TabsContent>
           <TabsContent value="code" className="h-[calc(100%-2.5rem)]">
             <CodePanel
-              code={config.codeGenerator.generateComponentCode(styles)}
-              editorType={config.type}
+              config={config}
+              styles={styles}
             />
           </TabsContent>
         </Tabs>
