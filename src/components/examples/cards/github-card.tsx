@@ -18,23 +18,27 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Separator } from "@/components/ui/separator"
+import { Link } from "react-router-dom"
 
 export function DemoGithub() {
 	return (
 		<Card>
 			<CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
 				<div className="space-y-1">
-					<CardTitle>shadcn/ui</CardTitle>
+					<CardTitle>tweakcn</CardTitle>
 					<CardDescription>
-						Beautifully designed components that you can copy and paste into
-						your apps. Accessible. Customizable. Open Source.
+						A visual editor for shadcn/ui components with beautiful themes. Accessible. Customizable. Open Source.
 					</CardDescription>
 				</div>
 				<div className="flex items-center space-x-1 rounded-md bg-secondary text-secondary-foreground">
-					<Button variant="secondary" className="px-3 shadow-none">
-						<Star />
-						Star
-					</Button>
+					<Link
+						to="https://github.com/jnsahaj/tweakcn"
+					>
+						<Button variant="secondary" className="px-3 shadow-none">
+							<Star />
+							Star
+						</Button>
+					</Link>
 					<Separator orientation="vertical" className="h-[20px]" />
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>

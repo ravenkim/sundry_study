@@ -1,17 +1,16 @@
-
 import { ThemeEditorPreviewProps } from '@/types/theme';
-import { Settings, Plus, ArrowRight, Info, AlertTriangle, Bell, Search, User, Calendar, FileText, Mail as Message, Home, Bookmark, Star } from 'lucide-react';
+import { Settings, Info, AlertTriangle, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { cn } from '../../lib/utils';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
-import { ScrollArea } from '../ui/scroll-area';
-import { Separator } from '../ui/separator';
-import { DemoCards } from '../examples/Cards';
+import { ScrollArea, ScrollBar } from '../ui/scroll-area';
+import { lazy, Suspense } from 'react';
+import { Skeleton } from '../ui/skeleton';
+const DemoCards = lazy(() => import('@/components/examples/Cards'));
 
 const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {
@@ -48,7 +47,17 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
           <div>
             {/* Examples Preview */}
             <TabsContent value="examples" className="p-4 space-y-6 mt-0">
-              <DemoCards />
+              <Suspense fallback={
+                <div className="flex w-fit mx-auto flex-col space-y-3">
+                  <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
+              }>
+                <DemoCards />
+              </Suspense>
             </TabsContent>
 
             {/* Components showcase - more organized by type */}
@@ -272,6 +281,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
             </div>
           </TabsContent>
         </Tabs>
+        <ScrollBar orientation='horizontal' />
       </ScrollArea>
     </div>
   );
