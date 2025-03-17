@@ -48,7 +48,30 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
 
       <div className="flex-1 min-h-0 flex flex-col rounded-lg border overflow-hidden">
         <div className="flex-none flex justify-between items-center px-4 py-2 border-b bg-muted/50">
-          <span className="text-xs font-medium">{getFileName()}</span>
+          <span className="text-sm font-medium">{getFileName()}</span>
+          {editorType === 'theme' && (<Select value={colorFormat} onValueChange={(value: ColorFormat) => setColorFormat(value)}>
+            <SelectTrigger className='w-fit focus:ring-transparent focus:border-none bg-transparent outline-none border-none gap-1'>
+              <SelectValue className='focus:ring-transparent' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="hsl">
+                HSL
+              </SelectItem>
+              <SelectItem value="oklch">
+                OKLCH
+              </SelectItem>
+              <SelectItem value="rgb">
+                RGB
+              </SelectItem>
+              <SelectItem value="hex">
+                HEX
+              </SelectItem>
+              <SelectItem value="cmyk">
+                CMYK
+              </SelectItem>
+            </SelectContent>
+          </Select>)}
+
           <Button
             variant="ghost"
             size="sm"
@@ -71,28 +94,6 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
         </div>
 
         <ScrollArea className="flex-1 relative">
-          <Select value={colorFormat} onValueChange={(value: ColorFormat) => setColorFormat(value)}>
-            <SelectTrigger className='absolute w-fit top-0 right-0 focus:ring-0 text-muted-foreground bg-transparent backdrop-blur-sm'>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="hsl">
-                HSL
-              </SelectItem>
-              <SelectItem value="oklch">
-                OKLCH
-              </SelectItem>
-              <SelectItem value="rgb">
-                RGB
-              </SelectItem>
-              <SelectItem value="hex">
-                HEX
-              </SelectItem>
-              <SelectItem value="cmyk">
-                CMYK
-              </SelectItem>
-            </SelectContent>
-          </Select>
           <pre className="h-full p-4 text-sm">
             <code>{code}</code>
           </pre>
