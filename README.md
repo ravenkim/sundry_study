@@ -9,27 +9,27 @@ Currently in beta, only starting with the button component. Support for all othe
 
 ## Current Features
 
-- Visual button customizer with real-time preview
+- Visual theme customizer with real-time preview
+- Visual advanced button customizer with real-time preview
 - Full control over:
   - Colors (background, text, border)
   - Dimensions (padding, border radius)
   - Typography (font size, weight, transform)
   - Effects (shadow, transitions)
   - States (hover, focus, active)
-- Export to multiple formats:
+- Export Code:
   - React component
-  - CSS
-  - Tailwind config
-  - ShadCN config
-- Responsive design with mobile support
+  - CSS (for tailwind)
 
 ## Roadmap
 
-- [ ] Add support to import `ui` folder
-- [ ] Add support for all ShadCN components
-- [ ] Add component templates
-- [ ] Add theme support
-- [ ] Add component library export
+- [x] Add global theme editor with presets
+- [ ] Add advanced customization support for shadcn/ui components
+  - [ ] Button
+  - [ ] Input
+  - [ ] Select
+  - [ ] ...and more
+- [ ] Add support to import/export themes
 - [ ] Add collaboration features
 
 ## Getting Started
