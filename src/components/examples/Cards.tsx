@@ -8,6 +8,8 @@ import { DemoPaymentMethod } from "./cards/payment-method"
 import { DemoReportAnIssue } from "./cards/report-an-issue"
 import { DemoShareDocument } from "./cards/share-document"
 import { DemoTeamMembers } from "./cards/team-members"
+import { DemoStats } from "./cards/stats"
+import { DemoChat } from "./cards/chat"
 
 export function DemoContainer({
 	className,
@@ -30,6 +32,9 @@ export function DemoCards() {
 			<div className="grid grid-cols-1 @2xl:grid-cols-2 mx-auto gap-4 w-full">
 				{/* First column */}
 				<div className="flex flex-col gap-4 max-w-lg mx-auto">
+					<DemoContainer>
+						<DemoStats />
+					</DemoContainer>
 					<DemoContainer>
 						<DemoCreateAccount />
 					</DemoContainer>
@@ -61,6 +66,9 @@ export function DemoCards() {
 					</DemoContainer>
 					<DemoContainer>
 						<DemoNotifications />
+					</DemoContainer>
+					<DemoContainer>
+						<DemoChat />
 					</DemoContainer>
 				</div>
 			</div>
