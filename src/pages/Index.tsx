@@ -8,6 +8,7 @@ import GitHubIcon from "@/assets/github.svg?react";
 import { cn } from "../lib/utils";
 import { useTheme } from "../components/theme-provider";
 import { useEffect, useState } from "react";
+import logo from "@/assets/logo.png";
 
 const Index = () => {
   const { editorType = "button" } = useParams();
@@ -36,8 +37,9 @@ const Index = () => {
       )}
     >
       <header className="border-b">
-        <div className="px-4 py-4 flex items-center gap-2 justify-between">
+        <div className="px-2 md:px-4 py-4 flex items-center gap-2 justify-between">
           <div className="flex items-center gap-1">
+            <img src={logo} alt="tweakcn" className="h-8 w-8 mr-1 md:mr-2" title="Nothing here yet..." />
             <EditorCombobox />
             <Button variant="secondary" size="icon" onClick={toggleTheme}>
               {theme === "light" ? (
@@ -51,14 +53,12 @@ const Index = () => {
             <Link
               to="https://github.com/sponsors/jnsahaj"
               target="_blank"
-              data-umami-event="outbound-link-click"
-              data-umami-event-url="https://github.com/sponsors/jnsahaj"
             >
-              <Button variant="link" size="icon">
-                <Heart className="h-5 w-5" stroke="#c96198" />
+              <Button variant="outline" size="icon">
+                <Heart className="h-5 w-5" stroke="#c96198" fill="#c96198" />
               </Button>
             </Link>
-            <Button variant="ghost" asChild>
+            <Button variant="outline" asChild>
               <a
                 href="https://github.com/jnsahaj/tweakcn"
                 target="_blank"

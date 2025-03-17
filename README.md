@@ -1,6 +1,9 @@
 # tweakcn
 
-A visual editor for shadcn/ui components. Currently in beta with button component support.
+A Powerful Visual Theme Editor for shadcn/ui components with Tailwind CSS support. Comes with Beautiful theme presets to get started.
+
+![tweakcn.com](public/og-image.png)
+
 
 ## About
 
