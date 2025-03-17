@@ -9,6 +9,7 @@ import ThemePresetSelect from "./ThemePresetSelect";
 import { presets } from "../../utils/themePresets";
 import { useEditorStore } from "../../store/editorStore";
 import { Label } from "../ui/label";
+import { SliderWithInput } from "./slider-with-input";
 
 const ThemeControlPanel = ({
   styles,
@@ -57,6 +58,8 @@ const ThemeControlPanel = ({
     return null; // Or some fallback UI
   }
 
+  const radius = parseFloat(currentStyles.radius.replace('rem', ''));
+
   return (
     <div className="space-y-4 h-full">
       <div className="flex items-center justify-between">
@@ -69,10 +72,21 @@ const ThemeControlPanel = ({
       </div>
 
       <ScrollArea className="h-full pb-4">
-        <div className="mb-4 m-1 -p-1">
+        <div className="mb-6 ml-1">
           <Label htmlFor="theme-preset" className="text-xs mb-1.5 block">Preset</Label>
           <ThemePresetSelect presets={presets} currentPreset={themeState.preset} onPresetChange={applyThemePreset} />
         </div>
+
+
+        <SliderWithInput
+          value={radius}
+          onChange={(value) => updateStyle('radius', `${value}rem`)}
+          min={0}
+          max={5}
+          step={0.025}
+          unit="rem"
+          label="Radius"
+        />
         <ControlSection title="Primary Colors" id="primary-colors" expanded>
           <ColorPicker
             color={currentStyles.primary}

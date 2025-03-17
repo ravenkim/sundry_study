@@ -39,7 +39,11 @@ export function ThemeProvider({
     const mode = themeState.currentMode;
     const themeStyles = themeState.styles;
     Object.entries(themeStyles[mode]).forEach(([key, value]) => {
-      if (typeof value === 'string' && (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl'))) {
+      if (typeof value === 'string') {
+        if (key === 'radius') {
+          root?.setAttribute(`style`, `${root.getAttribute('style') || ''}--${key}: ${value};`);
+        }
+
         // Convert the color to HSL format
         const hslValue = convertToHSL(value);
         root?.setAttribute(`style`, `${root.getAttribute('style') || ''}--${key}: ${hslValue};`);
