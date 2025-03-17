@@ -42,6 +42,7 @@ export function ThemeProvider({
       if (typeof value === 'string') {
         if (key === 'radius') {
           root?.setAttribute(`style`, `${root.getAttribute('style') || ''}--${key}: ${value};`);
+          return;
         }
 
         // Convert the color to HSL format
