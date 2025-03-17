@@ -64,10 +64,10 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
                 <SelectValue className="focus:ring-transparent" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="hsl">HSL</SelectItem>
-                <SelectItem value="oklch">OKLCH</SelectItem>
-                <SelectItem value="rgb">RGB</SelectItem>
-                <SelectItem value="hex">HEX</SelectItem>
+                <SelectItem value="hsl">hsl</SelectItem>
+                <SelectItem value="oklch">oklch</SelectItem>
+                <SelectItem value="rgb">rgb</SelectItem>
+                <SelectItem value="hex">hex</SelectItem>
               </SelectContent>
             </Select>
           )}
