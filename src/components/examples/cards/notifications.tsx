@@ -31,7 +31,7 @@ export function DemoNotifications() {
           <User className="mt-px h-5 w-5" />
           <div className="space-y-1">
             <p className="text-sm font-medium leading-none">Available</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm">
               Only mentions and comments.
             </p>
           </div>
