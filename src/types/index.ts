@@ -119,4 +119,4 @@ export type ReadOnlyColorDisplayProps = {
   linkTo: string;
 };
 
-export type ColorFormat = "hex" | "rgb" | "hsl" | "oklch" | "cmyk";
+export type ColorFormat = "hex" | "rgb" | "hsl" | "oklch";

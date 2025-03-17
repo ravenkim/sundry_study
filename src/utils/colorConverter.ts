@@ -1,43 +1,37 @@
-import Color from "color"; // You'll need to install this package: npm install color
+import * as culori from "culori";
 import { ColorFormat } from "../types";
+
+const formatNumber = (num) => (num % 1 === 0 ? num : num.toFixed(2));
 
 export const colorFormatter = (
   colorValue: string,
   format: ColorFormat = "hsl",
 ): string => {
   try {
-    // Use the color library to parse any color format
-    const color = Color(colorValue);
+    const color = culori.parse(colorValue);
+    if (!color) throw new Error("Invalid color input");
 
-    if (format === "hsl") {
-      const hsl = color.hsl().round().array();
-      return `${hsl[0]} ${hsl[1]}% ${hsl[2]}%`;
-    }
-
-    if (format === "rgb") {
-      const rgb = color.rgb().round().array();
-      return `rgb(${rgb[0]} ${rgb[1]} ${rgb[2]})`;
-    }
-
-    if (format === "cmyk") {
-      const cmyk = color.cmyk().round().array();
-      return `cmyk(${cmyk[0]} ${cmyk[1]} ${cmyk[2]} ${cmyk[3]})`;
-    }
-
-    if (format === "oklch") {
-      const oklch = color.lch().round().array();
-      return `oklch(${oklch[0]} ${oklch[1]} ${oklch[2]})`;
-    }
-
-    if (format === "hex") {
-      return color.hex();
+    switch (format) {
+      case "hsl": {
+        const hsl = culori.converter("hsl")(color);
+        return `${hsl.h} ${formatNumber(hsl.s * 100)}% ${formatNumber(hsl.l * 100)}%`;
+      }
+      case "rgb":
+        return culori.formatRgb(color); // e.g., "rgb(64, 128, 192)"
+      case "oklch": {
+        const oklch = culori.converter("oklch")(color);
+        return `oklch(${formatNumber(oklch.l)} ${formatNumber(oklch.c)} ${formatNumber(oklch.h ?? 0)})`;
+      }
+      case "hex":
+        return culori.formatHex(color); // e.g., "#4080c0"
+      default:
+        return colorValue;
     }
   } catch (error) {
     console.error(`Failed to convert color: ${colorValue}`, error);
-    return colorValue; // Return original if conversion fails
+    return colorValue;
   }
 };
 
-export const convertToHSL = (colorValue: string): string => {
-  return colorFormatter(colorValue, "hsl");
-};
+export const convertToHSL = (colorValue: string): string =>
+  colorFormatter(colorValue, "hsl");

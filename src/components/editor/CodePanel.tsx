@@ -67,7 +67,6 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
                 <SelectItem value="oklch">OKLCH</SelectItem>
                 <SelectItem value="rgb">RGB</SelectItem>
                 <SelectItem value="hex">HEX</SelectItem>
-                <SelectItem value="cmyk">CMYK</SelectItem>
               </SelectContent>
             </Select>
           )}
