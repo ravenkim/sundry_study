@@ -72,7 +72,7 @@ const ThemeControlPanel = ({
       </div>
 
       <ScrollArea className="h-full pb-4">
-        <div className="mb-4">
+        <div className="mb-6 ml-1">
           <Label htmlFor="theme-preset" className="text-xs mb-1.5 block">Preset</Label>
           <ThemePresetSelect presets={presets} currentPreset={themeState.preset} onPresetChange={applyThemePreset} />
         </div>
