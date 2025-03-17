@@ -4,12 +4,7 @@ import { Check, Plus, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import {
   Command,
   CommandEmpty,
@@ -173,8 +168,7 @@ export function DemoChat() {
           <DialogHeader className="px-4 pb-4 pt-5">
             <DialogTitle>New message</DialogTitle>
             <DialogDescription>
-              Invite a user to this thread. This will create a new group
-              message.
+              Invite a user to this thread. This will create a new group message.
             </DialogDescription>
           </DialogHeader>
           <Command className="overflow-hidden rounded-t-none border-t bg-transparent">
@@ -207,12 +201,8 @@ export function DemoChat() {
                       <AvatarFallback>{user.name[0]}</AvatarFallback>
                     </Avatar>
                     <div className="ml-2">
-                      <p className="text-sm font-medium leading-none">
-                        {user.name}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {user.email}
-                      </p>
+                      <p className="text-sm font-medium leading-none">{user.name}</p>
+                      <p className="text-sm text-muted-foreground">{user.email}</p>
                     </div>
                     {selectedUsers.includes(user) ? (
                       <Check className="ml-auto flex h-5 w-5 text-primary" />

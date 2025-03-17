@@ -21,9 +21,7 @@ const Index = () => {
     const repo = "tweakcn";
 
     const fetchData = async () => {
-      const response = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}`,
-      );
+      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
       const data = await response.json();
       setStargazersCount(data.stargazers_count);
     };

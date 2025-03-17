@@ -1,8 +1,9 @@
 import defaultButtonStyles from "@/config/button";
-import { ButtonStyleProps, ButtonVariant, ButtonSize } from "@/types";
+import { ButtonVariant, ButtonSize } from "@/types";
+import { ButtonStyles } from "@/types/button";
 
 export const generateButtonClassName = (
-  styles: ButtonStyleProps,
+  styles: ButtonStyles,
   variant: ButtonVariant,
   size: ButtonSize,
 ): string => {
@@ -40,8 +41,8 @@ export const generateButtonClassName = (
 
 export const getDefaultButtonStyles = (
   variant: ButtonVariant = "default",
-): ButtonStyleProps => {
-  const baseStyles: ButtonStyleProps = defaultButtonStyles;
+): ButtonStyles => {
+  const baseStyles: ButtonStyles = defaultButtonStyles;
 
   // Apply variant-specific styles
   switch (variant) {
@@ -97,15 +98,12 @@ export const getDefaultButtonStyles = (
 };
 
 export const generateButtonComponentCode = (
-  styles: ButtonStyleProps,
+  styles: ButtonStyles,
   variant: ButtonVariant,
   size: ButtonSize,
 ): string => {
   // Generate Tailwind utility classes for each style property
-  const generateTailwindClasses = (
-    styles: ButtonStyleProps,
-    variant: ButtonVariant,
-  ) => {
+  const generateTailwindClasses = (styles: ButtonStyles, variant: ButtonVariant) => {
     // Convert hex color to Tailwind format for inline classes
     const formatColor = (color: string) => color;
 

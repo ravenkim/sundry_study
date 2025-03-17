@@ -4,7 +4,7 @@ import { Copy, Check, ChevronDown } from "lucide-react";
 import { EditorConfig } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { ThemeStyles } from "../../types/theme";
-import { ButtonStyleProps, ColorFormat } from "../../types";
+import { ColorFormat } from "../../types";
 import {
   Select,
   SelectContent,
@@ -12,10 +12,11 @@ import {
   SelectValue,
   SelectItem,
 } from "../ui/select";
+import { ButtonStyles } from "@/types/button";
 
 interface CodePanelProps {
   config: EditorConfig;
-  styles: ThemeStyles | ButtonStyleProps;
+  styles: ThemeStyles | ButtonStyles;
 }
 
 const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
@@ -63,10 +64,10 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
                 <SelectValue className="focus:ring-transparent" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="hsl">HSL</SelectItem>
-                <SelectItem value="oklch">OKLCH</SelectItem>
-                <SelectItem value="rgb">RGB</SelectItem>
-                <SelectItem value="hex">HEX</SelectItem>
+                <SelectItem value="hsl">hsl</SelectItem>
+                <SelectItem value="oklch">oklch</SelectItem>
+                <SelectItem value="rgb">rgb</SelectItem>
+                <SelectItem value="hex">hex</SelectItem>
               </SelectContent>
             </Select>
           )}

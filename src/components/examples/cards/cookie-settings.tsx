@@ -22,8 +22,8 @@ export function DemoCookieSettings() {
           <Label htmlFor="necessary" className="flex flex-col space-y-1">
             <span>Strictly Necessary</span>
             <span className="font-normal leading-snug text-muted-foreground">
-              These cookies are essential in order to use the website and use
-              its features.
+              These cookies are essential in order to use the website and use its
+              features.
             </span>
           </Label>
           <Switch id="necessary" defaultChecked />
@@ -32,8 +32,7 @@ export function DemoCookieSettings() {
           <Label htmlFor="functional" className="flex flex-col space-y-1">
             <span>Functional Cookies</span>
             <span className="font-normal leading-snug text-muted-foreground">
-              These cookies allow the website to provide personalized
-              functionality.
+              These cookies allow the website to provide personalized functionality.
             </span>
           </Label>
           <Switch id="functional" />

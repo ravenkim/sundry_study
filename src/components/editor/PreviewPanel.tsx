@@ -5,9 +5,9 @@ import { ButtonEditorState } from "@/types/editor";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Info } from "lucide-react";
 
-const PreviewPanel: React.FC<
-  EditorPreviewProps & Partial<ButtonEditorState>
-> = (props) => {
+const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = (
+  props,
+) => {
   // If this is a button editor state with styles, variant, and size
   if ("styles" in props) {
     const {
@@ -65,11 +65,7 @@ const PreviewPanel: React.FC<
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Default</p>
-                <ButtonPreview
-                  styles={styles}
-                  variant={variant}
-                  size="default"
-                />
+                <ButtonPreview styles={styles} variant={variant} size="default" />
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Large</p>

@@ -13,10 +13,7 @@ const ControlSection = ({
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   return (
-    <div
-      id={id}
-      className={cn("mb-4 border rounded-lg overflow-hidden", className)}
-    >
+    <div id={id} className={cn("mb-4 border rounded-lg overflow-hidden", className)}>
       <div
         className="flex items-center justify-between p-3 cursor-pointer bg-background hover:bg-muted"
         onClick={() => setIsExpanded(!isExpanded)}

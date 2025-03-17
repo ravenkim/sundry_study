@@ -1,6 +1,6 @@
-import { ButtonStyleProps } from "@/types/index"; // Updated import path if necessary
+import { ButtonStyles } from "@/types/button";
 
-const defaultButtonStyles: ButtonStyleProps = {
+const defaultButtonStyles: ButtonStyles = {
   backgroundColor: "#000000",
   textColor: "#ffffff",
   borderColor: "#000000",

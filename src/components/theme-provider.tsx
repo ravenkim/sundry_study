@@ -31,9 +31,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     root.classList.remove("preview-theme", "preview-theme-dark");
 
     const theme =
-      themeState.currentMode === "light"
-        ? "preview-theme"
-        : "preview-theme-dark";
+      themeState.currentMode === "light" ? "preview-theme" : "preview-theme-dark";
     root.classList.add(theme);
 
     const mode = themeState.currentMode;

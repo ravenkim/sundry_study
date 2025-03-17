@@ -13,10 +13,7 @@ interface ResetButtonProps {
   label?: string;
 }
 
-const ResetButton = ({
-  onReset,
-  label = "Reset to default",
-}: ResetButtonProps) => {
+const ResetButton = ({ onReset, label = "Reset to default" }: ResetButtonProps) => {
   return (
     <TooltipProvider>
       <Tooltip>

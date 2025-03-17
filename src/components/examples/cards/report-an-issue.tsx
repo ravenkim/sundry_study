@@ -23,9 +23,7 @@ export function DemoReportAnIssue() {
     <Card>
       <CardHeader>
         <CardTitle>Report an issue</CardTitle>
-        <CardDescription>
-          What area are you having problems with?
-        </CardDescription>
+        <CardDescription>What area are you having problems with?</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
         <div className="grid grid-cols-2 gap-4">

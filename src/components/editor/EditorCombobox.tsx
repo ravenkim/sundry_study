@@ -9,11 +9,7 @@ import {
   CommandInput,
   CommandItem,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { editorTypes, getEditorConfig } from "@/config/editors";
 import { useNavigate, useParams } from "react-router-dom";
 import { CommandList } from "cmdk";

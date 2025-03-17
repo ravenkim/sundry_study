@@ -5,13 +5,9 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  EditorConfig,
-  BaseEditorState,
-  ThemeEditorState,
-} from "@/types/editor";
+import { EditorConfig, BaseEditorState, ThemeEditorState } from "@/types/editor";
 import { ThemeStyles } from "@/types/theme";
-import { ButtonStyleProps } from "@/types/button";
+import { ButtonStyles } from "@/types/button";
 import CodePanel from "./CodePanel";
 import { PanelRightClose, PanelRightOpen, Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editorStore";
@@ -50,11 +46,11 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
   const state = config.type === "theme" ? themeState : buttonState;
   const hasChanges = hasStateChanged(config.type);
 
-  const handleStyleChange = (newStyles: ThemeStyles | ButtonStyleProps) => {
+  const handleStyleChange = (newStyles: ThemeStyles | ButtonStyles) => {
     if (config.type === "theme") {
       setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
     } else {
-      setButtonState({ ...buttonState, styles: newStyles as ButtonStyleProps });
+      setButtonState({ ...buttonState, styles: newStyles as ButtonStyles });
     }
   };
 
@@ -124,9 +120,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                       aria-label={
                         isCodePanelOpen ? "Hide code panel" : "Show code panel"
                       }
-                      title={
-                        isCodePanelOpen ? "Hide code panel" : "Show code panel"
-                      }
+                      title={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
                     >
                       {isCodePanelOpen ? (
                         <PanelRightClose className="h-4 w-4" />

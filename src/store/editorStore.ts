@@ -1,10 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import {
-  ButtonEditorState,
-  ThemeEditorState,
-  EditorType,
-} from "@/types/editor";
+import { ButtonEditorState, ThemeEditorState, EditorType } from "@/types/editor";
 import { ButtonVariant, ButtonSize } from "@/types/button";
 import { isEqual } from "lodash";
 import { defaultThemeState } from "@/config/theme";

@@ -1,10 +1,10 @@
 import { ThemeStyles } from "@/types/theme";
-import { ButtonStyleProps } from "@/types/button";
+import { ButtonStyles } from "@/types/button";
 import { colorFormatter } from "./colorConverter";
 import { ColorFormat } from "../types";
 
 export const generateThemeCode = (
-  styles: ButtonStyleProps | ThemeStyles,
+  styles: ButtonStyles | ThemeStyles,
   colorFormat: ColorFormat = "hsl",
 ): string => {
   if (!("light" in styles) || !("dark" in styles)) {

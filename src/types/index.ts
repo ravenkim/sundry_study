@@ -1,48 +1,4 @@
-export type ButtonStyleProps = {
-  // Base properties
-  backgroundColor: string;
-  textColor: string;
-  borderColor: string;
-  borderWidth: number;
-  borderRadius: number;
-  fontSize: number;
-  fontWeight: string;
-  paddingX: number;
-  paddingY: number;
-
-  // Hover states
-  hoverBackgroundColor: string;
-  hoverTextColor: string;
-  hoverBorderColor: string;
-  hoverBackgroundOpacity: number;
-
-  // Transitions
-  transitionDuration: number;
-  transitionEasing: string;
-
-  // Shadow
-  shadowColor: string;
-  shadowOpacity: number;
-  shadowOffsetX: number;
-  shadowOffsetY: number;
-  shadowBlur: number;
-  shadowSpread: number;
-
-  // Text properties
-  textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
-  letterSpacing: number;
-  lineHeight: number;
-
-  // Focus states
-  focusBorderColor: string;
-  focusRingColor: string;
-  focusRingWidth: number;
-
-  // Active states
-  activeBackgroundColor: string;
-  activeTextColor: string;
-  activeBorderColor: string;
-};
+import { ButtonStyles } from "./button";
 
 export type ButtonVariant =
   | "default"
@@ -85,26 +41,26 @@ export type ToggleOptionProps<T> = {
 };
 
 export type ControlPanelProps = {
-  styles: ButtonStyleProps;
-  onChange: (styles: ButtonStyleProps) => void;
+  styles: ButtonStyles;
+  onChange: (styles: ButtonStyles) => void;
   onReset: () => void;
   hasChanges?: boolean;
 };
 
 export type PreviewPanelProps = {
-  styles: ButtonStyleProps;
+  styles: ButtonStyles;
   variant: ButtonVariant;
   size: ButtonSize;
 };
 
 export type CodePanelProps = {
-  styles: ButtonStyleProps;
+  styles: ButtonStyles;
   variant: ButtonVariant;
   size: ButtonSize;
 };
 
 export type ButtonPreviewProps = {
-  styles: ButtonStyleProps;
+  styles: ButtonStyles;
   variant: ButtonVariant;
   size: ButtonSize;
   label?: string;
