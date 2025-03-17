@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Select,
   SelectContent,
@@ -10,6 +10,8 @@ import {
 import { ThemePreset } from "../../types/theme";
 import { useEditorStore } from "../../store/editorStore";
 import { getPresetThemeStyles } from "../../utils/themePresets";
+import { Button } from "../ui/button";
+import { Shuffle } from "lucide-react";
 
 interface ThemePresetSelectProps {
   presets: Record<string, ThemePreset>;
@@ -35,12 +37,21 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   const mode = themeState.currentMode;
   const presetNames = ["default", ...Object.keys(presets)];
   const value = presetNames?.find(name => name === currentPreset);
+  const randomize = useCallback(() => {
+    const random = Math.floor(Math.random() * presetNames.length);
+    onPresetChange(presetNames[random]);
+  }, [onPresetChange, presets]);
 
   return (
     <Select value={value || ""} onValueChange={onPresetChange}>
-      <SelectTrigger className="w-full md:w-64">
-        <SelectValue placeholder="Select theme preset" />
-      </SelectTrigger>
+      <div className="flex gap-1 items-center">
+        <SelectTrigger className="w-full md:w-64">
+          <SelectValue placeholder="Select theme preset" />
+        </SelectTrigger>
+        <Button size="icon" variant="outline" className="h-10 w-10" title="Randomize" onClick={randomize}>
+          <Shuffle />
+        </Button>
+      </div>
       <SelectContent>
         <SelectGroup>
           {presetNames.map((presetName) => (
