@@ -1,82 +1,87 @@
 import { ThemeStyles } from "@/types/theme";
 import { ButtonStyleProps } from "@/types/button";
-import { convertToHSL } from "./colorConverter";
+import { colorFormatter } from "./colorConverter";
+import { ColorFormat } from "../types";
 
 export const generateThemeCode = (
   styles: ButtonStyleProps | ThemeStyles,
+  colorFormat: ColorFormat = "hsl",
 ): string => {
   if (!("light" in styles) || !("dark" in styles)) {
     throw new Error("Invalid theme styles: missing light or dark mode");
   }
+
+  const formatColor = (color: string) => colorFormatter(color, colorFormat);
+
   const themeStyles = styles as ThemeStyles;
   return `:root {
-  --background: ${convertToHSL(themeStyles.light.background)};
-  --foreground: ${convertToHSL(themeStyles.light.foreground)};
-  --card: ${convertToHSL(themeStyles.light.card)};
-  --card-foreground: ${convertToHSL(themeStyles.light["card-foreground"])};
-  --popover: ${convertToHSL(themeStyles.light.popover)};
-  --popover-foreground: ${convertToHSL(themeStyles.light["popover-foreground"])};
-  --primary: ${convertToHSL(themeStyles.light.primary)};
-  --primary-foreground: ${convertToHSL(themeStyles.light["primary-foreground"])};
-  --secondary: ${convertToHSL(themeStyles.light.secondary)};
-  --secondary-foreground: ${convertToHSL(themeStyles.light["secondary-foreground"])};
-  --muted: ${convertToHSL(themeStyles.light.muted)};
-  --muted-foreground: ${convertToHSL(themeStyles.light["muted-foreground"])};
-  --accent: ${convertToHSL(themeStyles.light.accent)};
-  --accent-foreground: ${convertToHSL(themeStyles.light["accent-foreground"])};
-  --destructive: ${convertToHSL(themeStyles.light.destructive)};
-  --destructive-foreground: ${convertToHSL(themeStyles.light["destructive-foreground"])};
-  --border: ${convertToHSL(themeStyles.light.border)};
-  --input: ${convertToHSL(themeStyles.light.input)};
-  --ring: ${convertToHSL(themeStyles.light.ring)};
-  --chart-1: ${convertToHSL(themeStyles.light["chart-1"])};
-  --chart-2: ${convertToHSL(themeStyles.light["chart-2"])};
-  --chart-3: ${convertToHSL(themeStyles.light["chart-3"])};
-  --chart-4: ${convertToHSL(themeStyles.light["chart-4"])};
-  --chart-5: ${convertToHSL(themeStyles.light["chart-5"])};
+  --background: ${formatColor(themeStyles.light.background)};
+  --foreground: ${formatColor(themeStyles.light.foreground)};
+  --card: ${formatColor(themeStyles.light.card)};
+  --card-foreground: ${formatColor(themeStyles.light["card-foreground"])};
+  --popover: ${formatColor(themeStyles.light.popover)};
+  --popover-foreground: ${formatColor(themeStyles.light["popover-foreground"])};
+  --primary: ${formatColor(themeStyles.light.primary)};
+  --primary-foreground: ${formatColor(themeStyles.light["primary-foreground"])};
+  --secondary: ${formatColor(themeStyles.light.secondary)};
+  --secondary-foreground: ${formatColor(themeStyles.light["secondary-foreground"])};
+  --muted: ${formatColor(themeStyles.light.muted)};
+  --muted-foreground: ${formatColor(themeStyles.light["muted-foreground"])};
+  --accent: ${formatColor(themeStyles.light.accent)};
+  --accent-foreground: ${formatColor(themeStyles.light["accent-foreground"])};
+  --destructive: ${formatColor(themeStyles.light.destructive)};
+  --destructive-foreground: ${formatColor(themeStyles.light["destructive-foreground"])};
+  --border: ${formatColor(themeStyles.light.border)};
+  --input: ${formatColor(themeStyles.light.input)};
+  --ring: ${formatColor(themeStyles.light.ring)};
+  --chart-1: ${formatColor(themeStyles.light["chart-1"])};
+  --chart-2: ${formatColor(themeStyles.light["chart-2"])};
+  --chart-3: ${formatColor(themeStyles.light["chart-3"])};
+  --chart-4: ${formatColor(themeStyles.light["chart-4"])};
+  --chart-5: ${formatColor(themeStyles.light["chart-5"])};
   --radius: ${themeStyles.light.radius};
-  --sidebar: ${convertToHSL(themeStyles.light.sidebar)};
-  --sidebar-foreground: ${convertToHSL(themeStyles.light["sidebar-foreground"])};
-  --sidebar-primary: ${convertToHSL(themeStyles.light["sidebar-primary"])};
-  --sidebar-primary-foreground: ${convertToHSL(themeStyles.light["sidebar-primary-foreground"])};
-  --sidebar-accent: ${convertToHSL(themeStyles.light["sidebar-accent"])};
-  --sidebar-accent-foreground: ${convertToHSL(themeStyles.light["sidebar-accent-foreground"])};
-  --sidebar-border: ${convertToHSL(themeStyles.light["sidebar-border"])};
-  --sidebar-ring: ${convertToHSL(themeStyles.light["sidebar-ring"])};
+  --sidebar: ${formatColor(themeStyles.light.sidebar)};
+  --sidebar-foreground: ${formatColor(themeStyles.light["sidebar-foreground"])};
+  --sidebar-primary: ${formatColor(themeStyles.light["sidebar-primary"])};
+  --sidebar-primary-foreground: ${formatColor(themeStyles.light["sidebar-primary-foreground"])};
+  --sidebar-accent: ${formatColor(themeStyles.light["sidebar-accent"])};
+  --sidebar-accent-foreground: ${formatColor(themeStyles.light["sidebar-accent-foreground"])};
+  --sidebar-border: ${formatColor(themeStyles.light["sidebar-border"])};
+  --sidebar-ring: ${formatColor(themeStyles.light["sidebar-ring"])};
 }
+
 .dark {
-  --background: ${convertToHSL(themeStyles.dark.background)};
-  --foreground: ${convertToHSL(themeStyles.dark.foreground)};
-  --card: ${convertToHSL(themeStyles.dark.card)};
-  --card-foreground: ${convertToHSL(themeStyles.dark["card-foreground"])};
-  --popover: ${convertToHSL(themeStyles.dark.popover)};
-  --popover-foreground: ${convertToHSL(themeStyles.dark["popover-foreground"])};
-  --primary: ${convertToHSL(themeStyles.dark.primary)};
-  --primary-foreground: ${convertToHSL(themeStyles.dark["primary-foreground"])};
-  --secondary: ${convertToHSL(themeStyles.dark.secondary)};
-  --secondary-foreground: ${convertToHSL(themeStyles.dark["secondary-foreground"])};
-  --muted: ${convertToHSL(themeStyles.dark.muted)};
-  --muted-foreground: ${convertToHSL(themeStyles.dark["muted-foreground"])};
-  --accent: ${convertToHSL(themeStyles.dark.accent)};
-  --accent-foreground: ${convertToHSL(themeStyles.dark["accent-foreground"])};
-  --destructive: ${convertToHSL(themeStyles.dark.destructive)};
-  --destructive-foreground: ${convertToHSL(themeStyles.dark["destructive-foreground"])};
-  --border: ${convertToHSL(themeStyles.dark.border)};
-  --input: ${convertToHSL(themeStyles.dark.input)};
-  --ring: ${convertToHSL(themeStyles.dark.ring)};
-  --chart-1: ${convertToHSL(themeStyles.dark["chart-1"])};
-  --chart-2: ${convertToHSL(themeStyles.dark["chart-2"])};
-  --chart-3: ${convertToHSL(themeStyles.dark["chart-3"])};
-  --chart-4: ${convertToHSL(themeStyles.dark["chart-4"])};
-  --chart-5: ${convertToHSL(themeStyles.dark["chart-5"])};
-  --sidebar: ${convertToHSL(themeStyles.dark.sidebar)};
-  --sidebar-foreground: ${convertToHSL(themeStyles.dark["sidebar-foreground"])};
-  --sidebar-primary: ${convertToHSL(themeStyles.dark["sidebar-primary"])};
-  --sidebar-primary-foreground: ${convertToHSL(themeStyles.dark["sidebar-primary-foreground"])};
-  --sidebar-accent: ${convertToHSL(themeStyles.dark["sidebar-accent"])};
-  --sidebar-accent-foreground: ${convertToHSL(themeStyles.dark["sidebar-accent-foreground"])};
-  --sidebar-border: ${convertToHSL(themeStyles.dark["sidebar-border"])};
-  --sidebar-ring: ${convertToHSL(themeStyles.dark["sidebar-ring"])};
+  --background: ${formatColor(themeStyles.dark.background)};
+  --foreground: ${formatColor(themeStyles.dark.foreground)};
+  --card: ${formatColor(themeStyles.dark.card)};
+  --card-foreground: ${formatColor(themeStyles.dark["card-foreground"])};
+  --popover: ${formatColor(themeStyles.dark.popover)};
+  --popover-foreground: ${formatColor(themeStyles.dark["popover-foreground"])};
+  --primary: ${formatColor(themeStyles.dark.primary)};
+  --primary-foreground: ${formatColor(themeStyles.dark["primary-foreground"])};
+  --secondary: ${formatColor(themeStyles.dark.secondary)};
+  --secondary-foreground: ${formatColor(themeStyles.dark["secondary-foreground"])};
+  --muted: ${formatColor(themeStyles.dark.muted)};
+  --muted-foreground: ${formatColor(themeStyles.dark["muted-foreground"])};
+  --accent: ${formatColor(themeStyles.dark.accent)};
+  --accent-foreground: ${formatColor(themeStyles.dark["accent-foreground"])};
+  --destructive: ${formatColor(themeStyles.dark.destructive)};
+  --destructive-foreground: ${formatColor(themeStyles.dark["destructive-foreground"])};
+  --border: ${formatColor(themeStyles.dark.border)};
+  --input: ${formatColor(themeStyles.dark.input)};
+  --ring: ${formatColor(themeStyles.dark.ring)};
+  --chart-1: ${formatColor(themeStyles.dark["chart-1"])};
+  --chart-2: ${formatColor(themeStyles.dark["chart-2"])};
+  --chart-3: ${formatColor(themeStyles.dark["chart-3"])};
+  --chart-4: ${formatColor(themeStyles.dark["chart-4"])};
+  --chart-5: ${formatColor(themeStyles.dark["chart-5"])};
+  --sidebar: ${formatColor(themeStyles.dark.sidebar)};
+  --sidebar-foreground: ${formatColor(themeStyles.dark["sidebar-foreground"])};
+  --sidebar-primary: ${formatColor(themeStyles.dark["sidebar-primary"])};
+  --sidebar-primary-foreground: ${formatColor(themeStyles.dark["sidebar-primary-foreground"])};
+  --sidebar-accent: ${formatColor(themeStyles.dark["sidebar-accent"])};
+  --sidebar-accent-foreground: ${formatColor(themeStyles.dark["sidebar-accent-foreground"])};
+  --sidebar-border: ${formatColor(themeStyles.dark["sidebar-border"])};
+  --sidebar-ring: ${formatColor(themeStyles.dark["sidebar-ring"])};
 }`;
 };
-
