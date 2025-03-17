@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
   Select,
   SelectContent,
@@ -35,12 +35,12 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
 }) => {
   const { themeState } = useEditorStore();
   const mode = themeState.currentMode;
-  const presetNames = ["default", ...Object.keys(presets)];
+  const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
   const value = presetNames?.find(name => name === currentPreset);
   const randomize = useCallback(() => {
     const random = Math.floor(Math.random() * presetNames.length);
     onPresetChange(presetNames[random]);
-  }, [onPresetChange, presets]);
+  }, [onPresetChange, presetNames]);
 
   return (
     <Select value={value || ""} onValueChange={onPresetChange}>
