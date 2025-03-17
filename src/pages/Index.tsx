@@ -52,7 +52,7 @@ const Index = () => {
                 className="font-semibold"
               >
                 <GitHubIcon className="h-5 w-5" />
-                {stargazersCount}
+                {stargazersCount > 0 && stargazersCount}
               </a>
             </Button>
           </div>
