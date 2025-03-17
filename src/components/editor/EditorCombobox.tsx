@@ -36,7 +36,7 @@ const EditorCombobox = ({ className }: { className?: string }) => {
           variant="secondary"
           role="combobox"
           aria-expanded={open}
-          className={cn("w-[200px] justify-between", className)}
+          className={cn("w-[150px] md:w-[200px] justify-between", className)}
         >
           {editorType ?
             editors.find((editor) => editor.value === editorType)?.label :
