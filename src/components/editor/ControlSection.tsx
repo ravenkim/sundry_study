@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ControlSectionProps } from '@/types';
+import React, { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ControlSectionProps } from "@/types";
 
 const ControlSection = ({
   title,
   children,
   expanded = false,
   className,
-  id
+  id,
 }: ControlSectionProps) => {
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   return (
-    <div id={id} className={cn("mb-4 border rounded-lg overflow-hidden", className)}>
+    <div
+      id={id}
+      className={cn("mb-4 border rounded-lg overflow-hidden", className)}
+    >
       <div
         className="flex items-center justify-between p-3 cursor-pointer bg-background hover:bg-muted"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -35,12 +38,10 @@ const ControlSection = ({
       <div
         className={cn(
           "overflow-hidden transition-all duration-200",
-          isExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+          isExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0",
         )}
       >
-        <div className="p-3 bg-background border-t">
-          {children}
-        </div>
+        <div className="p-3 bg-background border-t">{children}</div>
       </div>
     </div>
   );

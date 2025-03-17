@@ -36,23 +36,26 @@ Currently in beta, only starting with the button component. Support for all othe
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm / yarn / pnpm
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/jnsahaj/tweakcn.git
 cd tweakcn
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```

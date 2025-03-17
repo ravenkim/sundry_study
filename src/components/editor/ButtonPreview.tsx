@@ -1,27 +1,28 @@
-import React from 'react';
-import { ButtonPreviewProps } from '@/types';
-import { cn } from '@/lib/utils';
-import { useEditorStore } from '@/store/editorStore';
+import React from "react";
+import { ButtonPreviewProps } from "@/types";
+import { cn } from "@/lib/utils";
+import { useEditorStore } from "@/store/editorStore";
 
 const ButtonPreview = ({
   styles,
   variant,
   size,
-  label = 'Button',
+  label = "Button",
   disabled = false,
   className,
   hover = false,
 }: ButtonPreviewProps) => {
   const [isHovered, setIsHovered] = React.useState(hover);
-  const themeState = useEditorStore(state => state.themeState?.styles);
-  const mode = 'light'; // You might want to make this dynamic based on your app's theme mode
+  const themeState = useEditorStore((state) => state.themeState?.styles);
+  const mode = "light"; // You might want to make this dynamic based on your app's theme mode
 
   // Base Tailwind classes (removing color classes as we'll apply them via style)
-  const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
+  const baseClasses =
+    "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
 
   const parseColor = (color: string, opacity: number) => {
     // Handle hex colors
-    if (color.startsWith('#')) {
+    if (color.startsWith("#")) {
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
       if (result) {
         const r = parseInt(result[1], 16);
@@ -32,7 +33,7 @@ const ButtonPreview = ({
     }
 
     // Handle rgb/rgba colors
-    if (color.startsWith('rgb')) {
+    if (color.startsWith("rgb")) {
       const values = color.match(/\d+/g);
       if (values && values.length >= 3) {
         const [r, g, b] = values;
@@ -41,17 +42,17 @@ const ButtonPreview = ({
     }
 
     // Handle oklch colors
-    if (color.startsWith('oklch')) {
+    if (color.startsWith("oklch")) {
       // Extract the values from oklch
       const values = color.match(/[\d.]+/g);
       if (values && values.length >= 3) {
         // Keep the original oklch values but add opacity
-        return color.replace(')', ` / ${opacity})`);
+        return color.replace(")", ` / ${opacity})`);
       }
     }
 
     // Handle hsl/hsla colors
-    if (color.startsWith('hsl')) {
+    if (color.startsWith("hsl")) {
       const values = color.match(/[\d.]+/g);
       if (values && values.length >= 3) {
         const [h, s, l] = values;
@@ -66,37 +67,50 @@ const ButtonPreview = ({
   // Variant style objects using theme colors
   const variantStyles = {
     default: {
-      color: themeState[mode]['primary-foreground'],
+      color: themeState[mode]["primary-foreground"],
       backgroundColor: isHovered
-        ? parseColor(themeState[mode].primary, (styles.hoverBackgroundOpacity) / 100)
+        ? parseColor(
+            themeState[mode].primary,
+            styles.hoverBackgroundOpacity / 100,
+          )
         : themeState[mode].primary,
     },
     destructive: {
-      color: themeState[mode]['destructive-foreground'],
+      color: themeState[mode]["destructive-foreground"],
       backgroundColor: isHovered
-        ? parseColor(themeState[mode].destructive, (styles.hoverBackgroundOpacity) / 100)
+        ? parseColor(
+            themeState[mode].destructive,
+            styles.hoverBackgroundOpacity / 100,
+          )
         : themeState[mode].destructive,
     },
     outline: {
-      backgroundColor: isHovered ? themeState[mode].accent : themeState[mode].background,
+      backgroundColor: isHovered
+        ? themeState[mode].accent
+        : themeState[mode].background,
       color: themeState[mode].foreground,
       borderColor: themeState[mode].input,
-      borderWidth: '1px',
+      borderWidth: "1px",
     },
     secondary: {
-      backgroundColor: isHovered ? parseColor(themeState[mode].secondary, (styles.hoverBackgroundOpacity) / 100) : themeState[mode].secondary,
-      color: themeState[mode]['secondary-foreground'],
+      backgroundColor: isHovered
+        ? parseColor(
+            themeState[mode].secondary,
+            styles.hoverBackgroundOpacity / 100,
+          )
+        : themeState[mode].secondary,
+      color: themeState[mode]["secondary-foreground"],
     },
     ghost: {
-      backgroundColor: isHovered ? themeState[mode].accent : 'transparent',
+      backgroundColor: isHovered ? themeState[mode].accent : "transparent",
       color: themeState[mode].foreground,
     },
     link: {
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
       color: themeState[mode].primary,
-      textDecoration: 'underline',
-      textUnderlineOffset: '4px',
-    }
+      textDecoration: "underline",
+      textUnderlineOffset: "4px",
+    },
   };
 
   // Size classes without padding (we'll apply custom padding from styles)
@@ -104,7 +118,7 @@ const ButtonPreview = ({
     default: "h-10",
     sm: "h-9 rounded-md text-sm",
     lg: "h-11 rounded-md text-lg",
-    icon: "h-10 w-10"
+    icon: "h-10 w-10",
   };
 
   // Combine custom styles with variant styles
@@ -122,12 +136,16 @@ const ButtonPreview = ({
     paddingBottom: `${styles.paddingY}px`,
     // Add box shadow only if opacity > 0
     ...(styles.shadowOpacity > 0 && {
-      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}`
+      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(
+        styles.shadowOpacity * 255,
+      )
+        .toString(16)
+        .padStart(2, "0")}`,
     }),
     // Add border only if width > 0
     ...(styles.borderWidth > 0 && {
       borderWidth: `${styles.borderWidth}px`,
-      borderColor: isHovered ? styles.hoverBorderColor : styles.borderColor
+      borderColor: isHovered ? styles.hoverBorderColor : styles.borderColor,
     }),
     transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
     ...variantStyles[variant],
@@ -137,16 +155,20 @@ const ButtonPreview = ({
 
   return (
     <button
-    className={cn(
+      className={cn(
         baseClasses,
         sizeClasses[size],
         className,
-        disabled && 'opacity-50 cursor-not-allowed'
+        disabled && "opacity-50 cursor-not-allowed",
       )}
       type="button"
       style={customStyles}
-      onMouseEnter={() => { if (!disabled) setIsHovered(true)} }
-      onMouseLeave={() => { if (!hover) setIsHovered(false)} }
+      onMouseEnter={() => {
+        if (!disabled) setIsHovered(true);
+      }}
+      onMouseLeave={() => {
+        if (!hover) setIsHovered(false);
+      }}
     >
       {label}
     </button>

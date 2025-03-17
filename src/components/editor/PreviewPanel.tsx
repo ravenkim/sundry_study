@@ -1,16 +1,21 @@
+import React from "react";
+import { EditorPreviewProps } from "@/types/editor";
+import ButtonPreview from "./ButtonPreview";
+import { ButtonEditorState } from "@/types/editor";
+import { Button } from "@/components/ui/button";
+import { Check, ArrowRight, Info } from "lucide-react";
 
-import React from 'react';
-import { EditorPreviewProps } from '@/types/editor';
-import ButtonPreview from './ButtonPreview';
-import { ButtonEditorState } from '@/types/editor';
-import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Info } from 'lucide-react';
-
-const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = (props) => {
+const PreviewPanel: React.FC<
+  EditorPreviewProps & Partial<ButtonEditorState>
+> = (props) => {
   // If this is a button editor state with styles, variant, and size
-  if ('styles' in props) {
-    const { styles, variant = "default", size = "default" } = props as ButtonEditorState;
-    
+  if ("styles" in props) {
+    const {
+      styles,
+      variant = "default",
+      size = "default",
+    } = props as ButtonEditorState;
+
     return (
       <div className="h-full flex flex-col">
         <div className="flex items-center justify-between mb-4">
@@ -29,10 +34,10 @@ const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = 
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Hover</p>
                 <div className="relative">
-                  <ButtonPreview 
-                    styles={styles} 
-                    variant={variant} 
-                    size={size} 
+                  <ButtonPreview
+                    styles={styles}
+                    variant={variant}
+                    size={size}
                     hover
                     className="!pointer-events-none"
                   />
@@ -40,10 +45,10 @@ const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = 
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Disabled</p>
-                <ButtonPreview 
-                  styles={styles} 
-                  variant={variant} 
-                  size={size} 
+                <ButtonPreview
+                  styles={styles}
+                  variant={variant}
+                  size={size}
                   disabled
                 />
               </div>
@@ -60,7 +65,11 @@ const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = 
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Default</p>
-                <ButtonPreview styles={styles} variant={variant} size="default" />
+                <ButtonPreview
+                  styles={styles}
+                  variant={variant}
+                  size="default"
+                />
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Large</p>
@@ -68,21 +77,20 @@ const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = 
               </div>
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs text-muted-foreground">Icon</p>
-                <ButtonPreview 
-                  styles={styles} 
-                  variant={variant} 
-                  size="icon" 
-                  label="+" 
+                <ButtonPreview
+                  styles={styles}
+                  variant={variant}
+                  size="icon"
+                  label="+"
                 />
               </div>
             </div>
           </div>
-
         </div>
       </div>
     );
   }
-  
+
   // Fallback for other types of editors or missing props
   return (
     <div className="h-full flex items-center justify-center">

@@ -21,7 +21,9 @@ const Index = () => {
     const repo = "tweakcn";
 
     const fetchData = async () => {
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+      const response = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}`,
+      );
       const data = await response.json();
       setStargazersCount(data.stargazers_count);
     };
@@ -30,7 +32,11 @@ const Index = () => {
   }, []);
 
   return (
-    <div className={cn("h-screen flex flex-col text-foreground bg-background transition-colors")}>
+    <div
+      className={cn(
+        "h-screen flex flex-col text-foreground bg-background transition-colors",
+      )}
+    >
       <header className="border-b">
         <div className="px-4 py-4 flex items-center gap-2 justify-between">
           <div className="flex items-center gap-1">
@@ -44,11 +50,13 @@ const Index = () => {
             </Button>
           </div>
           <div className="flex items-center gap-1">
-            <Link to="https://github.com/sponsors/jnsahaj" target="_blank"
+            <Link
+              to="https://github.com/sponsors/jnsahaj"
+              target="_blank"
               data-umami-event="outbound-link-click"
               data-umami-event-url="https://github.com/sponsors/jnsahaj"
             >
-              <Button variant="link" size="icon" >
+              <Button variant="link" size="icon">
                 <Heart className="h-5 w-5" stroke="#c96198" />
               </Button>
             </Link>
@@ -63,7 +71,6 @@ const Index = () => {
                 {stargazersCount > 0 && stargazersCount}
               </a>
             </Button>
-
           </div>
         </div>
       </header>

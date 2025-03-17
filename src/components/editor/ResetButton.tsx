@@ -1,14 +1,22 @@
-import React from 'react';
-import { RotateCcw } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import React from "react";
+import { RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ResetButtonProps {
   onReset: () => void;
   label?: string;
 }
 
-const ResetButton = ({ onReset, label = 'Reset to default' }: ResetButtonProps) => {
+const ResetButton = ({
+  onReset,
+  label = "Reset to default",
+}: ResetButtonProps) => {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -29,4 +37,4 @@ const ResetButton = ({ onReset, label = 'Reset to default' }: ResetButtonProps) 
   );
 };
 
-export default ResetButton; 
+export default ResetButton;

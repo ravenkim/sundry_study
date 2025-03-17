@@ -84,4 +84,3 @@ export const defaultThemeState: ThemeEditorState = {
   },
   currentMode: "light",
 };
-

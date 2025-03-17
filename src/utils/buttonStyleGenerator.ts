@@ -1,10 +1,10 @@
-import defaultButtonStyles from '@/config/button';
-import { ButtonStyleProps, ButtonVariant, ButtonSize } from '@/types';
+import defaultButtonStyles from "@/config/button";
+import { ButtonStyleProps, ButtonVariant, ButtonSize } from "@/types";
 
 export const generateButtonClassName = (
   styles: ButtonStyleProps,
   variant: ButtonVariant,
-  size: ButtonSize
+  size: ButtonSize,
 ): string => {
   // Base styles
   let className = `
@@ -21,70 +21,72 @@ export const generateButtonClassName = (
 
   // Add size-specific styles - using inline styles for flexibility
   switch (size) {
-    case 'sm':
+    case "sm":
       className += ` h-8`;
       break;
-    case 'default':
+    case "default":
       className += ` h-9`;
       break;
-    case 'lg':
+    case "lg":
       className += ` h-10`;
       break;
-    case 'icon':
+    case "icon":
       className += ` h-9 w-9`;
       break;
   }
 
-  return className.replace(/\s+/g, ' ').trim();
+  return className.replace(/\s+/g, " ").trim();
 };
 
-export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): ButtonStyleProps => {
+export const getDefaultButtonStyles = (
+  variant: ButtonVariant = "default",
+): ButtonStyleProps => {
   const baseStyles: ButtonStyleProps = defaultButtonStyles;
 
   // Apply variant-specific styles
   switch (variant) {
-    case 'secondary':
+    case "secondary":
       return {
         ...baseStyles,
-        backgroundColor: '#f3f4f6',
-        textColor: '#1f2937',
-        hoverBackgroundColor: '#e5e7eb',
-        hoverTextColor: '#1f2937',
+        backgroundColor: "#f3f4f6",
+        textColor: "#1f2937",
+        hoverBackgroundColor: "#e5e7eb",
+        hoverTextColor: "#1f2937",
       };
-    case 'destructive':
+    case "destructive":
       return {
         ...baseStyles,
-        backgroundColor: '#ef4444',
-        hoverBackgroundColor: '#dc2626',
+        backgroundColor: "#ef4444",
+        hoverBackgroundColor: "#dc2626",
       };
-    case 'outline':
+    case "outline":
       return {
         ...baseStyles,
-        backgroundColor: 'transparent',
-        textColor: '#1f2937',
-        borderColor: '#e5e7eb',
-        hoverBackgroundColor: '#f9fafb',
-        hoverTextColor: '#1f2937',
+        backgroundColor: "transparent",
+        textColor: "#1f2937",
+        borderColor: "#e5e7eb",
+        hoverBackgroundColor: "#f9fafb",
+        hoverTextColor: "#1f2937",
       };
-    case 'ghost':
+    case "ghost":
       return {
         ...baseStyles,
-        backgroundColor: 'transparent',
-        textColor: '#1f2937',
-        borderColor: 'transparent',
-        hoverBackgroundColor: '#f3f4f6',
-        hoverTextColor: '#1f2937',
+        backgroundColor: "transparent",
+        textColor: "#1f2937",
+        borderColor: "transparent",
+        hoverBackgroundColor: "#f3f4f6",
+        hoverTextColor: "#1f2937",
       };
-    case 'link':
+    case "link":
       return {
         ...baseStyles,
-        backgroundColor: 'transparent',
-        textColor: '#2563eb',
-        borderColor: 'transparent',
-        hoverBackgroundColor: 'transparent',
-        hoverTextColor: '#1d4ed8',
-        textTransform: 'none',
-        fontWeight: '400',
+        backgroundColor: "transparent",
+        textColor: "#2563eb",
+        borderColor: "transparent",
+        hoverBackgroundColor: "transparent",
+        hoverTextColor: "#1d4ed8",
+        textTransform: "none",
+        fontWeight: "400",
         shadowOpacity: 0,
         paddingX: 2,
         paddingY: 0,
@@ -94,17 +96,19 @@ export const getDefaultButtonStyles = (variant: ButtonVariant = 'default'): Butt
   }
 };
 
-
 export const generateButtonComponentCode = (
   styles: ButtonStyleProps,
   variant: ButtonVariant,
-  size: ButtonSize
+  size: ButtonSize,
 ): string => {
   // Generate Tailwind utility classes for each style property
-  const generateTailwindClasses = (styles: ButtonStyleProps, variant: ButtonVariant) => {
+  const generateTailwindClasses = (
+    styles: ButtonStyleProps,
+    variant: ButtonVariant,
+  ) => {
     // Convert hex color to Tailwind format for inline classes
     const formatColor = (color: string) => color;
-    
+
     // Transform styling properties to Tailwind utility classes
     const baseClasses = `
       bg-primary 
@@ -116,19 +120,27 @@ export const generateButtonComponentCode = (
       font-[${styles.fontWeight}] 
       px-[${styles.paddingX}px] 
       py-[${styles.paddingY}px] 
-      ${styles.shadowOpacity > 0 ? `shadow-[${styles.shadowOffsetX}px_${styles.shadowOffsetY}px_${styles.shadowBlur}px_${styles.shadowSpread}px_${formatColor(styles.shadowColor)}${Math.round(styles.shadowOpacity * 255).toString(16).padStart(2, '0')}]` : ''}
+      ${
+        styles.shadowOpacity > 0
+          ? `shadow-[${styles.shadowOffsetX}px_${styles.shadowOffsetY}px_${styles.shadowBlur}px_${styles.shadowSpread}px_${formatColor(styles.shadowColor)}${Math.round(
+              styles.shadowOpacity * 255,
+            )
+              .toString(16)
+              .padStart(2, "0")}]`
+          : ""
+      }
       tracking-[${styles.letterSpacing}em] 
       leading-[${styles.lineHeight}] 
-      ${styles.textTransform !== 'none' ? `${styles.textTransform}` : ''} 
+      ${styles.textTransform !== "none" ? `${styles.textTransform}` : ""} 
       transition-all duration-[${styles.transitionDuration}ms] ease-[${styles.transitionEasing}]
       hover:bg-primary/${styles.hoverBackgroundOpacity} 
       hover:text-[${formatColor(styles.hoverTextColor)}] 
       hover:border-[${formatColor(styles.hoverBorderColor)}]
     `;
-    
-    return baseClasses.replace(/\s+/g, ' ').trim();
+
+    return baseClasses.replace(/\s+/g, " ").trim();
   };
-  
+
   // Size classes object to be used in the cva function
   const getSizeClasses = () => {
     return {
@@ -141,9 +153,11 @@ export const generateButtonComponentCode = (
 
   // Generate tailwind classes for each variant
   const variantClasses = {
-    default: generateTailwindClasses(styles, 'default'),
-    destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-    outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+    default: generateTailwindClasses(styles, "default"),
+    destructive:
+      "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+    outline:
+      "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
     secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
     ghost: "hover:bg-accent hover:text-accent-foreground",
     link: "text-primary underline-offset-4 hover:underline",

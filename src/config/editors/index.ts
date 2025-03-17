@@ -1,4 +1,3 @@
-
 import { EditorConfig } from "@/types/editor";
 import { buttonEditorConfig } from "./button";
 import { themeEditorConfig } from "./theme";

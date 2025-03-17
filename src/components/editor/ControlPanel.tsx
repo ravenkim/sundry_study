@@ -1,25 +1,31 @@
-import React from 'react';
-import { ControlPanelProps } from '@/types';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Slider } from '@/components/ui/slider';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import ControlSection from './ControlSection';
-import ColorPicker from './ColorPicker';
-import ResetButton from './ResetButton';
-import { Link } from 'react-router-dom';
-import { ExternalLink, Palette } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useEditorStore } from '@/store/editorStore';
-import { ScrollArea } from '../ui/scroll-area';
-import { SliderWithInput } from './slider-with-input';
+import React from "react";
+import { ControlPanelProps } from "@/types";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import ControlSection from "./ControlSection";
+import ColorPicker from "./ColorPicker";
+import ResetButton from "./ResetButton";
+import { Link } from "react-router-dom";
+import { ExternalLink, Palette } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useEditorStore } from "@/store/editorStore";
+import { ScrollArea } from "../ui/scroll-area";
+import { SliderWithInput } from "./slider-with-input";
 
 // Readonly color display component for theme-controlled properties
 const ReadOnlyColorDisplay = ({
   color,
   label,
-  linkTo
+  linkTo,
 }: {
   color: string;
   label: string;
@@ -28,19 +34,22 @@ const ReadOnlyColorDisplay = ({
   // Map labels to theme section IDs
   const getSectionId = (label: string) => {
     switch (label.toLowerCase()) {
-      case 'background color':
-      case 'text color':
-      case 'hover background':
-        return '#primary-colors';
+      case "background color":
+      case "text color":
+      case "hover background":
+        return "#primary-colors";
       default:
-        return '';
+        return "";
     }
   };
 
   return (
     <div className="mb-3">
       <div className="flex items-center justify-between mb-1.5">
-        <Label htmlFor={`color-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+        <Label
+          htmlFor={`color-${label.replace(/\s+/g, "-").toLowerCase()}`}
+          className="text-xs font-medium"
+        >
           {label}
         </Label>
         <div className="text-xs text-muted-foreground">{color}</div>
@@ -49,7 +58,7 @@ const ReadOnlyColorDisplay = ({
       <div className="flex items-center gap-2">
         <div
           className="h-8 w-8 rounded border overflow-hidden relative flex items-center justify-center"
-          style={{ backgroundColor: color, cursor: 'default', opacity: 0.8 }}
+          style={{ backgroundColor: color, cursor: "default", opacity: 0.8 }}
         />
 
         <div className="flex-1 relative">
@@ -84,14 +93,17 @@ const ControlPanel = ({
   styles,
   onChange,
   onReset,
-  hasChanges = false
+  hasChanges = false,
 }: ControlPanelProps) => {
-  const updateStyle = React.useCallback(<K extends keyof typeof styles>(key: K, value: typeof styles[K]) => {
-    onChange({ ...styles, [key]: value });
-  }, [onChange, styles]);
+  const updateStyle = React.useCallback(
+    <K extends keyof typeof styles>(key: K, value: (typeof styles)[K]) => {
+      onChange({ ...styles, [key]: value });
+    },
+    [onChange, styles],
+  );
 
-  const themeState = useEditorStore(state => state.themeState);
-  const mode = 'light';
+  const themeState = useEditorStore((state) => state.themeState);
+  const mode = "light";
   const themeStyles = themeState?.styles[mode];
 
   return (
@@ -99,20 +111,23 @@ const ControlPanel = ({
       <div className="sticky top-0 z-10 pb-2 mb-2 bg-background">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-medium">Button Editor</h2>
-          {hasChanges && <ResetButton onReset={onReset} label="Reset button styles" />}
+          {hasChanges && (
+            <ResetButton onReset={onReset} label="Reset button styles" />
+          )}
         </div>
       </div>
 
-
-      <ScrollArea className='h-full'>
+      <ScrollArea className="h-full">
         <div className="mt-4 mb-3">
-          <Label htmlFor="button-variant" className="text-xs mb-1.5 block">Button Variant</Label>
+          <Label htmlFor="button-variant" className="text-xs mb-1.5 block">
+            Button Variant
+          </Label>
           <Select
             value="default"
             onValueChange={(value) => {
               // For now, we only support default variant
               if (value === "default") {
-                updateStyle('variant', value);
+                updateStyle("variant", value);
               }
             }}
           >
@@ -121,11 +136,21 @@ const ControlPanel = ({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="default">Default</SelectItem>
-              <SelectItem value="secondary" disabled>Secondary (Coming Soon)</SelectItem>
-              <SelectItem value="destructive" disabled>Destructive (Coming Soon)</SelectItem>
-              <SelectItem value="outline" disabled>Outline (Coming Soon)</SelectItem>
-              <SelectItem value="ghost" disabled>Ghost (Coming Soon)</SelectItem>
-              <SelectItem value="link" disabled>Link (Coming Soon)</SelectItem>
+              <SelectItem value="secondary" disabled>
+                Secondary (Coming Soon)
+              </SelectItem>
+              <SelectItem value="destructive" disabled>
+                Destructive (Coming Soon)
+              </SelectItem>
+              <SelectItem value="outline" disabled>
+                Outline (Coming Soon)
+              </SelectItem>
+              <SelectItem value="ghost" disabled>
+                Ghost (Coming Soon)
+              </SelectItem>
+              <SelectItem value="link" disabled>
+                Link (Coming Soon)
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -146,13 +171,13 @@ const ControlPanel = ({
                 linkTo="/editor/theme"
               />
               <ReadOnlyColorDisplay
-                color={themeStyles?.['primary-foreground']}
+                color={themeStyles?.["primary-foreground"]}
                 label="Text Color"
                 linkTo="/editor/theme"
               />
               <ColorPicker
                 color={styles.borderColor}
-                onChange={(color) => updateStyle('borderColor', color)}
+                onChange={(color) => updateStyle("borderColor", color)}
                 label="Border Color"
               />
             </ControlSection>
@@ -160,28 +185,28 @@ const ControlPanel = ({
             <ControlSection title="Dimensions">
               <SliderWithInput
                 value={styles.paddingX}
-                onChange={(value) => updateStyle('paddingX', value)}
+                onChange={(value) => updateStyle("paddingX", value)}
                 min={0}
                 max={40}
                 label="Padding X"
               />
               <SliderWithInput
                 value={styles.paddingY}
-                onChange={(value) => updateStyle('paddingY', value)}
+                onChange={(value) => updateStyle("paddingY", value)}
                 min={0}
                 max={40}
                 label="Padding Y"
               />
               <SliderWithInput
                 value={styles.borderWidth}
-                onChange={(value) => updateStyle('borderWidth', value)}
+                onChange={(value) => updateStyle("borderWidth", value)}
                 min={0}
                 max={8}
                 label="Border Width"
               />
               <SliderWithInput
                 value={styles.borderRadius}
-                onChange={(value) => updateStyle('borderRadius', value)}
+                onChange={(value) => updateStyle("borderRadius", value)}
                 min={0}
                 max={30}
                 label="Border Radius"
@@ -191,7 +216,7 @@ const ControlPanel = ({
             <ControlSection title="Shadow">
               <SliderWithInput
                 value={styles.shadowOpacity}
-                onChange={(value) => updateStyle('shadowOpacity', value)}
+                onChange={(value) => updateStyle("shadowOpacity", value)}
                 min={0}
                 max={1}
                 step={0.01}
@@ -202,33 +227,33 @@ const ControlPanel = ({
                 <>
                   <ColorPicker
                     color={styles.shadowColor}
-                    onChange={(color) => updateStyle('shadowColor', color)}
+                    onChange={(color) => updateStyle("shadowColor", color)}
                     label="Shadow Color"
                   />
                   <SliderWithInput
                     value={styles.shadowOffsetX}
-                    onChange={(value) => updateStyle('shadowOffsetX', value)}
+                    onChange={(value) => updateStyle("shadowOffsetX", value)}
                     min={-20}
                     max={20}
                     label="Shadow X Offset"
                   />
                   <SliderWithInput
                     value={styles.shadowOffsetY}
-                    onChange={(value) => updateStyle('shadowOffsetY', value)}
+                    onChange={(value) => updateStyle("shadowOffsetY", value)}
                     min={-20}
                     max={20}
                     label="Shadow Y Offset"
                   />
                   <SliderWithInput
                     value={styles.shadowBlur}
-                    onChange={(value) => updateStyle('shadowBlur', value)}
+                    onChange={(value) => updateStyle("shadowBlur", value)}
                     min={0}
                     max={40}
                     label="Shadow Blur"
                   />
                   <SliderWithInput
                     value={styles.shadowSpread}
-                    onChange={(value) => updateStyle('shadowSpread', value)}
+                    onChange={(value) => updateStyle("shadowSpread", value)}
                     min={0}
                     max={40}
                     label="Shadow Spread"
@@ -240,7 +265,7 @@ const ControlPanel = ({
             <ControlSection title="Animation">
               <SliderWithInput
                 value={styles.transitionDuration}
-                onChange={(value) => updateStyle('transitionDuration', value)}
+                onChange={(value) => updateStyle("transitionDuration", value)}
                 min={0}
                 max={1000}
                 step={10}
@@ -248,10 +273,17 @@ const ControlPanel = ({
                 unit="ms"
               />
               <div className="mb-3">
-                <Label htmlFor="transition-easing" className="text-xs mb-1.5 block">Transition Easing</Label>
+                <Label
+                  htmlFor="transition-easing"
+                  className="text-xs mb-1.5 block"
+                >
+                  Transition Easing
+                </Label>
                 <Select
                   value={styles.transitionEasing}
-                  onValueChange={(value) => updateStyle('transitionEasing', value)}
+                  onValueChange={(value) =>
+                    updateStyle("transitionEasing", value)
+                  }
                 >
                   <SelectTrigger id="transition-easing" className="h-9">
                     <SelectValue placeholder="Select easing" />
@@ -278,7 +310,9 @@ const ControlPanel = ({
               />
               <SliderWithInput
                 value={styles.hoverBackgroundOpacity ?? 90}
-                onChange={(value) => updateStyle('hoverBackgroundOpacity', value)}
+                onChange={(value) =>
+                  updateStyle("hoverBackgroundOpacity", value)
+                }
                 min={0}
                 max={100}
                 step={5}
@@ -287,12 +321,12 @@ const ControlPanel = ({
               />
               <ColorPicker
                 color={styles.hoverTextColor}
-                onChange={(color) => updateStyle('hoverTextColor', color)}
+                onChange={(color) => updateStyle("hoverTextColor", color)}
                 label="Hover Text"
               />
               <ColorPicker
                 color={styles.hoverBorderColor}
-                onChange={(color) => updateStyle('hoverBorderColor', color)}
+                onChange={(color) => updateStyle("hoverBorderColor", color)}
                 label="Hover Border"
               />
             </ControlSection>
@@ -300,17 +334,17 @@ const ControlPanel = ({
             <ControlSection title="Focus State">
               <ColorPicker
                 color={styles.focusBorderColor}
-                onChange={(color) => updateStyle('focusBorderColor', color)}
+                onChange={(color) => updateStyle("focusBorderColor", color)}
                 label="Focus Border"
               />
               <ColorPicker
                 color={styles.focusRingColor}
-                onChange={(color) => updateStyle('focusRingColor', color)}
+                onChange={(color) => updateStyle("focusRingColor", color)}
                 label="Focus Ring"
               />
               <SliderWithInput
                 value={styles.focusRingWidth}
-                onChange={(value) => updateStyle('focusRingWidth', value)}
+                onChange={(value) => updateStyle("focusRingWidth", value)}
                 min={0}
                 max={5}
                 step={0.5}
@@ -321,17 +355,19 @@ const ControlPanel = ({
             <ControlSection title="Active State">
               <ColorPicker
                 color={styles.activeBackgroundColor}
-                onChange={(color) => updateStyle('activeBackgroundColor', color)}
+                onChange={(color) =>
+                  updateStyle("activeBackgroundColor", color)
+                }
                 label="Active Background"
               />
               <ColorPicker
                 color={styles.activeTextColor}
-                onChange={(color) => updateStyle('activeTextColor', color)}
+                onChange={(color) => updateStyle("activeTextColor", color)}
                 label="Active Text"
               />
               <ColorPicker
                 color={styles.activeBorderColor}
-                onChange={(color) => updateStyle('activeBorderColor', color)}
+                onChange={(color) => updateStyle("activeBorderColor", color)}
                 label="Active Border"
               />
             </ControlSection>
@@ -341,17 +377,19 @@ const ControlPanel = ({
             <ControlSection title="Text Properties" expanded>
               <SliderWithInput
                 value={styles.fontSize}
-                onChange={(value) => updateStyle('fontSize', value)}
+                onChange={(value) => updateStyle("fontSize", value)}
                 min={8}
                 max={24}
                 label="Font Size"
               />
 
               <div className="mb-3">
-                <Label htmlFor="font-weight" className="text-xs mb-1.5 block">Font Weight</Label>
+                <Label htmlFor="font-weight" className="text-xs mb-1.5 block">
+                  Font Weight
+                </Label>
                 <Select
                   value={styles.fontWeight}
-                  onValueChange={(value) => updateStyle('fontWeight', value)}
+                  onValueChange={(value) => updateStyle("fontWeight", value)}
                 >
                   <SelectTrigger id="font-weight" className="h-9">
                     <SelectValue placeholder="Select weight" />
@@ -367,10 +405,15 @@ const ControlPanel = ({
               </div>
 
               <div className="mb-3">
-                <Label htmlFor="text-transform" className="text-xs mb-1.5 block">Text Transform</Label>
+                <Label
+                  htmlFor="text-transform"
+                  className="text-xs mb-1.5 block"
+                >
+                  Text Transform
+                </Label>
                 <Select
                   value={styles.textTransform}
-                  onValueChange={(value) => updateStyle('textTransform', value)}
+                  onValueChange={(value) => updateStyle("textTransform", value)}
                 >
                   <SelectTrigger id="text-transform" className="h-9">
                     <SelectValue placeholder="Select transform" />
@@ -386,7 +429,7 @@ const ControlPanel = ({
 
               <SliderWithInput
                 value={styles.letterSpacing}
-                onChange={(value) => updateStyle('letterSpacing', value)}
+                onChange={(value) => updateStyle("letterSpacing", value)}
                 min={-0.1}
                 max={0.5}
                 step={0.01}
@@ -396,7 +439,7 @@ const ControlPanel = ({
 
               <SliderWithInput
                 value={styles.lineHeight}
-                onChange={(value) => updateStyle('lineHeight', value)}
+                onChange={(value) => updateStyle("lineHeight", value)}
                 min={0.7}
                 max={2}
                 step={0.1}

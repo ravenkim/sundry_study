@@ -1,16 +1,28 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { EditorConfig, BaseEditorState, ThemeEditorState } from '@/types/editor';
-import { ThemeStyles } from '@/types/theme';
-import { ButtonStyleProps } from '@/types/button';
-import CodePanel from './CodePanel';
-import { PanelRightClose, PanelRightOpen, Sliders } from 'lucide-react';
-import { useEditorStore } from '@/store/editorStore';
-import { useToast } from '@/components/ui/use-toast';
-import { convertToHSL } from '../../utils/colorConverter';
-import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import React, { useLayoutEffect, useState } from "react";
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@/components/ui/resizable";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  EditorConfig,
+  BaseEditorState,
+  ThemeEditorState,
+} from "@/types/editor";
+import { ThemeStyles } from "@/types/theme";
+import { ButtonStyleProps } from "@/types/button";
+import CodePanel from "./CodePanel";
+import { PanelRightClose, PanelRightOpen, Sliders } from "lucide-react";
+import { useEditorStore } from "@/store/editorStore";
+import { useToast } from "@/components/ui/use-toast";
+import { convertToHSL } from "../../utils/colorConverter";
+import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 interface EditorProps {
   config: EditorConfig;
@@ -18,21 +30,28 @@ interface EditorProps {
 }
 
 const isThemeStyles = (styles: any): styles is ThemeStyles => {
-  return !!styles && 'light' in styles && 'dark' in styles;
+  return !!styles && "light" in styles && "dark" in styles;
 };
 
 const Editor: React.FC<EditorProps> = ({ config }) => {
-  const { buttonState, themeState, setButtonState, setThemeState, resetToDefault, hasStateChanged } = useEditorStore();
+  const {
+    buttonState,
+    themeState,
+    setButtonState,
+    setThemeState,
+    resetToDefault,
+    hasStateChanged,
+  } = useEditorStore();
   const { toast } = useToast();
   const Controls = config.controls;
   const Preview = config.preview;
   const [isCodePanelOpen, setIsCodePanelOpen] = useState(true);
 
-  const state = config.type === 'theme' ? themeState : buttonState;
+  const state = config.type === "theme" ? themeState : buttonState;
   const hasChanges = hasStateChanged(config.type);
 
   const handleStyleChange = (newStyles: ThemeStyles | ButtonStyleProps) => {
-    if (config.type === 'theme') {
+    if (config.type === "theme") {
       setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
     } else {
       setButtonState({ ...buttonState, styles: newStyles as ButtonStyleProps });
@@ -47,13 +66,13 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
     });
   };
 
-  const isThemeEditor = config.type === 'theme';
+  const isThemeEditor = config.type === "theme";
 
   // Ensure we have valid theme styles for theme editor
-  const styles = isThemeEditor && !isThemeStyles(state.styles)
-    ? (config.defaultState as ThemeEditorState).styles
-    : state.styles;
-
+  const styles =
+    isThemeEditor && !isThemeStyles(state.styles)
+      ? (config.defaultState as ThemeEditorState).styles
+      : state.styles;
 
   return (
     <div className="h-full overflow-hidden">
@@ -93,10 +112,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                     </div>
 
                     <CollapsibleContent className="w-1/3 border-l transition-all">
-                      <CodePanel
-                        config={config}
-                        styles={styles}
-                      />
+                      <CodePanel config={config} styles={styles} />
                     </CollapsibleContent>
                   </div>
 
@@ -105,8 +121,12 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                       variant="ghost"
                       size="sm"
                       className="absolute right-2 top-20 z-10"
-                      aria-label={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
-                      title={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
+                      aria-label={
+                        isCodePanelOpen ? "Hide code panel" : "Show code panel"
+                      }
+                      title={
+                        isCodePanelOpen ? "Hide code panel" : "Show code panel"
+                      }
                     >
                       {isCodePanelOpen ? (
                         <PanelRightClose className="h-4 w-4" />
@@ -133,8 +153,12 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
               <Sliders className="h-4 w-4 mr-2" />
               Controls
             </TabsTrigger>
-            <TabsTrigger value="preview" className="flex-1">Preview</TabsTrigger>
-            <TabsTrigger value="code" className="flex-1">Code</TabsTrigger>
+            <TabsTrigger value="preview" className="flex-1">
+              Preview
+            </TabsTrigger>
+            <TabsTrigger value="code" className="flex-1">
+              Code
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="controls" className="h-[calc(100%-2.5rem)]">
             <div className="h-full p-4">
@@ -160,10 +184,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             </div>
           </TabsContent>
           <TabsContent value="code" className="h-[calc(100%-2.5rem)]">
-            <CodePanel
-              config={config}
-              styles={styles}
-            />
+            <CodePanel config={config} styles={styles} />
           </TabsContent>
         </Tabs>
       </div>

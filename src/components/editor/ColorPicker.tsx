@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Label } from '@/components/ui/label';
-import { ColorPickerProps } from '@/types';
+import React, { useState, useCallback, useEffect } from "react";
+import { Label } from "@/components/ui/label";
+import { ColorPickerProps } from "@/types";
 
 function debounce(fn, delay) {
   let timeoutId;
-  return function(...args) {
+  return function (...args) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       fn.apply(this, args);
@@ -26,7 +26,7 @@ const ColorPicker = ({ color, onChange, label }: ColorPickerProps) => {
     debounce((value) => {
       onChange(value);
     }, 10), // 300ms debounce delay - adjust as needed
-    [onChange]
+    [onChange],
   );
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,10 @@ const ColorPicker = ({ color, onChange, label }: ColorPickerProps) => {
   return (
     <div className="mb-3">
       <div className="flex items-center justify-between mb-1.5">
-        <Label htmlFor={`color-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+        <Label
+          htmlFor={`color-${label.replace(/\s+/g, "-").toLowerCase()}`}
+          className="text-xs font-medium"
+        >
           {label}
         </Label>
         <div className="text-xs text-muted-foreground">{localColor}</div>
@@ -51,7 +54,7 @@ const ColorPicker = ({ color, onChange, label }: ColorPickerProps) => {
         >
           <input
             type="color"
-            id={`color-${label.replace(/\s+/g, '-').toLowerCase()}`}
+            id={`color-${label.replace(/\s+/g, "-").toLowerCase()}`}
             value={localColor}
             onChange={handleColorChange}
             className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"

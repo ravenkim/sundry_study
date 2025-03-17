@@ -34,7 +34,6 @@ const ThemeControlPanel = ({
     }
   }, [location.hash]);
 
-
   const currentStyles = styles?.[currentMode];
 
   const updateStyle = React.useCallback(
@@ -58,7 +57,7 @@ const ThemeControlPanel = ({
     return null; // Or some fallback UI
   }
 
-  const radius = parseFloat(currentStyles.radius.replace('rem', ''));
+  const radius = parseFloat(currentStyles.radius.replace("rem", ""));
 
   return (
     <div className="space-y-4 h-full">
@@ -73,14 +72,19 @@ const ThemeControlPanel = ({
 
       <ScrollArea className="h-full pb-4">
         <div className="mb-6 ml-1">
-          <Label htmlFor="theme-preset" className="text-xs mb-1.5 block">Preset</Label>
-          <ThemePresetSelect presets={presets} currentPreset={themeState.preset} onPresetChange={applyThemePreset} />
+          <Label htmlFor="theme-preset" className="text-xs mb-1.5 block">
+            Preset
+          </Label>
+          <ThemePresetSelect
+            presets={presets}
+            currentPreset={themeState.preset}
+            onPresetChange={applyThemePreset}
+          />
         </div>
-
 
         <SliderWithInput
           value={radius}
-          onChange={(value) => updateStyle('radius', `${value}rem`)}
+          onChange={(value) => updateStyle("radius", `${value}rem`)}
           min={0}
           max={5}
           step={0.025}

@@ -35,8 +35,11 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
 }) => {
   const { themeState } = useEditorStore();
   const mode = themeState.currentMode;
-  const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
-  const value = presetNames?.find(name => name === currentPreset);
+  const presetNames = useMemo(
+    () => ["default", ...Object.keys(presets)],
+    [presets],
+  );
+  const value = presetNames?.find((name) => name === currentPreset);
   const randomize = useCallback(() => {
     const random = Math.floor(Math.random() * presetNames.length);
     onPresetChange(presetNames[random]);
@@ -48,7 +51,13 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
         <SelectTrigger className="w-full md:w-64">
           <SelectValue placeholder="Select theme preset" />
         </SelectTrigger>
-        <Button size="icon" variant="outline" className="h-10 w-10" title="Randomize" onClick={randomize}>
+        <Button
+          size="icon"
+          variant="outline"
+          className="h-10 w-10"
+          title="Randomize"
+          onClick={randomize}
+        >
           <Shuffle />
         </Button>
       </div>
@@ -58,12 +67,22 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
             <SelectItem key={presetName} value={presetName}>
               <div className="flex items-center justify-between w-full">
                 <div className="flex">
-                  <ColorBox color={getPresetThemeStyles(presetName)[mode].primary} />
-                  <ColorBox color={getPresetThemeStyles(presetName)[mode].accent} />
-                  <ColorBox color={getPresetThemeStyles(presetName)[mode].secondary} />
-                  <ColorBox color={getPresetThemeStyles(presetName)[mode].border} />
+                  <ColorBox
+                    color={getPresetThemeStyles(presetName)[mode].primary}
+                  />
+                  <ColorBox
+                    color={getPresetThemeStyles(presetName)[mode].accent}
+                  />
+                  <ColorBox
+                    color={getPresetThemeStyles(presetName)[mode].secondary}
+                  />
+                  <ColorBox
+                    color={getPresetThemeStyles(presetName)[mode].border}
+                  />
                 </div>
-                <span className="capitalize ml-2">{presetName.replace(/-/g, " ")}</span>
+                <span className="capitalize ml-2">
+                  {presetName.replace(/-/g, " ")}
+                </span>
               </div>
             </SelectItem>
           ))}

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { Slider } from '../ui/slider';
+import { useEffect, useState } from "react";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Slider } from "../ui/slider";
 
 export const SliderWithInput = ({
   value,
@@ -10,7 +10,7 @@ export const SliderWithInput = ({
   max,
   step = 1,
   label,
-  unit = 'px'
+  unit = "px",
 }: {
   value: number;
   onChange: (value: number) => void;
@@ -29,12 +29,15 @@ export const SliderWithInput = ({
   return (
     <div className="mb-3">
       <div className="flex items-center justify-between mb-1.5">
-        <Label htmlFor={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`} className="text-xs font-medium">
+        <Label
+          htmlFor={`slider-${label.replace(/\s+/g, "-").toLowerCase()}`}
+          className="text-xs font-medium"
+        >
           {label}
         </Label>
         <div className="flex items-center gap-1">
           <Input
-            id={`input-${label.replace(/\s+/g, '-').toLowerCase()}`}
+            id={`input-${label.replace(/\s+/g, "-").toLowerCase()}`}
             type="number"
             value={localValue}
             onChange={(e) => {
@@ -51,7 +54,7 @@ export const SliderWithInput = ({
         </div>
       </div>
       <Slider
-        id={`slider-${label.replace(/\s+/g, '-').toLowerCase()}`}
+        id={`slider-${label.replace(/\s+/g, "-").toLowerCase()}`}
         value={[localValue]}
         min={min}
         max={max}

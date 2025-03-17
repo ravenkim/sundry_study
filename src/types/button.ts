@@ -1,5 +1,11 @@
-export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
+export type ButtonVariant =
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
+export type ButtonSize = "default" | "sm" | "lg" | "icon";
 
 export interface ButtonStyleProps {
   backgroundColor: string;
@@ -11,7 +17,7 @@ export interface ButtonStyleProps {
   paddingY: number;
   fontSize: number;
   fontWeight: string;
-  textTransform: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
+  textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
   letterSpacing: number;
   lineHeight: number;
   shadowOpacity: number;
@@ -32,4 +38,4 @@ export interface ButtonStyleProps {
   activeBorderColor: string;
   transitionDuration: number;
   transitionEasing: string;
-} 
+}
