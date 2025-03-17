@@ -11,7 +11,7 @@ import {
   ThemeEditorState,
 } from "@/types/editor";
 import { ThemeStyles } from "@/types/theme";
-import { ButtonStyleProps } from "@/types/button";
+import { ButtonStyles } from "@/types/button";
 import CodePanel from "./CodePanel";
 import { PanelRightClose, PanelRightOpen, Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editorStore";
@@ -50,11 +50,11 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
   const state = config.type === "theme" ? themeState : buttonState;
   const hasChanges = hasStateChanged(config.type);
 
-  const handleStyleChange = (newStyles: ThemeStyles | ButtonStyleProps) => {
+  const handleStyleChange = (newStyles: ThemeStyles | ButtonStyles) => {
     if (config.type === "theme") {
       setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
     } else {
-      setButtonState({ ...buttonState, styles: newStyles as ButtonStyleProps });
+      setButtonState({ ...buttonState, styles: newStyles as ButtonStyles });
     }
   };
 

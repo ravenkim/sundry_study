@@ -7,7 +7,7 @@ export type ButtonVariant =
   | "link";
 export type ButtonSize = "default" | "sm" | "lg" | "icon";
 
-export interface ButtonStyleProps {
+export interface ButtonStyles {
   backgroundColor: string;
   textColor: string;
   borderColor: string;

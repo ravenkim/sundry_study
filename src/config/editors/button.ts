@@ -1,10 +1,11 @@
 import { EditorConfig } from "@/types/editor";
 import { ButtonEditorState } from "@/types/editor";
-import { ButtonStyleProps, ButtonVariant, ButtonSize } from "@/types/index";
+import { ButtonVariant, ButtonSize } from "@/types/index";
 import ControlPanel from "@/components/editor/ControlPanel";
 import PreviewPanel from "@/components/editor/PreviewPanel";
 import { generateButtonComponentCode } from "@/utils/buttonStyleGenerator";
 import defaultButtonStyles from "@/config/button";
+import { ButtonStyles } from "@/types/button";
 
 const defaultButtonState: ButtonEditorState = {
   styles: defaultButtonStyles,
@@ -33,7 +34,7 @@ export const buttonEditorConfig: EditorConfig = {
       }
       // Fallback for direct style objects (legacy support)
       return generateButtonComponentCode(
-        styles as ButtonStyleProps,
+        styles as ButtonStyles,
         "default",
         "default",
       );
