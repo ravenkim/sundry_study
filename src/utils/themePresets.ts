@@ -660,40 +660,75 @@ export const presets: Record<string, ThemeStyles> = {
   },
 
   "midnight-bloom": {
+    light: {
+      background: "#f9f9f9", // Soft gray background
+      foreground: "#333333", // Dark gray text
+      card: "#ffffff", // White cards
+      "card-foreground": "#333333",
+      popover: "#ffffff",
+      "popover-foreground": "#333333",
+      primary: "#6c5ce7", // Deep purple primary
+      "primary-foreground": "#ffffff",
+      secondary: "#a1c9f2", // Soft blue secondary
+      "secondary-foreground": "#333333",
+      muted: "#c9c4b5", // Muted beige for subtle elements
+      "muted-foreground": "#6e6e6e",
+      accent: "#8b9467", // Earthy green accents
+      "accent-foreground": "#ffffff",
+      destructive: "#ef4444", // Bright red for destructive actions
+      "destructive-foreground": "#ffffff",
+      border: "#d4d4d4", // Light gray for borders
+      input: "#d4d4d4",
+      ring: "#6c5ce7", // Purple ring for focus
+      "chart-1": "#6c5ce7", // Purple chart color
+      "chart-2": "#8e44ad", // Deep pink chart color
+      "chart-3": "#4b0082", // Dark blue chart color
+      "chart-4": "#6495ed", // Bright blue chart color
+      "chart-5": "#4682b4", // Steel blue chart color
+      radius: "0.5rem",
+      sidebar: "#f9f9f9",
+      "sidebar-foreground": "#333333",
+      "sidebar-primary": "#6c5ce7",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#8b9467",
+      "sidebar-accent-foreground": "#ffffff",
+      "sidebar-border": "#d4d4d4",
+      "sidebar-ring": "#6c5ce7",
+    },
     dark: {
-      background: "#111827",
-      foreground: "#d1d5db",
-      card: "#1f2937",
-      "card-foreground": "#d1d5db",
-      popover: "#1f2937",
-      "popover-foreground": "#d1d5db",
-      primary: "#ec4899",
-      "primary-foreground": "#f9fafb",
-      secondary: "#374151",
-      "secondary-foreground": "#d1d5db",
-      muted: "#2d3748",
-      "muted-foreground": "#9ca3af",
-      accent: "#6b7280",
-      "accent-foreground": "#d1d5db",
-      destructive: "#e11d48",
-      "destructive-foreground": "#f9fafb",
-      border: "#4b5563",
-      input: "#4b5563",
-      ring: "#ec4899",
-      "chart-1": "#ec4899",
-      "chart-2": "#d946ef",
-      "chart-3": "#a855f7",
-      "chart-4": "#8b5cf6",
-      "chart-5": "#7c3aed",
-      radius: "0.75rem",
-      sidebar: "#1f2937",
-      "sidebar-foreground": "#d1d5db",
-      "sidebar-primary": "#ec4899",
-      "sidebar-primary-foreground": "#f9fafb",
-      "sidebar-accent": "#6b7280",
-      "sidebar-accent-foreground": "#d1d5db",
-      "sidebar-border": "#4b5563",
-      "sidebar-ring": "#ec4899",
+      background: "#1a1d23", // Deep dark background
+      foreground: "#e5e5e5", // Light gray text
+      card: "#2f3436", // Dark gray cards
+      "card-foreground": "#e5e5e5",
+      popover: "#2f3436",
+      "popover-foreground": "#e5e5e5",
+      primary: "#6c5ce7",
+      "primary-foreground": "#ffffff",
+      secondary: "#4b0082", // Dark blue secondary
+      "secondary-foreground": "#e5e5e5",
+      muted: "#444444", // Dark gray for muted elements
+      "muted-foreground": "#a3a3a3",
+      accent: "#6495ed", // Bright blue accents
+      "accent-foreground": "#e5e5e5",
+      destructive: "#ef4444",
+      "destructive-foreground": "#ffffff",
+      border: "#444444",
+      input: "#444444",
+      ring: "#6c5ce7",
+      "chart-1": "#6c5ce7",
+      "chart-2": "#8e44ad",
+      "chart-3": "#4b0082",
+      "chart-4": "#6495ed",
+      "chart-5": "#4682b4",
+      radius: "0.5rem",
+      sidebar: "#1a1d23",
+      "sidebar-foreground": "#e5e5e5",
+      "sidebar-primary": "#6c5ce7",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#6495ed",
+      "sidebar-accent-foreground": "#e5e5e5",
+      "sidebar-border": "#444444",
+      "sidebar-ring": "#6c5ce7",
     },
   },
 
@@ -767,6 +802,225 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#a1a1aa",
       "sidebar-border": "#4b5563",
       "sidebar-ring": "#34d399",
+    },
+  },
+
+  "retro-arcade": {
+    light: {
+      background: "#fdf6e3", // Soft beige for a retro vibe
+      foreground: "#073642", // Deep teal for text
+      card: "#eee8d5", // Light beige for cards
+      "card-foreground": "#073642",
+      popover: "#eee8d5",
+      "popover-foreground": "#073642",
+      primary: "#d33682", // Vibrant magenta
+      "primary-foreground": "#ffffff",
+      secondary: "#2aa198", // Bright cyan
+      "secondary-foreground": "#ffffff",
+      muted: "#93a1a1", // Muted gray for subtle elements
+      "muted-foreground": "#073642",
+      accent: "#cb4b16", // Burnt orange for accents
+      "accent-foreground": "#ffffff",
+      destructive: "#dc322f", // Bold red for warnings
+      "destructive-foreground": "#ffffff",
+      border: "#839496", // Neutral gray for borders
+      input: "#839496",
+      ring: "#d33682", // Magenta ring for focus elements
+      "chart-1": "#268bd2", // Blue chart color
+      "chart-2": "#2aa198", // Cyan chart color
+      "chart-3": "#d33682", // Magenta chart color
+      "chart-4": "#cb4b16", // Orange chart color
+      "chart-5": "#dc322f", // Red chart color
+      radius: "0.25rem",
+      sidebar: "#fdf6e3",
+      "sidebar-foreground": "#073642",
+      "sidebar-primary": "#d33682",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#2aa198",
+      "sidebar-accent-foreground": "#ffffff",
+      "sidebar-border": "#839496",
+      "sidebar-ring": "#d33682",
+    },
+    dark: {
+      background: "#002b36", // Deep navy blue for background
+      foreground: "#93a1a1", // Muted gray for text
+      card: "#073642", // Teal for cards
+      "card-foreground": "#93a1a1",
+      popover: "#073642",
+      "popover-foreground": "#93a1a1",
+      primary: "#d33682",
+      "primary-foreground": "#ffffff",
+      secondary: "#2aa198",
+      "secondary-foreground": "#ffffff",
+      muted: "#586e75", // Dark gray for muted elements
+      "muted-foreground": "#93a1a1",
+      accent: "#cb4b16",
+      "accent-foreground": "#ffffff",
+      destructive: "#dc322f",
+      "destructive-foreground": "#ffffff",
+      border: "#586e75",
+      input: "#586e75",
+      ring: "#d33682",
+      "chart-1": "#268bd2",
+      "chart-2": "#2aa198",
+      "chart-3": "#d33682",
+      "chart-4": "#cb4b16",
+      "chart-5": "#dc322f",
+      radius: "0.25rem",
+      sidebar: "#002b36",
+      "sidebar-foreground": "#93a1a1",
+      "sidebar-primary": "#d33682",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#2aa198",
+      "sidebar-accent-foreground": "#ffffff",
+      "sidebar-border": "#586e75",
+      "sidebar-ring": "#d33682",
+    },
+  },
+
+  candyland: {
+    light: {
+      background: "#f7f9fa", // Soft gray-blue background
+      foreground: "#333333", // Dark gray text
+      card: "#ffffff", // White cards
+      "card-foreground": "#333333",
+      popover: "#ffffff",
+      "popover-foreground": "#333333",
+      primary: "#ffc0cb", // Pastel pink primary
+      "primary-foreground": "#000000",
+      secondary: "#87ceeb", // Light blue secondary
+      "secondary-foreground": "#000000",
+      muted: "#ddd9c4", // Muted beige for subtle elements
+      "muted-foreground": "#6e6e6e",
+      accent: "#ffff00", // Yellow accents
+      "accent-foreground": "#000000",
+      destructive: "#ef4444", // Bright red for destructive actions
+      "destructive-foreground": "#ffffff",
+      border: "#d4d4d4", // Light gray for borders
+      input: "#d4d4d4",
+      ring: "#ffc0cb", // Pink ring for focus
+      "chart-1": "#ffc0cb", // Pink chart color
+      "chart-2": "#87ceeb", // Light blue chart color
+      "chart-3": "#ffff00", // Yellow chart color
+      "chart-4": "#ff99cc", // Pastel red chart color
+      "chart-5": "#33cc33", // Green chart color
+      radius: "0.5rem",
+      sidebar: "#f7f9fa",
+      "sidebar-foreground": "#333333",
+      "sidebar-primary": "#ffc0cb",
+      "sidebar-primary-foreground": "#000000",
+      "sidebar-accent": "#ffff00",
+      "sidebar-accent-foreground": "#000000",
+      "sidebar-border": "#d4d4d4",
+      "sidebar-ring": "#ffc0cb",
+    },
+    dark: {
+      background: "#1a1d23", // Deep dark background
+      foreground: "#e5e5e5", // Light gray text
+      card: "#2f3436", // Dark gray cards
+      "card-foreground": "#e5e5e5",
+      popover: "#2f3436",
+      "popover-foreground": "#e5e5e5",
+      primary: "#ff99cc", // Pastel red primary
+      "primary-foreground": "#000000",
+      secondary: "#33cc33", // Green secondary
+      "secondary-foreground": "#000000",
+      muted: "#444444", // Dark gray for muted elements
+      "muted-foreground": "#a3a3a3",
+      accent: "#87ceeb", // Light blue accents
+      "accent-foreground": "#000000",
+      destructive: "#ef4444",
+      "destructive-foreground": "#ffffff",
+      border: "#444444",
+      input: "#444444",
+      ring: "#ff99cc",
+      "chart-1": "#ff99cc",
+      "chart-2": "#33cc33",
+      "chart-3": "#87ceeb",
+      "chart-4": "#ffff00", // Yellow chart color
+      "chart-5": "#ffcc00", // Orange chart color
+      radius: "0.5rem",
+      sidebar: "#1a1d23",
+      "sidebar-foreground": "#e5e5e5",
+      "sidebar-primary": "#ff99cc",
+      "sidebar-primary-foreground": "#000000",
+      "sidebar-accent": "#87ceeb",
+      "sidebar-accent-foreground": "#000000",
+      "sidebar-border": "#444444",
+      "sidebar-ring": "#ff99cc",
+    },
+  },
+
+  "northern-lights": {
+    light: {
+      background: "#f9f9fa", // Soft gray background
+      foreground: "#333333", // Dark gray text
+      card: "#ffffff", // White cards
+      "card-foreground": "#333333",
+      popover: "#ffffff",
+      "popover-foreground": "#333333",
+      primary: "#34a85a", // Green primary
+      "primary-foreground": "#ffffff",
+      secondary: "#6495ed", // Blue secondary
+      "secondary-foreground": "#ffffff",
+      muted: "#ddd9c4", // Muted beige for subtle elements
+      "muted-foreground": "#6e6e6e",
+      accent: "#66d9ef", // Cyan accents
+      "accent-foreground": "#333333",
+      destructive: "#ef4444", // Bright red for destructive actions
+      "destructive-foreground": "#ffffff",
+      border: "#d4d4d4", // Light gray for borders
+      input: "#d4d4d4",
+      ring: "#34a85a", // Green ring for focus
+      "chart-1": "#34a85a", // Green chart color
+      "chart-2": "#6495ed", // Blue chart color
+      "chart-3": "#66d9ef", // Cyan chart color
+      "chart-4": "#4682b4", // Steel blue chart color
+      "chart-5": "#1a9641", // Teal-green chart color
+      radius: "0.5rem",
+      sidebar: "#f9f9fa",
+      "sidebar-foreground": "#333333",
+      "sidebar-primary": "#34a85a",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#66d9ef",
+      "sidebar-accent-foreground": "#333333",
+      "sidebar-border": "#d4d4d4",
+      "sidebar-ring": "#34a85a",
+    },
+    dark: {
+      background: "#1a1d23", // Deep dark background
+      foreground: "#e5e5e5", // Light gray text
+      card: "#2f3436", // Dark gray cards
+      "card-foreground": "#e5e5e5",
+      popover: "#2f3436",
+      "popover-foreground": "#e5e5e5",
+      primary: "#34a85a", // Green primary
+      "primary-foreground": "#ffffff",
+      secondary: "#4682b4", // Steel blue secondary
+      "secondary-foreground": "#e5e5e5",
+      muted: "#444444", // Dark gray for muted elements
+      "muted-foreground": "#a3a3a3",
+      accent: "#6495ed", // Blue accents
+      "accent-foreground": "#e5e5e5",
+      destructive: "#ef4444",
+      "destructive-foreground": "#ffffff",
+      border: "#444444",
+      input: "#444444",
+      ring: "#34a85a",
+      "chart-1": "#34a85a",
+      "chart-2": "#4682b4",
+      "chart-3": "#6495ed",
+      "chart-4": "#66d9ef", // Cyan chart color
+      "chart-5": "#1a9641", // Teal-green chart color
+      radius: "0.5rem",
+      sidebar: "#1a1d23",
+      "sidebar-foreground": "#e5e5e5",
+      "sidebar-primary": "#34a85a",
+      "sidebar-primary-foreground": "#ffffff",
+      "sidebar-accent": "#6495ed",
+      "sidebar-accent-foreground": "#e5e5e5",
+      "sidebar-border": "#444444",
+      "sidebar-ring": "#34a85a",
     },
   },
 };
