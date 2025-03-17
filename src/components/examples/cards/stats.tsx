@@ -58,9 +58,7 @@ export function DemoStats() {
         </CardHeader>
         <CardContent className="pb-0">
           <div className="text-2xl font-bold">$15,231.89</div>
-          <p className="text-xs text-muted-foreground">
-            +20.1% from last month
-          </p>
+          <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           <ChartContainer config={chartConfig} className="h-[80px] w-full">
             <LineChart
               data={data}
@@ -90,9 +88,7 @@ export function DemoStats() {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">+2350</div>
-          <p className="text-xs text-muted-foreground">
-            +180.1% from last month
-          </p>
+          <p className="text-xs text-muted-foreground">+180.1% from last month</p>
           <ChartContainer config={chartConfig} className="mt-2 h-[80px] w-full">
             <BarChart data={data}>
               <Bar

@@ -58,7 +58,11 @@ const ReadOnlyColorDisplay = ({
       <div className="flex items-center gap-2">
         <div
           className="h-8 w-8 rounded border overflow-hidden relative flex items-center justify-center"
-          style={{ backgroundColor: color, cursor: "default", opacity: 0.8 }}
+          style={{
+            backgroundColor: color,
+            cursor: "default",
+            opacity: 0.8,
+          }}
         />
 
         <div className="flex-1 relative">
@@ -273,17 +277,12 @@ const ControlPanel = ({
                 unit="ms"
               />
               <div className="mb-3">
-                <Label
-                  htmlFor="transition-easing"
-                  className="text-xs mb-1.5 block"
-                >
+                <Label htmlFor="transition-easing" className="text-xs mb-1.5 block">
                   Transition Easing
                 </Label>
                 <Select
                   value={styles.transitionEasing}
-                  onValueChange={(value) =>
-                    updateStyle("transitionEasing", value)
-                  }
+                  onValueChange={(value) => updateStyle("transitionEasing", value)}
                 >
                   <SelectTrigger id="transition-easing" className="h-9">
                     <SelectValue placeholder="Select easing" />
@@ -310,9 +309,7 @@ const ControlPanel = ({
               />
               <SliderWithInput
                 value={styles.hoverBackgroundOpacity ?? 90}
-                onChange={(value) =>
-                  updateStyle("hoverBackgroundOpacity", value)
-                }
+                onChange={(value) => updateStyle("hoverBackgroundOpacity", value)}
                 min={0}
                 max={100}
                 step={5}
@@ -355,9 +352,7 @@ const ControlPanel = ({
             <ControlSection title="Active State">
               <ColorPicker
                 color={styles.activeBackgroundColor}
-                onChange={(color) =>
-                  updateStyle("activeBackgroundColor", color)
-                }
+                onChange={(color) => updateStyle("activeBackgroundColor", color)}
                 label="Active Background"
               />
               <ColorPicker
@@ -405,10 +400,7 @@ const ControlPanel = ({
               </div>
 
               <div className="mb-3">
-                <Label
-                  htmlFor="text-transform"
-                  className="text-xs mb-1.5 block"
-                >
+                <Label htmlFor="text-transform" className="text-xs mb-1.5 block">
                   Text Transform
                 </Label>
                 <Select

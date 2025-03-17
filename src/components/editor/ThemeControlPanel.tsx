@@ -259,9 +259,7 @@ const ThemeControlPanel = ({
           />
           <ColorPicker
             color={currentStyles["sidebar-primary-foreground"]}
-            onChange={(color) =>
-              updateStyle("sidebar-primary-foreground", color)
-            }
+            onChange={(color) => updateStyle("sidebar-primary-foreground", color)}
             label="Sidebar Primary Foreground"
           />
           <ColorPicker
@@ -271,9 +269,7 @@ const ThemeControlPanel = ({
           />
           <ColorPicker
             color={currentStyles["sidebar-accent-foreground"]}
-            onChange={(color) =>
-              updateStyle("sidebar-accent-foreground", color)
-            }
+            onChange={(color) => updateStyle("sidebar-accent-foreground", color)}
             label="Sidebar Accent Foreground"
           />
           <ColorPicker

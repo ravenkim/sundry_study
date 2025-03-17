@@ -5,11 +5,7 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  EditorConfig,
-  BaseEditorState,
-  ThemeEditorState,
-} from "@/types/editor";
+import { EditorConfig, BaseEditorState, ThemeEditorState } from "@/types/editor";
 import { ThemeStyles } from "@/types/theme";
 import { ButtonStyles } from "@/types/button";
 import CodePanel from "./CodePanel";
@@ -124,9 +120,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                       aria-label={
                         isCodePanelOpen ? "Hide code panel" : "Show code panel"
                       }
-                      title={
-                        isCodePanelOpen ? "Hide code panel" : "Show code panel"
-                      }
+                      title={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
                     >
                       {isCodePanelOpen ? (
                         <PanelRightClose className="h-4 w-4" />

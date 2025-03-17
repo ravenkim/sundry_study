@@ -35,10 +35,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
 }) => {
   const { themeState } = useEditorStore();
   const mode = themeState.currentMode;
-  const presetNames = useMemo(
-    () => ["default", ...Object.keys(presets)],
-    [presets],
-  );
+  const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
   const value = presetNames?.find((name) => name === currentPreset);
   const randomize = useCallback(() => {
     const random = Math.floor(Math.random() * presetNames.length);
@@ -67,18 +64,12 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
             <SelectItem key={presetName} value={presetName}>
               <div className="flex items-center justify-between w-full">
                 <div className="flex">
-                  <ColorBox
-                    color={getPresetThemeStyles(presetName)[mode].primary}
-                  />
-                  <ColorBox
-                    color={getPresetThemeStyles(presetName)[mode].accent}
-                  />
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].primary} />
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].accent} />
                   <ColorBox
                     color={getPresetThemeStyles(presetName)[mode].secondary}
                   />
-                  <ColorBox
-                    color={getPresetThemeStyles(presetName)[mode].border}
-                  />
+                  <ColorBox color={getPresetThemeStyles(presetName)[mode].border} />
                 </div>
                 <span className="capitalize ml-2">
                   {presetName.replace(/-/g, " ")}

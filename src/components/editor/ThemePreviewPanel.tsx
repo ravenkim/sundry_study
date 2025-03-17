@@ -26,10 +26,7 @@ import { lazy, Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 const DemoCards = lazy(() => import("@/components/examples/Cards"));
 
-const ThemePreviewPanel = ({
-  styles,
-  currentMode,
-}: ThemeEditorPreviewProps) => {
+const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {
     return null;
   }
@@ -123,8 +120,8 @@ const ThemePreviewPanel = ({
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm">
-                        This card demonstrates the card background and
-                        foreground colors, with content showing regular text.
+                        This card demonstrates the card background and foreground
+                        colors, with content showing regular text.
                       </p>
                     </CardContent>
                     <CardFooter className="flex justify-between">
@@ -142,9 +139,7 @@ const ThemePreviewPanel = ({
                         border: `1px solid ${styles[currentMode].border}`,
                       }}
                     >
-                      <h4 className="text-sm font-medium mb-2">
-                        Popover Container
-                      </h4>
+                      <h4 className="text-sm font-medium mb-2">Popover Container</h4>
                       <p className="text-xs">
                         This container shows popover colors and styling.
                       </p>
@@ -157,9 +152,7 @@ const ThemePreviewPanel = ({
                         color: styles[currentMode]["muted-foreground"],
                       }}
                     >
-                      <h4 className="text-sm font-medium mb-2">
-                        Muted Container
-                      </h4>
+                      <h4 className="text-sm font-medium mb-2">Muted Container</h4>
                       <p className="text-xs">
                         Container with muted background and foreground colors.
                       </p>
@@ -179,9 +172,7 @@ const ThemePreviewPanel = ({
                     <Badge variant="secondary">Secondary</Badge>
                     <Badge variant="outline">Outline</Badge>
                     <Badge variant="destructive">Error</Badge>
-                    <Badge className="bg-blue-500 hover:bg-blue-600">
-                      Custom
-                    </Badge>
+                    <Badge className="bg-blue-500 hover:bg-blue-600">Custom</Badge>
                   </div>
 
                   <div className="space-y-3">
@@ -212,8 +203,7 @@ const ThemePreviewPanel = ({
                       <div>
                         <h5 className="font-medium text-sm">Success Alert</h5>
                         <p className="text-xs mt-1">
-                          Custom alert using accent colors with an opacity
-                          modifier.
+                          Custom alert using accent colors with an opacity modifier.
                         </p>
                       </div>
                     </div>
@@ -223,9 +213,7 @@ const ThemePreviewPanel = ({
 
               {/* Data Display */}
               <section className="space-y-3">
-                <h3 className="text-sm font-medium border-b pb-2">
-                  Data Display
-                </h3>
+                <h3 className="text-sm font-medium border-b pb-2">Data Display</h3>
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -237,9 +225,7 @@ const ThemePreviewPanel = ({
                   </TableHeader>
                   <TableBody>
                     <TableRow>
-                      <TableCell className="font-medium">
-                        Alex Johnson
-                      </TableCell>
+                      <TableCell className="font-medium">Alex Johnson</TableCell>
                       <TableCell>
                         <Badge
                           variant="outline"
@@ -287,14 +273,8 @@ const ThemePreviewPanel = ({
                   Primary Theme Colors
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {renderColorPreview(
-                    "Background",
-                    styles[currentMode].background,
-                  )}
-                  {renderColorPreview(
-                    "Foreground",
-                    styles[currentMode].foreground,
-                  )}
+                  {renderColorPreview("Background", styles[currentMode].background)}
+                  {renderColorPreview("Foreground", styles[currentMode].foreground)}
                   {renderColorPreview("Primary", styles[currentMode].primary)}
                   {renderColorPreview(
                     "Primary Foreground",
@@ -309,10 +289,7 @@ const ThemePreviewPanel = ({
                   Secondary & Accent Colors
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {renderColorPreview(
-                    "Secondary",
-                    styles[currentMode].secondary,
-                  )}
+                  {renderColorPreview("Secondary", styles[currentMode].secondary)}
                   {renderColorPreview(
                     "Secondary Foreground",
                     styles[currentMode]["secondary-foreground"],
@@ -385,26 +362,11 @@ const ThemePreviewPanel = ({
                   Chart & Visualization Colors
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {renderColorPreview(
-                    "Chart 1",
-                    styles[currentMode]["chart-1"],
-                  )}
-                  {renderColorPreview(
-                    "Chart 2",
-                    styles[currentMode]["chart-2"],
-                  )}
-                  {renderColorPreview(
-                    "Chart 3",
-                    styles[currentMode]["chart-3"],
-                  )}
-                  {renderColorPreview(
-                    "Chart 4",
-                    styles[currentMode]["chart-4"],
-                  )}
-                  {renderColorPreview(
-                    "Chart 5",
-                    styles[currentMode]["chart-5"],
-                  )}
+                  {renderColorPreview("Chart 1", styles[currentMode]["chart-1"])}
+                  {renderColorPreview("Chart 2", styles[currentMode]["chart-2"])}
+                  {renderColorPreview("Chart 3", styles[currentMode]["chart-3"])}
+                  {renderColorPreview("Chart 4", styles[currentMode]["chart-4"])}
+                  {renderColorPreview("Chart 5", styles[currentMode]["chart-5"])}
                 </div>
               </div>
 

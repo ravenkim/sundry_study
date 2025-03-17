@@ -69,10 +69,7 @@ const ButtonPreview = ({
     default: {
       color: themeState[mode]["primary-foreground"],
       backgroundColor: isHovered
-        ? parseColor(
-            themeState[mode].primary,
-            styles.hoverBackgroundOpacity / 100,
-          )
+        ? parseColor(themeState[mode].primary, styles.hoverBackgroundOpacity / 100)
         : themeState[mode].primary,
     },
     destructive: {
@@ -94,10 +91,7 @@ const ButtonPreview = ({
     },
     secondary: {
       backgroundColor: isHovered
-        ? parseColor(
-            themeState[mode].secondary,
-            styles.hoverBackgroundOpacity / 100,
-          )
+        ? parseColor(themeState[mode].secondary, styles.hoverBackgroundOpacity / 100)
         : themeState[mode].secondary,
       color: themeState[mode]["secondary-foreground"],
     },

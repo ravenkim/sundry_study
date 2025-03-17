@@ -16,8 +16,7 @@ const defaultButtonState: ButtonEditorState = {
 export const buttonEditorConfig: EditorConfig = {
   type: "button",
   name: "Button",
-  description:
-    "A versatile button component with customizable styles and states",
+  description: "A versatile button component with customizable styles and states",
   defaultState: defaultButtonState,
   controls: ControlPanel,
   preview: PreviewPanel,

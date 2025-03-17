@@ -103,10 +103,7 @@ export const generateButtonComponentCode = (
   size: ButtonSize,
 ): string => {
   // Generate Tailwind utility classes for each style property
-  const generateTailwindClasses = (
-    styles: ButtonStyles,
-    variant: ButtonVariant,
-  ) => {
+  const generateTailwindClasses = (styles: ButtonStyles, variant: ButtonVariant) => {
     // Convert hex color to Tailwind format for inline classes
     const formatColor = (color: string) => color;
 
