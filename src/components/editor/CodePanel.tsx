@@ -82,7 +82,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
             {copied ? (
               <>
                 <Check className="h-4 w-4 mr-2" />
-                <span className="sr-only md:not-sr-only">Copied!</span>
+                <span className="sr-only md:not-sr-only">Copy</span>
               </>
             ) : (
               <>
