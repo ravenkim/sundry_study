@@ -75,6 +75,7 @@ export const generateThemeCode = (
   --chart-3: ${formatColor(themeStyles.dark["chart-3"])};
   --chart-4: ${formatColor(themeStyles.dark["chart-4"])};
   --chart-5: ${formatColor(themeStyles.dark["chart-5"])};
+  --radius: ${themeStyles.dark.radius};
   --sidebar: ${formatColor(themeStyles.dark.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.dark["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.dark["sidebar-primary"])};
