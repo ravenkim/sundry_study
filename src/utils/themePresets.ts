@@ -1,6 +1,29 @@
 import { defaultThemeState } from "../config/theme";
 import { ThemeStyles } from "../types/theme";
 
+export function getPresetThemeStyles(name: string): ThemeStyles {
+  const defaultTheme = defaultThemeState.styles;
+  if (name === "default") {
+    return defaultTheme;
+  }
+
+  const preset = presets[name];
+  if (!preset) {
+    return defaultTheme;
+  }
+
+  return {
+    light: {
+      ...defaultTheme.light,
+      ...(preset.light || {}),
+    },
+    dark: {
+      ...defaultTheme.dark,
+      ...(preset.dark || {}),
+    },
+  };
+}
+
 export const presets: Record<string, ThemeStyles> = {
   "modern-minimal": {
     light: {
@@ -1024,26 +1047,3 @@ export const presets: Record<string, ThemeStyles> = {
     },
   },
 };
-
-export function getPresetThemeStyles(name: string): ThemeStyles {
-  const defaultTheme = defaultThemeState.styles;
-  if (name === "default") {
-    return defaultTheme;
-  }
-
-  const preset = presets[name];
-  if (!preset) {
-    return defaultTheme;
-  }
-
-  return {
-    light: {
-      ...defaultTheme.light,
-      ...(preset.light || {}),
-    },
-    dark: {
-      ...defaultTheme.dark,
-      ...(preset.dark || {}),
-    },
-  };
-}

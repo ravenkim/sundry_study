@@ -39,7 +39,6 @@ export const generateThemeCode = (
   --chart-3: ${formatColor(themeStyles.light["chart-3"])};
   --chart-4: ${formatColor(themeStyles.light["chart-4"])};
   --chart-5: ${formatColor(themeStyles.light["chart-5"])};
-  --radius: ${themeStyles.light.radius};
   --sidebar: ${formatColor(themeStyles.light.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.light["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.light["sidebar-primary"])};
@@ -48,6 +47,12 @@ export const generateThemeCode = (
   --sidebar-accent-foreground: ${formatColor(themeStyles.light["sidebar-accent-foreground"])};
   --sidebar-border: ${formatColor(themeStyles.light["sidebar-border"])};
   --sidebar-ring: ${formatColor(themeStyles.light["sidebar-ring"])};
+
+  --font-sans: ${themeStyles.light["font-sans"]};
+  --font-serif: ${themeStyles.light["font-serif"]};
+  --font-mono: ${themeStyles.light["font-mono"]};
+
+  --radius: ${themeStyles.light.radius};
 }
 
 .dark {
@@ -75,7 +80,6 @@ export const generateThemeCode = (
   --chart-3: ${formatColor(themeStyles.dark["chart-3"])};
   --chart-4: ${formatColor(themeStyles.dark["chart-4"])};
   --chart-5: ${formatColor(themeStyles.dark["chart-5"])};
-  --radius: ${themeStyles.dark.radius};
   --sidebar: ${formatColor(themeStyles.dark.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.dark["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.dark["sidebar-primary"])};

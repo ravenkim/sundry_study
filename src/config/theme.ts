@@ -1,5 +1,18 @@
 import { ThemeEditorState } from "../types/theme";
 
+// these are common between light and dark modes
+// we can assume that light mode's value will be used for dark mode as well
+export const COMMON_STYLES = ["font-sans", "font-serif", "font-mono", "radius"];
+
+export const DEFAULT_FONT_SANS =
+  "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'";
+
+export const DEFAULT_FONT_SERIF =
+  'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif';
+
+export const DEFAULT_FONT_MONO =
+  'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
 // Default light theme styles
 export const defaultLightThemeStyles = {
   background: "hsl(0 0% 100%)",
@@ -35,6 +48,9 @@ export const defaultLightThemeStyles = {
   "sidebar-accent-foreground": "hsl(0 0% 20.5%)",
   "sidebar-border": "hsl(0 0% 92.2%)",
   "sidebar-ring": "hsl(0 0% 70.8%)",
+  "font-sans": DEFAULT_FONT_SANS,
+  "font-serif": DEFAULT_FONT_SERIF,
+  "font-mono": DEFAULT_FONT_MONO,
 };
 
 // Default dark theme styles
