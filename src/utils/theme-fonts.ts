@@ -3,13 +3,14 @@ import { ThemeEditorState, ThemeStyleProps } from "../types/theme";
 export const fonts = {
   Inter: "Inter, sans-serif",
   Roboto: "Roboto, sans-serif",
-  Monospace: "Monospace, monospace",
-  Poppins: '"Poppins", sans-serif',
-  Lato: '"Lato", sans-serif',
+  Montserrat: "Montserrat, sans-serif",
   "Open Sans": '"Open Sans", sans-serif',
-  "Source Sans Pro": '"Source Sans Pro", sans-serif',
-  "Ubuntu Mono": "Ubuntu Mono, monospace",
-  "Fira Code": "Fira Code, monospace",
+  Lato: '"Lato", sans-serif',
+  Georgia: "Georgia, serif",
+  Merriweather: '"Merriweather", serif',
+  "Source Code Pro": '"Source Code Pro", monospace',
+  "JetBrains Mono": '"JetBrains Mono", monospace',
+  "Fira Code": '"Fira Code", monospace',
 };
 
 export const getAppliedThemeFont = (

@@ -14,6 +14,7 @@ import { SliderWithInput } from "./slider-with-input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 import ThemeFontSelect from "./theme-font-select";
 import { DEFAULT_FONT_MONO, DEFAULT_FONT_SANS, DEFAULT_FONT_SERIF } from "../../config/theme";
+import { Separator } from "../ui/separator";
 
 const ThemeControlPanel = ({
   styles,
@@ -297,41 +298,46 @@ const ThemeControlPanel = ({
           </TabsContent>
 
           <TabsContent value="typography" className="flex flex-col gap-4">
-            <div>
-              <Label htmlFor="font-sans" className="text-xs mb-1.5 block">
-                Font Family (Sans)
-              </Label>
-              <ThemeFontSelect
-                fonts={fonts}
-                defaultValue={DEFAULT_FONT_SANS}
-                currentFont={getAppliedThemeFont(themeState, "font-sans")}
-                onFontChange={(value) => updateStyle("font-sans", value)}
-              />
-            </div>
+            <ControlSection title="Font Family" expanded>
+              <div className="mb-4">
+                <Label htmlFor="font-sans" className="text-xs mb-1.5 block">
+                  Sans-Serif Font
+                </Label>
+                <ThemeFontSelect
+                  fonts={fonts}
+                  defaultValue={DEFAULT_FONT_SANS}
+                  currentFont={getAppliedThemeFont(themeState, "font-sans")}
+                  onFontChange={(value) => updateStyle("font-sans", value)}
+                />
+              </div>
 
-            <div>
-              <Label htmlFor="font-serif" className="text-xs mb-1.5 block">
-                Font Family (Serif)
-              </Label>
-              <ThemeFontSelect
-                fonts={fonts}
-                defaultValue={DEFAULT_FONT_SERIF}
-                currentFont={getAppliedThemeFont(themeState, "font-serif")}
-                onFontChange={(value) => updateStyle("font-serif", value)}
-              />
-            </div>
+              <Separator className="my-4" />
 
-            <div>
-              <Label htmlFor="font-mono" className="text-xs mb-1.5 block">
-                Font Family (Mono)
-              </Label>
-              <ThemeFontSelect
-                fonts={fonts}
-                defaultValue={DEFAULT_FONT_MONO}
-                currentFont={getAppliedThemeFont(themeState, "font-mono")}
-                onFontChange={(value) => updateStyle("font-mono", value)}
-              />
-            </div>
+              <div className="mb-4">
+                <Label htmlFor="font-serif" className="text-xs mb-1.5 block">
+                  Serif Font
+                </Label>
+                <ThemeFontSelect
+                  fonts={fonts}
+                  defaultValue={DEFAULT_FONT_SERIF}
+                  currentFont={getAppliedThemeFont(themeState, "font-serif")}
+                  onFontChange={(value) => updateStyle("font-serif", value)}
+                />
+              </div>
+
+              <Separator className="my-4" />
+              <div>
+                <Label htmlFor="font-mono" className="text-xs mb-1.5 block">
+                  Monospace Font
+                </Label>
+                <ThemeFontSelect
+                  fonts={fonts}
+                  defaultValue={DEFAULT_FONT_MONO}
+                  currentFont={getAppliedThemeFont(themeState, "font-mono")}
+                  onFontChange={(value) => updateStyle("font-mono", value)}
+                />
+              </div>
+            </ControlSection>
           </TabsContent>
 
           <TabsContent value="other">
