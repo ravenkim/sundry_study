@@ -22,7 +22,8 @@ interface CodePanelProps {
 const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
   const { type: editorType } = config;
   const [colorFormat, setColorFormat] = useState<ColorFormat>("hsl");
-  const code = config.codeGenerator.generateComponentCode(styles, colorFormat);
+  const [tailwindVersion, setTailwindVersion] = useState<"3" | "4">("3");
+  const code = config.codeGenerator.generateComponentCode(styles, colorFormat, tailwindVersion);
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async (text: string) => {
@@ -56,6 +57,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
         <div className="flex-none flex justify-between items-center px-4 py-2 border-b bg-muted/50">
           <span className="text-sm font-medium">{getFileName()}</span>
           {editorType === "theme" && (
+            <>
             <Select
               value={colorFormat}
               onValueChange={(value: ColorFormat) => setColorFormat(value)}
@@ -70,6 +72,19 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
                 <SelectItem value="hex">hex</SelectItem>
               </SelectContent>
             </Select>
+            <Select
+            value={tailwindVersion}
+            onValueChange={(value: "3" | "4") => setTailwindVersion(value)}
+          >
+            <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-transparent outline-none border-none gap-1">
+              <SelectValue className="focus:ring-transparent" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="3">Tailwind v3</SelectItem>
+              <SelectItem value="4">Tailwind v4</SelectItem>
+            </SelectContent>
+          </Select>
+          </>
           )}
 
           <Button
