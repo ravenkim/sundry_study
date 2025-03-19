@@ -7,13 +7,24 @@ import { useLocation } from "react-router-dom";
 import { ScrollArea } from "../ui/scroll-area";
 import ThemePresetSelect from "./ThemePresetSelect";
 import { presets } from "../../utils/themePresets";
-import { fonts, getAppliedThemeFont, monoFonts, sansSerifFontNames, sansSerifFonts, serifFonts } from "../../utils/theme-fonts";
+import {
+  fonts,
+  getAppliedThemeFont,
+  monoFonts,
+  sansSerifFontNames,
+  sansSerifFonts,
+  serifFonts,
+} from "../../utils/theme-fonts";
 import { useEditorStore } from "../../store/editorStore";
 import { Label } from "../ui/label";
 import { SliderWithInput } from "./slider-with-input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 import ThemeFontSelect from "./theme-font-select";
-import { DEFAULT_FONT_MONO, DEFAULT_FONT_SANS, DEFAULT_FONT_SERIF } from "../../config/theme";
+import {
+  DEFAULT_FONT_MONO,
+  DEFAULT_FONT_SANS,
+  DEFAULT_FONT_SERIF,
+} from "../../config/theme";
 import { Separator } from "../ui/separator";
 import { AlertCircle } from "lucide-react";
 
@@ -48,8 +59,17 @@ const ThemeControlPanel = ({
       value: (typeof currentStyles)[K],
     ) => {
       // apply common styles to both light and dark modes
-      if (key === "font-sans" || key === "font-serif" || key === "font-mono" || key === "radius") {
-        onChange({ ...styles, light: { ...styles.light, [key]: value }, dark: { ...styles.dark, [key]: value } });
+      if (
+        key === "font-sans" ||
+        key === "font-serif" ||
+        key === "font-mono" ||
+        key === "radius"
+      ) {
+        onChange({
+          ...styles,
+          light: { ...styles.light, [key]: value },
+          dark: { ...styles.dark, [key]: value },
+        });
         return;
       }
 
@@ -302,12 +322,18 @@ const ThemeControlPanel = ({
             <div className="p-3 bg-muted/50 rounded-md border mb-2 flex items-start gap-2.5">
               <AlertCircle className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
               <div className="text-sm text-muted-foreground">
-                <p>For these fonts to work in your project, you'll need to:</p>
-                <ol className="list-decimal ml-5 mt-1 space-y-1">
-                  <li>Add the Google Fonts link to your HTML head section</li>
-                  <li>Configure the font family in your Tailwind CSS configuration</li>
-                </ol>
-                <p className="mt-1">The imported fonts in this project are included for preview purposes only.</p>
+                <p>
+                  For custom fonts to work in your project, you'll need to embed
+                  them. <br /> See{" "}
+                  <a
+                    href="https://tailwindcss.com/docs/font-family"
+                    target="_blank"
+                    className="underline underline-offset-2 hover:text-muted-foreground/90"
+                  >
+                    Tailwind docs
+                  </a>{" "}
+                  for more information.
+                </p>
               </div>
             </div>
 
