@@ -22,6 +22,8 @@ export interface EditorCodeGenerator {
   generateComponentCode: (
     styles: ThemeStyles | ButtonStyles,
     colorFormat?: ColorFormat,
+    tailwindVersion?: "3" | "4",
+    
   ) => string;
 }
 

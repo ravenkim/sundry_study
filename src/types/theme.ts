@@ -23,7 +23,6 @@ export interface ThemeStyleProps {
   "chart-3": string;
   "chart-4": string;
   "chart-5": string;
-  radius: string;
   sidebar: string;
   "sidebar-foreground": string;
   "sidebar-primary": string;
@@ -32,11 +31,15 @@ export interface ThemeStyleProps {
   "sidebar-accent-foreground": string;
   "sidebar-border": string;
   "sidebar-ring": string;
+  "font-sans"?: string;
+  "font-serif"?: string;
+  "font-mono"?: string;
+  radius?: string;
 }
 
 export interface ThemeStyles {
   light: ThemeStyleProps;
-  dark: ThemeStyleProps;
+  dark: Partial<ThemeStyleProps>;
 }
 
 export interface ThemeEditorState {

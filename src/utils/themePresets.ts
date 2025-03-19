@@ -1,6 +1,29 @@
 import { defaultThemeState } from "../config/theme";
 import { ThemeStyles } from "../types/theme";
 
+export function getPresetThemeStyles(name: string): ThemeStyles {
+  const defaultTheme = defaultThemeState.styles;
+  if (name === "default") {
+    return defaultTheme;
+  }
+
+  const preset = presets[name];
+  if (!preset) {
+    return defaultTheme;
+  }
+
+  return {
+    light: {
+      ...defaultTheme.light,
+      ...(preset.light || {}),
+    },
+    dark: {
+      ...defaultTheme.dark,
+      ...(preset.dark || {}),
+    },
+  };
+}
+
 export const presets: Record<string, ThemeStyles> = {
   "modern-minimal": {
     light: {
@@ -37,6 +60,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#1e3a8a",
       "sidebar-border": "#e5e7eb",
       "sidebar-ring": "#3b82f6",
+      "font-sans": "Inter, sans-serif",
+      "font-serif": '"Source Serif 4", serif',
+      "font-mono": '"JetBrains Mono", monospace',
     },
     dark: {
       background: "#171717",
@@ -110,6 +136,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#1b5e20",
       "sidebar-border": "#e0d6c9",
       "sidebar-ring": "#2e7d32",
+      "font-sans": "Montserrat, sans-serif",
+      "font-serif": '"Merriweather", serif',
+      "font-mono": '"Source Code Pro", monospace',
     },
     dark: {
       background: "#1c2a1f",
@@ -183,6 +212,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#1e40af",
       "sidebar-border": "#e0e7ff",
       "sidebar-ring": "#8b5cf6",
+      "font-sans": "Roboto, sans-serif",
+      "font-serif": '"Playfair Display", serif',
+      "font-mono": '"Fira Code", monospace',
     },
     dark: {
       background: "#0f172a",
@@ -256,6 +288,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#7f1d1d",
       "sidebar-border": "#f5e8d2",
       "sidebar-ring": "#9b2c2c",
+      "font-sans": "Poppins, sans-serif",
+      "font-serif": '"Libre Baskerville", serif',
+      "font-mono": '"IBM Plex Mono", monospace',
     },
     dark: {
       background: "#1c1917",
@@ -329,6 +364,8 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#ffffff",
       "sidebar-border": "#000000",
       "sidebar-ring": "#ff3333",
+      "font-sans": '"DM Sans", sans-serif',
+      "font-mono": '"Space Mono", monospace',
     },
     dark: {
       background: "#000000",
@@ -402,6 +439,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#374151",
       "sidebar-border": "#d6d3d1",
       "sidebar-ring": "#6366f1",
+      "font-sans": '"Plus Jakarta Sans", sans-serif',
+      "font-serif": "Lora, serif",
+      "font-mono": '"Roboto Mono", monospace',
     },
     dark: {
       background: "#1e1b18",
@@ -475,6 +515,8 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#0c0c1d",
       "sidebar-border": "#dfe6e9",
       "sidebar-ring": "#ff00c8",
+      "font-sans": "Outfit, sans-serif",
+      "font-mono": '"Fira Code", monospace',
     },
     dark: {
       background: "#0c0c1d",
@@ -548,6 +590,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#374151",
       "sidebar-border": "#e9d8fd",
       "sidebar-ring": "#a78bfa",
+      "font-sans": '"Open Sans", sans-serif',
+      "font-serif": '"Source Serif 4", serif',
+      "font-mono": '"IBM Plex Mono", monospace',
     },
     dark: {
       background: "#1c1917",
@@ -621,6 +666,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#374151",
       "sidebar-border": "#d1d5db",
       "sidebar-ring": "#6366f1",
+      "font-sans": "Inter, sans-serif",
+      "font-serif": '"Merriweather", serif',
+      "font-mono": '"JetBrains Mono", monospace',
     },
     dark: {
       background: "#0f172a",
@@ -661,30 +709,30 @@ export const presets: Record<string, ThemeStyles> = {
 
   "midnight-bloom": {
     light: {
-      background: "#f9f9f9", // Soft gray background
-      foreground: "#333333", // Dark gray text
-      card: "#ffffff", // White cards
+      background: "#f9f9f9",
+      foreground: "#333333",
+      card: "#ffffff",
       "card-foreground": "#333333",
       popover: "#ffffff",
       "popover-foreground": "#333333",
-      primary: "#6c5ce7", // Deep purple primary
+      primary: "#6c5ce7",
       "primary-foreground": "#ffffff",
-      secondary: "#a1c9f2", // Soft blue secondary
+      secondary: "#a1c9f2",
       "secondary-foreground": "#333333",
-      muted: "#c9c4b5", // Muted beige for subtle elements
+      muted: "#c9c4b5",
       "muted-foreground": "#6e6e6e",
-      accent: "#8b9467", // Earthy green accents
+      accent: "#8b9467",
       "accent-foreground": "#ffffff",
-      destructive: "#ef4444", // Bright red for destructive actions
+      destructive: "#ef4444",
       "destructive-foreground": "#ffffff",
-      border: "#d4d4d4", // Light gray for borders
+      border: "#d4d4d4",
       input: "#d4d4d4",
-      ring: "#6c5ce7", // Purple ring for focus
-      "chart-1": "#6c5ce7", // Purple chart color
-      "chart-2": "#8e44ad", // Deep pink chart color
-      "chart-3": "#4b0082", // Dark blue chart color
-      "chart-4": "#6495ed", // Bright blue chart color
-      "chart-5": "#4682b4", // Steel blue chart color
+      ring: "#6c5ce7",
+      "chart-1": "#6c5ce7",
+      "chart-2": "#8e44ad",
+      "chart-3": "#4b0082",
+      "chart-4": "#6495ed",
+      "chart-5": "#4682b4",
       radius: "0.5rem",
       sidebar: "#f9f9f9",
       "sidebar-foreground": "#333333",
@@ -694,21 +742,24 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#ffffff",
       "sidebar-border": "#d4d4d4",
       "sidebar-ring": "#6c5ce7",
+      "font-sans": "Montserrat, sans-serif",
+      "font-serif": '"Playfair Display", serif',
+      "font-mono": '"Source Code Pro", monospace',
     },
     dark: {
-      background: "#1a1d23", // Deep dark background
-      foreground: "#e5e5e5", // Light gray text
-      card: "#2f3436", // Dark gray cards
+      background: "#1a1d23",
+      foreground: "#e5e5e5",
+      card: "#2f3436",
       "card-foreground": "#e5e5e5",
       popover: "#2f3436",
       "popover-foreground": "#e5e5e5",
       primary: "#6c5ce7",
       "primary-foreground": "#ffffff",
-      secondary: "#4b0082", // Dark blue secondary
+      secondary: "#4b0082",
       "secondary-foreground": "#e5e5e5",
-      muted: "#444444", // Dark gray for muted elements
+      muted: "#444444",
       "muted-foreground": "#a3a3a3",
-      accent: "#6495ed", // Bright blue accents
+      accent: "#6495ed",
       "accent-foreground": "#e5e5e5",
       destructive: "#ef4444",
       "destructive-foreground": "#ffffff",
@@ -767,6 +818,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#374151",
       "sidebar-border": "#e5e7eb",
       "sidebar-ring": "#22c55e",
+      "font-sans": '"DM Sans", sans-serif',
+      "font-serif": "Lora, serif",
+      "font-mono": '"IBM Plex Mono", monospace',
     },
     dark: {
       background: "#0f172a",
@@ -807,30 +861,30 @@ export const presets: Record<string, ThemeStyles> = {
 
   "retro-arcade": {
     light: {
-      background: "#fdf6e3", // Soft beige for a retro vibe
-      foreground: "#073642", // Deep teal for text
-      card: "#eee8d5", // Light beige for cards
+      background: "#fdf6e3",
+      foreground: "#073642",
+      card: "#eee8d5",
       "card-foreground": "#073642",
       popover: "#eee8d5",
       "popover-foreground": "#073642",
-      primary: "#d33682", // Vibrant magenta
+      primary: "#d33682",
       "primary-foreground": "#ffffff",
-      secondary: "#2aa198", // Bright cyan
+      secondary: "#2aa198",
       "secondary-foreground": "#ffffff",
-      muted: "#93a1a1", // Muted gray for subtle elements
+      muted: "#93a1a1",
       "muted-foreground": "#073642",
-      accent: "#cb4b16", // Burnt orange for accents
+      accent: "#cb4b16",
       "accent-foreground": "#ffffff",
-      destructive: "#dc322f", // Bold red for warnings
+      destructive: "#dc322f",
       "destructive-foreground": "#ffffff",
-      border: "#839496", // Neutral gray for borders
+      border: "#839496",
       input: "#839496",
-      ring: "#d33682", // Magenta ring for focus elements
-      "chart-1": "#268bd2", // Blue chart color
-      "chart-2": "#2aa198", // Cyan chart color
-      "chart-3": "#d33682", // Magenta chart color
-      "chart-4": "#cb4b16", // Orange chart color
-      "chart-5": "#dc322f", // Red chart color
+      ring: "#d33682",
+      "chart-1": "#268bd2",
+      "chart-2": "#2aa198",
+      "chart-3": "#d33682",
+      "chart-4": "#cb4b16",
+      "chart-5": "#dc322f",
       radius: "0.25rem",
       sidebar: "#fdf6e3",
       "sidebar-foreground": "#073642",
@@ -840,11 +894,13 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#ffffff",
       "sidebar-border": "#839496",
       "sidebar-ring": "#d33682",
+      "font-sans": "Outfit, sans-serif",
+      "font-mono": '"Space Mono", monospace',
     },
     dark: {
-      background: "#002b36", // Deep navy blue for background
-      foreground: "#93a1a1", // Muted gray for text
-      card: "#073642", // Teal for cards
+      background: "#002b36",
+      foreground: "#93a1a1",
+      card: "#073642",
       "card-foreground": "#93a1a1",
       popover: "#073642",
       "popover-foreground": "#93a1a1",
@@ -852,7 +908,7 @@ export const presets: Record<string, ThemeStyles> = {
       "primary-foreground": "#ffffff",
       secondary: "#2aa198",
       "secondary-foreground": "#ffffff",
-      muted: "#586e75", // Dark gray for muted elements
+      muted: "#586e75",
       "muted-foreground": "#93a1a1",
       accent: "#cb4b16",
       "accent-foreground": "#ffffff",
@@ -880,30 +936,30 @@ export const presets: Record<string, ThemeStyles> = {
 
   candyland: {
     light: {
-      background: "#f7f9fa", // Soft gray-blue background
-      foreground: "#333333", // Dark gray text
-      card: "#ffffff", // White cards
+      background: "#f7f9fa",
+      foreground: "#333333",
+      card: "#ffffff",
       "card-foreground": "#333333",
       popover: "#ffffff",
       "popover-foreground": "#333333",
-      primary: "#ffc0cb", // Pastel pink primary
+      primary: "#ffc0cb",
       "primary-foreground": "#000000",
-      secondary: "#87ceeb", // Light blue secondary
+      secondary: "#87ceeb",
       "secondary-foreground": "#000000",
-      muted: "#ddd9c4", // Muted beige for subtle elements
+      muted: "#ddd9c4",
       "muted-foreground": "#6e6e6e",
-      accent: "#ffff00", // Yellow accents
+      accent: "#ffff00",
       "accent-foreground": "#000000",
-      destructive: "#ef4444", // Bright red for destructive actions
+      destructive: "#ef4444",
       "destructive-foreground": "#ffffff",
-      border: "#d4d4d4", // Light gray for borders
+      border: "#d4d4d4",
       input: "#d4d4d4",
-      ring: "#ffc0cb", // Pink ring for focus
-      "chart-1": "#ffc0cb", // Pink chart color
-      "chart-2": "#87ceeb", // Light blue chart color
-      "chart-3": "#ffff00", // Yellow chart color
-      "chart-4": "#ff99cc", // Pastel red chart color
-      "chart-5": "#33cc33", // Green chart color
+      ring: "#ffc0cb",
+      "chart-1": "#ffc0cb",
+      "chart-2": "#87ceeb",
+      "chart-3": "#ffff00",
+      "chart-4": "#ff99cc",
+      "chart-5": "#33cc33",
       radius: "0.5rem",
       sidebar: "#f7f9fa",
       "sidebar-foreground": "#333333",
@@ -913,21 +969,23 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#000000",
       "sidebar-border": "#d4d4d4",
       "sidebar-ring": "#ffc0cb",
+      "font-sans": "Poppins, sans-serif",
+      "font-mono": '"Roboto Mono", monospace',
     },
     dark: {
-      background: "#1a1d23", // Deep dark background
-      foreground: "#e5e5e5", // Light gray text
-      card: "#2f3436", // Dark gray cards
+      background: "#1a1d23",
+      foreground: "#e5e5e5",
+      card: "#2f3436",
       "card-foreground": "#e5e5e5",
       popover: "#2f3436",
       "popover-foreground": "#e5e5e5",
-      primary: "#ff99cc", // Pastel red primary
+      primary: "#ff99cc",
       "primary-foreground": "#000000",
-      secondary: "#33cc33", // Green secondary
+      secondary: "#33cc33",
       "secondary-foreground": "#000000",
-      muted: "#444444", // Dark gray for muted elements
+      muted: "#444444",
       "muted-foreground": "#a3a3a3",
-      accent: "#87ceeb", // Light blue accents
+      accent: "#87ceeb",
       "accent-foreground": "#000000",
       destructive: "#ef4444",
       "destructive-foreground": "#ffffff",
@@ -937,8 +995,8 @@ export const presets: Record<string, ThemeStyles> = {
       "chart-1": "#ff99cc",
       "chart-2": "#33cc33",
       "chart-3": "#87ceeb",
-      "chart-4": "#ffff00", // Yellow chart color
-      "chart-5": "#ffcc00", // Orange chart color
+      "chart-4": "#ffff00",
+      "chart-5": "#ffcc00",
       radius: "0.5rem",
       sidebar: "#1a1d23",
       "sidebar-foreground": "#e5e5e5",
@@ -953,30 +1011,30 @@ export const presets: Record<string, ThemeStyles> = {
 
   "northern-lights": {
     light: {
-      background: "#f9f9fa", // Soft gray background
-      foreground: "#333333", // Dark gray text
-      card: "#ffffff", // White cards
+      background: "#f9f9fa",
+      foreground: "#333333",
+      card: "#ffffff",
       "card-foreground": "#333333",
       popover: "#ffffff",
       "popover-foreground": "#333333",
-      primary: "#34a85a", // Green primary
+      primary: "#34a85a",
       "primary-foreground": "#ffffff",
-      secondary: "#6495ed", // Blue secondary
+      secondary: "#6495ed",
       "secondary-foreground": "#ffffff",
-      muted: "#ddd9c4", // Muted beige for subtle elements
+      muted: "#ddd9c4",
       "muted-foreground": "#6e6e6e",
-      accent: "#66d9ef", // Cyan accents
+      accent: "#66d9ef",
       "accent-foreground": "#333333",
-      destructive: "#ef4444", // Bright red for destructive actions
+      destructive: "#ef4444",
       "destructive-foreground": "#ffffff",
-      border: "#d4d4d4", // Light gray for borders
+      border: "#d4d4d4",
       input: "#d4d4d4",
-      ring: "#34a85a", // Green ring for focus
-      "chart-1": "#34a85a", // Green chart color
-      "chart-2": "#6495ed", // Blue chart color
-      "chart-3": "#66d9ef", // Cyan chart color
-      "chart-4": "#4682b4", // Steel blue chart color
-      "chart-5": "#1a9641", // Teal-green chart color
+      ring: "#34a85a",
+      "chart-1": "#34a85a",
+      "chart-2": "#6495ed",
+      "chart-3": "#66d9ef",
+      "chart-4": "#4682b4",
+      "chart-5": "#1a9641",
       radius: "0.5rem",
       sidebar: "#f9f9fa",
       "sidebar-foreground": "#333333",
@@ -986,21 +1044,24 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#333333",
       "sidebar-border": "#d4d4d4",
       "sidebar-ring": "#34a85a",
+      "font-sans": '"Plus Jakarta Sans", sans-serif',
+      "font-serif": '"Source Serif 4", serif',
+      "font-mono": '"JetBrains Mono", monospace',
     },
     dark: {
-      background: "#1a1d23", // Deep dark background
-      foreground: "#e5e5e5", // Light gray text
-      card: "#2f3436", // Dark gray cards
+      background: "#1a1d23",
+      foreground: "#e5e5e5",
+      card: "#2f3436",
       "card-foreground": "#e5e5e5",
       popover: "#2f3436",
       "popover-foreground": "#e5e5e5",
-      primary: "#34a85a", // Green primary
+      primary: "#34a85a",
       "primary-foreground": "#ffffff",
-      secondary: "#4682b4", // Steel blue secondary
+      secondary: "#4682b4",
       "secondary-foreground": "#e5e5e5",
-      muted: "#444444", // Dark gray for muted elements
+      muted: "#444444",
       "muted-foreground": "#a3a3a3",
-      accent: "#6495ed", // Blue accents
+      accent: "#6495ed",
       "accent-foreground": "#e5e5e5",
       destructive: "#ef4444",
       "destructive-foreground": "#ffffff",
@@ -1010,8 +1071,8 @@ export const presets: Record<string, ThemeStyles> = {
       "chart-1": "#34a85a",
       "chart-2": "#4682b4",
       "chart-3": "#6495ed",
-      "chart-4": "#66d9ef", // Cyan chart color
-      "chart-5": "#1a9641", // Teal-green chart color
+      "chart-4": "#66d9ef",
+      "chart-5": "#1a9641",
       radius: "0.5rem",
       sidebar: "#1a1d23",
       "sidebar-foreground": "#e5e5e5",
@@ -1024,26 +1085,3 @@ export const presets: Record<string, ThemeStyles> = {
     },
   },
 };
-
-export function getPresetThemeStyles(name: string): ThemeStyles {
-  const defaultTheme = defaultThemeState.styles;
-  if (name === "default") {
-    return defaultTheme;
-  }
-
-  const preset = presets[name];
-  if (!preset) {
-    return defaultTheme;
-  }
-
-  return {
-    light: {
-      ...defaultTheme.light,
-      ...(preset.light || {}),
-    },
-    dark: {
-      ...defaultTheme.dark,
-      ...(preset.dark || {}),
-    },
-  };
-}

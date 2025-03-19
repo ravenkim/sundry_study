@@ -36,16 +36,20 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 
     const mode = themeState.currentMode;
     const themeStyles = themeState.styles;
-    Object.entries(themeStyles[mode]).forEach(([key, value]) => {
-      if (typeof value === "string") {
-        if (key === "radius") {
-          root?.setAttribute(
-            `style`,
-            `${root.getAttribute("style") || ""}--${key}: ${value};`,
-          );
-          return;
-        }
 
+    const commonNonColorKeys = ["font-sans", "font-serif", "font-mono", "radius"];
+    Object.entries(themeStyles.light)
+      .filter(([key]) => commonNonColorKeys.includes(key))
+      .forEach(([key, value]) => {
+        root?.setAttribute(
+          `style`,
+          `${root.getAttribute("style") || ""}--${key}: ${value};`,
+        );
+      }
+      );
+
+    Object.entries(themeStyles[mode]).forEach(([key, value]) => {
+      if (typeof value === "string" && !commonNonColorKeys.includes(key)) {
         // Convert the color to HSL format
         const hslValue = convertToHSL(value);
         root?.setAttribute(

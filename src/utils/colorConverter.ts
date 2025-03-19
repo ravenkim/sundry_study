@@ -9,6 +9,7 @@ const formatNumber = (num?: number) => {
 export const colorFormatter = (
   colorValue: string,
   format: ColorFormat = "hsl",
+  tailwindVersion: "3" | "4" = "3"
 ): string => {
   try {
     const color = culori.parse(colorValue);
@@ -17,6 +18,9 @@ export const colorFormatter = (
     switch (format) {
       case "hsl": {
         const hsl = culori.converter("hsl")(color);
+        if (tailwindVersion === "4") {
+          return `hsl(${formatNumber(hsl.h)} ${formatNumber(hsl.s * 100)}% ${formatNumber(hsl.l * 100)}%)`;
+        }
         return `${formatNumber(hsl.h)} ${formatNumber(hsl.s * 100)}% ${formatNumber(hsl.l * 100)}%`;
       }
       case "rgb":
