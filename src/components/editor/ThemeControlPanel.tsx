@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { ScrollArea } from "../ui/scroll-area";
 import ThemePresetSelect from "./ThemePresetSelect";
 import { presets } from "../../utils/themePresets";
-import { fonts, getAppliedThemeFont } from "../../utils/theme-fonts";
+import { fonts, getAppliedThemeFont, monoFonts, sansSerifFontNames, sansSerifFonts, serifFonts } from "../../utils/theme-fonts";
 import { useEditorStore } from "../../store/editorStore";
 import { Label } from "../ui/label";
 import { SliderWithInput } from "./slider-with-input";
@@ -304,7 +304,7 @@ const ThemeControlPanel = ({
                   Sans-Serif Font
                 </Label>
                 <ThemeFontSelect
-                  fonts={fonts}
+                  fonts={{ ...sansSerifFonts, ...serifFonts, ...monoFonts }}
                   defaultValue={DEFAULT_FONT_SANS}
                   currentFont={getAppliedThemeFont(themeState, "font-sans")}
                   onFontChange={(value) => updateStyle("font-sans", value)}
@@ -318,7 +318,7 @@ const ThemeControlPanel = ({
                   Serif Font
                 </Label>
                 <ThemeFontSelect
-                  fonts={fonts}
+                  fonts={{ ...serifFonts, ...sansSerifFonts, ...monoFonts }}
                   defaultValue={DEFAULT_FONT_SERIF}
                   currentFont={getAppliedThemeFont(themeState, "font-serif")}
                   onFontChange={(value) => updateStyle("font-serif", value)}
@@ -331,7 +331,7 @@ const ThemeControlPanel = ({
                   Monospace Font
                 </Label>
                 <ThemeFontSelect
-                  fonts={fonts}
+                  fonts={{ ...monoFonts, ...sansSerifFonts, ...serifFonts }}
                   defaultValue={DEFAULT_FONT_MONO}
                   currentFont={getAppliedThemeFont(themeState, "font-mono")}
                   onFontChange={(value) => updateStyle("font-mono", value)}
