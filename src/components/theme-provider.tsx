@@ -28,12 +28,6 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 
   useLayoutEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove("preview-theme", "preview-theme-dark");
-
-    const theme =
-      themeState.currentMode === "light" ? "preview-theme" : "preview-theme-dark";
-    root.classList.add(theme);
-
     const mode = themeState.currentMode;
     const themeStyles = themeState.styles;
 
