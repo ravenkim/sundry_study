@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@config "../tailwind.config.ts";
-
 @utility animate-in {
   animation: fadeIn 0.3s ease forwards;
 }
