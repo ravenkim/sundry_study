@@ -23,6 +23,10 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+function applyStyleToElement(element: HTMLElement, key: string, value: string) {
+  element.setAttribute(`style`, `${element.getAttribute("style") || ""}--${key}: ${value};`);
+}
+
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const { themeState, setThemeState } = useEditorStore();
 
@@ -35,21 +39,13 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     Object.entries(themeStyles.light)
       .filter(([key]) => commonNonColorKeys.includes(key))
       .forEach(([key, value]) => {
-        root?.setAttribute(
-          `style`,
-          `${root.getAttribute("style") || ""}--${key}: ${value};`,
-        );
-      }
-      );
+        applyStyleToElement(root, key, value);
+      });
 
     Object.entries(themeStyles[mode]).forEach(([key, value]) => {
       if (typeof value === "string" && !commonNonColorKeys.includes(key)) {
-        // Convert the color to HSL format
         const hslValue = colorFormatter(value, "hsl", "4");
-        root?.setAttribute(
-          `style`,
-          `${root.getAttribute("style") || ""}--${key}: ${hslValue};`,
-        );
+        applyStyleToElement(root, key, hslValue);
       }
     });
   }, [themeState]);
