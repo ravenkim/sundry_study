@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useLayoutEffect } from "react";
+import { createContext, useContext, useLayoutEffect } from "react";
 import { useEditorStore } from "../store/editorStore";
-import { convertToHSL } from "../utils/colorConverter";
+import { colorFormatter } from "../utils/colorConverter";
 
 type Theme = "dark" | "light";
 
@@ -51,7 +51,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     Object.entries(themeStyles[mode]).forEach(([key, value]) => {
       if (typeof value === "string" && !commonNonColorKeys.includes(key)) {
         // Convert the color to HSL format
-        const hslValue = convertToHSL(value);
+        const hslValue = colorFormatter(value, "hsl", "4");
         root?.setAttribute(
           `style`,
           `${root.getAttribute("style") || ""}--${key}: ${hslValue};`,
