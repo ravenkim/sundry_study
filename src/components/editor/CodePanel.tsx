@@ -61,7 +61,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
               setColorFormat(value === "4" ? "oklch" : "hsl")
             }}
           >
-            <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-muted/50 outline-none border-none gap-1">
+            <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-muted/50 outline-hidden border-none gap-1">
               <SelectValue className="focus:ring-transparent" />
             </SelectTrigger>
             <SelectContent>
@@ -73,7 +73,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
             value={colorFormat}
             onValueChange={(value: ColorFormat) => setColorFormat(value)}
           >
-            <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-muted/50 outline-none border-none gap-1">
+            <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-muted/50 outline-hidden border-none gap-1">
               <SelectValue className="focus:ring-transparent" />
             </SelectTrigger>
             <SelectContent>

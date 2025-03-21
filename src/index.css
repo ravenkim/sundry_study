@@ -1,6 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../tailwind.config.ts';
+
+@utility glass {
+  @apply bg-white/80 backdrop-blur-md dark:bg-black/50;
+}
+
+@utility panel {
+  @apply rounded-lg border bg-editor-panel p-4 shadow-xs transition-all duration-200;
+}
+
+@utility animate-in {
+  animation: fadeIn 0.3s ease forwards;
+}
 
 @layer base {
   :root {
@@ -165,19 +177,5 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 240 4.9% 83.9%;
-  }
-}
-
-@layer utilities {
-  .glass {
-    @apply bg-white/80 backdrop-blur-md dark:bg-black/50;
-  }
-
-  .panel {
-    @apply rounded-lg border bg-editor-panel p-4 shadow-sm transition-all duration-200;
-  }
-
-  .animate-in {
-    animation: fadeIn 0.3s ease forwards;
   }
 }

@@ -18,7 +18,7 @@ const ButtonPreview = ({
 
   // Base Tailwind classes (removing color classes as we'll apply them via style)
   const baseClasses =
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
+    "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
 
   const parseColor = (color: string, opacity: number) => {
     // Handle hex colors

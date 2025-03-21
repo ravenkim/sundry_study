@@ -237,7 +237,7 @@ const ThemeControlPanel = ({
               />
               <ColorPicker
                 color={currentStyles.ring}
-                onChange={(color) => updateStyle("ring", color)}
+                onChange={(color) => updateStyle("ring-3", color)}
                 label="Ring"
               />
             </ControlSection>
