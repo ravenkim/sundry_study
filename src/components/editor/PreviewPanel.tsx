@@ -39,7 +39,7 @@ const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = 
                     variant={variant}
                     size={size}
                     hover
-                    className="!pointer-events-none"
+                    className="pointer-events-none!"
                   />
                 </div>
               </div>

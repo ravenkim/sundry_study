@@ -199,7 +199,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                         backgroundColor: `${styles[currentMode].accent}20`,
                       }}
                     >
-                      <Star className="h-5 w-5 text-yellow-500 flex-shrink-0" />
+                      <Star className="h-5 w-5 text-yellow-500 shrink-0" />
                       <div>
                         <h5 className="font-medium text-sm">Success Alert</h5>
                         <p className="text-xs mt-1">

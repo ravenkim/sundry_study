@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useLayoutEffect } from "react";
+import { createContext, useContext, useLayoutEffect } from "react";
 import { useEditorStore } from "../store/editorStore";
-import { convertToHSL } from "../utils/colorConverter";
+import { colorFormatter } from "../utils/colorConverter";
 
 type Theme = "dark" | "light";
 
@@ -23,17 +23,15 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+function applyStyleToElement(element: HTMLElement, key: string, value: string) {
+  element.setAttribute(`style`, `${element.getAttribute("style") || ""}--${key}: ${value};`);
+}
+
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const { themeState, setThemeState } = useEditorStore();
 
   useLayoutEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove("preview-theme", "preview-theme-dark");
-
-    const theme =
-      themeState.currentMode === "light" ? "preview-theme" : "preview-theme-dark";
-    root.classList.add(theme);
-
     const mode = themeState.currentMode;
     const themeStyles = themeState.styles;
 
@@ -41,21 +39,13 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     Object.entries(themeStyles.light)
       .filter(([key]) => commonNonColorKeys.includes(key))
       .forEach(([key, value]) => {
-        root?.setAttribute(
-          `style`,
-          `${root.getAttribute("style") || ""}--${key}: ${value};`,
-        );
-      }
-      );
+        applyStyleToElement(root, key, value);
+      });
 
     Object.entries(themeStyles[mode]).forEach(([key, value]) => {
       if (typeof value === "string" && !commonNonColorKeys.includes(key)) {
-        // Convert the color to HSL format
-        const hslValue = convertToHSL(value);
-        root?.setAttribute(
-          `style`,
-          `${root.getAttribute("style") || ""}--${key}: ${hslValue};`,
-        );
+        const hslValue = colorFormatter(value, "hsl", "4");
+        applyStyleToElement(root, key, hslValue);
       }
     });
   }, [themeState]);
