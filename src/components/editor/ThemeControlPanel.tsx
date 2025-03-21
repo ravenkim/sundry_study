@@ -118,7 +118,7 @@ const ThemeControlPanel = ({
           <TabsTrigger value="other">Other</TabsTrigger>
         </TabsList>
 
-        <ScrollArea className="h-full pb-4">
+        <ScrollArea className="h-full pb-40">
           <TabsContent value="colors">
             <ControlSection title="Primary Colors" id="primary-colors" expanded>
               <ColorPicker
