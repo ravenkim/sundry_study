@@ -106,7 +106,7 @@ const ControlPanel = ({
   );
 
   const themeState = useEditorStore((state) => state.themeState);
-  const mode = "light";
+  const mode = themeState?.currentMode;
   const themeStyles = themeState?.styles[mode];
 
   return (
@@ -315,10 +315,10 @@ const ControlPanel = ({
                 label="Hover Background Opacity"
                 unit="%"
               />
-              <ColorPicker
-                color={styles.hoverTextColor}
-                onChange={(color) => updateStyle("hoverTextColor", color)}
+              <ReadOnlyColorDisplay
+                color={themeStyles?.["primary-foreground"]}
                 label="Hover Text"
+                linkTo="/editor/theme"
               />
               <ColorPicker
                 color={styles.hoverBorderColor}

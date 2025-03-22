@@ -52,6 +52,7 @@ export type ButtonPreviewProps = {
   className?: string;
   disabled?: boolean;
   hover?: boolean;
+  size?: "default" | "sm" | "lg" | "icon";
 };
 
 export type ReadOnlyColorDisplayProps = {
