@@ -5,16 +5,16 @@ import { useEditorStore } from "@/store/editor-store";
 
 const ButtonPreview = ({
   styles,
-  variant,
-  size,
   label = "Button",
   disabled = false,
   className,
   hover = false,
+  size = "default",
 }: ButtonPreviewProps) => {
   const [isHovered, setIsHovered] = React.useState(hover);
-  const themeState = useEditorStore((state) => state.themeState?.styles);
-  const mode = "light"; // You might want to make this dynamic based on your app's theme mode
+  const editorState = useEditorStore((state) => state.themeState);
+  const themeState = editorState?.styles;
+  const mode = editorState?.currentMode;
 
   // Base Tailwind classes (removing color classes as we'll apply them via style)
   const baseClasses =
@@ -144,9 +144,9 @@ const ButtonPreview = ({
       borderColor: isHovered ? styles.hoverBorderColor : styles.borderColor,
     }),
     transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
-    ...variantStyles[variant],
+    ...variantStyles["default"],
     // Move color after variantStyles to ensure it takes precedence
-    color: isHovered ? styles.hoverTextColor : variantStyles[variant].color,
+    color: isHovered ? styles.hoverTextColor : variantStyles["default"].color,
   };
 
   return (

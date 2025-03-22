@@ -1,5 +1,5 @@
 import { ColorFormat } from ".";
-import { ButtonStyles, ButtonVariant, ButtonSize } from "./button";
+import { ButtonStyles } from "./button";
 import { ThemeStyles } from "./theme";
 
 // Base interface for any editor's state
@@ -22,16 +22,13 @@ export interface EditorCodeGenerator {
   generateComponentCode: (
     styles: ThemeStyles | ButtonStyles,
     colorFormat?: ColorFormat,
-    tailwindVersion?: "3" | "4",
-    
+    tailwindVersion?: "3" | "4"
   ) => string;
 }
 
 // Button-specific editor state
 export interface ButtonEditorState extends BaseEditorState {
   styles: ButtonStyles;
-  variant: ButtonVariant;
-  size: ButtonSize;
 }
 
 // Theme-specific editor state

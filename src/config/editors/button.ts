@@ -1,6 +1,5 @@
 import { EditorConfig } from "@/types/editor";
 import { ButtonEditorState } from "@/types/editor";
-import { ButtonVariant, ButtonSize } from "@/types/index";
 import ControlPanel from "@/components/editor/control-panel";
 import PreviewPanel from "@/components/editor/preview-panel";
 import { generateButtonComponentCode } from "@/utils/button-style-generator";
@@ -9,8 +8,6 @@ import { ButtonStyles } from "@/types/button";
 
 const defaultButtonState: ButtonEditorState = {
   styles: defaultButtonStyles,
-  variant: "default" as ButtonVariant,
-  size: "default" as ButtonSize,
 };
 
 export const buttonEditorConfig: EditorConfig = {
@@ -25,11 +22,7 @@ export const buttonEditorConfig: EditorConfig = {
       // Extract variant and size from the full state object
       if (styles && "styles" in styles) {
         const buttonState = styles as ButtonEditorState;
-        return generateButtonComponentCode(
-          buttonState.styles,
-          buttonState.variant,
-          buttonState.size
-        );
+        return generateButtonComponentCode(buttonState.styles);
       }
       // Fallback for direct style objects (legacy support)
       return generateButtonComponentCode(

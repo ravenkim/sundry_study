@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ButtonEditorState, ThemeEditorState, EditorType } from "@/types/editor";
-import { ButtonVariant, ButtonSize } from "@/types/button";
 import { isEqual } from "lodash";
 import { defaultThemeState } from "@/config/theme";
 import defaultButtonStyles from "@/config/button";
@@ -10,8 +9,6 @@ import { getPresetThemeStyles } from "../utils/theme-presets";
 // Default button state
 const defaultButtonState: ButtonEditorState = {
   styles: defaultButtonStyles,
-  variant: "default" as ButtonVariant,
-  size: "default" as ButtonSize,
 };
 
 interface EditorStore {
@@ -61,6 +58,6 @@ export const useEditorStore = create<EditorStore>()(
     }),
     {
       name: "editor-storage", // unique name for localStorage
-    },
-  ),
+    }
+  )
 );
