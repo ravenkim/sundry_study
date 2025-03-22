@@ -108,7 +108,7 @@ const ControlPanel = ({
   const mode = themeState?.currentMode;
   const themeStyles = themeState?.styles[mode];
 
-  const radius = parseFloat(styles.borderRadius.replace("rem", ""));
+  const radius = parseFloat(styles?.borderRadius?.replace("rem", ""));
 
   return (
     <div className="h-full pb-4">
