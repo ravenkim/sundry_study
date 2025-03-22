@@ -1,13 +1,12 @@
 import React from "react";
 import { ButtonPreviewProps } from "@/types";
-import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/editor-store";
+import { Button } from "../ui/button";
 
 const ButtonPreview = ({
   styles,
   label = "Button",
   disabled = false,
-  className,
   hover = false,
   size = "default",
 }: ButtonPreviewProps) => {
@@ -15,10 +14,6 @@ const ButtonPreview = ({
   const editorState = useEditorStore((state) => state.themeState);
   const themeState = editorState?.styles;
   const mode = editorState?.currentMode;
-
-  // Base Tailwind classes (removing color classes as we'll apply them via style)
-  const baseClasses =
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
 
   const parseColor = (color: string, opacity: number) => {
     // Handle hex colors
@@ -107,17 +102,9 @@ const ButtonPreview = ({
     },
   };
 
-  // Size classes without padding (we'll apply custom padding from styles)
-  const sizeClasses = {
-    default: "h-10",
-    sm: "h-9 rounded-md text-sm",
-    lg: "h-11 rounded-md text-lg",
-    icon: "h-10 w-10",
-  };
-
   // Combine custom styles with variant styles
   const customStyles = {
-    borderRadius: `${styles.borderRadius}px`,
+    borderRadius: `${styles.borderRadius}`,
     fontSize: `${styles.fontSize}px`,
     fontWeight: styles.fontWeight,
     letterSpacing: `${styles.letterSpacing}em`,
@@ -144,21 +131,12 @@ const ButtonPreview = ({
       borderColor: isHovered ? styles.hoverBorderColor : styles.borderColor,
     }),
     transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
-    ...variantStyles["default"],
-    // Move color after variantStyles to ensure it takes precedence
-    color: isHovered ? styles.hoverTextColor : variantStyles["default"].color,
   };
 
   return (
-    <button
-      className={cn(
-        baseClasses,
-        sizeClasses[size],
-        className,
-        disabled && "opacity-50 cursor-not-allowed"
-      )}
-      type="button"
+    <Button
       style={customStyles}
+      size={size}
       onMouseEnter={() => {
         if (!disabled) setIsHovered(true);
       }}
@@ -167,7 +145,7 @@ const ButtonPreview = ({
       }}
     >
       {label}
-    </button>
+    </Button>
   );
 };
 

@@ -1,11 +1,8 @@
 import { ButtonStyles } from "@/types/button";
 
 const defaultButtonStyles: ButtonStyles = {
-  backgroundColor: "#000000",
-  textColor: "#ffffff",
   borderColor: "#000000",
   borderWidth: 0,
-  borderRadius: 6,
   paddingX: 16,
   paddingY: 8,
   fontSize: 14,

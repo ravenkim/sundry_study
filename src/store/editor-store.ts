@@ -11,6 +11,15 @@ const defaultButtonState: ButtonEditorState = {
   styles: defaultButtonStyles,
 };
 
+const getDefaultButtonState = (theme: ThemeEditorState) => {
+  return {
+    ...defaultButtonState,
+    styles: {
+      ...defaultButtonState.styles,
+      borderRadius: theme.styles.light.radius,
+    },
+  };
+};
 interface EditorStore {
   buttonState: ButtonEditorState;
   themeState: ThemeEditorState;
@@ -27,7 +36,19 @@ export const useEditorStore = create<EditorStore>()(
       buttonState: defaultButtonState,
       themeState: defaultThemeState,
       setButtonState: (state: ButtonEditorState) => set({ buttonState: state }),
-      setThemeState: (state: ThemeEditorState) => set({ themeState: state }),
+      setThemeState: (state: ThemeEditorState) => {
+        set({ themeState: state });
+        const buttonState = get().buttonState;
+        set({
+          buttonState: {
+            ...buttonState,
+            styles: {
+              ...buttonState.styles,
+              borderRadius: state.styles.light.radius,
+            },
+          },
+        });
+      },
       applyThemePreset: (preset: string) => {
         const themeState = get().themeState;
         set({
@@ -40,7 +61,10 @@ export const useEditorStore = create<EditorStore>()(
       },
       resetToDefault: (type: EditorType) => {
         if (type === "button") {
-          set({ buttonState: defaultButtonState });
+          const defaultButtonState = getDefaultButtonState(get().themeState);
+          set({
+            buttonState: defaultButtonState,
+          });
         } else if (type === "theme") {
           const mode = get().themeState.currentMode;
           set({ themeState: { ...defaultThemeState, currentMode: mode } });
@@ -49,7 +73,10 @@ export const useEditorStore = create<EditorStore>()(
       hasStateChanged: (type: EditorType) => {
         const state = get();
         if (type === "button") {
-          return !isEqual(state.buttonState, defaultButtonState);
+          return !isEqual(
+            state.buttonState,
+            getDefaultButtonState(state.themeState)
+          );
         } else if (type === "theme") {
           return !isEqual(state.themeState.styles, defaultThemeState.styles);
         }

@@ -1,9 +1,7 @@
 export interface ButtonStyles {
-  backgroundColor: string;
-  textColor: string;
   borderColor: string;
   borderWidth: number;
-  borderRadius: number;
+  borderRadius: string;
   paddingX: number;
   paddingY: number;
   fontSize: number;
