@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonPreviewProps } from "@/types";
 import { cn } from "@/lib/utils";
-import { useEditorStore } from "@/store/editorStore";
+import { useEditorStore } from "@/store/editor-store";
 
 const ButtonPreview = ({
   styles,
@@ -77,7 +77,7 @@ const ButtonPreview = ({
       backgroundColor: isHovered
         ? parseColor(
             themeState[mode].destructive,
-            styles.hoverBackgroundOpacity / 100,
+            styles.hoverBackgroundOpacity / 100
           )
         : themeState[mode].destructive,
     },
@@ -130,8 +130,10 @@ const ButtonPreview = ({
     paddingBottom: `${styles.paddingY}px`,
     // Add box shadow only if opacity > 0
     ...(styles.shadowOpacity > 0 && {
-      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(
-        styles.shadowOpacity * 255,
+      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${
+        styles.shadowBlur
+      }px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(
+        styles.shadowOpacity * 255
       )
         .toString(16)
         .padStart(2, "0")}`,
@@ -153,7 +155,7 @@ const ButtonPreview = ({
         baseClasses,
         sizeClasses[size],
         className,
-        disabled && "opacity-50 cursor-not-allowed",
+        disabled && "opacity-50 cursor-not-allowed"
       )}
       type="button"
       style={customStyles}

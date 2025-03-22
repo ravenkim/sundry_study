@@ -1,9 +1,9 @@
 import { EditorConfig } from "@/types/editor";
 import { ButtonEditorState } from "@/types/editor";
 import { ButtonVariant, ButtonSize } from "@/types/index";
-import ControlPanel from "@/components/editor/ControlPanel";
-import PreviewPanel from "@/components/editor/PreviewPanel";
-import { generateButtonComponentCode } from "@/utils/buttonStyleGenerator";
+import ControlPanel from "@/components/editor/control-panel";
+import PreviewPanel from "@/components/editor/preview-panel";
+import { generateButtonComponentCode } from "@/utils/button-style-generator";
 import defaultButtonStyles from "@/config/button";
 import { ButtonStyles } from "@/types/button";
 
@@ -28,14 +28,14 @@ export const buttonEditorConfig: EditorConfig = {
         return generateButtonComponentCode(
           buttonState.styles,
           buttonState.variant,
-          buttonState.size,
+          buttonState.size
         );
       }
       // Fallback for direct style objects (legacy support)
       return generateButtonComponentCode(
         styles as ButtonStyles,
         "default",
-        "default",
+        "default"
       );
     },
   },

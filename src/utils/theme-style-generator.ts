@@ -1,12 +1,12 @@
 import { ThemeStyles } from "@/types/theme";
 import { ButtonStyles } from "@/types/button";
-import { colorFormatter } from "./colorConverter";
+import { colorFormatter } from "./color-converter";
 import { ColorFormat } from "../types";
 
 export const generateThemeCode = (
   styles: ButtonStyles | ThemeStyles,
   colorFormat: ColorFormat = "hsl",
-  tailwindVersion: "3" | "4" = "3",
+  tailwindVersion: "3" | "4" = "3"
 ): string => {
   if (!("light" in styles) || !("dark" in styles)) {
     throw new Error("Invalid theme styles: missing light or dark mode");
@@ -33,7 +33,9 @@ export const generateThemeCode = (
   --accent: ${formatColor(themeStyles.light.accent)};
   --accent-foreground: ${formatColor(themeStyles.light["accent-foreground"])};
   --destructive: ${formatColor(themeStyles.light.destructive)};
-  --destructive-foreground: ${formatColor(themeStyles.light["destructive-foreground"])};
+  --destructive-foreground: ${formatColor(
+    themeStyles.light["destructive-foreground"]
+  )};
   --border: ${formatColor(themeStyles.light.border)};
   --input: ${formatColor(themeStyles.light.input)};
   --ring: ${formatColor(themeStyles.light.ring)};
@@ -45,9 +47,13 @@ export const generateThemeCode = (
   --sidebar: ${formatColor(themeStyles.light.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.light["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.light["sidebar-primary"])};
-  --sidebar-primary-foreground: ${formatColor(themeStyles.light["sidebar-primary-foreground"])};
+  --sidebar-primary-foreground: ${formatColor(
+    themeStyles.light["sidebar-primary-foreground"]
+  )};
   --sidebar-accent: ${formatColor(themeStyles.light["sidebar-accent"])};
-  --sidebar-accent-foreground: ${formatColor(themeStyles.light["sidebar-accent-foreground"])};
+  --sidebar-accent-foreground: ${formatColor(
+    themeStyles.light["sidebar-accent-foreground"]
+  )};
   --sidebar-border: ${formatColor(themeStyles.light["sidebar-border"])};
   --sidebar-ring: ${formatColor(themeStyles.light["sidebar-ring"])};
 
@@ -74,7 +80,9 @@ export const generateThemeCode = (
   --accent: ${formatColor(themeStyles.dark.accent)};
   --accent-foreground: ${formatColor(themeStyles.dark["accent-foreground"])};
   --destructive: ${formatColor(themeStyles.dark.destructive)};
-  --destructive-foreground: ${formatColor(themeStyles.dark["destructive-foreground"])};
+  --destructive-foreground: ${formatColor(
+    themeStyles.dark["destructive-foreground"]
+  )};
   --border: ${formatColor(themeStyles.dark.border)};
   --input: ${formatColor(themeStyles.dark.input)};
   --ring: ${formatColor(themeStyles.dark.ring)};
@@ -86,9 +94,13 @@ export const generateThemeCode = (
   --sidebar: ${formatColor(themeStyles.dark.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.dark["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.dark["sidebar-primary"])};
-  --sidebar-primary-foreground: ${formatColor(themeStyles.dark["sidebar-primary-foreground"])};
+  --sidebar-primary-foreground: ${formatColor(
+    themeStyles.dark["sidebar-primary-foreground"]
+  )};
   --sidebar-accent: ${formatColor(themeStyles.dark["sidebar-accent"])};
-  --sidebar-accent-foreground: ${formatColor(themeStyles.dark["sidebar-accent-foreground"])};
+  --sidebar-accent-foreground: ${formatColor(
+    themeStyles.dark["sidebar-accent-foreground"]
+  )};
   --sidebar-border: ${formatColor(themeStyles.dark["sidebar-border"])};
   --sidebar-ring: ${formatColor(themeStyles.dark["sidebar-ring"])};
 }
@@ -154,7 +166,9 @@ export const generateThemeCode = (
   --accent: ${formatColor(themeStyles.light.accent)};
   --accent-foreground: ${formatColor(themeStyles.light["accent-foreground"])};
   --destructive: ${formatColor(themeStyles.light.destructive)};
-  --destructive-foreground: ${formatColor(themeStyles.light["destructive-foreground"])};
+  --destructive-foreground: ${formatColor(
+    themeStyles.light["destructive-foreground"]
+  )};
   --border: ${formatColor(themeStyles.light.border)};
   --input: ${formatColor(themeStyles.light.input)};
   --ring: ${formatColor(themeStyles.light.ring)};
@@ -166,9 +180,13 @@ export const generateThemeCode = (
   --sidebar: ${formatColor(themeStyles.light.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.light["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.light["sidebar-primary"])};
-  --sidebar-primary-foreground: ${formatColor(themeStyles.light["sidebar-primary-foreground"])};
+  --sidebar-primary-foreground: ${formatColor(
+    themeStyles.light["sidebar-primary-foreground"]
+  )};
   --sidebar-accent: ${formatColor(themeStyles.light["sidebar-accent"])};
-  --sidebar-accent-foreground: ${formatColor(themeStyles.light["sidebar-accent-foreground"])};
+  --sidebar-accent-foreground: ${formatColor(
+    themeStyles.light["sidebar-accent-foreground"]
+  )};
   --sidebar-border: ${formatColor(themeStyles.light["sidebar-border"])};
   --sidebar-ring: ${formatColor(themeStyles.light["sidebar-ring"])};
 
@@ -195,7 +213,9 @@ export const generateThemeCode = (
   --accent: ${formatColor(themeStyles.dark.accent)};
   --accent-foreground: ${formatColor(themeStyles.dark["accent-foreground"])};
   --destructive: ${formatColor(themeStyles.dark.destructive)};
-  --destructive-foreground: ${formatColor(themeStyles.dark["destructive-foreground"])};
+  --destructive-foreground: ${formatColor(
+    themeStyles.dark["destructive-foreground"]
+  )};
   --border: ${formatColor(themeStyles.dark.border)};
   --input: ${formatColor(themeStyles.dark.input)};
   --ring: ${formatColor(themeStyles.dark.ring)};
@@ -207,9 +227,13 @@ export const generateThemeCode = (
   --sidebar: ${formatColor(themeStyles.dark.sidebar)};
   --sidebar-foreground: ${formatColor(themeStyles.dark["sidebar-foreground"])};
   --sidebar-primary: ${formatColor(themeStyles.dark["sidebar-primary"])};
-  --sidebar-primary-foreground: ${formatColor(themeStyles.dark["sidebar-primary-foreground"])};
+  --sidebar-primary-foreground: ${formatColor(
+    themeStyles.dark["sidebar-primary-foreground"]
+  )};
   --sidebar-accent: ${formatColor(themeStyles.dark["sidebar-accent"])};
-  --sidebar-accent-foreground: ${formatColor(themeStyles.dark["sidebar-accent-foreground"])};
+  --sidebar-accent-foreground: ${formatColor(
+    themeStyles.dark["sidebar-accent-foreground"]
+  )};
   --sidebar-border: ${formatColor(themeStyles.dark["sidebar-border"])};
   --sidebar-ring: ${formatColor(themeStyles.dark["sidebar-ring"])};
 }`;

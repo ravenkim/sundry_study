@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { ThemeEditorControlsProps } from "@/types/theme";
-import ControlSection from "./ControlSection";
-import ColorPicker from "./ColorPicker";
-import ResetButton from "./ResetButton";
+import ControlSection from "./control-section";
+import ColorPicker from "./color-picker";
+import ResetButton from "./reset-button";
 import { useLocation } from "react-router-dom";
 import { ScrollArea } from "../ui/scroll-area";
 import ThemePresetSelect from "./theme-preset-select";
@@ -13,7 +13,7 @@ import {
   sansSerifFonts,
   serifFonts,
 } from "../../utils/theme-fonts";
-import { useEditorStore } from "../../store/editorStore";
+import { useEditorStore } from "../../store/editor-store";
 import { Label } from "../ui/label";
 import { SliderWithInput } from "./slider-with-input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
@@ -54,7 +54,7 @@ const ThemeControlPanel = ({
   const updateStyle = React.useCallback(
     <K extends keyof typeof currentStyles>(
       key: K,
-      value: (typeof currentStyles)[K],
+      value: (typeof currentStyles)[K]
     ) => {
       // apply common styles to both light and dark modes
       if (
@@ -79,7 +79,7 @@ const ThemeControlPanel = ({
         },
       });
     },
-    [onChange, styles, currentMode, currentStyles],
+    [onChange, styles, currentMode, currentStyles]
   );
 
   // Ensure we have valid styles for the current mode

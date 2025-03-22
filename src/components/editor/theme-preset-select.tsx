@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ThemePreset } from "../../types/theme";
-import { useEditorStore } from "../../store/editorStore";
+import { useEditorStore } from "../../store/editor-store";
 import { getPresetThemeStyles } from "../../utils/theme-presets";
 import { Button } from "../ui/button";
 import { Shuffle } from "lucide-react";
