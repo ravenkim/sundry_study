@@ -1,7 +1,6 @@
 import React from "react";
 import { ControlPanelProps } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,13 +10,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ControlSection from "./ControlSection";
-import ColorPicker from "./ColorPicker";
-import ResetButton from "./ResetButton";
+import ControlSection from "./control-section";
+import ColorPicker from "./color-picker";
+import ResetButton from "./reset-button";
 import { Link } from "react-router-dom";
 import { ExternalLink, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEditorStore } from "@/store/editorStore";
+import { useEditorStore } from "@/store/editor-store";
 import { ScrollArea } from "../ui/scroll-area";
 import { SliderWithInput } from "./slider-with-input";
 
@@ -103,7 +102,7 @@ const ControlPanel = ({
     <K extends keyof typeof styles>(key: K, value: (typeof styles)[K]) => {
       onChange({ ...styles, [key]: value });
     },
-    [onChange, styles],
+    [onChange, styles]
   );
 
   const themeState = useEditorStore((state) => state.themeState);

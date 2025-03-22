@@ -1,12 +1,12 @@
 import React from "react";
 import { EditorPreviewProps } from "@/types/editor";
-import ButtonPreview from "./ButtonPreview";
+import ButtonPreview from "./button-preview";
 import { ButtonEditorState } from "@/types/editor";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Info } from "lucide-react";
 
 const PreviewPanel: React.FC<EditorPreviewProps & Partial<ButtonEditorState>> = (
-  props,
+  props
 ) => {
   // If this is a button editor state with styles, variant, and size
   if ("styles" in props) {

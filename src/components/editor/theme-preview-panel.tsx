@@ -24,7 +24,7 @@ import {
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
-const DemoCards = lazy(() => import("@/components/examples/Cards"));
+const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 
 const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {

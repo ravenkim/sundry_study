@@ -1,7 +1,7 @@
 import { EditorConfig } from "@/types/editor";
-import ThemeControlPanel from "@/components/editor/ThemeControlPanel";
-import ThemePreviewPanel from "@/components/editor/ThemePreviewPanel";
-import { generateThemeCode } from "@/utils/themeStyleGenerator";
+import ThemeControlPanel from "@/components/editor/theme-control-panel";
+import ThemePreviewPanel from "@/components/editor/theme-preview-panel";
+import { generateThemeCode } from "@/utils/theme-style-generator";
 import { defaultThemeState } from "@/config/theme";
 
 export const themeEditorConfig: EditorConfig = {
