@@ -1,6 +1,20 @@
-# tweakcn
+<div align="center">
+  <h1>tweakcn.com</h1>
+</div>
 
-A Powerful Visual Theme Editor for shadcn/ui components with Tailwind CSS support. Comes with Beautiful theme presets to get started.
+<div align="center">
+  <a href="https://discord.gg/qYkxuJyd" target="_blank">
+    <img alt="Discord" src="https://img.shields.io/discord/1353416868769173576?style=for-the-badge&logo=discord&logoColor=%23ffffff">
+  </a>
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/jnsahaj/tweakcn?style=for-the-badge&logo=github">
+  <a href="https://x.com/iamsahaj_xyz">
+    <img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2Fiamsahaj_xyz&style=for-the-badge&logo=x&label=%40iamsahaj_xyz&color=%2300000000" />
+  </a>
+</div>
+
+<br />
+
+**tweakcn** is a powerful Visual Theme Editor for tailwind CSS & shadcn/ui components. It comes with Beautiful theme presets to get started, while aimming to offer advanced customisation for each aspect of your UI
 
 ![tweakcn.com](public/og-image.png)
 
