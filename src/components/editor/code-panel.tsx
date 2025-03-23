@@ -1,6 +1,7 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Download } from "lucide-react";
 import { EditorConfig } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { ThemeStyles } from "../../types/theme";
@@ -52,6 +53,26 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
     } catch (err) {
       console.error("Failed to copy text:", err);
     }
+  };
+
+  const downloadFile = () => {
+    const fileName = getFileName();
+    const blob = new Blob([code], { type: "text/plain" });
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(href);
+    
+    posthog.capture("DOWNLOAD_CODE", {
+      editorType,
+      preset,
+      colorFormat,
+      tailwindVersion,
+    });
   };
 
   const getFileName = () => {
@@ -108,25 +129,37 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
         <div className="flex-none flex justify-between items-center px-4 py-2 border-b bg-muted/50">
           <span className="text-sm font-medium">{getFileName()}</span>
 
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => copyToClipboard(code)}
-            className="h-8 px-2"
-            aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
-          >
-            {copied ? (
-              <>
-                <Check className="h-4 w-4 mr-2" />
-                <span className="sr-only md:not-sr-only">Copy</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4 mr-2" />
-                <span className="sr-only md:not-sr-only">Copy</span>
-              </>
-            )}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => copyToClipboard(code)}
+              className="h-8 px-2"
+              aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
+            >
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4 mr-2" />
+                  <span className="sr-only md:not-sr-only">Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4 mr-2" />
+                  <span className="sr-only md:not-sr-only">Copy</span>
+                </>
+              )}
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={downloadFile}
+              className="h-8 px-2"
+              aria-label="Download file"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              <span className="sr-only md:not-sr-only">Download</span>
+            </Button>
+          </div>
         </div>
 
         <ScrollArea className="flex-1 relative">
