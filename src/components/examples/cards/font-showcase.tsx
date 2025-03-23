@@ -1,7 +1,12 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
-export function FontShowcase() {
+export function DemoFontShowcase() {
   return (
     <Card>
       <CardHeader>
