@@ -75,7 +75,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       {/* Desktop Layout */}
       <div className="h-full hidden md:block">
         <ResizablePanelGroup direction="horizontal" className="h-full">
-          <ResizablePanel defaultSize={25} minSize={20} maxSize={40}>
+          <ResizablePanel defaultSize={30} minSize={20} maxSize={40}>
             <div className="h-full p-4">
               <Controls
                 styles={state.styles}
@@ -89,7 +89,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             </div>
           </ResizablePanel>
           <ResizableHandle />
-          <ResizablePanel defaultSize={75}>
+          <ResizablePanel defaultSize={70}>
             <div className="h-full flex flex-col">
               <div className="flex-1 min-h-0">
                 <Collapsible
