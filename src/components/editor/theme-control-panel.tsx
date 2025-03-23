@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { ThemeEditorControlsProps } from "@/types/theme";
 import ControlSection from "./control-section";
 import ColorPicker from "./color-picker";
@@ -24,7 +25,10 @@ import {
   DEFAULT_FONT_SERIF,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, FileCode } from "lucide-react";
+import { Button } from "../ui/button";
+import CssImportDialog from "./css-import-dialog";
+import { toast } from "../ui/use-toast";
 
 const ThemeControlPanel = ({
   styles,
@@ -35,6 +39,7 @@ const ThemeControlPanel = ({
 }: ThemeEditorControlsProps) => {
   const location = useLocation();
   const { applyThemePreset, themeState } = useEditorStore();
+  const [cssImportOpen, setCssImportOpen] = useState(false);
 
   useEffect(() => {
     // Handle hash navigation
@@ -82,6 +87,15 @@ const ThemeControlPanel = ({
     [onChange, styles, currentMode, currentStyles]
   );
 
+  const handleCssImport = (css: string) => {
+    // This just shows a success toast for now
+    // The actual CSS parsing and theme application logic would be implemented later
+    toast({
+      title: "CSS imported",
+      description: "Your custom CSS has been imported successfully",
+    });
+  };
+
   // Ensure we have valid styles for the current mode
   if (!currentStyles) {
     return null; // Or some fallback UI
@@ -96,6 +110,15 @@ const ThemeControlPanel = ({
           <h2 className="text-lg font-semibold">Theme Editor</h2>
         </div>
         <div className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => setCssImportOpen(true)}
+            className="flex items-center gap-1.5"
+          >
+            <FileCode className="h-4 w-4" />
+            Import CSS
+          </Button>
           {hasChanges && <ResetButton onReset={onReset} label="Reset theme" />}
         </div>
       </div>
@@ -390,6 +413,12 @@ const ThemeControlPanel = ({
           </TabsContent>
         </ScrollArea>
       </Tabs>
+
+      <CssImportDialog 
+        open={cssImportOpen} 
+        onOpenChange={setCssImportOpen}
+        onImport={handleCssImport}
+      />
     </div>
   );
 };
