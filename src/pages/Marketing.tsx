@@ -2,11 +2,13 @@
 
 import logo from "@/assets/logo.png"
 import og from "@/assets/og-image.png"
+import Editor from "@/components/editor/Editor"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getEditorConfig } from "@/config/editors"
+import { useEditorStore } from "@/store/editorStore"
 import { motion } from "framer-motion"
 import {
     ArrowRight,
@@ -25,13 +27,24 @@ import {
     Smartphone,
     Sun,
     Users,
-    Wand2,
-    X,
+    X
 } from "lucide-react"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useTheme } from "../components/theme-provider"
 import { getPresetThemeStyles, presets } from "../utils/theme-presets"
-import { useEditorStore } from "@/store/editorStore"
+import DemoCards, { DemoContainer } from "@/components/examples/Cards"
+import { DemoChat } from "@/components/examples/cards/chat"
+import { DemoCookieSettings } from "@/components/examples/cards/cookie-settings"
+import { DemoCreateAccount } from "@/components/examples/cards/create-account"
+import { DemoDatePicker } from "@/components/examples/cards/date-picker"
+import { DemoFontShowcase } from "@/components/examples/cards/font-showcase"
+import { DemoGithub } from "@/components/examples/cards/github-card"
+import { DemoNotifications } from "@/components/examples/cards/notifications"
+import { DemoPaymentMethod } from "@/components/examples/cards/payment-method"
+import { DemoReportAnIssue } from "@/components/examples/cards/report-an-issue"
+import { DemoShareDocument } from "@/components/examples/cards/share-document"
+import { DemoStats } from "@/components/examples/cards/stats"
+import { DemoTeamMembers } from "@/components/examples/cards/team-members"
 const ColorBox = ({ color }: { color: string }) => {
     return (
         <div
@@ -55,6 +68,8 @@ export default function LandingPage() {
         applyThemePreset(presetNames[random]);
     }, [applyThemePreset, presetNames]);
 
+    const editorConfig = getEditorConfig("theme");
+    const Preview = editorConfig.preview;
 
     useEffect(() => {
         setMounted(true)
@@ -134,6 +149,12 @@ export default function LandingPage() {
                     </div>
                     <nav className="hidden md:flex gap-8">
                         <a
+                            href="#examples"
+                            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                            Examples
+                        </a>
+                        <a
                             href="#features"
                             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                         >
@@ -144,12 +165,6 @@ export default function LandingPage() {
                             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                         >
                             How It Works
-                        </a>
-                        <a
-                            href="#examples"
-                            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                        >
-                            Examples
                         </a>
                         <a
                             href="#roadmap"
@@ -196,14 +211,14 @@ export default function LandingPage() {
                         className="md:hidden absolute top-16 inset-x-0 bg-background/95 backdrop-blur-lg border-b"
                     >
                         <div className="container py-4 flex flex-col gap-4">
+                            <a href="#examples" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                                Example
+                            </a>
                             <a href="#features" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
                                 Features
                             </a>
                             <a href="#how-it-works" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
                                 How It Works
-                            </a>
-                            <a href="#examples" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
-                                Examples
                             </a>
                             <a href="#roadmap" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
                                 Roadmap
@@ -289,7 +304,7 @@ export default function LandingPage() {
                 </section>
 
                 {/* Theme Preset Selector Section */}
-                <section id="theme-selector" className="w-full py-20 md:py-32">
+                <section id="examples" className="w-full py-20 md:py-32">
                     <div className="container px-4 md:px-6">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -306,6 +321,39 @@ export default function LandingPage() {
                                 Click on a theme below to preview how it transforms the page.
                             </p>
                         </motion.div>
+
+
+                        <div className="@container">
+                            <div className="grid grid-cols-1 @2xl:grid-cols-2 mx-auto gap-4 w-full">
+                                {/* First column */}
+                                <div className="flex flex-col gap-4 max-w-lg mx-auto">
+                                    <DemoContainer>
+                                        <DemoStats />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoCreateAccount />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoGithub />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoCookieSettings />
+                                    </DemoContainer>
+                                    
+                                </div>
+
+                                {/* Second column */}
+                                <div className="flex flex-col gap-4 max-w-lg mx-auto">
+                                    <DemoContainer>
+                                        <DemoReportAnIssue />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoPaymentMethod />
+                                    </DemoContainer>
+                                    
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Theme Selector Buttons */}
                         <div className="flex flex-wrap justify-center gap-4 mt-8">
