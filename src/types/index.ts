@@ -1,14 +1,5 @@
 import { ButtonStyles } from "./button";
 
-export type ButtonVariant =
-  | "default"
-  | "secondary"
-  | "destructive"
-  | "outline"
-  | "ghost"
-  | "link";
-export type ButtonSize = "default" | "sm" | "lg" | "icon";
-
 export type ControlSectionProps = {
   title: string;
   children: React.ReactNode;
@@ -49,24 +40,19 @@ export type ControlPanelProps = {
 
 export type PreviewPanelProps = {
   styles: ButtonStyles;
-  variant: ButtonVariant;
-  size: ButtonSize;
 };
 
 export type CodePanelProps = {
   styles: ButtonStyles;
-  variant: ButtonVariant;
-  size: ButtonSize;
 };
 
 export type ButtonPreviewProps = {
   styles: ButtonStyles;
-  variant: ButtonVariant;
-  size: ButtonSize;
   label?: string;
   className?: string;
   disabled?: boolean;
   hover?: boolean;
+  size?: "default" | "sm" | "lg" | "icon";
 };
 
 export type ReadOnlyColorDisplayProps = {

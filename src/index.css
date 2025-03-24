@@ -51,3 +51,8 @@
 * {
   border-color: var(--color-border);
 }
+
+body {
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+}

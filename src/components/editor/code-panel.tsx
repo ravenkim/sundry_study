@@ -13,6 +13,8 @@ import {
   SelectItem,
 } from "../ui/select";
 import { ButtonStyles } from "@/types/button";
+import { usePostHog } from "posthog-js/react";
+import { useEditorStore } from "@/store/editor-store";
 
 interface CodePanelProps {
   config: EditorConfig;
@@ -23,14 +25,30 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
   const { type: editorType } = config;
   const [colorFormat, setColorFormat] = useState<ColorFormat>("oklch");
   const [tailwindVersion, setTailwindVersion] = useState<"3" | "4">("4");
-  const code = config.codeGenerator.generateComponentCode(styles, colorFormat, tailwindVersion);
+  const code = config.codeGenerator.generateComponentCode(
+    styles,
+    colorFormat,
+    tailwindVersion
+  );
   const [copied, setCopied] = useState(false);
+  const posthog = usePostHog();
+  const preset = useEditorStore((state) => state.themeState.preset);
+
+  const captureCopyEvent = () => {
+    posthog.capture("COPY_CODE", {
+      editorType,
+      preset,
+      colorFormat,
+      tailwindVersion,
+    });
+  };
 
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      captureCopyEvent();
     } catch (err) {
       console.error("Failed to copy text:", err);
     }
@@ -57,8 +75,8 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
           <Select
             value={tailwindVersion}
             onValueChange={(value: "3" | "4") => {
-              setTailwindVersion(value)
-              setColorFormat(value === "4" ? "oklch" : "hsl")
+              setTailwindVersion(value);
+              setColorFormat(value === "4" ? "oklch" : "hsl");
             }}
           >
             <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-muted/50 outline-hidden border-none gap-1">
@@ -83,7 +101,6 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
               <SelectItem value="hex">hex</SelectItem>
             </SelectContent>
           </Select>
-
         </div>
       )}
 
@@ -91,26 +108,27 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
         <div className="flex-none flex justify-between items-center px-4 py-2 border-b bg-muted/50">
           <span className="text-sm font-medium">{getFileName()}</span>
 
-
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => copyToClipboard(code)}
-            className="h-8 px-2"
-            aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
-          >
-            {copied ? (
-              <>
-                <Check className="h-4 w-4 mr-2" />
-                <span className="sr-only md:not-sr-only">Copy</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4 mr-2" />
-                <span className="sr-only md:not-sr-only">Copy</span>
-              </>
-            )}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => copyToClipboard(code)}
+              className="h-8"
+              aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
+            >
+              {copied ? (
+                <>
+                  <Check className="size-4" />
+                  <span className="sr-only md:not-sr-only">Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="size-4" />
+                  <span className="sr-only md:not-sr-only">Copy</span>
+                </>
+              )}
+            </Button>
+          </div>
         </div>
 
         <ScrollArea className="flex-1 relative">

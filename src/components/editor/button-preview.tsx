@@ -1,24 +1,19 @@
 import React from "react";
 import { ButtonPreviewProps } from "@/types";
-import { cn } from "@/lib/utils";
-import { useEditorStore } from "@/store/editorStore";
+import { useEditorStore } from "@/store/editor-store";
+import { Button } from "../ui/button";
 
 const ButtonPreview = ({
   styles,
-  variant,
-  size,
   label = "Button",
   disabled = false,
-  className,
   hover = false,
+  size = "default",
 }: ButtonPreviewProps) => {
   const [isHovered, setIsHovered] = React.useState(hover);
-  const themeState = useEditorStore((state) => state.themeState?.styles);
-  const mode = "light"; // You might want to make this dynamic based on your app's theme mode
-
-  // Base Tailwind classes (removing color classes as we'll apply them via style)
-  const baseClasses =
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50";
+  const editorState = useEditorStore((state) => state.themeState);
+  const themeState = editorState?.styles;
+  const mode = editorState?.currentMode;
 
   const parseColor = (color: string, opacity: number) => {
     // Handle hex colors
@@ -77,7 +72,7 @@ const ButtonPreview = ({
       backgroundColor: isHovered
         ? parseColor(
             themeState[mode].destructive,
-            styles.hoverBackgroundOpacity / 100,
+            styles.hoverBackgroundOpacity / 100
           )
         : themeState[mode].destructive,
     },
@@ -107,17 +102,9 @@ const ButtonPreview = ({
     },
   };
 
-  // Size classes without padding (we'll apply custom padding from styles)
-  const sizeClasses = {
-    default: "h-10",
-    sm: "h-9 rounded-md text-sm",
-    lg: "h-11 rounded-md text-lg",
-    icon: "h-10 w-10",
-  };
-
   // Combine custom styles with variant styles
   const customStyles = {
-    borderRadius: `${styles.borderRadius}px`,
+    borderRadius: `${styles.borderRadius}`,
     fontSize: `${styles.fontSize}px`,
     fontWeight: styles.fontWeight,
     letterSpacing: `${styles.letterSpacing}em`,
@@ -130,8 +117,10 @@ const ButtonPreview = ({
     paddingBottom: `${styles.paddingY}px`,
     // Add box shadow only if opacity > 0
     ...(styles.shadowOpacity > 0 && {
-      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${styles.shadowBlur}px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(
-        styles.shadowOpacity * 255,
+      boxShadow: `${styles.shadowOffsetX}px ${styles.shadowOffsetY}px ${
+        styles.shadowBlur
+      }px ${styles.shadowSpread}px ${styles.shadowColor}${Math.round(
+        styles.shadowOpacity * 255
       )
         .toString(16)
         .padStart(2, "0")}`,
@@ -142,21 +131,12 @@ const ButtonPreview = ({
       borderColor: isHovered ? styles.hoverBorderColor : styles.borderColor,
     }),
     transition: `all ${styles.transitionDuration}ms ${styles.transitionEasing}`,
-    ...variantStyles[variant],
-    // Move color after variantStyles to ensure it takes precedence
-    color: isHovered ? styles.hoverTextColor : variantStyles[variant].color,
   };
 
   return (
-    <button
-      className={cn(
-        baseClasses,
-        sizeClasses[size],
-        className,
-        disabled && "opacity-50 cursor-not-allowed",
-      )}
-      type="button"
+    <Button
       style={customStyles}
+      size={size}
       onMouseEnter={() => {
         if (!disabled) setIsHovered(true);
       }}
@@ -165,7 +145,7 @@ const ButtonPreview = ({
       }}
     >
       {label}
-    </button>
+    </Button>
   );
 };
 

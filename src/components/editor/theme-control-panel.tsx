@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { ThemeEditorControlsProps } from "@/types/theme";
-import ControlSection from "./ControlSection";
-import ColorPicker from "./ColorPicker";
-import ResetButton from "./ResetButton";
-import { useLocation } from "react-router-dom";
+import ControlSection from "./control-section";
+import ColorPicker from "./color-picker";
+import ResetButton from "./reset-button";
 import { ScrollArea } from "../ui/scroll-area";
 import ThemePresetSelect from "./theme-preset-select";
 import { presets } from "../../utils/theme-presets";
@@ -13,7 +12,7 @@ import {
   sansSerifFonts,
   serifFonts,
 } from "../../utils/theme-fonts";
-import { useEditorStore } from "../../store/editorStore";
+import { useEditorStore } from "../../store/editor-store";
 import { Label } from "../ui/label";
 import { SliderWithInput } from "./slider-with-input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
@@ -24,7 +23,11 @@ import {
   DEFAULT_FONT_SERIF,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, FileCode } from "lucide-react";
+import { Button } from "../ui/button";
+import CssImportDialog from "./css-import-dialog";
+import { toast } from "../ui/use-toast";
+import { parseCssInput } from "../../utils/parse-css-input";
 
 const ThemeControlPanel = ({
   styles,
@@ -33,28 +36,15 @@ const ThemeControlPanel = ({
   onReset,
   hasChanges = false,
 }: ThemeEditorControlsProps) => {
-  const location = useLocation();
   const { applyThemePreset, themeState } = useEditorStore();
-
-  useEffect(() => {
-    // Handle hash navigation
-    if (location.hash) {
-      const element = document.querySelector(location.hash);
-      if (element) {
-        // Add a small delay to ensure the sections are expanded
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-      }
-    }
-  }, [location.hash]);
+  const [cssImportOpen, setCssImportOpen] = useState(false);
 
   const currentStyles = styles?.[currentMode];
 
   const updateStyle = React.useCallback(
     <K extends keyof typeof currentStyles>(
       key: K,
-      value: (typeof currentStyles)[K],
+      value: (typeof currentStyles)[K]
     ) => {
       // apply common styles to both light and dark modes
       if (
@@ -79,8 +69,25 @@ const ThemeControlPanel = ({
         },
       });
     },
-    [onChange, styles, currentMode, currentStyles],
+    [onChange, styles, currentMode, currentStyles]
   );
+
+  const handleCssImport = (css: string) => {
+    // This just shows a success toast for now
+    const { lightColors, darkColors } = parseCssInput(css);
+    console.log(lightColors, darkColors);
+    onChange({
+      ...styles,
+      light: { ...styles.light, ...lightColors },
+      dark: { ...styles.dark, ...darkColors },
+    });
+
+    // The actual CSS parsing and theme application logic would be implemented later
+    toast({
+      title: "CSS imported",
+      description: "Your custom CSS has been imported successfully",
+    });
+  };
 
   // Ensure we have valid styles for the current mode
   if (!currentStyles) {
@@ -95,15 +102,21 @@ const ThemeControlPanel = ({
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-semibold">Theme Editor</h2>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-0">
           {hasChanges && <ResetButton onReset={onReset} label="Reset theme" />}
+          <Button
+            variant="link"
+            size="sm"
+            onClick={() => setCssImportOpen(true)}
+            className="text-muted-foreground hover:text-foreground p-0"
+          >
+            <FileCode className="size-4" />
+            Import
+          </Button>
         </div>
       </div>
 
       <div className="mb-6 ml-1">
-        <Label htmlFor="theme-preset" className="text-xs mb-1.5 block">
-          Preset
-        </Label>
         <ThemePresetSelect
           presets={presets}
           currentPreset={themeState.preset}
@@ -390,6 +403,12 @@ const ThemeControlPanel = ({
           </TabsContent>
         </ScrollArea>
       </Tabs>
+
+      <CssImportDialog
+        open={cssImportOpen}
+        onOpenChange={setCssImportOpen}
+        onImport={handleCssImport}
+      />
     </div>
   );
 };

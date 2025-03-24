@@ -1,6 +1,6 @@
 import { createContext, useContext, useLayoutEffect } from "react";
-import { useEditorStore } from "../store/editorStore";
-import { colorFormatter } from "../utils/colorConverter";
+import { useEditorStore } from "../store/editor-store";
+import { colorFormatter } from "../utils/color-converter";
 
 type Theme = "dark" | "light";
 
@@ -24,7 +24,10 @@ const initialState: ThemeProviderState = {
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 function applyStyleToElement(element: HTMLElement, key: string, value: string) {
-  element.setAttribute(`style`, `${element.getAttribute("style") || ""}--${key}: ${value};`);
+  element.setAttribute(
+    `style`,
+    `${element.getAttribute("style") || ""}--${key}: ${value};`
+  );
 }
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {

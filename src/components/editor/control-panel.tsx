@@ -1,9 +1,7 @@
 import React from "react";
 import { ControlPanelProps } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,13 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ControlSection from "./ControlSection";
-import ColorPicker from "./ColorPicker";
-import ResetButton from "./ResetButton";
+import ControlSection from "./control-section";
+import ColorPicker from "./color-picker";
+import ResetButton from "./reset-button";
 import { Link } from "react-router-dom";
-import { ExternalLink, Palette } from "lucide-react";
+import { Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEditorStore } from "@/store/editorStore";
+import { useEditorStore } from "@/store/editor-store";
 import { ScrollArea } from "../ui/scroll-area";
 import { SliderWithInput } from "./slider-with-input";
 
@@ -103,12 +101,14 @@ const ControlPanel = ({
     <K extends keyof typeof styles>(key: K, value: (typeof styles)[K]) => {
       onChange({ ...styles, [key]: value });
     },
-    [onChange, styles],
+    [onChange, styles]
   );
 
   const themeState = useEditorStore((state) => state.themeState);
-  const mode = "light";
+  const mode = themeState?.currentMode;
   const themeStyles = themeState?.styles[mode];
+
+  const radius = parseFloat(styles?.borderRadius?.replace("rem", ""));
 
   return (
     <div className="h-full pb-4">
@@ -209,10 +209,12 @@ const ControlPanel = ({
                 label="Border Width"
               />
               <SliderWithInput
-                value={styles.borderRadius}
-                onChange={(value) => updateStyle("borderRadius", value)}
+                value={radius}
+                onChange={(value) => updateStyle("borderRadius", `${value}rem`)}
                 min={0}
-                max={30}
+                max={5}
+                step={0.025}
+                unit="rem"
                 label="Border Radius"
               />
             </ControlSection>
@@ -316,10 +318,10 @@ const ControlPanel = ({
                 label="Hover Background Opacity"
                 unit="%"
               />
-              <ColorPicker
-                color={styles.hoverTextColor}
-                onChange={(color) => updateStyle("hoverTextColor", color)}
+              <ReadOnlyColorDisplay
+                color={themeStyles?.["primary-foreground"]}
                 label="Hover Text"
+                linkTo="/editor/theme"
               />
               <ColorPicker
                 color={styles.hoverBorderColor}
