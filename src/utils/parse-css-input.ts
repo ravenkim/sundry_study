@@ -1,4 +1,5 @@
 import { ThemeStyleProps } from "@/types/theme";
+import { colorFormatter } from "./color-converter";
 
 export const variableNames = [
   "background",
@@ -31,6 +32,8 @@ export const variableNames = [
   "font-mono",
 ];
 
+const nonColorVariables = ["font-sans", "font-serif", "font-mono", "radius"];
+
 const VARIABLE_PREFIX = "--";
 
 export const parseCssInput = (input: string) => {
@@ -62,7 +65,7 @@ const extractCssBlockContent = (input: string, selector: string): string | null 
 const parseColorVariables = (
   cssContent: string,
   target: ThemeStyleProps,
-  validNames: string[]
+  validNames: string[],
 ) => {
   const variableDeclarations = cssContent.match(/--[^:]+:\s*[^;]+/g) || [];
 
@@ -71,7 +74,14 @@ const parseColorVariables = (
     const cleanName = name.replace(VARIABLE_PREFIX, "");
 
     if (validNames.includes(cleanName)) {
-      target[cleanName] = processColorValue(value);
+      if (nonColorVariables.includes(cleanName)) {
+        target[cleanName] = value;
+        return;
+      }
+
+      const colorValue = processColorValue(value);
+      const formattedValue = colorFormatter(colorValue, "hex");
+      target[cleanName] = formattedValue;
     }
   });
 };
