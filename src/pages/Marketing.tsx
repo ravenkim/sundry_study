@@ -23,6 +23,7 @@ import {
     Paintbrush,
     Palette,
     Repeat,
+    Shuffle,
     Sliders,
     Smartphone,
     Sun,
@@ -45,6 +46,7 @@ import { DemoReportAnIssue } from "@/components/examples/cards/report-an-issue"
 import { DemoShareDocument } from "@/components/examples/cards/share-document"
 import { DemoStats } from "@/components/examples/cards/stats"
 import { DemoTeamMembers } from "@/components/examples/cards/team-members"
+import { Link } from "react-router-dom"
 const ColorBox = ({ color }: { color: string }) => {
     return (
         <div
@@ -68,8 +70,7 @@ export default function LandingPage() {
         applyThemePreset(presetNames[random]);
     }, [applyThemePreset, presetNames]);
 
-    const editorConfig = getEditorConfig("theme");
-    const Preview = editorConfig.preview;
+
 
     useEffect(() => {
         setMounted(true)
@@ -80,7 +81,7 @@ export default function LandingPage() {
                 setIsScrolled(false)
             }
         }
-
+        
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
@@ -143,10 +144,12 @@ export default function LandingPage() {
                 className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${isScrolled ? "bg-background/80 shadow-sm" : "bg-transparent"}`}
             >
                 <div className="container flex h-16 px-4 min-w-full items-center justify-between">
+                    <Link to="/">
                     <div className="flex items-center gap-2 font-bold">
                         <img src={logo} alt="tweakcn" className="h-8 w-8 mr-1 md:mr-2" title="Nothing here yet..." />
                         <span>tweakcn</span>
                     </div>
+                    </Link>
                     <nav className="hidden md:flex gap-8">
                         <a
                             href="#examples"
@@ -179,7 +182,7 @@ export default function LandingPage() {
                             FAQ
                         </a>
                     </nav>
-                    <div className="hidden md:flex gap-4 items-center">
+                    <div className="hidden md:flex gap-4 items-center cursor-pointer">
                         <Button variant="secondary" size="icon" onClick={toggleTheme}>
                             {theme === "light" ? (
                                 <Sun className="h-6 w-6" />
@@ -187,13 +190,15 @@ export default function LandingPage() {
                                 <Moon className="h-6 w-6" />
                             )}
                         </Button>
-                        <Button className="rounded-full">
-                            Try It Now
-                            <ChevronRight className="ml-1 size-4" />
-                        </Button>
+                        <Link to="/editor/theme">
+                            <Button className="rounded-full cursor-pointer">
+                                Try It Now
+                                <ChevronRight className="ml-1 size-4" />
+                            </Button>
+                        </Link>
                     </div>
                     <div className="flex items-center gap-4 md:hidden">
-                        <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
+                        <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full cursor-pointer">
                             {mounted && theme === "dark" ? <Sun className="size-[18px]" /> : <Moon className="size-[18px]" />}
                         </Button>
                         <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -227,10 +232,12 @@ export default function LandingPage() {
                                 FAQ
                             </a>
                             <div className="flex flex-col gap-2 pt-2 border-t">
-                                <Button className="rounded-full">
-                                    Try It Now
-                                    <ChevronRight className="ml-1 size-4" />
-                                </Button>
+                                <Link to="/editor/theme">
+                                    <Button className="rounded-full">
+                                        Try It Now
+                                        <ChevronRight className="ml-1 size-4" />
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </motion.div>
@@ -259,13 +266,17 @@ export default function LandingPage() {
                                 components visually and export the code instantly.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Button size="lg" className="rounded-full h-12 px-8">
-                                    Try It Now
-                                    <ArrowRight className="ml-2 size-4" />
-                                </Button>
-                                <Button size="lg" variant="outline" className="rounded-full h-12 px-8">
-                                    View Examples
-                                </Button>
+                                <Link to="/editor/theme">
+                                    <Button size="lg" className="rounded-full h-12 px-8 cursor-pointer">
+                                        Try It Now
+                                        <ArrowRight className="ml-2 size-4" />
+                                    </Button>
+                                </Link>
+                                <a href="#examples">
+                                    <Button size="lg" variant="outline" className="rounded-full h-12 px-8 cursor-pointer">
+                                        View Examples
+                                    </Button>
+                                </a>
                             </div>
                             <div className="flex items-center justify-center gap-4 mt-6 text-sm text-muted-foreground">
                                 <div className="flex items-center gap-1">
@@ -313,9 +324,14 @@ export default function LandingPage() {
                             transition={{ duration: 0.5 }}
                             className="flex flex-col items-center justify-center space-y-4 text-center mb-12"
                         >
-                            <Badge className="rounded-full px-4 py-1.5 text-sm font-medium" variant="secondary">
-                                Theme Presets
-                            </Badge>
+                            <div className="flex items-center justify-center gap-4 mb-4">
+                                <Badge className="rounded-full px-4 py-1.5 text-sm font-medium" variant="secondary">
+                                    Theme Presets
+                                </Badge>
+                                <Badge className="rounded-full px-4 py-1.5 text-sm font-medium cursor-pointer" variant="secondary" onClick={randomize}>
+                                    <Shuffle className="size-5 stroke-1" />
+                                </Badge>
+                            </div>
                             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Preview and Select a Theme</h2>
                             <p className="max-w-[800px] text-muted-foreground md:text-lg">
                                 Click on a theme below to preview how it transforms the page.
@@ -323,9 +339,14 @@ export default function LandingPage() {
                         </motion.div>
 
 
-                        <div className="@container">
-                            <div className="grid grid-cols-1 @2xl:grid-cols-2 mx-auto gap-4 w-full">
-                                {/* First column */}
+                        <div className="@container relative overflow-hidden border rounded-lg p-4 max-h-[60vh] md:max-h-[80vh]" >
+                            <div
+                                className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none z-10"
+                                style={{
+                                    background: "linear-gradient(to bottom, rgba(255,255,255,0), var(--background))",
+                                }}
+                            />
+                            <div className="grid grid-cols-1 @3xl:grid-cols-2 mx-auto gap-4 w-full ">
                                 <div className="flex flex-col gap-4 max-w-lg mx-auto">
                                     <DemoContainer>
                                         <DemoStats />
@@ -339,10 +360,18 @@ export default function LandingPage() {
                                     <DemoContainer>
                                         <DemoCookieSettings />
                                     </DemoContainer>
-                                    
+                                    <DemoContainer>
+                                        <DemoTeamMembers />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoFontShowcase />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoDatePicker />
+                                    </DemoContainer>
                                 </div>
 
-                                {/* Second column */}
+                                {/* Third column */}
                                 <div className="flex flex-col gap-4 max-w-lg mx-auto">
                                     <DemoContainer>
                                         <DemoReportAnIssue />
@@ -350,7 +379,15 @@ export default function LandingPage() {
                                     <DemoContainer>
                                         <DemoPaymentMethod />
                                     </DemoContainer>
-                                    
+                                    <DemoContainer>
+                                        <DemoShareDocument />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoNotifications />
+                                    </DemoContainer>
+                                    <DemoContainer>
+                                        <DemoChat />
+                                    </DemoContainer>
                                 </div>
                             </div>
                         </div>
@@ -366,7 +403,7 @@ export default function LandingPage() {
                                 return (
                                     <Button
                                         key={presetName}
-                                        className={`flex items-center relative border transition-all`}
+                                        className={`flex items-center relative border transition-all cursor-pointer`}
                                         variant="outline"
                                         style={{
                                             backgroundColor: themeStyles.background,
@@ -686,17 +723,21 @@ export default function LandingPage() {
                                 Start customizing your shadcn/ui components today and create a unique look for your application.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                                <Button size="lg" variant="secondary" className="rounded-full h-12 px-8 text-base">
-                                    Try It Now
-                                    <ArrowRight className="ml-2 size-4" />
-                                </Button>
-                                <Button
-                                    size="lg"
-                                    variant="outline"
-                                    className="rounded-full h-12 px-8 text-base bg-transparent border-white text-white hover:bg-white/10"
-                                >
-                                    View on GitHub
-                                </Button>
+                                <Link to="/editor/theme">
+                                    <Button size="lg" variant="secondary" className="rounded-full h-12 px-8 text-base cursor-pointer">
+                                        Try It Now
+                                        <ArrowRight className="ml-2 size-4" />
+                                    </Button>
+                                </Link>
+                                <Link to="https://github.com/jnsahaj/tweakcn">
+                                    <Button
+                                        size="lg"
+                                        variant="outline"
+                                        className="rounded-full h-12 px-8 text-base bg-transparent border-white text-white hover:bg-white/10"
+                                    >
+                                        View on GitHub
+                                    </Button>
+                                </Link>
                             </div>
                             <p className="text-sm text-primary-foreground/80 mt-4">No login required. Free to use. Open source.</p>
                         </motion.div>
@@ -776,18 +817,14 @@ export default function LandingPage() {
                         <div className="space-y-4">
                             <h4 className="text-sm font-bold">Resources</h4>
                             <ul className="space-y-2 text-sm">
+                                
                                 <li>
-                                    <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                                        Documentation
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <a href="https://github.com/jnsahaj/tweakcn" className="text-muted-foreground hover:text-foreground transition-colors">
                                         GitHub
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <a href="https://discord.com/invite/qYkxuJyd" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Discord
                                     </a>
                                 </li>
