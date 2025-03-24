@@ -1,3 +1,5 @@
+import { ThemeStyleProps } from "@/types/theme";
+
 export const variableNames = [
   "background",
   "foreground",
@@ -29,36 +31,56 @@ export const variableNames = [
   "font-mono",
 ];
 
+const VARIABLE_PREFIX = "--";
+
 export const parseCssInput = (input: string) => {
-  const lightColors: Record<string, string> = {};
-  const darkColors: Record<string, string> = {};
+  const lightColors: ThemeStyleProps = {} as ThemeStyleProps;
+  const darkColors: ThemeStyleProps = {} as ThemeStyleProps;
 
   try {
-    const rootMatch = input.match(/:root\s*{([^}]+)}/)?.[1];
-    const darkMatch = input.match(/\.dark\s*{([^}]+)}/)?.[1];
+    const rootContent = extractCssBlockContent(input, ":root");
+    const darkContent = extractCssBlockContent(input, ".dark");
 
-    const parseVars = (str: string, target: Record<string, string>) => {
-      const vars = str.match(/--[^:]+:\s*[^;]+/g) || [];
-      vars.forEach((v) => {
-        const [name, value] = v.split(":").map((s) => s.trim());
-
-        const cleanName = name.replace("--", "");
-        if (variableNames.includes(cleanName)) {
-          // if value starts with a number, add "hsl" to the beginning
-          if (!isNaN(Number(value[0]))) {
-            target[cleanName] = `hsl(${value})`;
-          } else {
-            target[cleanName] = value;
-          }
-        }
-      });
-    };
-
-    if (rootMatch) parseVars(rootMatch, lightColors);
-    if (darkMatch) parseVars(darkMatch, darkColors);
+    if (rootContent) {
+      parseColorVariables(rootContent, lightColors, variableNames);
+    }
+    if (darkContent) {
+      parseColorVariables(darkContent, darkColors, variableNames);
+    }
   } catch (error) {
     console.error("Error parsing CSS input:", error);
   }
 
   return { lightColors, darkColors };
+};
+
+const extractCssBlockContent = (input: string, selector: string): string | null => {
+  const regex = new RegExp(`${escapeRegExp(selector)}\\s*{([^}]+)}`);
+  return input.match(regex)?.[1]?.trim() || null;
+};
+
+const parseColorVariables = (
+  cssContent: string,
+  target: ThemeStyleProps,
+  validNames: string[]
+) => {
+  const variableDeclarations = cssContent.match(/--[^:]+:\s*[^;]+/g) || [];
+
+  variableDeclarations.forEach((declaration) => {
+    const [name, value] = declaration.split(":").map((part) => part.trim());
+    const cleanName = name.replace(VARIABLE_PREFIX, "");
+
+    if (validNames.includes(cleanName)) {
+      target[cleanName] = processColorValue(value);
+    }
+  });
+};
+
+const processColorValue = (value: string): string => {
+  return /^\d/.test(value) ? `hsl(${value})` : value;
+};
+
+// Helper function to escape regex special characters
+const escapeRegExp = (string: string): string => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };

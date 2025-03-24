@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Dialog,
@@ -38,7 +37,9 @@ const CssImportDialog: React.FC<CssImportDialogProps> = ({
       // Here you would add more sophisticated CSS parsing validation
       // For now we'll just do a simple check
       if (!cssText.includes("--") || !cssText.includes(":")) {
-        setError("Invalid CSS format. CSS should contain variable definitions like --primary: #color");
+        setError(
+          "Invalid CSS format. CSS should contain variable definitions like --primary: #color"
+        );
         return;
       }
 
@@ -61,10 +62,10 @@ const CssImportDialog: React.FC<CssImportDialogProps> = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle>Import Custom CSS</DialogTitle>
+          <DialogTitle className="text-foreground">Import Custom CSS</DialogTitle>
           <DialogDescription>
-            Paste your CSS variables below to customize the theme colors.
-            Make sure to include variables like --primary, --background, etc.
+            Paste your CSS file below to customize the theme colors. Make sure
+            to include variables like --primary, --background, etc.
           </DialogDescription>
         </DialogHeader>
 
@@ -77,13 +78,20 @@ const CssImportDialog: React.FC<CssImportDialogProps> = ({
 
         <div className="grid gap-4 py-4">
           <Textarea
-            placeholder=":root {
+            placeholder={`:root {
   --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  /* Add more variables */
-}"
-            className="min-h-[300px] font-mono text-sm"
+  --foreground: oklch(0.52 0.13 144.17);
+  --primary: #3e2723;
+  /* And more */
+}
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: hsl(37.50 36.36% 95.69%);
+  --primary: rgb(46, 125, 50);
+  /* And more */
+}
+  `}
+            className="min-h-[300px] font-mono text-sm text-foreground"
             value={cssText}
             onChange={(e) => {
               setCssText(e.target.value);
@@ -92,7 +100,11 @@ const CssImportDialog: React.FC<CssImportDialogProps> = ({
           />
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={handleClose}>
+          <Button
+            variant="outline"
+            onClick={handleClose}
+            className="text-foreground"
+          >
             Cancel
           </Button>
           <Button onClick={handleImport}>Import</Button>
