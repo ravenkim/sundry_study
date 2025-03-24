@@ -2,12 +2,10 @@
 
 import logo from "@/assets/logo.png"
 import og from "@/assets/og-image.png"
-import Editor from "@/components/editor/Editor"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { getEditorConfig } from "@/config/editors"
 import { useEditorStore } from "@/store/editorStore"
 import { motion } from "framer-motion"
 import {
