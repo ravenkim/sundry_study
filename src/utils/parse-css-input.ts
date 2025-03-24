@@ -32,6 +32,8 @@ export const variableNames = [
   "font-mono",
 ];
 
+const nonColorVariables = ["font-sans", "font-serif", "font-mono", "radius"];
+
 const VARIABLE_PREFIX = "--";
 
 export const parseCssInput = (input: string) => {
@@ -72,6 +74,11 @@ const parseColorVariables = (
     const cleanName = name.replace(VARIABLE_PREFIX, "");
 
     if (validNames.includes(cleanName)) {
+      if (nonColorVariables.includes(cleanName)) {
+        target[cleanName] = value;
+        return;
+      }
+
       const colorValue = processColorValue(value);
       const formattedValue = colorFormatter(colorValue, "hex");
       target[cleanName] = formattedValue;
