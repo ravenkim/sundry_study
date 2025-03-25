@@ -13,25 +13,24 @@ import { useEditorStore } from "@/store/editor-store";
 import { motion } from "motion/react";
 import {
   ArrowRight,
-  BarChart,
   Check,
   ChevronRight,
-  Eye,
+  Code,
   FileCode,
+  Folder,
+  Grid,
   Layers,
   Menu,
   Moon,
   Paintbrush,
+  PaintBucket,
   Palette,
   Repeat,
-  Shuffle,
-  Sliders,
-  Smartphone,
   Sun,
   Users,
   X,
 } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../components/theme-provider";
 import { getPresetThemeStyles, presets } from "../utils/theme-presets";
 import { DemoContainer } from "@/components/examples/demo-cards";
@@ -64,11 +63,7 @@ export default function LandingPage() {
   const [styles, setStyles] = useState({});
   const { themeState, applyThemePreset } = useEditorStore();
   const mode = themeState.currentMode;
-  const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
-  const randomize = useCallback(() => {
-    const random = Math.floor(Math.random() * presetNames.length);
-    applyThemePreset(presetNames[random]);
-  }, [applyThemePreset, presetNames]);
+  const presetNames = Object.keys(presets);
 
   useEffect(() => {
     setMounted(true);
@@ -107,22 +102,10 @@ export default function LandingPage() {
       icon: <Palette className="size-5" />,
     },
     {
-      title: "Button Customization",
-      description:
-        "Full control over button styles including colors, dimensions, typography, and effects.",
-      icon: <Sliders className="size-5" />,
-    },
-    {
       title: "Color Control",
       description:
         "Customize background, text, and border colors with an intuitive color picker interface.",
       icon: <Paintbrush className="size-5" />,
-    },
-    {
-      title: "Dimension Control",
-      description:
-        "Adjust padding, border radius, and other dimensions to match your design system.",
-      icon: <Layers className="size-5" />,
     },
     {
       title: "Typography Settings",
@@ -131,16 +114,24 @@ export default function LandingPage() {
       icon: <FileCode className="size-5" />,
     },
     {
-      title: "State Management",
+      title: "Tailwind v4 & v3 Support",
       description:
-        "Preview and customize hover, focus, and active states for interactive components.",
-      icon: <Eye className="size-5" />,
+        "Seamlessly switch between Tailwind v4 and v3, with support for multiple color formats including OKLCH & HSL.",
+      icon: <Code className="size-5" />,
+    },
+    {
+      title: "Dimension Control",
+      description:
+        "Adjust padding, border radius, and other dimensions to match your design system.",
+      icon: <Layers className="size-5" />,
+    },
+    {
+      title: "Beautiful Theme Presets",
+      description:
+        "Choose from stunning pre-designed themes and customize both light and dark mode colors effortlessly.",
+      icon: <PaintBucket className="size-5" />,
     },
   ];
-
-  const handleStyleChange = (newStyles) => {
-    setStyles(newStyles);
-  };
 
   return (
     <div
@@ -158,7 +149,6 @@ export default function LandingPage() {
                 src={logo}
                 alt="tweakcn"
                 className="h-8 w-8 mr-1 md:mr-2"
-                title="Nothing here yet..."
               />
               <span>tweakcn</span>
             </div>
@@ -314,10 +304,10 @@ export default function LandingPage() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
                 Make Your shadcn/ui Components Stand Out
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
                 A powerful visual theme editor for shadcn/ui components with Tailwind
-                CSS support. Customize your components visually and export the code
-                instantly.
+                CSS support. <span className="hidden md:inline">Customize your components visually and export the code
+                  instantly.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/editor/theme">
@@ -392,13 +382,6 @@ export default function LandingPage() {
                 >
                   Theme Presets
                 </Badge>
-                <Badge
-                  className="rounded-full px-4 py-1.5 text-sm font-medium cursor-pointer"
-                  variant="secondary"
-                  onClick={randomize}
-                >
-                  <Shuffle className="size-5 stroke-1" />
-                </Badge>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
                 Preview and Select a Theme
@@ -410,7 +393,7 @@ export default function LandingPage() {
 
             {/* Theme Selector Buttons */}
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              {presetNames?.slice(5, 11).map((presetName) => {
+              {presetNames?.slice(4, 10).map((presetName) => {
                 const themeStyles =
                   getPresetThemeStyles(presetName)[
                   mode === "dark" ? "dark" : "light"
@@ -479,7 +462,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Third column */}
-                <div className="flex flex-col gap-4 max-w-lg flex-1">
+                <div className=" flex-col gap-4 max-w-lg flex-1 hidden md:flex">
                   <DemoContainer>
                     <DemoReportAnIssue />
                   </DemoContainer>
@@ -536,7 +519,7 @@ export default function LandingPage() {
             >
               {features.map((feature, i) => (
                 <motion.div key={i} variants={item}>
-                  <Card className="h-full overflow-hidden border-border/40 bg-gradient-to-b from-background to-muted/10 backdrop-blur transition-all hover:shadow-md">
+                  <Card className="h-full overflow-hidden border-border/40 bg-gradient-to-b from-card to-card/50 backdrop-blur transition-all hover:shadow-md">
                     <CardContent className="p-6 flex flex-col h-full">
                       <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
                         {feature.icon}
@@ -651,80 +634,82 @@ export default function LandingPage() {
             </motion.div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  title: "Global Theme Editor",
-                  description:
-                    "Create and manage complete themes with presets for your entire application.",
-                  status: "In Progress",
-                  icon: <Palette className="size-5" />,
-                },
-                {
-                  title: "More Components",
-                  description:
-                    "Support for Input, Select, and other shadcn/ui components.",
-                  status: "Coming Soon",
-                  icon: <Layers className="size-5" />,
-                },
-                {
-                  title: "Theme Import/Export",
-                  description: "Save and share your custom themes with others.",
-                  status: "Planned",
-                  icon: <Repeat className="size-5" />,
-                },
-                {
-                  title: "Responsive Preview",
-                  description:
-                    "Preview your components across different device sizes.",
-                  status: "Planned",
-                  icon: <Smartphone className="size-5" />,
-                },
-                {
-                  title: "Collaboration Features",
-                  description:
-                    "Work together with your team on theme customization.",
-                  status: "Future",
-                  icon: <Users className="size-5" />,
-                },
-                {
-                  title: "Theme Analytics",
-                  description:
-                    "Get insights into how your themes perform across devices and browsers.",
-                  status: "Future",
-                  icon: <BarChart className="size-5" />,
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <Card className="h-full overflow-hidden border-border/40 bg-gradient-to-b from-background to-muted/10 backdrop-blur transition-all hover:shadow-md">
-                    <CardContent className="p-6 flex flex-col h-full">
-                      <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
-                        {item.icon}
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <h3 className="text-xl font-bold">{item.title}</h3>
-                        <Badge
-                          variant={
-                            item.status === "In Progress"
-                              ? "default"
-                              : item.status === "Coming Soon"
-                                ? "secondary"
-                                : "outline"
-                          }
-                        >
-                          {item.status}
-                        </Badge>
-                      </div>
-                      <p className="text-muted-foreground">{item.description}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              {
+                [
+                  {
+                    title: "Global Theme Editor",
+                    description:
+                      "Create and manage complete themes with presets for your entire application.",
+                    status: "In Progress",
+                    icon: <Palette className="size-5" />,
+                  },
+                  {
+                    title: "Theme Import/Export",
+                    description: "Save and share your custom themes with others.",
+                    status: "In Progress",
+                    icon: <Repeat className="size-5" />,
+                  },
+                  {
+                    title: "More Components",
+                    description:
+                      "Support for Input, Select, and other shadcn/ui components.",
+                    status: "Coming Soon",
+                    icon: <Layers className="size-5" />,
+                  },
+                  {
+                    title: "Community Themes",
+                    description:
+                      "Allow users to submit themes, vote on the best designs",
+                    status: "Planned",
+                    icon: <Users className="size-5" />,
+                  },
+                  {
+                    title: "Multi-Project Management",
+                    description:
+                      "Save and manage multiple theme projects, making it easy to switch between designs.",
+                    status: "Planned",
+                    icon: <Folder className="size-5" />,
+                  },
+                  {
+                    title: "Way More Preset Options",
+                    description:
+                      "Expand the preset library with a wider variety of stunning themes for quick customization.",
+                    status: "Planned",
+                    icon: <Grid className="size-5" />,
+                  },
+                ]
+                  .map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                    >
+                      <Card className="h-full overflow-hidden border-border/40 bg-gradient-to-b from-card to-card/50 backdrop-blur transition-all hover:shadow-md">
+                        <CardContent className="p-6 flex flex-col h-full">
+                          <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                            {item.icon}
+                          </div>
+                          <div className="flex justify-between items-center mb-2">
+                            <h3 className="text-xl font-bold">{item.title}</h3>
+                            <Badge
+                              variant={
+                                item.status === "In Progress" || item.status === "Completed"
+                                  ? "default"
+                                  : item.status === "Coming Soon"
+                                    ? "secondary"
+                                    : "outline"
+                              }
+                            >
+                              {item.status}
+                            </Badge>
+                          </div>
+                          <p className="text-muted-foreground">{item.description}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
             </div>
           </div>
         </section>
