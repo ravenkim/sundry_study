@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { DemoCookieSettings } from "./cards/cookie-settings";
 import { DemoCreateAccount } from "./cards/create-account";
@@ -28,7 +27,7 @@ export function DemoContainer({
 function DemoCards() {
   return (
     <div className="@container">
-      <div className="grid grid-cols-1 @2xl:grid-cols-2 mx-auto gap-4 w-full">
+      <div className="grid grid-cols-1 @4xl:grid-cols-2 mx-auto gap-4 w-full">
         {/* First column */}
         <div className="flex flex-col gap-4 max-w-lg mx-auto">
           <DemoContainer>
@@ -49,9 +48,6 @@ function DemoCards() {
           <DemoContainer>
             <DemoFontShowcase />
           </DemoContainer>
-          <DemoContainer>
-            <DemoDatePicker />
-          </DemoContainer>
         </div>
 
         {/* Third column */}
@@ -70,6 +66,9 @@ function DemoCards() {
           </DemoContainer>
           <DemoContainer>
             <DemoChat />
+          </DemoContainer>
+          <DemoContainer>
+            <DemoDatePicker />
           </DemoContainer>
         </div>
       </div>
