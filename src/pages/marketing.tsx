@@ -844,7 +844,7 @@ export default function LandingPage() {
       <footer className="w-full border-t bg-background/95 backdrop-blur-sm">
         <div className="container max-w-8xl mx-auto flex flex-col gap-8 px-4 md:px-0 py-10 lg:py-16">
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-            I<div className="space-y-4 col-span-2 max-w-md">
+            <div className="space-y-4 col-span-2 max-w-md">
               <div className="flex items-center gap-2 font-bold">
                 <img
                   src={logo}
