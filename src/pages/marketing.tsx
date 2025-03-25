@@ -934,11 +934,12 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
+
           <div className="flex flex-col gap-4 sm:flex-row justify-between items-center border-t border-border/40 pt-8">
             <p className="text-xs text-muted-foreground">
               &copy; {new Date().getFullYear()} tweakcn. All rights reserved.
             </p>
-            <div className="flex gap-4">
+            {/*<div className="flex gap-4">
               <a
                 href="#"
                 className="text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -951,7 +952,7 @@ export default function LandingPage() {
               >
                 Terms of Service
               </a>
-            </div>
+            </div>*/}
           </div>
         </div>
       </footer>
