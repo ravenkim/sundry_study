@@ -63,7 +63,6 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [styles, setStyles] = useState({});
   const { themeState, applyThemePreset } = useEditorStore();
   const mode = themeState.currentMode;
   const presetNames = Object.keys(presets);
@@ -139,7 +138,6 @@ export default function LandingPage() {
   return (
     <div
       className="flex min-h-[100dvh] justify-items-center items-center flex-col bg-background text-foreground"
-      style={styles}
     >
       <header
         className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${isScrolled ? "bg-background/80 shadow-sm" : "bg-transparent"
