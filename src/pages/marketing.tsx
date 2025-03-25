@@ -409,11 +409,6 @@ export default function LandingPage() {
                         <ColorBox color={themeStyles.accent} />
                       </div>
                       <span className="capitalize">{presetName.replace(/-/g, " ")}</span>
-                      {isSelected && (
-                        <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute right-2 text-xs">
-                          <Check className="h-4 w-4" />
-                        </motion.span>
-                      )}
                     </Button>
                   </motion.div>
                 )
