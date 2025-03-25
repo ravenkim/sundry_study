@@ -27,9 +27,9 @@ export function DemoContainer({
 function DemoCards() {
   return (
     <div className="@container">
-      <div className="grid grid-cols-1 @4xl:grid-cols-2 mx-auto gap-4 w-full">
+      <div className="flex flex-col @4xl:flex-row items-center @4xl:items-start justify-center gap-4">
         {/* First column */}
-        <div className="flex flex-col gap-4 max-w-lg mx-auto">
+        <div className="flex flex-col gap-4 max-w-lg">
           <DemoContainer>
             <DemoStats />
           </DemoContainer>
@@ -51,7 +51,7 @@ function DemoCards() {
         </div>
 
         {/* Third column */}
-        <div className="flex flex-col gap-4 max-w-lg mx-auto">
+        <div className="flex flex-col gap-4 max-w-lg">
           <DemoContainer>
             <DemoReportAnIssue />
           </DemoContainer>

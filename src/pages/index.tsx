@@ -39,12 +39,14 @@ const Index = () => {
       <header className="border-b">
         <div className="px-2 md:px-4 py-4 flex items-center gap-2 justify-between">
           <div className="flex items-center gap-1">
-            <img
-              src={logo}
-              alt="tweakcn"
-              className="h-8 w-8 mr-1 md:mr-2"
-              title="Nothing here yet..."
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                alt="tweakcn"
+                className="h-8 w-8 mr-1 md:mr-2"
+                title="tweakcn"
+              />
+            </Link>
             <EditorCombobox />
             <Button variant="secondary" size="icon" onClick={toggleTheme}>
               {theme === "light" ? (
