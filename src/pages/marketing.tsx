@@ -34,7 +34,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTheme } from "../components/theme-provider";
 import { getPresetThemeStyles, presets } from "../utils/theme-presets";
-import DemoCards, { DemoContainer } from "@/components/examples/demo-cards";
+import { DemoContainer } from "@/components/examples/demo-cards";
 import { DemoChat } from "@/components/examples/cards/chat";
 import { DemoCookieSettings } from "@/components/examples/cards/cookie-settings";
 import { DemoCreateAccount } from "@/components/examples/cards/create-account";
@@ -65,7 +65,6 @@ export default function LandingPage() {
   const { themeState, applyThemePreset } = useEditorStore();
   const mode = themeState.currentMode;
   const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
-  const value = presetNames?.find((name) => name === mode);
   const randomize = useCallback(() => {
     const random = Math.floor(Math.random() * presetNames.length);
     applyThemePreset(presetNames[random]);
@@ -149,9 +148,8 @@ export default function LandingPage() {
       style={styles}
     >
       <header
-        className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${
-          isScrolled ? "bg-background/80 shadow-sm" : "bg-transparent"
-        }`}
+        className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${isScrolled ? "bg-background/80 shadow-sm" : "bg-transparent"
+          }`}
       >
         <div className="container flex h-16 px-4 min-w-full items-center justify-between">
           <Link to="/">
@@ -410,7 +408,44 @@ export default function LandingPage() {
               </p>
             </motion.div>
 
+            {/* Theme Selector Buttons */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {presetNames?.slice(5, 11).map((presetName) => {
+                const themeStyles =
+                  getPresetThemeStyles(presetName)[
+                  mode === "dark" ? "dark" : "light"
+                  ];
+                const isSelected = presetName === themeState.preset;
+                return (
+                  <Button
+                    key={presetName}
+                    className={`flex items-center relative border transition-all`}
+                    variant="outline"
+                    style={{
+                      backgroundColor: themeStyles.background,
+                      color: themeStyles.foreground,
+                      borderColor: themeStyles.border,
+                    }}
+                    onClick={() => applyThemePreset(presetName)}
+                  >
+                    <div className="flex gap-0.5 mr-1">
+                      <ColorBox color={themeStyles.primary} />
+                      <ColorBox color={themeStyles.accent} />
+                    </div>
+                    <span className="capitalize">
+                      {presetName.replace(/-/g, " ")}
+                    </span>
+                    {isSelected && (
+                      <span className=" right-2 text-xs">
+                        <Check className="h-10 w-10" />
+                      </span>
+                    )}
+                  </Button>
+                );
+              })}
+            </div>
             <div className="@container relative overflow-hidden border rounded-lg p-4 max-h-[60vh] md:max-h-[80vh]">
+
               <div
                 className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none z-10"
                 style={{
@@ -418,8 +453,8 @@ export default function LandingPage() {
                     "linear-gradient(to bottom, rgba(255,255,255,0), var(--background))",
                 }}
               />
-              <div className="grid grid-cols-1 @3xl:grid-cols-2 mx-auto gap-4 w-full ">
-                <div className="flex flex-col gap-4 max-w-lg mx-auto">
+              <div className="flex flex-row gap-4 justify-center">
+                <div className="flex flex-col gap-4 max-w-lg flex-1">
                   <DemoContainer>
                     <DemoStats />
                   </DemoContainer>
@@ -444,7 +479,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Third column */}
-                <div className="flex flex-col gap-4 max-w-lg mx-auto">
+                <div className="flex flex-col gap-4 max-w-lg flex-1">
                   <DemoContainer>
                     <DemoReportAnIssue />
                   </DemoContainer>
@@ -464,47 +499,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Theme Selector Buttons */}
-            <div className="flex flex-wrap justify-center gap-4 mt-8">
-              {presetNames.map((presetName) => {
-                const themeStyles =
-                  getPresetThemeStyles(presetName)[
-                    mode === "dark" ? "dark" : "light"
-                  ];
-                const isSelected = presetName === themeState.preset;
-                console.log(presetName);
-                console.log(themeState);
-                console.log(isSelected);
-                return (
-                  <Button
-                    key={presetName}
-                    className={`flex items-center relative border transition-all cursor-pointer`}
-                    variant="outline"
-                    style={{
-                      backgroundColor: themeStyles.background,
-                      color: themeStyles.foreground,
-                      borderColor: themeStyles.border,
-                    }}
-                    onClick={() => applyThemePreset(presetName)}
-                  >
-                    <div className="flex gap-0.5 mr-2">
-                      <ColorBox color={themeStyles.primary} />
-                      <ColorBox color={themeStyles.accent} />
-                      <ColorBox color={themeStyles.secondary} />
-                      <ColorBox color={themeStyles.muted} />
-                    </div>
-                    <span className="capitalize">
-                      {presetName.replace(/-/g, " ")}
-                    </span>
-                    {isSelected && (
-                      <span className=" right-2 text-xs">
-                        <Check className="h-10 w-10" />
-                      </span>
-                    )}
-                  </Button>
-                );
-              })}
-            </div>
           </div>
         </section>
 
@@ -719,8 +713,8 @@ export default function LandingPage() {
                             item.status === "In Progress"
                               ? "default"
                               : item.status === "Coming Soon"
-                              ? "secondary"
-                              : "outline"
+                                ? "secondary"
+                                : "outline"
                           }
                         >
                           {item.status}
@@ -868,7 +862,7 @@ export default function LandingPage() {
         </section>
       </main>
       <footer className="w-full border-t bg-background/95 backdrop-blur-sm">
-        <div className="container flex flex-col gap-8 px-4 py-10 md:px-6 lg:py-16 min-w-full">
+        <div className="container max-w-8xl mx-auto flex flex-col gap-8 px-4 md:px-0 py-10 lg:py-16">
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
             <div className="space-y-4">
               <div className="flex items-center gap-2 font-bold">
