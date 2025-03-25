@@ -335,10 +335,10 @@ export default function LandingPage() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="relative mx-auto max-w-5xl"
             >
-              <div className="rounded-xl overflow-hidden shadow-2xl border border-border/40 bg-gradient-to-b from-background to-muted/20 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(var(--primary-rgb),0.15)]">
+              <div className="rounded-xl overflow-hidden shadow-2xl border border-border/40 bg-gradient-to-b from-background to-muted/20 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(var(--primary),0.15)]">
                 <img
                   src={og || "/placeholder.svg"}
-                  alt="tweakcn interface showing button customization"
+                  alt="tweakcn interface showing theme customization"
                   className="w-full h-auto"
                 />
                 <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10"></div>
