@@ -25,6 +25,7 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
+const DemoMail = lazy(() => import("@/components/examples/mail"));
 
 const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {
@@ -51,9 +52,10 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
       </div>
 
       <div className="flex flex-col flex-1 overflow-hidden">
-        <Tabs defaultValue="examples" className="flex flex-col overflow-hidden">
-          <TabsList className="grid grid-cols-3">
-            <TabsTrigger value="examples">Examples</TabsTrigger>
+        <Tabs defaultValue="cards" className="flex flex-col overflow-hidden">
+          <TabsList className="grid grid-cols-4">
+            <TabsTrigger value="cards">Cards</TabsTrigger>
+            <TabsTrigger value="mail">Mail</TabsTrigger>
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
@@ -61,10 +63,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
           <ScrollArea className="rounded-lg border mt-2 flex flex-col flex-1">
             <div className="flex flex-col flex-1">
               {/* Examples Preview */}
-              <TabsContent
-                value="examples"
-                className="space-y-6 mt-0 py-4 px-4 h-full"
-              >
+              <TabsContent value="cards" className="space-y-6 mt-0 py-4 px-4 h-full">
                 <Suspense
                   fallback={
                     <div className="flex w-fit mx-auto flex-col space-y-3">
@@ -77,6 +76,24 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                   }
                 >
                   <DemoCards />
+                </Suspense>
+              </TabsContent>
+
+              <TabsContent value="mail" className="space-y-6 mt-0 h-full @container">
+                <Suspense
+                  fallback={
+                    <div className="flex w-fit mx-auto flex-col space-y-3">
+                      <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-[250px]" />
+                        <Skeleton className="h-4 w-[200px]" />
+                      </div>
+                    </div>
+                  }
+                >
+                  <div className="min-w-[1400px]">
+                    <DemoMail />
+                  </div>
                 </Suspense>
               </TabsContent>
 
