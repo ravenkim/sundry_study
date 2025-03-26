@@ -53,7 +53,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
               className={cn(
                 buttonVariants({ variant: link.variant, size: "sm" }),
                 link.variant === "default" &&
-                  "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
+                  "group dark:bg-muted dark:text-foreground dark:hover:bg-muted dark:hover:text-foreground",
                 "justify-start"
               )}
             >
@@ -63,7 +63,8 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 <span
                   className={cn(
                     "ml-auto",
-                    link.variant === "default" && "text-background dark:text-white"
+                    link.variant === "default" &&
+                      "text-background dark:text-muted-foreground"
                   )}
                 >
                   {link.label}

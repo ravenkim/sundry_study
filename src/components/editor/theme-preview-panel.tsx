@@ -53,9 +53,11 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
 
       <div className="flex flex-col flex-1 overflow-hidden">
         <Tabs defaultValue="cards" className="flex flex-col overflow-hidden">
-          <TabsList className="grid grid-cols-4">
+          <TabsList className="grid grid-cols-3 md:grid-cols-4">
             <TabsTrigger value="cards">Cards</TabsTrigger>
-            <TabsTrigger value="mail">Mail</TabsTrigger>
+            <TabsTrigger className="hidden md:block" value="mail">
+              Mail
+            </TabsTrigger>
             <TabsTrigger value="components">Components</TabsTrigger>
             <TabsTrigger value="colors">Color Palette</TabsTrigger>
           </TabsList>
@@ -91,7 +93,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                     </div>
                   }
                 >
-                  <div className="min-w-[1400px]">
+                  <div className="min-w-[1300px]">
                     <DemoMail />
                   </div>
                 </Suspense>
