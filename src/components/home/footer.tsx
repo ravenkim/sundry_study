@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import GitHubIcon from "@/assets/github.svg?react";
 import TwitterIcon from "@/assets/twitter.svg?react";
+import DiscordIcon from "@/assets/discord.svg?react";
 
 export function Footer() {
   return (
@@ -29,6 +30,13 @@ export function Footer() {
               >
                 <GitHubIcon className="size-5" />
                 <span className="sr-only">GitHub</span>
+              </a>
+              <a
+                href="https://discord.com/invite/qYkxuJyd"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <DiscordIcon className="size-5" />
+                <span className="sr-only">Discord</span>
               </a>
               <a
                 href="https://x.com/iamsahaj_xyz"

@@ -8,7 +8,8 @@ import NotFound from "./pages/not-found";
 import { ThemeProvider } from "./components/theme-provider";
 import { PostHogProvider } from "posthog-js/react";
 import { HelmetProvider } from "react-helmet-async";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
+import { Loading } from "@/components/loading";
 
 const Index = lazy(() => import("./pages/index"));
 
@@ -28,13 +29,15 @@ const App = () => (
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/editor/:editorType" element={<Index />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
+            <Suspense fallback={<Loading />}>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/editor/:editorType" element={<Index />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </Suspense>
           </TooltipProvider>
         </QueryClientProvider>
       </PostHogProvider>
