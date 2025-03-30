@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Copy, Check } from "lucide-react";
-import { EditorConfig } from "@/types/editor";
+import { EditorConfig, ThemeEditorState } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
-import { ThemeStyles } from "../../types/theme";
 import { ColorFormat } from "../../types";
 import {
   Select,
@@ -17,14 +16,15 @@ import { useEditorStore } from "@/store/editor-store";
 
 interface CodePanelProps {
   config: EditorConfig;
-  styles: ThemeStyles;
+  themeEditorState: ThemeEditorState;
 }
 
-const CodePanel: React.FC<CodePanelProps> = ({ config, styles }) => {
+const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
   const [colorFormat, setColorFormat] = useState<ColorFormat>("oklch");
   const [tailwindVersion, setTailwindVersion] = useState<"3" | "4">("4");
+  console.log("themeEditorState", themeEditorState);
   const code = config.codeGenerator.generateComponentCode(
-    styles,
+    themeEditorState,
     colorFormat,
     tailwindVersion
   );

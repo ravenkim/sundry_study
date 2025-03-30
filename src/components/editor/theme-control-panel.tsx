@@ -21,6 +21,7 @@ import {
   DEFAULT_FONT_MONO,
   DEFAULT_FONT_SANS,
   DEFAULT_FONT_SERIF,
+  COMMON_STYLES,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
 import { AlertCircle, FileCode } from "lucide-react";
@@ -28,6 +29,7 @@ import { Button } from "../ui/button";
 import CssImportDialog from "./css-import-dialog";
 import { toast } from "../ui/use-toast";
 import { parseCssInput } from "../../utils/parse-css-input";
+import ShadowControl from "./shadow-control";
 
 const ThemeControlPanel = ({
   styles,
@@ -47,12 +49,7 @@ const ThemeControlPanel = ({
       value: (typeof currentStyles)[K]
     ) => {
       // apply common styles to both light and dark modes
-      if (
-        key === "font-sans" ||
-        key === "font-serif" ||
-        key === "font-mono" ||
-        key === "radius"
-      ) {
+      if (COMMON_STYLES.includes(key)) {
         onChange({
           ...styles,
           light: { ...styles.light, [key]: value },
@@ -391,15 +388,44 @@ const ThemeControlPanel = ({
           </TabsContent>
 
           <TabsContent value="other">
-            <SliderWithInput
-              value={radius}
-              onChange={(value) => updateStyle("radius", `${value}rem`)}
-              min={0}
-              max={5}
-              step={0.025}
-              unit="rem"
-              label="Radius"
-            />
+            <ControlSection title="Radius" expanded>
+              <SliderWithInput
+                value={radius}
+                onChange={(value) => updateStyle("radius", `${value}rem`)}
+                min={0}
+                max={5}
+                step={0.025}
+                unit="rem"
+                label="Radius"
+              />
+            </ControlSection>
+            <div className="mt-6">
+              <ShadowControl
+                shadowColor={currentStyles["shadow-color"]}
+                shadowOpacity={parseFloat(currentStyles["shadow-opacity"])}
+                shadowBlur={parseFloat(
+                  currentStyles["shadow-blur"]?.replace("px", "")
+                )}
+                shadowSpread={parseFloat(
+                  currentStyles["shadow-spread"]?.replace("px", "")
+                )}
+                shadowOffsetX={parseFloat(
+                  currentStyles["shadow-offset-x"]?.replace("px", "")
+                )}
+                shadowOffsetY={parseFloat(
+                  currentStyles["shadow-offset-y"]?.replace("px", "")
+                )}
+                onChange={(key, value) => {
+                  if (key === "shadow-color") {
+                    updateStyle(key, value);
+                  } else if (key === "shadow-opacity") {
+                    updateStyle(key, value.toString());
+                  } else {
+                    updateStyle(key, `${value}px`);
+                  }
+                }}
+              />
+            </div>
           </TabsContent>
         </ScrollArea>
       </Tabs>

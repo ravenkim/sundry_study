@@ -35,6 +35,12 @@ export interface ThemeStyleProps {
   "font-serif"?: string;
   "font-mono"?: string;
   radius?: string;
+  "shadow-color"?: string;
+  "shadow-opacity"?: string;
+  "shadow-blur"?: string;
+  "shadow-spread"?: string;
+  "shadow-offset-x"?: string;
+  "shadow-offset-y"?: string;
 }
 
 export interface ThemeStyles {

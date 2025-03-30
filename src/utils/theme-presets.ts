@@ -19,6 +19,7 @@ export function getPresetThemeStyles(name: string): ThemeStyles {
     },
     dark: {
       ...defaultTheme.dark,
+      ...(preset.light || {}),
       ...(preset.dark || {}),
     },
   };
@@ -138,6 +139,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-serif": "Source Serif 4, serif",
       "font-mono": "JetBrains Mono, monospace",
       radius: "0.425rem",
+      "shadow-color": "hsl(88 22% 35% / 0.15)",
+      "shadow-opacity": "0.15",
+      "shadow-blur": "2px",
+      "shadow-spread": "0px",
+      "shadow-offset-x": "3px",
+      "shadow-offset-y": "3px",
     },
     dark: {
       background: "#3a3529",
@@ -289,6 +296,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Roboto, sans-serif",
       "font-serif": "Playfair Display, serif",
       "font-mono": "Fira Code, monospace",
+      "shadow-color": "hsl(255 86% 66%)",
+      "shadow-opacity": "0.2",
+      "shadow-blur": "4px",
+      "shadow-spread": "0px",
+      "shadow-offset-x": "2px",
+      "shadow-offset-y": "2px",
     },
     dark: {
       background: "#0f172a",
@@ -365,6 +378,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Poppins, sans-serif",
       "font-serif": "Libre Baskerville, serif",
       "font-mono": "IBM Plex Mono, monospace",
+      "shadow-color": "hsl(0 63% 18%)",
+      "shadow-opacity": "0.12",
+      "shadow-blur": "16px",
+      "shadow-spread": "-2px",
+      "shadow-offset-x": "1px",
+      "shadow-offset-y": "1px",
     },
     dark: {
       background: "#1c1917",
@@ -440,6 +459,12 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#ff3333",
       "font-sans": "DM Sans, sans-serif",
       "font-mono": "Space Mono, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "1",
+      "shadow-blur": "0px",
+      "shadow-spread": "0px",
+      "shadow-offset-x": "4px",
+      "shadow-offset-y": "4px",
     },
     dark: {
       background: "#000000",
@@ -516,6 +541,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Plus Jakarta Sans, sans-serif",
       "font-serif": "Lora, serif",
       "font-mono": "Roboto Mono, monospace",
+      "shadow-color": "hsl(240 4% 60%)",
+      "shadow-opacity": "0.18",
+      "shadow-blur": "10px",
+      "shadow-spread": "4px",
+      "shadow-offset-x": "2px",
+      "shadow-offset-y": "2px",
     },
     dark: {
       background: "#1e1b18",
@@ -551,6 +582,7 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#d1d5db",
       "sidebar-border": "#3a3633",
       "sidebar-ring": "#818cf8",
+      "shadow-color": "hsl(0 0% 0%)",
     },
   },
 
@@ -591,6 +623,12 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#ff00c8",
       "font-sans": "Outfit, sans-serif",
       "font-mono": "Fira Code, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "0.1",
+      "shadow-blur": "8px",
+      "shadow-spread": "-2px",
+      "shadow-offset-x": "0px",
+      "shadow-offset-y": "4px",
     },
     dark: {
       background: "#0c0c1d",
@@ -628,7 +666,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#ff00c8",
     },
   },
-
   "pastel-dreams": {
     light: {
       background: "#f7f3f9",
@@ -667,6 +704,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Open Sans, sans-serif",
       "font-serif": "Source Serif 4, serif",
       "font-mono": "IBM Plex Mono, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "0.08",
+      "shadow-blur": "16px",
+      "shadow-spread": "-4px",
+      "shadow-offset-x": "0px",
+      "shadow-offset-y": "8px",
     },
     dark: {
       background: "#1c1917",
@@ -704,7 +747,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#c0aafd",
     },
   },
-
   "clean-slate": {
     light: {
       background: "#f8fafc",
@@ -743,6 +785,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Inter, sans-serif",
       "font-serif": "Merriweather, serif",
       "font-mono": "JetBrains Mono, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "0.1",
+      "shadow-blur": "8px",
+      "shadow-spread": "-1px",
+      "shadow-offset-x": "0px",
+      "shadow-offset-y": "4px",
     },
     dark: {
       background: "#0f172a",
@@ -780,7 +828,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#818cf8",
     },
   },
-
   caffeine: {
     light: {
       background: "#f9f9f9",
@@ -850,9 +897,9 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#f4f4f5",
       "sidebar-border": "#27272a",
       "sidebar-ring": "#d4d4d8",
+      radius: "0.5rem",
     },
   },
-
   "ocean-breeze": {
     light: {
       background: "#f0f8ff",
@@ -891,6 +938,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "DM Sans, sans-serif",
       "font-serif": "Lora, serif",
       "font-mono": "IBM Plex Mono, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "0.1",
+      "shadow-blur": "8px",
+      "shadow-spread": "-1px",
+      "shadow-offset-x": "0px",
+      "shadow-offset-y": "4px",
     },
     dark: {
       background: "#0f172a",
@@ -928,7 +981,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#34d399",
     },
   },
-
   "retro-arcade": {
     light: {
       background: "#fdf6e3",
@@ -966,6 +1018,12 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#d33682",
       "font-sans": "Outfit, sans-serif",
       "font-mono": "Space Mono, monospace",
+      "shadow-color": "hsl(196 83% 10%)",
+      "shadow-opacity": "0.15",
+      "shadow-blur": "4px",
+      "shadow-spread": "0px",
+      "shadow-offset-x": "2px",
+      "shadow-offset-y": "2px",
     },
     dark: {
       background: "#002b36",
@@ -1003,7 +1061,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#d33682",
     },
   },
-
   "midnight-bloom": {
     light: {
       background: "#f9f9f9",
@@ -1042,6 +1099,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Montserrat, sans-serif",
       "font-serif": "Playfair Display, serif",
       "font-mono": "Source Code Pro, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "0.1",
+      "shadow-blur": "10px",
+      "shadow-spread": "-2px",
+      "shadow-offset-x": "0px",
+      "shadow-offset-y": "5px",
     },
     dark: {
       background: "#1a1d23",
@@ -1079,7 +1142,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#6c5ce7",
     },
   },
-
   candyland: {
     light: {
       background: "#f7f9fa",
@@ -1154,7 +1216,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#ff99cc",
     },
   },
-
   "northern-lights": {
     light: {
       background: "#f9f9fa",
@@ -1230,7 +1291,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#34a85a",
     },
   },
-
   "vintage-paper": {
     light: {
       background: "#f5f1e6",
@@ -1269,6 +1329,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Libre Baskerville, serif",
       "font-serif": "Lora, serif",
       "font-mono": "IBM Plex Mono, monospace",
+      "shadow-color": "hsl(28 13% 20%)",
+      "shadow-opacity": "0.12",
+      "shadow-blur": "5px",
+      "shadow-spread": "0px",
+      "shadow-offset-x": "2px",
+      "shadow-offset-y": "3px",
     },
     dark: {
       background: "#2d2621",
@@ -1306,7 +1372,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#c0a080",
     },
   },
-
   "sunset-horizon": {
     light: {
       background: "#fff9f5",
@@ -1345,6 +1410,12 @@ export const presets: Record<string, ThemeStyles> = {
       "font-sans": "Montserrat, sans-serif",
       "font-serif": "Merriweather, serif",
       "font-mono": "Ubuntu Mono, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "0.09",
+      "shadow-blur": "12px",
+      "shadow-spread": "-3px",
+      "shadow-offset-x": "0px",
+      "shadow-offset-y": "6px",
     },
     dark: {
       background: "#2a2024",
@@ -1382,7 +1453,6 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#ff7e5f",
     },
   },
-
   claude: {
     light: {
       background: "#f2f1e9",
