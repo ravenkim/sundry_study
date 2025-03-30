@@ -13,7 +13,7 @@ export const getShadowMap = (themeEditorState: ThemeEditorState) => {
   const spread = styles["shadow-spread"];
   const opacity = parseFloat(styles["shadow-opacity"]);
   const color = (opacityMultiplier: number) =>
-    `hsl(${hsl} / ${opacity * opacityMultiplier})`;
+    `hsl(${hsl} / ${(opacity * opacityMultiplier).toFixed(2)})`;
 
   const secondLayer = (fixedOffsetY: string, fixedBlur: string): string => {
     // Use the same offsetX as the first layer
@@ -23,7 +23,8 @@ export const getShadowMap = (themeEditorState: ThemeEditorState) => {
     // Use the fixed blur specific to the shadow size
     const blur2 = fixedBlur;
     // Calculate spread relative to the first layer's spread variable
-    const spread2 = `calc(${spread} - 1px)`; // Consistent relationship found in examples
+    const spread2 =
+      (parseFloat(spread?.replace("px", "") ?? "0") - 1).toString() + "px";
     // Use the same color function (opacity can still be overridden by --shadow-opacity)
     const color2 = color(1.0); // Default opacity for second layer is 0.1 in examples
 
