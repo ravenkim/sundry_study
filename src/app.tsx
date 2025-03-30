@@ -33,7 +33,7 @@ const App = () => (
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/editor/:editorType" element={<Index />} />
+                  <Route path="/editor/theme" element={<Index />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>
