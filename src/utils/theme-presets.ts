@@ -19,6 +19,7 @@ export function getPresetThemeStyles(name: string): ThemeStyles {
     },
     dark: {
       ...defaultTheme.dark,
+      ...(preset.light || {}),
       ...(preset.dark || {}),
     },
   };
@@ -440,6 +441,12 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-ring": "#ff3333",
       "font-sans": "DM Sans, sans-serif",
       "font-mono": "Space Mono, monospace",
+      "shadow-color": "hsl(0 0% 0%)",
+      "shadow-opacity": "1",
+      "shadow-blur": "0px",
+      "shadow-spread": "0px",
+      "shadow-offset-x": "4px",
+      "shadow-offset-y": "4px",
     },
     dark: {
       background: "#000000",

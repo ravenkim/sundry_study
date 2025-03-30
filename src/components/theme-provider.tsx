@@ -1,6 +1,8 @@
 import { createContext, useContext, useLayoutEffect } from "react";
 import { useEditorStore } from "../store/editor-store";
 import { colorFormatter } from "../utils/color-converter";
+import { setShadowVariables } from "@/utils/shadows";
+import { applyStyleToElement } from "@/utils/apply-style-to-element";
 
 type Theme = "dark" | "light";
 
@@ -23,13 +25,6 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-function applyStyleToElement(element: HTMLElement, key: string, value: string) {
-  element.setAttribute(
-    `style`,
-    `${element.getAttribute("style") || ""}--${key}: ${value};`
-  );
-}
-
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const { themeState, setThemeState } = useEditorStore();
 
@@ -38,7 +33,17 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     const mode = themeState.currentMode;
     const themeStyles = themeState.styles;
 
-    const commonNonColorKeys = ["font-sans", "font-serif", "font-mono", "radius"];
+    const commonNonColorKeys = [
+      "font-sans",
+      "font-serif",
+      "font-mono",
+      "radius",
+      "shadow-opacity",
+      "shadow-blur",
+      "shadow-spread",
+      "shadow-offset-x",
+      "shadow-offset-y",
+    ];
     Object.entries(themeStyles.light)
       .filter(([key]) => commonNonColorKeys.includes(key))
       .forEach(([key, value]) => {
@@ -51,6 +56,8 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
         applyStyleToElement(root, key, hslValue);
       }
     });
+
+    setShadowVariables(themeState);
   }, [themeState]);
 
   const value = {
