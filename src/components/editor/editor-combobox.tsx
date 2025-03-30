@@ -34,9 +34,7 @@ const EditorCombobox = ({ className }: { className?: string }) => {
           aria-expanded={open}
           className={cn("w-[150px] md:w-[200px] justify-between", className)}
         >
-          {editorType
-            ? editors.find((editor) => editor.value === editorType)?.label
-            : "Select editor..."}
+          Theme Editor
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -58,7 +56,7 @@ const EditorCombobox = ({ className }: { className?: string }) => {
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      editorType === editor.value ? "opacity-100" : "opacity-0",
+                      editorType === editor.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {editor.label}

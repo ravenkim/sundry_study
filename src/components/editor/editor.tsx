@@ -7,7 +7,6 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EditorConfig, BaseEditorState, ThemeEditorState } from "@/types/editor";
 import { ThemeStyles } from "@/types/theme";
-import { ButtonStyles } from "@/types/button";
 import CodePanel from "./code-panel";
 import { PanelRightClose, PanelRightOpen, Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editor-store";
@@ -29,28 +28,17 @@ const isThemeStyles = (styles: any): styles is ThemeStyles => {
 };
 
 const Editor: React.FC<EditorProps> = ({ config }) => {
-  const {
-    buttonState,
-    themeState,
-    setButtonState,
-    setThemeState,
-    resetToDefault,
-    hasStateChanged,
-  } = useEditorStore();
+  const { themeState, setThemeState, resetToDefault, hasStateChanged } =
+    useEditorStore();
   const { toast } = useToast();
   const Controls = config.controls;
   const Preview = config.preview;
   const [isCodePanelOpen, setIsCodePanelOpen] = useState(true);
 
-  const state = config.type === "theme" ? themeState : buttonState;
   const hasChanges = hasStateChanged(config.type);
 
-  const handleStyleChange = (newStyles: ThemeStyles | ButtonStyles) => {
-    if (config.type === "theme") {
-      setThemeState({ ...themeState, styles: newStyles as ThemeStyles });
-    } else {
-      setButtonState({ ...buttonState, styles: newStyles as ButtonStyles });
-    }
+  const handleStyleChange = (newStyles: ThemeStyles) => {
+    setThemeState({ ...themeState, styles: newStyles });
   };
 
   const handleReset = () => {
@@ -61,13 +49,10 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
     });
   };
 
-  const isThemeEditor = config.type === "theme";
-
-  // Ensure we have valid theme styles for theme editor
-  const styles =
-    isThemeEditor && !isThemeStyles(state.styles)
-      ? (config.defaultState as ThemeEditorState).styles
-      : state.styles;
+  // Ensure we have valid theme styles
+  const styles = !isThemeStyles(themeState.styles)
+    ? (config.defaultState as ThemeEditorState).styles
+    : themeState.styles;
 
   return (
     <div className="h-full overflow-hidden">
@@ -77,13 +62,11 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           <ResizablePanel defaultSize={30} minSize={20} maxSize={40}>
             <div className="h-full p-4">
               <Controls
-                styles={state.styles}
+                styles={styles}
                 onChange={handleStyleChange}
                 onReset={handleReset}
                 hasChanges={hasChanges}
-                {...(isThemeEditor && {
-                  currentMode: (state as ThemeEditorState).currentMode,
-                })}
+                currentMode={themeState.currentMode}
               />
             </div>
           </ResizablePanel>
@@ -100,9 +83,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                     <div className="flex-1 p-4">
                       <Preview
                         styles={styles}
-                        {...(isThemeEditor && {
-                          currentMode: (state as ThemeEditorState).currentMode,
-                        })}
+                        currentMode={themeState.currentMode}
                       />
                     </div>
 
@@ -160,20 +141,13 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
                 onChange={handleStyleChange}
                 onReset={handleReset}
                 hasChanges={hasChanges}
-                {...(isThemeEditor && {
-                  currentMode: (state as ThemeEditorState).currentMode,
-                })}
+                currentMode={themeState.currentMode}
               />
             </div>
           </TabsContent>
           <TabsContent value="preview" className="h-[calc(100%-2.5rem)]">
             <div className="h-full p-4">
-              <Preview
-                styles={styles}
-                {...(isThemeEditor && {
-                  currentMode: (state as ThemeEditorState).currentMode,
-                })}
-              />
+              <Preview styles={styles} currentMode={themeState.currentMode} />
             </div>
           </TabsContent>
           <TabsContent value="code" className="h-[calc(100%-2.5rem)]">
