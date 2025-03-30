@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { Menu, Moon, Sun, X, ChevronRight } from "lucide-react";
 import logo from "@/assets/logo.png";
+import GitHubIcon from "@/assets/github.svg?react";
+import { useGithubStars } from "@/hooks/use-github-stars";
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -17,6 +19,7 @@ export function Header({
   setMobileMenuOpen,
 }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const { stargazersCount } = useGithubStars("jnsahaj", "tweakcn");
 
   return (
     <header
@@ -64,6 +67,24 @@ export function Header({
           )}
         </nav>
         <div className="hidden md:flex gap-4 items-center cursor-pointer">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.45 }}
+          >
+            <Button variant="ghost" asChild>
+              <a
+                href="https://github.com/jnsahaj/tweakcn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold"
+              >
+                <GitHubIcon className="h-5 w-5" />
+                {stargazersCount > 0 && stargazersCount}
+              </a>
+            </Button>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

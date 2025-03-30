@@ -6,29 +6,15 @@ import { Moon, Sun } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg?react";
 import { cn } from "../lib/utils";
 import { useTheme } from "../components/theme-provider";
-import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import { Helmet } from "react-helmet-async";
+import { useGithubStars } from "@/hooks/use-github-stars";
 
 const Index = () => {
-  const { editorType = "button" } = useParams();
+  const { editorType = "theme" } = useParams();
   const editorConfig = getEditorConfig(editorType);
   const { theme, toggleTheme } = useTheme();
-
-  const [stargazersCount, setStargazersCount] = useState(0);
-
-  useEffect(() => {
-    const owner = "jnsahaj";
-    const repo = "tweakcn";
-
-    const fetchData = async () => {
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-      const data = await response.json();
-      setStargazersCount(data.stargazers_count);
-    };
-
-    fetchData();
-  }, []);
+  const { stargazersCount } = useGithubStars("jnsahaj", "tweakcn");
 
   return (
     <div
