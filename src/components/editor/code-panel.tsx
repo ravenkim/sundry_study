@@ -55,13 +55,14 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
       await navigator.clipboard.writeText(getRegistryCommand(preset));
       setRegistryCopied(true);
       setTimeout(() => setRegistryCopied(false), 2000);
+      captureCopyEvent("COPY_REGISTRY_COMMAND");
     } catch (err) {
       console.error("Failed to copy text:", err);
     }
   };
 
-  const captureCopyEvent = () => {
-    posthog.capture("COPY_CODE", {
+  const captureCopyEvent = (event: string) => {
+    posthog.capture(event, {
       editorType: "theme",
       preset,
       colorFormat,
@@ -74,7 +75,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      captureCopyEvent();
+      captureCopyEvent("COPY_CODE");
     } catch (err) {
       console.error("Failed to copy text:", err);
     }
