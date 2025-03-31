@@ -85,7 +85,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
     <div className="h-full flex flex-col p-4">
       <div className="flex-none mb-4">
         <h2 className="text-lg font-semibold">Code</h2>
-        {preset && (
+        {preset && preset !== "default" && (
           <div className="mt-2 rounded-md overflow-hidden border">
             <div className="flex border-b">
               {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
