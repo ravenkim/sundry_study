@@ -22,6 +22,10 @@ interface CodePanelProps {
 const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
   const [colorFormat, setColorFormat] = useState<ColorFormat>("oklch");
   const [tailwindVersion, setTailwindVersion] = useState<"3" | "4">("4");
+  const [packageManager, setPackageManager] = useState<
+    "pnpm" | "npm" | "yarn" | "bun"
+  >("pnpm");
+  const [registryCopied, setRegistryCopied] = useState(false);
   console.log("themeEditorState", themeEditorState);
   const code = config.codeGenerator.generateComponentCode(
     themeEditorState,
@@ -31,6 +35,30 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
   const [copied, setCopied] = useState(false);
   const posthog = usePostHog();
   const preset = useEditorStore((state) => state.themeState.preset);
+
+  const getRegistryCommand = (preset: string) => {
+    const url = `https://tweakcn.com/r/themes/${preset}.json`;
+    switch (packageManager) {
+      case "pnpm":
+        return `pnpm dlx shadcn@latest add ${url}`;
+      case "npm":
+        return `npx shadcn@latest add ${url}`;
+      case "yarn":
+        return `yarn dlx shadcn@latest add ${url}`;
+      case "bun":
+        return `bunx shadcn@latest add ${url}`;
+    }
+  };
+
+  const copyRegistryCommand = async () => {
+    try {
+      await navigator.clipboard.writeText(getRegistryCommand(preset));
+      setRegistryCopied(true);
+      setTimeout(() => setRegistryCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text:", err);
+    }
+  };
 
   const captureCopyEvent = () => {
     posthog.capture("COPY_CODE", {
@@ -54,8 +82,53 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
 
   return (
     <div className="h-full flex flex-col p-4">
-      <div className="flex-none px-2 mb-4">
+      <div className="flex-none mb-4">
         <h2 className="text-lg font-semibold">Code</h2>
+        {preset && (
+          <div className="mt-2 rounded-md overflow-hidden border">
+            <div className="flex border-b">
+              {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
+                <button
+                  key={pm}
+                  onClick={() => setPackageManager(pm)}
+                  className={`px-3 py-1.5 text-sm font-medium ${
+                    packageManager === pm
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {pm}
+                </button>
+              ))}
+
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={copyRegistryCommand}
+                className="h-8 ml-auto"
+                aria-label={
+                  registryCopied ? "Copied to clipboard" : "Copy to clipboard"
+                }
+              >
+                {registryCopied ? (
+                  <Check className="size-4" />
+                ) : (
+                  <Copy className="size-4" />
+                )}
+              </Button>
+            </div>
+            <div className="p-2 bg-muted/50 flex justify-between items-center">
+              <ScrollArea className="w-full">
+                <div className="whitespace-nowrap overflow-y-hidden pb-2">
+                  <code className="text-sm font-mono">
+                    {getRegistryCommand(preset)}
+                  </code>
+                </div>
+                <ScrollBar orientation="horizontal" />
+              </ScrollArea>
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-2 mb-4 ">
         <Select
