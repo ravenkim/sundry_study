@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
+    "build": "tsx scripts/generate-theme-registry.ts && vite build",
+    "build:dev": "tsx scripts/generate-theme-registry.ts && vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-themes": "tsx scripts/generate-theme-registry.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -68,6 +69,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@esbuild/darwin-arm64": "^0.25.2",
     "@eslint/js": "^9.9.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/postcss": "^4.0.15",
@@ -85,6 +87,7 @@
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
     "tailwindcss": "^4.0.15",
+    "tsx": "^4.19.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
