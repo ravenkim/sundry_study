@@ -1,13 +1,16 @@
-import React, { useCallback, useMemo } from "react";
+
+import React, { useCallback, useMemo, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ThemePreset } from "../../types/theme";
 import { useEditorStore } from "../../store/editor-store";
 import { getPresetThemeStyles } from "../../utils/theme-presets";
 import { Button } from "../ui/button";
-import { Shuffle, Sun, Moon, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Moon, Search, Shuffle, Sun } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Separator } from "../ui/separator";
 import { ScrollArea } from "../ui/scroll-area";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../ui/command";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 interface ThemePresetSelectProps {
   presets: Record<string, ThemePreset>;
@@ -18,7 +21,7 @@ interface ThemePresetSelectProps {
 const ColorBox = ({ color }: { color: string }) => {
   return (
     <div
-      className="w-3 h-3 rounded-sm border border-muted"
+      className="h-3 w-3 rounded-sm border border-muted"
       style={{ backgroundColor: color }}
     />
   );
@@ -32,6 +35,8 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   const { themeState } = useEditorStore();
   const { theme, toggleTheme } = useTheme();
   const mode = themeState.currentMode;
+  const [search, setSearch] = useState("");
+  
   const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
   const value = presetNames?.find((name) => name === currentPreset);
   const currentIndex = useMemo(
@@ -54,135 +59,163 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     },
     [currentIndex, presetNames, onPresetChange]
   );
+  
+  const filteredPresets = useMemo(() => {
+    return search.trim() === ""
+      ? presetNames
+      : presetNames.filter((name) => 
+          name.toLowerCase().includes(search.toLowerCase())
+        );
+  }, [presetNames, search]);
 
   return (
     <div className="flex items-center gap-1">
-      <Popover>
-        <PopoverTrigger asChild>
+      <TooltipProvider>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full md:min-w-72 h-10 justify-between group relative"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex gap-0.5">
+                  <ColorBox
+                    color={getPresetThemeStyles(value || "default")[mode].primary}
+                  />
+                  <ColorBox
+                    color={getPresetThemeStyles(value || "default")[mode].accent}
+                  />
+                  <ColorBox
+                    color={getPresetThemeStyles(value || "default")[mode].secondary}
+                  />
+                  <ColorBox
+                    color={getPresetThemeStyles(value || "default")[mode].border}
+                  />
+                </div>
+                <span className="capitalize font-medium">
+                  {(value || "default").replace(/-/g, " ")}
+                </span>
+              </div>
+              <span className="absolute inset-y-0 right-0 flex items-center pr-2 opacity-0 group-hover:opacity-70 transition-opacity">
+                <Search className="h-3.5 w-3.5" />
+              </span>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="p-0 w-[300px]" align="start">
+            <Command className="rounded-lg border shadow-md">
+              <div className="flex items-center border-b px-3">
+                <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                <CommandInput 
+                  placeholder="Search themes..." 
+                  className="flex h-9 py-2"
+                  value={search}
+                  onValueChange={setSearch}
+                />
+              </div>
+              <div className="flex items-center justify-between px-4 py-2">
+                <div className="text-xs text-muted-foreground">
+                  {filteredPresets.length} theme{filteredPresets.length !== 1 ? 's' : ''}
+                </div>
+                <div className="flex gap-1">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 w-7 p-0"
+                        onClick={toggleTheme}
+                      >
+                        {theme === "light" ? (
+                          <Sun className="h-3.5 w-3.5" />
+                        ) : (
+                          <Moon className="h-3.5 w-3.5" />
+                        )}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">
+                      <p className="text-xs">Toggle theme</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 w-7 p-0"
+                        onClick={randomize}
+                      >
+                        <Shuffle className="h-3.5 w-3.5" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">
+                      <p className="text-xs">Random theme</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+              </div>
+              <Separator />
+              <ScrollArea className="h-[300px]">
+                <CommandEmpty>No themes found.</CommandEmpty>
+                <CommandGroup>
+                  {filteredPresets.map((presetName) => (
+                    <CommandItem
+                      key={presetName}
+                      onSelect={() => onPresetChange(presetName)}
+                      className="flex items-center gap-2 py-2.5"
+                    >
+                      <div className="flex gap-0.5 mr-2">
+                        <ColorBox color={getPresetThemeStyles(presetName)[mode].primary} />
+                        <ColorBox color={getPresetThemeStyles(presetName)[mode].accent} />
+                        <ColorBox color={getPresetThemeStyles(presetName)[mode].secondary} />
+                        <ColorBox color={getPresetThemeStyles(presetName)[mode].border} />
+                      </div>
+                      <span className="flex-1 capitalize text-sm font-medium">
+                        {presetName.replace(/-/g, " ")}
+                      </span>
+                      {presetName === value && (
+                        <Check className="h-4 w-4 shrink-0 opacity-70" />
+                      )}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </ScrollArea>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </TooltipProvider>
+
+      <Tooltip>
+        <TooltipTrigger asChild>
           <Button
             variant="outline"
-            className="w-full md:min-w-72 h-10 justify-between"
+            size="icon"
+            className="h-10 w-10 shrink-0"
+            onClick={() => cycleTheme("prev")}
           >
-            <div className="flex items-center gap-3">
-              <div className="flex gap-0.5">
-                <ColorBox
-                  color={getPresetThemeStyles(value || "default")[mode].primary}
-                />
-                <ColorBox
-                  color={getPresetThemeStyles(value || "default")[mode].accent}
-                />
-                <ColorBox
-                  color={getPresetThemeStyles(value || "default")[mode].secondary}
-                />
-                <ColorBox
-                  color={getPresetThemeStyles(value || "default")[mode].border}
-                />
-              </div>
-              <span className="capitalize font-medium">
-                {(value || "default").replace(/-/g, " ")}
-              </span>
-            </div>
+            <ChevronLeft className="h-4 w-4" />
           </Button>
-        </PopoverTrigger>
-        <PopoverContent className="md:w-full p-6" align="start">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <h4 className="font-semibold text-sm">Theme Mode</h4>
-                <p className="text-xs text-muted-foreground">
-                  Switch between light and dark mode
-                </p>
-              </div>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={toggleTheme}
-                className="h-9 w-9"
-              >
-                {theme === "light" ? (
-                  <Sun className="h-4 w-4" />
-                ) : (
-                  <Moon className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          <p className="text-xs">Previous theme</p>
+        </TooltipContent>
+      </Tooltip>
 
-            <Separator />
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <h4 className="font-semibold text-sm">Theme Presets</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Choose from our curated collection of themes
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="h-9 w-9"
-                  onClick={randomize}
-                  title="Random theme"
-                >
-                  <Shuffle className="h-4 w-4" />
-                </Button>
-              </div>
-              <ScrollArea className="h-[400px] -mr-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pr-4">
-                  {presetNames.map((presetName) => (
-                    <Button
-                      key={presetName}
-                      variant={presetName === value ? "default" : "outline"}
-                      className="h-auto py-2.5 px-3 justify-start transition-colors min-w-56"
-                      onClick={() => onPresetChange(presetName)}
-                    >
-                      <div className="flex items-center gap-3 w-full">
-                        <div className="flex gap-0.5">
-                          <ColorBox
-                            color={getPresetThemeStyles(presetName)[mode].primary}
-                          />
-                          <ColorBox
-                            color={getPresetThemeStyles(presetName)[mode].accent}
-                          />
-                          <ColorBox
-                            color={getPresetThemeStyles(presetName)[mode].secondary}
-                          />
-                          <ColorBox
-                            color={getPresetThemeStyles(presetName)[mode].border}
-                          />
-                        </div>
-                        <span className="capitalize text-sm font-medium">
-                          {presetName.replace(/-/g, " ")}
-                        </span>
-                      </div>
-                    </Button>
-                  ))}
-                </div>
-              </ScrollArea>
-            </div>
-          </div>
-        </PopoverContent>
-      </Popover>
-
-      <Button
-        variant="outline"
-        size="icon"
-        className="h-10 w-10 shrink-0"
-        onClick={() => cycleTheme("prev")}
-        title="Previous theme"
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
-
-      <Button
-        variant="outline"
-        size="icon"
-        className="h-10 w-10 shrink-0"
-        onClick={() => cycleTheme("next")}
-        title="Next theme"
-      >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-10 w-10 shrink-0"
+            onClick={() => cycleTheme("next")}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          <p className="text-xs">Next theme</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };
