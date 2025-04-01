@@ -6,6 +6,7 @@ import { getPresetThemeStyles } from "../../utils/theme-presets";
 import { Button } from "../ui/button";
 import {
   Check,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Moon,
@@ -109,6 +110,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                   {(value || "default").replace(/-/g, " ")}
                 </span>
               </div>
+              <ChevronDown className="size-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="p-0 w-[300px]" align="start">
