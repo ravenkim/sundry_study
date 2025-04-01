@@ -32,7 +32,7 @@ export function Footer() {
                 <span className="sr-only">GitHub</span>
               </a>
               <a
-                href="https://discord.com/invite/qYkxuJyd"
+                href="https://discord.gg/Phs4u2NM3n"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <DiscordIcon className="size-5" />
@@ -89,7 +89,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://discord.com/invite/qYkxuJyd"
+                  href="https://discord.gg/Phs4u2NM3n"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Discord
