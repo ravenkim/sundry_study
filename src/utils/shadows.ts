@@ -1,9 +1,15 @@
 import { colorFormatter } from "./color-converter";
 import { applyStyleToElement } from "./apply-style-to-element";
 import { ThemeEditorState } from "../types/theme";
+import { defaultThemeState } from "../config/theme";
 
 export const getShadowMap = (themeEditorState: ThemeEditorState) => {
-  const styles = themeEditorState.styles[themeEditorState.currentMode];
+  const mode = themeEditorState.currentMode;
+  const styles = {
+    ...defaultThemeState.styles.light,
+    ...defaultThemeState.styles[mode],
+    ...themeEditorState.styles[mode],
+  };
 
   const shadowColor = styles["shadow-color"];
   const hsl = colorFormatter(shadowColor, "hsl", "3");

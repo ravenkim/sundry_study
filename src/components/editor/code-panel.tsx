@@ -26,7 +26,6 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
     "pnpm" | "npm" | "yarn" | "bun"
   >("pnpm");
   const [registryCopied, setRegistryCopied] = useState(false);
-  console.log("themeEditorState", themeEditorState);
   const code = config.codeGenerator.generateComponentCode(
     themeEditorState,
     colorFormat,

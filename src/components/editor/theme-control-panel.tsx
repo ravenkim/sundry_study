@@ -72,7 +72,6 @@ const ThemeControlPanel = ({
   const handleCssImport = (css: string) => {
     // This just shows a success toast for now
     const { lightColors, darkColors } = parseCssInput(css);
-    console.log(lightColors, darkColors);
     onChange({
       ...styles,
       light: { ...styles.light, ...lightColors },
