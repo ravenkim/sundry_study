@@ -211,37 +211,25 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
         </Popover>
       </TooltipProvider>
 
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-10 w-10 shrink-0"
-            onClick={() => cycleTheme("prev")}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">
-          <p className="text-xs">Previous theme</p>
-        </TooltipContent>
-      </Tooltip>
+      <Button
+        variant="outline"
+        size="icon"
+        className="h-10 w-10 shrink-0"
+        title="Previous theme"
+        onClick={() => cycleTheme("prev")}
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
 
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-10 w-10 shrink-0"
-            onClick={() => cycleTheme("next")}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">
-          <p className="text-xs">Next theme</p>
-        </TooltipContent>
-      </Tooltip>
+      <Button
+        variant="outline"
+        size="icon"
+        className="h-10 w-10 shrink-0"
+        title="Next theme"
+        onClick={() => cycleTheme("next")}
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
     </div>
   );
 };
