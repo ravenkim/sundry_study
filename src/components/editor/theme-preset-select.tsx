@@ -58,7 +58,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
           <Shuffle />
         </Button>
       </div>
-      <SelectContent>
+      <SelectContent className="max-h-[600px] overflow-y-auto">
         <SelectGroup>
           {presetNames.map((presetName) => (
             <SelectItem key={presetName} value={presetName}>
