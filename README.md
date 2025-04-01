@@ -3,7 +3,7 @@
 </div>
 
 <div align="center">
-  <a href="https://discord.gg/qYkxuJyd" target="_blank">
+  <a href="https://discord.gg/c8ZbKBaD" target="_blank">
     <img alt="Discord" src="https://img.shields.io/discord/1353416868769173576?style=for-the-badge&logo=discord&logoColor=%23ffffff">
   </a>
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/jnsahaj/tweakcn?style=for-the-badge&logo=github">
