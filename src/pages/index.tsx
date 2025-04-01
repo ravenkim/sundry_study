@@ -9,6 +9,7 @@ import { useTheme } from "../components/theme-provider";
 import logo from "@/assets/logo.png";
 import { Helmet } from "react-helmet-async";
 import { useGithubStars } from "@/hooks/use-github-stars";
+import BuyMeACoffeeIcon from "@/assets/buymeacoffee.svg?react";
 
 const Index = () => {
   const { editorType = "theme" } = useParams();
@@ -37,7 +38,17 @@ const Index = () => {
               <span className="font-bold">tweakcn</span>
             </Link>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
+            <Button variant="secondary" size="icon" className="group">
+              <a
+                href="https://buymeacoffee.com/sahajjain1z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group-hover:scale-130 group-hover:rotate-16 transition-all duration-200"
+              >
+                <BuyMeACoffeeIcon className="size-12" />
+              </a>
+            </Button>
             <Button variant="secondary" asChild>
               <a
                 href="https://github.com/jnsahaj/tweakcn"
@@ -49,11 +60,16 @@ const Index = () => {
                 {stargazersCount > 0 && stargazersCount}
               </a>
             </Button>
-            <Button variant="secondary" size="icon" onClick={toggleTheme}>
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={toggleTheme}
+              className="group"
+            >
               {theme === "light" ? (
-                <Sun className="h-6 w-6" />
+                <Sun className="size-6 group-hover:scale-110 group-hover:rotate-16 transition-all duration-200" />
               ) : (
-                <Moon className="h-6 w-6" />
+                <Moon className="size-6 group-hover:scale-110 group-hover:-rotate-16 transition-all duration-200" />
               )}
             </Button>
           </div>
