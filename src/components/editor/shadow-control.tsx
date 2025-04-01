@@ -24,7 +24,7 @@ const ShadowControl: React.FC<ShadowControlProps> = ({
   onChange,
 }) => {
   return (
-    <ControlSection title="Shadow Control" expanded>
+    <ControlSection title="Shadow" expanded>
       <div className="space-y-4">
         <div>
           <ColorPicker
