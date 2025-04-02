@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 const LoadingSkeleton = () => (
-  <div className="flex w-fit mx-auto flex-col space-y-3">
-    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+  <div className="flex w-fit p-4 flex-col space-y-3 min-h-full">
+    <Skeleton className="h-[225px] w-full rounded-xl" />
     <div className="space-y-2">
       <Skeleton className="h-4 w-[250px]" />
       <Skeleton className="h-4 w-[200px]" />
