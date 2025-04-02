@@ -12,6 +12,7 @@ import { Maximize, Minimize, PanelRight } from "lucide-react";
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
 const DemoTasks = lazy(() => import("@/components/examples/tasks"));
+const DemoMusic = lazy(() => import("@/components/examples/music"));
 
 const ThemePreviewPanel = ({
   styles,
@@ -91,6 +92,7 @@ const ThemePreviewPanel = ({
             <div className="hidden md:flex">
               <TabsTriggerPill value="mail">Mail</TabsTriggerPill>
               <TabsTriggerPill value="tasks">Tasks</TabsTriggerPill>
+              <TabsTriggerPill value="music">Music</TabsTriggerPill>
             </div>
             <TabsTriggerPill value="components">Components</TabsTriggerPill>
             <TabsTriggerPill value="colors">Color Palette</TabsTriggerPill>
@@ -116,6 +118,15 @@ const ThemePreviewPanel = ({
               >
                 <ExamplesPreviewContainer className="min-w-[1300px]">
                   <DemoTasks />
+                </ExamplesPreviewContainer>
+              </TabsContent>
+
+              <TabsContent
+                value="music"
+                className="space-y-6 mt-0 h-full @container"
+              >
+                <ExamplesPreviewContainer className="min-w-[1300px]">
+                  <DemoMusic />
                 </ExamplesPreviewContainer>
               </TabsContent>
 
