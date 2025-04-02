@@ -24,8 +24,20 @@ import {
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { TabsTriggerProps } from "@radix-ui/react-tabs";
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
+
+const TabsTriggerPill = ({ children, ...props }: TabsTriggerProps) => {
+  return (
+    <TabsTrigger
+      className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground hover:text-muted-foreground/70"
+      {...props}
+    >
+      {children}
+    </TabsTrigger>
+  );
+};
 
 const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
   if (!styles || !styles[currentMode]) {
@@ -53,13 +65,11 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
 
       <div className="flex flex-col flex-1 overflow-hidden">
         <Tabs defaultValue="cards" className="flex flex-col overflow-hidden">
-          <TabsList className="grid grid-cols-3 md:grid-cols-4">
-            <TabsTrigger value="cards">Cards</TabsTrigger>
-            <TabsTrigger className="hidden md:block" value="mail">
-              Mail
-            </TabsTrigger>
-            <TabsTrigger value="components">Components</TabsTrigger>
-            <TabsTrigger value="colors">Color Palette</TabsTrigger>
+          <TabsList className="inline-flex w-fit h-9 items-center justify-center rounded-full bg-background px-0 text-muted-foreground">
+            <TabsTriggerPill value="cards">Cards</TabsTriggerPill>
+            <TabsTriggerPill value="mail">Mail</TabsTriggerPill>
+            <TabsTriggerPill value="components">Components</TabsTriggerPill>
+            <TabsTriggerPill value="colors">Color Palette</TabsTriggerPill>
           </TabsList>
 
           <ScrollArea className="rounded-lg border mt-2 flex flex-col flex-1">
