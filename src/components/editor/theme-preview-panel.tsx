@@ -3,7 +3,6 @@ import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import ColorPreview from "./theme-preview/color-preview";
 import ComponentsShowcase from "./theme-preview/components-showcase";
-import ExamplesPreview from "./theme-preview/examples-preview-container";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
 import ExamplesPreviewContainer from "./theme-preview/examples-preview-container";
 import { lazy } from "react";
