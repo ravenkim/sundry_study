@@ -5,21 +5,83 @@ import ColorPreview from "./theme-preview/color-preview";
 import ComponentsShowcase from "./theme-preview/components-showcase";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
 import ExamplesPreviewContainer from "./theme-preview/examples-preview-container";
-import { lazy } from "react";
+import { lazy, useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Maximize, Minimize, PanelRight } from "lucide-react";
 
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
 const DemoTasks = lazy(() => import("@/components/examples/tasks"));
 
-const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => {
+const ThemePreviewPanel = ({
+  styles,
+  currentMode,
+  isCodePanelOpen,
+  onCodePanelToggle,
+}: ThemeEditorPreviewProps) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setIsFullscreen(false);
+      }
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
+
   if (!styles || !styles[currentMode]) {
     return null;
   }
 
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+    if (!isFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   return (
-    <div className="max-h-full flex flex-col">
+    <div
+      className={`max-h-full flex flex-col ${
+        isFullscreen ? "fixed inset-0 z-50 bg-background p-4" : ""
+      }`}
+    >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Theme Preview</h2>
+        <div className="flex items-center gap-0">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleFullscreen}
+            className="h-8 group"
+            title="Toggle Fullscreen"
+          >
+            {isFullscreen ? (
+              <Minimize className="size-4 group-hover:scale-120 transition-all" />
+            ) : (
+              <Maximize className="size-4 group-hover:scale-120 transition-all" />
+            )}
+          </Button>
+          {!isCodePanelOpen && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onCodePanelToggle(!isCodePanelOpen)}
+              className="h-8 invisible md:visible group"
+              aria-label="Hide Code Panel"
+              title="Hide Code Panel"
+            >
+              <PanelRight className="size-4 group-hover:scale-120 transition-all" />
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col flex-1 overflow-hidden">

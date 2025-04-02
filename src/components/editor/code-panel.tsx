@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, PanelRight } from "lucide-react";
 import { EditorConfig, ThemeEditorState } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { ColorFormat } from "../../types";
@@ -17,9 +17,14 @@ import { useEditorStore } from "@/store/editor-store";
 interface CodePanelProps {
   config: EditorConfig;
   themeEditorState: ThemeEditorState;
+  onCodePanelToggle: () => void;
 }
 
-const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
+const CodePanel: React.FC<CodePanelProps> = ({
+  config,
+  themeEditorState,
+  onCodePanelToggle,
+}) => {
   const [colorFormat, setColorFormat] = useState<ColorFormat>("oklch");
   const [tailwindVersion, setTailwindVersion] = useState<"3" | "4">("4");
   const [packageManager, setPackageManager] = useState<
@@ -83,9 +88,20 @@ const CodePanel: React.FC<CodePanelProps> = ({ config, themeEditorState }) => {
   return (
     <div className="h-full flex flex-col p-4">
       <div className="flex-none mb-4">
-        <h2 className="text-lg font-semibold">Code</h2>
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-lg font-semibold">Code</h2>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onCodePanelToggle}
+            className="h-8 invisible md:visible group"
+            title="Collapse Code Panel"
+          >
+            <PanelRight className="size-4 group-hover:scale-120 transition-all" />
+          </Button>
+        </div>
         {preset && preset !== "default" && (
-          <div className="mt-2 rounded-md overflow-hidden border">
+          <div className="mt-4 rounded-md overflow-hidden border">
             <div className="flex border-b">
               {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
                 <button

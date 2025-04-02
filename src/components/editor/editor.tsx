@@ -8,15 +8,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EditorConfig, BaseEditorState, ThemeEditorState } from "@/types/editor";
 import { ThemeStyles } from "@/types/theme";
 import CodePanel from "./code-panel";
-import { PanelRightClose, PanelRightOpen, Sliders } from "lucide-react";
+import { Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editor-store";
 import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 
 interface EditorProps {
   config: EditorConfig;
@@ -74,44 +69,29 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           <ResizablePanel defaultSize={70}>
             <div className="h-full flex flex-col">
               <div className="flex-1 min-h-0">
-                <Collapsible
-                  open={isCodePanelOpen}
-                  onOpenChange={setIsCodePanelOpen}
-                  className="h-full"
-                >
+                <Collapsible open={isCodePanelOpen} className="h-full">
                   <div className="h-full flex">
                     <div className="flex-1 p-4">
                       <Preview
                         styles={styles}
                         currentMode={themeState.currentMode}
+                        isCodePanelOpen={isCodePanelOpen}
+                        onCodePanelToggle={() =>
+                          setIsCodePanelOpen(!isCodePanelOpen)
+                        }
                       />
                     </div>
 
                     <CollapsibleContent className="w-1/3 border-l transition-all">
-                      <CodePanel config={config} themeEditorState={themeState} />
+                      <CodePanel
+                        config={config}
+                        themeEditorState={themeState}
+                        onCodePanelToggle={() =>
+                          setIsCodePanelOpen(!isCodePanelOpen)
+                        }
+                      />
                     </CollapsibleContent>
                   </div>
-
-                  <CollapsibleTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="absolute right-2 top-20 z-10"
-                      aria-label={
-                        isCodePanelOpen ? "Hide code panel" : "Show code panel"
-                      }
-                      title={isCodePanelOpen ? "Hide code panel" : "Show code panel"}
-                    >
-                      {isCodePanelOpen ? (
-                        <PanelRightClose className="h-4 w-4" />
-                      ) : (
-                        <>
-                          <PanelRightOpen className="h-4 w-4" />
-                          Code
-                        </>
-                      )}
-                    </Button>
-                  </CollapsibleTrigger>
                 </Collapsible>
               </div>
             </div>
@@ -147,11 +127,20 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           </TabsContent>
           <TabsContent value="preview" className="h-[calc(100%-2.5rem)]">
             <div className="h-full p-4">
-              <Preview styles={styles} currentMode={themeState.currentMode} />
+              <Preview
+                styles={styles}
+                currentMode={themeState.currentMode}
+                isCodePanelOpen={isCodePanelOpen}
+                onCodePanelToggle={() => setIsCodePanelOpen(!isCodePanelOpen)}
+              />
             </div>
           </TabsContent>
           <TabsContent value="code" className="h-[calc(100%-2.5rem)]">
-            <CodePanel config={config} themeEditorState={themeState} />
+            <CodePanel
+              config={config}
+              themeEditorState={themeState}
+              onCodePanelToggle={() => setIsCodePanelOpen(!isCodePanelOpen)}
+            />
           </TabsContent>
         </Tabs>
       </div>
