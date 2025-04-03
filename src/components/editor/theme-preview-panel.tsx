@@ -50,9 +50,8 @@ const ThemePreviewPanel = ({
 
   return (
     <div
-      className={`max-h-full flex flex-col ${
-        isFullscreen ? "fixed inset-0 z-50 bg-background p-4" : ""
-      }`}
+      className={`max-h-full flex flex-col ${isFullscreen ? "fixed inset-0 z-50 bg-background p-4" : ""
+        }`}
     >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Theme Preview</h2>
@@ -70,7 +69,7 @@ const ThemePreviewPanel = ({
               <Maximize className="size-4 group-hover:scale-120 transition-all" />
             )}
           </Button>
-          {!isCodePanelOpen && (
+          {(!isCodePanelOpen || !isFullscreen) && (
             <Button
               variant="ghost"
               size="icon"

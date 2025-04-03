@@ -307,7 +307,7 @@ export const presets: Record<string, ThemeStyles> = {
       "sidebar-accent-foreground": "#91185c",
       "sidebar-border": "#ffddf0",
       "sidebar-ring": "#e6067a",
-      "font-sans": "Quicksand, sans-serif",
+      "font-sans": "Poppins, sans-serif",
       "font-serif": "Playfair Display, serif",
       "font-mono": "Space Mono, monospace",
       radius: "0.5rem",
