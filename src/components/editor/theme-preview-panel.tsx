@@ -69,7 +69,7 @@ const ThemePreviewPanel = ({
               <Maximize className="size-4 group-hover:scale-120 transition-all" />
             )}
           </Button>
-          {(!isCodePanelOpen || !isFullscreen) && (
+          {!isCodePanelOpen && !isFullscreen && (
             <Button
               variant="ghost"
               size="icon"
