@@ -2,16 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
-import NotFound from "./pages/not-found";
+import { Outlet } from "react-router";
 import { ThemeProvider } from "./components/theme-provider";
 import { PostHogProvider } from "posthog-js/react";
-import { HelmetProvider } from "react-helmet-async";
-import { lazy, Suspense } from "react";
-import { Loading } from "@/components/loading";
-
-const Index = lazy(() => import("./pages/index"));
+import * as Helmet from "react-helmet-async";
 
 const queryClient = new QueryClient();
 const options = {
@@ -19,7 +13,7 @@ const options = {
 };
 
 const App = () => (
-  <HelmetProvider>
+  <Helmet.HelmetProvider>
     <ThemeProvider defaultTheme="light">
       <PostHogProvider
         apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
@@ -29,20 +23,12 @@ const App = () => (
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <Suspense fallback={<Loading />}>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/editor/theme" element={<Index />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </Suspense>
+            <Outlet />
           </TooltipProvider>
         </QueryClientProvider>
       </PostHogProvider>
     </ThemeProvider>
-  </HelmetProvider>
+  </Helmet.HelmetProvider>
 );
 
 export default App;

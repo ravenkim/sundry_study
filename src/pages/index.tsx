@@ -1,7 +1,7 @@
 import { getEditorConfig } from "@/config/editors";
 import Editor from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import { Moon, Sun } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg?react";
 import { cn } from "../lib/utils";
@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet-async";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import BuyMeACoffeeIcon from "@/assets/buymeacoffee.svg?react";
 
-const Index = () => {
+export default function Component() {
   const { editorType = "theme" } = useParams();
   const editorConfig = getEditorConfig(editorType);
   const { theme, toggleTheme } = useTheme();
@@ -81,6 +81,4 @@ const Index = () => {
       </main>
     </div>
   );
-};
-
-export default Index;
+}

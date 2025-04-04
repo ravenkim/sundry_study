@@ -9,6 +9,7 @@ lerna-debug.log*
 
 .env
 
+.react-router/
 node_modules
 dist
 dist-ssr

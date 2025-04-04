@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Menu, Moon, Sun, X, ChevronRight } from "lucide-react";
 import logo from "@/assets/logo.png";
 import GitHubIcon from "@/assets/github.svg?react";
