@@ -1,0 +1,130 @@
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import App from "./app"; // Import the main App component
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Primary Meta Tags */}
+        <title>
+          Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator
+        </title>
+        <meta
+          name="title"
+          content="Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator"
+        />
+        <meta
+          name="description"
+          content="tweakcn is a powerful theme editor for shadcn/ui components, offering beautifully designed themes and seamless Tailwind CSS integration. Create, customize, and export themes instantly."
+        />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://tweakcn.com/" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tweakcn.com/" />
+        <meta
+          property="og:title"
+          content="Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator"
+        />
+        <meta
+          property="og:description"
+          content="tweakcn is a powerful theme editor for shadcn/ui components, offering beautifully designed themes and seamless Tailwind CSS integration. Create, customize, and export themes instantly."
+        />
+        <meta property="og:image" content="https://tweakcn.com/og-image.png" />
+        <meta property="og:site_name" content="tweakcn" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://tweakcn.com/" />
+        <meta
+          property="twitter:title"
+          content="Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator"
+        />
+        <meta
+          property="twitter:description"
+          content="tweakcn is a powerful theme editor for shadcn/ui components, offering beautifully designed themes and seamless Tailwind CSS integration. Create, customize, and export themes instantly."
+        />
+        <meta property="twitter:image" content="https://tweakcn.com/og-image.png" />
+
+        {/* Keywords */}
+        <meta
+          name="keywords"
+          content="theme editor, theme generator, shadcn, ui, components, react, tailwind, button, editor, visual editor, component editor, web development, frontend, design system, UI components, React components, Tailwind CSS, shadcn/ui themes"
+        />
+
+        {/* Author */}
+        <meta name="author" content="Sahaj Jain" />
+
+        {/* Theme Color */}
+        <meta name="theme-color" content="#000000" />
+
+        {/* Additional Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="generator" content="Vite" />
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "tweakcn",
+              description:
+                "A powerful theme editor for shadcn/ui components, offering beautifully designed themes and seamless Tailwind CSS integration.",
+              url: "https://tweakcn.com",
+              applicationCategory: "DesignApplication",
+              operatingSystem: "Web",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              author: {
+                "@type": "Person",
+                name: "Sahaj Jain",
+              },
+            }),
+          }}
+        />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {children}
+        <ScrollRestoration />
+        <Scripts />
+        {/* IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! */}
+        <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+        {/* <script type="module" src="/src/main.tsx"></script> - This is now handled by Scripts */}
+      </body>
+    </html>
+  );
+}
+
+export default function Root() {
+  return <App />;
+}

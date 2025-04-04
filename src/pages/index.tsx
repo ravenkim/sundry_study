@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet-async";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import BuyMeACoffeeIcon from "@/assets/buymeacoffee.svg?react";
 
-const Index = () => {
+export default function Component() {
   const { editorType = "theme" } = useParams();
   const editorConfig = getEditorConfig(editorType);
   const { theme, toggleTheme } = useTheme();
@@ -81,6 +81,4 @@ const Index = () => {
       </main>
     </div>
   );
-};
-
-export default Index;
+}
