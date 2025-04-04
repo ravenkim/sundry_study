@@ -69,6 +69,10 @@ export interface ThemeEditorControlsProps {
 }
 
 export type ThemePreset = {
-  light?: Partial<ThemeStyleProps>;
-  dark?: Partial<ThemeStyleProps>;
+  createdAt?: string;
+  label?: string;
+  styles: {
+    light?: Partial<ThemeStyleProps>;
+    dark?: Partial<ThemeStyleProps>;
+  };
 };

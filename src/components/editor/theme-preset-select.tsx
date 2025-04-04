@@ -107,7 +107,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                   />
                 </div>
                 <span className="capitalize font-medium">
-                  {(value || "default").replace(/-/g, " ")}
+                  {presets[value || "default"]?.label || "default"}
                 </span>
               </div>
               <ChevronDown className="size-4 shrink-0 opacity-50" />
