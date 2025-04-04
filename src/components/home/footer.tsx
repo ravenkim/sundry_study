@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import logo from "@/assets/logo.png";
 import GitHubIcon from "@/assets/github.svg?react";
 import TwitterIcon from "@/assets/twitter.svg?react";

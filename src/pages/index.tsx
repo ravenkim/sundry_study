@@ -1,7 +1,7 @@
 import { getEditorConfig } from "@/config/editors";
 import Editor from "@/components/editor/editor";
 import { Button } from "@/components/ui/button";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import { Moon, Sun } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg?react";
 import { cn } from "../lib/utils";

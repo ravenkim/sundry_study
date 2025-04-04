@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useEditorStore } from "@/store/editor-store";
 import { motion } from "motion/react";
 import { ArrowRight, Check, Copy, Circle, Eye, Palette } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const ColorBox = ({ color }: { color: string }) => {
   return (
