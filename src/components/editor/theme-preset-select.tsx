@@ -25,6 +25,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { Input } from "../ui/input";
+import { Badge } from "../ui/badge";
 
 interface ThemePresetSelectProps {
   presets: Record<string, ThemePreset>;
@@ -39,6 +40,14 @@ const ColorBox = ({ color }: { color: string }) => {
       style={{ backgroundColor: color }}
     />
   );
+};
+
+const isThemeNew = (preset: ThemePreset) => {
+  if (!preset.createdAt) return false;
+  const createdAt = new Date(preset.createdAt);
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  return createdAt > oneWeekAgo;
 };
 
 const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
@@ -75,12 +84,27 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   );
 
   const filteredPresets = useMemo(() => {
-    return search.trim() === ""
-      ? presetNames
-      : presetNames.filter((name) =>
-          name.toLowerCase().includes(search.toLowerCase())
-        );
-  }, [presetNames, search]);
+    const filteredList =
+      search.trim() === ""
+        ? presetNames
+        : presetNames.filter((name) =>
+            name.toLowerCase().includes(search.toLowerCase())
+          );
+
+    return filteredList.sort((a, b) => {
+      // Keep "default" at the top
+      if (a === "default") return -1;
+      if (b === "default") return 1;
+
+      // Then sort new themes
+      const isANew = presets[a] && isThemeNew(presets[a]);
+      const isBNew = presets[b] && isThemeNew(presets[b]);
+
+      if (isANew && !isBNew) return -1;
+      if (!isANew && isBNew) return 1;
+      return 0;
+    });
+  }, [presetNames, search, presets]);
 
   return (
     <div className="flex items-center gap-1">
@@ -180,7 +204,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                         onPresetChange(presetName);
                         setSearch("");
                       }}
-                      className="flex items-center gap-2 py-2.5"
+                      className="flex items-center gap-2 py-2 hover:bg-secondary/50"
                     >
                       <div className="flex gap-0.5 mr-2">
                         <ColorBox
@@ -196,9 +220,19 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                           color={getPresetThemeStyles(presetName)[mode].border}
                         />
                       </div>
-                      <span className="flex-1 capitalize text-sm font-medium">
-                        {presetName.replace(/-/g, " ")}
-                      </span>
+                      <div className="flex items-center gap-2 flex-1">
+                        <span className="capitalize text-sm font-medium">
+                          {presets[presetName]?.label || presetName}
+                        </span>
+                        {presets[presetName] && isThemeNew(presets[presetName]) && (
+                          <Badge
+                            variant="secondary"
+                            className="text-xs rounded-full"
+                          >
+                            New
+                          </Badge>
+                        )}
+                      </div>
                       {presetName === value && (
                         <Check className="h-4 w-4 shrink-0 opacity-70" />
                       )}

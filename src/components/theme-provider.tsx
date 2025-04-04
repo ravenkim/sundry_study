@@ -33,6 +33,12 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     const mode = themeState.currentMode;
     const themeStyles = themeState.styles;
 
+    if (mode === "light") {
+      root.classList.remove("dark");
+    } else {
+      root.classList.add("dark");
+    }
+
     const commonNonColorKeys = [
       "font-sans",
       "font-serif",
