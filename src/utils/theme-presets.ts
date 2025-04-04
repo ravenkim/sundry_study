@@ -107,6 +107,7 @@ export const presets: Record<string, ThemePreset> = {
 
   perpetuity: {
     label: "Perpetuity",
+    createdAt: "2025-04-01",
     styles: {
       light: {
         background: "#e8f0f0",
