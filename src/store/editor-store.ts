@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ThemeEditorState, EditorType } from "@/types/editor";
-import * as _ from "lodash";
+import { isEqual } from "@ngard/tiny-isequal";
 import { defaultThemeState } from "@/config/theme";
 import { getPresetThemeStyles } from "../utils/theme-presets";
 
@@ -39,7 +39,7 @@ export const useEditorStore = create<EditorStore>()(
       hasStateChanged: (type: EditorType) => {
         const state = get();
         if (type === "theme") {
-          return !_.isEqual(state.themeState.styles, defaultThemeState.styles);
+          return isEqual(state.themeState.styles, defaultThemeState.styles);
         }
         return false;
       },
