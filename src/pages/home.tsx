@@ -9,6 +9,18 @@ import { FAQ } from "@/components/home/faq";
 import { CTA } from "@/components/home/cta";
 import { Footer } from "@/components/home/footer";
 
+export function meta() {
+  return [
+    {
+      title: "Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator",
+    },
+    {
+      name: "description",
+      content: "Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator",
+    },
+  ];
+}
+
 export default function Component() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
