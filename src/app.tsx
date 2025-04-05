@@ -8,6 +8,7 @@ import { PostHogProvider } from "posthog-js/react";
 import Home from "./pages/home";
 import { lazy, Suspense } from "react";
 import { Loading } from "./components/loading";
+import { HelmetProvider } from "react-helmet-async";
 
 const Index = lazy(() => import("@/pages/index"));
 
@@ -23,16 +24,18 @@ const App = () => (
       options={options}
     >
       <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/editor/theme" element={<Index />} />
-            </Routes>
-          </Suspense>
-        </TooltipProvider>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/editor/theme" element={<Index />} />
+              </Routes>
+            </Suspense>
+          </TooltipProvider>
+        </HelmetProvider>
       </QueryClientProvider>
     </PostHogProvider>
   </ThemeProvider>

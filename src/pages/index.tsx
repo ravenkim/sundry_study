@@ -9,7 +9,7 @@ import { useTheme } from "../components/theme-provider";
 import logo from "@/assets/logo.png";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import BuyMeACoffeeIcon from "@/assets/buymeacoffee.svg?react";
-// import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 
 export default function Component() {
   const { theme, toggleTheme } = useTheme();
@@ -17,13 +17,13 @@ export default function Component() {
 
   return (
     <>
-      {/* <Helmet>
-        <title>Theme Generator for shadcn/ui</title>
+      <Helmet>
+        <title>tweakcn — Theme Generator for shadcn/ui</title>
         <meta
           name="description"
-          content="Create and customize beautiful themes for shadcn/ui components with tweakcn's interactive editor. Supports Tailwind CSS v4, Shadcn UI, and custom styles. Modify properties, preview changes, and get the code in real time."
+          content="Easily customize and preview your shadcn/ui theme with tweakcn. Modify colors, fonts, and styles in real-time."
         />
-      </Helmet> */}
+      </Helmet>
       <div
         className={cn(
           "h-screen flex flex-col text-foreground bg-background transition-colors"
