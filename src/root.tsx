@@ -1,4 +1,4 @@
-import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import App from "./app"; // Import the main App component
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -45,5 +45,5 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function Root() {
-  return <App />;
+  return <Outlet />;
 }
