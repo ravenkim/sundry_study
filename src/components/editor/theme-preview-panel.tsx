@@ -13,6 +13,7 @@ const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
 const DemoTasks = lazy(() => import("@/components/examples/tasks"));
 const DemoMusic = lazy(() => import("@/components/examples/music"));
+const DemoDashboard = lazy(() => import("@/components/examples/dashboard"));
 
 const ThemePreviewPanel = ({
   styles,
@@ -92,8 +93,8 @@ const ThemePreviewPanel = ({
               <TabsTriggerPill value="mail">Mail</TabsTriggerPill>
               <TabsTriggerPill value="tasks">Tasks</TabsTriggerPill>
               <TabsTriggerPill value="music">Music</TabsTriggerPill>
+              <TabsTriggerPill value="dashboard">Dashboard</TabsTriggerPill>
             </div>
-            <TabsTriggerPill value="components">Components</TabsTriggerPill>
             <TabsTriggerPill value="colors">Color Palette</TabsTriggerPill>
           </TabsList>
 
@@ -129,8 +130,13 @@ const ThemePreviewPanel = ({
                 </ExamplesPreviewContainer>
               </TabsContent>
 
-              <TabsContent value="components" className="p-4 space-y-6 mt-0">
-                <ComponentsShowcase styles={styles} currentMode={currentMode} />
+              <TabsContent
+                value="dashboard"
+                className="space-y-6 mt-0 h-full @container relative"
+              >
+                <ExamplesPreviewContainer className="min-w-[1400px]">
+                  <DemoDashboard />
+                </ExamplesPreviewContainer>
               </TabsContent>
 
               <TabsContent value="colors" className="p-4 space-y-6">
