@@ -2,9 +2,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet } from "react-router";
+import { Route, Routes } from "react-router";
 import { ThemeProvider } from "./components/theme-provider";
 import { PostHogProvider } from "posthog-js/react";
+import Home from "./pages/home";
+import { lazy, Suspense } from "react";
+import { Loading } from "./components/loading";
+
+const Index = lazy(() => import("@/pages/index"));
 
 const queryClient = new QueryClient();
 const options = {
@@ -21,7 +26,12 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <Outlet />
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/editor/theme" element={<Index />} />
+            </Routes>
+          </Suspense>
         </TooltipProvider>
       </QueryClientProvider>
     </PostHogProvider>
