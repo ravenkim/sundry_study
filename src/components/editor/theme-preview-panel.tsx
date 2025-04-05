@@ -135,7 +135,7 @@ const ThemePreviewPanel = ({
                 value="dashboard"
                 className="space-y-6 mt-0 h-full @container relative"
               >
-                <ExamplesPreviewContainer className="min-w-[1300px]">
+                <ExamplesPreviewContainer className="min-w-[1400px]">
                   <DemoDashboard />
                 </ExamplesPreviewContainer>
               </TabsContent>
