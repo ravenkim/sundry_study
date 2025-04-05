@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "tsx scripts/generate-theme-registry.ts && vite build",
+    "build": "tsx scripts/generate-theme-registry.ts && react-router build",
     "build:dev": "tsx scripts/generate-theme-registry.ts && vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
