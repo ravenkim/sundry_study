@@ -39,7 +39,7 @@ export const useEditorStore = create<EditorStore>()(
       hasStateChanged: (type: EditorType) => {
         const state = get();
         if (type === "theme") {
-          return isEqual(state.themeState.styles, defaultThemeState.styles);
+          return !isEqual(state.themeState.styles, defaultThemeState.styles);
         }
         return false;
       },
