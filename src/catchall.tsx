@@ -6,14 +6,12 @@ export function meta() {
   const ogImage = "https://tweakcn.com/og-image.png";
   const title =
     "Beautiful themes for shadcn/ui — tweakcn | Theme Editor & Generator";
-  const shortDescription =
+  const description =
     "Customize theme for shadcn/ui with tweakcn's interactive editor. Supports Tailwind CSS v4, Shadcn UI, and custom styles. Modify properties, preview changes, and get the code in real time.";
-  const longDescription =
-    "tweakcn is a powerful theme editor for shadcn/ui components, offering beautifully designed themes and seamless Tailwind CSS integration. Create, customize, and export themes instantly.";
 
   return [
     { title },
-    { name: "description", content: shortDescription },
+    { name: "description", content: description },
     {
       name: "keywords",
       content:
@@ -25,7 +23,7 @@ export function meta() {
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:url", content: siteUrl },
     { name: "twitter:title", content: title },
-    { name: "twitter:description", content: longDescription },
+    { name: "twitter:description", content: description },
     { name: "twitter:image", content: ogImage },
     { name: "robots", content: "index, follow" },
     { name: "language", content: "English" },
@@ -36,7 +34,7 @@ export function meta() {
     { property: "og:type", content: "website" },
     { property: "og:url", content: siteUrl },
     { property: "og:title", content: title },
-    { property: "og:description", content: longDescription },
+    { property: "og:description", content: description },
     { property: "og:image", content: ogImage },
     { property: "og:site_name", content: siteName },
   ];
