@@ -3,7 +3,7 @@ import { useTheme } from "@/components/theme-provider";
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import { Menu, Moon, Sun, X, ChevronRight } from "lucide-react";
-import logo from "@/assets/logo.png";
+import Logo from "@/assets/logo.svg?react";
 import GitHubIcon from "@/assets/github.svg?react";
 import { useGithubStars } from "@/hooks/use-github-stars";
 
@@ -32,7 +32,7 @@ export function Header({
       <div className="container flex h-16 px-4 min-w-full items-center justify-between">
         <Link to="/">
           <div className="flex items-center gap-2 font-bold">
-            <img src={logo} alt="tweakcn" className="h-8 w-8" />
+            <Logo className="size-6" />
             <span>tweakcn</span>
           </div>
         </Link>
