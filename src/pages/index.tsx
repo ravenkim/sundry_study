@@ -4,12 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 import { Moon, Sun } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg?react";
+import TwitterIcon from "@/assets/twitter.svg?react";
+import DiscordIcon from "@/assets/discord.svg?react";
 import { cn } from "../lib/utils";
 import { useTheme } from "../components/theme-provider";
 import logo from "@/assets/logo.png";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import BuyMeACoffeeIcon from "@/assets/buymeacoffee.svg?react";
 import { Helmet } from "react-helmet-async";
+import { SocialLink } from "@/components/home/social-link";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+import * as SwitchPrimitives from "@radix-ui/react-switch";
 
 export default function Component() {
   const { theme, toggleTheme } = useTheme();
@@ -34,43 +40,43 @@ export default function Component() {
             <div className="flex items-center gap-1">
               <Link to="/" className="flex items-center gap-2">
                 <img src={logo} alt="tweakcn" className="h-8 w-8" title="tweakcn" />
-                <span className="font-bold">tweakcn</span>
+                <span className="font-bold hidden md:block">tweakcn</span>
               </Link>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="secondary" size="icon" className="group">
-                <a
-                  href="https://buymeacoffee.com/sahajjain1z"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group-hover:scale-130 group-hover:rotate-16 transition-all duration-200"
-                >
-                  <BuyMeACoffeeIcon className="size-12" />
-                </a>
-              </Button>
-              <Button variant="secondary" asChild>
-                <a
-                  href="https://github.com/jnsahaj/tweakcn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold"
-                >
-                  <GitHubIcon className="h-5 w-5" />
-                  {stargazersCount > 0 && stargazersCount}
-                </a>
-              </Button>
-              <Button
-                variant="secondary"
-                size="icon"
-                onClick={toggleTheme}
-                className="group"
+            <div className="flex items-center gap-3.5">
+              <SocialLink
+                href="https://github.com/jnsahaj/tweakcn"
+                className="flex items-center gap-2 font-mono text-sm"
               >
-                {theme === "light" ? (
-                  <Sun className="size-6 group-hover:scale-110 group-hover:rotate-16 transition-all duration-200" />
-                ) : (
-                  <Moon className="size-6 group-hover:scale-110 group-hover:-rotate-16 transition-all duration-200" />
-                )}
-              </Button>
+                <GitHubIcon className="size-4" />
+                {stargazersCount > 0 && stargazersCount}
+              </SocialLink>
+              <Separator orientation="vertical" className="h-5" />
+              <div className="hidden md:flex items-center gap-3.5">
+                <SocialLink href="https://buymeacoffee.com/sahajjain1z">
+                  <BuyMeACoffeeIcon className="size-4" />
+                </SocialLink>
+                <SocialLink href="https://discord.gg/Phs4u2NM3n">
+                  <DiscordIcon className="size-5" />
+                </SocialLink>
+              </div>
+              <SocialLink href="https://x.com/iamsahaj_xyz">
+                <TwitterIcon className="size-4" />
+              </SocialLink>
+              <Separator orientation="vertical" className="h-5" />
+              <SwitchPrimitives.Root
+                checked={theme === "dark"}
+                onCheckedChange={() => toggleTheme()}
+                className="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-accent data-[state=unchecked]:bg-input"
+              >
+                <SwitchPrimitives.Thumb className="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 flex items-center justify-center">
+                  {theme === "dark" ? (
+                    <Moon className="size-3" />
+                  ) : (
+                    <Sun className="size-3" />
+                  )}
+                </SwitchPrimitives.Thumb>
+              </SwitchPrimitives.Root>
             </div>
           </div>
         </header>
