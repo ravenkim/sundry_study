@@ -21,6 +21,11 @@ export function Header({
   const { theme, toggleTheme } = useTheme();
   const { stargazersCount } = useGithubStars("jnsahaj", "tweakcn");
 
+  const handleThemeToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { clientX: x, clientY: y } = event;
+    toggleTheme({ x, y });
+  };
+
   return (
     <header
       className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${
@@ -80,7 +85,7 @@ export function Header({
             <Button
               variant="secondary"
               size="icon"
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               className="rounded-full transition-transform hover:scale-105"
             >
               {theme === "light" ? (
@@ -107,7 +112,7 @@ export function Header({
           <Button
             variant="ghost"
             size="icon"
-            onClick={toggleTheme}
+            onClick={handleThemeToggle}
             className="rounded-full cursor-pointer"
           >
             {theme === "dark" ? (

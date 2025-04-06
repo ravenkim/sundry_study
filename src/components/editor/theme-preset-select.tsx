@@ -106,6 +106,11 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     });
   }, [presetNames, search, presets]);
 
+  const handleThemeToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { clientX: x, clientY: y } = event;
+    toggleTheme({ x, y });
+  };
+
   return (
     <div className="flex items-center gap-1">
       <TooltipProvider>
@@ -162,7 +167,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                         variant="ghost"
                         size="sm"
                         className="h-7 w-7 p-0"
-                        onClick={toggleTheme}
+                        onClick={handleThemeToggle}
                       >
                         {theme === "light" ? (
                           <Sun className="h-3.5 w-3.5" />
