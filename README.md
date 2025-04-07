@@ -14,7 +14,7 @@
 
 <br />
 
-**[tweakcn](https://tweakcn.com)** is a powerful Visual Theme Editor for tailwind CSS & shadcn/ui components. It comes with Beautiful theme presets to get started, while aimming to offer advanced customisation for each aspect of your UI
+**[tweakcn](https://tweakcn.com)** is a powerful Visual Theme Editor for tailwind CSS & shadcn/ui components. It comes with Beautiful theme presets to get started, while aiming to offer advanced customisation for each aspect of your UI
 
 ![tweakcn.com](public/og-image.png)
 
