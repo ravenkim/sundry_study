@@ -26,6 +26,17 @@ export function Header({
     toggleTheme({ x, y });
   };
 
+  const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetId = e.currentTarget.getAttribute("href")?.slice(1);
+    if (!targetId) return;
+
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header
       className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${
@@ -50,6 +61,7 @@ export function Header({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
                 href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                onClick={handleScrollToSection}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground relative group"
               >
                 {item}
@@ -148,8 +160,11 @@ export function Header({
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: i * 0.05 }}
                   href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  onClick={(e) => {
+                    handleScrollToSection(e);
+                    setMobileMenuOpen(false);
+                  }}
                   className="py-2 text-sm font-medium relative overflow-hidden group"
-                  onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="relative z-10">{item}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
