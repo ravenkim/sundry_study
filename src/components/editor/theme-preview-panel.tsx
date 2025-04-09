@@ -5,9 +5,12 @@ import ColorPreview from "./theme-preview/color-preview";
 import ComponentsShowcase from "./theme-preview/components-showcase";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
 import ExamplesPreviewContainer from "./theme-preview/examples-preview-container";
-import { lazy, useState, useEffect } from "react";
+import { lazy } from "react";
 import { Button } from "@/components/ui/button";
-import { Maximize, Minimize, PanelRight } from "lucide-react";
+import { Maximize, Minimize, PanelRight, Moon, Sun } from "lucide-react";
+import { useFullscreen } from "@/hooks/use-fullscreen";
+import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme-provider";
 
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
@@ -21,42 +24,43 @@ const ThemePreviewPanel = ({
   isCodePanelOpen,
   onCodePanelToggle,
 }: ThemeEditorPreviewProps) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        setIsFullscreen(false);
-      }
-    };
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    };
-  }, []);
+  const { isFullscreen, toggleFullscreen } = useFullscreen();
+  const { theme, toggleTheme } = useTheme();
 
   if (!styles || !styles[currentMode]) {
     return null;
   }
 
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-    if (!isFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
+  const handleThemeToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { clientX: x, clientY: y } = event;
+    toggleTheme({ x, y });
   };
 
   return (
     <div
-      className={`max-h-full flex flex-col ${isFullscreen ? "fixed inset-0 z-50 bg-background p-4" : ""
-        }`}
+      className={cn(
+        "max-h-full flex flex-col",
+        isFullscreen && "fixed inset-0 z-50 bg-background p-4"
+      )}
     >
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Theme Preview</h2>
         <div className="flex items-center gap-0">
+          {isFullscreen && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleThemeToggle}
+              className="h-8 group"
+              title="Toggle Theme"
+            >
+              {theme === "light" ? (
+                <Sun className="size-4 group-hover:scale-120 transition-all" />
+              ) : (
+                <Moon className="size-4 group-hover:scale-120 transition-all" />
+              )}
+            </Button>
+          )}
           <Button
             variant="ghost"
             size="icon"
