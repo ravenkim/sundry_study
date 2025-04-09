@@ -9,6 +9,7 @@ import Home from "./pages/home";
 import { lazy, Suspense } from "react";
 import { Loading } from "./components/loading";
 import { HelmetProvider } from "react-helmet-async";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 const Index = lazy(() => import("@/pages/index"));
 
@@ -18,27 +19,29 @@ const options = {
 };
 
 const App = () => (
-  <ThemeProvider defaultTheme="light">
-    <PostHogProvider
-      apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
-      options={options}
-    >
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/editor/theme" element={<Index />} />
-              </Routes>
-            </Suspense>
-          </TooltipProvider>
-        </HelmetProvider>
-      </QueryClientProvider>
-    </PostHogProvider>
-  </ThemeProvider>
+  <NuqsAdapter>
+    <ThemeProvider defaultTheme="light">
+      <PostHogProvider
+        apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
+        options={options}
+      >
+        <QueryClientProvider client={queryClient}>
+          <HelmetProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/editor/theme" element={<Index />} />
+                </Routes>
+              </Suspense>
+            </TooltipProvider>
+          </HelmetProvider>
+        </QueryClientProvider>
+      </PostHogProvider>
+    </ThemeProvider>
+  </NuqsAdapter>
 );
 
 export default App;

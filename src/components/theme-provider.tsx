@@ -4,6 +4,7 @@ import { colorFormatter } from "../utils/color-converter";
 import { setShadowVariables } from "@/utils/shadows";
 import { applyStyleToElement } from "@/utils/apply-style-to-element";
 import { ThemeStyleProps, ThemeStyles } from "@/types/theme";
+import { useThemePresetFromUrl } from "@/hooks/use-theme-preset-from-url";
 
 type Theme = "dark" | "light";
 
@@ -79,6 +80,9 @@ const updateThemeClass = (root: HTMLElement, mode: Theme) => {
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const { themeState, setThemeState } = useEditorStore();
+
+  // Handle theme preset from URL
+  useThemePresetFromUrl();
 
   useLayoutEffect(() => {
     const root = window.document.documentElement;
