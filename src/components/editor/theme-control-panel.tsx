@@ -34,10 +34,15 @@ const ThemeControlPanel = ({
   styles,
   currentMode,
   onChange,
-  onReset,
-  hasChanges = false,
 }: ThemeEditorControlsProps) => {
-  const { applyThemePreset, themeState } = useEditorStore();
+  const {
+    applyThemePreset,
+    themeState,
+    resetToCurrentPreset,
+    resetToDefault,
+    hasDefaultThemeChanged,
+    hasCurrentPresetChanged,
+  } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
 
   const currentStyles = styles?.[currentMode];
@@ -98,8 +103,10 @@ const ThemeControlPanel = ({
           <h2 className="text-lg font-semibold">Theme Editor</h2>
         </div>
         <ThemeControlActions
-          hasChanges={hasChanges}
-          onReset={onReset}
+          hasChanges={hasDefaultThemeChanged()}
+          hasPresetChanges={hasCurrentPresetChanged()}
+          onReset={resetToDefault}
+          onResetToPreset={resetToCurrentPreset}
           onImportClick={() => setCssImportOpen(true)}
         />
       </div>

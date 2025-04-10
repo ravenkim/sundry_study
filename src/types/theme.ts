@@ -64,8 +64,6 @@ export interface ThemeEditorControlsProps {
   styles: ThemeStyles;
   currentMode: "light" | "dark";
   onChange: (styles: ThemeStyles) => void;
-  onReset: () => void;
-  hasChanges?: boolean;
 }
 
 export type ThemePreset = {

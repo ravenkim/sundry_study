@@ -9,8 +9,10 @@ interface EditorStore {
   themeState: ThemeEditorState;
   setThemeState: (state: ThemeEditorState) => void;
   applyThemePreset: (preset: string) => void;
-  resetToDefault: (type: EditorType) => void;
-  hasStateChanged: (type: EditorType) => boolean;
+  resetToDefault: () => void;
+  resetToCurrentPreset: () => void;
+  hasDefaultThemeChanged: () => boolean;
+  hasCurrentPresetChanged: () => boolean;
 }
 
 export const useEditorStore = create<EditorStore>()(
@@ -30,18 +32,27 @@ export const useEditorStore = create<EditorStore>()(
           },
         });
       },
-      resetToDefault: (type: EditorType) => {
-        if (type === "theme") {
-          const mode = get().themeState.currentMode;
-          set({ themeState: { ...defaultThemeState, currentMode: mode } });
-        }
+      resetToDefault: () => {
+        const mode = get().themeState.currentMode;
+        set({ themeState: { ...defaultThemeState, currentMode: mode } });
       },
-      hasStateChanged: (type: EditorType) => {
+      resetToCurrentPreset: () => {
+        const themeState = get().themeState;
+        set({
+          themeState: {
+            ...themeState,
+            styles: getPresetThemeStyles(themeState.preset),
+          },
+        });
+      },
+      hasDefaultThemeChanged: () => {
         const state = get();
-        if (type === "theme") {
-          return !isEqual(state.themeState.styles, defaultThemeState.styles);
-        }
-        return false;
+        return !isEqual(state.themeState.styles, defaultThemeState.styles);
+      },
+      hasCurrentPresetChanged: () => {
+        const state = get();
+        const presetStyles = getPresetThemeStyles(state.themeState.preset);
+        return !isEqual(state.themeState.styles, presetStyles);
       },
     }),
     {

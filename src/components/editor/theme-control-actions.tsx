@@ -1,5 +1,4 @@
-import React from "react";
-import { FileCode, MoreVertical, RotateCcw } from "lucide-react";
+import { FileCode, MoreVertical, RotateCcw, RefreshCw } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -7,17 +6,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import ResetButton from "./reset-button";
 
 interface ThemeControlActionsProps {
   hasChanges: boolean;
+  hasPresetChanges: boolean;
   onReset: () => void;
+  onResetToPreset: () => void;
   onImportClick: () => void;
 }
 
 const ThemeControlActions = ({
   hasChanges,
+  hasPresetChanges,
   onReset,
+  onResetToPreset,
   onImportClick,
 }: ThemeControlActionsProps) => {
   return (
@@ -34,12 +36,20 @@ const ThemeControlActions = ({
           Import CSS
         </DropdownMenuItem>
         <DropdownMenuItem
+          onClick={onResetToPreset}
+          disabled={!hasPresetChanges}
+          title={hasPresetChanges ? "Reset to preset" : "No changes from preset"}
+        >
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Reset to Preset
+        </DropdownMenuItem>
+        <DropdownMenuItem
           onClick={onReset}
           disabled={!hasChanges}
           title={hasChanges ? "Reset theme" : "No changes to reset"}
         >
           <RotateCcw className="mr-2 h-4 w-4" />
-          Reset theme
+          Reset to Default
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

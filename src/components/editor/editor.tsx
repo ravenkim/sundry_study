@@ -23,25 +23,13 @@ const isThemeStyles = (styles: any): styles is ThemeStyles => {
 };
 
 const Editor: React.FC<EditorProps> = ({ config }) => {
-  const { themeState, setThemeState, resetToDefault, hasStateChanged } =
-    useEditorStore();
-  const { toast } = useToast();
+  const { themeState, setThemeState, hasStateChanged } = useEditorStore();
   const Controls = config.controls;
   const Preview = config.preview;
   const [isCodePanelOpen, setIsCodePanelOpen] = useState(true);
 
-  const hasChanges = hasStateChanged(config.type);
-
   const handleStyleChange = (newStyles: ThemeStyles) => {
     setThemeState({ ...themeState, styles: newStyles });
-  };
-
-  const handleReset = () => {
-    resetToDefault(config.type);
-    toast({
-      title: "Reset successful",
-      description: "All settings have been restored to their default values.",
-    });
   };
 
   // Ensure we have valid theme styles
@@ -59,8 +47,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
               <Controls
                 styles={styles}
                 onChange={handleStyleChange}
-                onReset={handleReset}
-                hasChanges={hasChanges}
                 currentMode={themeState.currentMode}
               />
             </div>
@@ -119,8 +105,6 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
               <Controls
                 styles={styles}
                 onChange={handleStyleChange}
-                onReset={handleReset}
-                hasChanges={hasChanges}
                 currentMode={themeState.currentMode}
               />
             </div>
