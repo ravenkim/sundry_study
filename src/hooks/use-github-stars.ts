@@ -1,35 +1,29 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 interface GitHubStarsResponse {
   stargazers_count: number;
 }
 
+async function fetchGithubStars(
+  owner: string,
+  repo: string
+): Promise<GitHubStarsResponse> {
+  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch stargazers count");
+  }
+  return response.json();
+}
+
 export function useGithubStars(owner: string, repo: string) {
-  const [stargazersCount, setStargazersCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["github-stars", owner, repo],
+    queryFn: () => fetchGithubStars(owner, repo),
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          `https://api.github.com/repos/${owner}/${repo}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch stargazers count");
-        }
-        const data: GitHubStarsResponse = await response.json();
-        setStargazersCount(data.stargazers_count);
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error("An error occurred"));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [owner, repo]);
-
-  return { stargazersCount, isLoading, error };
+  return {
+    stargazersCount: data?.stargazers_count ?? 0,
+    isLoading,
+    error: error as Error | null,
+  };
 }
