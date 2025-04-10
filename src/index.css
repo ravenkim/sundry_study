@@ -1,7 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-@utility animate-in {
-  animation: fadeIn 0.3s ease forwards;
+:root {
+  --tracking-normal: 0em;
 }
 
 @theme inline {
