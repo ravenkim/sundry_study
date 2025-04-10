@@ -13,6 +13,7 @@ import {
 } from "../ui/select";
 import { usePostHog } from "posthog-js/react";
 import { useEditorStore } from "@/store/editor-store";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CodePanelProps {
   config: EditorConfig;
@@ -90,15 +91,19 @@ const CodePanel: React.FC<CodePanelProps> = ({
       <div className="flex-none mb-4">
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">Code</h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onCodePanelToggle}
-            className="h-8 invisible md:visible group"
-            title="Collapse Code Panel"
-          >
-            <PanelRight className="size-4 group-hover:scale-120 transition-all" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onCodePanelToggle}
+                className="h-8 invisible md:visible group"
+              >
+                <PanelRight className="size-4 group-hover:scale-120 transition-all" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Collapse Code Panel</TooltipContent>
+          </Tooltip>
         </div>
         {preset && preset !== "default" && (
           <div className="mt-4 rounded-md overflow-hidden border">

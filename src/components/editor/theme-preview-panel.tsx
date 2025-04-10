@@ -10,6 +10,7 @@ import { Maximize, Minimize, PanelRight, Moon, Sun } from "lucide-react";
 import { useFullscreen } from "@/hooks/use-fullscreen";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/theme-provider";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
@@ -46,44 +47,58 @@ const ThemePreviewPanel = ({
         <h2 className="text-lg font-semibold">Theme Preview</h2>
         <div className="flex items-center gap-0">
           {isFullscreen && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleThemeToggle}
-              className="h-8 group"
-              title="Toggle Theme"
-            >
-              {theme === "light" ? (
-                <Sun className="size-4 group-hover:scale-120 transition-all" />
-              ) : (
-                <Moon className="size-4 group-hover:scale-120 transition-all" />
-              )}
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleThemeToggle}
+                  className="h-8 group"
+                >
+                  {theme === "light" ? (
+                    <Sun className="size-4 group-hover:scale-120 transition-all" />
+                  ) : (
+                    <Moon className="size-4 group-hover:scale-120 transition-all" />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Toggle Theme</TooltipContent>
+            </Tooltip>
           )}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleFullscreen}
-            className="h-8 group"
-            title="Toggle Fullscreen"
-          >
-            {isFullscreen ? (
-              <Minimize className="size-4 group-hover:scale-120 transition-all" />
-            ) : (
-              <Maximize className="size-4 group-hover:scale-120 transition-all" />
-            )}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleFullscreen}
+                className="h-8 group"
+              >
+                {isFullscreen ? (
+                  <Minimize className="size-4 group-hover:scale-120 transition-all" />
+                ) : (
+                  <Maximize className="size-4 group-hover:scale-120 transition-all" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {isFullscreen ? "Exit full screen" : "Full screen"}
+            </TooltipContent>
+          </Tooltip>
           {!isCodePanelOpen && !isFullscreen && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => onCodePanelToggle(!isCodePanelOpen)}
-              className="h-8 invisible md:visible group"
-              aria-label="Hide Code Panel"
-              title="Hide Code Panel"
-            >
-              <PanelRight className="size-4 group-hover:scale-120 transition-all" />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onCodePanelToggle(!isCodePanelOpen)}
+                  className="h-8 invisible md:visible group"
+                  aria-label="Show Code Panel"
+                >
+                  <PanelRight className="size-4 group-hover:scale-120 transition-all" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Hide Code Panel</TooltipContent>
+            </Tooltip>
           )}
         </div>
       </div>

@@ -1,5 +1,4 @@
 import { getEditorConfig } from "@/config/editors";
-import Editor from "@/components/editor/editor";
 import { Link } from "react-router";
 import { Moon, Sun } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg?react";
@@ -14,6 +13,11 @@ import { Helmet } from "react-helmet-async";
 import { SocialLink } from "@/components/social-link";
 import { Separator } from "@/components/ui/separator";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
+import { Suspense } from "react";
+import { Loading } from "@/components/loading";
+import { lazy } from "react";
+
+const Editor = lazy(() => import("@/components/editor/editor"));
 
 export default function Component() {
   const { theme, toggleTheme } = useTheme();
@@ -85,7 +89,9 @@ export default function Component() {
         </header>
 
         <main className="flex-1 overflow-hidden">
-          <Editor config={getEditorConfig("theme")} />
+          <Suspense fallback={<Loading />}>
+            <Editor config={getEditorConfig("theme")} />
+          </Suspense>
         </main>
       </div>
     </>

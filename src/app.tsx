@@ -6,12 +6,9 @@ import { Route, Routes } from "react-router";
 import { ThemeProvider } from "./components/theme-provider";
 import { PostHogProvider } from "posthog-js/react";
 import Home from "./pages/home";
-import { lazy, Suspense } from "react";
-import { Loading } from "./components/loading";
 import { HelmetProvider } from "react-helmet-async";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
-
-const Index = lazy(() => import("@/pages/index"));
+import Index from "./pages/index";
 
 const queryClient = new QueryClient();
 const options = {
@@ -30,12 +27,10 @@ const App = () => (
             <TooltipProvider>
               <Toaster />
               <Sonner />
-              <Suspense fallback={<Loading />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/editor/theme" element={<Index />} />
-                </Routes>
-              </Suspense>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/editor/theme" element={<Index />} />
+              </Routes>
             </TooltipProvider>
           </HelmetProvider>
         </QueryClientProvider>
