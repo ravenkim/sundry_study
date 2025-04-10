@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ThemeEditorControlsProps } from "@/types/theme";
+import { ThemeEditorControlsProps, ThemeStyleProps } from "@/types/theme";
 import ControlSection from "./control-section";
 import ColorPicker from "./color-picker";
-import ResetButton from "./reset-button";
 import { ScrollArea } from "../ui/scroll-area";
 import ThemePresetSelect from "./theme-preset-select";
 import { presets } from "../../utils/theme-presets";
@@ -24,12 +23,12 @@ import {
   COMMON_STYLES,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
-import { AlertCircle, FileCode } from "lucide-react";
-import { Button } from "../ui/button";
+import { AlertCircle } from "lucide-react";
 import CssImportDialog from "./css-import-dialog";
 import { toast } from "../ui/use-toast";
 import { parseCssInput } from "../../utils/parse-css-input";
 import ShadowControl from "./shadow-control";
+import ThemeControlActions from "./theme-control-actions";
 
 const ThemeControlPanel = ({
   styles,
@@ -98,18 +97,11 @@ const ThemeControlPanel = ({
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-semibold">Theme Editor</h2>
         </div>
-        <div className="flex items-center gap-0">
-          {hasChanges && <ResetButton onReset={onReset} label="Reset theme" />}
-          <Button
-            variant="link"
-            size="sm"
-            onClick={() => setCssImportOpen(true)}
-            className="text-muted-foreground hover:text-foreground p-0"
-          >
-            <FileCode className="size-4" />
-            Import
-          </Button>
-        </div>
+        <ThemeControlActions
+          hasChanges={hasChanges}
+          onReset={onReset}
+          onImportClick={() => setCssImportOpen(true)}
+        />
       </div>
 
       <div className="mb-6 ml-1">
@@ -420,7 +412,7 @@ const ThemeControlPanel = ({
                   } else if (key === "shadow-opacity") {
                     updateStyle(key, value.toString());
                   } else {
-                    updateStyle(key, `${value}px`);
+                    updateStyle(key as keyof ThemeStyleProps, `${value}px`);
                   }
                 }}
               />
