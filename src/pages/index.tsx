@@ -1,6 +1,6 @@
 import { getEditorConfig } from "@/config/editors";
 import { Link } from "react-router";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Heart } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg?react";
 import TwitterIcon from "@/assets/twitter.svg?react";
 import DiscordIcon from "@/assets/discord.svg?react";
@@ -60,8 +60,12 @@ export default function Component() {
               </SocialLink>
               <Separator orientation="vertical" className="h-5" />
               <div className="hidden md:flex items-center gap-3.5">
-                <SocialLink href="https://buymeacoffee.com/sahajjain1z">
-                  <BuyMeACoffeeIcon className="size-4" />
+                <SocialLink
+                  href="https://buymeacoffee.com/sahajjain1z"
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-md border hover:border-pink-500 hover:text-pink-500 transition-colors"
+                >
+                  <Heart className="size-4" strokeWidth={2.5} />
+                  <span className="text-sm font-medium">Support</span>
                 </SocialLink>
                 <SocialLink href="https://discord.gg/Phs4u2NM3n">
                   <DiscordIcon className="size-5" />
