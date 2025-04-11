@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   ResizablePanelGroup,
   ResizablePanel,
@@ -10,7 +10,7 @@ import { ThemeStyles } from "@/types/theme";
 import CodePanel from "./code-panel";
 import { Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editor-store";
-import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
+import { motion, AnimatePresence } from "motion/react";
 
 interface EditorProps {
   config: EditorConfig;
@@ -26,6 +26,11 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
   const Controls = config.controls;
   const Preview = config.preview;
   const [isCodePanelOpen, setIsCodePanelOpen] = useState(true);
+  const isFirstMount = useRef(true);
+
+  useEffect(() => {
+    isFirstMount.current = false;
+  }, []);
 
   const handleStyleChange = (newStyles: ThemeStyles) => {
     setThemeState({ ...themeState, styles: newStyles });
@@ -63,18 +68,28 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
               </div>
             </div>
           </ResizablePanel>
-          {isCodePanelOpen && (
-            <>
-              <ResizableHandle />
-              <ResizablePanel defaultSize={25} minSize={10}>
-                <CodePanel
-                  config={config}
-                  themeEditorState={themeState}
-                  onCodePanelToggle={() => setIsCodePanelOpen(!isCodePanelOpen)}
-                />
-              </ResizablePanel>
-            </>
-          )}
+          <AnimatePresence>
+            {isCodePanelOpen && (
+              <>
+                <ResizableHandle />
+                <motion.div
+                  initial={isFirstMount.current ? false : { width: 0, opacity: 0 }}
+                  animate={{ width: "25%", opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <ResizablePanel defaultSize={25} minSize={10}>
+                    <CodePanel
+                      config={config}
+                      themeEditorState={themeState}
+                      onCodePanelToggle={() => setIsCodePanelOpen(!isCodePanelOpen)}
+                    />
+                  </ResizablePanel>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </ResizablePanelGroup>
       </div>
 
