@@ -8,7 +8,6 @@ import { cn } from "../lib/utils";
 import { useTheme } from "../components/theme-provider";
 import Logo from "@/assets/logo.svg?react";
 import { useGithubStars } from "@/hooks/use-github-stars";
-import BuyMeACoffeeIcon from "@/assets/buymeacoffee.svg?react";
 import { Helmet } from "react-helmet-async";
 import { SocialLink } from "@/components/social-link";
 import { Separator } from "@/components/ui/separator";
@@ -56,7 +55,7 @@ export default function Component() {
                 className="flex items-center gap-2 text-sm font-bold"
               >
                 <GitHubIcon className="size-4" />
-                {stargazersCount > 0 && stargazersCount}
+                {stargazersCount > 0 && stargazersCount.toLocaleString()}
               </SocialLink>
               <Separator orientation="vertical" className="h-5" />
               <div className="hidden md:flex items-center gap-3.5">
