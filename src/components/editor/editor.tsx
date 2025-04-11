@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   ResizablePanelGroup,
   ResizablePanel,
@@ -10,8 +10,7 @@ import { ThemeStyles } from "@/types/theme";
 import CodePanel from "./code-panel";
 import { Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editor-store";
-import { useToast } from "@/components/ui/use-toast";
-import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
+import { motion, AnimatePresence } from "motion/react";
 
 interface EditorProps {
   config: EditorConfig;
@@ -23,10 +22,15 @@ const isThemeStyles = (styles: any): styles is ThemeStyles => {
 };
 
 const Editor: React.FC<EditorProps> = ({ config }) => {
-  const { themeState, setThemeState, hasStateChanged } = useEditorStore();
+  const { themeState, setThemeState } = useEditorStore();
   const Controls = config.controls;
   const Preview = config.preview;
   const [isCodePanelOpen, setIsCodePanelOpen] = useState(true);
+  const isFirstMount = useRef(true);
+
+  useEffect(() => {
+    isFirstMount.current = false;
+  }, []);
 
   const handleStyleChange = (newStyles: ThemeStyles) => {
     setThemeState({ ...themeState, styles: newStyles });
@@ -52,36 +56,40 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             </div>
           </ResizablePanel>
           <ResizableHandle />
-          <ResizablePanel defaultSize={70}>
+          <ResizablePanel defaultSize={45} minSize={20}>
             <div className="h-full flex flex-col">
-              <div className="flex-1 min-h-0">
-                <Collapsible open={isCodePanelOpen} className="h-full">
-                  <div className="h-full flex">
-                    <div className="flex-1 p-4">
-                      <Preview
-                        styles={styles}
-                        currentMode={themeState.currentMode}
-                        isCodePanelOpen={isCodePanelOpen}
-                        onCodePanelToggle={() =>
-                          setIsCodePanelOpen(!isCodePanelOpen)
-                        }
-                      />
-                    </div>
-
-                    <CollapsibleContent className="w-1/3 border-l transition-all">
-                      <CodePanel
-                        config={config}
-                        themeEditorState={themeState}
-                        onCodePanelToggle={() =>
-                          setIsCodePanelOpen(!isCodePanelOpen)
-                        }
-                      />
-                    </CollapsibleContent>
-                  </div>
-                </Collapsible>
+              <div className="flex-1 min-h-0 p-4">
+                <Preview
+                  styles={styles}
+                  currentMode={themeState.currentMode}
+                  isCodePanelOpen={isCodePanelOpen}
+                  onCodePanelToggle={() => setIsCodePanelOpen(!isCodePanelOpen)}
+                />
               </div>
             </div>
           </ResizablePanel>
+          <AnimatePresence>
+            {isCodePanelOpen && (
+              <>
+                <ResizableHandle />
+                <motion.div
+                  initial={isFirstMount.current ? false : { width: 0, opacity: 0 }}
+                  animate={{ width: "25%", opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <ResizablePanel defaultSize={25} minSize={10}>
+                    <CodePanel
+                      config={config}
+                      themeEditorState={themeState}
+                      onCodePanelToggle={() => setIsCodePanelOpen(!isCodePanelOpen)}
+                    />
+                  </ResizablePanel>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </ResizablePanelGroup>
       </div>
 
