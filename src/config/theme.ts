@@ -13,6 +13,7 @@ export const COMMON_STYLES = [
   "shadow-offset-x",
   "shadow-offset-y",
   "letter-spacing",
+  "spacing",
 ];
 
 export const DEFAULT_FONT_SANS =
