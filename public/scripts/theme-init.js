@@ -29,12 +29,37 @@ const mode =
   (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
 root.classList.remove("dark", "light");
+
+const stylesToApply = [
+  "background",
+  "foreground",
+  "primary",
+  "primary-foreground",
+  "border",
+  "secondary",
+  "secondary-foreground",
+  "muted",
+  "muted-foreground",
+  "radius",
+];
+
+// element.setAttribute(
+//   `style`,
+//   `${element.getAttribute("style") || ""}--${key}: ${value};`
+// );
+
 if (mode === "dark") {
-  root.classList.add("dark");
-  root.style.setProperty("--background", darkStyles.background);
-  root.style.setProperty("--foreground", darkStyles.foreground);
+  stylesToApply.forEach((style) => {
+    root.setAttribute(
+      `style`,
+      `${root.getAttribute("style") || ""}--${style}: ${darkStyles[style]};`
+    );
+  });
 } else {
-  root.classList.add("light");
-  root.style.setProperty("--background", lightStyles.background);
-  root.style.setProperty("--foreground", lightStyles.foreground);
+  stylesToApply.forEach((style) => {
+    root.setAttribute(
+      `style`,
+      `${root.getAttribute("style") || ""}--${style}: ${lightStyles[style]};`
+    );
+  });
 }
