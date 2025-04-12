@@ -8,7 +8,6 @@ import { cn } from "../lib/utils";
 import { useTheme } from "../components/theme-provider";
 import Logo from "@/assets/logo.svg?react";
 import { useGithubStars } from "@/hooks/use-github-stars";
-import { Helmet } from "react-helmet-async";
 import { SocialLink } from "@/components/social-link";
 import { Separator } from "@/components/ui/separator";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
@@ -17,6 +16,17 @@ import { Loading } from "@/components/loading";
 import { lazy } from "react";
 
 const Editor = lazy(() => import("@/components/editor/editor"));
+
+export function meta() {
+  return [
+    { title: "tweakcn — Theme Generator for shadcn/ui" },
+    {
+      name: "description",
+      content:
+        "Easily customize and preview your shadcn/ui theme with tweakcn. Modify colors, fonts, and styles in real-time.",
+    },
+  ];
+}
 
 export default function Component() {
   const { theme, toggleTheme } = useTheme();
@@ -29,13 +39,6 @@ export default function Component() {
 
   return (
     <>
-      <Helmet>
-        <title>tweakcn — Theme Generator for shadcn/ui</title>
-        <meta
-          name="description"
-          content="Easily customize and preview your shadcn/ui theme with tweakcn. Modify colors, fonts, and styles in real-time."
-        />
-      </Helmet>
       <div
         className={cn(
           "h-screen flex flex-col text-foreground bg-background transition-colors"
