@@ -60,7 +60,7 @@ export function CTA() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full h-12 px-8 text-base bg-transparent border-white text-white hover:bg-white/10 transition-all duration-300 hover:translate-y-[-2px]"
+                className="rounded-full bg-transparent h-12 px-8 text-base transition-all duration-300 hover:translate-y-[-2px]"
               >
                 View on GitHub
               </Button>
