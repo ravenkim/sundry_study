@@ -4,29 +4,20 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet } from "react-router";
 import { ThemeProvider } from "./components/theme-provider";
-import { PostHogProvider } from "posthog-js/react";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 const queryClient = new QueryClient();
-const options = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-};
 
 const App = () => (
   <NuqsAdapter>
     <ThemeProvider defaultTheme="light">
-      <PostHogProvider
-        apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
-        options={options}
-      >
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <Outlet />
-          </TooltipProvider>
-        </QueryClientProvider>
-      </PostHogProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Outlet />
+        </TooltipProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   </NuqsAdapter>
 );

@@ -1,49 +1,45 @@
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import App from "./app"; // Import the main App component
+import posthog from "posthog-js";
+import { useEffect } from "react";
+
+function PosthogInit() {
+  useEffect(() => {
+    posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
+      api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+    });
+  }, []);
+
+  return null;
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: "tweakcn",
-              description:
-                "A powerful theme editor for shadcn/ui components, offering beautifully designed themes and seamless Tailwind CSS integration.",
-              url: "https://tweakcn.com",
-              applicationCategory: "DesignApplication",
-              operatingSystem: "Web",
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
-              },
-              author: {
-                "@type": "Person",
-                name: "Sahaj Jain",
-              },
-            }),
-          }}
+          src="/scripts/theme-init.js"
+          type="module"
+          suppressHydrationWarning
         />
+        <meta charSet="UTF-8" />
         <Meta />
         <Links />
       </head>
       <body>
+        <PosthogInit />
         {children}
         <ScrollRestoration />
+        {/* Scripts component loads the main React bundle for hydration */}
         <Scripts />
         {/* IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! */}
         <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-        {/* <script type="module" src="/src/main.tsx"></script> - This is now handled by Scripts */}
       </body>
     </html>
   );
 }
 
+// Default export remains the same
 export default function Root() {
   return <App />;
 }

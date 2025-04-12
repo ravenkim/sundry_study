@@ -1,4 +1,4 @@
-import { createContext, useContext, useLayoutEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useEditorStore } from "../store/editor-store";
 import { colorFormatter } from "../utils/color-converter";
 import { setShadowVariables } from "@/utils/shadows";
@@ -84,7 +84,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   // Handle theme preset from URL
   useThemePresetFromUrl();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const root = window.document.documentElement;
     const { currentMode: mode, styles: themeStyles } = themeState;
 
