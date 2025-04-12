@@ -1,13 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEditorStore } from "@/store/editor-store";
 import { ArrowRight, Check, Copy, Circle, Eye, Palette } from "lucide-react";
 import { Link } from "react-router";
 
 export function Hero() {
-  const { themeState } = useEditorStore();
-
   return (
     <section className="w-full py-20 md:py-32 lg:py-40 relative">
       <div className="container px-4 md:px-6 z-10 relative">
@@ -78,14 +75,6 @@ export function Hero() {
                       <div className="size-3 rounded-full bg-yellow-500"></div>
                       <div className="size-3 rounded-full bg-green-500"></div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Badge
-                      variant="outline"
-                      className="text-xs font-normal capitalize"
-                    >
-                      {themeState.preset ?? "Default"}
-                    </Badge>
                   </div>
                 </div>
 

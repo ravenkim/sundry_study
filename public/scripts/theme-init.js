@@ -1,66 +1,59 @@
-const storageKey = "editor-storage"; // ZUSTAND STORAGE KEY
+(function () {
+  "use strict";
 
-function getThemeFromStorage() {
+  const storageKey = "editor-storage";
+  const root = document.documentElement;
+
+  let themeState = null;
   try {
-    const persistedStateJSON = window.localStorage.getItem(storageKey);
+    const persistedStateJSON = localStorage.getItem(storageKey);
     if (persistedStateJSON) {
-      let theme = JSON.parse(persistedStateJSON);
-      return theme?.state?.themeState;
+      themeState = JSON.parse(persistedStateJSON)?.state?.themeState;
     }
   } catch (e) {
-    console.warn("Theme initialization: Failed to read or parse localStorage:", e);
+    console.warn("Theme initialization: Failed to read/parse localStorage:", e);
   }
-  return null; // Not found or invalid
-}
 
-const themeState = getThemeFromStorage();
-const root = document.documentElement;
-const lightStyles = themeState?.styles?.light ?? {
-  background: "#fff",
-  foreground: "#000",
-};
-const darkStyles = themeState?.styles?.dark ?? {
-  background: "#000",
-  foreground: "#fff",
-};
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const mode = themeState?.currentMode ?? (prefersDark ? "dark" : "light");
 
-const mode =
-  themeState?.currentMode ??
-  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const activeStyles =
+    mode === "dark"
+      ? {
+          background: "#000",
+          foreground: "#fff",
+          ...(themeState?.styles?.dark || {}),
+        }
+      : {
+          background: "#fff",
+          foreground: "#000",
+          ...(themeState?.styles?.light || {}),
+        };
 
-root.classList.remove("dark", "light");
+  const stylesToApply = [
+    "background",
+    "foreground",
+    "border",
+    "primary",
+    "primary-foreground",
+    "secondary",
+    "secondary-foreground",
+    "muted",
+    "muted-foreground",
+    "radius",
+    "ring",
+    "input",
+    "card",
+    "card-foreground",
+  ];
 
-const stylesToApply = [
-  "background",
-  "foreground",
-  "primary",
-  "primary-foreground",
-  "border",
-  "secondary",
-  "secondary-foreground",
-  "muted",
-  "muted-foreground",
-  "radius",
-  "ring",
-];
+  for (const styleName of stylesToApply) {
+    const value = activeStyles[styleName];
+    if (value !== undefined) {
+      root.style.setProperty(`--${styleName}`, value);
+    }
+  }
 
-// element.setAttribute(
-//   `style`,
-//   `${element.getAttribute("style") || ""}--${key}: ${value};`
-// );
-
-if (mode === "dark") {
-  stylesToApply.forEach((style) => {
-    root.setAttribute(
-      `style`,
-      `${root.getAttribute("style") || ""}--${style}: ${darkStyles[style]};`
-    );
-  });
-} else {
-  stylesToApply.forEach((style) => {
-    root.setAttribute(
-      `style`,
-      `${root.getAttribute("style") || ""}--${style}: ${lightStyles[style]};`
-    );
-  });
-}
+  root.classList.remove("dark", "light");
+  root.setAttribute("data-theme", mode);
+})();
