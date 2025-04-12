@@ -10,6 +10,7 @@ const sansSerifFontNames = [
   "Plus Jakarta Sans",
   "DM Sans",
   "Geist",
+  "Oxanium",
 ];
 
 const serifFontNames = [
@@ -43,6 +44,7 @@ export const fonts = {
   "DM Sans": "DM Sans, sans-serif",
   "IBM Plex Sans": "IBM Plex Sans, sans-serif",
   Geist: "Geist, sans-serif",
+  Oxanium: "Oxanium, sans-serif",
 
   // Serif fonts
   Merriweather: "Merriweather, serif",

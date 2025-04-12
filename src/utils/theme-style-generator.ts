@@ -69,23 +69,51 @@ const generateShadowVariables = (shadowMap: Record<string, string>): string => {
   --shadow-2xl: ${shadowMap["shadow-2xl"]};`;
 };
 
+const generateTrackingVariables = (themeStyles: ThemeStyles): string => {
+  const styles = themeStyles["light"];
+  if (styles["letter-spacing"] === "0em") {
+    return "";
+  }
+  return `
+
+  --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
+  --tracking-tight: calc(var(--tracking-normal) - 0.025em);
+  --tracking-normal: var(--tracking-normal);
+  --tracking-wide: calc(var(--tracking-normal) + 0.025em);
+  --tracking-wider: calc(var(--tracking-normal) + 0.05em);
+  --tracking-widest: calc(var(--tracking-normal) + 0.1em);`;
+};
+
 const generateThemeVariables = (
   themeStyles: ThemeStyles,
   mode: ThemeMode,
   formatColor: (color: string) => string
 ): string => {
-  return `${mode === "dark" ? ".dark" : ":root"} {${generateColorVariables(
-    themeStyles,
-    mode,
-    formatColor
-  )}${generateFontVariables(themeStyles, mode)}
-  --radius: ${themeStyles[mode].radius};${generateShadowVariables(
+  const selector = mode === "dark" ? ".dark" : ":root";
+  const colorVars = generateColorVariables(themeStyles, mode, formatColor);
+  const fontVars = generateFontVariables(themeStyles, mode);
+  const radiusVar = `\n  --radius: ${themeStyles[mode].radius};`;
+  const shadowVars = generateShadowVariables(
     getShadowMap({ styles: themeStyles, currentMode: mode })
-  )}
-}\n\n`;
+  );
+  const trackingVars =
+    mode === "light" && themeStyles["light"]["letter-spacing"] !== "0em"
+      ? `\n  --tracking-normal: ${themeStyles["light"]["letter-spacing"]};`
+      : "";
+
+  return (
+    selector +
+    " {" +
+    colorVars +
+    fontVars +
+    radiusVar +
+    shadowVars +
+    trackingVars +
+    "\n}"
+  );
 };
 
-const generateTailwindV4ThemeInline = (): string => {
+const generateTailwindV4ThemeInline = (themeStyles: ThemeStyles): string => {
   return `@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -136,7 +164,7 @@ const generateTailwindV4ThemeInline = (): string => {
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
-  --shadow-2xl: var(--shadow-2xl);
+  --shadow-2xl: var(--shadow-2xl);${generateTrackingVariables(themeStyles)}
 }`;
 };
 
@@ -159,10 +187,15 @@ export const generateThemeCode = (
 
   const lightTheme = generateThemeVariables(themeStyles, "light", formatColor);
   const darkTheme = generateThemeVariables(themeStyles, "dark", formatColor);
+  const tailwindV4Theme =
+    tailwindVersion === "4"
+      ? `\n\n${generateTailwindV4ThemeInline(themeStyles)}`
+      : "";
 
-  if (tailwindVersion === "4") {
-    return `${lightTheme}${darkTheme}${generateTailwindV4ThemeInline()}`;
-  }
+  const bodyLetterSpacing =
+    themeStyles["light"]["letter-spacing"] !== "0em"
+      ? "\n\nbody {\n  letter-spacing: var(--tracking-normal);\n}"
+      : "";
 
-  return `${lightTheme}${darkTheme}`;
+  return `${lightTheme}\n\n${darkTheme}${tailwindV4Theme}${bodyLetterSpacing}`;
 };

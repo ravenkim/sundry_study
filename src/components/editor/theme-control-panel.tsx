@@ -383,6 +383,20 @@ const ThemeControlPanel = ({
                 />
               </div>
             </ControlSection>
+
+            <ControlSection title="Letter Spacing" expanded>
+              <SliderWithInput
+                value={parseFloat(
+                  currentStyles["letter-spacing"]?.replace("em", "")
+                )}
+                onChange={(value) => updateStyle("letter-spacing", `${value}em`)}
+                min={-0.5}
+                max={0.5}
+                step={0.025}
+                unit="em"
+                label="Letter Spacing"
+              />
+            </ControlSection>
           </TabsContent>
 
           <TabsContent value="other">

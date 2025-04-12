@@ -5,6 +5,7 @@ import { setShadowVariables } from "@/utils/shadows";
 import { applyStyleToElement } from "@/utils/apply-style-to-element";
 import { ThemeStyleProps, ThemeStyles } from "@/types/theme";
 import { useThemePresetFromUrl } from "@/hooks/use-theme-preset-from-url";
+import { COMMON_STYLES } from "@/config/theme";
 
 type Theme = "dark" | "light";
 
@@ -21,17 +22,7 @@ type ThemeProviderState = {
   toggleTheme: (coords?: Coords) => void;
 };
 
-const COMMON_NON_COLOR_KEYS = [
-  "font-sans",
-  "font-serif",
-  "font-mono",
-  "radius",
-  "shadow-opacity",
-  "shadow-blur",
-  "shadow-spread",
-  "shadow-offset-x",
-  "shadow-offset-y",
-] as const;
+const COMMON_NON_COLOR_KEYS = COMMON_STYLES;
 
 const initialState: ThemeProviderState = {
   theme: "light",
