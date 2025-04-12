@@ -40,7 +40,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       {/* Desktop Layout */}
       <div className="h-full hidden md:block">
         <ResizablePanelGroup direction="horizontal" className="h-full">
-          <ResizablePanel defaultSize={30} minSize={20} maxSize={40}>
+          <ResizablePanel defaultSize={30} minSize={20} maxSize={30}>
             <div className="h-full p-4">
               <Controls
                 styles={styles}
