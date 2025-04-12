@@ -41,6 +41,7 @@ const stylesToApply = [
   "muted",
   "muted-foreground",
   "radius",
+  "ring",
 ];
 
 // element.setAttribute(
