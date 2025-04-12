@@ -21,6 +21,7 @@ import {
   DEFAULT_FONT_SANS,
   DEFAULT_FONT_SERIF,
   COMMON_STYLES,
+  defaultThemeState,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
 import { AlertCircle } from "lucide-react";
@@ -45,7 +46,11 @@ const ThemeControlPanel = ({
   } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
 
-  const currentStyles = styles?.[currentMode];
+  const currentStyles = {
+    ...defaultThemeState.styles.light,
+    ...defaultThemeState.styles[currentMode],
+    ...styles?.[currentMode],
+  };
 
   const updateStyle = React.useCallback(
     <K extends keyof typeof currentStyles>(
