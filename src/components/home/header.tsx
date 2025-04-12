@@ -6,6 +6,7 @@ import { Menu, Moon, Sun, X, ChevronRight } from "lucide-react";
 import Logo from "@/assets/logo.svg?react";
 import GitHubIcon from "@/assets/github.svg?react";
 import { useGithubStars } from "@/hooks/use-github-stars";
+import { cn } from "@/lib/utils";
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -39,11 +40,12 @@ export function Header({
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full backdrop-blur-lg transition-all duration-300 ${
+      className={cn(
+        "sticky top-0 z-50 w-full backdrop-blur-lg",
         isScrolled
           ? "bg-background/90 shadow-xs border-b border-border/20"
           : "bg-transparent"
-      }`}
+      )}
     >
       <div className="container flex h-16 px-4 min-w-full items-center justify-between">
         <Link to="/">
