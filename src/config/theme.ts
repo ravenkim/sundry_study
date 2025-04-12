@@ -12,6 +12,7 @@ export const COMMON_STYLES = [
   "shadow-spread",
   "shadow-offset-x",
   "shadow-offset-y",
+  "letter-spacing",
 ];
 
 export const DEFAULT_FONT_SANS =
@@ -68,6 +69,8 @@ export const defaultLightThemeStyles = {
   "shadow-spread": "0px",
   "shadow-offset-x": "0",
   "shadow-offset-y": "1px",
+
+  "letter-spacing": "0em",
 };
 
 // Default dark theme styles

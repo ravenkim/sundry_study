@@ -107,12 +107,24 @@ const generateThemeRegistry = (name: string) => {
     type: "registry:style",
     dependencies: [],
     registryDependencies: [],
+    css: {
+      "@layer base": {
+        body: {
+          "letter-spacing": "var(--tracking-normal)",
+        },
+      },
+    },
     cssVars: {
       theme: {
         "font-sans": getThemeValue(dark, light, "font-sans") || "Inter, sans-serif",
         "font-mono": getThemeValue(dark, light, "font-mono") || "monospace",
         "font-serif": getThemeValue(dark, light, "font-serif") || "serif",
         radius: getThemeValue(dark, light, "radius") || "0.5rem",
+        "tracking-tighter": "calc(var(--tracking-normal) - 0.05em)",
+        "tracking-tight": "calc(var(--tracking-normal) - 0.025em)",
+        "tracking-wide": "calc(var(--tracking-normal) + 0.025em)",
+        "tracking-wider": "calc(var(--tracking-normal) + 0.05em)",
+        "tracking-widest": "calc(var(--tracking-normal) + 0.1em)",
       },
       light: {
         ...light,
@@ -124,6 +136,7 @@ const generateThemeRegistry = (name: string) => {
         "shadow-lg": lightShadows["shadow-lg"],
         "shadow-xl": lightShadows["shadow-xl"],
         "shadow-2xl": lightShadows["shadow-2xl"],
+        "tracking-normal": getThemeValue(dark, light, "letter-spacing") || "0em",
       },
       dark: {
         ...dark,

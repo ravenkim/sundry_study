@@ -41,6 +41,7 @@ export interface ThemeStyleProps {
   "shadow-spread"?: string;
   "shadow-offset-x"?: string;
   "shadow-offset-y"?: string;
+  "letter-spacing"?: string;
 }
 
 export interface ThemeStyles {
