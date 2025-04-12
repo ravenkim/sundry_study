@@ -2,7 +2,7 @@ import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import App from "./app"; // Import the main App component
 import posthog from "posthog-js";
 import { useEffect } from "react";
-import themeInitScriptContent from "/public/scripts/theme-init.js?raw";
+import themeInitScriptContent from "/scripts/theme-init.js?raw";
 
 export function meta() {
   const siteName = "tweakcn";
