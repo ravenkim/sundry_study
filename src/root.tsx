@@ -21,6 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           src="/scripts/theme-init.js"
           type="module"
           suppressHydrationWarning
+          defer
         />
         <meta charSet="UTF-8" />
         <Meta />
