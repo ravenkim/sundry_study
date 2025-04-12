@@ -7,7 +7,6 @@ import { Link } from "react-router";
 
 export function Hero() {
   const { themeState } = useEditorStore();
-  const mode = themeState.currentMode;
 
   return (
     <section className="w-full py-20 md:py-32 lg:py-40 relative">

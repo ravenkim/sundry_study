@@ -10,6 +10,7 @@ import { DemoGithub } from "@/components/examples/cards/github-card";
 import { DemoStats } from "@/components/examples/cards/stats";
 import { lazy, Suspense } from "react";
 import { Loading } from "../loading";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const DemoMail = lazy(() => import("@/components/examples/mail"));
 
@@ -23,6 +24,7 @@ export function ThemePresetSelector() {
   const { themeState, applyThemePreset } = useEditorStore();
   const mode = themeState.currentMode;
   const presetNames = Object.keys(presets);
+  const isMobile = useIsMobile();
 
   return (
     <section id="examples" className="w-full py-20 md:py-32">
@@ -111,17 +113,18 @@ export function ThemePresetSelector() {
             }}
           />
           <Suspense fallback={<Loading />}>
-            <div className="hidden md:block">
+            {!isMobile ? (
               <DemoMail />
-            </div>
-            <div className="block md:hidden p-4 flex flex-col gap-4">
-              <DemoContainer>
-                <DemoStats />
-              </DemoContainer>
-              <DemoContainer>
-                <DemoGithub />
-              </DemoContainer>
-            </div>
+            ) : (
+              <div className="p-4 flex flex-col gap-4">
+                <DemoContainer>
+                  <DemoStats />
+                </DemoContainer>
+                <DemoContainer>
+                  <DemoGithub />
+                </DemoContainer>
+              </div>
+            )}
           </Suspense>
         </motion.div>
       </div>
