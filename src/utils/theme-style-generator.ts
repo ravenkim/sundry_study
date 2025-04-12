@@ -2,6 +2,7 @@ import { ThemeEditorState, ThemeStyles } from "@/types/theme";
 import { colorFormatter } from "./color-converter";
 import { ColorFormat } from "../types";
 import { getShadowMap } from "./shadows";
+import { defaultLightThemeStyles } from "@/config/theme";
 
 type ThemeMode = "light" | "dark";
 
@@ -96,8 +97,16 @@ const generateThemeVariables = (
   const shadowVars = generateShadowVariables(
     getShadowMap({ styles: themeStyles, currentMode: mode })
   );
+  const spacingVar =
+    mode === "light" &&
+    themeStyles["light"].spacing !== defaultLightThemeStyles.spacing
+      ? `\n  --spacing: ${themeStyles["light"].spacing};`
+      : "";
+
   const trackingVars =
-    mode === "light" && themeStyles["light"]["letter-spacing"] !== "0em"
+    mode === "light" &&
+    themeStyles["light"]["letter-spacing"] !==
+      defaultLightThemeStyles["letter-spacing"]
       ? `\n  --tracking-normal: ${themeStyles["light"]["letter-spacing"]};`
       : "";
 
@@ -109,6 +118,7 @@ const generateThemeVariables = (
     radiusVar +
     shadowVars +
     trackingVars +
+    spacingVar +
     "\n}"
   );
 };

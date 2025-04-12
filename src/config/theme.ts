@@ -71,6 +71,7 @@ export const defaultLightThemeStyles = {
   "shadow-offset-y": "1px",
 
   "letter-spacing": "0em",
+  spacing: "0.25rem",
 };
 
 // Default dark theme styles
