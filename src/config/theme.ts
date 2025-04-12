@@ -113,6 +113,9 @@ export const defaultDarkThemeStyles = {
   "sidebar-ring": "hsl(240 4.9% 83.9%)",
 
   "shadow-color": "hsl(0 0% 0%)",
+
+  "letter-spacing": "0em",
+  spacing: "0.25rem",
 };
 
 // Default theme state
