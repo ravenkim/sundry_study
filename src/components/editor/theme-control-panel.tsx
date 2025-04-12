@@ -47,6 +47,7 @@ const ThemeControlPanel = ({
   const [cssImportOpen, setCssImportOpen] = useState(false);
 
   const currentStyles = {
+    ...defaultThemeState.styles.light,
     ...defaultThemeState.styles[currentMode],
     ...styles?.[currentMode],
   };
