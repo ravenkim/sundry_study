@@ -416,6 +416,18 @@ const ThemeControlPanel = ({
                 label="Radius"
               />
             </ControlSection>
+
+            <ControlSection title="Spacing" expanded>
+              <SliderWithInput
+                value={parseFloat(currentStyles.spacing?.replace("rem", ""))}
+                onChange={(value) => updateStyle("spacing", `${value}rem`)}
+                min={0.15}
+                max={0.35}
+                step={0.01}
+                unit="rem"
+                label="Spacing"
+              />
+            </ControlSection>
             <div className="mt-6">
               <ShadowControl
                 shadowColor={currentStyles["shadow-color"]}

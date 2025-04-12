@@ -137,6 +137,7 @@ const generateThemeRegistry = (name: string) => {
         "shadow-xl": lightShadows["shadow-xl"],
         "shadow-2xl": lightShadows["shadow-2xl"],
         "tracking-normal": getThemeValue(dark, light, "letter-spacing") || "0em",
+        spacing: getThemeValue(dark, light, "spacing") || "0.25rem",
       },
       dark: {
         ...dark,
