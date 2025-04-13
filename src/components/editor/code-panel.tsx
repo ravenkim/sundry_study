@@ -26,20 +26,24 @@ const CodePanel: React.FC<CodePanelProps> = ({
   themeEditorState,
   onCodePanelToggle,
 }) => {
-  const [colorFormat, setColorFormat] = useState<ColorFormat>("oklch");
-  const [tailwindVersion, setTailwindVersion] = useState<"3" | "4">("4");
   const [packageManager, setPackageManager] = useState<
     "pnpm" | "npm" | "yarn" | "bun"
   >("pnpm");
   const [registryCopied, setRegistryCopied] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const posthog = usePostHog();
+  
+  const preset = useEditorStore((state) => state.themeState.preset);
+  const colorFormat = useEditorStore((state) => state.colorFormat);
+  const tailwindVersion = useEditorStore((state) => state.tailwindVersion);
+  const setColorFormat = useEditorStore((state) => state.setColorFormat);
+  const setTailwindVersion = useEditorStore((state) => state.setTailwindVersion);
+
   const code = config.codeGenerator.generateComponentCode(
     themeEditorState,
     colorFormat,
     tailwindVersion
   );
-  const [copied, setCopied] = useState(false);
-  const posthog = usePostHog();
-  const preset = useEditorStore((state) => state.themeState.preset);
 
   const getRegistryCommand = (preset: string) => {
     const url = `https://tweakcn.com/r/themes/${preset}.json`;
@@ -156,7 +160,9 @@ const CodePanel: React.FC<CodePanelProps> = ({
           value={tailwindVersion}
           onValueChange={(value: "3" | "4") => {
             setTailwindVersion(value);
-            setColorFormat(value === "4" ? "oklch" : "hsl");
+            if (value === "4" && colorFormat === "hsl") {
+              setColorFormat("oklch");
+            }
           }}
         >
           <SelectTrigger className="w-fit focus:ring-transparent focus:border-none bg-muted/50 outline-hidden border-none gap-1">
