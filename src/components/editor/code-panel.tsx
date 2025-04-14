@@ -13,6 +13,7 @@ import {
 } from "../ui/select";
 import { usePostHog } from "posthog-js/react";
 import { useEditorStore } from "@/store/editor-store";
+import { usePreferencesStore } from "@/store/preferences-store";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CodePanelProps {
@@ -26,18 +27,17 @@ const CodePanel: React.FC<CodePanelProps> = ({
   themeEditorState,
   onCodePanelToggle,
 }) => {
-  const [packageManager, setPackageManager] = useState<
-    "pnpm" | "npm" | "yarn" | "bun"
-  >("pnpm");
   const [registryCopied, setRegistryCopied] = useState(false);
   const [copied, setCopied] = useState(false);
   const posthog = usePostHog();
   
   const preset = useEditorStore((state) => state.themeState.preset);
-  const colorFormat = useEditorStore((state) => state.colorFormat);
-  const tailwindVersion = useEditorStore((state) => state.tailwindVersion);
-  const setColorFormat = useEditorStore((state) => state.setColorFormat);
-  const setTailwindVersion = useEditorStore((state) => state.setTailwindVersion);
+  const colorFormat = usePreferencesStore((state) => state.colorFormat);
+  const tailwindVersion = usePreferencesStore((state) => state.tailwindVersion);
+  const packageManager = usePreferencesStore((state) => state.packageManager);
+  const setColorFormat = usePreferencesStore((state) => state.setColorFormat);
+  const setTailwindVersion = usePreferencesStore((state) => state.setTailwindVersion);
+  const setPackageManager = usePreferencesStore((state) => state.setPackageManager);
 
   const code = config.codeGenerator.generateComponentCode(
     themeEditorState,
