@@ -26,9 +26,6 @@ const CodePanel: React.FC<CodePanelProps> = ({
   themeEditorState,
   onCodePanelToggle,
 }) => {
-  const [packageManager, setPackageManager] = useState<
-    "pnpm" | "npm" | "yarn" | "bun"
-  >("pnpm");
   const [registryCopied, setRegistryCopied] = useState(false);
   const [copied, setCopied] = useState(false);
   const posthog = usePostHog();
@@ -36,8 +33,10 @@ const CodePanel: React.FC<CodePanelProps> = ({
   const preset = useEditorStore((state) => state.themeState.preset);
   const colorFormat = useEditorStore((state) => state.colorFormat);
   const tailwindVersion = useEditorStore((state) => state.tailwindVersion);
+  const packageManager = useEditorStore((state) => state.packageManager);
   const setColorFormat = useEditorStore((state) => state.setColorFormat);
   const setTailwindVersion = useEditorStore((state) => state.setTailwindVersion);
+  const setPackageManager = useEditorStore((state) => state.setPackageManager);
 
   const code = config.codeGenerator.generateComponentCode(
     themeEditorState,

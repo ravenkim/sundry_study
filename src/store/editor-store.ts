@@ -6,13 +6,17 @@ import { defaultThemeState } from "@/config/theme";
 import { getPresetThemeStyles } from "../utils/theme-presets";
 import { ColorFormat } from "@/types";
 
+type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
+
 interface EditorStore {
   themeState: ThemeEditorState;
   tailwindVersion: "3" | "4";
   colorFormat: ColorFormat;
+  packageManager: PackageManager;
   setThemeState: (state: ThemeEditorState) => void;
   setTailwindVersion: (version: "3" | "4") => void;
   setColorFormat: (format: ColorFormat) => void;
+  setPackageManager: (pm: PackageManager) => void;
   applyThemePreset: (preset: string) => void;
   resetToDefault: () => void;
   resetToCurrentPreset: () => void;
@@ -26,6 +30,7 @@ export const useEditorStore = create<EditorStore>()(
       themeState: defaultThemeState,
       tailwindVersion: "4",
       colorFormat: "oklch",
+      packageManager: "pnpm",
       setThemeState: (state: ThemeEditorState) => {
         set({ themeState: state });
       },
@@ -34,6 +39,9 @@ export const useEditorStore = create<EditorStore>()(
       },
       setColorFormat: (format: ColorFormat) => {
         set({ colorFormat: format });
+      },
+      setPackageManager: (pm: PackageManager) => {
+        set({ packageManager: pm });
       },
       applyThemePreset: (preset: string) => {
         const themeState = get().themeState;
