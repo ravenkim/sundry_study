@@ -26,6 +26,7 @@ import {
 } from "../ui/tooltip";
 import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
+import { cn } from "@/lib/utils";
 
 interface ThemePresetSelectProps {
   presets: Record<string, ThemePreset>;
@@ -56,6 +57,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   onPresetChange,
 }) => {
   const { themeState } = useEditorStore();
+  const { hasChangedThemeFromDefault } = useEditorStore();
   const { theme, toggleTheme } = useTheme();
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
@@ -118,7 +120,12 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="w-full md:min-w-72 h-10 justify-between group relative"
+              className={cn(
+                "w-full md:min-w-64 h-10 justify-between group relative",
+                (!value || value === "default") &&
+                  !hasChangedThemeFromDefault &&
+                  "ring-2 ring-offset-1 ring-offset-background ring-primary/30 animate-pulse"
+              )}
             >
               <div className="flex items-center gap-3">
                 <div className="flex gap-0.5">

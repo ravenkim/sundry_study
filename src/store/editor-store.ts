@@ -13,24 +13,30 @@ interface EditorStore {
   resetToCurrentPreset: () => void;
   hasDefaultThemeChanged: () => boolean;
   hasCurrentPresetChanged: () => boolean;
+  hasChangedThemeFromDefault: boolean;
 }
 
 export const useEditorStore = create<EditorStore>()(
   persist(
     (set, get) => ({
       themeState: defaultThemeState,
+      hasChangedThemeFromDefault: false,
       setThemeState: (state: ThemeEditorState) => {
         set({ themeState: state });
       },
       applyThemePreset: (preset: string) => {
         const themeState = get().themeState;
-        set({
+        const updates: Partial<EditorStore> = {
           themeState: {
             ...themeState,
             preset,
             styles: getPresetThemeStyles(preset),
           },
-        });
+        };
+        if (preset !== "default") {
+          updates.hasChangedThemeFromDefault = true;
+        }
+        set(updates);
       },
       resetToDefault: () => {
         const mode = get().themeState.currentMode;
