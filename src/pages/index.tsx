@@ -63,7 +63,7 @@ export default function Component() {
               <Separator orientation="vertical" className="h-5" />
               <div className="hidden md:flex items-center gap-3.5">
                 <SocialLink
-                  href="https://buymeacoffee.com/sahajjain1z"
+                  href="https://github.com/sponsors/jnsahaj"
                   className="flex items-center gap-1.5 px-2 py-1 rounded-md border hover:border-pink-500 hover:text-pink-500 transition-colors"
                 >
                   <Heart className="size-4" strokeWidth={2.5} />
