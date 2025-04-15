@@ -45,9 +45,9 @@ const ColorBox = ({ color }: { color: string }) => {
 const isThemeNew = (preset: ThemePreset) => {
   if (!preset.createdAt) return false;
   const createdAt = new Date(preset.createdAt);
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  return createdAt > oneWeekAgo;
+  const timePeriod = new Date();
+  timePeriod.setDate(timePeriod.getDate() - 3);
+  return createdAt > timePeriod;
 };
 
 const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
