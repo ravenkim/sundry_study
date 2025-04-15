@@ -47,7 +47,7 @@ const isThemeNew = (preset: ThemePreset) => {
   if (!preset.createdAt) return false;
   const createdAt = new Date(preset.createdAt);
   const timePeriod = new Date();
-  timePeriod.setDate(timePeriod.getDate() - 3);
+  timePeriod.setDate(timePeriod.getDate() - 5);
   return createdAt > timePeriod;
 };
 
@@ -94,17 +94,10 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
           );
 
     return filteredList.sort((a, b) => {
-      // Keep "default" at the top
-      if (a === "default") return -1;
-      if (b === "default") return 1;
-
-      // Then sort new themes
-      const isANew = presets[a] && isThemeNew(presets[a]);
-      const isBNew = presets[b] && isThemeNew(presets[b]);
-
-      if (isANew && !isBNew) return -1;
-      if (!isANew && isBNew) return 1;
-      return 0;
+      // Sort alphabetically
+      const labelA = presets[a]?.label || a;
+      const labelB = presets[b]?.label || b;
+      return labelA.localeCompare(labelB);
     });
   }, [presetNames, search, presets]);
 
