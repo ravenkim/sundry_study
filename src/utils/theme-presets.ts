@@ -2041,7 +2041,7 @@ export const presets: Record<string, ThemePreset> = {
 
   "starry-night": {
     label: "Starry Night",
-    createdAt: "2025-04-18",
+    createdAt: "2025-04-16",
     styles: {
       light: {
         background: "#f5f7fa",
