@@ -126,7 +126,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
             <Button
               variant="ghost"
               className={cn(
-                "w-full md:min-w-64 min-h-14 rounded-none justify-between group relative border-r",
+                "w-full md:min-w-56 min-h-14 rounded-none justify-between group relative",
                 (!value || value === "default") &&
                   !hasChangedThemeFromDefault &&
                   "ring-2 ring-offset-1 ring-offset-background ring-primary/30 animate-pulse"
@@ -273,15 +273,19 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
         </Popover>
       </TooltipProvider>
 
+      <Separator orientation="vertical" className="h-8" />
+
       <Button
         variant="ghost"
         size="icon"
-        className="size-14 shrink-0 rounded-none border-r bg-muted/10"
+        className="size-14 shrink-0 rounded-none bg-muted/10"
         title="Previous theme"
         onClick={() => cycleTheme("prev")}
       >
         <ArrowLeft className="h-4 w-4" />
       </Button>
+
+      <Separator orientation="vertical" className="h-8" />
 
       <Button
         variant="ghost"

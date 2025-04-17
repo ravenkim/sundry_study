@@ -19,6 +19,7 @@ import { SliderWithInput } from "./slider-with-input";
 import { Tabs, TabsList, TabsContent } from "../ui/tabs";
 import ThemeFontSelect from "./theme-font-select";
 import {
+  COMMON_STYLES,
   DEFAULT_FONT_MONO,
   DEFAULT_FONT_SANS,
   DEFAULT_FONT_SERIF,

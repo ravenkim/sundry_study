@@ -16,10 +16,6 @@ interface EditorStore {
   hasDefaultThemeChanged: () => boolean;
   hasCurrentPresetChanged: () => boolean;
   hasChangedThemeFromDefault: boolean;
-  updateStyle: <K extends keyof ThemeStyleProps>(
-    key: K,
-    value: ThemeStyleProps[K]
-  ) => void;
 }
 
 export const useEditorStore = create<EditorStore>()(
@@ -68,36 +64,6 @@ export const useEditorStore = create<EditorStore>()(
         );
         return !isEqual(state.themeState.styles, presetStyles);
       },
-      updateStyle: (key, value) =>
-        set((state) => {
-          const currentMode = state.themeState.currentMode;
-          const currentStyles = state.themeState.styles;
-
-          let newStyles = { ...currentStyles };
-
-          if (COMMON_STYLES.includes(key as string)) {
-            newStyles = {
-              ...newStyles,
-              light: { ...newStyles.light, [key]: value },
-              dark: { ...newStyles.dark, [key]: value },
-            };
-          } else {
-            newStyles = {
-              ...newStyles,
-              [currentMode]: {
-                ...(newStyles[currentMode] || {}),
-                [key]: value,
-              },
-            };
-          }
-
-          return {
-            themeState: {
-              ...state.themeState,
-              styles: newStyles,
-            },
-          };
-        }),
     }),
     {
       name: "editor-storage", // unique name for localStorage

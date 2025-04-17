@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContrastChecker } from "../../hooks/use-contrast-checker";
 import { ThemeStyleProps } from "@/types/theme";
 import { Button } from "../ui/button";
@@ -10,16 +10,20 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "../ui/dialog";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import ColorPicker from "./color-picker";
-import { useEditorStore } from "@/store/editor-store";
-import { Contrast, Check, AlertTriangle } from "lucide-react";
+import { Contrast, Check, AlertTriangle, Info } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "../ui/card";
+import { Badge } from "../ui/badge";
+import { ScrollArea } from "../ui/scroll-area";
+import { Separator } from "../ui/separator";
 
 type ContrastCheckerProps = {
-  currentStyles: ThemeStyleProps | Partial<ThemeStyleProps>;
+  currentStyles: ThemeStyleProps;
 };
 
 const MIN_CONTRAST_RATIO = 4.5;
+
+type ColorCategory = "content" | "interactive" | "functional";
 
 type ColorPair = {
   id: string;
@@ -28,34 +32,14 @@ type ColorPair = {
   foreground: string | undefined;
   background: string | undefined;
   label: string;
+  category: ColorCategory;
 };
 
 const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
+  const [filter, setFilter] = useState<"all" | "issues">("all");
+
   const colorPairsToCheck: ColorPair[] = [
-    {
-      id: "primary",
-      foregroundId: "primary-foreground",
-      backgroundId: "primary",
-      foreground: currentStyles?.["primary-foreground"],
-      background: currentStyles?.["primary"],
-      label: "Primary",
-    },
-    {
-      id: "secondary",
-      foregroundId: "secondary-foreground",
-      backgroundId: "secondary",
-      foreground: currentStyles?.["secondary-foreground"],
-      background: currentStyles?.["secondary"],
-      label: "Secondary",
-    },
-    {
-      id: "accent",
-      foregroundId: "accent-foreground",
-      backgroundId: "accent",
-      foreground: currentStyles?.["accent-foreground"],
-      background: currentStyles?.["accent"],
-      label: "Accent",
-    },
+    // Content - Base, background, cards, containers
     {
       id: "base",
       foregroundId: "foreground",
@@ -63,6 +47,7 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["foreground"],
       background: currentStyles?.["background"],
       label: "Base",
+      category: "content",
     },
     {
       id: "card",
@@ -71,6 +56,7 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["card-foreground"],
       background: currentStyles?.["card"],
       label: "Card",
+      category: "content",
     },
     {
       id: "popover",
@@ -79,6 +65,7 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["popover-foreground"],
       background: currentStyles?.["popover"],
       label: "Popover",
+      category: "content",
     },
     {
       id: "muted",
@@ -87,7 +74,39 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["muted-foreground"],
       background: currentStyles?.["muted"],
       label: "Muted",
+      category: "content",
     },
+
+    // Interactive - Buttons, links, actions
+    {
+      id: "primary",
+      foregroundId: "primary-foreground",
+      backgroundId: "primary",
+      foreground: currentStyles?.["primary-foreground"],
+      background: currentStyles?.["primary"],
+      label: "Primary",
+      category: "interactive",
+    },
+    {
+      id: "secondary",
+      foregroundId: "secondary-foreground",
+      backgroundId: "secondary",
+      foreground: currentStyles?.["secondary-foreground"],
+      background: currentStyles?.["secondary"],
+      label: "Secondary",
+      category: "interactive",
+    },
+    {
+      id: "accent",
+      foregroundId: "accent-foreground",
+      backgroundId: "accent",
+      foreground: currentStyles?.["accent-foreground"],
+      background: currentStyles?.["accent"],
+      label: "Accent",
+      category: "interactive",
+    },
+
+    // Functional - Sidebar, destructive, special purposes
     {
       id: "destructive",
       foregroundId: "destructive-foreground",
@@ -95,6 +114,7 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["destructive-foreground"],
       background: currentStyles?.["destructive"],
       label: "Destructive",
+      category: "functional",
     },
     {
       id: "sidebar",
@@ -103,6 +123,7 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["sidebar-foreground"],
       background: currentStyles?.["sidebar"],
       label: "Sidebar Base",
+      category: "functional",
     },
     {
       id: "sidebar-primary",
@@ -111,6 +132,7 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["sidebar-primary-foreground"],
       background: currentStyles?.["sidebar-primary"],
       label: "Sidebar Primary",
+      category: "functional",
     },
     {
       id: "sidebar-accent",
@@ -119,10 +141,9 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
       foreground: currentStyles?.["sidebar-accent-foreground"],
       background: currentStyles?.["sidebar-accent"],
       label: "Sidebar Accent",
+      category: "functional",
     },
   ];
-
-  const { updateStyle } = useEditorStore();
 
   const validColorPairsToCheck = colorPairsToCheck.filter(
     (pair): pair is ColorPair & { foreground: string; background: string } =>
@@ -130,91 +151,228 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
   );
   const contrastResults = useContrastChecker(validColorPairsToCheck);
 
+  const getContrastResult = (pairId: string) => {
+    return contrastResults?.find((res) => res.id === pairId);
+  };
+
+  const totalIssues = contrastResults?.filter(
+    (result) => result.contrastRatio < MIN_CONTRAST_RATIO
+  ).length;
+
+  const filteredPairs =
+    filter === "all"
+      ? colorPairsToCheck
+      : colorPairsToCheck.filter((pair) => {
+          const result = getContrastResult(pair.id);
+          return result && result.contrastRatio < MIN_CONTRAST_RATIO;
+        });
+
+  // Group color pairs by category
+  const categoryLabels: Record<ColorCategory, string> = {
+    content: "Content & Containers",
+    interactive: "Interactive Elements",
+    functional: "Navigation & Functional",
+  };
+
+  const categories: ColorCategory[] = ["content", "interactive", "functional"];
+  const groupedPairs = categories
+    .map((category) => ({
+      category,
+      label: categoryLabels[category],
+      pairs: filteredPairs.filter((pair) => pair.category === category),
+    }))
+    .filter((group) => group.pairs.length > 0);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="outline">
-              <Contrast />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Check Contrast</TooltipContent>
-        </Tooltip>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+        >
+          <Contrast className="h-4 w-4" />
+          <span className="text-sm hidden md:block">Contrast</span>
+        </Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Contrast Checker</DialogTitle>
-          <DialogDescription>
-            Check the contrast ratios of your theme colors to ensure they meet
-            accessibility standards. You can also adjust the colors using the
-            color pickers below. The recommended minimum contrast ratio is{" "}
-            <span className="font-bold">{MIN_CONTRAST_RATIO}</span>.
-          </DialogDescription>
-          <div className="space-y-4 pt-4">
-            {colorPairsToCheck.map((pair) => {
-              const result = contrastResults?.find((res) => res.id === pair.id);
-
-              return (
-                <div key={pair.id} className="flex flex-col gap-2 w-full">
-                  <p className="text-sm text-center font-medium">
-                    {pair.label}
-                  </p>
-                  <div className="flex h-8 w-full gap-2 items-center">
-                    <ColorPicker
-                      color={pair.background ?? ""}
-                      onChange={(color) =>
-                        updateStyle(pair.backgroundId, color)
-                      }
-                      label={pair.label}
-                      onlyShowPicker
-                    />
-                    <div
-                      style={{
-                        backgroundColor: pair.background ?? "transparent",
-                      }}
-                      className="h-8 flex-1 rounded border flex items-center justify-center"
-                    >
-                      {pair.foreground && pair.background && (
-                        <p
-                          style={{ color: pair.foreground }}
-                          className="text-lg"
-                        >
-                          Aa
-                        </p>
-                      )}
-                      {(!pair.foreground || !pair.background) && (
-                        <p className="text-xs text-muted-foreground">N/A</p>
-                      )}
-                    </div>
-                    <ColorPicker
-                      color={pair.foreground ?? ""}
-                      onChange={(color) =>
-                        updateStyle(pair.foregroundId, color)
-                      }
-                      label={pair.label}
-                      onlyShowPicker
-                    />
-                  </div>
-                  <p className="text-end text-sm">
-                    {result ? (
-                      <>
-                        Contrast Ratio: {result.contrastRatio.toFixed(2)}{" "}
-                        {result.contrastRatio >= MIN_CONTRAST_RATIO ? (
-                          <Check className="inline h-4 w-4 text-green-600" />
-                        ) : (
-                          <AlertTriangle className="inline h-4 w-4 text-yellow-600" />
-                        )}
-                      </>
-                    ) : (
-                      "N/A"
-                    )}
-                  </p>
-                </div>
-              );
-            })}
+      <DialogContent className="max-w-screen-lg max-h-[90vh]">
+        <DialogHeader className="mb-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <DialogTitle className="text-xl font-bold">
+                Contrast Checker
+              </DialogTitle>
+              <DialogDescription className="text-sm mt-1">
+                WCAG 2.0 AA requires a contrast ratio of at least{" "}
+                {MIN_CONTRAST_RATIO}:1{" • "}
+                <a
+                  href="https://www.w3.org/TR/WCAG21/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline hover:text-primary/80 transition-colors"
+                >
+                  Learn more
+                </a>
+              </DialogDescription>
+            </div>
+            <div className="items-center gap-2 hidden md:flex">
+              <Button
+                variant={filter === "all" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFilter("all")}
+              >
+                All
+              </Button>
+              <Button
+                variant={filter === "issues" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFilter("issues")}
+              >
+                <AlertTriangle className={cn("h-3 w-3 mr-1")} />
+                Issues ({totalIssues})
+              </Button>
+            </div>
           </div>
         </DialogHeader>
+
+        <ScrollArea className="h-[calc(90vh-12rem)]">
+          <div className="space-y-6">
+            {groupedPairs.map((group) => (
+              <div key={group.category} className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-md font-semibold">{group.label}</h2>
+                  <Separator className="flex-1" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {group.pairs.map((pair) => {
+                    const result = getContrastResult(pair.id);
+                    const isValid =
+                      result?.contrastRatio !== undefined &&
+                      result?.contrastRatio >= MIN_CONTRAST_RATIO;
+                    const contrastRatio =
+                      result?.contrastRatio?.toFixed(2) ?? "N/A";
+
+                    return (
+                      <Card
+                        key={pair.id}
+                        className={cn(
+                          "transition-all duration-200",
+                          !isValid && "border-yellow-500/50"
+                        )}
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <h3 className="font-medium">{pair.label}</h3>
+                            <Badge
+                              variant={isValid ? "default" : "destructive"}
+                              className={cn(
+                                "flex items-center gap-1 text-xs",
+                                isValid
+                                  ? "bg-muted text-muted-foreground"
+                                  : "bg-destructive text-destructive-foreground"
+                              )}
+                            >
+                              {isValid ? (
+                                <>
+                                  <Check className="h-3 w-3" />
+                                  {contrastRatio}
+                                </>
+                              ) : (
+                                <>
+                                  <AlertTriangle className="h-3 w-3" />
+                                  {contrastRatio}
+                                </>
+                              )}
+                            </Badge>
+                          </div>
+
+                          <div className="flex gap-2 items-center">
+                            <div className="flex flex-col items-center gap-3 flex-1">
+                              <div className="flex w-full items-center gap-3">
+                                <div
+                                  style={{
+                                    backgroundColor:
+                                      pair.background ?? "#000000",
+                                  }}
+                                  className="h-12 w-12 rounded-md border shadow-sm flex-shrink-0"
+                                ></div>
+                                <div className="flex flex-col">
+                                  <span className="text-xs font-medium">
+                                    Background
+                                  </span>
+                                  <span className="text-xs text-muted-foreground font-mono">
+                                    {pair.background}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="flex w-full items-center gap-3">
+                                <div
+                                  style={{
+                                    backgroundColor:
+                                      pair.foreground ?? "#ffffff",
+                                  }}
+                                  className="h-12 w-12 rounded-md border shadow-sm flex-shrink-0"
+                                ></div>
+                                <div className="flex flex-col">
+                                  <span className="text-xs font-medium">
+                                    Foreground
+                                  </span>
+                                  <span className="text-xs text-muted-foreground font-mono">
+                                    {pair.foreground}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div
+                              style={{
+                                backgroundColor:
+                                  pair.background ?? "transparent",
+                              }}
+                              className="flex-1 h-full min-h-[120px] rounded-lg border shadow-sm flex items-center justify-center overflow-hidden"
+                            >
+                              {pair.foreground && pair.background ? (
+                                <div className="text-center p-4">
+                                  <p
+                                    style={{ color: pair.foreground }}
+                                    className="text-4xl font-bold tracking-wider mb-2"
+                                  >
+                                    Aa
+                                  </p>
+                                  <p
+                                    style={{ color: pair.foreground }}
+                                    className="text-sm font-medium"
+                                  >
+                                    Sample Text
+                                  </p>
+                                </div>
+                              ) : (
+                                <p className="text-xs text-muted-foreground">
+                                  Preview
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          {!isValid && result && (
+                            <div className="mt-3 p-3 rounded-lg bg-destructive/20 border border-destructive">
+                              <p className="text-xs text-destructive flex items-center gap-1">
+                                <Info className="h-3 w-3 mr-1" />
+                                Contrast ratio below {MIN_CONTRAST_RATIO}:1
+                                (WCAG 2.0 AA)
+                              </p>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
