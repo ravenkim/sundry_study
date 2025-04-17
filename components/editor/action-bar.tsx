@@ -12,6 +12,7 @@ import { Separator } from "../ui/separator";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { useTheme } from "../theme-provider";
 import ContrastChecker from "./contrast-checker";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export function ActionBar() {
   const {
@@ -56,54 +57,74 @@ export function ActionBar() {
       <div className="flex h-14 items-center justify-end gap-4 px-4">
         <div className="flex items-center gap-2">
           <div className="px-2">
-            <SwitchPrimitives.Root
-              checked={theme === "dark"}
-              onClick={handleThemeToggle}
-              className="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-accent data-[state=unchecked]:bg-input"
-            >
-              <SwitchPrimitives.Thumb className="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 flex items-center justify-center">
-                {theme === "dark" ? (
-                  <Moon className="size-3" />
-                ) : (
-                  <Sun className="size-3" />
-                )}
-              </SwitchPrimitives.Thumb>
-            </SwitchPrimitives.Root>
+            <Tooltip>
+              <TooltipTrigger>
+                <SwitchPrimitives.Root
+                  checked={theme === "dark"}
+                  onClick={handleThemeToggle}
+                  className="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-accent data-[state=unchecked]:bg-input"
+                >
+                  <SwitchPrimitives.Thumb className="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 flex items-center justify-center">
+                    {theme === "dark" ? (
+                      <Moon className="size-3" />
+                    ) : (
+                      <Sun className="size-3" />
+                    )}
+                  </SwitchPrimitives.Thumb>
+                </SwitchPrimitives.Root>
+              </TooltipTrigger>
+              <TooltipContent>Toggle light/dark mode</TooltipContent>
+            </Tooltip>
           </div>
           <Separator orientation="vertical" className="h-8" />
           <ContrastChecker
             currentStyles={themeState.styles[themeState.currentMode]}
           />
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            onClick={() => setCssImportOpen(true)}
-          >
-            <FileCode className="size-3.5" />
-            <span className="text-sm hidden md:block">Import</span>
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            onClick={resetToCurrentPreset}
-            disabled={!hasCurrentPresetChanged()}
-          >
-            <RefreshCw className="size-3.5" />
-            <span className="text-sm hidden md:block">Reset</span>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                onClick={() => setCssImportOpen(true)}
+              >
+                <FileCode className="size-3.5" />
+                <span className="text-sm hidden md:block">Import</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Import CSS variables</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                onClick={resetToCurrentPreset}
+                disabled={!hasCurrentPresetChanged()}
+              >
+                <RefreshCw className="size-3.5" />
+                <span className="text-sm hidden md:block">Reset</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Reset to preset defaults</TooltipContent>
+          </Tooltip>
 
           <Separator orientation="vertical" className="h-8" />
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            onClick={() => setCodePanelOpen(true)}
-          >
-            <Code className="size-3.5" />
-            <span className="text-sm">Code</span>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                onClick={() => setCodePanelOpen(true)}
+              >
+                <Code className="size-3.5" />
+                <span className="text-sm">Code</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>View theme code</TooltipContent>
+          </Tooltip>
         </div>
       </div>
 
