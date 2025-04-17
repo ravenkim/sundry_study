@@ -10,6 +10,7 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "../ui/dialog";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import ColorPicker from "./color-picker";
 import { useEditorStore } from "@/store/editor-store";
 import { Contrast, Check, AlertTriangle } from "lucide-react";
@@ -132,9 +133,14 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          <Contrast />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">
+              <Contrast />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Check Contrast</TooltipContent>
+        </Tooltip>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
