@@ -16,6 +16,7 @@ import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 type ContrastCheckerProps = {
   currentStyles: ThemeStyleProps;
@@ -185,15 +186,20 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="relative h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
-        >
-          <Contrast className="h-4 w-4" />
-          <span className="text-sm hidden md:block">Contrast</span>
-        </Button>
+      <DialogTrigger>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+            >
+              <Contrast className="h-4 w-4" />
+              <span className="text-sm hidden md:block">Contrast</span>
+            </Button>
+            <TooltipContent>Check contrast accessibility</TooltipContent>
+          </TooltipTrigger>
+        </Tooltip>
       </DialogTrigger>
       <DialogContent className="max-w-screen-lg max-h-[90vh]">
         <DialogHeader className="mb-4">

@@ -275,27 +275,35 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
 
       <Separator orientation="vertical" className="h-8" />
 
-      <Button
-        variant="ghost"
-        size="icon"
-        className="size-14 shrink-0 rounded-none bg-muted/10"
-        title="Previous theme"
-        onClick={() => cycleTheme("prev")}
-      >
-        <ArrowLeft className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-14 shrink-0 rounded-none bg-muted/10"
+            onClick={() => cycleTheme("prev")}
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Previous theme</TooltipContent>
+      </Tooltip>
 
       <Separator orientation="vertical" className="h-8" />
 
-      <Button
-        variant="ghost"
-        size="icon"
-        className="size-14 shrink-0 rounded-none bg-muted/10"
-        title="Next theme"
-        onClick={() => cycleTheme("next")}
-      >
-        <ArrowRight className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-14 shrink-0 rounded-none bg-muted/10"
+            onClick={() => cycleTheme("next")}
+          >
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Next theme</TooltipContent>
+      </Tooltip>
     </div>
   );
 };
