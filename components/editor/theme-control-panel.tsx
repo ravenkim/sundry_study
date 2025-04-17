@@ -99,8 +99,11 @@ const ThemeControlPanel = ({
           onPresetChange={applyThemePreset}
         />
       </div>
-      <div className="space-y-4 h-full">
-        <Tabs defaultValue="colors" className="w-full h-full">
+      <div className="space-y-4 min-h-0 flex-1 flex flex-col">
+        <Tabs
+          defaultValue="colors"
+          className="w-full flex-1 flex flex-col min-h-0"
+        >
           <div className="px-4 mt-2">
             <TabsList className="inline-flex w-fit items-center justify-center rounded-full bg-background px-0 text-muted-foreground">
               <TabsTriggerPill value="colors">Colors</TabsTriggerPill>
@@ -109,7 +112,7 @@ const ThemeControlPanel = ({
             </TabsList>
           </div>
 
-          <ScrollArea className="h-full pb-40 p-4 pt-0">
+          <ScrollArea className="h-full pb-40 p-4 pt-0 flex-1">
             <TabsContent value="colors">
               <ControlSection
                 title="Primary Colors"
@@ -143,7 +146,7 @@ const ThemeControlPanel = ({
                 />
               </ControlSection>
 
-              <ControlSection title="Accent Colors" expanded>
+              <ControlSection title="Accent Colors">
                 <ColorPicker
                   color={currentStyles.accent}
                   onChange={(color) => updateStyle("accent", color)}
