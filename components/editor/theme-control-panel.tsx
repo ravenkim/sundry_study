@@ -22,7 +22,6 @@ import {
   DEFAULT_FONT_MONO,
   DEFAULT_FONT_SANS,
   DEFAULT_FONT_SERIF,
-  COMMON_STYLES,
   defaultThemeState,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
