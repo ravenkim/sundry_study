@@ -22,7 +22,6 @@ import {
   DEFAULT_FONT_MONO,
   DEFAULT_FONT_SANS,
   DEFAULT_FONT_SERIF,
-  COMMON_STYLES,
   defaultThemeState,
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
@@ -32,6 +31,7 @@ import { toast } from "../ui/use-toast";
 import { parseCssInput } from "../../utils/parse-css-input";
 import ShadowControl from "./shadow-control";
 import ThemeControlActions from "./theme-control-actions";
+import ContrastChecker from "./contrast-checker";
 
 const ThemeControlPanel = ({
   styles,
@@ -45,6 +45,7 @@ const ThemeControlPanel = ({
     resetToDefault,
     hasDefaultThemeChanged,
     hasCurrentPresetChanged,
+    updateStyle,
   } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
 
@@ -54,32 +55,6 @@ const ThemeControlPanel = ({
       ...styles?.[currentMode],
     }),
     [currentMode, styles]
-  );
-
-  const updateStyle = React.useCallback(
-    <K extends keyof typeof currentStyles>(
-      key: K,
-      value: (typeof currentStyles)[K]
-    ) => {
-      // apply common styles to both light and dark modes
-      if (COMMON_STYLES.includes(key)) {
-        onChange({
-          ...styles,
-          light: { ...styles.light, [key]: value },
-          dark: { ...styles.dark, [key]: value },
-        });
-        return;
-      }
-
-      onChange({
-        ...styles,
-        [currentMode]: {
-          ...currentStyles,
-          [key]: value,
-        },
-      });
-    },
-    [onChange, styles, currentMode, currentStyles]
   );
 
   const handleCssImport = (css: string) => {
@@ -110,6 +85,7 @@ const ThemeControlPanel = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-semibold">Theme Editor</h2>
+          <ContrastChecker currentStyles={currentStyles} />
         </div>
         <ThemeControlActions
           hasChanges={hasDefaultThemeChanged()}

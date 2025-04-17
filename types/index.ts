@@ -10,6 +10,7 @@ export type ColorPickerProps = {
   color: string;
   onChange: (color: string) => void;
   label: string;
+  onlyShowPicker?: boolean;
 };
 
 export type SliderInputProps = {
