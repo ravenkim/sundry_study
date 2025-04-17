@@ -11,9 +11,15 @@ import { CodePanelDialog } from "./code-panel-dialog";
 import { Separator } from "../ui/separator";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { useTheme } from "../theme-provider";
+import ContrastChecker from "./contrast-checker";
 
 export function ActionBar() {
-  const { themeState, resetToCurrentPreset, setThemeState } = useEditorStore();
+  const {
+    themeState,
+    resetToCurrentPreset,
+    setThemeState,
+    hasCurrentPresetChanged,
+  } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
   const [codePanelOpen, setCodePanelOpen] = useState(false);
 
@@ -65,6 +71,9 @@ export function ActionBar() {
             </SwitchPrimitives.Root>
           </div>
           <Separator orientation="vertical" className="h-8" />
+          <ContrastChecker
+            currentStyles={themeState.styles[themeState.currentMode]}
+          />
           <Button
             variant="ghost"
             size="sm"
@@ -72,16 +81,17 @@ export function ActionBar() {
             onClick={() => setCssImportOpen(true)}
           >
             <FileCode className="size-3.5" />
-            <span className="text-sm">Import</span>
+            <span className="text-sm hidden md:block">Import</span>
           </Button>
           <Button
             variant="ghost"
             size="sm"
             className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
             onClick={resetToCurrentPreset}
+            disabled={!hasCurrentPresetChanged()}
           >
             <RefreshCw className="size-3.5" />
-            <span className="text-sm">Reset</span>
+            <span className="text-sm hidden md:block">Reset</span>
           </Button>
 
           <Separator orientation="vertical" className="h-8" />

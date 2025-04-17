@@ -3,12 +3,7 @@ import { Label } from "@/components/ui/label";
 import { ColorPickerProps } from "@/types";
 import { debounce } from "@/utils/debounce";
 
-const ColorPicker = ({
-  color,
-  onChange,
-  label,
-  onlyShowPicker,
-}: ColorPickerProps) => {
+const ColorPicker = ({ color, onChange, label }: ColorPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [localColor, setLocalColor] = useState(color);
 
@@ -35,24 +30,6 @@ const ColorPicker = ({
       debouncedOnChange.cancel();
     };
   }, [debouncedOnChange]);
-
-  if (onlyShowPicker) {
-    return (
-      <div
-        className="h-8 w-8 rounded border cursor-pointer overflow-hidden relative flex items-center justify-center"
-        style={{ backgroundColor: localColor }}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <input
-          type="color"
-          id={`color-${label.replace(/\s+/g, "-").toLowerCase()}`}
-          value={localColor}
-          onChange={handleColorChange}
-          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="mb-3">
@@ -82,7 +59,7 @@ const ColorPicker = ({
           type="text"
           value={localColor}
           onChange={handleColorChange}
-          className="flex-1 h-8 px-2 text-sm rounded bg-input/20"
+          className="flex-1 h-8 px-2 text-sm rounded bg-input/25 border border-border/20"
         />
       </div>
     </div>
