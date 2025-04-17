@@ -15,12 +15,11 @@ export class AuthService {
     ) {}
 
     async createAccessToken(id: number) {
-        const userInfo = await this.prisma.user.findUniqueOrThrow({
+        const userInfo = await this.prisma.user.findUnique({
             where: {
                 id: id,
             },
         })
-
         const payload = {
             id: userInfo.id,
             email: userInfo.email,
@@ -74,7 +73,7 @@ export class AuthService {
     async login(props: LoginRequestDto, res: Response) {
         const { loginId, password } = props
 
-        const userInfo = await this.prisma.user.findUniqueOrThrow({
+        const userInfo = await this.prisma.user.findUnique({
             where: {
                 login_id: loginId,
             },
