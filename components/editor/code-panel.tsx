@@ -22,13 +22,9 @@ import {
 import { generateThemeCode } from "@/utils/theme-style-generator";
 interface CodePanelProps {
   themeEditorState: ThemeEditorState;
-  onCodePanelToggle: () => void;
 }
 
-const CodePanel: React.FC<CodePanelProps> = ({
-  themeEditorState,
-  onCodePanelToggle,
-}) => {
+const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
   const [registryCopied, setRegistryCopied] = useState(false);
   const [copied, setCopied] = useState(false);
   const posthog = usePostHog();
@@ -102,20 +98,7 @@ const CodePanel: React.FC<CodePanelProps> = ({
     <div className="h-full flex flex-col p-4">
       <div className="flex-none mb-4">
         <div className="flex items-center justify-between gap-2">
-          <h2 className="text-lg font-semibold">Code</h2>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onCodePanelToggle}
-                className="h-8 invisible md:visible group"
-              >
-                <PanelRight className="size-4 group-hover:scale-120 transition-all" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Collapse Code Panel</TooltipContent>
-          </Tooltip>
+          <h2 className="text-lg font-semibold">Theme Code</h2>
         </div>
         {preset && preset !== "default" && (
           <div className="mt-4 rounded-md overflow-hidden border">
