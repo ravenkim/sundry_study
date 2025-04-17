@@ -107,6 +107,7 @@ export const presets: Record<string, ThemePreset> = {
 
   graphite: {
     label: "Graphite",
+    createdAt: "2025-04-17",
     styles: {
       light: {
         background: "#f0f0f0",
@@ -1388,6 +1389,7 @@ export const presets: Record<string, ThemePreset> = {
       },
     },
   },
+
   caffeine: {
     label: "Caffeine",
     styles: {
