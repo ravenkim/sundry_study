@@ -51,7 +51,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       <div className="h-full hidden md:block">
         <ResizablePanelGroup direction="horizontal" className="h-full">
           <ResizablePanel defaultSize={30} minSize={20} maxSize={30}>
-            <div className="h-full">
+            <div className="h-full flex flex-col">
               <Controls
                 styles={styles}
                 onChange={handleStyleChange}
@@ -83,11 +83,13 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="controls" className="h-[calc(100%-2.5rem)] mt-0">
-            <Controls
-              styles={styles}
-              onChange={handleStyleChange}
-              currentMode={themeState.currentMode}
-            />
+            <div className="h-full flex flex-col">
+              <Controls
+                styles={styles}
+                onChange={handleStyleChange}
+                currentMode={themeState.currentMode}
+              />
+            </div>
           </TabsContent>
           <TabsContent value="preview" className="h-[calc(100%-2.5rem)] mt-0">
             <div className="h-full flex flex-col">
