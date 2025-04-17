@@ -101,7 +101,7 @@ const ThemeControlPanel = ({
       </div>
       <div className="space-y-4 h-full">
         <Tabs defaultValue="colors" className="w-full h-full">
-          <div className="px-4 py-1 border-b">
+          <div className="px-4 mt-2">
             <TabsList className="inline-flex w-fit items-center justify-center rounded-full bg-background px-0 text-muted-foreground">
               <TabsTriggerPill value="colors">Colors</TabsTriggerPill>
               <TabsTriggerPill value="typography">Typography</TabsTriggerPill>
@@ -109,7 +109,7 @@ const ThemeControlPanel = ({
             </TabsList>
           </div>
 
-          <ScrollArea className="h-full pb-40 p-4">
+          <ScrollArea className="h-full pb-40 p-4 pt-0">
             <TabsContent value="colors">
               <ControlSection
                 title="Primary Colors"

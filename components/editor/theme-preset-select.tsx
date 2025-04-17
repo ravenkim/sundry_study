@@ -9,10 +9,10 @@ import { useEditorStore } from "../../store/editor-store";
 import { getPresetThemeStyles } from "../../utils/theme-presets";
 import { Button } from "../ui/button";
 import {
+  ArrowLeft,
+  ArrowRight,
   Check,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Moon,
   Search,
   Shuffle,
@@ -122,14 +122,11 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     <div className="flex items-center">
       <TooltipProvider>
         <Popover>
-          <PopoverTrigger
-            className="bg-secondary/50 text-secondary-foreground"
-            asChild
-          >
+          <PopoverTrigger className="bg-muted/10" asChild>
             <Button
               variant="ghost"
               className={cn(
-                "w-full md:min-w-72 min-h-14 rounded-none justify-between group relative border-r",
+                "w-full md:min-w-64 min-h-14 rounded-none justify-between group relative border-r",
                 (!value || value === "default") &&
                   !hasChangedThemeFromDefault &&
                   "ring-2 ring-offset-1 ring-offset-background ring-primary/30 animate-pulse"
@@ -162,7 +159,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                   {presets[value || "default"]?.label || "default"}
                 </span>
               </div>
-              <ChevronDown className="size-4 shrink-0 opacity-50" />
+              <ChevronDown className="size-4 shrink-0" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="p-0 w-[300px] ml-4" align="center">
@@ -279,21 +276,21 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
       <Button
         variant="ghost"
         size="icon"
-        className="size-14 shrink-0 rounded-none border-r bg-secondary/50 text-secondary-foreground"
+        className="size-14 shrink-0 rounded-none border-r bg-muted/10"
         title="Previous theme"
         onClick={() => cycleTheme("prev")}
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ArrowLeft className="h-4 w-4" />
       </Button>
 
       <Button
         variant="ghost"
         size="icon"
-        className="size-14 shrink-0 rounded-none bg-secondary/50 text-secondary-foreground"
+        className="size-14 shrink-0 rounded-none bg-muted/10"
         title="Next theme"
         onClick={() => cycleTheme("next")}
       >
-        <ChevronRight className="h-4 w-4" />
+        <ArrowRight className="h-4 w-4" />
       </Button>
     </div>
   );

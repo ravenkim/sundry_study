@@ -62,7 +62,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
           <ResizableHandle />
           <ResizablePanel defaultSize={45} minSize={20}>
             <div className="h-full flex flex-col">
-              <div className="flex-1 min-h-0">
+              <div className="flex-1 min-h-0 flex flex-col">
                 <Preview styles={styles} currentMode={themeState.currentMode} />
               </div>
             </div>
