@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <header className="border-b">
-      <div className="px-2 md:px-4 py-4 flex items-center gap-2 justify-between">
+      <div className="p-4 flex items-center gap-2 justify-between">
         <div className="flex items-center gap-1">
           <Link href="/" className="flex items-center gap-2">
             <Logo className="size-6" title="tweakcn" />

@@ -73,7 +73,7 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
       {/* Mobile Layout */}
       <div className="h-full md:hidden">
         <Tabs defaultValue="controls" className="h-full">
-          <TabsList className="w-full">
+          <TabsList className="w-full rounded-none">
             <TabsTrigger value="controls" className="flex-1">
               <Sliders className="h-4 w-4 mr-2" />
               Controls
@@ -81,21 +81,16 @@ const Editor: React.FC<EditorProps> = ({ config }) => {
             <TabsTrigger value="preview" className="flex-1">
               Preview
             </TabsTrigger>
-            <TabsTrigger value="code" className="flex-1">
-              Code
-            </TabsTrigger>
           </TabsList>
-          <TabsContent value="controls" className="h-[calc(100%-2.5rem)]">
-            <div className="h-full p-4">
-              <Controls
-                styles={styles}
-                onChange={handleStyleChange}
-                currentMode={themeState.currentMode}
-              />
-            </div>
+          <TabsContent value="controls" className="h-[calc(100%-2.5rem)] mt-0">
+            <Controls
+              styles={styles}
+              onChange={handleStyleChange}
+              currentMode={themeState.currentMode}
+            />
           </TabsContent>
-          <TabsContent value="preview" className="h-[calc(100%-2.5rem)]">
-            <div className="h-full p-4">
+          <TabsContent value="preview" className="h-[calc(100%-2.5rem)] mt-0">
+            <div className="h-full flex flex-col">
               <Preview styles={styles} currentMode={themeState.currentMode} />
             </div>
           </TabsContent>
