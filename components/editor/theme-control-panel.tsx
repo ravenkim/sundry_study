@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { ThemeEditorControlsProps, ThemeStyleProps } from "@/types/theme";
 import ControlSection from "./control-section";
 import ColorPicker from "./color-picker";
@@ -16,7 +16,7 @@ import {
 import { useEditorStore } from "../../store/editor-store";
 import { Label } from "../ui/label";
 import { SliderWithInput } from "./slider-with-input";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
+import { Tabs, TabsList, TabsContent } from "../ui/tabs";
 import ThemeFontSelect from "./theme-font-select";
 import {
   DEFAULT_FONT_MONO,
@@ -27,11 +27,7 @@ import {
 } from "../../config/theme";
 import { Separator } from "../ui/separator";
 import { AlertCircle } from "lucide-react";
-import CssImportDialog from "./css-import-dialog";
-import { toast } from "../ui/use-toast";
-import { parseCssInput } from "../../utils/parse-css-input";
 import ShadowControl from "./shadow-control";
-import ThemeControlActions from "./theme-control-actions";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
 
 const ThemeControlPanel = ({
@@ -39,15 +35,7 @@ const ThemeControlPanel = ({
   currentMode,
   onChange,
 }: ThemeEditorControlsProps) => {
-  const {
-    applyThemePreset,
-    themeState,
-    resetToCurrentPreset,
-    resetToDefault,
-    hasDefaultThemeChanged,
-    hasCurrentPresetChanged,
-  } = useEditorStore();
-  const [cssImportOpen, setCssImportOpen] = useState(false);
+  const { applyThemePreset, themeState } = useEditorStore();
 
   const currentStyles = React.useMemo(
     () => ({

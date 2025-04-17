@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg";
 import TwitterIcon from "@/assets/twitter.svg";
 import DiscordIcon from "@/assets/discord.svg";
-import { useTheme } from "@/components/theme-provider";
 import Logo from "@/assets/logo.svg";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import { SocialLink } from "@/components/social-link";
