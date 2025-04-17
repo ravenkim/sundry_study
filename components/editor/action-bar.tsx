@@ -1,8 +1,6 @@
 "use client";
 
-import ThemePresetSelect from "./theme-preset-select";
 import { useEditorStore } from "@/store/editor-store";
-import { getPresetThemeStyles, presets } from "@/utils/theme-presets";
 import { Button } from "../ui/button";
 import { FileCode, RefreshCw, Code, Moon, Sun } from "lucide-react";
 import CssImportDialog from "./css-import-dialog";
@@ -15,14 +13,9 @@ import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { useTheme } from "../theme-provider";
 
 export function ActionBar() {
-  const { themeState, applyThemePreset, resetToCurrentPreset, setThemeState } =
-    useEditorStore();
+  const { themeState, resetToCurrentPreset, setThemeState } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
   const [codePanelOpen, setCodePanelOpen] = useState(false);
-
-  const handlePresetChange = (preset: string) => {
-    applyThemePreset(preset);
-  };
 
   const handleCssImport = (css: string) => {
     // This just shows a success toast for now

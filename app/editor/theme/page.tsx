@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import Editor from "@/components/editor/editor";
 import { Metadata } from "next";
 import { Header } from "../../../components/editor/header";
-import { ActionBar } from "@/components/editor/action-bar";
 
 export const metadata: Metadata = {
   title: "tweakcn — Theme Generator for shadcn/ui",

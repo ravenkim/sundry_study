@@ -17,10 +17,7 @@ export function CodePanelDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl h-[80vh] overflow-hidden">
         <div className="h-full overflow-auto">
-          <CodePanel
-            themeEditorState={themeEditorState}
-            onCodePanelToggle={() => onOpenChange(false)}
-          />
+          <CodePanel themeEditorState={themeEditorState} />
         </div>
       </DialogContent>
     </Dialog>

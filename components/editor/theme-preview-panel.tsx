@@ -47,7 +47,7 @@ const ThemePreviewPanel = ({
       <div
         className={cn(
           "min-h-0 flex flex-col flex-1",
-          isFullscreen && "fixed inset-0 z-50 bg-background p-4"
+          isFullscreen && "fixed inset-0 z-50 bg-background"
         )}
       >
         <Tabs defaultValue="cards" className="flex flex-col overflow-hidden">
