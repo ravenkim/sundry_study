@@ -1,3 +1,5 @@
+import path from "path";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config: any) => {
@@ -35,6 +37,11 @@ const nextConfig = {
       ...config.resolve.alias,
       "@": ".",
     };
+
+    config.resolve.alias["@radix-ui/react-use-effect-event"] = path.resolve(
+      __dirname,
+      "stubs/use-effect-event.js"
+    );
 
     return config;
   },
