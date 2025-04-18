@@ -130,7 +130,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                 "w-full md:min-w-56 min-h-14 rounded-none justify-between group relative",
                 (!value || value === "default") &&
                   !hasChangedThemeFromDefault &&
-                  "ring-2 ring-offset-1 ring-offset-background ring-primary/30 animate-pulse"
+                  "bg-muted/30 animate-pulse"
               )}
             >
               <div className="flex items-center gap-3">
