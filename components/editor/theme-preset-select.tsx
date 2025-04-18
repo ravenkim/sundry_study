@@ -1,14 +1,18 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { ThemePreset } from "../../types/theme";
 import { useEditorStore } from "../../store/editor-store";
 import { getPresetThemeStyles } from "../../utils/theme-presets";
 import { Button } from "../ui/button";
 import {
+  ArrowLeft,
+  ArrowRight,
   Check,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Moon,
   Search,
   Shuffle,
@@ -17,7 +21,12 @@ import {
 import { useTheme } from "@/components/theme-provider";
 import { Separator } from "../ui/separator";
 import { ScrollArea } from "../ui/scroll-area";
-import { Command, CommandEmpty, CommandGroup, CommandItem } from "../ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "../ui/command";
 import {
   Tooltip,
   TooltipContent,
@@ -62,12 +71,16 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
 
-  const presetNames = useMemo(() => ["default", ...Object.keys(presets)], [presets]);
-  const value = presetNames?.find((name) => name === currentPreset);
-  const currentIndex = useMemo(
-    () => presetNames.indexOf(value || "default"),
-    [presetNames, value]
+  const presetNames = useMemo(
+    () => ["default", ...Object.keys(presets)],
+    [presets]
   );
+  const value = presetNames?.find((name) => name === currentPreset);
+  const currentIndex =
+    useMemo(
+      () => presetNames.indexOf(value || "default"),
+      [presetNames, value]
+    ) ?? 0;
 
   const randomize = useCallback(() => {
     const random = Math.floor(Math.random() * presetNames.length);
@@ -107,14 +120,14 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center">
       <TooltipProvider>
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger className="bg-muted/10" asChild>
             <Button
-              variant="outline"
+              variant="ghost"
               className={cn(
-                "w-full md:min-w-64 h-10 justify-between group relative",
+                "w-full md:min-w-56 min-h-14 rounded-none justify-between group relative",
                 (!value || value === "default") &&
                   !hasChangedThemeFromDefault &&
                   "ring-2 ring-offset-1 ring-offset-background ring-primary/30 animate-pulse"
@@ -123,26 +136,34 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               <div className="flex items-center gap-3">
                 <div className="flex gap-0.5">
                   <ColorBox
-                    color={getPresetThemeStyles(value || "default")[mode].primary}
+                    color={
+                      getPresetThemeStyles(value || "default")[mode].primary
+                    }
                   />
                   <ColorBox
-                    color={getPresetThemeStyles(value || "default")[mode].accent}
+                    color={
+                      getPresetThemeStyles(value || "default")[mode].accent
+                    }
                   />
                   <ColorBox
-                    color={getPresetThemeStyles(value || "default")[mode].secondary}
+                    color={
+                      getPresetThemeStyles(value || "default")[mode].secondary
+                    }
                   />
                   <ColorBox
-                    color={getPresetThemeStyles(value || "default")[mode].border}
+                    color={
+                      getPresetThemeStyles(value || "default")[mode].border
+                    }
                   />
                 </div>
                 <span className="capitalize font-medium">
                   {presets[value || "default"]?.label || "default"}
                 </span>
               </div>
-              <ChevronDown className="size-4 shrink-0 opacity-50" />
+              <ChevronDown className="size-4 shrink-0" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="p-0 w-[300px]" align="start">
+          <PopoverContent className="p-0 w-[300px] ml-4" align="center">
             <Command className="rounded-lg border shadow-md w-full">
               <div className="flex items-center w-full">
                 <div className="flex items-center w-full border-b px-3 py-1">
@@ -219,7 +240,9 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                           color={getPresetThemeStyles(presetName)[mode].accent}
                         />
                         <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].secondary}
+                          color={
+                            getPresetThemeStyles(presetName)[mode].secondary
+                          }
                         />
                         <ColorBox
                           color={getPresetThemeStyles(presetName)[mode].border}
@@ -229,14 +252,15 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                         <span className="capitalize text-sm font-medium">
                           {presets[presetName]?.label || presetName}
                         </span>
-                        {presets[presetName] && isThemeNew(presets[presetName]) && (
-                          <Badge
-                            variant="secondary"
-                            className="text-xs rounded-full"
-                          >
-                            New
-                          </Badge>
-                        )}
+                        {presets[presetName] &&
+                          isThemeNew(presets[presetName]) && (
+                            <Badge
+                              variant="secondary"
+                              className="text-xs rounded-full"
+                            >
+                              New
+                            </Badge>
+                          )}
                       </div>
                       {presetName === value && (
                         <Check className="h-4 w-4 shrink-0 opacity-70" />
@@ -250,25 +274,37 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
         </Popover>
       </TooltipProvider>
 
-      <Button
-        variant="outline"
-        size="icon"
-        className="h-10 w-10 shrink-0"
-        title="Previous theme"
-        onClick={() => cycleTheme("prev")}
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
+      <Separator orientation="vertical" className="h-8" />
 
-      <Button
-        variant="outline"
-        size="icon"
-        className="h-10 w-10 shrink-0"
-        title="Next theme"
-        onClick={() => cycleTheme("next")}
-      >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-14 shrink-0 rounded-none bg-muted/10"
+            onClick={() => cycleTheme("prev")}
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Previous theme</TooltipContent>
+      </Tooltip>
+
+      <Separator orientation="vertical" className="h-8" />
+
+      <Tooltip>
+        <TooltipTrigger>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-14 shrink-0 rounded-none bg-muted/10"
+            onClick={() => cycleTheme("next")}
+          >
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Next theme</TooltipContent>
+      </Tooltip>
     </div>
   );
 };
