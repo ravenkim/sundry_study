@@ -25,7 +25,6 @@ export function ActionBar() {
   const [codePanelOpen, setCodePanelOpen] = useState(false);
 
   const handleCssImport = (css: string) => {
-    // This just shows a success toast for now
     const { lightColors, darkColors } = parseCssInput(css);
     const styles = {
       ...themeState.styles,
@@ -38,7 +37,6 @@ export function ActionBar() {
       styles,
     });
 
-    // The actual CSS parsing and theme application logic would be implemented later
     toast({
       title: "CSS imported",
       description: "Your custom CSS has been imported successfully",

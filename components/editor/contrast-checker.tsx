@@ -10,13 +10,14 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "../ui/dialog";
-import { Contrast, Check, AlertTriangle, Info } from "lucide-react";
+import { Contrast, Check, AlertTriangle, Info, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { useTheme } from "@/components/theme-provider";
 
 type ContrastCheckerProps = {
   currentStyles: ThemeStyleProps;
@@ -38,6 +39,7 @@ type ColorPair = {
 
 const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
   const [filter, setFilter] = useState<"all" | "issues">("all");
+  const { theme, toggleTheme } = useTheme();
 
   const colorPairsToCheck: ColorPair[] = [
     // Content - Base, background, cards, containers
@@ -222,6 +224,24 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
               </DialogDescription>
             </div>
             <div className="items-center gap-2 hidden md:flex">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })}
+                  >
+                    {theme === "light" ? (
+                      <Sun className="h-3.5 w-3.5" />
+                    ) : (
+                      <Moon className="h-3.5 w-3.5" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p className="text-xs">Toggle theme</p>
+                </TooltipContent>
+              </Tooltip>
               <Button
                 variant={filter === "all" ? "default" : "outline"}
                 size="sm"
@@ -263,12 +283,22 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
                         key={pair.id}
                         className={cn(
                           "transition-all duration-200",
-                          !isValid && "border-yellow-500/50"
+                          !isValid && " border-dashed"
                         )}
                       >
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between mb-3">
-                            <h3 className="font-medium">{pair.label}</h3>
+                            <h3
+                              className={cn(
+                                "font-medium flex items-center",
+                                !isValid && "text-destructive"
+                              )}
+                            >
+                              {pair.label}
+                              {!isValid && (
+                                <AlertTriangle className="size-3.5 ml-1" />
+                              )}
+                            </h3>
                             <Badge
                               variant={isValid ? "default" : "destructive"}
                               className={cn(
@@ -360,16 +390,6 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
                               )}
                             </div>
                           </div>
-
-                          {!isValid && result && (
-                            <div className="mt-3 p-3 rounded-lg bg-destructive/20 border border-destructive">
-                              <p className="text-xs text-destructive flex items-center gap-1">
-                                <Info className="h-3 w-3 mr-1" />
-                                Contrast ratio below {MIN_CONTRAST_RATIO}:1
-                                (WCAG 2.0 AA)
-                              </p>
-                            </div>
-                          )}
                         </CardContent>
                       </Card>
                     );
