@@ -76,10 +76,11 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     [presets]
   );
   const value = presetNames?.find((name) => name === currentPreset);
-  const currentIndex = useMemo(
-    () => presetNames.indexOf(value || "default"),
-    [presetNames, value]
-  );
+  const currentIndex =
+    useMemo(
+      () => presetNames.indexOf(value || "default"),
+      [presetNames, value]
+    ) ?? 0;
 
   const randomize = useCallback(() => {
     const random = Math.floor(Math.random() * presetNames.length);
