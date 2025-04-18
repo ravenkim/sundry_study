@@ -1,53 +1,9 @@
 import { ThemeStyleProps } from "@/types/theme";
 import { colorFormatter } from "./color-converter";
+import { COMMON_STYLES, defaultThemeState } from "@/config/theme";
 
-export const variableNames = [
-  "background",
-  "foreground",
-  "card",
-  "card-foreground",
-  "popover",
-  "popover-foreground",
-  "primary",
-  "primary-foreground",
-  "secondary",
-  "secondary-foreground",
-  "muted",
-  "muted-foreground",
-  "accent",
-  "accent-foreground",
-  "destructive",
-  "destructive-foreground",
-  "border",
-  "input",
-  "ring",
-  "chart-1",
-  "chart-2",
-  "chart-3",
-  "chart-4",
-  "chart-5",
-  "radius",
-  "font-sans",
-  "font-serif",
-  "font-mono",
-  "shadow-color",
-  "shadow-opacity",
-  "shadow-blur",
-  "shadow-spread",
-  "shadow-offset-x",
-  "shadow-offset-y",
-  "shadow",
-  "shadow-2xs",
-  "shadow-xs",
-  "shadow-sm",
-  "shadow-md",
-  "shadow-lg",
-  "shadow-xl",
-  "shadow-2xl",
-];
-
-const nonColorVariables = ["font-sans", "font-serif", "font-mono", "radius"];
-
+export const variableNames = Object.keys(defaultThemeState.styles.light);
+const nonColorVariables = COMMON_STYLES;
 const VARIABLE_PREFIX = "--";
 
 export const parseCssInput = (input: string) => {
