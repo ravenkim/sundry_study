@@ -10,7 +10,7 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "../ui/dialog";
-import { Contrast, Check, AlertTriangle, Info, Moon, Sun } from "lucide-react";
+import { Contrast, Check, AlertTriangle, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
