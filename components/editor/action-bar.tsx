@@ -114,9 +114,9 @@ export function ActionBar() {
           <Tooltip>
             <TooltipTrigger>
               <Button
-                variant="ghost"
+                variant="secondary"
                 size="sm"
-                className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                className="h-8 px-2 gap-1.5"
                 onClick={() => setCodePanelOpen(true)}
               >
                 <Code className="size-3.5" />
