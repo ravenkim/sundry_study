@@ -5,18 +5,12 @@ import {
   Code,
   FileCode,
   Layers,
-  Palette,
   Paintbrush,
   PaintBucket,
+  Contrast,
 } from "lucide-react";
 
 const features = [
-  {
-    title: "Visual Theme Customizer",
-    description:
-      "Customize your shadcn/ui components with a real-time preview to see changes instantly.",
-    icon: <Palette className="size-5" />,
-  },
   {
     title: "Color Control",
     description:
@@ -46,6 +40,12 @@ const features = [
     description:
       "Choose from stunning pre-designed themes and customize both light and dark mode colors effortlessly.",
     icon: <PaintBucket className="size-5" />,
+  },
+  {
+    title: "Contrast Checker",
+    description:
+      "Ensure your designs meet accessibility standards with built-in contrast ratio checking between text and background colors.",
+    icon: <Contrast className="size-5" />,
   },
 ];
 
