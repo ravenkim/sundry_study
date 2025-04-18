@@ -40,11 +40,10 @@ const ColorPicker = ({ color, onChange, label }: ColorPickerProps) => {
         >
           {label}
         </Label>
-        <div className="text-xs text-muted-foreground">{localColor}</div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <div
-          className="h-8 w-8 rounded border cursor-pointer overflow-hidden relative flex items-center justify-center"
+          className="h-8 w-8 border cursor-pointer overflow-hidden relative flex items-center justify-center rounded"
           style={{ backgroundColor: localColor }}
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -60,7 +59,7 @@ const ColorPicker = ({ color, onChange, label }: ColorPickerProps) => {
           type="text"
           value={localColor}
           onChange={handleColorChange}
-          className="flex-1 h-8 px-2 text-sm rounded-md border bg-background"
+          className="flex-1 h-8 px-2 text-sm rounded bg-input/25 border border-border/20"
         />
       </div>
     </div>

@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ThemeEditorState } from "@/types/editor";
+import { ThemeStyleProps } from "@/types/theme";
 // @ts-expect-error: owned by ngard
 import { isEqual } from "@ngard/tiny-isequal";
-import { defaultThemeState } from "@/config/theme";
+import { defaultThemeState, COMMON_STYLES } from "@/config/theme";
 import { getPresetThemeStyles } from "@/utils/theme-presets";
 
 interface EditorStore {

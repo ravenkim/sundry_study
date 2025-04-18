@@ -58,8 +58,6 @@ export interface ThemeEditorState {
 export interface ThemeEditorPreviewProps {
   styles: ThemeStyles;
   currentMode: "light" | "dark";
-  isCodePanelOpen: boolean;
-  onCodePanelToggle: (open: boolean) => void;
 }
 
 export interface ThemeEditorControlsProps {
