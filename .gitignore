@@ -10,6 +10,9 @@ node_modules
 !.yarn/releases
 !.yarn/versions
 
+# bun lock
+bun.lock
+
 # testing
 /coverage
 
