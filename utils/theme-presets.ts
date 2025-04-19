@@ -1,15 +1,15 @@
-import { defaultThemeState } from "../config/theme"
-import { ThemePreset, ThemeStyles } from "../types/theme"
+import { defaultThemeState } from "../config/theme";
+import { ThemePreset, ThemeStyles } from "../types/theme";
 
 export function getPresetThemeStyles(name: string): ThemeStyles {
-  const defaultTheme = defaultThemeState.styles
+  const defaultTheme = defaultThemeState.styles;
   if (name === "default") {
-    return defaultTheme
+    return defaultTheme;
   }
 
-  const preset = presets[name]
+  const preset = presets[name];
   if (!preset) {
-    return defaultTheme
+    return defaultTheme;
   }
 
   return {
@@ -22,7 +22,7 @@ export function getPresetThemeStyles(name: string): ThemeStyles {
       ...(preset.styles.light || {}),
       ...(preset.styles.dark || {}),
     },
-  }
+  };
 }
 
 export const presets: Record<string, ThemePreset> = {
@@ -2621,4 +2621,4 @@ export const presets: Record<string, ThemePreset> = {
       },
     },
   },
-}
+};
