@@ -107,7 +107,7 @@ export const presets: Record<string, ThemePreset> = {
 
   "t3-chat": {
     label: "T3 Chat",
-    createdAt: "2025-04-18",
+    createdAt: "2025-04-19",
     styles: {
       light: {
         background: "#faf5fa",
