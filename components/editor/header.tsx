@@ -9,6 +9,7 @@ import Logo from "@/assets/logo.svg";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import { SocialLink } from "@/components/social-link";
 import { Separator } from "@/components/ui/separator";
+import { formatCompactNumber } from "@/utils/format";
 
 export function Header() {
   const { stargazersCount } = useGithubStars("jnsahaj", "tweakcn");
@@ -28,7 +29,7 @@ export function Header() {
             className="flex items-center gap-2 text-sm font-bold"
           >
             <GitHubIcon className="size-4" />
-            {stargazersCount > 0 && stargazersCount.toLocaleString()}
+            {stargazersCount > 0 && formatCompactNumber(stargazersCount)}
           </SocialLink>
           <Separator orientation="vertical" className="h-8" />
           <div className="hidden md:flex items-center gap-3.5">
