@@ -2599,7 +2599,7 @@ export const presets: Record<string, ThemePreset> = {
         destructive: "#ff6467",
         "destructive-foreground": "#262626",
         border: "#262626",
-        input: "#ffffff",
+        input: "#525252",
         ring: "#737373",
         "chart-1": "#737373",
         "chart-2": "#737373",
