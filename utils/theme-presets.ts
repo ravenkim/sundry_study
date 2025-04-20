@@ -2535,7 +2535,7 @@ export const presets: Record<string, ThemePreset> = {
 
   mono: {
     label: "Mono",
-    createdAt: "2025-04-19",
+    createdAt: "2025-04-20",
     styles: {
       light: {
         background: "#ffffff",
@@ -2544,7 +2544,7 @@ export const presets: Record<string, ThemePreset> = {
         "card-foreground": "#0a0a0a",
         popover: "#ffffff",
         "popover-foreground": "#0a0a0a",
-        primary: "#171717",
+        primary: "#737373",
         "primary-foreground": "#fafafa",
         secondary: "#f5f5f5",
         "secondary-foreground": "#171717",
@@ -2584,12 +2584,12 @@ export const presets: Record<string, ThemePreset> = {
       dark: {
         background: "#0a0a0a",
         foreground: "#fafafa",
-        card: "#171717",
+        card: "#191919",
         "card-foreground": "#fafafa",
         popover: "#262626",
         "popover-foreground": "#fafafa",
-        primary: "#e5e5e5",
-        "primary-foreground": "#171717",
+        primary: "#737373",
+        "primary-foreground": "#fafafa",
         secondary: "#262626",
         "secondary-foreground": "#fafafa",
         muted: "#262626",
@@ -2598,7 +2598,7 @@ export const presets: Record<string, ThemePreset> = {
         "accent-foreground": "#fafafa",
         destructive: "#ff6467",
         "destructive-foreground": "#262626",
-        border: "#262626",
+        border: "#383838",
         input: "#525252",
         ring: "#737373",
         "chart-1": "#737373",
@@ -2614,10 +2614,6 @@ export const presets: Record<string, ThemePreset> = {
         "sidebar-accent-foreground": "#fafafa",
         "sidebar-border": "#ffffff",
         "sidebar-ring": "#525252",
-        "font-sans": "Geist Mono, monospace",
-        "font-serif": "Geist Mono, monospace",
-        "font-mono": "Geist Mono, monospace",
-        radius: "0rem",
       },
     },
   },
