@@ -9,6 +9,7 @@ import Logo from "@/assets/logo.svg";
 import GitHubIcon from "@/assets/github.svg";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import { cn } from "@/lib/utils";
+import { formatCompactNumber } from "@/utils/format";
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -88,7 +89,7 @@ export function Header({
                 className="font-semibold"
               >
                 <GitHubIcon className="size-5" />
-                {stargazersCount > 0 && stargazersCount.toLocaleString()}
+                {stargazersCount > 0 && formatCompactNumber(stargazersCount)}
               </a>
             </Button>
           </motion.div>
@@ -142,7 +143,11 @@ export function Header({
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {mobileMenuOpen ? (
+              <X className="size-5" />
+            ) : (
+              <Menu className="size-5" />
+            )}
             <span className="sr-only">Toggle menu</span>
           </Button>
         </div>
@@ -181,7 +186,10 @@ export function Header({
               transition={{ duration: 0.3, delay: 0.3 }}
               className="pt-2 mt-2 border-t border-border/30"
             >
-              <Link href="/editor/theme" onClick={() => setMobileMenuOpen(false)}>
+              <Link
+                href="/editor/theme"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <Button className="w-full rounded-full">
                   Try It Now
                   <ChevronRight className="ml-2 size-4" />
