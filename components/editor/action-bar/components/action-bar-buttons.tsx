@@ -20,7 +20,7 @@ export function ActionBarButtons({
   onSaveClick,
   isSaving,
 }: ActionBarButtonsProps) {
-  const { themeState, resetToCurrentPreset, hasCurrentPresetChanged } =
+  const { themeState, restoreThemeCheckpoint, hasThemeChangedFromCheckpoint } =
     useEditorStore();
 
   return (
@@ -32,8 +32,8 @@ export function ActionBarButtons({
       />
       <ImportButton onImportClick={onImportClick} />
       <ResetButton
-        onReset={resetToCurrentPreset}
-        isDisabled={!hasCurrentPresetChanged()}
+        onReset={restoreThemeCheckpoint}
+        isDisabled={!hasThemeChangedFromCheckpoint()}
       />
       <Separator orientation="vertical" className="h-8" />
       <SaveButton onSaveClick={onSaveClick} isSaving={isSaving} />

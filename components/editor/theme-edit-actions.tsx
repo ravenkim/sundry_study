@@ -50,7 +50,6 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
     }
 
     if (!dataToUpdate.name && !dataToUpdate.styles) {
-      console.log("No changes detected.");
       setIsNameDialogOpen(false);
       setIsSaving(false);
       return;

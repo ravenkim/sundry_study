@@ -30,6 +30,9 @@ const isThemeStyles = (styles: unknown): styles is ThemeStyles => {
 const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
   const themeState = useEditorStore((state) => state.themeState);
   const setThemeState = useEditorStore((state) => state.setThemeState);
+  const saveThemeCheckpoint = useEditorStore(
+    (state) => state.saveThemeCheckpoint
+  );
   const Controls = config.controls;
   const Preview = config.preview;
 
@@ -47,8 +50,9 @@ const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
     if (initialTheme && isThemeStyles(initialTheme.styles)) {
       const prev = useEditorStore.getState().themeState;
       setThemeState({ ...prev, styles: initialTheme.styles });
+      saveThemeCheckpoint();
     }
-  }, [initialTheme, setThemeState]);
+  }, [initialTheme, setThemeState, saveThemeCheckpoint]);
 
   if (initialTheme && !isThemeStyles(initialTheme.styles)) {
     return (
