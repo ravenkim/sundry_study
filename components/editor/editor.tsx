@@ -28,7 +28,8 @@ const isThemeStyles = (styles: unknown): styles is ThemeStyles => {
 };
 
 const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
-  const { themeState, setThemeState } = useEditorStore();
+  const themeState = useEditorStore((state) => state.themeState);
+  const setThemeState = useEditorStore((state) => state.setThemeState);
   const Controls = config.controls;
   const Preview = config.preview;
 
@@ -36,16 +37,18 @@ const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
 
   const handleStyleChange = React.useCallback(
     (newStyles: ThemeStyles) => {
-      setThemeState({ ...themeState, styles: newStyles });
+      const prev = useEditorStore.getState().themeState;
+      setThemeState({ ...prev, styles: newStyles });
     },
-    [themeState, setThemeState]
+    [setThemeState]
   );
 
   useEffect(() => {
     if (initialTheme && isThemeStyles(initialTheme.styles)) {
-      handleStyleChange(initialTheme.styles);
+      const prev = useEditorStore.getState().themeState;
+      setThemeState({ ...prev, styles: initialTheme.styles });
     }
-  }, [initialTheme, handleStyleChange]);
+  }, [initialTheme, setThemeState]);
 
   if (initialTheme && !isThemeStyles(initialTheme.styles)) {
     return (
