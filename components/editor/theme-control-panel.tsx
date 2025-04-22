@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { use } from "react";
 import { ThemeEditorControlsProps, ThemeStyleProps } from "@/types/theme";
 import ControlSection from "./control-section";
 import ColorPicker from "./color-picker";
@@ -29,11 +29,13 @@ import { Separator } from "../ui/separator";
 import { AlertCircle } from "lucide-react";
 import ShadowControl from "./shadow-control";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
+import ThemeEditActions from "./theme-edit-actions";
 
 const ThemeControlPanel = ({
   styles,
   currentMode,
   onChange,
+  themePromise,
 }: ThemeEditorControlsProps) => {
   const { applyThemePreset, themeState } = useEditorStore();
 
@@ -78,14 +80,20 @@ const ThemeControlPanel = ({
 
   const radius = parseFloat(currentStyles.radius.replace("rem", ""));
 
+  const theme = use(themePromise);
+
   return (
     <>
       <div className="border-b">
-        <ThemePresetSelect
-          presets={presets}
-          currentPreset={themeState.preset || null}
-          onPresetChange={applyThemePreset}
-        />
+        {!theme ? (
+          <ThemePresetSelect
+            presets={presets}
+            currentPreset={themeState.preset || null}
+            onPresetChange={applyThemePreset}
+          />
+        ) : (
+          <ThemeEditActions theme={theme} />
+        )}
       </div>
       <div className="space-y-4 min-h-0 flex-1 flex flex-col">
         <Tabs

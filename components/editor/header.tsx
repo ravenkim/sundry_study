@@ -9,6 +9,7 @@ import Logo from "@/assets/logo.svg";
 import { useGithubStars } from "@/hooks/use-github-stars";
 import { SocialLink } from "@/components/social-link";
 import { Separator } from "@/components/ui/separator";
+import { UserProfileDropdown } from "@/components/user-profile-dropdown";
 import { formatCompactNumber } from "@/utils/format";
 
 export function Header() {
@@ -34,19 +35,31 @@ export function Header() {
           <Separator orientation="vertical" className="h-8" />
           <div className="hidden md:flex items-center gap-3.5">
             <SocialLink
-              href="https://github.com/sponsors/jnsahaj"
-              className="flex items-center gap-1.5 px-2 py-1 rounded-md border hover:border-pink-500 hover:text-pink-500 transition-colors"
+              href="https://github.com/jnsahaj/tweakcn"
+              className="flex items-center gap-2 text-sm font-bold"
             >
-              <Heart className="size-4" strokeWidth={2.5} />
-              <span className="text-sm font-medium">Support</span>
+              <GitHubIcon className="size-4" />
+              {stargazersCount > 0 && stargazersCount.toLocaleString()}
             </SocialLink>
-            <SocialLink href="https://discord.gg/Phs4u2NM3n">
-              <DiscordIcon className="size-5" />
+            <Separator orientation="vertical" className="h-8" />
+            <div className="hidden md:flex items-center gap-3.5">
+              <SocialLink
+                href="https://github.com/sponsors/jnsahaj"
+                className="flex items-center gap-1.5 px-2 py-1 rounded-md border hover:border-pink-500 hover:text-pink-500 transition-colors"
+              >
+                <Heart className="size-4" strokeWidth={2.5} />
+                <span className="text-sm font-medium">Support</span>
+              </SocialLink>
+              <SocialLink href="https://discord.gg/Phs4u2NM3n">
+                <DiscordIcon className="size-5" />
+              </SocialLink>
+            </div>
+            <SocialLink href="https://x.com/iamsahaj_xyz">
+              <TwitterIcon className="size-4" />
             </SocialLink>
           </div>
-          <SocialLink href="https://x.com/iamsahaj_xyz">
-            <TwitterIcon className="size-4" />
-          </SocialLink>
+          <Separator orientation="vertical" className="h-8" />
+          <UserProfileDropdown />
         </div>
       </div>
     </header>

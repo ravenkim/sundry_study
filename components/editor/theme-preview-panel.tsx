@@ -17,7 +17,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ActionBar } from "./action-bar";
+import { ActionBar } from "./action-bar/action-bar";
 
 const DemoCards = lazy(() => import("@/components/examples/demo-cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
