@@ -34,14 +34,6 @@ export function Header() {
           </SocialLink>
           <Separator orientation="vertical" className="h-8" />
           <div className="hidden md:flex items-center gap-3.5">
-            <SocialLink
-              href="https://github.com/jnsahaj/tweakcn"
-              className="flex items-center gap-2 text-sm font-bold"
-            >
-              <GitHubIcon className="size-4" />
-              {stargazersCount > 0 && stargazersCount.toLocaleString()}
-            </SocialLink>
-            <Separator orientation="vertical" className="h-8" />
             <div className="hidden md:flex items-center gap-3.5">
               <SocialLink
                 href="https://github.com/sponsors/jnsahaj"
