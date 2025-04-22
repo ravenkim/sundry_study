@@ -61,8 +61,9 @@ export function ActionBar() {
     };
 
     try {
-      await createTheme(themeData);
+      const theme = await createTheme(themeData);
       setTimeout(() => {
+        if (!theme) return;
         setSaveDialogOpen(false);
       }, 50);
     } catch (error) {

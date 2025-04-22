@@ -121,7 +121,8 @@ export function useThemeActions() {
     if (error) {
       handleMutationError(
         error,
-        (err) => setState((prev) => ({ ...prev, error: err })),
+        (err) =>
+          setState((prev) => ({ ...prev, error: err, isLoading: false })),
         setIsAuthRequired
       );
       return null;
