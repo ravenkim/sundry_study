@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeScript } from "@/components/theme-script";
+import { AuthDialogWrapper } from "@/components/auth-dialog-wrapper";
 import "./globals.css";
 import { PostHogInit } from "@/components/posthog-init";
 import { Suspense } from "react";
@@ -93,6 +94,7 @@ export default function RootLayout({
               <TooltipProvider>
                 <Toaster />
                 {children}
+                <AuthDialogWrapper />
               </TooltipProvider>
             </ThemeProvider>
           </Suspense>

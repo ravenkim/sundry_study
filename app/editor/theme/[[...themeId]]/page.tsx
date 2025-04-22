@@ -2,15 +2,22 @@ import { getEditorConfig } from "@/config/editors";
 import { cn } from "@/lib/utils";
 import Editor from "@/components/editor/editor";
 import { Metadata } from "next";
-import { Header } from "../../../components/editor/header";
-
+import { Header } from "../../../../components/editor/header";
+import { getTheme } from "@/actions/themes";
 export const metadata: Metadata = {
   title: "tweakcn — Theme Generator for shadcn/ui",
   description:
     "Easily customize and preview your shadcn/ui theme with tweakcn. Modify colors, fonts, and styles in real-time.",
 };
 
-export default function Component() {
+export default async function Component({
+  params,
+}: {
+  params: Promise<{ themeId: string }>;
+}) {
+  const { themeId } = await params;
+  const themePromise = themeId ? getTheme(themeId) : Promise.resolve(null);
+
   return (
     <>
       <div
@@ -20,7 +27,10 @@ export default function Component() {
       >
         <Header />
         <main className="flex-1 overflow-hidden">
-          <Editor config={getEditorConfig("theme")} />
+          <Editor
+            config={getEditorConfig("theme")}
+            themePromise={themePromise}
+          />
         </main>
       </div>
     </>
