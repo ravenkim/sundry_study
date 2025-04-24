@@ -8,8 +8,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { MoreVertical, Trash2, Edit, Loader2 } from "lucide-react";
+import { MoreVertical, Trash2, Edit, Loader2, Zap } from "lucide-react";
 import { useMemo } from "react";
 import { useEditorStore } from "@/store/editor-store";
 import { useThemeActions } from "@/hooks/use-theme-actions";
@@ -36,12 +37,19 @@ const swatchDefinitions: SwatchDefinition[] = [
 ];
 
 export function ThemeCard({ theme, className }: ThemeCardProps) {
-  const { themeState } = useEditorStore();
+  const { themeState, setThemeState } = useEditorStore();
   const { deleteTheme, isDeletingTheme } = useThemeActions();
   const mode = themeState.currentMode;
 
   const handleDelete = () => {
     deleteTheme(theme.id);
+  };
+
+  const handleQuickApply = () => {
+    setThemeState({
+      ...themeState,
+      styles: theme.styles,
+    });
   };
 
   const colorSwatches = useMemo(() => {
@@ -110,6 +118,10 @@ export function ThemeCard({ theme, className }: ThemeCardProps) {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48 bg-popover">
+            <DropdownMenuItem onClick={handleQuickApply} className="gap-2">
+              <Zap className="h-4 w-4" />
+              Quick Apply
+            </DropdownMenuItem>
             <DropdownMenuItem asChild className="gap-2">
               <Link href={`/editor/theme/${theme.id}`}>
                 <Edit className="h-4 w-4" />
@@ -123,6 +135,7 @@ export function ThemeCard({ theme, className }: ThemeCardProps) {
               <Share className="h-4 w-4" />
               Share Theme
             </DropdownMenuItem> */}
+            <DropdownMenuSeparator className="mx-2" />
             <DropdownMenuItem
               onClick={handleDelete}
               className="text-destructive gap-2 focus:text-destructive"
