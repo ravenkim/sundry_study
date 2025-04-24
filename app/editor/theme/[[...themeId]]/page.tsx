@@ -4,6 +4,9 @@ import Editor from "@/components/editor/editor";
 import { Metadata } from "next";
 import { Header } from "../../../../components/editor/header";
 import { getTheme } from "@/actions/themes";
+import { Suspense } from "react";
+import { Loading } from "@/components/loading";
+
 export const metadata: Metadata = {
   title: "tweakcn — Theme Generator for shadcn/ui",
   description:
@@ -27,10 +30,12 @@ export default async function Component({
       >
         <Header />
         <main className="flex-1 overflow-hidden">
-          <Editor
-            config={getEditorConfig("theme")}
-            themePromise={themePromise}
-          />
+          <Suspense fallback={<Loading />}>
+            <Editor
+              config={getEditorConfig("theme")}
+              themePromise={themePromise}
+            />
+          </Suspense>
         </main>
       </div>
     </>

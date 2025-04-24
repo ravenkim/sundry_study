@@ -26,8 +26,8 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const handleThemeEditCancel = () => {
-    applyThemePreset(themeState?.preset || "default");
     router.push("/editor/theme");
+    applyThemePreset(themeState?.preset || "default");
   };
 
   const handleSaveTheme = async (newName: string) => {
@@ -61,8 +61,8 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
 
     if (result) {
       setIsNameDialogOpen(false);
-      applyThemePreset(themeState?.preset || "default");
       router.push("/editor/theme");
+      applyThemePreset(themeState?.preset || "default");
     } else {
       console.error("Failed to update theme");
     }
