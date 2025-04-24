@@ -117,7 +117,7 @@ export function Header({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.5 }}
           >
-            <Link href="/editor/theme">
+            <Link href="/editor/theme" prefetch>
               <Button className="rounded-full cursor-pointer transition-transform hover:scale-105 font-medium">
                 Try It Now
                 <ChevronRight className="ml-1 size-4" />
