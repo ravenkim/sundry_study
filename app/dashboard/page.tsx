@@ -1,10 +1,9 @@
-import { Theme } from "@/types/theme";
 import { getThemes } from "@/actions/themes";
-import { ThemeCard } from "./components/theme-card";
 import { Header } from "@/components/editor/header";
-import { Palette } from "lucide-react";
+import { Palette, Plus } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ThemesList } from "@/app/dashboard/components/themes-list";
 
 export default async function ProfilePage() {
   const themes = await getThemes();
@@ -12,32 +11,75 @@ export default async function ProfilePage() {
     return b.createdAt?.getTime() - a.createdAt?.getTime();
   });
 
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  const recentThemeObjects = themes.filter((theme) => {
+    return theme.createdAt && theme.createdAt > oneWeekAgo;
+  });
+
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <Header />
-      <div className="container mx-auto py-8">
-        <h1 className="text-3xl font-bold mb-8">Your Themes</h1>
-        {sortedThemes.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="text-6xl mb-4">
-              <Palette className="size-12" />
-            </div>
-            <h2 className="text-2xl font-semibold mb-2">No themes yet</h2>
-            <p className="text-gray-500 mb-4">
-              Create your first theme to get started
+      <div className="container mx-auto py-8 px-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">Your Themes</h1>
+            <p className="text-muted-foreground mt-1">
+              Manage and explore your custom color themes
             </p>
-            <Link href="/editor/theme">
-              <Button>Create Theme</Button>
-            </Link>
+          </div>
+          <Link href="/editor/theme">
+            <Button className="gap-1" variant="accent">
+              New Theme
+              <Plus className="size-4" />
+            </Button>
+          </Link>
+        </div>
+
+        {sortedThemes.length === 0 ? (
+          <div className="bg-card rounded-xl border shadow-sm p-8 flex flex-col items-center justify-center py-16 text-center">
+            <div className="bg-primary/10 p-4 rounded-full mb-6">
+              <Palette className="size-12 text-primary" />
+            </div>
+            <h2 className="text-2xl font-semibold mb-2">
+              No themes created yet
+            </h2>
+            <p className="text-muted-foreground max-w-md mb-6">
+              Create your first custom theme to personalize your projects with
+              unique color palettes
+            </p>
+            <div className="space-y-6 w-full max-w-md">
+              <Link href="/editor/theme">
+                <Button size="lg" className="w-full gap-2">
+                  <Plus className="size-4" />
+                  Create Your First Theme
+                </Button>
+              </Link>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-card px-2 text-muted-foreground">
+                    or explore examples
+                  </span>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-gradient-to-br from-pink-500 to-purple-600 h-24 rounded-md shadow-sm cursor-pointer hover:opacity-90 transition-opacity" />
+                <div className="bg-gradient-to-br from-emerald-500 to-teal-600 h-24 rounded-md shadow-sm cursor-pointer hover:opacity-90 transition-opacity" />
+                <div className="bg-gradient-to-br from-amber-500 to-orange-600 h-24 rounded-md shadow-sm cursor-pointer hover:opacity-90 transition-opacity" />
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {sortedThemes.map((theme: Theme) => (
-              <ThemeCard key={theme.id} theme={theme} />
-            ))}
-          </div>
+          <ThemesList
+            themes={sortedThemes}
+            recentCount={recentThemeObjects.length}
+            totalCount={themes.length}
+          />
         )}
       </div>
-    </>
+    </div>
   );
 }
