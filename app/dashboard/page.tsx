@@ -11,12 +11,6 @@ export default async function ProfilePage() {
     return b.createdAt?.getTime() - a.createdAt?.getTime();
   });
 
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const recentThemeObjects = themes.filter((theme) => {
-    return theme.createdAt && theme.createdAt > oneWeekAgo;
-  });
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <Header />
@@ -73,11 +67,7 @@ export default async function ProfilePage() {
             </div>
           </div>
         ) : (
-          <ThemesList
-            themes={sortedThemes}
-            recentCount={recentThemeObjects.length}
-            totalCount={themes.length}
-          />
+          <ThemesList themes={sortedThemes} totalCount={themes.length} />
         )}
       </div>
     </div>

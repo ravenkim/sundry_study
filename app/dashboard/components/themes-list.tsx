@@ -52,12 +52,10 @@ export function ThemesList({ themes, totalCount }: ThemesListProps) {
       <div className="bg-card rounded-lg border p-4">
         <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-between md:gap-4 mb-6">
           <div className="flex flex-wrap gap-2 items-center">
-            <div className="flex items-center gap-2 bg-accent px-3 py-1.5 rounded-full">
-              <Layers className="h-4 w-4 text-accent-foreground" />
+            <div className="flex items-center gap-2 bg-accent px-3 py-1.5 rounded-full text-accent-foreground">
+              <Layers className="h-4 w-4" />
               <span className="font-medium">{totalCount}</span>
-              <span className="text-accent-foreground font-normal">
-                total themes
-              </span>
+              <span className="font-normal">total themes</span>
             </div>
           </div>
           <div className="flex flex-row gap-2 w-full md:w-auto">
