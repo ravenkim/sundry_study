@@ -6,9 +6,9 @@ import { db } from "@/db";
 import { theme as themeTable } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import cuid from "cuid";
-import { type ThemeStyles } from "@/types/theme";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers"; // Keep for session, but actions handle auth differently
+import { themeStylesSchema, type ThemeStyles } from "@/types/theme";
 
 // Helper to get user ID (Consider centralizing auth checks)
 async function getCurrentUserId(): Promise<string | null> {
@@ -17,59 +17,6 @@ async function getCurrentUserId(): Promise<string | null> {
   });
   return session?.user?.id ?? null;
 }
-
-// --- Zod Schemas (Consider moving to a shared types/schemas file) ---
-const themeStylePropsSchema = z.object({
-  background: z.string(),
-  foreground: z.string(),
-  card: z.string(),
-  "card-foreground": z.string(),
-  popover: z.string(),
-  "popover-foreground": z.string(),
-  primary: z.string(),
-  "primary-foreground": z.string(),
-  secondary: z.string(),
-  "secondary-foreground": z.string(),
-  muted: z.string(),
-  "muted-foreground": z.string(),
-  accent: z.string(),
-  "accent-foreground": z.string(),
-  destructive: z.string(),
-  "destructive-foreground": z.string(),
-  border: z.string(),
-  input: z.string(),
-  ring: z.string(),
-  "chart-1": z.string(),
-  "chart-2": z.string(),
-  "chart-3": z.string(),
-  "chart-4": z.string(),
-  "chart-5": z.string(),
-  sidebar: z.string(),
-  "sidebar-foreground": z.string(),
-  "sidebar-primary": z.string(),
-  "sidebar-primary-foreground": z.string(),
-  "sidebar-accent": z.string(),
-  "sidebar-accent-foreground": z.string(),
-  "sidebar-border": z.string(),
-  "sidebar-ring": z.string(),
-  "font-sans": z.string(),
-  "font-serif": z.string(),
-  "font-mono": z.string(),
-  radius: z.string(),
-  "shadow-color": z.string(),
-  "shadow-opacity": z.string(),
-  "shadow-blur": z.string(),
-  "shadow-spread": z.string(),
-  "shadow-offset-x": z.string(),
-  "shadow-offset-y": z.string(),
-  "letter-spacing": z.string(),
-  spacing: z.string(),
-});
-
-const themeStylesSchema = z.object({
-  light: themeStylePropsSchema,
-  dark: themeStylePropsSchema,
-});
 
 const createThemeSchema = z.object({
   name: z.string().min(1, "Theme name cannot be empty"),
