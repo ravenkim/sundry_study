@@ -21,11 +21,12 @@ interface ThemeEditActionsProps {
 const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
   const router = useRouter();
   const { updateTheme } = useThemeActions();
-  const { themeState } = useEditorStore();
+  const { themeState, applyThemePreset } = useEditorStore();
   const [isNameDialogOpen, setIsNameDialogOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleThemeEditCancel = () => {
+    applyThemePreset(themeState?.preset || "default");
     router.push("/editor/theme");
   };
 
@@ -60,6 +61,7 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
 
     if (result) {
       setIsNameDialogOpen(false);
+      applyThemePreset(themeState?.preset || "default");
       router.push("/editor/theme");
     } else {
       console.error("Failed to update theme");
