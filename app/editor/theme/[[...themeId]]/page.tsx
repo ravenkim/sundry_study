@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 export default async function Component({
   params,
 }: {
-  params: Promise<{ themeId: string }>;
+  params: Promise<{ themeId: string[] }>;
 }) {
   const { themeId } = await params;
-  const themePromise = themeId ? getTheme(themeId) : Promise.resolve(null);
+  const themePromise =
+    themeId?.length > 0 ? getTheme(themeId?.[0]) : Promise.resolve(null);
 
   return (
     <>
