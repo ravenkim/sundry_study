@@ -55,7 +55,9 @@ export function ThemesList({ themes, totalCount }: ThemesListProps) {
             <div className="flex items-center gap-2 bg-accent px-3 py-1.5 rounded-full text-accent-foreground">
               <Layers className="h-4 w-4" />
               <span className="font-medium">{totalCount}</span>
-              <span className="font-normal">total themes</span>
+              <span className="font-normal">
+                theme{totalCount === 1 ? "" : "s"}
+              </span>
             </div>
           </div>
           <div className="flex flex-row gap-2 w-full md:w-auto">
