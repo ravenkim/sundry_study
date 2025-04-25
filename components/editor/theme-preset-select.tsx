@@ -66,7 +66,6 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   onPresetChange,
 }) => {
   const { themeState } = useEditorStore();
-  const { hasChangedThemeFromDefault } = useEditorStore();
   const { theme, toggleTheme } = useTheme();
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
@@ -127,10 +126,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
             <Button
               variant="ghost"
               className={cn(
-                "w-full md:min-w-56 min-h-14 rounded-none justify-between group relative",
-                (!value || value === "default") &&
-                  !hasChangedThemeFromDefault &&
-                  "bg-muted/30 animate-pulse"
+                "w-full md:min-w-56 min-h-14 rounded-none justify-between group relative"
               )}
             >
               <div className="flex items-center gap-3">
