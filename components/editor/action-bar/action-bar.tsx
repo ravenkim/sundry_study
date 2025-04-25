@@ -12,6 +12,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { usePostLoginAction } from "@/hooks/use-post-login-action";
 import { useThemeActions } from "@/hooks/use-theme-actions";
 import { ActionBarButtons } from "@/components/editor/action-bar/components/action-bar-buttons";
+import { usePostHog } from "posthog-js/react";
 
 export function ActionBar() {
   const { themeState, setThemeState } = useEditorStore();
@@ -21,6 +22,7 @@ export function ActionBar() {
   const { data: session } = authClient.useSession();
   const { openAuthDialog } = useAuthStore();
   const { createTheme, isCreatingTheme } = useThemeActions();
+  const posthog = usePostHog();
 
   usePostLoginAction("SAVE_THEME", () => {
     setSaveDialogOpen(true);
@@ -62,6 +64,10 @@ export function ActionBar() {
 
     try {
       const theme = await createTheme(themeData);
+      posthog.capture("CREATE_THEME", {
+        theme_id: theme?.id,
+        theme_name: theme?.name,
+      });
       setTimeout(() => {
         if (!theme) return;
         setSaveDialogOpen(false);
