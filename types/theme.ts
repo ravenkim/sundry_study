@@ -1,54 +1,61 @@
-export interface ThemeStyleProps {
-  background: string;
-  foreground: string;
-  card: string;
-  "card-foreground": string;
-  popover: string;
-  "popover-foreground": string;
-  primary: string;
-  "primary-foreground": string;
-  secondary: string;
-  "secondary-foreground": string;
-  muted: string;
-  "muted-foreground": string;
-  accent: string;
-  "accent-foreground": string;
-  destructive: string;
-  "destructive-foreground": string;
-  border: string;
-  input: string;
-  ring: string;
-  "chart-1": string;
-  "chart-2": string;
-  "chart-3": string;
-  "chart-4": string;
-  "chart-5": string;
-  sidebar: string;
-  "sidebar-foreground": string;
-  "sidebar-primary": string;
-  "sidebar-primary-foreground": string;
-  "sidebar-accent": string;
-  "sidebar-accent-foreground": string;
-  "sidebar-border": string;
-  "sidebar-ring": string;
-  "font-sans": string;
-  "font-serif": string;
-  "font-mono": string;
-  radius: string;
-  "shadow-color": string;
-  "shadow-opacity": string;
-  "shadow-blur": string;
-  "shadow-spread": string;
-  "shadow-offset-x": string;
-  "shadow-offset-y": string;
-  "letter-spacing": string;
-  spacing: string;
-}
+import { theme } from "@/db/schema";
+import { InferSelectModel } from "drizzle-orm";
+import { z } from "zod";
 
-export interface ThemeStyles {
-  light: ThemeStyleProps;
-  dark: ThemeStyleProps;
-}
+export const themeStylePropsSchema = z.object({
+  background: z.string(),
+  foreground: z.string(),
+  card: z.string(),
+  "card-foreground": z.string(),
+  popover: z.string(),
+  "popover-foreground": z.string(),
+  primary: z.string(),
+  "primary-foreground": z.string(),
+  secondary: z.string(),
+  "secondary-foreground": z.string(),
+  muted: z.string(),
+  "muted-foreground": z.string(),
+  accent: z.string(),
+  "accent-foreground": z.string(),
+  destructive: z.string(),
+  "destructive-foreground": z.string(),
+  border: z.string(),
+  input: z.string(),
+  ring: z.string(),
+  "chart-1": z.string(),
+  "chart-2": z.string(),
+  "chart-3": z.string(),
+  "chart-4": z.string(),
+  "chart-5": z.string(),
+  sidebar: z.string(),
+  "sidebar-foreground": z.string(),
+  "sidebar-primary": z.string(),
+  "sidebar-primary-foreground": z.string(),
+  "sidebar-accent": z.string(),
+  "sidebar-accent-foreground": z.string(),
+  "sidebar-border": z.string(),
+  "sidebar-ring": z.string(),
+  "font-sans": z.string(),
+  "font-serif": z.string(),
+  "font-mono": z.string(),
+  radius: z.string(),
+  "shadow-color": z.string(),
+  "shadow-opacity": z.string(),
+  "shadow-blur": z.string(),
+  "shadow-spread": z.string(),
+  "shadow-offset-x": z.string(),
+  "shadow-offset-y": z.string(),
+  "letter-spacing": z.string(),
+  spacing: z.string(),
+});
+
+export const themeStylesSchema = z.object({
+  light: themeStylePropsSchema,
+  dark: themeStylePropsSchema,
+});
+
+export type ThemeStyleProps = z.infer<typeof themeStylePropsSchema>;
+export type ThemeStyles = z.infer<typeof themeStylesSchema>;
 
 export interface ThemeEditorState {
   styles: ThemeStyles;
@@ -64,6 +71,7 @@ export interface ThemeEditorControlsProps {
   styles: ThemeStyles;
   currentMode: "light" | "dark";
   onChange: (styles: ThemeStyles) => void;
+  themePromise: Promise<Theme | null>;
 }
 
 export type ThemePreset = {
@@ -74,3 +82,5 @@ export type ThemePreset = {
     dark?: Partial<ThemeStyleProps>;
   };
 };
+
+export type Theme = InferSelectModel<typeof theme>;

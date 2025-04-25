@@ -38,7 +38,9 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 const applyCommonStyles = (root: HTMLElement, themeStyles: ThemeStyleProps) => {
   Object.entries(themeStyles)
     .filter(([key]) =>
-      COMMON_NON_COLOR_KEYS.includes(key as (typeof COMMON_NON_COLOR_KEYS)[number])
+      COMMON_NON_COLOR_KEYS.includes(
+        key as (typeof COMMON_NON_COLOR_KEYS)[number]
+      )
     )
     .forEach(([key, value]) => {
       if (typeof value === "string") {
@@ -55,7 +57,9 @@ const applyThemeColors = (
   Object.entries(themeStyles[mode]).forEach(([key, value]) => {
     if (
       typeof value === "string" &&
-      !COMMON_NON_COLOR_KEYS.includes(key as (typeof COMMON_NON_COLOR_KEYS)[number])
+      !COMMON_NON_COLOR_KEYS.includes(
+        key as (typeof COMMON_NON_COLOR_KEYS)[number]
+      )
     ) {
       const hslValue = colorFormatter(value, "hsl", "4");
       applyStyleToElement(root, key, hslValue);
