@@ -15,7 +15,7 @@ import { ActionBarButtons } from "@/components/editor/action-bar/components/acti
 import { usePostHog } from "posthog-js/react";
 
 export function ActionBar() {
-  const { themeState, setThemeState } = useEditorStore();
+  const { themeState, setThemeState, applyThemePreset } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
   const [codePanelOpen, setCodePanelOpen] = useState(false);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
@@ -68,6 +68,7 @@ export function ActionBar() {
         theme_id: theme?.id,
         theme_name: theme?.name,
       });
+      applyThemePreset(theme?.id);
       setTimeout(() => {
         if (!theme) return;
         setSaveDialogOpen(false);
