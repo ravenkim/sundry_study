@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect } from "react";
+import React, { use } from "react";
 import { ThemeEditorControlsProps, ThemeStyleProps } from "@/types/theme";
 import ControlSection from "./control-section";
 import ColorPicker from "./color-picker";
@@ -39,13 +39,6 @@ const ThemeControlPanel = ({
 }: ThemeEditorControlsProps) => {
   const { applyThemePreset, themeState } = useEditorStore();
   const presets = useThemePresetStore((state) => state.getAllPresets());
-  const loadSavedPresets = useThemePresetStore(
-    (state) => state.loadSavedPresets
-  );
-
-  useEffect(() => {
-    loadSavedPresets();
-  }, [loadSavedPresets]);
 
   const currentStyles = React.useMemo(
     () => ({

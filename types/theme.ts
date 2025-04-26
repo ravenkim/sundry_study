@@ -78,7 +78,10 @@ export type ThemePreset = {
   source?: "SAVED" | "BUILT_IN";
   createdAt?: string;
   label?: string;
-  styles: ThemeStyles;
+  styles: {
+    light: Partial<ThemeStyleProps>;
+    dark: Partial<ThemeStyleProps>;
+  };
 };
 
 export type Theme = InferSelectModel<typeof theme>;
