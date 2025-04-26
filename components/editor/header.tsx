@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Heart } from "lucide-react";
 import GitHubIcon from "@/assets/github.svg";
 import TwitterIcon from "@/assets/twitter.svg";
 import DiscordIcon from "@/assets/discord.svg";
@@ -39,7 +38,6 @@ export function Header() {
                 href="https://github.com/sponsors/jnsahaj"
                 className="flex items-center gap-1.5 px-2 py-1 rounded-md border hover:border-pink-500 hover:text-pink-500 transition-colors"
               >
-                <Heart className="size-4" strokeWidth={2.5} />
                 <span className="text-sm font-medium">Support</span>
               </SocialLink>
               <SocialLink href="https://discord.gg/Phs4u2NM3n">
