@@ -17,7 +17,7 @@ import {
   Search,
   Shuffle,
   Sun,
-  Bookmark,
+  Heart,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Separator } from "../ui/separator";
@@ -268,7 +268,13 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               <div className="flex items-center gap-3">
                 <ThemeColors presetName={value || "default"} mode={mode} />
                 {value !== "default" && value && isSavedTheme(value) && (
-                  <Bookmark className="size-3.5 text-muted-foreground" />
+                  <div className="rounded-full bg-muted p-1">
+                    <Heart
+                      className="size-1"
+                      stroke="var(--muted)"
+                      fill="var(--muted-foreground)"
+                    />
+                  </div>
                 )}
                 <span className="capitalize font-medium">
                   {presets[value || "default"]?.label || "default"}
@@ -356,7 +362,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                   <>
                     <div className="pt-2 px-2 text-xs text-muted-foreground flex items-center gap-1.5">
                       <div className="flex items-center gap-1 px-2 py-1 border rounded-md">
-                        <Bookmark className="size-3" />
+                        <Heart className="size-3" />
                         <span>Save</span>
                       </div>
                       <span>a theme to find it here.</span>
