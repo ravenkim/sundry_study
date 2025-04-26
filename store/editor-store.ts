@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ThemeEditorState } from "@/types/editor";
 import { defaultThemeState } from "@/config/theme";
-import { getPresetThemeStyles } from "@/utils/theme-presets";
+import { getPresetThemeStyles } from "@/utils/theme-preset-helper";
 import { isDeepEqual } from "@/lib/utils";
 
 interface EditorStore {
