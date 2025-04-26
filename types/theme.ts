@@ -75,12 +75,10 @@ export interface ThemeEditorControlsProps {
 }
 
 export type ThemePreset = {
+  source?: "SAVED" | "BUILT_IN";
   createdAt?: string;
   label?: string;
-  styles: {
-    light?: Partial<ThemeStyleProps>;
-    dark?: Partial<ThemeStyleProps>;
-  };
+  styles: ThemeStyles;
 };
 
 export type Theme = InferSelectModel<typeof theme>;
