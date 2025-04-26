@@ -68,7 +68,7 @@ export function ActionBar() {
         theme_id: theme?.id,
         theme_name: theme?.name,
       });
-      applyThemePreset(theme?.id);
+      applyThemePreset(theme?.id || themeState.preset || "default");
       setTimeout(() => {
         if (!theme) return;
         setSaveDialogOpen(false);
