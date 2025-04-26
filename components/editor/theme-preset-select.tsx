@@ -43,12 +43,31 @@ interface ThemePresetSelectProps {
   onPresetChange: (preset: string) => void;
 }
 
-const ColorBox = ({ color }: { color: string }) => {
+interface ColorBoxProps {
+  color: string;
+}
+
+const ColorBox: React.FC<ColorBoxProps> = ({ color }) => (
+  <div
+    className="h-3 w-3 rounded-sm border border-muted"
+    style={{ backgroundColor: color }}
+  />
+);
+
+interface ThemeColorsProps {
+  presetName: string;
+  mode: "light" | "dark";
+}
+
+const ThemeColors: React.FC<ThemeColorsProps> = ({ presetName, mode }) => {
+  const styles = getPresetThemeStyles(presetName)[mode];
   return (
-    <div
-      className="h-3 w-3 rounded-sm border border-muted"
-      style={{ backgroundColor: color }}
-    />
+    <div className="flex gap-0.5">
+      <ColorBox color={styles.primary} />
+      <ColorBox color={styles.accent} />
+      <ColorBox color={styles.secondary} />
+      <ColorBox color={styles.border} />
+    </div>
   );
 };
 
@@ -59,6 +78,89 @@ const isThemeNew = (preset: ThemePreset) => {
   timePeriod.setDate(timePeriod.getDate() - 5);
   return createdAt > timePeriod;
 };
+
+interface ThemeControlsProps {
+  onRandomize: () => void;
+  onThemeToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  theme: string;
+}
+
+const ThemeControls: React.FC<ThemeControlsProps> = ({
+  onRandomize,
+  onThemeToggle,
+  theme,
+}) => (
+  <div className="flex gap-1">
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0"
+          onClick={onThemeToggle}
+        >
+          {theme === "light" ? (
+            <Sun className="h-3.5 w-3.5" />
+          ) : (
+            <Moon className="h-3.5 w-3.5" />
+          )}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        <p className="text-xs">Toggle theme</p>
+      </TooltipContent>
+    </Tooltip>
+
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0"
+          onClick={onRandomize}
+        >
+          <Shuffle className="h-3.5 w-3.5" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        <p className="text-xs">Random theme</p>
+      </TooltipContent>
+    </Tooltip>
+  </div>
+);
+
+interface ThemeCycleButtonProps {
+  direction: "prev" | "next";
+  onClick: () => void;
+}
+
+const ThemeCycleButton: React.FC<ThemeCycleButtonProps> = ({
+  direction,
+  onClick,
+}) => (
+  <>
+    <Separator orientation="vertical" className="h-8" />
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-14 shrink-0 rounded-none bg-muted/10"
+          onClick={onClick}
+        >
+          {direction === "prev" ? (
+            <ArrowLeft className="h-4 w-4" />
+          ) : (
+            <ArrowRight className="h-4 w-4" />
+          )}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        {direction === "prev" ? "Previous theme" : "Next theme"}
+      </TooltipContent>
+    </Tooltip>
+  </>
+);
 
 const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   presets,
@@ -106,7 +208,6 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
           );
 
     return filteredList.sort((a, b) => {
-      // Sort alphabetically
       const labelA = presets[a]?.label || a;
       const labelB = presets[b]?.label || b;
       return labelA.localeCompare(labelB);
@@ -130,28 +231,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               )}
             >
               <div className="flex items-center gap-3">
-                <div className="flex gap-0.5">
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].primary
-                    }
-                  />
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].accent
-                    }
-                  />
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].secondary
-                    }
-                  />
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].border
-                    }
-                  />
-                </div>
+                <ThemeColors presetName={value || "default"} mode={mode} />
                 <span className="capitalize font-medium">
                   {presets[value || "default"]?.label || "default"}
                 </span>
@@ -177,43 +257,11 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                   {filteredPresets.length} theme
                   {filteredPresets.length !== 1 ? "s" : ""}
                 </div>
-                <div className="flex gap-1">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 w-7 p-0"
-                        onClick={handleThemeToggle}
-                      >
-                        {theme === "light" ? (
-                          <Sun className="h-3.5 w-3.5" />
-                        ) : (
-                          <Moon className="h-3.5 w-3.5" />
-                        )}
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">
-                      <p className="text-xs">Toggle theme</p>
-                    </TooltipContent>
-                  </Tooltip>
-
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 w-7 p-0"
-                        onClick={randomize}
-                      >
-                        <Shuffle className="h-3.5 w-3.5" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">
-                      <p className="text-xs">Random theme</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
+                <ThemeControls
+                  onRandomize={randomize}
+                  onThemeToggle={handleThemeToggle}
+                  theme={theme}
+                />
               </div>
               <Separator />
               <ScrollArea className="h-[500px] max-h-[70vh]">
@@ -228,22 +276,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                       }}
                       className="flex items-center gap-2 py-2 hover:bg-secondary/50"
                     >
-                      <div className="flex gap-0.5 mr-2">
-                        <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].primary}
-                        />
-                        <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].accent}
-                        />
-                        <ColorBox
-                          color={
-                            getPresetThemeStyles(presetName)[mode].secondary
-                          }
-                        />
-                        <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].border}
-                        />
-                      </div>
+                      <ThemeColors presetName={presetName} mode={mode} />
                       <div className="flex items-center gap-2 flex-1">
                         <span className="capitalize text-sm font-medium">
                           {presets[presetName]?.label || presetName}
@@ -270,37 +303,8 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
         </Popover>
       </TooltipProvider>
 
-      <Separator orientation="vertical" className="h-8" />
-
-      <Tooltip>
-        <TooltipTrigger>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-14 shrink-0 rounded-none bg-muted/10"
-            onClick={() => cycleTheme("prev")}
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>Previous theme</TooltipContent>
-      </Tooltip>
-
-      <Separator orientation="vertical" className="h-8" />
-
-      <Tooltip>
-        <TooltipTrigger>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-14 shrink-0 rounded-none bg-muted/10"
-            onClick={() => cycleTheme("next")}
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>Next theme</TooltipContent>
-      </Tooltip>
+      <ThemeCycleButton direction="prev" onClick={() => cycleTheme("prev")} />
+      <ThemeCycleButton direction="next" onClick={() => cycleTheme("next")} />
     </div>
   );
 };
