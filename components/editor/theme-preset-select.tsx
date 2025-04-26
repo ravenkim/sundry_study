@@ -17,6 +17,7 @@ import {
   Search,
   Shuffle,
   Sun,
+  Bookmark,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Separator } from "../ui/separator";
@@ -172,52 +173,86 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
 
+  // Placeholder condition for saved themes
+  const isSavedTheme = (presetId: string) => {
+    return presets[presetId]?.source === "SAVED";
+  };
+
   const presetNames = useMemo(
     () => ["default", ...Object.keys(presets)],
     [presets]
   );
   const value = presetNames?.find((name) => name === currentPreset);
-  const currentIndex =
-    useMemo(
-      () => presetNames.indexOf(value || "default"),
-      [presetNames, value]
-    ) ?? 0;
-
-  const randomize = useCallback(() => {
-    const random = Math.floor(Math.random() * presetNames.length);
-    onPresetChange(presetNames[random]);
-  }, [onPresetChange, presetNames]);
-
-  const cycleTheme = useCallback(
-    (direction: "prev" | "next") => {
-      const newIndex =
-        direction === "next"
-          ? (currentIndex + 1) % presetNames.length
-          : (currentIndex - 1 + presetNames.length) % presetNames.length;
-      onPresetChange(presetNames[newIndex]);
-    },
-    [currentIndex, presetNames, onPresetChange]
-  );
 
   const filteredPresets = useMemo(() => {
     const filteredList =
       search.trim() === ""
         ? presetNames
-        : presetNames.filter((name) =>
-            name.toLowerCase().includes(search.toLowerCase())
-          );
+        : Object.entries(presets)
+            .filter(([_, preset]) =>
+              preset.label?.toLowerCase().includes(search.toLowerCase())
+            )
+            .map(([name]) => name);
 
-    return filteredList.sort((a, b) => {
-      const labelA = presets[a]?.label || a;
-      const labelB = presets[b]?.label || b;
-      return labelA.localeCompare(labelB);
-    });
+    // Separate saved and default themes
+    const savedThemesList = filteredList.filter(
+      (name) => name !== "default" && isSavedTheme(name)
+    );
+    const defaultThemesList = filteredList.filter(
+      (name) => !savedThemesList.includes(name)
+    );
+
+    // Sort each list
+    const sortThemes = (list: string[]) =>
+      list.sort((a, b) => {
+        const labelA = presets[a]?.label || a;
+        const labelB = presets[b]?.label || b;
+        return labelA.localeCompare(labelB);
+      });
+
+    // Combine saved themes first, then default themes
+    return [...sortThemes(savedThemesList), ...sortThemes(defaultThemesList)];
   }, [presetNames, search, presets]);
+
+  const currentIndex =
+    useMemo(
+      () => filteredPresets.indexOf(value || "default"),
+      [filteredPresets, value]
+    ) ?? 0;
+
+  const randomize = useCallback(() => {
+    const random = Math.floor(Math.random() * filteredPresets.length);
+    onPresetChange(filteredPresets[random]);
+  }, [onPresetChange, filteredPresets]);
+
+  const cycleTheme = useCallback(
+    (direction: "prev" | "next") => {
+      const newIndex =
+        direction === "next"
+          ? (currentIndex + 1) % filteredPresets.length
+          : (currentIndex - 1 + filteredPresets.length) %
+            filteredPresets.length;
+      onPresetChange(filteredPresets[newIndex]);
+    },
+    [currentIndex, filteredPresets, onPresetChange]
+  );
 
   const handleThemeToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { clientX: x, clientY: y } = event;
     toggleTheme({ x, y });
   };
+
+  const filteredSavedThemes = useMemo(() => {
+    return filteredPresets.filter(
+      (name) => name !== "default" && isSavedTheme(name)
+    );
+  }, [filteredPresets, isSavedTheme]);
+
+  const filteredDefaultThemes = useMemo(() => {
+    return filteredPresets.filter(
+      (name) => name === "default" || !isSavedTheme(name)
+    );
+  }, [filteredPresets, isSavedTheme]);
 
   return (
     <div className="flex items-center">
@@ -232,6 +267,9 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
             >
               <div className="flex items-center gap-3">
                 <ThemeColors presetName={value || "default"} mode={mode} />
+                {value !== "default" && value && isSavedTheme(value) && (
+                  <Bookmark className="size-3.5 text-muted-foreground" />
+                )}
                 <span className="capitalize font-medium">
                   {presets[value || "default"]?.label || "default"}
                 </span>
@@ -266,37 +304,92 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               <Separator />
               <ScrollArea className="h-[500px] max-h-[70vh]">
                 <CommandEmpty>No themes found.</CommandEmpty>
-                <CommandGroup>
-                  {filteredPresets.map((presetName) => (
-                    <CommandItem
-                      key={presetName}
-                      onSelect={() => {
-                        onPresetChange(presetName);
-                        setSearch("");
-                      }}
-                      className="flex items-center gap-2 py-2 hover:bg-secondary/50"
-                    >
-                      <ThemeColors presetName={presetName} mode={mode} />
-                      <div className="flex items-center gap-2 flex-1">
-                        <span className="capitalize text-sm font-medium">
-                          {presets[presetName]?.label || presetName}
-                        </span>
-                        {presets[presetName] &&
-                          isThemeNew(presets[presetName]) && (
-                            <Badge
-                              variant="secondary"
-                              className="text-xs rounded-full"
+
+                {/* Saved Themes Group */}
+                {filteredSavedThemes.length > 0 && (
+                  <>
+                    <CommandGroup heading="Saved Themes">
+                      {filteredSavedThemes
+                        .filter(
+                          (name) => name !== "default" && isSavedTheme(name)
+                        )
+                        .map((presetName) => (
+                          <>
+                            <CommandItem
+                              key={presetName}
+                              onSelect={() => {
+                                onPresetChange(presetName);
+                                setSearch("");
+                              }}
+                              className="flex items-center gap-2 py-2 hover:bg-secondary/50"
                             >
-                              New
-                            </Badge>
-                          )}
+                              <ThemeColors
+                                presetName={presetName}
+                                mode={mode}
+                              />
+                              <div className="flex items-center gap-2 flex-1">
+                                <span className="capitalize text-sm font-medium">
+                                  {presets[presetName]?.label || presetName}
+                                </span>
+                                {presets[presetName] &&
+                                  isThemeNew(presets[presetName]) && (
+                                    <Badge
+                                      variant="secondary"
+                                      className="text-xs rounded-full"
+                                    >
+                                      New
+                                    </Badge>
+                                  )}
+                              </div>
+                              {presetName === value && (
+                                <Check className="h-4 w-4 shrink-0 opacity-70" />
+                              )}
+                            </CommandItem>
+                          </>
+                        ))}
+                    </CommandGroup>
+                    <Separator className="my-2" />
+                  </>
+                )}
+
+                {filteredSavedThemes.length === 0 && search.trim() === "" && (
+                  <>
+                    <div className="pt-2 px-2 text-xs text-muted-foreground flex items-center gap-1.5">
+                      <div className="flex items-center gap-1 px-2 py-1 border rounded-md">
+                        <Bookmark className="size-3" />
+                        <span>Save</span>
                       </div>
-                      {presetName === value && (
-                        <Check className="h-4 w-4 shrink-0 opacity-70" />
-                      )}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
+                      <span>a theme to find it here.</span>
+                    </div>
+                    <Separator className="my-2" />
+                  </>
+                )}
+
+                {/* Default Theme Group */}
+                {filteredDefaultThemes.length > 0 && (
+                  <CommandGroup heading="Built-in Themes">
+                    {filteredDefaultThemes.map((presetName) => (
+                      <CommandItem
+                        key={presetName}
+                        onSelect={() => {
+                          onPresetChange(presetName);
+                          setSearch("");
+                        }}
+                        className="flex items-center gap-2 py-2 hover:bg-secondary/50"
+                      >
+                        <ThemeColors presetName={presetName} mode={mode} />
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="capitalize text-sm font-medium">
+                            {presets[presetName]?.label || presetName}
+                          </span>
+                        </div>
+                        {presetName === value && (
+                          <Check className="h-4 w-4 shrink-0 opacity-70" />
+                        )}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                )}
               </ScrollArea>
             </Command>
           </PopoverContent>

@@ -8,6 +8,7 @@ import {
 } from "@/actions/themes";
 import { Theme } from "@/types/theme";
 import { tryCatch } from "@/utils/try-catch";
+import { useThemePresetStore } from "@/store/theme-preset-store";
 
 type MutationState<T> = {
   isLoading: boolean;
@@ -88,6 +89,8 @@ async function fetcher<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export function useThemeActions() {
+  const { registerPreset, updatePreset, unregisterPreset } =
+    useThemePresetStore();
   const [isAuthRequired, setIsAuthRequired] = useState(false);
 
   const [createState, setCreateState] = useState<MutationState<Theme>>({
@@ -153,6 +156,12 @@ export function useThemeActions() {
           if (result.theme) {
             const theme: Theme = result.theme;
             handleMutationSuccess(theme, "Created");
+            registerPreset(theme.id, {
+              label: theme.name,
+              source: "SAVED",
+              createdAt: theme.createdAt.toISOString(),
+              styles: theme.styles,
+            });
             return theme;
           }
           return null;
@@ -171,6 +180,12 @@ export function useThemeActions() {
           if (result.theme) {
             const theme: Theme = result.theme;
             handleMutationSuccess(theme, "Updated");
+            updatePreset(theme.id, {
+              label: theme.name,
+              source: "SAVED",
+              createdAt: theme.createdAt.toISOString(),
+              styles: theme.styles,
+            });
             return theme;
           }
           return null;
@@ -187,6 +202,7 @@ export function useThemeActions() {
       (result) => {
         if (result.success) {
           handleMutationSuccess(result.theme, "Deleted");
+          unregisterPreset(themeId);
           toast({
             title: "Theme Deleted Successfully",
           });
