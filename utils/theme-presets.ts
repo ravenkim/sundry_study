@@ -1,31 +1,7 @@
 import { defaultThemeState } from "../config/theme";
 import { ThemePreset, ThemeStyles } from "../types/theme";
 
-export function getPresetThemeStyles(name: string): ThemeStyles {
-  const defaultTheme = defaultThemeState.styles;
-  if (name === "default") {
-    return defaultTheme;
-  }
-
-  const preset = presets[name];
-  if (!preset) {
-    return defaultTheme;
-  }
-
-  return {
-    light: {
-      ...defaultTheme.light,
-      ...(preset.styles.light || {}),
-    },
-    dark: {
-      ...defaultTheme.dark,
-      ...(preset.styles.light || {}),
-      ...(preset.styles.dark || {}),
-    },
-  };
-}
-
-export const presets: Record<string, ThemePreset> = {
+export const defaultPresets: Record<string, ThemePreset> = {
   "modern-minimal": {
     label: "Modern Minimal",
     styles: {
@@ -2393,7 +2369,7 @@ export const presets: Record<string, ThemePreset> = {
         secondary: "#ffedea",
         "secondary-foreground": "#b35340",
         muted: "#fff0eb",
-        "muted-foreground": "#785652",
+        "muted-foreground": "#78716C",
         accent: "#feb47b",
         "accent-foreground": "#3d3436",
         destructive: "#e63946",

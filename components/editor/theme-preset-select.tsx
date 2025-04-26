@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { ThemePreset } from "../../types/theme";
 import { useEditorStore } from "../../store/editor-store";
-import { getPresetThemeStyles } from "../../utils/theme-presets";
+import { getPresetThemeStyles } from "../../utils/theme-preset-helper";
 import { Button } from "../ui/button";
 import {
   ArrowLeft,
