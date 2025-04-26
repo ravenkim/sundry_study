@@ -15,7 +15,12 @@ export async function middleware(request: NextRequest) {
   });
 
   const isApiAuth = request.nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(request.nextUrl.pathname);
+  const isThemeJson =
+    request.nextUrl.pathname.startsWith("/r/themes/") &&
+    request.nextUrl.pathname.endsWith(".json");
+
+  const isPublicRoute =
+    publicRoutes.includes(request.nextUrl.pathname) || isThemeJson;
 
   const isAuthRoute = () => {
     return authRoutes.some((path) => request.nextUrl.pathname.startsWith(path));
@@ -43,11 +48,13 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Exclude static files and assets
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-    // Exclude theme JSON files
-    "/((?!r/themes/.*\\.json).*)",
-    // Exclude image files
-    "/((?!.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
