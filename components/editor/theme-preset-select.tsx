@@ -173,10 +173,12 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
 
-  // Placeholder condition for saved themes
-  const isSavedTheme = (presetId: string) => {
-    return presets[presetId]?.source === "SAVED";
-  };
+  const isSavedTheme = useCallback(
+    (presetId: string) => {
+      return presets[presetId]?.source === "SAVED";
+    },
+    [presets]
+  );
 
   const presetNames = useMemo(
     () => ["default", ...Object.keys(presets)],
@@ -212,7 +214,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
 
     // Combine saved themes first, then default themes
     return [...sortThemes(savedThemesList), ...sortThemes(defaultThemesList)];
-  }, [presetNames, search, presets]);
+  }, [presetNames, search, presets, isSavedTheme]);
 
   const currentIndex =
     useMemo(

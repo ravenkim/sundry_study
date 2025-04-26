@@ -1,4 +1,4 @@
-import { Bookmark, Heart, Loader2 } from "lucide-react";
+import { Heart, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
