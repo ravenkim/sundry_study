@@ -1282,84 +1282,177 @@ export const defaultPresets: Record<string, ThemePreset> = {
     createdAt: "2025-04-27",
     styles: {
       light: {
-        background: "#ffffff",
-        foreground: "#262626",
-        card: "#ffffff",
-        "card-foreground": "#262626",
-        popover: "#ffffff",
-        "popover-foreground": "#262626",
-        primary: "#f59e0b",
-        "primary-foreground": "#000000",
-        secondary: "#f3f4f6",
-        "secondary-foreground": "#4b5563",
-        muted: "#f9fafb",
-        "muted-foreground": "#6b7280",
-        accent: "#fffbeb",
-        "accent-foreground": "#92400e",
-        destructive: "#ef4444",
-        "destructive-foreground": "#ffffff",
-        border: "#e5e7eb",
-        input: "#e5e7eb",
-        ring: "#f59e0b",
-        "chart-1": "#f59e0b",
-        "chart-2": "#d97706",
-        "chart-3": "#b45309",
-        "chart-4": "#92400e",
-        "chart-5": "#78350f",
-        sidebar: "#f9fafb",
-        "sidebar-foreground": "#262626",
-        "sidebar-primary": "#f59e0b",
+        background: "#cccccc", // Light stone/concrete gray
+        foreground: "#1f1f1f", // Dark text for contrast
+        card: "#b0b0b0", // Slightly darker card background
+        "card-foreground": "#1f1f1f",
+        popover: "#b0b0b0",
+        "popover-foreground": "#1f1f1f",
+        primary: "#b71c1c", // Deep, bloody red
+        "primary-foreground": "#ffffff", // White text on red
+        secondary: "#556b2f", // Dark, toxic/olive green
+        "secondary-foreground": "#ffffff", // White text on green
+        muted: "#b8b8b8", // Subtle variation for muted elements
+        "muted-foreground": "#4a4a4a", // Darker gray for muted text
+        accent: "#4682b4", // Steel blue, like some lighting/tech
+        "accent-foreground": "#ffffff", // White text on blue
+        destructive: "#ff6f00", // Fiery/rusty orange for destructive actions
+        "destructive-foreground": "#000000", // Black text on orange
+        border: "#505050", // Dark gray border
+        input: "#505050", // Input border matches general border
+        ring: "#b71c1c", // Ring focus uses primary red
+        "chart-1": "#b71c1c", // Chart: Primary Red
+        "chart-2": "#556b2f", // Chart: Secondary Green
+        "chart-3": "#4682b4", // Chart: Accent Blue
+        "chart-4": "#ff6f00", // Chart: Destructive Orange
+        "chart-5": "#8d6e63", // Chart: Rusty Brown/Stone
+        radius: "0px", // Sharp, blocky edges
+        sidebar: "#a0a0a0", // Darker sidebar background
+        "sidebar-foreground": "#1f1f1f",
+        "sidebar-primary": "#b71c1c",
         "sidebar-primary-foreground": "#ffffff",
-        "sidebar-accent": "#fffbeb",
-        "sidebar-accent-foreground": "#92400e",
-        "sidebar-border": "#e5e7eb",
-        "sidebar-ring": "#f59e0b",
-        "font-sans": "Inter, sans-serif",
-        "font-serif": "Source Serif 4, serif",
-        "font-mono": "JetBrains Mono, monospace",
-        radius: "0.375rem",
-        "shadow-color": "hsl(0 0% 0%)",
-        "shadow-opacity": "0.1",
-        "shadow-blur": "8px",
-        "shadow-spread": "-1px",
+        "sidebar-accent": "#4682b4",
+        "sidebar-accent-foreground": "#ffffff",
+        "sidebar-border": "#505050",
+        "sidebar-ring": "#b71c1c",
+        "font-sans": '"Oxanium", sans-serif', // Tech/industrial font
+        "font-mono": '"Source Code Pro", monospace', // Standard mono
+        "shadow-color": "hsl(0 0% 0%)", // Black shadow
+        "shadow-opacity": "0.4", // Less intense shadow
+        "shadow-blur": "4px", // Subtle blur
+        "shadow-spread": "0px",
         "shadow-offset-x": "0px",
-        "shadow-offset-y": "4px",
-        "letter-spacing": "0em",
-        spacing: "0.25rem",
+        "shadow-offset-y": "2px", // Slight downward offset
       },
       dark: {
-        background: "#171717",
-        foreground: "#e5e5e5",
-        card: "#262626",
-        "card-foreground": "#e5e5e5",
-        popover: "#262626",
-        "popover-foreground": "#e5e5e5",
-        primary: "#f59e0b",
-        "primary-foreground": "#000000",
-        secondary: "#262626",
-        "secondary-foreground": "#e5e5e5",
-        muted: "#262626",
-        "muted-foreground": "#a3a3a3",
-        accent: "#92400e",
-        "accent-foreground": "#fde68a",
-        destructive: "#ef4444",
-        "destructive-foreground": "#ffffff",
-        border: "#404040",
-        input: "#404040",
-        ring: "#f59e0b",
-        "chart-1": "#fbbf24",
-        "chart-2": "#d97706",
-        "chart-3": "#92400e",
-        "chart-4": "#b45309",
-        "chart-5": "#92400e",
-        sidebar: "#0f0f0f",
-        "sidebar-foreground": "#e5e5e5",
-        "sidebar-primary": "#f59e0b",
+        background: "#1a1a1a", // Very dark gray, near black
+        foreground: "#e0e0e0", // Light gray text
+        card: "#2a2a2a", // Slightly lighter card background
+        "card-foreground": "#e0e0e0",
+        popover: "#2a2a2a",
+        "popover-foreground": "#e0e0e0",
+        primary: "#e53935", // Brighter red for dark mode contrast
+        "primary-foreground": "#ffffff", // White text on red
+        secondary: "#689f38", // Muted, sickly green
+        "secondary-foreground": "#000000", // Black text on green
+        muted: "#252525", // Subtle dark variation
+        "muted-foreground": "#a0a0a0", // Lighter gray for muted text
+        accent: "#64b5f6", // Brighter blue, like console lights
+        "accent-foreground": "#000000", // Black text on light blue
+        destructive: "#ffa000", // Brighter orange for destructive
+        "destructive-foreground": "#000000", // Black text on orange
+        border: "#4a4a4a", // Medium gray border
+        input: "#4a4a4a", // Input border matches
+        ring: "#e53935", // Ring focus uses primary red
+        "chart-1": "#e53935", // Chart: Primary Red
+        "chart-2": "#689f38", // Chart: Secondary Green
+        "chart-3": "#64b5f6", // Chart: Accent Blue
+        "chart-4": "#ffa000", // Chart: Destructive Orange
+        "chart-5": "#a1887f", // Chart: Lighter Rusty Brown/Stone
+        radius: "0px", // Sharp, blocky edges
+        sidebar: "#000000", // Pure black sidebar
+        "sidebar-foreground": "#e0e0e0",
+        "sidebar-primary": "#e53935",
         "sidebar-primary-foreground": "#ffffff",
-        "sidebar-accent": "#92400e",
-        "sidebar-accent-foreground": "#fde68a",
-        "sidebar-border": "#404040",
-        "sidebar-ring": "#f59e0b",
+        "sidebar-accent": "#64b5f6",
+        "sidebar-accent-foreground": "#000000",
+        "sidebar-border": "#4a4a4a",
+        "sidebar-ring": "#e53935",
+        // Fonts and shadows inherit from light or base unless overridden
+        // Adding shadows explicitly for dark mode if needed:
+        "shadow-color": "hsl(0 0% 0%)",
+        "shadow-opacity": "0.6", // Slightly more visible on dark
+        "shadow-blur": "5px",
+        "shadow-spread": "0px",
+        "shadow-offset-x": "0px",
+        "shadow-offset-y": "2px",
+      },
+    },
+  },
+
+  supabase: {
+    label: "Supabase",
+    createdAt: "2025-04-27",
+    styles: {
+      light: {
+        background: "#fcfcfc",
+        foreground: "#171717",
+        card: "#fcfcfc",
+        "card-foreground": "#171717",
+        popover: "#fcfcfc",
+        "popover-foreground": "#525252",
+        primary: "#72e3ad",
+        "primary-foreground": "#1e2723",
+        secondary: "#fdfdfd",
+        "secondary-foreground": "#171717",
+        muted: "#ededed",
+        "muted-foreground": "#202020",
+        accent: "#ededed",
+        "accent-foreground": "#202020",
+        destructive: "#ca3214",
+        "destructive-foreground": "#fffcfc",
+        border: "#dfdfdf",
+        input: "#f6f6f6",
+        ring: "#72e3ad",
+        "chart-1": "#72e3ad",
+        "chart-2": "#3b82f6",
+        "chart-3": "#8b5cf6",
+        "chart-4": "#f59e0b",
+        "chart-5": "#10b981",
+        sidebar: "#fcfcfc",
+        "sidebar-foreground": "#707070",
+        "sidebar-primary": "#72e3ad",
+        "sidebar-primary-foreground": "#1e2723",
+        "sidebar-accent": "#ededed",
+        "sidebar-accent-foreground": "#202020",
+        "sidebar-border": "#dfdfdf",
+        "sidebar-ring": "#72e3ad",
+        "font-sans": "Outfit, sans-serif",
+        "font-serif":
+          'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
+        "font-mono": "monospace",
+        radius: "0.5rem",
+        "shadow-color": "#000000",
+        "shadow-opacity": "0.17",
+        "shadow-blur": "3px",
+        "shadow-spread": "0px",
+        "shadow-offset-x": "0px",
+        "shadow-offset-y": "1px",
+        "letter-spacing": "0.025em",
+      },
+      dark: {
+        background: "#121212",
+        foreground: "#e2e8f0",
+        card: "#171717",
+        "card-foreground": "#e2e8f0",
+        popover: "#242424",
+        "popover-foreground": "#a9a9a9",
+        primary: "#006239",
+        "primary-foreground": "#dde8e3",
+        secondary: "#242424",
+        "secondary-foreground": "#fafafa",
+        muted: "#1f1f1f",
+        "muted-foreground": "#a2a2a2",
+        accent: "#313131",
+        "accent-foreground": "#fafafa",
+        destructive: "#541c15",
+        "destructive-foreground": "#ede9e8",
+        border: "#292929",
+        input: "#242424",
+        ring: "#4ade80",
+        "chart-1": "#4ade80",
+        "chart-2": "#60a5fa",
+        "chart-3": "#a78bfa",
+        "chart-4": "#fbbf24",
+        "chart-5": "#2dd4bf",
+        sidebar: "#121212",
+        "sidebar-foreground": "#898989",
+        "sidebar-primary": "#006239",
+        "sidebar-primary-foreground": "#dde8e3",
+        "sidebar-accent": "#313131",
+        "sidebar-accent-foreground": "#fafafa",
+        "sidebar-border": "#292929",
+        "sidebar-ring": "#4ade80",
       },
     },
   },
