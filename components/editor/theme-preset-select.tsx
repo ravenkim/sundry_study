@@ -390,6 +390,15 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                           <span className="capitalize text-sm font-medium">
                             {presets[presetName]?.label || presetName}
                           </span>
+                          {presets[presetName] &&
+                            isThemeNew(presets[presetName]) && (
+                              <Badge
+                                variant="secondary"
+                                className="text-xs rounded-full"
+                              >
+                                New
+                              </Badge>
+                            )}
                         </div>
                         {presetName === value && (
                           <Check className="h-4 w-4 shrink-0 opacity-70" />
