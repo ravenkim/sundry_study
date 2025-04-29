@@ -256,6 +256,8 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     );
   }, [filteredPresets, isSavedTheme]);
 
+  console.log(filteredSavedThemes);
+
   return (
     <div className="flex items-center">
       <TooltipProvider>
@@ -321,15 +323,16 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                         .filter(
                           (name) => name !== "default" && isSavedTheme(name)
                         )
-                        .map((presetName) => (
+                        .map((presetName, index) => (
                           <>
                             <CommandItem
-                              key={presetName}
+                              key={`${presetName}-${index}`}
+                              value={`${presetName}-${index}`}
                               onSelect={() => {
                                 onPresetChange(presetName);
                                 setSearch("");
                               }}
-                              className="flex items-center gap-2 py-2 hover:bg-secondary/50"
+                              className="flex items-center gap-2 py-2 data-[highlighted]:bg-secondary/50"
                             >
                               <ThemeColors
                                 presetName={presetName}
@@ -376,14 +379,15 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                 {/* Default Theme Group */}
                 {filteredDefaultThemes.length > 0 && (
                   <CommandGroup heading="Built-in Themes">
-                    {filteredDefaultThemes.map((presetName) => (
+                    {filteredDefaultThemes.map((presetName, index) => (
                       <CommandItem
-                        key={presetName}
+                        key={`${presetName}-${index}`}
+                        value={`${presetName}-${index}`}
                         onSelect={() => {
                           onPresetChange(presetName);
                           setSearch("");
                         }}
-                        className="flex items-center gap-2 py-2 hover:bg-secondary/50"
+                        className="flex items-center gap-2 py-2 data-[highlighted]:bg-secondary/50"
                       >
                         <ThemeColors presetName={presetName} mode={mode} />
                         <div className="flex items-center gap-2 flex-1">
