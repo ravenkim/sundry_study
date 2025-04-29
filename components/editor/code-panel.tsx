@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, AlertTriangle } from "lucide-react";
 import { ThemeEditorState } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { ColorFormat } from "../../types";
@@ -15,6 +15,8 @@ import { usePostHog } from "posthog-js/react";
 import { useEditorStore } from "@/store/editor-store";
 import { usePreferencesStore } from "@/store/preferences-store";
 import { generateThemeCode } from "@/utils/theme-style-generator";
+import { useThemePresetStore } from "@/store/theme-preset-store";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 interface CodePanelProps {
   themeEditorState: ThemeEditorState;
@@ -35,6 +37,10 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
   );
   const setPackageManager = usePreferencesStore(
     (state) => state.setPackageManager
+  );
+
+  const isSavedPreset = useThemePresetStore(
+    (state) => preset && state.getPreset(preset)?.source === "SAVED"
   );
 
   const code = generateThemeCode(
@@ -96,7 +102,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">Theme Code</h2>
         </div>
-        {preset && preset !== "default" && (
+        {preset && preset !== "default" && !isSavedPreset && (
           <div className="mt-4 rounded-md overflow-hidden border">
             <div className="flex border-b">
               {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
@@ -140,6 +146,20 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
               </ScrollArea>
             </div>
           </div>
+        )}
+        {isSavedPreset && (
+          <Alert variant="default" className="mt-4">
+            <AlertTriangle className="h-4 w-4 mt-1" />
+            <AlertTitle className="flex items-center gap-2">
+              Registry commands are not supported for saved themes yet
+              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
+                Coming Soon
+              </span>
+            </AlertTitle>
+            <AlertDescription className="text-foreground/80">
+              You can still copy and use the theme code directly.
+            </AlertDescription>
+          </Alert>
         )}
       </div>
       <div className="flex items-center gap-2 mb-4 ">

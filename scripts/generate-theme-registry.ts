@@ -1,5 +1,6 @@
 import { ThemeStyles, ThemeStyleProps } from "@/types/theme";
-import { getPresetThemeStyles, presets } from "@/utils/theme-presets";
+import { getPresetThemeStyles } from "@/utils/theme-preset-helper";
+import { defaultPresets } from "@/utils/theme-presets";
 import fs from "fs";
 import path from "path";
 import { colorFormatter } from "@/utils/color-converter";
@@ -161,7 +162,7 @@ const generateThemeRegistry = (name: string) => {
 };
 
 // Generate registry files for all presets
-Object.keys(presets).forEach((name) => {
+Object.keys(defaultPresets).forEach((name) => {
   const registryItem = generateThemeRegistry(name);
   const filePath = path.join(THEMES_DIR, `${name}.json`);
   fs.writeFileSync(filePath, JSON.stringify(registryItem, null, 2));

@@ -8,7 +8,7 @@ const roadmapItems = [
     title: "Global Theme Editor",
     description:
       "Create and manage complete themes with presets for your entire application.",
-    status: "In Progress",
+    status: "Done",
     icon: <Palette className="size-5" />,
   },
   {
@@ -18,17 +18,17 @@ const roadmapItems = [
     icon: <Repeat className="size-5" />,
   },
   {
-    title: "More Controls",
-    description:
-      "Support for more controls, including Spacing, Shadows, Tracking and more",
-    status: "Coming Soon",
-    icon: <Layers className="size-5" />,
-  },
-  {
     title: "Community Themes",
     description: "Allow users to submit themes, vote on the best designs",
-    status: "Planned",
+    status: "Coming Soon",
     icon: <Users className="size-5" />,
+  },
+  {
+    title: "AI Theme Generation",
+    description:
+      "Generate and customize themes with AI assistance, making theme creation faster and more intuitive",
+    status: "Coming Soon",
+    icon: <Layers className="size-5" />,
   },
   {
     title: "Multi-Project Management",
@@ -38,9 +38,9 @@ const roadmapItems = [
     icon: <Folder className="size-5" />,
   },
   {
-    title: "More Presets",
+    title: "Smart Theme Generator",
     description:
-      "Expand the preset library with a wider variety of stunning themes for quick customization.",
+      "Generate beautiful themes from a single color, color pair, or even an image. Expand your customization options with AI-powered theme generation.",
     status: "Planned",
     icon: <Grid className="size-5" />,
   },
@@ -50,12 +50,11 @@ export function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="w-full py-20 md:py-32 bg-muted/30 relative overflow-hidden"
+      className="w-full py-20 md:py-32 bg-linear-180 from-muted/30 from-50% to-transparent relative overflow-hidden isolate"
     >
-      <div className="absolute inset-0 -z-10 h-full w-full bg-background/20"></div>
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(var(--secondary-rgb),0.05),transparent_50%)]"></div>
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(from_var(--secondary)_r_g_b_/0.05),transparent_50%)]"></div>
 
-      <div className="container px-4 md:px-6 relative">
+      <div className="container mx-auto px-4 md:px-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

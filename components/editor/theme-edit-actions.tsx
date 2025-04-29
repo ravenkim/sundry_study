@@ -62,7 +62,7 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
     if (result) {
       setIsNameDialogOpen(false);
       router.push("/editor/theme");
-      applyThemePreset(themeState?.preset || "default");
+      applyThemePreset(result?.id || themeState?.preset || "default");
     } else {
       console.error("Failed to update theme");
     }
@@ -74,11 +74,11 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
 
   return (
     <>
-      <div className="flex items-center">
-        <div className="flex flex-1 items-center gap-2 bg-muted/10 min-h-14 px-4">
-          <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-            <span className="text-sm font-medium text-muted-foreground">
+      <div className="flex items-center bg-card/80 text-card-foreground">
+        <div className="flex flex-1 items-center gap-2 min-h-14 px-4">
+          <div className="flex items-center gap-2 animate-pulse">
+            <div className="h-2 w-2 rounded-full bg-blue-500" />
+            <span className="text-sm font-medium text-card-foreground/60">
               Editing
             </span>
           </div>
@@ -87,7 +87,7 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
           </span>
         </div>
 
-        <Separator orientation="vertical" className="h-8" />
+        <Separator orientation="vertical" className="h-8 bg-border" />
 
         <TooltipProvider>
           <Tooltip>
@@ -95,7 +95,7 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="size-14 shrink-0 rounded-none bg-muted/10"
+                className="size-14 shrink-0 rounded-none"
                 onClick={handleThemeEditCancel}
               >
                 <X className="h-4 w-4" />
@@ -105,7 +105,7 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
           </Tooltip>
         </TooltipProvider>
 
-        <Separator orientation="vertical" className="h-8" />
+        <Separator orientation="vertical" className="h-8 bg-border" />
 
         <TooltipProvider>
           <Tooltip>
@@ -113,7 +113,7 @@ const ThemeEditActions: React.FC<ThemeEditActionsProps> = ({ theme }) => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="size-14 shrink-0 rounded-none bg-muted/10"
+                className="size-14 shrink-0 rounded-none"
                 onClick={handleThemeEditSave}
               >
                 <Check className="h-4 w-4" />

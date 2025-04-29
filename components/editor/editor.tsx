@@ -11,6 +11,8 @@ import { EditorConfig } from "@/types/editor";
 import { Theme, ThemeStyles } from "@/types/theme";
 import { Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editor-store";
+import { useThemePresetStore } from "@/store/theme-preset-store";
+import { authClient } from "@/lib/auth-client";
 
 interface EditorProps {
   config: EditorConfig;
@@ -35,6 +37,18 @@ const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
   );
   const Controls = config.controls;
   const Preview = config.preview;
+
+  const loadSavedPresets = useThemePresetStore(
+    (state) => state.loadSavedPresets
+  );
+
+  const { data: session } = authClient.useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      loadSavedPresets();
+    }
+  }, [loadSavedPresets, session?.user]);
 
   const initialTheme = themePromise ? use(themePromise) : null;
 

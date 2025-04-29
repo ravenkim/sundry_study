@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { ThemePreset } from "../../types/theme";
 import { useEditorStore } from "../../store/editor-store";
-import { getPresetThemeStyles } from "../../utils/theme-presets";
+import { getPresetThemeStyles } from "../../utils/theme-preset-helper";
 import { Button } from "../ui/button";
 import {
   ArrowLeft,
@@ -17,6 +17,7 @@ import {
   Search,
   Shuffle,
   Sun,
+  Heart,
 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Separator } from "../ui/separator";
@@ -43,12 +44,31 @@ interface ThemePresetSelectProps {
   onPresetChange: (preset: string) => void;
 }
 
-const ColorBox = ({ color }: { color: string }) => {
+interface ColorBoxProps {
+  color: string;
+}
+
+const ColorBox: React.FC<ColorBoxProps> = ({ color }) => (
+  <div
+    className="h-3 w-3 rounded-sm border border-muted"
+    style={{ backgroundColor: color }}
+  />
+);
+
+interface ThemeColorsProps {
+  presetName: string;
+  mode: "light" | "dark";
+}
+
+const ThemeColors: React.FC<ThemeColorsProps> = ({ presetName, mode }) => {
+  const styles = getPresetThemeStyles(presetName)[mode];
   return (
-    <div
-      className="h-3 w-3 rounded-sm border border-muted"
-      style={{ backgroundColor: color }}
-    />
+    <div className="flex gap-0.5">
+      <ColorBox color={styles.primary} />
+      <ColorBox color={styles.accent} />
+      <ColorBox color={styles.secondary} />
+      <ColorBox color={styles.border} />
+    </div>
   );
 };
 
@@ -60,6 +80,89 @@ const isThemeNew = (preset: ThemePreset) => {
   return createdAt > timePeriod;
 };
 
+interface ThemeControlsProps {
+  onRandomize: () => void;
+  onThemeToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  theme: string;
+}
+
+const ThemeControls: React.FC<ThemeControlsProps> = ({
+  onRandomize,
+  onThemeToggle,
+  theme,
+}) => (
+  <div className="flex gap-1">
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0"
+          onClick={onThemeToggle}
+        >
+          {theme === "light" ? (
+            <Sun className="h-3.5 w-3.5" />
+          ) : (
+            <Moon className="h-3.5 w-3.5" />
+          )}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        <p className="text-xs">Toggle theme</p>
+      </TooltipContent>
+    </Tooltip>
+
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0"
+          onClick={onRandomize}
+        >
+          <Shuffle className="h-3.5 w-3.5" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        <p className="text-xs">Random theme</p>
+      </TooltipContent>
+    </Tooltip>
+  </div>
+);
+
+interface ThemeCycleButtonProps {
+  direction: "prev" | "next";
+  onClick: () => void;
+}
+
+const ThemeCycleButton: React.FC<ThemeCycleButtonProps> = ({
+  direction,
+  onClick,
+}) => (
+  <>
+    <Separator orientation="vertical" className="h-8" />
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-14 shrink-0 rounded-none bg-muted/10"
+          onClick={onClick}
+        >
+          {direction === "prev" ? (
+            <ArrowLeft className="h-4 w-4" />
+          ) : (
+            <ArrowRight className="h-4 w-4" />
+          )}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        {direction === "prev" ? "Previous theme" : "Next theme"}
+      </TooltipContent>
+    </Tooltip>
+  </>
+);
+
 const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   presets,
   currentPreset,
@@ -70,53 +173,88 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
 
+  const isSavedTheme = useCallback(
+    (presetId: string) => {
+      return presets[presetId]?.source === "SAVED";
+    },
+    [presets]
+  );
+
   const presetNames = useMemo(
     () => ["default", ...Object.keys(presets)],
     [presets]
   );
   const value = presetNames?.find((name) => name === currentPreset);
-  const currentIndex =
-    useMemo(
-      () => presetNames.indexOf(value || "default"),
-      [presetNames, value]
-    ) ?? 0;
-
-  const randomize = useCallback(() => {
-    const random = Math.floor(Math.random() * presetNames.length);
-    onPresetChange(presetNames[random]);
-  }, [onPresetChange, presetNames]);
-
-  const cycleTheme = useCallback(
-    (direction: "prev" | "next") => {
-      const newIndex =
-        direction === "next"
-          ? (currentIndex + 1) % presetNames.length
-          : (currentIndex - 1 + presetNames.length) % presetNames.length;
-      onPresetChange(presetNames[newIndex]);
-    },
-    [currentIndex, presetNames, onPresetChange]
-  );
 
   const filteredPresets = useMemo(() => {
     const filteredList =
       search.trim() === ""
         ? presetNames
-        : presetNames.filter((name) =>
-            name.toLowerCase().includes(search.toLowerCase())
-          );
+        : Object.entries(presets)
+            .filter(([_, preset]) =>
+              preset.label?.toLowerCase().includes(search.toLowerCase())
+            )
+            .map(([name]) => name);
 
-    return filteredList.sort((a, b) => {
-      // Sort alphabetically
-      const labelA = presets[a]?.label || a;
-      const labelB = presets[b]?.label || b;
-      return labelA.localeCompare(labelB);
-    });
-  }, [presetNames, search, presets]);
+    // Separate saved and default themes
+    const savedThemesList = filteredList.filter(
+      (name) => name !== "default" && isSavedTheme(name)
+    );
+    const defaultThemesList = filteredList.filter(
+      (name) => !savedThemesList.includes(name)
+    );
+
+    // Sort each list
+    const sortThemes = (list: string[]) =>
+      list.sort((a, b) => {
+        const labelA = presets[a]?.label || a;
+        const labelB = presets[b]?.label || b;
+        return labelA.localeCompare(labelB);
+      });
+
+    // Combine saved themes first, then default themes
+    return [...sortThemes(savedThemesList), ...sortThemes(defaultThemesList)];
+  }, [presetNames, search, presets, isSavedTheme]);
+
+  const currentIndex =
+    useMemo(
+      () => filteredPresets.indexOf(value || "default"),
+      [filteredPresets, value]
+    ) ?? 0;
+
+  const randomize = useCallback(() => {
+    const random = Math.floor(Math.random() * filteredPresets.length);
+    onPresetChange(filteredPresets[random]);
+  }, [onPresetChange, filteredPresets]);
+
+  const cycleTheme = useCallback(
+    (direction: "prev" | "next") => {
+      const newIndex =
+        direction === "next"
+          ? (currentIndex + 1) % filteredPresets.length
+          : (currentIndex - 1 + filteredPresets.length) %
+            filteredPresets.length;
+      onPresetChange(filteredPresets[newIndex]);
+    },
+    [currentIndex, filteredPresets, onPresetChange]
+  );
 
   const handleThemeToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { clientX: x, clientY: y } = event;
     toggleTheme({ x, y });
   };
+
+  const filteredSavedThemes = useMemo(() => {
+    return filteredPresets.filter(
+      (name) => name !== "default" && isSavedTheme(name)
+    );
+  }, [filteredPresets, isSavedTheme]);
+
+  const filteredDefaultThemes = useMemo(() => {
+    return filteredPresets.filter(
+      (name) => name === "default" || !isSavedTheme(name)
+    );
+  }, [filteredPresets, isSavedTheme]);
 
   return (
     <div className="flex items-center">
@@ -130,28 +268,16 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               )}
             >
               <div className="flex items-center gap-3">
-                <div className="flex gap-0.5">
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].primary
-                    }
-                  />
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].accent
-                    }
-                  />
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].secondary
-                    }
-                  />
-                  <ColorBox
-                    color={
-                      getPresetThemeStyles(value || "default")[mode].border
-                    }
-                  />
-                </div>
+                <ThemeColors presetName={value || "default"} mode={mode} />
+                {value !== "default" && value && isSavedTheme(value) && (
+                  <div className="rounded-full bg-muted p-1">
+                    <Heart
+                      className="size-1"
+                      stroke="var(--muted)"
+                      fill="var(--muted-foreground)"
+                    />
+                  </div>
+                )}
                 <span className="capitalize font-medium">
                   {presets[value || "default"]?.label || "default"}
                 </span>
@@ -177,130 +303,118 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                   {filteredPresets.length} theme
                   {filteredPresets.length !== 1 ? "s" : ""}
                 </div>
-                <div className="flex gap-1">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 w-7 p-0"
-                        onClick={handleThemeToggle}
-                      >
-                        {theme === "light" ? (
-                          <Sun className="h-3.5 w-3.5" />
-                        ) : (
-                          <Moon className="h-3.5 w-3.5" />
-                        )}
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">
-                      <p className="text-xs">Toggle theme</p>
-                    </TooltipContent>
-                  </Tooltip>
-
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 w-7 p-0"
-                        onClick={randomize}
-                      >
-                        <Shuffle className="h-3.5 w-3.5" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">
-                      <p className="text-xs">Random theme</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
+                <ThemeControls
+                  onRandomize={randomize}
+                  onThemeToggle={handleThemeToggle}
+                  theme={theme}
+                />
               </div>
               <Separator />
               <ScrollArea className="h-[500px] max-h-[70vh]">
                 <CommandEmpty>No themes found.</CommandEmpty>
-                <CommandGroup>
-                  {filteredPresets.map((presetName) => (
-                    <CommandItem
-                      key={presetName}
-                      onSelect={() => {
-                        onPresetChange(presetName);
-                        setSearch("");
-                      }}
-                      className="flex items-center gap-2 py-2 hover:bg-secondary/50"
-                    >
-                      <div className="flex gap-0.5 mr-2">
-                        <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].primary}
-                        />
-                        <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].accent}
-                        />
-                        <ColorBox
-                          color={
-                            getPresetThemeStyles(presetName)[mode].secondary
-                          }
-                        />
-                        <ColorBox
-                          color={getPresetThemeStyles(presetName)[mode].border}
-                        />
-                      </div>
-                      <div className="flex items-center gap-2 flex-1">
-                        <span className="capitalize text-sm font-medium">
-                          {presets[presetName]?.label || presetName}
-                        </span>
-                        {presets[presetName] &&
-                          isThemeNew(presets[presetName]) && (
-                            <Badge
-                              variant="secondary"
-                              className="text-xs rounded-full"
+
+                {/* Saved Themes Group */}
+                {filteredSavedThemes.length > 0 && (
+                  <>
+                    <CommandGroup heading="Saved Themes">
+                      {filteredSavedThemes
+                        .filter(
+                          (name) => name !== "default" && isSavedTheme(name)
+                        )
+                        .map((presetName) => (
+                          <>
+                            <CommandItem
+                              key={presetName}
+                              onSelect={() => {
+                                onPresetChange(presetName);
+                                setSearch("");
+                              }}
+                              className="flex items-center gap-2 py-2 hover:bg-secondary/50"
                             >
-                              New
-                            </Badge>
-                          )}
+                              <ThemeColors
+                                presetName={presetName}
+                                mode={mode}
+                              />
+                              <div className="flex items-center gap-2 flex-1">
+                                <span className="capitalize text-sm font-medium">
+                                  {presets[presetName]?.label || presetName}
+                                </span>
+                                {presets[presetName] &&
+                                  isThemeNew(presets[presetName]) && (
+                                    <Badge
+                                      variant="secondary"
+                                      className="text-xs rounded-full"
+                                    >
+                                      New
+                                    </Badge>
+                                  )}
+                              </div>
+                              {presetName === value && (
+                                <Check className="h-4 w-4 shrink-0 opacity-70" />
+                              )}
+                            </CommandItem>
+                          </>
+                        ))}
+                    </CommandGroup>
+                    <Separator className="my-2" />
+                  </>
+                )}
+
+                {filteredSavedThemes.length === 0 && search.trim() === "" && (
+                  <>
+                    <div className="pt-2 px-2 text-xs text-muted-foreground flex items-center gap-1.5">
+                      <div className="flex items-center gap-1 px-2 py-1 border rounded-md">
+                        <Heart className="size-3" />
+                        <span>Save</span>
                       </div>
-                      {presetName === value && (
-                        <Check className="h-4 w-4 shrink-0 opacity-70" />
-                      )}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
+                      <span>a theme to find it here.</span>
+                    </div>
+                    <Separator className="my-2" />
+                  </>
+                )}
+
+                {/* Default Theme Group */}
+                {filteredDefaultThemes.length > 0 && (
+                  <CommandGroup heading="Built-in Themes">
+                    {filteredDefaultThemes.map((presetName) => (
+                      <CommandItem
+                        key={presetName}
+                        onSelect={() => {
+                          onPresetChange(presetName);
+                          setSearch("");
+                        }}
+                        className="flex items-center gap-2 py-2 hover:bg-secondary/50"
+                      >
+                        <ThemeColors presetName={presetName} mode={mode} />
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="capitalize text-sm font-medium">
+                            {presets[presetName]?.label || presetName}
+                          </span>
+                          {presets[presetName] &&
+                            isThemeNew(presets[presetName]) && (
+                              <Badge
+                                variant="secondary"
+                                className="text-xs rounded-full"
+                              >
+                                New
+                              </Badge>
+                            )}
+                        </div>
+                        {presetName === value && (
+                          <Check className="h-4 w-4 shrink-0 opacity-70" />
+                        )}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                )}
               </ScrollArea>
             </Command>
           </PopoverContent>
         </Popover>
       </TooltipProvider>
 
-      <Separator orientation="vertical" className="h-8" />
-
-      <Tooltip>
-        <TooltipTrigger>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-14 shrink-0 rounded-none bg-muted/10"
-            onClick={() => cycleTheme("prev")}
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>Previous theme</TooltipContent>
-      </Tooltip>
-
-      <Separator orientation="vertical" className="h-8" />
-
-      <Tooltip>
-        <TooltipTrigger>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-14 shrink-0 rounded-none bg-muted/10"
-            onClick={() => cycleTheme("next")}
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>Next theme</TooltipContent>
-      </Tooltip>
+      <ThemeCycleButton direction="prev" onClick={() => cycleTheme("prev")} />
+      <ThemeCycleButton direction="next" onClick={() => cycleTheme("next")} />
     </div>
   );
 };
