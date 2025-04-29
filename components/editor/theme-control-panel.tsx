@@ -6,7 +6,6 @@ import ControlSection from "./control-section";
 import ColorPicker from "./color-picker";
 import { ScrollArea } from "../ui/scroll-area";
 import ThemePresetSelect from "./theme-preset-select";
-import { presets } from "../../utils/theme-presets";
 import {
   getAppliedThemeFont,
   monoFonts,
@@ -30,6 +29,7 @@ import { AlertCircle } from "lucide-react";
 import ShadowControl from "./shadow-control";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
 import ThemeEditActions from "./theme-edit-actions";
+import { useThemePresetStore } from "@/store/theme-preset-store";
 
 const ThemeControlPanel = ({
   styles,
@@ -38,6 +38,7 @@ const ThemeControlPanel = ({
   themePromise,
 }: ThemeEditorControlsProps) => {
   const { applyThemePreset, themeState } = useEditorStore();
+  const presets = useThemePresetStore((state) => state.getAllPresets());
 
   const currentStyles = React.useMemo(
     () => ({

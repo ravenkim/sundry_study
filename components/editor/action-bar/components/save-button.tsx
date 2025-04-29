@@ -1,4 +1,4 @@
-import { Bookmark, Loader2 } from "lucide-react";
+import { Heart, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -25,7 +25,7 @@ export function SaveButton({ onSaveClick, isSaving }: SaveButtonProps) {
           {isSaving ? (
             <Loader2 className="size-3.5 animate-spin" />
           ) : (
-            <Bookmark className="size-3.5" />
+            <Heart className="size-3.5" />
           )}
           <span className="text-sm">Save</span>
         </Button>

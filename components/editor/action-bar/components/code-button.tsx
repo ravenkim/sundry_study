@@ -1,4 +1,4 @@
-import { Code } from "lucide-react";
+import { Braces } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -15,12 +15,12 @@ export function CodeButton({ onCodeClick }: CodeButtonProps) {
     <Tooltip>
       <TooltipTrigger>
         <Button
-          variant="secondary"
+          variant="ghost"
           size="sm"
-          className="h-8 px-2 gap-1.5"
+          className="h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
           onClick={onCodeClick}
         >
-          <Code className="size-3.5" />
+          <Braces className="size-3.5" />
           <span className="text-sm">Code</span>
         </Button>
       </TooltipTrigger>

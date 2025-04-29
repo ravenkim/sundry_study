@@ -4,7 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useEditorStore } from "@/store/editor-store";
 import { motion } from "motion/react";
-import { getPresetThemeStyles, presets } from "@/utils/theme-presets";
+import { defaultPresets } from "@/utils/theme-presets";
+import { getPresetThemeStyles } from "@/utils/theme-preset-helper";
 import { cn } from "@/lib/utils";
 import { colorFormatter } from "@/utils/color-converter";
 import { DemoContainer } from "@/components/examples/demo-cards";
@@ -18,19 +19,22 @@ const DemoMail = lazy(() => import("@/components/examples/mail"));
 
 const ColorBox = ({ color }: { color: string }) => {
   return (
-    <div className="w-3 h-3 rounded-sm border" style={{ backgroundColor: color }} />
+    <div
+      className="w-3 h-3 rounded-sm border"
+      style={{ backgroundColor: color }}
+    />
   );
 };
 
 export function ThemePresetSelector() {
   const { themeState, applyThemePreset } = useEditorStore();
   const mode = themeState.currentMode;
-  const presetNames = Object.keys(presets);
+  const presetNames = Object.keys(defaultPresets);
   const isMobile = useIsMobile();
 
   return (
     <section id="examples" className="w-full py-20 md:py-32">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +98,9 @@ export function ThemePresetSelector() {
                     <ColorBox color={themeStyles.primary} />
                     <ColorBox color={themeStyles.accent} />
                   </div>
-                  <span className="capitalize">{presetName.replace(/-/g, " ")}</span>
+                  <span className="capitalize">
+                    {presetName.replace(/-/g, " ")}
+                  </span>
                 </Button>
               </motion.div>
             );
