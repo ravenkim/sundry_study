@@ -9,6 +9,7 @@ import cuid from "cuid";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers"; // Keep for session, but actions handle auth differently
 import { themeStylesSchema, type ThemeStyles } from "@/types/theme";
+import { cache } from "react";
 
 // Helper to get user ID (Consider centralizing auth checks)
 async function getCurrentUserId(): Promise<string | null> {
@@ -29,14 +30,9 @@ const updateThemeSchema = z.object({
   styles: themeStylesSchema.optional(),
 });
 
-// --- Server Actions ---
-
-// Action to get user themes
 export async function getThemes() {
   const userId = await getCurrentUserId();
   if (!userId) {
-    // In actions, throwing errors is common for auth failures
-    // Or return a specific structure like { success: false, error: "Unauthorized" }
     throw new Error("Unauthorized");
   }
   try {
@@ -51,25 +47,21 @@ export async function getThemes() {
   }
 }
 
-export async function getTheme(themeId: string) {
-  const userId = await getCurrentUserId();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
+// Wrap getTheme with React.cache
+export const getTheme = cache(async (themeId: string) => {
   try {
     const [theme] = await db
       .select()
       .from(themeTable)
-      .where(and(eq(themeTable.id, themeId), eq(themeTable.userId, userId)))
+      .where(eq(themeTable.id, themeId))
       .limit(1);
+
     return theme;
   } catch (error) {
     console.error("Error fetching theme:", error);
     throw new Error("Failed to fetch theme.");
   }
-}
+});
 
 // Action to create a new theme
 export async function createTheme(formData: {

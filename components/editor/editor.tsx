@@ -13,6 +13,7 @@ import { Sliders } from "lucide-react";
 import { useEditorStore } from "@/store/editor-store";
 import { useThemePresetStore } from "@/store/theme-preset-store";
 import { authClient } from "@/lib/auth-client";
+import { ActionBar } from "./action-bar/action-bar";
 
 interface EditorProps {
   config: EditorConfig;
@@ -97,6 +98,7 @@ const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
           <ResizablePanel defaultSize={70} minSize={20}>
             <div className="h-full flex flex-col">
               <div className="flex-1 min-h-0 flex flex-col">
+                <ActionBar />
                 <Preview styles={styles} currentMode={themeState.currentMode} />
               </div>
             </div>
@@ -128,6 +130,7 @@ const Editor: React.FC<EditorProps> = ({ config, themePromise }) => {
           </TabsContent>
           <TabsContent value="preview" className="h-[calc(100%-2.5rem)] mt-0">
             <div className="h-full flex flex-col">
+              <ActionBar />
               <Preview styles={styles} currentMode={themeState.currentMode} />
             </div>
           </TabsContent>

@@ -2,18 +2,15 @@
 
 import { createContext, useContext, useEffect } from "react";
 import { useEditorStore } from "../store/editor-store";
-import { colorFormatter } from "../utils/color-converter";
-import { setShadowVariables } from "@/utils/shadows";
-import { applyStyleToElement } from "@/utils/apply-style-to-element";
-import { ThemeStyleProps, ThemeStyles } from "@/types/theme";
+import { applyThemeToElement } from "@/utils/apply-theme";
 import { useThemePresetFromUrl } from "@/hooks/use-theme-preset-from-url";
-import { COMMON_STYLES } from "@/config/theme";
 
 type Theme = "dark" | "light";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
   defaultTheme?: Theme;
+  toggleTheme: (coords?: Coords) => void;
 };
 
 type Coords = { x: number; y: number };
@@ -24,8 +21,6 @@ type ThemeProviderState = {
   toggleTheme: (coords?: Coords) => void;
 };
 
-const COMMON_NON_COLOR_KEYS = COMMON_STYLES;
-
 const initialState: ThemeProviderState = {
   theme: "light",
   setTheme: () => null,
@@ -34,47 +29,6 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-// Helper functions
-const applyCommonStyles = (root: HTMLElement, themeStyles: ThemeStyleProps) => {
-  Object.entries(themeStyles)
-    .filter(([key]) =>
-      COMMON_NON_COLOR_KEYS.includes(
-        key as (typeof COMMON_NON_COLOR_KEYS)[number]
-      )
-    )
-    .forEach(([key, value]) => {
-      if (typeof value === "string") {
-        applyStyleToElement(root, key, value);
-      }
-    });
-};
-
-const applyThemeColors = (
-  root: HTMLElement,
-  themeStyles: ThemeStyles,
-  mode: Theme
-) => {
-  Object.entries(themeStyles[mode]).forEach(([key, value]) => {
-    if (
-      typeof value === "string" &&
-      !COMMON_NON_COLOR_KEYS.includes(
-        key as (typeof COMMON_NON_COLOR_KEYS)[number]
-      )
-    ) {
-      const hslValue = colorFormatter(value, "hsl", "4");
-      applyStyleToElement(root, key, hslValue);
-    }
-  });
-};
-
-const updateThemeClass = (root: HTMLElement, mode: Theme) => {
-  if (mode === "light") {
-    root.classList.remove("dark");
-  } else {
-    root.classList.add("dark");
-  }
-};
-
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const { themeState, setThemeState } = useEditorStore();
 
@@ -82,13 +36,10 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   useThemePresetFromUrl();
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    const { currentMode: mode, styles: themeStyles } = themeState;
+    const root = document.documentElement;
+    if (!root) return;
 
-    updateThemeClass(root, mode);
-    applyCommonStyles(root, themeStyles.light);
-    applyThemeColors(root, themeStyles, mode);
-    setShadowVariables(themeState);
+    applyThemeToElement(themeState, root);
   }, [themeState]);
 
   const handleThemeChange = (newMode: Theme) => {
