@@ -35,7 +35,7 @@ function generateRegistry() {
   }
 
   // Create public/r directory if it doesn't exist
-  const publicDir = path.join(process.cwd(), "public", "r");
+  const publicDir = path.join(process.cwd(), "public", "r", "themes");
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
   }
