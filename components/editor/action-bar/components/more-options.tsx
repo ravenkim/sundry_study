@@ -23,7 +23,7 @@ export function MoreOptions() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => setMcpDialogOpen(true)}>
-            <McpIcon className="h-4 w-4 mr-2" />
+            <McpIcon className="h-4 w-4" />
             MCP
           </DropdownMenuItem>
         </DropdownMenuContent>
