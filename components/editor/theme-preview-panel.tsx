@@ -43,7 +43,6 @@ const ThemePreviewPanel = ({
 
   return (
     <>
-      <ActionBar />
       <div
         className={cn(
           "min-h-0 flex flex-col flex-1",

@@ -36,7 +36,7 @@ import {
 } from "../ui/tooltip";
 import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, isDeepEqual } from "@/lib/utils";
 
 interface ThemePresetSelectProps {
   presets: Record<string, ThemePreset>;
@@ -168,7 +168,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   currentPreset,
   onPresetChange,
 }) => {
-  const { themeState } = useEditorStore();
+  const { themeState, hasThemeChangedFromCheckpoint } = useEditorStore();
   const { theme, toggleTheme } = useTheme();
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
@@ -256,7 +256,19 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     );
   }, [filteredPresets, isSavedTheme]);
 
-  console.log(filteredSavedThemes);
+  const hasUnsavedChanges = useMemo(() => {
+    return (
+      hasThemeChangedFromCheckpoint() ||
+      (!currentPreset &&
+        !isDeepEqual(themeState.styles, presets["default"]?.styles))
+    );
+  }, [
+    hasThemeChangedFromCheckpoint,
+    currentPreset,
+    themeState.styles,
+    presets,
+    value,
+  ]);
 
   return (
     <div className="flex items-center">
@@ -270,18 +282,30 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               )}
             >
               <div className="flex items-center gap-3">
-                <ThemeColors presetName={value || "default"} mode={mode} />
-                {value !== "default" && value && isSavedTheme(value) && (
-                  <div className="rounded-full bg-muted p-1">
-                    <Heart
-                      className="size-1"
-                      stroke="var(--muted)"
-                      fill="var(--muted-foreground)"
-                    />
-                  </div>
-                )}
+                <div className="flex gap-0.5">
+                  <ColorBox color={themeState.styles[mode].primary} />
+                  <ColorBox color={themeState.styles[mode].accent} />
+                  <ColorBox color={themeState.styles[mode].secondary} />
+                  <ColorBox color={themeState.styles[mode].border} />
+                </div>
+                {value !== "default" &&
+                  value &&
+                  isSavedTheme(value) &&
+                  !hasUnsavedChanges && (
+                    <div className="rounded-full bg-muted p-1">
+                      <Heart
+                        className="size-1"
+                        stroke="var(--muted)"
+                        fill="var(--muted-foreground)"
+                      />
+                    </div>
+                  )}
                 <span className="capitalize font-medium">
-                  {presets[value || "default"]?.label || "default"}
+                  {hasUnsavedChanges ? (
+                    <>Custom (Unsaved)</>
+                  ) : (
+                    presets[value || "default"]?.label || "default"
+                  )}
                 </span>
               </div>
               <ChevronDown className="size-4 shrink-0" />
