@@ -1,0 +1,439 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tweakcn-theme-registry",
+  "homepage": "http://tweakcn.com",
+  "items": [
+    {
+      "name": "modern-minimal",
+      "type": "registry:style",
+      "title": "Modern Minimal",
+      "description": "A theme based on the Modern Minimal color palette.",
+      "files": [
+        {
+          "path": "themes/modern-minimal.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "t3-chat",
+      "type": "registry:style",
+      "title": "T3 Chat",
+      "description": "A theme based on the T3 Chat color palette.",
+      "files": [
+        {
+          "path": "themes/t3-chat.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "twitter",
+      "type": "registry:style",
+      "title": "Twitter",
+      "description": "A theme based on the Twitter color palette.",
+      "files": [
+        {
+          "path": "themes/twitter.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "mocha-mousse",
+      "type": "registry:style",
+      "title": "Mocha Mousse",
+      "description": "A theme based on the Mocha Mousse color palette.",
+      "files": [
+        {
+          "path": "themes/mocha-mousse.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "bubblegum",
+      "type": "registry:style",
+      "title": "Bubblegum",
+      "description": "A theme based on the Bubblegum color palette.",
+      "files": [
+        {
+          "path": "themes/bubblegum.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "doom-64",
+      "type": "registry:style",
+      "title": "Doom 64",
+      "description": "A theme based on the Doom 64 color palette.",
+      "files": [
+        {
+          "path": "themes/doom-64.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "catppuccin",
+      "type": "registry:style",
+      "title": "Catppuccin",
+      "description": "A theme based on the Catppuccin color palette.",
+      "files": [
+        {
+          "path": "themes/catppuccin.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "graphite",
+      "type": "registry:style",
+      "title": "Graphite",
+      "description": "A theme based on the Graphite color palette.",
+      "files": [
+        {
+          "path": "themes/graphite.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "perpetuity",
+      "type": "registry:style",
+      "title": "Perpetuity",
+      "description": "A theme based on the Perpetuity color palette.",
+      "files": [
+        {
+          "path": "themes/perpetuity.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "kodama-grove",
+      "type": "registry:style",
+      "title": "Kodama Grove",
+      "description": "A theme based on the Kodama Grove color palette.",
+      "files": [
+        {
+          "path": "themes/kodama-grove.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "cosmic-night",
+      "type": "registry:style",
+      "title": "Cosmic Night",
+      "description": "A theme based on the Cosmic Night color palette.",
+      "files": [
+        {
+          "path": "themes/cosmic-night.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "tangerine",
+      "type": "registry:style",
+      "title": "Tangerine",
+      "description": "A theme based on the Tangerine color palette.",
+      "files": [
+        {
+          "path": "themes/tangerine.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "quantum-rose",
+      "type": "registry:style",
+      "title": "Quantum Rose",
+      "description": "A theme based on the Quantum Rose color palette.",
+      "files": [
+        {
+          "path": "themes/quantum-rose.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "nature",
+      "type": "registry:style",
+      "title": "Nature",
+      "description": "A theme based on the Nature color palette.",
+      "files": [
+        {
+          "path": "themes/nature.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "bold-tech",
+      "type": "registry:style",
+      "title": "Bold Tech",
+      "description": "A theme based on the Bold Tech color palette.",
+      "files": [
+        {
+          "path": "themes/bold-tech.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "elegant-luxury",
+      "type": "registry:style",
+      "title": "Elegant Luxury",
+      "description": "A theme based on the Elegant Luxury color palette.",
+      "files": [
+        {
+          "path": "themes/elegant-luxury.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "amber-minimal",
+      "type": "registry:style",
+      "title": "Amber Minimal",
+      "description": "A theme based on the Amber Minimal color palette.",
+      "files": [
+        {
+          "path": "themes/amber-minimal.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "supabase",
+      "type": "registry:style",
+      "title": "Supabase",
+      "description": "A theme based on the Supabase color palette.",
+      "files": [
+        {
+          "path": "themes/supabase.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "neo-brutalism",
+      "type": "registry:style",
+      "title": "Neo Brutalism",
+      "description": "A theme based on the Neo Brutalism color palette.",
+      "files": [
+        {
+          "path": "themes/neo-brutalism.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "solar-dusk",
+      "type": "registry:style",
+      "title": "Solar Dusk",
+      "description": "A theme based on the Solar Dusk color palette.",
+      "files": [
+        {
+          "path": "themes/solar-dusk.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "claymorphism",
+      "type": "registry:style",
+      "title": "Claymorphism",
+      "description": "A theme based on the Claymorphism color palette.",
+      "files": [
+        {
+          "path": "themes/claymorphism.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "cyberpunk",
+      "type": "registry:style",
+      "title": "Cyberpunk",
+      "description": "A theme based on the Cyberpunk color palette.",
+      "files": [
+        {
+          "path": "themes/cyberpunk.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "pastel-dreams",
+      "type": "registry:style",
+      "title": "Pastel Dreams",
+      "description": "A theme based on the Pastel Dreams color palette.",
+      "files": [
+        {
+          "path": "themes/pastel-dreams.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "clean-slate",
+      "type": "registry:style",
+      "title": "Clean Slate",
+      "description": "A theme based on the Clean Slate color palette.",
+      "files": [
+        {
+          "path": "themes/clean-slate.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "caffeine",
+      "type": "registry:style",
+      "title": "Caffeine",
+      "description": "A theme based on the Caffeine color palette.",
+      "files": [
+        {
+          "path": "themes/caffeine.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "ocean-breeze",
+      "type": "registry:style",
+      "title": "Ocean Breeze",
+      "description": "A theme based on the Ocean Breeze color palette.",
+      "files": [
+        {
+          "path": "themes/ocean-breeze.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "retro-arcade",
+      "type": "registry:style",
+      "title": "Retro Arcade",
+      "description": "A theme based on the Retro Arcade color palette.",
+      "files": [
+        {
+          "path": "themes/retro-arcade.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "midnight-bloom",
+      "type": "registry:style",
+      "title": "Midnight Bloom",
+      "description": "A theme based on the Midnight Bloom color palette.",
+      "files": [
+        {
+          "path": "themes/midnight-bloom.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "candyland",
+      "type": "registry:style",
+      "title": "Candyland",
+      "description": "A theme based on the Candyland color palette.",
+      "files": [
+        {
+          "path": "themes/candyland.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "northern-lights",
+      "type": "registry:style",
+      "title": "Northern Lights",
+      "description": "A theme based on the Northern Lights color palette.",
+      "files": [
+        {
+          "path": "themes/northern-lights.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "vintage-paper",
+      "type": "registry:style",
+      "title": "Vintage Paper",
+      "description": "A theme based on the Vintage Paper color palette.",
+      "files": [
+        {
+          "path": "themes/vintage-paper.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "sunset-horizon",
+      "type": "registry:style",
+      "title": "Sunset Horizon",
+      "description": "A theme based on the Sunset Horizon color palette.",
+      "files": [
+        {
+          "path": "themes/sunset-horizon.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "starry-night",
+      "type": "registry:style",
+      "title": "Starry Night",
+      "description": "A theme based on the Starry Night color palette.",
+      "files": [
+        {
+          "path": "themes/starry-night.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "claude",
+      "type": "registry:style",
+      "title": "Claude",
+      "description": "A theme based on the Claude color palette.",
+      "files": [
+        {
+          "path": "themes/claude.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "vercel",
+      "type": "registry:style",
+      "title": "Vercel",
+      "description": "A theme based on the Vercel color palette.",
+      "files": [
+        {
+          "path": "themes/vercel.json",
+          "type": "registry:theme"
+        }
+      ]
+    },
+    {
+      "name": "mono",
+      "type": "registry:style",
+      "title": "Mono",
+      "description": "A theme based on the Mono color palette.",
+      "files": [
+        {
+          "path": "themes/mono.json",
+          "type": "registry:theme"
+        }
+      ]
+    }
+  ]
+}
