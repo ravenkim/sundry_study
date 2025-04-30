@@ -1,48 +1,35 @@
 import fs from "fs";
 import path from "path";
 import { defaultPresets } from "../utils/theme-presets";
-
-interface ThemeRegistryItem {
-  name: string;
-  type: "registry:style";
-  title: string;
-  description: string;
-  files: {
-    path: string;
-    type: "registry:theme";
-  }[];
-}
+import { generateThemeRegistryFromPreset } from "@/utils/registry/themes";
 
 interface ThemeRegistry {
   $schema: string;
   name: string;
   homepage: string;
-  items: ThemeRegistryItem[];
+  items: unknown[];
 }
 
 function generateRegistry() {
   const registry: ThemeRegistry = {
     $schema: "https://ui.shadcn.com/schema/registry.json",
     name: "tweakcn-theme-registry",
-    homepage: "http://tweakcn.com",
+    homepage: "https://tweakcn.com",
     items: [],
   };
 
   // Convert defaultPresets to registry items
   for (const [name, preset] of Object.entries(defaultPresets)) {
-    const item: ThemeRegistryItem = {
+    const registryItem = generateThemeRegistryFromPreset(name);
+    const item = {
       name,
       type: "registry:style",
       title: preset.label || name,
       description: `A theme based on the ${
         preset.label || name
       } color palette.`,
-      files: [
-        {
-          path: `themes/${name}.json`,
-          type: "registry:theme",
-        },
-      ],
+      css: registryItem.css,
+      cssVars: registryItem.cssVars,
     };
     registry.items.push(item);
   }

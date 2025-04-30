@@ -1,4 +1,7 @@
-import { defaultDarkThemeStyles, defaultLightThemeStyles } from "@/config/theme";
+import {
+  defaultDarkThemeStyles,
+  defaultLightThemeStyles,
+} from "@/config/theme";
 import { ThemeStyleProps, ThemeStyles } from "@/types/theme";
 import { colorFormatter } from "@/utils/color-converter";
 import { getShadowMap } from "@/utils/shadows";
@@ -24,7 +27,8 @@ const convertThemeStyles = (styles: ThemeStyles) => {
 
   const convertTheme = (theme: ThemeStyleProps): ThemeStyleProps => {
     const result: ThemeStyleProps = theme;
-    const convertColor = (color?: string) => convertToRegistryColor(color || "");
+    const convertColor = (color?: string) =>
+      convertToRegistryColor(color || "");
 
     // Convert all color values
     result.background = convertColor(theme.background);
@@ -36,13 +40,17 @@ const convertThemeStyles = (styles: ThemeStyles) => {
     result.primary = convertColor(theme.primary);
     result["primary-foreground"] = convertColor(theme["primary-foreground"]);
     result.secondary = convertColor(theme.secondary);
-    result["secondary-foreground"] = convertColor(theme["secondary-foreground"]);
+    result["secondary-foreground"] = convertColor(
+      theme["secondary-foreground"]
+    );
     result.muted = convertColor(theme.muted);
     result["muted-foreground"] = convertColor(theme["muted-foreground"]);
     result.accent = convertColor(theme.accent);
     result["accent-foreground"] = convertColor(theme["accent-foreground"]);
     result.destructive = convertColor(theme.destructive);
-    result["destructive-foreground"] = convertColor(theme["destructive-foreground"]);
+    result["destructive-foreground"] = convertColor(
+      theme["destructive-foreground"]
+    );
     result.border = convertColor(theme.border);
     result.input = convertColor(theme.input);
     result.ring = convertColor(theme.ring);
@@ -54,9 +62,13 @@ const convertThemeStyles = (styles: ThemeStyles) => {
     result.sidebar = convertColor(theme.sidebar);
     result["sidebar-foreground"] = convertColor(theme["sidebar-foreground"]);
     result["sidebar-primary"] = convertColor(theme["sidebar-primary"]);
-    result["sidebar-primary-foreground"] = convertColor(theme["sidebar-primary-foreground"]);
+    result["sidebar-primary-foreground"] = convertColor(
+      theme["sidebar-primary-foreground"]
+    );
     result["sidebar-accent"] = convertColor(theme["sidebar-accent"]);
-    result["sidebar-accent-foreground"] = convertColor(theme["sidebar-accent-foreground"]);
+    result["sidebar-accent-foreground"] = convertColor(
+      theme["sidebar-accent-foreground"]
+    );
     result["sidebar-border"] = convertColor(theme["sidebar-border"]);
     result["sidebar-ring"] = convertColor(theme["sidebar-ring"]);
 
@@ -76,7 +88,10 @@ export const generateThemeRegistryFromPreset = (name: string) => {
   return registryItem;
 };
 
-export const generateThemeRegistryItemFromStyles = (name: string, themeStyles: ThemeStyles) => {
+export const generateThemeRegistryItemFromStyles = (
+  name: string,
+  themeStyles: ThemeStyles
+) => {
   const { light, dark } = convertThemeStyles(themeStyles);
 
   // Generate shadow variables for both light and dark modes
@@ -93,8 +108,6 @@ export const generateThemeRegistryItemFromStyles = (name: string, themeStyles: T
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name,
     type: "registry:style",
-    dependencies: [],
-    registryDependencies: [],
     css: {
       "@layer base": {
         body: {
@@ -104,7 +117,8 @@ export const generateThemeRegistryItemFromStyles = (name: string, themeStyles: T
     },
     cssVars: {
       theme: {
-        "font-sans": getThemeValue(dark, light, "font-sans") || "Inter, sans-serif",
+        "font-sans":
+          getThemeValue(dark, light, "font-sans") || "Inter, sans-serif",
         "font-mono": getThemeValue(dark, light, "font-mono") || "monospace",
         "font-serif": getThemeValue(dark, light, "font-serif") || "serif",
         radius: getThemeValue(dark, light, "radius") || "0.5rem",
@@ -124,7 +138,8 @@ export const generateThemeRegistryItemFromStyles = (name: string, themeStyles: T
         "shadow-lg": lightShadows["shadow-lg"],
         "shadow-xl": lightShadows["shadow-xl"],
         "shadow-2xl": lightShadows["shadow-2xl"],
-        "tracking-normal": getThemeValue(dark, light, "letter-spacing") || "0em",
+        "tracking-normal":
+          getThemeValue(dark, light, "letter-spacing") || "0em",
         spacing: getThemeValue(dark, light, "spacing") || "0.25rem",
       },
       dark: {
