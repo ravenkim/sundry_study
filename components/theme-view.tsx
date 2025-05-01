@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Theme } from "@/types/theme";
 import ThemePreviewPanel from "./editor/theme-preview-panel";
 import { Button } from "@/components/ui/button";
-import { Share, Sun, Moon, MoreVertical, Edit, Copy } from "lucide-react";
+import { Share, Sun, Moon, MoreVertical, Edit } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { Header } from "./editor/header";
 import { Footer } from "@/components/home/footer";
 import { toast } from "@/components/ui/use-toast";
+
 export default function ThemeView({ theme }: { theme: Theme }) {
   const {
     themeState,
@@ -36,13 +37,8 @@ export default function ThemeView({ theme }: { theme: Theme }) {
     return () => {
       restoreThemeCheckpoint();
     };
-  }, [
-    theme,
-    saveThemeCheckpoint,
-    setThemeState,
-    themeState,
-    restoreThemeCheckpoint,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme, saveThemeCheckpoint, setThemeState, restoreThemeCheckpoint]);
 
   if (!theme) {
     notFound();
@@ -87,7 +83,7 @@ export default function ThemeView({ theme }: { theme: Theme }) {
                   <Moon className="size-4" />
                 )}
               </Button>
-              <Button variant="outline" size="default">
+              <Button variant="outline" size="default" onClick={handleShare}>
                 <Share className="size-4" />
                 Share
               </Button>
@@ -104,10 +100,6 @@ export default function ThemeView({ theme }: { theme: Theme }) {
                   >
                     <Edit className="size-4" />
                     Open in Editor
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleShare} className="gap-2">
-                    <Copy className="size-4" />
-                    Copy URL
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
