@@ -36,7 +36,13 @@ export default function ThemeView({ theme }: { theme: Theme }) {
     return () => {
       restoreThemeCheckpoint();
     };
-  }, [theme]);
+  }, [
+    theme,
+    saveThemeCheckpoint,
+    setThemeState,
+    themeState,
+    restoreThemeCheckpoint,
+  ]);
 
   if (!theme) {
     notFound();
