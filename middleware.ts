@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
-import { apiAuthPrefix, DEFAULT_LOGIN_REDIRECT } from "./routes";
+import { apiAuthPrefix } from "./routes";
 
 export async function middleware(request: NextRequest) {
   const session = await auth.api.getSession({
@@ -23,5 +23,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/editor/:path*", "/dashboard"],
+  matcher: ["/editor/theme/:themeId", "/dashboard"],
 };
