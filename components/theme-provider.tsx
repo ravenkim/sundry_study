@@ -10,7 +10,6 @@ type Theme = "dark" | "light";
 type ThemeProviderProps = {
   children: React.ReactNode;
   defaultTheme?: Theme;
-  toggleTheme: (coords?: Coords) => void;
 };
 
 type Coords = { x: number; y: number };
