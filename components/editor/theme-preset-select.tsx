@@ -267,7 +267,6 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     currentPreset,
     themeState.styles,
     presets,
-    value,
   ]);
 
   return (
