@@ -1,30 +1,18 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useEditorStore } from "@/store/editor-store";
 import { motion } from "motion/react";
 import { defaultPresets } from "@/utils/theme-presets";
-import { getPresetThemeStyles } from "@/utils/theme-preset-helper";
-import { cn } from "@/lib/utils";
-import { colorFormatter } from "@/utils/color-converter";
 import { DemoContainer } from "@/components/examples/demo-cards";
 import { DemoGithub } from "@/components/examples/cards/github-card";
 import { DemoStats } from "@/components/examples/cards/stats";
 import { lazy, Suspense } from "react";
 import { Loading } from "../loading";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ThemePresetButtons } from "@/components/home/theme-preset-buttons";
 
 const DemoMail = lazy(() => import("@/components/examples/mail"));
-
-const ColorBox = ({ color }: { color: string }) => {
-  return (
-    <div
-      className="w-3 h-3 rounded-sm border"
-      style={{ backgroundColor: color }}
-    />
-  );
-};
 
 export function ThemePresetSelector() {
   const { themeState, applyThemePreset } = useEditorStore();
@@ -51,61 +39,21 @@ export function ThemePresetSelector() {
             </Badge>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">
-            Preview and Select a Theme
+            Elevate Your Design Instantly
           </h2>
           <p className="max-w-[800px] text-muted-foreground md:text-lg">
-            Click on a theme below to preview how it transforms the page.
+            Apply theme presets with a single click. See how each option
+            enhances the look.
           </p>
         </motion.div>
 
         {/* Theme Selector Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8"
-        >
-          {presetNames?.slice(4, 10).map((presetName, index) => {
-            const themeStyles = getPresetThemeStyles(presetName)[mode];
-            const bgColor = colorFormatter(themeStyles.primary, "hsl", "4");
-            const isSelected = presetName === themeState.preset;
-            return (
-              <motion.div
-                key={presetName}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-              >
-                <Button
-                  className={cn(
-                    "flex w-full items-center relative transition-all hover:shadow-md bg-primary/10 hover:bg-primary/20 hover:translate-y-[-2px]",
-                    isSelected ? "ring-2 ring-primary/30 shadow-md" : ""
-                  )}
-                  variant="ghost"
-                  style={{
-                    backgroundColor: bgColor
-                      .replace("hsl", "hsla")
-                      .replace(/\s+/g, ", ")
-                      .replace(")", ", 0.15)"),
-                    color: themeStyles.foreground,
-                    borderRadius: themeStyles.radius,
-                  }}
-                  onClick={() => applyThemePreset(presetName)}
-                >
-                  <div className="flex gap-0.5 mr-1">
-                    <ColorBox color={themeStyles.primary} />
-                    <ColorBox color={themeStyles.accent} />
-                  </div>
-                  <span className="capitalize">
-                    {presetName.replace(/-/g, " ")}
-                  </span>
-                </Button>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+        <ThemePresetButtons
+          presetNames={presetNames}
+          mode={mode}
+          themeState={themeState}
+          applyThemePreset={applyThemePreset}
+        />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
