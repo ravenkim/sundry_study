@@ -4,16 +4,17 @@ import { ImportButton } from "./import-button";
 import { ResetButton } from "./reset-button";
 import { SaveButton } from "./save-button";
 import { CodeButton } from "./code-button";
-import ContrastChecker from "@/components/editor/contrast-checker";
 import { useEditorStore } from "@/store/editor-store";
 import { useThemePresetStore } from "@/store/theme-preset-store";
 import { EditButton } from "./edit-button";
 import { MoreOptions } from "./more-options";
+import { AIGenerateButton } from "./ai-generate-button";
 
 interface ActionBarButtonsProps {
   onImportClick: () => void;
   onCodeClick: () => void;
   onSaveClick: () => void;
+  onAiGenerateClick: () => void;
   isSaving: boolean;
 }
 
@@ -21,6 +22,7 @@ export function ActionBarButtons({
   onImportClick,
   onCodeClick,
   onSaveClick,
+  onAiGenerateClick,
   isSaving,
 }: ActionBarButtonsProps) {
   const { themeState, restoreThemeCheckpoint, hasThemeChangedFromCheckpoint } =
@@ -36,14 +38,12 @@ export function ActionBarButtons({
       <Separator orientation="vertical" className="h-8 mx-1" />
       <ThemeToggle />
       <Separator orientation="vertical" className="h-8 mx-1" />
-      <ContrastChecker
-        currentStyles={themeState.styles[themeState.currentMode]}
-      />
-      <ImportButton onImportClick={onImportClick} />
       <ResetButton
         onReset={restoreThemeCheckpoint}
         isDisabled={!hasThemeChangedFromCheckpoint()}
       />
+      <ImportButton onImportClick={onImportClick} />
+      <AIGenerateButton onClick={onAiGenerateClick} />
       <Separator orientation="vertical" className="h-8 mx-1" />
       {showEditButton && <EditButton themeId={themeState.preset as string} />}
       <SaveButton onSaveClick={onSaveClick} isSaving={isSaving} />

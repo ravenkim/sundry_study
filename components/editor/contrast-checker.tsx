@@ -188,20 +188,11 @@ const ContrastChecker = ({ currentStyles }: ContrastCheckerProps) => {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Tooltip>
-          <TooltipTrigger>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="relative h-8 px-2 gap-1.5 text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            >
-              <Contrast className="h-4 w-4" />
-              <span className="text-sm hidden md:block">Contrast</span>
-            </Button>
-            <TooltipContent>Check contrast accessibility</TooltipContent>
-          </TooltipTrigger>
-        </Tooltip>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="sm" className="px-2 w-full justify-start">
+          <Contrast className="h-4 w-4" />
+          <span className="text-sm hidden md:block">Contrast</span>
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-screen-lg max-h-[90vh]">
         <DialogHeader className="mb-4">
