@@ -4,6 +4,7 @@ import ThemeView from "@/components/theme-view";
 import { Metadata } from "next";
 import { Header } from "@/components/editor/header";
 import { Loading } from "@/components/loading";
+
 interface ThemePageProps {
   params: Promise<{
     themeId: string;
@@ -18,6 +19,17 @@ export async function generateMetadata({
 
   return {
     title: theme?.name + " - tweakcn",
+    description: `Discover shadcn/ui themes - ${theme?.name} theme`,
+    openGraph: {
+      title: `${theme?.name} - tweakcn`,
+      description: `Discover shadcn/ui themes - ${theme?.name} theme`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${theme?.name} - tweakcn`,
+      description: `Discover shadcn/ui themes - ${theme?.name} theme`,
+    },
     robots: {
       index: false,
       follow: true,
