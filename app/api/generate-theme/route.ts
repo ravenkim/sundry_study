@@ -1,11 +1,12 @@
 import { createGroq } from "@ai-sdk/groq";
+import { createFallback } from "ai-fallback";
 import { generateObject } from "ai";
 import { z } from "zod";
 import { themeStylePropsSchema } from "@/types/theme";
 import kv from "@vercel/kv";
 import { Ratelimit } from "@upstash/ratelimit";
 import { NextRequest } from "next/server";
-
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 const requestSchema = z.object({
   prompt: z.string().min(1),
 });
@@ -47,7 +48,20 @@ export async function POST(req: NextRequest) {
       apiKey: process.env.GROQ_API_KEY,
     });
 
-    const model = groq("llama-3.3-70b-versatile");
+    const google = createGoogleGenerativeAI({
+      apiKey: process.env.GOOGLE_API_KEY,
+    });
+
+    const model = createFallback({
+      models: [
+        groq("llama-3.3-70b-versatile"),
+        google("gemini-2.0-flash-lite"),
+      ],
+      onError: (error, modelId) => {
+        console.error(`Error with model ${modelId}:`, error);
+      },
+      modelResetInterval: 60000, // Reset to first model after 1 minute of the first error
+    });
 
     const { object: theme } = await generateObject({
       model,
