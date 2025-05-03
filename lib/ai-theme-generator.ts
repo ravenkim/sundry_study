@@ -72,6 +72,7 @@ export function applyGeneratedTheme(themeStyles: Theme["styles"]) {
   if (!document.startViewTransition) {
     setThemeState({
       ...themeState,
+      preset: undefined,
       styles: {
         ...themeState.styles,
         light: { ...defaultThemeState.styles.light, ...themeStyles.light },
@@ -82,6 +83,7 @@ export function applyGeneratedTheme(themeStyles: Theme["styles"]) {
     document.startViewTransition(() => {
       setThemeState({
         ...themeState,
+        preset: undefined,
         styles: {
           ...themeState.styles,
           light: {
