@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Heart } from "lucide-react";
 import { ThemeEditorState } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { ColorFormat } from "../../types";
@@ -16,6 +16,7 @@ import { useEditorStore } from "@/store/editor-store";
 import { usePreferencesStore } from "@/store/preferences-store";
 import { generateThemeCode } from "@/utils/theme-style-generator";
 import { useThemePresetStore } from "@/store/theme-preset-store";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 interface CodePanelProps {
   themeEditorState: ThemeEditorState;
@@ -36,6 +37,9 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
   );
   const setPackageManager = usePreferencesStore(
     (state) => state.setPackageManager
+  );
+  const hasUnsavedChanges = useEditorStore(
+    (state) => state.hasThemeChangedFromCheckpoint
   );
 
   const isSavedPreset = useThemePresetStore(
@@ -103,7 +107,21 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">Theme Code</h2>
         </div>
-        {preset && preset !== "default" && (
+        {preset && preset !== "default" && hasUnsavedChanges() && (
+          <Alert className="mt-4">
+            <AlertTitle>You have unsaved changes.</AlertTitle>
+            <AlertDescription className="flex flex-col gap-2 mt-2">
+              <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 px-2 py-0.5 border rounded-md">
+                  <Heart className="size-3.5" />
+                  <span>Save</span>
+                </div>
+                your theme to get the registry command.
+              </div>
+            </AlertDescription>
+          </Alert>
+        )}
+        {preset && preset !== "default" && !hasUnsavedChanges() && (
           <div className="mt-4 rounded-md overflow-hidden border">
             <div className="flex border-b">
               {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
