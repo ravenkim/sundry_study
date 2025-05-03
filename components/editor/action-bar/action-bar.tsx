@@ -13,20 +13,51 @@ import { usePostLoginAction } from "@/hooks/use-post-login-action";
 import { useThemeActions } from "@/hooks/use-theme-actions";
 import { ActionBarButtons } from "@/components/editor/action-bar/components/action-bar-buttons";
 import { usePostHog } from "posthog-js/react";
+import { AIGenerateDialog } from "@/components/editor/action-bar/components/ai-generate-dialog";
+import { useAIThemeGeneration } from "@/hooks/use-ai-theme-generation";
 
 export function ActionBar() {
   const { themeState, setThemeState, applyThemePreset } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
   const [codePanelOpen, setCodePanelOpen] = useState(false);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [aiGenerateOpen, setAiGenerateOpen] = useState(false);
+  const [dialogKey, setDialogKey] = useState(0);
   const { data: session } = authClient.useSession();
   const { openAuthDialog } = useAuthStore();
   const { createTheme, isCreatingTheme } = useThemeActions();
   const posthog = usePostHog();
+  const { generateTheme, loading: aiGenerateLoading } = useAIThemeGeneration({
+    onSuccess: () => {
+      setAiGenerateOpen(false);
+      setDialogKey((prev) => prev + 1);
+    },
+  });
 
   usePostLoginAction("SAVE_THEME", () => {
     setSaveDialogOpen(true);
   });
+
+  usePostLoginAction("AI_GENERATE", () => {
+    setAiGenerateOpen(true);
+  });
+
+  const handleGenerateTheme = async (
+    promptText: string,
+    jsonPromptText: string
+  ) => {
+    if (!promptText.trim()) return;
+    await generateTheme(promptText, jsonPromptText);
+  };
+
+  const handleAiGenerateClick = () => {
+    if (!session) {
+      openAuthDialog("signin", "AI_GENERATE");
+      return;
+    }
+
+    setAiGenerateOpen(true);
+  };
 
   const handleCssImport = (css: string) => {
     const { lightColors, darkColors } = parseCssInput(css);
@@ -88,6 +119,7 @@ export function ActionBar() {
           onImportClick={() => setCssImportOpen(true)}
           onCodeClick={() => setCodePanelOpen(true)}
           onSaveClick={handleSaveClick}
+          onAiGenerateClick={handleAiGenerateClick}
           isSaving={isCreatingTheme}
         />
       </div>
@@ -107,6 +139,13 @@ export function ActionBar() {
         onOpenChange={setSaveDialogOpen}
         onSave={saveTheme}
         isSaving={isCreatingTheme}
+      />
+      <AIGenerateDialog
+        key={dialogKey}
+        open={aiGenerateOpen}
+        onOpenChange={setAiGenerateOpen}
+        loading={aiGenerateLoading}
+        onGenerate={handleGenerateTheme}
       />
     </div>
   );
