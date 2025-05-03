@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
-export type PostLoginAction = "SAVE_THEME" | "AI_GENERATE" | null;
+export type PostLoginAction =
+  | "SAVE_THEME"
+  | "AI_GENERATE"
+  | "SAVE_THEME_FOR_SHARE"
+  | null;
 type PostLoginHandler = () => void | Promise<void>;
 
 const handlers: Map<PostLoginAction, PostLoginHandler[]> = new Map();

@@ -15,12 +15,20 @@ import { ActionBarButtons } from "@/components/editor/action-bar/components/acti
 import { usePostHog } from "posthog-js/react";
 import { AIGenerateDialog } from "@/components/editor/action-bar/components/ai-generate-dialog";
 import { useAIThemeGeneration } from "@/hooks/use-ai-theme-generation";
+import { ShareDialog } from "@/components/editor/share-dialog";
+import { useThemePresetStore } from "@/store/theme-preset-store";
 
 export function ActionBar() {
-  const { themeState, setThemeState, applyThemePreset } = useEditorStore();
+  const {
+    themeState,
+    setThemeState,
+    applyThemePreset,
+    hasThemeChangedFromCheckpoint,
+  } = useEditorStore();
   const [cssImportOpen, setCssImportOpen] = useState(false);
   const [codePanelOpen, setCodePanelOpen] = useState(false);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [shareAfterSave, setShareAfterSave] = useState(false);
   const [aiGenerateOpen, setAiGenerateOpen] = useState(false);
   const [dialogKey, setDialogKey] = useState(0);
   const { data: session } = authClient.useSession();
@@ -33,6 +41,10 @@ export function ActionBar() {
       setDialogKey((prev) => prev + 1);
     },
   });
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+
+  const { getPreset } = useThemePresetStore();
 
   usePostLoginAction("SAVE_THEME", () => {
     setSaveDialogOpen(true);
@@ -42,12 +54,21 @@ export function ActionBar() {
     setAiGenerateOpen(true);
   });
 
+  usePostLoginAction("SAVE_THEME_FOR_SHARE", () => {
+    setSaveDialogOpen(true);
+    setShareAfterSave(true);
+  });
+
   const handleGenerateTheme = async (
     promptText: string,
     jsonPromptText: string
   ) => {
     if (!promptText.trim()) return;
     await generateTheme(promptText, jsonPromptText);
+
+    posthog.capture("AI_GENERATE_THEME", {
+      prompt_text: promptText,
+    });
   };
 
   const handleAiGenerateClick = () => {
@@ -78,13 +99,19 @@ export function ActionBar() {
     });
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (shareAfterSave: boolean = false) => {
     if (!session) {
-      openAuthDialog("signin", "SAVE_THEME");
+      openAuthDialog(
+        "signin",
+        shareAfterSave ? "SAVE_THEME_FOR_SHARE" : "SAVE_THEME"
+      );
       return;
     }
 
     setSaveDialogOpen(true);
+    if (shareAfterSave) {
+      setShareAfterSave(true);
+    }
   };
 
   const saveTheme = async (themeName: string) => {
@@ -104,12 +131,48 @@ export function ActionBar() {
         if (!theme) return;
         setSaveDialogOpen(false);
       }, 50);
+
+      if (shareAfterSave) {
+        handleShareClick(theme?.id);
+        setShareAfterSave(false);
+      }
     } catch (error) {
       console.error(
         "Save operation failed (error likely handled by hook):",
         error
       );
     }
+  };
+
+  const handleShareClick = async (id?: string) => {
+    if (hasThemeChangedFromCheckpoint()) {
+      handleSaveClick(true);
+      return;
+    }
+
+    const presetId = id ?? themeState.preset;
+    const currentPreset = presetId ? getPreset(presetId) : undefined;
+
+    if (!currentPreset) {
+      setShareUrl(`https://tweakcn.com/editor/theme`);
+      setShareDialogOpen(true);
+      return;
+    }
+
+    const isSavedPreset = !!currentPreset && currentPreset.source === "SAVED";
+
+    posthog.capture("SHARE_THEME", {
+      theme_id: id,
+      theme_name: currentPreset?.label,
+      is_saved: isSavedPreset,
+    });
+
+    const url = isSavedPreset
+      ? `https://tweakcn.com/themes/${id}`
+      : `https://tweakcn.com/editor/theme?theme=${id}`;
+
+    setShareUrl(url);
+    setShareDialogOpen(true);
   };
 
   return (
@@ -121,6 +184,7 @@ export function ActionBar() {
           onSaveClick={handleSaveClick}
           onAiGenerateClick={handleAiGenerateClick}
           isSaving={isCreatingTheme}
+          onShareClick={handleShareClick}
         />
       </div>
 
@@ -146,6 +210,11 @@ export function ActionBar() {
         onOpenChange={setAiGenerateOpen}
         loading={aiGenerateLoading}
         onGenerate={handleGenerateTheme}
+      />
+      <ShareDialog
+        open={shareDialogOpen}
+        onOpenChange={setShareDialogOpen}
+        url={shareUrl}
       />
     </div>
   );

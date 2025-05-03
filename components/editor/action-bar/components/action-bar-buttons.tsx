@@ -9,12 +9,14 @@ import { useThemePresetStore } from "@/store/theme-preset-store";
 import { EditButton } from "./edit-button";
 import { MoreOptions } from "./more-options";
 import { AIGenerateButton } from "./ai-generate-button";
+import { ShareButton } from "./share-button";
 
 interface ActionBarButtonsProps {
   onImportClick: () => void;
   onCodeClick: () => void;
   onSaveClick: () => void;
   onAiGenerateClick: () => void;
+  onShareClick: (id?: string) => void;
   isSaving: boolean;
 }
 
@@ -23,14 +25,17 @@ export function ActionBarButtons({
   onCodeClick,
   onSaveClick,
   onAiGenerateClick,
+  onShareClick,
   isSaving,
 }: ActionBarButtonsProps) {
   const { themeState, restoreThemeCheckpoint, hasThemeChangedFromCheckpoint } =
     useEditorStore();
 
   const { getPreset } = useThemePresetStore();
-  const currentPreset = themeState?.preset && getPreset(themeState?.preset);
-  const showEditButton = !!currentPreset && currentPreset.source === "SAVED";
+  const currentPreset = themeState?.preset
+    ? getPreset(themeState?.preset)
+    : undefined;
+  const isSavedPreset = !!currentPreset && currentPreset.source === "SAVED";
 
   return (
     <div className="flex items-center gap-1">
@@ -45,7 +50,8 @@ export function ActionBarButtons({
       <ImportButton onImportClick={onImportClick} />
       <AIGenerateButton onClick={onAiGenerateClick} />
       <Separator orientation="vertical" className="h-8 mx-1" />
-      {showEditButton && <EditButton themeId={themeState.preset as string} />}
+      {isSavedPreset && <EditButton themeId={themeState.preset as string} />}
+      <ShareButton onShareClick={() => onShareClick(themeState.preset)} />
       <SaveButton onSaveClick={onSaveClick} isSaving={isSaving} />
       <CodeButton onCodeClick={onCodeClick} />
     </div>
