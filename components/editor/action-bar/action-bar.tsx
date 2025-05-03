@@ -99,17 +99,17 @@ export function ActionBar() {
     });
   };
 
-  const handleSaveClick = (shareAfterSave: boolean = false) => {
+  const handleSaveClick = (options?: { shareAfterSave?: boolean }) => {
     if (!session) {
       openAuthDialog(
         "signin",
-        shareAfterSave ? "SAVE_THEME_FOR_SHARE" : "SAVE_THEME"
+        options?.shareAfterSave ? "SAVE_THEME_FOR_SHARE" : "SAVE_THEME"
       );
       return;
     }
 
     setSaveDialogOpen(true);
-    if (shareAfterSave) {
+    if (options?.shareAfterSave) {
       setShareAfterSave(true);
     }
   };
@@ -146,7 +146,7 @@ export function ActionBar() {
 
   const handleShareClick = async (id?: string) => {
     if (hasThemeChangedFromCheckpoint()) {
-      handleSaveClick(true);
+      handleSaveClick({ shareAfterSave: true });
       return;
     }
 
@@ -181,7 +181,7 @@ export function ActionBar() {
         <ActionBarButtons
           onImportClick={() => setCssImportOpen(true)}
           onCodeClick={() => setCodePanelOpen(true)}
-          onSaveClick={handleSaveClick}
+          onSaveClick={() => handleSaveClick()}
           onAiGenerateClick={handleAiGenerateClick}
           isSaving={isCreatingTheme}
           onShareClick={handleShareClick}

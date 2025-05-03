@@ -3,10 +3,12 @@ import { createFallback } from "ai-fallback";
 import { generateObject } from "ai";
 import { z } from "zod";
 import { themeStylePropsSchema } from "@/types/theme";
-import kv from "@vercel/kv";
+import { kv } from "@vercel/kv";
 import { Ratelimit } from "@upstash/ratelimit";
 import { NextRequest } from "next/server";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { auth } from "@/lib/auth";
+
 const requestSchema = z.object({
   prompt: z.string().min(1),
 });
@@ -30,6 +32,13 @@ const ratelimit = new Ratelimit({
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await auth.api.getSession(req);
+    if (!session) {
+      return new Response("Unauthorized", {
+        status: 401,
+      });
+    }
+
     // Apply rate limiting based on the request IP
     const ip = req.headers.get("x-forwarded-for") ?? "anonymous";
     const { success } = await ratelimit.limit(ip);
@@ -69,7 +78,8 @@ export async function POST(req: NextRequest) {
       system: `You are an AI generating Shadcn UI color themes.
 Input: User description or existing theme tokens.
 Format: Use Hex values (#000000) exclusively for colors.
-Requirement: Ensure light/dark mode cohesion. If asked to change the theme's main color (e.g., "make it green"), adjust related colors (--accent, --secondary, --ring, --border) along with --primary to create a cohesive new palette.`,
+Requirement: Ensure light/dark mode cohesion. If asked to change the theme's main color (e.g., "make it green"), adjust related colors (--accent, --secondary, --ring, --border) along with --primary to create a cohesive new palette.
+Ensure sufficient contrast between foreground and background colors.`,
       prompt: `Generate Shadcn theme. Input: ${prompt}`,
     });
 
