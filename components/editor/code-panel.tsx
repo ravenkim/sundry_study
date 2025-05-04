@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Copy, Check, Heart } from "lucide-react";
 import { ThemeEditorState } from "@/types/editor";
@@ -38,9 +38,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
   const setPackageManager = usePreferencesStore(
     (state) => state.setPackageManager
   );
-  const hasUnsavedChanges = useEditorStore(
-    (state) => state.hasThemeChangedFromCheckpoint
-  );
+  const hasUnsavedChanges = useEditorStore((state) => state.hasUnsavedChanges);
 
   const isSavedPreset = useThemePresetStore(
     (state) => preset && state.getPreset(preset)?.source === "SAVED"
@@ -101,27 +99,17 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
     }
   };
 
+  const showRegistryCommand = useMemo(() => {
+    return preset && preset !== "default" && !hasUnsavedChanges();
+  }, [preset, hasUnsavedChanges]);
+
   return (
     <div className="h-full flex flex-col">
       <div className="flex-none mb-4">
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">Theme Code</h2>
         </div>
-        {preset && preset !== "default" && hasUnsavedChanges() && (
-          <Alert className="mt-4">
-            <AlertTitle>You have unsaved changes.</AlertTitle>
-            <AlertDescription className="flex flex-col gap-2 mt-2">
-              <div className="flex items-center gap-1">
-                <div className="flex items-center gap-1 px-2 py-0.5 border rounded-md">
-                  <Heart className="size-3.5" />
-                  <span>Save</span>
-                </div>
-                your theme to get the registry command.
-              </div>
-            </AlertDescription>
-          </Alert>
-        )}
-        {preset && preset !== "default" && !hasUnsavedChanges() && (
+        {showRegistryCommand ? (
           <div className="mt-4 rounded-md overflow-hidden border">
             <div className="flex border-b">
               {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
@@ -158,13 +146,26 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
               <ScrollArea className="w-full">
                 <div className="whitespace-nowrap overflow-y-hidden pb-2">
                   <code className="text-sm font-mono">
-                    {getRegistryCommand(preset)}
+                    {getRegistryCommand(preset as string)}
                   </code>
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
             </div>
           </div>
+        ) : (
+          <Alert className="mt-4">
+            <AlertTitle>You have unsaved changes.</AlertTitle>
+            <AlertDescription className="flex flex-col gap-2 mt-2">
+              <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 px-2 py-0.5 border rounded-md">
+                  <Heart className="size-3.5" />
+                  <span>Save</span>
+                </div>
+                your theme to get the registry command.
+              </div>
+            </AlertDescription>
+          </Alert>
         )}
       </div>
       <div className="flex items-center gap-2 mb-4 ">

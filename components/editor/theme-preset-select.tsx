@@ -36,7 +36,7 @@ import {
 } from "../ui/tooltip";
 import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
-import { cn, isDeepEqual } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface ThemePresetSelectProps {
   presets: Record<string, ThemePreset>;
@@ -168,7 +168,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
   currentPreset,
   onPresetChange,
 }) => {
-  const { themeState, hasThemeChangedFromCheckpoint } = useEditorStore();
+  const { themeState, hasUnsavedChanges } = useEditorStore();
   const { theme, toggleTheme } = useTheme();
   const mode = themeState.currentMode;
   const [search, setSearch] = useState("");
@@ -256,19 +256,6 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
     );
   }, [filteredPresets, isSavedTheme]);
 
-  const hasUnsavedChanges = useMemo(() => {
-    return (
-      hasThemeChangedFromCheckpoint() ||
-      (!currentPreset &&
-        !isDeepEqual(themeState.styles, presets["default"]?.styles))
-    );
-  }, [
-    hasThemeChangedFromCheckpoint,
-    currentPreset,
-    themeState.styles,
-    presets,
-  ]);
-
   return (
     <div className="flex items-center">
       <TooltipProvider>
@@ -290,7 +277,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                 {value !== "default" &&
                   value &&
                   isSavedTheme(value) &&
-                  !hasUnsavedChanges && (
+                  !hasUnsavedChanges() && (
                     <div className="rounded-full bg-muted p-1">
                       <Heart
                         className="size-1"
@@ -300,7 +287,7 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
                     </div>
                   )}
                 <span className="capitalize font-medium">
-                  {hasUnsavedChanges ? (
+                  {hasUnsavedChanges() ? (
                     <>Custom (Unsaved)</>
                   ) : (
                     presets[value || "default"]?.label || "default"
