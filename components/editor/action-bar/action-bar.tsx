@@ -126,16 +126,15 @@ export function ActionBar() {
         theme_id: theme?.id,
         theme_name: theme?.name,
       });
+      if (!theme) return;
       applyThemePreset(theme?.id || themeState.preset || "default");
-      setTimeout(() => {
-        if (!theme) return;
-        setSaveDialogOpen(false);
-      }, 50);
-
       if (shareAfterSave) {
         handleShareClick(theme?.id);
         setShareAfterSave(false);
       }
+      setTimeout(() => {
+        setSaveDialogOpen(false);
+      }, 50);
     } catch (error) {
       console.error(
         "Save operation failed (error likely handled by hook):",
