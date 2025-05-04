@@ -13,6 +13,7 @@ interface EditorStore {
   saveThemeCheckpoint: () => void;
   restoreThemeCheckpoint: () => void;
   hasThemeChangedFromCheckpoint: () => boolean;
+  hasUnsavedChanges: () => boolean;
 }
 
 export const useEditorStore = create<EditorStore>()(
@@ -52,6 +53,13 @@ export const useEditorStore = create<EditorStore>()(
       hasThemeChangedFromCheckpoint: () => {
         const checkpoint = get().themeCheckpoint;
         return !isDeepEqual(get().themeState, checkpoint);
+      },
+      hasUnsavedChanges: () => {
+        const themeState = get().themeState;
+        const presetThemeStyles = getPresetThemeStyles(
+          themeState.preset ?? "default"
+        );
+        return !isDeepEqual(themeState.styles, presetThemeStyles);
       },
     }),
     {
