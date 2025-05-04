@@ -52,7 +52,8 @@ export function AIGenerateDialog({
         <DialogHeader className="px-6">
           <DialogTitle>How can I help you theme?</DialogTitle>
           <DialogDescription>
-            Ask for anything in plain english, I&apos;ll make it happen.
+            Use <span className="font-medium">@</span> to mention a preset or
+            your current theme.
           </DialogDescription>
         </DialogHeader>
 
