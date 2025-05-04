@@ -58,7 +58,7 @@ export function AIGenerateDialog({
         </DialogHeader>
 
         <div className="px-6">
-          <div className="bg-muted/40 rounded-lg p-1">
+          <div className="bg-muted/40 rounded-lg p-1 max-w-[500px]">
             <Suspense fallback={<Loading className="min-h-[80px]" />}>
               <CustomTextarea
                 onContentChange={handleContentChange}
