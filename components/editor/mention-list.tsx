@@ -31,6 +31,7 @@ export const MentionList = forwardRef<MentionListRef, MentionListProps>(
 
     // Function to select item (adapted from reference)
     const selectItem = (index: number) => {
+      console.log("selectItem", index);
       const item = props.items[index];
       if (item) {
         // Pass the whole item object to the command function
@@ -84,32 +85,34 @@ export const MentionList = forwardRef<MentionListRef, MentionListProps>(
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95"
         )}
+        style={{ position: "absolute", pointerEvents: "auto" }}
       >
-        {
-          props.items.length ? (
-            props.items.map((item, index) => (
-              <button
-                // Use Tailwind classes mimicking shadcn/ui DropdownMenuItem with cn utility
-                className={cn(
-                  "relative flex w-full cursor-default select-none items-center rounded-sm p-1.5 text-xs outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                  index === selectedIndex && "bg-accent text-accent-foreground"
-                )}
-                key={item.id} // Use item.id as the key
-                onClick={() => selectItem(index)}
-              >
-                {item.label} {/* Display the item's label */}
-              </button>
-            ))
-          ) : (
-            <div
+        {props.items.length ? (
+          props.items.map((item, index) => (
+            <button
+              // Use Tailwind classes mimicking shadcn/ui DropdownMenuItem with cn utility
               className={cn(
-                "relative flex cursor-default select-none items-center rounded-sm p-1.5 text-xs text-muted-foreground"
+                "relative flex w-full items-center rounded-sm p-1.5 text-xs outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+                index === selectedIndex && "bg-accent text-accent-foreground"
               )}
+              key={item.id} // Use item.id as the key
+              onClick={(e) => {
+                e.stopPropagation();
+                selectItem(index);
+              }}
             >
-              No result
-            </div>
-          ) // Use Tailwind classes for the empty state, styled like an item, using cn
-        }
+              {item.label}
+            </button>
+          ))
+        ) : (
+          <div
+            className={cn(
+              "relative flex cursor-default select-none items-center rounded-sm p-1.5 text-xs text-muted-foreground"
+            )}
+          >
+            No result
+          </div>
+        )}
       </div>
     );
   }
