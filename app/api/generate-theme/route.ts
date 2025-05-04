@@ -76,8 +76,7 @@ export async function POST(req: NextRequest) {
       model,
       schema: themeSchemaWithoutSpacing,
       system: `You are an AI generating Shadcn UI color themes.
-Input: User description or existing theme tokens.
-Format: Use Hex values (#000000) exclusively for colors.
+Format: Use Hex values (#000000) ONLY for colors. Don't use formats like rgba or hsla.
 Requirement: Ensure light/dark mode cohesion. If asked to change the theme's main color (e.g., "make it green"), adjust related colors (--accent, --secondary, --ring, --border) along with --primary to create a cohesive new palette.
 Ensure sufficient contrast between foreground and background colors.`,
       prompt: `Generate Shadcn theme. Input: ${prompt}`,
