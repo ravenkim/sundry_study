@@ -78,7 +78,10 @@ export function ThemeSaveDialog({
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-6">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6 px-6"
+          >
             <FormField
               control={form.control}
               name="themeName"
@@ -101,14 +104,19 @@ export function ThemeSaveDialog({
               variant="ghost"
               disabled={isSaving}
               size="sm"
-              >
+            >
               Cancel
             </Button>
             <Button
               type="submit"
-              disabled={isSaving || !form.formState.isValid || form.formState.isSubmitting}
+              disabled={
+                isSaving ||
+                !form.formState.isValid ||
+                form.formState.isSubmitting
+              }
               size="sm"
-              >
+              onClick={form.handleSubmit(onSubmit)}
+            >
               {isSaving || form.formState.isSubmitting ? (
                 <>
                   <Loader2 className="mr-1 size-4 animate-spin" />
