@@ -50,9 +50,9 @@ export function AIGenerateDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[550px] p-0 pt-6 overflow-hidden rounded-lg border shadow-lg gap-6">
         <DialogHeader className="px-6">
-          <DialogTitle>What can I do for your theme?</DialogTitle>
+          <DialogTitle>How can I help you theme?</DialogTitle>
           <DialogDescription>
-            Ask for anything in plain english, I'll make it happen.
+            Ask for anything in plain english, I&apos;ll make it happen.
           </DialogDescription>
         </DialogHeader>
 
