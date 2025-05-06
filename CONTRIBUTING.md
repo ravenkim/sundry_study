@@ -103,9 +103,15 @@ Even if you don't plan to write code, there are many ways to contribute:
     # Create Google OAuth Credentials: https://www.better-auth.com/docs/authentication/google
     GOOGLE_CLIENT_ID="YOUR_GOOGLE_CLIENT_ID"
     GOOGLE_CLIENT_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
+
+    ###### AI ######
+    # Get a Google API Key: https://aistudio.google.com/apikey
+    GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
+    # Get a Groq API Key: https://console.groq.com/keys
+    GROQ_API_KEY="YOUR_GROQ_API_KEY"
     ```
 
-    - Make sure to replace the placeholder values with your actual credentials obtained from Neon, BetterAuth, GitHub, and Google Cloud Platform.
+    - Make sure to replace the placeholder values with your actual credentials obtained from the services
 
 2.  **Apply Database Schema:** Push the database schema defined in `db/schema.ts` to your Neon database using Drizzle Kit:
 
