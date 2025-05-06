@@ -45,7 +45,12 @@ export const useEditorStore = create<EditorStore>()(
       restoreThemeCheckpoint: () => {
         const checkpoint = get().themeCheckpoint;
         if (checkpoint) {
-          set({ themeState: checkpoint });
+          set({
+            themeState: {
+              ...checkpoint,
+              currentMode: get().themeState.currentMode,
+            },
+          });
         } else {
           console.warn("No theme checkpoint available to restore to.");
         }
