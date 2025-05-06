@@ -90,6 +90,7 @@
     "swr": "^2.3.3",
     "tailwind-merge": "^3.2.0",
     "tippy.js": "^6.3.7",
+    "use-scramble": "^2.2.15",
     "vaul": "^1.1.2",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"
