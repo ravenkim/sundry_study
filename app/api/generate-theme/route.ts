@@ -39,15 +39,18 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Apply rate limiting based on the request IP
-    const ip = req.headers.get("x-forwarded-for") ?? "anonymous";
-    const { success } = await ratelimit.limit(ip);
+    // Skip rate limiting in development environment
+    if (process.env.NODE_ENV !== "development") {
+      // Apply rate limiting based on the request IP
+      const ip = req.headers.get("x-forwarded-for") ?? "anonymous";
+      const { success } = await ratelimit.limit(ip);
 
-    // Block the request if rate limit exceeded
-    if (!success) {
-      return new Response("Rate limit exceeded. Please try again later.", {
-        status: 429,
-      });
+      // Block the request if rate limit exceeded
+      if (!success) {
+        return new Response("Rate limit exceeded. Please try again later.", {
+          status: 429,
+        });
+      }
     }
 
     const body = await req.json();
