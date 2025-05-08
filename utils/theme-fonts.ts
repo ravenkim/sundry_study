@@ -1,4 +1,4 @@
-import { ThemeEditorState, ThemeStyleProps } from "../types/theme";
+import { ThemeEditorState } from "../types/editor";
 
 const sansSerifFontNames = [
   "Inter",
