@@ -97,7 +97,7 @@ const HslAdjustmentControls = () => {
 
       // Update theme state with all changes
       setThemeState({
-        ...state,
+        ...themeState,
         hslAdjustments,
         styles: {
           light: { ...lightStyles, ...updatedLightStyles },
