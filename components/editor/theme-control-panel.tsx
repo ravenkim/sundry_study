@@ -104,7 +104,7 @@ const ThemeControlPanel = ({
             </TabsList>
           </div>
 
-          <ScrollArea className="h-full flex-1 p-4 pt-0 pb-40">
+          <ScrollArea className="h-full flex-1 p-4 pt-0">
             <TabsContent value="colors">
               <ControlSection title="Primary Colors" id="primary-colors" expanded>
                 <ColorPicker
@@ -390,7 +390,7 @@ const ThemeControlPanel = ({
                 />
               </ControlSection>
 
-              <ControlSection title="Spacing" expanded>
+              <ControlSection title="Spacing">
                 <SliderWithInput
                   value={parseFloat(currentStyles.spacing?.replace("rem", ""))}
                   onChange={(value) => updateStyle("spacing", `${value}rem`)}
@@ -401,7 +401,8 @@ const ThemeControlPanel = ({
                   label="Spacing"
                 />
               </ControlSection>
-              <div className="mt-6">
+
+              <ControlSection title="Shadow">
                 <ShadowControl
                   shadowColor={currentStyles["shadow-color"]}
                   shadowOpacity={parseFloat(currentStyles["shadow-opacity"])}
@@ -419,7 +420,7 @@ const ThemeControlPanel = ({
                     }
                   }}
                 />
-              </div>
+              </ControlSection>
             </TabsContent>
           </ScrollArea>
         </Tabs>
