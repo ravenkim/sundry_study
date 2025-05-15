@@ -41,6 +41,7 @@ export const useEditorStore = create<EditorStore>()(
       setThemeState: (newState: ThemeEditorState) => {
         const oldThemeState = get().themeState;
         let currentHistory = get().history;
+        let currentFuture = get().future;
 
         // Check if only currentMode changed
         const oldStateWithoutMode = { ...oldThemeState, currentMode: undefined };
@@ -50,7 +51,7 @@ export const useEditorStore = create<EditorStore>()(
           isDeepEqual(oldStateWithoutMode, newStateWithoutMode) &&
           oldThemeState.currentMode !== newState.currentMode
         ) {
-          // Only currentMode changed, or nothing changed but currentMode (which is fine)
+          // Only currentMode changed
           // Just update themeState without affecting history or future
           set({ themeState: newState });
           return;
@@ -64,17 +65,12 @@ export const useEditorStore = create<EditorStore>()(
           currentHistory.length > 0 ? currentHistory[currentHistory.length - 1] : null;
 
         if (
-          lastHistoryEntry &&
-          currentTime - lastHistoryEntry.timestamp < HISTORY_OVERRIDE_THRESHOLD_MS
+          !lastHistoryEntry ||
+          currentTime - lastHistoryEntry.timestamp >= HISTORY_OVERRIDE_THRESHOLD_MS
         ) {
-          // Override the last history entry
-          currentHistory = [
-            ...currentHistory.slice(0, -1),
-            { state: newState, timestamp: currentTime },
-          ];
-        } else {
           // Add a new history entry
-          currentHistory = [...currentHistory, { state: newState, timestamp: currentTime }];
+          currentHistory = [...currentHistory, { state: oldThemeState, timestamp: currentTime }];
+          currentFuture = [];
         }
 
         if (currentHistory.length > MAX_HISTORY_COUNT) {
@@ -84,7 +80,7 @@ export const useEditorStore = create<EditorStore>()(
         set({
           themeState: newState,
           history: currentHistory,
-          future: [], // Clear future on new state change
+          future: currentFuture,
         });
       },
       applyThemePreset: (preset: string) => {
@@ -100,7 +96,7 @@ export const useEditorStore = create<EditorStore>()(
           hslAdjustments: defaultThemeState.hslAdjustments,
         };
 
-        const newHistoryEntry = { state: newThemeState, timestamp: currentTime };
+        const newHistoryEntry = { state: currentThemeState, timestamp: currentTime };
         let updatedHistory = [...oldHistory, newHistoryEntry];
         if (updatedHistory.length > MAX_HISTORY_COUNT) {
           updatedHistory.shift();
@@ -181,19 +177,11 @@ export const useEditorStore = create<EditorStore>()(
         const currentThemeState = get().themeState;
         const future = get().future;
 
+        const lastHistoryEntry = history[history.length - 1];
+        const newHistory = history.slice(0, -1);
+
         const newFutureEntry = { state: currentThemeState, timestamp: Date.now() };
         const newFuture = [newFutureEntry, ...future];
-
-        if (history.length === 1) {
-          get().resetToCurrentPreset();
-          set({
-            future: newFuture,
-          });
-          return;
-        }
-
-        const lastHistoryEntry = history[history.length - 2];
-        const newHistory = history.slice(0, -1);
 
         set({
           themeState: lastHistoryEntry.state,
@@ -212,7 +200,9 @@ export const useEditorStore = create<EditorStore>()(
         const firstFutureEntry = future[0];
         const newFuture = future.slice(1);
 
-        const newHistoryEntry = { state: firstFutureEntry.state, timestamp: Date.now() };
+        const currentThemeState = get().themeState;
+
+        const newHistoryEntry = { state: currentThemeState, timestamp: Date.now() };
         let updatedHistory = [...history, newHistoryEntry];
         if (updatedHistory.length > MAX_HISTORY_COUNT) {
           updatedHistory.shift();
