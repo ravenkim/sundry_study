@@ -10,12 +10,20 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { MoreVertical, Trash2, Edit, Loader2, Zap } from "lucide-react";
+import {
+  MoreVertical,
+  Trash2,
+  Edit,
+  Loader2,
+  Zap,
+  ExternalLink,
+  Copy,
+} from "lucide-react";
 import { useMemo } from "react";
 import { useEditorStore } from "@/store/editor-store";
 import { useThemeActions } from "@/hooks/use-theme-actions";
 import Link from "next/link";
-
+import { toast } from "@/components/ui/use-toast";
 interface ThemeCardProps {
   theme: Theme;
   className?: string;
@@ -49,6 +57,14 @@ export function ThemeCard({ theme, className }: ThemeCardProps) {
     setThemeState({
       ...themeState,
       styles: theme.styles,
+    });
+  };
+
+  const handleShare = () => {
+    const url = `https://tweakcn.com/themes/${theme.id}`;
+    navigator.clipboard.writeText(url);
+    toast({
+      title: "Theme URL copied to clipboard!",
     });
   };
 
@@ -112,7 +128,7 @@ export function ThemeCard({ theme, className }: ThemeCardProps) {
           </p>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100">
+          <DropdownMenuTrigger>
             <div className="p-2 hover:bg-accent rounded-md">
               <MoreVertical className="h-4 w-4 text-muted-foreground" />
             </div>
@@ -123,18 +139,21 @@ export function ThemeCard({ theme, className }: ThemeCardProps) {
               Quick Apply
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="gap-2">
-              <Link href={`/editor/theme/${theme.id}`}>
-                <Edit className="h-4 w-4" />
-                Open in Editor
+              <Link href={`/themes/${theme.id}`} target="_blank">
+                <ExternalLink className="h-4 w-4" />
+                Open Theme
               </Link>
             </DropdownMenuItem>
-            {/* <DropdownMenuItem
-              onClick={() => onShare?.(theme)}
-              className="gap-2"
-            >
-              <Share className="h-4 w-4" />
-              Share Theme
-            </DropdownMenuItem> */}
+            <DropdownMenuItem asChild className="gap-2">
+              <Link href={`/editor/theme/${theme.id}`}>
+                <Edit className="h-4 w-4" />
+                Edit Theme
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleShare} className="gap-2">
+              <Copy className="h-4 w-4" />
+              Copy URL
+            </DropdownMenuItem>
             <DropdownMenuSeparator className="mx-2" />
             <DropdownMenuItem
               onClick={handleDelete}

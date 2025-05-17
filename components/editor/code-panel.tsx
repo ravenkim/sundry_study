@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy, Check, AlertTriangle } from "lucide-react";
+import { Copy, Check, Heart } from "lucide-react";
 import { ThemeEditorState } from "@/types/editor";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { ColorFormat } from "../../types";
@@ -38,6 +38,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
   const setPackageManager = usePreferencesStore(
     (state) => state.setPackageManager
   );
+  const hasUnsavedChanges = useEditorStore((state) => state.hasUnsavedChanges);
 
   const isSavedPreset = useThemePresetStore(
     (state) => preset && state.getPreset(preset)?.source === "SAVED"
@@ -50,7 +51,9 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
   );
 
   const getRegistryCommand = (preset: string) => {
-    const url = `https://tweakcn.com/r/themes/${preset}.json`;
+    const url = isSavedPreset
+      ? `https://tweakcn.com/r/themes/${preset}`
+      : `https://tweakcn.com/r/themes/${preset}.json`;
     switch (packageManager) {
       case "pnpm":
         return `pnpm dlx shadcn@latest add ${url}`;
@@ -96,13 +99,17 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
     }
   };
 
+  const showRegistryCommand = useMemo(() => {
+    return preset && preset !== "default" && !hasUnsavedChanges();
+  }, [preset, hasUnsavedChanges]);
+
   return (
-    <div className="h-full flex flex-col p-4">
+    <div className="h-full flex flex-col">
       <div className="flex-none mb-4">
         <div className="flex items-center justify-between gap-2">
           <h2 className="text-lg font-semibold">Theme Code</h2>
         </div>
-        {preset && preset !== "default" && !isSavedPreset && (
+        {showRegistryCommand ? (
           <div className="mt-4 rounded-md overflow-hidden border">
             <div className="flex border-b">
               {(["pnpm", "npm", "yarn", "bun"] as const).map((pm) => (
@@ -139,25 +146,24 @@ const CodePanel: React.FC<CodePanelProps> = ({ themeEditorState }) => {
               <ScrollArea className="w-full">
                 <div className="whitespace-nowrap overflow-y-hidden pb-2">
                   <code className="text-sm font-mono">
-                    {getRegistryCommand(preset)}
+                    {getRegistryCommand(preset as string)}
                   </code>
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
             </div>
           </div>
-        )}
-        {isSavedPreset && (
-          <Alert variant="default" className="mt-4">
-            <AlertTriangle className="h-4 w-4 mt-1" />
-            <AlertTitle className="flex items-center gap-2">
-              Registry commands are not supported for saved themes yet
-              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80">
-                Coming Soon
-              </span>
-            </AlertTitle>
-            <AlertDescription className="text-foreground/80">
-              You can still copy and use the theme code directly.
+        ) : (
+          <Alert className="mt-4">
+            <AlertTitle>You have unsaved changes.</AlertTitle>
+            <AlertDescription className="flex flex-col gap-2 mt-2">
+              <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 px-2 py-0.5 border rounded-md">
+                  <Heart className="size-3.5" />
+                  <span>Save</span>
+                </div>
+                your theme to get the registry command.
+              </div>
             </AlertDescription>
           </Alert>
         )}
