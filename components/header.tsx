@@ -38,7 +38,7 @@ export function Header() {
                 href="https://github.com/sponsors/jnsahaj"
                 className="flex items-center gap-1.5 px-2 py-1 rounded-md border hover:border-pink-500 hover:text-pink-500 transition-colors"
               >
-                <span className="text-sm font-medium">Support</span>
+                <span className="text-sm font-medium">Sponsor</span>
               </SocialLink>
               <SocialLink href="https://discord.gg/Phs4u2NM3n">
                 <DiscordIcon className="size-5" />

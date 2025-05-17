@@ -6,29 +6,28 @@ import { Folder, Grid, Layers, Palette, Repeat, Users } from "lucide-react";
 const roadmapItems = [
   {
     title: "Global Theme Editor",
-    description:
-      "Create and manage complete themes with presets for your entire application.",
+    description: "Create and manage complete themes with presets for your entire application.",
     status: "Done",
     icon: <Palette className="size-5" />,
   },
   {
     title: "Theme Import/Export",
     description: "Save and share your custom themes with others.",
-    status: "In Progress",
+    status: "Done",
     icon: <Repeat className="size-5" />,
+  },
+  {
+    title: "AI Theme Generation",
+    description:
+      "Generate and customize themes with AI assistance, making theme creation faster and more intuitive",
+    status: "In Progress",
+    icon: <Layers className="size-5" />,
   },
   {
     title: "Community Themes",
     description: "Allow users to submit themes, vote on the best designs",
     status: "Coming Soon",
     icon: <Users className="size-5" />,
-  },
-  {
-    title: "AI Theme Generation",
-    description:
-      "Generate and customize themes with AI assistance, making theme creation faster and more intuitive",
-    status: "Coming Soon",
-    icon: <Layers className="size-5" />,
   },
   {
     title: "Multi-Project Management",
@@ -50,30 +49,30 @@ export function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="w-full py-20 md:py-32 bg-linear-180 from-muted/30 from-50% to-transparent relative overflow-hidden isolate"
+      className="from-muted/30 relative isolate w-full overflow-hidden bg-linear-180 from-50% to-transparent py-20 md:py-32"
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(from_var(--secondary)_r_g_b_/0.05),transparent_50%)]"></div>
 
-      <div className="container mx-auto px-4 md:px-6 relative">
+      <div className="relative container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
+          className="mb-16 flex flex-col items-center justify-center space-y-4 text-center"
         >
           <Badge
             className="rounded-full px-4 py-1.5 text-sm font-medium shadow-sm"
             variant="secondary"
           >
-            <span className="mr-1 text-primary">✦</span> Roadmap
+            <span className="text-primary mr-1">✦</span> Roadmap
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">
+          <h2 className="from-foreground to-foreground/80 bg-gradient-to-r bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl">
             What&apos;s Coming Next
           </h2>
-          <p className="max-w-[800px] text-muted-foreground md:text-lg">
-            We&apos;re constantly working to improve tweakcn and add new
-            features. Here&apos;s what&apos;s on our roadmap.
+          <p className="text-muted-foreground max-w-[800px] md:text-lg">
+            We&apos;re constantly working to improve tweakcn and add new features. Here&apos;s
+            what&apos;s on our roadmap.
           </p>
         </motion.div>
 
@@ -87,20 +86,20 @@ export function Roadmap() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <Card className="h-full overflow-hidden border-border/40 bg-gradient-to-b from-card to-card/50 backdrop-blur transition-all hover:shadow-lg hover:border-primary/20">
-                <CardContent className="p-6 flex flex-col h-full">
-                  <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+              <Card className="border-border/40 from-card to-card/50 hover:border-primary/20 h-full overflow-hidden bg-gradient-to-b backdrop-blur transition-all hover:shadow-lg">
+                <CardContent className="flex h-full flex-col p-6">
+                  <div className="bg-primary/10 text-primary mb-4 flex size-12 items-center justify-center rounded-full">
                     {item.icon}
                   </div>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="mb-2 flex items-center justify-between">
                     <h3 className="text-xl font-bold">{item.title}</h3>
                     <Badge
                       variant={
                         item.status === "In Progress"
                           ? "default"
                           : item.status === "Coming Soon"
-                          ? "secondary"
-                          : "outline"
+                            ? "secondary"
+                            : "outline"
                       }
                       className="shadow-sm"
                     >

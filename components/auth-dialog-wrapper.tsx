@@ -32,6 +32,7 @@ export function AuthDialogWrapper() {
     }
 
     if (session && postLoginAction) {
+      // Execute action immediately - the system will now handle waiting for handlers
       executePostLoginAction(postLoginAction);
       clearPostLoginAction();
     }
