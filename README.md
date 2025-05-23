@@ -10,6 +10,11 @@
   <a href="https://x.com/iamsahaj_xyz">
     <img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2Fiamsahaj_xyz&style=for-the-badge&logo=x&label=%40iamsahaj_xyz&color=%2300000000" />
   </a>
+<br />
+<br />
+<a href="https://vercel.com/oss">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
+</a>
 </div>
 
 <br />
