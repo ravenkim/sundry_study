@@ -6,11 +6,11 @@ import {
   Heart,
   Moon,
   Search,
+  Settings,
   Shuffle,
   Sun,
 } from "lucide-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-
 import { useTheme } from "@/components/theme-provider";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,7 @@ import { useEditorStore } from "@/store/editor-store";
 import { useThemePresetStore } from "@/store/theme-preset-store";
 import { ThemePreset } from "@/types/theme";
 import { getPresetThemeStyles } from "@/utils/theme-preset-helper";
+import Link from "next/link";
 
 interface ThemePresetSelectProps extends React.ComponentProps<typeof Button> {
   withCycleThemes?: boolean;
@@ -328,7 +329,23 @@ const ThemePresetSelect: React.FC<ThemePresetSelectProps> = ({
               {/* Saved Themes Group */}
               {filteredSavedThemes.length > 0 && (
                 <>
-                  <CommandGroup heading="Saved Themes">
+                  <CommandGroup
+                    heading={
+                      <div className="flex w-full items-center justify-between">
+                        <span>Saved Themes</span>
+                        <Link href="/dashboard">
+                          <Button
+                            variant="link"
+                            size="sm"
+                            className="text-muted-foreground hover:text-foreground flex h-6 items-center gap-1.5 p-0 text-xs"
+                          >
+                            <Settings />
+                            <span>Manage</span>
+                          </Button>
+                        </Link>
+                      </div>
+                    }
+                  >
                     {filteredSavedThemes
                       .filter((name) => name !== "default" && isSavedTheme(name))
                       .map((presetName, index) => (
