@@ -117,7 +117,7 @@ body {
 
 /* Mention styles */
 .mention {
-  @apply bg-primary/10 text-primary rounded-md px-1;
+  @apply bg-primary/10 rounded-md px-1 font-mono text-sm font-semibold;
 }
 
 @keyframes text {
@@ -133,11 +133,19 @@ body {
   animation: text 3s linear infinite;
 }
 
-.scrollbar-thin {
+@utility scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
 
   &::-webkit-scrollbar {
     width: 8px;
   }
+}
+
+@utility scrollbar-gutter-stable {
+  scrollbar-gutter: stable;
+}
+
+@utility scrollbar-gutter-both {
+  scrollbar-gutter: stable both-edges;
 }
