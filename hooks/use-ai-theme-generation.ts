@@ -1,10 +1,12 @@
 import { toast } from "@/components/ui/use-toast";
 import { useAIThemeGenerationStore } from "@/store/ai-theme-generation-store";
+import { usePostHog } from "posthog-js/react";
 
 export function useAIThemeGeneration() {
   const generateTheme = useAIThemeGenerationStore((state) => state.generateTheme);
   const loading = useAIThemeGenerationStore((state) => state.loading);
   const cancelThemeGeneration = useAIThemeGenerationStore((state) => state.cancelThemeGeneration);
+  const posthog = usePostHog();
 
   const handleGenerateTheme = async (prompt: string) => {
     try {
@@ -13,6 +15,10 @@ export function useAIThemeGeneration() {
       toast({
         title: "Theme generated",
         description: "Your AI-generated theme has been applied",
+      });
+
+      posthog.capture("AI_GENERATE_THEME", {
+        prompt,
       });
 
       return result; // Return the result from the store
