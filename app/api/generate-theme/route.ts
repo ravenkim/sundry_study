@@ -1,16 +1,22 @@
-import { createGroq } from "@ai-sdk/groq";
-import { createFallback } from "ai-fallback";
-import { generateObject } from "ai";
-import { z } from "zod";
-import { themeStylePropsSchema } from "@/types/theme";
-import { kv } from "@vercel/kv";
-import { Ratelimit } from "@upstash/ratelimit";
-import { NextRequest } from "next/server";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { auth } from "@/lib/auth";
+import { AI_PROMPT_CHARACTER_LIMIT } from "@/lib/constants";
+import { themeStylePropsSchema } from "@/types/theme";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createGroq } from "@ai-sdk/groq";
+import { Ratelimit } from "@upstash/ratelimit";
+import { kv } from "@vercel/kv";
+import { generateObject } from "ai";
+import { createFallback } from "ai-fallback";
+import { NextRequest } from "next/server";
+import { z } from "zod";
 
 const requestSchema = z.object({
-  prompt: z.string().min(1),
+  prompt: z
+    .string()
+    .min(1)
+    .max(AI_PROMPT_CHARACTER_LIMIT + 4000, {
+      message: `Failed to generate theme. Input character limit exceeded.`,
+    }),
 });
 
 // Create a new schema based on themeStylePropsSchema excluding 'spacing'
@@ -19,9 +25,12 @@ const themeStylePropsWithoutSpacing = themeStylePropsSchema.omit({
 });
 
 // Define the main theme schema using the modified props schema
-const themeSchemaWithoutSpacing = z.object({
-  light: themeStylePropsWithoutSpacing,
-  dark: themeStylePropsWithoutSpacing,
+const responseSchema = z.object({
+  text: z.string().describe("A concise paragraph on the generated theme"),
+  theme: z.object({
+    light: themeStylePropsWithoutSpacing,
+    dark: themeStylePropsWithoutSpacing,
+  }),
 });
 
 // Create Rate limit - 5 requests per 60 seconds
@@ -65,10 +74,7 @@ export async function POST(req: NextRequest) {
     });
 
     const model = createFallback({
-      models: [
-        groq("llama-3.3-70b-versatile"),
-        google("gemini-2.0-flash-lite"),
-      ],
+      models: [groq("llama-3.3-70b-versatile"), google("gemini-2.0-flash-lite")],
       onError: (error, modelId) => {
         console.error(`Error with model ${modelId}:`, error);
       },
@@ -77,12 +83,34 @@ export async function POST(req: NextRequest) {
 
     const { object: theme } = await generateObject({
       model,
-      schema: themeSchemaWithoutSpacing,
-      system: `You are an AI generating Shadcn UI color themes.
-Format: Use Hex values (#000000) ONLY for colors. Use shadow-opacity instead of using rgba for shadow-color.
-Requirement: Ensure light/dark mode cohesion. If asked to change the theme's main color (e.g., "make it green"), adjust related colors (--accent, --secondary, --ring, --border) along with --primary to create a cohesive new palette.
-Ensure sufficient contrast between foreground and background colors.`,
-      prompt: `Generate Shadcn theme. Input: ${prompt}`,
+      schema: responseSchema,
+      system: `# Role
+    You are tweakcn, an expert shadcn/ui theme generator.
+
+    # Token Groups
+    - **Brand**: primary, secondary, accent, ring
+    - **Surfaces**: background, card, popover, muted, sidebar
+    - **Typography**: font-sans, font-serif, font-mono
+    - **Contrast pairs**: Some colors have a -foreground counterpart for text, (e.g., primary/primary-foreground, secondary/secondary-foreground)
+
+    # Rules **IMPORTANT**
+    - Output JSON matching schema exactly
+    - Colors: HEX only (#RRGGBB), do NOT output rgba()
+    - Shadows: Shadow Opacity is handled separately (e.g., via \`--shadow-opacity\`);
+    - Generate harmonious light/dark modes
+    - Ensure contrast for base/foreground pairs
+    - Don't change typography unless requested
+
+    # Color Change Logic
+    - "Make it [color]" → modify brand colors only
+    - "Background darker/lighter" → modify surface colors only
+    - Specific tokens requests → change those tokens + their direct foreground pairs
+    - "Change [colors] in light/dark mode" → change those colors only in the requested mode, leave the other mode unchanged. (e.g. "Make primary color in light mode a little darker" → only change primary in light mode, keep dark mode unchanged)
+    - Maintain color harmony across all related tokens
+
+    # Text Description
+    Fill the \`text\` field in a friendly way, for example: "I've generated..." or "Alright, I've whipped up..."`,
+      prompt: `Create shadcn/ui theme for: ${prompt}`,
     });
 
     return new Response(JSON.stringify(theme), {
@@ -90,6 +118,15 @@ Ensure sufficient contrast between foreground and background colors.`,
     });
   } catch (error) {
     console.error(error);
+
+    // Handle Zod validation errors specifically
+    if (error instanceof z.ZodError) {
+      const firstError = error.errors[0];
+      return new Response(firstError.message, {
+        status: 400,
+      });
+    }
+
     // Consider more specific error handling based on AI SDK errors if needed
     return new Response("Error generating theme", { status: 500 });
   }
