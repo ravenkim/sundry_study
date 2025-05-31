@@ -1,18 +1,13 @@
-import { useEditorStore } from "@/store/editor-store";
-import { useThemePresetStore } from "@/store/theme-preset-store";
 import { defaultThemeState } from "@/config/theme";
-import { JSONContent } from "@tiptap/react";
+import { useEditorStore } from "@/store/editor-store";
+import { AIPromptData } from "@/types/ai";
 import { Theme } from "@/types/theme";
-interface GenerateThemeOptions {
-  onSuccess?: (themeStyles: Theme["styles"]) => void;
-  onError?: (error: Error) => void;
-  signal?: AbortSignal;
-}
+import { buildPromptForAPI } from "@/utils/ai-prompt";
 
 /**
  * Generate a theme with AI using a text prompt
  */
-export async function generateThemeWithAI(prompt: string, options?: GenerateThemeOptions) {
+export async function generateThemeWithAI(prompt: string, options?: { signal?: AbortSignal }) {
   if (!prompt.trim()) return null;
 
   try {
@@ -26,40 +21,19 @@ export async function generateThemeWithAI(prompt: string, options?: GenerateThem
     });
 
     if (!response.ok) {
-      throw new Error("Failed to generate theme");
+      const errorBody = await response.text();
+      const errorMessage = errorBody || "Failed to generate theme. Please try again.";
+      throw new Error(errorMessage);
     }
 
-    const themeStyles = await response.json();
-    applyGeneratedTheme(themeStyles);
+    const result = await response.json();
+    applyGeneratedTheme(result.theme);
 
-    options?.onSuccess?.(themeStyles);
-    return themeStyles;
+    return result;
   } catch (error) {
     console.error("AI theme generation error:", error);
-
-    if (error instanceof Error) {
-      options?.onError?.(error);
-    } else {
-      options?.onError?.(new Error("Unknown error occurred"));
-    }
-
     throw error;
   }
-}
-
-/**
- * Generate a theme with AI using a structured prompt
- * with references to existing themes/presets
- */
-export async function generateThemeWithReferences(
-  textPrompt: string,
-  jsonPrompt: string,
-  options?: GenerateThemeOptions
-) {
-  if (!textPrompt.trim()) return null;
-
-  const transformedPrompt = transformPrompt(textPrompt, jsonPrompt);
-  return generateThemeWithAI(transformedPrompt, options);
 }
 
 /**
@@ -94,27 +68,6 @@ export function applyGeneratedTheme(themeStyles: Theme["styles"]) {
   }
 }
 
-/**
- * Transform a prompt to include references to other themes
- */
-function transformPrompt(prompt: string, jsonPrompt: string) {
-  const parsedJsonPrompt = JSON.parse(jsonPrompt) as JSONContent;
-  const mentions = parsedJsonPrompt.content?.[0]?.content?.filter(
-    (item) => item.type === "mention"
-  );
-
-  const getMentionContent = (id: string) => {
-    if (id === "editor:current-changes") {
-      return useEditorStore.getState().themeState.styles;
-    }
-
-    return useThemePresetStore.getState().getPreset(id)?.styles;
-  };
-
-  const mentionReferences = mentions?.map(
-    (mention) => `@${mention.attrs?.label} = 
-  ${JSON.stringify(getMentionContent(mention.attrs?.id))}`
-  );
-
-  return prompt + "\n\n" + (mentionReferences?.join("\n") || "");
+export function buildPrompt(promptData: AIPromptData) {
+  return buildPromptForAPI(promptData);
 }
