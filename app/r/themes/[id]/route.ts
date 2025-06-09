@@ -4,24 +4,18 @@ import { getTheme } from "@/actions/themes";
 import { generateThemeRegistryItemFromStyles } from "@/utils/registry/themes";
 import { registryItemSchema } from "shadcn/registry";
 
-export async function GET(
-  _req: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export const dynamic = "force-static";
+
+export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   try {
     const theme = await getTheme(id);
-    const generatedRegistryItem = generateThemeRegistryItemFromStyles(
-      theme.name,
-      theme.styles
-    );
+    const generatedRegistryItem = generateThemeRegistryItemFromStyles(theme.name, theme.styles);
 
     // Validate the generated registry item against the official shadcn registry item schema
     // https://ui.shadcn.com/docs/registry/registry-item-json
-    const parsedRegistryItem = registryItemSchema.safeParse(
-      generatedRegistryItem
-    );
+    const parsedRegistryItem = registryItemSchema.safeParse(generatedRegistryItem);
     if (!parsedRegistryItem.success) {
       console.error(
         "Could not parse the registry item from the database:",
@@ -42,6 +36,7 @@ export async function GET(
     return new NextResponse(JSON.stringify(registryItem), {
       status: 200,
       headers: {
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
