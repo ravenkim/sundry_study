@@ -25,6 +25,7 @@ const ShadowControl: React.FC<ShadowControlProps> = ({
     <div className="space-y-4">
       <div>
         <ColorPicker
+          name="shadow-color"
           color={shadowColor}
           onChange={(color) => onChange("shadow-color", color)}
           label="Shadow Color"
