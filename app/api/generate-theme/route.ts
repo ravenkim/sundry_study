@@ -2,11 +2,9 @@ import { auth } from "@/lib/auth";
 import { AI_PROMPT_CHARACTER_LIMIT } from "@/lib/constants";
 import { themeStylePropsSchema } from "@/types/theme";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { createGroq } from "@ai-sdk/groq";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
 import { generateObject } from "ai";
-import { createFallback } from "ai-fallback";
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { headers } from "next/headers";
@@ -72,21 +70,11 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { prompt } = requestSchema.parse(body);
 
-    const groq = createGroq({
-      apiKey: process.env.GROQ_API_KEY,
-    });
-
     const google = createGoogleGenerativeAI({
       apiKey: process.env.GOOGLE_API_KEY,
     });
 
-    const model = createFallback({
-      models: [groq("llama-3.3-70b-versatile"), google("gemini-2.0-flash-lite")],
-      onError: (error, modelId) => {
-        console.error(`Error with model ${modelId}:`, error);
-      },
-      modelResetInterval: 60000, // Reset to first model after 1 minute of the first error
-    });
+    const model = google("gemini-2.0-flash");
 
     const { object: theme } = await generateObject({
       model,
