@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
       apiKey: process.env.GOOGLE_API_KEY,
     });
 
-    const model = google("gemini-2.0-flash");
+    const model = google("gemini-2.5-flash-lite-preview-06-17");
 
     const { object: theme } = await generateObject({
       model,
