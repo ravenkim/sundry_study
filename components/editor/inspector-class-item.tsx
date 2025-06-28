@@ -75,7 +75,7 @@ const InspectorClassItem = memo(({ className }: InspectorClassItemProps) => {
 
   return (
     <div
-      className="group hover:bg-muted/50 flex cursor-pointer items-center justify-between gap-2 rounded-md p-1.5 transition-colors"
+      className="group hover:bg-foreground/10 flex cursor-pointer items-center justify-between gap-2 rounded-md p-1.5 transition-colors"
       onClick={handleClick}
     >
       <div className="flex items-center gap-2 overflow-hidden">
@@ -84,7 +84,7 @@ const InspectorClassItem = memo(({ className }: InspectorClassItemProps) => {
             backgroundColor: styles[segments.value as keyof typeof styles],
           }}
           className={cn(
-            "border-background ring-border inline-block size-4 shrink-0 rounded-md border-1 ring-1"
+            "border-background ring-border block size-4 shrink-0 rounded-md border-1 ring-1"
           )}
         />
         <span className="font-mono text-xs">{renderSegmentedClassName()}</span>

@@ -4,7 +4,8 @@ import ShadcnBlocksLogo from "@/assets/shadcnblocks.svg";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
+import { Tabs, TabsList } from "@/components/ui/tabs";
+import { TabsContent as TabsContentPrimitive } from "@radix-ui/react-tabs";
 import { useFullscreen } from "@/hooks/use-fullscreen";
 import { cn } from "@/lib/utils";
 import { ThemeEditorPreviewProps } from "@/types/theme";
@@ -172,19 +173,19 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
             onMouseLeave={handleMouseLeave}
           >
             <div className="flex h-full flex-1 flex-col">
-              <TabsContent value="cards" className="m-0 h-full">
+              <TabsContentPrimitive value="cards" className="m-0 h-full">
                 <ExamplesPreviewContainer>
                   <DemoCards />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="dashboard" className="@container mt-0 h-full space-y-6">
+              <TabsContentPrimitive value="dashboard" className="@container mt-0 h-full space-y-6">
                 <ExamplesPreviewContainer className="min-w-[1400px]">
                   <DemoDashboard />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="pricing" className="@container mt-0 h-full space-y-6">
+              <TabsContentPrimitive value="pricing" className="@container mt-0 h-full space-y-6">
                 <ExamplesPreviewContainer>
                   <div className="absolute top-4 right-4 z-10">
                     <Link
@@ -209,35 +210,35 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                   </div>
                   <DemoPricing />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="mail" className="@container mt-0 h-full space-y-6">
+              <TabsContentPrimitive value="mail" className="@container mt-0 h-full space-y-6">
                 <ExamplesPreviewContainer className="min-w-[1300px]">
                   <DemoMail />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="tasks" className="@container mt-0 h-full space-y-6">
+              <TabsContentPrimitive value="tasks" className="@container mt-0 h-full space-y-6">
                 <ExamplesPreviewContainer className="min-w-[1300px]">
                   <DemoTasks />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="music" className="@container mt-0 h-full space-y-6">
+              <TabsContentPrimitive value="music" className="@container mt-0 h-full space-y-6">
                 <ExamplesPreviewContainer className="min-w-[1300px]">
                   <DemoMusic />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="typography" className="space-y-6 p-4">
+              <TabsContentPrimitive value="typography" className="space-y-6 p-4">
                 <ExamplesPreviewContainer>
                   <TypographyDemo />
                 </ExamplesPreviewContainer>
-              </TabsContent>
+              </TabsContentPrimitive>
 
-              <TabsContent value="colors" className="space-y-6 p-4">
+              <TabsContentPrimitive value="colors" className="space-y-6 p-4">
                 <ColorPreview styles={styles} currentMode={currentMode} />
-              </TabsContent>
+              </TabsContentPrimitive>
 
               <ScrollBar orientation="horizontal" />
             </div>

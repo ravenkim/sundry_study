@@ -62,9 +62,6 @@ const InspectorOverlay = ({ inspector, enabled, rootRef }: InspectorOverlayProps
           )}
           sideOffset={8}
         >
-          <p className="text-muted-foreground px-1 font-mono text-xs font-semibold tracking-wider uppercase">
-            Inspector <span className="text-muted-foreground/60 normal-case">(Beta)</span>
-          </p>
           <div className="flex flex-col gap-0.5">
             {classNames.map((cls) => (
               <InspectorClassItem key={cls} className={cls} />
