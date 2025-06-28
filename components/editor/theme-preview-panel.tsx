@@ -245,7 +245,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
         </Tabs>
       </div>
 
-      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} />
+      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} rootRef={rootRef} />
     </>
   );
 };
