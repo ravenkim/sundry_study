@@ -7,7 +7,6 @@ import { FocusColorId, useColorControlFocus } from "@/store/color-control-focus-
 
 interface InspectorClassItemProps {
   className: string;
-  onEdit?: () => void;
 }
 
 const getColorFromClassname = (className: string) => {
@@ -16,7 +15,7 @@ const getColorFromClassname = (className: string) => {
   return color;
 };
 
-const InspectorClassItem = memo(({ className, onEdit }: InspectorClassItemProps) => {
+const InspectorClassItem = memo(({ className }: InspectorClassItemProps) => {
   const { focusColor } = useColorControlFocus();
 
   const handleClick = useCallback(
@@ -27,9 +26,8 @@ const InspectorClassItem = memo(({ className, onEdit }: InspectorClassItemProps)
       if (color) {
         focusColor(color as FocusColorId);
       }
-      onEdit?.();
     },
-    [className, focusColor, onEdit]
+    [className, focusColor]
   );
 
   return (
