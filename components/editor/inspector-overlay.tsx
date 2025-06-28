@@ -64,7 +64,7 @@ const InspectorOverlay = ({ inspector, enabled, rootRef }: InspectorOverlayProps
           )}
           sideOffset={8}
         >
-          <p className="text-muted-foreground flex items-center gap-1.5 px-2 text-sm font-semibold">
+          <p className="text-muted-foreground flex items-center gap-1.5 px-1 text-sm">
             <Inspect className="size-4" />
             Inspector
           </p>

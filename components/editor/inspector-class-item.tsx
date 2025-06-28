@@ -84,7 +84,7 @@ const InspectorClassItem = memo(({ className }: InspectorClassItemProps) => {
             backgroundColor: styles[segments.value as keyof typeof styles],
           }}
           className={cn(
-            "border-background ring-border block size-4 shrink-0 rounded-md border-1 ring-1"
+            "border-foreground ring-border block size-4 shrink-0 rounded-md border-1 ring-1"
           )}
         />
         <span className="font-mono text-xs">{renderSegmentedClassName()}</span>
