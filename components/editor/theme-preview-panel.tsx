@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { useFullscreen } from "@/hooks/use-fullscreen";
 import { cn } from "@/lib/utils";
 import { ThemeEditorPreviewProps } from "@/types/theme";
-import { Maximize, Minimize, Moon, MoreVertical, Sun } from "lucide-react";
+import { Maximize, Minimize, Moon, MoreVertical, Sun, Inspect } from "lucide-react";
 import Link from "next/link";
 import { lazy, useState } from "react";
 import { HorizontalScrollArea } from "../horizontal-scroll-area";
@@ -22,6 +22,8 @@ import {
 import ColorPreview from "./theme-preview/color-preview";
 import ExamplesPreviewContainer from "./theme-preview/examples-preview-container";
 import TabsTriggerPill from "./theme-preview/tabs-trigger-pill";
+import { useThemeInspector } from "@/hooks/use-theme-inspector";
+import InspectorOverlay from "./inspector-overlay";
 
 const DemoCards = lazy(() => import("@/components/examples/cards"));
 const DemoMail = lazy(() => import("@/components/examples/mail"));
@@ -35,6 +37,15 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
   const { isFullscreen, toggleFullscreen } = useFullscreen();
   const { theme, toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState("cards");
+
+  const {
+    rootRef,
+    inspector,
+    inspectorEnabled,
+    toggleInspector,
+    handleMouseMove,
+    handleMouseLeave,
+  } = useThemeInspector();
 
   if (!styles || !styles[currentMode]) {
     return null;
@@ -117,6 +128,20 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                   </Button>
                 </TooltipWrapper>
               )}
+              {/* Inspector toggle button */}
+              <TooltipWrapper
+                label={inspectorEnabled ? "Disable Inspector" : "Enable Inspector"}
+                asChild
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={toggleInspector}
+                  className="group size-8"
+                >
+                  <Inspect className="transition-all group-hover:scale-120" />
+                </Button>
+              </TooltipWrapper>
               <TooltipWrapper
                 label={isFullscreen ? "Exit full screen" : "Full screen"}
                 className="hidden md:inline-flex"
@@ -137,7 +162,12 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
             </div>
           </HorizontalScrollArea>
 
-          <ScrollArea className="relative m-4 mt-1 flex flex-1 flex-col overflow-hidden rounded-lg border">
+          <ScrollArea
+            className="relative m-4 mt-1 flex flex-1 flex-col overflow-hidden rounded-lg border"
+            ref={rootRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
             <div className="flex h-full flex-1 flex-col">
               <TabsContent value="cards" className="m-0 h-full">
                 <ExamplesPreviewContainer>
@@ -211,6 +241,8 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
           </ScrollArea>
         </Tabs>
       </div>
+
+      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} />
     </>
   );
 };
