@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useClassNames } from "@/hooks/use-theme-inspector-classnames";
 import InspectorClassItem from "./inspector-class-item";
+import { Inspect } from "lucide-react";
+import { Separator } from "../ui/separator";
 
 interface InspectorState {
   rect: DOMRect | null;
@@ -62,6 +64,11 @@ const InspectorOverlay = ({ inspector, enabled, rootRef }: InspectorOverlayProps
           )}
           sideOffset={8}
         >
+          <p className="text-muted-foreground flex items-center gap-1.5 px-2 text-sm font-semibold">
+            <Inspect className="size-4" />
+            Inspector
+          </p>
+          <Separator />
           <div className="flex flex-col gap-0.5">
             {classNames.map((cls) => (
               <InspectorClassItem key={cls} className={cls} />

@@ -112,7 +112,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
               </DropdownMenu>
             </TabsList>
 
-            <div className="flex items-center gap-0">
+            <div className="flex items-center gap-0.5">
               {isFullscreen && (
                 <TooltipWrapper label="Toggle Theme" asChild>
                   <Button
@@ -130,20 +130,18 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                 </TooltipWrapper>
               )}
               {/* Inspector toggle button */}
-              <TooltipWrapper
-                label={inspectorEnabled ? "Disable Inspector" : "Enable Inspector"}
-                asChild
-              >
+              <TooltipWrapper label="Toggle Inspector" asChild>
                 <Button
                   variant="ghost"
-                  size="icon"
+                  size="sm"
                   onClick={toggleInspector}
                   className={cn(
-                    "group size-8",
-                    inspectorEnabled && "bg-accent text-accent-foreground"
+                    "group h-8 w-8",
+                    inspectorEnabled && "bg-accent text-accent-foreground w-auto"
                   )}
                 >
                   <Inspect className="transition-all group-hover:scale-120" />
+                  {inspectorEnabled && <span className="text-xs tracking-wide uppercase">on</span>}
                 </Button>
               </TooltipWrapper>
               <TooltipWrapper
