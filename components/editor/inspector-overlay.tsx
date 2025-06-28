@@ -15,10 +15,9 @@ interface InspectorState {
 interface InspectorOverlayProps {
   inspector: InspectorState;
   enabled: boolean;
-  onEdit?: () => void;
 }
 
-const InspectorOverlay = ({ inspector, enabled, onEdit }: InspectorOverlayProps) => {
+const InspectorOverlay = ({ inspector, enabled }: InspectorOverlayProps) => {
   const PADDING = 0;
   const classNames = useClassNames(inspector.className);
 
@@ -59,7 +58,7 @@ const InspectorOverlay = ({ inspector, enabled, onEdit }: InspectorOverlayProps)
           </p>
           <div className="flex flex-col gap-1">
             {classNames.map((cls) => (
-              <InspectorClassItem key={cls} className={cls} onEdit={onEdit} />
+              <InspectorClassItem key={cls} className={cls} />
             ))}
           </div>
         </TooltipContent>
@@ -74,7 +73,6 @@ const arePropsEqual = (
   nextProps: InspectorOverlayProps
 ): boolean => {
   if (prevProps.enabled !== nextProps.enabled) return false;
-  if (prevProps.onEdit !== nextProps.onEdit) return false;
 
   const prevRect = prevProps.inspector.rect;
   const nextRect = nextProps.inspector.rect;

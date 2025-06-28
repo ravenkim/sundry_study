@@ -42,9 +42,9 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
     rootRef,
     inspector,
     inspectorEnabled,
-    toggleInspector,
     handleMouseMove,
     handleMouseLeave,
+    toggleInspector,
   } = useThemeInspector();
 
   if (!styles || !styles[currentMode]) {
@@ -245,7 +245,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
         </Tabs>
       </div>
 
-      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} onEdit={toggleInspector} />
+      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} />
     </>
   );
 };
