@@ -137,7 +137,10 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
                   variant="ghost"
                   size="icon"
                   onClick={toggleInspector}
-                  className="group size-8"
+                  className={cn(
+                    "group size-8",
+                    inspectorEnabled && "bg-accent text-accent-foreground"
+                  )}
                 >
                   <Inspect className="transition-all group-hover:scale-120" />
                 </Button>
@@ -242,7 +245,7 @@ const ThemePreviewPanel = ({ styles, currentMode }: ThemeEditorPreviewProps) => 
         </Tabs>
       </div>
 
-      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} />
+      <InspectorOverlay inspector={inspector} enabled={inspectorEnabled} onEdit={toggleInspector} />
     </>
   );
 };

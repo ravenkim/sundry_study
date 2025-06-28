@@ -15,24 +15,12 @@ interface InspectorState {
 interface InspectorOverlayProps {
   inspector: InspectorState;
   enabled: boolean;
+  onEdit?: () => void;
 }
 
-const InspectorOverlay = ({ inspector, enabled }: InspectorOverlayProps) => {
+const InspectorOverlay = ({ inspector, enabled, onEdit }: InspectorOverlayProps) => {
   const PADDING = 0;
   const classNames = useClassNames(inspector.className);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    if (enabled) {
-      const previousCursor = document.body.style.cursor;
-      document.body.style.cursor = "crosshair";
-
-      return () => {
-        document.body.style.cursor = previousCursor;
-      };
-    }
-  }, [enabled]);
 
   if (!enabled || !inspector.rect || typeof window === "undefined") {
     return null;
@@ -40,11 +28,13 @@ const InspectorOverlay = ({ inspector, enabled }: InspectorOverlayProps) => {
 
   return createPortal(
     <TooltipProvider delayDuration={400}>
-      <Tooltip open={enabled && !!inspector.rect} defaultOpen={false}>
+      <Tooltip open={true} defaultOpen={false}>
         <TooltipTrigger asChild>
           <div
+            data-inspector-overlay
             className={cn(
-              "ring-primary pointer-events-none fixed z-[10000] cursor-crosshair rounded-sm ring-2"
+              "ring-primary pointer-events-none fixed z-[10000] rounded-sm ring-2",
+              "transition-all duration-100 ease-in-out"
             )}
             style={{
               top: inspector.rect.top - PADDING,
@@ -56,10 +46,11 @@ const InspectorOverlay = ({ inspector, enabled }: InspectorOverlayProps) => {
         </TooltipTrigger>
 
         <TooltipContent
+          data-inspector-overlay
           side="top"
           align="start"
           className={cn(
-            "bg-popover/80 text-popover-foreground pointer-events-auto w-auto max-w-[320px] space-y-2 rounded-lg border p-2 shadow-xl backdrop-blur-md"
+            "bg-popover/90 text-popover-foreground pointer-events-auto w-auto max-w-[320px] space-y-2 rounded-lg border p-2 shadow-xl backdrop-blur-lg"
           )}
           sideOffset={8}
         >
@@ -68,7 +59,7 @@ const InspectorOverlay = ({ inspector, enabled }: InspectorOverlayProps) => {
           </p>
           <div className="flex flex-col gap-1">
             {classNames.map((cls) => (
-              <InspectorClassItem key={cls} className={cls} />
+              <InspectorClassItem key={cls} className={cls} onEdit={onEdit} />
             ))}
           </div>
         </TooltipContent>
@@ -83,6 +74,7 @@ const arePropsEqual = (
   nextProps: InspectorOverlayProps
 ): boolean => {
   if (prevProps.enabled !== nextProps.enabled) return false;
+  if (prevProps.onEdit !== nextProps.onEdit) return false;
 
   const prevRect = prevProps.inspector.rect;
   const nextRect = nextProps.inspector.rect;
