@@ -78,7 +78,7 @@ const InspectorClassItem = memo(({ className }: InspectorClassItemProps) => {
       className="group hover:bg-foreground/10 flex cursor-pointer items-center justify-between gap-2 rounded-md p-1.5 transition-colors"
       onClick={handleClick}
     >
-      <div className="flex items-center gap-2 overflow-hidden">
+      <div className="flex items-center gap-1.5">
         <span
           style={{
             backgroundColor: styles[segments.value as keyof typeof styles],
