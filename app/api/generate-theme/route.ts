@@ -14,7 +14,7 @@ const google = createGoogleGenerativeAI({
   apiKey: process.env.GOOGLE_API_KEY,
 });
 
-const model = google("gemini-2.5-flash-lite-preview-06-17");
+const model = google("gemini-2.0-flash");
 
 const requestSchema = z.object({
   prompt: z
