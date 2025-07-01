@@ -3,18 +3,16 @@ import { DEBOUNCE_DELAY } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useColorControlFocus } from "@/store/color-control-focus-store";
 import { ColorPickerProps } from "@/types";
-import { convertColorToTailwindClasses, isValidHexColor } from "@/utils/color-type-checker";
 import { debounce } from "@/utils/debounce";
-import { TAILWIND_SHADES } from "@/utils/registry/tailwind-colors";
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ColorSelectorPopover } from "./color-selector-popover";
 import { SectionContext } from "./section-context";
 
 const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [localColor, setLocalColor] = useState(color);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const textInputRef = useRef<HTMLInputElement>(null);
   const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
   const sectionCtx = useContext(SectionContext);
   const { registerColor, unregisterColor, highlightTarget } = useColorControlFocus();
@@ -26,17 +24,16 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
   }, [name, registerColor, unregisterColor]);
 
   useEffect(() => {
-    if (color !== localColor) {
-      setLocalColor(color);
+    // Update the text input value using ref when color prop changes
+    if (textInputRef.current) {
+      textInputRef.current.value = color;
     }
-  }, [color, localColor, setLocalColor]);
+  }, [color]);
 
   const debouncedOnChange = useMemo(
     () =>
       debounce((value: string) => {
-        if (isValidHexColor(value)) {
-          onChange(value);
-        }
+        onChange(value);
       }, DEBOUNCE_DELAY),
     [onChange]
   );
@@ -44,14 +41,15 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
   const handleColorChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newColor = e.target.value;
-      setLocalColor(newColor);
-      const convertedColor = convertColorToTailwindClasses(newColor, TAILWIND_SHADES);
+      debouncedOnChange(newColor);
+    },
+    [debouncedOnChange]
+  );
 
-      if (convertedColor !== newColor) {
-        debouncedOnChange(convertedColor);
-      } else {
-        debouncedOnChange(newColor);
-      }
+  const handleTextInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const colorString = e.target.value;
+      debouncedOnChange(colorString);
     },
     [debouncedOnChange]
   );
@@ -59,11 +57,6 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
   useEffect(() => {
     return () => debouncedOnChange.cancel();
   }, [debouncedOnChange]);
-
-  const convertedColor = useMemo(
-    () => convertColorToTailwindClasses(localColor, TAILWIND_SHADES),
-    [localColor]
-  );
 
   const isHighlighted = name && highlightTarget === name;
 
@@ -119,30 +112,27 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
       <div className="relative flex items-center gap-1">
         <div
           className="relative flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded border"
-          style={{ backgroundColor: convertedColor }}
+          style={{ backgroundColor: color }}
           onClick={() => setIsOpen(!isOpen)}
         >
           <input
             type="color"
             id={`color-${label.replace(/\s+/g, "-").toLowerCase()}`}
-            value={localColor}
+            value={color}
             onChange={handleColorChange}
             className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
         </div>
         <input
+          ref={textInputRef}
           type="text"
-          value={localColor}
-          onChange={handleColorChange}
+          defaultValue={color}
+          onChange={handleTextInputChange}
           className="bg-input/25 border-border/20 h-8 flex-1 rounded border px-2 text-sm"
           placeholder="Enter color (hex or tailwind class)"
         />
 
-        <ColorSelectorPopover
-          currentColor={color}
-          onChange={onChange}
-          setLocalColor={setLocalColor}
-        />
+        <ColorSelectorPopover currentColor={color} onChange={onChange} />
       </div>
     </div>
   );
