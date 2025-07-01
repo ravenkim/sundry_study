@@ -15,10 +15,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { TAILWIND_PALETTE } from "@/utils/registry/tailwind-colors";
-import { Check, LayoutGrid, LayoutList, List } from "lucide-react";
+import { Check, LayoutGrid, List } from "lucide-react";
 import { useCallback } from "react";
 import { Separator } from "../ui/separator";
-import { debounce } from "@/utils/debounce";
+import { ColorSelectorTab, usePreferencesStore } from "@/store/preferences-store";
 
 type ColorSelectorPopoverProps = {
   currentColor: string;
@@ -37,6 +37,15 @@ export function ColorSelectorPopover({
       onChange(color);
     },
     [onChange, setLocalColor]
+  );
+
+  const { setColorSelectorTab, colorSelectorTab } = usePreferencesStore();
+
+  const handleTabChange = useCallback(
+    (value: string) => {
+      setColorSelectorTab(value as ColorSelectorTab);
+    },
+    [setColorSelectorTab]
   );
 
   const isColorSelected = useCallback(
@@ -60,7 +69,7 @@ export function ColorSelectorPopover({
       </PopoverTrigger>
 
       <PopoverContent className="size-auto gap-0 overflow-hidden p-0" align="end">
-        <Tabs defaultValue="list">
+        <Tabs defaultValue={colorSelectorTab} onValueChange={handleTabChange}>
           <div className="flex items-center justify-between gap-4">
             <div className="ml-2 flex items-center gap-1.5">
               <TailwindCSS className="size-4" />
