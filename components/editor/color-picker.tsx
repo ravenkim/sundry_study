@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useMemo, useRef, useContext } from "react";
 import { Label } from "@/components/ui/label";
-import { ColorPickerProps } from "@/types";
-import { debounce } from "@/utils/debounce";
-import { useColorControlFocus } from "@/store/color-control-focus-store";
+import { DEBOUNCE_DELAY } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useColorControlFocus } from "@/store/color-control-focus-store";
+import { ColorPickerProps } from "@/types";
+import { convertColorToTailwindClasses, isValidHexColor } from "@/utils/color-type-checker";
+import { debounce } from "@/utils/debounce";
+import { TAILWIND_SHADES } from "@/utils/registry/tailwind-colors";
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { ColorSelectorPopover } from "./color-selector-popover";
 import { SectionContext } from "./section-context";
 
 const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
@@ -22,25 +26,44 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
   }, [name, registerColor, unregisterColor]);
 
   useEffect(() => {
-    setLocalColor(color);
-  }, [color]);
+    if (color !== localColor) {
+      setLocalColor(color);
+    }
+  }, [color, localColor, setLocalColor]);
 
   const debouncedOnChange = useMemo(
-    () => debounce((value: string) => onChange(value), 20),
+    () =>
+      debounce((value: string) => {
+        if (isValidHexColor(value)) {
+          onChange(value);
+        }
+      }, DEBOUNCE_DELAY),
     [onChange]
   );
 
-  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newColor = e.target.value;
-    setLocalColor(newColor);
-    debouncedOnChange(newColor);
-  };
+  const handleColorChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newColor = e.target.value;
+      setLocalColor(newColor);
+      const convertedColor = convertColorToTailwindClasses(newColor, TAILWIND_SHADES);
+
+      if (convertedColor !== newColor) {
+        debouncedOnChange(convertedColor);
+      } else {
+        debouncedOnChange(newColor);
+      }
+    },
+    [debouncedOnChange]
+  );
 
   useEffect(() => {
-    return () => {
-      debouncedOnChange.cancel();
-    };
+    return () => debouncedOnChange.cancel();
   }, [debouncedOnChange]);
+
+  const convertedColor = useMemo(
+    () => convertColorToTailwindClasses(localColor, TAILWIND_SHADES),
+    [localColor]
+  );
 
   const isHighlighted = name && highlightTarget === name;
 
@@ -75,7 +98,7 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
         animationTimerRef.current = null;
       }
     };
-  }, [isHighlighted]);
+  }, [isHighlighted, sectionCtx]);
 
   return (
     <div
@@ -93,10 +116,10 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
           {label}
         </Label>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="relative flex items-center gap-1">
         <div
           className="relative flex h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded border"
-          style={{ backgroundColor: localColor }}
+          style={{ backgroundColor: convertedColor }}
           onClick={() => setIsOpen(!isOpen)}
         >
           <input
@@ -112,6 +135,13 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
           value={localColor}
           onChange={handleColorChange}
           className="bg-input/25 border-border/20 h-8 flex-1 rounded border px-2 text-sm"
+          placeholder="Enter color (hex or tailwind class)"
+        />
+
+        <ColorSelectorPopover
+          currentColor={color}
+          onChange={onChange}
+          setLocalColor={setLocalColor}
         />
       </div>
     </div>
