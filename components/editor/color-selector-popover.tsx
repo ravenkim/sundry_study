@@ -184,20 +184,19 @@ function ColorSwatch({
     lg: "size-8",
   };
   return (
-    <TooltipWrapper asChild label={`${name} - ${color}`}>
-      <button
-        aria-label={`Select color ${name}`}
-        className={cn(
-          "group relative cursor-pointer rounded-md border bg-(--color) transition-all hover:z-10 hover:scale-110 hover:shadow-lg",
-          sizeClasses[size],
-          isSelected && "ring-2 ring-(--color)",
-          className
-        )}
-        style={{ "--color": color } as React.CSSProperties}
-        {...props}
-      >
-        <div className="group-hover:ring-foreground/50 absolute inset-0 rounded-[inherit] ring-2 ring-transparent transition-all duration-200" />
-      </button>
-    </TooltipWrapper>
+    <button
+      aria-label={`Select color ${name}`}
+      title={name}
+      className={cn(
+        "group relative cursor-pointer rounded-md border bg-(--color) transition-all hover:z-10 hover:scale-110 hover:shadow-lg",
+        sizeClasses[size],
+        isSelected && "ring-2 ring-(--color)",
+        className
+      )}
+      style={{ "--color": color } as React.CSSProperties}
+      {...props}
+    >
+      <div className="group-hover:ring-foreground/50 absolute inset-0 rounded-[inherit] ring-2 ring-transparent transition-all duration-200" />
+    </button>
   );
 }
