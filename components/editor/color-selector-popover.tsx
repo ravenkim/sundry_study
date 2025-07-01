@@ -23,20 +23,14 @@ import { ColorSelectorTab, usePreferencesStore } from "@/store/preferences-store
 type ColorSelectorPopoverProps = {
   currentColor: string;
   onChange: (color: string) => void;
-  setLocalColor: (color: string) => void;
 };
 
-export function ColorSelectorPopover({
-  currentColor,
-  onChange,
-  setLocalColor,
-}: ColorSelectorPopoverProps) {
+export function ColorSelectorPopover({ currentColor, onChange }: ColorSelectorPopoverProps) {
   const handleColorSelect = useCallback(
     (color: string) => {
-      setLocalColor(color);
       onChange(color);
     },
-    [onChange, setLocalColor]
+    [onChange]
   );
 
   const { setColorSelectorTab, colorSelectorTab } = usePreferencesStore();
