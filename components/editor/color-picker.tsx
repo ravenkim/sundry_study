@@ -97,7 +97,7 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
 
 
   const displayHexColor = useMemo(() => {
-    if (color.startsWith('#')) return color
+    if (!color || color.startsWith('#')) return color
     return colorFormatter(color, "hex");
   }, [color])
 
