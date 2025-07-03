@@ -7,6 +7,7 @@ import { debounce } from "@/utils/debounce";
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ColorSelectorPopover } from "./color-selector-popover";
 import { SectionContext } from "./section-context";
+import { colorFormatter } from "@/utils/color-converter";
 
 const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +94,14 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
     };
   }, [isHighlighted, sectionCtx]);
 
+
+
+  const displayHexColor = useMemo(() => {
+    if (color.startsWith('#')) return color
+    return colorFormatter(color, "hex");
+  }, [color])
+
+
   return (
     <div
       ref={rootRef}
@@ -118,7 +127,7 @@ const ColorPicker = ({ color, onChange, label, name }: ColorPickerProps) => {
           <input
             type="color"
             id={`color-${label.replace(/\s+/g, "-").toLowerCase()}`}
-            value={color}
+            value={displayHexColor}
             onChange={handleColorChange}
             className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
