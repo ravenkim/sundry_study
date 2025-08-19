@@ -12,7 +12,7 @@ const ReduxClientComponet = () => {
     const { pokemon, value } = useAppSelector(
         (state: RootState) => ({
             pokemon: state.sampleReducer.pokemons.data,
-            value:state.sampleReducer.value,
+            value: state.sampleReducer.value,
         }),
         shallowEqual,
     )
@@ -20,10 +20,6 @@ const ReduxClientComponet = () => {
     useEffect(() => {
         dispatch(sampleActions.getPokemons({}))
     }, [dispatch])
-
-
-
-
 
     return (
         <div>
@@ -38,10 +34,9 @@ const ReduxClientComponet = () => {
 
             {value}
 
-
             <button
                 onClick={() => {
-                    dispatch(sampleActions.setValue( 123))
+                    dispatch(sampleActions.setValue(123))
                 }}
             >
                 asd
