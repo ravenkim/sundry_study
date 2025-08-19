@@ -30,15 +30,19 @@ export default function SSimageMarker({
                 return (
                     <div
                         key={i}
-                        className="absolute flex items-center justify-center"
+                        className="absolute"
                         style={{
                             left: `${marker.position.x}%`,
                             top: `${marker.position.y}%`,
                             transform: 'translate(-50%, -50%)',
+                            width: `${widthPercent}%`,  // 부모(relative) 기준 너비
                         }}
                     >
                         <div
-                            className={`w-[${widthPercent}%] flex items-center justify-center aspect-[${marker.size.x}/${marker.size.y}] bg-red-500`}
+                            className="flex items-center justify-center bg-red-500 w-full"
+                            style={{
+                                aspectRatio: `${marker.size.x} / ${marker.size.y}`,
+                            }}
                         >
                             <SSresizableTextBox maxFontSize={200}>
                                 {marker.text}
