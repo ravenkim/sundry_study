@@ -20,10 +20,10 @@ const SpeechBubbleArea = () => {
                             y: 50,
                         },
                         size:{
-                            x: 171,
-                            y: 48,
+                            x: 134,
+                            y: 72,
                         },
-                        text: "asdasdasd",
+                        text: "asdasda asdas  asdas  asdsad assd",
 
                     }
                 ]}
