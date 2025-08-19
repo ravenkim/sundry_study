@@ -17,8 +17,8 @@ const SpeechBubbleArea = () => {
                 markers={[
                     {
                         position: {
-                            x: 10,
-                            y: 10,
+                            x: 35,
+                            y: 33.2,
                         },
                         size: {
                             x: 134,
@@ -36,8 +36,8 @@ const SpeechBubbleArea = () => {
                             y: 50,
                         },
                         size: {
-                            x: 134,
-                            y: 72,
+                            x: 171,
+                            y: 48,
                         },
                         component: (
                             <SSresizableTextBox maxFontSize={200}>

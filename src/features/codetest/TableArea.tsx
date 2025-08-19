@@ -7,7 +7,7 @@ const TableArea = () => {
     const data = 'asd'
 
     return     <div
-        className="w-full h-full  bg-cover "
+        className="w-full h-full bg-contain bg-no-repeat bg-center"
         style={{ backgroundImage: `url(${tableBg.src})` }}
     >
         <div className="text-white p-4">내용</div>
