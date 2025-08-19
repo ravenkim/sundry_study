@@ -1,16 +1,18 @@
 import { MobileLayout } from '@/shared/layout'
-import ResizableTextBox from '@/shared/components/text/ResizableTextBox'
+import SSresizableTextBox from '@/shared/components/text/SSresizableTextBox'
+import SSimageMarker from '@/shared/components/image/SSimageMarker'
+import imgurl from '@/assets/images/img.png'
+import SpeechBubbleArea from '@/features/codetest/SpeechBubbleArea'
+
+
 
 export default function Home() {
     return (
         <MobileLayout>
-            <div className={'h-60 w-80 bg-red-500'}>
-                <ResizableTextBox maxFontSize={200}>
-                    ㅁㄴㅇㅁㅇㄴㅁㅁㄴㅇㅁㄴㅇㄴㅁㅇ
-                </ResizableTextBox>
-            </div>
 
-            {/*<SpeechBubbleArea/>*/}
+
+
+            <SpeechBubbleArea/>
         </MobileLayout>
     )
 }

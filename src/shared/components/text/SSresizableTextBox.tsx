@@ -8,7 +8,7 @@ interface ResizableTextBoxProps {
     maxFontSize?: number
 }
 
-const ResizableTextBox = ({
+const SSresizableTextBox = ({
     children,
     className = '',
     maxFontSize = 55, // todo 변경 필요
@@ -79,4 +79,4 @@ const ResizableTextBox = ({
     )
 }
 
-export default ResizableTextBox
+export default SSresizableTextBox
