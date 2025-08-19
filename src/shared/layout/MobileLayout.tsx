@@ -5,7 +5,11 @@ interface MobileLayoutProps {
 }
 
 const MobileLayout = ({ children }: MobileLayoutProps) => {
-    return <div className="mx-auto max-w-md outline outline-1 outline-border bg-[#F3F2EF]">{children}</div>
+    return (
+        <div className="outline-border mx-auto max-w-md bg-[#F3F2EF] outline outline-1">
+            {children}
+        </div>
+    )
 }
 
 export default MobileLayout
