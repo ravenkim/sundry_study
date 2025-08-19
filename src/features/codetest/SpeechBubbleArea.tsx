@@ -1,17 +1,11 @@
 'use client'
 
-import groupImage0 from '@/assets/images/Group 1410141690.svg'
+import groupImage0 from '@/assets/images/img.png'
 import SSimageMarker from '@/shared/components/image/SSimageMarker'
 
 const SpeechBubbleArea = () => {
 
-
-    //todo 여기 데이터 어떤식으로 받아올지 에 따라서 [] 로 변경하거나, 하드코딩이면 어디서 받아올지 논의 필요
-
-
-    // 이미지 넓이 375
-    // 가로 넓이 171 세로 넓이 48
-
+    // todo 디자인 앞으로 어떤식으로 받을지 논의 필요 - 지금 너무 일러스트 처럼 사용중임
 
     return (
         <>
