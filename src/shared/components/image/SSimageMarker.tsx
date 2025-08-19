@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import SSresizableTextBox from '@/shared/components/text/SSresizableTextBox'
 
 interface Marker {
     position: { x: number; y: number }
