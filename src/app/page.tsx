@@ -1,5 +1,13 @@
+import { MobileLayout } from '@/shared/layout'
+import SpeechBubbleArea from '@/features/codetest/SpeechBubbleArea'
+import Image from 'next/image';
+import groupImage from '@/assets/images/Group 1410141671.svg';
+
 export default function Home() {
     return (
-        <div className="min-h-screen bg-pink-500 px-4 py-12 sm:px-6 lg:px-8"></div>
+        <MobileLayout>
+
+            <SpeechBubbleArea/>
+        </MobileLayout>
     )
 }
