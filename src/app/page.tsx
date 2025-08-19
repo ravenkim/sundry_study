@@ -9,13 +9,13 @@ export default function Home() {
         <MobileLayout>
 
             <div
-            className={'w-20 h-20 bg-red-500'}
+            className={'w-80 h-60 bg-red-500'}
             >
-                <ResizableTextBox>
-                    asddddddddddddddddddd asdasdjklasd
-                    asdk;asldkalsd
-                    asdasdsad
-
+                <ResizableTextBox
+                    maxFontSize={200}
+                >
+                    
+                    ㅁㄴㅇㅁㅇㄴㅁㅁㄴㅇㅁㄴㅇㄴㅁㅇ
                 </ResizableTextBox>
 
             </div>
