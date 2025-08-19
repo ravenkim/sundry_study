@@ -1,15 +1,7 @@
 const TableArea = () => {
+    const data = 'asd'
 
-    const data = ""
-
-
-
-
-    return (
-        <div>
-
-        </div>
-    )
+    return <div>{data}</div>
 }
 
 export default TableArea
