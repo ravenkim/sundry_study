@@ -3,7 +3,7 @@ import { configureStore, Tuple } from '@reduxjs/toolkit'
 import { all } from 'redux-saga/effects'
 
 // import { routerSaga, routerSlice } from './router/routerReducer'
-import { sampleSlice, sampleSaga } from '@/features/sample/sampleReducer'
+import { sampleSaga, sampleSlice } from '@/features/sample/sampleReducer'
 // import { themeSlice } from '../shared/components/theme/themeReducer'
 
 const reducers = {
@@ -13,9 +13,7 @@ const reducers = {
 }
 
 export function* rootSaga() {
-    yield all([
-        sampleSaga(),
-    ])
+    yield all([sampleSaga()])
 }
 
 const sagaMiddleware = createSagaMiddleware()

@@ -29,12 +29,6 @@ const asyncRequests = [
     } as const satisfies AsyncRequest<PokemonsResponse, void>,
 ] as const
 
-
-
-
-
-
-
 const localState = {
     value: 0,
 }
