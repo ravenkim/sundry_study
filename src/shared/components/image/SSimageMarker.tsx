@@ -38,7 +38,7 @@ export default function SSimageMarker({
                         }}
                     >
                         <div
-                            className="flex w-full items-center justify-center "
+                            className="flex w-full items-center justify-center"
                             style={{
                                 aspectRatio: `${marker.size.x} / ${marker.size.y}`,
                             }}
