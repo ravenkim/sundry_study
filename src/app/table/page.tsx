@@ -23,50 +23,68 @@ export default function TablePage() {
     return (
         <MobileLayout>
             <div
-                className="w-full h-[100vh] bg-contain bg-no-repeat "
+                className="w-full h-[100vh] bg-contain bg-no-repeat  bg-center"
                 style={{ backgroundImage: `url(${tableBg.src})` }}
             >
 
-                <div className="w-full h-[124px] bg-amber-200 opacity-49 ">
+                <div className="w-full h-[124px]  flex justify-center items-center flex-col ">
 
+                    <div
+                        className={'text-bold text-md'}
 
+                    >
+                    김로켓님의 사주
+                    </div>
+                    <div
+                        className={'text-bold text-2xl'}
+                    >
+                       1980년 8월27일 08:10
+                    </div>
                 </div>
 
-                <div className="w-full px-6 ">
+                <div className="w-full px-6 bg-amber-300">
 
 
 
                 <Table className="border-b border-r border-black w-full table-fixed">
+                    <colgroup>
+                        <col className="w-[16.67%]" />
+                        <col className="w-[20.83%]" />
+                        <col className="w-[20.83%]" />
+                        <col className="w-[20.83%]" />
+                        <col className="w-[20.83%]" />
+                    </colgroup>
                     <TableHeader>
                         <TableRow className="border-b border-black">
-                            <TableHead className="w-0 flex-1 border-r border-black">
-                
+                            <TableHead className="border-r border-black">
+
                             </TableHead>
-                            <TableHead className="w-0 flex-1 border-r border-gray-400">
+                            <TableHead className="border-r border-gray-400">
                                 <div className="w-full h-full grid place-items-center">
                                     <ChineseCharacterWithKorean
-                
+
                                     />
                                 </div>
                             </TableHead>
-                            <TableHead className="w-0 flex-1 border-r border-gray-400">
+                            <TableHead className="border-r border-gray-400">
                                 <div className="w-full h-full grid place-items-center">
                                     <div className="w-[10px] h-[10px] bg-red-500" />
                                 </div>
                             </TableHead>
-                            <TableHead className="w-0 flex-1 border-r border-gray-400">
+                            <TableHead className="border-r border-gray-400">
                                 <div className="w-full h-full grid place-items-center">
                                     <div className="w-[10px] h-[10px] bg-red-500" />
                                 </div>
                             </TableHead>
-                            <TableHead className="w-0 flex-1 text-right">
+                            <TableHead className="text-right">
                                 <div className="w-full h-full grid place-items-center">
                                     <div className="w-[10px] h-[10px] bg-red-500" />
                                 </div>
                             </TableHead>
                         </TableRow>
                     </TableHeader>
-                
+
+
                     <TableBody>
                         <TableRow className="border-b border-black">
                             {/* 맨 왼쪽 셀: 배경 유지 */}

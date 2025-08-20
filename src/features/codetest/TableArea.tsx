@@ -1,9 +1,12 @@
 "use client"
 
-import tableBg from '@/assets/images/tableBg.svg'
+import tableBg from '@/assets/images/asd.png'
 
 
 const TableArea = () => {
+
+    // todo 진짜 배경 그냥 붙여넣기 할거면 누끼딴거면 투명부분 제거해서 추가해주세요 제발 ㅠ
+
 
     const columns =  ["구분", "時", "日", "月", "年"]
     const data = [

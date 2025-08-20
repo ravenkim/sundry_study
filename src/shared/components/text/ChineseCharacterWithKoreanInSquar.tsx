@@ -23,7 +23,7 @@ const ChineseCharacterWithKoreanInSquare = ({
 
     return (
         <div
-            className=" flex flex-col items-center justify-center  rounded-lg shadow-lg py-2 px-2"
+            className=" flex flex-col items-center justify-center  rounded-lg shadow-lg py-2 px-3 mb-1"
             style={{
                 backgroundColor: backgroundColor,
                 color: textColor
@@ -31,7 +31,7 @@ const ChineseCharacterWithKoreanInSquare = ({
         >
             {/* 위쪽 한글 */}
             <div
-                className="text-sm "
+                className="text-xs "
                 style={{ color: textColor }}
             >
                 {koreanChar}
@@ -39,7 +39,7 @@ const ChineseCharacterWithKoreanInSquare = ({
 
             {/* 가운데 메인 한자 */}
             <div
-                className="text-xl font-bold"
+                className="text-4xl font-bold"
                 style={{
                     color: textColor,
                     fontFamily: 'serif'
@@ -50,7 +50,7 @@ const ChineseCharacterWithKoreanInSquare = ({
 
             {/* 아래쪽 서브 한자들 */}
             <div
-                className=" text-sm font-medium tracking-wider"
+                className=" text-xs font-medium tracking-wider"
                 style={{
                     color: textColor,
                     fontFamily: 'serif'
