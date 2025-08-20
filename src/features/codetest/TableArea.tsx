@@ -1,6 +1,6 @@
 "use client"
 
-import tableBg from '@/assets/images/asd.png'
+import tableBg from '@/assets/images/tableBg.svg'
 
 
 const TableArea = () => {
