@@ -17,18 +17,12 @@ export default function TablePage() {
      다른 형태의 여러 테이블이 (이 디자인이 필요한건지 에 따라서 컴포넌트 공통화 묶음 단위가 달라짐 - 논의 필요 )
    **/
 
-
-
-
     return (
         <MobileLayout>
             <div
-                className="w-full h-[100vh] bg-contain bg-no-repeat  "
+                className="h-[100vh] w-full bg-contain bg-no-repeat"
                 style={{ backgroundImage: `url(${tableBg.src})` }}
-            >
-
-
-            </div>
+            ></div>
         </MobileLayout>
     )
 }

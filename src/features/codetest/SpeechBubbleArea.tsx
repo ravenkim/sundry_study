@@ -18,7 +18,7 @@ const SpeechBubbleArea = () => {
                     {
                         position: {
                             x: 35,
-                            y: 33.4,
+                            y: 49,
                         },
                         size: {
                             x: 140,
@@ -26,14 +26,15 @@ const SpeechBubbleArea = () => {
                         },
                         component: (
                             <SSresizableTextBox maxFontSize={200}>
-                                이제 본격적으로 00님의 사주팔자를 분석해볼 차례네요.
+                                이제 본격적으로 00님의 사주팔자를 분석해볼
+                                차례네요.
                             </SSresizableTextBox>
                         ),
                     },
                     {
                         position: {
                             x: 39,
-                            y: 50.5,
+                            y: 74,
                         },
                         size: {
                             x: 180,
@@ -43,20 +44,6 @@ const SpeechBubbleArea = () => {
                             <SSresizableTextBox maxFontSize={200}>
                                 제가 00님의 사주를 보기 쉽게 표로 정리했어요
                             </SSresizableTextBox>
-                        ),
-                    },
-                    {
-                        position: {
-                            x: 50,
-                            y: 83,
-                        },
-                        size: {
-                            x: 351,
-                            y: 621,
-                        },
-                        component: (
-                            <TableArea/>
-
                         ),
                     },
                 ]}

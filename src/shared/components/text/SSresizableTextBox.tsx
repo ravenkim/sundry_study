@@ -26,7 +26,7 @@ const SSresizableTextBox = ({
             const containerWidth = container.clientWidth
             const containerHeight = container.clientHeight
 
-            const findOptimalSize = (low:number, high:number) => {
+            const findOptimalSize = (low: number, high: number) => {
                 let optimal = low
                 while (low <= high) {
                     const mid = Math.floor((low + high) / 2)
