@@ -6,16 +6,11 @@ type Props = {
     children?: React.ReactNode // 가운데 박스 안에 넣을 내용
 }
 
-const TableLayout: React.FC<Props> = ({ className = 'w-64', children }) => {
+const TableLayout: React.FC<Props> = ({  children }) => {
     return (
         <div
-            className={[
-                'relative',
-                'top-[-30] bg-[#F5F3EC]',
-                'border-[3px] border-black',
-                'grid w-full grid-cols-[7px_1fr_7px] grid-rows-[7px_1fr_7px]',
-                className,
-            ].join(' ')}
+            className="grid w-full grid-cols-[7px_1fr_7px] grid-rows-[7px_1fr_7px] relative top-[-30] bg-[#F5F3EC] border-[3px] border-black"
+
         >
             <div className="absolute top-0 bottom-0 left-[7px] w-px bg-black" />
             <div className="absolute top-0 right-[7px] bottom-0 w-px bg-black" />
