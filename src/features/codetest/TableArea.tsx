@@ -12,7 +12,7 @@ const TableArea = () => {
         >
             <div className={'w-full'}>
                 <TableLayout>
-                    <SajuTable/>
+                    <SajuTable />
                 </TableLayout>
             </div>
         </div>

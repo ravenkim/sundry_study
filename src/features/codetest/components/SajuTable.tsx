@@ -5,7 +5,6 @@
 import icon_left from '@/assets/images/icon_left.svg'
 import icon_right from '@/assets/images/icon_right.svg'
 
-
 import {
     Table,
     TableBody,
@@ -81,18 +80,20 @@ const SajuTable = () => {
             className="h-full w-full bg-contain bg-no-repeat pb-10"
             // style={{ backgroundImage: `url(${tableBg.src})` }}
         >
-            <div
-
-                className="h-[124px]  w-full justify-between  flex flex-row"
-            >
-                <Image src={icon_left} alt={'왼쪽 아이콘'} className={'mt-3'}/>
-                <div className="flex flex-col h-full items-center justify-center">
+            <div className="flex h-[124px] w-full flex-row justify-between">
+                <Image src={icon_left} alt={'왼쪽 아이콘'} className={'mt-3'} />
+                <div className="flex h-full flex-col items-center justify-center">
                     <div className={'text-bold text-md'}>김로켓님의 사주</div>
-                    <div className={'text-bold text-2xl'}>1980년 8월27일 08:10</div>
+                    <div className={'text-bold text-2xl'}>
+                        1980년 8월27일 08:10
+                    </div>
                 </div>
 
-                <Image src={icon_right} alt={'오른쪽 아이콘'}  className={'mb-3'}/>
-
+                <Image
+                    src={icon_right}
+                    alt={'오른쪽 아이콘'}
+                    className={'mb-3'}
+                />
             </div>
 
             <div className="w-full px-3">
@@ -114,23 +115,17 @@ const SajuTable = () => {
                             </TableHead>
                             <TableHead className="border-r border-gray-400">
                                 <div className="grid h-full w-full place-items-center">
-                                    <ChineseCharacterWithKorean
-                                        han={'時'}
-                                    />
+                                    <ChineseCharacterWithKorean han={'時'} />
                                 </div>
                             </TableHead>
                             <TableHead className="border-r border-gray-400">
                                 <div className="grid h-full w-full place-items-center">
-                                    <ChineseCharacterWithKorean
-                                        han={'時'}
-                                    />
+                                    <ChineseCharacterWithKorean han={'時'} />
                                 </div>
                             </TableHead>
                             <TableHead className="text-right">
                                 <div className="grid h-full w-full place-items-center">
-                                    <ChineseCharacterWithKorean
-                                        han={'時'}
-                                    />
+                                    <ChineseCharacterWithKorean han={'時'} />
                                 </div>
                             </TableHead>
                         </TableRow>
@@ -186,7 +181,7 @@ const SajuTable = () => {
                             {/* 여기를 변경 */}
                             {/* 맨 왼쪽 셀: 배경 유지 */}
                             <TableCell className="border-r border-black font-medium">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKorean
                                         kor={'귀인'}
                                         han={'天乙'}
@@ -195,31 +190,31 @@ const SajuTable = () => {
                             </TableCell>
                             {/* 나머지 셀: 흰색 배경 */}
                             <TableCell className="border-r border-gray-400 bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare
                                         backgroundColor={'#222222'}
                                     />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-black bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
                         </TableRow>
                         <TableRow className="border-b border-black">
                             <TableCell className="border-r border-black font-medium">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKorean
                                         kor={'귀인'}
                                         han={'天乙'}
@@ -228,22 +223,22 @@ const SajuTable = () => {
                             </TableCell>
 
                             <TableCell className="border-r border-gray-400 bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
                             <TableCell className="bg-white">
-                                <div className="grid h-full w-full place-items-center  overflow-auto">
+                                <div className="grid h-full w-full place-items-center overflow-auto">
                                     <ChineseCharacterWithKoreanInSquare />
                                 </div>
                             </TableCell>
