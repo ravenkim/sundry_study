@@ -1,14 +1,4 @@
 import { MobileLayout } from '@/shared/layout'
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/shared/lib/shadcn/components/ui/table'
-import ChineseCharacterWithKorean from '@/shared/components/text/ChineseCharacterWithKorean'
-import ChineseCharacterWithKoreanInSquare from '@/shared/components/text/ChineseCharacterWithKoreanInSquar'
 import tableBg from '@/assets/images/tableBg.svg'
 
 export default function TablePage() {
