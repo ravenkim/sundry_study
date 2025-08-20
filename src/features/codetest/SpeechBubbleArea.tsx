@@ -4,7 +4,6 @@ import cartoonImage from '@/assets/images/cartoon.svg'
 import SSimageMarker from '@/shared/components/image/SSimageMarker'
 import SSresizableTextBox from '@/shared/components/text/SSresizableTextBox'
 import React from 'react'
-import TableArea from '@/features/codetest/TableArea'
 
 const SpeechBubbleArea = () => {
     // todo 디자인 앞으로 어떤식으로 받을지 논의 필요 - 지금 너무 일러스트 처럼 사용중임 + 그룹지정할때 공백좀 없애주세요 ㅠㅠ
@@ -18,7 +17,7 @@ const SpeechBubbleArea = () => {
                     {
                         position: {
                             x: 35,
-                            y: 49,
+                            y: 47.5,
                         },
                         size: {
                             x: 140,
@@ -34,7 +33,7 @@ const SpeechBubbleArea = () => {
                     {
                         position: {
                             x: 39,
-                            y: 74,
+                            y: 72,
                         },
                         size: {
                             x: 180,
