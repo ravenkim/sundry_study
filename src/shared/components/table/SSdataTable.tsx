@@ -1,3 +1,5 @@
+"use client"
+
 import {
     flexRender,
     getCoreRowModel,
@@ -23,8 +25,8 @@ import { renderPagination } from '@/shared/components/table/options/pagination'
 import { DataTableProps } from '@/shared/components/table/options/types'
 
 export function SSdataTable<TData, TValue>({
-    columns,
-    data,
+    columns = [],
+    data = [],
     pagination = {},
     virtualization = {},
     search = {},

@@ -4,7 +4,8 @@ import tableBg from '@/assets/images/tableBg.svg'
 
 
 const TableArea = () => {
-    const data = 'asd'
+
+
 
     return     <div
         className="w-full h-full bg-contain bg-no-repeat bg-center"
