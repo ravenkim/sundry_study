@@ -10,19 +10,19 @@ const ChineseCharacterWithKorean: React.FC<ChineseCharacterWithKoreanProps> = ({
 
     // 둘 다 없을 때
     if (!han && !kor) {
-        return <div className="text-[12px] text-center">({displayKor})</div>;
+        return <div className="text-[11px] text-center">({displayKor})</div>;
     }
 
     return (
-        <div className="text-center">
+        <div className="text-center my-1">
             {han && (
-                <div className={kor ? 'text-[16px]' : 'text-[20px]'}>
+                <div className={kor ? 'text-[11px] text-bold' : 'text-[20px] text-bold'}>
                     {han}
                 </div>
             )}
-            <div className="text-[12px]">
+            {kor && <div className="text-[8px]">
                 ({displayKor})
-            </div>
+            </div>}
         </div>
     );
 };

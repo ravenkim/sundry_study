@@ -39,7 +39,7 @@ const ChineseCharacterWithKoreanInSquare = ({
 
             {/* 가운데 메인 한자 */}
             <div
-                className="text-4xl font-bold"
+                className="text-2xl font-bold"
                 style={{
                     color: textColor,
                     fontFamily: 'serif'
