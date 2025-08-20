@@ -18,30 +18,30 @@ const SpeechBubbleArea = () => {
                     {
                         position: {
                             x: 35,
-                            y: 33.2,
+                            y: 33.4,
                         },
                         size: {
-                            x: 134,
-                            y: 72,
+                            x: 140,
+                            y: 78,
                         },
                         component: (
                             <SSresizableTextBox maxFontSize={200}>
-                                asdasdasd
+                                이제 본격적으로 00님의 사주팔자를 분석해볼 차례네요.
                             </SSresizableTextBox>
                         ),
                     },
                     {
                         position: {
-                            x: 50,
-                            y: 50,
+                            x: 39,
+                            y: 50.5,
                         },
                         size: {
-                            x: 171,
-                            y: 48,
+                            x: 180,
+                            y: 53,
                         },
                         component: (
                             <SSresizableTextBox maxFontSize={200}>
-                                asdasdasd
+                                제가 00님의 사주를 보기 쉽게 표로 정리했어요
                             </SSresizableTextBox>
                         ),
                     },
