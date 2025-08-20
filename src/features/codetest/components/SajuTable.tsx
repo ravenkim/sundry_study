@@ -1,6 +1,11 @@
 'use client'
 
-import tableBg from '@/assets/images/tableBg.svg'
+// import tableBg from '@/assets/images/tableBg.svg'
+
+import icon_left from '@/assets/images/icon_left.svg'
+import icon_right from '@/assets/images/icon_right.svg'
+
+
 import {
     Table,
     TableBody,
@@ -11,6 +16,7 @@ import {
 } from '@/shared/lib/shadcn/components/ui/table'
 import ChineseCharacterWithKorean from '@/shared/components/text/ChineseCharacterWithKorean'
 import ChineseCharacterWithKoreanInSquare from '@/shared/components/text/ChineseCharacterWithKoreanInSquar'
+import Image from 'next/image'
 
 const SajuTable = () => {
     // todo 진짜 배경 그냥 붙여넣기 할거면 누끼딴거면 투명부분 제거해서 추가해주세요 (피그마 작업 오래걸렸습니다)논의 필요
@@ -69,15 +75,24 @@ const SajuTable = () => {
      }
      ]
 
-     **/
+     */
     return (
         <div
             className="h-full w-full bg-contain bg-no-repeat pb-10"
             // style={{ backgroundImage: `url(${tableBg.src})` }}
         >
-            <div className="flex h-[124px] w-full flex-col items-center justify-center">
-                <div className={'text-bold text-md'}>김로켓님의 사주</div>
-                <div className={'text-bold text-2xl'}>1980년 8월27일 08:10</div>
+            <div
+
+                className="h-[124px]  w-full justify-between  flex flex-row"
+            >
+                <Image src={icon_left} alt={'왼쪽 아이콘'} className={'mt-3'}/>
+                <div className="flex flex-col h-full items-center justify-center">
+                    <div className={'text-bold text-md'}>김로켓님의 사주</div>
+                    <div className={'text-bold text-2xl'}>1980년 8월27일 08:10</div>
+                </div>
+
+                <Image src={icon_right} alt={'오른쪽 아이콘'}  className={'mb-3'}/>
+
             </div>
 
             <div className="w-full px-3">
@@ -101,21 +116,21 @@ const SajuTable = () => {
                                 <div className="grid h-full w-full place-items-center">
                                     <ChineseCharacterWithKorean
                                         han={'時'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableHead>
                             <TableHead className="border-r border-gray-400">
                                 <div className="grid h-full w-full place-items-center">
                                     <ChineseCharacterWithKorean
                                         han={'時'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableHead>
                             <TableHead className="text-right">
                                 <div className="grid h-full w-full place-items-center">
                                     <ChineseCharacterWithKorean
                                         han={'時'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableHead>
                         </TableRow>
@@ -129,7 +144,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
 
@@ -139,7 +154,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -147,7 +162,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -155,7 +170,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="bg-white">
@@ -163,12 +178,11 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                         </TableRow>
                         <TableRow className="border-b border-gray-400">
-                            {' '}
                             {/* 여기를 변경 */}
                             {/* 맨 왼쪽 셀: 배경 유지 */}
                             <TableCell className="border-r border-black font-medium">
@@ -209,7 +223,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
 
@@ -242,7 +256,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
 
@@ -252,7 +266,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -260,7 +274,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -268,7 +282,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="bg-white">
@@ -287,7 +301,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
 
@@ -297,7 +311,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -305,7 +319,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -313,7 +327,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="bg-white">
@@ -339,7 +353,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -347,7 +361,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="border-r border-gray-400 bg-white">
@@ -355,7 +369,7 @@ const SajuTable = () => {
                                     <ChineseCharacterWithKorean
                                         kor={'천을귀인'}
                                         han={'天乙'}
-                                    />{' '}
+                                    />
                                 </div>
                             </TableCell>
                             <TableCell className="bg-white">
