@@ -23,7 +23,7 @@ export default function TablePage() {
     return (
         <MobileLayout>
             <div
-                className="w-full h-[100vh] bg-contain bg-no-repeat  bg-center"
+                className="w-full h-[100vh] bg-contain bg-no-repeat  "
                 style={{ backgroundImage: `url(${tableBg.src})` }}
             >
 
@@ -42,7 +42,7 @@ export default function TablePage() {
                     </div>
                 </div>
 
-                <div className="w-full px-6 bg-amber-300">
+                <div className="w-full px-6 ">
 
 
 
