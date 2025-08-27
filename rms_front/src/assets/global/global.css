@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+안트디 설정 초기화*/
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-input-affix-wrapper:focus,:where(.css-dev-only-do-not-override-6j9yrn).ant-input-affix-wrapper:focus-within {
+    border-color: #4F5FF5 !important;
+    box-shadow: none !important;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-input-affix-wrapper {
+    border-color: #ACACBA !important;
+}
+
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-input-affix-wrapper::placeholder {
+    color: #ACACBA !important;
+    font-weight: 500 !important;
+}
+
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-input {
+    color:#51525C !important;
+}
+
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-input::placeholder {
+    color: #ACACBA !important;
+    font-weight: 500 !important;
+}
+
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary {
+    background-color: #4F5FF5 !important;
+}
+
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-btn-primary:hover {
+    background-color: #263BF2 !important;
+}
+
+
+.slick-slide img {
+    object-fit: cover;
+    width:100%;
+    box-sizing: border-box;
+}
+
+.slick-prev {
+    left: -40px;
+    z-index: 80;
+    width:24px;
+    height: 24px;
+    background-image: url("/src/assets/img/angle_left_arrow.svg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    cursor: pointer;
+}
+
+.slick-prev:before, .slick-next:before {
+    display:none;
+}
+
+.slick-next {
+    right:-40px;
+    z-index: 80;
+    width:24px;
+    height: 24px;
+    background-image: url("/src/assets/img/angle_right_arrow.svg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    cursor: pointer;
+}
+
+.slick-prev:before,.slick-next:before {
+    color: #000;
+}
+
+.slick-dots {
+
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs {
+    color:#ACACBA !important;
+    border-color: #ACACBA !important;
+    border-top-color:#232433 !important;
+}
+
+/*:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs:focus,:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs:active, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs:hover{
+    color:#232433 !important;
+    border-color: #232433 !important;
+}*/
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color:#232433 !important;
+    border-color: #232433 !important;
+}
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab {
+    color:#ACACBA;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-tab:hover {
+    color:#232433 !important;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs .ant-tabs-ink-bar {
+    background: #232433;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top >.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom >.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-top >div>.ant-tabs-nav .ant-tabs-ink-bar, :where(.css-dev-only-do-not-override-6j9yrn).ant-tabs-bottom >div>.ant-tabs-nav .ant-tabs-ink-bar {
+    height: 1px;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-inner {
+    padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-popover .ant-popover-arrow::after {
+    background: rgba(85,101,246,.6);
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tag {
+    white-space: wrap;
+}
+
+*::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    width: 8px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    outline: none;
+    box-shadow: inset 6px 6px 0 rgba(154, 157, 173, 1);
+}
+
+*::-webkit-scrollbar-track {
+    /*background-color: #313131;*/
+    box-shadow: none;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #ffffff;
+    box-shadow: none;
+}
+
+.ant-table-cell {
+    vertical-align: middle;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-tag .ant-tag-close-icon {
+    height: fit-content;
+    font-size: 15px;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-modal .ant-modal-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-modal .ant-modal-footer button {
+    width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-upload-wrapper .ant-upload-list {
+    max-width: 180px;
+}
+
+.swal2-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.swal2-container button {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 4px 60px;
+}
+
+div:where(.swal2-icon) {
+    margin: 2.5em auto 0.6em;
+    border: 0.25em solid transparent;
+}
+
+:where(.css-6j9yrn).ant-popover .ant-popover-inner {
+    padding: 0;
+}
+
+/**************************************************************************************************************************************************************************/
+
+.ant-popover-inner {
+    padding: 0 !important;
+}
+
+.ant-popover-arrow:before {
+    background: rgba(85, 101, 246,0.6) !important;
+    color: #5565f6;
+}
+
+.ant-tabs-tab-btn {
+    color:#ACACBA !important;
+}
+
+.ant-tabs-tab-btn:hover {
+    color:#232433 !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color:#232433 !important;
+}
+
+.ant-tabs-ink-bar {
+    background: #232433 !important;
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper:focus-within {
+    border-color: #4F5FF5 !important;
+    box-shadow: none !important;
+}
+
+.ant-input-affix-wrapper {
+    border-color: #ACACBA !important;
+}
+
+.ant-input-affix-wrapper::placeholder {
+    color: #ACACBA !important;
+    font-weight: 500 !important;
+}
+.ant-input {
+    color:#51525C !important;
+}
+.ant-input::placeholder {
+    color: #ACACBA !important;
+    font-weight: 500 !important;
+}
+
+.ant-btn-primary {
+    background-color: #4F5FF5 !important;
+}
+
+.ant-btn-primary:hover {
+    background-color: #263BF2 !important;
+}
+
+
+/*
+suneditor*/
+.sun-editor {
+    @apply rounded-[5px];
+    overflow: hidden;
+}
+
+.sun-editor {
+    border: 1px solid #ACACBA;
+    box-shadow: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+/*
+suneditor*/
+
+.message_textarea {
+    outline: none;
+    resize: none;
+}
+
+.message_textarea::placeholder {
+    color: #ACACBA;
+}
+
