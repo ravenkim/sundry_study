@@ -44,5 +44,10 @@ https://dummyjson.com/products/1 - 사용 완료
 https://dummyjson.com/products/search?q=phone
 ```
 
+- 페이지네이션 테이블 - 완료
+- 스크롤 테이블 - 완료 
+- 리스트 
+- 카드
+
 
 
