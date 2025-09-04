@@ -99,9 +99,10 @@ const createRequestSaga = <PayloadType, ResponseType>(
 ) => {
     return function* fetchApiData(action: AnyAction) {
         try {
+
             const response: AxiosResponse<ResponseType> = yield call(
                 api,
-                action.payload,
+                action.payload
             )
 
 
