@@ -10,43 +10,41 @@ const asyncRequests = [
         state: 'categories',
         initialState: [
             {
-                "slug": "",
-                "name": "",
-                "url": ""
+                slug: '',
+                name: '',
+                url: '',
             },
         ],
         api: () => axios.get('https://dummyjson.com/products/categories'),
-    } as const satisfies AsyncRequest<  [{
-        "slug": string,
-        "name": string,
-        "url": string
-    }], void>,
+    } as const satisfies AsyncRequest<
+        [
+            {
+                slug: string
+                name: string
+                url: string
+            },
+        ],
+        void
+    >,
 
     {
         action: 'getProduct',
         state: 'product',
         initialState: null,
         api: getProduct,
-    } ,
+    },
 
     {
         action: 'getProducts',
         state: 'products',
         initialState: null,
         api: getProducts,
-    } ,
-
-
-
+    },
 ] as const
 
-const localState = {
+const localState = {}
 
-}
-
-const localReducers = {
-
-}
+const localReducers = {}
 
 const module = reduxMaker(prefix, asyncRequests, localState, localReducers)
 export const {

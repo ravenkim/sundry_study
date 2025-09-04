@@ -14,7 +14,7 @@ const reducers = {
 
 // Root saga
 export function* rootSaga() {
-    yield all([ routerSaga(), productSaga()])
+    yield all([routerSaga(), productSaga()])
 }
 
 // Saga middleware 생성

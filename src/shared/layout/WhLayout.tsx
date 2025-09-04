@@ -7,12 +7,10 @@ interface WhLayoutProps {
     title?: string
 }
 
-const WhLayout = ({ children, title = "" }: WhLayoutProps) => {
+const WhLayout = ({ children, title = '' }: WhLayoutProps) => {
     return (
         <div>
-            <WhHeader
-                title={title}
-            />
+            <WhHeader title={title} />
             {children}
         </div>
     )
