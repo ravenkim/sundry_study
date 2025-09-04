@@ -49,7 +49,7 @@ https://test-dott-g6pfd6k5g-ravenkims-projects.vercel.app/
 
 # todo list (작업 우선순위)
 
-## 1. 상품 상세 페이지
+## 1. 상품 상세 페이지 - 완료 
 
 상품 상세정보
 
@@ -60,7 +60,7 @@ https://dummyjson.com/products/1 - 사용 완료
 - 상품 상세 정보 들고오기 - 완료
 - 상품 없을떄 정보 보여주기 - 완료
 - 상품 불러오는거 로딩 처리 - 완료
-- 뒤로 가기 구현
+- 뒤로 가기 구현 - 완료 
 
 ## 2. 상품 리스트 페이지 (홈페이지)
 
