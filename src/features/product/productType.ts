@@ -30,3 +30,11 @@ export type Product = {
     images: string[];
     thumbnail: string;
 };
+
+
+export type ProductResponse = {
+    products: Product[]
+    total: number
+    skip: number
+    limit: number
+}
