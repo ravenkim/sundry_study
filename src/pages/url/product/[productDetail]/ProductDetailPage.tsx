@@ -7,10 +7,10 @@ import { productAction } from 'src/features/product/productReducer.ts'
 
 const ProductDetailPage = () => {
 
-    const {pathname} = useAppSelector(
-        ({routerReducer}) => ({
+    const {pathname, product} = useAppSelector(
+        ({routerReducer, productReducer}) => ({
             pathname: routerReducer.location.path,
-
+            product: productReducer.product.data,
         }),
         shallowEqual,
     )
@@ -20,23 +20,25 @@ const ProductDetailPage = () => {
 
     useEffect(() => {
         const id = pathname.split("/").pop();
-
         dispatch(productAction.getProduct(id))
     }, [dispatch, pathname])
 
 
-
-
-    const [productId, setProductId] = useState()
-    const [productName, setProductName] = useState('')
+    useEffect(() => {
+        if(product)
+        console.log(product)
+    }, [product])
 
 
 
     return (
         <WhLayout
-            title={productName}
+            title={product?.title}
         >
-            <ProductDetail/>
+            <ProductDetail
+                product={product}
+            />
+
         </WhLayout>
     )
 }
