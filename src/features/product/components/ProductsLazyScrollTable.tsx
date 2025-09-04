@@ -92,6 +92,7 @@ const ProductsLazyScrollTable = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead>ID</TableHead>
+                        <TableHead>Picture</TableHead>
                         <TableHead>Title</TableHead>
                         <TableHead>Category</TableHead>
                         <TableHead>Price</TableHead>
@@ -103,6 +104,14 @@ const ProductsLazyScrollTable = () => {
                         ? items.map((p: Product) => (
                               <TableRow key={p.id}>
                                   <TableCell>{p.id}</TableCell>
+                                  <TableCell>
+                                      <img
+                                          src={p.thumbnail || p.images[0]}
+                                          alt={p.title}
+                                          className="h-20 w-full object-cover rounded-md mb-2"
+                                      />
+
+                                  </TableCell>
                                   <TableCell
                                       onClick={() => {
                                           navigate(`/product/${p.id}`)
