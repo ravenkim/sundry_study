@@ -6,7 +6,7 @@ import SSspin from 'src/shared/components/loading/SSspin.tsx'
 import { Product } from 'src/features/product/productType.ts'
 import { useNavigate } from 'react-router'
 
-const ProductList = () => {
+const ProductsList = () => {
     const [page, setPage] = useState(1)
     const limit = 20
     const dispatch = useAppDispatch()
@@ -104,4 +104,4 @@ const ProductList = () => {
     )
 }
 
-export default ProductList
+export default ProductsList
