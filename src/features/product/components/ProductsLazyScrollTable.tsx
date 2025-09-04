@@ -1,5 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { useAppDispatch, useAppSelector } from 'src/app/store/redux/reduxHooks.tsx'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from 'src/app/store/redux/reduxHooks.tsx'
 import { productAction } from 'src/features/product/productReducer.ts'
 import {
     Table,
@@ -44,7 +47,9 @@ const ProductsLazyScrollTable = () => {
     useEffect(() => {
         if (products?.products) {
             setItems((prev) =>
-                page === 1 ? products.products : [...prev, ...products.products],
+                page === 1
+                    ? products.products
+                    : [...prev, ...products.products],
             )
             setTotalPages(Math.ceil(products?.total / limit))
         }
@@ -54,7 +59,11 @@ const ProductsLazyScrollTable = () => {
     const handleObserver = useCallback(
         (entries: IntersectionObserverEntry[]) => {
             const target = entries[0]
-            if (target.isIntersecting && !productsLoading && page < totalPages) {
+            if (
+                target.isIntersecting &&
+                !productsLoading &&
+                page < totalPages
+            ) {
                 setPage((prev) => prev + 1)
             }
         },
@@ -78,7 +87,7 @@ const ProductsLazyScrollTable = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="space-y-4 w-400 max-h-[600px] overflow-auto border rounded-lg">
+        <div className="max-h-[600px] w-400 space-y-4 overflow-auto rounded-lg border">
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -90,36 +99,43 @@ const ProductsLazyScrollTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {items.length > 0 ? (
-                        items.map((p: Product) => (
-                            <TableRow key={p.id}>
-                                <TableCell>{p.id}</TableCell>
-                                <TableCell
-                                    onClick={() => {navigate(`/product/${p.id}`)}}
-                                    className={'text-primary cursor-pointer hover:underline'}
-                                >{p.title}</TableCell>
-                                <TableCell>{p.category}</TableCell>
-                                <TableCell>${p.price}</TableCell>
-                                <TableCell>{p.stock}</TableCell>
-                            </TableRow>
-                        ))
-                    ) : (
-                        !productsLoading && (
-                            <TableRow>
-                                <TableCell
-                                    colSpan={5}
-                                    className="text-center py-6 text-muted-foreground"
-                                >
-                                    데이터가 없습니다.
-                                </TableCell>
-                            </TableRow>
-                        )
-                    )}
+                    {items.length > 0
+                        ? items.map((p: Product) => (
+                              <TableRow key={p.id}>
+                                  <TableCell>{p.id}</TableCell>
+                                  <TableCell
+                                      onClick={() => {
+                                          navigate(`/product/${p.id}`)
+                                      }}
+                                      className={
+                                          'text-primary cursor-pointer hover:underline'
+                                      }
+                                  >
+                                      {p.title}
+                                  </TableCell>
+                                  <TableCell>{p.category}</TableCell>
+                                  <TableCell>${p.price}</TableCell>
+                                  <TableCell>{p.stock}</TableCell>
+                              </TableRow>
+                          ))
+                        : !productsLoading && (
+                              <TableRow>
+                                  <TableCell
+                                      colSpan={5}
+                                      className="text-muted-foreground py-6 text-center"
+                                  >
+                                      데이터가 없습니다.
+                                  </TableCell>
+                              </TableRow>
+                          )}
                 </TableBody>
             </Table>
 
             {/* 감시용 div */}
-            <div ref={observerRef} className="h-10 flex justify-center items-center">
+            <div
+                ref={observerRef}
+                className="flex h-10 items-center justify-center"
+            >
                 {productsLoading && <SSspin loading={true} />}
             </div>
         </div>

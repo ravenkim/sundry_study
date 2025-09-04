@@ -37,7 +37,6 @@ const generateRoutes = (
     return routes
 }
 
-
 const router = createBrowserRouter([
     {
         path: '/',

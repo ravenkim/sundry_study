@@ -1,15 +1,17 @@
 import WhLayout from 'src/shared/layout/WhLayout.tsx'
 import ProductDetail from 'src/features/product/components/ProductDetail.tsx'
-import { useAppDispatch, useAppSelector } from 'src/app/store/redux/reduxHooks.tsx'
+import {
+    useAppDispatch,
+    useAppSelector,
+} from 'src/app/store/redux/reduxHooks.tsx'
 import { shallowEqual } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { productAction } from 'src/features/product/productReducer.ts'
 import SSspin from 'src/shared/components/loading/SSspin.tsx'
 
 const ProductDetailPage = () => {
-
-    const {pathname, product} = useAppSelector(
-        ({routerReducer, productReducer}) => ({
+    const { pathname, product } = useAppSelector(
+        ({ routerReducer, productReducer }) => ({
             pathname: routerReducer.location.path,
             product: productReducer.product.data,
         }),
@@ -18,30 +20,19 @@ const ProductDetailPage = () => {
 
     const dispatch = useAppDispatch()
 
-
     useEffect(() => {
-        const id = pathname.split("/").pop();
+        const id = pathname.split('/').pop()
         dispatch(productAction.getProduct(id))
     }, [dispatch, pathname])
 
-
     useEffect(() => {
-        if(product)
-        console.log(product)
+        if (product) console.log(product)
     }, [product])
 
-
-
     return (
-        <WhLayout
-            title={product?.title}
-        >
-            <SSspin
-                loading={!product }
-            >
-                <ProductDetail
-                    product={product}
-                />
+        <WhLayout title={product?.title}>
+            <SSspin loading={!product}>
+                <ProductDetail product={product} />
             </SSspin>
         </WhLayout>
     )
