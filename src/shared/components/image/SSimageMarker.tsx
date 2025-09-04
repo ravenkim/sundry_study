@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 
 interface Marker {
     position: { x: number; y: number }
@@ -22,7 +21,7 @@ export default function SSimageMarker({
 }: ImageMarkerProps) {
     return (
         <div className={`relative inline-block w-full ${className || ''}`}>
-            <Image src={src} alt="base" className="block h-auto w-full" />
+            <img src={src} alt="base" className="block h-auto w-full" />
             {markers?.map((marker, i) => {
                 const widthPercent = (marker.size.x / imageWidth) * 100
 
