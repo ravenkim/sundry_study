@@ -32,10 +32,10 @@ yarn build
 
 
 # 배포한 정적 사이트 URL
-https://test-dott-g6pfd6k5g-ravenkims-projects.vercel.app/
 
 
 
+[https://test-dott.vercel.app/](https://test-dott.vercel.app/)
 
 
 
