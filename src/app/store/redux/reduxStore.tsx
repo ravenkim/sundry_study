@@ -2,21 +2,19 @@ import createSagaMiddleware from 'redux-saga'
 import { configureStore } from '@reduxjs/toolkit'
 import { all } from 'redux-saga/effects'
 import { routerSaga, routerSlice } from 'src/app/router/routerReducer.tsx'
-import { sampleSaga, sampleSlice } from 'src/features/sample/sampleReducer.ts'
 import { themeSlice } from 'src/shared/components/theme/themeReducer.tsx'
 import { productSaga, productSlice } from 'src/features/product/productReducer'
 
 // Slice 모음
 const reducers = {
     routerReducer: routerSlice.reducer,
-    sampleReducer: sampleSlice.reducer,
     themeReducer: themeSlice.reducer,
     productReducer: productSlice.reducer,
 }
 
 // Root saga
 export function* rootSaga() {
-    yield all([sampleSaga(), routerSaga(), productSaga()])
+    yield all([ routerSaga(), productSaga()])
 }
 
 // Saga middleware 생성
