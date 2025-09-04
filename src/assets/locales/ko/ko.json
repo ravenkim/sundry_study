@@ -1,0 +1,27 @@
+{
+    "header": {
+        "mypage": "마이페이지",
+        "logout": "로그아웃",
+        "login": "로그인",
+        "register": "회원가입",
+        "language": "언어설정",
+        "help": "고객센터"
+    },
+    "nav": {
+        "dashboard": "대시보드",
+        "shopping-mall": "쇼핑몰 관리"
+    },
+    "home": {
+        "join": "회원가입"
+    },
+    "text": {
+        "Welcome to React": "어서오시라요"
+    },
+    "numbar": {
+        "aaaaa": "1111111111111"
+    },
+
+    "button": {
+        "del": "삭제"
+    }
+}
