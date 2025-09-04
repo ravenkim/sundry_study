@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'src/app/store/redux/reduxHooks.t
 import { shallowEqual } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { productAction } from 'src/features/product/productReducer.ts'
+import SSspin from 'src/shared/components/loading/SSspin.tsx'
 
 const ProductDetailPage = () => {
 
@@ -35,10 +36,13 @@ const ProductDetailPage = () => {
         <WhLayout
             title={product?.title}
         >
-            <ProductDetail
-                product={product}
-            />
-
+            <SSspin
+                loading={!product }
+            >
+                <ProductDetail
+                    product={product}
+                />
+            </SSspin>
         </WhLayout>
     )
 }
