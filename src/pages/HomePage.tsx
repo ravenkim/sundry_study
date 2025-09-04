@@ -8,6 +8,7 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/tabs'
 import ProductsTable from 'src/features/product/components/ProductsTable.tsx'
 import ProductsLazyScrollTable from 'src/features/product/components/ProductsLazyScrollTable.tsx'
+import ProductList from 'src/features/product/components/ProductList.tsx'
 
 const HomePage = () => {
     return (
@@ -16,19 +17,17 @@ const HomePage = () => {
                 <TabsList>
                     <TabsTrigger value="lazytable">스크롤 테이블</TabsTrigger>
                     <TabsTrigger value="table">페이지네이션 테이블</TabsTrigger>
-
                     <TabsTrigger value="list">list</TabsTrigger>
                     <TabsTrigger value="card">card</TabsTrigger>
                 </TabsList>
                 <TabsContent value="lazytable">
                     <ProductsLazyScrollTable />
                 </TabsContent>
-
                 <TabsContent value="table">
                     <ProductsTable />
                 </TabsContent>
                 <TabsContent value="list">
-                    Change your password here.
+                    <ProductList/>
                 </TabsContent>
                 <TabsContent value="card">
                     Change your password here.
