@@ -24,8 +24,8 @@ const asyncRequests = [
 
     {
         action: 'getProduct',
-        state: 'Product',
-        initialState: {},
+        state: 'product',
+        initialState: null,
         api: login,
     } ,
 
