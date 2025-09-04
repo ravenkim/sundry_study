@@ -20,7 +20,8 @@ const ProductDetailPage = () => {
 
     useEffect(() => {
         const id = pathname.split("/").pop();
-        dispatch(productAction.getProduct({ id }))
+
+        dispatch(productAction.getProduct(id))
     }, [dispatch, pathname])
 
 
