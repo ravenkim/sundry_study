@@ -1,4 +1,4 @@
-type Provider = 'AWS' | 'AZURE' | 'GCP'; // 프로바이더 예시, AWS만 활성화
+type Provider = 'AWS' | 'AZURE' | 'GCP' // 프로바이더 예시, AWS만 활성화
 
 const AWSRegionList = [
     'global',
@@ -19,43 +19,43 @@ const AWSRegionList = [
     'us-east-2',
     'us-west-1',
     'us-west-2',
-] as const;
+] as const
 
-type AWSCredentialType = 'ACCESS_KEY' | 'ASSUME_ROLE' | 'ROLES_ANYWHERE'; // AWS 크리덴셜 타입 예시, ACCESS_KEY만 활성화
+type AWSCredentialType = 'ACCESS_KEY' | 'ASSUME_ROLE' | 'ROLES_ANYWHERE' // AWS 크리덴셜 타입 예시, ACCESS_KEY만 활성화
 
 interface AWSCredential {
-    accessKeyId: string;
-    secretAccessKey: string;
-    roleArn?: string;
+    accessKeyId: string
+    secretAccessKey: string
+    roleArn?: string
 }
 
 interface AWSEventSource {
-    cloudTrailName?: string;
+    cloudTrailName?: string
 }
 
 // 타 프로바이더 예시, 미사용
-type AzureCredentialType = 'APPLICATION';
+type AzureCredentialType = 'APPLICATION'
 
 interface AzureCredential {
-    tenantId: string;
-    subscriptionId: string;
-    applicationId: string;
-    secretKey: string;
+    tenantId: string
+    subscriptionId: string
+    applicationId: string
+    secretKey: string
 }
 
 interface AzureEventSource {
-    storageAccountName?: string;
+    storageAccountName?: string
 }
 
-type GCPCredentialType = 'JSON_TEXT';
+type GCPCredentialType = 'JSON_TEXT'
 
 interface GCPCredential {
-    projectId?: string;
-    jsonText: string;
+    projectId?: string
+    jsonText: string
 }
 
 interface GCPEventSource {
-    storageAccountName?: string;
+    storageAccountName?: string
 }
 
 interface ScheduleScanSetting {
@@ -66,33 +66,33 @@ interface ScheduleScanSetting {
      * WEEK  : 매주을 의미
      * MONTH : 매월을 의미
      */
-    frequency: 'HOUR' | 'DAY' | 'WEEK' | 'MONTH';
-    date?: string; // '1' ~ '28'
-    weekday?: 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN';
-    hour?: string; // '0' ~ '23'
-    minute?: string; // '0' ~ '60', '5' 단위로 증가
+    frequency: 'HOUR' | 'DAY' | 'WEEK' | 'MONTH'
+    date?: string // '1' ~ '28'
+    weekday?: 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN'
+    hour?: string // '0' ~ '23'
+    minute?: string // '0' ~ '60', '5' 단위로 증가
 }
 
 // 상세 정보 불러오는 API를 GET, 저장하는 API를 PUT으로 가정
 interface Cloud {
-    id: string; // GET 요청 시 획득
-    provider: Provider;
-    name: string;
-    cloudGroupName?: string[]; // 선택 가능한 cloudGroupName 목록을 서버에서 받아야하지만, 편의상 상수로 선언하여 사용
-    eventProcessEnabled: boolean;
-    userActivityEnabled: boolean;
-    scheduleScanEnabled: boolean;
-    scheduleScanSetting?: ScheduleScanSetting; // scheduleScanEnabled = true 인 경우만 존재
-    regionList: string[];
-    proxyUrl?: string;
+    id: string // GET 요청 시 획득
+    provider: Provider
+    name: string
+    cloudGroupName?: string[] // 선택 가능한 cloudGroupName 목록을 서버에서 받아야하지만, 편의상 상수로 선언하여 사용
+    eventProcessEnabled: boolean
+    userActivityEnabled: boolean
+    scheduleScanEnabled: boolean
+    scheduleScanSetting?: ScheduleScanSetting // scheduleScanEnabled = true 인 경우만 존재
+    regionList: string[]
+    proxyUrl?: string
     /**
      * 비밀 값이라 GET 요쳥 시 마스킹 상태로 데이터 전송됨. 마스킹된 값을 UI에서 어떻게 활용할지는 자유
      * 예 : { accessKeyId: "AKIA********18", secretAccessKey: "jZd1********0n" }
      */
-    credentials: AWSCredential | AzureCredential | GCPCredential; 
-    credentialType: AWSCredentialType | AzureCredentialType | GCPCredentialType;
+    credentials: AWSCredential | AzureCredential | GCPCredential
+    credentialType: AWSCredentialType | AzureCredentialType | GCPCredentialType
     /**
      * 비밀 값이 아니라 마스킹되지 않음
      */
-    eventSource?: AWSEventSource | AzureEventSource | GCPEventSource;
+    eventSource?: AWSEventSource | AzureEventSource | GCPEventSource
 }

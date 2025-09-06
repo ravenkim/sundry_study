@@ -17,8 +17,8 @@ export const createCellFormatter = <T extends object>(
     options: CellFormatOptions<T>,
 ) => ({
     cell: ({
-               row,
-           }: {
+        row,
+    }: {
         row: { getValue: <K extends keyof T>(key: K) => T[K]; original: T }
     }) => {
         const {

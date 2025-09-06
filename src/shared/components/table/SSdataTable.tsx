@@ -1,5 +1,4 @@
-"use client"
-
+'use client'
 
 import {
     flexRender,
@@ -33,12 +32,12 @@ declare module '@tanstack/react-table' {
 }
 
 export function SSdataTable<TData, TValue>({
-                                               columns,
-                                               data,
-                                               pagination = {},
-                                               virtualization = {},
-                                               search = {},
-                                           }: DataTableProps<TData, TValue>) {
+    columns,
+    data,
+    pagination = {},
+    virtualization = {},
+    search = {},
+}: DataTableProps<TData, TValue>) {
     const {
         enabled: paginationEnabled = false,
         pageSize = 10,
@@ -175,10 +174,10 @@ export function SSdataTable<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                header.column.columnDef
-                                                    .header,
-                                                header.getContext(),
-                                            )}
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext(),
+                                              )}
                                     </TableHead>
                                 ))}
                             </TableRow>
