@@ -1,69 +1,59 @@
-export const cloudDummyList: Cloud[] = [
-    {
-        id: "cloud-001",
+// 더미 클라우드 데이터 20개
+export const cloudDummyList: Cloud[] = Array.from({ length: 200 }).map((_, idx) => {
+    const id = `cloud-${(idx + 1).toString().padStart(3, "0")}`;
+    const name = `aws-cloud-${idx + 1}`;
+    const regions = [
+        "ap-northeast-1",
+        "ap-northeast-2",
+        "us-east-1",
+        "us-west-2",
+        "eu-central-1",
+    ];
+    const cloudGroups = ["default", "finance", "devops", "staging", "research"];
+
+    return {
+        id,
         provider: "AWS",
-        name: "prod-aws-cloud",
-        cloudGroupName: ["default", "finance", "devops"],
-        eventProcessEnabled: true,
-        userActivityEnabled: true,
-        scheduleScanEnabled: true,
-        scheduleScanSetting: {
-            frequency: "DAY",
-            hour: "2",
-            minute: "0",
-        },
-        regionList: ["ap-northeast-2", "us-east-1"],
-        proxyUrl: "http://proxy.example.com:8080",
+        name,
+        cloudGroupName: [cloudGroups[idx % cloudGroups.length]],
+        eventProcessEnabled: idx % 2 === 0,
+        userActivityEnabled: idx % 3 !== 0,
+        scheduleScanEnabled: idx % 4 === 0,
+        scheduleScanSetting:
+            idx % 4 === 0
+                ? {
+                    frequency: ["HOUR", "DAY", "WEEK", "MONTH"][idx % 4] as
+                        | "HOUR"
+                        | "DAY"
+                        | "WEEK"
+                        | "MONTH",
+                    date: idx % 4 === 3 ? String(((idx % 28) + 1)) : undefined,
+                    weekday:
+                        idx % 4 === 2
+                            ? (["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"][
+                            idx % 7
+                                ] as
+                                | "MON"
+                                | "TUE"
+                                | "WED"
+                                | "THU"
+                                | "FRI"
+                                | "SAT"
+                                | "SUN")
+                            : undefined,
+                    hour: String(idx % 24),
+                    minute: String((idx * 5) % 60),
+                }
+                : undefined,
+        regionList: [regions[idx % regions.length]],
+        proxyUrl: idx % 5 === 0 ? `http://proxy${idx}.example.com:8080` : undefined,
         credentials: {
-            accessKeyId: "AKIA********18",
-            secretAccessKey: "jZd1********0n",
+            accessKeyId: `AKIA********${(1000 + idx).toString().slice(-2)}`,
+            secretAccessKey: `SeCrEt********${(2000 + idx).toString().slice(-2)}`,
         },
         credentialType: "ACCESS_KEY",
         eventSource: {
-            cloudTrailName: "main-trail",
+            cloudTrailName: `trail-${idx + 1}`,
         },
-    },
-    {
-        id: "cloud-002",
-        provider: "AWS",
-        name: "staging-aws-cloud",
-        cloudGroupName: ["default", "staging"],
-        eventProcessEnabled: false,
-        userActivityEnabled: true,
-        scheduleScanEnabled: false,
-        regionList: ["ap-northeast-1"],
-        credentials: {
-            accessKeyId: "AKIA********99",
-            secretAccessKey: "zZy8********1a",
-        },
-        credentialType: "ACCESS_KEY",
-        eventSource: {
-            cloudTrailName: "staging-trail",
-        },
-    },
-    {
-        id: "cloud-003",
-        provider: "AWS",
-        name: "analytics-aws-cloud",
-        cloudGroupName: ["analytics", "research"],
-        eventProcessEnabled: true,
-        userActivityEnabled: false,
-        scheduleScanEnabled: true,
-        scheduleScanSetting: {
-            frequency: "WEEK",
-            weekday: "MON",
-            hour: "6",
-            minute: "30",
-        },
-        regionList: ["eu-west-1", "eu-central-1"],
-        proxyUrl: undefined,
-        credentials: {
-            accessKeyId: "AKIA********55",
-            secretAccessKey: "dFs9********7b",
-        },
-        credentialType: "ACCESS_KEY",
-        eventSource: {
-            cloudTrailName: "analytics-trail",
-        },
-    },
-];
+    };
+});
