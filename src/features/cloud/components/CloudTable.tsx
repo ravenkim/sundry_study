@@ -1,5 +1,6 @@
 'use client'
 import { SSdataTable } from '@/shared/components/table/SSdataTable'
+import { Button } from '@/shared/lib/shadcn/components/ui/button'
 
 import { ColumnDef } from '@tanstack/react-table'
 import { cloudDummyList } from '@/features/cloud/data/cloudData'
@@ -76,6 +77,23 @@ const CloudTable = () => {
             accessorKey: 'proxyUrl',
             header: 'Proxy URL',
             cell: ({ row }) => row.getValue<string>('proxyUrl') ?? '-',
+        },
+        {
+            id: 'actions',
+            header: () => <div className="text-center">Actions</div>,
+            cell: ({ row }) => {
+                const cloud = row.original
+                return (
+                    <div className="text-center">
+                        <Button
+                            variant="outline"
+                            onClick={() => console.log('Edit', cloud)}
+                        >
+                            수정
+                        </Button>
+                    </div>
+                )
+            },
         },
     ]
 
