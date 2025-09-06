@@ -84,12 +84,20 @@ const CloudTable = () => {
             cell: ({ row }) => {
                 const cloud = row.original
                 return (
-                    <div className="text-center">
+                    <div className="flex items-center justify-center gap-2">
                         <Button
                             variant="outline"
+                            size="sm"
                             onClick={() => console.log('Edit', cloud)}
                         >
                             수정
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => console.log('Delete', cloud)}
+                        >
+                            삭제
                         </Button>
                     </div>
                 )
@@ -98,14 +106,21 @@ const CloudTable = () => {
     ]
 
     return (
-        <SSdataTable
-            columns={cloudColumns}
-            data={cloudDummyList}
-            virtualization={{
-                enabled: true,
-                containerHeight: 600,
-            }}
-        ></SSdataTable>
+        <div>
+            <div className="flex justify-end mb-4">
+                <Button onClick={() => console.log('Create Cloud clicked')}>
+                    클라우드 생성
+                </Button>
+            </div>
+            <SSdataTable
+                columns={cloudColumns}
+                data={cloudDummyList}
+                virtualization={{
+                    enabled: true,
+                    containerHeight: 600,
+                }}
+            ></SSdataTable>
+        </div>
     )
 }
 
