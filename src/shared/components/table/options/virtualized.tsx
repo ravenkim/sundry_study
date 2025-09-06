@@ -13,9 +13,9 @@ import { useEffect, useRef, useState } from 'react'
 import { VirtualizationOptions } from './types'
 
 export const VirtualizedTable = <TData,>({
-                                             table,
-                                             virtualization,
-                                         }: {
+    table,
+    virtualization,
+}: {
     table: TanstackTable<TData>
     virtualization: VirtualizationOptions
 }) => {
@@ -83,10 +83,10 @@ export const VirtualizedTable = <TData,>({
                                                 {header.isPlaceholder
                                                     ? null
                                                     : flexRender(
-                                                        header.column
-                                                            .columnDef.header,
-                                                        header.getContext(),
-                                                    )}
+                                                          header.column
+                                                              .columnDef.header,
+                                                          header.getContext(),
+                                                      )}
                                             </TableHead>
                                         ))}
                                     </TableRow>

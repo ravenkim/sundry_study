@@ -1,13 +1,10 @@
-"use client"
+'use client'
 import { SSdataTable } from '@/shared/components/table/SSdataTable'
-
 
 import { ColumnDef } from '@tanstack/react-table'
 import { cloudDummyList } from '@/features/cloud/data/cloudData'
 
 const CloudTable = () => {
-
-
     const cloudColumns: ColumnDef<Cloud>[] = [
         {
             accessorKey: 'id',
@@ -82,7 +79,6 @@ const CloudTable = () => {
         },
     ]
 
-
     return (
         <SSdataTable
             columns={cloudColumns}
@@ -91,10 +87,7 @@ const CloudTable = () => {
                 enabled: true,
                 containerHeight: 600,
             }}
-
-        >
-
-        </SSdataTable>
+        ></SSdataTable>
     )
 }
 

@@ -208,11 +208,10 @@ export function reduxMaker<
     } as () => SagaIterator
 
     type ReduxMakerReturn = {
-        slice: typeof slice;
-        actions: typeof slice.actions;
-        saga: () => SagaIterator;
-    };
-
+        slice: typeof slice
+        actions: typeof slice.actions
+        saga: () => SagaIterator
+    }
 
     return {
         slice,
@@ -220,5 +219,3 @@ export function reduxMaker<
         saga, // 명확하게 saga 포함
     } as ReduxMakerReturn
 }
-
-

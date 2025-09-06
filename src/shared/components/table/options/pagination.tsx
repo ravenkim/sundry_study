@@ -48,8 +48,8 @@ export const renderPagination = <TData,>(
         align === 'center'
             ? 'justify-center'
             : align === 'left'
-                ? 'justify-start'
-                : 'justify-end'
+              ? 'justify-start'
+              : 'justify-end'
 
     const currentPage = table.getState().pagination.pageIndex + 1
     const totalPages = table.getPageCount()
@@ -109,30 +109,30 @@ export const renderPagination = <TData,>(
 
                             {pageNumbers[pageNumbers.length - 1] <
                                 totalPages && (
-                                    <>
-                                        {pageNumbers[pageNumbers.length - 1] <
-                                            totalPages - 1 && (
-                                                <PaginationItem>
-                                                    <PaginationEllipsis />
-                                                </PaginationItem>
-                                            )}
+                                <>
+                                    {pageNumbers[pageNumbers.length - 1] <
+                                        totalPages - 1 && (
                                         <PaginationItem>
-                                            <PaginationLink
-                                                onClick={() =>
-                                                    table.setPageIndex(
-                                                        totalPages - 1,
-                                                    )
-                                                }
-                                                isActive={
-                                                    currentPage === totalPages
-                                                }
-                                                className="cursor-pointer"
-                                            >
-                                                {totalPages}
-                                            </PaginationLink>
+                                            <PaginationEllipsis />
                                         </PaginationItem>
-                                    </>
-                                )}
+                                    )}
+                                    <PaginationItem>
+                                        <PaginationLink
+                                            onClick={() =>
+                                                table.setPageIndex(
+                                                    totalPages - 1,
+                                                )
+                                            }
+                                            isActive={
+                                                currentPage === totalPages
+                                            }
+                                            className="cursor-pointer"
+                                        >
+                                            {totalPages}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                </>
+                            )}
                         </>
                     )}
 

@@ -13,9 +13,7 @@ const reducers = {
 }
 
 export function* rootSaga() {
-    yield all([
-        sampleSaga(),
-    ])
+    yield all([sampleSaga()])
 }
 
 const sagaMiddleware = createSagaMiddleware()
