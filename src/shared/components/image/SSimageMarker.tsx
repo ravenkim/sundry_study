@@ -24,7 +24,13 @@ export default function SSimageMarker({
 }: ImageMarkerProps) {
     return (
         <div className={`relative inline-block w-full ${className || ''}`}>
-            <Image src={src} alt="base" width={imageWidth} height={imageHeight} className="block h-auto w-full" />
+            <Image
+                src={src}
+                alt="base"
+                width={imageWidth}
+                height={imageHeight}
+                className="block h-auto w-full"
+            />
             {markers?.map((marker, i) => {
                 const widthPercent = (marker.size.x / imageWidth) * 100
 
