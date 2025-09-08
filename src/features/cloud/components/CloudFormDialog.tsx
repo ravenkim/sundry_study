@@ -223,6 +223,7 @@ export function CloudFormDialog({
 
     const scheduleScanEnabled = form.watch('scheduleScanEnabled')
     const scheduleFrequency = form.watch('scheduleScanSetting.frequency')
+    const provider = form.watch('provider')
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
@@ -316,300 +317,31 @@ export function CloudFormDialog({
                                             </div>
                                         </div>
 
-                                        <Separator />
 
-                                        <div className="space-y-6">
-                                            <h3 className="text-lg font-medium">
-                                                Credentials
-                                            </h3>
-                                            <div className="grid grid-cols-1 gap-6">
-                                                <FormField
-                                                    control={form.control}
-                                                    name="credentialType"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>
-                                                                Credential Type
-                                                            </FormLabel>
-                                                            <Select
-                                                                onValueChange={
-                                                                    field.onChange
-                                                                }
-                                                                defaultValue={
-                                                                    field.value
-                                                                }
-                                                            >
-                                                                <FormControl>
-                                                                    <SelectTrigger>
-                                                                        <SelectValue placeholder="Select a credential type" />
-                                                                    </SelectTrigger>
-                                                                </FormControl>
-                                                                <SelectContent>
-                                                                    <SelectItem value="ACCESS_KEY">
-                                                                        Access
-                                                                        Key
-                                                                    </SelectItem>
-                                                                    <SelectItem
-                                                                        value="ASSUME_ROLE"
-                                                                        disabled
-                                                                    >
-                                                                        Assume
-                                                                        Role
-                                                                        (soon)
-                                                                    </SelectItem>
-                                                                    <SelectItem
-                                                                        value="ROLES_ANYWHERE"
-                                                                        disabled
-                                                                    >
-                                                                        Roles
-                                                                        Anywhere
-                                                                        (soon)
-                                                                    </SelectItem>
-                                                                </SelectContent>
-                                                            </Select>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="accessKeyId"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>
-                                                                Access Key ID
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    placeholder="AKIA..."
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="secretAccessKey"
-                                                    render={({ field }) => (
-                                                        <FormItem className="md:col-span-2">
-                                                            <FormLabel>
-                                                                Secret Access
-                                                                Key
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    type="password"
-                                                                    placeholder={
-                                                                        mode ===
-                                                                        'edit'
-                                                                            ? 'Leave blank to keep unchanged'
-                                                                            : ''
-                                                                    }
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
-                                        </div>
+                                        {/*todo
+                                            컴포넌트화로 분리
+                                        */}
+                                        {provider === 'AWS' && (
+                                            <>
+                                                <Separator />
 
-                                        <Separator />
-
-                                        <div className="space-y-6">
-                                            <h3 className="text-lg font-medium">
-                                                Configuration
-                                            </h3>
-                                            <div className=" gap-6">
-                                                <FormField
-                                                    control={form.control}
-                                                    name="regionList"
-                                                    render={({ field }) => (
-                                                        <FormItem className="md:col-span-2">
-                                                            <FormLabel>
-                                                                Region List
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Textarea
-                                                                    placeholder="ap-northeast-2, us-east-1"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                            <FormDescription>
-                                                                Comma-separated
-                                                                list of regions.
-                                                            </FormDescription>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-
-                                                    name="cloudGroupName"
-                                                    render={({ field }) => (
-                                                        <FormItem
-                                                            className={'my-6 '}
-                                                        >
-                                                            <FormLabel>
-                                                                Cloud Group Name
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    placeholder="default, finance"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                            <FormDescription>
-                                                                Comma-separated
-                                                                list of group
-                                                                names.
-                                                            </FormDescription>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="proxyUrl"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>
-                                                                Proxy URL
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    placeholder="http://proxy.example.com:8080"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <Separator />
-
-                                        <div className="space-y-6">
-                                            <h3 className="text-lg font-medium">
-                                                Events & Scanning
-                                            </h3>
-                                            <div className="grid grid-cols-1 gap-6">
-                                                <FormField
-                                                    control={form.control}
-                                                    name="cloudTrailName"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>
-                                                                CloudTrail Name
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    placeholder="main-trail"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <div />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="eventProcessEnabled"
-                                                    render={({ field }) => (
-                                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-                                                            <div className="space-y-0.5">
-                                                                <FormLabel>
-                                                                    Enable Event
-                                                                    Processing
-                                                                </FormLabel>
-                                                            </div>
-                                                            <FormControl>
-                                                                <Switch
-                                                                    checked={
-                                                                        field.value
-                                                                    }
-                                                                    onCheckedChange={
-                                                                        field.onChange
-                                                                    }
-                                                                />
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="userActivityEnabled"
-                                                    render={({ field }) => (
-                                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-                                                            <div className="space-y-0.5">
-                                                                <FormLabel>
-                                                                    Enable User
-                                                                    Activity
-                                                                </FormLabel>
-                                                            </div>
-                                                            <FormControl>
-                                                                <Switch
-                                                                    checked={
-                                                                        field.value
-                                                                    }
-                                                                    onCheckedChange={
-                                                                        field.onChange
-                                                                    }
-                                                                />
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="scheduleScanEnabled"
-                                                    render={({ field }) => (
-                                                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm md:col-span-2">
-                                                            <div className="space-y-0.5">
-                                                                <FormLabel>
-                                                                    Enable
-                                                                    Schedule
-                                                                    Scan
-                                                                </FormLabel>
-                                                            </div>
-                                                            <FormControl>
-                                                                <Switch
-                                                                    checked={
-                                                                        field.value
-                                                                    }
-                                                                    onCheckedChange={
-                                                                        field.onChange
-                                                                    }
-                                                                />
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
-                                            {scheduleScanEnabled && (
-                                                <div className="mt-4 space-y-6 rounded-lg border p-4">
-                                                    <h4 className="text-md font-medium">
-                                                        Schedule Scan Settings
-                                                    </h4>
+                                                <div className="space-y-6">
+                                                    <h3 className="text-lg font-medium">
+                                                        Credentials
+                                                    </h3>
                                                     <div className="grid grid-cols-1 gap-6">
                                                         <FormField
                                                             control={
                                                                 form.control
                                                             }
-                                                            name="scheduleScanSetting.frequency"
+                                                            name="credentialType"
                                                             render={({
                                                                 field,
                                                             }) => (
                                                                 <FormItem>
                                                                     <FormLabel>
-                                                                        Frequency
+                                                                        Credential
+                                                                        Type
                                                                     </FormLabel>
                                                                     <Select
                                                                         onValueChange={
@@ -621,21 +353,29 @@ export function CloudFormDialog({
                                                                     >
                                                                         <FormControl>
                                                                             <SelectTrigger>
-                                                                                <SelectValue placeholder="Select frequency" />
+                                                                                <SelectValue placeholder="Select a credential type" />
                                                                             </SelectTrigger>
                                                                         </FormControl>
                                                                         <SelectContent>
-                                                                            <SelectItem value="HOUR">
-                                                                                Hourly
+                                                                            <SelectItem value="ACCESS_KEY">
+                                                                                Access
+                                                                                Key
                                                                             </SelectItem>
-                                                                            <SelectItem value="DAY">
-                                                                                Daily
+                                                                            <SelectItem
+                                                                                value="ASSUME_ROLE"
+                                                                                disabled
+                                                                            >
+                                                                                Assume
+                                                                                Role
+                                                                                (soon)
                                                                             </SelectItem>
-                                                                            <SelectItem value="WEEK">
-                                                                                Weekly
-                                                                            </SelectItem>
-                                                                            <SelectItem value="MONTH">
-                                                                                Monthly
+                                                                            <SelectItem
+                                                                                value="ROLES_ANYWHERE"
+                                                                                disabled
+                                                                            >
+                                                                                Roles
+                                                                                Anywhere
+                                                                                (soon)
                                                                             </SelectItem>
                                                                         </SelectContent>
                                                                     </Select>
@@ -643,120 +383,22 @@ export function CloudFormDialog({
                                                                 </FormItem>
                                                             )}
                                                         />
-
-                                                        {scheduleFrequency ===
-                                                            'WEEK' && (
-                                                            <FormField
-                                                                control={
-                                                                    form.control
-                                                                }
-                                                                name="scheduleScanSetting.weekday"
-                                                                render={({
-                                                                    field,
-                                                                }) => (
-                                                                    <FormItem>
-                                                                        <FormLabel>
-                                                                            Day
-                                                                            of
-                                                                            Week
-                                                                        </FormLabel>
-                                                                        <Select
-                                                                            onValueChange={
-                                                                                field.onChange
-                                                                            }
-                                                                            defaultValue={
-                                                                                field.value
-                                                                            }
-                                                                        >
-                                                                            <FormControl>
-                                                                                <SelectTrigger>
-                                                                                    <SelectValue placeholder="Select a day" />
-                                                                                </SelectTrigger>
-                                                                            </FormControl>
-                                                                            <SelectContent>
-                                                                                <SelectItem value="MON">
-                                                                                    Monday
-                                                                                </SelectItem>
-                                                                                <SelectItem value="TUE">
-                                                                                    Tuesday
-                                                                                </SelectItem>
-                                                                                <SelectItem value="WED">
-                                                                                    Wednesday
-                                                                                </SelectItem>
-                                                                                <SelectItem value="THU">
-                                                                                    Thursday
-                                                                                </SelectItem>
-                                                                                <SelectItem value="FRI">
-                                                                                    Friday
-                                                                                </SelectItem>
-                                                                                <SelectItem value="SAT">
-                                                                                    Saturday
-                                                                                </SelectItem>
-                                                                                <SelectItem value="SUN">
-                                                                                    Sunday
-                                                                                </SelectItem>
-                                                                            </SelectContent>
-                                                                        </Select>
-                                                                        <FormMessage />
-                                                                    </FormItem>
-                                                                )}
-                                                            />
-                                                        )}
-                                                        {scheduleFrequency ===
-                                                            'MONTH' && (
-                                                            <FormField
-                                                                control={
-                                                                    form.control
-                                                                }
-                                                                name="scheduleScanSetting.date"
-                                                                render={({
-                                                                    field,
-                                                                }) => (
-                                                                    <FormItem>
-                                                                        <FormLabel>
-                                                                            Day
-                                                                            of
-                                                                            Month
-                                                                        </FormLabel>
-                                                                        <FormControl>
-                                                                            <Input
-                                                                                type="number"
-                                                                                min={
-                                                                                    1
-                                                                                }
-                                                                                max={
-                                                                                    28
-                                                                                }
-                                                                                {...field}
-                                                                            />
-                                                                        </FormControl>
-                                                                        <FormMessage />
-                                                                    </FormItem>
-                                                                )}
-                                                            />
-                                                        )}
-
                                                         <FormField
                                                             control={
                                                                 form.control
                                                             }
-                                                            name="scheduleScanSetting.hour"
+                                                            name="accessKeyId"
                                                             render={({
                                                                 field,
                                                             }) => (
                                                                 <FormItem>
                                                                     <FormLabel>
-                                                                        Hour
+                                                                        Access
+                                                                        Key ID
                                                                     </FormLabel>
                                                                     <FormControl>
                                                                         <Input
-                                                                            type="number"
-                                                                            min={
-                                                                                0
-                                                                            }
-                                                                            max={
-                                                                                23
-                                                                            }
+                                                                            placeholder="AKIA..."
                                                                             {...field}
                                                                         />
                                                                     </FormControl>
@@ -768,25 +410,24 @@ export function CloudFormDialog({
                                                             control={
                                                                 form.control
                                                             }
-                                                            name="scheduleScanSetting.minute"
+                                                            name="secretAccessKey"
                                                             render={({
                                                                 field,
                                                             }) => (
-                                                                <FormItem>
+                                                                <FormItem className="md:col-span-2">
                                                                     <FormLabel>
-                                                                        Minute
+                                                                        Secret
+                                                                        Access
+                                                                        Key
                                                                     </FormLabel>
                                                                     <FormControl>
                                                                         <Input
-                                                                            type="number"
-                                                                            min={
-                                                                                0
-                                                                            }
-                                                                            max={
-                                                                                59
-                                                                            }
-                                                                            step={
-                                                                                5
+                                                                            type="password"
+                                                                            placeholder={
+                                                                                mode ===
+                                                                                'edit'
+                                                                                    ? 'Leave blank to keep unchanged'
+                                                                                    : ''
                                                                             }
                                                                             {...field}
                                                                         />
@@ -797,8 +438,444 @@ export function CloudFormDialog({
                                                         />
                                                     </div>
                                                 </div>
-                                            )}
-                                        </div>
+
+                                                <Separator />
+
+                                                <div className="space-y-6">
+                                                    <h3 className="text-lg font-medium">
+                                                        Configuration
+                                                    </h3>
+                                                    <div className="gap-6">
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="regionList"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem className="md:col-span-2">
+                                                                    <FormLabel>
+                                                                        Region
+                                                                        List
+                                                                    </FormLabel>
+                                                                    <FormControl>
+                                                                        <Textarea
+                                                                            placeholder="ap-northeast-2, us-east-1"
+                                                                            {...field}
+                                                                        />
+                                                                    </FormControl>
+                                                                    <FormDescription>
+                                                                        Comma-separated
+                                                                        list of
+                                                                        regions.
+                                                                    </FormDescription>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="cloudGroupName"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem
+                                                                    className={
+                                                                        'my-6'
+                                                                    }
+                                                                >
+                                                                    <FormLabel>
+                                                                        Cloud
+                                                                        Group
+                                                                        Name
+                                                                    </FormLabel>
+                                                                    <FormControl>
+                                                                        <Input
+                                                                            placeholder="default, finance"
+                                                                            {...field}
+                                                                        />
+                                                                    </FormControl>
+                                                                    <FormDescription>
+                                                                        Comma-separated
+                                                                        list of
+                                                                        group
+                                                                        names.
+                                                                    </FormDescription>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="proxyUrl"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem>
+                                                                    <FormLabel>
+                                                                        Proxy
+                                                                        URL
+                                                                    </FormLabel>
+                                                                    <FormControl>
+                                                                        <Input
+                                                                            placeholder="http://proxy.example.com:8080"
+                                                                            {...field}
+                                                                        />
+                                                                    </FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <Separator />
+
+                                                <div className="space-y-6">
+                                                    <h3 className="text-lg font-medium">
+                                                        Events & Scanning
+                                                    </h3>
+                                                    <div className="grid grid-cols-1 gap-6">
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="cloudTrailName"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem>
+                                                                    <FormLabel>
+                                                                        CloudTrail
+                                                                        Name
+                                                                    </FormLabel>
+                                                                    <FormControl>
+                                                                        <Input
+                                                                            placeholder="main-trail"
+                                                                            {...field}
+                                                                        />
+                                                                    </FormControl>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                        <div />
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="eventProcessEnabled"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                                                                    <div className="space-y-0.5">
+                                                                        <FormLabel>
+                                                                            Enable
+                                                                            Event
+                                                                            Processing
+                                                                        </FormLabel>
+                                                                    </div>
+                                                                    <FormControl>
+                                                                        <Switch
+                                                                            checked={
+                                                                                field.value
+                                                                            }
+                                                                            onCheckedChange={
+                                                                                field.onChange
+                                                                            }
+                                                                        />
+                                                                    </FormControl>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="userActivityEnabled"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                                                                    <div className="space-y-0.5">
+                                                                        <FormLabel>
+                                                                            Enable
+                                                                            User
+                                                                            Activity
+                                                                        </FormLabel>
+                                                                    </div>
+                                                                    <FormControl>
+                                                                        <Switch
+                                                                            checked={
+                                                                                field.value
+                                                                            }
+                                                                            onCheckedChange={
+                                                                                field.onChange
+                                                                            }
+                                                                        />
+                                                                    </FormControl>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                        <FormField
+                                                            control={
+                                                                form.control
+                                                            }
+                                                            name="scheduleScanEnabled"
+                                                            render={({
+                                                                field,
+                                                            }) => (
+                                                                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm md:col-span-2">
+                                                                    <div className="space-y-0.5">
+                                                                        <FormLabel>
+                                                                            Enable
+                                                                            Schedule
+                                                                            Scan
+                                                                        </FormLabel>
+                                                                    </div>
+                                                                    <FormControl>
+                                                                        <Switch
+                                                                            checked={
+                                                                                field.value
+                                                                            }
+                                                                            onCheckedChange={
+                                                                                field.onChange
+                                                                            }
+                                                                        />
+                                                                    </FormControl>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                    {scheduleScanEnabled && (
+                                                        <div className="mt-4 space-y-6 rounded-lg border p-4">
+                                                            <h4 className="text-md font-medium">
+                                                                Schedule Scan
+                                                                Settings
+                                                            </h4>
+                                                            <div className="grid grid-cols-1 gap-6">
+                                                                <FormField
+                                                                    control={
+                                                                        form.control
+                                                                    }
+                                                                    name="scheduleScanSetting.frequency"
+                                                                    render={({
+                                                                        field,
+                                                                    }) => (
+                                                                        <FormItem>
+                                                                            <FormLabel>
+                                                                                Frequency
+                                                                            </FormLabel>
+                                                                            <Select
+                                                                                onValueChange={
+                                                                                    field.onChange
+                                                                                }
+                                                                                defaultValue={
+                                                                                    field.value
+                                                                                }
+                                                                            >
+                                                                                <FormControl>
+                                                                                    <SelectTrigger>
+                                                                                        <SelectValue placeholder="Select frequency" />
+                                                                                    </SelectTrigger>
+                                                                                </FormControl>
+                                                                                <SelectContent>
+                                                                                    <SelectItem value="HOUR">
+                                                                                        Hourly
+                                                                                    </SelectItem>
+                                                                                    <SelectItem value="DAY">
+                                                                                        Daily
+                                                                                    </SelectItem>
+                                                                                    <SelectItem value="WEEK">
+                                                                                        Weekly
+                                                                                    </SelectItem>
+                                                                                    <SelectItem value="MONTH">
+                                                                                        Monthly
+                                                                                    </SelectItem>
+                                                                                </SelectContent>
+                                                                            </Select>
+                                                                            <FormMessage />
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+
+                                                                {scheduleFrequency ===
+                                                                    'WEEK' && (
+                                                                    <FormField
+                                                                        control={
+                                                                            form.control
+                                                                        }
+                                                                        name="scheduleScanSetting.weekday"
+                                                                        render={({
+                                                                            field,
+                                                                        }) => (
+                                                                            <FormItem>
+                                                                                <FormLabel>
+                                                                                    Day
+                                                                                    of
+                                                                                    Week
+                                                                                </FormLabel>
+                                                                                <Select
+                                                                                    onValueChange={
+                                                                                        field.onChange
+                                                                                    }
+                                                                                    defaultValue={
+                                                                                        field.value
+                                                                                    }
+                                                                                >
+                                                                                    <FormControl>
+                                                                                        <SelectTrigger>
+                                                                                            <SelectValue placeholder="Select a day" />
+                                                                                        </SelectTrigger>
+                                                                                    </FormControl>
+                                                                                    <SelectContent>
+                                                                                        <SelectItem value="MON">
+                                                                                            Monday
+                                                                                        </SelectItem>
+                                                                                        <SelectItem value="TUE">
+                                                                                            Tuesday
+                                                                                        </SelectItem>
+                                                                                        <SelectItem value="WED">
+                                                                                            Wednesday
+                                                                                        </SelectItem>
+                                                                                        <SelectItem value="THU">
+                                                                                            Thursday
+                                                                                        </SelectItem>
+                                                                                        <SelectItem value="FRI">
+                                                                                            Friday
+                                                                                        </SelectItem>
+                                                                                        <SelectItem value="SAT">
+                                                                                            Saturday
+                                                                                        </SelectItem>
+                                                                                        <SelectItem value="SUN">
+                                                                                            Sunday
+                                                                                        </SelectItem>
+                                                                                    </SelectContent>
+                                                                                </Select>
+                                                                                <FormMessage />
+                                                                            </FormItem>
+                                                                        )}
+                                                                    />
+                                                                )}
+                                                                {scheduleFrequency ===
+                                                                    'MONTH' && (
+                                                                    <FormField
+                                                                        control={
+                                                                            form.control
+                                                                        }
+                                                                        name="scheduleScanSetting.date"
+                                                                        render={({
+                                                                            field,
+                                                                        }) => (
+                                                                            <FormItem>
+                                                                                <FormLabel>
+                                                                                    Day
+                                                                                    of
+                                                                                    Month
+                                                                                </FormLabel>
+                                                                                <FormControl>
+                                                                                    <Input
+                                                                                        type="number"
+                                                                                        min={
+                                                                                            1
+                                                                                        }
+                                                                                        max={
+                                                                                            28
+                                                                                        }
+                                                                                        {...field}
+                                                                                    />
+                                                                                </FormControl>
+                                                                                <FormMessage />
+                                                                            </FormItem>
+                                                                        )}
+                                                                    />
+                                                                )}
+
+                                                                <FormField
+                                                                    control={
+                                                                        form.control
+                                                                    }
+                                                                    name="scheduleScanSetting.hour"
+                                                                    render={({
+                                                                        field,
+                                                                    }) => (
+                                                                        <FormItem>
+                                                                            <FormLabel>
+                                                                                Hour
+                                                                            </FormLabel>
+                                                                            <FormControl>
+                                                                                <Input
+                                                                                    type="number"
+                                                                                    min={
+                                                                                        0
+                                                                                    }
+                                                                                    max={
+                                                                                        23
+                                                                                    }
+                                                                                    {...field}
+                                                                                />
+                                                                            </FormControl>
+                                                                            <FormMessage />
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+                                                                <FormField
+                                                                    control={
+                                                                        form.control
+                                                                    }
+                                                                    name="scheduleScanSetting.minute"
+                                                                    render={({
+                                                                        field,
+                                                                    }) => (
+                                                                        <FormItem>
+                                                                            <FormLabel>
+                                                                                Minute
+                                                                            </FormLabel>
+                                                                            <FormControl>
+                                                                                <Input
+                                                                                    type="number"
+                                                                                    min={
+                                                                                        0
+                                                                                    }
+                                                                                    max={
+                                                                                        59
+                                                                                    }
+                                                                                    step={
+                                                                                        5
+                                                                                    }
+                                                                                    {...field}
+                                                                                />
+                                                                            </FormControl>
+                                                                            <FormMessage />
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                                        {/*
+                                        {provider === 'AZURE' && (
+                                            <>
+                                                // Azure form
+                                            </>
+                                        )}
+                                        */}
+                                        {/*
+                                        {provider === 'GCP' && (
+                                            <>
+                                                // GCP form
+                                            </>
+                                        )}
+                                        */}
                                         <DialogFooter className="!mt-8">
                                             <Button
                                                 type="button"
