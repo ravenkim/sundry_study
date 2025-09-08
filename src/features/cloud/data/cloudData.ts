@@ -1,5 +1,5 @@
 // 더미 클라우드 데이터 20개
-import { Cloud } from '@/test/types'
+import { Cloud } from '@/features/cloud/types'
 
 export const cloudDummyList: Cloud[] = Array.from({ length: 200 }).map(
     (_, idx) => {
