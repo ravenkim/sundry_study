@@ -1,4 +1,4 @@
-import { Cloud } from '@/test/types'
+import { Cloud } from '@/features/cloud/types'
 
 function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms))
