@@ -8,7 +8,7 @@ const SecondQueryComponent = () => {
         queryKey: ['pokemonList'],
         queryFn: fetchPokemonList,
         staleTime: 0, // 항상 stale로 간주
-        cacheTime: 0, // 캐시 저장 안 함
+        gcTime: 0, // 캐시 저장 안 함
         refetchOnMount: true, // 마운트될 때 무조건 다시 요청
         refetchOnWindowFocus: false, // 탭 포커싱시 재요청 방지 (원하면 true로)
     })
