@@ -1,3 +1,5 @@
+import { Cloud } from '@/test/types'
+
 function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms))
 }
