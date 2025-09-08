@@ -4,7 +4,7 @@ function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-async function fetchCloudDetail(id: string): Promise<Cloud> {
+export async function fetchCloudDetail(id: string): Promise<Cloud> {
     // 0 ~ 500ms 랜덤 지연
     const delay = Math.floor(Math.random() * 500)
     await sleep(delay)

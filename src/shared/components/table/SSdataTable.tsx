@@ -31,13 +31,13 @@ declare module '@tanstack/react-table' {
     }
 }
 
-export function SSdataTable<TData, TValue>({
+export function SSdataTable<TData>({
     columns,
     data,
     pagination = {},
     virtualization = {},
     search = {},
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData, unknown>) {
     const {
         enabled: paginationEnabled = false,
         pageSize = 10,

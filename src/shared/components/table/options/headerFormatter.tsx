@@ -12,6 +12,7 @@ interface HeaderFormatOptions<T extends object> {
 }
 
 // 헤더 포맷터 생성기
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createHeaderFormatter = <T extends object>(
     options: HeaderFormatOptions<T>,
 ): Partial<ColumnDef<T>> => ({
