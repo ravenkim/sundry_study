@@ -74,7 +74,7 @@ interface ScheduleScanSetting {
 }
 
 // 상세 정보 불러오는 API를 GET, 저장하는 API를 PUT으로 가정
-interface Cloud {
+export interface Cloud {
     id: string // GET 요청 시 획득
     provider: Provider
     name: string
