@@ -1,64 +1,43 @@
-type Provider = 'AWS' | 'AZURE' | 'GCP' // 프로바이더 예시, AWS만 활성화
+export type Provider = 'AWS' | 'AZURE' | 'GCP' // 프로바이더 예시, AWS만 활성화
 
-const AWSRegionList = [
-    'global',
-    'ap-northeast-1',
-    'ap-northeast-2',
-    'ap-northeast-3',
-    'ap-south-1',
-    'ap-southeast-1',
-    'ap-southeast-2',
-    'ca-central-1',
-    'eu-central-1',
-    'eu-north-1',
-    'eu-west-1',
-    'eu-west-2',
-    'eu-west-3',
-    'sa-east-1',
-    'us-east-1',
-    'us-east-2',
-    'us-west-1',
-    'us-west-2',
-] as const
+export type AWSCredentialType = 'ACCESS_KEY' | 'ASSUME_ROLE' | 'ROLES_ANYWHERE' // AWS 크리덴셜 타입 예시, ACCESS_KEY만 활성화
 
-type AWSCredentialType = 'ACCESS_KEY' | 'ASSUME_ROLE' | 'ROLES_ANYWHERE' // AWS 크리덴셜 타입 예시, ACCESS_KEY만 활성화
-
-interface AWSCredential {
+export interface AWSCredential {
     accessKeyId: string
     secretAccessKey: string
     roleArn?: string
 }
 
-interface AWSEventSource {
+export interface AWSEventSource {
     cloudTrailName?: string
 }
 
 // 타 프로바이더 예시, 미사용
-type AzureCredentialType = 'APPLICATION'
+export type AzureCredentialType = 'APPLICATION'
 
-interface AzureCredential {
+export interface AzureCredential {
     tenantId: string
     subscriptionId: string
     applicationId: string
     secretKey: string
 }
 
-interface AzureEventSource {
+export interface AzureEventSource {
     storageAccountName?: string
 }
 
-type GCPCredentialType = 'JSON_TEXT'
+export type GCPCredentialType = 'JSON_TEXT'
 
-interface GCPCredential {
+export interface GCPCredential {
     projectId?: string
     jsonText: string
 }
 
-interface GCPEventSource {
+export interface GCPEventSource {
     storageAccountName?: string
 }
 
-interface ScheduleScanSetting {
+export interface ScheduleScanSetting {
     /**
      * frequency에 따라 각 필드의 필수 여부가 변경됨. 어떤 필드가 필수로 올지는 자유롭게 선택
      * HOUR  : 매시간을 의미
