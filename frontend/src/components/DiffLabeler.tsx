@@ -39,6 +39,13 @@ const DiffLabeler = (props: Props) => {
     const [searchText, setSearchText] = useState('')
     const [resultDiff, setResultDiff] = useState('')
 
+    const fetchDiff = async () => {
+        const res = await fetch(`/api/diff?url=${encodeURIComponent(searchText)}`);
+        const text = await res.text();
+        setResultDiff(text);
+    };
+
+
 
     // ----------------------------------------------------
     const html = useMemo(() => {
@@ -109,7 +116,11 @@ const DiffLabeler = (props: Props) => {
             <div className="flex h-screen flex-col px-12 pb-4 pt-12">
                 <div className="pb-8">
                     <UrlForm
-                        onSubmit={() => {console.log(searchText)}}
+                        onSubmit={() => {
+
+                            console.log(searchText)
+                            fetchDiff()
+                        }}
                         onChange={(e) => {setSearchText(e.target.value)}}
                         value={searchText}
                     />
