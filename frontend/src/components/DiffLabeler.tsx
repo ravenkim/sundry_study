@@ -1,4 +1,5 @@
 'use client'
+import useDiff from '../queries/useDiff'
 import { labelSelectedRange, unlabelById } from '@/utils/diff-labeler'
 import { Label } from '@/utils/types'
 import * as diff2html from 'diff2html'
@@ -37,23 +38,26 @@ const DiffLabeler = (props: Props) => {
 
     // 1-2 기능 추가 ---------------------------------------
     const [searchText, setSearchText] = useState('')
-    const [resultDiff, setResultDiff] = useState('')
+    const [enabled, setEnabled] = useState(false)
 
-    const fetchDiff = async () => {
-        const res = await fetch(`/api/diff?url=${encodeURIComponent(searchText)}`);
-        const text = await res.text();
-        setResultDiff(text);
-    };
+    const { data } = useDiff({
+        searchText,
+        enabled,
+        onSuccess: () => {
+            setEnabled(false)
+        },
+    })
 
 
 
     // ----------------------------------------------------
     const html = useMemo(() => {
-        return diff2html.html(resultDiff, {
+        if (!data) return ''
+        return diff2html.html(data, {
             outputFormat: 'side-by-side',
             drawFileList: false,
         })
-    }, [resultDiff])
+    }, [data])
 
     useEffect(() => {
         if (!ref.current) {
@@ -116,12 +120,10 @@ const DiffLabeler = (props: Props) => {
             <div className="flex h-screen flex-col px-12 pb-4 pt-12">
                 <div className="pb-8">
                     <UrlForm
-                        onSubmit={() => {
-
-                            console.log(searchText)
-                            fetchDiff()
+                        onSubmit={() => setEnabled(true)}
+                        onChange={(e) => {
+                            setSearchText(e.target.value)
                         }}
-                        onChange={(e) => {setSearchText(e.target.value)}}
                         value={searchText}
                     />
                 </div>
