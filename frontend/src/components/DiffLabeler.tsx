@@ -21,6 +21,7 @@ import {
     increaseNumber,
     substractClass,
 } from '@/utils/dom'
+import SSspin from "@/components/SSspin";
 
 type Props = {
     diffString: string
@@ -38,16 +39,20 @@ const DiffLabeler = (props: Props) => {
 
     // 1-2 기능 추가 ---------------------------------------
     const [searchText, setSearchText] = useState('')
+    const [submittedSearchText, setSubmittedSearchText] = useState('')
+
     const [enabled, setEnabled] = useState(false)
 
-    const { data } = useDiff({
-        searchText,
+    const { data , isLoading} = useDiff({
+        searchText: submittedSearchText,
         enabled,
         onSuccess: () => {
             setEnabled(false)
         },
     })
 
+
+ 
 
 
     // ----------------------------------------------------
@@ -117,10 +122,17 @@ const DiffLabeler = (props: Props) => {
 
     return (
         <>
-            <div className="flex h-screen flex-col px-12 pb-4 pt-12">
+            <div className="flex w-screen h-screen flex-col px-12 pb-4 pt-12">
+                <SSspin
+                    loading={isLoading}
+                    className={'w-full h-full flex flex-col '}
+                >
                 <div className="pb-8">
                     <UrlForm
-                        onSubmit={() => setEnabled(true)}
+                        onSubmit={() => {
+                            setSubmittedSearchText(searchText)
+                            setEnabled(true)
+                        }}
                         onChange={(e) => {
                             setSearchText(e.target.value)
                         }}
@@ -207,6 +219,7 @@ const DiffLabeler = (props: Props) => {
                         </button>
                     </div>
                 </div>
+                </SSspin>
             </div>
         </>
     )
