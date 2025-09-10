@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 .hidden {
-  display: none;
+    display: none;
 }
 .labeled {
-  background-color: yellow;
+    background-color: yellow;
 }
-
