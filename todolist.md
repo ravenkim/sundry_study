@@ -7,7 +7,7 @@
 ## 프로젝트 세팅
 - webstorm 지원 기능 추가 - 완료 
 - 패키지 메니저 설정 - 완료 
-- 프리티어 추가,  테일윈드 순서 플러그인 추가 
+- 프리티어 추가,  테일윈드 순서 플러그인 추가 - 완료 
 
 ## 유저스토리 [1] github 의 open source repository 에서 pull request 들의 git diff 결과를 가져온다.
 - UrlForm component 안에 onchange, onSubmit 구현 
@@ -76,7 +76,12 @@
     - 특정 library 를 가져와 사용할때, library 의존성을 하나의 모듈로만 국한시킬 수 있는지.
 - Docker 이해도
     - docker compose 를 project 개발에 사용할 수 있는지.
+  
 - 기타
     - prettierrc 파일을 project 에 적용하여 format 을 통일할 수 있는지.
+        - prettierrc 파일을 성공적으로 적용하였다.
+        - prettierrc 실행 명령어를 package.json 에 등록하였다. 
+        - prettierrc 플러그인으로 테일윈드 순서 format을 통일하였다.
+
 
 테일윈드 정렬 기능 추가 
