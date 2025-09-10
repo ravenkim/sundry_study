@@ -93,22 +93,59 @@ const DiffLabeler = (props: Props) => {
     }, [html, fileIndex, numberOfFiles])
 
     useEffect(() => {
-        if (!selectedRange) return
+        if (!selectedRange || !ref.current) return
+
+        const startNode = selectedRange.startContainer
+        let parentTd: HTMLElement | null = (
+            startNode.nodeType === Node.ELEMENT_NODE
+                ? startNode
+                : startNode.parentElement
+        ) as HTMLElement
+
+        while (
+            parentTd &&
+            parentTd.tagName !== 'TD' &&
+            parentTd !== ref.current
+        ) {
+            parentTd = parentTd.parentElement
+        }
+
+        let changeType: Label['changeType'] | undefined = undefined
+
+        if (parentTd && parentTd.tagName === 'TD') {
+            if (parentTd.classList.contains('d2h-ins')) {
+                changeType = 'Inserted'
+            } else if (parentTd.classList.contains('d2h-del')) {
+                changeType = 'Deleted'
+            }
+        }
+
+        if (!changeType) {
+            return
+        }
+
         const labeledRange = labelSelectedRange(
             selectedRange,
             labelIdRef.current,
         )
 
+        const fileWrappers =
+            ref.current.getElementsByClassName('d2h-file-wrapper')
+        const currentFileWrapper = fileWrappers[fileIndex]
+        const fileNameElement =
+            currentFileWrapper?.getElementsByClassName('d2h-file-name')[0]
+        const fileName = fileNameElement?.textContent?.trim() ?? 'unknown'
+
         const label: Label = {
             id: labelIdRef.current,
             selectedRange: labeledRange,
-            fileName: '',
-            changeType: 'Inserted',
+            fileName: fileName,
+            changeType: changeType,
         }
 
         labelIdRef.current++
         setLabelList((list) => [...list, label])
-    }, [selectedRange])
+    }, [selectedRange, fileIndex])
 
     const onSelectRange = useCallback((range: Range) => {
         setSelectedRange(range)

@@ -12,7 +12,7 @@
 - 프리티어 추가,  테일윈드 순서 플러그인 추가 - 완료 
 
 
-## 유저스토리 [1] github 의 open source repository 에서 pull request 들의 git diff 결과를 가져온다.
+## 유저스토리 [1] github 의 open source repository 에서 pull request 들의 git diff 결과를 가져온다. - 완료 
 1. UrlForm component 안에 onchange, onSubmit, value 구현 - 완료 
 2. 임시데이터 삭제및 빈값일때 확인 - 완료
 3. state 에 diff 추가해서 데이터 fetch - 완료
@@ -20,9 +20,11 @@
 5. 기존 props 로 받던 하드 코딩된 데이터 변경 및 기존 임시 데이터 삭제 - 완료
 6. diff data 가 state 가 아니라서 랜더링 안되는 문제 해결 - 완료 
 
-## 유저스토리 [7]
-1. fileName 수정
-2. changeType 수정 
+## 유저스토리 [7] - 완료 
+1. fileName 수정 - 완료 
+2. changeType 수정 - 완료
+
+
 
 ---
 # 기능 요구사항
