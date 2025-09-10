@@ -14,7 +14,7 @@
 
 ## 유저스토리 [1] github 의 open source repository 에서 pull request 들의 git diff 결과를 가져온다.
 1. UrlForm component 안에 onchange, onSubmit, value 구현 - 완료 
-2. 임시데이터 삭제및 빈값일때 확인 
+2. 임시데이터 삭제및 빈값일때 확인 - 완료
 3. state 에 diff 추가해서 데이터 fetch
 4. 비동기 데이터 로딩 처리 (spinner 추가)
 5. 기존 props 로 받던 하드 코딩된 데이터 변경 및 기존 임시 데이터 삭제 
