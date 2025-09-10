@@ -18,10 +18,11 @@
 3. state 에 diff 추가해서 데이터 fetch - 완료
 4. 비동기 데이터 로딩 처리 (spinner 추가) - 완료
 5. 기존 props 로 받던 하드 코딩된 데이터 변경 및 기존 임시 데이터 삭제 - 완료
-6. diff data 가 state 가 아니라서 랜더링 안되는 문제 해결 
+6. diff data 가 state 가 아니라서 랜더링 안되는 문제 해결 - 완료 
 
 ## 유저스토리 [7]
-
+1. fileName 수정
+2. changeType 수정 
 
 ---
 # 기능 요구사항

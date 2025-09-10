@@ -21,7 +21,7 @@ import {
     increaseNumber,
     substractClass,
 } from '@/utils/dom'
-import SSspin from "@/components/SSspin";
+import SSspin from '@/components/SSspin'
 
 type Props = {
     diffString: string
@@ -37,13 +37,12 @@ const DiffLabeler = (props: Props) => {
         undefined,
     )
 
-    // 1-2 기능 추가 ---------------------------------------
     const [searchText, setSearchText] = useState('')
     const [submittedSearchText, setSubmittedSearchText] = useState('')
 
     const [enabled, setEnabled] = useState(false)
 
-    const { data , isLoading} = useDiff({
+    const { data, isLoading } = useDiff({
         searchText: submittedSearchText,
         enabled,
         onSuccess: () => {
@@ -51,14 +50,8 @@ const DiffLabeler = (props: Props) => {
         },
     })
 
-
- 
-
-
-    // ----------------------------------------------------
     const html = useMemo(() => {
-        if (!data) return ''
-        return diff2html.html(data, {
+        return diff2html.html(data || '', {
             outputFormat: 'side-by-side',
             drawFileList: false,
         })
@@ -123,103 +116,105 @@ const DiffLabeler = (props: Props) => {
 
     return (
         <>
-            <div className="flex w-screen h-screen flex-col px-12 pb-4 pt-12">
+            <div className="flex h-screen w-screen flex-col px-12 pb-4 pt-12">
                 <SSspin
                     loading={isLoading}
-                    className={'w-full h-full flex flex-col '}
+                    className={'flex h-full w-full flex-col'}
                 >
-                <div className="pb-8">
-                    <UrlForm
-                        onSubmit={() => {
-                            setSubmittedSearchText(searchText)
-                            setEnabled(true)
-                        }}
-                        onChange={(e) => {
-                            setSearchText(e.target.value)
-                        }}
-                        value={searchText}
+                    <div className="pb-8">
+                        <UrlForm
+                            onSubmit={() => {
+                                setSubmittedSearchText(searchText)
+                                setEnabled(true)
+                            }}
+                            onChange={(e) => {
+                                setSearchText(e.target.value)
+                            }}
+                            value={searchText}
+                        />
+                    </div>
+                    <DiffRenderer
+                        html={html}
+                        ref={ref}
+                        onSelectRange={onSelectRange}
                     />
-                </div>
-                <DiffRenderer
-                    html={html}
-                    ref={ref}
-                    onSelectRange={onSelectRange}
-                />
-                <div>
-                    <div className="flex flex-row py-2">
-                        <div className="flex basis-1/4 flex-row space-x-4 py-2 pr-6">
-                            <button
-                                className={`flex h-12 basis-1/2 items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
-                                onClick={() => {
-                                    if (labelList.length > 0) {
-                                        const lastId =
-                                            labelList[labelList.length - 1].id
-                                        unlabelById(lastId)
-                                        setLabelList(
-                                            labelList.filter(
-                                                (label) => label.id != lastId,
+                    <div>
+                        <div className="flex flex-row py-2">
+                            <div className="flex basis-1/4 flex-row space-x-4 py-2 pr-6">
+                                <button
+                                    className={`flex h-12 basis-1/2 items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
+                                    onClick={() => {
+                                        if (labelList.length > 0) {
+                                            const lastId =
+                                                labelList[labelList.length - 1]
+                                                    .id
+                                            unlabelById(lastId)
+                                            setLabelList(
+                                                labelList.filter(
+                                                    (label) =>
+                                                        label.id != lastId,
+                                                ),
+                                            )
+                                        }
+                                    }}
+                                >
+                                    Undo
+                                </button>
+                                <button
+                                    className={`flex h-12 basis-1/2 items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
+                                    onClick={() => {
+                                        labelList.forEach((label) => {
+                                            unlabelById(label.id)
+                                        })
+                                        setLabelList([])
+                                    }}
+                                >
+                                    Refresh
+                                </button>
+                            </div>
+                            <div className="flex basis-3/4 flex-row space-x-4 py-2">
+                                <button
+                                    className={`h-12 basis-1/2 px-4 py-2 font-bold ${
+                                        fileIndex == 0
+                                            ? 'cursor-default bg-zinc-200 text-zinc-500'
+                                            : 'bg-cyan-300 text-sky-900'
+                                    } flex items-center justify-center rounded-xl`}
+                                    onClick={() => {
+                                        setFileIndex(decreaseNumber(fileIndex))
+                                    }}
+                                >
+                                    Prev
+                                </button>
+                                <button
+                                    className={`h-12 basis-1/2 px-4 py-2 font-bold ${
+                                        fileIndex == numberOfFiles - 1
+                                            ? 'cursor-default bg-zinc-200 text-zinc-500'
+                                            : 'bg-cyan-300 text-sky-900'
+                                    } flex items-center justify-center rounded-xl`}
+                                    onClick={() => {
+                                        setFileIndex(
+                                            increaseNumber(
+                                                fileIndex,
+                                                numberOfFiles - 1,
                                             ),
                                         )
-                                    }
-                                }}
-                            >
-                                Undo
-                            </button>
-                            <button
-                                className={`flex h-12 basis-1/2 items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
-                                onClick={() => {
-                                    labelList.forEach((label) => {
-                                        unlabelById(label.id)
-                                    })
-                                    setLabelList([])
-                                }}
-                            >
-                                Refresh
-                            </button>
+                                    }}
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex basis-3/4 flex-row space-x-4 py-2">
+                        <div className="flex flex-row pt-4">
                             <button
-                                className={`h-12 basis-1/2 px-4 py-2 font-bold ${
-                                    fileIndex == 0
-                                        ? 'cursor-default bg-zinc-200 text-zinc-500'
-                                        : 'bg-cyan-300 text-sky-900'
-                                } flex items-center justify-center rounded-xl`}
+                                className={`flex h-14 grow items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
                                 onClick={() => {
-                                    setFileIndex(decreaseNumber(fileIndex))
+                                    console.log(labelList)
                                 }}
                             >
-                                Prev
-                            </button>
-                            <button
-                                className={`h-12 basis-1/2 px-4 py-2 font-bold ${
-                                    fileIndex == numberOfFiles - 1
-                                        ? 'cursor-default bg-zinc-200 text-zinc-500'
-                                        : 'bg-cyan-300 text-sky-900'
-                                } flex items-center justify-center rounded-xl`}
-                                onClick={() => {
-                                    setFileIndex(
-                                        increaseNumber(
-                                            fileIndex,
-                                            numberOfFiles - 1,
-                                        ),
-                                    )
-                                }}
-                            >
-                                Next
+                                Submit
                             </button>
                         </div>
                     </div>
-                    <div className="flex flex-row pt-4">
-                        <button
-                            className={`flex h-14 grow items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
-                            onClick={() => {
-                                console.log(labelList)
-                            }}
-                        >
-                            Submit
-                        </button>
-                    </div>
-                </div>
                 </SSspin>
             </div>
         </>
