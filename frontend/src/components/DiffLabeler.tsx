@@ -35,6 +35,12 @@ const DiffLabeler = (props: Props) => {
         undefined,
     )
 
+    // 1-2 기능 추가 ---------------------------------------
+    const [searchText, setSearchText] = useState('')
+    const [resultDiff, setResultDiff] = useState('')
+
+
+    // ----------------------------------------------------
     const html = useMemo(() => {
         return diff2html.html(props.diffString, {
             outputFormat: 'side-by-side',
@@ -102,7 +108,11 @@ const DiffLabeler = (props: Props) => {
         <>
             <div className="flex h-screen flex-col px-12 pb-4 pt-12">
                 <div className="pb-8">
-                    <UrlForm />
+                    <UrlForm
+                        onSubmit={() => {}}
+                        onChange={(e) => {}}
+                        value={''}
+                    />
                 </div>
                 <DiffRenderer
                     html={html}
