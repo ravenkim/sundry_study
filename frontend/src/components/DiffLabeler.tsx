@@ -71,7 +71,8 @@ const DiffLabeler = (props: Props) => {
         const fileWrappers =
             ref.current.getElementsByClassName('d2h-file-wrapper')
         setNumberOfFiles(fileWrappers.length)
-    }, [fileIndex, numberOfFiles])
+        setFileIndex(0)
+    }, [html])
 
     useLayoutEffect(() => {
         if (numberOfFiles == 0 || !ref.current) {
