@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 
 interface UseDiffOptions {
-    searchText: string;
-    enabled: boolean;
-    onSuccess: () => void;
+    searchText: string
+    enabled: boolean
+    onSuccess: () => void
 }
 
 const useDiff = ({ searchText, enabled, onSuccess }: UseDiffOptions) => {

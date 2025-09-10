@@ -12,15 +12,15 @@ type SSspinProps = {
 }
 
 const SSspin = ({
-                    children,
-                    className = '',
-                    loading,
-                    size = 24,
-                    strokeWidth = 2,
-                    overlayColor = 'bg-white',
-                    overlayOpacity = 'opacity-80',
-                    text = '',
-                }: SSspinProps) => {
+    children,
+    className = '',
+    loading,
+    size = 24,
+    strokeWidth = 2,
+    overlayColor = 'bg-white',
+    overlayOpacity = 'opacity-80',
+    text = '',
+}: SSspinProps) => {
     return (
         <div
             className={`relative overflow-hidden rounded-[0.3rem] ${className}`}
@@ -31,7 +31,7 @@ const SSspin = ({
                 >
                     {/* Spinner (SVG) */}
                     <svg
-                        className="animate-spin text-primary"
+                        className="text-primary animate-spin"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -53,9 +53,7 @@ const SSspin = ({
                         />
                     </svg>
 
-                    {text && (
-                        <div className="ml-4 text-2xl">{text}</div>
-                    )}
+                    {text && <div className="ml-4 text-2xl">{text}</div>}
                 </div>
             )}
             {children}
