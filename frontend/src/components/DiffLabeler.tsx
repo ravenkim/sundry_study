@@ -42,11 +42,11 @@ const DiffLabeler = (props: Props) => {
 
     // ----------------------------------------------------
     const html = useMemo(() => {
-        return diff2html.html(props.diffString, {
+        return diff2html.html(resultDiff, {
             outputFormat: 'side-by-side',
             drawFileList: false,
         })
-    }, [props.diffString])
+    }, [resultDiff])
 
     useEffect(() => {
         if (!ref.current) {
@@ -109,9 +109,9 @@ const DiffLabeler = (props: Props) => {
             <div className="flex h-screen flex-col px-12 pb-4 pt-12">
                 <div className="pb-8">
                     <UrlForm
-                        onSubmit={() => {}}
-                        onChange={(e) => {}}
-                        value={''}
+                        onSubmit={() => {console.log(searchText)}}
+                        onChange={(e) => {setSearchText(e.target.value)}}
+                        value={searchText}
                     />
                 </div>
                 <DiffRenderer
