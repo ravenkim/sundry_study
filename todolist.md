@@ -7,7 +7,7 @@
 ## 프로젝트 세팅
 - webstorm 지원 기능 추가 - 완료 
 - 패키지 메니저 설정 - 완료 
-- 프리티어 테일윈드 순서 변경 
+- 프리티어 추가,  테일윈드 순서 플러그인 추가 
 
 ## 유저스토리 [1] github 의 open source repository 에서 pull request 들의 git diff 결과를 가져온다.
 - UrlForm component 안에 onchange, onSubmit 구현 
