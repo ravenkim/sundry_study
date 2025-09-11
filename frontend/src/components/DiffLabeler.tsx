@@ -37,6 +37,7 @@ const DiffLabeler = () => {
     const [submittedSearchText, setSubmittedSearchText] = useState('')
 
     const [enabled, setEnabled] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const { text, time, isLoading } = useDiff({
         searchText: submittedSearchText,
@@ -151,10 +152,41 @@ const DiffLabeler = () => {
         setSelectedRange(range)
     }, [])
 
+    const handleSubmit = async () => {
+        setIsSubmitting(true)
+        try {
+            const response = await fetch('http://localhost:3031/labels', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    url: submittedSearchText,
+                    time: time,
+                    labels: labelList,
+                }),
+            })
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+
+            alert('Successfully submitted!')
+        } catch (error) {
+            console.error('Error submitting labels:', error)
+            alert('Error submitting labels. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
+
     return (
         <>
             <div className="flex w-screen flex-col px-12 pb-4 pt-12">
-                <SSspin loading={isLoading} className={'flex w-full flex-col'}>
+                <SSspin
+                    loading={isLoading || isSubmitting}
+                    className={'flex w-full flex-col'}
+                >
                     <div className="pb-8">
                         <UrlForm
                             onSubmit={() => {
@@ -240,16 +272,13 @@ const DiffLabeler = () => {
                         </div>
                         <div className="flex flex-row pt-4">
                             <button
-                                className={`flex h-14 grow items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
-                                onClick={() => {
-                                    console.log({
-                                        url: submittedSearchText,
-                                        time: time,
-                                        labels: labelList,
-                                    })
-                                }}
+                                className={`flex h-14 grow items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300 ${
+                                    isSubmitting ? 'cursor-not-allowed opacity-50' : ''
+                                }`}
+                                onClick={handleSubmit}
+                                disabled={isSubmitting}
                             >
-                                Submit
+                                {isSubmitting ? 'Submitting...' : 'Submit'}
                             </button>
                         </div>
                     </div>
