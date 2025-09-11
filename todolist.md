@@ -25,28 +25,35 @@
 2. changeType 수정 - 완료
 
 
-## 유저스토리 [8] Submit 시에 State 서버에 제출
-
-
 ## be 프로젝트 세팅 
 - 패키지 매니저 설정, 의존성 관리 - 완료
 - 스웨거 설정 - 완료
 
-## 시스템 설정 
-- 도커로 디비만 먼저 올리기
+## 시스템 설정  - 완료  
+- 도커로 디비만 먼저 올리기 - 완료
 
-## 유저스토리 [9] Server 에서는 제출된 데이터를 받아 추후 알고리즘 학습에 사용될 수 있도록 데이터 베이스에 저장
-- label 모듈 제작
-- 모듈 등록 
-- 컨트롤러 제작
-- 서비스 제작
-- dto 제작
-  - labels: 라벨 정보
-  - pullRequestUrl: url 정보
-  - diffFetchedAt: url 에서 들고온 시간
-  - submissionAt: label 을 제출한 시간  (timestamp 로찍어줌)
+## 유저스토리 [9] Server 에서는 제출된 데이터를 받아 추후 알고리즘 학습에 사용될 수 있도록 데이터 베이스에 저장 - 완료
+- label 모듈 제작 - 완료
+- 모듈 등록 - 완료
+- 컨트롤러 제작 - 완료
+- 서비스 제작 - 완료
+- dto 제작 - 완료
+  - labels: 라벨 정보 - 완료
+  - pullRequestUrl: url 정보 - 완료
+  - diffFetchedAt: url 에서 들고온 시간 - 완료
+  - submissionAt: label 을 제출한 시간  (timestamp 로찍어줌) - 완료
+- 스키마 제작 - 완료 
 
-    
+
+
+## 유저스토리 [8] Submit 시에 State 서버에 제출
+- labels 외에 필요한 diffFetchedAt, pullRequestUrl 추가해서 데이터 요청 기능 제작 
+- 요청 완료 팝업 or toast 추가
+
+## 배포 테스트 
+- 프, 백, 디비 패포된 상태로 정상 작동하는지 확인
+
+## 깃허브 주소 공유 
 
 ---
 
