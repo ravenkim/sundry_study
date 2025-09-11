@@ -6,7 +6,7 @@
 # todo list 
 주석에는 유저스토리 [1] 의 1번 이면 1-1 로 표시 
 
-## 프로젝트 세팅
+## fe 프로젝트 세팅
 - webstorm 지원 기능 추가 - 완료 
 - 패키지 메니저 설정 - 완료 
 - 프리티어 추가,  테일윈드 순서 플러그인 추가 - 완료 
@@ -20,46 +20,33 @@
 5. 기존 props 로 받던 하드 코딩된 데이터 변경 및 기존 임시 데이터 삭제 - 완료
 6. diff data 가 state 가 아니라서 랜더링 안되는 문제 해결 - 완료 
 
-## 유저스토리 [7] - 완료 
+## 유저스토리 [7] Label 에 임시로 fixed 로 입력하고 있던 데이터를, 제대로 입력할 수 있도록 수정 - 완료 
 1. fileName 수정 - 완료 
 2. changeType 수정 - 완료
 
 
+## 유저스토리 [8] Submit 시에 State 서버에 제출
 
----
-# 기능 요구사항
-##  📝  **github 의 open source repository 에서 pull request 들의 git diff 결과를 가져온다.**
-- 현재 fixed text 로 diff 결과를 사용하고 있으나, frontend 에서 input 을 통해 받아온 github url 로부터 diff 결과를 받아서 사용하도록 기능을 추가 해야함.
-    - github 은 commit 과 pull request 의 주소 뒤에 `.diff` 를 추가하면, diff 결과의 raw text 을 받아올 수 있다.
-    - e.g. https://patch-diff.githubusercontent.com/raw/fika-dev/fika-cli/pull/331.diff
-    - UrlForm component 사용할것 
 
-## 📝 Frontend 에서 Label 에 임시로 fixed 로 입력하고 있던 데이터를, 제대로 입력할 수 있도록 수정한다.**
-- 현재 label 을 state 에 저장시, 아래와 같이 fileName 과 changeType 에 대한 처리가 제대로 이루어지지 않고 있다.
+## be 프로젝트 세팅 
+- 패키지 매니저 설정, 의존성 관리 - 완료
+- 스웨거 설정 - 완료
 
-    ```tsx
-    const label: Label = {
-        id: labelId,
-        selectedRange: labeledRange,
-        fileName: '',
-        changeType: 'Inserted',
-      };
-    ```
+## 시스템 설정 
+- 도커로 디비만 먼저 올리기
 
-- 알맞은 fileName 과 changeType 을 넣을 수 있도록 수정한다.
-##  📝 **Submit 시에 State 서버에 제출하도록 한다.**
-- Submit 시에 서버에 State 에 저장된 Label 들을 제출하도록 구현한다.
-##  📝 **Server 에서는 제출된 데이터를 받아 추후 알고리즘 학습에 사용될 수 있도록 데이터 베이스에 저장**
-- 추후 분석에 필요한 정보
-    - 어떤 pull request 로 부터 가져온 diff 정보인지
-    - pull request 로부터 diff 정보를 가져온 일시
-    - Human Label 의 제출 일시
-    - 개별 Label 정보
-        - 어떤 파일(file)
-        - inserted, deleted 의 change type 중 어디에 해당하는지
-        - label 의 selection 의 start point (e.g. line, column)
-        - label 의 selection 의 end point (e.g. line, column)
+## 유저스토리 [9] Server 에서는 제출된 데이터를 받아 추후 알고리즘 학습에 사용될 수 있도록 데이터 베이스에 저장
+- label 모듈 제작
+- 모듈 등록 
+- 컨트롤러 제작
+- 서비스 제작
+- dto 제작
+  - labels: 라벨 정보
+  - pullRequestUrl: url 정보
+  - diffFetchedAt: url 에서 들고온 시간
+  - submissionAt: label 을 제출한 시간  (timestamp 로찍어줌)
 
+    
 
 ---
 
