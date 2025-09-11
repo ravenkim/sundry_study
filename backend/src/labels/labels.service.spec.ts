@@ -2,35 +2,33 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LabelsService } from './labels.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { LabelSubmission } from './schemas/label-submission.schema';
-import { Model } from 'mongoose';
 import { CreateLabelDto } from './dto/create-label.dto';
 
 describe('LabelsService', () => {
   let service: LabelsService;
-  let labelSubmissionModel: Model<LabelSubmission>;
 
   const mockLabelSubmission = {
     _id: 'someId',
-    pullRequestUrl: 'https://github.com/test/test-repo/pull/123',
-    diffFetchedAt: new Date(),
+    url: 'https://github.com/fika-dev/code-change-labeler/commit/f5083a140c755ef3c0c577b6e933c3c85d0ae2b9',
+    time: 1757575602336,
     labels: [
       {
-        file: 'src/app.ts',
-        changeType: 'inserted',
-        selection: {
-          start: { line: 1, col: 0 },
-          end: { line: 1, col: 10 },
-        },
-        label: 'bug-fix',
+        id: 0,
+        fileName: 'docker-compose.yaml',
+        changeType: 'Inserted',
+        selectedRange: [
+          { row: 1, column: 8 },
+          { row: 1, column: 12 },
+        ],
       },
       {
-        file: 'src/feature.ts',
-        changeType: 'deleted',
-        selection: {
-          start: { line: 5, col: 0 },
-          end: { line: 5, col: 20 },
-        },
-        label: 'new-feature',
+        id: 1,
+        fileName: 'frontend/.dockerignore',
+        changeType: 'Deleted',
+        selectedRange: [
+          { row: 2, column: 1 },
+          { row: 2, column: 5 },
+        ],
       },
     ],
     createdAt: new Date(),
@@ -53,9 +51,6 @@ describe('LabelsService', () => {
     }).compile();
 
     service = module.get<LabelsService>(LabelsService);
-    // labelSubmissionModel = module.get<Model<LabelSubmission>>(
-    //   getModelToken(LabelSubmission.name),
-    // ); // No longer needed as we mock the constructor directly
   });
 
   it('should be defined', () => {
@@ -65,17 +60,17 @@ describe('LabelsService', () => {
   describe('create', () => {
     it('should create a new label submission', async () => {
       const createLabelDto: CreateLabelDto = {
-        pullRequestUrl: 'https://github.com/test/test-repo/pull/123',
-        diffFetchedAt: new Date(),
+        url: 'https://github.com/fika-dev/code-change-labeler/commit/f5083a140c755ef3c0c577b6e933c3c85d0ae2b9',
+        time: 1757575602336,
         labels: [
           {
-            file: 'src/app.ts',
-            changeType: 'inserted',
-            selection: {
-              start: { line: 1, col: 0 },
-              end: { line: 1, col: 10 },
-            },
-            label: 'bug-fix',
+            id: 0,
+            fileName: 'docker-compose.yaml',
+            changeType: 'Inserted',
+            selectedRange: [
+              { row: 1, column: 8 },
+              { row: 1, column: 12 },
+            ],
           },
         ],
       };
@@ -83,7 +78,9 @@ describe('LabelsService', () => {
       const result = await service.create(createLabelDto);
 
       expect(mockLabelSubmissionModel).toHaveBeenCalledWith(createLabelDto);
-      expect(mockLabelSubmissionModel.mock.results[0].value.save).toHaveBeenCalled();
+      expect(
+        mockLabelSubmissionModel.mock.results[0].value.save,
+      ).toHaveBeenCalled();
       expect(result).toEqual(mockLabelSubmission);
     });
   });

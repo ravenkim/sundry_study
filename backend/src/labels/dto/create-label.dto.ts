@@ -1,60 +1,55 @@
 import { Type } from 'class-transformer';
 import {
   IsArray,
-  IsDate,
   IsNotEmpty,
-  IsObject,
+  IsNumber,
   IsString,
   ValidateNested,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-class LabelSelection {
-  @ApiProperty({ example: { line: 1, col: 0 } })
-  @IsObject()
-  start: {
-    line: number;
-    col: number;
-  };
+class Position {
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  row: number;
 
-  @ApiProperty({ example: { line: 1, col: 10 } })
-  @IsObject()
-  end: {
-    line: number;
-    col: number;
-  };
+  @ApiProperty({ example: 0 })
+  @IsNumber()
+  column: number;
 }
 
 class Label {
-  @ApiProperty({ description: 'File path', example: 'src/app.ts' })
-  @IsString()
-  file: string;
+  @ApiProperty({ description: 'ID', example: 0 })
+  @IsNumber()
+  id: number;
 
-  @ApiProperty({ example: 'inserted', enum: ['inserted', 'deleted'] })
+  @ApiProperty({ description: 'File name', example: 'docker-compose.yaml' })
   @IsString()
-  changeType: 'inserted' | 'deleted';
+  fileName: string;
 
-  @ApiProperty({ description: 'Selected code snippet', type: LabelSelection })
-  @IsObject()
-  @ValidateNested()
-  @Type(() => LabelSelection)
-  selection: LabelSelection;
-
-  @ApiProperty({ description: 'Label for the code change', example: 'bug-fix' })
+  @ApiProperty({ example: 'Inserted', enum: ['Inserted', 'Deleted'] })
   @IsString()
-  label: string;
+  changeType: 'Inserted' | 'Deleted';
+
+  @ApiProperty({ description: 'Selected range', type: [Position] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Position)
+  selectedRange: Position[];
 }
 
 export class CreateLabelDto {
-  @ApiProperty({ example: 'https://github.com/owner/repo/pull/123' })
+  @ApiProperty({
+    example:
+      'https://github.com/fika-dev/code-change-labeler/commit/f5083a140c755ef3c0c577b6e933c3c85d0ae2b9',
+  })
   @IsString()
   @IsNotEmpty()
-  pullRequestUrl: string;
+  url: string;
 
-  @ApiProperty({ example: '2023-01-01T12:00:00Z' })
-  @IsDate()
-  @Type(() => Date)
-  diffFetchedAt: Date;
+  @ApiProperty({ example: 1757575602336 })
+  @IsNumber()
+  time: number;
 
   @ApiProperty({ description: 'Array of labels', type: [Label] })
   @IsArray()
