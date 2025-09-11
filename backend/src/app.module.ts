@@ -8,9 +8,13 @@ import {
   MongoConfig,
   MONGO_CONFIG,
 } from './config/mongo.config';
+import { LabelsModule } from './labels/labels.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule.forFeature(loadMongoConfig)],
       inject: [ConfigService],
@@ -30,6 +34,7 @@ import {
         };
       },
     }),
+    LabelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
