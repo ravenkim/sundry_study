@@ -23,8 +23,6 @@ import {
 } from '@/utils/dom'
 import SSspin from '@/components/SSspin'
 
-
-
 const DiffLabeler = () => {
     const ref = useRef<HTMLDivElement>(null)
     const [fileIndex, setFileIndex] = useState(0)
@@ -46,7 +44,8 @@ const DiffLabeler = () => {
     })
 
     useEffect(() => {
-        if (text && enabled) { // Trigger when data is fetched and enabled was true
+        if (text && enabled) {
+            // Trigger when data is fetched and enabled was true
             setEnabled(false)
         }
     }, [text, enabled])
@@ -154,11 +153,8 @@ const DiffLabeler = () => {
 
     return (
         <>
-            <div className="flex  w-screen flex-col px-12 pb-4 pt-12">
-                <SSspin
-                    loading={isLoading}
-                    className={'flex  w-full flex-col'}
-                >
+            <div className="flex w-screen flex-col px-12 pb-4 pt-12">
+                <SSspin loading={isLoading} className={'flex w-full flex-col'}>
                     <div className="pb-8">
                         <UrlForm
                             onSubmit={() => {
@@ -247,9 +243,9 @@ const DiffLabeler = () => {
                                 className={`flex h-14 grow items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
                                 onClick={() => {
                                     console.log({
-                                        url:submittedSearchText,
-                                        time:time,
-                                        labels:labelList
+                                        url: submittedSearchText,
+                                        time: time,
+                                        labels: labelList,
                                     })
                                 }}
                             >

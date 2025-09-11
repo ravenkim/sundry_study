@@ -3,41 +3,30 @@ import { HydratedDocument } from 'mongoose';
 
 export type LabelSubmissionDocument = HydratedDocument<LabelSubmission>;
 
-@Schema()
-class LabelSelection {
+@Schema({ _id: false })
+class Position {
   @Prop()
-  line: number;
+  row: number;
 
   @Prop()
-  col: number;
+  column: number;
 }
 
-const LabelSelectionSchema = SchemaFactory.createForClass(LabelSelection);
+const PositionSchema = SchemaFactory.createForClass(Position);
 
-@Schema()
-class LabelCoordinates {
-  @Prop({ type: LabelSelectionSchema })
-  start: LabelSelection;
-
-  @Prop({ type: LabelSelectionSchema })
-  end: LabelSelection;
-}
-
-const LabelCoordinatesSchema = SchemaFactory.createForClass(LabelCoordinates);
-
-@Schema()
+@Schema({ _id: false })
 class Label {
   @Prop()
-  file: string;
+  id: number;
 
   @Prop()
-  changeType: 'inserted' | 'deleted';
-
-  @Prop({ type: LabelCoordinatesSchema })
-  selection: LabelCoordinates;
+  fileName: string;
 
   @Prop()
-  label: string;
+  changeType: 'Inserted' | 'Deleted';
+
+  @Prop({ type: [PositionSchema] })
+  selectedRange: Position[];
 }
 
 const LabelSchema = SchemaFactory.createForClass(Label);
@@ -45,10 +34,10 @@ const LabelSchema = SchemaFactory.createForClass(Label);
 @Schema({ timestamps: { createdAt: 'submissionAt', updatedAt: 'updatedAt' } })
 export class LabelSubmission {
   @Prop({ required: true })
-  pullRequestUrl: string;
+  url: string;
 
   @Prop({ required: true })
-  diffFetchedAt: Date;
+  time: number;
 
   @Prop({ type: [LabelSchema] })
   labels: Label[];
