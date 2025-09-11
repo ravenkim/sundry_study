@@ -18,5 +18,5 @@ export interface Label {
     id: number
     fileName: string
     changeType: ChangeType
-    selectedRange: SelectedRange
+    selectedRange: SelectedRange,
 }

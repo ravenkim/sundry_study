@@ -23,11 +23,9 @@ import {
 } from '@/utils/dom'
 import SSspin from '@/components/SSspin'
 
-type Props = {
-    diffString: string
-}
 
-const DiffLabeler = (props: Props) => {
+
+const DiffLabeler = () => {
     const ref = useRef<HTMLDivElement>(null)
     const [fileIndex, setFileIndex] = useState(0)
     const [labelList, setLabelList] = useState([] as Label[])
@@ -42,20 +40,23 @@ const DiffLabeler = (props: Props) => {
 
     const [enabled, setEnabled] = useState(false)
 
-    const { data, isLoading } = useDiff({
+    const { text, time, isLoading } = useDiff({
         searchText: submittedSearchText,
         enabled,
-        onSuccess: () => {
-            setEnabled(false)
-        },
     })
 
+    useEffect(() => {
+        if (text && enabled) { // Trigger when data is fetched and enabled was true
+            setEnabled(false)
+        }
+    }, [text, enabled])
+
     const html = useMemo(() => {
-        return diff2html.html(data || '', {
+        return diff2html.html(text || '', {
             outputFormat: 'side-by-side',
             drawFileList: false,
         })
-    }, [data])
+    }, [text])
 
     useEffect(() => {
         if (!ref.current) {
@@ -153,10 +154,10 @@ const DiffLabeler = (props: Props) => {
 
     return (
         <>
-            <div className="flex h-screen w-screen flex-col px-12 pb-4 pt-12">
+            <div className="flex  w-screen flex-col px-12 pb-4 pt-12">
                 <SSspin
                     loading={isLoading}
-                    className={'flex h-full w-full flex-col'}
+                    className={'flex  w-full flex-col'}
                 >
                     <div className="pb-8">
                         <UrlForm
@@ -245,7 +246,11 @@ const DiffLabeler = (props: Props) => {
                             <button
                                 className={`flex h-14 grow items-center justify-center rounded-xl bg-sky-900 px-4 py-2 font-bold text-cyan-300`}
                                 onClick={() => {
-                                    console.log(labelList)
+                                    console.log({
+                                        url:submittedSearchText,
+                                        time:time,
+                                        labels:labelList
+                                    })
                                 }}
                             >
                                 Submit
