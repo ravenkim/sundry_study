@@ -1,0 +1,23 @@
+{
+    "header": {
+        "mypage": "mypage",
+        "logout": "logout",
+        "login": "login",
+        "register": "jjjj",
+        "language": "ffff",
+        "help": "ffff"
+    },
+    "nav": {
+        "dashboard": "fff",
+        "shopping-mall": "fff ff"
+    },
+    "home": {
+        "join": "join"
+    },
+    "text": {
+        "Welcome to React": "ffff"
+    },
+    "numbar": {
+        "aaaaa": "22222222222222222"
+    }
+}
