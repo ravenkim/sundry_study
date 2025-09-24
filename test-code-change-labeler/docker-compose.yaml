@@ -1,0 +1,51 @@
+version: "3.4"
+
+networks:
+  docker_network:
+    driver: "bridge"
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    env_file:
+      - ./frontend/.env.example
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+    restart: always
+    ports:
+      - 3030:3030
+    networks:
+      - docker_network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 3031:3031
+    volumes:
+      - ./backend/src:/app/src
+    command: yarn run start:dev
+    networks:
+      - docker_network
+    env_file:
+      - ./backend/.env.example
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    env_file:
+      - ./backend/.env.example
+    volumes:
+      - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - 27017:27017
+    networks:
+      - docker_network
