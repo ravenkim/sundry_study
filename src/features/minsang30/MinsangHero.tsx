@@ -50,7 +50,7 @@ const MinsangHero = () => {
                                     DATE
                                 </span>
                                 <span className="font-m30-headline text-lg font-medium uppercase text-white">
-                                    MAR 23
+                                April 7
                                 </span>
                             </div>
                             <div className="flex flex-col">
