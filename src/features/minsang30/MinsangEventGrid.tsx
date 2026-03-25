@@ -89,7 +89,8 @@ GL                                       </p>
                             BYOB
                         </p>
                         <p className="mt-1 text-[10px] text-white/40">
-                            마시고 싶은 술 따로 사오기
+                            마시고 싶은 술 따로 사오기 <br />
+                            1인당 1소주 웰컴드링크 증정!
                         </p>
                     </div>
                     <div className={`flex-1 py-8 ${sectionPad}`}>

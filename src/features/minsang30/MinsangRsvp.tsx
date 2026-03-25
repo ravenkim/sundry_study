@@ -25,13 +25,7 @@ const MinsangRsvp = ({ onConfirm }: MinsangRsvpProps) => {
                 <p className="text-sm font-light uppercase tracking-widest text-white/40 sm:text-base md:text-lg">
                     Limited capacity — Confirm attendance
                 </p>
-                <button
-                    className="w-full min-h-12 touch-manipulation bg-white px-10 py-4 text-xs font-black tracking-[0.35em] text-black uppercase transition-all duration-300 [-webkit-tap-highlight-color:transparent] hover:bg-white/90 active:scale-[0.98] sm:min-h-14 sm:px-16 sm:py-6 sm:tracking-[0.4em] md:w-auto"
-                    type="button"
-                    onClick={onConfirm}
-                >
-                    CONFIRM RSVP
-                </button>
+             
             </div>
         </section>
     )

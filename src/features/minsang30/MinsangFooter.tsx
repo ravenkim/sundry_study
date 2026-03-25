@@ -22,18 +22,10 @@ const MinsangFooter = () => {
                     className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2"
                     aria-label="푸터 링크"
                 >
-                    {footerLinks.map(({ href, label }) => (
-                        <a
-                            key={label}
-                            className="inline-flex min-h-11 min-w-[44px] items-center justify-center text-[9px] font-bold tracking-[0.2em] text-white/30 uppercase transition-colors touch-manipulation [-webkit-tap-highlight-color:transparent] hover:text-white"
-                            href={href}
-                        >
-                            {label}
-                        </a>
-                    ))}
+          
                 </nav>
                 <p className="text-center text-[9px] tracking-widest text-white/20 uppercase">
-                    © 2024 THE MIDNIGHT KINETIC
+                    © made by @raven_kim97
                 </p>
             </div>
         </footer>
