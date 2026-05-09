@@ -1,61 +1,18 @@
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import { Mail, Lock, UserPlus, Home, User } from 'lucide-react'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
-import {
-    axiosApiMessage,
-    loginRequest,
-    signupRequest,
-} from 'src/globals/api/authApi.ts'
-import { setStoredAccessToken } from 'src/globals/api/client.tsx'
-import { apiBaseUrl } from 'src/pages/url/log/bartenderBackend.ts'
 
 const SignupPage = () => {
-    const navigate = useNavigate()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
-    const [submitting, setSubmitting] = useState(false)
 
-    const handleSignup = async (e: React.FormEvent) => {
+    const handleSignup = (e: React.FormEvent) => {
         e.preventDefault()
-        if (!apiBaseUrl()) {
-            toast.error(
-                'API 주소가 설정되지 않았습니다. fe/.env에 VITE_API_HOST를 넣어 주세요.',
-            )
-            return
-        }
-        if (password !== passwordConfirm) {
-            toast.error('비밀번호가 서로 일치하지 않습니다.')
-            return
-        }
-        if (password.length < 8) {
-            toast.error('비밀번호는 8자 이상으로 설정해 주세요.')
-            return
-        }
-        setSubmitting(true)
-        try {
-            await signupRequest({
-                email,
-                password,
-                name: name.trim() || undefined,
-            })
-            const loginData = await loginRequest(email, password)
-            setStoredAccessToken(loginData.access_token)
-            toast.success('가입되었습니다. 어서 오세요!')
-            navigate('/log')
-        } catch (err) {
-            toast.error(
-                axiosApiMessage(
-                    err,
-                    '가입에 실패했습니다. 잠시 후 다시 시도해 주세요.',
-                ),
-            )
-        } finally {
-            setSubmitting(false)
-        }
+        // TODO: Implement signup logic
+        console.log('Signup attempt:', { name, email, password, passwordConfirm })
     }
 
     return (
@@ -138,10 +95,9 @@ const SignupPage = () => {
 
                         <button
                             type="submit"
-                            disabled={submitting}
-                            className="bg-primary text-primary-foreground group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-sans font-semibold shadow-lg transition-all hover:brightness-110 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60"
+                            className="bg-primary text-primary-foreground group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-sans font-semibold shadow-lg transition-all hover:brightness-110 active:scale-[0.98]"
                         >
-                            <span>{submitting ? '처리 중…' : '가입하기'}</span>
+                            <span>가입하기</span>
                             <UserPlus className="h-5 w-5 transition-transform group-hover:scale-110" />
                         </button>
                     </form>
