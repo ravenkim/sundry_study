@@ -88,7 +88,8 @@ const LogPage = () => {
                     </div>
 
                     <p className="text-muted-foreground font-sans text-center text-xs leading-relaxed">
-                        전체 로그는 이 탭에만 표시되며, 새로고침하면 비워집니다.
+                        로그 내용은 같은 세션에서는 이 탭과 홈이 같습니다. 백엔드가 붙어 있으면
+                        새로고침 후에도 같은 채팅방이 이어질 수 있습니다.
                         말을 걸려면 홈 하단 입력창을 이용해 주세요.
                     </p>
 

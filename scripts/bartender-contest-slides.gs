@@ -28,9 +28,9 @@ var CONFIG = {
   FALLBACK_TO_ACTIVE_WHEN_OPEN_BY_ID_FAILS: false,
   /** true: 챕터 구분 슬라이드(다크 톤) 삽입 — 발표 장이 길어지므로 발표 시간에 맞게 끄기도 가능 */
   USE_SECTION_DIVIDERS: true,
-  /** 한글 가독성: Slides에 설치된 글꼴 이름과 일치해야 함 (없으면 자동 대체) */
-  FONT_TITLE: 'Malgun Gothic',
-  FONT_BODY: 'Malgun Gothic',
+  /** Google Slides에서 선택 가능 — Noto Sans KR(본문·제목), 없으면 Slides 기본 폰트로 대체 */
+  FONT_TITLE: 'Noto Sans KR',
+  FONT_BODY: 'Noto Sans KR',
   SIZES: {
     COVER_TITLE: 40,
     END_TITLE: 44,
@@ -199,7 +199,7 @@ function styleBodyText(textRange, pt) {
 function stylePlaceholderColumn(textRange) {
   var ts = textRange.getTextStyle();
   ts.setForegroundColor(THEME.MUTED).setFontSize(CONFIG.SIZES.PLACEHOLDER);
-  trySetFontFamily(ts, 'Consolas');
+  trySetFontFamily(ts, 'Courier New');
 }
 
 /** 표지·챕터·엔딩: 다크 배경 + 밝은 글자 (TITLE 레이아웃의 텍스트 플레이스홀더만) */
