@@ -5,11 +5,27 @@ import {
     type BartenderChatContextValue,
     type LastExchangeDisplay,
 } from 'src/globals/bartender/bartenderChatContext.ts'
+import {
+    bootstrapBartenderSession,
+    isBackendConfigured,
+    sendBartenderRoomMessage,
+    type BackendChatMessageRow,
+} from 'src/pages/url/log/bartenderBackend.ts'
 import { chatWithJun } from 'src/pages/url/log/chatService.ts'
 import { Role, type Message } from 'src/pages/url/log/types.ts'
 
 const FALLBACK_OPENING =
     '어서오세요, 단골손님! 오늘 어떤 분위기세요?'
+
+function messageFromBackend(row: BackendChatMessageRow): Message {
+    return {
+        id: `srv:${row.id}`,
+        role:
+            row.role === 'assistant' ? Role.MODEL : Role.USER,
+        content: row.content,
+        timestamp: new Date(row.created_at),
+    }
+}
 
 function deriveLastExchange(messages: Message[]): LastExchangeDisplay | null {
     const lastModel = [...messages]
@@ -44,6 +60,8 @@ export function BartenderChatProvider({
     const [bootstrapping, setBootstrapping] = useState(true)
     const [isTyping, setIsTyping] = useState(false)
     const messagesRef = useRef<Message[]>([])
+    const roomIdRef = useRef<number | null>(null)
+    const useBackendRef = useRef(false)
 
     useEffect(() => {
         messagesRef.current = messages
@@ -52,7 +70,7 @@ export function BartenderChatProvider({
     useEffect(() => {
         let cancelled = false
         ;(async () => {
-            try {
+            const tryLocalOpening = async () => {
                 const response = await chatWithJun([])
                 if (cancelled) return
                 setMessages([
@@ -64,20 +82,73 @@ export function BartenderChatProvider({
                         recommendation: response.recommendation,
                     },
                 ])
-            } catch {
-                if (!cancelled) {
-                    setMessages([
-                        {
-                            id: crypto.randomUUID(),
-                            role: Role.MODEL,
-                            content: FALLBACK_OPENING,
-                            timestamp: new Date(),
-                        },
-                    ])
-                }
-            } finally {
-                if (!cancelled) setBootstrapping(false)
             }
+
+            if (isBackendConfigured()) {
+                try {
+                    const { roomId, messages: rows } =
+                        await bootstrapBartenderSession()
+                    if (cancelled) return
+                    roomIdRef.current = roomId
+                    useBackendRef.current = true
+                    const mapped = rows.map(messageFromBackend)
+                    if (mapped.length > 0) {
+                        setMessages(mapped)
+                    } else {
+                        const response = await chatWithJun([])
+                        if (cancelled) return
+                        setMessages([
+                            {
+                                id: crypto.randomUUID(),
+                                role: Role.MODEL,
+                                content: response.content,
+                                timestamp: new Date(),
+                                recommendation: response.recommendation,
+                            },
+                        ])
+                        useBackendRef.current = false
+                        roomIdRef.current = null
+                    }
+                } catch {
+                    useBackendRef.current = false
+                    roomIdRef.current = null
+                    if (!cancelled) {
+                        toast.error(
+                            '서버에 연결하지 못했어요. 브라우저에서만 대화합니다.',
+                        )
+                    }
+                    try {
+                        await tryLocalOpening()
+                    } catch {
+                        if (!cancelled) {
+                            setMessages([
+                                {
+                                    id: crypto.randomUUID(),
+                                    role: Role.MODEL,
+                                    content: FALLBACK_OPENING,
+                                    timestamp: new Date(),
+                                },
+                            ])
+                        }
+                    }
+                }
+            } else {
+                try {
+                    await tryLocalOpening()
+                } catch {
+                    if (!cancelled) {
+                        setMessages([
+                            {
+                                id: crypto.randomUUID(),
+                                role: Role.MODEL,
+                                content: FALLBACK_OPENING,
+                                timestamp: new Date(),
+                            },
+                        ])
+                    }
+                }
+            }
+            if (!cancelled) setBootstrapping(false)
         })()
         return () => {
             cancelled = true
@@ -99,24 +170,34 @@ export function BartenderChatProvider({
         setIsTyping(true)
 
         try {
-            const historyForApi = [...messagesRef.current, userMessage].map(
-                (m) => ({
-                    role: m.role,
-                    content: m.content,
-                }),
-            )
-            const response = await chatWithJun(historyForApi)
+            const rid = roomIdRef.current
+            if (useBackendRef.current && rid != null) {
+                const { assistant_message } = await sendBartenderRoomMessage(
+                    rid,
+                    trimmed,
+                )
+                const botMessage = messageFromBackend(assistant_message)
+                setMessages((prev) => [...prev, botMessage])
+            } else {
+                const historyForApi = [...messagesRef.current, userMessage].map(
+                    (m) => ({
+                        role: m.role,
+                        content: m.content,
+                    }),
+                )
+                const response = await chatWithJun(historyForApi)
 
-            const botMessage: Message = {
-                id: crypto.randomUUID(),
-                role: Role.MODEL,
-                content: response.content,
-                timestamp: new Date(),
-                recommendation: response.recommendation,
-            }
-            setMessages((prev) => [...prev, botMessage])
-            if (response.safetyCutoffSuggested) {
-                toast.info('오늘은 여기까지 천천히 마셔 보세요.')
+                const botMessage: Message = {
+                    id: crypto.randomUUID(),
+                    role: Role.MODEL,
+                    content: response.content,
+                    timestamp: new Date(),
+                    recommendation: response.recommendation,
+                }
+                setMessages((prev) => [...prev, botMessage])
+                if (response.safetyCutoffSuggested) {
+                    toast.info('오늘은 여기까지 천천히 마셔 보세요.')
+                }
             }
         } catch {
             toast.error('응답을 받지 못했어요. 잠시 후 다시 보내 주세요.')

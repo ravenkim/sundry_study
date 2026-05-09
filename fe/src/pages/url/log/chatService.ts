@@ -134,10 +134,12 @@ async function chatStub(
 }
 
 /**
- * 바텐더 대화. `messages`가 비어 있으면 오프닝 멘트를 돌려줍니다 (API 스펙은 doc/api.md).
+ * 브라우저 전용 바텐더 대화 (백엔드 미설정 또는 폴백).
+ * `messages`가 비어 있으면 오프닝 멘트를 돌려줍니다 (스펙: doc/api.md).
  *
- * `VITE_GEMINI_API_KEY`가 있으면 Gemini(gemini-flash-latest)를 호출합니다. 대화 내용은 호출 측 상태(메모리)에만 있습니다.
- * 키가 없으면 로컬 스텁 응답을 사용합니다.
+ * 프로덕션에서 `VITE_API_HOST`를 쓰면 `be`의 `/api/chat/rooms`(룸 생성·메시지) 경로가 우선합니다.
+ *
+ * 로컮 전용: `VITE_GEMINI_API_KEY`가 있으면 Gemini(gemini-flash-latest). 없으면 스텁.
  */
 export async function chatWithJun(
     history: { role: Role; content: string }[],
