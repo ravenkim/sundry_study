@@ -30,6 +30,7 @@ function App() {
             <RouterProvider router={router} />
             <ToastContainer
                 position="top-right"
+                style={{ top: '4.75rem' }}
                 autoClose={5000}
                 hideProgressBar={false}
                 newestOnTop={false}

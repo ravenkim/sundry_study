@@ -1,4 +1,4 @@
-import { Palette, User, FileText, Scroll, Send, Club } from 'lucide-react'
+import { Palette, User, FileText, Scroll, Send } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router'
@@ -45,15 +45,15 @@ const HomePage = () => {
                                 노트
                             </span>
                         </Link>
-                        <button
-                            type="button"
+                        <Link
+                            to="/log"
                             className="group flex flex-col items-center transition-transform hover:scale-105"
                         >
                             <Scroll className="text-primary group-hover:brightness-110 h-6 w-6" />
                             <span className="text-muted-foreground mt-1 font-sans text-[10px] uppercase tracking-widest md:text-xs">
                                 로그
                             </span>
-                        </button>
+                        </Link>
                     </nav>
                 </div>
             </header>
@@ -126,15 +126,7 @@ const HomePage = () => {
                 </div>
             </footer>
 
-            {/* Decorative Floating Icon (Cards) */}
-            <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 0.7, x: 0 }}
-                whileHover={{ opacity: 1, scale: 1.1 }}
-                className="border-primary border-2 bg-card fixed bottom-28 right-8 hidden h-16 w-16 cursor-pointer items-center justify-center rounded-full shadow-2xl lg:flex"
-            >
-                <Club className="text-primary h-8 w-8" />
-            </motion.div>
+
         </div>
     )
 }
