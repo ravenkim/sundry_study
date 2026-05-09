@@ -88,8 +88,8 @@ const LogPage = () => {
                     </div>
 
                     <p className="text-muted-foreground font-sans text-center text-xs leading-relaxed">
-                        로그 내용은 같은 세션에서는 이 탭과 홈이 같습니다. 백엔드가 붙어 있으면
-                        새로고침 후에도 같은 채팅방이 이어질 수 있습니다.
+                        현재 진행 중인 대화의 로그입니다. 새로고침하거나 "새 대화"를 누르면
+                        화면이 초기 상태로 돌아갑니다.
                         말을 걸려면 홈 하단 입력창을 이용해 주세요.
                     </p>
 
