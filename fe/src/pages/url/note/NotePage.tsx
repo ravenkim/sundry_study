@@ -582,6 +582,27 @@ const NotePage = () => {
                                                             </span>
                                                         ) : null}
                                                     </CardDescription>
+                                                    <div className="flex flex-nowrap items-center justify-center gap-0.5 pt-1 sm:justify-start">
+                                                        {[1, 2, 3, 4, 5].map(
+                                                            (s) => (
+                                                                <span
+                                                                    key={s}
+                                                                    className="inline-flex shrink-0 items-center justify-center leading-none"
+                                                                    aria-hidden
+                                                                >
+                                                                    <Star
+                                                                        className={cn(
+                                                                            'block h-4 w-4',
+                                                                            s <=
+                                                                                n.rating
+                                                                                ? 'fill-primary text-primary'
+                                                                                : 'fill-muted/30 text-muted-foreground/35',
+                                                                        )}
+                                                                    />
+                                                                </span>
+                                                            ),
+                                                        )}
+                                                    </div>
                                                 </CardHeader>
                                                 <CardContent className="space-y-2 pt-0">
                                                     <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start">
@@ -594,25 +615,6 @@ const NotePage = () => {
                                                             />
                                                         </div>
                                                         <div className="min-w-0 flex-1 space-y-2">
-                                                            <div className="flex justify-center gap-0.5 sm:justify-start">
-                                                                {[
-                                                                    1, 2, 3, 4,
-                                                                    5,
-                                                                ].map((s) => (
-                                                                    <Star
-                                                                        key={
-                                                                            s
-                                                                        }
-                                                                        className={cn(
-                                                                            'h-4 w-4 shrink-0',
-                                                                            s <=
-                                                                                n.rating
-                                                                                ? 'fill-primary text-primary'
-                                                                                : 'text-muted-foreground/30',
-                                                                        )}
-                                                                    />
-                                                                ))}
-                                                            </div>
                                                             {n.comment ? (
                                                                 <p className="text-card-foreground line-clamp-2 text-center text-sm sm:text-left">
                                                                     &ldquo;
