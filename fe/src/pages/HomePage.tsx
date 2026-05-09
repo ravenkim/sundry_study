@@ -1,11 +1,28 @@
-import { Palette, User, FileText, Scroll, Send } from 'lucide-react'
+import { Loader2, Palette, User, FileText, Scroll, Send } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useBartenderChat } from 'src/globals/bartender/useBartenderChat.ts'
 import SScolorDrawer from 'src/shared/components/theme/SScolorDrawer.tsx'
 
 const HomePage = () => {
     const [inputValue, setInputValue] = useState('')
+    const {
+        bootstrapping,
+        isTyping,
+        lastExchange,
+        sendMessage,
+    } = useBartenderChat()
+
+    const canSend =
+        inputValue.trim().length > 0 && !bootstrapping && !isTyping
+
+    const handleSend = () => {
+        if (!canSend) return
+        const text = inputValue.trim()
+        setInputValue('')
+        void sendMessage(text)
+    }
 
     return (
         <div className="font-serif relative flex min-h-screen flex-col">
@@ -65,7 +82,7 @@ const HomePage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="relative flex w-full max-w-lg flex-col items-center"
                 >
-                    {/* Speech Bubble */}
+                    {/* Speech Bubble — 마지막 주고받음만 */}
                     <motion.div
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
@@ -73,12 +90,37 @@ const HomePage = () => {
                         className="mb-12 w-full"
                     >
                         <div className="bg-card/90 border-border border relative rounded-2xl p-6 text-center shadow-2xl backdrop-blur-lg md:p-8">
-                            <h1 className="text-primary font-display mb-2 text-2xl font-semibold md:text-3xl">
-                                어서오세요, 단골손님!
-                            </h1>
-                            <p className="text-card-foreground text-lg font-light md:text-xl">
-                                오늘 어떤 분위기세요?
-                            </p>
+                            {bootstrapping ? (
+                                <div className="text-muted-foreground flex flex-col items-center gap-3 py-4 font-sans text-sm">
+                                    <Loader2 className="text-primary h-8 w-8 animate-spin" />
+                                    바텐더가 자리에 앉는 중…
+                                </div>
+                            ) : lastExchange ? (
+                                <div className="space-y-4 text-left">
+                                    {lastExchange.lastUserContent ? (
+                                        <p className="text-muted-foreground border-border/60 font-sans text-sm leading-relaxed">
+                                            <span className="text-primary/80 mr-2 font-medium">
+                                                나
+                                            </span>
+                                            {lastExchange.lastUserContent}
+                                        </p>
+                                    ) : null}
+                                    <div>
+                                        <p className="text-primary/90 font-sans mb-2 text-xs font-medium uppercase tracking-widest">
+                                            준
+                                        </p>
+                                        <p className="text-card-foreground text-lg font-light leading-relaxed md:text-xl">
+                                            {lastExchange.lastModelContent}
+                                        </p>
+                                    </div>
+                                    {isTyping ? (
+                                        <p className="text-muted-foreground flex items-center gap-2 font-sans text-xs">
+                                            <Loader2 className="text-primary h-3.5 w-3.5 animate-spin" />
+                                            답을 적는 중…
+                                        </p>
+                                    ) : null}
+                                </div>
+                            ) : null}
                             {/* Bubble Pointer */}
                             <div className="border-border/40 bg-card absolute -bottom-3 left-1/2 h-6 w-6 -translate-x-1/2 rotate-45 border-r border-b shadow-xl" />
                         </div>
@@ -112,21 +154,37 @@ const HomePage = () => {
                         <input
                             type="text"
                             value={inputValue}
+                            disabled={bootstrapping || isTyping}
                             onChange={(e) => setInputValue(e.target.value)}
-                            placeholder="바턴더더에게 말을 걸어보세요..."
-                            className="border-input bg-background/50 text-foreground placeholder:text-muted-foreground focus:border-primary font-serif shadow-inner w-full rounded-full border-2 px-6 py-4 text-lg transition-all focus:outline-none"
+                            onKeyDown={(e) => {
+                                if (
+                                    e.key === 'Enter' &&
+                                    !e.nativeEvent.isComposing
+                                ) {
+                                    e.preventDefault()
+                                    handleSend()
+                                }
+                            }}
+                            placeholder={
+                                bootstrapping
+                                    ? '잠시만요…'
+                                    : '바텐더에게 말을 걸어보세요...'
+                            }
+                            className="border-input bg-background/50 text-foreground placeholder:text-muted-foreground focus:border-primary font-serif shadow-inner w-full rounded-full border-2 px-6 py-4 text-lg transition-all focus:outline-none disabled:opacity-60"
+                            aria-label="바텐더에게 메시지"
                         />
                     </div>
                     <button
                         type="button"
-                        className="bg-primary text-primary-foreground group flex items-center justify-center rounded-full p-4 shadow-lg transition-all hover:scale-110 active:scale-95"
+                        disabled={!canSend}
+                        onClick={handleSend}
+                        className="bg-primary text-primary-foreground group flex items-center justify-center rounded-full p-4 shadow-lg transition-all enabled:hover:scale-110 enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                        aria-label="보내기"
                     >
                         <Send className="h-6 w-6 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </button>
                 </div>
             </footer>
-
-
         </div>
     )
 }
