@@ -10,17 +10,45 @@ const MODULES = import.meta.glob('src/pages/url/**/*.tsx', {
     eager: true,
 }) as Record<string, { default: React.FC }>
 
+/** `url/note/NotePage.tsx` → `note` (경로당 폴더 1단 + *Page 컴포넌트), `:aid/detail` 등은 유지 */
+function filePathToRoutePath(relativePath: string): string {
+    const withParams = relativePath.replace(/\[(.*?)]/g, ':$1')
+    const segments = withParams.split('/').filter(Boolean)
+    const last = segments[segments.length - 1]
+
+    let routePath: string
+    if (segments.length >= 2 && last.endsWith('Page')) {
+        const parent = segments[segments.length - 2]
+        const baseName = last.slice(0, -'Page'.length)
+        const parentKey = parent.startsWith(':')
+            ? parent.slice(1)
+            : parent
+        if (
+            !parent.startsWith(':') &&
+            baseName.toLowerCase() === parentKey.toLowerCase()
+        ) {
+            routePath = segments.slice(0, -1).join('/')
+        } else {
+            routePath = [
+                ...segments.slice(0, -1),
+                last.replace(/Page$/, ''),
+            ].join('/')
+        }
+    } else {
+        routePath = withParams.replace(/Page$/, '')
+    }
+
+    return routePath.toLowerCase()
+}
+
 const generateRoutes = (
     modules: Record<string, { default: React.FC }>,
 ): RouteObject[] => {
     return Object.entries(modules).map(([path, module]) => {
-        // 파일 경로에서 'src/pages/url/' 이후의 경로를 추출
-        const routePath = path
-            .replace(/.*src\/pages\/url\//, '') // 'src/pages/url/' 부분 제거
-            .replace(/\.tsx$/, '') // 확장자 제거
-            .replace(/Page$/, '') // 'Page' 접미사 제거
-            .replace(/\[(.*?)]/g, ':$1') // [param] -> :param 변환
-            .toLowerCase()
+        const relativePath = path
+            .replace(/.*src\/pages\/url\//, '')
+            .replace(/\.tsx$/, '')
+        const routePath = filePathToRoutePath(relativePath)
 
         const Component = module.default
 
