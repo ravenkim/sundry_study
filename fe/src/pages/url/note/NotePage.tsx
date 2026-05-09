@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
     ArrowLeft,
     Plus,
+    Search,
     Sparkles,
     Star,
     Trash2,
@@ -342,10 +343,30 @@ function formatDate(iso: string) {
     }
 }
 
+function tastingNoteSearchText(n: TastingNote): string {
+    return [
+        n.drinkName,
+        n.category,
+        n.whiskyRegion,
+        n.comment,
+        n.aroma,
+        n.taste,
+        n.finish,
+        n.distillery,
+        n.ageStatement,
+        n.caskType,
+        n.bartenderComment,
+    ]
+        .map((s) => (typeof s === 'string' ? s.trim() : ''))
+        .filter(Boolean)
+        .join(' ')
+}
+
 const NotePage = () => {
     const navigate = useNavigate()
     const [notes, setNotes] = useState<TastingNote[]>(() => loadNotes())
     const [filter, setFilter] = useState<'전체' | DrinkCategory>('전체')
+    const [noteSearch, setNoteSearch] = useState('')
     const [sheetMode, setSheetMode] = useState<SheetMode>('closed')
     const [selected, setSelected] = useState<TastingNote | null>(null)
     const [form, setForm] = useState(emptyForm)
@@ -355,16 +376,24 @@ const NotePage = () => {
     }, [notes])
 
     const filtered = useMemo(() => {
-        const list =
+        let list =
             filter === '전체'
                 ? notes
                 : notes.filter((n) => n.category === filter)
+
+        const q = noteSearch.trim().toLowerCase()
+        if (q) {
+            list = list.filter((n) =>
+                tastingNoteSearchText(n).toLowerCase().includes(q),
+            )
+        }
+
         return [...list].sort(
             (a, b) =>
                 new Date(b.createdAt).getTime() -
                 new Date(a.createdAt).getTime(),
         )
-    }, [notes, filter])
+    }, [notes, filter, noteSearch])
 
     const whiskeyCount = useMemo(
         () =>
@@ -503,6 +532,29 @@ const NotePage = () => {
 
             <main className="relative z-10 flex flex-grow flex-col px-5 pb-12 pt-24 sm:px-6">
                 <div className="mx-auto w-full max-w-2xl">
+                    <div className="relative mb-4">
+                        <Search
+                            className="text-muted-foreground pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
+                            aria-hidden
+                        />
+                        <Input
+                            value={noteSearch}
+                            onChange={(e) => setNoteSearch(e.target.value)}
+                            placeholder="술 이름, 지역, 메모로 검색…"
+                            className="font-sans rounded-full pl-10 pr-10"
+                            aria-label="노트 검색"
+                        />
+                        {noteSearch ? (
+                            <button
+                                type="button"
+                                onClick={() => setNoteSearch('')}
+                                className="text-muted-foreground hover:text-foreground absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full p-1 font-sans text-xs"
+                                aria-label="검색어 지우기"
+                            >
+                                지움
+                            </button>
+                        ) : null}
+                    </div>
                     <div className="mb-6 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:thin]">
                         {(['전체', ...DRINK_CATEGORIES] as const).map(
                             (cat) => (
@@ -531,19 +583,44 @@ const NotePage = () => {
                                 className="border-border bg-card/90 flex flex-col items-center rounded-2xl border p-10 text-center shadow-xl backdrop-blur-lg"
                             >
                                 <Wine className="text-muted-foreground mb-4 h-12 w-12" />
-                                <p className="text-muted-foreground font-sans text-sm">
-                                    아직 남긴 노트가 없어요.
-                                    <br />
-                                    오늘 마신 한 잔을 적어 보시겠어요?
-                                </p>
-                                <Button
-                                    type="button"
-                                    className="mt-6 rounded-full"
-                                    onClick={openCreate}
-                                >
-                                    <Plus className="mr-2 h-4 w-4" />
-                                    노트 작성
-                                </Button>
+                                {notes.length === 0 ? (
+                                    <>
+                                        <p className="text-muted-foreground font-sans text-sm">
+                                            아직 남긴 노트가 없어요.
+                                            <br />
+                                            오늘 마신 한 잔을 적어 보시겠어요?
+                                        </p>
+                                        <Button
+                                            type="button"
+                                            className="mt-6 rounded-full"
+                                            onClick={openCreate}
+                                        >
+                                            <Plus className="mr-2 h-4 w-4" />
+                                            노트 작성
+                                        </Button>
+                                    </>
+                                ) : noteSearch.trim() ? (
+                                    <>
+                                        <p className="text-muted-foreground font-sans text-sm">
+                                            &lsquo;
+                                            {noteSearch.trim()}
+                                            &rsquo;에 맞는 노트가 없어요.
+                                        </p>
+                                        <button
+                                            type="button"
+                                            onClick={() => setNoteSearch('')}
+                                            className="text-primary mt-3 font-sans text-sm underline-offset-4 hover:underline"
+                                        >
+                                            검색어 지우기
+                                        </button>
+                                    </>
+                                ) : (
+                                    <p className="text-muted-foreground font-sans text-sm">
+                                        이 주종으로 남긴 노트가 아직 없어요.
+                                        <br />
+                                        다른 카테고리나 &lsquo;전체&rsquo;를 눌러 보세요.
+                                    </p>
+                                )}
                             </motion.div>
                         ) : (
                             <ul className="flex flex-col gap-4">
@@ -560,7 +637,7 @@ const NotePage = () => {
                                             onClick={() => openView(n)}
                                             className="w-full text-left"
                                         >
-                                            <Card className="border-border bg-card/95 hover:border-primary/40 transition-colors backdrop-blur-md">
+                                            <Card className="border-border bg-card/95 gap-0 py-0 hover:border-primary/40 transition-colors backdrop-blur-md">
                                                 <CardHeader className="pb-2">
                                                     <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-2">
                                                         <CardTitle className="text-primary font-display min-w-0 text-lg leading-snug sm:pr-2">
@@ -604,9 +681,22 @@ const NotePage = () => {
                                                         )}
                                                     </div>
                                                 </CardHeader>
-                                                <CardContent className="space-y-2 pt-0">
-                                                    <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start">
-                                                        <div className="border-border/60 bg-muted/15 mx-auto w-full max-w-[10.5rem] shrink-0 rounded-lg border p-2 sm:mx-0 sm:w-[5.75rem] sm:max-w-none sm:p-1.5">
+                                                <CardContent className="space-y-2 pb-4 pt-0">
+                                                    <div
+                                                        className={cn(
+                                                            'flex flex-col items-stretch gap-3 sm:items-start',
+                                                            n.comment &&
+                                                                'sm:flex-row',
+                                                        )}
+                                                    >
+                                                        <div
+                                                            className={cn(
+                                                                'border-border/60 bg-muted/15 rounded-lg border sm:p-2.5',
+                                                                n.comment
+                                                                    ? 'mx-auto w-full max-w-[10.5rem] shrink-0 p-2 sm:mx-0 sm:w-[11rem] sm:max-w-none'
+                                                                    : 'w-full min-w-0 max-w-none shrink-0 p-2 sm:mx-0',
+                                                            )}
+                                                        >
                                                             <TastingRadarChart
                                                                 axes={profileAxesForNote(
                                                                     n,
@@ -614,8 +704,8 @@ const NotePage = () => {
                                                                 labelMode="short"
                                                             />
                                                         </div>
-                                                        <div className="min-w-0 flex-1 space-y-2">
-                                                            {n.comment ? (
+                                                        {n.comment ? (
+                                                            <div className="min-w-0 flex-1 space-y-2">
                                                                 <p className="text-card-foreground line-clamp-2 text-center text-sm sm:text-left">
                                                                     &ldquo;
                                                                     {
@@ -623,8 +713,8 @@ const NotePage = () => {
                                                                     }
                                                                     &rdquo;
                                                                 </p>
-                                                            ) : null}
-                                                        </div>
+                                                            </div>
+                                                        ) : null}
                                                     </div>
                                                 </CardContent>
                                             </Card>
