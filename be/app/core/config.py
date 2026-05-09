@@ -15,8 +15,8 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str
     GEMINI_MODEL: str = "gemini-2.5-flash"
 
-    # CORS
-    CORS_ORIGINS: str = "http://localhost:5173"
+    # CORS (FE vite 기본 포트 6075 — doc 및 레거시 5173 포함)
+    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:6075,http://127.0.0.1:6075"
 
     # JWT
     JWT_SECRET: str

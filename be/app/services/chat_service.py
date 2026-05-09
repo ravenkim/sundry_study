@@ -131,15 +131,21 @@ def list_messages(
     limit: int = 50,
     before: Optional[int] = None,
 ) -> list[ChatMessage]:
-    """Return room messages ordered by id ASC."""
+    """Return the latest `limit` messages in chronological order (id ASC).
+
+    - 초기 로드: 가장 최근 대화부터 `limit`개 (시간 순).
+    - `before`(message id): 그보다 오래된 메시지 중 최근 `limit`개 (위로 스크롤 페이지네이션).
+    """
     _ensure_room_owner(db, room_id=room_id, user=user)
     limit = max(1, min(limit, 200))
 
     stmt = select(ChatMessage).where(ChatMessage.room_id == room_id)
     if before is not None:
         stmt = stmt.where(ChatMessage.id < before)
-    stmt = stmt.order_by(ChatMessage.id.asc()).limit(limit)
-    return list(db.execute(stmt).scalars())
+    stmt = stmt.order_by(ChatMessage.id.desc()).limit(limit)
+    rows = list(db.execute(stmt).scalars())
+    rows.reverse()
+    return rows
 
 
 def send_message(

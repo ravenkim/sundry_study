@@ -1,16 +1,45 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { Mail, Lock, LogIn, Home } from 'lucide-react'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import {
+    axiosApiMessage,
+    loginRequest,
+} from 'src/globals/api/authApi.ts'
+import { setStoredAccessToken } from 'src/globals/api/client.tsx'
+import { apiBaseUrl } from 'src/pages/url/log/bartenderBackend.ts'
 
 const LoginPage = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [submitting, setSubmitting] = useState(false)
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-        // TODO: Implement login logic
-        console.log('Login attempt:', { email, password })
+        if (!apiBaseUrl()) {
+            toast.error(
+                'API 주소가 설정되지 않았습니다. fe/.env에 VITE_API_HOST를 넣어 주세요.',
+            )
+            return
+        }
+        setSubmitting(true)
+        try {
+            const data = await loginRequest(email, password)
+            setStoredAccessToken(data.access_token)
+            toast.success(`환영합니다, ${data.user.nickname}님.`)
+            navigate('/log')
+        } catch (err) {
+            toast.error(
+                axiosApiMessage(
+                    err,
+                    '로그인에 실패했습니다. 잠시 후 다시 시도해 주세요.',
+                ),
+            )
+        } finally {
+            setSubmitting(false)
+        }
     }
 
     return (
@@ -71,9 +100,10 @@ const LoginPage = () => {
 
                         <button
                             type="submit"
-                            className="bg-primary text-primary-foreground group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-sans font-semibold shadow-lg transition-all hover:brightness-110 active:scale-[0.98]"
+                            disabled={submitting}
+                            className="bg-primary text-primary-foreground group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-sans font-semibold shadow-lg transition-all hover:brightness-110 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60"
                         >
-                            <span>입장하기</span>
+                            <span>{submitting ? '잠시만요…' : '입장하기'}</span>
                             <LogIn className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                         </button>
                     </form>

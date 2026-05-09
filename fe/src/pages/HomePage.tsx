@@ -7,23 +7,23 @@ import { Button } from 'src/shared/lib/shadcn/components/ui/button.tsx'
 import SScolorDrawer from 'src/shared/components/theme/SScolorDrawer.tsx'
 import { Role } from 'src/pages/url/log/types.ts'
 
-/** 첫 번째 선택 전용 — 버튼 라벨 / 서버로 보낼 문장 */
+/** 첫 번째 선택 전용 — 버튼 라벨과 동일 문장을 서버로 전송 */
 const FIRST_TURN_CHOICES = [
     {
-        label: '하루가 좀 무거워요',
-        text: '오늘 하루가 좀 힘들었어요. 잠깐 이야기 들어줄 수 있어요?',
+        label: '마실거 추천해드려요?',
+        text: '마실거 추천해드려요?',
     },
     {
-        label: '마실 거 추천해 주세요',
-        text: '지금 분위기에 맞게 뭐 마시면 좋을지 하나만 추천해 줘요.',
+        label: '음악 추천해 드려요?',
+        text: '음악 추천해 드려요?',
     },
     {
-        label: '냉장고 재료로 안주',
-        text: '집에 남은 재료로 혼자 먹기 괜찮은 안주 아이디어가 필요해요.',
+        label: '오늘 기분이 어떄요?',
+        text: '오늘 기분이 어떄요?',
     },
     {
-        label: '그냥 가볍게 잡담',
-        text: '특별한 건 없어요. 가볍게 잡담만 할래요.',
+        label: '안주 추천해 드려요?',
+        text: '안주 추천해 드려요?',
     },
 ] as const
 
