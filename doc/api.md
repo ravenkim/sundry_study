@@ -39,7 +39,7 @@
 
 ## `POST /api/chat`
 
-바텐더와 자유 대화.
+바텐더 대화. 화면 첫 진입 시 `messages`를 빈 배열로 보내면 바텐더가 먼저 기분·음료를 묻는 첫 메시지를 반환합니다.
 
 **요청 본문**
 
@@ -51,18 +51,23 @@
 }
 ```
 
-역할 확장 시 `assistant` 포함 가능. 과음 등 안전 처리는 서버 프롬프트·후처리로 수행합니다.
+`messages`가 빈 배열이면 서버가 바텐더 오프닝 질문을 생성합니다. 역할 확장 시 `assistant` 포함 가능. 과음 등 안전 처리는 서버 프롬프트·후처리로 수행합니다.
 
 **응답 200**
 
 ```json
 {
   "reply": "string",
-  "safetyCutoffSuggested": false
+  "safetyCutoffSuggested": false,
+  "recommendation": {
+    "drink": { "name": "string", "abv": "string", "description": "string" },
+    "snack": "string",
+    "music": { "title": "string", "youtubeSearchUrl": "string" }
+  }
 }
 ```
 
-`reply`: 바텐더 응답 텍스트. `safetyCutoffSuggested`: 과음 감지 시 대화 마무리 권장 플래그(선택).
+`reply`: 바텐더 응답 텍스트. `safetyCutoffSuggested`: 과음 감지 시 마무리 권장 플래그. `recommendation`: 대화 중 추천이 포함된 경우에만 채워짐, 없으면 `null`.
 
 ---
 
@@ -185,14 +190,20 @@
 ```json
 {
   "drink_name": "string",
-  "category": "string",
+  "category": "위스키 | 버번 | 맥주 | 와인 | 막걸리 | 기타",
   "rating": 1,
   "aroma": "string",
   "taste": "string",
   "finish": "string",
-  "comment": "string"
+  "comment": "string",
+  "distillery": "string | null",
+  "age_statement": "string | null",
+  "cask_type": "string | null",
+  "whisky_region": "string | null"
 }
 ```
+
+위스키 전용 필드(`distillery`, `age_statement`, `cask_type`, `whisky_region`)는 `category`가 `위스키` 또는 `버번`일 때만 의미 있으며, 나머지 주종에서는 `null`로 전송합니다.
 
 **응답 201**
 
