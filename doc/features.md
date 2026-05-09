@@ -206,6 +206,7 @@ grade         string   첫방문/단골/단골VIP/명예단골
 | Frontend | React + Vite + TypeScript |
 | Styling | Tailwind CSS |
 | Backend | FastAPI (Python) |
-| AI | Claude API (claude-haiku-4-5) |
-| DB | SQLite + SQLAlchemy |
+| AI | Gemini API (`google-genai` SDK) |
+| DB | PostgreSQL + SQLAlchemy 2.x |
+| 인증 | JWT (bcrypt) |
 | 음악 연결 | YouTube 검색 URL (API 키 불필요) |
