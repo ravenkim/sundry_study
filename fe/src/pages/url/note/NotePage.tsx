@@ -32,11 +32,10 @@ import { cn } from 'src/shared/lib/shadcn/lib/utils.ts'
 
 const STORAGE_KEY = 'gdg-bar-tasting-notes-v1'
 
-type DrinkCategory = '위스키' | '버번' | '맥주' | '와인' | '막걸리' | '기타'
+type DrinkCategory = '위스키' | '맥주' | '와인' | '막걸리' | '기타'
 
 const DRINK_CATEGORIES: DrinkCategory[] = [
     '위스키',
-    '버번',
     '맥주',
     '와인',
     '막걸리',
@@ -78,8 +77,12 @@ const RADAR_AXES = [
 
 function migrateLoadedNote(n: TastingNote): TastingNote {
     const r = n.rating
+    const rawCat = (n as { category?: unknown }).category
+    const category: DrinkCategory =
+        rawCat === '버번' ? '위스키' : (n.category as DrinkCategory)
     return {
         ...n,
+        category,
         noseScore: n.noseScore ?? r,
         palateScore: n.palateScore ?? r,
         finishScore: n.finishScore ?? r,
@@ -146,7 +149,7 @@ function makeBartenderComment(note: TastingNote): string {
     if (rating <= 2) {
         return '취향에 안 맞을 수도 있죠. 다음엔 한 단계 가벼운 쪽을 골라 볼까요?'
     }
-    if (category === '위스키' || category === '버번') {
+    if (category === '위스키') {
         return region
             ? `${region} 라인을 차근히 탐험 중이시네요. 노트에 적어 두신 향이 다음 선택에 도움이 될 거예요.`
             : '한 모금씩 기록해 두시는 편이, 취향이 잡히는 데 정말 도움이 돼요.'
@@ -398,7 +401,7 @@ const NotePage = () => {
     const whiskeyCount = useMemo(
         () =>
             notes.filter(
-                (n) => n.category === '위스키' || n.category === '버번',
+                (n) => n.category === '위스키',
             ).length,
         [notes],
     )
@@ -408,7 +411,7 @@ const NotePage = () => {
         const regions = notes
             .filter(
                 (n) =>
-                    (n.category === '위스키' || n.category === '버번') &&
+                    n.category === '위스키' &&
                     n.whiskyRegion?.trim(),
             )
             .map((n) => n.whiskyRegion!.trim())
@@ -491,8 +494,7 @@ const NotePage = () => {
         [closeSheet],
     )
 
-    const showWhiskyFields =
-        form.category === '위스키' || form.category === '버번'
+    const showWhiskyFields = form.category === '위스키'
 
     const sheetOpen = sheetMode !== 'closed'
 
@@ -637,7 +639,7 @@ const NotePage = () => {
                                             onClick={() => openView(n)}
                                             className="w-full text-left"
                                         >
-                                            <Card className="border-border bg-card/95 gap-0 py-0 hover:border-primary/40 transition-colors backdrop-blur-md">
+                                            <Card className="border-border bg-card/95 gap-0 pt-4 pb-0 hover:border-primary/40 transition-colors backdrop-blur-md">
                                                 <CardHeader className="pb-2">
                                                     <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-2">
                                                         <CardTitle className="text-primary font-display min-w-0 text-lg leading-snug sm:pr-2">
@@ -944,7 +946,7 @@ const NotePage = () => {
                                                 </Label>
                                                 <Input
                                                     id="cask"
-                                                    placeholder="예: 셰리, 버번"
+                                                    placeholder="예: 셰리, 포트"
                                                     value={form.caskType}
                                                     onChange={(e) =>
                                                         setForm((f) => ({
@@ -962,7 +964,7 @@ const NotePage = () => {
                                                 </Label>
                                                 <Input
                                                     id="region"
-                                                    placeholder="스페이사이드, 아일라, 버번 등"
+                                                    placeholder="스페이사이드, 아일라, 하이랜드 등"
                                                     value={form.whiskyRegion}
                                                     onChange={(e) =>
                                                         setForm((f) => ({
