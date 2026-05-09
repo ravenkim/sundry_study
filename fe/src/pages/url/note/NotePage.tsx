@@ -905,7 +905,7 @@ const NotePage = () => {
                                 </div>
                             </div>
 
-                            <SheetFooter className="gap-2 sm:flex-row">
+                            <SheetFooter className="flex-col gap-2">
                                 <Button
                                     type="button"
                                     variant="outline"
