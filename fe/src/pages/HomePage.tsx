@@ -1,31 +1,43 @@
-import { Loader2, Palette, User, FileText, Scroll, Send } from 'lucide-react'
+import { Loader2, Palette, User, FileText, Scroll, Send, RefreshCw } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { useBartenderChat } from 'src/globals/bartender/useBartenderChat.ts'
 import { Button } from 'src/shared/lib/shadcn/components/ui/button.tsx'
 import SScolorDrawer from 'src/shared/components/theme/SScolorDrawer.tsx'
+import type { FeatureKey } from 'src/pages/url/log/bartenderBackend.ts'
 import { Role } from 'src/pages/url/log/types.ts'
 
-/** 첫 번째 선택 전용 — 버튼 라벨 / 서버로 보낼 문장 */
-const FIRST_TURN_CHOICES = [
+/**
+ * 첫 번째 선택 전용 — 라벨 / 서버로 보낼 문장 / **새 룸을 만들 때 쓸 feature_key**.
+ * `featureKey` 는 `be/app/ai/feature_registry.py` 와 1:1 매핑되어야 한다.
+ */
+const FIRST_TURN_CHOICES: ReadonlyArray<{
+    featureKey: FeatureKey
+    label: string
+    text: string
+}> = [
     {
+        featureKey: 'late_night',
         label: '하루가 좀 무거워요',
         text: '오늘 하루가 좀 힘들었어요. 잠깐 이야기 들어줄 수 있어요?',
     },
     {
+        featureKey: 'drink_recommend',
         label: '마실 거 추천해 주세요',
         text: '지금 분위기에 맞게 뭐 마시면 좋을지 하나만 추천해 줘요.',
     },
     {
+        featureKey: 'fridge_recipe',
         label: '냉장고 재료로 안주',
         text: '집에 남은 재료로 혼자 먹기 괜찮은 안주 아이디어가 필요해요.',
     },
     {
+        featureKey: 'bar_counter',
         label: '그냥 가볍게 잡담',
         text: '특별한 건 없어요. 가볍게 잡담만 할래요.',
     },
-] as const
+]
 
 const HomePage = () => {
     const [inputValue, setInputValue] = useState('')
@@ -35,6 +47,8 @@ const HomePage = () => {
         isTyping,
         lastExchange,
         sendMessage,
+        startConversation,
+        resetConversation,
     } = useBartenderChat()
 
     const awaitingFirstPick = useMemo(
@@ -55,9 +69,15 @@ const HomePage = () => {
         void sendMessage(text)
     }
 
-    const handleFirstChoice = (text: string) => {
+    const handleFirstChoice = (featureKey: FeatureKey, text: string) => {
         if (bootstrapping || isTyping || !awaitingFirstPick) return
-        void sendMessage(text)
+        void startConversation(featureKey, text)
+    }
+
+    const handleResetConversation = () => {
+        if (isTyping) return
+        setInputValue('')
+        resetConversation()
     }
 
     return (
@@ -107,6 +127,19 @@ const HomePage = () => {
                                 로그
                             </span>
                         </Link>
+                        <button
+                            type="button"
+                            onClick={handleResetConversation}
+                            disabled={isTyping || awaitingFirstPick}
+                            className="group flex flex-col items-center transition-transform enabled:hover:scale-105 disabled:cursor-not-allowed disabled:opacity-40"
+                            aria-label="새 대화 시작"
+                            title="새 대화 시작 (다른 feature 로 바꾸려면 먼저 누르세요)"
+                        >
+                            <RefreshCw className="text-primary group-hover:brightness-110 h-6 w-6" />
+                            <span className="text-muted-foreground mt-1 font-sans text-[10px] uppercase tracking-widest md:text-xs">
+                                새 대화
+                            </span>
+                        </button>
                     </nav>
                 </div>
             </header>
@@ -195,13 +228,13 @@ const HomePage = () => {
                                 오늘은 어떤 이야기부터 할까요?
                             </p>
                             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                {FIRST_TURN_CHOICES.map(({ label, text }) => (
+                                {FIRST_TURN_CHOICES.map(({ featureKey, label, text }) => (
                                     <Button
-                                        key={label}
+                                        key={featureKey}
                                         type="button"
                                         variant="outline"
                                         className="border-primary/40 bg-background/60 text-card-foreground hover:bg-primary/10 h-auto min-h-[3rem] justify-center rounded-2xl px-4 py-3 text-center font-sans text-sm font-medium leading-snug whitespace-normal"
-                                        onClick={() => handleFirstChoice(text)}
+                                        onClick={() => handleFirstChoice(featureKey, text)}
                                     >
                                         {label}
                                     </Button>

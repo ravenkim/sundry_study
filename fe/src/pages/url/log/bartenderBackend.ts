@@ -1,7 +1,13 @@
 import { client } from 'src/globals/api/client.tsx'
 
-/** `be/app/ai/feature_registry.py` 의 기본 대화 채널과 맞춤 */
-export const DEFAULT_BARTENDER_FEATURE_KEY = 'bar_counter'
+/** `be/app/ai/feature_registry.py` 의 카탈로그와 1:1. 새 feature 추가 시 여기 함께 갱신. */
+export type FeatureKey =
+    | 'bar_counter'
+    | 'drink_recommend'
+    | 'fridge_recipe'
+    | 'late_night'
+
+export const DEFAULT_BARTENDER_FEATURE_KEY: FeatureKey = 'bar_counter'
 export const DEFAULT_CHARACTER_KEY = 'bartender_jun'
 
 export type BackendChatMessageRow = {
@@ -11,17 +17,9 @@ export type BackendChatMessageRow = {
     created_at: string
 }
 
-type RoomSummary = {
-    id: number
-}
-
-type MessagesListResponse = {
-    items: BackendChatMessageRow[]
-}
-
 type RoomCreatedResponse = {
     id: number
-    feature_key: string
+    feature_key: FeatureKey
     character_key: string
     title: string | null
     created_at: string
@@ -39,43 +37,23 @@ export function apiBaseUrl(): string {
 }
 
 /**
- * 같은 feature 의 가장 최근 채팅방이 있으면 메시지를 불러오고,
- * 없으면 룸을 새로 만들고 첫 인사를 받습니다 (`doc/api.md` 흐름).
+ * feature 기준으로 **새 채팅방을 명시적으로 생성**합니다.
+ *
+ * 이전(`bootstrapBartenderSession`)처럼 가장 최근 룸을 자동 재사용하지 않습니다.
+ * 같은 feature 라도 사용자가 "새 대화"를 시작했다면 새 룸이 만들어져야 history 가
+ * 직전 대화와 격리됩니다.
  */
-export async function bootstrapBartenderSession(featureKey = DEFAULT_BARTENDER_FEATURE_KEY): Promise<{
+export async function createBartenderRoom(featureKey: FeatureKey): Promise<{
     roomId: number
-    messages: BackendChatMessageRow[]
+    greeting: BackendChatMessageRow
 }> {
-    const listRes = await client.get<{ items: RoomSummary[] }>(
-        '/api/chat/rooms',
-        {
-            params: {
-                feature_key: featureKey,
-                limit: 1,
-            },
-        },
-    )
-    const rooms = listRes.data.items ?? []
-    if (rooms.length > 0) {
-        const roomId = rooms[0].id
-        const msgRes = await client.get<MessagesListResponse>(
-            `/api/chat/rooms/${roomId}/messages`,
-            { params: { limit: 200 } },
-        )
-        return { roomId, messages: msgRes.data.items ?? [] }
-    }
-
-    const createRes = await client.post<RoomCreatedResponse>(
-        '/api/chat/rooms',
-        {
-            feature_key: featureKey,
-            character_key: DEFAULT_CHARACTER_KEY,
-        },
-    )
-    const greeting = createRes.data.greeting_message
+    const res = await client.post<RoomCreatedResponse>('/api/chat/rooms', {
+        feature_key: featureKey,
+        character_key: DEFAULT_CHARACTER_KEY,
+    })
     return {
-        roomId: createRes.data.id,
-        messages: greeting ? [greeting] : [],
+        roomId: res.data.id,
+        greeting: res.data.greeting_message,
     }
 }
 

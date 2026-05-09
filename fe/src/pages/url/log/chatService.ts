@@ -84,53 +84,17 @@ async function chatWithGemini(
 async function chatStub(
     history: { role: Role; content: string }[],
 ): Promise<ChatTurnResult> {
-    /*
-    const { data } = await client.post<{
-        reply: string
-        safetyCutoffSuggested?: boolean
-        recommendation: null | {
-            drink: { name: string; abv?: string; description?: string }
-            snack: string
-            music: { title: string; youtubeSearchUrl: string }
-        }
-    }>('/api/chat', { messages })
-
-    const rec = data.recommendation
-    return {
-        content: data.reply,
-        recommendation: rec
-            ? {
-                  title: rec.drink.name,
-                  description: rec.drink.description?.trim() ?? '',
-                  foodPairing: rec.snack,
-                  musicLabel: rec.music.title,
-                  musicUrl: rec.music.youtubeSearchUrl,
-              }
-            : undefined,
-        safetyCutoffSuggested: data.safetyCutoffSuggested,
-    }
-    */
-
     await new Promise((r) => setTimeout(r, 280))
 
-    const messages: ApiChatMessage[] = history.map((m) => ({
-        role: m.role === Role.USER ? 'user' : 'assistant',
-        content: m.content,
-    }))
-
-    if (messages.length === 0) {
+    if (history.length === 0) {
         return {
-            content:
-                '어서오세요, 단골손님! 오늘 어떤 분위기세요?',
+            content: '어서오세요, 단골손님! 오늘 어떤 분위기세요?',
         }
     }
 
-    const lastUser = [...messages].reverse().find((m) => m.role === 'user')
-    return {
-        content: lastUser
-            ? `「${lastUser.content}」 잘 들었어요. 지금은 데모라 짧게만 답해요, 단골손님. 서버가 붙으면 술·안주 추천도 이어 드릴게요.`
-            : '편하게 말씀해 주세요.',
-    }
+    // history > 0 인 경우는 백엔드 응답이 필수. 폴백으로 가짜 답을 만들지 않고
+    // 호출부에서 toast 만 띄우고 messages 에 추가되지 않도록 throw.
+    throw new Error('Backend chat is required to reply.')
 }
 
 /**
