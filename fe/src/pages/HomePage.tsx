@@ -95,6 +95,11 @@ const HomePage = () => {
                                     <Loader2 className="text-primary h-8 w-8 animate-spin" />
                                     바텐더가 자리에 앉는 중…
                                 </div>
+                            ) : isTyping ? (
+                                <div className="text-muted-foreground flex flex-col items-center gap-3 py-6 font-sans text-sm md:py-8">
+                                    <Loader2 className="text-primary h-10 w-10 animate-spin" />
+                                    답을 적는 중…
+                                </div>
                             ) : lastExchange ? (
                                 <div className="space-y-4 text-left">
                                     {lastExchange.lastUserContent ? (
@@ -113,12 +118,6 @@ const HomePage = () => {
                                             {lastExchange.lastModelContent}
                                         </p>
                                     </div>
-                                    {isTyping ? (
-                                        <p className="text-muted-foreground flex items-center gap-2 font-sans text-xs">
-                                            <Loader2 className="text-primary h-3.5 w-3.5 animate-spin" />
-                                            답을 적는 중…
-                                        </p>
-                                    ) : null}
                                 </div>
                             ) : null}
                             {/* Bubble Pointer */}
