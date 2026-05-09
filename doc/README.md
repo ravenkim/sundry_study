@@ -6,6 +6,7 @@
 
 | 문서 | 파일 | 설명 |
 |------|------|------|
+| 문제정의 | [problem-definition.md](./problem-definition.md) | 배경, 타깃, 페인포인트, 범위, 검증 포인트 |
 | 기능 정의서 | [features.md](./features.md) | 전체 기능 목록, 우선순위, 인수 조건 |
 | API 정의서 | [api.md](./api.md) | 엔드포인트별 요청·응답 스펙 |
 | 화면 정의서 | [screens.md](./screens.md) | 화면별 구성 요소 및 UX 흐름 |
