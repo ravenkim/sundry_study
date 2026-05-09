@@ -36,6 +36,10 @@ erDiagram
         TEXT taste
         TEXT finish
         TEXT comment
+        TEXT distillery
+        TEXT age_statement
+        TEXT cask_type
+        TEXT whisky_region
         TEXT bartender_comment
         DATETIME created_at
     }
@@ -84,18 +88,23 @@ erDiagram
 | `id` | INTEGER | PK | |
 | `user_id` | INTEGER | FK → `users.id`, NOT NULL | |
 | `drink_name` | TEXT | NOT NULL | |
-| `category` | TEXT | | 위스키/맥주/와인/막걸리/기타 |
-| `rating` | INTEGER | CHECK 1~5 | |
-| `aroma` | TEXT | | |
-| `taste` | TEXT | | |
-| `finish` | TEXT | | |
+| `category` | TEXT | NOT NULL | 위스키/버번/맥주/와인/막걸리/기타 |
+| `rating` | INTEGER | NOT NULL, CHECK 1~5 | |
+| `aroma` | TEXT | | 향(Nose) |
+| `taste` | TEXT | | 맛(Palate) |
+| `finish` | TEXT | | 피니시(Finish) |
 | `comment` | TEXT | | 한 줄 감상 |
+| `distillery` | TEXT | | 증류소 (위스키 전용) |
+| `age_statement` | TEXT | | 숙성연수 (위스키 전용) |
+| `cask_type` | TEXT | | 캐스크 종류 (위스키 전용) |
+| `whisky_region` | TEXT | | 스타일·지역 (위스키 전용) |
 | `bartender_comment` | TEXT | | 생성 후 AI/서버가 채움 |
 | `created_at` | DATETIME | NOT NULL, DEFAULT | |
 
 **인덱스 권장**
 
 - `(user_id, created_at DESC)` — 목록 조회.
+- `(user_id, category)` — 주종 필터 조회.
 
 ---
 
