@@ -1,4 +1,5 @@
 import { RouterProvider } from 'react-router'
+import { BartenderChatProvider } from 'src/globals/bartender/BartenderChatProvider.tsx'
 import router from 'src/globals/router/router.tsx'
 import useRouteListener from 'src/globals/router/useRouteListener.tsx'
 import { Bounce, ToastContainer } from 'react-toastify'
@@ -27,9 +28,12 @@ function App() {
 
     return (
         <ThemeProvider>
-            <RouterProvider router={router} />
+            <BartenderChatProvider>
+                <RouterProvider router={router} />
+            </BartenderChatProvider>
             <ToastContainer
                 position="top-right"
+                style={{ top: '4.75rem' }}
                 autoClose={5000}
                 hideProgressBar={false}
                 newestOnTop={false}
