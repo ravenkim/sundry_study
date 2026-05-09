@@ -2,7 +2,7 @@
 
 ---
 
-# 📚 ss-react-boilerplate-ts User Guide
+# 📚 gdg-daejeon-fe (Bartender) User Guide
 
 ## 🛠️ Stack
 
@@ -96,8 +96,8 @@ src/
 
 ## 1. Project Overview
 
-- A boilerplate project based on React + TypeScript.
-- Designed for fast development, scalability, and maintainability.
+- Frontend for **Bartender** (바텐더), the GDG Daejeon monorepo app (`fe/`).
+- Built with React + TypeScript; designed for fast development, scalability, and maintainability.
 
 ---
 
