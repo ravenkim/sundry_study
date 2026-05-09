@@ -37,13 +37,17 @@ import { RootState } from 'src/globals/store/redux/reduxStore.tsx'
 import { themeAction } from 'src/shared/components/theme/themeReducer.tsx'
 import { colorGroups } from 'src/shared/components/theme/colorConstants.tsx'
 
-const SScolorDrawer = () => {
+interface SScolorDrawerProps {
+    children?: React.ReactNode
+}
+
+const SScolorDrawer = ({ children }: SScolorDrawerProps) => {
     const { theme } = useTheme()
 
     return (
         <Drawer direction={'right'}>
             <DrawerTrigger asChild>
-                <Settings className="h-5 w-5 cursor-pointer" />
+                {children || <Settings className="h-5 w-5 cursor-pointer" />}
             </DrawerTrigger>
 
             <DrawerContent className="flex flex-col">
