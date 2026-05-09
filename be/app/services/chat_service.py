@@ -9,10 +9,9 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.ai import gemini_client
+from app.ai import feature_registry, gemini_client
 from app.models.chat import ChatMessage, ChatRoom
 from app.models.user import User
-from app.services import feature_registry
 
 # Gemini 호출 시 함께 보낼 최근 메시지 개수 (system 제외, user/assistant)
 HISTORY_TURNS = 20
@@ -180,7 +179,7 @@ def send_message(
     try:
         reply_text = gemini_client.generate_bartender_reply(
             history,
-            system_instruction=feature["system_instruction"],
+            system_instruction=feature["system_prompt"],
         )
     except Exception as exc:
         db.rollback()

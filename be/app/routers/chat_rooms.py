@@ -27,7 +27,8 @@ from app.schemas.chat import (
     SendMessageRequest,
     SendMessageResponse,
 )
-from app.services import chat_service, feature_registry
+from app.ai import feature_registry
+from app.services import chat_service
 
 router = APIRouter(prefix="/api/chat", tags=["chat-rooms"])
 
