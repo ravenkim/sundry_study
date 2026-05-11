@@ -1,0 +1,227 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model common_code {
+  high_code String? @db.VarChar(8)
+  code2     String  @id @db.VarChar(8)
+  code_name String? @db.VarChar(20)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model company {
+  id   Int     @id @default(autoincrement())
+  name String? @db.VarChar(100)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model complain {
+  id Int @id @default(autoincrement())
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model country {
+  code       String @id @db.VarChar(3)
+  name       String @db.VarChar(20)
+  phone_code Int
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model party {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(100)
+  leader       Int
+  avg_alcohol  Float          @db.Float
+  smoker_count Int
+  type         String         @db.VarChar(100)
+  party_member party_member[]
+  ting         ting[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model party_member {
+  id       Int    @id @default(autoincrement())
+  party_id Int?
+  user_id  Int?
+  party    party? @relation(fields: [party_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "party_member_parties_FK")
+  user     user?  @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "party_member_users_FK")
+
+  @@index([party_id], map: "party_member_parties_FK")
+  @@index([user_id], map: "party_member_users_FK")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model phone_verification_code {
+  id                  Int      @id @default(autoincrement())
+  user_id             Int
+  verification_number String   @db.VarChar(6)
+  expire_time         DateTime @default(dbgenerated("(current_timestamp() + interval 5 minute)")) @db.DateTime(0)
+  user                user     @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "user_phone_verification_users_FK")
+
+  @@index([user_id], map: "user_phone_verification_users_FK")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model place {
+  id         Int          @id @default(autoincrement())
+  name       String?      @db.VarChar(100)
+  type       String?      @db.VarChar(100)
+  address    String?      @db.VarChar(225)
+  place_menu place_menu[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model place_menu {
+  id          Int     @id @default(autoincrement())
+  place_id    Int?
+  name        String  @db.VarChar(100)
+  description String? @db.VarChar(100)
+  image_url   String? @db.VarChar(100)
+  place       place?  @relation(fields: [place_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "place_menu_place_FK")
+
+  @@index([place_id], map: "place_menu_place_FK")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model role {
+  role                             Int          @id @default(autoincrement())
+  name                             String       @db.VarChar(100)
+  description                      String?      @db.VarChar(100)
+  user_title_user_title_roleTorole user_title[] @relation("user_title_roleTorole")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model school {
+  id Int @id @default(autoincrement())
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model term {
+  id        Int         @id @default(autoincrement())
+  title     String?     @db.VarChar(100)
+  content   String?     @db.LongText
+  user_term user_term[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model ting {
+  id           Int     @id @default(autoincrement())
+  title        String  @db.VarChar(100)
+  discription  String? @db.VarChar(200)
+  member_count Int?
+  party_id     Int?
+  party        party?  @relation(fields: [party_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "tings_parties_FK")
+
+  @@index([party_id], map: "tings_parties_FK")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tip {
+  id Int @id @default(autoincrement())
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user {
+  id                      Int                       @id @default(autoincrement())
+  login_id                String                    @unique(map: "users_unique") @db.VarChar(50)
+  password                String                    @db.VarChar(100)
+  email                   String                    @unique(map: "users_unique_1") @db.VarChar(100)
+  deleted_yn              String                    @default("N") @db.VarChar(1)
+  disabled_yn             String                    @default("N") @db.VarChar(1)
+  role                    Int                       @default(1)
+  verification_yn         String?                   @default("N") @db.VarChar(1)
+  name                    String?                   @db.VarChar(50)
+  gender                  String?                   @db.VarChar(10)
+  birth                   DateTime?                 @db.Date
+  info_fill_yn            String?                   @default("N") @db.VarChar(1)
+  alcohol                 Float?                    @db.Float
+  cigarette_yn            String?                   @db.VarChar(1)
+  mbti                    String?                   @db.VarChar(4)
+  photos_problem_yn       String?                   @default("Y") @db.VarChar(1)
+  ci                      String?                   @unique(map: "users_unique_2") @db.VarChar(100)
+  create_at               DateTime                  @default(now()) @db.Timestamp(0)
+  update_at               DateTime?                 @default(now()) @db.Timestamp(0)
+  deleted_at              DateTime?                 @db.Timestamp(0)
+  signup_channel          String                    @default("normal") @db.VarChar(12)
+  party_member            party_member[]
+  phone_verification_code phone_verification_code[]
+  user_photo              user_photo[]
+  user_refresh_token      user_refresh_token[]
+  user_term               user_term[]
+  user_title_relation     user_title_relation[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_photo {
+  id        Int     @id @default(autoincrement())
+  user_id   Int?
+  image_url String? @db.VarChar(100)
+  user      user?   @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "user_photos_users_FK")
+
+  @@index([user_id], map: "user_photos_users_FK")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_refresh_token {
+  id         BigInt    @id @default(autoincrement())
+  token      String    @db.LongText
+  user_id    Int?
+  created_at DateTime? @db.DateTime(6)
+  expires_at DateTime? @db.DateTime(6)
+  user       user?     @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "user_refresh_token_users_FK")
+
+  @@index([user_id], map: "user_refresh_token_users_FK")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_refresh_token_black_list {
+  blacklisted_at DateTime @db.DateTime(6)
+  token_id       BigInt
+
+  @@index([token_id], map: "user_refresh_token_black_list_user_refresh_token_FK")
+  @@ignore
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_term {
+  id        Int      @id @default(autoincrement())
+  user_id   Int?
+  term_id   Int?
+  agreed    Boolean
+  agreed_at DateTime @default(now()) @db.Timestamp(0)
+  term      term?    @relation(fields: [term_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "user_terms_terms_FK")
+  user      user?    @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "user_terms_users_FK")
+
+  @@index([term_id], map: "user_terms_terms_FK")
+  @@index([user_id], map: "user_terms_users_FK")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_title {
+  id                         Int                   @id @default(autoincrement())
+  name                       String                @db.VarChar(100)
+  role                       Int
+  role_user_title_roleTorole role                  @relation("user_title_roleTorole", fields: [role], references: [role], onUpdate: Restrict, map: "FK_authority_TO_title_1")
+  user_title_relation        user_title_relation[]
+
+  @@index([role], map: "FK_authority_TO_title_1")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_title_relation {
+  id         Int        @id @default(autoincrement())
+  user_id    Int
+  title_id   Int
+  user       user       @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "user_title_relation_user_FK")
+  user_title user_title @relation(fields: [title_id], references: [id], onUpdate: Restrict, map: "user_title_relation_user_title_FK")
+
+  @@index([user_id], map: "user_title_relation_user_FK")
+  @@index([title_id], map: "user_title_relation_user_title_FK")
+}
