@@ -1,0 +1,1 @@
+SELECT * FROM users where user_login_id = ?;
