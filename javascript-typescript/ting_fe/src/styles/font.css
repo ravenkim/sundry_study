@@ -1,0 +1,82 @@
+@font-face {
+    /*이름*/
+    font-family: "Pretendard";
+    /*굵기*/
+    font-weight: 900;
+    /*경로 이미 운영체제에 설치 되어있는지 확인 없으면 다운*/
+    src: local("Pretendard-Black"),
+    url('src/assets/fonts/Pretendard-Black.woff2') format('woff2');
+    font-display: block;    /*로딩시 깜빡임 방지*/
+
+}
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    src: local("Pretendard-Bold"),
+    url('src/assets/fonts/Pretendard-Bold.woff2') format('woff2');
+    font-display: block;
+}
+
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 800;
+    src: local("Pretendard-ExtraBold"),
+    url('src/assets/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 200;
+    src: local("Pretendard-ExtraLight"),
+    url('src/assets/fonts/Pretendard-ExtraLight.woff2') format('woff2');
+    font-display: block;
+}
+
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 300;
+    src: local("Pretendard-Light"),
+    url('src/assets/fonts/Pretendard-Light.woff2') format('woff2');
+    font-display: block;
+}
+
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 500;
+    src: local("Pretendard-Medium"),
+    url('src/assets/fonts/Pretendard-Medium.woff2') format('woff2');
+    font-display: block;
+}
+
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    src: local("Pretendard-Regular"),
+    url('src/assets/fonts/Pretendard-Regular.woff2') format('woff2');
+    font-display: block;
+}
+
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    src: local("Pretendard-SemiBold"),
+    url('src/assets/fonts/Pretendard-SemiBold.woff2') format('woff2');
+    font-display: block;
+}
+
+
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 100;
+    src: local("Pretendard-Thin"),
+    url('src/assets/fonts/Pretendard-Thin.woff2') format('woff2');
+    font-display: block;
+}
+
