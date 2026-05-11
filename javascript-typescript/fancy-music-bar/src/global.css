@@ -1,0 +1,10 @@
+html,
+body,
+#root {
+    transform: none !important;
+    -webkit-transform: none !important; /* For broader browser compatibility */
+    perspective: none !important;
+    filter: none !important;
+    will-change: auto !important;
+    contain: none !important;
+}
