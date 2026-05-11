@@ -1,0 +1,52 @@
+import { RouterProvider } from 'react-router'
+import { BartenderChatProvider } from 'src/globals/bartender/BartenderChatProvider.tsx'
+import router from 'src/globals/router/router.tsx'
+import useRouteListener from 'src/globals/router/useRouteListener.tsx'
+import { Bounce, ToastContainer } from 'react-toastify'
+import { ThemeProvider } from 'src/shared/lib/shadcn/components/ThemeProvider.tsx'
+import { useEffect } from 'react'
+
+function App() {
+    useRouteListener()
+
+    // 새로 고침시 애니메이션, 임시 배경색상 처리
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                const root = document.documentElement
+                const computedBg =
+                    getComputedStyle(root).getPropertyValue('--background')
+
+                if (computedBg?.trim()) {
+                    root.style.backgroundColor = ''
+                    document.body.classList.remove('preload')
+                    document.documentElement.classList.remove('theme-instant')
+                }
+            })
+        })
+    }, [])
+
+    return (
+        <ThemeProvider>
+            <BartenderChatProvider>
+                <RouterProvider router={router} />
+            </BartenderChatProvider>
+            <ToastContainer
+                position="top-right"
+                style={{ top: '4.75rem' }}
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
+        </ThemeProvider>
+    )
+}
+
+export default App
