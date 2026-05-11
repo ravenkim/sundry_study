@@ -1,0 +1,23 @@
+{
+  "header": {
+    "mypage": "마이페이지",
+    "logout": "로그아웃",
+    "login": "로그인",
+    "register": "회원가입",
+    "language": "언어설정",
+    "help": "고객센터"
+  },
+  "nav": {
+    "dashboard": "대시보드",
+    "shopping-mall": "쇼핑몰 관리"
+  },
+  "home": {
+    "join": "join"
+  },
+  "text": {
+    "Welcome to React": "영어영어"
+  },
+  "numbar": {
+    "aaaaa": "22222222222222222"
+  }
+}
