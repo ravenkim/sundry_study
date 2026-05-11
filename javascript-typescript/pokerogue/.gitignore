@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Secrets & local overrides
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 .idea
