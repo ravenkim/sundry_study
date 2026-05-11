@@ -1,0 +1,39 @@
+@theme inline {
+    --font-m30-headline: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-m30-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    --color-m30-surface: #0a0a0a;
+    --color-m30-on-surface: #ffffff;
+    --color-m30-primary-container: #ffffff;
+    --color-m30-on-primary: #000000;
+    --color-m30-surface-container-low: #0f0f0f;
+    --color-m30-surface-container-high: #1a1a1a;
+    --color-m30-surface-container-lowest: #050505;
+}
+
+@utility m30-neon-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+@utility m30-material-symbol {
+    font-family: 'Material Symbols Outlined';
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* 랜딩: 가로 스크롤·iOS 바운스 완화 */
+    .m30-landing {
+        overflow-x: clip;
+        -webkit-tap-highlight-color: rgb(255 255 255 / 0.08);
+    }
+}

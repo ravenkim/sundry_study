@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'src/styles/typography.pcss';
+@import 'src/styles/variables.css';
+@import 'src/features/minsang30/minsang-theme.pcss';
+@import 'src/styles/base.pcss';
