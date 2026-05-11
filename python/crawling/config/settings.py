@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-5y0xs@+o4n+-cl#+&nr1)p%qju=r73&0zm-e=o0f-+m2+p9rkp"
+# 로컬: DJANGO_SECRET_KEY 환경 변수를 설정하세요. 미설정 시 아래 플레이스홀더만 사용합니다(공개 레포용).
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "dev-placeholder-only-set-DJANGO_SECRET_KEY-for-real-use",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
