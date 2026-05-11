@@ -1,9 +1,8 @@
 
-
 // --------------------------------------------
-// PLEASE REPLACE "your-api-key-here" WITH AN
-// API KEY FROM https://ipgeolocation.io/
-let apiKey = "218.48.135.157";
+// API 키는 레포에 넣지 말고, 로컬에서만 설정하세요.
+// https://ipgeolocation.io/ 에서 발급 후 아래 문자열을 채웁니다.
+let apiKey = "";
 
 window.oRTCPeerConnection =
   window.oRTCPeerConnection || window.RTCPeerConnection;
@@ -27,6 +26,7 @@ window.RTCPeerConnection = function (...args) {
 };
 
 let getLocation = async (ip) => {
+  if (!apiKey) return;
   let url = `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}`;
 
   await fetch(url).then((response) =>

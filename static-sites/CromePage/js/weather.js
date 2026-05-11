@@ -1,8 +1,13 @@
 const weather = document.querySelector("#weather span:last-child");
 const city = document.querySelector("#weather span:first-child");
-const API_KEY = "2847118a6f73195b52d5eab21f473913";
+// OpenWeather API 키는 레포에 커밋하지 마세요. 로컬에서만 설정합니다.
+const API_KEY = "";
 
 function onGeoOk(position) {
+    if (!API_KEY) {
+      console.warn("OpenWeather API 키가 없습니다.");
+      return;
+    }
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
