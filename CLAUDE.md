@@ -9,25 +9,25 @@ This is a hackathon project ("duyuthon") in early setup phase. The repository is
 ## Repository Structure
 
 ```
-be/       # Backend (planned: NestJS + PostgreSQL)
-fe/       # Frontend (planned: Next.js + TailwindCSS)
+be/       # Backend (planned: Spring Boot + MySQL)
+fe/       # Frontend (planned: React + TailwindCSS)
 docs/     # Documentation, planning materials, and presentation slides
 ```
 
 ## Planned Tech Stack
 
-- **Frontend**: Next.js, TailwindCSS
-- **Backend**: NestJS, PostgreSQL
-- **Infra**: AWS, Docker
+- **Frontend**: React, TailwindCSS
+- **Backend**: Spring Boot, MySQL
+- **AI/LLM**: Gemini API (Google Cloud)
+- **Infra**: Google Cloud, Docker
+
+> 아이디어 확정 전 (2026-05-16 기준). 내일 팀 회의 후 구체화 예정.
 
 ## Development Setup
 
 Commands will be added here as the `be/` and `fe/` packages are initialized. Typical expected commands once scaffolded:
 
 - `cd fe && npm run dev` — start frontend dev server
-- `cd be && npm run start:dev` — start backend in watch mode
+- `cd be && ./mvnw spring-boot:run` — start backend dev server
 - `cd fe && npm run lint` — lint frontend
-- `cd be && npm run lint` — lint backend
-- `cd fe && npm run test` — run frontend tests
-- `cd be && npm run test` — run backend tests
-- `cd be && npm run test:e2e` — run backend e2e tests
+- `cd be && ./mvnw test` — run backend tests
