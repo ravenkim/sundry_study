@@ -41,6 +41,27 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+    /* Material Design 3 tokens */
+    --color-primary-container: var(--primary-container);
+    --color-on-primary-container: var(--on-primary-container);
+    --color-secondary-container: var(--secondary-container);
+    --color-on-secondary-container: var(--on-secondary-container);
+    --color-surface: var(--surface);
+    --color-surface-variant: var(--surface-variant);
+    --color-surface-container-lowest: var(--surface-container-lowest);
+    --color-surface-container-low: var(--surface-container-low);
+    --color-surface-container: var(--surface-container);
+    --color-surface-container-high: var(--surface-container-high);
+    --color-surface-bright: var(--surface-bright);
+    --color-on-surface: var(--on-surface);
+    --color-on-surface-variant: var(--on-surface-variant);
+    --color-outline-variant: var(--outline-variant);
+    --color-error: var(--error);
+    --color-error-container: var(--error-container);
+    --color-on-error-container: var(--on-error-container);
+    --color-tertiary: var(--tertiary);
+    --color-inverse-surface: var(--inverse-surface);
+    --color-inverse-on-surface: var(--inverse-on-surface);
 }
 
 :root {
@@ -51,10 +72,33 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
+    /* Volt Yellow #FFC107 */
+    --primary: oklch(0.856 0.178 85);
+    --primary-foreground: oklch(0.2 0.05 85);
+    /* Eco Green #4CAF50 */
+    --secondary: oklch(0.638 0.165 142);
+    --secondary-foreground: oklch(1 0 0);
+    /* Material Design 3 surface & container tokens */
+    --primary-container: oklch(0.95 0.09 85);
+    --on-primary-container: oklch(0.22 0.06 85);
+    --secondary-container: oklch(0.92 0.07 142);
+    --on-secondary-container: oklch(0.2 0.08 142);
+    --surface: oklch(0.99 0.002 85);
+    --surface-variant: oklch(0.93 0.005 85);
+    --surface-container-lowest: oklch(1 0 0);
+    --surface-container-low: oklch(0.97 0.002 85);
+    --surface-container: oklch(0.94 0.003 85);
+    --surface-container-high: oklch(0.91 0.004 85);
+    --surface-bright: oklch(0.99 0.002 85);
+    --on-surface: oklch(0.14 0 0);
+    --on-surface-variant: oklch(0.45 0.01 85);
+    --outline-variant: oklch(0.84 0.005 85);
+    --error: oklch(0.55 0.22 25);
+    --error-container: oklch(0.93 0.10 25);
+    --on-error-container: oklch(0.25 0.10 25);
+    --tertiary: oklch(0.58 0.15 260);
+    --inverse-surface: oklch(0.18 0.005 85);
+    --inverse-on-surface: oklch(0.95 0.002 85);
     --muted: oklch(0.97 0 0);
     --muted-foreground: oklch(0.556 0 0);
     --accent: oklch(0.97 0 0);

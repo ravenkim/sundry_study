@@ -1,12 +1,11 @@
-import WhLayout from 'src/shared/layout/WhLayout.tsx'
-import Home from 'src/features/Home.tsx'
+import { UserHome } from 'src/features/eco/UserPages'
+import { UserBottomNav } from 'src/features/eco/EcoLayouts'
 
-const HomePage = () => {
-    return (
-        <WhLayout>
-            <Home />
-        </WhLayout>
-    )
-}
+const HomePage = () => (
+    <>
+        <UserHome />
+        <UserBottomNav />
+    </>
+)
 
 export default HomePage
