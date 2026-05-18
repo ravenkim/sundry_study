@@ -1,5 +1,5 @@
-import { UserPointShop } from 'src/features/eco/UserPages'
-import { UserBottomNav } from 'src/features/eco/EcoLayouts'
+import { UserPointShop } from 'src/features/user'
+import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
 
 const ShopPage = () => (
     <>

@@ -1,2 +1,2 @@
-import { LoginPage } from 'src/features/eco/AuthPages'
-export default LoginPage
+import { Login } from 'src/features/auth'
+export default Login

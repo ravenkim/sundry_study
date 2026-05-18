@@ -1,2 +1,2 @@
-import { UserReportSuccess } from 'src/features/eco/UserPages'
+import { UserReportSuccess } from 'src/features/user'
 export default UserReportSuccess

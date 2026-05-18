@@ -1,2 +1,2 @@
-import { AdminReports } from 'src/features/eco/AdminPages'
+import { AdminReports } from 'src/features/admin/Admin'
 export default AdminReports

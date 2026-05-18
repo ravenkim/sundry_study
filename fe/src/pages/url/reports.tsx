@@ -1,5 +1,5 @@
 import { History } from 'lucide-react'
-import { UserBottomNav } from 'src/features/eco/EcoLayouts'
+import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
 
 const ReportsPage = () => (
     <>

@@ -32,8 +32,8 @@ import {
     Tooltip as RechartsTooltip,
 } from 'recharts'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
-import { EcoButton, EcoBadge, EcoCard } from './EcoShared'
-import { AdminSidebar, AdminHeader } from './EcoLayouts'
+import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
+import { AdminSidebar, AdminHeader } from 'src/shared/layout/EcoLayouts'
 
 export const AdminDashboard = () => (
     <>

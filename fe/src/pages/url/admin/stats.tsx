@@ -1,2 +1,2 @@
-import { AdminStats } from 'src/features/eco/AdminPages'
+import { AdminStats } from 'src/features/admin/Admin'
 export default AdminStats

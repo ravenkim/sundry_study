@@ -1,5 +1,5 @@
-import { UserHome } from 'src/features/eco/UserPages'
-import { UserBottomNav } from 'src/features/eco/EcoLayouts'
+import { UserHome } from 'src/features/user'
+import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
 
 const HomePage = () => (
     <>

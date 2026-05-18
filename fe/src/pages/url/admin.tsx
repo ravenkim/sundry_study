@@ -1,2 +1,2 @@
-import { AdminDashboard } from 'src/features/eco/AdminPages'
+import { AdminDashboard } from 'src/features/admin/Admin'
 export default AdminDashboard

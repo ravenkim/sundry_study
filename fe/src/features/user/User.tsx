@@ -15,7 +15,7 @@ import {
     LogOut,
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
-import { EcoButton, EcoBadge, EcoCard } from './EcoShared'
+import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
 
 export const UserHome = () => (
     <div className="p-5 flex flex-col gap-8 pb-24 md:pb-8">
@@ -328,7 +328,7 @@ export const UserPointShop = () => (
     </div>
 )
 
-export const UserMyPage = () => (
+export const UserProfile = () => (
     <div className="p-5 flex flex-col gap-8 max-w-[390px] mx-auto pb-24">
         <header className="flex justify-between items-center py-2 sticky top-0 bg-background/80 backdrop-blur-sm z-10 -mx-5 px-5">
             <span className="p-2 -ml-2 text-primary">

@@ -1,2 +1,2 @@
-import { SignupPage } from 'src/features/eco/AuthPages'
-export default SignupPage
+import { Signup } from 'src/features/auth'
+export default Signup

@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router'
 import { Leaf, MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
-import { EcoButton } from './EcoShared'
+import { EcoButton } from 'src/shared/ui/eco'
 
-export const LoginPage = () => {
+export const Login = () => {
     const navigate = useNavigate()
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-5 font-sans bg-background">
@@ -84,7 +84,7 @@ export const LoginPage = () => {
     )
 }
 
-export const SignupPage = () => {
+export const Signup = () => {
     const navigate = useNavigate()
     return (
         <div className="min-h-screen flex flex-col bg-background md:max-w-[390px] md:mx-auto">

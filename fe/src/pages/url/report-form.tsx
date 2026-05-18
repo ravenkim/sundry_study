@@ -1,2 +1,2 @@
-import { UserReportForm } from 'src/features/eco/UserPages'
+import { UserReportForm } from 'src/features/user'
 export default UserReportForm

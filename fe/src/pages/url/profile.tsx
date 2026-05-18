@@ -1,9 +1,9 @@
-import { UserMyPage } from 'src/features/eco/UserPages'
-import { UserBottomNav } from 'src/features/eco/EcoLayouts'
+import { UserProfile } from 'src/features/user'
+import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
 
 const ProfilePage = () => (
     <>
-        <UserMyPage />
+        <UserProfile />
         <UserBottomNav />
     </>
 )
