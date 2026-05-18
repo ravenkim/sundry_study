@@ -1,5 +1,6 @@
 # EcoReport — Stitch 화면 생성 프롬프트 모음
 
+> 이 프로젝트는 **UI 목업·스크린 탐색에 Google Stitch**를 사용합니다 (**Figma 비사용**).  
 > Google Stitch(stitch.withgoogle.com)에서 화면별로 아래 프롬프트를 복사·붙여넣기 하세요.  
 > 공통 스타일 컨텍스트를 먼저 입력하고, 이후 각 화면 프롬프트를 사용하세요.
 
