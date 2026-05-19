@@ -1,11 +1,10 @@
 import { UserPointShop } from 'src/features/user'
-import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
+import { UserAppLayout } from 'src/shared/layout/EcoLayouts'
 
 const ShopPage = () => (
-    <>
+    <UserAppLayout title="포인트샵">
         <UserPointShop />
-        <UserBottomNav />
-    </>
+    </UserAppLayout>
 )
 
 export default ShopPage

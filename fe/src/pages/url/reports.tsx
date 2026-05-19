@@ -1,15 +1,14 @@
 import { History } from 'lucide-react'
-import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
+import { UserAppLayout } from 'src/shared/layout/EcoLayouts'
 
 const ReportsPage = () => (
-    <>
-        <div className="p-8 text-center pt-24 pb-24">
+    <UserAppLayout title="제보 이력">
+        <div className="p-8 text-center">
             <History className="w-20 h-20 mx-auto text-primary-container mb-6" />
-            <h1 className="text-3xl font-black mb-2">제보 이력</h1>
+            <h2 className="text-2xl font-black mb-2">제보 이력</h2>
             <p className="font-bold text-on-surface-variant text-sm">사용자의 과거 제보 내역입니다.</p>
         </div>
-        <UserBottomNav />
-    </>
+    </UserAppLayout>
 )
 
 export default ReportsPage

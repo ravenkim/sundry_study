@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import {
     Leaf,
-    ArrowLeft,
     Plus,
     TrendingUp,
     CheckCircle2,
@@ -16,16 +15,11 @@ import {
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
+import { ParticipatedBuildingSavingsCard } from './ParticipatedBuildingSavings'
+import { formatKwh, PARTICIPATED_BUILDING_SAVINGS, sumParticipatedKwh } from './userSavingsData'
 
 export const UserHome = () => (
-    <div className="p-5 flex flex-col gap-8 pb-24 md:pb-8">
-        <header className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-                <Leaf className="w-6 h-6 text-primary" />
-                <h1 className="text-2xl font-black text-primary">EcoReport</h1>
-            </div>
-            <EcoBadge variant="yellow">1,250P</EcoBadge>
-        </header>
+    <div className="p-5 flex flex-col gap-8 pb-8 md:pb-8">
 
         <div className="grid grid-cols-1 gap-4">
             <EcoCard className="flex flex-col gap-2">
@@ -37,17 +31,7 @@ export const UserHome = () => (
                 <span className="text-xs text-secondary font-medium">이번 달 +220 P</span>
             </EcoCard>
 
-            <EcoCard className="relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
-                <span className="text-sm text-on-surface-variant font-medium">이번 달 캠퍼스 절약량</span>
-                <div className="flex items-center gap-2 mt-2">
-                    <span className="text-3xl font-bold text-secondary">🌿 243 kWh</span>
-                </div>
-                <span className="text-xs text-on-surface-variant">🌲 소나무 12그루 흡수량과 동등</span>
-                <div className="w-full bg-surface-container-high h-2 rounded-full mt-3 overflow-hidden">
-                    <div className="bg-secondary h-full" style={{ width: '65%' }}></div>
-                </div>
-            </EcoCard>
+            <ParticipatedBuildingSavingsCard />
         </div>
 
         <Link to="/report-form">
@@ -112,13 +96,7 @@ export const UserReportForm = () => {
     const [selectedType, setSelectedType] = useState<string | null>(null)
 
     return (
-        <div className="p-5 flex flex-col gap-8 max-w-lg mx-auto pb-24">
-            <header className="flex items-center">
-                <Link to="/" className="p-2 -ml-2 text-primary">
-                    <ArrowLeft className="w-6 h-6" />
-                </Link>
-                <h1 className="flex-1 text-center font-black text-xl mr-8">제보하기</h1>
-            </header>
+        <div className="p-5 flex flex-col gap-8 pb-8">
 
             <section className="flex flex-col gap-4">
                 <h2 className="text-xl font-bold">어디서 낭비되고 있나요?</h2>
@@ -190,7 +168,7 @@ export const UserReportForm = () => {
 }
 
 export const UserReportSuccess = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen p-5 text-center gap-8 bg-surface">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100dvh-3.5rem)] p-5 py-10 text-center gap-8 bg-surface">
         <div className="p-8 rounded-full bg-secondary-container/20">
             <CheckCircle2 className="w-24 h-24 text-secondary" />
         </div>
@@ -235,12 +213,7 @@ export const UserReportSuccess = () => (
 )
 
 export const UserPointShop = () => (
-    <div className="p-5 flex flex-col gap-6 max-w-[390px] mx-auto pb-24">
-        <header className="flex justify-between items-center pt-2">
-            <h1 className="text-2xl font-black text-primary">포인트샵</h1>
-            <EcoBadge variant="yellow">MY</EcoBadge>
-        </header>
-
+    <div className="p-5 flex flex-col gap-6 pb-8">
         <EcoCard className="bg-primary-container/10 border-primary-container p-5">
             <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider">
                 내 포인트
@@ -329,17 +302,7 @@ export const UserPointShop = () => (
 )
 
 export const UserProfile = () => (
-    <div className="p-5 flex flex-col gap-8 max-w-[390px] mx-auto pb-24">
-        <header className="flex justify-between items-center py-2 sticky top-0 bg-background/80 backdrop-blur-sm z-10 -mx-5 px-5">
-            <span className="p-2 -ml-2 text-primary">
-                <ClipboardCheck className="w-7 h-7" />
-            </span>
-            <h1 className="text-xl font-bold tracking-tight text-primary">마이페이지</h1>
-            <EcoBadge variant="yellow" className="text-sm font-bold py-1 px-3">
-                1,250P
-            </EcoBadge>
-        </header>
-
+    <div className="p-5 flex flex-col gap-8 pb-8">
         <section className="flex items-center gap-5">
             <div className="w-20 h-20 rounded-full border-2 border-primary-container p-1 overflow-hidden shadow-sm">
                 <img
@@ -388,14 +351,21 @@ export const UserProfile = () => (
             <EcoCard className="p-4 flex flex-col gap-3 border-l-4 border-l-secondary">
                 <div className="flex items-center gap-2 text-secondary">
                     <Leaf className="w-4 h-4 fill-current" />
-                    <span className="text-[10px] font-bold uppercase tracking-wider">절감 효과</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">절약 전기</span>
                 </div>
                 <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold">3.2</span>
-                    <span className="text-[10px] font-bold text-on-surface-variant">kg</span>
+                    <span className="text-2xl font-bold">
+                        {formatKwh(sumParticipatedKwh(PARTICIPATED_BUILDING_SAVINGS, 'total'))}
+                    </span>
+                    <span className="text-[10px] font-bold text-on-surface-variant">kWh</span>
                 </div>
+                <span className="text-[10px] text-on-surface-variant">
+                    참여 {PARTICIPATED_BUILDING_SAVINGS.length}개 건물 누적
+                </span>
             </EcoCard>
         </section>
+
+        <ParticipatedBuildingSavingsCard compact />
 
         <section className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden shadow-sm">
             {[

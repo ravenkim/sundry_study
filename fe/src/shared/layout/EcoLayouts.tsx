@@ -1,3 +1,4 @@
+import { useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router'
 import {
     Home,
@@ -13,38 +14,147 @@ import {
     Database,
     BarChart3,
     Users,
+    Menu,
+    Camera,
+    Shield,
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+} from 'src/shared/lib/shadcn/components/ui/sheet'
+import { EcoBadge } from 'src/shared/ui/eco'
 
-export const UserBottomNav = () => {
+export const USER_NAV_ITEMS = [
+    { name: '홈', path: '/', icon: Home },
+    { name: '낭비 제보', path: '/report-form', icon: Camera, highlight: true },
+    { name: '제보 이력', path: '/reports', icon: ClipboardCheck },
+    { name: '포인트샵', path: '/shop', icon: ShoppingBag },
+    { name: '마이페이지', path: '/profile', icon: UserIcon },
+] as const
+
+type UserAppLayoutProps = {
+    children: ReactNode
+    /** 상단 헤더 중앙 제목 (미지정 시 EcoReport 로고) */
+    title?: string
+    headerRight?: ReactNode
+    /** false면 우측 포인트 뱃지 숨김 */
+    showPoints?: boolean
+}
+
+export const UserAppLayout = ({
+    children,
+    title,
+    headerRight,
+    showPoints = true,
+}: UserAppLayoutProps) => {
+    const [menuOpen, setMenuOpen] = useState(false)
     const location = useLocation()
-    const navItems = [
-        { name: '홈', path: '/', icon: Home },
-        { name: '제보이력', path: '/reports', icon: ClipboardCheck },
-        { name: '포인트샵', path: '/shop', icon: ShoppingBag },
-        { name: '마이페이지', path: '/profile', icon: UserIcon },
-    ]
+
+    const closeMenu = () => setMenuOpen(false)
+
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-surface-container-lowest border-t border-outline-variant px-4 py-2 flex justify-around items-center z-50 rounded-t-xl shadow-lg md:hidden">
-            {navItems.map((item) => {
-                const isActive = location.pathname === item.path
-                return (
-                    <Link
-                        key={item.path}
-                        to={item.path}
-                        className={cn(
-                            'flex flex-col items-center gap-1 p-2 rounded-xl transition-all',
-                            isActive
-                                ? 'bg-primary-container text-on-primary-container'
-                                : 'text-on-surface-variant',
-                        )}
+        <div className="min-h-screen bg-background flex flex-col">
+            <header className="sticky top-0 z-40 border-b border-outline-variant bg-surface/95 backdrop-blur-md">
+                <div className="mx-auto flex h-14 max-w-[390px] items-center gap-2 px-4">
+                    <button
+                        type="button"
+                        onClick={() => setMenuOpen(true)}
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-primary hover:bg-surface-container-low transition-colors"
+                        aria-label="메뉴 열기"
                     >
-                        <item.icon className="w-6 h-6" />
-                        <span className="text-[10px] font-bold">{item.name}</span>
-                    </Link>
-                )
-            })}
-        </nav>
+                        <Menu className="h-6 w-6" />
+                    </button>
+
+                    {title ? (
+                        <h1 className="flex-1 truncate text-center text-lg font-black text-primary">
+                            {title}
+                        </h1>
+                    ) : (
+                        <Link
+                            to="/"
+                            className="flex flex-1 items-center justify-center gap-2"
+                            onClick={closeMenu}
+                        >
+                            <Leaf className="h-5 w-5 text-primary" />
+                            <span className="text-lg font-black text-primary">EcoReport</span>
+                        </Link>
+                    )}
+
+                    <div className="flex justify-end">
+                        {headerRight ??
+                            (showPoints ? (
+                                <EcoBadge variant="yellow" className="text-xs font-bold">
+                                    1,250P
+                                </EcoBadge>
+                            ) : (
+                                <span className="w-8" aria-hidden />
+                            ))}
+                    </div>
+                </div>
+            </header>
+
+            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                <SheetContent
+                    side="left"
+                    className="flex h-full w-[min(100%,280px)] flex-col border-outline-variant p-0"
+                >
+                    <SheetHeader className="border-b border-outline-variant bg-surface-container-low p-5 text-left">
+                        <div className="flex items-center gap-3 pr-8">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-container">
+                                <Leaf className="h-5 w-5 text-on-primary-container" />
+                            </div>
+                            <div>
+                                <SheetTitle className="text-left text-base font-black text-primary">
+                                    EcoReport
+                                </SheetTitle>
+                                <p className="text-xs text-on-surface-variant">캠퍼스 에너지 절약</p>
+                            </div>
+                        </div>
+                    </SheetHeader>
+
+                    <nav className="flex flex-col gap-1 p-3">
+                        {USER_NAV_ITEMS.map((item) => {
+                            const isActive = location.pathname === item.path
+                            const isHighlight = 'highlight' in item && item.highlight
+                            return (
+                                <Link
+                                    key={item.path}
+                                    to={item.path}
+                                    onClick={closeMenu}
+                                    className={cn(
+                                        'flex items-center gap-3 rounded-xl px-4 py-3.5 font-semibold transition-colors',
+                                        isActive
+                                            ? 'bg-primary-container text-on-primary-container'
+                                            : isHighlight
+                                              ? 'bg-secondary-container/30 text-secondary hover:bg-secondary-container/50'
+                                              : 'text-on-surface hover:bg-surface-container-low',
+                                    )}
+                                >
+                                    <item.icon className="h-5 w-5 shrink-0" />
+                                    <span>{item.name}</span>
+                                </Link>
+                            )
+                        })}
+                    </nav>
+
+                    <div className="mt-auto border-t border-outline-variant p-3">
+                        <Link
+                            to="/admin"
+                            onClick={closeMenu}
+                            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors"
+                        >
+                            <Shield className="h-5 w-5" />
+                            관리자 대시보드
+                        </Link>
+                    </div>
+                </SheetContent>
+            </Sheet>
+
+            <main className="mx-auto w-full max-w-[390px] flex-1">{children}</main>
+        </div>
     )
 }
 

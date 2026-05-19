@@ -1,11 +1,10 @@
 import { UserHome } from 'src/features/user'
-import { UserBottomNav } from 'src/shared/layout/EcoLayouts'
+import { UserAppLayout } from 'src/shared/layout/EcoLayouts'
 
 const HomePage = () => (
-    <>
+    <UserAppLayout>
         <UserHome />
-        <UserBottomNav />
-    </>
+    </UserAppLayout>
 )
 
 export default HomePage
