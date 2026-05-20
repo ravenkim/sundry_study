@@ -4,9 +4,9 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
+RUN sed -i '/^yarnPath:/d' .yarnrc.yml
 
-RUN corepack enable && yarn install --immutable
+RUN corepack enable && corepack prepare --activate && yarn install --immutable
 
 COPY . .
 
