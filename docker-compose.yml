@@ -10,8 +10,6 @@ services:
       MYSQL_DATABASE: DBname
       MYSQL_USER: your_mysql_user
       MYSQL_PASSWORD: your_mysql_user
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
