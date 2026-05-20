@@ -7,7 +7,7 @@ import org.example.be.api.response.ApiResponse;
 import org.example.be.api.response.ResponseCode;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
-import org.example.be.service.auth.MemberAuthService;
+import org.example.be.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 public class LoginController {
 
     @Autowired
-    private MemberAuthService memberAuthService;
+    private AuthService memberAuthService;
 
     @Operation(summary = "로그인", description = "사용자명과 비밀번호로 로그인합니다.")
     @PostMapping("/login")
