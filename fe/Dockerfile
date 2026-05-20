@@ -9,6 +9,7 @@ RUN sed -i '/^yarnPath:/d' .yarnrc.yml
 RUN corepack enable && corepack prepare --activate && yarn install --immutable
 
 COPY . .
+RUN sed -i '/^yarnPath:/d' .yarnrc.yml
 
 RUN yarn build
 
