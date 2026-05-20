@@ -2,9 +2,9 @@ spring:
   application:
     name: backend
   datasource:
-    url: jdbc:mysql://localhost:3306/energy_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: your_mysql_user
-    password: change_me_mysql_password
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -13,6 +13,41 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: eco-point-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: profile, email
+          kakao:
+            client-id: ${KAKAO_CLIENT_ID}
+            client-secret: ${KAKAO_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
+            client-authentication-method: POST
+            authorization-grant-type: authorization_code
+            scope: profile_nickname, account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
 
 management:
   info:
@@ -27,6 +62,7 @@ management:
     web:
       exposure:
         include: health, metrics, info
+
 info:
   app:
     name: Backend Weather API
@@ -40,3 +76,5 @@ info:
     properties:
       java:
         version: "@java.version@"
+
+kind: Application

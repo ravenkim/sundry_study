@@ -1,12 +1,10 @@
-package org.example.be.service;
+package org.example.be.service.report;
 
 import lombok.RequiredArgsConstructor;
 import org.example.be.api.request.ReportCreateRequest;
 import org.example.be.domain.model.*;
 import org.example.be.domain.repository.BuildingRepository;
 import org.example.be.domain.repository.ReportRepository;
-import org.example.be.exception.BusinessLogicException;
-import org.example.be.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;

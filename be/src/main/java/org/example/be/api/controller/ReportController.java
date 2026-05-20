@@ -2,7 +2,7 @@ package org.example.be.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.be.api.request.ReportCreateRequest;
-import org.example.be.service.ReportService;
+import org.example.be.service.report.ReportService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

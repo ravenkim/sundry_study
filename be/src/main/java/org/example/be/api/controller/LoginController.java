@@ -5,7 +5,7 @@ import org.example.be.api.response.ApiResponse;
 import org.example.be.api.response.ResponseCode;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
-import org.example.be.service.MemberAuthService;
+import org.example.be.service.auth.MemberAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

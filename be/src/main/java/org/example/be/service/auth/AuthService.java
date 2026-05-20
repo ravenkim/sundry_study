@@ -1,4 +1,4 @@
-package org.example.be.service;
+package org.example.be.service.auth;
 
 import org.example.be.api.request.MemberRequest;
 
