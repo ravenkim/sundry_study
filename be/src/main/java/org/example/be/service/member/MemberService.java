@@ -1,4 +1,4 @@
-package org.example.be.service;
+package org.example.be.service.member;
 
 import org.example.be.api.request.MemberRequest;
 import org.example.be.api.response.MemberResponse;

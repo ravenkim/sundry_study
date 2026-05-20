@@ -1,79 +1,42 @@
 package org.example.be.config;
 
-import lombok.AllArgsConstructor;
-import org.apache.catalina.Context;
-import org.apache.catalina.connector.Connector;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import lombok.RequiredArgsConstructor;
+import org.example.be.service.auth.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Arrays;
-
-
-@AllArgsConstructor
 @Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    /* explanation of securityFilterChain method
-       This method creates a security filter chain, which is a filter that will be applied to all incoming requests.
-       It uses HttpSecurity to configure the filter chain.
-       In this case, HttpSecurity is used to configure the filter chain, including CSRF protection, session management, and authorization.
-       The method returns the created security filter chain.
-       The securityFilterChain is then returned, which will be used by the Spring Security framework to apply the security configurations to incoming requests.*/
-    /*
+    private final CustomOAuth2UserService customOAuth2UserService;
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .requiresChannel(requiresChannel ->
-                        requiresChannel.anyRequest().requiresSecure())
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .authorizeHttpRequests(auth ->
-                        auth
-                                .requestMatchers("/login", "/register", "/ping").permitAll()
-                                .anyRequest().authenticated());
+                .csrf(csrf -> csrf.disable()) // 로컬 개발/테스트 완료를 위해 비활성화
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll() // 보안보단 완성이 목표이므로 모두 허용
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOAuth2UserService) // 작성한 OAuth2 서비스 연결
+                        )
+                        // 로그인 성공 시 이동할 엔드포인트 설정 (프론트엔드로 리다이렉트 등)
+                        .defaultSuccessUrl("/api/login/success")
+                );
+
         return http.build();
     }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-    @Bean
-    public ServletWebServerFactory servletContainer() {
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-        tomcat.addAdditionalTomcatConnectors(redirectConnector());
-        return tomcat;
-    }
-
-    private Connector redirectConnector() {
-        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setScheme("http");
-        connector.setPort(8080);
-        connector.setRedirectPort(8443);
-        return connector;
-    }*/
-
 }
