@@ -6,6 +6,9 @@ DB_USER="your_mysql_user"
 DB_PASS="your_mysql_user"
 
 SQL="
+SET GLOBAL validate_password.policy = LOW;
+SET GLOBAL validate_password.length = 4;
+
 CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`
   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
