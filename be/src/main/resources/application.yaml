@@ -23,7 +23,9 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    listener:
+      auto-startup: false
     consumer:
       group-id: eco-point-group
       auto-offset-reset: earliest
