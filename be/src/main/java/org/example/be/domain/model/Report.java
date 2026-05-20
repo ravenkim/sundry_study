@@ -29,6 +29,9 @@ public class Report {
     @Column(nullable = false)
     private String locationDetail; // 사용자가 직접 입력한 상세 장소 (예: 303호, 2층 복도 우측)
 
+    @Column(length = 1000)
+    private String description; //제보 사항 상세 설명
+
     private String imageUrl; // 제보 사진 URL
 
     @Embedded
@@ -40,11 +43,12 @@ public class Report {
     private LocalDateTime createdAt; // 제보 일시
 
     @Builder
-    public Report(Member member, Building building, String locationDetail, String imageUrl,
+    public Report(Member member, Building building, String locationDetail, String description, String imageUrl,
                   WasteType wasteType, ReportStatus status, LocalDateTime createdAt) {
         this.member = member;
         this.building = building;
         this.locationDetail = locationDetail;
+        this.description = description;
         this.imageUrl = imageUrl;
         this.wasteType = wasteType;
         this.status = status;

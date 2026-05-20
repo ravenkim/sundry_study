@@ -38,6 +38,7 @@ public class ReportService {
         WasteType wasteType = new WasteType(
                 request.isLightWasting(),
                 request.isAcWasting(),
+                request.isHeaterWasting(),
                 request.isOtherWasting()
         );
 
@@ -45,6 +46,7 @@ public class ReportService {
         Report report = Report.builder()
                 .building(building)
                 .locationDetail(request.locationDetail())
+                .description(request.description())
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)
                 .status(ReportStatus.PENDING)

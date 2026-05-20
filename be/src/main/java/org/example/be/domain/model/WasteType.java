@@ -18,6 +18,5 @@ public class WasteType {
     private boolean isHeaterWasting; // 히터 공회전 여부 (true/false)
     private boolean isOtherWasting;  // 기타 낭비 여부 (true/false)
 
-    public WasteType(boolean lightWasting, boolean acWasting, boolean otherWasting) {
-    }
+
 }
