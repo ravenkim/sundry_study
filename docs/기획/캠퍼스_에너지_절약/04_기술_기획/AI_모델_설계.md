@@ -6,99 +6,142 @@
 
 | 기능 | AI 여부 | 방법 |
 |------|---------|------|
-| 자원 낭비 판별 (전기·수도) | AI (Gemini Vision) | 이미지 분류 — 자원 유형별 동적 프롬프트 |
-| 공간 내 인원 감지 | AI (Gemini Vision) | 객체 감지 |
+| 사람·가구 감지 (강의실 판별) | AI (YOLOv8n) | COCO 사전학습 모델 — person/chair/desk 3클래스 필터링 |
+| 에어컨 탐지 | AI (YOLOv8n Custom) | Roboflow 데이터셋 파인튜닝 — `ac_best.pt` |
+| 에어컨 ON/OFF 및 조명 상태 판별 | AI (Gemini Vision) | 고정 프롬프트 — 시나리오 A(에어컨 탐지 시) / B(미탐지 시) |
 | 절약량 계산 (전기·수도) | 규칙 기반 | 자원 분류별 수식 엔진 |
 | 어뷰징 탐지 | 규칙 기반 | 임계값 필터 |
 | (P2) 낭비 패턴 예측 | AI (시계열) | 추후 구현 |
 
 ---
 
-## 2. Gemini Vision API 활용
+## 2. 3단계 AI 파이프라인
 
-### 모델
-- `gemini-1.5-flash` (속도·비용 균형)
-- 이미지 1장당 API 호출 1회
-
-### 프롬프트 동적 생성 전략
-
-제보 요청 시 해당 `LocationResource`의 `ResourceType.detection_hint`를 조합해 AI 프롬프트를 런타임에 생성.  
-→ 관리자가 새 자원 유형을 추가하면 코드 수정 없이 AI가 자동으로 감지 대상에 포함.
-
-#### 프롬프트 생성 예시 (Spring Boot 서버측)
-
-```java
-// 제보 대상 LocationResource의 ResourceType 목록으로 프롬프트 조립
-String resourceList = locationResources.stream()
-    .map(lr -> "- " + lr.getResourceType().getName()
-             + ": " + lr.getResourceType().getDetectionHint())
-    .collect(Collectors.joining("\n"));
-
-String systemPrompt = """
-    당신은 건물 자원 낭비를 탐지하는 AI입니다.
-    이 장소에는 다음 자원이 설치되어 있습니다:
-    %s
-    
-    사진을 분석하여 각 자원의 낭비 여부와 공간 내 사람 유무를 판별하세요.
-    반드시 다음 JSON 형식으로만 응답하세요:
-    {
-      "people_present": boolean,
-      "detected_wastes": [
-        { "resource_name": string, "is_wasting": boolean, "confidence": float }
-      ],
-      "overall_confidence": float
-    }
-    """.formatted(resourceList);
-```
-
-#### 생성된 프롬프트 예시 — 303호 (형광등 + 에어컨)
+이미지 한 장이 업로드되면 아래 세 모델이 순서대로 실행된다.  
+앞 단계에서 조기 종료 조건이 충족되면 이후 단계는 건너뛴다.
 
 ```
-이 장소에는 다음 자원이 설치되어 있습니다:
-- 형광등: 천장에 설치된 형광등 또는 LED 조명
-- 에어컨: 벽걸이형 또는 스탠드형 에어컨
-
-사진을 분석하여 각 자원의 낭비 여부와 공간 내 사람 유무를 판별하세요.
-```
-
-#### 생성된 프롬프트 예시 — 1층 화장실 (수도꼭지 + 형광등)
-
-```
-이 장소에는 다음 자원이 설치되어 있습니다:
-- 수도꼭지: 세면대 또는 싱크대 수도꼭지에서 물이 흐르는 상태
-- 형광등: 천장에 설치된 형광등 또는 LED 조명
+[이미지]
+   │
+   ▼
+[1단계] YOLOv8n — 사람·가구 탐지
+   ├─ chair=0 AND desk=0  → ERROR (강의실 아님)
+   ├─ person ≥ 1          → PASS (사용 중)
+   └─ person = 0          ↓
+[2단계] YOLOv8n Custom (ac_best.pt) — 에어컨 탐지
+   ├─ 미탐지              → [3단계 시나리오 B]
+   └─ 탐지 + 크롭         → [3단계 시나리오 A]
+[3단계] Gemini 2.5 Flash — ON/OFF 상태 판별
+   └─ JSON 응답 파싱 → WASTE_DETECTED / PASS
 ```
 
 ---
 
-### AI 응답 예시
+### 2-1. YOLOv8n — 1단계 사람·가구 탐지
 
-```json
+- **모델 파일:** `yolov8n.pt` (Ultralytics 공식 COCO 사전학습, 추가 학습 없음)
+- **추론 설정:** `conf=0.3, classes=[0, 56, 60]` (person / chair / dining table)
+
+| 조건 | 결과 |
+|------|------|
+| chair = 0 AND desk = 0 | `ERROR` — 강의실 아님 |
+| person ≥ 1 | `PASS` — 정상 사용 중 |
+| person = 0 | 2단계로 진행 |
+
+---
+
+### 2-2. YOLOv8n Custom — 2단계 에어컨 탐지
+
+- **모델 파일:** `models/ac_best.pt` (yolov8n 기반 파인튜닝)
+- **학습 데이터:** Roboflow `office-air-condition` v1 (2,016장, 1클래스)
+- **추론 설정:** `conf=0.4`
+- 탐지 시 confidence 최고 박스를 크롭하여 3단계에 전달
+
+**학습 성능 지표**
+
+| 지표 | 값 |
+|------|----|
+| mAP@0.5 | 0.990 |
+| F1 Score (최대) | 0.97 (confidence 0.489) |
+| Precision | 1.00 (confidence 0.894) |
+| Recall | 0.99 (confidence 0.000) |
+
+---
+
+### 2-3. Gemini 2.5 Flash — 3단계 ON/OFF 판별
+
+```python
+vertexai.init(project="duyuthon", location="us-central1")
+gemini_model = GenerativeModel("gemini-2.5-flash")
+```
+
+| 항목 | 내용 |
+|------|------|
+| 모델명 | `gemini-2.5-flash` |
+| 제공처 | Google DeepMind (Vertex AI) |
+| 추가 학습 | 없음 — Prompt Engineering만 사용 |
+
+#### 시나리오 A — 에어컨 탐지됨 (원본 + 크롭 이미지 2장 전달)
+
+```
+You are a building energy management AI.
+The first image is the full photo of a classroom.
+The second image is a cropped close-up of a ceiling 4-way air conditioner.
+
+1. "ac_status": Look at the second image.
+   If louvers are open or LED is on -> "ON", else -> "OFF".
+2. "light_status": Look at the first image's background.
+   If ceiling indoor lights are on -> "ON", else -> "OFF".
+
+Respond STRICTLY in the following JSON format only:
 {
-  "people_present": false,
-  "detected_wastes": [
-    { "resource_name": "형광등", "is_wasting": true,  "confidence": 0.95 },
-    { "resource_name": "에어컨", "is_wasting": true,  "confidence": 0.88 },
-    { "resource_name": "수도꼭지", "is_wasting": false, "confidence": 0.91 }
-  ],
-  "overall_confidence": 0.91
+    "ac_status": "ON or OFF",
+    "light_status": "ON or OFF",
+    "reason": "Detailed reasoning"
 }
 ```
 
-### 판별 로직 (확장 후)
+#### 시나리오 B — 에어컨 미탐지 (원본 이미지 1장만 전달)
 
 ```
-if (people_present == true):
-    → 전체 제보 반려 ("재실 중인 공간입니다")
+You are a building energy management AI.
+Analyze the provided classroom image.
 
-elif (overall_confidence < 0.70):
-    → 전체 보류 ("판별 불가 — 더 밝은 사진으로 재촬영 요청")
+"light_status": Look at the ceiling.
+If indoor lights (fluorescent/LED) are turned on and emitting light, return "ON".
+If they are turned off, return "OFF".
 
-else:
-    detected_wastes 중 is_wasting == true 항목만 필터
-    → 낭비 항목 없으면: 반려 ("낭비 감지되지 않음")
-    → 낭비 항목 있으면: 해당 자원별 절약량 계산 → 포인트 합산 → 승인
+Respond STRICTLY in the following JSON format only:
+{
+    "light_status": "ON or OFF",
+    "reason": "Detailed reasoning"
+}
 ```
+
+#### AI 응답 예시 (시나리오 A)
+
+```json
+{
+  "ac_status": "ON",
+  "light_status": "ON",
+  "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated."
+}
+```
+
+#### 판별 로직
+
+```
+[시나리오 A]
+  ac_status=ON OR light_status=ON → WASTE_DETECTED
+  둘 다 OFF                       → PASS
+
+[시나리오 B]
+  light_status=ON → WASTE_DETECTED
+  light_status=OFF → PASS
+```
+
+> **주의:** Gemini 응답은 Markdown 코드블록으로 래핑되어 올 수 있으므로  
+> `strip("` ` `json").strip("` ` `")` 처리 후 JSON 파싱한다.
 
 ---
 
@@ -166,12 +209,14 @@ total_L = flow_rate × quantity × off_time_minutes
 
 ## 5. AI 성능 목표 (해커톤 MVP 기준)
 
-| 지표 | 목표값 | 비고 |
-|------|-------|------|
-| 판별 정확도 | 85% 이상 | 밝은 낮 실내 사진 기준 |
-| 판별 소요 시간 | 5초 이내 | Gemini Flash 기준 |
-| 판별 불가 비율 | 15% 이하 | 어두운 사진, 흐린 각도 등 |
-| API 비용 | 건당 약 0.01달러 이하 | gemini-1.5-flash 기준 |
+| 지표 | 목표값 | 실제 달성 (ac_best.pt) | 비고 |
+|------|-------|----------------------|------|
+| 에어컨 탐지 mAP@0.5 | 0.95 이상 | **0.990** | Validation set 기준 |
+| 에어컨 탐지 F1 Score | 0.90 이상 | **0.97** | Confidence 0.489 기준 |
+| 전체 판별 정확도 | 85% 이상 | — | 밝은 낮 실내 사진 기준 |
+| 판별 소요 시간 | 5초 이내 | — | Gemini 2.5 Flash 기준 |
+| 판별 불가 비율 | 15% 이하 | — | 어두운 사진, 흐린 각도 등 |
+| API 비용 | 건당 약 0.01달러 이하 | — | gemini-2.5-flash 기준 |
 
 ---
 

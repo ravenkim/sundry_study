@@ -63,46 +63,42 @@
 | 필드 | 타입 | 필수 | 설명 |
 |------|------|------|------|
 | image | File | Y | 제보 사진 |
-| roomId | Long | Y | 강의실 ID |
 
-**Response 201 — 판별 성공**
+**Response 200 — PASS (사람 있음 / 모두 꺼짐)**
 ```json
 {
-  "code": "SUCCESS",
-  "data": {
-    "reportId": 42,
-    "status": "APPROVED",
-    "detectedDevices": ["조명", "에어컨"],
-    "pointAwarded": 89,
-    "totalPoints": 459
-  }
+  "result": "PASS",
+  "message": "강의실에 2명의 사람이 있습니다. 정상 상태입니다."
 }
 ```
 
-**Response 200 — 판별 불가**
+**Response 200 — WASTE_DETECTED (에어컨 탐지됨)**
 ```json
 {
-  "code": "SUCCESS",
-  "data": {
-    "reportId": 43,
-    "status": "UNDETECTABLE",
-    "message": "사진이 너무 어둡습니다. 더 밝은 환경에서 재촬영해 주세요.",
-    "pointAwarded": 0
-  }
+  "result": "WASTE_DETECTED",
+  "message": "빈 강의실에서 에너지 낭비가 발견되었습니다!",
+  "ac_status": "ON",
+  "light_status": "ON",
+  "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated."
 }
 ```
 
-**Response 200 — 반려**
+**Response 200 — WASTE_DETECTED (에어컨 미탐지, 조명만 켜짐)**
 ```json
 {
-  "code": "SUCCESS",
-  "data": {
-    "reportId": 44,
-    "status": "REJECTED",
-    "reason": "PEOPLE_PRESENT",
-    "message": "강의실에 사람이 있어 제보가 반려되었습니다.",
-    "pointAwarded": 0
-  }
+  "result": "WASTE_DETECTED",
+  "message": "[WARNING] 에어컨은 찾을 수 없으나, 빈 강의실에 조명이 켜져 있습니다!",
+  "ac_status": "UNKNOWN",
+  "light_status": "ON",
+  "reason": "Ceiling fluorescent lights are clearly on. No air conditioner detected in the image."
+}
+```
+
+**Response 200 — ERROR (강의실 미인식 / 서버 오류)**
+```json
+{
+  "result": "ERROR",
+  "message": "강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
 }
 ```
 
@@ -298,30 +294,48 @@
 ## 제보 — 변경사항
 
 ### POST /reports (업데이트)
-`roomId` → `locationResourceIds` 배열로 변경 (복수 자원 동시 제보 가능)
+`image` 필드 하나만 전송. AI 파이프라인(YOLOv8n → YOLOv8n Custom → Gemini 2.5 Flash) 결과를 그대로 반환한다.
 
 **Request**: `multipart/form-data`
 | 필드 | 타입 | 필수 | 설명 |
 |------|------|------|------|
 | image | File | Y | 제보 사진 |
-| locationId | Long | Y | 장소 ID |
-| locationResourceIds | Long[] | Y | 제보 대상 자원 ID 목록 |
 
-**Response 201 — 판별 성공**
+**Response 200 — PASS (사람 있음 / 모두 꺼짐)**
 ```json
 {
-  "code": "SUCCESS",
-  "data": {
-    "reportId": 42,
-    "status": "APPROVED",
-    "detectedWastes": [
-      { "resourceName": "형광등", "category": "ELECTRICITY", "savingKrw": 104 },
-      { "resourceName": "수도꼭지", "category": "WATER",       "savingKrw": 576 }
-    ],
-    "totalSavingKrw": 680,
-    "pointAwarded": 122,
-    "totalPoints": 582
-  }
+  "result": "PASS",
+  "message": "강의실에 2명의 사람이 있습니다. 정상 상태입니다."
+}
+```
+
+**Response 200 — WASTE_DETECTED (에어컨 탐지됨)**
+```json
+{
+  "result": "WASTE_DETECTED",
+  "message": "빈 강의실에서 에너지 낭비가 발견되었습니다!",
+  "ac_status": "ON",
+  "light_status": "ON",
+  "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated."
+}
+```
+
+**Response 200 — WASTE_DETECTED (에어컨 미탐지, 조명만 켜짐)**
+```json
+{
+  "result": "WASTE_DETECTED",
+  "message": "[WARNING] 에어컨은 찾을 수 없으나, 빈 강의실에 조명이 켜져 있습니다!",
+  "ac_status": "UNKNOWN",
+  "light_status": "ON",
+  "reason": "Ceiling fluorescent lights are clearly on. No air conditioner detected in the image."
+}
+```
+
+**Response 200 — ERROR (강의실 미인식 / 서버 오류)**
+```json
+{
+  "result": "ERROR",
+  "message": "강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
 }
 ```
 
@@ -439,11 +453,11 @@
         "imageUrl": "https://storage.googleapis.com/...",
         "aiResult": {
           "peoplePresent": false,
-          "detectedWastes": [
-            { "resourceName": "형광등", "isWasting": true,  "confidence": 0.95 },
-            { "resourceName": "에어컨", "isWasting": true,  "confidence": 0.88 }
-          ],
-          "overallConfidence": 0.91
+          "acDetected": true,
+          "acStatus": "ON",
+          "lightStatus": "ON",
+          "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated.",
+          "overallResult": "WASTE_DETECTED"
         },
         "status": "APPROVED",
         "totalSavingKrw": 494,
