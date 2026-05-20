@@ -1,3 +1,8 @@
+# Env files (actual values — keep *.example files)
+.env.docker
+.env.local
+.env
+
 HELP.md
 .gradle
 build/

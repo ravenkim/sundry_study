@@ -1,5 +1,7 @@
 package org.example.be.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.be.api.request.MemberRequest;
 import org.example.be.api.response.ApiResponse;
 import org.example.be.api.response.ResponseCode;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Tag(name = "Auth", description = "회원가입")
 @ResponseBody
 @Controller
 public class RegistrationController {
     @Autowired
     private DefaultMemberService defaultMemberService;
 
+    @Operation(summary = "회원가입", description = "새 사용자 계정을 등록합니다.")
     @PostMapping("/register")
     public ApiResponse<Void> register(@Valid @RequestBody MemberRequest.Create request) {
         if(defaultMemberService.registerMember(request)) {

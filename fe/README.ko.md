@@ -1,5 +1,5 @@
 ---
-# 📚 ss-react-boilerplate-ts 사용설명서
+# 📚 EcoReport (에코리포트) 프론트엔드 사용설명서
 
 ## 🛠️ Stack
 
@@ -260,7 +260,7 @@ TODO LIST
 - 새로고침시 깜빡임 이슈 - 아주 가끔씩 발생함 원인 불명
 - html 핼맷 도입 고민 < 19 는 그냥 써두 대지만 라우트별 다른 지원을 위해 도입
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=gradient&text=ss-react-boilerplate-ts&desc=Super%20Sexy&fontAlignY=30&descAlignY=55" style="width: 100%;" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=gradient&text=EcoReport&desc=Campus%20Energy%20Report&fontAlignY=30&descAlignY=55" style="width: 100%;" />
 
 ## Stack (로고로 변경)
 

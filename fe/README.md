@@ -2,7 +2,7 @@
 
 ---
 
-# 📚 ss-react-boilerplate-ts User Guide
+# 📚 EcoReport Frontend User Guide
 
 ## 🛠️ Stack
 
@@ -96,8 +96,8 @@ src/
 
 ## 1. Project Overview
 
-- A boilerplate project based on React + TypeScript.
-- Designed for fast development, scalability, and maintainability.
+- **에코리포트 (EcoReport)** — AI 기반 캠퍼스 에너지 낭비 제보 및 보상 플랫폼 (2026 두유톤)
+- React + TypeScript frontend for campus energy waste reporting and point rewards.
 
 ---
 

@@ -1,0 +1,11 @@
+node_modules
+.yarn
+src
+.storybook
+*.md
+.env*
+!.env.production.example
+!.env.development.example
+dist-ssr
+coverage
+.git

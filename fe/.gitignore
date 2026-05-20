@@ -1,3 +1,9 @@
+# Env files (actual values — keep *.example files)
+.env.production
+.env.development
+.env.local
+.env.*.local
+
 # Logs
 logs
 *.log

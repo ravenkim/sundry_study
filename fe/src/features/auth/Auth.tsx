@@ -1,9 +1,47 @@
+import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { Leaf, MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
+import { toast } from 'react-toastify'
+import { isAxiosError } from 'axios'
+import { login, register } from 'src/globals/api/authApi'
 import { EcoButton } from 'src/shared/ui/eco'
+
+function getErrorMessage(error: unknown): string {
+    if (isAxiosError(error)) {
+        const serverMsg = (error.response?.data as { message?: string })?.message
+        return serverMsg || error.message || '서버와 통신할 수 없습니다.'
+    }
+    if (error instanceof Error) {
+        return error.message || '요청 처리 중 오류가 발생했습니다.'
+    }
+    return '요청 처리 중 오류가 발생했습니다.'
+}
 
 export const Login = () => {
     const navigate = useNavigate()
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault()
+        if (!userName.trim() || !password) {
+            toast.error('아이디와 비밀번호를 입력해 주세요.')
+            return
+        }
+
+        setLoading(true)
+        try {
+            await login({ userName: userName.trim(), password })
+            toast.success('로그인되었습니다.')
+            navigate('/')
+        } catch (error) {
+            toast.error(getErrorMessage(error))
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center p-5 font-sans bg-background">
             <div className="w-full max-w-[390px] flex flex-col gap-8">
@@ -15,18 +53,15 @@ export const Login = () => {
                     <p className="text-on-surface-variant text-sm">에너지 절약의 시작, 에코리포트</p>
                 </header>
 
-                <form
-                    className="flex flex-col gap-4"
-                    onSubmit={(e) => {
-                        e.preventDefault()
-                        navigate('/')
-                    }}
-                >
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-semibold text-on-surface">이메일</label>
+                        <label className="text-sm font-semibold text-on-surface">아이디</label>
                         <input
-                            type="email"
-                            placeholder="이메일 주소를 입력하세요"
+                            type="text"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            placeholder="아이디를 입력하세요"
+                            autoComplete="username"
                             className="p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                         />
                     </div>
@@ -34,7 +69,10 @@ export const Login = () => {
                         <label className="text-sm font-semibold text-on-surface">비밀번호</label>
                         <input
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="비밀번호를 입력하세요"
+                            autoComplete="current-password"
                             className="p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                         />
                     </div>
@@ -50,8 +88,12 @@ export const Login = () => {
                             비밀번호 찾기
                         </a>
                     </div>
-                    <EcoButton className="py-4 text-base font-bold mt-2" type="submit">
-                        로그인
+                    <EcoButton
+                        className="py-4 text-base font-bold mt-2"
+                        type="submit"
+                        disabled={loading}
+                    >
+                        {loading ? '로그인 중...' : '로그인'}
                     </EcoButton>
                 </form>
 
@@ -86,6 +128,40 @@ export const Login = () => {
 
 export const Signup = () => {
     const navigate = useNavigate()
+    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault()
+
+        if (!userName.trim() || !email.trim() || !password) {
+            toast.error('필수 정보를 모두 입력해 주세요.')
+            return
+        }
+        if (password !== passwordConfirm) {
+            toast.error('비밀번호가 일치하지 않습니다.')
+            return
+        }
+
+        setLoading(true)
+        try {
+            await register({
+                userName: userName.trim(),
+                email: email.trim(),
+                password,
+            })
+            toast.success('회원가입이 완료되었습니다.')
+            navigate('/login')
+        } catch (error) {
+            toast.error(getErrorMessage(error))
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="min-h-screen flex flex-col bg-background md:max-w-[390px] md:mx-auto">
             <header className="px-5 h-14 border-b border-outline-variant flex items-center justify-between sticky top-0 bg-surface z-10">
@@ -104,12 +180,15 @@ export const Signup = () => {
                     </p>
                 </div>
 
-                <form className="flex flex-col gap-5">
+                <form id="signup-form" className="flex flex-col gap-5" onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-sm font-semibold text-on-surface">이름</label>
                         <input
                             type="text"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
                             placeholder="홍길동"
+                            autoComplete="name"
                             className="p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                         />
                     </div>
@@ -118,10 +197,13 @@ export const Signup = () => {
                         <div className="flex gap-2">
                             <input
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="example@email.com"
+                                autoComplete="email"
                                 className="flex-1 p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                             />
-                            <EcoButton variant="outline" className="whitespace-nowrap px-4">
+                            <EcoButton variant="outline" className="whitespace-nowrap px-4" type="button">
                                 인증하기
                             </EcoButton>
                         </div>
@@ -130,7 +212,10 @@ export const Signup = () => {
                         <label className="text-sm font-semibold text-on-surface">비밀번호</label>
                         <input
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="비밀번호를 입력해주세요"
+                            autoComplete="new-password"
                             className="p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                         />
                     </div>
@@ -138,7 +223,10 @@ export const Signup = () => {
                         <label className="text-sm font-semibold text-on-surface">비밀번호 확인</label>
                         <input
                             type="password"
+                            value={passwordConfirm}
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
                             placeholder="비밀번호를 다시 입력해주세요"
+                            autoComplete="new-password"
                             className="p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                         />
                     </div>
@@ -174,9 +262,11 @@ export const Signup = () => {
             <div className="p-5 border-t border-outline-variant bg-surface sticky bottom-0">
                 <EcoButton
                     className="w-full py-4 text-lg font-bold"
-                    onClick={() => navigate('/login')}
+                    type="submit"
+                    form="signup-form"
+                    disabled={loading}
                 >
-                    가입하기
+                    {loading ? '가입 중...' : '가입하기'}
                 </EcoButton>
             </div>
         </div>

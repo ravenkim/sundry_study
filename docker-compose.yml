@@ -1,0 +1,47 @@
+# 로컬 FE + BE + MySQL 통합 실행
+# 사용: docker compose up --build
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: ecoreport-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: DBname
+      MYSQL_USER: your_mysql_user
+      MYSQL_PASSWORD: your_mysql_user
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  be:
+    build: ./be
+    container_name: ecoreport-be
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/DBname?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+      SPRING_DATASOURCE_USERNAME: your_mysql_user
+      SPRING_DATASOURCE_PASSWORD: your_mysql_user
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  fe:
+    build:
+      context: ./fe
+    container_name: ecoreport-fe
+    ports:
+      - "8081:80"
+    depends_on:
+      - be
+
+volumes:
+  mysql_data:

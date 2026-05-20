@@ -12,9 +12,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Structure
 
 ```
-be/     # Backend — Spring Boot 4 + MySQL + Gradle
-fe/     # Frontend — React 19 + TypeScript + Vite + TailwindCSS v4
-docs/   # 기획, 디자인 가이드, 회의록, API 명세
+be/              # Backend — Spring Boot 4 + MySQL + Gradle
+fe/              # Frontend — React 19 + TypeScript + Vite + TailwindCSS v4
+docs/            # 기획, 디자인 가이드, 회의록, API 명세
+deploy.sh        # 통합 배포 (Docker Compose / Cloud Run)
+docker-compose.yml
 ```
 
 ## Backend (be/)
@@ -123,15 +125,38 @@ export function* rootSaga() { yield all([..., newSaga()]) }
 ### API 클라이언트
 `src/globals/api/client.tsx`의 axios 인스턴스 사용. `baseURL`은 `VITE_API_HOST` 환경변수 (현재 빈 문자열 — 개발 중).
 
+## 배포
+
+상세: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/배포_가이드.md`
+
+```bash
+# 로컬 통합 (FE:8081, BE:8080, MySQL:3306)
+bash deploy.sh
+bash deploy.sh down    # 중지
+bash deploy.sh logs
+
+# Cloud Run (GCP_PROJECT 필요)
+export GCP_PROJECT=your-project-id
+bash deploy.sh cloudrun
+
+# 개별
+bash be/deploy.sh build|docker|cloudrun
+bash fe/deploy.sh build|docker|cloudrun
+```
+
+환경 파일: `be/.env.docker.example` → `.env.docker`, `fe/.env.production.example` → `.env.production`
+
 ## 개발 환경 설정
 
 ### Backend DB
-MySQL이 `localhost:3306`에서 실행 중이어야 함. DB명: `DBname` (변경 예정).
+로컬 개발: MySQL `localhost:3306`, DB명 `DBname`.  
+Docker 통합 배포 시 Compose가 MySQL을 함께 기동한다.
 
 ### 환경변수 (Frontend)
 ```
 VITE_API_HOST=http://localhost:8080
 ```
+Docker/프로덕션 빌드 시 `VITE_API_HOST`가 빌드 타임에 주입된다.
 
 ## 계획된 추가 기능 (미구현)
 - JWT 인증 (SecurityConfig에 주석으로 존재)
