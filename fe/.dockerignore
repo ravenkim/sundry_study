@@ -1,9 +1,9 @@
 node_modules
 .yarn
-src
 .storybook
 *.md
 .env*
+!.env.production
 !.env.production.example
 !.env.development.example
 dist-ssr
