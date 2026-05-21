@@ -3,6 +3,7 @@ package org.example.be.service.auth;
 import lombok.RequiredArgsConstructor;
 import org.example.be.domain.model.Member;
 import org.example.be.domain.repository.MemberRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -30,31 +32,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String provider = userRequest.getClientRegistration().getRegistrationId();
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
-        String email = "";
-        String name = "";
-        String providerId = "";
-
-        if ("google".equals(provider)) {
-            email = (String) attributes.get("email");
-            name = (String) attributes.get("name");
-            providerId = (String) attributes.get("sub");
-        } else if ("kakao".equals(provider)) {
-            Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-            Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
-            email = (String) kakaoAccount.get("email");
-            name = (String) profile.get("nickname");
-            providerId = String.valueOf(attributes.get("id"));
-        }
+        OAuthAttributesHelper.OAuthUserProfile profile =
+                OAuthAttributesHelper.extract(provider, attributes);
+        String email = profile.email();
+        String name = profile.name();
+        String providerId = profile.providerId();
 
         // JPA 영속성 컨텍스트 내에서 동작
-        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        String normalizedEmail = email == null ? "" : email.trim().toLowerCase();
+        Optional<Member> optionalMember = memberRepository.findByEmailIgnoreCase(normalizedEmail);
         Member member;
 
         if (optionalMember.isEmpty()) {
             member = new Member();
-            member.setUserName(name + "_" + providerId.substring(0, 5));
-            member.setEmail(email);
-            member.setPassword(UUID.randomUUID().toString());
+            String idSuffix = providerId.length() >= 5 ? providerId.substring(0, 5) : providerId;
+            member.setUserName(name + "_" + idSuffix);
+            member.setEmail(normalizedEmail);
+            member.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
             member.setProvider(provider);
             member.setProviderId(providerId);
 

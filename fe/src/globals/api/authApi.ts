@@ -17,6 +17,17 @@ export interface RegisterRequest {
     email: string
 }
 
+export interface LoginResponse {
+    accessToken: string
+    userName: string
+    email?: string
+}
+
+export interface EmailCheckResponse {
+    email: string
+    available: boolean
+}
+
 async function postAuth<T>(
     path: string,
     body: unknown,
@@ -39,7 +50,24 @@ async function postAuth<T>(
 }
 
 export function login(request: LoginRequest) {
-    return postAuth<{ accessToken?: string }>('/login', request, ResponseCode.LOGIN_SUCCESS)
+    return postAuth<LoginResponse>('/login', request, ResponseCode.LOGIN_SUCCESS)
+}
+
+export async function checkEmailAvailability(email: string): Promise<EmailCheckResponse> {
+    const { data } = await client.get<ApiResponse<EmailCheckResponse> | ApiErrorResponse>(
+        '/register/check-email',
+        { params: { email: email.trim() } },
+    )
+
+    if (isApiError(data)) {
+        throw new Error(data.message || '이메일 확인에 실패했습니다.')
+    }
+
+    if (data.code !== ResponseCode.OK || !data.body) {
+        throw new Error('이메일 확인에 실패했습니다.')
+    }
+
+    return data.body
 }
 
 export function register(request: RegisterRequest) {

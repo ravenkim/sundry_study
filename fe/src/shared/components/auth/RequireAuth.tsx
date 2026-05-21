@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router'
 import { useAuth } from 'src/features/auth/AuthContext'
 import type { ReactNode } from 'react'
 
-const PUBLIC_PATHS = ['/login', '/signup']
+const PUBLIC_PATHS = ['/login', '/signup', '/oauth/callback']
 
 export function RequireAuth({ children }: { children: ReactNode }) {
     const { isAuthenticated } = useAuth()

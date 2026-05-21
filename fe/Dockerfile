@@ -1,12 +1,9 @@
-# Stage 1: Vite 빌드 (VITE_API_HOST = 백엔드 URL)
-FROM node:20-alpine AS builder
+# syntax=docker/dockerfile:1
+# Stage 1: Vite 빌드 (의존성은 DEPS_IMAGE에서 재사용, fe/deploy.sh)
+ARG DEPS_IMAGE
+FROM ${DEPS_IMAGE} AS builder
 
 WORKDIR /app
-
-COPY package.json yarn.lock .yarnrc.yml ./
-RUN sed -i '/^yarnPath:/d' .yarnrc.yml
-
-RUN corepack enable && corepack prepare --activate && yarn install --immutable
 
 COPY . .
 RUN sed -i '/^yarnPath:/d' .yarnrc.yml

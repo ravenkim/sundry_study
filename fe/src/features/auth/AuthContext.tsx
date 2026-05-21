@@ -10,7 +10,7 @@ import {
     clearAuth,
     getStoredUser,
     isAuthenticated as checkAuth,
-    setDemoSession,
+    setAuthSession,
     type StoredUser,
 } from 'src/features/auth/authStorage'
 import { login as loginApi, register as registerApi } from 'src/globals/api/authApi'
@@ -21,6 +21,11 @@ interface AuthContextValue {
     isAuthenticated: boolean
     login: (request: LoginRequest) => Promise<void>
     register: (request: RegisterRequest) => Promise<void>
+    completeOAuthLogin: (
+        accessToken: string,
+        userName: string,
+        email?: string,
+    ) => void
     logout: () => void
 }
 
@@ -31,8 +36,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [authenticated, setAuthenticated] = useState(() => checkAuth())
 
     const login = useCallback(async (request: LoginRequest) => {
-        await loginApi(request)
-        setDemoSession(request.userName)
+        const { body } = await loginApi(request)
+        if (!body?.accessToken || !body.userName) {
+            throw new Error('로그인 응답이 올바르지 않습니다.')
+        }
+        setAuthSession(body.accessToken, {
+            userName: body.userName,
+            email: body.email,
+        })
         setUser(getStoredUser())
         setAuthenticated(true)
     }, [])
@@ -40,6 +51,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const register = useCallback(async (request: RegisterRequest) => {
         await registerApi(request)
     }, [])
+
+    const completeOAuthLogin = useCallback(
+        (accessToken: string, userName: string, email?: string) => {
+            setAuthSession(accessToken, { userName, email })
+            setUser(getStoredUser())
+            setAuthenticated(true)
+        },
+        [],
+    )
 
     const logout = useCallback(() => {
         clearAuth()
@@ -53,9 +73,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             isAuthenticated: authenticated,
             login,
             register,
+            completeOAuthLogin,
             logout,
         }),
-        [user, authenticated, login, register, logout],
+        [user, authenticated, login, register, completeOAuthLogin, logout],
     )
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

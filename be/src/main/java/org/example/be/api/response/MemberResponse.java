@@ -26,7 +26,32 @@ public class MemberResponse {
     @Getter
     @Setter
     @Builder
+    public static class EmailCheck {
+        private String email;
+        private boolean available;
+
+        public static EmailCheck of(String email, boolean available) {
+            return EmailCheck.builder()
+                    .email(email)
+                    .available(available)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Setter
+    @Builder
     public static class Login {
-        //needs when JWT authentication is enabled.
+        private String accessToken;
+        private String userName;
+        private String email;
+
+        public static Login of(Member member, String accessToken) {
+            return Login.builder()
+                    .accessToken(accessToken)
+                    .userName(member.getUserName())
+                    .email(member.getEmail())
+                    .build();
+        }
     }
 }

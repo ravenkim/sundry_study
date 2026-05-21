@@ -1,9 +1,11 @@
-import { FormEvent, useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import { MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
+import { checkEmailAvailability } from 'src/globals/api/authApi'
+import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 
@@ -20,10 +22,25 @@ function getErrorMessage(error: unknown): string {
 
 export const Login = () => {
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
     const { login } = useAuth()
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (searchParams.get('error') === 'oauth') {
+            toast.error('소셜 로그인에 실패했습니다. 다시 시도해 주세요.')
+        }
+    }, [searchParams])
+
+    const startOAuth = (provider: 'kakao' | 'google') => {
+        try {
+            window.location.href = getOAuthAuthorizationUrl(provider)
+        } catch {
+            toast.error('API 서버 주소(VITE_API_HOST)가 설정되지 않았습니다.')
+        }
+    }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -112,12 +129,19 @@ export const Login = () => {
 
                 <div className="flex flex-col gap-2">
                     <EcoButton
+                        type="button"
                         variant="outline"
                         className="py-3 bg-[#FEE500] border-none text-[#3C1E1E]"
+                        onClick={() => startOAuth('kakao')}
                     >
                         <MessageCircle className="w-5 h-5 fill-current" /> 카카오로 시작하기
                     </EcoButton>
-                    <EcoButton variant="outline" className="py-3">
+                    <EcoButton
+                        type="button"
+                        variant="outline"
+                        className="py-3"
+                        onClick={() => startOAuth('google')}
+                    >
                         <UserIcon className="w-5 h-5" /> Google로 시작하기
                     </EcoButton>
                 </div>
@@ -133,13 +157,58 @@ export const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [emailChecked, setEmailChecked] = useState(false)
+    const [emailAvailable, setEmailAvailable] = useState(false)
+    const [checkingEmail, setCheckingEmail] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    const handleEmailChange = (value: string) => {
+        setEmail(value)
+        setEmailChecked(false)
+        setEmailAvailable(false)
+    }
+
+    const handleCheckEmail = async () => {
+        const trimmed = email.trim()
+        if (!trimmed) {
+            toast.error('이메일을 입력해 주세요.')
+            return
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+            toast.error('올바른 이메일 형식을 입력해 주세요.')
+            return
+        }
+
+        setCheckingEmail(true)
+        try {
+            const result = await checkEmailAvailability(trimmed)
+            setEmailChecked(true)
+            setEmailAvailable(result.available)
+            if (result.available) {
+                toast.success('사용 가능한 이메일입니다.')
+            } else {
+                toast.error('이미 사용 중인 이메일입니다.')
+            }
+        } catch (error) {
+            toast.error(getErrorMessage(error))
+        } finally {
+            setCheckingEmail(false)
+        }
+    }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
         if (!userName.trim() || !email.trim() || !password) {
             toast.error('필수 정보를 모두 입력해 주세요.')
+            return
+        }
+        if (!emailChecked || !emailAvailable) {
+            toast.error('이메일 중복 확인을 완료해 주세요.')
+            return
+        }
+        if (password.length < 8) {
+            toast.error('비밀번호는 8자 이상이어야 합니다.')
             return
         }
         if (password !== passwordConfirm) {
@@ -186,13 +255,13 @@ export const Signup = () => {
 
                 <form id="signup-form" className="flex flex-col gap-5" onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-semibold text-on-surface">이름</label>
+                        <label className="text-sm font-semibold text-on-surface">아이디</label>
                         <input
                             type="text"
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
-                            placeholder="홍길동"
-                            autoComplete="name"
+                            placeholder="로그인에 사용할 아이디"
+                            autoComplete="username"
                             className="p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                         />
                     </div>
@@ -202,15 +271,32 @@ export const Signup = () => {
                             <input
                                 type="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => handleEmailChange(e.target.value)}
                                 placeholder="example@email.com"
                                 autoComplete="email"
                                 className="flex-1 p-3.5 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none"
                             />
-                            <EcoButton variant="outline" className="whitespace-nowrap px-4" type="button">
-                                인증하기
+                            <EcoButton
+                                variant="outline"
+                                className="whitespace-nowrap px-4"
+                                type="button"
+                                disabled={checkingEmail}
+                                onClick={handleCheckEmail}
+                            >
+                                {checkingEmail ? '확인 중...' : '중복확인'}
                             </EcoButton>
                         </div>
+                        {emailChecked && (
+                            <p
+                                className={`text-xs font-medium ${
+                                    emailAvailable ? 'text-primary' : 'text-error'
+                                }`}
+                            >
+                                {emailAvailable
+                                    ? '사용 가능한 이메일입니다.'
+                                    : '이미 사용 중인 이메일입니다.'}
+                            </p>
+                        )}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-sm font-semibold text-on-surface">비밀번호</label>
@@ -268,7 +354,7 @@ export const Signup = () => {
                     className="w-full py-4 text-lg font-bold"
                     type="submit"
                     form="signup-form"
-                    disabled={loading}
+                    disabled={loading || !emailChecked || !emailAvailable}
                 >
                     {loading ? '가입 중...' : '가입하기'}
                 </EcoButton>

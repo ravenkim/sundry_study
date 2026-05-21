@@ -6,6 +6,14 @@ springdoc:
     operations-sorter: method
     tags-sorter: alpha
 
+app:
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5173}
+
+jwt:
+  secret: ${JWT_SECRET:ecoreport-dev-jwt-secret-key-min-32-chars!!}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
 spring:
   application:
     name: backend

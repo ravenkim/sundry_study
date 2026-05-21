@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+# package.json / yarn.lock / .yarnrc.yml 변경 시에만 빌드 (fe/deploy.sh)
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json yarn.lock .yarnrc.yml ./
+RUN sed -i '/^yarnPath:/d' .yarnrc.yml
+
+RUN --mount=type=cache,target=/root/.yarn/berry/cache \
+    corepack enable && corepack prepare --activate && yarn install --immutable

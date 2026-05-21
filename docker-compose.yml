@@ -28,6 +28,13 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/DBname?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: your_mysql_user
       SPRING_DATASOURCE_PASSWORD: your_mysql_user
+      FRONTEND_URL: http://localhost:8081
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID:-}
+      KAKAO_CLIENT_SECRET: ${KAKAO_CLIENT_SECRET:-}
+      JWT_SECRET: ${JWT_SECRET:-change-me-to-a-random-secret-at-least-32-chars}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
     depends_on:
       mysql:
         condition: service_healthy
@@ -35,6 +42,9 @@ services:
   fe:
     build:
       context: ./fe
+      args:
+        # fe/deploy.sh가 해시 태그 이미지를 넘김. 직접 빌드 시 deps 이미지를 먼저 만들 것.
+        DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-fe-deps:local}
     container_name: ecoreport-fe
     ports:
       - "8081:80"

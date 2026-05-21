@@ -20,11 +20,14 @@ public class MemberAuthService implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public boolean login(MemberRequest.Login request) {
-        // JPA 레포지토리 사용 (QueryDSL 제거)
+    public Member authenticate(MemberRequest.Login request) {
         Member member = memberRepository.findByUserName(request.getUserName())
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "Member not found"));
 
-        return passwordEncoder.matches(request.getPassword(), member.getPassword());
+        if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+            throw new BusinessLogicException(ErrorCode.NOT_CORRECT, "Password is not correct");
+        }
+
+        return member;
     }
 }

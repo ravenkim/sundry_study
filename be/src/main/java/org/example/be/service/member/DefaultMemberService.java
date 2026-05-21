@@ -19,25 +19,45 @@ public class DefaultMemberService implements MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Transactional // 데이터를 삽입/수정하는 메서드만 트랜잭션 활성화 (em.persist 실행)
+    @Override
+    public boolean isEmailAvailable(String email) {
+        String normalized = normalizeEmail(email);
+        if (normalized.isBlank()) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "이메일을 입력해 주세요.");
+        }
+        return memberRepository.findByEmailIgnoreCase(normalized).isEmpty();
+    }
+
+    @Transactional
     @Override
     public boolean registerMember(MemberRequest.Create request) {
         if (request.getPassword() == null || request.getPassword().length() < 8) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "Password must be at least 8 characters long");
+            throw new BusinessLogicException(ErrorCode.INVALID, "비밀번호는 8자 이상이어야 합니다.");
         }
 
-        if (memberRepository.findByUserName(request.getUserName()).isPresent()) {
-            throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "Member ID already exists");
+        String userName = request.getUserName().trim();
+        String normalizedEmail = normalizeEmail(request.getEmail());
+
+        if (memberRepository.findByUserName(userName).isPresent()) {
+            throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 아이디입니다.");
+        }
+
+        if (memberRepository.findByEmailIgnoreCase(normalizedEmail).isPresent()) {
+            throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 이메일입니다.");
         }
 
         Member member = new Member(
-                request.getUserName(),
+                userName,
                 passwordEncoder.encode(request.getPassword()),
-                request.getEmail()
+                normalizedEmail
         );
-        memberRepository.save(member); // 영속성 컨텍스트에 등록 (em.persist와 동일 역할)
+        memberRepository.save(member);
 
         return true;
+    }
+
+    private static String normalizeEmail(String email) {
+        return email == null ? "" : email.trim().toLowerCase();
     }
 
     // 조회 로직이므로 클래스 레벨의 readOnly=true를 탐

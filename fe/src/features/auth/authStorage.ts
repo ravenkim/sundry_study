@@ -37,7 +37,10 @@ export function isAuthenticated(): boolean {
     return Boolean(getAccessToken())
 }
 
-export function setDemoSession(userName: string, email?: string): void {
-    setAccessToken(`demo-token-${userName}`)
-    setStoredUser({ userName, email })
+export function setAuthSession(
+    accessToken: string,
+    user: StoredUser,
+): void {
+    setAccessToken(accessToken)
+    setStoredUser(user)
 }
