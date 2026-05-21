@@ -28,6 +28,15 @@ public class DefaultMemberService implements MemberService {
         return memberRepository.findByEmailIgnoreCase(normalized).isEmpty();
     }
 
+    @Override
+    public boolean isUserNameAvailable(String userName) {
+        String trimmed = userName == null ? "" : userName.trim();
+        if (trimmed.isBlank()) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "아이디를 입력해 주세요.");
+        }
+        return memberRepository.findByUserName(trimmed).isEmpty();
+    }
+
     @Transactional
     @Override
     public boolean registerMember(MemberRequest.Create request) {

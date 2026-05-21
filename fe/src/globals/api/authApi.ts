@@ -28,6 +28,11 @@ export interface EmailCheckResponse {
     available: boolean
 }
 
+export interface UserNameCheckResponse {
+    userName: string
+    available: boolean
+}
+
 async function postAuth<T>(
     path: string,
     body: unknown,
@@ -70,6 +75,24 @@ export async function checkEmailAvailability(
 
     if (data.code !== ResponseCode.OK || !data.body) {
         throw new Error('이메일 확인에 실패했습니다.')
+    }
+
+    return data.body
+}
+
+export async function checkUserNameAvailability(
+    userName: string,
+): Promise<UserNameCheckResponse> {
+    const { data } = await client.get<
+        ApiResponse<UserNameCheckResponse> | ApiErrorResponse
+    >('/register/check-username', { params: { userName: userName.trim() } })
+
+    if (isApiError(data)) {
+        throw new Error(data.message || '아이디 확인에 실패했습니다.')
+    }
+
+    if (data.code !== ResponseCode.OK || !data.body) {
+        throw new Error('아이디 확인에 실패했습니다.')
     }
 
     return data.body

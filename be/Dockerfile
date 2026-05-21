@@ -7,6 +7,7 @@ WORKDIR /app
 
 COPY src ./src
 
+# Gradle zip·Maven 캐시는 DEPS_IMAGE(/root/.gradle)에 포함 — wrapper/cache mount는 베이스 레이어를 가려 재다운로드 유발
 RUN ./gradlew bootJar -x test --no-daemon
 
 # Stage 2: 실행

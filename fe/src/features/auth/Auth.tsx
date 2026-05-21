@@ -4,10 +4,14 @@ import { User as UserIcon, ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
-import { checkEmailAvailability } from 'src/globals/api/authApi'
+import {
+    checkEmailAvailability,
+    checkUserNameAvailability,
+} from 'src/globals/api/authApi'
 import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SignupTermsAgreement } from 'src/features/auth/SignupTermsAgreement'
 
 function getErrorMessage(error: unknown): string {
     if (isAxiosError(error)) {
@@ -170,10 +174,44 @@ export const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [userNameChecked, setUserNameChecked] = useState(false)
+    const [userNameAvailable, setUserNameAvailable] = useState(false)
+    const [checkingUserName, setCheckingUserName] = useState(false)
     const [emailChecked, setEmailChecked] = useState(false)
     const [emailAvailable, setEmailAvailable] = useState(false)
     const [checkingEmail, setCheckingEmail] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [requiredTermsAgreed, setRequiredTermsAgreed] = useState(false)
+
+    const handleUserNameChange = (value: string) => {
+        setUserName(value)
+        setUserNameChecked(false)
+        setUserNameAvailable(false)
+    }
+
+    const handleCheckUserName = async () => {
+        const trimmed = userName.trim()
+        if (!trimmed) {
+            toast.error('아이디를 입력해 주세요.')
+            return
+        }
+
+        setCheckingUserName(true)
+        try {
+            const result = await checkUserNameAvailability(trimmed)
+            setUserNameChecked(true)
+            setUserNameAvailable(result.available)
+            if (result.available) {
+                toast.success('사용 가능한 아이디입니다.')
+            } else {
+                toast.error('이미 사용 중인 아이디입니다.')
+            }
+        } catch (error) {
+            toast.error(getErrorMessage(error))
+        } finally {
+            setCheckingUserName(false)
+        }
+    }
 
     const handleEmailChange = (value: string) => {
         setEmail(value)
@@ -216,6 +254,10 @@ export const Signup = () => {
             toast.error('필수 정보를 모두 입력해 주세요.')
             return
         }
+        if (!userNameChecked || !userNameAvailable) {
+            toast.error('아이디 중복 확인을 완료해 주세요.')
+            return
+        }
         if (!emailChecked || !emailAvailable) {
             toast.error('이메일 중복 확인을 완료해 주세요.')
             return
@@ -226,6 +268,10 @@ export const Signup = () => {
         }
         if (password !== passwordConfirm) {
             toast.error('비밀번호가 일치하지 않습니다.')
+            return
+        }
+        if (!requiredTermsAgreed) {
+            toast.error('필수 약관에 동의해 주세요.')
             return
         }
 
@@ -277,14 +323,40 @@ export const Signup = () => {
                         <label className="text-on-surface text-sm font-semibold">
                             아이디
                         </label>
-                        <input
-                            type="text"
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
-                            placeholder="로그인에 사용할 아이디"
-                            autoComplete="username"
-                            className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
-                        />
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                value={userName}
+                                onChange={(e) =>
+                                    handleUserNameChange(e.target.value)
+                                }
+                                placeholder="로그인에 사용할 아이디"
+                                autoComplete="username"
+                                className="border-outline-variant bg-surface focus:ring-primary-container flex-1 rounded-lg border p-3.5 outline-none focus:ring-2"
+                            />
+                            <EcoButton
+                                variant="outline"
+                                className="px-4 whitespace-nowrap"
+                                type="button"
+                                disabled={checkingUserName}
+                                onClick={handleCheckUserName}
+                            >
+                                {checkingUserName ? '확인 중...' : '중복확인'}
+                            </EcoButton>
+                        </div>
+                        {userNameChecked && (
+                            <p
+                                className={`text-xs font-medium ${
+                                    userNameAvailable
+                                        ? 'text-primary'
+                                        : 'text-error'
+                                }`}
+                            >
+                                {userNameAvailable
+                                    ? '사용 가능한 아이디입니다.'
+                                    : '이미 사용 중인 아이디입니다.'}
+                            </p>
+                        )}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
@@ -352,31 +424,9 @@ export const Signup = () => {
                         />
                     </div>
 
-                    <div className="border-surface-container-high mt-2 flex flex-col gap-3 border-t pt-4">
-                        <label className="flex cursor-pointer items-center gap-3 font-bold">
-                            <input
-                                type="checkbox"
-                                className="border-outline-variant text-primary focus:ring-primary h-5 w-5 rounded"
-                            />
-                            <span>전체 약관 동의</span>
-                        </label>
-                        {[
-                            '[필수] 서비스 이용약관 동의',
-                            '[필수] 개인정보 수집 및 이용 동의',
-                            '[선택] 마케팅 정보 수신 동의',
-                        ].map((txt, i) => (
-                            <label
-                                key={i}
-                                className="text-on-surface-variant flex cursor-pointer items-center gap-3 text-sm font-medium"
-                            >
-                                <input
-                                    type="checkbox"
-                                    className="border-outline-variant text-primary focus:ring-primary h-5 w-5 rounded"
-                                />
-                                <span>{txt}</span>
-                            </label>
-                        ))}
-                    </div>
+                    <SignupTermsAgreement
+                        onRequiredChange={setRequiredTermsAgreed}
+                    />
                 </form>
             </main>
 
@@ -385,7 +435,12 @@ export const Signup = () => {
                     className="w-full py-4 text-lg font-bold"
                     type="submit"
                     form="signup-form"
-                    disabled={loading || !emailChecked || !emailAvailable}
+                    disabled={
+                        loading ||
+                        !emailChecked ||
+                        !emailAvailable ||
+                        !requiredTermsAgreed
+                    }
                 >
                     {loading ? '가입 중...' : '가입하기'}
                 </EcoButton>

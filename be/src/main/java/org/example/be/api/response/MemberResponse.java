@@ -26,6 +26,21 @@ public class MemberResponse {
     @Getter
     @Setter
     @Builder
+    public static class UserNameCheck {
+        private String userName;
+        private boolean available;
+
+        public static UserNameCheck of(String userName, boolean available) {
+            return UserNameCheck.builder()
+                    .userName(userName)
+                    .available(available)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Setter
+    @Builder
     public static class EmailCheck {
         private String email;
         private boolean available;

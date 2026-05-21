@@ -18,6 +18,7 @@ DEPLOY_HOST="${DEPLOY_PUBLIC_HOST:-localhost}"
 
 deps_hash() {
   sha256sum \
+    "$BE_DIR/Dockerfile.deps" \
     "$BE_DIR/build.gradle" \
     "$BE_DIR/settings.gradle" \
     "$BE_DIR/gradle/wrapper/gradle-wrapper.properties" \

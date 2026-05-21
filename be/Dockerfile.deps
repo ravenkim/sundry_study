@@ -7,9 +7,9 @@ WORKDIR /app
 COPY gradlew gradlew.bat settings.gradle build.gradle ./
 COPY gradle ./gradle
 
-# placeholder로 compileJava 1회 실행 → Maven 의존성·annotation processor까지 prefetch
-RUN --mount=type=cache,target=/root/.gradle/wrapper \
-    chmod +x gradlew && \
+# Gradle 배포판·Maven 캐시를 이미지 레이어에 포함 (cache mount 사용 시 bootJar 단계에서 재다운로드됨)
+RUN chmod +x gradlew && \
+    ./gradlew --version --no-daemon -q && \
     mkdir -p src/main/java/org/example/be && \
     printf 'package org.example.be;\npublic class DepsPlaceholder {}\n' \
       > src/main/java/org/example/be/DepsPlaceholder.java && \

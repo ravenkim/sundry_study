@@ -34,6 +34,17 @@ public class RegistrationController {
         );
     }
 
+    @Operation(summary = "아이디 중복 확인", description = "DB에서 아이디 사용 여부를 확인합니다.")
+    @GetMapping("/register/check-username")
+    public ApiResponse<MemberResponse.UserNameCheck> checkUserName(@RequestParam String userName) {
+        boolean available = defaultMemberService.isUserNameAvailable(userName);
+        String trimmed = userName == null ? "" : userName.trim();
+        return ApiResponse.success(
+                ResponseCode.OK,
+                MemberResponse.UserNameCheck.of(trimmed, available)
+        );
+    }
+
     @Operation(summary = "회원가입", description = "새 사용자 계정을 등록합니다.")
     @PostMapping("/register")
     public ApiResponse<Void> register(@Valid @RequestBody MemberRequest.Create request) {
