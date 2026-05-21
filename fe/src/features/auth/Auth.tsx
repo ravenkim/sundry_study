@@ -1,10 +1,11 @@
 import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-import { Leaf, MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
+import { MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'axios'
 import { login, register } from 'src/globals/api/authApi'
 import { EcoButton } from 'src/shared/ui/eco'
+import { MascotImage } from 'src/shared/components/mascort'
 
 function getErrorMessage(error: unknown): string {
     if (isAxiosError(error)) {
@@ -46,9 +47,7 @@ export const Login = () => {
         <div className="min-h-screen flex flex-col items-center justify-center p-5 font-sans bg-background">
             <div className="w-full max-w-[390px] flex flex-col gap-8">
                 <header className="flex flex-col items-center gap-2 mt-8">
-                    <div className="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center shadow-sm">
-                        <Leaf className="w-8 h-8 text-on-primary-container fill-current" />
-                    </div>
+                    <MascotImage emotion="smile" size="lg" decorative />
                     <h1 className="text-3xl font-bold text-primary">EcoReport</h1>
                     <p className="text-on-surface-variant text-sm">에너지 절약의 시작, 에코리포트</p>
                 </header>

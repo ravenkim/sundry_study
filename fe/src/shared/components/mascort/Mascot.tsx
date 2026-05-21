@@ -1,0 +1,141 @@
+import type { ReactNode } from 'react'
+import { cn } from 'src/shared/lib/shadcn/lib/utils'
+import {
+    MASCORT_ALT,
+    MASCORT_SRC,
+    resolveMascortEmotion,
+    type MascortEmotion,
+    type MascortEmotionAlias,
+} from './mascortAssets'
+
+export type MascotSize = 'xs' | 'sm' | 'md' | 'lg' | 'hero'
+
+const SIZE_CLASS: Record<MascotSize, string> = {
+    xs: 'h-8 w-8',
+    sm: 'h-12 w-12',
+    md: 'h-20 w-20',
+    lg: 'h-28 w-28',
+    hero: 'h-36 w-36 sm:h-40 sm:w-40',
+}
+
+type MascotImageProps = {
+    emotion: MascortEmotionAlias
+    size?: MascotSize
+    className?: string
+    imgClassName?: string
+    decorative?: boolean
+}
+
+export const MascotImage = ({
+    emotion,
+    size = 'md',
+    className,
+    imgClassName,
+    decorative = false,
+}: MascotImageProps) => {
+    const key = resolveMascortEmotion(emotion)
+    return (
+        <span
+            className={cn(
+                'inline-flex shrink-0 items-center justify-center',
+                SIZE_CLASS[size],
+                className,
+            )}
+            aria-hidden={decorative ? true : undefined}
+        >
+            <img
+                src={MASCORT_SRC[key]}
+                alt={decorative ? '' : MASCORT_ALT[key]}
+                className={cn('h-full w-full object-contain drop-shadow-sm', imgClassName)}
+                draggable={false}
+            />
+        </span>
+    )
+}
+
+type MascotHeroProps = {
+    emotion?: MascortEmotion
+    title: string
+    subtitle?: string
+    className?: string
+}
+
+export const MascotHero = ({
+    emotion = 'smile',
+    title,
+    subtitle,
+    className,
+}: MascotHeroProps) => (
+    <section
+        className={cn(
+            'flex items-center gap-4 rounded-2xl border border-outline-variant bg-primary-container/15 px-4 py-4',
+            className,
+        )}
+    >
+        <MascotImage emotion={emotion} size="hero" decorative />
+        <div className="flex min-w-0 flex-col gap-1">
+            <h2 className="text-lg font-black leading-tight text-primary">{title}</h2>
+            {subtitle ? (
+                <p className="text-sm font-medium text-on-surface-variant">{subtitle}</p>
+            ) : null}
+        </div>
+    </section>
+)
+
+type MascotBubbleProps = {
+    emotion: MascortEmotionAlias
+    children: ReactNode
+    size?: MascotSize
+    className?: string
+}
+
+export const MascotBubble = ({ emotion, children, size = 'sm', className }: MascotBubbleProps) => (
+    <div className={cn('flex items-start gap-3', className)}>
+        <MascotImage emotion={emotion} size={size} decorative />
+        <p className="flex-1 rounded-2xl rounded-tl-sm bg-primary-container/25 px-3 py-2 text-sm font-semibold text-on-surface">
+            {children}
+        </p>
+    </div>
+)
+
+type MascotEmptyStateProps = {
+    emotion?: MascortEmotion
+    title: string
+    description?: string
+    children?: ReactNode
+    className?: string
+}
+
+export const MascotEmptyState = ({
+    emotion = 'question',
+    title,
+    description,
+    children,
+    className,
+}: MascotEmptyStateProps) => (
+    <div className={cn('flex flex-col items-center gap-4 py-10 text-center', className)}>
+        <MascotImage emotion={emotion} size="lg" />
+        <div className="flex flex-col gap-2">
+            <h2 className="text-xl font-black text-on-surface">{title}</h2>
+            {description ? (
+                <p className="text-sm font-medium text-on-surface-variant">{description}</p>
+            ) : null}
+        </div>
+        {children}
+    </div>
+)
+
+export const MascotWatermark = ({
+    emotion = 'smile',
+    className,
+}: {
+    emotion?: MascortEmotion
+    className?: string
+}) => (
+    <MascotImage
+        emotion={emotion}
+        size="xs"
+        decorative
+        className={cn('pointer-events-none absolute opacity-[0.12]', className)}
+    />
+)

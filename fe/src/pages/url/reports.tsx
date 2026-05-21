@@ -1,13 +1,19 @@
-import { History } from 'lucide-react'
+import { Link } from 'react-router'
 import { UserAppLayout } from 'src/shared/layout/EcoLayouts'
+import { MascotEmptyState } from 'src/shared/components/mascort'
+import { EcoButton } from 'src/shared/ui/eco'
 
 const ReportsPage = () => (
     <UserAppLayout title="제보 이력">
-        <div className="p-8 text-center">
-            <History className="w-20 h-20 mx-auto text-primary-container mb-6" />
-            <h2 className="text-2xl font-black mb-2">제보 이력</h2>
-            <p className="font-bold text-on-surface-variant text-sm">사용자의 과거 제보 내역입니다.</p>
-        </div>
+        <MascotEmptyState
+            emotion="question"
+            title="아직 제보가 없어요"
+            description="캠퍼스 낭비를 발견하면 제보하고 포인트를 받아보세요."
+        >
+            <Link to="/report-form" className="mt-2">
+                <EcoButton className="px-8">낭비 제보하기</EcoButton>
+            </Link>
+        </MascotEmptyState>
     </UserAppLayout>
 )
 

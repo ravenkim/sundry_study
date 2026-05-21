@@ -2,11 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import {
     Leaf,
-    Plus,
     TrendingUp,
-    CheckCircle2,
     ChevronRight,
-    Coins,
     ClipboardCheck,
     Bell,
     FileText,
@@ -15,16 +12,35 @@ import {
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
+import {
+    MascotHero,
+    MascotImage,
+    MascotBubble,
+    MascotWatermark,
+} from 'src/shared/components/mascort'
+import type { MascortEmotion } from 'src/shared/components/mascort'
 import { ParticipatedBuildingSavingsCard } from './ParticipatedBuildingSavings'
 import { formatKwh, PARTICIPATED_BUILDING_SAVINGS, sumParticipatedKwh } from './userSavingsData'
 
+const REPORT_STATUS_MASCOT: Record<string, MascortEmotion> = {
+    '승인됨': 'smile',
+    '검토중': 'sleepy',
+    '반려': 'sad',
+}
+
 export const UserHome = () => (
     <div className="p-5 flex flex-col gap-8 pb-8 md:pb-8">
+        <MascotHero
+            emotion="smile"
+            title="오늘도 캠퍼스 에너지를 지켜요"
+            subtitle="빈 강의실 낭비를 제보하고 포인트를 받아보세요"
+        />
 
         <div className="grid grid-cols-1 gap-4">
-            <EcoCard className="flex flex-col gap-2">
+            <EcoCard className="relative flex flex-col gap-2 overflow-hidden">
+                <MascotWatermark emotion="smile" className="right-2 bottom-2" />
                 <span className="text-sm text-on-surface-variant font-medium">내 포인트</span>
-                <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-1 relative z-10">
                     <span className="text-4xl font-bold text-primary">370</span>
                     <span className="text-2xl font-bold text-primary">P</span>
                 </div>
@@ -35,7 +51,10 @@ export const UserHome = () => (
         </div>
 
         <Link to="/report-form">
-            <EcoButton className="w-full py-4 text-lg shadow-md">📷 낭비 제보하기</EcoButton>
+            <EcoButton className="w-full py-4 text-lg shadow-md gap-3">
+                <MascotImage emotion="recognize" size="xs" decorative />
+                낭비 제보하기
+            </EcoButton>
         </Link>
 
         <div className="flex flex-col gap-4">
@@ -57,11 +76,16 @@ export const UserHome = () => (
                 ].map((item, i) => (
                     <div
                         key={i}
-                        className="bg-surface-container-lowest p-4 flex justify-between items-center hover:bg-surface-container-low transition-colors cursor-pointer"
+                        className="bg-surface-container-lowest p-4 flex justify-between items-center gap-3 hover:bg-surface-container-low transition-colors cursor-pointer"
                     >
-                        <div className="flex flex-col gap-1">
-                            <span className="font-bold">{item.loc}</span>
-                            <div className="flex gap-2">
+                        <MascotImage
+                            emotion={REPORT_STATUS_MASCOT[item.status] ?? 'nomal'}
+                            size="xs"
+                            decorative
+                        />
+                        <div className="flex flex-col gap-1 flex-1 min-w-0">
+                            <span className="font-bold truncate">{item.loc}</span>
+                            <div className="flex gap-2 flex-wrap">
                                 <EcoBadge>{item.type}</EcoBadge>
                                 <EcoBadge variant={item.status === '승인됨' ? 'green' : 'gray'}>
                                     {item.status}
@@ -70,7 +94,7 @@ export const UserHome = () => (
                         </div>
                         <span
                             className={cn(
-                                'font-bold',
+                                'font-bold shrink-0',
                                 item.pts.startsWith('+') ? 'text-secondary' : 'text-on-surface-variant',
                             )}
                         >
@@ -86,7 +110,7 @@ export const UserHome = () => (
                 to="/admin"
                 className="px-4 py-1.5 rounded-full bg-on-surface/10 text-on-surface-variant text-[10px] font-black opacity-40 hover:opacity-100 transition-all border border-outline-variant"
             >
-                🛡️ Admin 대시보드 →
+                Admin 대시보드 →
             </Link>
         </div>
     </div>
@@ -97,9 +121,11 @@ export const UserReportForm = () => {
 
     return (
         <div className="p-5 flex flex-col gap-8 pb-8">
-
             <section className="flex flex-col gap-4">
-                <h2 className="text-xl font-bold">어디서 낭비되고 있나요?</h2>
+                <div className="flex items-center gap-2">
+                    <h2 className="text-xl font-bold flex-1">어디서 낭비되고 있나요?</h2>
+                    <MascotImage emotion="question" size="sm" decorative />
+                </div>
                 <div className="flex flex-col gap-2">
                     <label className="text-xs font-bold text-on-surface-variant">건물 선택</label>
                     <select className="p-4 border border-outline-variant rounded-lg bg-surface focus:ring-2 focus:ring-primary-container outline-none">
@@ -127,18 +153,26 @@ export const UserReportForm = () => {
                         { name: '조명 켜짐', icon: '💡', id: 'light' },
                         { name: '에어컨 공회전', icon: '❄️', id: 'ac' },
                         { name: '난방 과열', icon: '🔥', id: 'heat' },
-                        { name: '기타', icon: '⚡', id: 'etc' },
+                        { name: '기타', icon: '⚡', id: 'etc', mascot: 'contempt' as const },
                     ].map((item) => (
                         <div
                             key={item.id}
                             onClick={() => setSelectedType(item.id)}
                             className={cn(
-                                'border rounded-xl p-6 flex flex-col items-center gap-2 transition-colors cursor-pointer bg-surface',
+                                'relative border rounded-xl p-6 flex flex-col items-center gap-2 transition-colors cursor-pointer bg-surface',
                                 selectedType === item.id
                                     ? 'border-primary bg-primary-container/10'
                                     : 'border-outline-variant hover:bg-surface-container-low',
                             )}
                         >
+                            {selectedType === item.id && (
+                                <MascotImage
+                                    emotion={item.id === 'etc' ? 'contempt' : 'recognize'}
+                                    size="xs"
+                                    decorative
+                                    className="absolute top-2 right-2"
+                                />
+                            )}
                             <span className="text-3xl">{item.icon}</span>
                             <span className="text-sm font-bold">{item.name}</span>
                         </div>
@@ -148,11 +182,9 @@ export const UserReportForm = () => {
 
             <section className="flex flex-col gap-4">
                 <h2 className="text-xl font-bold">현장 사진을 첨부해주세요</h2>
-                <div className="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center gap-2 bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low justify-center opacity-70">
-                    <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
-                        <Plus className="w-6 h-6 text-on-surface-variant" />
-                    </div>
-                    <p className="text-sm text-center">
+                <div className="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center gap-3 bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low justify-center">
+                    <MascotImage emotion="recognize" size="md" decorative />
+                    <p className="text-sm text-center text-on-surface-variant">
                         터치하여 낭비 현장을 촬영하세요
                         <br />
                         (선택 사항)
@@ -160,7 +192,9 @@ export const UserReportForm = () => {
                 </div>
             </section>
 
-            <Link to="/report-success" className="mt-4">
+            <MascotBubble emotion="nomal">제보하면 포인트가 쌓여요!</MascotBubble>
+
+            <Link to="/report-success" className="mt-2">
                 <EcoButton className="w-full py-4 text-lg">제보 완료</EcoButton>
             </Link>
         </div>
@@ -169,20 +203,25 @@ export const UserReportForm = () => {
 
 export const UserReportSuccess = () => (
     <div className="flex flex-col items-center justify-center min-h-[calc(100dvh-3.5rem)] p-5 py-10 text-center gap-8 bg-surface">
-        <div className="p-8 rounded-full bg-secondary-container/20">
-            <CheckCircle2 className="w-24 h-24 text-secondary" />
-        </div>
+        <MascotImage
+            emotion="smile"
+            size="hero"
+            decorative
+            className="animate-[mascot-pop_0.6s_ease-out_1]"
+            imgClassName="max-h-40"
+        />
         <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-black">제보가 완료되었습니다!</h1>
             <p className="text-on-surface-variant">에너지 절약에 동참해주셔서 감사합니다.</p>
         </div>
 
-        <EcoCard className="w-full max-w-sm flex flex-col gap-4">
-            <div className="flex justify-between items-center text-sm">
+        <EcoCard className="w-full max-w-sm flex flex-col gap-4 relative overflow-hidden">
+            <MascotWatermark emotion="smile" className="right-0 bottom-0 opacity-[0.08]" />
+            <div className="flex justify-between items-center text-sm relative z-10">
                 <span className="text-on-surface-variant">예상 적립 포인트</span>
                 <EcoBadge variant="yellow">리워드</EcoBadge>
             </div>
-            <div className="text-right">
+            <div className="text-right relative z-10">
                 <span className="text-4xl font-bold text-primary">+100P</span>
             </div>
         </EcoCard>
@@ -214,15 +253,16 @@ export const UserReportSuccess = () => (
 
 export const UserPointShop = () => (
     <div className="p-5 flex flex-col gap-6 pb-8">
-        <EcoCard className="bg-primary-container/10 border-primary-container p-5">
-            <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider">
+        <EcoCard className="relative bg-primary-container/10 border-primary-container p-5 overflow-hidden">
+            <MascotWatermark emotion="smile" className="right-3 bottom-3 opacity-20" />
+            <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider relative z-10">
                 내 포인트
             </span>
-            <div className="flex items-baseline gap-1 mt-1">
+            <div className="flex items-baseline gap-1 mt-1 relative z-10">
                 <span className="text-5xl font-black leading-none text-primary">1,250</span>
                 <span className="text-2xl font-bold text-primary">P</span>
             </div>
-            <div className="flex items-center gap-2 mt-2">
+            <div className="flex items-center gap-2 mt-2 relative z-10">
                 <TrendingUp className="w-3.5 h-3.5 text-secondary" />
                 <span className="text-xs text-secondary font-bold">이번 달 +220P 적립</span>
             </div>
@@ -304,12 +344,8 @@ export const UserPointShop = () => (
 export const UserProfile = () => (
     <div className="p-5 flex flex-col gap-8 pb-8">
         <section className="flex items-center gap-5">
-            <div className="w-20 h-20 rounded-full border-2 border-primary-container p-1 overflow-hidden shadow-sm">
-                <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kim"
-                    alt="User"
-                    className="w-full h-full object-cover rounded-full bg-surface-container"
-                />
+            <div className="w-20 h-20 rounded-full border-2 border-primary-container p-1 flex items-center justify-center bg-primary-container/20 shadow-sm overflow-hidden">
+                <MascotImage emotion="nomal" size="lg" decorative className="h-16 w-16" />
             </div>
             <div className="flex flex-col gap-1.5">
                 <h2 className="text-2xl font-bold tracking-tight text-on-surface">김에코</h2>
@@ -320,10 +356,8 @@ export const UserProfile = () => (
         </section>
 
         <EcoCard className="p-6 relative overflow-hidden hover:bg-surface-container-low cursor-pointer">
-            <div className="absolute right-[-10px] bottom-[-10px] opacity-[0.05]">
-                <Coins className="w-32 h-32" />
-            </div>
-            <div className="flex justify-between items-center mb-2">
+            <MascotWatermark emotion="smile" className="right-0 bottom-0 opacity-[0.15]" />
+            <div className="flex justify-between items-center mb-2 relative z-10">
                 <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">
                     보유 포인트
                 </span>

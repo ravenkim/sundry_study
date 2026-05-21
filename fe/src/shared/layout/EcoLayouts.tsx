@@ -5,7 +5,6 @@ import {
     ClipboardCheck,
     ShoppingBag,
     User as UserIcon,
-    Leaf,
     Search,
     Bell,
     Settings,
@@ -26,6 +25,7 @@ import {
     SheetTitle,
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
+import { MascotImage } from 'src/shared/components/mascort'
 
 export const USER_NAV_ITEMS = [
     { name: '홈', path: '/', icon: Home },
@@ -78,7 +78,7 @@ export const UserAppLayout = ({
                             className="flex flex-1 items-center justify-center gap-2"
                             onClick={closeMenu}
                         >
-                            <Leaf className="h-5 w-5 text-primary" />
+                            <MascotImage emotion="nomal" size="xs" decorative />
                             <span className="text-lg font-black text-primary">EcoReport</span>
                         </Link>
                     )}
@@ -103,9 +103,7 @@ export const UserAppLayout = ({
                 >
                     <SheetHeader className="border-b border-outline-variant bg-surface-container-low p-5 text-left">
                         <div className="flex items-center gap-3 pr-8">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-container">
-                                <Leaf className="h-5 w-5 text-on-primary-container" />
-                            </div>
+                            <MascotImage emotion="nomal" size="sm" decorative className="rounded-full" />
                             <div>
                                 <SheetTitle className="text-left text-base font-black text-primary">
                                     EcoReport
@@ -169,9 +167,7 @@ export const AdminSidebar = () => {
     return (
         <aside className="w-64 border-r border-outline-variant h-screen fixed left-0 top-0 bg-surface-container-low p-4 flex flex-col gap-2 z-50">
             <div className="flex items-center gap-3 px-2 mb-8">
-                <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
-                    <Leaf className="w-6 h-6 text-on-primary-container" />
-                </div>
+                <MascotImage emotion="nomal" size="sm" decorative />
                 <div>
                     <h1 className="font-bold text-primary text-sm leading-tight">EcoReport Admin</h1>
                     <p className="text-[10px] text-on-surface-variant">Management Console</p>
