@@ -52,3 +52,11 @@ export function formatKwh(kwh: number): string {
 export function getTreeEquivalent(kwh: number): number {
     return Math.max(1, Math.round(kwh / KWH_PER_TREE_GROUP))
 }
+
+/** 참여 건물 절약 상태 — 이번 달 절약이 있으면 긍정, 없으면 아쉬움 */
+export function getParticipatedSavingsMascotEmotion(
+    buildings: ParticipatedBuildingSavings[],
+): 'smile' | 'sad' {
+    if (buildings.length === 0) return 'sad'
+    return sumParticipatedKwh(buildings, 'month') > 0 ? 'smile' : 'sad'
+}

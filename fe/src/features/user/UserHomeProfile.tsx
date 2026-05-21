@@ -45,6 +45,10 @@ export const UserHome = () => {
 
     return (
         <div className="flex flex-col gap-8 p-5 pb-8">
+            <Link to="/report-form">
+                <EcoButton className="w-full py-4 text-lg shadow-md">📷 낭비 제보하기</EcoButton>
+            </Link>
+
             <div className="grid grid-cols-1 gap-4">
                 <EcoCard className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-on-surface-variant">내 포인트</span>
@@ -60,10 +64,6 @@ export const UserHome = () => {
                 </EcoCard>
                 <ParticipatedBuildingSavingsCard />
             </div>
-
-            <Link to="/report-form">
-                <EcoButton className="w-full py-4 text-lg shadow-md">📷 낭비 제보하기</EcoButton>
-            </Link>
 
             <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">

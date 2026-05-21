@@ -2,9 +2,10 @@ import { Building2, ChevronDown, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoCard } from 'src/shared/ui/eco'
-import { MascotWatermark } from 'src/shared/components/mascort'
+import { MascotImage } from 'src/shared/components/mascort'
 import {
     formatKwh,
+    getParticipatedSavingsMascotEmotion,
     getTreeEquivalent,
     PARTICIPATED_BUILDING_SAVINGS,
     sumParticipatedKwh,
@@ -22,11 +23,11 @@ export const ParticipatedBuildingSavingsCard = ({ compact = false, className }: 
     const monthKwh = sumParticipatedKwh(buildings, 'month')
     const maxMonthKwh = Math.max(...buildings.map((b) => b.thisMonthKwh), 1)
     const trees = getTreeEquivalent(totalKwh)
+    const mascotEmotion = getParticipatedSavingsMascotEmotion(buildings)
 
     return (
         <EcoCard className={cn('relative overflow-hidden', className)}>
             <div className="absolute top-0 left-0 w-1 h-full bg-secondary" aria-hidden="true" />
-            <MascotWatermark emotion="smile" className="right-2 bottom-2" />
             <div className="flex flex-col gap-3 relative z-10">
                 <div className="flex justify-between items-center gap-2">
                     <span className="text-sm text-on-surface-variant font-medium">
@@ -47,6 +48,15 @@ export const ParticipatedBuildingSavingsCard = ({ compact = false, className }: 
                             )}
                         </button>
                     )}
+                </div>
+
+                <div className="flex justify-center py-2">
+                    <MascotImage
+                        emotion={mascotEmotion}
+                        size="md"
+                        decorative
+                        className="h-60 w-60"
+                    />
                 </div>
 
                 <div className="flex flex-col gap-1">
