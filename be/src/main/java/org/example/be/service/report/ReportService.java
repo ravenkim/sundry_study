@@ -2,14 +2,23 @@ package org.example.be.service.report;
 
 import lombok.RequiredArgsConstructor;
 import org.example.be.api.request.ReportCreateRequest;
+import org.example.be.api.response.ReportResponse;
 import org.example.be.domain.model.*;
 import org.example.be.domain.repository.BuildingRepository;
+import org.example.be.domain.repository.MemberRepository;
 import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,10 +27,13 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
     private final BuildingRepository buildingRepository;
-    // private final MemberRepository memberRepository; // 로그인 연동 시 필요
+    private final MemberRepository memberRepository;
 
     @Transactional
-    public Long createReport(ReportCreateRequest request) {
+    public Long createReport(ReportCreateRequest request, Long memberSeq) {
+
+        Member member = memberRepository.findById(memberSeq)
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
         // 선택한 건물 정보 조회
         Building building = buildingRepository.findById(request.buildingId())
@@ -44,6 +56,7 @@ public class ReportService {
 
         // 엔티티 빌드 (초기 상태는 무조건 'PENDING - 처리중'으로 설정)
         Report report = Report.builder()
+                .member(member)
                 .building(building)
                 .locationDetail(request.roomName())
                 .description(request.description())
@@ -58,5 +71,92 @@ public class ReportService {
 
         // 생성된 제보의 고유 식별자(seq) 반환
         return savedReport.getSeq();
+    }
+
+    public ReportResponse.Page getMyReports(Long memberSeq, int page, int size, String statusFilter) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Report> reportPage = resolveStatusFilter(statusFilter)
+                .map(status -> reportRepository.findByMember_SeqAndStatusOrderByCreatedAtDesc(
+                        memberSeq, status, pageable))
+                .orElseGet(() -> reportRepository.findByMember_SeqOrderByCreatedAtDesc(memberSeq, pageable));
+
+        List<ReportResponse.Summary> content = reportPage.getContent().stream()
+                .map(this::toSummary)
+                .toList();
+
+        return ReportResponse.Page.builder()
+                .content(content)
+                .totalElements(reportPage.getTotalElements())
+                .totalPages(reportPage.getTotalPages())
+                .page(page)
+                .size(size)
+                .build();
+    }
+
+    public ReportResponse.Detail getReportDetail(Long memberSeq, Long reportId) {
+        Report report = reportRepository.findBySeqAndMember_Seq(reportId, memberSeq)
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "제보를 찾을 수 없습니다."));
+
+        ReportResponse.Summary summary = toSummary(report);
+        return ReportResponse.Detail.builder()
+                .reportId(summary.getReportId())
+                .roomName(summary.getRoomName())
+                .status(summary.getStatus())
+                .pointAwarded(summary.getPointAwarded())
+                .createdAt(summary.getCreatedAt())
+                .detectionLabel(summary.getDetectionLabel())
+                .thumbnailUrl(summary.getThumbnailUrl())
+                .buildingName(report.getBuilding() != null ? report.getBuilding().getName() : null)
+                .imageUrl(report.getImageUrl())
+                .aiResult(null)
+                .build();
+    }
+
+    private Optional<ReportStatus> resolveStatusFilter(String statusFilter) {
+        if (statusFilter == null || statusFilter.isBlank() || "ALL".equalsIgnoreCase(statusFilter)) {
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(ReportStatus.valueOf(statusFilter));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
+    }
+
+    private ReportResponse.Summary toSummary(Report report) {
+        String buildingName = report.getBuilding() != null ? report.getBuilding().getName() : "";
+        String roomName = buildingName.isBlank()
+                ? report.getLocationDetail()
+                : buildingName + " " + report.getLocationDetail();
+
+        return ReportResponse.Summary.builder()
+                .reportId(report.getSeq())
+                .roomName(roomName)
+                .status(report.getStatus().name())
+                .pointAwarded(0)
+                .createdAt(report.getCreatedAt() != null ? report.getCreatedAt().toString() : null)
+                .detectionLabel(buildDetectionLabel(report.getWasteType()))
+                .thumbnailUrl(report.getImageUrl())
+                .build();
+    }
+
+    private String buildDetectionLabel(WasteType wasteType) {
+        if (wasteType == null) {
+            return null;
+        }
+        List<String> labels = new ArrayList<>();
+        if (wasteType.isLightWasting()) {
+            labels.add("조명");
+        }
+        if (wasteType.isAcWasting()) {
+            labels.add("에어컨");
+        }
+        if (wasteType.isHeaterWasting()) {
+            labels.add("히터");
+        }
+        if (wasteType.isOtherWasting()) {
+            labels.add("기타");
+        }
+        return labels.isEmpty() ? null : String.join(", ", labels);
     }
 }

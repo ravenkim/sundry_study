@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 public class ReportResponse {
 
     @Getter
@@ -21,5 +23,42 @@ public class ReportResponse {
                     .message(message)
                     .build();
         }
+    }
+
+    @Getter
+    @Builder
+    public static class Summary {
+        private Long reportId;
+        private String roomName;
+        private String status;
+        private int pointAwarded;
+        private String createdAt;
+        private String detectionLabel;
+        private String thumbnailUrl;
+    }
+
+    @Getter
+    @Builder
+    public static class Detail {
+        private Long reportId;
+        private String roomName;
+        private String status;
+        private int pointAwarded;
+        private String createdAt;
+        private String detectionLabel;
+        private String thumbnailUrl;
+        private String buildingName;
+        private String imageUrl;
+        private Object aiResult;
+    }
+
+    @Getter
+    @Builder
+    public static class Page {
+        private List<Summary> content;
+        private long totalElements;
+        private int totalPages;
+        private int page;
+        private int size;
     }
 }

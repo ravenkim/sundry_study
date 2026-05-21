@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.be.api.request.MemberRequest;
 import org.example.be.api.response.MemberResponse;
 import org.example.be.domain.model.Member;
+import org.example.be.domain.model.MemberPoint;
+import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DefaultMemberService implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final MemberPointRepository memberPointRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -61,6 +64,7 @@ public class DefaultMemberService implements MemberService {
                 normalizedEmail
         );
         memberRepository.save(member);
+        memberPointRepository.save(new MemberPoint(member));
 
         return true;
     }

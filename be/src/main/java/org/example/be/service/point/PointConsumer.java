@@ -34,7 +34,7 @@ public class PointConsumer {
             log.info("제보 승인 감지! 회원 {}에게 {} 포인트 지급", payload.getMemberSeq(), payload.getAmount());
 
             // (MemberPoint는 이전 답변에서 만든 1:1 테이블이라 가정)
-            MemberPoint memberPoint = memberPointRepository.findByMemberSeq(payload.getMemberSeq())
+            MemberPoint memberPoint = memberPointRepository.findByMember_Seq(payload.getMemberSeq())
                     .orElseThrow(() -> new IllegalArgumentException("Point Wallet Not Found"));
 
             memberPoint.addPoint(payload.getAmount());

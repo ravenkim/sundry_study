@@ -47,9 +47,12 @@ bash run-dev.sh            # 루트 .env 로드 후 bootRun (포트 8080)
 - 모든 `BusinessLogicException`은 `ControllerAdvice`에서 일괄 처리
 
 **현재 구현 상태 주의사항**
-- `SecurityConfig`: Spring Security 필터 체인 전체 주석 처리됨 — 현재 모든 엔드포인트 인증 없이 접근 가능
+- `SecurityConfig`: JWT Resource Server 활성 — `/login`, `/register` 등 제외 경로 외 `authenticated`
 - CORS: `WebConfig`에서 `allowedOriginPatterns("*")`로 전체 허용
-- `DefaultMemberService`, `MemberAuthService`: 실제 비즈니스 로직 주석 처리됨 (QueryDSL, BCrypt 미연결) — 항상 `true` 반환
+- `MemberAuthService`: BCrypt 로그인 검증 + `JwtTokenProvider` JWT 발급
+- `DefaultMemberService`: 회원가입·중복확인 + 가입 시 `MemberPoint` 0P 생성
+- P0 API: `GET /api/buildings`, `GET /api/points/me`, `POST/GET /api/reports` (회원 FK·내 목록·상세)
+- 미구현: GCS·FastAPI AI·포인트 적립·관리자 API·Kafka Compose 연동
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 
 **패키지 구조**
@@ -158,8 +161,8 @@ VITE_API_HOST=http://localhost:8080
 Docker/프로덕션 빌드 시 `VITE_API_HOST`가 빌드 타임에 주입된다.
 
 ## 계획된 추가 기능 (미구현)
-- JWT 인증 (SecurityConfig에 주석으로 존재)
-- Gemini Vision API 연동 (AI 이미지 판별)
-- GCS 이미지 업로드
-- 포인트 정산 엔진
-- 상세 API: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/API_명세서.md`
+- GCS 이미지 업로드 + FastAPI `/analyze` (제보 AI·`aiResult`)
+- 포인트 적립·월/누적 집계·교환 (`rewards`, `exchange`)
+- 관리자 API (`/api/admin/*`)
+- Kafka Compose + `PointProducer` 연동
+- 진행 현황: `docs/남은_기능_개발_목록.md`, API 명세: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/API_명세서.md`
