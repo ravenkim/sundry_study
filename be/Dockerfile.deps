@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1
+# build.gradle / settings.gradle 변경 시에만 빌드 (be/deploy.sh)
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+COPY gradlew gradlew.bat settings.gradle build.gradle ./
+COPY gradle ./gradle
+
+# placeholder로 compileJava 1회 실행 → Maven 의존성·annotation processor까지 prefetch
+RUN --mount=type=cache,target=/root/.gradle/wrapper \
+    chmod +x gradlew && \
+    mkdir -p src/main/java/org/example/be && \
+    printf 'package org.example.be;\npublic class DepsPlaceholder {}\n' \
+      > src/main/java/org/example/be/DepsPlaceholder.java && \
+    ./gradlew dependencies compileJava --no-daemon -q && \
+    rm -rf src build

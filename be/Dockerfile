@@ -1,13 +1,13 @@
-# Stage 1: JAR 빌드
-FROM eclipse-temurin:17-jdk-alpine AS builder
+# syntax=docker/dockerfile:1
+# Stage 1: JAR 빌드 (의존성은 DEPS_IMAGE에서 재사용, be/deploy.sh)
+ARG DEPS_IMAGE
+FROM ${DEPS_IMAGE} AS builder
 
 WORKDIR /app
 
-COPY gradlew gradlew.bat settings.gradle build.gradle ./
-COPY gradle ./gradle
 COPY src ./src
 
-RUN chmod +x gradlew && ./gradlew bootJar -x test --no-daemon
+RUN ./gradlew bootJar -x test --no-daemon
 
 # Stage 2: 실행
 FROM eclipse-temurin:17-jre-alpine
