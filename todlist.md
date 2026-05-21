@@ -24,7 +24,7 @@
 서비스·기술 소개 문서  - `docs/최종 제안서/`
 발표 PPT (5분)  - `docs/발표/slides.md`
 GitHub (Public) - https://github.com/ravenkim/duyuthon
-배포 URL (사이트트) - 
+배포 URL (사이트트) - https://looks-leaders-contacting-dispatch.trycloudflare.com/
 배포 URL (ai ai 학습 관련 doc 보충 되어있는지 확인 부탁) - 
 
 
