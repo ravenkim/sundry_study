@@ -16,7 +16,10 @@ type Props = {
     className?: string
 }
 
-export const ParticipatedBuildingSavingsCard = ({ compact = false, className }: Props) => {
+export const ParticipatedBuildingSavingsCard = ({
+    compact = false,
+    className,
+}: Props) => {
     const [expanded, setExpanded] = useState(!compact)
     const buildings = PARTICIPATED_BUILDING_SAVINGS
     const totalKwh = sumParticipatedKwh(buildings, 'total')
@@ -27,24 +30,27 @@ export const ParticipatedBuildingSavingsCard = ({ compact = false, className }: 
 
     return (
         <EcoCard className={cn('relative overflow-hidden', className)}>
-            <div className="absolute top-0 left-0 w-1 h-full bg-secondary" aria-hidden="true" />
-            <div className="flex flex-col gap-3 relative z-10">
-                <div className="flex justify-between items-center gap-2">
-                    <span className="text-sm text-on-surface-variant font-medium">
+            <div
+                className="bg-secondary absolute top-0 left-0 h-full w-1"
+                aria-hidden="true"
+            />
+            <div className="relative z-10 flex flex-col gap-3">
+                <div className="flex items-center justify-between gap-2">
+                    <span className="text-on-surface-variant text-sm font-medium">
                         참여 건물 절약 전기
                     </span>
                     {compact && (
                         <button
                             type="button"
                             onClick={() => setExpanded((v) => !v)}
-                            className="text-xs font-bold text-primary flex items-center gap-0.5"
+                            className="text-primary flex items-center gap-0.5 text-xs font-bold"
                             aria-expanded={expanded}
                         >
                             {buildings.length}개 건물
                             {expanded ? (
-                                <ChevronUp className="w-3.5 h-3.5" />
+                                <ChevronUp className="h-3.5 w-3.5" />
                             ) : (
-                                <ChevronDown className="w-3.5 h-3.5" />
+                                <ChevronDown className="h-3.5 w-3.5" />
                             )}
                         </button>
                     )}
@@ -60,44 +66,46 @@ export const ParticipatedBuildingSavingsCard = ({ compact = false, className }: 
                 </div>
 
                 <div className="flex flex-col gap-1">
-                    <span className="text-xs text-on-surface-variant font-medium">
+                    <span className="text-on-surface-variant text-xs font-medium">
                         참여 건물 누적 절약 전기
                     </span>
                     <div className="flex items-center gap-2">
-                        <span className="text-3xl font-bold text-secondary">
+                        <span className="text-secondary text-3xl font-bold">
                             🌿 {formatKwh(totalKwh)} kWh
                         </span>
                     </div>
-                    <span className="text-xs text-secondary font-medium">
-                        이번 달 +{formatKwh(monthKwh)} kWh · 🌲 소나무 {trees}그루 흡수량과 동등
+                    <span className="text-secondary text-xs font-medium">
+                        이번 달 +{formatKwh(monthKwh)} kWh · 🌲 소나무 {trees}
+                        그루 흡수량과 동등
                     </span>
                 </div>
 
                 {expanded && (
-                    <ul className="flex flex-col gap-2 pt-1 border-t border-outline-variant/60">
+                    <ul className="border-outline-variant/60 flex flex-col gap-2 border-t pt-1">
                         {buildings.map((building) => (
                             <li
                                 key={building.buildingId}
                                 className="flex flex-col gap-1.5 py-2 first:pt-3"
                             >
-                                <div className="flex justify-between items-start gap-2">
-                                    <div className="flex items-center gap-1.5 min-w-0">
-                                        <Building2 className="w-3.5 h-3.5 text-on-surface-variant shrink-0" />
-                                        <span className="text-sm font-bold truncate">
+                                <div className="flex items-start justify-between gap-2">
+                                    <div className="flex min-w-0 items-center gap-1.5">
+                                        <Building2 className="text-on-surface-variant h-3.5 w-3.5 shrink-0" />
+                                        <span className="truncate text-sm font-bold">
                                             {building.buildingName}
                                         </span>
                                     </div>
-                                    <div className="text-right shrink-0">
-                                        <span className="text-sm font-bold text-secondary">
+                                    <div className="shrink-0 text-right">
+                                        <span className="text-secondary text-sm font-bold">
                                             {formatKwh(building.totalKwh)} kWh
                                         </span>
-                                        <p className="text-[10px] text-on-surface-variant">
-                                            이번 달 {formatKwh(building.thisMonthKwh)} kWh · 제보{' '}
-                                            {building.reportCount}건
+                                        <p className="text-on-surface-variant text-[10px]">
+                                            이번 달{' '}
+                                            {formatKwh(building.thisMonthKwh)}{' '}
+                                            kWh · 제보 {building.reportCount}건
                                         </p>
                                     </div>
                                 </div>
-                                <div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+                                <div className="bg-surface-container-high h-1.5 w-full overflow-hidden rounded-full">
                                     <div
                                         className="bg-secondary h-full rounded-full transition-all"
                                         style={{

@@ -26,15 +26,19 @@ export const UserReportDetail = () => {
 
     if (loading) {
         return (
-            <p className="p-8 text-center text-sm text-on-surface-variant">불러오는 중...</p>
+            <p className="text-on-surface-variant p-8 text-center text-sm">
+                불러오는 중...
+            </p>
         )
     }
 
     if (!report) {
         return (
             <div className="flex flex-col items-center gap-4 p-8 text-center">
-                <p className="text-on-surface-variant">제보를 찾을 수 없습니다.</p>
-                <Link to="/reports" className="text-sm font-bold text-primary">
+                <p className="text-on-surface-variant">
+                    제보를 찾을 수 없습니다.
+                </p>
+                <Link to="/reports" className="text-primary text-sm font-bold">
                     목록으로
                 </Link>
             </div>
@@ -45,7 +49,7 @@ export const UserReportDetail = () => {
         <div className="flex flex-col gap-6 p-5 pb-8">
             <Link
                 to="/reports"
-                className="flex items-center gap-2 text-sm font-bold text-on-surface-variant"
+                className="text-on-surface-variant flex items-center gap-2 text-sm font-bold"
             >
                 <ArrowLeft className="h-4 w-4" /> 제보 이력
             </Link>
@@ -65,26 +69,36 @@ export const UserReportDetail = () => {
                 </div>
                 <div className="flex flex-col gap-2 text-sm">
                     <div className="flex justify-between">
-                        <span className="text-on-surface-variant">제보 일시</span>
+                        <span className="text-on-surface-variant">
+                            제보 일시
+                        </span>
                         <span className="font-medium">
                             {new Date(report.createdAt).toLocaleString('ko-KR')}
                         </span>
                     </div>
                     {report.detectionLabel && (
                         <div className="flex justify-between">
-                            <span className="text-on-surface-variant">AI 판별</span>
-                            <span className="font-medium">{report.detectionLabel}</span>
+                            <span className="text-on-surface-variant">
+                                AI 판별
+                            </span>
+                            <span className="font-medium">
+                                {report.detectionLabel}
+                            </span>
                         </div>
                     )}
                     <div className="flex justify-between">
-                        <span className="text-on-surface-variant">적립 포인트</span>
-                        <span className="font-bold text-primary">
-                            {report.pointAwarded > 0 ? `+${report.pointAwarded}P` : '-'}
+                        <span className="text-on-surface-variant">
+                            적립 포인트
+                        </span>
+                        <span className="text-primary font-bold">
+                            {report.pointAwarded > 0
+                                ? `+${report.pointAwarded}P`
+                                : '-'}
                         </span>
                     </div>
                 </div>
                 {report.aiResult?.message && (
-                    <p className="rounded-lg bg-surface-container-low p-3 text-sm text-on-surface-variant">
+                    <p className="bg-surface-container-low text-on-surface-variant rounded-lg p-3 text-sm">
                         {report.aiResult.message}
                     </p>
                 )}

@@ -22,7 +22,8 @@ export async function simulateAiAnalysis(
         result = 'PASS'
     }
 
-    const pointAwarded = result === 'WASTE_DETECTED' ? 50 + Math.floor(Math.random() * 50) : 0
+    const pointAwarded =
+        result === 'WASTE_DETECTED' ? 50 + Math.floor(Math.random() * 50) : 0
     const points = updateMockPointsAfterReport(pointAwarded)
 
     return {

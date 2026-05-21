@@ -174,7 +174,9 @@ export function getMockReports(
             : MOCK_REPORTS_RAW.filter((r) => r.status === status)
 
     const start = page * size
-    const content = filtered.slice(start, start + size).map(({ aiResult, ...rest }) => rest)
+    const content = filtered
+        .slice(start, start + size)
+        .map(({ aiResult, ...rest }) => rest)
 
     return {
         content,
@@ -185,7 +187,9 @@ export function getMockReports(
     }
 }
 
-export function getMockReportDetail(reportId: number): ReportDetail | undefined {
+export function getMockReportDetail(
+    reportId: number,
+): ReportDetail | undefined {
     return MOCK_REPORTS_RAW.find((r) => r.reportId === reportId)
 }
 
@@ -236,7 +240,9 @@ export function getMockPoints(): PointsSummary {
     return { ...mockPointsState }
 }
 
-export function updateMockPointsAfterExchange(pointUsed: number): PointsSummary {
+export function updateMockPointsAfterExchange(
+    pointUsed: number,
+): PointsSummary {
     mockPointsState = {
         ...mockPointsState,
         currentBalance: mockPointsState.currentBalance - pointUsed,
@@ -245,7 +251,9 @@ export function updateMockPointsAfterExchange(pointUsed: number): PointsSummary 
     return getMockPoints()
 }
 
-export function updateMockPointsAfterReport(pointAwarded: number): PointsSummary {
+export function updateMockPointsAfterReport(
+    pointAwarded: number,
+): PointsSummary {
     mockPointsState = {
         ...mockPointsState,
         currentBalance: mockPointsState.currentBalance + pointAwarded,

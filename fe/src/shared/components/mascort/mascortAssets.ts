@@ -41,6 +41,8 @@ export const MASCORT_ALT: Record<MascortEmotion, string> = {
     contempt: '심각한 낭비를 보는 에코 마스코트',
 }
 
-export function resolveMascortEmotion(emotion: MascortEmotion | 'normal'): MascortEmotion {
+export function resolveMascortEmotion(
+    emotion: MascortEmotion | 'normal',
+): MascortEmotion {
     return emotion === 'normal' ? 'nomal' : emotion
 }

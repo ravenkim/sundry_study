@@ -3,7 +3,11 @@ import { toast } from 'react-toastify'
 
 export function useAdminReportsState() {
     const [reports, setReports] = useState<
-        Awaited<ReturnType<typeof import('src/globals/api/adminApi').getAdminReports>>
+        Awaited<
+            ReturnType<
+                typeof import('src/globals/api/adminApi').getAdminReports
+            >
+        >
     >([])
 
     useEffect(() => {
@@ -21,16 +25,18 @@ export function useAdminReportsState() {
         setReports((prev) =>
             prev.map((r) => (r.reportId === reportId ? { ...r, status } : r)),
         )
-        toast.success(status === 'APPROVED' ? '승인되었습니다.' : '반려되었습니다.')
+        toast.success(
+            status === 'APPROVED' ? '승인되었습니다.' : '반려되었습니다.',
+        )
     }
 
     return { reports, handleStatusUpdate }
 }
 
 export function useAdminDashboardState() {
-    const [stats, setStats] = useState<
-        Awaited<ReturnType<typeof import('src/globals/api/adminApi').getAdminDashboard>> | null
-    >(null)
+    const [stats, setStats] = useState<Awaited<
+        ReturnType<typeof import('src/globals/api/adminApi').getAdminDashboard>
+    > | null>(null)
 
     useEffect(() => {
         void import('src/globals/api/adminApi')

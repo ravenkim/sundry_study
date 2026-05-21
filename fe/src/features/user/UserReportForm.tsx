@@ -24,7 +24,9 @@ export const UserReportForm = () => {
     const [locationId, setLocationId] = useState<number | ''>('')
 
     useEffect(() => {
-        void getBuildings().then(setBuildings).catch(() => setBuildings(MOCK_BUILDINGS))
+        void getBuildings()
+            .then(setBuildings)
+            .catch(() => setBuildings(MOCK_BUILDINGS))
     }, [])
 
     useEffect(() => {
@@ -38,7 +40,9 @@ export const UserReportForm = () => {
     }, [photo])
 
     const selectedBuilding = buildings.find((b) => b.buildingId === buildingId)
-    const selectedLocation = selectedBuilding?.locations.find((l) => l.locationId === locationId)
+    const selectedLocation = selectedBuilding?.locations.find(
+        (l) => l.locationId === locationId,
+    )
 
     const handleFileSelect = (file: File | undefined) => {
         if (!file) return
@@ -79,7 +83,9 @@ export const UserReportForm = () => {
             })
         } catch (error) {
             const message =
-                error instanceof Error ? error.message : '제보 접수 중 오류가 발생했습니다.'
+                error instanceof Error
+                    ? error.message
+                    : '제보 접수 중 오류가 발생했습니다.'
             toast.error(message)
             setStep('location')
         }
@@ -88,13 +94,13 @@ export const UserReportForm = () => {
     if (step === 'loading') {
         return (
             <div className="flex min-h-[calc(100dvh-3.5rem)] flex-col items-center justify-center gap-6 p-5 text-center">
-                <Loader2 className="h-16 w-16 animate-spin text-primary" />
+                <Loader2 className="text-primary h-16 w-16 animate-spin" />
                 <div className="flex flex-col gap-2">
                     <h2 className="text-xl font-bold">AI가 분석 중입니다...</h2>
-                    <p className="text-sm text-on-surface-variant">
-                        강의실 사진을 확인하고 에너지 낭비 여부를 판별하고 있어요.
-                        <br />
-                        약 3~5초 소요됩니다.
+                    <p className="text-on-surface-variant text-sm">
+                        강의실 사진을 확인하고 에너지 낭비 여부를 판별하고
+                        있어요.
+                        <br />약 3~5초 소요됩니다.
                     </p>
                 </div>
             </div>
@@ -110,18 +116,20 @@ export const UserReportForm = () => {
                         <img
                             src={previewUrl}
                             alt="제보 사진"
-                            className="h-32 w-full rounded-xl object-cover border border-outline-variant"
+                            className="border-outline-variant h-32 w-full rounded-xl border object-cover"
                         />
                     )}
                     <div className="flex flex-col gap-2">
-                        <label className="text-xs font-bold text-on-surface-variant">건물 선택</label>
+                        <label className="text-on-surface-variant text-xs font-bold">
+                            건물 선택
+                        </label>
                         <select
                             value={buildingId}
                             onChange={(e) => {
                                 setBuildingId(Number(e.target.value) || '')
                                 setLocationId('')
                             }}
-                            className="rounded-lg border border-outline-variant bg-surface p-4 outline-none focus:ring-2 focus:ring-primary-container"
+                            className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-4 outline-none focus:ring-2"
                         >
                             <option value="">건물을 선택해주세요</option>
                             {buildings.map((b) => (
@@ -132,16 +140,23 @@ export const UserReportForm = () => {
                         </select>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <label className="text-xs font-bold text-on-surface-variant">강의실 선택</label>
+                        <label className="text-on-surface-variant text-xs font-bold">
+                            강의실 선택
+                        </label>
                         <select
                             value={locationId}
-                            onChange={(e) => setLocationId(Number(e.target.value) || '')}
+                            onChange={(e) =>
+                                setLocationId(Number(e.target.value) || '')
+                            }
                             disabled={!selectedBuilding}
-                            className="rounded-lg border border-outline-variant bg-surface p-4 outline-none focus:ring-2 focus:ring-primary-container disabled:opacity-50"
+                            className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-4 outline-none focus:ring-2 disabled:opacity-50"
                         >
                             <option value="">강의실을 선택해주세요</option>
                             {selectedBuilding?.locations.map((loc) => (
-                                <option key={loc.locationId} value={loc.locationId}>
+                                <option
+                                    key={loc.locationId}
+                                    value={loc.locationId}
+                                >
                                     {loc.name}
                                 </option>
                             ))}
@@ -150,7 +165,10 @@ export const UserReportForm = () => {
                 </section>
 
                 <div className="flex flex-col gap-3">
-                    <EcoButton className="w-full py-4 text-lg" onClick={() => void handleSubmit()}>
+                    <EcoButton
+                        className="w-full py-4 text-lg"
+                        onClick={() => void handleSubmit()}
+                    >
                         제출하기
                     </EcoButton>
                     <EcoButton
@@ -169,24 +187,28 @@ export const UserReportForm = () => {
         <div className="flex flex-col gap-8 p-5 pb-8">
             <section className="flex flex-col gap-4">
                 <h2 className="text-xl font-bold">현장 사진을 촬영해 주세요</h2>
-                <p className="text-sm text-on-surface-variant">
+                <p className="text-on-surface-variant text-sm">
                     빈 강의실의 조명·에어컨 상태가 잘 보이도록 촬영해 주세요.
                 </p>
 
                 <div
                     className={cn(
-                        'flex min-h-[240px] flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed border-outline-variant bg-surface-container-lowest',
+                        'border-outline-variant bg-surface-container-lowest flex min-h-[240px] flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed',
                         previewUrl && 'border-solid p-0',
                     )}
                 >
                     {previewUrl ? (
-                        <img src={previewUrl} alt="미리보기" className="h-full w-full object-cover" />
+                        <img
+                            src={previewUrl}
+                            alt="미리보기"
+                            className="h-full w-full object-cover"
+                        />
                     ) : (
                         <>
-                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container">
-                                <Plus className="h-6 w-6 text-on-surface-variant" />
+                            <div className="bg-surface-container flex h-12 w-12 items-center justify-center rounded-full">
+                                <Plus className="text-on-surface-variant h-6 w-6" />
                             </div>
-                            <p className="text-center text-sm text-on-surface-variant">
+                            <p className="text-on-surface-variant text-center text-sm">
                                 카메라 또는 갤러리에서 사진을 선택하세요
                             </p>
                         </>
@@ -227,7 +249,10 @@ export const UserReportForm = () => {
                 </div>
             </section>
 
-            <EcoButton className="w-full py-4 text-lg" onClick={handleNextFromPhoto}>
+            <EcoButton
+                className="w-full py-4 text-lg"
+                onClick={handleNextFromPhoto}
+            >
                 다음
             </EcoButton>
         </div>

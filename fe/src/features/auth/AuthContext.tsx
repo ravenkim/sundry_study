@@ -13,7 +13,10 @@ import {
     setAuthSession,
     type StoredUser,
 } from 'src/features/auth/authStorage'
-import { login as loginApi, register as registerApi } from 'src/globals/api/authApi'
+import {
+    login as loginApi,
+    register as registerApi,
+} from 'src/globals/api/authApi'
 import type { LoginRequest, RegisterRequest } from 'src/globals/api/authApi'
 
 interface AuthContextValue {

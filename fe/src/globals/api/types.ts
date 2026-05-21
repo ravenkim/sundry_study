@@ -24,11 +24,7 @@ export function isApiError(data: unknown): data is ApiErrorResponse {
     )
 }
 
-export type ReportStatus =
-    | 'APPROVED'
-    | 'PENDING'
-    | 'REJECTED'
-    | 'UNDETECTABLE'
+export type ReportStatus = 'APPROVED' | 'PENDING' | 'REJECTED' | 'UNDETECTABLE'
 
 export type AiResultType = 'WASTE_DETECTED' | 'PASS' | 'ERROR'
 

@@ -10,16 +10,19 @@ export const EcoButton = ({
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'error'
 }) => {
     const variants = {
-        primary: 'bg-primary-container text-on-primary-container hover:brightness-95',
-        secondary: 'bg-secondary text-secondary-foreground hover:brightness-110',
-        outline: 'border border-outline-variant text-on-surface hover:bg-surface-container-low',
+        primary:
+            'bg-primary-container text-on-primary-container hover:brightness-95',
+        secondary:
+            'bg-secondary text-secondary-foreground hover:brightness-110',
+        outline:
+            'border border-outline-variant text-on-surface hover:bg-surface-container-low',
         ghost: 'text-on-surface-variant hover:bg-surface-container-low',
         error: 'bg-error text-destructive-foreground hover:brightness-110',
     }
     return (
         <button
             className={cn(
-                'px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 flex items-center justify-center gap-2',
+                'flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-semibold transition-all active:scale-95',
                 variants[variant],
                 className,
             )}
@@ -39,7 +42,7 @@ export const EcoCard = ({
 }) => (
     <div
         className={cn(
-            'bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm',
+            'bg-surface-container-lowest border-outline-variant rounded-xl border p-4 shadow-sm',
             className,
         )}
     >
@@ -65,7 +68,7 @@ export const EcoBadge = ({
     return (
         <span
             className={cn(
-                'px-2 py-0.5 rounded-full text-xs font-medium',
+                'rounded-full px-2 py-0.5 text-xs font-medium',
                 variants[variant],
                 className,
             )}

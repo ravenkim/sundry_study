@@ -16,12 +16,19 @@ import type {
 
 export async function createReport(
     payload: CreateReportPayload,
-): Promise<CreateReportResponse & { aiResult?: Awaited<ReturnType<typeof simulateAiAnalysis>> }> {
+): Promise<
+    CreateReportResponse & {
+        aiResult?: Awaited<ReturnType<typeof simulateAiAnalysis>>
+    }
+> {
     const formData = new FormData()
     formData.append('image', payload.image)
-    if (payload.buildingId) formData.append('buildingId', String(payload.buildingId))
-    if (payload.locationId) formData.append('locationId', String(payload.locationId))
-    if (payload.buildingName) formData.append('buildingName', payload.buildingName)
+    if (payload.buildingId)
+        formData.append('buildingId', String(payload.buildingId))
+    if (payload.locationId)
+        formData.append('locationId', String(payload.locationId))
+    if (payload.buildingName)
+        formData.append('buildingName', payload.buildingName)
     if (payload.roomName) formData.append('roomName', payload.roomName)
 
     const backendCall = async () => {
@@ -34,7 +41,11 @@ export async function createReport(
 
         if (result.status === 'PENDING' || !result.aiResult) {
             const aiResult = await simulateAiAnalysis(payload)
-            return { ...result, reportId: result.reportSeq ?? result.reportId, aiResult }
+            return {
+                ...result,
+                reportId: result.reportSeq ?? result.reportId,
+                aiResult,
+            }
         }
 
         return result
@@ -59,16 +70,21 @@ export async function getMyReports(
         async () => {
             const params: Record<string, string | number> = { page, size }
             if (status && status !== 'ALL') params.status = status
-            const { data } = await client.get<ApiResponse<PaginatedReports>>('/api/reports/me', {
-                params,
-            })
+            const { data } = await client.get<ApiResponse<PaginatedReports>>(
+                '/api/reports/me',
+                {
+                    params,
+                },
+            )
             return unwrapApiData(data)
         },
         () => getMockReports(page, size, status),
     )
 }
 
-export async function getReportDetail(reportId: number): Promise<ReportDetail | null> {
+export async function getReportDetail(
+    reportId: number,
+): Promise<ReportDetail | null> {
     return withMockFallback(
         async () => {
             const { data } = await client.get<ApiResponse<ReportDetail>>(

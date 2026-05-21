@@ -46,7 +46,10 @@ export const MascotImage = ({
             <img
                 src={MASCORT_SRC[key]}
                 alt={decorative ? '' : MASCORT_ALT[key]}
-                className={cn('h-full w-full object-contain drop-shadow-sm', imgClassName)}
+                className={cn(
+                    'h-full w-full object-contain drop-shadow-sm',
+                    imgClassName,
+                )}
                 draggable={false}
             />
         </span>
@@ -68,15 +71,19 @@ export const MascotHero = ({
 }: MascotHeroProps) => (
     <section
         className={cn(
-            'flex items-center gap-4 rounded-2xl border border-outline-variant bg-primary-container/15 px-4 py-4',
+            'border-outline-variant bg-primary-container/15 flex items-center gap-4 rounded-2xl border px-4 py-4',
             className,
         )}
     >
         <MascotImage emotion={emotion} size="hero" decorative />
         <div className="flex min-w-0 flex-col gap-1">
-            <h2 className="text-lg font-black leading-tight text-primary">{title}</h2>
+            <h2 className="text-primary text-lg leading-tight font-black">
+                {title}
+            </h2>
             {subtitle ? (
-                <p className="text-sm font-medium text-on-surface-variant">{subtitle}</p>
+                <p className="text-on-surface-variant text-sm font-medium">
+                    {subtitle}
+                </p>
             ) : null}
         </div>
     </section>
@@ -89,10 +96,15 @@ type MascotBubbleProps = {
     className?: string
 }
 
-export const MascotBubble = ({ emotion, children, size = 'sm', className }: MascotBubbleProps) => (
+export const MascotBubble = ({
+    emotion,
+    children,
+    size = 'sm',
+    className,
+}: MascotBubbleProps) => (
     <div className={cn('flex items-start gap-3', className)}>
         <MascotImage emotion={emotion} size={size} decorative />
-        <p className="flex-1 rounded-2xl rounded-tl-sm bg-primary-container/25 px-3 py-2 text-sm font-semibold text-on-surface">
+        <p className="bg-primary-container/25 text-on-surface flex-1 rounded-2xl rounded-tl-sm px-3 py-2 text-sm font-semibold">
             {children}
         </p>
     </div>
@@ -113,12 +125,19 @@ export const MascotEmptyState = ({
     children,
     className,
 }: MascotEmptyStateProps) => (
-    <div className={cn('flex flex-col items-center gap-4 py-10 text-center', className)}>
+    <div
+        className={cn(
+            'flex flex-col items-center gap-4 py-10 text-center',
+            className,
+        )}
+    >
         <MascotImage emotion={emotion} size="lg" />
         <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-black text-on-surface">{title}</h2>
+            <h2 className="text-on-surface text-xl font-black">{title}</h2>
             {description ? (
-                <p className="text-sm font-medium text-on-surface-variant">{description}</p>
+                <p className="text-on-surface-variant text-sm font-medium">
+                    {description}
+                </p>
             ) : null}
         </div>
         {children}

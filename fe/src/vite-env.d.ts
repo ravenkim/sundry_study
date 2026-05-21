@@ -9,7 +9,7 @@ interface ImportMeta {
     readonly env: ImportMetaEnv
 }
 
-declare module "*.webp" {
+declare module '*.webp' {
     const src: string
     export default src
 }

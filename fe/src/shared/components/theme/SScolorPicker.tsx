@@ -13,11 +13,11 @@ type ColorPickerProps = {
 }
 
 const ColorPicker = ({
-                         variableKey,
-                         color,
-                         onChange,
-                         label,
-                     }: ColorPickerProps) => {
+    variableKey,
+    color,
+    onChange,
+    label,
+}: ColorPickerProps) => {
     const [localColor, setLocalColor] = useState(color)
 
     useEffect(() => {

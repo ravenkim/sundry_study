@@ -14,7 +14,10 @@ import type {
 export async function getAdminReports(): Promise<AdminReportRow[]> {
     return withMockFallback(
         async () => {
-            const { data } = await client.get<ApiResponse<AdminReportRow[]>>('/api/admin/reports')
+            const { data } =
+                await client.get<ApiResponse<AdminReportRow[]>>(
+                    '/api/admin/reports',
+                )
             return unwrapApiData(data)
         },
         () => MOCK_ADMIN_REPORTS,

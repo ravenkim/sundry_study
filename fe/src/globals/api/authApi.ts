@@ -50,14 +50,19 @@ async function postAuth<T>(
 }
 
 export function login(request: LoginRequest) {
-    return postAuth<LoginResponse>('/login', request, ResponseCode.LOGIN_SUCCESS)
+    return postAuth<LoginResponse>(
+        '/login',
+        request,
+        ResponseCode.LOGIN_SUCCESS,
+    )
 }
 
-export async function checkEmailAvailability(email: string): Promise<EmailCheckResponse> {
-    const { data } = await client.get<ApiResponse<EmailCheckResponse> | ApiErrorResponse>(
-        '/register/check-email',
-        { params: { email: email.trim() } },
-    )
+export async function checkEmailAvailability(
+    email: string,
+): Promise<EmailCheckResponse> {
+    const { data } = await client.get<
+        ApiResponse<EmailCheckResponse> | ApiErrorResponse
+    >('/register/check-email', { params: { email: email.trim() } })
 
     if (isApiError(data)) {
         throw new Error(data.message || '이메일 확인에 실패했습니다.')

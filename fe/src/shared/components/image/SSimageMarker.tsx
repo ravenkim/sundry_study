@@ -14,11 +14,11 @@ interface ImageMarkerProps {
 }
 
 export default function SSimageMarker({
-                                          src,
-                                          imageWidth,
-                                          markers,
-                                          className,
-                                      }: ImageMarkerProps) {
+    src,
+    imageWidth,
+    markers,
+    className,
+}: ImageMarkerProps) {
     return (
         <div className={`relative inline-block w-full ${className || ''}`}>
             <img src={src} alt="base" className="block h-auto w-full" />

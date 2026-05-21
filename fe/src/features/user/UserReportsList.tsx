@@ -42,7 +42,7 @@ export const UserReportsList = () => {
 
     return (
         <div className="flex flex-col gap-6 p-5 pb-8">
-            <nav className="-mx-5 flex gap-2 overflow-x-auto px-5 no-scrollbar">
+            <nav className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5">
                 {FILTERS.map((f) => (
                     <button
                         key={f.value}
@@ -52,7 +52,7 @@ export const UserReportsList = () => {
                             setPage(0)
                         }}
                         className={cn(
-                            'whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all',
+                            'rounded-full px-4 py-2 text-xs font-bold whitespace-nowrap transition-all',
                             filter === f.value
                                 ? 'bg-primary text-on-primary'
                                 : 'bg-surface-container-low text-on-surface-variant',
@@ -64,9 +64,11 @@ export const UserReportsList = () => {
             </nav>
 
             {loading ? (
-                <p className="py-12 text-center text-sm text-on-surface-variant">불러오는 중...</p>
+                <p className="text-on-surface-variant py-12 text-center text-sm">
+                    불러오는 중...
+                </p>
             ) : !data || data.content.length === 0 ? (
-                <p className="py-12 text-center text-sm text-on-surface-variant">
+                <p className="text-on-surface-variant py-12 text-center text-sm">
                     제보 내역이 없습니다.
                 </p>
             ) : (
@@ -75,7 +77,7 @@ export const UserReportsList = () => {
                         <Link
                             key={item.reportId}
                             to={`/reports/${item.reportId}`}
-                            className="flex gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 transition-colors hover:bg-surface-container-low"
+                            className="border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low flex gap-4 rounded-xl border p-4 transition-colors"
                         >
                             {item.thumbnailUrl ? (
                                 <img
@@ -84,31 +86,43 @@ export const UserReportsList = () => {
                                     className="h-16 w-16 shrink-0 rounded-lg object-cover"
                                 />
                             ) : (
-                                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-surface-container text-2xl">
+                                <div className="bg-surface-container flex h-16 w-16 shrink-0 items-center justify-center rounded-lg text-2xl">
                                     📷
                                 </div>
                             )}
                             <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                                <span className="truncate font-bold">{item.roomName}</span>
+                                <span className="truncate font-bold">
+                                    {item.roomName}
+                                </span>
                                 <div className="flex flex-wrap gap-2">
                                     {item.detectionLabel && (
-                                        <EcoBadge>{item.detectionLabel}</EcoBadge>
+                                        <EcoBadge>
+                                            {item.detectionLabel}
+                                        </EcoBadge>
                                     )}
-                                    <EcoBadge variant={statusVariant(item.status)}>
+                                    <EcoBadge
+                                        variant={statusVariant(item.status)}
+                                    >
                                         {STATUS_LABEL[item.status]}
                                     </EcoBadge>
                                 </div>
-                                <span className="text-xs text-on-surface-variant">
-                                    {new Date(item.createdAt).toLocaleDateString('ko-KR')}
+                                <span className="text-on-surface-variant text-xs">
+                                    {new Date(
+                                        item.createdAt,
+                                    ).toLocaleDateString('ko-KR')}
                                 </span>
                             </div>
                             <span
                                 className={cn(
                                     'shrink-0 self-center font-bold',
-                                    item.pointAwarded > 0 ? 'text-secondary' : 'text-on-surface-variant',
+                                    item.pointAwarded > 0
+                                        ? 'text-secondary'
+                                        : 'text-on-surface-variant',
                                 )}
                             >
-                                {item.pointAwarded > 0 ? `+${item.pointAwarded}P` : '-'}
+                                {item.pointAwarded > 0
+                                    ? `+${item.pointAwarded}P`
+                                    : '-'}
                             </span>
                         </Link>
                     ))}

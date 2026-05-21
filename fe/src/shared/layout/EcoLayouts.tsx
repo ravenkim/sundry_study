@@ -59,20 +59,20 @@ export const UserAppLayout = ({
     const closeMenu = () => setMenuOpen(false)
 
     return (
-        <div className="min-h-screen bg-background flex flex-col">
-            <header className="sticky top-0 z-40 border-b border-outline-variant bg-surface/95 backdrop-blur-md">
+        <div className="bg-background flex min-h-screen flex-col">
+            <header className="border-outline-variant bg-surface/95 sticky top-0 z-40 border-b backdrop-blur-md">
                 <div className="mx-auto flex h-14 max-w-[390px] items-center gap-2 px-4">
                     <button
                         type="button"
                         onClick={() => setMenuOpen(true)}
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-primary hover:bg-surface-container-low transition-colors"
+                        className="text-primary hover:bg-surface-container-low flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors"
                         aria-label="메뉴 열기"
                     >
                         <Menu className="h-6 w-6" />
                     </button>
 
                     {title ? (
-                        <h1 className="flex-1 truncate text-center text-lg font-black text-primary">
+                        <h1 className="text-primary flex-1 truncate text-center text-lg font-black">
                             {title}
                         </h1>
                     ) : (
@@ -82,14 +82,19 @@ export const UserAppLayout = ({
                             onClick={closeMenu}
                         >
                             <MascotImage emotion="nomal" size="xs" decorative />
-                            <span className="text-lg font-black text-primary">EcoReport</span>
+                            <span className="text-primary text-lg font-black">
+                                EcoReport
+                            </span>
                         </Link>
                     )}
 
                     <div className="flex justify-end">
                         {headerRight ??
                             (showPoints ? (
-                                <EcoBadge variant="yellow" className="text-xs font-bold">
+                                <EcoBadge
+                                    variant="yellow"
+                                    className="text-xs font-bold"
+                                >
                                     {pointsLoading
                                         ? '...'
                                         : `${points.currentBalance.toLocaleString()}P`}
@@ -104,16 +109,23 @@ export const UserAppLayout = ({
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
                 <SheetContent
                     side="left"
-                    className="flex h-full w-[min(100%,280px)] flex-col border-outline-variant p-0"
+                    className="border-outline-variant flex h-full w-[min(100%,280px)] flex-col p-0"
                 >
-                    <SheetHeader className="border-b border-outline-variant bg-surface-container-low p-5 text-left">
+                    <SheetHeader className="border-outline-variant bg-surface-container-low border-b p-5 text-left">
                         <div className="flex items-center gap-3 pr-8">
-                            <MascotImage emotion="nomal" size="sm" decorative className="rounded-full" />
+                            <MascotImage
+                                emotion="nomal"
+                                size="sm"
+                                decorative
+                                className="rounded-full"
+                            />
                             <div>
-                                <SheetTitle className="text-left text-base font-black text-primary">
+                                <SheetTitle className="text-primary text-left text-base font-black">
                                     EcoReport
                                 </SheetTitle>
-                                <p className="text-xs text-on-surface-variant">캠퍼스 에너지 절약</p>
+                                <p className="text-on-surface-variant text-xs">
+                                    캠퍼스 에너지 절약
+                                </p>
                             </div>
                         </div>
                     </SheetHeader>
@@ -121,7 +133,8 @@ export const UserAppLayout = ({
                     <nav className="flex flex-col gap-1 p-3">
                         {USER_NAV_ITEMS.map((item) => {
                             const isActive = location.pathname === item.path
-                            const isHighlight = 'highlight' in item && item.highlight
+                            const isHighlight =
+                                'highlight' in item && item.highlight
                             return (
                                 <Link
                                     key={item.path}
@@ -143,9 +156,9 @@ export const UserAppLayout = ({
                         })}
                     </nav>
 
-                    <div className="mt-auto border-t border-outline-variant p-3 flex flex-col gap-1">
+                    <div className="border-outline-variant mt-auto flex flex-col gap-1 border-t p-3">
                         <div className="flex items-center justify-between rounded-xl px-4 py-3">
-                            <span className="text-sm font-semibold text-on-surface-variant">
+                            <span className="text-on-surface-variant text-sm font-semibold">
                                 다크 모드
                             </span>
                             <SSdarkmodeSwitch />
@@ -153,7 +166,7 @@ export const UserAppLayout = ({
                         <Link
                             to="/admin"
                             onClick={closeMenu}
-                            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors"
+                            className="text-on-surface-variant hover:bg-surface-container-low flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors"
                         >
                             <Shield className="h-5 w-5" />
                             관리자 대시보드
@@ -162,7 +175,9 @@ export const UserAppLayout = ({
                 </SheetContent>
             </Sheet>
 
-            <main className="mx-auto w-full max-w-[390px] flex-1">{children}</main>
+            <main className="mx-auto w-full max-w-[390px] flex-1">
+                {children}
+            </main>
         </div>
     )
 }
@@ -178,48 +193,53 @@ export const AdminSidebar = () => {
         { name: '사용자 관리', path: '/admin/users', icon: Users },
     ]
     return (
-        <aside className="w-64 border-r border-outline-variant h-screen fixed left-0 top-0 bg-surface-container-low p-4 flex flex-col gap-2 z-50">
-            <div className="flex items-center gap-3 px-2 mb-8">
+        <aside className="border-outline-variant bg-surface-container-low fixed top-0 left-0 z-50 flex h-screen w-64 flex-col gap-2 border-r p-4">
+            <div className="mb-8 flex items-center gap-3 px-2">
                 <MascotImage emotion="nomal" size="sm" decorative />
                 <div>
-                    <h1 className="font-bold text-primary text-sm leading-tight">EcoReport Admin</h1>
-                    <p className="text-[10px] text-on-surface-variant">Management Console</p>
+                    <h1 className="text-primary text-sm leading-tight font-bold">
+                        EcoReport Admin
+                    </h1>
+                    <p className="text-on-surface-variant text-[10px]">
+                        Management Console
+                    </p>
                 </div>
             </div>
-            <div className="flex-1 flex flex-col gap-1">
+            <div className="flex flex-1 flex-col gap-1">
                 {navItems.map((item) => {
                     const isActive =
                         location.pathname === item.path ||
-                        (item.path !== '/admin' && location.pathname.startsWith(item.path))
+                        (item.path !== '/admin' &&
+                            location.pathname.startsWith(item.path))
                     return (
                         <Link
                             key={item.path}
                             to={item.path}
                             className={cn(
-                                'flex items-center gap-3 px-4 py-2 rounded-lg font-semibold transition-all',
+                                'flex items-center gap-3 rounded-lg px-4 py-2 font-semibold transition-all',
                                 isActive
                                     ? 'bg-primary-container text-on-primary-container'
                                     : 'text-on-surface-variant hover:bg-surface-variant/50',
                             )}
                         >
-                            <item.icon className="w-5 h-5" />
+                            <item.icon className="h-5 w-5" />
                             <span>{item.name}</span>
                         </Link>
                     )
                 })}
             </div>
-            <div className="pt-4 border-t border-outline-variant flex flex-col gap-1">
+            <div className="border-outline-variant flex flex-col gap-1 border-t pt-4">
                 <div className="flex items-center justify-between px-4 py-2">
-                    <span className="text-sm font-semibold text-on-surface-variant">
+                    <span className="text-on-surface-variant text-sm font-semibold">
                         다크 모드
                     </span>
                     <SSdarkmodeSwitch />
                 </div>
                 <Link
                     to="/"
-                    className="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg w-full"
+                    className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full items-center gap-3 rounded-lg px-4 py-2"
                 >
-                    <LogOut className="w-5 h-5" />
+                    <LogOut className="h-5 w-5" />
                     <span>사용자 모드</span>
                 </Link>
             </div>
@@ -228,22 +248,25 @@ export const AdminSidebar = () => {
 }
 
 export const AdminHeader = ({ title }: { title: string }) => (
-    <header className="h-16 border-b border-outline-variant sticky top-0 bg-surface px-8 flex items-center justify-between z-40">
+    <header className="border-outline-variant bg-surface sticky top-0 z-40 flex h-16 items-center justify-between border-b px-8">
         <h2 className="text-xl font-bold">{title}</h2>
         <div className="flex items-center gap-4">
             <div className="relative">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
+                <Search className="text-on-surface-variant absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                 <input
                     type="text"
                     placeholder="검색..."
-                    className="bg-surface-container-lowest border border-outline-variant rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:outline-none focus:border-primary-container"
+                    className="bg-surface-container-lowest border-outline-variant focus:border-primary-container w-64 rounded-full border py-2 pr-4 pl-10 text-sm focus:outline-none"
                 />
             </div>
-            <Bell className="w-5 h-5 text-on-surface-variant cursor-pointer" />
-            <Settings className="w-5 h-5 text-on-surface-variant cursor-pointer" />
-            <HelpCircle className="w-5 h-5 text-on-surface-variant cursor-pointer" />
-            <div className="w-8 h-8 rounded-full bg-surface-container border border-outline-variant overflow-hidden">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin" alt="Admin" />
+            <Bell className="text-on-surface-variant h-5 w-5 cursor-pointer" />
+            <Settings className="text-on-surface-variant h-5 w-5 cursor-pointer" />
+            <HelpCircle className="text-on-surface-variant h-5 w-5 cursor-pointer" />
+            <div className="bg-surface-container border-outline-variant h-8 w-8 overflow-hidden rounded-full border">
+                <img
+                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+                    alt="Admin"
+                />
             </div>
         </div>
     </header>

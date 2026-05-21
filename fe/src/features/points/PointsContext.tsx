@@ -42,7 +42,11 @@ export function PointsProvider({ children }: { children: ReactNode }) {
         [points, loading, refresh],
     )
 
-    return <PointsContext.Provider value={value}>{children}</PointsContext.Provider>
+    return (
+        <PointsContext.Provider value={value}>
+            {children}
+        </PointsContext.Provider>
+    )
 }
 
 export function usePoints(): PointsContextValue {

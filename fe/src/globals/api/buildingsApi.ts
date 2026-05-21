@@ -6,7 +6,8 @@ import type { ApiResponse, Building } from 'src/globals/api/types'
 export async function getBuildings(): Promise<Building[]> {
     return withMockFallback(
         async () => {
-            const { data } = await client.get<ApiResponse<Building[]>>('/api/buildings')
+            const { data } =
+                await client.get<ApiResponse<Building[]>>('/api/buildings')
             return unwrapApiData(data)
         },
         () => MOCK_BUILDINGS,

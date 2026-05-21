@@ -25,7 +25,7 @@ export default function OAuthCallback() {
     }, [searchParams, completeOAuthLogin, navigate])
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-background text-on-surface-variant text-sm">
+        <div className="bg-background text-on-surface-variant flex min-h-screen items-center justify-center text-sm">
             로그인 처리 중...
         </div>
     )

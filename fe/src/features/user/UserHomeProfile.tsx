@@ -17,7 +17,11 @@ import { usePoints } from 'src/features/points/PointsContext'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getMyReports } from 'src/globals/api/reportApi'
 import type { ReportSummary, ReportStatus } from 'src/globals/api/types'
-import { formatKwh, PARTICIPATED_BUILDING_SAVINGS, sumParticipatedKwh } from './userSavingsData'
+import {
+    formatKwh,
+    PARTICIPATED_BUILDING_SAVINGS,
+    sumParticipatedKwh,
+} from './userSavingsData'
 
 const STATUS_LABEL: Record<ReportStatus, string> = {
     APPROVED: '승인됨',
@@ -46,19 +50,27 @@ export const UserHome = () => {
     return (
         <div className="flex flex-col gap-8 p-5 pb-8">
             <Link to="/report-form">
-                <EcoButton className="w-full py-4 text-lg shadow-md">📷 낭비 제보하기</EcoButton>
+                <EcoButton className="w-full py-4 text-lg shadow-md">
+                    📷 낭비 제보하기
+                </EcoButton>
             </Link>
 
             <div className="grid grid-cols-1 gap-4">
                 <EcoCard className="flex flex-col gap-2">
-                    <span className="text-sm font-medium text-on-surface-variant">내 포인트</span>
+                    <span className="text-on-surface-variant text-sm font-medium">
+                        내 포인트
+                    </span>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold text-primary">
-                            {pointsLoading ? '—' : points.currentBalance.toLocaleString()}
+                        <span className="text-primary text-4xl font-bold">
+                            {pointsLoading
+                                ? '—'
+                                : points.currentBalance.toLocaleString()}
                         </span>
-                        <span className="text-2xl font-bold text-primary">P</span>
+                        <span className="text-primary text-2xl font-bold">
+                            P
+                        </span>
                     </div>
-                    <span className="text-xs font-medium text-secondary">
+                    <span className="text-secondary text-xs font-medium">
                         이번 달 +{points.thisMonthEarned} P
                     </span>
                 </EcoCard>
@@ -68,17 +80,20 @@ export const UserHome = () => {
             <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-bold">최근 제보 내역</h2>
-                    <Link to="/reports" className="text-xs font-bold text-primary">
+                    <Link
+                        to="/reports"
+                        className="text-primary text-xs font-bold"
+                    >
                         전체 보기
                     </Link>
                 </div>
-                <div className="flex flex-col gap-1 overflow-hidden rounded-xl border border-outline-variant bg-outline-variant">
+                <div className="border-outline-variant bg-outline-variant flex flex-col gap-1 overflow-hidden rounded-xl border">
                     {reportsLoading ? (
-                        <div className="bg-surface-container-lowest p-8 text-center text-sm text-on-surface-variant">
+                        <div className="bg-surface-container-lowest text-on-surface-variant p-8 text-center text-sm">
                             불러오는 중...
                         </div>
                     ) : recentReports.length === 0 ? (
-                        <div className="bg-surface-container-lowest p-8 text-center text-sm text-on-surface-variant">
+                        <div className="bg-surface-container-lowest text-on-surface-variant p-8 text-center text-sm">
                             아직 제보 내역이 없습니다.
                         </div>
                     ) : (
@@ -86,15 +101,21 @@ export const UserHome = () => {
                             <Link
                                 key={item.reportId}
                                 to={`/reports/${item.reportId}`}
-                                className="flex items-center justify-between bg-surface-container-lowest p-4 transition-colors hover:bg-surface-container-low"
+                                className="bg-surface-container-lowest hover:bg-surface-container-low flex items-center justify-between p-4 transition-colors"
                             >
                                 <div className="flex flex-col gap-1">
-                                    <span className="font-bold">{item.roomName}</span>
+                                    <span className="font-bold">
+                                        {item.roomName}
+                                    </span>
                                     <div className="flex gap-2">
                                         {item.detectionLabel && (
-                                            <EcoBadge>{item.detectionLabel}</EcoBadge>
+                                            <EcoBadge>
+                                                {item.detectionLabel}
+                                            </EcoBadge>
                                         )}
-                                        <EcoBadge variant={statusVariant(item.status)}>
+                                        <EcoBadge
+                                            variant={statusVariant(item.status)}
+                                        >
                                             {STATUS_LABEL[item.status]}
                                         </EcoBadge>
                                     </div>
@@ -107,7 +128,9 @@ export const UserHome = () => {
                                             : 'text-on-surface-variant',
                                     )}
                                 >
-                                    {item.pointAwarded > 0 ? `+${item.pointAwarded}P` : '-'}
+                                    {item.pointAwarded > 0
+                                        ? `+${item.pointAwarded}P`
+                                        : '-'}
                                 </span>
                             </Link>
                         ))
@@ -118,7 +141,7 @@ export const UserHome = () => {
             <div className="flex justify-center pb-4">
                 <Link
                     to="/admin"
-                    className="rounded-full border border-outline-variant bg-on-surface/10 px-4 py-1.5 text-[10px] font-black text-on-surface-variant opacity-40 transition-all hover:opacity-100"
+                    className="border-outline-variant bg-on-surface/10 text-on-surface-variant rounded-full border px-4 py-1.5 text-[10px] font-black opacity-40 transition-all hover:opacity-100"
                 >
                     🛡️ Admin 대시보드 →
                 </Link>
@@ -146,74 +169,96 @@ export const UserProfile = () => {
     return (
         <div className="flex flex-col gap-8 p-5 pb-8">
             <section className="flex items-center gap-5">
-                <div className="h-20 w-20 overflow-hidden rounded-full border-2 border-primary-container p-1 shadow-sm">
+                <div className="border-primary-container h-20 w-20 overflow-hidden rounded-full border-2 p-1 shadow-sm">
                     <img
                         src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${displayName}`}
                         alt="User"
-                        className="h-full w-full rounded-full bg-surface-container object-cover"
+                        className="bg-surface-container h-full w-full rounded-full object-cover"
                     />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                    <h2 className="text-2xl font-bold tracking-tight text-on-surface">{displayName}</h2>
+                    <h2 className="text-on-surface text-2xl font-bold tracking-tight">
+                        {displayName}
+                    </h2>
                     <EcoBadge
                         variant="green"
                         className="flex w-max items-center gap-1.5 px-3 py-1 text-xs font-bold"
                     >
-                        <Leaf className="h-3.5 w-3.5 fill-current" /> 그린 마스터
+                        <Leaf className="h-3.5 w-3.5 fill-current" /> 그린
+                        마스터
                     </EcoBadge>
                 </div>
             </section>
 
             <Link to="/shop">
-                <EcoCard className="relative cursor-pointer overflow-hidden p-6 hover:bg-surface-container-low">
-                    <div className="absolute bottom-[-10px] right-[-10px] opacity-[0.05]">
+                <EcoCard className="hover:bg-surface-container-low relative cursor-pointer overflow-hidden p-6">
+                    <div className="absolute right-[-10px] bottom-[-10px] opacity-[0.05]">
                         <Coins className="h-32 w-32" />
                     </div>
                     <div className="mb-2 flex items-center justify-between">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+                        <span className="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase">
                             보유 포인트
                         </span>
-                        <span className="flex items-center gap-0.5 text-[10px] font-bold text-primary">
+                        <span className="text-primary flex items-center gap-0.5 text-[10px] font-bold">
                             내역 보기 <ChevronRight className="h-3 w-3" />
                         </span>
                     </div>
                     <div className="relative z-10 flex items-baseline gap-1">
-                        <span className="text-4xl font-black tracking-tight text-primary">
-                            {loading ? '—' : points.currentBalance.toLocaleString()}
+                        <span className="text-primary text-4xl font-black tracking-tight">
+                            {loading
+                                ? '—'
+                                : points.currentBalance.toLocaleString()}
                         </span>
-                        <span className="text-xl font-bold text-primary">P</span>
+                        <span className="text-primary text-xl font-bold">
+                            P
+                        </span>
                     </div>
                 </EcoCard>
             </Link>
 
             <section className="grid grid-cols-2 gap-4">
                 <EcoCard className="flex flex-col gap-3 p-4">
-                    <div className="flex items-center gap-2 text-primary">
+                    <div className="text-primary flex items-center gap-2">
                         <ClipboardCheck className="h-4 w-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">총 제보</span>
-                    </div>
-                    <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-bold">{reportCount}</span>
-                        <span className="text-[10px] font-bold text-on-surface-variant">건</span>
-                    </div>
-                </EcoCard>
-                <EcoCard className="flex flex-col gap-3 border-l-4 border-l-secondary p-4">
-                    <div className="flex items-center gap-2 text-secondary">
-                        <Leaf className="h-4 w-4 fill-current" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">절약 전기</span>
+                        <span className="text-[10px] font-bold tracking-wider uppercase">
+                            총 제보
+                        </span>
                     </div>
                     <div className="flex items-baseline gap-1">
                         <span className="text-2xl font-bold">
-                            {formatKwh(sumParticipatedKwh(PARTICIPATED_BUILDING_SAVINGS, 'total'))}
+                            {reportCount}
                         </span>
-                        <span className="text-[10px] font-bold text-on-surface-variant">kWh</span>
+                        <span className="text-on-surface-variant text-[10px] font-bold">
+                            건
+                        </span>
+                    </div>
+                </EcoCard>
+                <EcoCard className="border-l-secondary flex flex-col gap-3 border-l-4 p-4">
+                    <div className="text-secondary flex items-center gap-2">
+                        <Leaf className="h-4 w-4 fill-current" />
+                        <span className="text-[10px] font-bold tracking-wider uppercase">
+                            절약 전기
+                        </span>
+                    </div>
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-bold">
+                            {formatKwh(
+                                sumParticipatedKwh(
+                                    PARTICIPATED_BUILDING_SAVINGS,
+                                    'total',
+                                ),
+                            )}
+                        </span>
+                        <span className="text-on-surface-variant text-[10px] font-bold">
+                            kWh
+                        </span>
                     </div>
                 </EcoCard>
             </section>
 
             <ParticipatedBuildingSavingsCard compact />
 
-            <section className="overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest shadow-sm">
+            <section className="border-outline-variant bg-surface-container-lowest overflow-hidden rounded-2xl border shadow-sm">
                 {[
                     { icon: Edit2, label: '프로필 수정' },
                     { icon: Bell, label: '알림 설정' },
@@ -221,11 +266,13 @@ export const UserProfile = () => {
                 ].map((item) => (
                     <div
                         key={item.label}
-                        className="group flex cursor-pointer items-center justify-between border-b border-surface-container p-4 transition-colors last:border-0 hover:bg-surface-container-low"
+                        className="group border-surface-container hover:bg-surface-container-low flex cursor-pointer items-center justify-between border-b p-4 transition-colors last:border-0"
                     >
                         <div className="flex items-center gap-4">
                             <item.icon className="h-5 w-5 opacity-70 group-hover:opacity-100" />
-                            <span className="text-sm font-semibold">{item.label}</span>
+                            <span className="text-sm font-semibold">
+                                {item.label}
+                            </span>
                         </div>
                         <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
                     </div>
@@ -233,7 +280,7 @@ export const UserProfile = () => {
                 <button
                     type="button"
                     onClick={handleLogout}
-                    className="group flex w-full cursor-pointer items-center justify-between p-4 text-error transition-colors hover:bg-surface-container-low"
+                    className="group text-error hover:bg-surface-container-low flex w-full cursor-pointer items-center justify-between p-4 transition-colors"
                 >
                     <div className="flex items-center gap-4">
                         <LogOut className="h-5 w-5 opacity-70 group-hover:opacity-100" />

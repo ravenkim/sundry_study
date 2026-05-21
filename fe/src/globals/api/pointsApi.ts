@@ -15,7 +15,8 @@ import type {
 export async function getMyPoints(): Promise<PointsSummary> {
     return withMockFallback(
         async () => {
-            const { data } = await client.get<ApiResponse<PointsSummary>>('/api/points/me')
+            const { data } =
+                await client.get<ApiResponse<PointsSummary>>('/api/points/me')
             return unwrapApiData(data)
         },
         () => getMockPoints(),
@@ -25,7 +26,8 @@ export async function getMyPoints(): Promise<PointsSummary> {
 export async function getRewards(): Promise<RewardItem[]> {
     return withMockFallback(
         async () => {
-            const { data } = await client.get<ApiResponse<RewardItem[]>>('/api/rewards')
+            const { data } =
+                await client.get<ApiResponse<RewardItem[]>>('/api/rewards')
             return unwrapApiData(data)
         },
         () => MOCK_REWARDS,
