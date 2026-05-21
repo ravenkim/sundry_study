@@ -172,6 +172,9 @@ export const Signup = () => {
             </header>
 
             <main className="p-5 flex flex-col gap-8 flex-grow">
+                <div className="flex justify-center">
+                    <MascotImage emotion="smile" size="md" decorative />
+                </div>
                 <div>
                     <h2 className="text-xl font-bold text-on-surface mb-1">기본 정보 입력</h2>
                     <p className="text-on-surface-variant text-sm">

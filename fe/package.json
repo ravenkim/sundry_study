@@ -12,7 +12,8 @@
         "test:run": "vitest run",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "format": "yarn exec prettier . --write"
+        "format": "yarn exec prettier . --write",
+        "process-mascort": "node scripts/process-mascort.mjs"
     },
     "dependencies": {
         "@radix-ui/react-accordion": "^1.2.11",
