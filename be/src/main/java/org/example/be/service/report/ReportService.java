@@ -5,6 +5,8 @@ import org.example.be.api.request.ReportCreateRequest;
 import org.example.be.domain.model.*;
 import org.example.be.domain.repository.BuildingRepository;
 import org.example.be.domain.repository.ReportRepository;
+import org.example.be.exception.BusinessLogicException;
+import org.example.be.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
@@ -22,8 +24,8 @@ public class ReportService {
     public Long createReport(ReportCreateRequest request) {
 
         // 선택한 건물 정보 조회
-        Building building = buildingRepository.findById(request.buildingSeq())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 건물입니다."));
+        Building building = buildingRepository.findById(request.buildingId())
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 건물입니다."));
 
         // 사진 이미지 저장 처리 로직 공간
         // (우선은 파일이 들어오면 가상의 URL을 매핑하고, 들어오지 않으면 null 처리)
@@ -43,7 +45,7 @@ public class ReportService {
         // 엔티티 빌드 (초기 상태는 무조건 'PENDING - 처리중'으로 설정)
         Report report = Report.builder()
                 .building(building)
-                .locationDetail(request.locationDetail())
+                .locationDetail(request.roomName())
                 .description(request.description())
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)

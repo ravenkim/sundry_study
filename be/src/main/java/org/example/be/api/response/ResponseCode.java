@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum ResponseCode {
     OK(10000),
     LOGIN_SUCCESS(10001),
-    REGISTER_SUCCESS(10002);
+    REGISTER_SUCCESS(10002),
+    REPORT_CREATED(10003);
     private final int code;
 }

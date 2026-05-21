@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
-import { User as UserIcon, ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
@@ -11,6 +11,7 @@ import {
 import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { GoogleSignInButton } from 'src/features/auth/GoogleSignInButton'
 import { SignupTermsAgreement } from 'src/features/auth/SignupTermsAgreement'
 
 function getErrorMessage(error: unknown): string {
@@ -152,16 +153,7 @@ export const Login = () => {
                     <div className="bg-surface-container-high h-px flex-1"></div>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                    <EcoButton
-                        type="button"
-                        variant="outline"
-                        className="py-3"
-                        onClick={() => startOAuth('google')}
-                    >
-                        <UserIcon className="h-5 w-5" /> Google로 시작하기
-                    </EcoButton>
-                </div>
+                <GoogleSignInButton onClick={() => startOAuth('google')} />
             </div>
         </div>
     )

@@ -5,3 +5,13 @@
 **/.env.docker
 
 !.env.example
+
+# Backend (Gradle / Spring Boot)
+be/.gradle/
+be/build/
+!be/gradle/wrapper/gradle-wrapper.jar
+
+# Frontend (Vite / Yarn)
+fe/node_modules/
+fe/dist/
+fe/dist-ssr/
