@@ -7,7 +7,6 @@ import { useTheme } from 'src/shared/utils/themeUtils.tsx'
 import { useEffect } from 'react'
 import { AuthProvider } from 'src/features/auth/AuthContext'
 import { PointsProvider } from 'src/features/points/PointsContext'
-import { RequireAuth } from 'src/shared/components/auth/RequireAuth'
 
 function AppToastContainer() {
     const { theme } = useTheme()
@@ -53,9 +52,7 @@ function App() {
         <ThemeProvider defaultTheme="light">
             <AuthProvider>
                 <PointsProvider>
-                    <RequireAuth>
-                        <RouterProvider router={router} />
-                    </RequireAuth>
+                    <RouterProvider router={router} />
                 </PointsProvider>
             </AuthProvider>
             <AppToastContainer />
