@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
-import { MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
+import { User as UserIcon, ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
@@ -34,7 +34,7 @@ export const Login = () => {
         }
     }, [searchParams])
 
-    const startOAuth = (provider: 'kakao' | 'google') => {
+    const startOAuth = (provider: 'google') => {
         try {
             window.location.href = getOAuthAuthorizationUrl(provider)
         } catch {
@@ -128,14 +128,6 @@ export const Login = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <EcoButton
-                        type="button"
-                        variant="outline"
-                        className="py-3 bg-[#FEE500] border-none text-[#3C1E1E]"
-                        onClick={() => startOAuth('kakao')}
-                    >
-                        <MessageCircle className="w-5 h-5 fill-current" /> 카카오로 시작하기
-                    </EcoButton>
                     <EcoButton
                         type="button"
                         variant="outline"

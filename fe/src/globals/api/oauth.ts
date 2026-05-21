@@ -1,4 +1,4 @@
-export type OAuthProvider = 'kakao' | 'google'
+export type OAuthProvider = 'google'
 
 export function getOAuthAuthorizationUrl(provider: OAuthProvider): string {
     const base = (import.meta.env.VITE_API_HOST ?? '').replace(/\/$/, '')

@@ -36,7 +36,7 @@ export const UserPointShop = () => {
         try {
             await exchangeReward(selectedReward.rewardId)
             await refresh()
-            toast.success('기프티콘이 카카오톡으로 발송되었습니다.')
+            toast.success('기프티콘이 발송되었습니다.')
             setSelectedReward(null)
         } catch (error) {
             toast.error(error instanceof Error ? error.message : '교환에 실패했습니다.')

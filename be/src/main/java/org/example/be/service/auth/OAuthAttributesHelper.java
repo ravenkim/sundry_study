@@ -17,23 +17,6 @@ public final class OAuthAttributesHelper {
                     (String) attributes.get("sub")
             );
         }
-        if ("kakao".equals(provider)) {
-            @SuppressWarnings("unchecked")
-            Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-            if (kakaoAccount == null) {
-                throw new OAuth2AuthenticationException("kakao_account is missing");
-            }
-            @SuppressWarnings("unchecked")
-            Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
-            if (profile == null) {
-                throw new OAuth2AuthenticationException("kakao profile is missing");
-            }
-            return new OAuthUserProfile(
-                    (String) kakaoAccount.get("email"),
-                    (String) profile.get("nickname"),
-                    String.valueOf(attributes.get("id"))
-            );
-        }
         throw new OAuth2AuthenticationException("Unsupported OAuth provider: " + provider);
     }
 
