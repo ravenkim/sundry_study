@@ -5,6 +5,9 @@ import { Bounce, ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'src/shared/lib/shadcn/components/ThemeProvider.tsx'
 import { useTheme } from 'src/shared/utils/themeUtils.tsx'
 import { useEffect } from 'react'
+import { AuthProvider } from 'src/features/auth/AuthContext'
+import { PointsProvider } from 'src/features/points/PointsContext'
+import { RequireAuth } from 'src/shared/components/auth/RequireAuth'
 
 function AppToastContainer() {
     const { theme } = useTheme()
@@ -48,7 +51,13 @@ function App() {
 
     return (
         <ThemeProvider defaultTheme="light">
-            <RouterProvider router={router} />
+            <AuthProvider>
+                <PointsProvider>
+                    <RequireAuth>
+                        <RouterProvider router={router} />
+                    </RequireAuth>
+                </PointsProvider>
+            </AuthProvider>
             <AppToastContainer />
         </ThemeProvider>
     )

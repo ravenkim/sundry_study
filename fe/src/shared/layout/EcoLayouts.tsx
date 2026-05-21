@@ -27,6 +27,7 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
 import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
+import { usePoints } from 'src/features/points/PointsContext'
 
 export const USER_NAV_ITEMS = [
     { name: '홈', path: '/', icon: Home },
@@ -53,6 +54,7 @@ export const UserAppLayout = ({
 }: UserAppLayoutProps) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const location = useLocation()
+    const { points, loading: pointsLoading } = usePoints()
 
     const closeMenu = () => setMenuOpen(false)
 
@@ -88,7 +90,9 @@ export const UserAppLayout = ({
                         {headerRight ??
                             (showPoints ? (
                                 <EcoBadge variant="yellow" className="text-xs font-bold">
-                                    1,250P
+                                    {pointsLoading
+                                        ? '...'
+                                        : `${points.currentBalance.toLocaleString()}P`}
                                 </EcoBadge>
                             ) : (
                                 <span className="w-8" aria-hidden />
@@ -169,6 +173,8 @@ export const AdminSidebar = () => {
     const location = useLocation()
     const navItems = [
         { name: '제보 현황', path: '/admin', icon: Database },
+        { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
+        { name: '건물·강의실', path: '/admin/buildings', icon: Settings },
         { name: '포인트 관리', path: '/admin/points', icon: ShoppingBag },
         { name: '에너지 통계', path: '/admin/stats', icon: BarChart3 },
         { name: '사용자 관리', path: '/admin/users', icon: Users },
@@ -186,7 +192,9 @@ export const AdminSidebar = () => {
             </div>
             <div className="flex-1 flex flex-col gap-1">
                 {navItems.map((item) => {
-                    const isActive = location.pathname === item.path
+                    const isActive =
+                        location.pathname === item.path ||
+                        (item.path !== '/admin' && location.pathname.startsWith(item.path))
                     return (
                         <Link
                             key={item.path}
