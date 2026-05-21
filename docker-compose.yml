@@ -1,15 +1,16 @@
 # FE + BE + MySQL 통합 실행
-# 사용: bash deploy.sh
+# 사용: cp .env.example .env 후 값 설정 → bash deploy.sh
+# 비밀값은 .env 에만 두세요 (Git 추적 금지).
 
 services:
   mysql:
     image: mysql:8.4
     container_name: ecoreport-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: DBname
-      MYSQL_USER: your_mysql_user
-      MYSQL_PASSWORD: your_mysql_user
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -22,23 +23,15 @@ services:
     build:
       context: ./be
       args:
-        # be/deploy.sh가 해시 태그 이미지를 넘김. 직접 빌드 시 deps 이미지를 먼저 만들 것.
         DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-be-deps:local}
     container_name: ecoreport-be
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "${SERVER_PORT:-8080}:8080"
     env_file:
-      - ./be/.env
+      - .env
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/DBname?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-      SPRING_DATASOURCE_USERNAME: your_mysql_user
-      SPRING_DATASOURCE_PASSWORD: your_mysql_user
-      FRONTEND_URL: ${FRONTEND_URL:-http://YOUR_DEPLOY_HOST:8081}
-      # OAuth: be/.env (env_file) — compose environment에 빈 값을 두면 env_file을 덮어씀
-      JWT_SECRET: ${JWT_SECRET:-change-me-to-a-random-secret-at-least-32-chars}
-      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
     depends_on:
       mysql:
         condition: service_healthy
@@ -47,8 +40,8 @@ services:
     build:
       context: ./fe
       args:
-        # fe/deploy.sh가 해시 태그 이미지를 넘김. 직접 빌드 시 deps 이미지를 먼저 만들 것.
         DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-fe-deps:local}
+        VITE_API_HOST: ${VITE_API_HOST:-}
     container_name: ecoreport-fe
     ports:
       - "8081:80"

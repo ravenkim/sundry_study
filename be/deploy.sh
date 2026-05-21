@@ -5,7 +5,16 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BE_DIR="$ROOT/be"
 cd "$ROOT"
 
+if [[ ! -f "${ROOT}/.env" ]]; then
+  echo "[be] ${ROOT}/.env 가 없습니다: cp .env.example .env"
+  exit 1
+fi
+
 export DOCKER_BUILDKIT=1
+
+# shellcheck source=/dev/null
+set -a && source "${ROOT}/.env" && set +a
+DEPLOY_HOST="${DEPLOY_PUBLIC_HOST:-localhost}"
 
 deps_hash() {
   sha256sum \
@@ -35,5 +44,5 @@ export DEPS_IMAGE
 docker compose build be
 docker compose up -d be
 
-echo "백엔드 → http://YOUR_DEPLOY_HOST:8080"
-echo "Swagger → http://YOUR_DEPLOY_HOST:8080/swagger-ui.html"
+echo "백엔드 → http://${DEPLOY_HOST}:8080"
+echo "Swagger → http://${DEPLOY_HOST}:8080/swagger-ui.html"

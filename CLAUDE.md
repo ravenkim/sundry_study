@@ -24,7 +24,8 @@ docker-compose.yml
 ### Commands
 ```bash
 cd be
-./gradlew bootRun          # 개발 서버 실행 (포트 8080)
+bash run-dev.sh            # 루트 .env 로드 후 bootRun (포트 8080)
+./gradlew bootRun          # (환경변수 직접 export 시)
 ./gradlew build            # 빌드 (JAR 생성)
 ./gradlew test             # 전체 테스트
 ./gradlew test --tests "org.example.be.BeApplicationTests"  # 단일 테스트 클래스
@@ -49,7 +50,7 @@ cd be
 - `SecurityConfig`: Spring Security 필터 체인 전체 주석 처리됨 — 현재 모든 엔드포인트 인증 없이 접근 가능
 - CORS: `WebConfig`에서 `allowedOriginPatterns("*")`로 전체 허용
 - `DefaultMemberService`, `MemberAuthService`: 실제 비즈니스 로직 주석 처리됨 (QueryDSL, BCrypt 미연결) — 항상 `true` 반환
-- DB 접속 정보: `application.yaml`에 하드코딩 (`localhost:3306/DBname`) — 운영 전 환경변수로 분리 필요
+- DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 
 **패키지 구조**
 ```
@@ -142,7 +143,7 @@ docker compose down         # 중지
 docker compose logs -f      # 로그
 ```
 
-FE Docker 빌드 전: `fe/.env.production.example` → `fe/.env.production` (`VITE_API_HOST` 설정)
+Docker: `cp .env.example .env` → `bash deploy.sh`. 로컬 BE: `bash be/run-dev.sh`. 로컬 FE: `cd fe && yarn dev` (Vite가 루트 `.env` 로드)
 
 ## 개발 환경 설정
 

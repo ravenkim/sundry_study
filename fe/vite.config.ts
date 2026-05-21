@@ -6,6 +6,9 @@ import fs, { copyFileSync } from 'fs'
 
 // https://vite.dev/config/
 export default defineConfig({
+    // VITE_* 는 프로젝트 루트 .env 에서 로드 (fe/.env.* 파일 불필요)
+    envDir: path.resolve(__dirname, '..'),
+
     plugins: [react(), tailwindcss(), fontPreloadPlugin(), copyRobotsTxt()],
 
     // 포트지정

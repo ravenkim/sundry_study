@@ -4,5 +4,3 @@ build
 .git
 *.md
 .env*
-!.env.docker.example
-!.env.example

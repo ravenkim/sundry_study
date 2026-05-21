@@ -3,9 +3,6 @@ node_modules
 .storybook
 *.md
 .env*
-!.env.production
-!.env.production.example
-!.env.development.example
 dist-ssr
 coverage
 .git
