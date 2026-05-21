@@ -5,18 +5,14 @@ import {
     Leaf,
     Search,
     Download,
-    Plus,
     CheckCircle2,
     X,
-    Edit2,
     Settings,
     Megaphone,
     Coins,
     Users,
     User as UserIcon,
     Clock,
-    ChevronRight,
-    ChevronLeft,
     ChevronDown,
     Calendar,
 } from 'lucide-react'
@@ -34,351 +30,283 @@ import {
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
 import { AdminSidebar, AdminHeader } from 'src/shared/layout/EcoLayouts'
+import { useAdminDashboardState, useAdminReportsState } from 'src/features/admin/useAdminData'
+import type { ReportStatus } from 'src/globals/api/types'
 
-export const AdminDashboard = () => (
-    <>
-        <AdminSidebar />
-        <div className="md:ml-64 flex flex-col min-h-screen bg-surface-bright">
-            <AdminHeader title="제보 현황" />
-            <main className="p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full">
-                <div className="flex justify-between items-end">
-                    <div>
-                        <h2 className="text-3xl font-bold mb-1">제보 관리</h2>
-                        <p className="text-on-surface-variant">
-                            캠퍼스 내 에너지 낭비 제보를 관리하고 승인하세요.
-                        </p>
+const STATUS_LABEL: Record<ReportStatus, string> = {
+    APPROVED: '처리완료',
+    PENDING: '승인대기',
+    REJECTED: '반려',
+    UNDETECTABLE: '판별불가',
+}
+export const AdminDashboard = () => {
+    const stats = useAdminDashboardState()
+    const { reports, handleStatusUpdate } = useAdminReportsState()
+
+    return (
+        <>
+            <AdminSidebar />
+            <div className="md:ml-64 flex min-h-screen flex-col bg-surface-bright">
+                <AdminHeader title="제보 현황" />
+                <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 p-8">
+                    <div className="flex items-end justify-between">
+                        <div>
+                            <h2 className="mb-1 text-3xl font-bold">제보 관리</h2>
+                            <p className="text-on-surface-variant">
+                                캠퍼스 내 에너지 낭비 제보를 관리하고 승인하세요.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="grid grid-cols-3 gap-6">
-                    <EcoCard className="flex flex-col justify-between h-32 border-b-2 hover:border-primary-container transition-all">
-                        <div className="flex justify-between">
-                            <span className="text-sm font-bold text-on-surface-variant">오늘의 제보</span>
-                            <div className="p-1.5 rounded-full bg-primary-container/20 text-primary">
-                                <ClipboardCheck className="w-4 h-4" />
+                    <div className="grid grid-cols-3 gap-6">
+                        <EcoCard className="flex h-32 flex-col justify-between border-b-2 transition-all hover:border-primary-container">
+                            <div className="flex justify-between">
+                                <span className="text-sm font-bold text-on-surface-variant">오늘의 제보</span>
+                                <div className="rounded-full bg-primary-container/20 p-1.5 text-primary">
+                                    <ClipboardCheck className="h-4 w-4" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold">24</span>
-                            <span className="text-secondary text-xs flex items-center font-bold">
-                                <TrendingUp className="w-3 h-3 mr-1" /> 12% 증가
-                            </span>
-                        </div>
-                    </EcoCard>
-                    <EcoCard className="flex flex-col justify-between h-32 border-b-2 hover:border-error transition-all">
-                        <div className="flex justify-between">
-                            <span className="text-sm font-bold text-on-surface-variant">미처리 제보</span>
-                            <div className="p-1.5 rounded-full bg-error-container text-error">
-                                <AlertCircle className="w-4 h-4" />
+                            <div className="flex items-baseline gap-2">
+                                <span className="text-3xl font-bold">{stats?.todayReports ?? '—'}</span>
+                                <span className="flex items-center text-xs font-bold text-secondary">
+                                    <TrendingUp className="mr-1 h-3 w-3" /> 12% 증가
+                                </span>
                             </div>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold text-error">5</span>
-                            <span className="text-on-surface-variant text-xs">신속 처리가 중요합니다</span>
-                        </div>
-                    </EcoCard>
-                    <EcoCard className="flex flex-col justify-between h-32 border-b-2 hover:border-secondary transition-all">
-                        <div className="flex justify-between">
-                            <span className="text-sm font-bold text-on-surface-variant">누적 CO₂ 절감</span>
-                            <div className="p-1.5 rounded-full bg-secondary-container text-secondary">
-                                <Leaf className="w-4 h-4" />
+                        </EcoCard>
+                        <EcoCard className="flex h-32 flex-col justify-between border-b-2 transition-all hover:border-error">
+                            <div className="flex justify-between">
+                                <span className="text-sm font-bold text-on-surface-variant">미처리 제보</span>
+                                <div className="rounded-full bg-error-container p-1.5 text-error">
+                                    <AlertCircle className="h-4 w-4" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold">1,240</span>
-                            <span className="text-on-surface-variant text-xs">kg</span>
-                        </div>
-                    </EcoCard>
-                </div>
-
-                <EcoCard className="overflow-hidden p-0">
-                    <div className="p-4 bg-surface-container-low border-b border-outline-variant flex gap-4">
-                        <select className="border border-outline-variant rounded-lg px-3 py-1.5 text-sm bg-surface outline-none">
-                            <option>전체 건물</option>
-                            <option>본관 (A동)</option>
-                        </select>
-                        <select className="border border-outline-variant rounded-lg px-3 py-1.5 text-sm bg-surface outline-none">
-                            <option>전체 상태</option>
-                            <option>승인대기</option>
-                            <option>처리완료</option>
-                        </select>
+                            <div className="flex items-baseline gap-2">
+                                <span className="text-3xl font-bold text-error">
+                                    {stats?.pendingReports ?? '—'}
+                                </span>
+                                <span className="text-xs text-on-surface-variant">신속 처리가 중요합니다</span>
+                            </div>
+                        </EcoCard>
+                        <EcoCard className="flex h-32 flex-col justify-between border-b-2 transition-all hover:border-secondary">
+                            <div className="flex justify-between">
+                                <span className="text-sm font-bold text-on-surface-variant">누적 CO₂ 절감</span>
+                                <div className="rounded-full bg-secondary-container p-1.5 text-secondary">
+                                    <Leaf className="h-4 w-4" />
+                                </div>
+                            </div>
+                            <div className="flex items-baseline gap-2">
+                                <span className="text-3xl font-bold">
+                                    {stats?.totalCo2SavedKg?.toLocaleString() ?? '—'}
+                                </span>
+                                <span className="text-xs text-on-surface-variant">kg</span>
+                            </div>
+                        </EcoCard>
                     </div>
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="bg-surface text-on-surface-variant text-xs font-bold border-b border-outline-variant">
-                                <th className="p-4">제보 일시</th>
-                                <th className="p-4">건물명</th>
-                                <th className="p-4">제보 내용</th>
-                                <th className="p-4">작성자</th>
-                                <th className="p-4">상태</th>
-                                <th className="p-4 text-right">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-sm font-medium divide-y divide-outline-variant/30">
-                            {[
-                                {
-                                    time: '14:30',
-                                    loc: '공학관 A동',
-                                    msg: '빈 강의실 조명 8개 점등 상태',
-                                    user: '김철수',
-                                    status: '승인대기',
-                                },
-                                {
-                                    time: '11:15',
-                                    loc: '학생회관',
-                                    msg: '창문 개방 상태로 에어컨 풀가동',
-                                    user: '이영희',
-                                    status: '처리완료',
-                                },
-                                {
-                                    time: '09:45',
-                                    loc: '별관 (B동)',
-                                    msg: '2층 남자 화장실 누수',
-                                    user: '박사원',
-                                    status: '승인대기',
-                                },
-                            ].map((item, i) => (
-                                <tr
-                                    key={i}
-                                    className="hover:bg-surface-container-low/30 transition-colors"
-                                >
-                                    <td className="p-4">{item.time}</td>
-                                    <td className="p-4">{item.loc}</td>
-                                    <td className="p-4">
-                                        <div className="flex items-center gap-2">
-                                            <EcoBadge variant="gray">조명</EcoBadge>
-                                            <span className="truncate max-w-xs">{item.msg}</span>
-                                        </div>
-                                    </td>
-                                    <td className="p-4">{item.user}</td>
-                                    <td className="p-4">
-                                        <EcoBadge
-                                            variant={item.status === '승인대기' ? 'yellow' : 'green'}
-                                        >
-                                            {item.status}
-                                        </EcoBadge>
-                                    </td>
-                                    <td className="p-4 text-right">
-                                        <div className="flex gap-2 justify-end">
-                                            {item.status === '승인대기' ? (
-                                                <>
-                                                    <EcoButton className="px-3 py-1 text-xs">
+
+                    <EcoCard className="overflow-hidden p-0">
+                        <table className="w-full text-left">
+                            <thead>
+                                <tr className="border-b border-outline-variant bg-surface text-xs font-bold text-on-surface-variant">
+                                    <th className="p-4">제보 일시</th>
+                                    <th className="p-4">건물명</th>
+                                    <th className="p-4">AI 판별</th>
+                                    <th className="p-4">작성자</th>
+                                    <th className="p-4">상태</th>
+                                    <th className="p-4 text-right">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-outline-variant/30 text-sm font-medium">
+                                {reports.map((item) => (
+                                    <tr
+                                        key={item.reportId}
+                                        className="transition-colors hover:bg-surface-container-low/30"
+                                    >
+                                        <td className="p-4 text-xs">
+                                            {new Date(item.createdAt).toLocaleString('ko-KR')}
+                                        </td>
+                                        <td className="p-4">
+                                            {item.buildingName} {item.roomName}
+                                        </td>
+                                        <td className="p-4">
+                                            <EcoBadge variant="gray">{item.aiResult}</EcoBadge>
+                                        </td>
+                                        <td className="p-4">{item.memberName}</td>
+                                        <td className="p-4">
+                                            <EcoBadge
+                                                variant={
+                                                    item.status === 'PENDING'
+                                                        ? 'yellow'
+                                                        : item.status === 'APPROVED'
+                                                          ? 'green'
+                                                          : 'gray'
+                                                }
+                                            >
+                                                {STATUS_LABEL[item.status]}
+                                            </EcoBadge>
+                                        </td>
+                                        <td className="p-4 text-right">
+                                            {item.status === 'PENDING' ? (
+                                                <div className="flex justify-end gap-2">
+                                                    <EcoButton
+                                                        className="px-3 py-1 text-xs"
+                                                        onClick={() =>
+                                                            void handleStatusUpdate(
+                                                                item.reportId,
+                                                                'APPROVED',
+                                                            )
+                                                        }
+                                                    >
                                                         승인
                                                     </EcoButton>
                                                     <EcoButton
                                                         variant="outline"
                                                         className="px-3 py-1 text-xs"
+                                                        onClick={() =>
+                                                            void handleStatusUpdate(
+                                                                item.reportId,
+                                                                'REJECTED',
+                                                            )
+                                                        }
                                                     >
                                                         반려
                                                     </EcoButton>
-                                                </>
+                                                </div>
                                             ) : (
-                                                <span className="text-secondary font-bold">+500P</span>
+                                                <span className="font-bold text-secondary">
+                                                    {item.pointAwarded > 0
+                                                        ? `+${item.pointAwarded}P`
+                                                        : '-'}
+                                                </span>
                                             )}
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <div className="p-4 text-center text-xs text-on-surface-variant border-t border-outline-variant">
-                        총 124건 중 1-3건
-                    </div>
-                </EcoCard>
-            </main>
-        </div>
-    </>
-)
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </EcoCard>
+                </main>
+            </div>
+        </>
+    )
+}
 
-export const AdminReports = () => (
-    <>
-        <AdminSidebar />
-        <div className="md:ml-64 flex flex-col min-h-screen bg-surface-bright">
-            <AdminHeader title="제보 현황" />
-            <main className="p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full">
-                <div className="flex justify-between items-end">
-                    <div>
-                        <h2 className="text-3xl font-black tracking-tight mb-1">제보 관리</h2>
-                        <p className="text-on-surface-variant font-medium text-sm">
-                            에너지 낭비 제보 내역을 확인하고 승인 여부를 결정합니다.
-                        </p>
-                    </div>
-                    <div className="flex gap-2">
-                        <EcoButton variant="outline" className="px-4 py-2 text-xs font-bold gap-2">
-                            <Download className="w-4 h-4" /> 내보내기
-                        </EcoButton>
-                        <EcoButton className="px-4 py-2 text-xs font-bold gap-2">
-                            <Plus className="w-4 h-4" /> 일괄 승인
-                        </EcoButton>
-                    </div>
-                </div>
+export const AdminReports = () => {
+    const { reports, handleStatusUpdate } = useAdminReportsState()
 
-                <EcoCard className="overflow-hidden p-0">
-                    <div className="p-4 bg-surface-container-low border-b border-outline-variant flex gap-3 overflow-x-auto no-scrollbar">
-                        <select className="border border-outline-variant rounded-lg px-3 py-1.5 text-xs bg-surface outline-none font-bold text-on-surface-variant">
-                            <option>전체 건물</option>
-                            <option>공학관 A동</option>
-                            <option>학생회관</option>
-                        </select>
-                        <select className="border border-outline-variant rounded-lg px-3 py-1.5 text-xs bg-surface outline-none font-bold text-on-surface-variant">
-                            <option>전체 상태</option>
-                            <option>승인대기</option>
-                            <option>처리완료</option>
-                            <option>반려</option>
-                        </select>
-                        <div className="relative flex-1 min-w-[200px]">
-                            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
-                            <input
-                                type="text"
-                                placeholder="제보 내용 검색..."
-                                className="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-9 pr-4 py-1.5 text-xs focus:outline-none focus:border-primary-container font-medium"
-                            />
+    return (
+        <>
+            <AdminSidebar />
+            <div className="md:ml-64 flex min-h-screen flex-col bg-surface-bright">
+                <AdminHeader title="제보 관리" />
+                <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 p-8">
+                    <div className="flex items-end justify-between">
+                        <div>
+                            <h2 className="mb-1 text-3xl font-black tracking-tight">제보 관리</h2>
+                            <p className="text-sm font-medium text-on-surface-variant">
+                                에너지 낭비 제보 내역을 확인하고 승인 여부를 결정합니다.
+                            </p>
+                        </div>
+                        <div className="flex gap-2">
+                            <EcoButton variant="outline" className="gap-2 px-4 py-2 text-xs font-bold">
+                                <Download className="h-4 w-4" /> 내보내기
+                            </EcoButton>
                         </div>
                     </div>
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="bg-surface-container-lowest text-on-surface-variant text-[10px] font-black uppercase tracking-widest border-b border-outline-variant">
-                                <th className="px-6 py-4">제보 일시</th>
-                                <th className="px-6 py-4">건물/장소</th>
-                                <th className="px-6 py-4">제보 내용</th>
-                                <th className="px-6 py-4">작성자</th>
-                                <th className="px-6 py-4">상태</th>
-                                <th className="px-6 py-4 text-right">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-sm font-medium divide-y divide-outline-variant/30">
-                            {[
-                                {
-                                    time: '2024-10-31 14:30',
-                                    loc: '공학관 A동',
-                                    subLoc: '303호 강의실',
-                                    msg: '빈 강의실 조명 8개 점등 상태',
-                                    user: '김철수',
-                                    status: '승인대기',
-                                    type: '조명',
-                                },
-                                {
-                                    time: '2024-10-31 11:15',
-                                    loc: '학생회관',
-                                    subLoc: '2층 복도',
-                                    msg: '창문 개방 상태로 에어컨 풀가동',
-                                    user: '이영희',
-                                    status: '처리완료',
-                                    type: '냉난방',
-                                },
-                                {
-                                    time: '2024-10-30 18:45',
-                                    loc: '본관 A동',
-                                    subLoc: '1층 로비',
-                                    msg: '사용하지 않는 안내 전광판 켜짐',
-                                    user: '박지민',
-                                    status: '승인대기',
-                                    type: '기타',
-                                },
-                                {
-                                    time: '2024-10-30 15:20',
-                                    loc: '중앙도서관',
-                                    subLoc: '3층 열람실',
-                                    msg: '화장실 세면대 물 지속 방류',
-                                    user: '최동욱',
-                                    status: '반려',
-                                    type: '수자원',
-                                },
-                            ].map((item, i) => (
-                                <tr
-                                    key={i}
-                                    className="hover:bg-surface-container-low/30 transition-colors"
-                                >
-                                    <td className="px-6 py-4 text-xs font-bold text-on-surface-variant">
-                                        {item.time}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <div className="flex flex-col">
-                                            <span className="font-bold text-on-surface">{item.loc}</span>
-                                            <span className="text-[10px] text-on-surface-variant">
-                                                {item.subLoc}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center gap-2">
+
+                    <EcoCard className="overflow-hidden p-0">
+                        <table className="w-full text-left">
+                            <thead>
+                                <tr className="border-b border-outline-variant bg-surface-container-lowest text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
+                                    <th className="px-6 py-4">제보 일시</th>
+                                    <th className="px-6 py-4">건물/장소</th>
+                                    <th className="px-6 py-4">AI 판별</th>
+                                    <th className="px-6 py-4">작성자</th>
+                                    <th className="px-6 py-4">상태</th>
+                                    <th className="px-6 py-4 text-right">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-outline-variant/30 text-sm font-medium">
+                                {reports.map((item) => (
+                                    <tr
+                                        key={item.reportId}
+                                        className="transition-colors hover:bg-surface-container-low/30"
+                                    >
+                                        <td className="px-6 py-4 text-xs font-bold text-on-surface-variant">
+                                            {new Date(item.createdAt).toLocaleString('ko-KR')}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex flex-col">
+                                                <span className="font-bold text-on-surface">
+                                                    {item.buildingName}
+                                                </span>
+                                                <span className="text-[10px] text-on-surface-variant">
+                                                    {item.roomName}
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <EcoBadge variant="gray">{item.aiResult}</EcoBadge>
+                                        </td>
+                                        <td className="px-6 py-4 text-on-surface">{item.memberName}</td>
+                                        <td className="px-6 py-4">
                                             <EcoBadge
                                                 variant={
-                                                    item.type === '조명'
+                                                    item.status === 'PENDING'
                                                         ? 'yellow'
-                                                        : item.type === '냉난방'
+                                                        : item.status === 'APPROVED'
                                                           ? 'green'
                                                           : 'gray'
                                                 }
                                             >
-                                                {item.type}
+                                                {STATUS_LABEL[item.status]}
                                             </EcoBadge>
-                                            <span className="truncate max-w-[200px] font-bold">
-                                                {item.msg}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td className="px-6 py-4 text-on-surface">{item.user}</td>
-                                    <td className="px-6 py-4">
-                                        <EcoBadge
-                                            variant={
-                                                item.status === '승인대기'
-                                                    ? 'yellow'
-                                                    : item.status === '처리완료'
-                                                      ? 'green'
-                                                      : 'red'
-                                            }
-                                        >
-                                            {item.status}
-                                        </EcoBadge>
-                                    </td>
-                                    <td className="px-6 py-4 text-right">
-                                        {item.status === '승인대기' ? (
-                                            <div className="flex gap-1 justify-end">
-                                                <button className="p-1.5 rounded-lg bg-primary-container text-on-primary-container hover:brightness-95 transition-all">
-                                                    <CheckCircle2 className="w-4 h-4" />
-                                                </button>
-                                                <button className="p-1.5 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-all">
-                                                    <X className="w-4 h-4" />
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <button className="p-1.5 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-all">
-                                                <Edit2 className="w-3.5 h-3.5" />
-                                            </button>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <div className="p-4 flex items-center justify-between border-t border-outline-variant bg-surface-container-lowest">
-                        <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
-                            페이지 1 / 15
-                        </span>
-                        <div className="flex gap-1">
-                            <button className="p-1 border border-outline-variant rounded hover:bg-surface-container-low opacity-50">
-                                <ChevronLeft className="w-4 h-4" />
-                            </button>
-                            <button className="p-1 bg-primary-container text-on-primary-container font-bold text-[10px] w-6 h-6 flex items-center justify-center rounded">
-                                1
-                            </button>
-                            <button className="p-1 border border-outline-variant rounded hover:bg-surface-container-low font-bold text-[10px] w-6 h-6 flex items-center justify-center">
-                                2
-                            </button>
-                            <button className="p-1 border border-outline-variant rounded hover:bg-surface-container-low font-bold text-[10px] w-6 h-6 flex items-center justify-center">
-                                3
-                            </button>
-                            <button className="p-1 border border-outline-variant rounded hover:bg-surface-container-low">
-                                <ChevronRight className="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
-                </EcoCard>
-            </main>
-        </div>
-    </>
-)
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            {item.status === 'PENDING' ? (
+                                                <div className="flex justify-end gap-1">
+                                                    <button
+                                                        type="button"
+                                                        className="rounded-lg bg-primary-container p-1.5 text-on-primary-container transition-all hover:brightness-95"
+                                                        onClick={() =>
+                                                            void handleStatusUpdate(
+                                                                item.reportId,
+                                                                'APPROVED',
+                                                            )
+                                                        }
+                                                    >
+                                                        <CheckCircle2 className="h-4 w-4" />
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="rounded-lg border border-outline-variant p-1.5 text-on-surface-variant transition-all hover:bg-surface-container-low"
+                                                        onClick={() =>
+                                                            void handleStatusUpdate(
+                                                                item.reportId,
+                                                                'REJECTED',
+                                                            )
+                                                        }
+                                                    >
+                                                        <X className="h-4 w-4" />
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <span className="font-bold text-secondary">
+                                                    {item.pointAwarded > 0
+                                                        ? `+${item.pointAwarded}P`
+                                                        : '-'}
+                                                </span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </EcoCard>
+                </main>
+            </div>
+        </>
+    )
+}
 
 export const AdminStats = () => {
     const pieData = [
@@ -704,22 +632,6 @@ export const AdminUsers = () => (
                         </tbody>
                     </table>
                 </EcoCard>
-            </main>
-        </div>
-    </>
-)
-
-export const AdminPoints = () => (
-    <>
-        <AdminSidebar />
-        <div className="md:ml-64 flex flex-col min-h-screen bg-surface-bright">
-            <AdminHeader title="포인트 관리" />
-            <main className="p-8">
-                <div className="mt-8 text-center flex flex-col items-center gap-4 opacity-60">
-                    <Coins className="w-16 h-16 text-on-surface-variant" />
-                    <h3 className="text-xl font-bold">포인트 지급/차감 시스템</h3>
-                    <p className="text-on-surface-variant text-sm">준비 중입니다.</p>
-                </div>
             </main>
         </div>
     </>

@@ -26,6 +26,8 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
+import { usePoints } from 'src/features/points/PointsContext'
 
 export const USER_NAV_ITEMS = [
     { name: '홈', path: '/', icon: Home },
@@ -52,6 +54,7 @@ export const UserAppLayout = ({
 }: UserAppLayoutProps) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const location = useLocation()
+    const { points, loading: pointsLoading } = usePoints()
 
     const closeMenu = () => setMenuOpen(false)
 
@@ -87,7 +90,9 @@ export const UserAppLayout = ({
                         {headerRight ??
                             (showPoints ? (
                                 <EcoBadge variant="yellow" className="text-xs font-bold">
-                                    1,250P
+                                    {pointsLoading
+                                        ? '...'
+                                        : `${points.currentBalance.toLocaleString()}P`}
                                 </EcoBadge>
                             ) : (
                                 <span className="w-8" aria-hidden />
@@ -138,7 +143,13 @@ export const UserAppLayout = ({
                         })}
                     </nav>
 
-                    <div className="mt-auto border-t border-outline-variant p-3">
+                    <div className="mt-auto border-t border-outline-variant p-3 flex flex-col gap-1">
+                        <div className="flex items-center justify-between rounded-xl px-4 py-3">
+                            <span className="text-sm font-semibold text-on-surface-variant">
+                                다크 모드
+                            </span>
+                            <SSdarkmodeSwitch />
+                        </div>
                         <Link
                             to="/admin"
                             onClick={closeMenu}
@@ -160,6 +171,8 @@ export const AdminSidebar = () => {
     const location = useLocation()
     const navItems = [
         { name: '제보 현황', path: '/admin', icon: Database },
+        { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
+        { name: '건물·강의실', path: '/admin/buildings', icon: Settings },
         { name: '포인트 관리', path: '/admin/points', icon: ShoppingBag },
         { name: '에너지 통계', path: '/admin/stats', icon: BarChart3 },
         { name: '사용자 관리', path: '/admin/users', icon: Users },
@@ -175,7 +188,9 @@ export const AdminSidebar = () => {
             </div>
             <div className="flex-1 flex flex-col gap-1">
                 {navItems.map((item) => {
-                    const isActive = location.pathname === item.path
+                    const isActive =
+                        location.pathname === item.path ||
+                        (item.path !== '/admin' && location.pathname.startsWith(item.path))
                     return (
                         <Link
                             key={item.path}
@@ -193,7 +208,13 @@ export const AdminSidebar = () => {
                     )
                 })}
             </div>
-            <div className="pt-4 border-t border-outline-variant">
+            <div className="pt-4 border-t border-outline-variant flex flex-col gap-1">
+                <div className="flex items-center justify-between px-4 py-2">
+                    <span className="text-sm font-semibold text-on-surface-variant">
+                        다크 모드
+                    </span>
+                    <SSdarkmodeSwitch />
+                </div>
                 <Link
                     to="/"
                     className="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg w-full"

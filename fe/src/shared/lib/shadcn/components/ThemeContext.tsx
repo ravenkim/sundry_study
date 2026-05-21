@@ -11,7 +11,7 @@ export type ThemeContextType = {
 }
 
 export const initialState: ThemeContextType = {
-    theme: 'dark',
+    theme: 'light',
     setTheme: () => null,
 }
 

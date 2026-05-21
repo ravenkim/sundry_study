@@ -18,7 +18,7 @@ const SSspin = ({
     loading,
     size = 24,
     strokeWidth = 2,
-    overlayColor = 'bg-white',
+    overlayColor = 'bg-background/80',
     overlayOpacity = 'opacity-80',
     text = '',
 }: SSspinProps) => {

@@ -11,10 +11,10 @@ export const EcoButton = ({
 }) => {
     const variants = {
         primary: 'bg-primary-container text-on-primary-container hover:brightness-95',
-        secondary: 'bg-secondary text-white hover:brightness-110',
+        secondary: 'bg-secondary text-secondary-foreground hover:brightness-110',
         outline: 'border border-outline-variant text-on-surface hover:bg-surface-container-low',
         ghost: 'text-on-surface-variant hover:bg-surface-container-low',
-        error: 'bg-error text-white hover:brightness-110',
+        error: 'bg-error text-destructive-foreground hover:brightness-110',
     }
     return (
         <button

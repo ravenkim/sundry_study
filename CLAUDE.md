@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 be/              # Backend — Spring Boot 4 + MySQL + Gradle
 fe/              # Frontend — React 19 + TypeScript + Vite + TailwindCSS v4
 docs/            # 기획, 디자인 가이드, 회의록, API 명세
-deploy.sh        # 통합 배포 (Docker Compose / Cloud Run)
+deploy.sh        # 통합 배포 (be/deploy.sh → fe/deploy.sh, Docker Compose)
 docker-compose.yml
 ```
 
@@ -131,20 +131,18 @@ export function* rootSaga() { yield all([..., newSaga()]) }
 
 ```bash
 # 로컬 통합 (FE:8081, BE:8080, MySQL:3306)
-bash deploy.sh
-bash deploy.sh down    # 중지
-bash deploy.sh logs
-
-# Cloud Run (GCP_PROJECT 필요)
-export GCP_PROJECT=your-project-id
-bash deploy.sh cloudrun
+bash deploy.sh              # be/deploy.sh → fe/deploy.sh (docker-compose.yml 사용)
 
 # 개별
-bash be/deploy.sh build|docker|cloudrun
-bash fe/deploy.sh build|docker|cloudrun
+bash be/deploy.sh           # MySQL(필요 시) + BE
+bash fe/deploy.sh           # FE
+
+# Compose 직접 (프로젝트 루트)
+docker compose down         # 중지
+docker compose logs -f      # 로그
 ```
 
-환경 파일: `be/.env.docker.example` → `.env.docker`, `fe/.env.production.example` → `.env.production`
+FE Docker 빌드 전: `fe/.env.production.example` → `fe/.env.production` (`VITE_API_HOST` 설정)
 
 ## 개발 환경 설정
 

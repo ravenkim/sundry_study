@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router'
 import { MessageCircle, User as UserIcon, ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { isAxiosError } from 'axios'
-import { login, register } from 'src/globals/api/authApi'
+import { useAuth } from 'src/features/auth/AuthContext'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 
@@ -20,6 +20,7 @@ function getErrorMessage(error: unknown): string {
 
 export const Login = () => {
     const navigate = useNavigate()
+    const { login } = useAuth()
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -127,6 +128,7 @@ export const Login = () => {
 
 export const Signup = () => {
     const navigate = useNavigate()
+    const { register } = useAuth()
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

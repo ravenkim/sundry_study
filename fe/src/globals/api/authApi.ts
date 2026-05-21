@@ -39,7 +39,7 @@ async function postAuth<T>(
 }
 
 export function login(request: LoginRequest) {
-    return postAuth<void>('/login', request, ResponseCode.LOGIN_SUCCESS)
+    return postAuth<{ accessToken?: string }>('/login', request, ResponseCode.LOGIN_SUCCESS)
 }
 
 export function register(request: RegisterRequest) {
