@@ -39,7 +39,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
 
-        String provider = oauthToken.getAuthorizedClientRegistration().getRegistrationId();
+        String provider = oauthToken.getAuthorizedClientRegistrationId();
         OAuth2User principal = oauthToken.getPrincipal();
         OAuthAttributesHelper.OAuthUserProfile profile =
                 OAuthAttributesHelper.extract(provider, principal.getAttributes());
