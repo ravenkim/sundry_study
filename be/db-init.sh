@@ -8,10 +8,8 @@ if [[ ! -f "${ROOT}/.env" ]]; then
   echo "[db-init] ${ROOT}/.env 없음 — cp .env.example .env"
   exit 1
 fi
-set -a
 # shellcheck source=/dev/null
-source "${ROOT}/.env"
-set +a
+set -a && source <(sed 's/\r$//' "${ROOT}/.env") && set +a
 
 DB_NAME="${MYSQL_DATABASE:-DBname}"
 DB_USER="${MYSQL_USER:-${SPRING_DATASOURCE_USERNAME:-${DB_USERNAME:-}}}"

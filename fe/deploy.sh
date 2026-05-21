@@ -11,7 +11,7 @@ if [[ ! -f "${ROOT}/.env" ]]; then
 fi
 
 # shellcheck source=/dev/null
-set -a && source "${ROOT}/.env" && set +a
+set -a && source <(sed 's/\r$//' "${ROOT}/.env") && set +a
 DEPLOY_HOST="${DEPLOY_PUBLIC_HOST:-localhost}"
 
 # Docker 빌드 ARG — fe/.env.production 없이 루트 .env 의 VITE_API_HOST 전달

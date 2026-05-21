@@ -13,7 +13,7 @@ fi
 export DOCKER_BUILDKIT=1
 
 # shellcheck source=/dev/null
-set -a && source "${ROOT}/.env" && set +a
+set -a && source <(sed 's/\r$//' "${ROOT}/.env") && set +a
 DEPLOY_HOST="${DEPLOY_PUBLIC_HOST:-localhost}"
 
 deps_hash() {
