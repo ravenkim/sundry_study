@@ -13,7 +13,9 @@ export const UserPointShop = () => {
     const { points, refresh } = usePoints()
     const [rewards, setRewards] = useState<RewardItem[]>([])
     const [activeCategory, setActiveCategory] = useState<string>('전체')
-    const [selectedReward, setSelectedReward] = useState<RewardItem | null>(null)
+    const [selectedReward, setSelectedReward] = useState<RewardItem | null>(
+        null,
+    )
     const [exchanging, setExchanging] = useState(false)
 
     useEffect(() => {
@@ -39,7 +41,9 @@ export const UserPointShop = () => {
             toast.success('기프티콘이 발송되었습니다.')
             setSelectedReward(null)
         } catch (error) {
-            toast.error(error instanceof Error ? error.message : '교환에 실패했습니다.')
+            toast.error(
+                error instanceof Error ? error.message : '교환에 실패했습니다.',
+            )
         } finally {
             setExchanging(false)
         }
@@ -48,38 +52,38 @@ export const UserPointShop = () => {
     return (
         <div className="relative flex flex-col gap-6 p-5 pb-8">
             <EcoCard className="border-primary-container bg-primary-container/10 p-5">
-                <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                <span className="text-on-surface-variant text-xs font-bold tracking-wider uppercase">
                     내 포인트
                 </span>
                 <div className="mt-1 flex items-baseline gap-1">
-                    <span className="text-5xl font-black leading-none text-primary">
+                    <span className="text-primary text-5xl leading-none font-black">
                         {points.currentBalance.toLocaleString()}
                     </span>
-                    <span className="text-2xl font-bold text-primary">P</span>
+                    <span className="text-primary text-2xl font-bold">P</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2">
-                    <TrendingUp className="h-3.5 w-3.5 text-secondary" />
-                    <span className="text-xs font-bold text-secondary">
+                    <TrendingUp className="text-secondary h-3.5 w-3.5" />
+                    <span className="text-secondary text-xs font-bold">
                         이번 달 +{points.thisMonthEarned}P 적립
                     </span>
                 </div>
-                <div className="mt-3 flex gap-4 text-xs text-on-surface-variant">
+                <div className="text-on-surface-variant mt-3 flex gap-4 text-xs">
                     <span>총 획득 {points.totalEarned.toLocaleString()}P</span>
                     <span>교환 {points.totalRedeemed.toLocaleString()}P</span>
                 </div>
             </EcoCard>
 
-            <nav className="-mx-5 flex gap-4 overflow-x-auto border-b border-outline-variant/30 px-5 pb-1 pt-2 no-scrollbar">
+            <nav className="border-outline-variant/30 no-scrollbar -mx-5 flex gap-4 overflow-x-auto border-b px-5 pt-2 pb-1">
                 {CATEGORIES.map((tab) => (
                     <button
                         key={tab}
                         type="button"
                         onClick={() => setActiveCategory(tab)}
                         className={cn(
-                            'whitespace-nowrap border-b-2 pb-3 text-sm font-bold transition-all',
+                            'border-b-2 pb-3 text-sm font-bold whitespace-nowrap transition-all',
                             activeCategory === tab
                                 ? 'border-primary text-on-surface'
-                                : 'border-transparent text-on-surface-variant opacity-60',
+                                : 'text-on-surface-variant border-transparent opacity-60',
                         )}
                     >
                         {tab}
@@ -95,17 +99,17 @@ export const UserPointShop = () => {
                             key={item.rewardId}
                             onClick={() => canAfford && setSelectedReward(item)}
                             className={cn(
-                                'group flex flex-col overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest transition-all active:scale-95',
+                                'group border-outline-variant bg-surface-container-lowest flex flex-col overflow-hidden rounded-2xl border transition-all active:scale-95',
                                 canAfford
-                                    ? 'cursor-pointer hover:border-primary'
+                                    ? 'hover:border-primary cursor-pointer'
                                     : 'cursor-not-allowed opacity-50',
                             )}
                         >
-                            <div className="relative aspect-square overflow-hidden bg-surface-container-low">
+                            <div className="bg-surface-container-low relative aspect-square overflow-hidden">
                                 {item.tag && (
                                     <EcoBadge
                                         variant="green"
-                                        className="absolute left-2 top-2 z-10 px-2 py-0.5"
+                                        className="absolute top-2 left-2 z-10 px-2 py-0.5"
                                     >
                                         {item.tag}
                                     </EcoBadge>
@@ -119,11 +123,11 @@ export const UserPointShop = () => {
                                 )}
                             </div>
                             <div className="flex flex-grow flex-col gap-1.5 p-3.5">
-                                <h3 className="line-clamp-2 text-xs font-bold leading-snug text-on-surface">
+                                <h3 className="text-on-surface line-clamp-2 text-xs leading-snug font-bold">
                                     {item.name}
                                 </h3>
                                 <div className="mt-auto">
-                                    <span className="text-sm font-black text-primary">
+                                    <span className="text-primary text-sm font-black">
                                         {item.pointCost.toLocaleString()} P
                                     </span>
                                 </div>
@@ -135,10 +139,12 @@ export const UserPointShop = () => {
 
             {selectedReward && (
                 <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
-                    <div className="w-full max-w-sm rounded-2xl bg-surface p-6 shadow-xl">
+                    <div className="bg-surface w-full max-w-sm rounded-2xl p-6 shadow-xl">
                         <h3 className="mb-2 text-lg font-bold">교환 확인</h3>
-                        <p className="mb-1 text-sm text-on-surface-variant">{selectedReward.name}</p>
-                        <p className="mb-6 text-2xl font-black text-primary">
+                        <p className="text-on-surface-variant mb-1 text-sm">
+                            {selectedReward.name}
+                        </p>
+                        <p className="text-primary mb-6 text-2xl font-black">
                             {selectedReward.pointCost.toLocaleString()} P
                         </p>
                         <div className="flex flex-col gap-2">
