@@ -6,15 +6,11 @@
                 try {
                     // 새로고침시 임시 배경화면 제공
                     const theme =
-                        localStorage.getItem('vite-ui-theme') || 'system'
+                        localStorage.getItem('vite-ui-theme') || 'light'
                     const vars = JSON.parse(
                         localStorage.getItem('vite-ui-theme-vars') || '{}',
                     )
-                    const prefersDark = window.matchMedia(
-                        '(prefers-color-scheme: dark)',
-                    ).matches
-                    const isDark =
-                        theme === 'dark' || (theme === 'system' && prefersDark)
+                    const isDark = theme === 'dark'
 
                     const root = document.documentElement
                     root.classList.add(isDark ? 'dark' : 'light')

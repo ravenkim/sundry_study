@@ -26,6 +26,7 @@ import {
     SheetTitle,
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
+import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
 
 export const USER_NAV_ITEMS = [
     { name: '홈', path: '/', icon: Home },
@@ -140,7 +141,13 @@ export const UserAppLayout = ({
                         })}
                     </nav>
 
-                    <div className="mt-auto border-t border-outline-variant p-3">
+                    <div className="mt-auto border-t border-outline-variant p-3 flex flex-col gap-1">
+                        <div className="flex items-center justify-between rounded-xl px-4 py-3">
+                            <span className="text-sm font-semibold text-on-surface-variant">
+                                다크 모드
+                            </span>
+                            <SSdarkmodeSwitch />
+                        </div>
                         <Link
                             to="/admin"
                             onClick={closeMenu}
@@ -197,7 +204,13 @@ export const AdminSidebar = () => {
                     )
                 })}
             </div>
-            <div className="pt-4 border-t border-outline-variant">
+            <div className="pt-4 border-t border-outline-variant flex flex-col gap-1">
+                <div className="flex items-center justify-between px-4 py-2">
+                    <span className="text-sm font-semibold text-on-surface-variant">
+                        다크 모드
+                    </span>
+                    <SSdarkmodeSwitch />
+                </div>
                 <Link
                     to="/"
                     className="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg w-full"
