@@ -3,8 +3,11 @@ package org.example.be.service.member;
 import lombok.RequiredArgsConstructor;
 import org.example.be.api.request.MemberRequest;
 import org.example.be.api.response.MemberResponse;
+import org.example.be.domain.model.Affiliation;
 import org.example.be.domain.model.Member;
 import org.example.be.domain.model.MemberPoint;
+import org.example.be.domain.model.UserType;
+import org.example.be.domain.repository.AffiliationRepository;
 import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.exception.BusinessLogicException;
@@ -21,6 +24,7 @@ public class DefaultMemberService implements MemberService {
     private final MemberRepository memberRepository;
     private final MemberPointRepository memberPointRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AffiliationRepository affiliationRepository;
 
     @Override
     public boolean isEmailAvailable(String email) {
@@ -58,11 +62,24 @@ public class DefaultMemberService implements MemberService {
             throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 이메일입니다.");
         }
 
+// 1. 블록 외부에서 사용할 수 있도록 변수를 null로 먼저 선언합니다.
+        Affiliation affiliation = null;
+
+        // 2. 요청값에 소속 seq가 넘어왔을 경우에만 DB 조회를 수행합니다.
+        if (request.getAffiliation() != null) {
+            affiliation = affiliationRepository.findById(request.getAffiliation())
+                    .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 소속입니다."));
+        }
+
         Member member = new Member(
                 userName,
                 passwordEncoder.encode(request.getPassword()),
-                normalizedEmail
+                normalizedEmail,
+                affiliation
         );
+
+        member.setUserType(UserType.USER);
+
         memberRepository.save(member);
         memberPointRepository.save(new MemberPoint(member));
 

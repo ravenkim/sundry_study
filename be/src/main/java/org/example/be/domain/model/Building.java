@@ -20,12 +20,12 @@ public class Building {
     @Column(nullable = false)
     private String name; // 건물 이름 (예: 공학관 A동)
 
-    private String address; // 건물 주소 (예: 서울시 XX구 XX로 1)
-    //근데 도로명 주소가 필요할까?
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "affiliation_seq")
+    private Affiliation affiliation; // 건물이 속한 구역
 
     @Builder
-    public Building(String name, String address) {
+    public Building(String name) {
         this.name = name;
-        this.address = address;
     }
 }
