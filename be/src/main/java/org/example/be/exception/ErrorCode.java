@@ -15,7 +15,8 @@ public enum ErrorCode {
     NOT_FOUND(2003),
     ALREADY_EXISTS(2004),
     DB_ERROR(5001),
-    MULTIPART_ERROR(5002);
+    MULTIPART_ERROR(5002),
+    INTERNAL_SERVER_ERROR(5003);
     private final int code;
     private String message;
 }

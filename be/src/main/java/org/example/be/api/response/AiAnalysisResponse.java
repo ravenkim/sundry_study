@@ -1,0 +1,12 @@
+package org.example.be.api.response;
+
+import lombok.Data;
+
+@Data
+public class AiAnalysisResponse {
+    private String result;       // "PASS", "ERROR", "WASTE_DETECTED"
+    private String message;      // 상세 메시지
+    private String ac_status;    // "ON", "OFF", "UNKNOWN" 등
+    private String light_status; // "ON", "OFF"
+    private String reason;       // Gemini의 판단 이유
+}
