@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    KPI 카드 템플릿 - 2×2 공들여 나열한 것（CRAP 최적화된 버전）
+    사용: KPI 표시
+    적용 가능한 시나리오: 재무 지표、비즈니스 데이터 칸반、성장률 표시
+    최적화: 정렬 강화、차이、반복하다、친밀감의 원리
+    -->
+    
+    <defs>
+        <!-- 카드 섀도우 - 더욱 세련되고 부드러워짐 -->
+        <filter id="cardShadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+            <feOffset dx="0" dy="3" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.15"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        
+        <!-- 구배배경 - 위계 의식 추가 -->
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ECF0F1;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="url(#bgGradient)"/>
+    
+    <!-- 제목 영역 - 대비 향상 -->
+    <text x="60" y="75" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="36" font-weight="700" fill="#1A252F" letter-spacing="-0.5">
+        <tspan>주요 성과 지표</tspan>
+    </text>
+    <text x="60" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" fill="#7F8C8D">
+        <tspan>Key Performance Indicators</tspan>
+    </text>
+    
+    <!-- KPI 카드 레이아웃 2×2 - 균일한 간격 40px -->
+    
+    <!-- 카드 1 - 왼쪽 위 (수익 성장) -->
+    <g filter="url(#cardShadow)">
+        <!-- 카드배경 - 둥근 모서리 -->
+        <rect x="60" y="150" width="560" height="250" rx="12" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+        
+        <!-- 왼쪽 색상 블록 표시기 - 더욱 대담하고 시선을 사로잡는 -->
+        <rect x="76" y="170" width="8" height="70" rx="4" fill="#2196F3"/>
+        
+        <!-- 지표 이름 - 통합 왼쪽 여백 100px -->
+        <text x="100" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="500" fill="#5F6368" letter-spacing="0.2">
+            <tspan>총 수익</tspan>
+        </text>
+        <text x="100" y="213" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#9AA0A6">
+            <tspan>Total Revenue</tspan>
+        </text>
+        
+        <!-- 주요 가치 - 향상된 시각적 가중치 -->
+        <text x="100" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="64" font-weight="700" fill="#1A252F" letter-spacing="-1">
+            <tspan>¥2.45</tspan>
+        </text>
+        <text x="310" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="28" font-weight="500" fill="#5F6368">
+            <tspan>1억</tspan>
+        </text>
+        
+        <!-- 추세 지표 - 간격 및 정렬 최적화 -->
+        <circle cx="110" cy="340" r="18" fill="#E8F5E9"/>
+        <polygon points="110,333 116,347 104,347" fill="#27AE60"/>
+        <text x="140" y="349" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#27AE60">
+            <tspan>+18.5%</tspan>
+        </text>
+        
+        <!-- 전년 대비 설명 - 더 컴팩트한 그룹화 -->
+        <text x="245" y="349" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" fill="#9AA0A6">
+            <tspan>작년 같은 기간과 비교</tspan>
+        </text>
+    </g>
+    
+    <!-- 카드 2 - 오른쪽 위 (사용자 수) -->
+    <g filter="url(#cardShadow)">
+        <!-- 카드배경 -->
+        <rect x="660" y="150" width="560" height="250" rx="12" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+        
+        <!-- 왼쪽 색상 블록 표시기 -->
+        <rect x="676" y="170" width="8" height="70" rx="4" fill="#4CAF50"/>
+        
+        <!-- 지표 이름 -->
+        <text x="700" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="500" fill="#5F6368" letter-spacing="0.2">
+            <tspan>활성 사용자</tspan>
+        </text>
+        <text x="700" y="213" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#9AA0A6">
+            <tspan>Active Users</tspan>
+        </text>
+        
+        <!-- 주요 가치 -->
+        <text x="700" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="64" font-weight="700" fill="#1A252F" letter-spacing="-1">
+            <tspan>128.3</tspan>
+        </text>
+        <text x="930" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="28" font-weight="500" fill="#5F6368">
+            <tspan>만</tspan>
+        </text>
+        
+        <!-- 추세 지표 -->
+        <circle cx="710" cy="340" r="18" fill="#E8F5E9"/>
+        <polygon points="710,333 716,347 704,347" fill="#27AE60"/>
+        <text x="740" y="349" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#27AE60">
+            <tspan>+12.3%</tspan>
+        </text>
+        
+        <!-- 전년 대비 설명 -->
+        <text x="845" y="349" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" fill="#9AA0A6">
+            <tspan>전월 대비 성장률</tspan>
+        </text>
+    </g>
+    
+    <!-- 카드 3 - 왼쪽 아래 (고객당 가격) -->
+    <g filter="url(#cardShadow)">
+        <!-- 카드배경 -->
+        <rect x="60" y="440" width="560" height="250" rx="12" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+        
+        <!-- 왼쪽 색상 블록 표시기 -->
+        <rect x="76" y="460" width="8" height="70" rx="4" fill="#FF9800"/>
+        
+        <!-- 지표 이름 -->
+        <text x="100" y="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="500" fill="#5F6368" letter-spacing="0.2">
+            <tspan>평균 고객 단가</tspan>
+        </text>
+        <text x="100" y="503" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#9AA0A6">
+            <tspan>Avg Order Value</tspan>
+        </text>
+        
+        <!-- 주요 가치 -->
+        <text x="100" y="575" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="64" font-weight="700" fill="#1A252F" letter-spacing="-1">
+            <tspan>¥432</tspan>
+        </text>
+        
+        <!-- 추세 지표 - 하향 추세 -->
+        <circle cx="110" cy="630" r="18" fill="#FFEBEE"/>
+        <polygon points="110,643 116,629 104,629" fill="#E74C3C"/>
+        <text x="140" y="639" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#E74C3C">
+            <tspan>-3.2%</tspan>
+        </text>
+        
+        <!-- 전년 대비 설명 -->
+        <text x="235" y="639" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" fill="#9AA0A6">
+            <tspan>월별</tspan>
+        </text>
+    </g>
+    
+    <!-- 카드 4 - 오른쪽 아래 (전환율) -->
+    <g filter="url(#cardShadow)">
+        <!-- 카드배경 -->
+        <rect x="660" y="440" width="560" height="250" rx="12" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+        
+        <!-- 왼쪽 색상 블록 표시기 -->
+        <rect x="676" y="460" width="8" height="70" rx="4" fill="#9C27B0"/>
+        
+        <!-- 지표 이름 -->
+        <text x="700" y="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="500" fill="#5F6368" letter-spacing="0.2">
+            <tspan>전환율</tspan>
+        </text>
+        <text x="700" y="503" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#9AA0A6">
+            <tspan>Conversion Rate</tspan>
+        </text>
+        
+        <!-- 주요 가치 -->
+        <text x="700" y="575" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="64" font-weight="700" fill="#1A252F" letter-spacing="-1">
+            <tspan>8.7%</tspan>
+        </text>
+        
+        <!-- 추세 지표 -->
+        <circle cx="710" cy="630" r="18" fill="#E8F5E9"/>
+        <polygon points="710,623 716,637 704,637" fill="#27AE60"/>
+        <text x="740" y="639" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#27AE60">
+            <tspan>+0.8%</tspan>
+        </text>
+        
+        <!-- 전년 대비 설명 -->
+        <text x="835" y="639" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" fill="#9AA0A6">
+            <tspan>백분율 포인트 증가</tspan>
+        </text>
+    </g>
+    
+    <!-- 데이터 원본 주석 - 스타일 최적화 -->
+    <text x="1160" y="705" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" fill="#9AA0A6" text-anchor="end">
+        <tspan>현재 데이터 2025년도11달 | Data as of Nov 2025</tspan>
+    </text>
+</svg>
+

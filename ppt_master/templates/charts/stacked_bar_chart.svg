@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    누적 히스토그램 템플릿
+    사용: 다중 범주 구성 비교、비율 추세 분석
+    적용 가능한 시나리오: 매출 구성、비용 분석、시장 점유율 변화
+    지원하다: 5그룹 데이터 × 4카테고리（조절할 수 있는）
+    -->
+    
+    <defs>
+        <!-- 그림자 -->
+        <filter id="stackShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>분기별 매출 구성 분석</tspan>
+    </text>
+    
+    <text x="60" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2024-2025년도 · 단위：백만 위안</tspan>
+    </text>
+    
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- Y축 그리드 선 -->
+        <line x1="140" y1="550" x2="1100" y2="550" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="470" x2="1100" y2="470" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="390" x2="1100" y2="390" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="310" x2="1100" y2="310" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="230" x2="1100" y2="230" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="150" x2="1100" y2="150" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- Y축 스케일 레이블 -->
+        <text x="125" y="555" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>0</tspan>
+        </text>
+        <text x="125" y="475" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>100</tspan>
+        </text>
+        <text x="125" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>200</tspan>
+        </text>
+        <text x="125" y="315" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>300</tspan>
+        </text>
+        <text x="125" y="235" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>400</tspan>
+        </text>
+        <text x="125" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>500</tspan>
+        </text>
+        
+        <!-- X축과Y중심선 -->
+        <line x1="140" y1="150" x2="140" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="140" y1="550" x2="1100" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        
+        <!-- 기둥 쌓기 - Q1 2024 (총 높이320, 비례적으로: 제품A 120, 제품B 100, 제품C 60, 제품D 40) -->
+        <g filter="url(#stackShadow)">
+            <rect x="200" y="422" width="80" height="128" fill="#2196F3"/>
+            <rect x="200" y="342" width="80" height="80" fill="#4CAF50"/>
+            <rect x="200" y="294" width="80" height="48" fill="#FF9800"/>
+            <rect x="200" y="262" width="80" height="32" fill="#9C27B0"/>
+        </g>
+        <text x="240" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q1'24</tspan>
+        </text>
+        <text x="240" y="247" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>320</tspan>
+        </text>
+        
+        <!-- 기둥 쌓기 - Q2 2024 (총 높이360) -->
+        <g filter="url(#stackShadow)">
+            <rect x="380" y="406" width="80" height="144" fill="#2196F3"/>
+            <rect x="380" y="318" width="80" height="88" fill="#4CAF50"/>
+            <rect x="380" y="262" width="80" height="56" fill="#FF9800"/>
+            <rect x="380" y="222" width="80" height="40" fill="#9C27B0"/>
+        </g>
+        <text x="420" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q2'24</tspan>
+        </text>
+        <text x="420" y="207" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>360</tspan>
+        </text>
+        
+        <!-- 기둥 쌓기 - Q3 2024 (총 높이400) -->
+        <g filter="url(#stackShadow)">
+            <rect x="560" y="390" width="80" height="160" fill="#2196F3"/>
+            <rect x="560" y="294" width="80" height="96" fill="#4CAF50"/>
+            <rect x="560" y="230" width="80" height="64" fill="#FF9800"/>
+            <rect x="560" y="182" width="80" height="48" fill="#9C27B0"/>
+        </g>
+        <text x="600" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q3'24</tspan>
+        </text>
+        <text x="600" y="167" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>400</tspan>
+        </text>
+        
+        <!-- 기둥 쌓기 - Q4 2024 (총 높이420) -->
+        <g filter="url(#stackShadow)">
+            <rect x="740" y="382" width="80" height="168" fill="#2196F3"/>
+            <rect x="740" y="278" width="80" height="104" fill="#4CAF50"/>
+            <rect x="740" y="206" width="80" height="72" fill="#FF9800"/>
+            <rect x="740" y="158" width="80" height="48" fill="#9C27B0"/>
+        </g>
+        <text x="780" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q4'24</tspan>
+        </text>
+        <text x="780" y="143" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>420</tspan>
+        </text>
+        
+        <!-- 기둥 쌓기 - Q1 2025 (총 높이480) -->
+        <g filter="url(#stackShadow)">
+            <rect x="920" y="358" width="80" height="192" fill="#2196F3"/>
+            <rect x="920" y="246" width="80" height="112" fill="#4CAF50"/>
+            <rect x="920" y="166" width="80" height="80" fill="#FF9800"/>
+            <rect x="920" y="110" width="80" height="56" fill="#9C27B0"/>
+        </g>
+        <text x="960" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q1'25</tspan>
+        </text>
+        <text x="960" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>480</tspan>
+        </text>
+    </g>
+    
+    <!-- 전설 -->
+    <g id="legend" transform="translate(1120, 200)">
+        <rect x="0" y="0" width="140" height="180" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="70" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>소득 항목</tspan>
+        </text>
+        
+        <rect x="15" y="50" width="20" height="16" rx="2" fill="#2196F3"/>
+        <text x="45" y="63" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#5D6D7E">
+            <tspan>제품 판매</tspan>
+        </text>
+        
+        <rect x="15" y="80" width="20" height="16" rx="2" fill="#4CAF50"/>
+        <text x="45" y="93" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#5D6D7E">
+            <tspan>서비스 수익</tspan>
+        </text>
+        
+        <rect x="15" y="110" width="20" height="16" rx="2" fill="#FF9800"/>
+        <text x="45" y="123" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#5D6D7E">
+            <tspan>구독 수익</tspan>
+        </text>
+        
+        <rect x="15" y="140" width="20" height="16" rx="2" fill="#9C27B0"/>
+        <text x="45" y="153" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#5D6D7E">
+            <tspan>기타소득</tspan>
+        </text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 소스: 재무 부서 보고서</tspan>
+    </text>
+</svg>
+

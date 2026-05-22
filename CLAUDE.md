@@ -51,8 +51,8 @@ bash run-dev.sh            # 루트 .env 로드 후 bootRun (포트 8080)
 - CORS: `WebConfig`에서 `allowedOriginPatterns("*")`로 전체 허용
 - `MemberAuthService`: BCrypt 로그인 검증 + `JwtTokenProvider` JWT 발급
 - `DefaultMemberService`: 회원가입·중복확인 + 가입 시 `MemberPoint` 0P 생성
-- P0 API: `GET /api/buildings`, `GET /api/points/me`, `POST/GET /api/reports` (회원 FK·내 목록·상세)
-- 미구현: GCS·FastAPI AI·포인트 적립·관리자 API·Kafka Compose 연동
+- P0 API: `GET /api/buildings`, `GET /api/points/me`, `POST/GET /api/reports` (회원 FK·내 목록·상세, **제보 생성 시 FastAPI `/analyze` 연동**)
+- 미구현: GCS 실업로드·`aiResult` JSON·포인트 적립·관리자 API·Kafka Compose 연동
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 
 **패키지 구조**

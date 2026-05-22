@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    가로 막대 차트 템플릿
+    사용: 카테고리 순위、수치비교（카테고리 이름이 긴 시나리오에 적합）
+    적용 가능한 시나리오: 판매 리더보드、브랜드 인지도、만족도 점수
+    지원하다: 8바（조정될 수 있습니다5-12개인）
+    막대 차트와의 차이점: 수평 디스플레이，순위 및 카테고리 이름이 긴 데이터에 적합
+    -->
+    
+    <defs>
+        <!-- 바 그래디언트 -->
+        <linearGradient id="hbarGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="hbarGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#66BB6A;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="hbarGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 그림자 -->
+        <filter id="hbarShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="1" dy="0"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>브랜드 인지도 순위표</tspan>
+    </text>
+    
+    <text x="60" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025연간 소비자 조사 보고서 · 표본 크기 N=5,000</tspan>
+    </text>
+    
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- X축 그리드 선 -->
+        <line x1="300" y1="140" x2="300" y2="620" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="480" y1="140" x2="480" y2="620" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="660" y1="140" x2="660" y2="620" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="840" y1="140" x2="840" y2="620" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="1020" y1="140" x2="1020" y2="620" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="1200" y1="140" x2="1200" y2="620" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- X축 스케일 레이블 -->
+        <text x="300" y="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="middle">
+            <tspan>0%</tspan>
+        </text>
+        <text x="480" y="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="middle">
+            <tspan>20%</tspan>
+        </text>
+        <text x="660" y="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="middle">
+            <tspan>40%</tspan>
+        </text>
+        <text x="840" y="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="middle">
+            <tspan>60%</tspan>
+        </text>
+        <text x="1020" y="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="middle">
+            <tspan>80%</tspan>
+        </text>
+        <text x="1200" y="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="middle">
+            <tspan>100%</tspan>
+        </text>
+        
+        <!-- Y축 기준선 -->
+        <line x1="300" y1="140" x2="300" y2="620" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="300" y1="620" x2="1200" y2="620" stroke="#95A5A6" stroke-width="2"/>
+        
+        <!-- 바 데이터 (바 높이36px, 간격24px, 총 간격60px) -->
+        
+        <!-- 술집1: 상표A - 92% (아니요.1이름，파란색) -->
+        <text x="290" y="175" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표A (마켓 리더)</tspan>
+        </text>
+        <rect x="300" y="155" width="828" height="36" rx="4" fill="url(#hbarGrad1)" filter="url(#hbarShadow)"/>
+        <text x="1138" y="179" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>92%</tspan>
+        </text>
+        
+        <!-- 술집2: 상표B - 78% (아니요.2이름，파란색) -->
+        <text x="290" y="235" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표B (신흥 브랜드)</tspan>
+        </text>
+        <rect x="300" y="215" width="702" height="36" rx="4" fill="url(#hbarGrad1)" filter="url(#hbarShadow)"/>
+        <text x="1012" y="239" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>78%</tspan>
+        </text>
+        
+        <!-- 술집3: 상표C - 65% (아니요.3이름，파란색) -->
+        <text x="290" y="295" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표C (클래식 브랜드)</tspan>
+        </text>
+        <rect x="300" y="275" width="585" height="36" rx="4" fill="url(#hbarGrad1)" filter="url(#hbarShadow)"/>
+        <text x="895" y="299" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>65%</tspan>
+        </text>
+        
+        <!-- 술집4: 상표D - 52% (아니요.4이름，녹색) -->
+        <text x="290" y="355" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표D (지역 브랜드)</tspan>
+        </text>
+        <rect x="300" y="335" width="468" height="36" rx="4" fill="url(#hbarGrad2)" filter="url(#hbarShadow)"/>
+        <text x="778" y="359" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>52%</tspan>
+        </text>
+        
+        <!-- 술집5: 상표E - 45% (아니요.5이름，녹색) -->
+        <text x="290" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표E (가치 브랜드)</tspan>
+        </text>
+        <rect x="300" y="395" width="405" height="36" rx="4" fill="url(#hbarGrad2)" filter="url(#hbarShadow)"/>
+        <text x="715" y="419" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>45%</tspan>
+        </text>
+        
+        <!-- 술집6: 상표F - 38% (아니요.6이름，녹색) -->
+        <text x="290" y="475" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표F (고급 브랜드)</tspan>
+        </text>
+        <rect x="300" y="455" width="342" height="36" rx="4" fill="url(#hbarGrad2)" filter="url(#hbarShadow)"/>
+        <text x="652" y="479" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>38%</tspan>
+        </text>
+        
+        <!-- 술집7: 상표G - 25% (아니요.7이름，오렌지색) -->
+        <text x="290" y="535" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>상표G (신규 참가자)</tspan>
+        </text>
+        <rect x="300" y="515" width="225" height="36" rx="4" fill="url(#hbarGrad3)" filter="url(#hbarShadow)"/>
+        <text x="535" y="539" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>25%</tspan>
+        </text>
+        
+        <!-- 술집8: 다른 - 12% (아니요.8이름，오렌지색) -->
+        <text x="290" y="595" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="16" fill="#2C3E50" text-anchor="end">
+            <tspan>다른 브랜드</tspan>
+        </text>
+        <rect x="300" y="575" width="108" height="36" rx="4" fill="url(#hbarGrad3)" filter="url(#hbarShadow)"/>
+        <text x="418" y="599" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#2C3E50">
+            <tspan>12%</tspan>
+        </text>
+    </g>
+    
+    <!-- 전설 -->
+    <g id="legend">
+        <rect x="60" y="660" width="16" height="16" rx="2" fill="url(#hbarGrad1)"/>
+        <text x="85" y="673" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E">
+            <tspan>높은 인지도 (≥50%)</tspan>
+        </text>
+        
+        <rect x="240" y="660" width="16" height="16" rx="2" fill="url(#hbarGrad2)"/>
+        <text x="265" y="673" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E">
+            <tspan>중간 정도의 인식 (30-50%)</tspan>
+        </text>
+        
+        <rect x="450" y="660" width="16" height="16" rx="2" fill="url(#hbarGrad3)"/>
+        <text x="475" y="673" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E">
+            <tspan>낮은 인지도 (&lt;30%)</tspan>
+        </text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="1220" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6" text-anchor="end">
+        <tspan>데이터 소스: 시장조사부</tspan>
+    </text>
+</svg>
+

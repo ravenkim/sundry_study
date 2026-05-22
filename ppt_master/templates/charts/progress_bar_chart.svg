@@ -1,0 +1,291 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--진행률 표시줄 차트 정리
+    사용법: 목표 최종 실행、여러 평가 비교
+    적용 가능한 시나리오: OKR 진행, 프로젝트 종료, KPI 달성, 예산 집행
+    Support: 6진행표시줄 ，대상 라인 및 상태 표시줄 포함-->
+    
+    <defs>
+        <!--진행률 표시줄 그라디언트 (파란색 - 기본값)-->
+        <linearGradient id="progressBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" />
+        </linearGradient>
+        
+        <!--진행률 표시줄 그라디언트 (Green - Completed/Exceeded)-->
+        <linearGradient id="progressGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#66BB6A;stop-opacity:1" />
+        </linearGradient>
+        
+        <!--진행중인 표시줄 그라디언트 (orange - 진행 중)-->
+        <linearGradient id="progressOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+        </linearGradient>
+        
+        <!--진행률 표시줄 그라디언트 (red - Behind)-->
+        <linearGradient id="progressRed" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#f44336;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#EF5350;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 진행률 표시줄 그림자 -->
+        <filter id="progressShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!--제목-->
+    <text x="60" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>2025년 4분기 OKR 진행 상황 추적</tspan>
+    </text>
+    
+    <text x="60" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>종료일: 2025년 12월 31일 · 20일 남음</tspan>
+    </text>
+    
+    <!-- 전반적인 진행 상황 개요 -->
+    <g id="overallProgress" transform="translate(900, 50)">
+        <rect x="0" y="0" width="320" height="60" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="20" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#7F8C8D">
+            <tspan>전체 완료</tspan>
+        </text>
+        <text x="20" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="24" font-weight="bold" fill="#2196F3">
+            <tspan>73.5%</tspan>
+        </text>
+        <text x="110" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#7F8C8D">
+            <tspan>/ 목표 100%</tspan>
+        </text>
+        
+        <!-- 미니 진행 표시줄 -->
+        <rect x="200" y="20" width="100" height="24" rx="12" fill="#E0E0E0"/>
+        <rect x="200" y="20" width="73.5" height="24" rx="12" fill="url(#progressBlue)"/>
+    </g>
+    
+    <!-- 진행률 표시줄 영역 -->
+    <g id="progressBars">
+        <!--각 실행표시줄：
+        - 전체 너비: 700px(x=360에서 x=1060)
+        - 높이: 32px
+        - 세로 간격 : 85px-->
+        
+        <!--진행률 표시줄 1: 수익 목표 92%(초과)-->
+        <g transform="translate(60, 150)">
+            <!--태그 영역-->
+            <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="18" font-weight="600" fill="#2C3E50">
+                <tspan>수익 목표</tspan>
+            </text>
+            <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" fill="#7F8C8D">
+                <tspan>목표 : 5천만 | 실제: 4,600만</tspan>
+            </text>
+            
+            <!--배경Tiao-->
+            <rect x="300" y="8" width="700" height="32" rx="16" fill="#EEEEEE"/>
+            
+            <!--진행률 표시줄 92%-->
+            <rect x="300" y="8" width="644" height="32" rx="16" fill="url(#progressGreen)" filter="url(#progressShadow)"/>
+            
+            <!--타겟 라인(100% = 700px)-->
+            <line x1="1000" y1="2" x2="1000" y2="46" stroke="#2C3E50" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="1000" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="12" fill="#7F8C8D" text-anchor="middle"><tspan>목표</tspan></text>
+            
+            <!--백분율-->
+            <text x="1050" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#4CAF50">
+                <tspan>92%</tspan>
+            </text>
+            
+            <!--상태 라벨-->
+            <rect x="1110" y="8" width="70" height="32" rx="16" fill="#E8F5E9"/>
+            <text x="1145" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#4CAF50" text-anchor="middle">
+                <tspan>미리</tspan>
+            </text>
+        </g>
+        
+        <!--진행률 표시줄 2: 신규 고객 요구 85%-->
+        <g transform="translate(60, 235)">
+            <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="18" font-weight="600" fill="#2C3E50">
+                <tspan>신규 고객 유치</tspan>
+            </text>
+            <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" fill="#7F8C8D">
+                <tspan>대상: 200개 매장 | 실제: 매장 170개</tspan>
+            </text>
+            
+            <rect x="300" y="8" width="700" height="32" rx="16" fill="#EEEEEE"/>
+            <rect x="300" y="8" width="595" height="32" rx="16" fill="url(#progressGreen)" filter="url(#progressShadow)"/>
+            
+            <line x1="1000" y1="2" x2="1000" y2="46" stroke="#2C3E50" stroke-width="2" stroke-dasharray="4,2"/>
+            
+            <text x="1050" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#4CAF50">
+                <tspan>85%</tspan>
+            </text>
+            
+            <rect x="1110" y="8" width="70" height="32" rx="16" fill="#E8F5E9"/>
+            <text x="1145" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#4CAF50" text-anchor="middle">
+                <tspan>기준을 만나십시오</tspan>
+            </text>
+        </g>
+        
+        <!--진행률 표시줄 3: 제품 출시 75%-->
+        <g transform="translate(60, 320)">
+            <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="18" font-weight="600" fill="#2C3E50">
+                <tspan>제품 출시</tspan>
+            </text>
+            <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" fill="#7F8C8D">
+                <tspan>대상: 4가지 기능 | 실제: 기능 3개</tspan>
+            </text>
+            
+            <rect x="300" y="8" width="700" height="32" rx="16" fill="#EEEEEE"/>
+            <rect x="300" y="8" width="525" height="32" rx="16" fill="url(#progressBlue)" filter="url(#progressShadow)"/>
+            
+            <line x1="1000" y1="2" x2="1000" y2="46" stroke="#2C3E50" stroke-width="2" stroke-dasharray="4,2"/>
+            
+            <text x="1050" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#2196F3">
+                <tspan>75%</tspan>
+            </text>
+            
+            <rect x="1110" y="8" width="70" height="32" rx="16" fill="#E3F2FD"/>
+            <text x="1145" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#2196F3" text-anchor="middle">
+                <tspan>진행 중</tspan>
+            </text>
+        </g>
+        
+        <!--진행률 표시줄 4: 팀 확장 68%-->
+        <g transform="translate(60, 405)">
+            <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="18" font-weight="600" fill="#2C3E50">
+                <tspan>팀 확장</tspan>
+            </text>
+            <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" fill="#7F8C8D">
+                <tspan>대상 : 25명 | 실제: 17명</tspan>
+            </text>
+            
+            <rect x="300" y="8" width="700" height="32" rx="16" fill="#EEEEEE"/>
+            <rect x="300" y="8" width="476" height="32" rx="16" fill="url(#progressOrange)" filter="url(#progressShadow)"/>
+            
+            <line x1="1000" y1="2" x2="1000" y2="46" stroke="#2C3E50" stroke-width="2" stroke-dasharray="4,2"/>
+            
+            <text x="1050" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#FF9800">
+                <tspan>68%</tspan>
+            </text>
+            
+            <rect x="1110" y="8" width="70" height="32" rx="16" fill="#FFF3E0"/>
+            <text x="1145" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#FF9800" text-anchor="middle">
+                <tspan>지연</tspan>
+            </text>
+        </g>
+        
+        <!--진행률 표시줄 5: 비용 관리 55%-->
+        <g transform="translate(60, 490)">
+            <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="18" font-weight="600" fill="#2C3E50">
+                <tspan>비용 통제</tspan>
+            </text>
+            <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" fill="#7F8C8D">
+                <tspan>목표: 20% 감소 | 실제: 11% 감소</tspan>
+            </text>
+            
+            <rect x="300" y="8" width="700" height="32" rx="16" fill="#EEEEEE"/>
+            <rect x="300" y="8" width="385" height="32" rx="16" fill="url(#progressRed)" filter="url(#progressShadow)"/>
+            
+            <line x1="1000" y1="2" x2="1000" y2="46" stroke="#2C3E50" stroke-width="2" stroke-dasharray="4,2"/>
+            
+            <text x="1050" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#f44336">
+                <tspan>55%</tspan>
+            </text>
+            
+            <rect x="1110" y="8" width="70" height="32" rx="16" fill="#FFEBEE"/>
+            <text x="1145" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#f44336" text-anchor="middle">
+                <tspan>위험</tspan>
+            </text>
+        </g>
+        
+        <!--진행률 표시줄 6: 브랜드 구축 66%-->
+        <g transform="translate(60, 575)">
+            <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="18" font-weight="600" fill="#2C3E50">
+                <tspan>브랜드 구축</tspan>
+            </text>
+            <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" fill="#7F8C8D">
+                <tspan>목표: 인지도 +30% | 실제: +20%</tspan>
+            </text>
+            
+            <rect x="300" y="8" width="700" height="32" rx="16" fill="#EEEEEE"/>
+            <rect x="300" y="8" width="462" height="32" rx="16" fill="url(#progressOrange)" filter="url(#progressShadow)"/>
+            
+            <line x1="1000" y1="2" x2="1000" y2="46" stroke="#2C3E50" stroke-width="2" stroke-dasharray="4,2"/>
+            
+            <text x="1050" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#FF9800">
+                <tspan>66%</tspan>
+            </text>
+            
+            <rect x="1110" y="8" width="70" height="32" rx="16" fill="#FFF3E0"/>
+            <text x="1145" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#FF9800" text-anchor="middle">
+                <tspan>지연</tspan>
+            </text>
+        </g>
+    </g>
+    
+    <!--전설-->
+    <g id="legend" transform="translate(60, 660)">
+        <rect x="0" y="0" width="16" height="16" rx="4" fill="url(#progressGreen)"/>
+        <text x="24" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>목표 달성/일정보다 앞서(≥80%)</tspan></text>
+        
+        <rect x="160" y="0" width="16" height="16" rx="4" fill="url(#progressBlue)"/>
+        <text x="184" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>진행 중(70-80%)</tspan></text>
+        
+        <rect x="320" y="0" width="16" height="16" rx="4" fill="url(#progressOrange)"/>
+        <text x="344" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>히스테리시스(60-70%)</tspan></text>
+        
+        <rect x="470" y="0" width="16" height="16" rx="4" fill="url(#progressRed)"/>
+        <text x="494" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>위험(<60%)</tspan></text>
+    </g>
+    
+    <!--데이터 소스-->
+    <text x="1220" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6" text-anchor="end">
+        <tspan>데이터 출처: OKR 관리 시스템</tspan>
+    </text>
+</svg>
+

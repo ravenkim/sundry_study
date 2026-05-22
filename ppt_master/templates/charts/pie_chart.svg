@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    원형 차트 템플릿
+    사용: 비율 및 조성 분석（기본 버전）
+    적용 가능한 시나리오: 시장 점유율、예산 할당、구조 분석
+    지원하다: 5덩어리 (추천하다3-6개인)
+    링 차트와의 차이점: 중앙 구멍 없음，간단한 비율 표시에 더 적합합니다.
+    -->
+    
+    <defs>
+        <!-- 섹터 섀도우 -->
+        <filter id="pieShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            <feOffset dx="0" dy="2"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.25"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        
+        <!-- 색상 정의 -->
+        <linearGradient id="pieGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="pieGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="pieGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="pieGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="pieGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#607D8B;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#455A64;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>시장 점유율 분포</tspan>
+    </text>
+    
+    <text x="60" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025올해 3분기 · 업계의 전반적인 시장 규모 1201억</tspan>
+    </text>
+    
+    <!-- 원형 차트 센터 -->
+    <g id="pieChart" transform="translate(420, 400)">
+        <!-- 
+        원의 중심: (420, 400)
+        반지름: 200px
+        시작 각도: -90° (12점 방향)
+        
+        데이터:
+        1. 회사A: 35% (파란색) - 각도: 126°
+        2. 회사B: 25% (녹색) - 각도: 90°
+        3. 회사C: 20% (오렌지색) - 각도: 72°
+        4. 회사D: 12% (보라) - 각도: 43.2°
+        5. 다른: 8% (회색) - 각도: 28.8°
+        -->
+        
+        <!-- 부문1: 회사A 35% (~에서-90°도착하다36°, 지금 바로126°) -->
+        <path d="M 0,0 L 0,-200 A 200,200 0 0,1 173.2,100 Z" 
+              fill="url(#pieGrad1)" filter="url(#pieShadow)"/>
+        
+        <!-- 부문2: 회사B 25% (~에서36°도착하다126°, 지금 바로90°) -->
+        <path d="M 0,0 L 173.2,100 A 200,200 0 0,1 -117.56,162.34 Z" 
+              fill="url(#pieGrad2)" filter="url(#pieShadow)"/>
+        
+        <!-- 부문3: 회사C 20% (~에서126°도착하다198°, 지금 바로72°) -->
+        <path d="M 0,0 L -117.56,162.34 A 200,200 0 0,1 -195.63,-62.93 Z" 
+              fill="url(#pieGrad3)" filter="url(#pieShadow)"/>
+        
+        <!-- 부문4: 회사D 12% (~에서198°도착하다241.2°, 지금 바로43.2°) -->
+        <path d="M 0,0 L -195.63,-62.93 A 200,200 0 0,1 -62.93,-189.87 Z" 
+              fill="url(#pieGrad4)" filter="url(#pieShadow)"/>
+        
+        <!-- 부문5: 다른 8% (~에서241.2°도착하다270°, 지금 바로28.8°) -->
+        <path d="M 0,0 L -62.93,-189.87 A 200,200 0 0,1 0,-200 Z" 
+              fill="url(#pieGrad5)" filter="url(#pieShadow)"/>
+    </g>
+    
+    <!-- 백분율 레이블（섹터에 직접 표시） -->
+    <!-- 상표1: 회사A 35% -->
+    <text x="500" y="320" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+        <tspan>35%</tspan>
+    </text>
+    
+    <!-- 상표2: 회사B 25% -->
+    <text x="450" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="22" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+        <tspan>25%</tspan>
+    </text>
+    
+    <!-- 상표3: 회사C 20% -->
+    <text x="280" y="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+        <tspan>20%</tspan>
+    </text>
+    
+    <!-- 상표4: 회사D 12% -->
+    <text x="280" y="320" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+        <tspan>12%</tspan>
+    </text>
+    
+    <!-- 상표5: 다른 8% (섹터가 더 작습니다.，리드 레이블 사용) -->
+    <g>
+        <line x1="380" y1="220" x2="340" y2="170" stroke="#607D8B" stroke-width="1.5"/>
+        <circle cx="380" cy="220" r="3" fill="#607D8B"/>
+        <text x="330" y="165" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#607D8B" text-anchor="end">
+            <tspan>8%</tspan>
+        </text>
+    </g>
+    
+    <!-- 오른쪽의 범례 -->
+    <g id="legend" transform="translate(720, 200)">
+        <!-- 범례 제목 -->
+        <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="20" font-weight="600" fill="#2C3E50">
+            <tspan>시장 점유율</tspan>
+        </text>
+        
+        <!-- 전설 아이템1: 회사A -->
+        <rect x="0" y="30" width="24" height="24" rx="4" fill="url(#pieGrad1)"/>
+        <text x="40" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E">
+            <tspan>회사A</tspan>
+        </text>
+        <text x="460" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="600" fill="#2C3E50" text-anchor="end">
+            <tspan>421억 (35%)</tspan>
+        </text>
+        
+        <!-- 전설 아이템2: 회사B -->
+        <rect x="0" y="70" width="24" height="24" rx="4" fill="url(#pieGrad2)"/>
+        <text x="40" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E">
+            <tspan>회사B</tspan>
+        </text>
+        <text x="460" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="600" fill="#2C3E50" text-anchor="end">
+            <tspan>301억 (25%)</tspan>
+        </text>
+        
+        <!-- 전설 아이템3: 회사C -->
+        <rect x="0" y="110" width="24" height="24" rx="4" fill="url(#pieGrad3)"/>
+        <text x="40" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E">
+            <tspan>회사C</tspan>
+        </text>
+        <text x="460" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="600" fill="#2C3E50" text-anchor="end">
+            <tspan>241억 (20%)</tspan>
+        </text>
+        
+        <!-- 전설 아이템4: 회사D -->
+        <rect x="0" y="150" width="24" height="24" rx="4" fill="url(#pieGrad4)"/>
+        <text x="40" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E">
+            <tspan>회사D</tspan>
+        </text>
+        <text x="460" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="600" fill="#2C3E50" text-anchor="end">
+            <tspan>14.41억 (12%)</tspan>
+        </text>
+        
+        <!-- 전설 아이템5: 다른 -->
+        <rect x="0" y="190" width="24" height="24" rx="4" fill="url(#pieGrad5)"/>
+        <text x="40" y="208" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E">
+            <tspan>다른</tspan>
+        </text>
+        <text x="460" y="208" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="600" fill="#2C3E50" text-anchor="end">
+            <tspan>9.61억 (8%)</tspan>
+        </text>
+        
+        <!-- 분할기 -->
+        <line x1="0" y1="240" x2="460" y2="240" stroke="#E0E0E0" stroke-width="2"/>
+        
+        <!-- 총 -->
+        <text x="0" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" font-weight="600" fill="#2C3E50">
+            <tspan>총 시장 규모</tspan>
+        </text>
+        <text x="460" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="bold" fill="#2C3E50" text-anchor="end">
+            <tspan>1201억 (100%)</tspan>
+        </text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 소스: 산업 연구 보고서</tspan>
+    </text>
+</svg>
+

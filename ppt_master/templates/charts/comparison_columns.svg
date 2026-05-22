@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    다중 열 비교/가격표 템플릿
+    사용: 서비스 패키지 비교、가격 계획、회원등급
+    적용 가능한 시나리오: SaaS가격 페이지、제품 버전 비교、서비스 등급
+    지원하다: 3목록 (추천하다2-4목록)
+    -->
+
+    <defs>
+        <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+            <feOffset dx="0" dy="3" result="offsetblur"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="highlightShadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+            <feOffset dx="0" dy="4" result="offsetblur"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+    </defs>
+
+    <rect width="1280" height="720" fill="#F8F9FA"/>
+
+    <!-- 제목 -->
+    <text x="640" y="52" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="30" font-weight="700" fill="#1A252F">알맞은 요금제 선택하기</text>
+    <text x="640" y="78" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="14" fill="#7F8C8D">Pricing Plans · 다양한 크기를 위한 유연한 솔루션</text>
+
+    <!-- 기본 버전 (왼쪽) -->
+    <g filter="url(#cardShadow)">
+        <rect x="80" y="110" width="340" height="560" rx="16" fill="#FFFFFF"/>
+        <!-- 머리 -->
+        <rect x="80" y="110" width="340" height="120" rx="16" fill="#6C5CE7" fill-opacity="0.06"/>
+        <rect x="80" y="214" width="340" height="16" fill="#FFFFFF"/>
+        <text x="250" y="152" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="20" font-weight="700" fill="#6C5CE7">기본 버전</text>
+        <text x="250" y="175" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="13" fill="#95A5A6">개인 및 소규모 그룹에 적합</text>
+        <text x="210" y="210" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="42" font-weight="800" fill="#1A252F">¥99</text>
+        <text x="268" y="210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#95A5A6">/달</text>
+        <!-- 기능 목록 -->
+        <line x1="110" y1="240" x2="390" y2="240" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="142" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">5항목 공간</text>
+        <text x="118" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="142" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">10GB저장</text>
+        <text x="118" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="142" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">기본 보고 기능</text>
+        <text x="118" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="142" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">이메일 지원</text>
+        <text x="118" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="142" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#BDC3C7">API통합</text>
+        <text x="118" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#BDC3C7">—</text>
+        <text x="142" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#BDC3C7">사용자 지정 워크플로</text>
+        <text x="118" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#BDC3C7">—</text>
+        <text x="142" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#BDC3C7">전담 계정 관리자</text>
+        <text x="118" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#BDC3C7">—</text>
+        <text x="142" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#BDC3C7">SLA확신하다</text>
+        <text x="118" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#BDC3C7">—</text>
+        <!-- 단추 -->
+        <rect x="120" y="560" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#6C5CE7" stroke-width="2"/>
+        <text x="220" y="587" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" font-weight="700" fill="#6C5CE7">시작하기</text>
+    </g>
+
+    <!-- 전문가용 버전 (가운데, 추천하이라이트) -->
+    <g filter="url(#highlightShadow)">
+        <rect x="470" y="95" width="340" height="590" rx="16" fill="#FFFFFF"/>
+        <!-- 추천 태그 -->
+        <rect x="580" y="82" width="80" height="26" rx="13" fill="#00B894"/>
+        <text x="620" y="99" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="11" font-weight="700" fill="#FFFFFF">가장 높은 별점</text>
+        <!-- 머리 -->
+        <rect x="470" y="95" width="340" height="130" rx="16" fill="#00B894"/>
+        <rect x="470" y="209" width="340" height="16" fill="#FFFFFF"/>
+        <text x="640" y="142" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="20" font-weight="700" fill="#FFFFFF">전문가용 버전</text>
+        <text x="640" y="165" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="13" fill="#FFFFFF" fill-opacity="0.85">성장하는 비즈니스에 이상적</text>
+        <text x="598" y="205" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="42" font-weight="800" fill="#1A252F">¥399</text>
+        <text x="658" y="205" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#95A5A6">/달</text>
+        <line x1="500" y1="235" x2="780" y2="235" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="532" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">무제한 프로젝트 공간</text>
+        <text x="508" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="532" y="305" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">100GB저장</text>
+        <text x="508" y="305" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="532" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">고급 보고 + 계기반</text>
+        <text x="508" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="532" y="375" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">우선 티켓 지원</text>
+        <text x="508" y="375" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="532" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">API통합</text>
+        <text x="508" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="532" y="445" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">사용자 지정 워크플로</text>
+        <text x="508" y="445" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="532" y="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#BDC3C7">전담 계정 관리자</text>
+        <text x="508" y="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#BDC3C7">—</text>
+        <text x="532" y="515" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#BDC3C7">SLA확신하다</text>
+        <text x="508" y="515" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#BDC3C7">—</text>
+        <rect x="510" y="555" width="200" height="44" rx="22" fill="#00B894"/>
+        <text x="610" y="582" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" font-weight="700" fill="#FFFFFF">지금 업그레이드</text>
+    </g>
+
+    <!-- 엔터프라이즈 에디션 (오른쪽) -->
+    <g filter="url(#cardShadow)">
+        <rect x="860" y="110" width="340" height="560" rx="16" fill="#FFFFFF"/>
+        <rect x="860" y="110" width="340" height="120" rx="16" fill="#1A252F" fill-opacity="0.04"/>
+        <rect x="860" y="214" width="340" height="16" fill="#FFFFFF"/>
+        <text x="1030" y="152" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="20" font-weight="700" fill="#1A252F">엔터프라이즈 에디션</text>
+        <text x="1030" y="175" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="13" fill="#95A5A6">대규모 조직에 적합</text>
+        <text x="1030" y="210" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="36" font-weight="800" fill="#1A252F">영업팀에 문의</text>
+        <line x1="890" y1="240" x2="1170" y2="240" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="922" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">무제한 프로젝트 공간</text>
+        <text x="898" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">무제한 저장용량</text>
+        <text x="898" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">모든 보고서 + BI분석하다</text>
+        <text x="898" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">7×24전화 지원</text>
+        <text x="898" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">API통합 + Webhook</text>
+        <text x="898" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">사용자 지정 워크플로</text>
+        <text x="898" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">전담 계정 관리자</text>
+        <text x="898" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <text x="922" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" fill="#2C3E50">99.9% SLA확신하다</text>
+        <text x="898" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#00B894">✓</text>
+        <rect x="900" y="560" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#1A252F" stroke-width="2"/>
+        <text x="1000" y="587" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" font-weight="700" fill="#1A252F">문의하기</text>
+    </g>
+
+    <!-- 맨 아래 -->
+    <text x="640" y="710" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="12" fill="#BDC3C7">모든 요금제에는 다음이 포함됩니다14일 무료 평가판 · 언제든지 업그레이드 및 다운그레이드 지원</text>
+</svg>

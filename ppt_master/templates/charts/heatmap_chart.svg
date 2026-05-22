@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    히트맵 템플릿
+    사용: 매트릭스 데이터 시각화、상관분석
+    적용 가능한 시나리오: 상관 관계 매트릭스、시간 히트맵、사용자 행동 분석
+    지원하다: 7×7 매트릭스 격자
+    -->
+    
+    <defs>
+        <!-- 히트맵 색상 스케일（파란색에서 빨간색으로） -->
+        <linearGradient id="heatGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#1565C0"/>
+            <stop offset="25%" style="stop-color:#42A5F5"/>
+            <stop offset="50%" style="stop-color:#FFEB3B"/>
+            <stop offset="75%" style="stop-color:#FF9800"/>
+            <stop offset="100%" style="stop-color:#D32F2F"/>
+        </linearGradient>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>사용자 활동 히트맵</tspan>
+    </text>
+    
+    <text x="60" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>요일 및 시간대별 통계 · 값은 평균 온라인 사용자 수를 나타냅니다（수천명의 사람들）</tspan>
+    </text>
+    
+    <!-- 히트맵 영역 -->
+    <g id="heatmapArea" transform="translate(180, 130)">
+        <!-- 
+        그리드 크기: 80×60
+        목록: 7목록（월요일 ~ 일요일）
+        좋아요: 8좋아요（기간）
+        컬러 맵: 0-100 -> 파란색에서 빨간색으로
+        -->
+        
+        <!-- 열 헤더（주） -->
+        <text x="40" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle"><tspan>월요일에</tspan></text>
+        <text x="120" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle"><tspan>화요일</tspan></text>
+        <text x="200" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle"><tspan>수요일</tspan></text>
+        <text x="280" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle"><tspan>목요일</tspan></text>
+        <text x="360" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle"><tspan>금요일</tspan></text>
+        <text x="440" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#E91E63" text-anchor="middle"><tspan>토요일</tspan></text>
+        <text x="520" y="-15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#E91E63" text-anchor="middle"><tspan>일요일</tspan></text>
+        
+        <!-- 행 머리글（기간） -->
+        <text x="-15" y="35" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>6-9시간</tspan></text>
+        <text x="-15" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>9-12시간</tspan></text>
+        <text x="-15" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>12-14시간</tspan></text>
+        <text x="-15" y="215" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>14-17시간</tspan></text>
+        <text x="-15" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>17-19시간</tspan></text>
+        <text x="-15" y="335" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>19-21시간</tspan></text>
+        <text x="-15" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>21-23시간</tspan></text>
+        <text x="-15" y="455" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>23-6시간</tspan></text>
+        
+        <!-- 히트맵 격자 -->
+        <!-- 아니요.1좋아요: 6-9시간 -->
+        <rect x="0" y="5" width="78" height="58" rx="4" fill="#64B5F6"/><text x="40" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>35</tspan></text>
+        <rect x="80" y="5" width="78" height="58" rx="4" fill="#42A5F5"/><text x="120" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>42</tspan></text>
+        <rect x="160" y="5" width="78" height="58" rx="4" fill="#42A5F5"/><text x="200" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>40</tspan></text>
+        <rect x="240" y="5" width="78" height="58" rx="4" fill="#64B5F6"/><text x="280" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>38</tspan></text>
+        <rect x="320" y="5" width="78" height="58" rx="4" fill="#90CAF9"/><text x="360" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>28</tspan></text>
+        <rect x="400" y="5" width="78" height="58" rx="4" fill="#BBDEFB"/><text x="440" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>15</tspan></text>
+        <rect x="480" y="5" width="78" height="58" rx="4" fill="#E3F2FD"/><text x="520" y="40" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>10</tspan></text>
+        
+        <!-- 아니요.2좋아요: 9-12시간 -->
+        <rect x="0" y="65" width="78" height="58" rx="4" fill="#FFF176"/><text x="40" y="100" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>58</tspan></text>
+        <rect x="80" y="65" width="78" height="58" rx="4" fill="#FFD54F"/><text x="120" y="100" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>65</tspan></text>
+        <rect x="160" y="65" width="78" height="58" rx="4" fill="#FFC107"/><text x="200" y="100" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>72</tspan></text>
+        <rect x="240" y="65" width="78" height="58" rx="4" fill="#FFD54F"/><text x="280" y="100" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>68</tspan></text>
+        <rect x="320" y="65" width="78" height="58" rx="4" fill="#FFF176"/><text x="360" y="100" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>55</tspan></text>
+        <rect x="400" y="65" width="78" height="58" rx="4" fill="#42A5F5"/><text x="440" y="100" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>45</tspan></text>
+        <rect x="480" y="65" width="78" height="58" rx="4" fill="#64B5F6"/><text x="520" y="100" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>38</tspan></text>
+        
+        <!-- 아니요.3좋아요: 12-14시간 -->
+        <rect x="0" y="125" width="78" height="58" rx="4" fill="#FFB74D"/><text x="40" y="160" font-size="13" fill="#E65100" text-anchor="middle"><tspan>75</tspan></text>
+        <rect x="80" y="125" width="78" height="58" rx="4" fill="#FFA726"/><text x="120" y="160" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>82</tspan></text>
+        <rect x="160" y="125" width="78" height="58" rx="4" fill="#FF9800"/><text x="200" y="160" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>88</tspan></text>
+        <rect x="240" y="125" width="78" height="58" rx="4" fill="#FFA726"/><text x="280" y="160" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>80</tspan></text>
+        <rect x="320" y="125" width="78" height="58" rx="4" fill="#FFB74D"/><text x="360" y="160" font-size="13" fill="#E65100" text-anchor="middle"><tspan>70</tspan></text>
+        <rect x="400" y="125" width="78" height="58" rx="4" fill="#FFF176"/><text x="440" y="160" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>60</tspan></text>
+        <rect x="480" y="125" width="78" height="58" rx="4" fill="#FFD54F"/><text x="520" y="160" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>65</tspan></text>
+        
+        <!-- 아니요.4좋아요: 14-17시간 -->
+        <rect x="0" y="185" width="78" height="58" rx="4" fill="#FFF176"/><text x="40" y="220" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>55</tspan></text>
+        <rect x="80" y="185" width="78" height="58" rx="4" fill="#FFD54F"/><text x="120" y="220" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>62</tspan></text>
+        <rect x="160" y="185" width="78" height="58" rx="4" fill="#FFD54F"/><text x="200" y="220" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>68</tspan></text>
+        <rect x="240" y="185" width="78" height="58" rx="4" fill="#FFF176"/><text x="280" y="220" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>60</tspan></text>
+        <rect x="320" y="185" width="78" height="58" rx="4" fill="#42A5F5"/><text x="360" y="220" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>48</tspan></text>
+        <rect x="400" y="185" width="78" height="58" rx="4" fill="#FFB74D"/><text x="440" y="220" font-size="13" fill="#E65100" text-anchor="middle"><tspan>72</tspan></text>
+        <rect x="480" y="185" width="78" height="58" rx="4" fill="#FFA726"/><text x="520" y="220" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>78</tspan></text>
+        
+        <!-- 아니요.5좋아요: 17-19시간 -->
+        <rect x="0" y="245" width="78" height="58" rx="4" fill="#64B5F6"/><text x="40" y="280" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>32</tspan></text>
+        <rect x="80" y="245" width="78" height="58" rx="4" fill="#64B5F6"/><text x="120" y="280" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>35</tspan></text>
+        <rect x="160" y="245" width="78" height="58" rx="4" fill="#64B5F6"/><text x="200" y="280" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>38</tspan></text>
+        <rect x="240" y="245" width="78" height="58" rx="4" fill="#64B5F6"/><text x="280" y="280" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>35</tspan></text>
+        <rect x="320" y="245" width="78" height="58" rx="4" fill="#90CAF9"/><text x="360" y="280" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>28</tspan></text>
+        <rect x="400" y="245" width="78" height="58" rx="4" fill="#FFD54F"/><text x="440" y="280" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>65</tspan></text>
+        <rect x="480" y="245" width="78" height="58" rx="4" fill="#FFB74D"/><text x="520" y="280" font-size="13" fill="#E65100" text-anchor="middle"><tspan>70</tspan></text>
+        
+        <!-- 아니요.6좋아요: 19-21시간 (정점) -->
+        <rect x="0" y="305" width="78" height="58" rx="4" fill="#FFA726"/><text x="40" y="340" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>78</tspan></text>
+        <rect x="80" y="305" width="78" height="58" rx="4" fill="#FF9800"/><text x="120" y="340" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>85</tspan></text>
+        <rect x="160" y="305" width="78" height="58" rx="4" fill="#FF9800"/><text x="200" y="340" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>88</tspan></text>
+        <rect x="240" y="305" width="78" height="58" rx="4" fill="#FF9800"/><text x="280" y="340" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>86</tspan></text>
+        <rect x="320" y="305" width="78" height="58" rx="4" fill="#FFA726"/><text x="360" y="340" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>80</tspan></text>
+        <rect x="400" y="305" width="78" height="58" rx="4" fill="#EF5350"/><text x="440" y="340" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>95</tspan></text>
+        <rect x="480" y="305" width="78" height="58" rx="4" fill="#D32F2F"/><text x="520" y="340" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>98</tspan></text>
+        
+        <!-- 아니요.7좋아요: 21-23시간 -->
+        <rect x="0" y="365" width="78" height="58" rx="4" fill="#FFD54F"/><text x="40" y="400" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>62</tspan></text>
+        <rect x="80" y="365" width="78" height="58" rx="4" fill="#FFB74D"/><text x="120" y="400" font-size="13" fill="#E65100" text-anchor="middle"><tspan>70</tspan></text>
+        <rect x="160" y="365" width="78" height="58" rx="4" fill="#FFB74D"/><text x="200" y="400" font-size="13" fill="#E65100" text-anchor="middle"><tspan>72</tspan></text>
+        <rect x="240" y="365" width="78" height="58" rx="4" fill="#FFB74D"/><text x="280" y="400" font-size="13" fill="#E65100" text-anchor="middle"><tspan>68</tspan></text>
+        <rect x="320" y="365" width="78" height="58" rx="4" fill="#FFD54F"/><text x="360" y="400" font-size="13" fill="#F57F17" text-anchor="middle"><tspan>65</tspan></text>
+        <rect x="400" y="365" width="78" height="58" rx="4" fill="#FF9800"/><text x="440" y="400" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>85</tspan></text>
+        <rect x="480" y="365" width="78" height="58" rx="4" fill="#FFA726"/><text x="520" y="400" font-size="13" fill="#FFFFFF" text-anchor="middle"><tspan>82</tspan></text>
+        
+        <!-- 아니요.8좋아요: 23-6시간 -->
+        <rect x="0" y="425" width="78" height="58" rx="4" fill="#BBDEFB"/><text x="40" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>18</tspan></text>
+        <rect x="80" y="425" width="78" height="58" rx="4" fill="#BBDEFB"/><text x="120" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>15</tspan></text>
+        <rect x="160" y="425" width="78" height="58" rx="4" fill="#BBDEFB"/><text x="200" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>12</tspan></text>
+        <rect x="240" y="425" width="78" height="58" rx="4" fill="#BBDEFB"/><text x="280" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>15</tspan></text>
+        <rect x="320" y="425" width="78" height="58" rx="4" fill="#90CAF9"/><text x="360" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>22</tspan></text>
+        <rect x="400" y="425" width="78" height="58" rx="4" fill="#64B5F6"/><text x="440" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>35</tspan></text>
+        <rect x="480" y="425" width="78" height="58" rx="4" fill="#90CAF9"/><text x="520" y="460" font-size="13" fill="#1565C0" text-anchor="middle"><tspan>28</tspan></text>
+    </g>
+    
+    <!-- 색상 스케일 범례 -->
+    <g id="colorLegend" transform="translate(780, 150)">
+        <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50"><tspan>활동 수준</tspan></text>
+        
+        <rect x="0" y="15" width="200" height="20" rx="4" fill="url(#heatGradient)"/>
+        
+        <text x="0" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D"><tspan>낮은 (0)</tspan></text>
+        <text x="90" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D" text-anchor="middle"><tspan>가운데 (50)</tspan></text>
+        <text x="200" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D" text-anchor="end"><tspan>높은 (100)</tspan></text>
+    </g>
+    
+    <!-- 통계 패널 -->
+    <g id="statsPanel" transform="translate(780, 240)">
+        <rect x="0" y="0" width="200" height="180" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="100" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle"><tspan>통계 요약</tspan></text>
+        
+        <line x1="15" y1="42" x2="185" y2="42" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="20" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>🔥 성수기</tspan></text>
+        <text x="20" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#D32F2F"><tspan>일요일 19-21시간 (98K)</tspan></text>
+        
+        <text x="20" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>❄️ 최저점 기간</tspan></text>
+        <text x="20" y="135" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#1565C0"><tspan>일요일 6-9시간 (10K)</tspan></text>
+        
+        <text x="20" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>📊 일일 평균 온라인</tspan></text>
+        <text x="130" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="bold" fill="#2C3E50"><tspan>54.2K</tspan></text>
+    </g>
+    
+    <!-- 통찰력 카드 -->
+    <g id="insightCard" transform="translate(780, 440)">
+        <rect x="0" y="0" width="200" height="120" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1"/>
+        
+        <text x="20" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#2E7D32"><tspan>💡 주요 통찰력</tspan></text>
+        
+        <text x="20" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>• 주말에 가장 높은 액티비티 저녁</tspan></text>
+        <text x="20" y="75" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>• 평일 정오의 소규모 러시아워</tspan></text>
+        <text x="20" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>• 이른 아침의 가장 낮은 트래픽</tspan></text>
+        <text x="20" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>제안: 주말 숙박을 위한 서버 추가</tspan></text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 소스: 사용자 행동 분석 플랫폼</tspan>
+    </text>
+</svg>
+
