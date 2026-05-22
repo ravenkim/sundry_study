@@ -1,0 +1,307 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--이중 Y축 차트 폴더
+    사용법: 두 개의 서로 다른 특징의 시계열 표시
+    현장: 온도 및 테스트 모니터링, 거래량 vs. 마진, 추적 및 전환 분석 등
+    예시 데이터: 온도(°C) + 상대습도(%)
+    색상: 레일프로페셔널 스타일 | 왼쪽 축: 실선 | 오른쪽 축: 대시드 광장
+    캔버스: 1280×720(16:9)-->
+    
+    <defs>
+        <!-- 데이터 포인트 섀도우 -->
+        <filter id="dotShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.3"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!--제목-->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="32" font-weight="bold" fill="#000000">
+        <tspan>온도 및 습도 테스트 사이클 곡선</tspan>
+    </text>
+    
+    <text x="60" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" fill="#666666">
+        <tspan>환경시험 · 총 소요시간 : 720분(12시간)</tspan>
+    </text>
+    
+    <!-- 스테이지 콜아웃배경 -->
+    <rect x="140" y="130" width="158" height="40" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1" rx="4"/>
+    <rect x="298" y="130" width="237" height="40" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1" rx="4"/>
+    <rect x="535" y="130" width="158" height="40" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1" rx="4"/>
+    <rect x="693" y="130" width="237" height="40" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1" rx="4"/>
+    <rect x="930" y="130" width="158" height="40" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1" rx="4"/>
+    
+    <!-- 단계 텍스트 주석 -->
+    <text x="219" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" font-weight="600" fill="#333333" text-anchor="middle">
+        <tspan>1. 난방(60분)</tspan>
+    </text>
+    
+    <text x="416.5" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" font-weight="600" fill="#333333" text-anchor="middle">
+        <tspan>2. 고온유지 (240분)</tspan>
+    </text>
+    
+    <text x="614" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" font-weight="600" fill="#333333" text-anchor="middle">
+        <tspan>3. 쿨다운(120분)</tspan>
+    </text>
+    
+    <text x="811.5" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" font-weight="600" fill="#333333" text-anchor="middle">
+        <tspan>4. 저온유지 (240분)</tspan>
+    </text>
+    
+    <text x="1009" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" font-weight="600" fill="#333333" text-anchor="middle">
+        <tspan>5.리셋(60분)</tspan>
+    </text>
+    
+    <!--차트 영역-->
+    <g id="chartArea">
+        <!-- 스테이지 구분선 -->
+        <line x1="298" y1="190" x2="298" y2="580" stroke="#BDBDBD" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <line x1="535" y1="190" x2="535" y2="580" stroke="#BDBDBD" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <line x1="693" y1="190" x2="693" y2="580" stroke="#BDBDBD" stroke-width="1.5" stroke-dasharray="5,5"/>
+        <line x1="930" y1="190" x2="930" y2="580" stroke="#BDBDBD" stroke-width="1.5" stroke-dasharray="5,5"/>
+        
+        <!-- 가로 눈금선（눈금에 정확하게 맞추기）-->
+        <!--바닥: -60°C / 0%-->
+        <line x1="140" y1="580" x2="1088" y2="580" stroke="#E0E0E0" stroke-width="1.5"/>
+        <!-- -30°C / 20% -->
+        <line x1="140" y1="502" x2="1088" y2="502" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <!-- 0°C / 40% -->
+        <line x1="140" y1="424" x2="1088" y2="424" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <!-- 30°C / 60% -->
+        <line x1="140" y1="346" x2="1088" y2="346" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <!-- 60°C / 80% -->
+        <line x1="140" y1="268" x2="1088" y2="268" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <!--상단: 90°C / 100%-->
+        <line x1="140" y1="190" x2="1088" y2="190" stroke="#E0E0E0" stroke-width="1.5"/>
+        
+        <!--왼쪽 Y축 - 온도 눈금(°C, 30도 간격)-->
+        <text x="50" y="585" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>-60</tspan>
+        </text>
+        <text x="50" y="507" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#333333" text-anchor="middle">
+              <tspan>-30</tspan>
+        </text>
+        <text x="50" y="429" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#333333" text-anchor="middle">
+            <tspan>0</tspan>
+        </text>
+        <text x="50" y="351" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#333333" text-anchor="middle">
+            <tspan>30</tspan>
+        </text>
+        <text x="50" y="273" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#333333" text-anchor="middle">
+            <tspan>60</tspan>
+        </text>
+        <text x="50" y="195" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>90</tspan>
+        </text>
+        
+        <!--왼쪽 Y축 제목-->
+        <text x="30" y="385" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="bold" fill="#000000" text-anchor="middle" transform="rotate(-90, 30, 385)">
+            <tspan>온도(℃)</tspan>
+        </text>
+        
+        <!--오른쪽 Y축 - 습도 비율(%, 20% 간격)-->
+        <text x="1190" y="585" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>0%</tspan>
+        </text>
+        <text x="1190" y="507" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#555555" text-anchor="middle">
+            <tspan>20%</tspan>
+        </text>
+        <text x="1190" y="429" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#555555" text-anchor="middle">
+            <tspan>40%</tspan>
+        </text>
+        <text x="1190" y="351" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#555555" text-anchor="middle">
+            <tspan>60%</tspan>
+        </text>
+        <text x="1190" y="273" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#555555" text-anchor="middle">
+            <tspan>80%</tspan>
+        </text>
+        <text x="1190" y="195" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>100%</tspan>
+        </text>
+        
+        <!--오른쪽 Y축 제목-->
+        <text x="1250" y="385" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="bold" fill="#000000" text-anchor="middle" transform="rotate(90, 1250, 385)">
+            <tspan>상대습도(%)</tspan>
+        </text>
+        
+        <!--중심선-->
+        <line x1="140" y1="190" x2="140" y2="580" stroke="#616161" stroke-width="2"/>
+        <line x1="140" y1="580" x2="1088" y2="580" stroke="#616161" stroke-width="2"/>
+        <line x1="1088" y1="190" x2="1088" y2="580" stroke="#616161" stroke-width="2"/>
+        
+        <!-- X축 시간 레이블 -->
+        <text x="140" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#333333" text-anchor="middle">
+            <tspan>0</tspan>
+        </text>
+        <text x="298" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#333333" text-anchor="middle">
+            <tspan>60</tspan>
+        </text>
+        <text x="535" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#333333" text-anchor="middle">
+            <tspan>300</tspan>
+        </text>
+        <text x="693" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#333333" text-anchor="middle">
+            <tspan>420</tspan>
+        </text>
+        <text x="930" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#333333" text-anchor="middle">
+            <tspan>660</tspan>
+        </text>
+        <text x="1088" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#333333" text-anchor="middle">
+            <tspan>720</tspan>
+        </text>
+        
+        <!--X축 제목-->
+        <text x="614" y="640" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">
+            <tspan>시간(분)</tspan>
+        </text>
+        
+        <!--온도 곡선(검은색 실선 + 점)-->
+        <!--데이터 포인트를 계산하려면:
+             온도 범위: -60°C ~ 90°C, 범위 150°C
+             Y = 580 - ((온도+60)/150)*390
+             20°C → Y = 580 - (80/150)*390 = 580 - 208 = 372
+             85°C → Y = 580 - (145/150)*390 = 580 - 377 = 203
+             -40°C → Y = 580 - (20/150)*390 = 580 - 52 = 528-->
+        <polyline points="140,372 298,203 535,203 693,528 930,528 1088,372" 
+                  fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <!--온도 데이터 포인트(점)-->
+        <circle cx="140" cy="372" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <circle cx="298" cy="203" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <circle cx="535" cy="203" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <circle cx="693" cy="528" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <circle cx="930" cy="528" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <circle cx="1088" cy="372" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        
+        <!--습도 곡선(다크 그레이 점선+사각형 점)-->
+        <!--데이터 포인트 조사(0%-100% 범위):
+             Y = 580 - (습도% / 100) * 390
+             65% → Y=327, 85% → Y=248, 30% → Y=463-->
+        <polyline points="140,327 298,248 535,248 693,463 930,463 1088,327" 
+                  fill="none" stroke="#666666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,5"/>
+        
+        <!--검증된 데이터 포인트(사각형)-->
+        <rect x="135" y="322" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <rect x="293" y="243" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <rect x="530" y="243" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <rect x="688" y="458" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <rect x="925" y="458" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        <rect x="1083" y="322" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2" filter="url(#dotShadow)"/>
+        
+        <!--주요 데이터(겹침을 피하기 위해 배경으로 프레임 처리됨, 생존자들과 반대)-->
+        
+        <!--시작점(x=140, 온도 y=372) - 온도-->
+        <rect x="145" y="357" width="42" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="166" y="370" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>20℃</tspan>
+        </text>
+        
+        <!--시작점(x=140, 습도 y=327) - 습도-->
+        <rect x="145" y="312" width="42" height="20" fill="#FFFFFF" stroke="#666666" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="166" y="325" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#666666" text-anchor="middle">
+            <tspan>65%</tspan>
+        </text>
+        
+        <!--고온점(x=298, y=203) - 온도-->
+        <rect x="303" y="188" width="42" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="324" y="201" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>85℃</tspan>
+        </text>
+        
+        <!--높은 습도점(y=248) - 습도-->
+        <rect x="395" y="233" width="42" height="20" fill="#FFFFFF" stroke="#666666" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="416" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#666666" text-anchor="middle">
+            <tspan>85%</tspan>
+        </text>
+        
+        <!--저온점(x=693, y=528) - 온도-->
+        <rect x="698" y="513" width="48" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="722" y="526" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>-40℃</tspan>
+        </text>
+        
+        <!--낮은 습도 지점(y=463) - 습도-->
+        <rect x="790" y="448" width="42" height="20" fill="#FFFFFF" stroke="#666666" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="811" y="461" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#666666" text-anchor="middle">
+            <tspan>30%</tspan>
+        </text>
+        
+        <!--재설정 지점(x=1088, 온도 y=372) - 온도-->
+        <rect x="1020" y="357" width="42" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="1041" y="370" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
+            <tspan>20℃</tspan>
+        </text>
+        
+        <!--재설정 지점(습도 y=327) - 습도-->
+        <rect x="1020" y="312" width="42" height="20" fill="#FFFFFF" stroke="#666666" stroke-width="0.5" rx="3" opacity="0.9"/>
+        <text x="1041" y="325" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#666666" text-anchor="middle">
+            <tspan>65%</tspan>
+        </text>
+    </g>
+    
+    <!--전설-->
+    <g id="legend">
+        <rect x="420" y="660" width="440" height="45" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1" rx="6"/>
+        
+        <!--온도 범례 (검은색 실선 + 점)-->
+        <line x1="450" y1="682" x2="490" y2="682" stroke="#000000" stroke-width="3"/>
+        <circle cx="470" cy="682" r="5" fill="#000000" stroke="#FFFFFF" stroke-width="2"/>
+        <text x="505" y="687" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="600" fill="#000000">
+            <tspan>온도(℃)</tspan>
+        </text>
+        
+        <!--습도 범례(진한 회색 점선 + 사각형)-->
+        <line x1="650" y1="682" x2="690" y2="682" stroke="#666666" stroke-width="2.5" stroke-dasharray="8,5"/>
+        <rect x="665" y="677" width="10" height="10" fill="#666666" stroke="#FFFFFF" stroke-width="2"/>
+        <text x="705" y="687" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="600" fill="#666666">
+            <tspan>상대습도(%)</tspan>
+        </text>
+    </g>
+</svg>
+

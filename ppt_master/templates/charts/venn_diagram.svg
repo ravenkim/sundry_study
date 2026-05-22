@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    웨인 다이어그램 템플릿
+    사용: 관계 설정、교차 영역、공통성 분석
+    적용 가능한 시나리오: 역량 교차 분석、부서별 협업、제품 포지셔닝
+    지원하다: 3원형 십자가 (클래식한 Ternary Wayne)
+    -->
+    
+    <defs>
+        <!-- 카드 섀도우 -->
+        <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+            <feOffset dx="0" dy="2" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.12"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 영역 -->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="32" font-weight="700" fill="#1A252F" letter-spacing="-0.5">핵심 역량 교차 분석</text>
+    <text x="60" y="100" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" fill="#7F8C8D">Core Competency Intersection · 시너지의 세 가지 영역</text>
+    
+    <!-- 웨인 다이어그램 본문 (센터 x=480, y=400) -->
+    <!--Circle A: 기술 (뒤로)-->
+    <circle cx="420" cy="350" r="175" fill="#3498DB" fill-opacity="0.15" stroke="#3498DB" stroke-width="2.5" stroke-opacity="0.6"/>
+    <text x="340" y="280" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="20" font-weight="700" fill="#2980B9">기술</text>
+    <text x="340" y="305" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" fill="#7F8C8D">Technology</text>
+    
+    <!--원 B: 시장(오른쪽 위)-->
+    <circle cx="540" cy="350" r="175" fill="#E74C3C" fill-opacity="0.15" stroke="#E74C3C" stroke-width="2.5" stroke-opacity="0.6"/>
+    <text x="620" y="280" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="20" font-weight="700" fill="#C0392B">시장</text>
+    <text x="620" y="305" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" fill="#7F8C8D">Market</text>
+    
+    <!--서클 C: 운영 (아래에)-->
+    <circle cx="480" cy="460" r="175" fill="#2ECC71" fill-opacity="0.15" stroke="#2ECC71" stroke-width="2.5" stroke-opacity="0.6"/>
+    <text x="480" y="560" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="20" font-weight="700" fill="#27AE60">운영</text>
+    <text x="480" y="585" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" fill="#7F8C8D">Operations</text>
+    
+    <!-- A∩B 크로스 라벨 (기술+시장) -->
+    <text x="480" y="310" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="12" font-weight="600" fill="#8E44AD">제품 혁신</text>
+    
+    <!-- A∩C 크로스 라벨 (기술+운영) -->
+    <text x="415" y="440" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="12" font-weight="600" fill="#16A085">기술 운영 및 유지 관리</text>
+    
+    <!-- B∩C 크로스 라벨 (시장+운영) -->
+    <text x="545" y="440" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="12" font-weight="600" fill="#D35400">고객 운영</text>
+    
+    <!-- 센터 크로스 (핵심 경쟁력) -->
+    <text x="480" y="388" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="15" font-weight="800" fill="#2C3E50">핵심 경쟁력</text>
+    
+    <!-- 오른쪽 도움말 패널 -->
+    <g filter="url(#cardShadow)">
+        <rect x="740" y="140" width="480" height="90" rx="10" fill="#FFFFFF"/>
+        <rect x="740" y="140" width="6" height="90" rx="3" fill="#3498DB"/>
+        <circle cx="768" cy="168" r="10" fill="#3498DB" fill-opacity="0.2"/>
+        <circle cx="768" cy="168" r="5" fill="#3498DB"/>
+        <text x="790" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#1A252F">기술적 능력</text>
+        <text x="768" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D">사내 R&D 엔진 · AI연산 · 클라우드 네이티브 아키텍처</text>
+    </g>
+    
+    <g filter="url(#cardShadow)">
+        <rect x="740" y="248" width="480" height="90" rx="10" fill="#FFFFFF"/>
+        <rect x="740" y="248" width="6" height="90" rx="3" fill="#E74C3C"/>
+        <circle cx="768" cy="276" r="10" fill="#E74C3C" fill-opacity="0.2"/>
+        <circle cx="768" cy="276" r="5" fill="#E74C3C"/>
+        <text x="790" y="280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#1A252F">시장 통찰력</text>
+        <text x="768" y="308" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D">옴니채널 적용 범위 · 선도적인 브랜드 인지도 · 사용자 성장 플라이휠</text>
+    </g>
+    
+    <g filter="url(#cardShadow)">
+        <rect x="740" y="356" width="480" height="90" rx="10" fill="#FFFFFF"/>
+        <rect x="740" y="356" width="6" height="90" rx="3" fill="#2ECC71"/>
+        <circle cx="768" cy="384" r="10" fill="#2ECC71" fill-opacity="0.2"/>
+        <circle cx="768" cy="384" r="5" fill="#2ECC71"/>
+        <text x="790" y="388" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#1A252F">운영 효율성</text>
+        <text x="768" y="416" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D">공급망 최적화 · 스마트 창고 · 정제된 비용 관리</text>
+    </g>
+    
+    <!-- 핵심 교차 설명 -->
+    <g filter="url(#cardShadow)">
+        <rect x="740" y="480" width="480" height="80" rx="10" fill="#F8F9FA"/>
+        <rect x="740" y="480" width="480" height="6" rx="3" fill="#8E44AD"/>
+        <text x="980" y="515" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#8E44AD">핵심 경쟁력 = 기술 × 시장 × 운영</text>
+        <text x="980" y="540" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D">세 가지 기능의 깊은 통합은 복제할 수 없는 경쟁 장벽을 구성합니다.</text>
+    </g>
+
+    <!-- 하단 음표 -->
+    <text x="60" y="680" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="12" fill="#BDC3C7">원형 영역은 용량 범위를 나타냅니다，교차 영역은 시너지 가치를 나타냅니다</text>
+</svg>

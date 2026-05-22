@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    워드 클라우드 다이어그램 템플릿
+    사용: 키워드 가중치 시각화、뜨거운 주제、라벨 배포
+    적용 가능한 시나리오: 사용자 피드백 키워드、업계 핫스팟、기술 스택 개요
+    지원하다: 20-30키워드 (크기는 체중을 나타냅니다)
+    -->
+
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#EEF1F5;stop-opacity:1"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="1280" height="720" fill="url(#bgGrad)"/>
+
+    <!-- 제목 -->
+    <text x="640" y="55" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="30" font-weight="700" fill="#1A252F">업계 인기 키워드</text>
+    <text x="640" y="82" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="14" fill="#7F8C8D">Word Cloud · 글꼴 크기는 키워드 인기도 가중치를 반영합니다</text>
+
+    <!-- 단어 구름 본문 (수동 레이아웃, 크기=무게) -->
+    <!-- Tier 1: 최고 (핵심 키워드) -->
+    <text x="520" y="260" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="58" font-weight="800" fill="#6C5CE7" fill-opacity="0.9">일체 포함</text>
+    <text x="400" y="390" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="52" font-weight="800" fill="#0984E3" fill-opacity="0.85">대형 모델</text>
+
+    <!-- Tier 2: 두 번째로 큰 -->
+    <text x="750" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="42" font-weight="700" fill="#00B894" fill-opacity="0.85">디지털 트랜스포메이션</text>
+    <text x="180" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="38" font-weight="700" fill="#E17055" fill-opacity="0.8">클라우드 컴퓨팅</text>
+    <text x="650" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="40" font-weight="700" fill="#D4A537" fill-opacity="0.8">스마트 제조</text>
+
+    <!-- Tier 3: 중간 -->
+    <text x="110" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="30" font-weight="600" fill="#A29BFE" fill-opacity="0.75">데이터 보안</text>
+    <text x="900" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="32" font-weight="600" fill="#74B9FF" fill-opacity="0.8">자율주행</text>
+    <text x="140" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="28" font-weight="600" fill="#55EFC4" fill-opacity="0.8">엣지 컴퓨팅</text>
+    <text x="920" y="420" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="30" font-weight="600" fill="#E74C3C" fill-opacity="0.7">메타버스</text>
+    <text x="350" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="28" font-weight="600" fill="#0984E3" fill-opacity="0.7">블록체인</text>
+
+    <!-- Tier 4: 더 작은 -->
+    <text x="580" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="22" font-weight="500" fill="#6C5CE7" fill-opacity="0.6">양자 컴퓨팅</text>
+    <text x="850" y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="22" font-weight="500" fill="#E17055" fill-opacity="0.6">Web3.0</text>
+    <text x="1020" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="24" font-weight="500" fill="#00B894" fill-opacity="0.65">사물 인터넷</text>
+    <text x="80" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="20" font-weight="500" fill="#D63031" fill-opacity="0.6">기계 학습</text>
+    <text x="640" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="24" font-weight="500" fill="#A29BFE" fill-opacity="0.65">로우 코드</text>
+    <text x="300" y="500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="22" font-weight="500" fill="#74B9FF" fill-opacity="0.65">디지털 트윈</text>
+
+    <!-- Tier 5: 가장 작은 -->
+    <text x="780" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="17" font-weight="400" fill="#95A5A6" fill-opacity="0.6">RPA</text>
+    <text x="1080" y="470" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="16" font-weight="400" fill="#BDC3C7" fill-opacity="0.6">GPT</text>
+    <text x="1000" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="18" font-weight="400" fill="#A29BFE" fill-opacity="0.55">DevOps</text>
+    <text x="130" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="16" font-weight="400" fill="#00B894" fill-opacity="0.5">제로 트러스트</text>
+    <text x="500" y="570" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="18" font-weight="400" fill="#E17055" fill-opacity="0.55">다중 모드</text>
+    <text x="880" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="17" font-weight="400" fill="#6C5CE7" fill-opacity="0.5">지식 그래프</text>
+    <text x="250" y="570" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="15" font-weight="400" fill="#D4A537" fill-opacity="0.5">AIGC</text>
+    <text x="1050" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="16" font-weight="400" fill="#74B9FF" fill-opacity="0.5">연합 학습</text>
+    <text x="700" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="15" font-weight="400" fill="#55EFC4" fill-opacity="0.5">프라이버시 컴퓨팅</text>
+
+    <!-- 전설 -->
+    <rect x="60" y="630" width="400" height="55" rx="8" fill="#FFFFFF" fill-opacity="0.6"/>
+    <text x="80" y="652" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="12" font-weight="600" fill="#5F6368">체중 수준:</text>
+    <text x="160" y="652" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="20" font-weight="800" fill="#6C5CE7">매우 높음</text>
+    <text x="220" y="652" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="16" font-weight="600" fill="#0984E3">높은</text>
+    <text x="260" y="652" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="14" font-weight="500" fill="#00B894">가운데</text>
+    <text x="300" y="652" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="12" font-weight="400" fill="#95A5A6">낮은</text>
+    <text x="80" y="674" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="11" fill="#BDC3C7">글꼴 크기가 클수록 이 키워드가 업계 토론에 더 자주 표시됩니다.</text>
+
+    <!-- 데이터 소스 -->
+    <text x="1220" y="690" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="11" fill="#BDC3C7">데이터 소스: 업계 보고 및 소셜 미디어 분석 · 2025년도</text>
+</svg>

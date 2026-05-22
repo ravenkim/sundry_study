@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    매트릭스 다이어그램 템플릿 (2×2) - CRAP Deepin Optimized
+    사용: 4 사분면 분석
+    적용 가능한 시나리오: 보스턴 매트릭스、위험 평가、우선순위 분석
+    최적화 초점:
+      - 조정: 그리드 레이아웃，균일한 여백
+      - 차이: 향상된 색상 계층 구조 및 시각적 가중치
+      - 반복하다: 균일한 글꼴 크기、간격、스타일
+      - 친밀: 요소 그룹화 및 공백 최적화
+    -->
+    
+    <defs>
+        <!-- 사분면 그라데이션배경 - 대비 및 채도 최적화 -->
+        <linearGradient id="quadrant1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#C8E6C9;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="quadrant2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFF8E1;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFE082;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="quadrant3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFEBEE;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FFCDD2;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="quadrant4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#E3F2FD;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#BBDEFB;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 전반적인배경구배 -->
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FAFBFC;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F5F6F8;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 데이터 포인트 섀도우 - 부드러운 깊이 -->
+        <filter id="bubbleShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+            <feOffset dx="0" dy="4"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.25"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        
+        <!-- 축 화살표 마커 -->
+        <marker id="arrowX" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto">
+            <path d="M 2,2 L 12,7 L 2,12 Z" fill="#1A252F"/>
+        </marker>
+        <marker id="arrowY" markerWidth="14" markerHeight="14" refX="7" refY="2" orient="auto">
+            <path d="M 2,12 L 7,2 L 12,12 Z" fill="#1A252F"/>
+        </marker>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="url(#bgGradient)"/>
+    
+    <!-- 제목 영역 - 강화 수준 -->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="36" font-weight="700" fill="#1A252F" letter-spacing="-0.5">
+        <tspan>포트폴리오 매트릭스 분석</tspan>
+    </text>
+    <text x="60" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="15" fill="#9AA0A6">
+        <tspan>Boston Matrix · Product Portfolio Analysis</tspan>
+    </text>
+    
+    <text x="60" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" font-weight="500" fill="#5F6368">
+        <tspan>시장 성장률 vs 시장 점유율 · 버블 크기는 매출 크기를 나타냅니다</tspan>
+    </text>
+    
+    <!-- 매트릭스 주요 영역 - 레이아웃 최적화，중심점 (565, 410) -->
+    <g id="matrixArea">
+        <!-- 사분면배경 - 균일한 크기 480×240，향상된 테두리 대비 -->
+        <!-- 사분면1: 오른쪽 위 (높은 성장, 높은 점유율) - 별 -->
+        <rect x="565" y="170" width="480" height="240" fill="url(#quadrant1)" 
+              stroke="#FFFFFF" stroke-width="3" rx="2"/>
+        
+        <!-- 사분면2: 왼쪽 위 (높은 성장, 낮은 점유율) - 질문 -->
+        <rect x="85" y="170" width="480" height="240" fill="url(#quadrant2)" 
+              stroke="#FFFFFF" stroke-width="3" rx="2"/>
+        
+        <!-- 사분면3: 왼쪽 아래 (저성장, 낮은 점유율) - 마른 개 -->
+        <rect x="85" y="410" width="480" height="240" fill="url(#quadrant3)" 
+              stroke="#FFFFFF" stroke-width="3" rx="2"/>
+        
+        <!-- 사분면4: 오른쪽 아래 (저성장, 높은 점유율) - 현금 소 -->
+        <rect x="565" y="410" width="480" height="240" fill="url(#quadrant4)" 
+              stroke="#FFFFFF" stroke-width="3" rx="2"/>
+        
+        <!-- 중심선 - 명확하고 강력함 -->
+        <line x1="85" y1="410" x2="1045" y2="410" stroke="#1A252F" stroke-width="4" 
+              marker-end="url(#arrowX)"/>
+        <line x1="565" y1="170" x2="565" y2="650" stroke="#1A252F" stroke-width="4" 
+              marker-start="url(#arrowY)"/>
+        
+        <!-- X중심선상표 - 통합 스타일 계층구조 -->
+        <text x="565" y="680" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#1A252F" text-anchor="middle">
+            <tspan>시장 점유율 Market Share</tspan>
+        </text>
+        <text x="220" y="680" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="500" fill="#5F6368" text-anchor="middle">
+            <tspan>낮은 Low</tspan>
+        </text>
+        <text x="910" y="680" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="500" fill="#5F6368" text-anchor="middle">
+            <tspan>높은 High</tspan>
+        </text>
+        
+        <!-- Y중심선상표 - 통합 스타일 계층구조 -->
+        <text x="40" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="600" fill="#1A252F" text-anchor="middle" 
+              transform="rotate(-90, 40, 410)">
+            <tspan>시장 성장률</tspan>
+        </text>
+        <text x="25" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#9AA0A6" text-anchor="middle" 
+              transform="rotate(-90, 25, 410)">
+            <tspan>Growth Rate</tspan>
+        </text>
+        <!-- Y축 엔드포인트 마커 - 정렬 최적화 -->
+        <text x="50" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="500" fill="#5F6368">
+            <tspan>낮은</tspan>
+        </text>
+        <text x="50" y="668" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#9AA0A6">
+            <tspan>Low</tspan>
+        </text>
+        
+        <text x="50" y="180" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="500" fill="#5F6368">
+            <tspan>높은</tspan>
+        </text>
+        <text x="50" y="193" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#9AA0A6">
+            <tspan>High</tspan>
+        </text>
+        
+        <!-- 사분면 라벨 - 정렬 최적화，균일한 간격 -->
+        <!-- 왼쪽 위：문제제품 -->
+        <text x="105" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#F57C00">
+            <tspan>문제제품</tspan>
+        </text>
+        <text x="105" y="220" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#E65100">
+            <tspan>Question Marks</tspan>
+        </text>
+        <text x="105" y="238" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="500" fill="#D84315">
+            <tspan>높은 투자 · 낮은 수익률</tspan>
+        </text>
+        
+        <!-- 오른쪽 위：스타 상품 -->
+        <text x="585" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#388E3C">
+            <tspan>스타 상품</tspan>
+        </text>
+        <text x="585" y="220" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#2E7D32">
+            <tspan>Stars</tspan>
+        </text>
+        <text x="585" y="238" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="500" fill="#1B5E20">
+            <tspan>높은 투자 · 높은 수익</tspan>
+        </text>
+        
+        <!-- 왼쪽 아래：슬림 강아지 제품 -->
+        <text x="105" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#D32F2F">
+            <tspan>슬림 강아지 제품</tspan>
+        </text>
+        <text x="105" y="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#C62828">
+            <tspan>Dogs</tspan>
+        </text>
+        
+        <!-- 오른쪽 아래：현금 소 제품 -->
+        <text x="585" y="610" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="20" font-weight="700" fill="#1976D2">
+            <tspan>현금 소 제품</tspan>
+        </text>
+        <text x="585" y="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#1565C0">
+            <tspan>Cash Cows</tspan>
+        </text>
+        
+        <!-- 데이터 포인트 (버블 차트) - 정복，통일된 스타일 -->
+        <!-- 제품A: 별 (시장 점유율: 높은75%, 성장률: 높은35%, 수익: 큰) -->
+        <circle cx="879" cy="247" r="55" fill="#4CAF50" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="879" y="244" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품A</tspan>
+        </text>
+        <text x="879" y="263" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥3.21억</tspan>
+        </text>
+        
+        <!-- 제품B: 현금 소 (시장 점유율: 높은80%, 성장률: 낮은8%, 수익: 최고) -->
+        <circle cx="935" cy="544" r="70" fill="#2196F3" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="935" y="540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품B</tspan>
+        </text>
+        <text x="935" y="560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥4.81억</tspan>
+        </text>
+        
+        <!-- 제품C: 질문 (시장 점유율: 낮은25%, 성장률: 높은40%, 수익: 가운데) -->
+        <circle cx="269" cy="228" r="42" fill="#FF9800" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="269" y="225" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품C</tspan>
+        </text>
+        <text x="269" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥1.61억</tspan>
+        </text>
+        
+        <!-- 제품D: 질문 (시장 점유율: 낮은30%, 성장률: 높은28%, 수익: 가운데) -->
+        <circle cx="325" cy="309" r="38" fill="#FF9800" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="325" y="306" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품D</tspan>
+        </text>
+        <text x="325" y="323" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥1.21억</tspan>
+        </text>
+        
+        <!-- 제품E: 마른 개 (시장 점유율: 낮은15%, 성장률: 낮은5%, 수익: 작은) -->
+        <circle cx="195" cy="573" r="30" fill="#E74C3C" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="195" y="571" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품E</tspan>
+        </text>
+        <text x="195" y="587" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥0.51억</tspan>
+        </text>
+        
+        <!-- 제품F: 현금 소 (시장 점유율: 가운데60%, 성장률: 낮은12%, 수익: 가운데) -->
+        <circle cx="741" cy="506" r="45" fill="#2196F3" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="741" y="503" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품F</tspan>
+        </text>
+        <text x="741" y="521" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥1.81억</tspan>
+        </text>
+        
+        <!-- 제품G: 별 (시장 점유율: 가운데55%, 성장률: 높은30%, 수익: 가운데) -->
+        <circle cx="695" cy="285" r="40" fill="#4CAF50" opacity="0.9" filter="url(#bubbleShadow)"/>
+        <text x="695" y="282" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+            <tspan>제품G</tspan>
+        </text>
+        <text x="695" y="299" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+            <tspan>¥1.41억</tspan>
+        </text>
+    </g>
+    
+    <!-- 전략 제안 상자 - 재설계，친밀감과 공백 최적화 -->
+    <g id="strategicRecommendations">
+        <!-- 배경카드 -->
+        <rect x="1070" y="180" width="170" height="240" fill="#FFFFFF" 
+              stroke="#E0E0E0" stroke-width="1.5" rx="8" opacity="0.95"/>
+        
+        <!-- 제목 -->
+        <text x="1155" y="210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#1A252F" text-anchor="middle">
+            <tspan>전략적 조언</tspan>
+        </text>
+        
+        <!-- 분할기 -->
+        <line x1="1085" y1="225" x2="1225" y2="225" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <!-- 스타 상품 -->
+        <circle cx="1090" cy="250" r="6" fill="#4CAF50" opacity="0.9"/>
+        <text x="1105" y="254" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" font-weight="600" fill="#388E3C">
+            <tspan>별: 지속적인 투자</tspan>
+        </text>
+        
+        <!-- 문제제품 -->
+        <circle cx="1090" cy="285" r="6" fill="#FF9800" opacity="0.9"/>
+        <text x="1105" y="289" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" font-weight="600" fill="#F57C00">
+            <tspan>질문: 선택적 투자</tspan>
+        </text>
+        
+        <!-- 현금 소 제품 -->
+        <circle cx="1090" cy="320" r="6" fill="#2196F3" opacity="0.9"/>
+        <text x="1105" y="324" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" font-weight="600" fill="#1976D2">
+            <tspan>현금 소: 수확하다</tspan>
+        </text>
+        
+        <!-- 슬림 강아지 제품 -->
+        <circle cx="1090" cy="355" r="6" fill="#E74C3C" opacity="0.9"/>
+        <text x="1105" y="359" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" font-weight="600" fill="#D32F2F">
+            <tspan>마른 개: 박탈</tspan>
+        </text>
+        
+        <!-- 하단 설명 -->
+        <text x="1155" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="10" fill="#9AA0A6" text-anchor="middle">
+            <tspan>거품 크기 = 매출 규모</tspan>
+        </text>
+    </g>
+    
+    <!-- 데이터 소스 - 스타일 최적화 -->
+    <text x="60" y="705" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" fill="#9AA0A6">
+        <tspan>데이터 소스: 시장조사부 분석 | Source: Market Research Department</tspan>
+    </text>
+</svg>
+

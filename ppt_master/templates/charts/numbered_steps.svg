@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    숫자 단계 흐름 템플릿
+    사용: 질서정연한 발걸음、무대 과정、운영안내
+    적용 가능한 시나리오: 구현 경로、운영과정、방법적 단계
+    지원하다: 5단계적 측면 흐름 (추천하다3-6단계)
+    -->
+    
+    <defs>
+        <!-- 카드 섀도우 -->
+        <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+            <feOffset dx="0" dy="3" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.12"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        
+        <!-- 배경구배 -->
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#EEF1F5;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="url(#bgGrad)"/>
+    
+    <!-- 제목 영역 -->
+    <text x="640" y="65" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="32" font-weight="700" fill="#1A252F" letter-spacing="-0.5">경로 5단계 방법 구현</text>
+    <text x="640" y="95" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" fill="#7F8C8D">Five-Step Implementation · 계획에서 착륙에 이르는 전체 경로</text>
+    
+    <!-- 주요 연결선 -->
+    <line x1="165" y1="265" x2="1115" y2="265" stroke="#E0E0E0" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- 단계 번호 원 + 연결 화살표 -->
+    <!-- 단계 간 화살표 (polygon삼각형) -->
+    <polygon points="310,265 298,255 298,275" fill="#D5D8DC"/>
+    <polygon points="540,265 528,255 528,275" fill="#D5D8DC"/>
+    <polygon points="770,265 758,255 758,275" fill="#D5D8DC"/>
+    <polygon points="1000,265 988,255 988,275" fill="#D5D8DC"/>
+    
+    <!-- 단계1 -->
+    <circle cx="165" cy="265" r="38" fill="#6C5CE7" filter="url(#cardShadow)"/>
+    <circle cx="165" cy="265" r="32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3"/>
+    <text x="165" y="260" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="24" font-weight="800" fill="#FFFFFF">01</text>
+    <text x="165" y="278" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="9" font-weight="600" fill="#FFFFFF" fill-opacity="0.7">STEP</text>
+    
+    <!-- 단계2 -->
+    <circle cx="395" cy="265" r="38" fill="#00B894" filter="url(#cardShadow)"/>
+    <circle cx="395" cy="265" r="32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3"/>
+    <text x="395" y="260" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="24" font-weight="800" fill="#FFFFFF">02</text>
+    <text x="395" y="278" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="9" font-weight="600" fill="#FFFFFF" fill-opacity="0.7">STEP</text>
+    
+    <!-- 단계3 -->
+    <circle cx="625" cy="265" r="38" fill="#FDCB6E" filter="url(#cardShadow)"/>
+    <circle cx="625" cy="265" r="32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3"/>
+    <text x="625" y="260" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="24" font-weight="800" fill="#FFFFFF">03</text>
+    <text x="625" y="278" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="9" font-weight="600" fill="#FFFFFF" fill-opacity="0.7">STEP</text>
+    
+    <!-- 단계4 -->
+    <circle cx="855" cy="265" r="38" fill="#E17055" filter="url(#cardShadow)"/>
+    <circle cx="855" cy="265" r="32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3"/>
+    <text x="855" y="260" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="24" font-weight="800" fill="#FFFFFF">04</text>
+    <text x="855" y="278" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="9" font-weight="600" fill="#FFFFFF" fill-opacity="0.7">STEP</text>
+    
+    <!-- 단계5 -->
+    <circle cx="1085" cy="265" r="38" fill="#0984E3" filter="url(#cardShadow)"/>
+    <circle cx="1085" cy="265" r="32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3"/>
+    <text x="1085" y="260" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="24" font-weight="800" fill="#FFFFFF">05</text>
+    <text x="1085" y="278" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="9" font-weight="600" fill="#FFFFFF" fill-opacity="0.7">STEP</text>
+    
+    <!-- 카드에 파선 연결됨 -->
+    <line x1="165" y1="303" x2="165" y2="350" stroke="#6C5CE7" stroke-width="2" stroke-dasharray="4,4" stroke-opacity="0.4"/>
+    <line x1="395" y1="303" x2="395" y2="350" stroke="#00B894" stroke-width="2" stroke-dasharray="4,4" stroke-opacity="0.4"/>
+    <line x1="625" y1="303" x2="625" y2="350" stroke="#FDCB6E" stroke-width="2" stroke-dasharray="4,4" stroke-opacity="0.4"/>
+    <line x1="855" y1="303" x2="855" y2="350" stroke="#E17055" stroke-width="2" stroke-dasharray="4,4" stroke-opacity="0.4"/>
+    <line x1="1085" y1="303" x2="1085" y2="350" stroke="#0984E3" stroke-width="2" stroke-dasharray="4,4" stroke-opacity="0.4"/>
+    
+    <!-- 단계 세부 정보 카드 -->
+    <!-- 카드1 -->
+    <g filter="url(#cardShadow)">
+        <rect x="60" y="355" width="210" height="280" rx="12" fill="#FFFFFF"/>
+        <rect x="60" y="355" width="210" height="6" rx="3" fill="#6C5CE7"/>
+        <text x="165" y="395" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="17" font-weight="700" fill="#1A252F">분석 필요</text>
+        <text x="165" y="418" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#6C5CE7" font-weight="600">Requirements</text>
+        <line x1="90" y1="435" x2="240" y2="435" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="80" y="462" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 비즈니스 목표 정렬</text>
+        <text x="80" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 사용자 니즈 조사</text>
+        <text x="80" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 경쟁 제품 현황 분석</text>
+        <text x="80" y="531" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 핵심 지표 식별</text>
+        <rect x="90" y="560" width="60" height="22" rx="11" fill="#6C5CE7" fill-opacity="0.1"/>
+        <text x="120" y="575" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#6C5CE7">2주</text>
+    </g>
+    
+    <!-- 카드2 -->
+    <g filter="url(#cardShadow)">
+        <rect x="290" y="355" width="210" height="280" rx="12" fill="#FFFFFF"/>
+        <rect x="290" y="355" width="210" height="6" rx="3" fill="#00B894"/>
+        <text x="395" y="395" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="17" font-weight="700" fill="#1A252F">계획 설계</text>
+        <text x="395" y="418" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#00B894" font-weight="600">Design</text>
+        <line x1="320" y1="435" x2="470" y2="435" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="310" y="462" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 아키텍처 시나리오 검토</text>
+        <text x="310" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 기술 선택 확인</text>
+        <text x="310" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 마일스톤 계획</text>
+        <text x="310" y="531" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 리소스 할당 시나리오</text>
+        <rect x="320" y="560" width="60" height="22" rx="11" fill="#00B894" fill-opacity="0.1"/>
+        <text x="350" y="575" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#00B894">3주</text>
+    </g>
+    
+    <!-- 카드3 -->
+    <g filter="url(#cardShadow)">
+        <rect x="520" y="355" width="210" height="280" rx="12" fill="#FFFFFF"/>
+        <rect x="520" y="355" width="210" height="6" rx="3" fill="#FDCB6E"/>
+        <text x="625" y="395" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="17" font-weight="700" fill="#1A252F">개발 및 구현</text>
+        <text x="625" y="418" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#D4A537" font-weight="600">Develop</text>
+        <line x1="550" y1="435" x2="700" y2="435" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="540" y="462" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 핵심 모듈 개발</text>
+        <text x="540" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 지속적인 통합 배포</text>
+        <text x="540" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 코드 검토 절차</text>
+        <text x="540" y="531" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 단위 테스트 재정의</text>
+        <rect x="550" y="560" width="60" height="22" rx="11" fill="#FDCB6E" fill-opacity="0.15"/>
+        <text x="580" y="575" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#D4A537">6주</text>
+    </g>
+    
+    <!-- 카드4 -->
+    <g filter="url(#cardShadow)">
+        <rect x="750" y="355" width="210" height="280" rx="12" fill="#FFFFFF"/>
+        <rect x="750" y="355" width="210" height="6" rx="3" fill="#E17055"/>
+        <text x="855" y="395" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="17" font-weight="700" fill="#1A252F">테스트 검증</text>
+        <text x="855" y="418" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#E17055" font-weight="600">Testing</text>
+        <line x1="780" y1="435" x2="930" y2="435" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="770" y="462" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 기능 회귀 테스트</text>
+        <text x="770" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 성능 스트레스 테스트</text>
+        <text x="770" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 사용자 수락 테스트</text>
+        <text x="770" y="531" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· Bug폐쇄 루프 수리</text>
+        <rect x="780" y="560" width="60" height="22" rx="11" fill="#E17055" fill-opacity="0.1"/>
+        <text x="810" y="575" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#E17055">3주</text>
+    </g>
+    
+    <!-- 카드5 -->
+    <g filter="url(#cardShadow)">
+        <rect x="980" y="355" width="210" height="280" rx="12" fill="#FFFFFF"/>
+        <rect x="980" y="355" width="210" height="6" rx="3" fill="#0984E3"/>
+        <text x="1085" y="395" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="17" font-weight="700" fill="#1A252F">업라인 O&M</text>
+        <text x="1085" y="418" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#0984E3" font-weight="600">Launch</text>
+        <line x1="1010" y1="435" x2="1160" y2="435" stroke="#F0F0F0" stroke-width="1"/>
+        <text x="1000" y="462" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 그레이스케일 게시 전략</text>
+        <text x="1000" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 알람 구성 모니터링</text>
+        <text x="1000" y="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 데이터 효과 추적</text>
+        <text x="1000" y="531" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5F6368">· 연속 반복 최적화</text>
+        <rect x="1010" y="560" width="60" height="22" rx="11" fill="#0984E3" fill-opacity="0.1"/>
+        <text x="1040" y="575" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#0984E3">계속되는</text>
+    </g>
+
+    <!-- 하단 음표 -->
+    <text x="640" y="680" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="12" fill="#BDC3C7">총주기는 약입니다.14주 · 프로젝트 규모에 따라 단계를 유연하게 조정할 수 있습니다.</text>
+</svg>

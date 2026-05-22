@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    직사각형 트리 다이어그램 템플릿
+    사용: 계층적 데이터의 비율 시각화
+    적용 가능한 시나리오: 디스크 공간 분석、예산 할당、시장 점유율、조직 구조
+    지원하다: 다단계 직사각형 중첩
+    -->
+    
+    <defs>
+        <!-- 그림자 -->
+        <filter id="treemapShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.15"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>연간 예산 할당 개요</tspan>
+    </text>
+    
+    <text x="60" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025세계 · 일시금 1,200만 위안 · 영역은 예산의 비율을 나타냅니다</tspan>
+    </text>
+    
+    <!-- 직사각형 트리 영역 -->
+    <g id="treemapArea" transform="translate(60, 120)">
+        <!-- 
+        총면적: 1000×480
+        
+        주요 카테고리 및 비율:
+        1. 인건비 40% (400×480 왼쪽)
+        2. 운영 비용 25% (오른쪽 위 600×200)
+        3. 마케팅 비용 20% (오른쪽 가운데 600×160)
+        4. R&D 투자 10% (오른쪽 아래 왼쪽 300×120)
+        5. 기타 비용 5% (오른쪽 오른쪽 아래 300×120)
+        -->
+        
+        <!-- 1. 인건비 40% - 파란색 -->
+        <g id="hr_cost">
+            <rect x="0" y="0" width="400" height="480" rx="6" fill="#1976D2" filter="url(#treemapShadow)"/>
+            
+            <!-- 하위 카테고리 -->
+            <!-- 1.1 급여 및 복리후생 70% of 40% = 28% (400×336) -->
+            <rect x="4" y="4" width="392" height="328" rx="4" fill="#2196F3"/>
+            <text x="200" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>급여 및 복리후생</tspan></text>
+            <text x="200" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="32" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>336만</tspan></text>
+            <text x="200" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="16" fill="#BBDEFB" text-anchor="middle"><tspan>28%</tspan></text>
+            
+            <!-- 1.2 훈련과 개발 15% of 40% = 6% (200×144) -->
+            <rect x="4" y="336" width="194" height="140" rx="4" fill="#42A5F5"/>
+            <text x="101" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>훈련과 개발</tspan></text>
+            <text x="101" y="420" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>72만</tspan></text>
+            <text x="101" y="442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="13" fill="#BBDEFB" text-anchor="middle"><tspan>6%</tspan></text>
+            
+            <!-- 1.3 모집 비용 15% of 40% = 6% (200×144) -->
+            <rect x="202" y="336" width="194" height="140" rx="4" fill="#64B5F6"/>
+            <text x="299" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>모집 비용</tspan></text>
+            <text x="299" y="420" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>72만</tspan></text>
+            <text x="299" y="442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="13" fill="#BBDEFB" text-anchor="middle"><tspan>6%</tspan></text>
+            
+            <!-- 총 인건비 라벨 -->
+            <text x="200" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="13" fill="#BBDEFB" text-anchor="middle"><tspan>인건비 480만 (40%)</tspan></text>
+        </g>
+        
+        <!-- 2. 운영 비용 25% - 그린 시스템 -->
+        <g id="operation_cost">
+            <rect x="404" y="0" width="596" height="200" rx="6" fill="#388E3C" filter="url(#treemapShadow)"/>
+            
+            <!-- 2.1 사무실 공간 50% of 25% = 12.5% -->
+            <rect x="408" y="4" width="290" height="192" rx="4" fill="#4CAF50"/>
+            <text x="553" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>사무실 공간</tspan></text>
+            <text x="553" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>150만</tspan></text>
+            <text x="553" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="14" fill="#C8E6C9" text-anchor="middle"><tspan>12.5%</tspan></text>
+            
+            <!-- 2.2 장비 조달 30% of 25% = 7.5% -->
+            <rect x="702" y="4" width="175" height="192" rx="4" fill="#66BB6A"/>
+            <text x="790" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>장비 조달</tspan></text>
+            <text x="790" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>90만</tspan></text>
+            <text x="790" y="135" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="13" fill="#C8E6C9" text-anchor="middle"><tspan>7.5%</tspan></text>
+            
+            <!-- 2.3 일상 업무 20% of 25% = 5% -->
+            <rect x="881" y="4" width="115" height="192" rx="4" fill="#81C784"/>
+            <text x="939" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>일일</tspan></text>
+            <text x="939" y="97" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>운영</tspan></text>
+            <text x="939" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>60만</tspan></text>
+            <text x="939" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="12" fill="#C8E6C9" text-anchor="middle"><tspan>5%</tspan></text>
+        </g>
+        
+        <!-- 3. 마케팅 비용 20% - 오렌지 계열 -->
+        <g id="marketing_cost">
+            <rect x="404" y="204" width="596" height="156" rx="6" fill="#F57C00" filter="url(#treemapShadow)"/>
+            
+            <!-- 3.1 광고 60% of 20% = 12% -->
+            <rect x="408" y="208" width="350" height="148" rx="4" fill="#FF9800"/>
+            <text x="583" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>광고</tspan></text>
+            <text x="583" y="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="22" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>144만</tspan></text>
+            <text x="583" y="325" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="14" fill="#FFE0B2" text-anchor="middle"><tspan>12%</tspan></text>
+            
+            <!-- 3.2 브랜드 활동 40% of 20% = 8% -->
+            <rect x="762" y="208" width="234" height="148" rx="4" fill="#FFB74D"/>
+            <text x="879" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="14" font-weight="600" fill="#E65100" text-anchor="middle"><tspan>브랜드 활동</tspan></text>
+            <text x="879" y="298" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="20" font-weight="bold" fill="#E65100" text-anchor="middle"><tspan>96만</tspan></text>
+            <text x="879" y="322" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="13" fill="#E65100" text-anchor="middle"><tspan>8%</tspan></text>
+        </g>
+        
+        <!-- 4. R&D 투자 10% - 보라색 시리즈 -->
+        <g id="rd_cost">
+            <rect x="404" y="364" width="296" height="116" rx="6" fill="#7B1FA2" filter="url(#treemapShadow)"/>
+            
+            <rect x="408" y="368" width="288" height="108" rx="4" fill="#9C27B0"/>
+            <text x="552" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>R&D 투자</tspan></text>
+            <text x="552" y="440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>120만</tspan></text>
+            <text x="552" y="465" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="14" fill="#E1BEE7" text-anchor="middle"><tspan>10%</tspan></text>
+        </g>
+        
+        <!-- 5. 기타 비용 5% - 회색 -->
+        <g id="other_cost">
+            <rect x="704" y="364" width="296" height="116" rx="6" fill="#455A64" filter="url(#treemapShadow)"/>
+            
+            <rect x="708" y="368" width="288" height="108" rx="4" fill="#607D8B"/>
+            <text x="852" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>기타 비용</tspan></text>
+            <text x="852" y="440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle"><tspan>60만</tspan></text>
+            <text x="852" y="465" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="14" fill="#B0BEC5" text-anchor="middle"><tspan>5%</tspan></text>
+        </g>
+    </g>
+    
+    <!-- 전설 -->
+    <g id="legend" transform="translate(1080, 130)">
+        <rect x="0" y="0" width="160" height="240" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="80" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle"><tspan>예산 분류</tspan></text>
+        
+        <line x1="15" y1="42" x2="145" y2="42" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <rect x="20" y="55" width="20" height="20" rx="3" fill="#2196F3"/>
+        <text x="50" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>인건비 40%</tspan></text>
+        
+        <rect x="20" y="85" width="20" height="20" rx="3" fill="#4CAF50"/>
+        <text x="50" y="100" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>운영 비용 25%</tspan></text>
+        
+        <rect x="20" y="115" width="20" height="20" rx="3" fill="#FF9800"/>
+        <text x="50" y="130" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>마케팅 비용 20%</tspan></text>
+        
+        <rect x="20" y="145" width="20" height="20" rx="3" fill="#9C27B0"/>
+        <text x="50" y="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>R&D 투자 10%</tspan></text>
+        
+        <rect x="20" y="175" width="20" height="20" rx="3" fill="#607D8B"/>
+        <text x="50" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>기타 비용 5%</tspan></text>
+        
+        <line x1="15" y1="208" x2="145" y2="208" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="20" y="228" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#7F8C8D"><tspan>총예산: 1,200만</tspan></text>
+    </g>
+    
+    <!-- 설명하다 -->
+    <g id="note" transform="translate(1080, 390)">
+        <rect x="0" y="0" width="160" height="80" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="1"/>
+        <text x="15" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" font-weight="600" fill="#1976D2"><tspan>📊 차트 설명</tspan></text>
+        <text x="15" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="11" fill="#5D6D7E"><tspan>직사각형 영역은 예산을 나타냅니다</tspan></text>
+        <text x="15" y="62" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="11" fill="#5D6D7E"><tspan>비율 크기，색상 영역</tspan></text>
+        <text x="15" y="75" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="11" fill="#5D6D7E"><tspan>예산 범주별</tspan></text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 소스: 재무부 연간 예산 보고서</tspan>
+    </text>
+</svg>
+

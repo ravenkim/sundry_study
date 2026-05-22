@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    누적 영역 차트 템플릿
+    사용: 멀티 시리즈 누적 추세、구성 변경
+    적용 가능한 시나리오: 매출 컴포지션의 변화、트래픽 소스 추세、시장 점유율 진화
+    지원하다: 4시리즈 × 12시점
+    -->
+    
+    <defs>
+        <!-- 시리즈1구배（파란색） -->
+        <linearGradient id="stackGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:0.85" />
+            <stop offset="100%" style="stop-color:#2196F3;stop-opacity:0.6" />
+        </linearGradient>
+        
+        <!-- 시리즈2구배（녹색） -->
+        <linearGradient id="stackGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.85" />
+            <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:0.6" />
+        </linearGradient>
+        
+        <!-- 시리즈3구배（오렌지색） -->
+        <linearGradient id="stackGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:0.85" />
+            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:0.6" />
+        </linearGradient>
+        
+        <!-- 시리즈4구배（보라） -->
+        <linearGradient id="stackGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:0.85" />
+            <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:0.6" />
+        </linearGradient>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>매출원 구성 추이</tspan>
+    </text>
+    
+    <text x="60" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025연간 월간 데이터 · 단위：백만 위안</tspan>
+    </text>
+    
+    <!-- 전설 -->
+    <g id="legend" transform="translate(800, 60)">
+        <rect x="0" y="0" width="16" height="16" rx="3" fill="#2196F3"/>
+        <text x="24" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E"><tspan>구독 수익</tspan></text>
+        
+        <rect x="110" y="0" width="16" height="16" rx="3" fill="#4CAF50"/>
+        <text x="134" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E"><tspan>광고 수익</tspan></text>
+        
+        <rect x="220" y="0" width="16" height="16" rx="3" fill="#FF9800"/>
+        <text x="244" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E"><tspan>부가 서비스</tspan></text>
+        
+        <rect x="330" y="0" width="16" height="16" rx="3" fill="#9C27B0"/>
+        <text x="354" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E"><tspan>다른</tspan></text>
+    </g>
+    
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- Y축 그리드 선 -->
+        <line x1="100" y1="550" x2="1180" y2="550" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="100" y1="460" x2="1180" y2="460" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="100" y1="370" x2="1180" y2="370" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="100" y1="280" x2="1180" y2="280" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="100" y1="190" x2="1180" y2="190" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- Y축 스케일 레이블 -->
+        <text x="85" y="555" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>0</tspan></text>
+        <text x="85" y="465" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>50</tspan></text>
+        <text x="85" y="375" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>100</tspan></text>
+        <text x="85" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>150</tspan></text>
+        <text x="85" y="195" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>200</tspan></text>
+        
+        <!-- 중심선 -->
+        <line x1="100" y1="150" x2="100" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="100" y1="550" x2="1180" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        
+        <!-- X중심선상표（12개월） -->
+        <!-- 월간 간격: 90px -->
+        <text x="145" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>1달</tspan></text>
+        <text x="235" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>2달</tspan></text>
+        <text x="325" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>3달</tspan></text>
+        <text x="415" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>4달</tspan></text>
+        <text x="505" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>5달</tspan></text>
+        <text x="595" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>6달</tspan></text>
+        <text x="685" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>7달</tspan></text>
+        <text x="775" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>8달</tspan></text>
+        <text x="865" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>9달</tspan></text>
+        <text x="955" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>10달</tspan></text>
+        <text x="1045" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>11달</tspan></text>
+        <text x="1135" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>12달</tspan></text>
+        
+        <!-- 
+        데이터 설명（하단에서 상단으로 스태킹）：
+        X동등 어구: 145, 235, 325, 415, 505, 595, 685, 775, 865, 955, 1045, 1135
+        Y: 550 - value * 1.8
+        
+        시리즈1 구독 수익: 45, 48, 52, 55, 58, 62, 68, 72, 70, 68, 75, 82
+        시리즈2 광고 수익: 25, 28, 30, 32, 35, 38, 42, 45, 43, 40, 45, 50
+        시리즈3 부가 서비스: 15, 16, 18, 20, 22, 25, 28, 30, 28, 26, 30, 35
+        시리즈4 다른: 8, 8, 10, 10, 12, 12, 15, 15, 14, 14, 15, 18
+        
+        총계:
+        L1끝: 0
+        L1맨 위: 45, 48, 52, 55, 58, 62, 68, 72, 70, 68, 75, 82
+        L2맨 위: 70, 76, 82, 87, 93, 100, 110, 117, 113, 108, 120, 132
+        L3맨 위: 85, 92, 100, 107, 115, 125, 138, 147, 141, 134, 150, 167
+        L4맨 위: 93, 100, 110, 117, 127, 137, 153, 162, 155, 148, 165, 185
+        -->
+        
+        <!-- 시리즈4: 다른（최상위 수준，보라） -->
+        <path d="M 145,550 
+                 L 145,382.6 L 235,370 L 325,352 L 415,339.4 L 505,321.4 L 595,303.4 L 685,274.6 L 775,258.4 L 865,271 L 955,283.6 L 1045,253 L 1135,217
+                 L 1135,249.4 L 1045,280 L 955,308.8 L 865,296.2 L 775,285.4 L 685,301.6 L 595,325 L 505,343 L 415,357.4 L 325,370 L 235,384.4 L 145,397
+                 Z" fill="url(#stackGrad4)"/>
+        
+        <!-- 시리즈3: 부가 서비스（오렌지색） -->
+        <path d="M 145,550 
+                 L 145,397 L 235,384.4 L 325,370 L 415,357.4 L 505,343 L 595,325 L 685,301.6 L 775,285.4 L 865,296.2 L 955,308.8 L 1045,280 L 1135,249.4
+                 L 1135,312.4 L 1045,334 L 955,355.6 L 865,342.6 L 775,337 L 685,352.4 L 595,374 L 505,387 L 415,398.6 L 325,406 L 235,413.2 L 145,424
+                 Z" fill="url(#stackGrad3)"/>
+        
+        <!-- 시리즈2: 광고 수익（녹색） -->
+        <path d="M 145,550 
+                 L 145,424 L 235,413.2 L 325,406 L 415,398.6 L 505,387 L 595,374 L 685,352.4 L 775,337 L 865,342.6 L 955,355.6 L 1045,334 L 1135,312.4
+                 L 1135,402.4 L 1045,415 L 955,427.6 L 865,424 L 775,418.6 L 685,424 L 595,436.6 L 505,445 L 415,451 L 325,456.4 L 235,463.6 L 145,469
+                 Z" fill="url(#stackGrad2)"/>
+        
+        <!-- 시리즈1: 구독 수익（파란색，가장 낮은 수준） -->
+        <path d="M 145,550 
+                 L 145,469 L 235,463.6 L 325,456.4 L 415,451 L 505,445 L 595,436.6 L 685,424 L 775,418.6 L 865,424 L 955,427.6 L 1045,415 L 1135,402.4
+                 L 1135,550 Z" fill="url(#stackGrad1)"/>
+        
+        <!-- 상단 테두리 -->
+        <path d="M 145,382.6 L 235,370 L 325,352 L 415,339.4 L 505,321.4 L 595,303.4 L 685,274.6 L 775,258.4 L 865,271 L 955,283.6 L 1045,253 L 1135,217" 
+              fill="none" stroke="#9C27B0" stroke-width="2"/>
+    </g>
+    
+    <!-- 표시（8월별 피크） -->
+    <g id="annotation">
+        <rect x="730" y="195" width="90" height="50" rx="6" fill="#9C27B0"/>
+        <text x="775" y="218" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>성수기</tspan></text>
+        <text x="775" y="236" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#FFFFFF" text-anchor="middle"><tspan>162M</tspan></text>
+        <path d="M 775,245 L 770,258.4 L 780,258.4 Z" fill="#9C27B0"/>
+    </g>
+    
+    <!-- 통계 카드 -->
+    <g id="statsCards" transform="translate(60, 610)">
+        <!-- 카드1 -->
+        <rect x="0" y="0" width="200" height="80" rx="8" fill="#E3F2FD" stroke="#2196F3" stroke-width="1"/>
+        <text x="20" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#1976D2"><tspan>구독 수익</tspan></text>
+        <text x="20" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="22" font-weight="bold" fill="#2196F3"><tspan>755M</tspan></text>
+        <text x="20" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D"><tspan>비율 48.5% ↑12%</tspan></text>
+        
+        <!-- 카드2 -->
+        <rect x="220" y="0" width="200" height="80" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1"/>
+        <text x="240" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#388E3C"><tspan>광고 수익</tspan></text>
+        <text x="240" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="22" font-weight="bold" fill="#4CAF50"><tspan>453M</tspan></text>
+        <text x="240" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D"><tspan>비율 29.1% ↑8%</tspan></text>
+        
+        <!-- 카드3 -->
+        <rect x="440" y="0" width="200" height="80" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="1"/>
+        <text x="460" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#F57C00"><tspan>부가 서비스</tspan></text>
+        <text x="460" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="22" font-weight="bold" fill="#FF9800"><tspan>293M</tspan></text>
+        <text x="460" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D"><tspan>비율 18.8% ↑15%</tspan></text>
+        
+        <!-- 카드4 -->
+        <rect x="660" y="0" width="200" height="80" rx="8" fill="#F3E5F5" stroke="#9C27B0" stroke-width="1"/>
+        <text x="680" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#7B1FA2"><tspan>기타소득</tspan></text>
+        <text x="680" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="22" font-weight="bold" fill="#9C27B0"><tspan>56M</tspan></text>
+        <text x="680" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D"><tspan>비율 3.6% ↑5%</tspan></text>
+        
+        <!-- 총 -->
+        <rect x="880" y="0" width="200" height="80" rx="8" fill="#F8F9FA" stroke="#2C3E50" stroke-width="2"/>
+        <text x="900" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#5D6D7E"><tspan>연간 총 수익</tspan></text>
+        <text x="900" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="22" font-weight="bold" fill="#2C3E50"><tspan>1,557M</tspan></text>
+        <text x="900" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#27AE60"><tspan>전년 대비 성장 +11.2%</tspan></text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="1220" y="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6" text-anchor="end">
+        <tspan>데이터 소스: 재무부</tspan>
+    </text>
+</svg>
+

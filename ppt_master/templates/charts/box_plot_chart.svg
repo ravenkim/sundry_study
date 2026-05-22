@@ -1,0 +1,308 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    박스 다이어그램 템플릿
+    사용: 데이터 분포 시각화、통계 분석
+    적용 가능한 시나리오: 급여 분포、성능 분석、품질 관리、이상값 감지
+    지원하다: 5박스 라인 차트 비교
+    -->
+    
+    <defs>
+        <!-- 캐비닛 그라데이션 -->
+        <linearGradient id="boxGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#42A5F5;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="boxGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#66BB6A;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="boxGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFB74D;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="boxGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#BA68C8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="boxGrad5" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#EF5350;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#D32F2F;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 그림자 -->
+        <filter id="boxShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>부서별 급여 분포 분석</tspan>
+    </text>
+    
+    <text x="60" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025연간 보상 보고서 · 단위：만 위안/년도</tspan>
+    </text>
+    
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- Y축 그리드 선 -->
+        <line x1="140" y1="550" x2="1000" y2="550" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="480" x2="1000" y2="480" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="410" x2="1000" y2="410" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="340" x2="1000" y2="340" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="270" x2="1000" y2="270" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="200" x2="1000" y2="200" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="130" x2="1000" y2="130" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- Y축 스케일 레이블 -->
+        <text x="125" y="555" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>0</tspan></text>
+        <text x="125" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>10</tspan></text>
+        <text x="125" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>20</tspan></text>
+        <text x="125" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>30</tspan></text>
+        <text x="125" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>40</tspan></text>
+        <text x="125" y="205" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>50</tspan></text>
+        <text x="125" y="135" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>60</tspan></text>
+        
+        <!-- Y축 제목 -->
+        <text x="45" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="15" fill="#5D6D7E" text-anchor="middle" transform="rotate(-90, 45, 340)">
+            <tspan>연봉（만 위안）</tspan>
+        </text>
+        
+        <!-- 중심선 -->
+        <line x1="140" y1="130" x2="140" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="140" y1="550" x2="1000" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        
+        <!-- 
+        박스 다이어그램 설명：
+        - 휴지통당 너비: 80px
+        - 상자 간격: 100px
+        - 모든10만=70px
+        
+        데이터（최소값, Q1, 중앙값, Q3, 최대값）：
+        기술부: 15, 25, 35, 45, 58 + 특이치 8
+        제품부: 12, 22, 28, 38, 50
+        디자인부: 10, 18, 24, 32, 42
+        마케팅 부서: 8, 15, 22, 30, 45 + 특이치 55
+        운영부서: 8, 14, 20, 26, 38
+        -->
+        
+        <!-- 상자 그림1: 기술부 (파란색) -->
+        <g id="box1" transform="translate(230, 0)">
+            <!-- 윗수염 라인 (max=58) -->
+            <line x1="0" y1="143.4" x2="0" y2="235" stroke="#1976D2" stroke-width="2"/>
+            <line x1="-20" y1="143.4" x2="20" y2="143.4" stroke="#1976D2" stroke-width="2"/>
+            
+            <!-- 내각 (Q1=25도착하다Q3=45) -->
+            <rect x="-40" y="235" width="80" height="140" rx="4" fill="url(#boxGrad1)" filter="url(#boxShadow)"/>
+            
+            <!-- 중앙선 (median=35) -->
+            <line x1="-40" y1="305" x2="40" y2="305" stroke="#FFFFFF" stroke-width="3"/>
+            
+            <!-- 아래쪽 수염 라인 (min=15) -->
+            <line x1="0" y1="375" x2="0" y2="445" stroke="#1976D2" stroke-width="2"/>
+            <line x1="-20" y1="445" x2="20" y2="445" stroke="#1976D2" stroke-width="2"/>
+            
+            <!-- 특이치 (outlier=8) -->
+            <circle cx="0" cy="494" r="6" fill="#FFFFFF" stroke="#1976D2" stroke-width="2"/>
+            
+            <!-- 상표 -->
+            <text x="0" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="15" font-weight="600" fill="#1976D2" text-anchor="middle"><tspan>기술부</tspan></text>
+            
+            <!-- 수치 주석 -->
+            <text x="50" y="148" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>58</tspan></text>
+            <text x="50" y="240" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>45</tspan></text>
+            <text x="50" y="310" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#2196F3"><tspan>35</tspan></text>
+            <text x="50" y="380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>25</tspan></text>
+            <text x="50" y="450" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>15</tspan></text>
+        </g>
+        
+        <!-- 상자 그림2: 제품부 (녹색) -->
+        <g id="box2" transform="translate(400, 0)">
+            <!-- 윗수염 라인 (max=50) -->
+            <line x1="0" y1="200" x2="0" y2="284" stroke="#388E3C" stroke-width="2"/>
+            <line x1="-20" y1="200" x2="20" y2="200" stroke="#388E3C" stroke-width="2"/>
+            
+            <!-- 내각 (Q1=22도착하다Q3=38) -->
+            <rect x="-40" y="284" width="80" height="112" rx="4" fill="url(#boxGrad2)" filter="url(#boxShadow)"/>
+            
+            <!-- 중앙선 (median=28) -->
+            <line x1="-40" y1="354" x2="40" y2="354" stroke="#FFFFFF" stroke-width="3"/>
+            
+            <!-- 아래쪽 수염 라인 (min=12) -->
+            <line x1="0" y1="396" x2="0" y2="466" stroke="#388E3C" stroke-width="2"/>
+            <line x1="-20" y1="466" x2="20" y2="466" stroke="#388E3C" stroke-width="2"/>
+            
+            <!-- 상표 -->
+            <text x="0" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="15" font-weight="600" fill="#388E3C" text-anchor="middle"><tspan>제품부</tspan></text>
+        </g>
+        
+        <!-- 상자 그림3: 디자인부 (오렌지색) -->
+        <g id="box3" transform="translate(570, 0)">
+            <!-- 윗수염 라인 (max=42) -->
+            <line x1="0" y1="256" x2="0" y2="326" stroke="#F57C00" stroke-width="2"/>
+            <line x1="-20" y1="256" x2="20" y2="256" stroke="#F57C00" stroke-width="2"/>
+            
+            <!-- 내각 (Q1=18도착하다Q3=32) -->
+            <rect x="-40" y="326" width="80" height="98" rx="4" fill="url(#boxGrad3)" filter="url(#boxShadow)"/>
+            
+            <!-- 중앙선 (median=24) -->
+            <line x1="-40" y1="382" x2="40" y2="382" stroke="#FFFFFF" stroke-width="3"/>
+            
+            <!-- 아래쪽 수염 라인 (min=10) -->
+            <line x1="0" y1="424" x2="0" y2="480" stroke="#F57C00" stroke-width="2"/>
+            <line x1="-20" y1="480" x2="20" y2="480" stroke="#F57C00" stroke-width="2"/>
+            
+            <!-- 상표 -->
+            <text x="0" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="15" font-weight="600" fill="#F57C00" text-anchor="middle"><tspan>디자인부</tspan></text>
+        </g>
+        
+        <!-- 상자 그림4: 마케팅 부서 (보라) -->
+        <g id="box4" transform="translate(740, 0)">
+            <!-- 윗수염 라인 (max=45) -->
+            <line x1="0" y1="235" x2="0" y2="340" stroke="#7B1FA2" stroke-width="2"/>
+            <line x1="-20" y1="235" x2="20" y2="235" stroke="#7B1FA2" stroke-width="2"/>
+            
+            <!-- 내각 (Q1=15도착하다Q3=30) -->
+            <rect x="-40" y="340" width="80" height="105" rx="4" fill="url(#boxGrad4)" filter="url(#boxShadow)"/>
+            
+            <!-- 중앙선 (median=22) -->
+            <line x1="-40" y1="396" x2="40" y2="396" stroke="#FFFFFF" stroke-width="3"/>
+            
+            <!-- 아래쪽 수염 라인 (min=8) -->
+            <line x1="0" y1="445" x2="0" y2="494" stroke="#7B1FA2" stroke-width="2"/>
+            <line x1="-20" y1="494" x2="20" y2="494" stroke="#7B1FA2" stroke-width="2"/>
+            
+            <!-- 특이치 (outlier=55) -->
+            <circle cx="0" cy="165" r="6" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="2"/>
+            
+            <!-- 상표 -->
+            <text x="0" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="15" font-weight="600" fill="#7B1FA2" text-anchor="middle"><tspan>마케팅 부서</tspan></text>
+        </g>
+        
+        <!-- 상자 그림5: 운영부서 (빨간색) -->
+        <g id="box5" transform="translate(910, 0)">
+            <!-- 윗수염 라인 (max=38) -->
+            <line x1="0" y1="284" x2="0" y2="368" stroke="#D32F2F" stroke-width="2"/>
+            <line x1="-20" y1="284" x2="20" y2="284" stroke="#D32F2F" stroke-width="2"/>
+            
+            <!-- 내각 (Q1=14도착하다Q3=26) -->
+            <rect x="-40" y="368" width="80" height="84" rx="4" fill="url(#boxGrad5)" filter="url(#boxShadow)"/>
+            
+            <!-- 중앙선 (median=20) -->
+            <line x1="-40" y1="410" x2="40" y2="410" stroke="#FFFFFF" stroke-width="3"/>
+            
+            <!-- 아래쪽 수염 라인 (min=8) -->
+            <line x1="0" y1="452" x2="0" y2="494" stroke="#D32F2F" stroke-width="2"/>
+            <line x1="-20" y1="494" x2="20" y2="494" stroke="#D32F2F" stroke-width="2"/>
+            
+            <!-- 상표 -->
+            <text x="0" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+                  font-size="15" font-weight="600" fill="#D32F2F" text-anchor="middle"><tspan>운영부서</tspan></text>
+        </g>
+    </g>
+    
+    <!-- 박스 다이어그램 설명 -->
+    <g id="boxLegend" transform="translate(1040, 130)">
+        <rect x="0" y="0" width="200" height="240" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="100" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle"><tspan>전설</tspan></text>
+        
+        <line x1="15" y1="42" x2="185" y2="42" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <!-- 개략도 -->
+        <g transform="translate(30, 60)">
+            <!-- 윗수염 라인 -->
+            <line x1="30" y1="0" x2="30" y2="25" stroke="#5D6D7E" stroke-width="2"/>
+            <line x1="20" y1="0" x2="40" y2="0" stroke="#5D6D7E" stroke-width="2"/>
+            <text x="70" y="5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>최대값</tspan></text>
+            
+            <!-- 내각 -->
+            <rect x="10" y="25" width="40" height="60" rx="3" fill="#BDC3C7"/>
+            <text x="70" y="35" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>Q3 (75%)</tspan></text>
+            
+            <!-- 중앙값 -->
+            <line x1="10" y1="55" x2="50" y2="55" stroke="#2C3E50" stroke-width="2"/>
+            <text x="70" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#2C3E50"><tspan>중앙값</tspan></text>
+            
+            <text x="70" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>Q1 (25%)</tspan></text>
+            
+            <!-- 아래쪽 수염 라인 -->
+            <line x1="30" y1="85" x2="30" y2="110" stroke="#5D6D7E" stroke-width="2"/>
+            <line x1="20" y1="110" x2="40" y2="110" stroke="#5D6D7E" stroke-width="2"/>
+            <text x="70" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#7F8C8D"><tspan>최소값</tspan></text>
+            
+            <!-- 특이치 -->
+            <circle cx="30" cy="135" r="5" fill="#FFFFFF" stroke="#5D6D7E" stroke-width="2"/>
+            <text x="70" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+                  font-size="11" fill="#E91E63"><tspan>특이치</tspan></text>
+        </g>
+        
+        <text x="15" y="220" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="10" fill="#95A5A6"><tspan>IQR = Q3 - Q1</tspan></text>
+        <text x="15" y="232" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="10" fill="#95A5A6"><tspan>특이치 > Q3+1.5*IQR</tspan></text>
+    </g>
+    
+    <!-- 통계 요약 -->
+    <g id="statsSummary" transform="translate(1040, 390)">
+        <rect x="0" y="0" width="200" height="160" rx="8" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1"/>
+        
+        <text x="15" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2E7D32"><tspan>📊 통계 요약</tspan></text>
+        
+        <text x="15" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>최고 중앙값: 기술부 35만</tspan></text>
+        <text x="15" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>최저 중앙값: 운영부서 20만</tspan></text>
+        <text x="15" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>가장 널리 분포되어 있는: 기술부</tspan></text>
+        <text x="15" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#5D6D7E"><tspan>가장 중앙에 분산되어 있음: 운영부서</tspan></text>
+        <text x="15" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#E91E63"><tspan>아웃라이어 찾음: 2개인</tspan></text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 소스: 인사 보상 통계</tspan>
+    </text>
+</svg>
+

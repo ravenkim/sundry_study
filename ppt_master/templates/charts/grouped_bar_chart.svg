@@ -1,0 +1,275 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    그룹화된 히스토그램 템플릿
+    사용: 다중 시리즈 데이터 비교
+    적용 가능한 시나리오: 여러 제품/기간/분류 비교、전년 대비 순차 분석
+    지원하다: 4그룹 × 3시리즈（조정될 수 있습니다3-6그룹，2-4시리즈）
+    일반 막대 차트와의 차이: 각 카테고리 아래에 나란히 있는 여러 개의 열，비교를 위해
+    -->
+    
+    <defs>
+        <!-- 시리즈1구배（파란색） -->
+        <linearGradient id="groupGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 시리즈2구배（녹색） -->
+        <linearGradient id="groupGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 시리즈3구배（오렌지색） -->
+        <linearGradient id="groupGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 그림자 -->
+        <filter id="groupShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.25"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>분기별 제품 라인 매출 비교</tspan>
+    </text>
+    
+    <text x="60" y="105" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025년도 · 단위：백만 위안</tspan>
+    </text>
+    
+    <!-- 전설 -->
+    <g id="legend" transform="translate(900, 70)">
+        <rect x="0" y="0" width="20" height="20" rx="3" fill="url(#groupGrad1)"/>
+        <text x="30" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="15" fill="#5D6D7E">
+            <tspan>제품 라인A</tspan>
+        </text>
+        
+        <rect x="120" y="0" width="20" height="20" rx="3" fill="url(#groupGrad2)"/>
+        <text x="150" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="15" fill="#5D6D7E">
+            <tspan>제품 라인B</tspan>
+        </text>
+        
+        <rect x="240" y="0" width="20" height="20" rx="3" fill="url(#groupGrad3)"/>
+        <text x="270" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="15" fill="#5D6D7E">
+            <tspan>제품 라인C</tspan>
+        </text>
+    </g>
+    
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- Y축 그리드 선 -->
+        <line x1="140" y1="570" x2="1180" y2="570" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="480" x2="1180" y2="480" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="390" x2="1180" y2="390" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="300" x2="1180" y2="300" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="210" x2="1180" y2="210" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- Y축 스케일 레이블 -->
+        <text x="125" y="575" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>0</tspan>
+        </text>
+        <text x="125" y="485" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>50</tspan>
+        </text>
+        <text x="125" y="395" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>100</tspan>
+        </text>
+        <text x="125" y="305" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>150</tspan>
+        </text>
+        <text x="125" y="215" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>200</tspan>
+        </text>
+        
+        <!-- 중심선 -->
+        <line x1="140" y1="165" x2="140" y2="570" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="140" y1="570" x2="1180" y2="570" stroke="#95A5A6" stroke-width="2"/>
+        
+        <!-- 
+        그룹 설명：
+        - 4여러 떼（Q1-Q4），각 그룹3기둥
+        - 그룹 너비：240px，그룹 간격：20px
+        - 열 너비：60px，열 간격：10px
+        - 각 그룹의 시작：170, 430, 690, 950
+        - 모든50단위=90px높은
+        -->
+        
+        <!-- Q1 그룹 -->
+        <!-- Q1 제품 라인A: 120M (높은216px) -->
+        <rect x="170" y="354" width="60" height="216" rx="4" fill="url(#groupGrad1)" filter="url(#groupShadow)"/>
+        <text x="200" y="342" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>120</tspan>
+        </text>
+        
+        <!-- Q1 제품 라인B: 85M (높은153px) -->
+        <rect x="240" y="417" width="60" height="153" rx="4" fill="url(#groupGrad2)" filter="url(#groupShadow)"/>
+        <text x="270" y="405" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>85</tspan>
+        </text>
+        
+        <!-- Q1 제품 라인C: 65M (높은117px) -->
+        <rect x="310" y="453" width="60" height="117" rx="4" fill="url(#groupGrad3)" filter="url(#groupShadow)"/>
+        <text x="340" y="441" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>65</tspan>
+        </text>
+        
+        <!-- Q1 상표 -->
+        <text x="255" y="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q1</tspan>
+        </text>
+        
+        <!-- Q2 그룹 -->
+        <!-- Q2 제품 라인A: 145M (높은261px) -->
+        <rect x="430" y="309" width="60" height="261" rx="4" fill="url(#groupGrad1)" filter="url(#groupShadow)"/>
+        <text x="460" y="297" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>145</tspan>
+        </text>
+        
+        <!-- Q2 제품 라인B: 98M (높은176px) -->
+        <rect x="500" y="394" width="60" height="176" rx="4" fill="url(#groupGrad2)" filter="url(#groupShadow)"/>
+        <text x="530" y="382" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>98</tspan>
+        </text>
+        
+        <!-- Q2 제품 라인C: 78M (높은140px) -->
+        <rect x="570" y="430" width="60" height="140" rx="4" fill="url(#groupGrad3)" filter="url(#groupShadow)"/>
+        <text x="600" y="418" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>78</tspan>
+        </text>
+        
+        <!-- Q2 상표 -->
+        <text x="515" y="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q2</tspan>
+        </text>
+        
+        <!-- Q3 그룹 -->
+        <!-- Q3 제품 라인A: 168M (높은302px) -->
+        <rect x="690" y="268" width="60" height="302" rx="4" fill="url(#groupGrad1)" filter="url(#groupShadow)"/>
+        <text x="720" y="256" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>168</tspan>
+        </text>
+        
+        <!-- Q3 제품 라인B: 112M (높은202px) -->
+        <rect x="760" y="368" width="60" height="202" rx="4" fill="url(#groupGrad2)" filter="url(#groupShadow)"/>
+        <text x="790" y="356" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>112</tspan>
+        </text>
+        
+        <!-- Q3 제품 라인C: 92M (높은166px) -->
+        <rect x="830" y="404" width="60" height="166" rx="4" fill="url(#groupGrad3)" filter="url(#groupShadow)"/>
+        <text x="860" y="392" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>92</tspan>
+        </text>
+        
+        <!-- Q3 상표 -->
+        <text x="775" y="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q3</tspan>
+        </text>
+        
+        <!-- Q4 그룹 -->
+        <!-- Q4 제품 라인A: 185M (높은333px) -->
+        <rect x="950" y="237" width="60" height="333" rx="4" fill="url(#groupGrad1)" filter="url(#groupShadow)"/>
+        <text x="980" y="225" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>185</tspan>
+        </text>
+        
+        <!-- Q4 제품 라인B: 125M (높은225px) -->
+        <rect x="1020" y="345" width="60" height="225" rx="4" fill="url(#groupGrad2)" filter="url(#groupShadow)"/>
+        <text x="1050" y="333" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>125</tspan>
+        </text>
+        
+        <!-- Q4 제품 라인C: 108M (높은194px) -->
+        <rect x="1090" y="376" width="60" height="194" rx="4" fill="url(#groupGrad3)" filter="url(#groupShadow)"/>
+        <text x="1120" y="364" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>108</tspan>
+        </text>
+        
+        <!-- Q4 상표 -->
+        <text x="1035" y="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="18" fill="#5D6D7E" text-anchor="middle">
+            <tspan>Q4</tspan>
+        </text>
+    </g>
+    
+    <!-- 트렌드 요약 카드 -->
+    <g id="summaryCard">
+        <rect x="60" y="630" width="400" height="60" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="80" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E">
+            <tspan>연간 총액:</tspan>
+        </text>
+        <text x="160" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="bold" fill="#2196F3">
+            <tspan>618M</tspan>
+        </text>
+        <text x="220" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E">
+            <tspan>|</tspan>
+        </text>
+        <text x="240" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="bold" fill="#4CAF50">
+            <tspan>420M</tspan>
+        </text>
+        <text x="300" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#5D6D7E">
+            <tspan>|</tspan>
+        </text>
+        <text x="320" y="655" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="16" font-weight="bold" fill="#FF9800">
+            <tspan>343M</tspan>
+        </text>
+        
+        <text x="80" y="675" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" fill="#95A5A6">
+            <tspan>전년 대비 성장: +15.2%</tspan>
+        </text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="1220" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6" text-anchor="end">
+        <tspan>데이터 소스: 영업부서</tspan>
+    </text>
+</svg>
+

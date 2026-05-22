@@ -1,0 +1,315 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    간트 차트 템플릿
+    사용: 프로젝트 일정 계획、타임라인 관리
+    적용 가능한 시나리오: 프로젝트 관리、마일스톤 추적、작업 예약
+    지원하다: 8작업 × 12주별 소요 시간（조절할 수 있는）
+    -->
+    
+    <defs>
+        <!-- 작업 표시줄 그라데이션 -->
+        <linearGradient id="taskGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="taskGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="taskGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="taskGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+        </linearGradient>
+        
+        <!-- 그림자 -->
+        <filter id="ganttShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        
+        <!-- 오늘의 라인 패턴 -->
+        <pattern id="todayPattern" patternUnits="userSpaceOnUse" width="4" height="4">
+            <line x1="0" y1="0" x2="4" y2="4" stroke="#E74C3C" stroke-width="1"/>
+        </pattern>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="28" font-weight="bold" fill="#2C3E50">
+        <tspan>프로젝트 일정</tspan>
+    </text>
+    
+    <text x="60" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" fill="#7F8C8D">
+        <tspan>제품 출시 품목 · 2025년도Q1-Q2</tspan>
+    </text>
+    
+    <!-- 타임라인 헤더 -->
+    <g id="timeHeader">
+        <!-- 월 라벨배경 -->
+        <rect x="280" y="105" width="960" height="30" fill="#F5F5F5"/>
+        
+        <!-- 월 구분 기호 및 레이블 -->
+        <line x1="280" y1="105" x2="280" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="360" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle">
+            <tspan>1달</tspan>
+        </text>
+        
+        <line x1="440" y1="105" x2="440" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="520" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle">
+            <tspan>2달</tspan>
+        </text>
+        
+        <line x1="600" y1="105" x2="600" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="680" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle">
+            <tspan>3달</tspan>
+        </text>
+        
+        <line x1="760" y1="105" x2="760" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="840" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle">
+            <tspan>4달</tspan>
+        </text>
+        
+        <line x1="920" y1="105" x2="920" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="1000" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle">
+            <tspan>5달</tspan>
+        </text>
+        
+        <line x1="1080" y1="105" x2="1080" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="1160" y="125" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#5D6D7E" text-anchor="middle">
+            <tspan>6달</tspan>
+        </text>
+        
+        <line x1="1240" y1="105" x2="1240" y2="640" stroke="#E0E0E0" stroke-width="1"/>
+    </g>
+    
+    <!-- 주간 구분선（점선） -->
+    <g stroke="#F0F0F0" stroke-width="1" stroke-dasharray="2,2">
+        <line x1="320" y1="135" x2="320" y2="640"/>
+        <line x1="360" y1="135" x2="360" y2="640"/>
+        <line x1="400" y1="135" x2="400" y2="640"/>
+        <line x1="480" y1="135" x2="480" y2="640"/>
+        <line x1="520" y1="135" x2="520" y2="640"/>
+        <line x1="560" y1="135" x2="560" y2="640"/>
+        <line x1="640" y1="135" x2="640" y2="640"/>
+        <line x1="680" y1="135" x2="680" y2="640"/>
+        <line x1="720" y1="135" x2="720" y2="640"/>
+        <line x1="800" y1="135" x2="800" y2="640"/>
+        <line x1="840" y1="135" x2="840" y2="640"/>
+        <line x1="880" y1="135" x2="880" y2="640"/>
+        <line x1="960" y1="135" x2="960" y2="640"/>
+        <line x1="1000" y1="135" x2="1000" y2="640"/>
+        <line x1="1040" y1="135" x2="1040" y2="640"/>
+        <line x1="1120" y1="135" x2="1120" y2="640"/>
+        <line x1="1160" y1="135" x2="1160" y2="640"/>
+        <line x1="1200" y1="135" x2="1200" y2="640"/>
+    </g>
+    
+    <!-- 작업 목록 영역 -->
+    <g id="taskList">
+        <!-- 작업 라인배경（대체 색상） -->
+        <rect x="40" y="135" width="240" height="60" fill="#FFFFFF"/>
+        <rect x="40" y="195" width="240" height="60" fill="#FAFAFA"/>
+        <rect x="40" y="255" width="240" height="60" fill="#FFFFFF"/>
+        <rect x="40" y="315" width="240" height="60" fill="#FAFAFA"/>
+        <rect x="40" y="375" width="240" height="60" fill="#FFFFFF"/>
+        <rect x="40" y="435" width="240" height="60" fill="#FAFAFA"/>
+        <rect x="40" y="495" width="240" height="60" fill="#FFFFFF"/>
+        <rect x="40" y="555" width="240" height="60" fill="#FAFAFA"/>
+        
+        <!-- 작업 이름 -->
+        <text x="55" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>1. 분석 필요</tspan>
+        </text>
+        
+        <text x="55" y="232" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>2. 제품 디자인</tspan>
+        </text>
+        
+        <text x="55" y="292" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>3. UI/UX 설계</tspan>
+        </text>
+        
+        <text x="55" y="352" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>4. 프론트엔드 개발</tspan>
+        </text>
+        
+        <text x="55" y="412" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>5. 백엔드 개발</tspan>
+        </text>
+        
+        <text x="55" y="472" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>6. 시험 합격</tspan>
+        </text>
+        
+        <text x="55" y="532" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>7. 배포 및 온라인</tspan>
+        </text>
+        
+        <text x="55" y="592" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50">
+            <tspan>8. 운영 추진</tspan>
+        </text>
+    </g>
+    
+    <!-- 간트 바 -->
+    <g id="ganttBars">
+        <!-- 일1: 분석 필요 (1월 번호1주 - 1월 번호3주) -->
+        <rect x="280" y="155" width="120" height="24" rx="4" fill="url(#taskGrad1)" filter="url(#ganttShadow)"/>
+        <text x="340" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>3주</tspan>
+        </text>
+        
+        <!-- 일2: 제품 디자인 (1월 번호2주 - 2월 번호2주) -->
+        <rect x="320" y="215" width="200" height="24" rx="4" fill="url(#taskGrad1)" filter="url(#ganttShadow)"/>
+        <text x="420" y="232" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>5주</tspan>
+        </text>
+        
+        <!-- 일3: UI/UX 설계 (2월 번호1주 - 3월 번호1주) -->
+        <rect x="440" y="275" width="200" height="24" rx="4" fill="url(#taskGrad2)" filter="url(#ganttShadow)"/>
+        <text x="540" y="292" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>5주</tspan>
+        </text>
+        
+        <!-- 일4: 프론트엔드 개발 (2월 번호3주 - 4월 번호2주) -->
+        <rect x="520" y="335" width="320" height="24" rx="4" fill="url(#taskGrad3)" filter="url(#ganttShadow)"/>
+        <text x="680" y="352" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>8주</tspan>
+        </text>
+        
+        <!-- 일5: 백엔드 개발 (2월 번호2주 - 4월 번호3주) -->
+        <rect x="480" y="395" width="400" height="24" rx="4" fill="url(#taskGrad3)" filter="url(#ganttShadow)"/>
+        <text x="680" y="412" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>10주</tspan>
+        </text>
+        
+        <!-- 일6: 시험 합격 (4월 번호1주 - 5월 번호2주) -->
+        <rect x="760" y="455" width="240" height="24" rx="4" fill="url(#taskGrad4)" filter="url(#ganttShadow)"/>
+        <text x="880" y="472" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>6주</tspan>
+        </text>
+        
+        <!-- 일7: 배포 및 온라인 (5월 번호2주 - 5월 번호3주) -->
+        <rect x="1000" y="515" width="80" height="24" rx="4" fill="url(#taskGrad4)" filter="url(#ganttShadow)"/>
+        <text x="1040" y="532" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>2주</tspan>
+        </text>
+        
+        <!-- 일8: 운영 추진 (5월 번호3주 - 6월 번호4주) -->
+        <rect x="1040" y="575" width="200" height="24" rx="4" fill="url(#taskGrad2)" filter="url(#ganttShadow)"/>
+        <text x="1140" y="592" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#FFFFFF" text-anchor="middle">
+            <tspan>5주</tspan>
+        </text>
+    </g>
+    
+    <!-- 마일스톤 마커 -->
+    <g id="milestones">
+        <!-- 중요한 단계: 요구사항 검토 -->
+        <polygon points="400,165 410,155 420,165 410,175" fill="#E74C3C"/>
+        <text x="410" y="145" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#E74C3C" text-anchor="middle">
+            <tspan>요구사항 검토</tspan>
+        </text>
+        
+        <!-- 중요한 단계: 디자인 검토 -->
+        <polygon points="640,285 650,275 660,285 650,295" fill="#E74C3C"/>
+        <text x="650" y="265" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#E74C3C" text-anchor="middle">
+            <tspan>디자인 검토</tspan>
+        </text>
+        
+        <!-- 중요한 단계: 제품 출시 -->
+        <polygon points="1070,525 1080,515 1090,525 1080,535" fill="#E74C3C"/>
+        <text x="1080" y="550" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#E74C3C" text-anchor="middle">
+            <tspan>제품 출시</tspan>
+        </text>
+    </g>
+    
+    <!-- 오늘의 라인 (다음과 같이 가정합니다.3월 번호2주) -->
+    <line x1="680" y1="105" x2="680" y2="640" stroke="#E74C3C" stroke-width="2" stroke-dasharray="6,3"/>
+    <rect x="660" y="95" width="40" height="20" rx="3" fill="#E74C3C"/>
+    <text x="680" y="109" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="11" fill="#FFFFFF" text-anchor="middle">
+        <tspan>오늘</tspan>
+    </text>
+    
+    <!-- 전설 -->
+    <g id="legend" transform="translate(60, 650)">
+        <rect x="0" y="0" width="16" height="16" rx="2" fill="url(#taskGrad1)"/>
+        <text x="25" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5D6D7E">
+            <tspan>기획단계</tspan>
+        </text>
+        
+        <rect x="100" y="0" width="16" height="16" rx="2" fill="url(#taskGrad2)"/>
+        <text x="125" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5D6D7E">
+            <tspan>디자인 단계</tspan>
+        </text>
+        
+        <rect x="200" y="0" width="16" height="16" rx="2" fill="url(#taskGrad3)"/>
+        <text x="225" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5D6D7E">
+            <tspan>개발 단계</tspan>
+        </text>
+        
+        <rect x="300" y="0" width="16" height="16" rx="2" fill="url(#taskGrad4)"/>
+        <text x="325" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5D6D7E">
+            <tspan>테스트 릴리스</tspan>
+        </text>
+        
+        <polygon points="420,8 430,-2 440,8 430,18" fill="#E74C3C"/>
+        <text x="455" y="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#5D6D7E">
+            <tspan>중요한 단계</tspan>
+        </text>
+    </g>
+    
+    <!-- 프로젝트 정보 -->
+    <text x="1220" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="14" fill="#95A5A6" text-anchor="end">
+        <tspan>프로젝트 관리자: 장산 | 업데이트 날짜: 2025-03-15</tspan>
+    </text>
+</svg>
+
