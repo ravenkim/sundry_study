@@ -30,7 +30,7 @@ public class BuildingDataInitializer implements ApplicationRunner {
             return;
         }
         for (String name : SEED_BUILDING_NAMES) {
-            buildingRepository.save(Building.builder().name(name).address(null).build());
+            buildingRepository.save(Building.builder().name(name).build());
         }
     }
 }

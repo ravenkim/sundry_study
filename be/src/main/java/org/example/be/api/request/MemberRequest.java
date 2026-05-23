@@ -18,6 +18,7 @@ public class MemberRequest {
         private String password;
         @NotEmpty(message="Enter the email.")
         private String email;
+        private Long affiliation;
     }
 
     @Getter
