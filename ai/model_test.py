@@ -10,7 +10,7 @@ from roboflow import Roboflow
 # ==========================================
 # 1. Configuration & Initialization
 # ==========================================
-ROBOFLOW_API_KEY = "PIlWf3SW88eM18FTSeCr"
+ROBOFLOW_API_KEY = "YOUR_ROBOFLOW_KEY"
 GCP_PROJECT_ID = "duyuthon"  # 본인의 GCP 프로젝트 ID
 gemini_model = GenerativeModel("gemini-2.5-flash")
 

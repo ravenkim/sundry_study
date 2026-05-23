@@ -15,3 +15,5 @@ be/build/
 fe/node_modules/
 fe/dist/
 fe/dist-ssr/
+
+.idea/
