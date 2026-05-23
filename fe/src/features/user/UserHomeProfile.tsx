@@ -98,10 +98,9 @@ export const UserHome = () => {
                         </div>
                     ) : (
                         recentReports.map((item) => (
-                            <Link
+                            <div
                                 key={item.reportId}
-                                to={`/reports/${item.reportId}`}
-                                className="bg-surface-container-lowest hover:bg-surface-container-low flex items-center justify-between p-4 transition-colors"
+                                className="bg-surface-container-lowest flex items-center justify-between p-4"
                             >
                                 <div className="flex flex-col gap-1">
                                     <span className="font-bold">
@@ -132,7 +131,7 @@ export const UserHome = () => {
                                         ? `+${item.pointAwarded}P`
                                         : '-'}
                                 </span>
-                            </Link>
+                            </div>
                         ))
                     )}
                 </div>

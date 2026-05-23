@@ -83,6 +83,19 @@ export interface ExchangeResult {
     rewardName: string
     pointUsed: number
     remainingBalance: number
+    status: GifticonExchangeStatus
+}
+
+export type GifticonExchangeStatus = 'PENDING' | 'SENT' | 'REJECTED'
+
+export interface GifticonExchangeRow {
+    exchangeId: number
+    memberName: string
+    rewardName: string
+    pointUsed: number
+    status: GifticonExchangeStatus
+    createdAt: string
+    processedAt?: string
 }
 
 export interface BuildingLocation {

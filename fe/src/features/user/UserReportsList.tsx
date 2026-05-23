@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoBadge, EcoButton } from 'src/shared/ui/eco'
@@ -74,10 +73,9 @@ export const UserReportsList = () => {
             ) : (
                 <div className="flex flex-col gap-3">
                     {data.content.map((item) => (
-                        <Link
+                        <div
                             key={item.reportId}
-                            to={`/reports/${item.reportId}`}
-                            className="border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low flex gap-4 rounded-xl border p-4 transition-colors"
+                            className="border-outline-variant bg-surface-container-lowest flex gap-4 rounded-xl border p-4"
                         >
                             {item.thumbnailUrl ? (
                                 <img
@@ -124,7 +122,7 @@ export const UserReportsList = () => {
                                     ? `+${item.pointAwarded}P`
                                     : '-'}
                             </span>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             )}

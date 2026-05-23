@@ -5,10 +5,7 @@ import {
     ClipboardCheck,
     ShoppingBag,
     User as UserIcon,
-    Search,
-    Bell,
     Settings,
-    HelpCircle,
     LogOut,
     Database,
     BarChart3,
@@ -248,26 +245,7 @@ export const AdminSidebar = () => {
 }
 
 export const AdminHeader = ({ title }: { title: string }) => (
-    <header className="border-outline-variant bg-surface sticky top-0 z-40 flex h-16 items-center justify-between border-b px-8">
+    <header className="border-outline-variant bg-surface sticky top-0 z-40 flex h-16 items-center border-b px-8">
         <h2 className="text-xl font-bold">{title}</h2>
-        <div className="flex items-center gap-4">
-            <div className="relative">
-                <Search className="text-on-surface-variant absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                <input
-                    type="text"
-                    placeholder="검색..."
-                    className="bg-surface-container-lowest border-outline-variant focus:border-primary-container w-64 rounded-full border py-2 pr-4 pl-10 text-sm focus:outline-none"
-                />
-            </div>
-            <Bell className="text-on-surface-variant h-5 w-5 cursor-pointer" />
-            <Settings className="text-on-surface-variant h-5 w-5 cursor-pointer" />
-            <HelpCircle className="text-on-surface-variant h-5 w-5 cursor-pointer" />
-            <div className="bg-surface-container border-outline-variant h-8 w-8 overflow-hidden rounded-full border">
-                <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
-                    alt="Admin"
-                />
-            </div>
-        </div>
     </header>
 )

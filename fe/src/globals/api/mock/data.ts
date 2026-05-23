@@ -2,6 +2,8 @@ import type {
     AdminDashboardStats,
     AdminReportRow,
     Building,
+    GifticonExchangeRow,
+    GifticonExchangeStatus,
     PaginatedReports,
     PointsSummary,
     ReportDetail,
@@ -234,6 +236,126 @@ export const MOCK_ADMIN_DASHBOARD: AdminDashboardStats = {
     monthlySavingsKrw: 320000,
 }
 
+const MOCK_CURRENT_MEMBER_NAME = '김에코'
+
+let mockGifticonExchanges: GifticonExchangeRow[] = [
+    {
+        exchangeId: 101,
+        memberName: '이민준',
+        rewardName: '스타벅스 아이스 아메리카노 T',
+        pointUsed: 500,
+        status: 'PENDING',
+        createdAt: '2026-05-22T10:30:00',
+    },
+    {
+        exchangeId: 100,
+        memberName: '박그린',
+        rewardName: 'GS25 모바일 상품권 3천원',
+        pointUsed: 300,
+        status: 'PENDING',
+        createdAt: '2026-05-21T15:20:00',
+    },
+    {
+        exchangeId: 99,
+        memberName: '최지우',
+        rewardName: '학식 포인트 100원',
+        pointUsed: 100,
+        status: 'SENT',
+        createdAt: '2026-05-20T09:10:00',
+        processedAt: '2026-05-20T11:00:00',
+    },
+]
+
+let nextGifticonExchangeId = 102
+
+export function getMockGifticonExchanges(
+    status?: GifticonExchangeStatus | 'ALL',
+): GifticonExchangeRow[] {
+    const sorted = [...mockGifticonExchanges].sort(
+        (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
+    if (!status || status === 'ALL') return sorted
+    return sorted.filter((item) => item.status === status)
+}
+
+export function getMockMyGifticonExchanges(): GifticonExchangeRow[] {
+    return getMockGifticonExchanges().filter(
+        (item) => item.memberName === MOCK_CURRENT_MEMBER_NAME,
+    )
+}
+
+export function createMockGifticonExchange(
+    rewardId: number,
+    quantity = 1,
+): GifticonExchangeRow {
+    const reward = MOCK_REWARDS.find((r) => r.rewardId === rewardId)
+    if (!reward) throw new Error('리워드를 찾을 수 없습니다.')
+
+    const pointUsed = reward.pointCost * quantity
+    const points = getMockPoints()
+    if (points.currentBalance < pointUsed) {
+        throw new Error('포인트가 부족합니다.')
+    }
+
+    updateMockPointsAfterExchange(pointUsed)
+
+    const exchange: GifticonExchangeRow = {
+        exchangeId: nextGifticonExchangeId++,
+        memberName: MOCK_CURRENT_MEMBER_NAME,
+        rewardName: reward.name,
+        pointUsed,
+        status: 'PENDING',
+        createdAt: new Date().toISOString(),
+    }
+
+    mockGifticonExchanges = [exchange, ...mockGifticonExchanges]
+    return exchange
+}
+
+export function updateMockGifticonExchangeStatus(
+    exchangeId: number,
+    status: 'SENT' | 'REJECTED',
+): GifticonExchangeRow {
+    const target = mockGifticonExchanges.find(
+        (item) => item.exchangeId === exchangeId,
+    )
+    if (!target) throw new Error('교환 신청을 찾을 수 없습니다.')
+    if (target.status !== 'PENDING') {
+        throw new Error('이미 처리된 신청입니다.')
+    }
+
+    if (status === 'REJECTED') {
+        refundMockPoints(target.pointUsed)
+    }
+
+    const updated: GifticonExchangeRow = {
+        ...target,
+        status,
+        processedAt: new Date().toISOString(),
+    }
+
+    mockGifticonExchanges = mockGifticonExchanges.map((item) =>
+        item.exchangeId === exchangeId ? updated : item,
+    )
+
+    return updated
+}
+
+export function getMockGifticonExchangeStats() {
+    const all = getMockGifticonExchanges()
+    const pending = all.filter((item) => item.status === 'PENDING')
+    const sent = all.filter((item) => item.status === 'SENT')
+    const rejected = all.filter((item) => item.status === 'REJECTED')
+
+    return {
+        pendingCount: pending.length,
+        sentCount: sent.length,
+        rejectedCount: rejected.length,
+        pendingPoints: pending.reduce((sum, item) => sum + item.pointUsed, 0),
+    }
+}
+
 let mockPointsState = { ...MOCK_POINTS }
 
 export function getMockPoints(): PointsSummary {
@@ -247,6 +369,15 @@ export function updateMockPointsAfterExchange(
         ...mockPointsState,
         currentBalance: mockPointsState.currentBalance - pointUsed,
         totalRedeemed: mockPointsState.totalRedeemed + pointUsed,
+    }
+    return getMockPoints()
+}
+
+export function refundMockPoints(pointAmount: number): PointsSummary {
+    mockPointsState = {
+        ...mockPointsState,
+        currentBalance: mockPointsState.currentBalance + pointAmount,
+        totalRedeemed: Math.max(0, mockPointsState.totalRedeemed - pointAmount),
     }
     return getMockPoints()
 }

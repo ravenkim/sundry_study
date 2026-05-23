@@ -8,7 +8,6 @@ import {
     CheckCircle2,
     X,
     Settings,
-    Megaphone,
     Coins,
     Users,
     User as UserIcon,
@@ -581,19 +580,14 @@ export const AdminUsers = () => (
         <div className="bg-surface-bright flex min-h-screen flex-col md:ml-64">
             <AdminHeader title="사용자 관리" />
             <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 p-8">
-                <div className="flex items-end justify-between">
-                    <div>
-                        <h2 className="mb-1 text-3xl font-black tracking-tight">
-                            가입자 목록
-                        </h2>
-                        <p className="text-on-surface-variant text-sm font-medium">
-                            캠퍼스 에너지 절약 캠페인에 동참 중인 전체 사용자
-                            현황입니다.
-                        </p>
-                    </div>
-                    <EcoButton className="gap-2 px-5 py-2.5 text-sm font-bold">
-                        <Megaphone className="h-4 w-4" /> 전체 공지 발송
-                    </EcoButton>
+                <div>
+                    <h2 className="mb-1 text-3xl font-black tracking-tight">
+                        가입자 목록
+                    </h2>
+                    <p className="text-on-surface-variant text-sm font-medium">
+                        캠퍼스 에너지 절약 캠페인에 동참 중인 전체 사용자
+                        현황입니다.
+                    </p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
