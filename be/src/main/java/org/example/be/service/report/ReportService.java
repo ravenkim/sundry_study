@@ -48,6 +48,11 @@ public class ReportService {
         Building building = buildingRepository.findById(request.buildingId())
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 건물입니다."));
 
+        if (member.getBuilding() != null
+                && !member.getBuilding().getSeq().equals(building.getSeq())) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "소속 건물에서만 제보할 수 있습니다.");
+        }
+
         if (request.image() == null || request.image().isEmpty()) {
             throw new BusinessLogicException(ErrorCode.INVALID, "현장 사진 이미지는 필수입니다.");
         }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import {
     Leaf,
@@ -136,15 +136,6 @@ export const UserHome = () => {
                     )}
                 </div>
             </div>
-
-            <div className="flex justify-center pb-4">
-                <Link
-                    to="/admin"
-                    className="border-outline-variant bg-on-surface/10 text-on-surface-variant rounded-full border px-4 py-1.5 text-[10px] font-black opacity-40 transition-all hover:opacity-100"
-                >
-                    🛡️ Admin 대시보드 →
-                </Link>
-            </div>
         </div>
     )
 }
@@ -155,6 +146,17 @@ export const UserProfile = () => {
     const navigate = useNavigate()
     const [reportCount, setReportCount] = useState(0)
     const displayName = user?.userName ?? '김에코'
+    const myBuildingSavings = useMemo(() => {
+        if (!user?.buildingId && !user?.buildingName) {
+            return PARTICIPATED_BUILDING_SAVINGS
+        }
+        return PARTICIPATED_BUILDING_SAVINGS.filter(
+            (building) =>
+                (user.buildingId != null &&
+                    String(building.buildingId) === String(user.buildingId)) ||
+                building.buildingName === user.buildingName,
+        )
+    }, [user?.buildingId, user?.buildingName])
 
     useEffect(() => {
         void getMyReports(0, 1).then((res) => setReportCount(res.totalElements))
@@ -183,8 +185,8 @@ export const UserProfile = () => {
                         variant="green"
                         className="flex w-max items-center gap-1.5 px-3 py-1 text-xs font-bold"
                     >
-                        <Leaf className="h-3.5 w-3.5 fill-current" /> 그린
-                        마스터
+                        <Leaf className="h-3.5 w-3.5 fill-current" />{' '}
+                        {user?.buildingName ?? '그린 마스터'}
                     </EcoBadge>
                 </div>
             </section>
@@ -242,10 +244,7 @@ export const UserProfile = () => {
                     <div className="flex items-baseline gap-1">
                         <span className="text-2xl font-bold">
                             {formatKwh(
-                                sumParticipatedKwh(
-                                    PARTICIPATED_BUILDING_SAVINGS,
-                                    'total',
-                                ),
+                                sumParticipatedKwh(myBuildingSavings, 'total'),
                             )}
                         </span>
                         <span className="text-on-surface-variant text-[10px] font-bold">

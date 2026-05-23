@@ -28,6 +28,9 @@ interface AuthContextValue {
         accessToken: string,
         userName: string,
         email?: string,
+        buildingId?: number,
+        buildingName?: string,
+        userType?: 'USER' | 'ADMIN',
     ) => void
     logout: () => void
 }
@@ -46,6 +49,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAuthSession(body.accessToken, {
             userName: body.userName,
             email: body.email,
+            buildingId: body.buildingId,
+            buildingName: body.buildingName,
+            userType: body.userType,
         })
         setUser(getStoredUser())
         setAuthenticated(true)
@@ -56,8 +62,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, [])
 
     const completeOAuthLogin = useCallback(
-        (accessToken: string, userName: string, email?: string) => {
-            setAuthSession(accessToken, { userName, email })
+        (
+            accessToken: string,
+            userName: string,
+            email?: string,
+            buildingId?: number,
+            buildingName?: string,
+            userType?: 'USER' | 'ADMIN',
+        ) => {
+            setAuthSession(accessToken, {
+                userName,
+                email,
+                buildingId,
+                buildingName,
+                userType,
+            })
             setUser(getStoredUser())
             setAuthenticated(true)
         },

@@ -13,6 +13,8 @@ public enum ResponseCode {
     BUILDINGS_LIST(10004),
     POINTS_ME(10005),
     REPORTS_LIST(10006),
-    REPORT_DETAIL(10007);
+    REPORT_DETAIL(10007),
+    AFFILIATIONS_LIST(10008),
+    MEMBER_BUILDING_UPDATED(10009);
     private final int code;
 }

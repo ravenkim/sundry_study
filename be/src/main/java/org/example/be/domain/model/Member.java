@@ -23,7 +23,11 @@ public class Member {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "affiliation_seq")
-    private Affiliation affiliation; // 이용자의 소속
+    private Affiliation affiliation; // 캠퍼스·학교 소속
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_seq")
+    private Building building; // 이용자가 속한 건물
 
     private String provider;
     private String providerId;

@@ -3,7 +3,9 @@ package org.example.be.service.building;
 import lombok.RequiredArgsConstructor;
 import org.example.be.api.response.BuildingResponse;
 import org.example.be.domain.model.Building;
+import org.example.be.domain.model.Member;
 import org.example.be.domain.repository.BuildingRepository;
+import org.example.be.domain.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,11 +38,25 @@ public class BuildingService {
     );
 
     private final BuildingRepository buildingRepository;
+    private final MemberRepository memberRepository;
 
     public List<BuildingResponse.Item> listBuildings() {
         return buildingRepository.findAll().stream()
                 .map(this::toItem)
                 .toList();
+    }
+
+    public List<BuildingResponse.Item> listBuildingsForMember(Long memberSeq) {
+        Member member = memberRepository.findById(memberSeq)
+                .orElseThrow(() -> new org.example.be.exception.BusinessLogicException(
+                        org.example.be.exception.ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
+
+        Building building = member.getBuilding();
+        if (building == null) {
+            return listBuildings();
+        }
+
+        return List.of(toItem(building));
     }
 
     private BuildingResponse.Item toItem(Building building) {
@@ -50,6 +66,16 @@ public class BuildingService {
         return BuildingResponse.Item.builder()
                 .buildingId(building.getSeq())
                 .name(building.getName())
+                .affiliationId(
+                        building.getAffiliation() != null
+                                ? building.getAffiliation().getSeq()
+                                : null
+                )
+                .affiliationName(
+                        building.getAffiliation() != null
+                                ? building.getAffiliation().getName()
+                                : null
+                )
                 .locations(locations)
                 .build();
     }

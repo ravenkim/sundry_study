@@ -106,7 +106,15 @@ export interface BuildingLocation {
 export interface Building {
     buildingId: number
     name: string
+    affiliationId?: number
+    affiliationName?: string
     locations: BuildingLocation[]
+}
+
+export interface Affiliation {
+    affiliationId: number
+    name: string
+    address?: string
 }
 
 export interface AdminReportRow {

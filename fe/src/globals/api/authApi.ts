@@ -15,12 +15,17 @@ export interface RegisterRequest {
     userName: string
     password: string
     email: string
+    affiliation: number
+    buildingId?: number
 }
 
 export interface LoginResponse {
     accessToken: string
     userName: string
     email?: string
+    buildingId?: number
+    buildingName?: string
+    userType?: 'USER' | 'ADMIN'
 }
 
 export interface EmailCheckResponse {

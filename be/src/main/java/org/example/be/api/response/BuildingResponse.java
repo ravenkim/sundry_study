@@ -19,6 +19,8 @@ public class BuildingResponse {
     public static class Item {
         private Long buildingId;
         private String name;
+        private Long affiliationId;
+        private String affiliationName;
         private List<LocationItem> locations;
     }
 }

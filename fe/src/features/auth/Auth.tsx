@@ -8,11 +8,15 @@ import {
     checkEmailAvailability,
     checkUserNameAvailability,
 } from 'src/globals/api/authApi'
-import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 import { GoogleSignInButton } from 'src/features/auth/GoogleSignInButton'
 import { SignupTermsAgreement } from 'src/features/auth/SignupTermsAgreement'
+import {
+    getPendingAffiliation,
+    clearPendingAffiliation,
+} from 'src/features/auth/signupBuildingStorage'
+import { getAppHomePath, getStoredUser } from 'src/features/auth/authStorage'
 
 function getErrorMessage(error: unknown): string {
     if (isAxiosError(error)) {
@@ -40,12 +44,8 @@ export const Login = () => {
         }
     }, [searchParams])
 
-    const startOAuth = (provider: 'google') => {
-        try {
-            window.location.href = getOAuthAuthorizationUrl(provider)
-        } catch {
-            toast.error('API 서버 주소(VITE_API_HOST)가 설정되지 않았습니다.')
-        }
+    const startOAuth = () => {
+        navigate('/signup/affiliation?intent=oauth')
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -59,7 +59,7 @@ export const Login = () => {
         try {
             await login({ userName: userName.trim(), password })
             toast.success('로그인되었습니다.')
-            navigate('/')
+            navigate(getAppHomePath(getStoredUser()))
         } catch (error) {
             toast.error(getErrorMessage(error))
         } finally {
@@ -80,70 +80,76 @@ export const Login = () => {
                     </p>
                 </header>
 
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                    <div className="flex flex-col gap-1.5">
-                        <label className="text-on-surface text-sm font-semibold">
-                            아이디
-                        </label>
-                        <input
-                            type="text"
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
-                            placeholder="아이디를 입력하세요"
-                            autoComplete="username"
-                            className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
-                        />
-                    </div>
-                    <div className="flex flex-col gap-1.5">
-                        <label className="text-on-surface text-sm font-semibold">
-                            비밀번호
-                        </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="비밀번호를 입력하세요"
-                            autoComplete="current-password"
-                            className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
-                        />
-                    </div>
-                    <div className="flex items-center justify-between text-xs font-medium">
-                        <label className="flex cursor-pointer items-center gap-2">
+                <div className="flex flex-col gap-5">
+                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                        <div className="flex flex-col gap-1.5">
+                            <label className="text-on-surface text-sm font-semibold">
+                                아이디
+                            </label>
                             <input
-                                type="checkbox"
-                                className="border-outline-variant text-primary-container focus:ring-primary-container rounded"
+                                type="text"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                                placeholder="아이디를 입력하세요"
+                                autoComplete="username"
+                                className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                             />
-                            <span className="text-on-surface-variant">
-                                로그인 유지
-                            </span>
-                        </label>
-                        <a
-                            href="#"
-                            className="text-on-surface-variant hover:text-primary"
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                            <label className="text-on-surface text-sm font-semibold">
+                                비밀번호
+                            </label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="비밀번호를 입력하세요"
+                                autoComplete="current-password"
+                                className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
+                            />
+                        </div>
+                        <EcoButton
+                            className="mt-2 py-4 text-base font-bold"
+                            type="submit"
+                            disabled={loading}
                         >
-                            비밀번호 찾기
-                        </a>
-                    </div>
-                    <EcoButton
-                        className="mt-2 py-4 text-base font-bold"
-                        type="submit"
-                        disabled={loading}
-                    >
-                        {loading ? '로그인 중...' : '로그인'}
-                    </EcoButton>
-                </form>
+                            {loading ? '로그인 중...' : '로그인'}
+                        </EcoButton>
+                    </form>
 
-                <p className="text-center text-xs font-medium">
-                    <span className="text-on-surface-variant">
-                        계정이 없으신가요?
-                    </span>
-                    <Link
-                        to="/signup"
-                        className="text-primary ml-1 font-bold hover:underline"
-                    >
-                        회원가입
-                    </Link>
-                </p>
+                    <div className="border-outline-variant/60 bg-surface-container-low flex flex-col items-center gap-2.5 rounded-xl border px-4 py-3.5">
+                        <p className="text-sm">
+                        
+                            <Link
+                                to="/signup/affiliation?intent=signup"
+                                className="text-primary font-semibold hover:underline"
+                            >
+                                회원가입
+                            </Link>
+                        </p>
+                        <div className="bg-outline-variant/30 h-px w-full max-w-[200px]" />
+                        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs">
+                            <Link
+                                to="/find-account"
+                                className="text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                            >
+                                아이디 · 비밀번호 찾기
+                            </Link>
+                            <span
+                                className="text-outline-variant"
+                                aria-hidden
+                            >
+                                |
+                            </span>
+                            <Link
+                                to="/signup/admin"
+                                className="text-on-surface-variant hover:text-primary transition-colors hover:underline"
+                            >
+                                관리자 회원가입
+                            </Link>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="flex items-center gap-3">
                     <div className="bg-surface-container-high h-px flex-1"></div>
@@ -153,7 +159,7 @@ export const Login = () => {
                     <div className="bg-surface-container-high h-px flex-1"></div>
                 </div>
 
-                <GoogleSignInButton onClick={() => startOAuth('google')} />
+                <GoogleSignInButton onClick={startOAuth} />
             </div>
         </div>
     )
@@ -162,6 +168,7 @@ export const Login = () => {
 export const Signup = () => {
     const navigate = useNavigate()
     const { register } = useAuth()
+    const pendingAffiliation = getPendingAffiliation()
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -174,6 +181,12 @@ export const Signup = () => {
     const [checkingEmail, setCheckingEmail] = useState(false)
     const [loading, setLoading] = useState(false)
     const [requiredTermsAgreed, setRequiredTermsAgreed] = useState(false)
+
+    useEffect(() => {
+        if (!pendingAffiliation) {
+            navigate('/signup/affiliation?intent=signup', { replace: true })
+        }
+    }, [pendingAffiliation, navigate])
 
     const handleUserNameChange = (value: string) => {
         setUserName(value)
@@ -266,6 +279,11 @@ export const Signup = () => {
             toast.error('필수 약관에 동의해 주세요.')
             return
         }
+        if (!pendingAffiliation) {
+            toast.error('소속을 선택해 주세요.')
+            navigate('/signup/affiliation?intent=signup')
+            return
+        }
 
         setLoading(true)
         try {
@@ -273,7 +291,10 @@ export const Signup = () => {
                 userName: userName.trim(),
                 email: email.trim(),
                 password,
+                affiliation: pendingAffiliation.affiliationId,
+                buildingId: pendingAffiliation.buildingId,
             })
+            clearPendingAffiliation()
             toast.success('회원가입이 완료되었습니다.')
             navigate('/login')
         } catch (error) {
@@ -286,7 +307,10 @@ export const Signup = () => {
     return (
         <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
             <header className="border-outline-variant bg-surface sticky top-0 z-10 flex h-14 items-center justify-between border-b px-5">
-                <Link to="/login" className="text-on-surface-variant -ml-2 p-2">
+                <Link
+                    to="/signup/affiliation?intent=signup"
+                    className="text-on-surface-variant -ml-2 p-2"
+                >
                     <ArrowLeft className="h-6 w-6" />
                 </Link>
                 <h1 className="text-primary text-lg font-bold">회원가입</h1>
@@ -304,6 +328,11 @@ export const Signup = () => {
                     <p className="text-on-surface-variant text-sm">
                         에코리포트 서비스 이용을 위해 정보를 입력해 주세요.
                     </p>
+                    {pendingAffiliation?.buildingId && (
+                        <p className="text-primary mt-2 text-sm font-semibold">
+                            소속 건물: {pendingAffiliation.buildingName ?? '선택됨'}
+                        </p>
+                    )}
                 </div>
 
                 <form

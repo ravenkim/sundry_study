@@ -25,7 +25,8 @@ public class Building {
     private Affiliation affiliation; // 건물이 속한 구역
 
     @Builder
-    public Building(String name) {
+    public Building(String name, Affiliation affiliation) {
         this.name = name;
+        this.affiliation = affiliation;
     }
 }

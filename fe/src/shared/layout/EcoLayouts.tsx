@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import {
     Home,
     ClipboardCheck,
@@ -12,7 +12,6 @@ import {
     Users,
     Menu,
     Camera,
-    Shield,
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import {
@@ -25,6 +24,7 @@ import { EcoBadge } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
 import { usePoints } from 'src/features/points/PointsContext'
+import { useAuth } from 'src/features/auth/AuthContext'
 
 export const USER_NAV_ITEMS = [
     { name: '홈', path: '/', icon: Home },
@@ -160,14 +160,6 @@ export const UserAppLayout = ({
                             </span>
                             <SSdarkmodeSwitch />
                         </div>
-                        <Link
-                            to="/admin"
-                            onClick={closeMenu}
-                            className="text-on-surface-variant hover:bg-surface-container-low flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors"
-                        >
-                            <Shield className="h-5 w-5" />
-                            관리자 대시보드
-                        </Link>
                     </div>
                 </SheetContent>
             </Sheet>
@@ -181,6 +173,8 @@ export const UserAppLayout = ({
 
 export const AdminSidebar = () => {
     const location = useLocation()
+    const navigate = useNavigate()
+    const { logout } = useAuth()
     const navItems = [
         { name: '제보 현황', path: '/admin', icon: Database },
         { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
@@ -232,13 +226,17 @@ export const AdminSidebar = () => {
                     </span>
                     <SSdarkmodeSwitch />
                 </div>
-                <Link
-                    to="/"
-                    className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full items-center gap-3 rounded-lg px-4 py-2"
+                <button
+                    type="button"
+                    onClick={() => {
+                        logout()
+                        navigate('/login')
+                    }}
+                    className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full items-center gap-3 rounded-lg px-4 py-2 text-left"
                 >
                     <LogOut className="h-5 w-5" />
-                    <span>사용자 모드</span>
-                </Link>
+                    <span>로그아웃</span>
+                </button>
             </div>
         </aside>
     )

@@ -1,8 +1,9 @@
 import { Building2, ChevronDown, ChevronUp } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoCard } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { useAuth } from 'src/features/auth/AuthContext'
 import {
     formatKwh,
     getParticipatedSavingsMascotEmotion,
@@ -20,8 +21,19 @@ export const ParticipatedBuildingSavingsCard = ({
     compact = false,
     className,
 }: Props) => {
+    const { user } = useAuth()
     const [expanded, setExpanded] = useState(!compact)
-    const buildings = PARTICIPATED_BUILDING_SAVINGS
+    const buildings = useMemo(() => {
+        if (!user?.buildingId && !user?.buildingName) {
+            return PARTICIPATED_BUILDING_SAVINGS
+        }
+        return PARTICIPATED_BUILDING_SAVINGS.filter(
+            (building) =>
+                (user.buildingId != null &&
+                    String(building.buildingId) === String(user.buildingId)) ||
+                building.buildingName === user.buildingName,
+        )
+    }, [user?.buildingId, user?.buildingName])
     const totalKwh = sumParticipatedKwh(buildings, 'total')
     const monthKwh = sumParticipatedKwh(buildings, 'month')
     const maxMonthKwh = Math.max(...buildings.map((b) => b.thisMonthKwh), 1)
@@ -37,7 +49,7 @@ export const ParticipatedBuildingSavingsCard = ({
             <div className="relative z-10 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-2">
                     <span className="text-on-surface-variant text-sm font-medium">
-                        참여 건물 절약 전기
+                        {buildings.length <= 1 ? '내 건물 절약 전기' : '참여 건물 절약 전기'}
                     </span>
                     {compact && (
                         <button
@@ -67,7 +79,7 @@ export const ParticipatedBuildingSavingsCard = ({
 
                 <div className="flex flex-col gap-1">
                     <span className="text-on-surface-variant text-xs font-medium">
-                        참여 건물 누적 절약 전기
+                        {buildings.length <= 1 ? '내 건물 누적 절약 전기' : '참여 건물 누적 절약 전기'}
                     </span>
                     <div className="flex items-center gap-2">
                         <span className="text-secondary text-3xl font-bold">
