@@ -227,3 +227,34 @@ total_L = flow_rate × quantity × off_time_minutes
 | 단기 | 사진 품질 가이드 UI로 판별불가율 감소 |
 | 중기 | 낭비 패턴 시계열 분석 → 상습 방치 강의실 예측 알림 |
 | 장기 | 자체 경량 분류 모델 파인튜닝 (API 비용 절감) |
+
+---
+
+## 7. 저장소 구조 (monorepo `ai/`)
+
+2026-05-23 기준 AI 학습·추론·배포 코드가 본 monorepo `ai/` 디렉터리에 포함되었다.
+
+```
+ai/
+├── yolov8n.pt                    # COCO 사전학습 (1단계)
+├── model_train.py                # YOLOv8n Custom 학습
+├── model_train_re.ipynb          # 학습 노트북
+├── model_test.py                 # 파이프라인 추론 테스트
+├── model_test.ipynb              # 추론 노트북
+├── train_result/
+│   ├── weights/best.pt           # 학습 가중치 (ac_best.pt와 동일 계열)
+│   ├── results.csv               # epoch별 loss·mAP
+│   └── *.png                     # PR/F1/confusion matrix 등
+└── for_deploy/campus_api/
+    ├── main.py                   # FastAPI POST /analyze
+    ├── models/ac_best.pt         # Cloud Run 배포용 가중치
+    ├── requirements.txt
+    └── Dockerfile.txt
+```
+
+| 항목 | 내용 |
+|------|------|
+| 학습 데이터 | Roboflow `Office-Air-Condition-1` (75 epochs, yolov8n base) |
+| 학습 성능 | mAP@0.5 **0.990**, F1 **0.97** (`train_result/` 기준) |
+| 배포 | `for_deploy/campus_api/` → Cloud Run, Spring Boot `ReportService.callAiApi`에서 HTTP 호출 |
+| 보안 | GCP 프로젝트 ID·API 키는 placeholder 처리, `.idea/` gitignore 추가 |

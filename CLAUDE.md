@@ -52,7 +52,9 @@ bash run-dev.sh            # 루트 .env 로드 후 bootRun (포트 8080)
 - `MemberAuthService`: BCrypt 로그인 검증 + `JwtTokenProvider` JWT 발급
 - `DefaultMemberService`: 회원가입·중복확인 + 가입 시 `MemberPoint` 0P 생성
 - P0 API: `GET /api/buildings`, `GET /api/points/me`, `POST/GET /api/reports` (회원 FK·내 목록·상세, **제보 생성 시 FastAPI `/analyze` 연동**)
-- 미구현: GCS 실업로드·`aiResult` JSON·포인트 적립·관리자 API·Kafka Compose 연동
+- **소속·역할**: `Affiliation` 엔티티, `UserType` enum, `Member`·`Building` → Affiliation FK, 회원가입 `affiliation` 필드 (시드·조회 API·FE UI 미완)
+- **AI 코드**: monorepo `ai/` — 학습(`model_train*.py`), 가중치(`train_result/weights/best.pt`), Cloud Run 배포(`for_deploy/campus_api/`)
+- 미구현: GCS 실업로드·`aiResult` JSON·포인트 적립·관리자 API·Kafka Compose 연동·Affiliation 시드/API
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 
 **패키지 구조**
