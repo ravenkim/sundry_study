@@ -5,5 +5,11 @@ No,Filename,Width,Height,AspectRatio,SizeKB,Category,LayoutType,ImageArea,TextAr
 4,question.png,388,512,0.76,151.6,Portrait,left-right,455x600,685x600
 5,recognize.png,356,512,0.70,160.8,Portrait,left-right,417x600,723x600
 6,sad.png,512,413,1.24,337.1,Standard landscape,left-right,744x600,396x600
-7,sleepy.png,320,512,0.62,146.7,Portrait,left-right,375x600,765x600
-8,smile.png,335,512,0.65,195.6,Portrait,left-right,393x600,747x600
+7,screen_home.png,390,844,0.46,70.1,Portrait,left-right,277x600,863x600
+8,screen_login.png,390,844,0.46,24.0,Portrait,left-right,277x600,863x600
+9,screen_profile.png,390,844,0.46,74.6,Portrait,left-right,277x600,863x600
+10,screen_report_form.png,390,844,0.46,20.4,Portrait,left-right,277x600,863x600
+11,screen_reports.png,390,844,0.46,59.6,Portrait,left-right,277x600,863x600
+12,screen_shop.png,390,844,0.46,148.2,Portrait,left-right,277x600,863x600
+13,sleepy.png,320,512,0.62,146.7,Portrait,left-right,375x600,765x600
+14,smile.png,335,512,0.65,195.6,Portrait,left-right,393x600,747x600
