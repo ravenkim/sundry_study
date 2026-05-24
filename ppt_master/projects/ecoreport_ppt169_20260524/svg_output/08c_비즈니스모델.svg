@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s08c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <marker id="s08c_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+    <marker id="s08c_arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9AA0A6"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s08c_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">비즈니스 모델</text>
+  <rect x="40" y="64" width="190" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="238" y="64" width="80" height="4" rx="2" fill="#FFC107"/>
+
+  <!-- 3대 수익 모델 -->
+  <!-- Model 1: SaaS 구독 -->
+  <rect x="24" y="80" width="378" height="400" rx="16" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="24" y="80" width="378" height="8" rx="4" fill="#4CAF50"/>
+  <circle cx="60" cy="112" r="20" fill="#4CAF50"/>
+  <text x="60" y="119" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">1</text>
+  <text x="92" y="108" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#2E7D32">SaaS 구독 (학교)</text>
+  <text x="92" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">B2B · 대학 시설팀 대상</text>
+
+  <line x1="44" y1="140" x2="382" y2="140" stroke="#E8EAED" stroke-width="1"/>
+
+  <text x="44" y="162" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 대학교 1곳당 월 30~50만원</text>
+  <text x="44" y="182" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 강의실 수에 따라 티어 책정</text>
+  <text x="44" y="202" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">  Tier1: ~200강의실 / 30만원</text>
+  <text x="44" y="222" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">  Tier2: ~500강의실 / 50만원</text>
+  <text x="44" y="242" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">  Enterprise: 협의</text>
+
+  <line x1="44" y1="256" x2="382" y2="256" stroke="#E8EAED" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="44" y="274" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#2E7D32">ROI 제안</text>
+  <text x="44" y="294" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">월 절약 전기료 10만원 이상</text>
+  <text x="44" y="314" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ 구독료 상쇄 후 순 이익</text>
+  <text x="44" y="334" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">탄소중립 ESG 실적 제공</text>
+
+  <rect x="44" y="354" width="338" height="54" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="213" y="378" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">430개 대학 × 40만 = 월 1.7억</text>
+  <text x="213" y="396" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">10% 침투율 = 월 1,720만원 ARR</text>
+
+  <text x="213" y="462" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#9AA0A6">주요 수익원 ★★★★★</text>
+
+  <!-- Model 2: 포인트 재원 -->
+  <rect x="422" y="80" width="378" height="400" rx="16" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="422" y="80" width="378" height="8" rx="4" fill="#FFC107"/>
+  <circle cx="458" cy="112" r="20" fill="#FFC107"/>
+  <text x="458" y="119" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">2</text>
+  <text x="490" y="108" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#E65100">포인트 리워드 수수료</text>
+  <text x="490" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">교환 상품 마진</text>
+
+  <line x1="442" y1="140" x2="780" y2="140" stroke="#E8EAED" stroke-width="1"/>
+
+  <text x="442" y="162" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 기프티콘 도매 구매 → 정가 교환</text>
+  <text x="442" y="182" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 10~15% 마진 수익</text>
+  <text x="442" y="202" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 쿠폰사 파트너십 (카카오, GS25 등)</text>
+
+  <line x1="442" y1="216" x2="780" y2="216" stroke="#E8EAED" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="442" y="234" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#E65100">포인트 재원 흐름</text>
+  <text x="442" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">절약 전기료 일부 → 학교가 포인트 예산 책정</text>
+  <text x="442" y="274" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ EcoReport 플랫폼을 통해 학생에게 지급</text>
+  <text x="442" y="294" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">절약 10만 중 2~3만원 포인트 재원 사용</text>
+  <text x="442" y="314" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">학교 입장: 순 절약 7~8만원/월 실현</text>
+
+  <rect x="442" y="334" width="338" height="54" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1"/>
+  <text x="611" y="358" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">학교·학생·플랫폼 3자 Win-Win</text>
+  <text x="611" y="376" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">선순환 구조 — 참여 증가 = 수익 증가</text>
+
+  <text x="611" y="462" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#9AA0A6">보조 수익원 ★★★☆☆</text>
+
+  <!-- Model 3: 데이터/API -->
+  <rect x="820" y="80" width="436" height="400" rx="16" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="820" y="80" width="436" height="8" rx="4" fill="#4285F4"/>
+  <circle cx="856" cy="112" r="20" fill="#4285F4"/>
+  <text x="856" y="119" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">3</text>
+  <text x="888" y="108" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#1565C0">에너지 데이터 서비스</text>
+  <text x="888" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">B2B API · 연구기관</text>
+
+  <line x1="840" y1="140" x2="1236" y2="140" stroke="#E8EAED" stroke-width="1"/>
+
+  <text x="840" y="162" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 캠퍼스 에너지 낭비 패턴 데이터</text>
+  <text x="840" y="182" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 장소별·시간대별·설비별 통계 API</text>
+  <text x="840" y="202" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 에너지 절감 컨설팅 기관 판매</text>
+  <text x="840" y="222" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 스마트빌딩 솔루션사 OEM 공급</text>
+
+  <line x1="840" y1="236" x2="1236" y2="236" stroke="#E8EAED" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="840" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#1565C0">잠재 고객</text>
+  <text x="840" y="274" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 에너지관리공단(KEA)</text>
+  <text x="840" y="294" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 탄소배출권 거래 플랫폼</text>
+  <text x="840" y="314" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 건물 에너지 관리 스타트업</text>
+
+  <rect x="840" y="334" width="376" height="54" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1"/>
+  <text x="1028" y="358" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1565C0">Phase 2 수익원 (PMF 후)</text>
+  <text x="1028" y="376" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">데이터 자산 가치는 참여자 증가와 정비례</text>
+
+  <text x="1028" y="462" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#9AA0A6">미래 수익원 ★★★★☆</text>
+
+  <!-- 하단 요약 -->
+  <rect x="24" y="496" width="1232" height="80" rx="12" fill="#1A237E"/>
+  <text x="640" y="524" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#FFFFFF">현 단계: SaaS 구독 + 포인트 재원 모델로 시작 → PMF 이후 데이터 사업 확장</text>
+  <text x="640" y="550" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">MVP 목표: 3개 대학 파일럿 → 6개월 내 손익분기점 · 구독료 = 운영비 + AI API 비용</text>
+  <text x="640" y="568" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#4CAF50">도입 장벽: 설비 투자 없음 · API 키 1개만 공유하면 즉시 시작 가능</text>
+
+  <!-- 전제조건 배지 -->
+  <rect x="24" y="590" width="1232" height="80" rx="12" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="640" y="618" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">수익 실현 전제 조건</text>
+  <text x="640" y="640" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">① 포인트 교환 시스템 완성 (Phase 1) · ② GCS 이미지 영구 저장 · ③ 관리자 리포트 API 완성 · ④ 3개 파일럿 캠퍼스 확보</text>
+  <text x="640" y="658" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">현재 핵심 기능 완료 — 상용화까지 4~6주 추가 개발 필요 추정</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">08c / 30</text>
+</svg>

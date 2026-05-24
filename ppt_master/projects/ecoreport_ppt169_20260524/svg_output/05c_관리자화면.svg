@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s05c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s05c_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">관리자 대시보드 — UI 투어</text>
+  <rect x="40" y="64" width="220" height="4" rx="2" fill="#4285F4"/>
+  <rect x="268" y="64" width="80" height="4" rx="2" fill="#FFC107"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">관리자 전용 웹 인터페이스 — 제보 현황 · 장소 관리 · 통계</text>
+
+  <!-- 메인 대시보드 크게 -->
+  <rect x="24" y="96" width="590" height="560" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="24" y="96" width="590" height="8" rx="4" fill="#1A237E"/>
+  <image href="../images/screen_admin_dashboard.png" x="30" y="108" width="578" height="530" preserveAspectRatio="xMidYMin meet"/>
+  <text x="319" y="670" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">관리자 대시보드</text>
+  <text x="319" y="688" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">전체 제보 현황 · KPI 요약 · 최근 제보 목록</text>
+
+  <!-- 우측 3개 화면 -->
+  <!-- 제보 목록 -->
+  <rect x="634" y="96" width="300" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="634" y="96" width="300" height="6" rx="3" fill="#4285F4"/>
+  <image href="../images/screen_admin_reports.png" x="640" y="104" width="288" height="218" preserveAspectRatio="xMidYMin meet"/>
+  <text x="784" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">제보 목록</text>
+  <text x="784" y="370" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">제보 리스트 · 상세 조회</text>
+
+  <!-- 장소 관리 -->
+  <rect x="944" y="96" width="312" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="944" y="96" width="312" height="6" rx="3" fill="#4CAF50"/>
+  <image href="../images/screen_admin_buildings.png" x="950" y="104" width="300" height="218" preserveAspectRatio="xMidYMin meet"/>
+  <text x="1100" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">장소 관리</text>
+  <text x="1100" y="370" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">3단 계층 장소 CRUD</text>
+
+  <!-- 통계 -->
+  <rect x="634" y="392" width="300" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="634" y="392" width="300" height="6" rx="3" fill="#FFC107"/>
+  <image href="../images/screen_admin_stats.png" x="640" y="400" width="288" height="218" preserveAspectRatio="xMidYMin meet"/>
+  <text x="784" y="648" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">절약 통계</text>
+  <text x="784" y="666" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#E65100">월별 kWh · CO₂ · 금액</text>
+
+  <!-- 포인트 관리 -->
+  <rect x="944" y="392" width="312" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="944" y="392" width="312" height="6" rx="3" fill="#EA4335"/>
+  <image href="../images/screen_admin_points.png" x="950" y="400" width="300" height="218" preserveAspectRatio="xMidYMin meet"/>
+  <text x="1100" y="648" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">포인트 관리</text>
+  <text x="1100" y="666" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#C62828">학생 포인트 내역</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">05c / 30</text>
+</svg>

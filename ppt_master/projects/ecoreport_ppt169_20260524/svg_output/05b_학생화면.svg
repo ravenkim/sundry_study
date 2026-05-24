@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s05b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s05b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">학생 앱 화면 — UI 투어</text>
+  <rect x="40" y="64" width="200" height="4" rx="2" fill="#FFC107"/>
+  <rect x="248" y="64" width="80" height="4" rx="2" fill="#4CAF50"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">React 19 · TailwindCSS v4 · shadcn/ui — 실제 구현 화면</text>
+
+  <!-- 화면 6개 갤러리 (2행 × 4열 구성, 폰 프레임) -->
+
+  <!-- Row 1 -->
+  <!-- Screen 1: 로그인 -->
+  <rect x="28" y="98" width="270" height="280" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="28" y="98" width="270" height="6" rx="3" fill="#4285F4"/>
+  <image href="../images/screen_login.png" x="34" y="106" width="258" height="256" preserveAspectRatio="xMidYMin meet"/>
+  <text x="163" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">로그인</text>
+  <text x="163" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">이메일 / 구글 OAuth2</text>
+
+  <!-- Screen 2: 회원가입 -->
+  <rect x="318" y="98" width="270" height="280" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="318" y="98" width="270" height="6" rx="3" fill="#4CAF50"/>
+  <image href="../images/screen_signup.png" x="324" y="106" width="258" height="256" preserveAspectRatio="xMidYMin meet"/>
+  <text x="453" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">회원가입</text>
+  <text x="453" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">소속/학교/학과 선택</text>
+
+  <!-- Screen 3: 홈 -->
+  <rect x="608" y="98" width="270" height="280" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="608" y="98" width="270" height="6" rx="3" fill="#FFC107"/>
+  <image href="../images/screen_home.png" x="614" y="106" width="258" height="256" preserveAspectRatio="xMidYMin meet"/>
+  <text x="743" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">홈 화면</text>
+  <text x="743" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">포인트 현황 · 제보하기</text>
+
+  <!-- Screen 4: 제보 폼 -->
+  <rect x="898" y="98" width="270" height="280" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="898" y="98" width="270" height="6" rx="3" fill="#EA4335"/>
+  <image href="../images/screen_report_form.png" x="904" y="106" width="258" height="256" preserveAspectRatio="xMidYMin meet"/>
+  <text x="1033" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">제보 폼</text>
+  <text x="1033" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">사진 + 장소 선택 + 제출</text>
+
+  <!-- Row 2 -->
+  <!-- Screen 5: 제보 성공 -->
+  <rect x="173" y="440" width="270" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="173" y="440" width="270" height="6" rx="3" fill="#4CAF50"/>
+  <image href="../images/screen_report_success.png" x="179" y="448" width="258" height="220" preserveAspectRatio="xMidYMin meet"/>
+  <text x="308" y="694" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">제보 완료</text>
+  <text x="308" y="710" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#4CAF50">포인트 적립 확인 ✅</text>
+
+  <!-- Screen 6: 포인트 샵 -->
+  <rect x="503" y="440" width="270" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="503" y="440" width="270" height="6" rx="3" fill="#FFC107"/>
+  <image href="../images/screen_shop.png" x="509" y="448" width="258" height="220" preserveAspectRatio="xMidYMin meet"/>
+  <text x="638" y="694" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">포인트 샵</text>
+  <text x="638" y="710" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#E65100">기프티콘 교환</text>
+
+  <!-- Screen 7: 제보 목록 -->
+  <rect x="833" y="440" width="270" height="240" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="833" y="440" width="270" height="6" rx="3" fill="#4285F4"/>
+  <image href="../images/screen_reports.png" x="839" y="448" width="258" height="220" preserveAspectRatio="xMidYMin meet"/>
+  <text x="968" y="694" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">제보 내역</text>
+  <text x="968" y="710" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#1565C0">내 제보 이력 조회</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">05b / 30</text>
+</svg>

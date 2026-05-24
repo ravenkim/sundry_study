@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s05d_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s05d_pointBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s05d_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">포인트 시스템 설계</text>
+  <rect x="40" y="64" width="190" height="4" rx="2" fill="#FFC107"/>
+  <rect x="238" y="64" width="80" height="4" rx="2" fill="#4CAF50"/>
+
+  <!-- 포인트 적립 기준 테이블 -->
+  <rect x="24" y="80" width="580" height="376" rx="16" fill="url(#s05d_pointBg)" stroke="#FFD54F" stroke-width="1.5"/>
+  <rect x="24" y="80" width="580" height="8" rx="4" fill="#FFC107"/>
+
+  <use data-icon="tabler-outline/coins" x="44" y="100" width="28" height="28" fill="#E65100"/>
+  <text x="84" y="120" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#E65100">포인트 적립 기준</text>
+  <text x="84" y="138" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">절감 예상액 기반 동적 산출 (AI가 계산)</text>
+
+  <!-- 테이블 헤더 -->
+  <rect x="44" y="148" width="540" height="36" rx="6" fill="#E65100" fill-opacity="0.15"/>
+  <text x="100" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#E65100">제보 유형</text>
+  <text x="280" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#E65100">예상 절감액</text>
+  <text x="490" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#E65100">적립 포인트</text>
+
+  <!-- Row 1 -->
+  <rect x="44" y="184" width="540" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  <text x="100" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">조명만 ON</text>
+  <text x="280" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">~1,040원/시간</text>
+  <text x="490" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">30P</text>
+
+  <!-- Row 2 -->
+  <rect x="44" y="222" width="540" height="38" rx="4" fill="#FFF9C4" fill-opacity="0.5"/>
+  <text x="100" y="246" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">에어컨만 ON</text>
+  <text x="280" y="246" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">~19,500원/시간</text>
+  <text x="490" y="246" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">50P</text>
+
+  <!-- Row 3 -->
+  <rect x="44" y="260" width="540" height="38" rx="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  <text x="100" y="284" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">조명 + 에어컨 모두 ON</text>
+  <text x="280" y="284" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">~20,540원/시간</text>
+  <text x="490" y="284" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="800" fill="#EA4335">80P</text>
+
+  <!-- Row 4 -->
+  <rect x="44" y="298" width="540" height="38" rx="4" fill="#FFF9C4" fill-opacity="0.5"/>
+  <text x="100" y="322" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">낭비 없음 (불채택)</text>
+  <text x="280" y="322" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">—</text>
+  <text x="490" y="322" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">0P</text>
+
+  <text x="44" y="364" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">* 1P = 1원 환산 기준. 실제 교환 시 최소 500P 이상</text>
+  <text x="44" y="382" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">* 동일 장소 동일 시간대 24시간 내 중복 제보 차단</text>
+  <text x="44" y="400" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">* AI 판별 신뢰도 0.5 미만 시 수동 검토 대기</text>
+  <text x="44" y="418" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">* expected = waste_kw × 130원 × 가중치 (Gemini 산출)</text>
+
+  <!-- 교환 가능 보상 -->
+  <rect x="24" y="472" width="580" height="212" rx="16" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="24" y="472" width="580" height="8" rx="4" fill="#4CAF50"/>
+  <use data-icon="tabler-outline/gift" x="44" y="492" width="28" height="28" fill="#4CAF50"/>
+  <text x="84" y="512" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#2E7D32">교환 가능 보상</text>
+
+  <!-- 보상 아이템들 -->
+  <rect x="44" y="524" width="120" height="80" rx="10" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/coffee" x="90" y="536" width="28" height="28" fill="#4CAF50"/>
+  <text x="104" y="580" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#2E7D32">커피 쿠폰</text>
+  <text x="104" y="596" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">500P~</text>
+
+  <rect x="178" y="524" width="120" height="80" rx="10" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/device-mobile" x="224" y="536" width="28" height="28" fill="#4285F4"/>
+  <text x="238" y="580" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">편의점 상품권</text>
+  <text x="238" y="596" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">1,000P~</text>
+
+  <rect x="312" y="524" width="120" height="80" rx="10" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/ticket" x="358" y="536" width="28" height="28" fill="#FFC107"/>
+  <text x="372" y="580" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#E65100">문화상품권</text>
+  <text x="372" y="596" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">3,000P~</text>
+
+  <rect x="446" y="524" width="140" height="80" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/leaf" x="500" y="536" width="28" height="28" fill="#4CAF50"/>
+  <text x="516" y="578" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#2E7D32">탄소중립</text>
+  <text x="516" y="594" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#5F6368">인증 배지 (무료)</text>
+
+  <!-- 우측: 포인트 시뮬레이터 -->
+  <rect x="628" y="80" width="628" height="604" rx="16" fill="#1A237E"/>
+  <rect x="628" y="80" width="628" height="8" rx="4" fill="#4285F4"/>
+
+  <text x="942" y="118" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#FFFFFF">학생 수익 시뮬레이션</text>
+  <text x="942" y="138" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">주 3회 제보 기준</text>
+
+  <!-- 주별 시나리오 -->
+  <rect x="652" y="152" width="580" height="80" rx="10" fill="#FFFFFF" fill-opacity="0.08"/>
+  <text x="660" y="178" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#9AA0A6">주간 제보</text>
+  <text x="942" y="178" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#FFFFFF">3회 × 평균 50P = 150P/주</text>
+  <text x="660" y="210" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#9AA0A6">월간 적립</text>
+  <text x="942" y="210" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#FFFFFF">150P × 4주 = 600P/월</text>
+
+  <rect x="652" y="244" width="580" height="80" rx="10" fill="#FFFFFF" fill-opacity="0.08"/>
+  <text x="660" y="270" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#9AA0A6">학기 적립 (4개월)</text>
+  <text x="942" y="270" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="700" fill="#FFC107">2,400P</text>
+  <text x="660" y="306" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#9AA0A6">연간 적립 (2학기)</text>
+  <text x="942" y="306" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="700" fill="#4CAF50">4,800P ≈ 4,800원</text>
+
+  <!-- 교환 예시 -->
+  <rect x="652" y="336" width="580" height="100" rx="10" fill="#4CAF50" fill-opacity="0.15"/>
+  <text x="942" y="362" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#4CAF50">교환 가능: 커피 9잔 + 편의점 쿠폰 1장</text>
+  <text x="942" y="384" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">단, 적극 참여자(일 2회)는 연 20,000P 이상도 가능</text>
+  <text x="942" y="404" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">상위 5% 참여자 월별 추가 보너스 포인트 예정</text>
+
+  <!-- AI 화면 미리보기 -->
+  <rect x="652" y="452" width="580" height="200" rx="10" fill="#FFFFFF" fill-opacity="0.05" stroke="#4285F4" stroke-width="1"/>
+  <image href="../images/screen_profile.png" x="660" y="460" width="560" height="184" preserveAspectRatio="xMidYMin meet"/>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">05d / 30</text>
+</svg>

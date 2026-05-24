@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s03b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s03b_bar1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EA4335"/>
+      <stop offset="100%" stop-color="#FF7043"/>
+    </linearGradient>
+    <linearGradient id="s03b_bar2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+    <linearGradient id="s03b_bar3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="100%" stop-color="#81C784"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s03b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="36" font-weight="700" fill="#1A237E">캠퍼스 에너지 낭비 — 숫자로 보다</text>
+  <rect x="40" y="64" width="160" height="4" rx="2" fill="#EA4335"/>
+  <rect x="208" y="64" width="100" height="4" rx="2" fill="#FFC107"/>
+  <rect x="316" y="64" width="100" height="4" rx="2" fill="#4CAF50"/>
+
+  <!-- 좌측: KPI 통계 3개 -->
+  <!-- stat 1 -->
+  <rect x="24" y="82" width="340" height="140" rx="14" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <text x="44" y="122" font-family="Pretendard, system-ui, sans-serif"
+        font-size="52" font-weight="800" fill="#C62828">30%</text>
+  <text x="44" y="148" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="600" fill="#C62828">에너지 비용 중 빈 공간 낭비</text>
+  <text x="44" y="170" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">한국에너지공단 건물 에너지 절약 현황 기준</text>
+  <text x="44" y="190" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">공공기관 미사용 공간 평균 30% 에너지 낭비</text>
+
+  <!-- stat 2 -->
+  <rect x="24" y="234" width="340" height="140" rx="14" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <text x="44" y="274" font-family="Pretendard, system-ui, sans-serif"
+        font-size="52" font-weight="800" fill="#E65100">430개</text>
+  <text x="44" y="300" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="600" fill="#E65100">전국 4년제 대학</text>
+  <text x="44" y="322" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">강의실 합계 약 10만 개 이상 추정</text>
+  <text x="44" y="342" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">방학·야간 시간대 점유율 10% 미만</text>
+
+  <!-- stat 3 -->
+  <rect x="24" y="386" width="340" height="140" rx="14" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+  <text x="44" y="426" font-family="Pretendard, system-ui, sans-serif"
+        font-size="52" font-weight="800" fill="#2E7D32">10만+</text>
+  <text x="44" y="452" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="600" fill="#2E7D32">월 불필요 전기료 (원)</text>
+  <text x="44" y="474" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">100개 강의실 · 형광등+에어컨 기준</text>
+  <text x="44" y="494" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">절감 가능 금액 연간 100만원+ 추정</text>
+
+  <!-- stat 4 -->
+  <rect x="24" y="538" width="340" height="100" rx="14" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="44" y="574" font-family="Pretendard, system-ui, sans-serif"
+        font-size="44" font-weight="800" fill="#1565C0">2.5억</text>
+  <text x="44" y="596" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="600" fill="#1565C0">kWh (연간 대학 전기 소비)</text>
+  <text x="44" y="618" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">전국 대학 통합 기준 추정치</text>
+
+  <!-- 중앙 구분선 -->
+  <line x1="390" y1="82" x2="390" y2="650" stroke="#E8EAED" stroke-width="1"/>
+
+  <!-- 우측: 낭비 유형 가로 막대 차트 -->
+  <text x="420" y="98" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#1A237E">강의실 에너지 낭비 유형</text>
+  <text x="420" y="116" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">수업 종료 후 방치된 설비 비중 (추정)</text>
+
+  <!-- 막대 1: 조명 -->
+  <text x="420" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="600" fill="#1A252F">조명 (형광등·LED)</text>
+  <rect x="420" y="162" width="720" height="36" rx="6" fill="#F8F9FA"/>
+  <rect x="420" y="162" width="576" height="36" rx="6" fill="url(#s03b_bar1)"/>
+  <text x="1005" y="186" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#C62828">80%</text>
+  <text x="430" y="184" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#FFFFFF">방치 최多 — 끄는 습관 없음</text>
+
+  <!-- 막대 2: 에어컨 -->
+  <text x="420" y="222" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="600" fill="#1A252F">에어컨·냉난방</text>
+  <rect x="420" y="230" width="720" height="36" rx="6" fill="#F8F9FA"/>
+  <rect x="420" y="230" width="468" height="36" rx="6" fill="url(#s03b_bar2)"/>
+  <text x="897" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#E65100">65%</text>
+  <text x="430" y="252" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#FFFFFF">고소비전력 — 냉난방 최대 1.5kW</text>
+
+  <!-- 막대 3: 빔 프로젝터 -->
+  <text x="420" y="290" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="600" fill="#1A252F">빔 프로젝터</text>
+  <rect x="420" y="298" width="720" height="36" rx="6" fill="#F8F9FA"/>
+  <rect x="420" y="298" width="288" height="36" rx="6" fill="url(#s03b_bar3)"/>
+  <text x="717" y="322" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">40%</text>
+  <text x="430" y="320" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#FFFFFF">대기전력 150W 이상</text>
+
+  <!-- 막대 4: PC/모니터 -->
+  <text x="420" y="358" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="600" fill="#1A252F">PC·모니터</text>
+  <rect x="420" y="366" width="720" height="36" rx="6" fill="#F8F9FA"/>
+  <rect x="420" y="366" width="216" height="36" rx="6" fill="#4285F4"/>
+  <text x="645" y="390" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#4285F4">30%</text>
+  <text x="430" y="388" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#FFFFFF">절전 모드 미설정</text>
+
+  <!-- 하단 인사이트 카드 -->
+  <rect x="420" y="424" width="820" height="90" rx="12" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/bulb" x="440" y="440" width="28" height="28" fill="#4CAF50"/>
+  <text x="480" y="455" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">핵심 인사이트</text>
+  <text x="480" y="478" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#2E7D32">조명과 에어컨만 제어해도 전체 낭비의 90% 이상을 해결할 수 있습니다.</text>
+  <text x="480" y="500" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">EcoReport AI는 이 두 설비의 ON/OFF 상태를 사진 한 장으로 정확히 판별합니다.</text>
+
+  <!-- 시간대별 강의실 점유율 -->
+  <rect x="420" y="530" width="820" height="130" rx="12" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="440" y="556" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">시간대별 강의실 점유율 (추정)</text>
+  <!-- 시간대 바 -->
+  <text x="440" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">08시</text>
+  <rect x="470" y="568" width="62" height="22" rx="4" fill="#4CAF50" fill-opacity="0.7"/>
+  <text x="501" y="584" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#FFFFFF">45%</text>
+
+  <text x="548" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">12시</text>
+  <rect x="578" y="558" width="90" height="32" rx="4" fill="#4CAF50"/>
+  <text x="623" y="578" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#FFFFFF">85%</text>
+
+  <text x="684" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">15시</text>
+  <rect x="714" y="560" width="76" height="30" rx="4" fill="#FFC107"/>
+  <text x="752" y="580" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#FFFFFF">70%</text>
+
+  <text x="806" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">18시</text>
+  <rect x="836" y="566" width="44" height="24" rx="4" fill="#FFC107" fill-opacity="0.7"/>
+  <text x="858" y="582" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#FFFFFF">30%</text>
+
+  <text x="900" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">21시</text>
+  <rect x="930" y="572" width="22" height="18" rx="4" fill="#EA4335" fill-opacity="0.7"/>
+  <text x="941" y="585" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#FFFFFF">8%</text>
+
+  <text x="970" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">24시</text>
+  <rect x="1002" y="574" width="10" height="16" rx="4" fill="#EA4335" fill-opacity="0.5"/>
+
+  <text x="440" y="624" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#EA4335" font-weight="600">야간(21~07시): 점유율 10% 미만 → 에너지 낭비 위험 최高</text>
+  <text x="440" y="644" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">학생 제보가 야간·주말 커버리지 공백을 효과적으로 메울 수 있습니다</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">03b / 30</text>
+</svg>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s04b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s04b_step1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="s04b_step2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="s04b_step3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+    <marker id="s04b_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5F6368"/>
+    </marker>
+    <marker id="s04b_arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+    <marker id="s04b_arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4285F4"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s04b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">3단계 AI 분석 파이프라인</text>
+  <rect x="40" y="64" width="220" height="4" rx="2" fill="#4285F4"/>
+  <rect x="268" y="64" width="80" height="4" rx="2" fill="#4CAF50"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">사진 1장 → 3단계 AI → 에너지 낭비 판별 + 절감 예상액 산출</text>
+
+  <!-- Step 1: YOLOv8n 조명 감지 -->
+  <rect x="24" y="96" width="356" height="560" rx="16" fill="url(#s04b_step1)" stroke="#90CAF9" stroke-width="1.5"/>
+  <rect x="24" y="96" width="356" height="8" rx="4" fill="#4285F4"/>
+
+  <circle cx="60" cy="136" r="22" fill="#4285F4"/>
+  <text x="60" y="143" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">1</text>
+
+  <text x="94" y="128" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#1565C0">YOLOv8n · 조명 감지</text>
+  <text x="94" y="148" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">Light Detection Model</text>
+
+  <line x1="44" y1="164" x2="360" y2="164" stroke="#90CAF9" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- 입력 -->
+  <text x="44" y="186" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#1565C0">입력</text>
+  <rect x="44" y="194" width="316" height="40" rx="8" fill="#FFFFFF" stroke="#90CAF9" stroke-width="1"/>
+  <use data-icon="tabler-outline/photo" x="56" y="204" width="20" height="20" fill="#4285F4"/>
+  <text x="82" y="219" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">강의실 사진 (JPG/PNG, 최대 5MB)</text>
+
+  <!-- 처리 -->
+  <text x="44" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#1565C0">처리 방식</text>
+  <rect x="44" y="262" width="316" height="84" rx="8" fill="#FFFFFF" stroke="#90CAF9" stroke-width="1"/>
+  <text x="60" y="282" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• YOLO bbox 탐지 → 조명 영역 추출</text>
+  <text x="60" y="302" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• confidence ≥ 0.5 조명 ON 판정</text>
+  <text x="60" y="322" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 탐지된 조명 수 카운트</text>
+
+  <!-- 출력 -->
+  <text x="44" y="362" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#1565C0">출력</text>
+  <rect x="44" y="370" width="152" height="52" rx="8" fill="#4285F4" fill-opacity="0.15" stroke="#4285F4" stroke-width="1"/>
+  <text x="120" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#1565C0">light_on: true</text>
+  <text x="120" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">light_count: N</text>
+  <rect x="208" y="370" width="152" height="52" rx="8" fill="#9AA0A6" fill-opacity="0.1" stroke="#9AA0A6" stroke-width="1"/>
+  <text x="284" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#5F6368">light_on: false</text>
+  <text x="284" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">→ 낭비 없음</text>
+
+  <!-- 모델 정보 -->
+  <rect x="44" y="438" width="316" height="60" rx="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1"/>
+  <text x="60" y="458" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">모델 정보</text>
+  <text x="60" y="476" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">YOLOv8n · mAP@0.5: 0.990 · 자체 학습</text>
+  <text x="60" y="492" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">조명 ON/OFF 2-class classification</text>
+
+  <!-- 성능 배지 -->
+  <rect x="44" y="516" width="316" height="112" rx="8" fill="#FFFFFF" stroke="#90CAF9" stroke-width="1"/>
+  <text x="60" y="536" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">학습 데이터</text>
+  <text x="60" y="554" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">직접 촬영 + 오픈소스 · 800장+</text>
+  <text x="60" y="572" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">추론 속도</text>
+  <text x="60" y="590" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">Cloud Run CPU · 평균 ~1.2초/장</text>
+  <text x="60" y="608" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">배포</text>
+  <text x="60" y="624" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">Google Cloud Run (FastAPI 서빙)</text>
+
+  <!-- 화살표 1→2 -->
+  <line x1="393" y1="376" x2="437" y2="376" stroke="#5F6368" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#s04b_arrow)"/>
+  <text x="415" y="366" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">조명</text>
+  <text x="415" y="380" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">ON시</text>
+
+  <!-- Step 2: YOLOv8n 에어컨 감지 -->
+  <rect x="444" y="96" width="356" height="560" rx="16" fill="url(#s04b_step2)" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="444" y="96" width="356" height="8" rx="4" fill="#4CAF50"/>
+
+  <circle cx="480" cy="136" r="22" fill="#4CAF50"/>
+  <text x="480" y="143" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">2</text>
+
+  <text x="514" y="128" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#2E7D32">YOLOv8n · 에어컨 감지</text>
+  <text x="514" y="148" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">AC Detection Model</text>
+
+  <line x1="464" y1="164" x2="780" y2="164" stroke="#A5D6A7" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <text x="464" y="186" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#2E7D32">입력</text>
+  <rect x="464" y="194" width="316" height="40" rx="8" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1"/>
+  <use data-icon="tabler-outline/air-conditioning" x="476" y="204" width="20" height="20" fill="#4CAF50"/>
+  <text x="502" y="219" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">동일 이미지 (Step 1과 병렬 처리)</text>
+
+  <text x="464" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#2E7D32">처리 방식</text>
+  <rect x="464" y="262" width="316" height="84" rx="8" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="480" y="282" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 에어컨 유닛 bbox 탐지</text>
+  <text x="480" y="302" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 동작 LED/패널 상태 분석</text>
+  <text x="480" y="322" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• ON 판정 → 소비전력 추정</text>
+
+  <text x="464" y="362" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#2E7D32">출력</text>
+  <rect x="464" y="370" width="152" height="52" rx="8" fill="#4CAF50" fill-opacity="0.15" stroke="#4CAF50" stroke-width="1"/>
+  <text x="540" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#2E7D32">ac_on: true</text>
+  <text x="540" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">count: N</text>
+  <rect x="628" y="370" width="152" height="52" rx="8" fill="#9AA0A6" fill-opacity="0.1" stroke="#9AA0A6" stroke-width="1"/>
+  <text x="704" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#5F6368">ac_on: false</text>
+
+  <rect x="464" y="438" width="316" height="60" rx="8" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="480" y="458" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#2E7D32">모델 정보</text>
+  <text x="480" y="476" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">YOLOv8n · 에어컨 ON/OFF 특화</text>
+  <text x="480" y="492" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">조명 모델과 동일 아키텍처, 별도 가중치</text>
+
+  <rect x="464" y="516" width="316" height="112" rx="8" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="480" y="536" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#2E7D32">소비전력 추정 공식</text>
+  <text x="480" y="554" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">에어컨 1대: ~1,500W (냉방 기준)</text>
+  <text x="480" y="572" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">조명 1세트: ~80W (형광등 40W×2)</text>
+  <text x="480" y="590" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#2E7D32">Step 1+2 결합</text>
+  <text x="480" y="608" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">total_waste_kw = light×0.08 + ac×1.5</text>
+  <text x="480" y="624" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">→ Gemini에 전달</text>
+
+  <!-- 화살표 2→3 -->
+  <line x1="813" y1="376" x2="857" y2="376" stroke="#5F6368" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#s04b_arrow)"/>
+
+  <!-- Step 3: Gemini 2.5 Flash -->
+  <rect x="864" y="96" width="392" height="560" rx="16" fill="url(#s04b_step3)" stroke="#FFD54F" stroke-width="1.5"/>
+  <rect x="864" y="96" width="392" height="8" rx="4" fill="#FFC107"/>
+
+  <circle cx="900" cy="136" r="22" fill="#FFC107"/>
+  <text x="900" y="143" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">3</text>
+
+  <text x="934" y="128" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#E65100">Gemini 2.5 Flash · 판정</text>
+  <text x="934" y="148" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">LLM Multi-modal Analysis</text>
+
+  <line x1="884" y1="164" x2="1236" y2="164" stroke="#FFD54F" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <text x="884" y="186" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#E65100">입력</text>
+  <rect x="884" y="194" width="352" height="52" rx="8" fill="#FFFFFF" stroke="#FFD54F" stroke-width="1"/>
+  <text x="900" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">• 원본 이미지</text>
+  <text x="900" y="232" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">• Step1+2 결과: light_on, ac_on, waste_kw</text>
+
+  <text x="884" y="262" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#E65100">처리 방식</text>
+  <rect x="884" y="270" width="352" height="96" rx="8" fill="#FFFFFF" stroke="#FFD54F" stroke-width="1"/>
+  <text x="900" y="290" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">• 이미지 + YOLO 메타 통합 분석</text>
+  <text x="900" y="308" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">• 빈 강의실 여부 최종 판정 (JSON)</text>
+  <text x="900" y="326" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">• 절감 예상액 원화 산출</text>
+  <text x="900" y="344" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">• 포인트 계산 (절감액 기반)</text>
+
+  <text x="884" y="380" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#E65100">출력 JSON</text>
+  <rect x="884" y="388" width="352" height="100" rx="8" fill="#1A237E" stroke="#FFD54F" stroke-width="1"/>
+  <text x="900" y="408" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#4CAF50">{"waste": true,</text>
+  <text x="900" y="426" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#4CAF50">  "light_on": true, "ac_on": false,</text>
+  <text x="900" y="444" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#FFC107">  "expected": 12400,</text>
+  <text x="900" y="462" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#4285F4">  "points": 50,</text>
+  <text x="900" y="480" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#EA4335">  "reason": "조명 4세트 방치"}</text>
+
+  <rect x="884" y="504" width="352" height="56" rx="8" fill="#FFF9C4" stroke="#FFD54F" stroke-width="1"/>
+  <text x="900" y="524" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#E65100">expected 산출 공식</text>
+  <text x="900" y="542" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">waste_kw × 1h × 130원/kWh × 가중치</text>
+  <text x="900" y="556" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">→ BE에서 포인트 테이블로 변환 저장</text>
+
+  <rect x="884" y="572" width="352" height="60" rx="8" fill="#FFFFFF" stroke="#FFD54F" stroke-width="1"/>
+  <text x="900" y="592" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#E65100">API 호출 흐름</text>
+  <text x="900" y="610" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">FE → BE (multipart) → Cloud Run (FastAPI)</text>
+  <text x="900" y="624" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">→ BE 포인트 저장 → FE 결과 표시</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">04b / 30</text>
+</svg>
