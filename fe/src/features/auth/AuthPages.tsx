@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { ArrowLeft, Mail, Phone } from 'lucide-react'
 import { toast } from 'react-toastify'
@@ -8,6 +8,7 @@ import type { Affiliation } from 'src/globals/api/types'
 import { setPendingAffiliation } from 'src/features/auth/signupBuildingStorage'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 
 type SignupIntent = 'signup' | 'oauth'
 
@@ -24,9 +25,6 @@ export function AffiliationSelection() {
         getAffiliations()
             .then((affiliationList) => {
                 setAffiliations(affiliationList)
-                if (affiliationList.length === 1) {
-                    setAffiliationId(affiliationList[0].affiliationId)
-                }
             })
             .catch(() => toast.error('소속 목록을 불러오지 못했습니다.'))
             .finally(() => setLoading(false))
@@ -34,6 +32,15 @@ export function AffiliationSelection() {
 
     const selectedAffiliation = affiliations.find(
         (affiliation) => affiliation.affiliationId === affiliationId,
+    )
+
+    const affiliationOptions = useMemo(
+        () =>
+            affiliations.map((affiliation) => ({
+                value: affiliation.affiliationId,
+                label: affiliation.name,
+            })),
+        [affiliations],
     )
 
     const handleContinue = (e: FormEvent) => {
@@ -99,39 +106,24 @@ export function AffiliationSelection() {
                         className="flex flex-col gap-5"
                         onSubmit={handleContinue}
                     >
-                        {affiliations.length > 1 ? (
+                        {affiliations.length > 0 ? (
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-on-surface text-sm font-semibold">
                                     학교·캠퍼스
                                 </label>
-                                <select
+                                <SearchableSelect
+                                    options={affiliationOptions}
                                     value={affiliationId}
-                                    onChange={(e) =>
-                                        setAffiliationId(Number(e.target.value) || '')
-                                    }
-                                    className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
-                                >
-                                    <option value="">학교를 선택해 주세요</option>
-                                    {affiliations.map((affiliation) => (
-                                        <option
-                                            key={affiliation.affiliationId}
-                                            value={affiliation.affiliationId}
-                                        >
-                                            {affiliation.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                    onChange={setAffiliationId}
+                                    placeholder="학교를 검색·선택해 주세요"
+                                    searchPlaceholder="학교명 검색..."
+                                />
                             </div>
-                        ) : selectedAffiliation ? (
-                            <div className="border-outline-variant bg-surface-container-low rounded-lg border px-4 py-3">
-                                <p className="text-on-surface-variant text-xs font-bold">
-                                    학교·캠퍼스
-                                </p>
-                                <p className="text-on-surface text-sm font-semibold">
-                                    {selectedAffiliation.name}
-                                </p>
-                            </div>
-                        ) : null}
+                        ) : (
+                            <p className="text-on-surface-variant text-sm">
+                                등록된 소속이 없습니다. 관리자에게 문의해 주세요.
+                            </p>
+                        )}
                     </form>
                 )}
             </main>

@@ -174,9 +174,10 @@
 
 | 기능 | 설명 | MVP 상태 |
 |------|------|----------|
-| **AI 이미지 분석** | 3단계 파이프라인, 5초 이내 판별 | BE Cloud Run `/analyze` 연동 ✅ / FE mock UX |
-| **제보·포인트** | 사진 + 건물/강의실 → AI 판별 후 저장 | `POST /api/reports` + AI ✅ / 포인트 mock |
-| **관리자 대시보드** | 제보 목록·월 절약 요약 | UI 6화면 ✅ / mock 데이터 |
+| **AI 이미지 분석** | 3단계 파이프라인, 5초 이내 판별 | BE→Cloud Run `/analyze` 연동 ✅ / FE mock UX |
+| **제보·포인트** | 사진 + 장소 선택 → AI 판별 후 저장 | `POST /api/reports` + AI ✅ / 포인트 mock |
+| **관리자 대시보드** | 제보·통계·장소 관리 | UI 6화면 ✅ / 장소 관리 BE 연동 ✅ / 나머지 mock |
+| **회원가입·인증** | 이메일·Google OAuth + 소속 선택 | 이메일·JWT ✅ / Google OAuth ✅ |
 
 **AI 3단계 상세 (슬라이드 각주 또는 보조 슬라이드)**:
 
@@ -189,8 +190,8 @@
 - **1단계**: chair=0 AND desk=0 → 강의실 아님 / person≥1 → 사용 중 / person=0 → 2단계
 - **3단계**: ac_status=ON 또는 light_status=ON → **낭비 확인**
 
-**학생 UI (5탭)**: 홈 · 낭비 제보 · 제보 이력 · 포인트샵 · 마이페이지  
-**관리자 UI (6화면)**: 대시보드 · 제보 · 건물 · 포인트 · 통계 · 사용자
+**학생 UI (9화면)**: 로그인 · 회원가입(소속 선택) · 홈 · 제보 작성 · 제보 완료 · 제보 이력 · 포인트샵 · 마이페이지  
+**관리자 UI (6화면)**: 대시보드 · 제보 관리 · 장소 관리(FE+BE ✅) · 기프티콘 관리 · 에너지 통계 · 사용자 관리
 
 ### 시각 자료
 
@@ -223,11 +224,11 @@
 
 | 단계 | 화면 | 설명 |
 |:----:|------|------|
-| 1 | 로그인 | 이메일 회원가입/로그인 (BE 연동 ✅) |
-| 2 | 홈 | 제보하기 CTA |
-| 3 | 제보 작성 | 카메라/갤러리 + 건물·강의실 선택 |
+| 1 | 로그인 | 이메일/Google OAuth (BE 연동 ✅) |
+| 2 | 홈 | 포인트 잔액 + 건물 절약 전기량 CTA |
+| 3 | 제보 작성 | 카메라/갤러리 + 장소 3단계 선택 |
 | 4 | AI 분석 | 3단계 진행 UI → 낭비 확인 / 판별 불가 |
-| 5 | 완료 | 포인트 적립 (+50~89P) |
+| 5 | 완료 | 포인트 적립 (낭비 확인 +100P) |
 | 6 | 이력·포인트샵 | 누적 포인트·교환 UI |
 
 **시나리오 예** ([사용자_시나리오.md](../기획/캠퍼스_에너지_절약/02_서비스_기획/사용자_시나리오.md)):
@@ -243,9 +244,9 @@
 
 | 구분 | 해커톤 MVP |
 |------|------------|
-| ✅ **완료** | UI 6화면(학생+관리자), 이메일 회원가입/로그인, JWT, `POST/GET /api/reports`(Cloud Run AI), `GET /api/buildings`, `GET /api/points/me`, Docker 배포, monorepo `ai/` |
-| 🔶 **데모** | FE AI 진행 UI mock, 포인트·관리자 — **FE mock** (`VITE_USE_MOCK`, 기본 `true`) |
-| ⏳ **미구현** | GCS, `aiResult` DB, Kafka, 관리자 API |
+| ✅ **완료** | 학생 UI 9화면·관리자 6화면, 이메일·**Google OAuth**, JWT, `POST/GET /api/reports`(Cloud Run AI 연동), `GET /api/buildings`, 장소 관리 **CRUD API+UI**, `GET /api/points/me`, Flyway 시드, Docker ubuntu03 배포, monorepo `ai/` |
+| 🔶 **FE mock** | AI 진행 UI (`simulateAiAnalysis`), 포인트 적립·관리자 대시보드·통계·기프티콘 — `VITE_USE_MOCK=true` |
+| ⏳ **미구현** | GCS 실업로드, `aiResult` DB 저장, Kafka 운영 연동, 관리자 제보 승인 API |
 
 ### 시각 자료
 
@@ -277,26 +278,22 @@
 
 ### 슬라이드 본문
 
-| 레이어 | 스택 (한 줄) |
-|--------|-------------|
-| **FE** | React 19 · Vite · Tailwind v4 · Redux-Saga · shadcn/ui |
-| **BE** | Spring Boot 4 · MySQL · JPA · JWT |
-| **AI** | YOLOv8n + Custom AC + Gemini 2.5 Flash (Vertex) · FastAPI |
-| **Infra** | Docker Compose · ubuntu03 (FE:8081, BE:8080, MySQL) |
+| 레이어 | 스택 |
+|--------|------|
+| **FE** | React 19 · Vite · TailwindCSS v4 · Redux-Saga · shadcn/ui · Recharts · i18next · Pretendard |
+| **BE** | Spring Boot 4 · MySQL 8.4 · JPA/Hibernate · JWT(HS256) · Flyway · Google OAuth2 |
+| **AI** | YOLOv8n(COCO) + YOLOv8n Custom(mAP 0.990) + Gemini 2.5 Flash · FastAPI · Cloud Run |
+| **Infra** | Docker Compose · ubuntu03 서버 (FE:8081, BE:8080, MySQL) |
 
-**한 줄 추가**:
-
-- **비동기 설계**: Kafka `member-point-topic` — Producer/Consumer 코드 존재, 운영 연동 P1
-- **이미지**: GCS 비공개 버킷 설계 — 현재 placeholder URL
-
-**아키텍처 (축소판 1장)**:
+**아키텍처**:
 
 ```
-[학생·관리자 React] ──HTTPS──► [Spring Boot API] ──► [MySQL]
+[학생·관리자 React] ──JWT──► [Spring Boot API] ──► [MySQL]
                                     │
-                                    ├──► [GCS] (목표)
+                                    ├──► [GCS] (P1)
                                     ├──► [Kafka] (P1)
-                                    └──► [FastAPI + YOLO + Gemini] (목표)
+                                    └──► [FastAPI Cloud Run] ✅
+                                          └─ YOLOv8n → Gemini 2.5 Flash
 ```
 
 ### 시각 자료
