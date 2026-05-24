@@ -46,6 +46,61 @@ log_db_migration_files() {
   fi
 }
 
+ensure_mysql_for_db_check() {
+  load_env
+  if docker ps --format '{{.Names}}' | grep -q '^ecoreport-mysql$'; then
+    return 0
+  fi
+  log_db "MySQL 기동 (구 DB 검사)..."
+  docker compose up -d mysql
+  local attempt=0
+  until docker exec ecoreport-mysql mysqladmin ping -h localhost --silent 2>/dev/null; do
+    attempt=$((attempt + 1))
+    if [[ "${attempt}" -ge 30 ]]; then
+      log_db "MySQL 기동 시간 초과"
+      exit 1
+    fi
+    sleep 2
+  done
+}
+
+maybe_reset_legacy_db() {
+  load_env
+
+  if [[ -z "${MYSQL_USER:-}" || -z "${MYSQL_PASSWORD:-}" ]]; then
+    return 0
+  fi
+
+  if ! docker ps --format '{{.Names}}' | grep -q '^ecoreport-mysql$'; then
+    return 0
+  fi
+
+  local flyway_exists legacy_exists
+  flyway_exists="$(mysql_exec \
+    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${MYSQL_DATABASE:-energy_db}' AND table_name='flyway_schema_history';" \
+    2>/dev/null || echo "0")"
+  legacy_exists="$(mysql_exec \
+    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${MYSQL_DATABASE:-energy_db}' AND table_name='building_db';" \
+    2>/dev/null || echo "0")"
+
+  if [[ "${legacy_exists}" -gt 0 ]]; then
+    log_db "구 스키마(building_db) 감지 — MySQL 볼륨 초기화 후 Flyway 재적용"
+    docker compose down -v 2>/dev/null || true
+    return 0
+  fi
+
+  if [[ "${flyway_exists}" -eq 0 ]]; then
+    local table_count
+    table_count="$(mysql_exec \
+      "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${MYSQL_DATABASE:-energy_db}' AND table_type='BASE TABLE';" \
+      2>/dev/null || echo "0")"
+    if [[ "${table_count}" -gt 0 ]]; then
+      log_db "Flyway 이력 없는 기존 DB 감지 — MySQL 볼륨 초기화"
+      docker compose down -v 2>/dev/null || true
+    fi
+  fi
+}
+
 maybe_reset_db_on_schema_change() {
   local current stored=""
   current="$(versioned_migration_hash)"
@@ -148,13 +203,17 @@ report_db_status() {
 
 wait_for_be() {
   load_env
-  local host="${DEPLOY_PUBLIC_HOST:-localhost}"
+  # 서버 내부 헬스체크 — DEPLOY_PUBLIC_HOST 는 요약 URL 출력용만 사용
+  local health_host="127.0.0.1"
   local port="${SERVER_PORT:-8080}"
   local attempt=0
 
-  log "백엔드 준비 대기 (http://${host}:${port}/ping) — Flyway migrate 포함..."
-  until curl -sf "http://${host}:${port}/ping" >/dev/null 2>&1; do
+  log "백엔드 준비 대기 (http://${health_host}:${port}/ping) — Flyway migrate 포함..."
+  until curl -sf "http://${health_host}:${port}/ping" >/dev/null 2>&1; do
     attempt=$((attempt + 1))
+    if (( attempt % 5 == 0 )); then
+      log "  ... 대기 중 (${attempt}/60)"
+    fi
     if [[ "${attempt}" -ge 60 ]]; then
       log "백엔드 기동 시간 초과 — 최근 로그:"
       docker compose logs --tail 40 be || true
@@ -170,11 +229,11 @@ wait_for_be() {
 
 wait_for_fe() {
   load_env
-  local host="${DEPLOY_PUBLIC_HOST:-localhost}"
+  local health_host="127.0.0.1"
   local attempt=0
 
-  log "프론트 준비 대기 (http://${host}:8081)..."
-  until curl -sf "http://${host}:8081/" >/dev/null 2>&1; do
+  log "프론트 준비 대기 (http://${health_host}:8081)..."
+  until curl -sf "http://${health_host}:8081/" >/dev/null 2>&1; do
     attempt=$((attempt + 1))
     if [[ "${attempt}" -ge 30 ]]; then
       log "프론트 기동 시간 초과 — docker compose logs fe"
@@ -187,12 +246,12 @@ wait_for_fe() {
 
 smoke_test() {
   load_env
-  local host="${DEPLOY_PUBLIC_HOST:-localhost}"
+  local health_host="127.0.0.1"
   local port="${SERVER_PORT:-8080}"
   local response
 
   log "로그인 스모크 테스트 (admin)..."
-  response="$(curl -sf -X POST "http://${host}:${port}/login" \
+  response="$(curl -sf -X POST "http://${health_host}:${port}/login" \
     -H 'Content-Type: application/json' \
     -d '{"userName":"admin","password":"admin1234!"}' 2>/dev/null || true)"
 
@@ -229,6 +288,8 @@ main() {
   ensure_env
   log_db "=== DB 배포 시작 ==="
   log_db_migration_files
+  ensure_mysql_for_db_check
+  maybe_reset_legacy_db
   maybe_reset_db_on_schema_change
 
   log "[1/2] 백엔드 (MySQL + Flyway + BE)..."

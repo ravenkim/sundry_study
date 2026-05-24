@@ -71,14 +71,19 @@ docker compose build be
 docker compose up -d be
 
 wait_for_be() {
-  local host="${DEPLOY_PUBLIC_HOST:-localhost}"
+  # 배포 서버 내부 헬스체크 — DEPLOY_PUBLIC_HOST(공인 IP/도메인)는 hairpin NAT 등으로
+  # 서버에서 자기 자신에게 접속되지 않는 경우가 많아 127.0.0.1 고정
+  local health_host="127.0.0.1"
   local port="${SERVER_PORT:-8080}"
   local attempt=0
-  echo "[be] 백엔드 준비 대기..."
-  until curl -sf "http://${host}:${port}/ping" >/dev/null 2>&1; do
+  echo "[be] 백엔드 준비 대기 (http://${health_host}:${port}/ping)..."
+  until curl -sf "http://${health_host}:${port}/ping" >/dev/null 2>&1; do
     attempt=$((attempt + 1))
+    if (( attempt % 5 == 0 )); then
+      echo "[be]   ... 대기 중 (${attempt}/60, BE 로그: docker compose logs --tail 20 be)"
+    fi
     if [[ "${attempt}" -ge 60 ]]; then
-      echo "[be] 백엔드 기동 시간 초과"
+      echo "[be] 백엔드 기동 시간 초과 — 최근 로그:"
       docker compose logs --tail 40 be || true
       exit 1
     fi
