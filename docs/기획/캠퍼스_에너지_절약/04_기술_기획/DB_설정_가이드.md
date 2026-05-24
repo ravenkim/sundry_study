@@ -73,13 +73,34 @@ flowchart LR
 
 ### 3.3 시드 데이터
 
-BE 기동 시 `ApplicationRunner`가 빈 DB에 초기 데이터를 넣는다.
+BE 기동 시 `ApplicationRunner`가 빈 DB에 초기 데이터를 넣는다.  
+**이미 동일 `userName` 계정이 있으면 건너뛴다** (재기동 시 중복 생성 안 됨).
 
 | 클래스 | 내용 |
 |--------|------|
-| `AffiliationDataInitializer` | 기본 소속 1건 |
+| `AffiliationDataInitializer` | 기본 소속 1건 (삼육대학교) |
 | `BuildingDataInitializer` | 건물 4건 (공학관 A동, 도서관, 학생회관, 본관) |
 | `AdminDataInitializer` | 관리자 계정 1건 |
+| `UserDataInitializer` | 일반 사용자 계정 1건 |
+
+#### 더미 계정 (로그인 테스트용)
+
+| 구분 | 아이디 | 비밀번호 | 이메일 | 소속 건물 | `user_type` | 초기 포인트 |
+|------|--------|----------|--------|-----------|-------------|-------------|
+| 관리자 | `admin` | `admin1234!` | `admin@ecoreport.kr` | 공학관 A동 | `ADMIN` | 0P |
+| 일반 사용자 | `user` | `user1234!` | `user@ecoreport.kr` | 도서관 | `USER` | 0P |
+
+로그인 API: `POST /login` — body `{ "userName": "admin", "password": "admin1234!" }`
+
+> **주의**: 개발·데모용 계정이다. 운영 배포 시 비밀번호 변경 또는 시드 비활성화를 권장한다.
+
+#### 시드 재적용 (DB 초기화 후)
+
+```bash
+docker compose down -v
+bash deploy.sh
+# BE 기동 시 ApplicationRunner가 소속·건물·계정을 다시 주입
+```
 
 ---
 
