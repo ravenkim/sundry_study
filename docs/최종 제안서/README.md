@@ -10,16 +10,24 @@
 | 구분 | 상태 | 비고 |
 |------|------|------|
 | **사용자 UI** | ✅ 완료 | 홈·제보·이력·포인트샵·마이페이지·관리자 6화면 |
-| **이메일 회원가입/로그인** | ✅ BE 연동 | BCrypt + JPA |
-| **제보 생성 API** | ✅ 부분 | `POST /api/reports` — Cloud Run `/analyze` 연동, `WASTE_DETECTED`만 저장, 이미지 URL placeholder |
-| **AI 3단계 파이프라인** | ✅ BE 연동 | monorepo `ai/` + Cloud Run FastAPI; FE `simulateAiAnalysis()`는 UX 시연용 |
-| **장소 관리 API+FE** | ✅ | `/api/admin/location-nodes` CRUD + 3단 컬럼 UI |
+| **이메일 회원가입/로그인** | ✅ BE 연동 | BCrypt + JPA + 다단계 회원가입 플로우 |
+| **Google OAuth** | ✅ BE·FE 연동 | OAuth2 Resource Server + `/oauth/callback` |
+| **계정 찾기** | ✅ UI | `/find-account` 화면 |
+| **제보 생성 API** | ✅ 완료 | `POST /api/reports` — Cloud Run `/analyze` 연동, `WASTE_DETECTED`만 저장 |
+| **AI 3단계 파이프라인** | ✅ BE 연동 | monorepo `ai/` + Cloud Run FastAPI; 절약 금액(`expected`)·전기량(`expectedKwh`) 반환 |
+| **장소 관리 API+FE** | ✅ 완료 | `/api/admin/location-nodes` CRUD + 3단 컬럼 UI |
+| **운영 스케줄 모델** | ✅ 완료 | `LocationOperatingSchedule` (요일별 on/off) — AI metadata로 활용 |
+| **리워드 목록 API** | ✅ 완료 | `GET /api/rewards` — 기프티콘·리워드 상품 목록 |
+| **포인트 교환 API** | ✅ 완료 | `POST /api/points/exchange` — 기프티콘 교환 신청 |
+| **교환 이력 조회** | ✅ 완료 | `GET /api/points/exchanges/me` — 내 교환 이력 |
+| **건물별 절약량 API** | ✅ 완료 | `GET /api/savings/buildings/me` — kWh·절감 집계 |
+| **관리자 기프티콘 관리** | ✅ 완료 | `/api/admin/gifticon-exchanges` — 교환 목록·통계·상태 변경 |
 | **관리자 제보·대시보드** | ⏳ UI만 | FE mock (`adminApi`) |
 | **Kafka / GCS** | ⏳ 코드만 | Producer/Consumer 존재, Compose·운영 미연동 |
-| **JWT** | ✅ | HS256 발급·검증, 제보·포인트·장소 API |
-| **운영 배포** | ✅ | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
+| **JWT** | ✅ 완료 | HS256 발급·검증, 제보·포인트·장소·교환 API |
+| **운영 배포** | ✅ 완료 | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
 
-> **목표 아키텍처**(GCS·Kafka·admin reports/dashboard)와 **현재 데모 경로**(BE 실 AI 판별 + 장소 CRUD 실연동 + FE mock 포인트·admin 제보)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
+> **목표 아키텍처**(GCS·Kafka·admin reports/dashboard)와 **현재 데모 경로**(BE 실 AI 판별 + 장소 CRUD + 리워드·포인트 교환 + FE mock 포인트·admin 제보)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
 
 ---
 

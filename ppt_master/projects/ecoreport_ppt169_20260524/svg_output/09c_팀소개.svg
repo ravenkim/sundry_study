@@ -19,145 +19,136 @@
   <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
   <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
 
-  <text x="640" y="54" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="34" font-weight="700" fill="#1A237E">팀 소개 — 14팀</text>
-  <rect x="520" y="64" width="240" height="4" rx="2" fill="url(#s09c_topBar)"/>
-  <text x="640" y="84" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="14" fill="#9AA0A6">2026 두유톤 해커톤 · Full-Stack AI 팀</text>
+  <text x="640" y="50" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="30" font-weight="700" fill="#1A237E">팀 소개 — 14팀</text>
+  <rect x="530" y="58" width="220" height="3" rx="2" fill="url(#s09c_topBar)"/>
+  <text x="640" y="76" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">2026 두유톤 해커톤 · Full-Stack AI 팀</text>
 
-  <!-- 팀원 1: 김해준 -->
-  <rect x="24" y="96" width="380" height="520" rx="20" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
-  <rect x="24" y="96" width="380" height="8" rx="4" fill="#4CAF50"/>
+  <!-- ======= 팀원 1: 김해준 ======= -->
+  <rect x="20" y="86" width="394" height="570" rx="18" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+  <rect x="20" y="86" width="394" height="7" rx="4" fill="#4CAF50"/>
 
-  <circle cx="214" cy="200" r="64" fill="#E8F5E9" stroke="#4CAF50" stroke-width="3"/>
-  <image href="../images/smile.png" x="158" y="138" width="112" height="122" preserveAspectRatio="xMidYMid meet"/>
+  <!-- 이미지 (smile.png: 335×512, ratio 0.654) -->
+  <!-- 프레임 100×153 (맞는 비율) -->
+  <rect x="148" y="102" width="118" height="154" rx="10" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/>
+  <image href="../images/smile.png" x="148" y="102" width="118" height="154" preserveAspectRatio="xMidYMid slice"/>
 
-  <text x="214" y="290" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="22" font-weight="800" fill="#1A237E">김해준</text>
+  <text x="212" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#1A237E">김해준</text>
+  <rect x="132" y="284" width="160" height="26" rx="13" fill="#4CAF50" fill-opacity="0.15" stroke="#4CAF50" stroke-width="1"/>
+  <text x="212" y="302" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#2E7D32">백엔드 · 인프라 리드</text>
 
-  <rect x="154" y="300" width="120" height="28" rx="14" fill="#4CAF50" fill-opacity="0.15" stroke="#4CAF50" stroke-width="1"/>
-  <text x="214" y="319" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="700" fill="#2E7D32">백엔드 · AI 연동</text>
+  <line x1="40" y1="318" x2="394" y2="318" stroke="#E8EAED" stroke-width="1"/>
 
-  <line x1="44" y1="340" x2="384" y2="340" stroke="#E8EAED" stroke-width="1"/>
+  <text x="40" y="340" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4CAF50">담당 영역</text>
+  <text x="40" y="358" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Spring Boot 4 백엔드 전체 설계/구현</text>
+  <text x="40" y="376" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• JWT HS256 인증 · Spring Security</text>
+  <text x="40" y="394" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Cloud Run AI 서버 연동 모듈</text>
+  <text x="40" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• MySQL 8.4 · Flyway 마이그레이션</text>
+  <text x="40" y="430" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Docker Compose 배포 파이프라인</text>
+  <text x="40" y="448" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Swagger UI · Actuator 모니터링</text>
 
-  <text x="54" y="366" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="600" fill="#4CAF50">담당 영역</text>
-  <text x="54" y="388" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• Spring Boot 4 백엔드 설계/구현</text>
-  <text x="54" y="408" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• JWT 인증 · Spring Security</text>
-  <text x="54" y="428" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• Cloud Run AI 서버 연동</text>
-  <text x="54" y="448" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• MySQL · Flyway DB 관리</text>
-  <text x="54" y="468" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• Docker Compose 배포</text>
+  <line x1="40" y1="462" x2="394" y2="462" stroke="#E8EAED" stroke-width="1"/>
+  <text x="40" y="480" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4CAF50">기술 스택</text>
+  <text x="40" y="498" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">Java 17 · Spring Boot 4 · JPA · Hibernate</text>
+  <text x="40" y="516" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">MySQL · Flyway · Docker · Google Cloud</text>
 
-  <line x1="44" y1="484" x2="384" y2="484" stroke="#E8EAED" stroke-width="1"/>
-
-  <text x="54" y="508" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="600" fill="#4CAF50">기술 스택</text>
-  <text x="54" y="528" font-family="Pretendard, system-ui, sans-serif"
-        font-size="12" fill="#9AA0A6">Java 17 · Spring Boot 4 · JPA</text>
-  <text x="54" y="546" font-family="Pretendard, system-ui, sans-serif"
-        font-size="12" fill="#9AA0A6">MySQL · Docker · Google Cloud</text>
-
-  <rect x="54" y="564" width="310" height="36" rx="10" fill="#4CAF50" fill-opacity="0.1"/>
-  <text x="214" y="586" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+  <rect x="40" y="532" width="334" height="34" rx="10" fill="#4CAF50" fill-opacity="0.12"/>
+  <text x="207" y="553" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
         font-size="12" font-weight="700" fill="#2E7D32">백엔드 전체 + 인프라 총괄</text>
 
-  <!-- 팀원 2: 차성호 -->
-  <rect x="450" y="96" width="380" height="520" rx="20" fill="#FFFFFF" stroke="#4285F4" stroke-width="2"/>
-  <rect x="450" y="96" width="380" height="8" rx="4" fill="#4285F4"/>
+  <text x="207" y="610" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="28" fill="#4CAF50">⚙️</text>
+  <text x="207" y="636" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">ubuntu03 · Docker Compose · 24h 배포</text>
 
-  <circle cx="640" cy="200" r="64" fill="#E3F2FD" stroke="#4285F4" stroke-width="3"/>
-  <image href="../images/recognize.png" x="584" y="138" width="112" height="122" preserveAspectRatio="xMidYMid meet"/>
+  <!-- ======= 팀원 2: 차성호 ======= -->
+  <rect x="443" y="86" width="394" height="570" rx="18" fill="#FFFFFF" stroke="#4285F4" stroke-width="2"/>
+  <rect x="443" y="86" width="394" height="7" rx="4" fill="#4285F4"/>
 
-  <text x="640" y="290" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="22" font-weight="800" fill="#1A237E">차성호</text>
+  <!-- recognize.png: 356×512, ratio 0.695 -->
+  <rect x="571" y="102" width="118" height="154" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1"/>
+  <image href="../images/recognize.png" x="571" y="102" width="118" height="154" preserveAspectRatio="xMidYMid slice"/>
 
-  <rect x="568" y="300" width="144" height="28" rx="14" fill="#4285F4" fill-opacity="0.12" stroke="#4285F4" stroke-width="1"/>
-  <text x="640" y="319" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="700" fill="#1565C0">AI · 모델 학습</text>
+  <text x="640" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#1A237E">차성호</text>
+  <rect x="554" y="284" width="172" height="26" rx="13" fill="#4285F4" fill-opacity="0.12" stroke="#4285F4" stroke-width="1"/>
+  <text x="640" y="302" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#1565C0">AI 엔지니어 · 모델 학습</text>
 
-  <line x1="470" y1="340" x2="810" y2="340" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="463" y1="318" x2="817" y2="318" stroke="#E8EAED" stroke-width="1"/>
 
-  <text x="480" y="366" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="600" fill="#4285F4">담당 영역</text>
-  <text x="480" y="388" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• YOLOv8n 조명/에어컨 모델 학습</text>
-  <text x="480" y="408" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• 학습 데이터 수집·라벨링</text>
-  <text x="480" y="428" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• FastAPI AI 서버 구현</text>
-  <text x="480" y="448" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• Gemini 2.5 Flash 프롬프트 설계</text>
-  <text x="480" y="468" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• Cloud Run 배포 · 성능 최적화</text>
+  <text x="463" y="340" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4285F4">담당 영역</text>
+  <text x="463" y="358" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• YOLOv8n 조명/에어컨 모델 학습</text>
+  <text x="463" y="376" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• 학습 데이터 수집 · 어노테이션</text>
+  <text x="463" y="394" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• FastAPI AI 서버 구현</text>
+  <text x="463" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Gemini 2.5 Flash 프롬프트 설계</text>
+  <text x="463" y="430" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Cloud Run 배포 및 성능 최적화</text>
+  <text x="463" y="448" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• mAP@0.5: 0.990 달성</text>
 
-  <line x1="470" y1="484" x2="810" y2="484" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="463" y1="462" x2="817" y2="462" stroke="#E8EAED" stroke-width="1"/>
+  <text x="463" y="480" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4285F4">기술 스택</text>
+  <text x="463" y="498" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">Python 3.11 · YOLOv8n · ultralytics</text>
+  <text x="463" y="516" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">FastAPI · Google Gemini API · Cloud Run</text>
 
-  <text x="480" y="508" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="600" fill="#4285F4">기술 스택</text>
-  <text x="480" y="528" font-family="Pretendard, system-ui, sans-serif"
-        font-size="12" fill="#9AA0A6">Python · YOLOv8n · FastAPI</text>
-  <text x="480" y="546" font-family="Pretendard, system-ui, sans-serif"
-        font-size="12" fill="#9AA0A6">Google Gemini API · Cloud Run</text>
-
-  <rect x="480" y="564" width="310" height="36" rx="10" fill="#4285F4" fill-opacity="0.1"/>
-  <text x="640" y="586" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+  <rect x="463" y="532" width="334" height="34" rx="10" fill="#4285F4" fill-opacity="0.1"/>
+  <text x="640" y="553" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
         font-size="12" font-weight="700" fill="#1565C0">AI 파이프라인 전체 설계</text>
 
-  <!-- 팀원 3: 이은총 -->
-  <rect x="876" y="96" width="380" height="520" rx="20" fill="#FFFFFF" stroke="#FFC107" stroke-width="2"/>
-  <rect x="876" y="96" width="380" height="8" rx="4" fill="#FFC107"/>
+  <text x="640" y="610" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="28" fill="#4285F4">🤖</text>
+  <text x="640" y="636" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">YOLOv8n ×2 + Gemini 2.5 Flash</text>
 
-  <circle cx="1066" cy="200" r="64" fill="#FFF8E1" stroke="#FFC107" stroke-width="3"/>
-  <use data-icon="tabler-outline/device-mobile" x="1032" y="166" width="68" height="68" fill="#E65100"/>
+  <!-- ======= 팀원 3: 이은총 ======= -->
+  <rect x="866" y="86" width="394" height="570" rx="18" fill="#FFFFFF" stroke="#FFC107" stroke-width="2"/>
+  <rect x="866" y="86" width="394" height="7" rx="4" fill="#FFC107"/>
 
-  <text x="1066" y="290" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="22" font-weight="800" fill="#1A237E">이은총</text>
+  <!-- 이은총: 아이콘으로 대체 (mascot 이미지 없음) -->
+  <rect x="993" y="102" width="118" height="154" rx="10" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1"/>
+  <use data-icon="tabler-outline/device-mobile" x="1030" y="138" width="44" height="44" fill="#E65100"/>
+  <text x="1052" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#E65100">FE Dev</text>
 
-  <rect x="988" y="300" width="156" height="28" rx="14" fill="#FFC107" fill-opacity="0.15" stroke="#FFC107" stroke-width="1"/>
-  <text x="1066" y="319" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="700" fill="#E65100">프론트엔드 · UX</text>
+  <text x="1063" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#1A237E">이은총</text>
+  <rect x="975" y="284" width="176" height="26" rx="13" fill="#FFC107" fill-opacity="0.15" stroke="#FFC107" stroke-width="1"/>
+  <text x="1063" y="302" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#E65100">프론트엔드 · UX 설계</text>
 
-  <line x1="896" y1="340" x2="1236" y2="340" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="886" y1="318" x2="1240" y2="318" stroke="#E8EAED" stroke-width="1"/>
 
-  <text x="906" y="366" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="600" fill="#E65100">담당 영역</text>
-  <text x="906" y="388" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• React 19 + TailwindCSS v4 UI</text>
-  <text x="906" y="408" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• 학생/관리자 앱 전체 화면 구현</text>
-  <text x="906" y="428" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• Redux Toolkit + Saga 상태 관리</text>
-  <text x="906" y="448" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• 회원가입 소속 선택 UI</text>
-  <text x="906" y="468" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#5F6368">• shadcn/ui 컴포넌트 시스템</text>
+  <text x="886" y="340" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#E65100">담당 영역</text>
+  <text x="886" y="358" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• React 19 + TailwindCSS v4 UI 전체</text>
+  <text x="886" y="376" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• 학생 / 관리자 앱 모든 화면 구현</text>
+  <text x="886" y="394" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Redux Toolkit + Saga 상태 관리</text>
+  <text x="886" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• 회원가입 소속 계층 선택 UI</text>
+  <text x="886" y="430" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• shadcn/ui 컴포넌트 시스템 구성</text>
+  <text x="886" y="448" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">• Pretendard 폰트 번들 · i18n 설정</text>
 
-  <line x1="896" y1="484" x2="1236" y2="484" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="886" y1="462" x2="1240" y2="462" stroke="#E8EAED" stroke-width="1"/>
+  <text x="886" y="480" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#E65100">기술 스택</text>
+  <text x="886" y="498" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">React 19 · TypeScript · Vite 6</text>
+  <text x="886" y="516" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">TailwindCSS v4 · shadcn/ui · Redux</text>
 
-  <text x="906" y="508" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" font-weight="600" fill="#E65100">기술 스택</text>
-  <text x="906" y="528" font-family="Pretendard, system-ui, sans-serif"
-        font-size="12" fill="#9AA0A6">React 19 · TypeScript · Vite</text>
-  <text x="906" y="546" font-family="Pretendard, system-ui, sans-serif"
-        font-size="12" fill="#9AA0A6">TailwindCSS v4 · shadcn/ui · Redux</text>
-
-  <rect x="906" y="564" width="310" height="36" rx="10" fill="#FFC107" fill-opacity="0.12"/>
-  <text x="1066" y="586" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+  <rect x="886" y="532" width="334" height="34" rx="10" fill="#FFC107" fill-opacity="0.12"/>
+  <text x="1063" y="553" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
         font-size="12" font-weight="700" fill="#E65100">프론트엔드 + UX 전체 담당</text>
 
-  <!-- 팀 배지 -->
-  <rect x="24" y="634" width="1232" height="52" rx="12" fill="#1A237E"/>
-  <text x="640" y="654" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="14" font-weight="700" fill="#FFFFFF">14팀 · 48시간 해커톤 · 풀스택 AI 제품 — 인증·제보·AI·관리자 모두 직접 구현</text>
-  <text x="640" y="674" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#4CAF50">ubuntu03 24시간 라이브 서버 · Cloud Run AI 실시간 · 두유톤 2026 출품작</text>
+  <text x="1063" y="610" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="28" fill="#FFC107">🎨</text>
+  <text x="1063" y="636" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">React 19 · :8081 · Docker 배포</text>
 
-  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
-        font-size="13" fill="#9AA0A6">09c / 30</text>
+  <!-- 하단 배지 -->
+  <rect x="20" y="664" width="1240" height="44" rx="10" fill="#1A237E"/>
+  <text x="640" y="682" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">14팀 · 48시간 해커톤 · FE+BE+AI 풀스택 구현 — ubuntu03 24시간 라이브 서버 운영 중</text>
+  <text x="640" y="700" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#4CAF50">두유톤 2026 · EcoReport · AI 기반 캠퍼스 에너지 낭비 제보·보상 플랫폼</text>
+
+  <text x="1240" y="716" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">09c / 30</text>
 </svg>
