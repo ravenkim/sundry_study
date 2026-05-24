@@ -13,6 +13,7 @@ export const ResponseCode = {
     OK: 10000,
     LOGIN_SUCCESS: 10001,
     REGISTER_SUCCESS: 10002,
+    REPORT_CREATED: 10003,
 } as const
 
 export function isApiError(data: unknown): data is ApiErrorResponse {
@@ -128,5 +129,6 @@ export interface CreateReportResponse {
     reportId?: number
     reportSeq?: number
     status: ReportStatus | 'PENDING'
+    message?: string
     aiResult?: AiReportResult
 }

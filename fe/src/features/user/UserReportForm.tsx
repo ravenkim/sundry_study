@@ -77,6 +77,7 @@ export const UserReportForm = () => {
             navigate('/report-success', {
                 state: {
                     aiResult: response.aiResult,
+                    status: response.status,
                     buildingName: selectedBuilding.name,
                     roomName: selectedLocation.name,
                 },

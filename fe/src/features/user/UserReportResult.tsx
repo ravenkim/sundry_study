@@ -9,6 +9,7 @@ interface ReportResultState {
     aiResult?: AiReportResult
     buildingName?: string
     roomName?: string
+    status?: string
 }
 
 function getDetectionLabel(result: AiReportResult): string {
@@ -30,16 +31,24 @@ export const UserReportResult = () => {
         void refresh()
     }, [refresh])
 
-    const aiResult: AiReportResult = state.aiResult ?? {
-        result: 'WASTE_DETECTED',
-        message: '빈 강의실에서 에너지 낭비가 발견되었습니다!',
-        light_status: 'ON',
-        pointAwarded: 100,
-        currentBalance: points.currentBalance,
+    if (!state.aiResult) {
+        return (
+            <div className="bg-surface flex min-h-[calc(100dvh-3.5rem)] flex-col items-center justify-center gap-8 p-5 py-10 text-center">
+                <p className="text-on-surface-variant">
+                    제보 결과를 불러올 수 없습니다.
+                </p>
+                <Link to="/report-form">
+                    <EcoButton className="w-full py-3">다시 제보하기</EcoButton>
+                </Link>
+            </div>
+        )
     }
 
+    const aiResult = state.aiResult
     const buildingName = state.buildingName ?? '공학관 A동'
     const roomName = state.roomName ?? '303호'
+    const isPendingReview =
+        state.status === 'PENDING' || (aiResult.pointAwarded ?? 0) === 0
 
     if (aiResult.result === 'ERROR') {
         return (
@@ -111,29 +120,37 @@ export const UserReportResult = () => {
                 <CheckCircle2 className="text-secondary h-24 w-24" />
             </div>
             <div className="flex flex-col gap-2">
-                <h1 className="text-2xl font-black">낭비 확인됨!</h1>
+                <h1 className="text-2xl font-black">
+                    {isPendingReview ? '제보 접수 완료!' : '낭비 확인됨!'}
+                </h1>
                 <p className="text-on-surface-variant">
-                    {getDetectionLabel(aiResult)}
+                    {isPendingReview
+                        ? aiResult.message
+                        : getDetectionLabel(aiResult)}
                 </p>
             </div>
 
-            <EcoCard className="flex w-full max-w-sm flex-col gap-4">
-                <div className="flex items-center justify-between text-sm">
-                    <span className="text-on-surface-variant">적립 포인트</span>
-                    <EcoBadge variant="yellow">리워드</EcoBadge>
-                </div>
-                <div className="text-right">
-                    <span className="text-primary text-4xl font-bold">
-                        +{pointAwarded}P
-                    </span>
-                </div>
-                <div className="border-surface-container border-t pt-3 text-sm">
-                    <span className="text-on-surface-variant">누적 </span>
-                    <span className="text-primary font-bold">
-                        {balance.toLocaleString()}P
-                    </span>
-                </div>
-            </EcoCard>
+            {!isPendingReview && (
+                <EcoCard className="flex w-full max-w-sm flex-col gap-4">
+                    <div className="flex items-center justify-between text-sm">
+                        <span className="text-on-surface-variant">
+                            적립 포인트
+                        </span>
+                        <EcoBadge variant="yellow">리워드</EcoBadge>
+                    </div>
+                    <div className="text-right">
+                        <span className="text-primary text-4xl font-bold">
+                            +{pointAwarded}P
+                        </span>
+                    </div>
+                    <div className="border-surface-container border-t pt-3 text-sm">
+                        <span className="text-on-surface-variant">누적 </span>
+                        <span className="text-primary font-bold">
+                            {balance.toLocaleString()}P
+                        </span>
+                    </div>
+                </EcoCard>
+            )}
 
             <EcoCard className="flex w-full max-w-sm flex-col gap-3 px-6 py-4 text-left">
                 <h3 className="text-sm font-bold">제보 요약</h3>

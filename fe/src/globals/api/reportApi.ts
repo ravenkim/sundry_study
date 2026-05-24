@@ -1,11 +1,12 @@
 import client from 'src/globals/api/client'
-import { unwrapApiData, withMockFallback } from 'src/globals/api/apiUtils'
+import { shouldUseMock, withMockFallback } from 'src/globals/api/apiUtils'
 import {
     getMockReportDetail,
     getMockReports,
     simulateAiAnalysis,
 } from 'src/globals/api/mock'
 import type {
+    ApiErrorResponse,
     ApiResponse,
     CreateReportPayload,
     CreateReportResponse,
@@ -13,6 +14,7 @@ import type {
     ReportDetail,
     ReportStatus,
 } from 'src/globals/api/types'
+import { isApiError, ResponseCode } from 'src/globals/api/types'
 
 export async function createReport(
     payload: CreateReportPayload,
@@ -21,6 +23,15 @@ export async function createReport(
         aiResult?: Awaited<ReturnType<typeof simulateAiAnalysis>>
     }
 > {
+    if (shouldUseMock()) {
+        const aiResult = await simulateAiAnalysis(payload)
+        return {
+            reportId: Date.now(),
+            status: 'APPROVED',
+            aiResult,
+        }
+    }
+
     const formData = new FormData()
     formData.append('image', payload.image)
     if (payload.buildingId)
@@ -31,34 +42,33 @@ export async function createReport(
         formData.append('buildingName', payload.buildingName)
     if (payload.roomName) formData.append('roomName', payload.roomName)
 
-    const backendCall = async () => {
-        const { data } = await client.post<ApiResponse<CreateReportResponse>>(
-            '/api/reports',
-            formData,
-            { headers: { 'Content-Type': 'multipart/form-data' } },
-        )
-        const result = unwrapApiData(data) as CreateReportResponse
+    const { data } = await client.post<
+        ApiResponse<CreateReportResponse> | ApiErrorResponse
+    >('/api/reports', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    })
 
-        if (result.status === 'PENDING' || !result.aiResult) {
-            const aiResult = await simulateAiAnalysis(payload)
-            return {
-                ...result,
-                reportId: result.reportSeq ?? result.reportId,
-                aiResult,
-            }
-        }
-
-        return result
+    if (isApiError(data)) {
+        throw new Error(data.message || '제보 접수에 실패했습니다.')
     }
 
-    return withMockFallback(backendCall, async () => {
-        const aiResult = await simulateAiAnalysis(payload)
-        return {
-            reportId: Date.now(),
-            status: 'APPROVED' as const,
-            aiResult,
-        }
-    })
+    if (data.code !== ResponseCode.REPORT_CREATED || !data.body) {
+        throw new Error('제보 접수에 실패했습니다.')
+    }
+
+    const result = data.body
+
+    return {
+        ...result,
+        reportId: result.reportSeq ?? result.reportId,
+        aiResult: result.aiResult ?? {
+            result: 'WASTE_DETECTED',
+            message:
+                result.message ??
+                '제보가 접수되었습니다. 관리자 확인 후 포인트가 지급됩니다.',
+            pointAwarded: 0,
+        },
+    }
 }
 
 export async function getMyReports(
@@ -76,7 +86,7 @@ export async function getMyReports(
                     params,
                 },
             )
-            return unwrapApiData(data)
+            return data.body!
         },
         () => getMockReports(page, size, status),
     )
@@ -90,7 +100,7 @@ export async function getReportDetail(
             const { data } = await client.get<ApiResponse<ReportDetail>>(
                 `/api/reports/${reportId}`,
             )
-            return unwrapApiData(data)
+            return data.body ?? null
         },
         () => getMockReportDetail(reportId) ?? null,
     )
