@@ -1,5 +1,5 @@
 import client from 'src/globals/api/client'
-import { unwrapApiData, withMockFallback } from 'src/globals/api/apiUtils'
+import { unwrapApiListData, withMockFallback } from 'src/globals/api/apiUtils'
 import type { ApiResponse, Affiliation } from 'src/globals/api/types'
 
 const MOCK_AFFILIATIONS: Affiliation[] = [
@@ -15,7 +15,7 @@ export async function getAffiliations(): Promise<Affiliation[]> {
         async () => {
             const { data } =
                 await client.get<ApiResponse<Affiliation[]>>('/api/affiliations')
-            return unwrapApiData(data)
+            return unwrapApiListData(data)
         },
         () => MOCK_AFFILIATIONS,
     )

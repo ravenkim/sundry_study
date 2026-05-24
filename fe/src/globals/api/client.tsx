@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getAccessToken, clearAuth } from 'src/features/auth/authStorage'
+import { isApiError } from 'src/globals/api/types'
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_HOST ?? '',
@@ -14,7 +15,12 @@ client.interceptors.request.use((config) => {
 })
 
 client.interceptors.response.use(
-    (response) => response,
+    (response) => {
+        if (isApiError(response.data)) {
+            return Promise.reject(new Error(response.data.message))
+        }
+        return response
+    },
     (error) => {
         if (axios.isAxiosError(error) && error.response?.status === 401) {
             clearAuth()

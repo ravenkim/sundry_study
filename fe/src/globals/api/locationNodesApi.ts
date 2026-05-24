@@ -1,5 +1,5 @@
 import client from 'src/globals/api/client'
-import { unwrapApiData } from 'src/globals/api/apiUtils'
+import { unwrapApiData, unwrapApiListData } from 'src/globals/api/apiUtils'
 import type { AdminLocationNode, ApiResponse, NodeKind } from 'src/globals/api/types'
 
 export async function getLocationNodeTree(
@@ -9,7 +9,7 @@ export async function getLocationNodeTree(
         '/api/admin/location-nodes/tree',
         { params: { affiliationId } },
     )
-    return unwrapApiData(data)
+    return unwrapApiListData(data)
 }
 
 export async function createLocationNode(payload: {

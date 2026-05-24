@@ -49,7 +49,8 @@ const TreeRow = ({
     onEdit: (node: AdminLocationNode) => void
 }) => {
     const [expanded, setExpanded] = useState(true)
-    const hasChildren = node.children.length > 0
+    const children = node.children ?? []
+    const hasChildren = children.length > 0
     const canAddChild = node.nodeKind === 'GROUP' && node.depth < 3
     const isEditing = editingNodeId === node.id
 
@@ -111,7 +112,7 @@ const TreeRow = ({
                 </button>
             </div>
             {expanded &&
-                node.children.map((child) => (
+                children.map((child) => (
                     <TreeRow
                         key={child.id}
                         node={child}
@@ -142,9 +143,10 @@ export const AdminBuildings = () => {
     const loadAffiliations = useCallback(() => {
         void getAffiliations()
             .then((items) => {
-                setAffiliations(items)
-                if (items.length > 0) {
-                    setAffiliationId((prev) => prev || items[0].affiliationId)
+                const list = Array.isArray(items) ? items : []
+                setAffiliations(list)
+                if (list.length > 0) {
+                    setAffiliationId((prev) => prev || list[0].affiliationId)
                 }
             })
             .catch(() => toast.error('소속 목록을 불러오지 못했습니다.'))
@@ -159,7 +161,9 @@ export const AdminBuildings = () => {
 
         setLoading(true)
         void getLocationNodeTree(Number(affiliationId))
-            .then(setTree)
+            .then((nodes) =>
+                setTree(Array.isArray(nodes) ? nodes : []),
+            )
             .catch(() => toast.error('장소 트리를 불러오지 못했습니다.'))
             .finally(() => setLoading(false))
     }, [affiliationId])
