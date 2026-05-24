@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s07c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s07c_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">구현 현황 매트릭스</text>
+  <rect x="40" y="64" width="200" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="248" y="64" width="80" height="4" rx="2" fill="#4285F4"/>
+
+  <!-- 범례 -->
+  <rect x="800" y="46" width="120" height="24" rx="6" fill="#E8F5E9"/>
+  <text x="820" y="62" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#2E7D32">✅ 완료</text>
+  <rect x="930" y="46" width="120" height="24" rx="6" fill="#FFF8E1"/>
+  <text x="950" y="62" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#E65100">🔶 부분</text>
+  <rect x="1060" y="46" width="120" height="24" rx="6" fill="#F3E5F5"/>
+  <text x="1080" y="62" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#6A1B9A">⏳ 예정</text>
+
+  <!-- 테이블 헤더 -->
+  <rect x="24" y="80" width="1232" height="42" rx="8" fill="#1A237E"/>
+  <text x="190" y="107" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#FFFFFF">기능</text>
+  <text x="470" y="107" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#4CAF50">프론트엔드</text>
+  <text x="680" y="107" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#FFC107">백엔드</text>
+  <text x="880" y="107" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#EA4335">AI 서버</text>
+  <text x="1100" y="107" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#9AA0A6">인프라</text>
+
+  <!-- 컬럼 구분선 -->
+  <line x1="350" y1="80" x2="350" y2="690" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="590" y1="80" x2="590" y2="690" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="790" y1="80" x2="790" y2="690" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="990" y1="80" x2="990" y2="690" stroke="#E8EAED" stroke-width="1"/>
+
+  <!-- Row 1: 인증 -->
+  <rect x="24" y="122" width="1232" height="44" rx="0" fill="#F8F9FA"/>
+  <text x="44" y="148" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">인증 (로그인/회원가입)</text>
+  <text x="470" y="148" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="680" y="148" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="880" y="148" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="148" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 2: 제보 -->
+  <rect x="24" y="166" width="1232" height="44" rx="0" fill="#FFFFFF"/>
+  <text x="44" y="192" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">제보 (사진 업로드 + 장소)</text>
+  <text x="470" y="192" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="680" y="192" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="880" y="192" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="1100" y="192" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 3: AI 분석 -->
+  <rect x="24" y="210" width="1232" height="44" rx="0" fill="#F8F9FA"/>
+  <text x="44" y="236" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">AI 분석 (YOLOv8 + Gemini)</text>
+  <text x="470" y="236" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="680" y="236" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="880" y="236" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="1100" y="236" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 4: 포인트 조회 -->
+  <rect x="24" y="254" width="1232" height="44" rx="0" fill="#FFFFFF"/>
+  <text x="44" y="280" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">포인트 조회 (GET /api/points/me)</text>
+  <text x="470" y="280" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="680" y="280" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="880" y="280" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="280" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 5: 장소 관리 -->
+  <rect x="24" y="298" width="1232" height="44" rx="0" fill="#F8F9FA"/>
+  <text x="44" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">장소 관리 (LocationNode CRUD)</text>
+  <text x="470" y="324" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="680" y="324" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="880" y="324" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="324" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 6: 관리자 대시보드 -->
+  <rect x="24" y="342" width="1232" height="44" rx="0" fill="#FFFFFF"/>
+  <text x="44" y="368" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">관리자 대시보드 (통계)</text>
+  <text x="470" y="368" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="680" y="368" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#FFC107">🔶</text>
+  <text x="880" y="368" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="368" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 7: 소속/학교 선택 -->
+  <rect x="24" y="386" width="1232" height="44" rx="0" fill="#F8F9FA"/>
+  <text x="44" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A252F">소속/학교 계층 선택 (회원가입)</text>
+  <text x="470" y="412" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="680" y="412" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+  <text x="880" y="412" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="412" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" fill="#4CAF50">✅</text>
+
+  <!-- Row 8: 포인트 교환 -->
+  <rect x="24" y="430" width="1232" height="44" rx="0" fill="#FFFFFF"/>
+  <text x="44" y="456" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9AA0A6">포인트 교환 (기프티콘)</text>
+  <text x="470" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#9C27B0">⏳</text>
+  <text x="680" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#9C27B0">⏳</text>
+  <text x="880" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+
+  <!-- Row 9: GCS 이미지 저장 -->
+  <rect x="24" y="474" width="1232" height="44" rx="0" fill="#F8F9FA"/>
+  <text x="44" y="500" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9AA0A6">GCS 이미지 저장</text>
+  <text x="470" y="500" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="680" y="500" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#9C27B0">⏳</text>
+  <text x="880" y="500" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="500" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#9C27B0">⏳</text>
+
+  <!-- Row 10: Kafka 이벤트 -->
+  <rect x="24" y="518" width="1232" height="44" rx="0" fill="#FFFFFF"/>
+  <text x="44" y="544" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9AA0A6">Kafka 포인트 이벤트</text>
+  <text x="470" y="544" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="680" y="544" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#9C27B0">⏳</text>
+  <text x="880" y="544" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="1100" y="544" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#9C27B0">⏳</text>
+
+  <!-- 하단 요약 -->
+  <rect x="24" y="576" width="1232" height="52" rx="12" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="640" y="599" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">핵심 기능 완료율: 7/10 ✅ — 인증 · 제보 · AI · 포인트 · 장소관리 · 배포 완료</text>
+  <text x="640" y="617" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">미완성(⏳): 교환, GCS, Kafka — 핵심 데모 시나리오는 100% 작동</text>
+
+  <!-- 배포 현황 배지 -->
+  <rect x="24" y="640" width="596" height="44" rx="10" fill="#1A237E"/>
+  <text x="322" y="666" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#FFFFFF">ubuntu03 서버 24시간 배포 중 — FE:8081 · BE:8080 · MySQL:3306</text>
+
+  <rect x="640" y="640" width="616" height="44" rx="10" fill="#4285F4" fill-opacity="0.1" stroke="#4285F4" stroke-width="1"/>
+  <text x="948" y="666" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#1565C0">Cloud Run AI 서버 — Google Cloud 배포 완료 ✅</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">07c / 30</text>
+</svg>

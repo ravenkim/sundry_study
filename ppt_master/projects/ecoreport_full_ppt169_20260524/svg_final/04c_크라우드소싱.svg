@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s04c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+    <linearGradient id="s04c_cycleBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9" />
+      <stop offset="100%" stop-color="#E8F5E9" />
+    </linearGradient>
+    <marker id="s04c_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50" />
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s04c_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1A237E">크라우드소싱 + 게임화 전략</text>
+  <path fill="#4CAF50" d="M42,64 H268 A2,2 0 0 1 270,66 V66 A2,2 0 0 1 268,68 H42 A2,2 0 0 1 40,66 V66 A2,2 0 0 1 42,64 Z" />
+  <path fill="#FFC107" d="M280,64 H356 A2,2 0 0 1 358,66 V66 A2,2 0 0 1 356,68 H280 A2,2 0 0 1 278,66 V66 A2,2 0 0 1 280,64 Z" />
+
+  
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5" d="M40,80 H458 A16,16 0 0 1 474,96 V644 A16,16 0 0 1 458,660 H40 A16,16 0 0 1 24,644 V96 A16,16 0 0 1 40,80 Z" />
+
+  <text x="44" y="112" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#1A237E">왜 크라우드소싱인가?</text>
+  <path fill="#4CAF50" d="M45,120 H163 A1,1 0 0 1 164,121 V122 A1,1 0 0 1 163,123 H45 A1,1 0 0 1 44,122 V121 A1,1 0 0 1 45,120 Z" />
+
+  
+  <path fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1" d="M54,136 H444 A10,10 0 0 1 454,146 V198 A10,10 0 0 1 444,208 H54 A10,10 0 0 1 44,198 V146 A10,10 0 0 1 54,136 Z" />
+  
+  <g transform="translate(60.0, 152.0)" fill="none" stroke="#4CAF50">
+    <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+  </g>
+  <text x="96" y="167" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#2E7D32">전국 430개 대학 20만+ 학생</text>
+  <text x="96" y="185" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">관리자 수십 명이 커버 불가한 공간을 학생이 커버</text>
+  <text x="96" y="200" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">24시간 · 주말 · 야간 모두 제보 가능</text>
+
+  <path fill="#E3F2FD" stroke="#90CAF9" stroke-width="1" d="M54,220 H444 A10,10 0 0 1 454,230 V282 A10,10 0 0 1 444,292 H54 A10,10 0 0 1 44,282 V230 A10,10 0 0 1 54,220 Z" />
+  
+  <g transform="translate(60.0, 236.0)" fill="none" stroke="#4285F4">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+  <text x="96" y="251" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1565C0">데이터 자동 수집</text>
+  <text x="96" y="269" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">제보마다 장소·시간·설비 ON/OFF 데이터 축적</text>
+  <text x="96" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">빅데이터 → 에너지 낭비 패턴 분석 가능</text>
+
+  <path fill="#FFF8E1" stroke="#FFD54F" stroke-width="1" d="M54,304 H444 A10,10 0 0 1 454,314 V366 A10,10 0 0 1 444,376 H54 A10,10 0 0 1 44,366 V314 A10,10 0 0 1 54,304 Z" />
+  
+  <g transform="translate(60.0, 320.0)" fill="none" stroke="#FFC107">
+    <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3" />
+    <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4" />
+    <path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598" />
+    <path d="M3 6v10c0 .888 .772 1.45 2 2" />
+    <path d="M3 11c0 .888 .772 1.45 2 2" />
+  </g>
+  <text x="96" y="335" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#E65100">제로 추가 인건비</text>
+  <text x="96" y="353" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">학생 포인트 보상 = 절약 전기료의 일부만 사용</text>
+  <text x="96" y="368" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">전담 관리자 고용 대비 1/10 이하 비용</text>
+
+  <path fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1" d="M54,388 H444 A10,10 0 0 1 454,398 V450 A10,10 0 0 1 444,460 H54 A10,10 0 0 1 44,450 V398 A10,10 0 0 1 54,388 Z" />
+  
+  <g transform="translate(60.0, 404.0)" fill="none" stroke="#EA4335">
+    <path d="M3 17l6 -6l4 4l8 -8" />
+    <path d="M14 7l7 0l0 7" />
+  </g>
+  <text x="96" y="419" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#C62828">네트워크 효과</text>
+  <text x="96" y="437" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">참여자 증가 → 커버리지 증가 → 절약 효과 증가</text>
+  <text x="96" y="452" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">선순환 구조: 더 많은 참여 → 더 많은 보상</text>
+
+  
+  <text x="44" y="488" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#1A237E">유사 성공 사례</text>
+  <path fill="#FFFFFF" stroke="#E8EAED" stroke-width="1" d="M52,496 H230 A8,8 0 0 1 238,504 V544 A8,8 0 0 1 230,552 H52 A8,8 0 0 1 44,544 V504 A8,8 0 0 1 52,496 Z" />
+  <text x="141" y="516" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5F6368">Waze</text>
+  <text x="141" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">교통정보 크라우드소싱</text>
+  <text x="141" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">포인트→리워드 구조 동일</text>
+
+  <path fill="#FFFFFF" stroke="#E8EAED" stroke-width="1" d="M258,496 H446 A8,8 0 0 1 454,504 V544 A8,8 0 0 1 446,552 H258 A8,8 0 0 1 250,544 V504 A8,8 0 0 1 258,496 Z" />
+  <text x="352" y="516" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5F6368">공유킥보드 배터리</text>
+  <text x="352" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">충전 완료 제보 → 보상</text>
+  <text x="352" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">시민참여 인프라 관리</text>
+
+  <text x="44" y="580" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">→ EcoReport: 교내 에너지 인프라에 동일 모델 적용</text>
+
+  
+  <path fill="url(#s04c_cycleBg)" stroke="#4CAF50" stroke-width="1.5" d="M512,80 H1240 A16,16 0 0 1 1256,96 V644 A16,16 0 0 1 1240,660 H512 A16,16 0 0 1 496,644 V96 A16,16 0 0 1 512,80 Z" />
+  <path fill="#4CAF50" d="M500,80 H1252 A4,4 0 0 1 1256,84 V84 A4,4 0 0 1 1252,88 H500 A4,4 0 0 1 496,84 V84 A4,4 0 0 1 500,80 Z" />
+
+  <text x="876" y="116" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#2E7D32">게임화(Gamification) 설계</text>
+
+  
+  
+  <circle cx="876" cy="370" r="90" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2" />
+  <circle cx="876" cy="370" r="65" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1" />
+  <text x="876" y="362" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">포인트</text>
+  <text x="876" y="382" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">순환</text>
+
+  
+  
+  <path fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5" d="M786,140 H966 A10,10 0 0 1 976,150 V194 A10,10 0 0 1 966,204 H786 A10,10 0 0 1 776,194 V150 A10,10 0 0 1 786,140 Z" />
+  <text x="876" y="164" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1565C0">① 제보</text>
+  <text x="876" y="183" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">강의실 사진 촬영 + 위치 태깅</text>
+
+  
+  <path fill="#FFFFFF" stroke="#FFC107" stroke-width="1.5" d="M1020,308 H1200 A10,10 0 0 1 1210,318 V362 A10,10 0 0 1 1200,372 H1020 A10,10 0 0 1 1010,362 V318 A10,10 0 0 1 1020,308 Z" />
+  <text x="1110" y="332" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#E65100">② AI 판별</text>
+  <text x="1110" y="351" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">낭비 확인 → 포인트 산출</text>
+
+  
+  <path fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5" d="M786,476 H966 A10,10 0 0 1 976,486 V530 A10,10 0 0 1 966,540 H786 A10,10 0 0 1 776,530 V486 A10,10 0 0 1 786,476 Z" />
+  <text x="876" y="500" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#2E7D32">③ 적립</text>
+  <text x="876" y="519" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">포인트 즉시 적립 확인</text>
+
+  
+  <path fill="#FFFFFF" stroke="#EA4335" stroke-width="1.5" d="M550,308 H730 A10,10 0 0 1 740,318 V362 A10,10 0 0 1 730,372 H550 A10,10 0 0 1 540,362 V318 A10,10 0 0 1 550,308 Z" />
+  <text x="640" y="332" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#C62828">④ 교환</text>
+  <text x="640" y="351" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">기프티콘·상품권 교환</text>
+
+  
+  <path d="M 876 204 A 166 166 0 0 1 1010 340" stroke="#4CAF50" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#s04c_arrow)" />
+  <path d="M 1010 372 A 166 166 0 0 1 876 476" stroke="#4CAF50" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#s04c_arrow)" />
+  <path d="M 776 508 A 166 166 0 0 1 640 372" stroke="#4CAF50" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#s04c_arrow)" />
+  <path d="M 640 340 A 166 166 0 0 1 776 172" stroke="#4CAF50" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#s04c_arrow)" />
+
+  
+  <path fill="#1A237E" d="M526,584 H1226 A10,10 0 0 1 1236,594 V638 A10,10 0 0 1 1226,648 H526 A10,10 0 0 1 516,638 V594 A10,10 0 0 1 526,584 Z" />
+  <text x="876" y="608" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">포인트 지급 기준: 절감 예상액 기반 + 중복 제보 방지 (어뷰징 필터)</text>
+  <text x="876" y="632" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">조명만 ON: 30P · 에어컨 ON: 50P · 둘 다 ON: 80P (예시)</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">04c / 30</text>
+</svg>

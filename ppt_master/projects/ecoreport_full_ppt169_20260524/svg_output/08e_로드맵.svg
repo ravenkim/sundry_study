@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s08e_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s08e_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">개발 로드맵</text>
+  <rect x="40" y="64" width="180" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="228" y="64" width="80" height="4" rx="2" fill="#FFC107"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">MVP → P1 → P2 3단계 로드맵 · 2026~2027</text>
+
+  <!-- 타임라인 헤더 -->
+  <!-- 월별 컬럼 헤더 -->
+  <rect x="160" y="96" width="1096" height="36" rx="8" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+
+  <!-- 월 구분선 및 레이블 (2026-05 ~ 2027-04, 12개월) -->
+  <text x="206" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">05</text>
+  <text x="297" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">06</text>
+  <text x="388" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">07</text>
+  <text x="479" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">08</text>
+  <text x="570" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">09</text>
+  <text x="661" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">10</text>
+  <text x="752" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">11</text>
+  <text x="843" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">12</text>
+  <text x="934" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">01</text>
+  <text x="1025" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">02</text>
+  <text x="1116" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">03</text>
+  <text x="1207" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">04</text>
+  <text x="206" y="108" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#5F6368">2026</text>
+  <text x="934" y="108" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#5F6368">2027</text>
+
+  <!-- 세로 구분선 -->
+  <line x1="160" y1="96" x2="160" y2="670" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="251" y1="132" x2="251" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="342" y1="132" x2="342" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="433" y1="132" x2="433" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="524" y1="132" x2="524" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="615" y1="132" x2="615" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="706" y1="132" x2="706" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="797" y1="132" x2="797" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="888" y1="132" x2="888" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="979" y1="132" x2="979" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="1070" y1="132" x2="1070" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+  <line x1="1161" y1="132" x2="1161" y2="670" stroke="#F0F0F0" stroke-width="1"/>
+
+  <!-- 현재 위치 표시 (2026-05) -->
+  <line x1="206" y1="96" x2="206" y2="670" stroke="#EA4335" stroke-width="2" stroke-dasharray="4,3"/>
+  <rect x="186" y="92" width="40" height="20" rx="4" fill="#EA4335"/>
+  <text x="206" y="106" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="700" fill="#FFFFFF">NOW</text>
+
+  <!-- Row 1: MVP 기능 -->
+  <text x="24" y="160" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1A237E">MVP</text>
+  <text x="24" y="176" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">핵심 기능</text>
+
+  <!-- MVP 완료 바 (05~현재) -->
+  <rect x="161" y="148" width="45" height="24" rx="6" fill="#4CAF50"/>
+  <text x="183" y="165" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">인증 ✅</text>
+
+  <rect x="161" y="180" width="45" height="24" rx="6" fill="#4CAF50"/>
+  <text x="183" y="197" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">제보 ✅</text>
+
+  <rect x="161" y="212" width="45" height="24" rx="6" fill="#4CAF50"/>
+  <text x="183" y="229" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">AI ✅</text>
+
+  <rect x="161" y="244" width="45" height="24" rx="6" fill="#4CAF50"/>
+  <text x="183" y="261" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">장소 ✅</text>
+
+  <rect x="161" y="276" width="45" height="24" rx="6" fill="#4CAF50"/>
+  <text x="183" y="293" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">배포 ✅</text>
+
+  <!-- Row labels -->
+  <text x="24" y="162" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">인증</text>
+  <text x="24" y="194" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">제보</text>
+  <text x="24" y="226" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">AI</text>
+  <text x="24" y="258" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">장소관리</text>
+  <text x="24" y="290" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">배포</text>
+
+  <!-- Phase 1 기능들 (06~08) -->
+  <text x="24" y="340" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFC107">Phase 1</text>
+  <text x="24" y="358" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">완성도↑</text>
+
+  <text x="24" y="380" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">교환 시스템</text>
+  <rect x="252" y="368" width="180" height="24" rx="6" fill="#FFC107" fill-opacity="0.7"/>
+  <text x="342" y="385" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">포인트 교환 (06~07)</text>
+
+  <text x="24" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">GCS 저장</text>
+  <rect x="252" y="400" width="180" height="24" rx="6" fill="#FFC107" fill-opacity="0.7"/>
+  <text x="342" y="417" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">이미지 영구 저장 (06~07)</text>
+
+  <text x="24" y="444" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">관리자 리포트</text>
+  <rect x="252" y="432" width="271" height="24" rx="6" fill="#FFC107" fill-opacity="0.7"/>
+  <text x="387" y="449" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">대시보드 API 완성 (06~08)</text>
+
+  <text x="24" y="476" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">파일럿 영업</text>
+  <rect x="252" y="464" width="362" height="24" rx="6" fill="#E65100" fill-opacity="0.5"/>
+  <text x="433" y="481" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">파일럿 캠퍼스 3개 영업 (06~09)</text>
+
+  <!-- Phase 2 (09~12) -->
+  <text x="24" y="526" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#4285F4">Phase 2</text>
+  <text x="24" y="544" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">확장</text>
+
+  <text x="24" y="564" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">Kafka 이벤트</text>
+  <rect x="616" y="552" width="362" height="24" rx="6" fill="#4285F4" fill-opacity="0.6"/>
+  <text x="797" y="569" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">Kafka 비동기 포인트 (10~12)</text>
+
+  <text x="24" y="596" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">다학교 멀티테넌트</text>
+  <rect x="616" y="584" width="453" height="24" rx="6" fill="#4285F4" fill-opacity="0.6"/>
+  <text x="842" y="601" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">멀티테넌트 아키텍처 (10~01)</text>
+
+  <text x="24" y="628" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">데이터 API</text>
+  <rect x="706" y="616" width="544" height="24" rx="6" fill="#1565C0" fill-opacity="0.5"/>
+  <text x="978" y="633" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" font-weight="600" fill="#FFFFFF">에너지 데이터 B2B API (11~04)</text>
+
+  <!-- 마일스톤 다이아몬드 -->
+  <polygon points="252,140 260,132 268,140 260,148" fill="#4CAF50"/>
+  <text x="260" y="126" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" fill="#4CAF50">해커톤</text>
+
+  <polygon points="615,140 623,132 631,140 623,148" fill="#FFC107"/>
+  <text x="623" y="126" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" fill="#E65100">파일럿 런칭</text>
+
+  <polygon points="888,140 896,132 904,140 896,148" fill="#4285F4"/>
+  <text x="896" y="126" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" fill="#4285F4">BEP 달성</text>
+
+  <polygon points="1161,140 1169,132 1177,140 1169,148" fill="#EA4335"/>
+  <text x="1169" y="126" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="10" fill="#EA4335">Series A</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">08e / 30</text>
+</svg>

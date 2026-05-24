@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s02_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s02_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8F9FA"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#s02_bg)"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s02_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="640" y="60" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="36" font-weight="700" fill="#1A237E">목차</text>
+  <rect x="590" y="70" width="100" height="4" rx="2" fill="url(#s02_topBar)"/>
+
+  <!-- 섹션 카드 2열 3행 -->
+  <!-- 좌측 열 -->
+  <!-- 섹션 1 -->
+  <rect x="60" y="96" width="555" height="96" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="60" y="96" width="6" height="96" rx="3" fill="#EA4335"/>
+  <circle cx="108" cy="144" r="26" fill="#EA4335"/>
+  <text x="108" y="151" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">01</text>
+  <text x="150" y="132" font-family="Pretendard, system-ui, sans-serif"
+        font-size="19" font-weight="700" fill="#1A252F">문제 정의</text>
+  <text x="150" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">캠퍼스 에너지 낭비 현황 · 기존 해결책 한계</text>
+  <text x="576" y="150" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">p. 03–03c</text>
+
+  <!-- 섹션 2 -->
+  <rect x="60" y="204" width="555" height="96" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="60" y="204" width="6" height="96" rx="3" fill="#FFC107"/>
+  <circle cx="108" cy="252" r="26" fill="#FFC107"/>
+  <text x="108" y="259" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">02</text>
+  <text x="150" y="240" font-family="Pretendard, system-ui, sans-serif"
+        font-size="19" font-weight="700" fill="#1A252F">솔루션</text>
+  <text x="150" y="262" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">크라우드소싱 + AI + 포인트 보상 · 3단계 AI 파이프라인</text>
+  <text x="576" y="258" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">p. 04–04c</text>
+
+  <!-- 섹션 3 -->
+  <rect x="60" y="312" width="555" height="96" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="60" y="312" width="6" height="96" rx="3" fill="#4CAF50"/>
+  <circle cx="108" cy="360" r="26" fill="#4CAF50"/>
+  <text x="108" y="367" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">03</text>
+  <text x="150" y="348" font-family="Pretendard, system-ui, sans-serif"
+        font-size="19" font-weight="700" fill="#1A252F">핵심 기능 및 데모</text>
+  <text x="150" y="370" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">학생·관리자 UI · 서비스 플로우 · 어뷰징 방지</text>
+  <text x="576" y="366" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">p. 05–06c</text>
+
+  <!-- 우측 열 -->
+  <!-- 섹션 4 -->
+  <rect x="665" y="96" width="555" height="96" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="665" y="96" width="6" height="96" rx="3" fill="#4285F4"/>
+  <circle cx="713" cy="144" r="26" fill="#4285F4"/>
+  <text x="713" y="151" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">04</text>
+  <text x="755" y="132" font-family="Pretendard, system-ui, sans-serif"
+        font-size="19" font-weight="700" fill="#1A252F">기술 구현</text>
+  <text x="755" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">기술 스택 · 아키텍처 · 구현 현황 · AI 모델</text>
+  <text x="1181" y="150" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">p. 07–07d</text>
+
+  <!-- 섹션 5 -->
+  <rect x="665" y="204" width="555" height="96" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="665" y="204" width="6" height="96" rx="3" fill="#2E7D32"/>
+  <circle cx="713" cy="252" r="26" fill="#2E7D32"/>
+  <text x="713" y="259" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">05</text>
+  <text x="755" y="240" font-family="Pretendard, system-ui, sans-serif"
+        font-size="19" font-weight="700" fill="#1A252F">기대 효과 · 비즈니스</text>
+  <text x="755" y="262" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">환경 임팩트 · 비즈니스 모델 · 확장 전략 · 로드맵</text>
+  <text x="1181" y="258" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">p. 08–08e</text>
+
+  <!-- 섹션 6 -->
+  <rect x="665" y="312" width="555" height="96" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="665" y="312" width="6" height="96" rx="3" fill="#9C27B0"/>
+  <circle cx="713" cy="360" r="26" fill="#9C27B0"/>
+  <text x="713" y="367" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">06</text>
+  <text x="755" y="348" font-family="Pretendard, system-ui, sans-serif"
+        font-size="19" font-weight="700" fill="#1A252F">경쟁 우위 · 팀 · 마무리</text>
+  <text x="755" y="370" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">경쟁 분석 · 팀 소개 · Q&amp;A</text>
+  <text x="1181" y="366" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">p. 09–10</text>
+
+  <!-- 하단 요약 바 -->
+  <rect x="60" y="434" width="1160" height="58" rx="12" fill="#F1F8E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="640" y="458" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">총 30장 · 약 10~12분 발표</text>
+  <text x="640" y="480" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">문제 → 솔루션 → 기능/데모 → 기술 → 임팩트 → 팀 순서로 진행</text>
+
+  <!-- 슬라이드 키워드 -->
+  <rect x="60" y="510" width="1160" height="130" rx="12" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <text x="80" y="534" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#5F6368">핵심 키워드</text>
+
+  <rect x="80" y="544" width="130" height="26" rx="13" fill="#4CAF50" fill-opacity="0.12"/>
+  <text x="145" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#2E7D32">캠퍼스 에너지 절약</text>
+
+  <rect x="222" y="544" width="110" height="26" rx="13" fill="#4285F4" fill-opacity="0.1"/>
+  <text x="277" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">AI 이미지 분석</text>
+
+  <rect x="344" y="544" width="110" height="26" rx="13" fill="#FFC107" fill-opacity="0.15"/>
+  <text x="399" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#E65100">포인트 보상</text>
+
+  <rect x="466" y="544" width="130" height="26" rx="13" fill="#9C27B0" fill-opacity="0.1"/>
+  <text x="531" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#6A1B9A">크라우드소싱</text>
+
+  <rect x="608" y="544" width="90" height="26" rx="13" fill="#EA4335" fill-opacity="0.1"/>
+  <text x="653" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#C62828">탄소중립</text>
+
+  <rect x="710" y="544" width="120" height="26" rx="13" fill="#2E7D32" fill-opacity="0.1"/>
+  <text x="770" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#2E7D32">스마트캠퍼스</text>
+
+  <rect x="842" y="544" width="110" height="26" rx="13" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="897" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#5F6368">YOLOv8n × 2</text>
+
+  <rect x="964" y="544" width="130" height="26" rx="13" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="1029" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="600" fill="#5F6368">Gemini 2.5 Flash</text>
+
+  <text x="80" y="608" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">EcoReport = 빈 강의실 낭비를 <tspan font-weight="700" fill="#4CAF50">학생이</tspan> 찾고, <tspan font-weight="700" fill="#4285F4">AI가</tspan> 판별하고, <tspan font-weight="700" fill="#FFC107">포인트로</tspan> 보상하는 크라우드소싱 플랫폼</text>
+  <text x="80" y="628" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">설비 투자 없이 즉시 도입 · 학생 동기 기반 지속 가능 · Cloud Run AI 연동 완료 · ubuntu03 24시간 배포 중</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">02 / 30</text>
+</svg>

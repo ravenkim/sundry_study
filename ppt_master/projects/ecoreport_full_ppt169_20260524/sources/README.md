@@ -1,0 +1,58 @@
+# 에코리포트 (EcoReport) — 최종 제안서
+
+> 2026 두유톤 해커톤 | 14팀  
+> **"빈 강의실에 켜진 전등 사진 한 장 → AI 분석 → 포인트 적립"**
+
+---
+
+## 해커톤 MVP 구현 범위 (2026-05)
+
+| 구분 | 상태 | 비고 |
+|------|------|------|
+| **사용자 UI** | ✅ 완료 | 홈·제보·이력·포인트샵·마이페이지·관리자 6화면 |
+| **이메일 회원가입/로그인** | ✅ BE 연동 | BCrypt + JPA + 다단계 회원가입 플로우 |
+| **Google OAuth** | ✅ BE·FE 연동 | OAuth2 Resource Server + `/oauth/callback` |
+| **계정 찾기** | ✅ UI | `/find-account` 화면 |
+| **제보 생성 API** | ✅ 완료 | `POST /api/reports` — Cloud Run `/analyze` 연동, `WASTE_DETECTED`만 저장 |
+| **AI 3단계 파이프라인** | ✅ BE 연동 | monorepo `ai/` + Cloud Run FastAPI; 절약 금액(`expected`)·전기량(`expectedKwh`) 반환 |
+| **장소 관리 API+FE** | ✅ 완료 | `/api/admin/location-nodes` CRUD + 3단 컬럼 UI |
+| **운영 스케줄 모델** | ✅ 완료 | `LocationOperatingSchedule` (요일별 on/off) — AI metadata로 활용 |
+| **리워드 목록 API** | ✅ 완료 | `GET /api/rewards` — 기프티콘·리워드 상품 목록 |
+| **포인트 교환 API** | ✅ 완료 | `POST /api/points/exchange` — 기프티콘 교환 신청 |
+| **교환 이력 조회** | ✅ 완료 | `GET /api/points/exchanges/me` — 내 교환 이력 |
+| **건물별 절약량 API** | ✅ 완료 | `GET /api/savings/buildings/me` — kWh·절감 집계 |
+| **관리자 기프티콘 관리** | ✅ 완료 | `/api/admin/gifticon-exchanges` — 교환 목록·통계·상태 변경 |
+| **관리자 제보·대시보드** | ⏳ UI만 | FE mock (`adminApi`) |
+| **Kafka / GCS** | ⏳ 코드만 | Producer/Consumer 존재, Compose·운영 미연동 |
+| **JWT** | ✅ 완료 | HS256 발급·검증, 제보·포인트·장소·교환 API |
+| **운영 배포** | ✅ 완료 | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
+
+> **목표 아키텍처**(GCS·Kafka·admin reports/dashboard)와 **현재 데모 경로**(BE 실 AI 판별 + 장소 CRUD + 리워드·포인트 교환 + FE mock 포인트·admin 제보)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
+
+---
+
+## 문서 목차
+
+| # | 문서 | 설명 |
+|---|------|------|
+| 1 | [팀 소개](./1_팀소개.md) | 14팀 구성원 (김해준, 차성호, 이은총), 역할, 강점 |
+| 2 | [서비스 개요](./2_서비스개요.md) | 서비스명, 한 줄 소개, 문제 정의, 해결 방안 |
+| 3 | [주요 기능](./3_주요기능.md) | AI 분석, 제보·포인트, 관리자 대시보드 등 |
+| 4 | [지속 가능성 및 확장 가능성](./4_지속가능성_및_확장가능성.md) | 기대 효과, 수익화, 확장 로드맵 |
+| 5 | [기술 스택](./5_기술스택.md) | Front-End, Back-End, AI, Infra |
+| 6 | [시스템 구조](./6_시스템구조.md) | 아키텍처 다이어그램, 서버 흐름도 |
+| 7 | [구현 상세](./7_구현상세.md) | 스택별 기술적 구현 특징 |
+| 8 | [개발 환경 및 운영 서버](./8_개발환경_및_운영서버.md) | IDE·AI·디자인 도구, ubuntu03 서버 사양 |
+
+---
+
+## 서비스 한 줄 핵심
+
+IoT 설비 없이, 스마트폰만으로 캠퍼스 전기료를 줄이고 그 절약분을 학생에게 돌려주는 **크라우드소싱 기반 AI 에너지 절약 플랫폼**.
+
+---
+
+## 관련 문서
+
+- [기획 문서 인덱스](../기획/캠퍼스_에너지_절약/README.md)
+- [발표 PPT 슬라이드 구성](../발표/slides.md)

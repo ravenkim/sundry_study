@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s08d_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <marker id="s08d_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s08d_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">확장 전략 — 4단계 시장 공략</text>
+  <rect x="40" y="64" width="250" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="298" y="64" width="80" height="4" rx="2" fill="#FFC107"/>
+
+  <!-- 4단계 확장 타임라인 (좌→우) -->
+  <!-- Phase 1: 대학 캠퍼스 -->
+  <rect x="24" y="82" width="282" height="520" rx="16" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <rect x="24" y="82" width="282" height="8" rx="4" fill="#4CAF50"/>
+  <text x="165" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF" dy="-8">Phase 1</text>
+  <circle cx="165" cy="148" r="40" fill="#4CAF50" fill-opacity="0.2"/>
+  <use data-icon="tabler-outline/building-arch" x="141" y="124" width="48" height="48" fill="#2E7D32"/>
+  <text x="165" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#2E7D32">대학 캠퍼스</text>
+  <text x="165" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">2026 H2 ~ 2027 H1</text>
+
+  <line x1="44" y1="244" x2="286" y2="244" stroke="#A5D6A7" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <text x="44" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#2E7D32" font-weight="600">타겟</text>
+  <text x="44" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">4년제 대학 430개</text>
+  <text x="44" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">전문대학 130개+</text>
+  <text x="44" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">학생 수 약 200만명</text>
+
+  <text x="44" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#2E7D32" font-weight="600">진입 전략</text>
+  <text x="44" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 해커톤→ 파일럿 캠퍼스 직접 제안</text>
+  <text x="44" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 시설관리처 ESG 실적 패키지</text>
+  <text x="44" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 탄소중립 선도 대학 공모전</text>
+
+  <rect x="44" y="436" width="242" height="48" rx="10" fill="#4CAF50" fill-opacity="0.15"/>
+  <text x="165" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#2E7D32">목표: 10개 대학 파일럿</text>
+  <text x="165" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">연 구독료 3,600만원 ARR</text>
+
+  <text x="165" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="22" fill="#4CAF50">★ 현재</text>
+  <text x="165" y="558" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#2E7D32" font-weight="600">핵심 타겟 시장</text>
+
+  <!-- 화살표 -->
+  <line x1="310" y1="342" x2="326" y2="342" stroke="#4CAF50" stroke-width="2" marker-end="url(#s08d_arrow)"/>
+
+  <!-- Phase 2: 공공기관 -->
+  <rect x="330" y="82" width="282" height="520" rx="16" fill="#E3F2FD" stroke="#4285F4" stroke-width="2"/>
+  <rect x="330" y="82" width="282" height="8" rx="4" fill="#4285F4"/>
+  <text x="471" y="102" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">Phase 2</text>
+  <circle cx="471" cy="148" r="40" fill="#4285F4" fill-opacity="0.2"/>
+  <use data-icon="tabler-outline/building" x="447" y="124" width="48" height="48" fill="#1565C0"/>
+  <text x="471" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#1565C0">공공기관</text>
+  <text x="471" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">2027 H1 ~ 2027 H2</text>
+
+  <line x1="350" y1="244" x2="592" y2="244" stroke="#90CAF9" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <text x="350" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#1565C0" font-weight="600">타겟</text>
+  <text x="350" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">정부부처·공공기관 5,000+</text>
+  <text x="350" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">회의실·강당·공용 공간</text>
+  <text x="350" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">직원 참여형 에너지 절약</text>
+
+  <text x="350" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#1565C0" font-weight="600">진입 전략</text>
+  <text x="350" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 조달청 공공구매 등록</text>
+  <text x="350" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 국가 탄소중립 정책 연계</text>
+  <text x="350" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 대학 레퍼런스 사례 활용</text>
+
+  <rect x="350" y="436" width="242" height="48" rx="10" fill="#4285F4" fill-opacity="0.12"/>
+  <text x="471" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#1565C0">목표: 30개 기관</text>
+  <text x="471" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">연 구독료 3.6억원 ARR</text>
+
+  <text x="471" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" fill="#4285F4">📋 파일럿 레퍼런스</text>
+  <text x="471" y="556" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#1565C0" font-weight="600">B2G 확장</text>
+
+  <line x1="616" y1="342" x2="632" y2="342" stroke="#4CAF50" stroke-width="2" marker-end="url(#s08d_arrow)"/>
+
+  <!-- Phase 3: 오피스빌딩 -->
+  <rect x="636" y="82" width="282" height="520" rx="16" fill="#FFF8E1" stroke="#FFC107" stroke-width="2"/>
+  <rect x="636" y="82" width="282" height="8" rx="4" fill="#FFC107"/>
+  <text x="777" y="102" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">Phase 3</text>
+  <circle cx="777" cy="148" r="40" fill="#FFC107" fill-opacity="0.2"/>
+  <use data-icon="tabler-outline/building-skyscraper" x="753" y="124" width="48" height="48" fill="#E65100"/>
+  <text x="777" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#E65100">오피스 빌딩</text>
+  <text x="777" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">2027 H2 ~ 2028</text>
+
+  <line x1="656" y1="244" x2="898" y2="244" stroke="#FFD54F" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <text x="656" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#E65100" font-weight="600">타겟</text>
+  <text x="656" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">중소기업 사무실</text>
+  <text x="656" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">코워킹스페이스</text>
+  <text x="656" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">대형 빌딩 공용 공간</text>
+
+  <text x="656" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#E65100" font-weight="600">진입 전략</text>
+  <text x="656" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• HR 시스템 연동</text>
+  <text x="656" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• ESG 경영 보고서 자동 생성</text>
+  <text x="656" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 직원 복지 포인트 연계</text>
+
+  <rect x="656" y="436" width="242" height="48" rx="10" fill="#FFC107" fill-opacity="0.15"/>
+  <text x="777" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#E65100">목표: 100개 사업장</text>
+  <text x="777" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">연 구독료 6억원 ARR</text>
+
+  <text x="777" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" fill="#FFC107">🏢 B2B 확장</text>
+  <text x="777" y="556" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#E65100" font-weight="600">대형 시장 진출</text>
+
+  <line x1="922" y1="342" x2="938" y2="342" stroke="#4CAF50" stroke-width="2" marker-end="url(#s08d_arrow)"/>
+
+  <!-- Phase 4: 주거·아파트 -->
+  <rect x="942" y="82" width="314" height="520" rx="16" fill="#FFEBEE" stroke="#EA4335" stroke-width="2"/>
+  <rect x="942" y="82" width="314" height="8" rx="4" fill="#EA4335"/>
+  <text x="1099" y="102" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">Phase 4</text>
+  <circle cx="1099" cy="148" r="40" fill="#EA4335" fill-opacity="0.2"/>
+  <use data-icon="tabler-outline/home" x="1075" y="124" width="48" height="48" fill="#C62828"/>
+  <text x="1099" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#C62828">주거·아파트</text>
+  <text x="1099" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">2028+</text>
+
+  <line x1="962" y1="244" x2="1236" y2="244" stroke="#EF9A9A" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <text x="962" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#C62828" font-weight="600">타겟</text>
+  <text x="962" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">아파트 단지 공용부</text>
+  <text x="962" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">복도·주차장·엘리베이터홀</text>
+  <text x="962" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">입주민 관리비 절감 보상</text>
+
+  <text x="962" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#C62828" font-weight="600">진입 전략</text>
+  <text x="962" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 입주자대표회의 영업</text>
+  <text x="962" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 관리비 절감 스마트앱 연동</text>
+  <text x="962" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• B2C 구독 (입주민 직접)</text>
+
+  <rect x="962" y="436" width="274" height="48" rx="10" fill="#EA4335" fill-opacity="0.1"/>
+  <text x="1099" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#C62828">잠재 시장 1조원+</text>
+  <text x="1099" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#5F6368">전국 아파트 1,200만 세대</text>
+
+  <text x="1099" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" fill="#EA4335">🚀 최종 목표</text>
+  <text x="1099" y="556" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#C62828" font-weight="600">주거 에너지 혁신</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">08d / 30</text>
+</svg>
