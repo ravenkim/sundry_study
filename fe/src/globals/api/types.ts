@@ -142,6 +142,8 @@ export interface AdminReportRow {
     reportId: number
     buildingName: string
     roomName: string
+    /** 전체 경로 (예: 공학관 A동 > 2층 > 303호). 없으면 buildingName + roomName 사용 */
+    locationPath?: string
     memberName: string
     status: ReportStatus
     aiResult: string

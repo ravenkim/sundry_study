@@ -1,2 +1,2 @@
-import { AdminBuildings } from 'src/features/admin/AdminBuildings'
-export default AdminBuildings
+import AdminBuildingsPage from 'src/features/admin/buildings/AdminBuildingsPage'
+export default AdminBuildingsPage

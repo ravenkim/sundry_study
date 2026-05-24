@@ -23,6 +23,7 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { LOC } from 'src/features/admin/buildings/locationTreeUtils'
 import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
 import { usePoints } from 'src/features/points/PointsContext'
 import { useAuth } from 'src/features/auth/AuthContext'
@@ -179,7 +180,7 @@ export const AdminSidebar = () => {
     const navItems = [
         { name: '제보 현황', path: '/admin', icon: Database },
         { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
-        { name: '건물·강의실', path: '/admin/buildings', icon: Settings },
+        { name: LOC.navLabel, path: '/admin/buildings', icon: Settings },
         { name: '기프티콘 관리', path: '/admin/points', icon: Gift },
         { name: '에너지 통계', path: '/admin/stats', icon: BarChart3 },
         { name: '사용자 관리', path: '/admin/users', icon: Users },
