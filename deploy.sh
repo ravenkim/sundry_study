@@ -7,6 +7,7 @@ cd "$ROOT"
 
 DEPLOY_STATE_DIR="${ROOT}/.deploy"
 MIGRATION_HASH_FILE="${DEPLOY_STATE_DIR}/migration.version.sha256"
+CREDENTIALS_HASH_FILE="${DEPLOY_STATE_DIR}/db.credentials.sha256"
 
 log() { echo "[deploy] $*"; }
 log_db() { echo "[deploy][db] $*"; }
@@ -99,6 +100,48 @@ maybe_reset_legacy_db() {
       docker compose down -v 2>/dev/null || true
     fi
   fi
+}
+
+db_credentials_hash() {
+  load_env
+  printf '%s\0%s\0%s\0%s' \
+    "${MYSQL_USER:-}" \
+    "${MYSQL_PASSWORD:-}" \
+    "${MYSQL_DATABASE:-energy_db}" \
+    "${MYSQL_ROOT_PASSWORD:-}" \
+    | sha256sum | awk '{print $1}'
+}
+
+maybe_reset_db_on_credential_change() {
+  load_env
+
+  if [[ -z "${MYSQL_USER:-}" || -z "${MYSQL_PASSWORD:-}" ]]; then
+    log_db "MYSQL_USER/MYSQL_PASSWORD 미설정 — 자격증명 변경 감지 생략"
+    return 0
+  fi
+
+  local current stored=""
+  current="$(db_credentials_hash)"
+
+  if [[ -f "${CREDENTIALS_HASH_FILE}" ]]; then
+    stored="$(cat "${CREDENTIALS_HASH_FILE}")"
+  fi
+
+  if [[ "${current}" == "${stored}" ]]; then
+    log_db "MySQL 자격증명 변경 없음"
+    return 0
+  fi
+
+  if [[ -n "${stored}" ]]; then
+    log_db "MYSQL_* 변경 감지 — MySQL 볼륨 초기화"
+    docker compose down -v 2>/dev/null || true
+    log_db "  mysql_data 볼륨 삭제 완료"
+  else
+    log_db "최초 배포 — MySQL 자격증명 기록"
+  fi
+
+  mkdir -p "${DEPLOY_STATE_DIR}"
+  echo "${current}" > "${CREDENTIALS_HASH_FILE}"
 }
 
 maybe_reset_db_on_schema_change() {
@@ -290,10 +333,11 @@ main() {
   log_db_migration_files
   ensure_mysql_for_db_check
   maybe_reset_legacy_db
+  maybe_reset_db_on_credential_change
   maybe_reset_db_on_schema_change
 
   log "[1/2] 백엔드 (MySQL + Flyway + BE)..."
-  bash "${ROOT}/be/deploy.sh"
+  DEPLOY_NO_WAIT=1 bash "${ROOT}/be/deploy.sh"
 
   log "[2/2] 프론트..."
   bash "${ROOT}/fe/deploy.sh"
