@@ -32,7 +32,9 @@ export async function getMyBuildingSavings(): Promise<
             const { data } = await client.get<
                 ApiResponse<BuildingSavingsApiItem[]>
             >('/api/savings/buildings/me')
-            return unwrapApiListData(data).map(toParticipatedBuildingSavings)
+            return unwrapApiListData<BuildingSavingsApiItem>(data).map(
+                toParticipatedBuildingSavings,
+            )
         },
         () => PARTICIPATED_BUILDING_SAVINGS,
     )

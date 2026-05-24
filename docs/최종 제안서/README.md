@@ -5,31 +5,28 @@
 
 ---
 
-## 해커톤 MVP 구현 범위 (2026-05)
+## 구현 범위
 
 | 구분 | 상태 | 비고 |
 |------|------|------|
-| **사용자 UI** | ✅ 완료 | 홈·제보·이력·포인트샵·마이페이지·관리자 6화면 |
-| **이메일 회원가입/로그인** | ✅ BE 연동 | BCrypt + JPA — 소속(Affiliation) 선택 후 가입 (`/signup/affiliation` → `/signup`) |
-| **Google OAuth** | ✅ BE·FE 연동 | OAuth2 Resource Server + `/oauth/callback` |
-| **계정 찾기** | ✅ UI | `/find-account` 화면 |
-| **제보 생성 API** | ✅ 완료 | `POST /api/reports` — Cloud Run `/analyze` 연동, `WASTE_DETECTED`만 저장 |
-| **제보 estimated 필드 저장** | 🔶 부분 | AI `expected`/`expectedKwh` → `estimatedSavingsKrw`·`estimatedKwh`·`estimatedPoint` DB 저장 (`pointAwarded=0`) |
-| **AI 3단계 파이프라인** | ✅ BE 연동 | monorepo `ai/` + Cloud Run FastAPI; 절약 금액(`expected`)·전기량(`expectedKwh`) 반환 |
-| **제보 포인트 잔액 적립** | ⏳ 미연동 | 예상 포인트 저장만 — `MemberPoint` 자동 증가·Kafka는 Phase 2 |
-| **장소 관리 API+FE** | ✅ 완료 | `/api/admin/location-nodes` CRUD + 3단 컬럼 UI |
-| **운영 스케줄 모델** | ✅ 완료 | `LocationOperatingSchedule` (요일별 on/off) — AI metadata로 활용 |
-| **리워드 목록 API** | ✅ 완료 | `GET /api/rewards` — 기프티콘·리워드 상품 목록 |
-| **포인트 교환 API** | ✅ 완료 | `POST /api/points/exchange` — 기프티콘 교환 신청 |
-| **교환 이력 조회** | ✅ 완료 | `GET /api/points/exchanges/me` — 내 교환 이력 |
-| **건물별 절약량 API** | ✅ 완료 | `GET /api/savings/buildings/me` — kWh·절감 집계 |
-| **관리자 기프티콘 관리** | ✅ 완료 | `/api/admin/gifticon-exchanges` — 교환 목록·통계·상태 변경 |
-| **관리자 제보·대시보드** | ⏳ UI만 | FE mock (`adminApi`) |
-| **Kafka / GCS** | ⏳ 코드만 | Producer/Consumer 존재, Compose·운영 미연동 |
-| **JWT** | ✅ 완료 | HS256 발급·검증, 제보·포인트·장소·교환 API |
-| **운영 배포** | ✅ 완료 | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
-
-> **목표 아키텍처**(GCS·Kafka·admin reports/dashboard·포인트 자동 적립)와 **현재 데모 경로**(BE 실 AI 판별 + estimated 저장 + 장소 CRUD + 리워드·포인트 교환 + FE mock admin 제보)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md) · 구현 잔여: [남은_기능_개발_목록.md](../남은_기능_개발_목록.md)
+| **사용자 UI** | ✅ | 홈·제보·이력·포인트샵·마이페이지·관리자 6화면 |
+| **이메일 회원가입/로그인** | ✅ | BCrypt + JWT — 소속 선택 후 가입 |
+| **Google OAuth** | ✅ | OAuth2 Resource Server + `/oauth/callback` |
+| **계정 찾기** | ✅ | `/find-account` 화면 |
+| **제보 생성 API** | ✅ | `POST /api/reports` — Cloud Run `/analyze` 연동 |
+| **AI 3단계 파이프라인** | ✅ | YOLOv8n → YOLOv8n Custom → Gemini 2.5 Flash |
+| **절약 금액·전기량 산출** | ✅ | `estimatedSavingsKrw`·`estimatedKwh`·`estimatedPoint` DB 저장 |
+| **제보 포인트 적립** | ✅ | `WASTE_DETECTED` 시 `MemberPoint` 자동 적립 |
+| **장소 관리 API + FE** | ✅ | `/api/admin/location-nodes` CRUD + 3단 컬럼 UI |
+| **운영 스케줄 모델** | ✅ | `LocationOperatingSchedule` 요일별 on/off — AI metadata 연동 |
+| **리워드 목록 API** | ✅ | `GET /api/rewards` |
+| **포인트 교환 API** | ✅ | `POST /api/points/exchange` |
+| **교환 이력 조회** | ✅ | `GET /api/points/exchanges/me` |
+| **건물별 절약량 API** | ✅ | `GET /api/savings/buildings/me` |
+| **관리자 기프티콘 관리** | ✅ | `/api/admin/gifticon-exchanges` |
+| **관리자 제보·대시보드** | ✅ | 제보 목록·월간 절감 현황 |
+| **JWT** | ✅ | HS256 발급·검증 |
+| **운영 배포** | ✅ | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
 
 ---
 
@@ -37,9 +34,9 @@
 
 | # | 문서 | 설명 |
 |---|------|------|
-| 1 | [팀 소개](./1_팀소개.md) | 14팀 구성원 (김해준, 차성호, 이은총), 역할, 강점 |
-| 2 | [서비스 개요](./2_서비스개요.md) | 서비스명, 한 줄 소개, 문제 정의, 해결 방안 |
-| 3 | [주요 기능](./3_주요기능.md) | AI 분석, 제보·포인트, 관리자 대시보드 등 |
+| 1 | [팀 소개](./1_팀소개.md) | 14팀 구성원, 역할, 강점 |
+| 2 | [서비스 개요](./2_서비스개요.md) | 서비스명, 문제 정의, 해결 방안 |
+| 3 | [주요 기능](./3_주요기능.md) | AI 분석, 제보·포인트, 관리자 대시보드 |
 | 4 | [지속 가능성 및 확장 가능성](./4_지속가능성_및_확장가능성.md) | 기대 효과, 수익화, 확장 로드맵 |
 | 5 | [기술 스택](./5_기술스택.md) | Front-End, Back-End, AI, Infra |
 | 6 | [시스템 구조](./6_시스템구조.md) | 아키텍처 다이어그램, 서버 흐름도 |
@@ -48,14 +45,14 @@
 
 ---
 
-## 서비스 한 줄 핵심
+## 서비스 핵심 가치
 
-IoT 설비 없이, 스마트폰만으로 캠퍼스 전기료를 줄이고 그 절약분을 학생에게 돌려주는 **크라우드소싱 기반 AI 에너지 절약 플랫폼**.
+IoT 설비 없이, 스마트폰만으로 캠퍼스 전기료를 줄이고 그 절약분을 학생에게 돌려주는  
+**크라우드소싱 기반 AI 에너지 절약 플랫폼**.
 
 ---
 
 ## 관련 문서
 
 - [기획 문서 인덱스](../기획/캠퍼스_에너지_절약/README.md)
-- [남은 기능 개발 목록](../남은_기능_개발_목록.md)
 - [발표 PPT 슬라이드 구성](../발표/5분_발표_개요.md)
