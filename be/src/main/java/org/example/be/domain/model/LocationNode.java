@@ -45,22 +45,18 @@ public class LocationNode {
     private String locationType;
 
     /** LEAF(항목) 전용 — 에어컨 대수 */
-    @Builder.Default
     @Column(name = "ac_count", nullable = false)
     private int acCount = 0;
 
     /** LEAF(항목) 전용 — 형광등 개수 */
-    @Builder.Default
     @Column(name = "fluorescent_count", nullable = false)
     private int fluorescentCount = 0;
 
     /** LEAF(항목) 전용 — LED 조명 개수 */
-    @Builder.Default
     @Column(name = "led_count", nullable = false)
     private int ledCount = 0;
 
     @OneToMany(mappedBy = "locationNode", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
     private List<LocationOperatingSchedule> operatingSchedules = new ArrayList<>();
 
     @Builder
@@ -86,5 +82,6 @@ public class LocationNode {
         this.acCount = acCount;
         this.fluorescentCount = fluorescentCount;
         this.ledCount = ledCount;
+        this.operatingSchedules = new ArrayList<>();
     }
 }
