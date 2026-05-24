@@ -15,6 +15,9 @@ jwt:
   expiration-ms: ${JWT_EXPIRATION_MS:86400000}
 
 spring:
+  http:
+    converters:
+      preferred-json-mapper: jackson2
   application:
     name: backend
   datasource:
