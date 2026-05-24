@@ -1,15 +1,13 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { ArrowLeft, Mail, Phone } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { getAffiliations } from 'src/globals/api/affiliationsApi'
-import { getBuildingsForRegister } from 'src/globals/api/buildingsApi'
 import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
-import type { Affiliation, Building } from 'src/globals/api/types'
+import type { Affiliation } from 'src/globals/api/types'
 import { setPendingAffiliation } from 'src/features/auth/signupBuildingStorage'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
-import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 
 type SignupIntent = 'signup' | 'oauth'
 
@@ -19,16 +17,13 @@ export function AffiliationSelection() {
     const intent = (searchParams.get('intent') as SignupIntent) || 'signup'
 
     const [affiliations, setAffiliations] = useState<Affiliation[]>([])
-    const [buildings, setBuildings] = useState<Building[]>([])
     const [affiliationId, setAffiliationId] = useState<number | ''>('')
-    const [buildingId, setBuildingId] = useState<number | ''>('')
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        Promise.all([getAffiliations(), getBuildingsForRegister()])
-            .then(([affiliationList, buildingList]) => {
+        getAffiliations()
+            .then((affiliationList) => {
                 setAffiliations(affiliationList)
-                setBuildings(buildingList)
                 if (affiliationList.length === 1) {
                     setAffiliationId(affiliationList[0].affiliationId)
                 }
@@ -37,33 +32,9 @@ export function AffiliationSelection() {
             .finally(() => setLoading(false))
     }, [])
 
-    const buildingsForAffiliation = useMemo(() => {
-        const scoped = !affiliationId
-            ? buildings
-            : buildings.filter((b) => b.affiliationId === affiliationId)
-        const list = scoped.length > 0 ? scoped : buildings
-        return list.filter((b) => b.nodeKind === 'GROUP')
-    }, [affiliationId, buildings])
-
-    const buildingOptions = useMemo(
-        () =>
-            buildingsForAffiliation.map((building) => ({
-                value: building.buildingId,
-                label: building.name,
-            })),
-        [buildingsForAffiliation],
-    )
-
     const selectedAffiliation = affiliations.find(
         (affiliation) => affiliation.affiliationId === affiliationId,
     )
-
-    useEffect(() => {
-        setBuildingId('')
-    }, [affiliationId])
-
-    const hasSubLocations = buildingsForAffiliation.length > 0
-    const requireBuildingSelection = buildingsForAffiliation.length > 0
 
     const handleContinue = (e: FormEvent) => {
         e.preventDefault()
@@ -72,19 +43,10 @@ export function AffiliationSelection() {
             toast.error('소속을 선택해 주세요.')
             return
         }
-        if (requireBuildingSelection && !buildingId) {
-            toast.error('소속 건물을 선택해 주세요.')
-            return
-        }
-
-        const selectedBuilding = buildingsForAffiliation.find(
-            (building) => building.buildingId === buildingId,
-        )
 
         setPendingAffiliation(
             Number(affiliationId),
-            buildingId ? Number(buildingId) : undefined,
-            selectedBuilding?.name,
+            selectedAffiliation?.name,
         )
 
         if (intent === 'oauth') {
@@ -122,17 +84,14 @@ export function AffiliationSelection() {
                 </div>
                 <div>
                     <h2 className="text-on-surface mb-1 text-xl font-bold">
-                        소속 건물 선택
+                        소속 선택
                     </h2>
                     <p className="text-on-surface-variant text-sm">{subtitle}</p>
-                    <p className="text-on-surface-variant/80 mt-2 text-xs leading-relaxed">
-                        가입 후 선택한 건물의 제보·절약 정보만 확인할 수 있습니다.
-                    </p>
                 </div>
 
                 {loading ? (
                     <p className="text-on-surface-variant text-sm">
-                        건물 목록을 불러오는 중...
+                        소속 목록을 불러오는 중...
                     </p>
                 ) : (
                     <form
@@ -173,22 +132,6 @@ export function AffiliationSelection() {
                                 </p>
                             </div>
                         ) : null}
-
-                        {hasSubLocations && (
-                            <div className="flex flex-col gap-1.5">
-                                <label className="text-on-surface text-sm font-semibold">
-                                    소속 건물
-                                </label>
-                                <SearchableSelect
-                                    options={buildingOptions}
-                                    value={buildingId}
-                                    onChange={setBuildingId}
-                                    placeholder="건물을 검색·선택해 주세요"
-                                    searchPlaceholder="건물명 검색..."
-                                    disabled={!affiliationId && affiliations.length > 1}
-                                />
-                            </div>
-                        )}
                     </form>
                 )}
             </main>

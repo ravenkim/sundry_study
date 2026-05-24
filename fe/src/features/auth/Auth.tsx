@@ -341,7 +341,6 @@ export const Signup = () => {
                 phoneNumber: phoneNumber.trim(),
                 password,
                 affiliation: pendingAffiliation.affiliationId,
-                buildingId: pendingAffiliation.buildingId,
             })
             clearPendingAffiliation()
             toast.success('회원가입이 완료되었습니다.')
@@ -377,9 +376,9 @@ export const Signup = () => {
                     <p className="text-on-surface-variant text-sm">
                         에코리포트 서비스 이용을 위해 정보를 입력해 주세요.
                     </p>
-                    {pendingAffiliation?.buildingId && (
+                    {pendingAffiliation?.affiliationName && (
                         <p className="text-primary mt-2 text-sm font-semibold">
-                            소속 건물: {pendingAffiliation.buildingName ?? '선택됨'}
+                            소속: {pendingAffiliation.affiliationName}
                         </p>
                     )}
                 </div>
