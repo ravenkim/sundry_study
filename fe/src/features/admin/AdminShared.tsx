@@ -138,8 +138,13 @@ export const AdminPoints = () => {
                                                     item.createdAt,
                                                 ).toLocaleString('ko-KR')}
                                             </td>
-                                            <td className="p-4 font-bold">
-                                                {item.memberName}
+                                            <td className="p-4">
+                                                <div className="font-bold">
+                                                    {item.memberName}
+                                                </div>
+                                                <div className="text-on-surface-variant text-xs">
+                                                    {item.memberPhone}
+                                                </div>
                                             </td>
                                             <td className="p-4">
                                                 {item.rewardName}

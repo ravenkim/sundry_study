@@ -268,6 +268,7 @@ let mockGifticonExchanges: GifticonExchangeRow[] = [
     {
         exchangeId: 101,
         memberName: '이민준',
+        memberPhone: '010-9876-5432',
         rewardName: '스타벅스 아이스 아메리카노 T',
         pointUsed: 500,
         status: 'PENDING',
@@ -276,6 +277,7 @@ let mockGifticonExchanges: GifticonExchangeRow[] = [
     {
         exchangeId: 100,
         memberName: '박그린',
+        memberPhone: '010-5555-1234',
         rewardName: 'GS25 모바일 상품권 3천원',
         pointUsed: 300,
         status: 'PENDING',
@@ -284,6 +286,7 @@ let mockGifticonExchanges: GifticonExchangeRow[] = [
     {
         exchangeId: 99,
         memberName: '최지우',
+        memberPhone: '010-3333-7777',
         rewardName: '학식 포인트 100원',
         pointUsed: 100,
         status: 'SENT',
@@ -329,6 +332,7 @@ export function createMockGifticonExchange(
     const exchange: GifticonExchangeRow = {
         exchangeId: nextGifticonExchangeId++,
         memberName: MOCK_CURRENT_MEMBER_NAME,
+        memberPhone: '010-1234-5678',
         rewardName: reward.name,
         pointUsed,
         status: 'PENDING',

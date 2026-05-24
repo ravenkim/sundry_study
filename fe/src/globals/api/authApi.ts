@@ -15,6 +15,7 @@ export interface RegisterRequest {
     userName: string
     password: string
     email: string
+    phoneNumber: string
     affiliation: number
     buildingId?: number
 }
@@ -35,6 +36,11 @@ export interface EmailCheckResponse {
 
 export interface UserNameCheckResponse {
     userName: string
+    available: boolean
+}
+
+export interface PhoneCheckResponse {
+    phoneNumber: string
     available: boolean
 }
 
@@ -98,6 +104,24 @@ export async function checkUserNameAvailability(
 
     if (data.code !== ResponseCode.OK || !data.body) {
         throw new Error('아이디 확인에 실패했습니다.')
+    }
+
+    return data.body
+}
+
+export async function checkPhoneAvailability(
+    phone: string,
+): Promise<PhoneCheckResponse> {
+    const { data } = await client.get<
+        ApiResponse<PhoneCheckResponse> | ApiErrorResponse
+    >('/register/check-phone', { params: { phone: phone.trim() } })
+
+    if (isApiError(data)) {
+        throw new Error(data.message || '전화번호 확인에 실패했습니다.')
+    }
+
+    if (data.code !== ResponseCode.OK || !data.body) {
+        throw new Error('전화번호 확인에 실패했습니다.')
     }
 
     return data.body

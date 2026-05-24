@@ -15,12 +15,14 @@ public class MemberResponse {
         private Long memberSeq;
         private String userName;
         private String email;
+        private String phoneNumber;
 
         public static Detail of(Member member) {
             return Detail.builder()
                     .memberSeq(member.getSeq())
                     .userName(member.getUserName())
                     .email(member.getEmail())
+                    .phoneNumber(member.getPhoneNumber())
                     .build();
         }
     }
@@ -50,6 +52,21 @@ public class MemberResponse {
         public static EmailCheck of(String email, boolean available) {
             return EmailCheck.builder()
                     .email(email)
+                    .available(available)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class PhoneCheck {
+        private String phoneNumber;
+        private boolean available;
+
+        public static PhoneCheck of(String phoneNumber, boolean available) {
+            return PhoneCheck.builder()
+                    .phoneNumber(phoneNumber)
                     .available(available)
                     .build();
         }

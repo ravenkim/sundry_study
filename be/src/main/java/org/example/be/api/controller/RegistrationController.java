@@ -45,6 +45,17 @@ public class RegistrationController {
         );
     }
 
+    @Operation(summary = "전화번호 중복 확인", description = "DB에서 전화번호 사용 여부를 확인합니다.")
+    @GetMapping("/register/check-phone")
+    public ApiResponse<MemberResponse.PhoneCheck> checkPhone(@RequestParam String phone) {
+        boolean available = defaultMemberService.isPhoneAvailable(phone);
+        String normalized = phone == null ? "" : phone.replaceAll("[^0-9]", "");
+        return ApiResponse.success(
+                ResponseCode.OK,
+                MemberResponse.PhoneCheck.of(normalized, available)
+        );
+    }
+
     @Operation(summary = "회원가입", description = "새 사용자 계정을 등록합니다.")
     @PostMapping("/register")
     public ApiResponse<Void> register(@Valid @RequestBody MemberRequest.Create request) {

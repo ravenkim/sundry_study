@@ -6,6 +6,7 @@ import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
 import {
     checkEmailAvailability,
+    checkPhoneAvailability,
     checkUserNameAvailability,
 } from 'src/globals/api/authApi'
 import { EcoButton } from 'src/shared/ui/eco'
@@ -28,6 +29,11 @@ function getErrorMessage(error: unknown): string {
         return error.message || '요청 처리 중 오류가 발생했습니다.'
     }
     return '요청 처리 중 오류가 발생했습니다.'
+}
+
+function isValidPhoneFormat(phone: string): boolean {
+    const digits = phone.replace(/[^0-9]/g, '')
+    return /^01[016789]\d{7,8}$/.test(digits)
 }
 
 export const Login = () => {
@@ -171,6 +177,7 @@ export const Signup = () => {
     const pendingAffiliation = getPendingAffiliation()
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const [userNameChecked, setUserNameChecked] = useState(false)
@@ -179,6 +186,9 @@ export const Signup = () => {
     const [emailChecked, setEmailChecked] = useState(false)
     const [emailAvailable, setEmailAvailable] = useState(false)
     const [checkingEmail, setCheckingEmail] = useState(false)
+    const [phoneChecked, setPhoneChecked] = useState(false)
+    const [phoneAvailable, setPhoneAvailable] = useState(false)
+    const [checkingPhone, setCheckingPhone] = useState(false)
     const [loading, setLoading] = useState(false)
     const [requiredTermsAgreed, setRequiredTermsAgreed] = useState(false)
 
@@ -252,10 +262,44 @@ export const Signup = () => {
         }
     }
 
+    const handlePhoneChange = (value: string) => {
+        setPhoneNumber(value)
+        setPhoneChecked(false)
+        setPhoneAvailable(false)
+    }
+
+    const handleCheckPhone = async () => {
+        const trimmed = phoneNumber.trim()
+        if (!trimmed) {
+            toast.error('전화번호를 입력해 주세요.')
+            return
+        }
+        if (!isValidPhoneFormat(trimmed)) {
+            toast.error('올바른 휴대전화 번호 형식을 입력해 주세요.')
+            return
+        }
+
+        setCheckingPhone(true)
+        try {
+            const result = await checkPhoneAvailability(trimmed)
+            setPhoneChecked(true)
+            setPhoneAvailable(result.available)
+            if (result.available) {
+                toast.success('사용 가능한 전화번호입니다.')
+            } else {
+                toast.error('이미 사용 중인 전화번호입니다.')
+            }
+        } catch (error) {
+            toast.error(getErrorMessage(error))
+        } finally {
+            setCheckingPhone(false)
+        }
+    }
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
-        if (!userName.trim() || !email.trim() || !password) {
+        if (!userName.trim() || !email.trim() || !phoneNumber.trim() || !password) {
             toast.error('필수 정보를 모두 입력해 주세요.')
             return
         }
@@ -265,6 +309,10 @@ export const Signup = () => {
         }
         if (!emailChecked || !emailAvailable) {
             toast.error('이메일 중복 확인을 완료해 주세요.')
+            return
+        }
+        if (!phoneChecked || !phoneAvailable) {
+            toast.error('전화번호 중복 확인을 완료해 주세요.')
             return
         }
         if (password.length < 8) {
@@ -290,6 +338,7 @@ export const Signup = () => {
             await register({
                 userName: userName.trim(),
                 email: email.trim(),
+                phoneNumber: phoneNumber.trim(),
                 password,
                 affiliation: pendingAffiliation.affiliationId,
                 buildingId: pendingAffiliation.buildingId,
@@ -420,6 +469,45 @@ export const Signup = () => {
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
+                            전화번호
+                        </label>
+                        <div className="flex gap-2">
+                            <input
+                                type="tel"
+                                value={phoneNumber}
+                                onChange={(e) =>
+                                    handlePhoneChange(e.target.value)
+                                }
+                                placeholder="010-1234-5678"
+                                autoComplete="tel"
+                                className="border-outline-variant bg-surface focus:ring-primary-container flex-1 rounded-lg border p-3.5 outline-none focus:ring-2"
+                            />
+                            <EcoButton
+                                variant="outline"
+                                className="px-4 whitespace-nowrap"
+                                type="button"
+                                disabled={checkingPhone}
+                                onClick={handleCheckPhone}
+                            >
+                                {checkingPhone ? '확인 중...' : '중복확인'}
+                            </EcoButton>
+                        </div>
+                        {phoneChecked && (
+                            <p
+                                className={`text-xs font-medium ${
+                                    phoneAvailable
+                                        ? 'text-primary'
+                                        : 'text-error'
+                                }`}
+                            >
+                                {phoneAvailable
+                                    ? '사용 가능한 전화번호입니다.'
+                                    : '이미 사용 중인 전화번호입니다.'}
+                            </p>
+                        )}
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-on-surface text-sm font-semibold">
                             비밀번호
                         </label>
                         <input
@@ -458,8 +546,12 @@ export const Signup = () => {
                     form="signup-form"
                     disabled={
                         loading ||
+                        !userNameChecked ||
+                        !userNameAvailable ||
                         !emailChecked ||
                         !emailAvailable ||
+                        !phoneChecked ||
+                        !phoneAvailable ||
                         !requiredTermsAgreed
                     }
                 >

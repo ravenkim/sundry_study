@@ -99,11 +99,12 @@ WHERE p.parent_seq IS NULL AND p.name = '본관'
   );
 
 -- Admin account
-INSERT INTO member_db (user_name, password, email, user_type, affiliation_seq, location_node_seq)
+INSERT INTO member_db (user_name, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
 SELECT
     'admin',
     '$2b$10$u76UxwI8aDheM9FsbKTcW.PQnaIIrZX5BswXAZfj8dKN53A53O0G.',
     'admin@ecoreport.kr',
+    '01011110001',
     'ADMIN',
     a.seq,
     n.seq
@@ -119,11 +120,12 @@ WHERE m.user_name = 'admin'
   AND NOT EXISTS (SELECT 1 FROM member_point_db mp WHERE mp.member_seq = m.seq);
 
 -- User account
-INSERT INTO member_db (user_name, password, email, user_type, affiliation_seq, location_node_seq)
+INSERT INTO member_db (user_name, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
 SELECT
     'user',
     '$2b$10$M20EFNpJiVd8zG4K36.um.kG1.ebqmPztuHMOAEtLKGPvtK5doATK',
     'user@ecoreport.kr',
+    '01022220002',
     'USER',
     a.seq,
     n.seq

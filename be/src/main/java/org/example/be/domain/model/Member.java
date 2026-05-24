@@ -20,6 +20,9 @@ public class Member {
     private String password;
     private String email;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "affiliation_seq")
     private Affiliation affiliation;

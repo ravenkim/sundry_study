@@ -91,6 +91,7 @@ export type GifticonExchangeStatus = 'PENDING' | 'SENT' | 'REJECTED'
 export interface GifticonExchangeRow {
     exchangeId: number
     memberName: string
+    memberPhone: string
     rewardName: string
     pointUsed: number
     status: GifticonExchangeStatus
