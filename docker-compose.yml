@@ -21,7 +21,8 @@ services:
 
   be:
     build:
-      context: ./be
+      context: .
+      dockerfile: be/Dockerfile
       args:
         DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-be-deps:local}
     container_name: ecoreport-be

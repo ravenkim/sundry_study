@@ -6,6 +6,9 @@
 
 !.env.example
 
+# Deploy state (migration hash cache)
+.deploy/
+
 # Backend (Gradle / Spring Boot)
 be/.gradle/
 be/build/

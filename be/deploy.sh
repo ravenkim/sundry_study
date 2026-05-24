@@ -16,8 +16,8 @@ export DOCKER_BUILDKIT=1
 set -a && source <(sed 's/\r$//' "${ROOT}/.env") && set +a
 DEPLOY_HOST="${DEPLOY_PUBLIC_HOST:-localhost}"
 
-MYSQL_USER="${MYSQL_USER:-${DB_USERNAME:-}}"
-MYSQL_PASSWORD="${MYSQL_PASSWORD:-${DB_PASSWORD:-}}"
+MYSQL_USER="${MYSQL_USER:-}"
+MYSQL_PASSWORD="${MYSQL_PASSWORD:-}"
 MYSQL_DATABASE="${MYSQL_DATABASE:-energy_db}"
 
 wait_for_mysql() {
@@ -37,9 +37,11 @@ wait_for_mysql() {
 deps_hash() {
   sha256sum \
     "$BE_DIR/Dockerfile.deps" \
+    "$BE_DIR/Dockerfile" \
     "$BE_DIR/build.gradle" \
     "$BE_DIR/settings.gradle" \
     "$BE_DIR/gradle/wrapper/gradle-wrapper.properties" \
+    "$ROOT/db/migration/"*.sql \
     | sha256sum | awk '{print $1}'
 }
 
@@ -67,6 +69,25 @@ fi
 export DEPS_IMAGE
 docker compose build be
 docker compose up -d be
+
+wait_for_be() {
+  local host="${DEPLOY_PUBLIC_HOST:-localhost}"
+  local port="${SERVER_PORT:-8080}"
+  local attempt=0
+  echo "[be] 백엔드 준비 대기..."
+  until curl -sf "http://${host}:${port}/ping" >/dev/null 2>&1; do
+    attempt=$((attempt + 1))
+    if [[ "${attempt}" -ge 60 ]]; then
+      echo "[be] 백엔드 기동 시간 초과"
+      docker compose logs --tail 40 be || true
+      exit 1
+    fi
+    sleep 2
+  done
+  echo "[be] 백엔드 OK"
+}
+
+wait_for_be
 
 echo "백엔드 → http://${DEPLOY_HOST}:8080"
 echo "Swagger → http://${DEPLOY_HOST}:8080/swagger-ui.html"

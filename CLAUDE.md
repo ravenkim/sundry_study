@@ -24,16 +24,16 @@ docker-compose.yml
 ### Commands
 ```bash
 cd be
-bash run-dev.sh            # 루트 .env 로드 후 bootRun (포트 8080)
-./gradlew bootRun          # (환경변수 직접 export 시)
 ./gradlew build            # 빌드 (JAR 생성)
 ./gradlew test             # 전체 테스트
 ./gradlew test --tests "org.example.be.BeApplicationTests"  # 단일 테스트 클래스
 ```
 
+> 로컬 BE 실행은 Docker Compose 전용입니다. `bash deploy.sh`로 MySQL·BE·FE를 기동하세요.
+
 ### Tech Stack
 - Spring Boot 4.0.6, Java 17, Gradle
-- Spring Data JPA (Hibernate), MySQL (`DDL auto: update`)
+- Spring Data JPA (Hibernate), MySQL (`ddl-auto: validate` + Flyway)
 - springdoc-openapi 3.0.2 — Swagger UI: `http://localhost:8080/swagger-ui.html`
 - Spring Actuator — `http://localhost:8080/actuator/health`
 - Lombok
@@ -56,6 +56,7 @@ bash run-dev.sh            # 루트 .env 로드 후 bootRun (포트 8080)
 - **AI 코드**: monorepo `ai/` — 학습(`model_train*.py`), 가중치(`train_result/weights/best.pt`), Cloud Run 배포(`for_deploy/campus_api/`)
 - 미구현: GCS 실업로드·`aiResult` JSON·포인트 적립·관리자 API·Kafka Compose 연동·Affiliation 시드/API
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
+- DB 연결: `MYSQL_*` + `SPRING_DATASOURCE_*` (동일 user/password). `DB_URL`/`DB_USERNAME`/`DB_PASSWORD`는 사용하지 않음
 
 **패키지 구조**
 ```
@@ -148,14 +149,13 @@ docker compose down         # 중지
 docker compose logs -f      # 로그
 ```
 
-Docker: `cp .env.example .env` → `bash deploy.sh`. 로컬 BE: `bash be/run-dev.sh`. 로컬 FE: `cd fe && yarn dev` (Vite가 루트 `.env` 로드)
+Docker: `cp .env.example .env` → `bash deploy.sh` (MySQL + BE + FE, Flyway·헬스체크·스키마 변경 시 DB 자동 초기화)
 
 ## 개발 환경 설정
 
 ### Backend DB
-- Docker 배포: Compose MySQL `energy_db` (`mysql:3306`) + **Flyway** (`be/src/main/resources/db/migration/V*.sql`) + `ddl-auto: validate`
-- 로컬 개발: `bash be/db-init.sh`(DB·유저만) 후 `bash be/run-dev.sh` — 스키마는 Flyway가 기동 시 적용
-- 참조 스냅샷: `db/energy_schema.sql` (V2 최종 상태, Flyway와 동기화 권장)
+- Docker Compose 전용: MySQL `energy_db` (`mysql:3306`) + **Flyway** ([`db/migration/V*.sql`](db/migration/)) + `ddl-auto: validate`
+- 시드: [`db/migration/R__seed_dev.sql`](db/migration/R__seed_dev.sql) (Flyway repeatable)
 - 상세: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/DB_설정_가이드.md`
 
 ### 환경변수 (Frontend)

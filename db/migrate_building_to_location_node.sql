@@ -1,2 +1,0 @@
--- Deprecated: Flyway V2__location_node_tree.sql 로 대체됨
--- be/src/main/resources/db/migration/
