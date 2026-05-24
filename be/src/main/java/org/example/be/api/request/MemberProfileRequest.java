@@ -21,4 +21,13 @@ public class MemberProfileRequest {
 
         private Long buildingId;
     }
+
+    @Getter
+    @Setter
+    public static class Update {
+        private String email;
+        private String phoneNumber;
+        private String currentPassword;
+        private String password;
+    }
 }

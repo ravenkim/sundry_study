@@ -22,29 +22,11 @@ import {
     SheetTitle,
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoButton } from 'src/shared/ui/eco'
+import { TermSections } from 'src/features/auth/TermSections'
 import { SIGNUP_TERMS, SignupTerm } from 'src/features/auth/signupTermsData'
 
 interface SignupTermsAgreementProps {
     onRequiredChange: (agreed: boolean) => void
-}
-
-function TermSections({ term }: { term: SignupTerm }) {
-    return (
-        <Accordion type="multiple" className="w-full">
-            {term.sections.map((section) => (
-                <AccordionItem key={section.title} value={section.title}>
-                    <AccordionTrigger className="text-on-surface py-3 text-sm font-semibold hover:no-underline">
-                        {section.title}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                        <p className="text-on-surface-variant whitespace-pre-line text-sm leading-relaxed">
-                            {section.content}
-                        </p>
-                    </AccordionContent>
-                </AccordionItem>
-            ))}
-        </Accordion>
-    )
 }
 
 export function SignupTermsAgreement({

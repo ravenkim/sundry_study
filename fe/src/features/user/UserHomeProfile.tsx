@@ -177,7 +177,9 @@ export const UserProfile = () => {
                         className="flex w-max items-center gap-1.5 px-3 py-1 text-xs font-bold"
                     >
                         <Leaf className="h-3.5 w-3.5 fill-current" />{' '}
-                        {user?.buildingName ?? '그린 마스터'}
+                        {user?.affiliationName ??
+                            user?.buildingName ??
+                            '그린 마스터'}
                     </EcoBadge>
                 </div>
             </section>
@@ -253,24 +255,30 @@ export const UserProfile = () => {
             <ParticipatedBuildingSavingsCard compact />
 
             <section className="border-outline-variant bg-surface-container-lowest overflow-hidden rounded-2xl border shadow-sm">
-                {[
-                    { icon: Edit2, label: '프로필 수정' },
-                    { icon: Bell, label: '알림 설정' },
-                    { icon: FileText, label: '서비스 이용약관' },
-                ].map((item) => (
-                    <div
-                        key={item.label}
-                        className="group border-surface-container hover:bg-surface-container-low flex cursor-pointer items-center justify-between border-b p-4 transition-colors last:border-0"
-                    >
-                        <div className="flex items-center gap-4">
-                            <item.icon className="h-5 w-5 opacity-70 group-hover:opacity-100" />
-                            <span className="text-sm font-semibold">
-                                {item.label}
-                            </span>
-                        </div>
-                        <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
+                <Link
+                    to="/profile/edit"
+                    className="group border-surface-container hover:bg-surface-container-low flex cursor-pointer items-center justify-between border-b p-4 transition-colors"
+                >
+                    <div className="flex items-center gap-4">
+                        <Edit2 className="h-5 w-5 opacity-70 group-hover:opacity-100" />
+                        <span className="text-sm font-semibold">
+                            프로필 수정
+                        </span>
                     </div>
-                ))}
+                    <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
+                </Link>
+                <Link
+                    to="/profile/terms"
+                    className="group border-surface-container hover:bg-surface-container-low flex cursor-pointer items-center justify-between border-b p-4 transition-colors last:border-0"
+                >
+                    <div className="flex items-center gap-4">
+                        <FileText className="h-5 w-5 opacity-70 group-hover:opacity-100" />
+                        <span className="text-sm font-semibold">
+                            서비스 이용약관
+                        </span>
+                    </div>
+                    <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
+                </Link>
                 <button
                     type="button"
                     onClick={handleLogout}

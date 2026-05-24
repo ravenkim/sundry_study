@@ -16,13 +16,27 @@ public class MemberResponse {
         private String userName;
         private String email;
         private String phoneNumber;
+        private Long affiliationId;
+        private String affiliationName;
+        private Long buildingId;
+        private String buildingName;
+        private String userType;
+        private String provider;
 
         public static Detail of(Member member) {
+            LocationNode locationNode = member.getLocationNode();
+            var affiliation = member.getAffiliation();
             return Detail.builder()
                     .memberSeq(member.getSeq())
                     .userName(member.getUserName())
                     .email(member.getEmail())
                     .phoneNumber(member.getPhoneNumber())
+                    .affiliationId(affiliation != null ? affiliation.getSeq() : null)
+                    .affiliationName(affiliation != null ? affiliation.getName() : null)
+                    .buildingId(locationNode != null ? locationNode.getSeq() : null)
+                    .buildingName(locationNode != null ? locationNode.getName() : null)
+                    .userType(member.getUserType() != null ? member.getUserType().name() : UserType.USER.name())
+                    .provider(member.getProvider())
                     .build();
         }
     }

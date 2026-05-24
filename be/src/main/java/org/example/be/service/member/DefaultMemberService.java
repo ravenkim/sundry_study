@@ -1,6 +1,7 @@
 package org.example.be.service.member;
 
 import lombok.RequiredArgsConstructor;
+import org.example.be.api.request.MemberProfileRequest;
 import org.example.be.api.request.MemberRequest;
 import org.example.be.api.response.MemberResponse;
 import org.example.be.domain.model.Affiliation;
@@ -140,6 +141,66 @@ public class DefaultMemberService implements MemberService {
 
         member.setLocationNode(locationNode);
         member.setAffiliation(affiliation);
+
+        return MemberResponse.Detail.of(member);
+    }
+
+    @Override
+    public MemberResponse.Detail findMyProfile(Long memberSeq) {
+        Member member = memberRepository.findById(memberSeq)
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
+        return MemberResponse.Detail.of(member);
+    }
+
+    @Transactional
+    @Override
+    public MemberResponse.Detail updateProfile(Long memberSeq, MemberProfileRequest.Update request) {
+        Member member = memberRepository.findById(memberSeq)
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
+
+        boolean hasEmail = request.getEmail() != null && !request.getEmail().isBlank();
+        boolean hasPhone = request.getPhoneNumber() != null && !request.getPhoneNumber().isBlank();
+        boolean hasPassword = request.getPassword() != null && !request.getPassword().isBlank();
+
+        if (!hasEmail && !hasPhone && !hasPassword) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "변경할 정보를 입력해 주세요.");
+        }
+
+        if (hasEmail) {
+            String normalizedEmail = normalizeEmail(request.getEmail());
+            memberRepository.findByEmailIgnoreCase(normalizedEmail)
+                    .filter(existing -> !existing.getSeq().equals(memberSeq))
+                    .ifPresent(existing -> {
+                        throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 이메일입니다.");
+                    });
+            member.setEmail(normalizedEmail);
+        }
+
+        if (hasPhone) {
+            String normalizedPhone = normalizePhone(request.getPhoneNumber());
+            validatePhoneFormat(normalizedPhone);
+            memberRepository.findByPhoneNumber(normalizedPhone)
+                    .filter(existing -> !existing.getSeq().equals(memberSeq))
+                    .ifPresent(existing -> {
+                        throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 전화번호입니다.");
+                    });
+            member.setPhoneNumber(normalizedPhone);
+        }
+
+        if (hasPassword) {
+            if (request.getPassword().length() < 8) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "비밀번호는 8자 이상이어야 합니다.");
+            }
+            if (member.getProvider() == null || member.getProvider().isBlank()) {
+                if (request.getCurrentPassword() == null || request.getCurrentPassword().isBlank()) {
+                    throw new BusinessLogicException(ErrorCode.INVALID, "현재 비밀번호를 입력해 주세요.");
+                }
+                if (!passwordEncoder.matches(request.getCurrentPassword(), member.getPassword())) {
+                    throw new BusinessLogicException(ErrorCode.INVALID, "현재 비밀번호가 일치하지 않습니다.");
+                }
+            }
+            member.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
 
         return MemberResponse.Detail.of(member);
     }

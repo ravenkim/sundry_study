@@ -1,6 +1,4 @@
-import client from 'src/globals/api/client'
-import { unwrapApiData } from 'src/globals/api/apiUtils'
-import type { ApiResponse } from 'src/globals/api/types'
+import { assignAffiliation } from 'src/globals/api/memberProfileApi'
 
 const PENDING_AFFILIATION_KEY = 'ecoreport_pending_affiliation_id'
 const PENDING_AFFILIATION_NAME_KEY = 'ecoreport_pending_affiliation_name'
@@ -76,11 +74,7 @@ export function clearPendingBuildingId(): void {
 export async function assignAffiliationToMember(
     affiliationId: number,
 ): Promise<void> {
-    const { data } = await client.patch<ApiResponse<unknown>>(
-        '/api/me/affiliation',
-        { affiliationId },
-    )
-    unwrapApiData(data)
+    await assignAffiliation({ affiliationId })
 }
 
 export async function applyPendingAffiliationIfNeeded(): Promise<void> {

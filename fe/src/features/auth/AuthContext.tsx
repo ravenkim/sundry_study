@@ -11,6 +11,7 @@ import {
     getStoredUser,
     isAuthenticated as checkAuth,
     setAuthSession,
+    setStoredUser,
     type StoredUser,
 } from 'src/features/auth/authStorage'
 import {
@@ -32,6 +33,7 @@ interface AuthContextValue {
         buildingName?: string,
         userType?: 'USER' | 'ADMIN',
     ) => void
+    refreshUser: (partial: Partial<StoredUser>) => void
     logout: () => void
 }
 
@@ -89,6 +91,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAuthenticated(false)
     }, [])
 
+    const refreshUser = useCallback((partial: Partial<StoredUser>) => {
+        const current = getStoredUser()
+        if (!current) return
+        const next = { ...current, ...partial }
+        setStoredUser(next)
+        setUser(next)
+    }, [])
+
     const value = useMemo(
         () => ({
             user,
@@ -96,9 +106,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             login,
             register,
             completeOAuthLogin,
+            refreshUser,
             logout,
         }),
-        [user, authenticated, login, register, completeOAuthLogin, logout],
+        [user, authenticated, login, register, completeOAuthLogin, refreshUser, logout],
     )
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

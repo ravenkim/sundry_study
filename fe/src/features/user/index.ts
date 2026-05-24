@@ -1,4 +1,6 @@
 export { UserHome, UserProfile } from './UserHomeProfile'
+export { ProfileEdit } from './ProfileEdit'
+export { ServiceTerms } from './ServiceTerms'
 export { UserPointShop } from './UserPointShop'
 export { UserReportForm } from './UserReportForm'
 export { UserReportResult, UserReportSuccess } from './UserReportResult'
