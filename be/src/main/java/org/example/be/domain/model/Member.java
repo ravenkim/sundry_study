@@ -20,13 +20,28 @@ public class Member {
     private String password;
     private String email;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "affiliation_seq")
+    private Affiliation affiliation;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_node_seq")
+    private LocationNode locationNode;
+
     private String provider;
     private String providerId;
 
-    public Member(String userName, String password, String email) {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_type", nullable = false)
+    private UserType userType;
+
+    public Member(String userName, String password, String email, Affiliation affiliation) {
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.affiliation = affiliation;
     }
-
 }

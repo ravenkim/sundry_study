@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { getStoredUser } from 'src/features/auth/authStorage'
 
 export function useAdminReportsState() {
     const [reports, setReports] = useState<
@@ -11,9 +12,20 @@ export function useAdminReportsState() {
     >([])
 
     useEffect(() => {
+        const user = getStoredUser()
         void import('src/globals/api/adminApi')
             .then(({ getAdminReports }) => getAdminReports())
-            .then(setReports)
+            .then((items) => {
+                if (!user?.buildingName) {
+                    setReports(items)
+                    return
+                }
+                setReports(
+                    items.filter(
+                        (item) => item.buildingName === user.buildingName,
+                    ),
+                )
+            })
     }, [])
 
     const handleStatusUpdate = async (
@@ -45,4 +57,61 @@ export function useAdminDashboardState() {
     }, [])
 
     return stats
+}
+
+export function useAdminGifticonExchangesState() {
+    const [filter, setFilter] = useState<
+        import('src/globals/api/types').GifticonExchangeStatus | 'ALL'
+    >('ALL')
+    const [exchanges, setExchanges] = useState<
+        Awaited<
+            ReturnType<
+                typeof import('src/globals/api/adminApi').getAdminGifticonExchanges
+            >
+        >
+    >([])
+    const [stats, setStats] = useState<Awaited<
+        ReturnType<
+            typeof import('src/globals/api/adminApi').getAdminGifticonExchangeStats
+        >
+    > | null>(null)
+
+    useEffect(() => {
+        void import('src/globals/api/adminApi')
+            .then(({ getAdminGifticonExchanges, getAdminGifticonExchangeStats }) =>
+                Promise.all([
+                    getAdminGifticonExchanges(filter),
+                    getAdminGifticonExchangeStats(),
+                ]),
+            )
+            .then(([nextExchanges, nextStats]) => {
+                setExchanges(nextExchanges)
+                setStats(nextStats)
+            })
+    }, [filter])
+
+    const handleStatusUpdate = async (
+        exchangeId: number,
+        status: 'SENT' | 'REJECTED',
+    ) => {
+        const {
+            updateGifticonExchangeStatus,
+            getAdminGifticonExchangeStats,
+            getAdminGifticonExchanges,
+        } = await import('src/globals/api/adminApi')
+        await updateGifticonExchangeStatus(exchangeId, status)
+        const [nextExchanges, nextStats] = await Promise.all([
+            getAdminGifticonExchanges(filter),
+            getAdminGifticonExchangeStats(),
+        ])
+        setExchanges(nextExchanges)
+        setStats(nextStats)
+        toast.success(
+            status === 'SENT'
+                ? '기프티콘 발송 처리되었습니다.'
+                : '반려되었습니다. 포인트가 환불됩니다.',
+        )
+    }
+
+    return { filter, setFilter, exchanges, stats, handleStatusUpdate }
 }

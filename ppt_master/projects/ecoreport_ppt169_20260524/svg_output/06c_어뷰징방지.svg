@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s06c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s06c_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">어뷰징 방지 메커니즘</text>
+  <rect x="40" y="64" width="220" height="4" rx="2" fill="#EA4335"/>
+  <rect x="268" y="64" width="80" height="4" rx="2" fill="#4CAF50"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">포인트 부정 취득을 원천 차단하는 4단계 방어 레이어</text>
+
+  <!-- 4개 방어 레이어 -->
+  <!-- Layer 1 -->
+  <rect x="24" y="96" width="596" height="160" rx="14" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <rect x="24" y="96" width="596" height="7" rx="3" fill="#EA4335"/>
+  <circle cx="60" cy="148" r="22" fill="#EA4335"/>
+  <text x="60" y="155" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">L1</text>
+  <text x="96" y="132" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#C62828">중복 제보 차단</text>
+  <text x="96" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">동일 장소(LocationNode ID) + 동일 사용자 = 24시간 이내 1회만 허용</text>
+  <text x="96" y="174" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">DB unique constraint: (member_id, location_id, date)</text>
+  <text x="96" y="192" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">중복 시도 시 409 Conflict 반환, 포인트 미지급</text>
+  <rect x="480" y="112" width="128" height="34" rx="17" fill="#EA4335" fill-opacity="0.15" stroke="#EA4335" stroke-width="1"/>
+  <text x="544" y="134" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#C62828">DB 레벨 적용</text>
+
+  <!-- Layer 2 -->
+  <rect x="24" y="270" width="596" height="160" rx="14" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <rect x="24" y="270" width="596" height="7" rx="3" fill="#FFC107"/>
+  <circle cx="60" cy="322" r="22" fill="#FFC107"/>
+  <text x="60" y="329" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">L2</text>
+  <text x="96" y="306" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#E65100">AI 신뢰도 필터</text>
+  <text x="96" y="328" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">YOLOv8n confidence &lt; 0.5 → 판정 보류, 수동 검토 대기 상태</text>
+  <text x="96" y="348" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">Gemini 판정 불일치 시(waste=false) → 포인트 미지급</text>
+  <text x="96" y="368" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">흐릿한 사진, 조작된 이미지 = AI가 낭비 없음으로 판정</text>
+  <rect x="480" y="286" width="128" height="34" rx="17" fill="#FFC107" fill-opacity="0.2" stroke="#FFC107" stroke-width="1"/>
+  <text x="544" y="308" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#E65100">AI 레벨 적용</text>
+
+  <!-- Layer 3 -->
+  <rect x="660" y="96" width="596" height="160" rx="14" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="660" y="96" width="596" height="7" rx="3" fill="#4CAF50"/>
+  <circle cx="696" cy="148" r="22" fill="#4CAF50"/>
+  <text x="696" y="155" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">L3</text>
+  <text x="732" y="132" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#2E7D32">운영 시간 검증</text>
+  <text x="732" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">LocationNode의 운영 스케줄(요일별 ON/OFF) 기반 자동 검증</text>
+  <text x="732" y="174" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">수업 없는 시간대(일요일 새벽 등) 제보는 낮은 점수</text>
+  <text x="732" y="192" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">location_operating_schedule DB 테이블 활용</text>
+  <rect x="1116" y="112" width="128" height="34" rx="17" fill="#4CAF50" fill-opacity="0.15" stroke="#4CAF50" stroke-width="1"/>
+  <text x="1180" y="134" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#2E7D32">BE 레벨 적용</text>
+
+  <!-- Layer 4 -->
+  <rect x="660" y="270" width="596" height="160" rx="14" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5"/>
+  <rect x="660" y="270" width="596" height="7" rx="3" fill="#4285F4"/>
+  <circle cx="696" cy="322" r="22" fill="#4285F4"/>
+  <text x="696" y="329" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="800" fill="#FFFFFF">L4</text>
+  <text x="732" y="306" font-family="Pretendard, system-ui, sans-serif"
+        font-size="17" font-weight="700" fill="#1565C0">관리자 수동 검토</text>
+  <text x="732" y="328" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">AI 신뢰도 낮은 제보는 PENDING 상태 → 관리자 대시보드 큐</text>
+  <text x="732" y="348" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">관리자 APPROVE/REJECT → 포인트 확정 또는 취소</text>
+  <text x="732" y="368" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">반복 어뷰징 사용자 계정 제한(ROLE 변경)</text>
+  <rect x="1116" y="286" width="128" height="34" rx="17" fill="#4285F4" fill-opacity="0.12" stroke="#4285F4" stroke-width="1"/>
+  <text x="1180" y="308" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#1565C0">운영 레벨 적용</text>
+
+  <!-- 하단 요약 -->
+  <rect x="24" y="450" width="1232" height="72" rx="12" fill="#F1F8E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/shield-check" x="44" y="466" width="30" height="30" fill="#4CAF50"/>
+  <text x="88" y="481" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">다층 방어로 포인트 부정 취득 원천 차단</text>
+  <text x="88" y="503" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">L1(DB중복방지) → L2(AI신뢰도) → L3(운영시간) → L4(관리자검토) — 각 레이어 독립 동작</text>
+
+  <!-- 어뷰징 사례 vs 차단 -->
+  <rect x="24" y="540" width="596" height="144" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="44" y="566" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#C62828">예상 어뷰징 시도</text>
+  <text x="44" y="588" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 같은 장소 여러 번 촬영하여 포인트 중복 수령</text>
+  <text x="44" y="606" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 어두운/흐린 사진으로 AI 속이기</text>
+  <text x="44" y="624" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 실제로 켜져 있지 않은 설비 신고</text>
+  <text x="44" y="642" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">• 새벽 등 운영 외 시간대 조작 제보</text>
+  <text x="44" y="660" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">→ L1~L4 레이어가 각각 차단</text>
+
+  <rect x="660" y="540" width="596" height="144" rx="12" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="680" y="566" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">차단 방식</text>
+  <text x="680" y="588" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ DB unique 제약으로 409 반환, 포인트 0</text>
+  <text x="680" y="606" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ YOLO confidence &lt; 0.5 → 보류 후 관리자 검토</text>
+  <text x="680" y="624" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ Gemini waste=false → 즉시 포인트 0 반환</text>
+  <text x="680" y="642" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ 운영시간 외 감점 + 관리자 REJECT 가능</text>
+  <text x="680" y="660" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">→ 반복 시 계정 제한</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">06c / 30</text>
+</svg>

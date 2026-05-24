@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s09_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s09_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1A237E">경쟁 우위 분석</text>
+  <path fill="#4285F4" d="M42,64 H238 A2,2 0 0 1 240,66 V66 A2,2 0 0 1 238,68 H42 A2,2 0 0 1 40,66 V66 A2,2 0 0 1 42,64 Z" />
+  <path fill="#4CAF50" d="M250,64 H326 A2,2 0 0 1 328,66 V66 A2,2 0 0 1 326,68 H250 A2,2 0 0 1 248,66 V66 A2,2 0 0 1 250,64 Z" />
+
+  
+  
+  <path fill="#1A237E" d="M32,80 H1248 A8,8 0 0 1 1256,88 V120 A8,8 0 0 1 1248,128 H32 A8,8 0 0 1 24,120 V88 A8,8 0 0 1 32,80 Z" />
+
+  <text x="200" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#9AA0A6">비교 항목</text>
+  <text x="420" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#EA4335">IoT 센서</text>
+  <text x="620" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFC107">관리인 순찰</text>
+  <text x="820" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#9AA0A6">캠페인</text>
+  <text x="1090" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="800" fill="#4CAF50">EcoReport ✨</text>
+
+  
+  <line x1="320" y1="80" x2="320" y2="658" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.2" />
+  <line x1="520" y1="80" x2="520" y2="658" stroke="#E8EAED" stroke-width="1" />
+  <line x1="720" y1="80" x2="720" y2="658" stroke="#E8EAED" stroke-width="1" />
+  <line x1="920" y1="80" x2="920" y2="658" stroke="#E8EAED" stroke-width="1" />
+
+  
+  <rect x="925" y="80" width="331" height="578" fill="#E8F5E9" fill-opacity="0.5" />
+
+  
+  <rect x="24" y="128" width="1232" height="52" rx="0" fill="#F8F9FA" />
+  <text x="44" y="158" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">초기 도입 비용</text>
+  <text x="420" y="158" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="420" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">2억+ 투자</text>
+  <text x="620" y="158" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#FFC107">⚠️</text>
+  <text x="620" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#E65100">인건비 부담</text>
+  <text x="820" y="158" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="820" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">거의 무료</text>
+  <text x="1090" y="158" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅✅</text>
+  <text x="1090" y="172" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">설비 투자 Zero</text>
+
+  
+  <rect x="24" y="180" width="1232" height="52" rx="0" fill="#FFFFFF" />
+  <text x="44" y="210" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">24시간 커버리지</text>
+  <text x="420" y="210" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="420" y="224" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">센서 자동</text>
+  <text x="620" y="210" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="620" y="224" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">야간 공백</text>
+  <text x="820" y="210" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="820" y="224" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">인식 시간 한정</text>
+  <text x="1090" y="210" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="1090" y="224" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">학생이 항시 대기</text>
+
+  
+  <rect x="24" y="232" width="1232" height="52" rx="0" fill="#F8F9FA" />
+  <text x="44" y="262" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">에너지 데이터 수집</text>
+  <text x="420" y="262" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="420" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">정밀 계측</text>
+  <text x="620" y="262" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="620" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">데이터 없음</text>
+  <text x="820" y="262" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="820" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">측정 불가</text>
+  <text x="1090" y="262" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="1090" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">제보마다 자동 축적</text>
+
+  
+  <rect x="24" y="284" width="1232" height="52" rx="0" fill="#FFFFFF" />
+  <text x="44" y="314" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">참여 지속성</text>
+  <text x="420" y="314" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="420" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">자동 동작</text>
+  <text x="620" y="314" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#FFC107">⚠️</text>
+  <text x="620" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#E65100">담당자 의존</text>
+  <text x="820" y="314" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="820" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">캠페인 피로도</text>
+  <text x="1090" y="314" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅✅</text>
+  <text x="1090" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">포인트로 자발적 참여</text>
+
+  
+  <rect x="24" y="336" width="1232" height="52" rx="0" fill="#F8F9FA" />
+  <text x="44" y="366" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">확장성</text>
+  <text x="420" y="366" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="420" y="380" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">공사 병목</text>
+  <text x="620" y="366" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="620" y="380" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">인력 선형 증가</text>
+  <text x="820" y="366" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="820" y="380" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">비용 낮음</text>
+  <text x="1090" y="366" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅✅</text>
+  <text x="1090" y="380" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">SaaS · API 확장</text>
+
+  
+  <rect x="24" y="388" width="1232" height="52" rx="0" fill="#FFFFFF" />
+  <text x="44" y="418" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">AI 자동 판별</text>
+  <text x="420" y="418" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅</text>
+  <text x="420" y="432" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">센서 자동 감지</text>
+  <text x="620" y="418" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="620" y="432" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">사람이 직접 확인</text>
+  <text x="820" y="418" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="820" y="432" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#EA4335">판별 없음</text>
+  <text x="1090" y="418" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅✅</text>
+  <text x="1090" y="432" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">YOLOv8+Gemini 자동</text>
+
+  
+  <rect x="24" y="440" width="1232" height="52" rx="0" fill="#F8F9FA" />
+  <text x="44" y="470" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1A252F">사용자 보상 시스템</text>
+  <text x="420" y="470" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="620" y="470" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#EA4335">❌</text>
+  <text x="820" y="470" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#FFC107">⚠️</text>
+  <text x="820" y="484" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#E65100">도덕적 보상만</text>
+  <text x="1090" y="470" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">✅✅</text>
+  <text x="1090" y="484" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">포인트→기프티콘</text>
+
+  
+  <rect x="24" y="504" width="1232" height="52" rx="0" fill="#1A237E" />
+  <text x="200" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">종합 점수</text>
+  <text x="420" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" font-weight="800" fill="#EA4335">3/7</text>
+  <text x="620" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" font-weight="800" fill="#FFC107">2/7</text>
+  <text x="820" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" font-weight="800" fill="#9AA0A6">3/7</text>
+  <text x="1090" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="28" font-weight="800" fill="#4CAF50">7/7 🏆</text>
+
+  
+  <path fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5" d="M36,568 H1244 A12,12 0 0 1 1256,580 V660 A12,12 0 0 1 1244,672 H36 A12,12 0 0 1 24,660 V580 A12,12 0 0 1 36,568 Z" />
+  
+  <g transform="translate(44.0, 588.0) scale(1.3333333333333333)" fill="none" stroke="#4CAF50">
+    <path d="M8 21l8 0" />
+    <path d="M12 17l0 4" />
+    <path d="M7 4l10 0" />
+    <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
+    <path d="M3 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M17 9a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+  </g>
+  <text x="92" y="598" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">EcoReport만의 차별점</text>
+  <text x="92" y="620" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">① 설비 투자 없이 즉시 도입 가능 — IoT와 동등한 커버리지를 1/100 비용으로</text>
+  <text x="92" y="640" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">② 크라우드소싱 + AI의 결합 — 인간의 눈과 AI 판별의 시너지</text>
+  <text x="92" y="660" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">③ 포인트 보상으로 지속 가능한 참여 동기 — 의무 아닌 자발적 절약 운동</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">09 / 30</text>
+</svg>

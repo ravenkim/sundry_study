@@ -88,14 +88,29 @@ export const UserReportDetail = () => {
                     )}
                     <div className="flex justify-between">
                         <span className="text-on-surface-variant">
-                            적립 포인트
+                            {report.status === 'APPROVED'
+                                ? '적립 포인트'
+                                : '예상 포인트'}
                         </span>
                         <span className="text-primary font-bold">
                             {report.pointAwarded > 0
                                 ? `+${report.pointAwarded}P`
-                                : '-'}
+                                : report.estimatedPoint && report.estimatedPoint > 0
+                                  ? `약 +${report.estimatedPoint}P`
+                                  : '-'}
                         </span>
                     </div>
+                    {report.offTimeMinutes != null && report.offTimeMinutes > 0 && (
+                        <div className="flex justify-between">
+                            <span className="text-on-surface-variant">
+                                예상 방치 시간
+                            </span>
+                            <span className="font-medium">
+                                {Math.floor(report.offTimeMinutes / 60)}시간{' '}
+                                {report.offTimeMinutes % 60}분
+                            </span>
+                        </div>
+                    )}
                 </div>
                 {report.aiResult?.message && (
                     <p className="bg-surface-container-low text-on-surface-variant rounded-lg p-3 text-sm">

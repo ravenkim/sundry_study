@@ -21,7 +21,8 @@ services:
 
   be:
     build:
-      context: ./be
+      context: .
+      dockerfile: be/Dockerfile
       args:
         DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-be-deps:local}
     container_name: ecoreport-be
@@ -42,6 +43,7 @@ services:
       args:
         DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-fe-deps:local}
         VITE_API_HOST: ${VITE_API_HOST:-}
+        VITE_USE_MOCK: ${VITE_USE_MOCK:-true}
     container_name: ecoreport-fe
     ports:
       - "8081:80"

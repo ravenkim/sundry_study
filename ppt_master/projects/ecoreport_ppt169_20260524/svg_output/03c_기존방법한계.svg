@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s03c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s03c_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">기존 해결책의 한계</text>
+  <rect x="40" y="64" width="200" height="4" rx="2" fill="#EA4335"/>
+  <rect x="248" y="64" width="80" height="4" rx="2" fill="#FFC107"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">왜 지금까지 해결되지 않았는가?</text>
+
+  <!-- 3개 비교 카드 (각 방법) -->
+
+  <!-- IoT 센서 -->
+  <rect x="24" y="96" width="390" height="520" rx="16" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <rect x="24" y="96" width="390" height="8" rx="4" fill="#EA4335"/>
+  <use data-icon="tabler-outline/cpu" x="44" y="116" width="32" height="32" fill="#C62828"/>
+  <text x="88" y="134" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="700" fill="#C62828">IoT 센서 방식</text>
+  <text x="88" y="152" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">스마트 전등·점유 감지기 설치</text>
+  <line x1="44" y1="168" x2="394" y2="168" stroke="#EF9A9A" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- 한계 항목들 -->
+  <use data-icon="tabler-outline/x" x="44" y="182" width="18" height="18" fill="#EA4335"/>
+  <text x="70" y="196" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#C62828">초기 비용 과다</text>
+  <text x="70" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">강의실 1개당 IoT 키트 ~20만원</text>
+  <text x="70" y="230" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">1,000개 강의실 → 최소 2억원 투자 필요</text>
+
+  <use data-icon="tabler-outline/x" x="44" y="252" width="18" height="18" fill="#EA4335"/>
+  <text x="70" y="266" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#C62828">유지보수 부담</text>
+  <text x="70" y="284" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">배터리 교체, 오작동, 펌웨어 업데이트</text>
+  <text x="70" y="300" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">전담 관리 인력 추가 배치 필요</text>
+
+  <use data-icon="tabler-outline/x" x="44" y="322" width="18" height="18" fill="#EA4335"/>
+  <text x="70" y="336" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#C62828">설치 제약</text>
+  <text x="70" y="354" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">기존 건물 전기 공사 동반, 인허가 필요</text>
+  <text x="70" y="370" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">노후 건물 적용 사실상 불가</text>
+
+  <use data-icon="tabler-outline/x" x="44" y="392" width="18" height="18" fill="#EA4335"/>
+  <text x="70" y="406" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#C62828">규모 확장 어려움</text>
+  <text x="70" y="424" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">예산·공사 병목으로 전체 도입까지 수년</text>
+
+  <rect x="44" y="452" width="350" height="60" rx="10" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="219" y="476" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#C62828">도입 장벽 ★★★★★</text>
+  <text x="219" y="498" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">예산 없는 학교는 시작도 못 함</text>
+
+  <!-- 관리인 순찰 -->
+  <rect x="440" y="96" width="390" height="520" rx="16" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <rect x="440" y="96" width="390" height="8" rx="4" fill="#FFC107"/>
+  <use data-icon="tabler-outline/user-check" x="460" y="116" width="32" height="32" fill="#E65100"/>
+  <text x="504" y="134" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="700" fill="#E65100">관리인 순찰 방식</text>
+  <text x="504" y="152" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">시설 담당자가 직접 순회 점검</text>
+  <line x1="460" y1="168" x2="810" y2="168" stroke="#FFD54F" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <use data-icon="tabler-outline/x" x="460" y="182" width="18" height="18" fill="#FFC107"/>
+  <text x="486" y="196" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#E65100">커버리지 한계</text>
+  <text x="486" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">담당자 1인이 수십~수백 개 강의실 순찰</text>
+  <text x="486" y="230" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">야간·주말엔 순찰 인력 자체가 없음</text>
+
+  <use data-icon="tabler-outline/x" x="460" y="252" width="18" height="18" fill="#FFC107"/>
+  <text x="486" y="266" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#E65100">실시간 대응 불가</text>
+  <text x="486" y="284" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">낭비 발생 시점과 감지 시점 간 시간 차</text>
+  <text x="486" y="300" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">발견 전까지 수 시간 낭비 지속</text>
+
+  <use data-icon="tabler-outline/x" x="460" y="322" width="18" height="18" fill="#FFC107"/>
+  <text x="486" y="336" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#E65100">인건비 부담</text>
+  <text x="486" y="354" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">담당자 추가 고용 시 연 3,000만원+ 비용</text>
+  <text x="486" y="370" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">절약 효과 vs 인건비 ROI 역전 가능</text>
+
+  <use data-icon="tabler-outline/x" x="460" y="392" width="18" height="18" fill="#FFC107"/>
+  <text x="486" y="406" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#E65100">데이터 부재</text>
+  <text x="486" y="424" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">어느 강의실이 언제 낭비되는지 기록 없음</text>
+
+  <rect x="460" y="452" width="350" height="60" rx="10" fill="#FFF9C4" stroke="#FFD54F" stroke-width="1"/>
+  <text x="635" y="476" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#E65100">지속 불가능성 ★★★★☆</text>
+  <text x="635" y="498" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">사람이 모든 공간을 커버할 수 없음</text>
+
+  <!-- 절약 캠페인 -->
+  <rect x="856" y="96" width="400" height="520" rx="16" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="856" y="96" width="400" height="8" rx="4" fill="#4CAF50"/>
+  <use data-icon="tabler-outline/speakerphone" x="876" y="116" width="32" height="32" fill="#2E7D32"/>
+  <text x="920" y="134" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="700" fill="#2E7D32">절약 캠페인 방식</text>
+  <text x="920" y="152" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">포스터·메시지로 행동 변화 유도</text>
+  <line x1="876" y1="168" x2="1236" y2="168" stroke="#A5D6A7" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <use data-icon="tabler-outline/x" x="876" y="182" width="18" height="18" fill="#4CAF50"/>
+  <text x="902" y="196" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#2E7D32">낮은 참여율</text>
+  <text x="902" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">인식 변화 캠페인 효과 단기간에 소멸</text>
+  <text x="902" y="230" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">강제성 없어 습관 형성 어려움</text>
+
+  <use data-icon="tabler-outline/x" x="876" y="252" width="18" height="18" fill="#4CAF50"/>
+  <text x="902" y="266" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#2E7D32">책임 주체 불명확</text>
+  <text x="902" y="284" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">"누군가 끌 것"이라는 방관자 효과</text>
+  <text x="902" y="300" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">마지막 사용자 책임 소재 불분명</text>
+
+  <use data-icon="tabler-outline/x" x="876" y="322" width="18" height="18" fill="#4CAF50"/>
+  <text x="902" y="336" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#2E7D32">측정·검증 불가</text>
+  <text x="902" y="354" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">캠페인 전후 실제 절약 효과 측정 어려움</text>
+  <text x="902" y="370" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">데이터 없이 개선 방향 설정 불가</text>
+
+  <use data-icon="tabler-outline/x" x="876" y="392" width="18" height="18" fill="#4CAF50"/>
+  <text x="902" y="406" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#2E7D32">반복 피로도</text>
+  <text x="902" y="424" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">학기마다 캠페인 반복 — 신선도 감소</text>
+
+  <rect x="876" y="452" width="360" height="60" rx="10" fill="#C8E6C9" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="1056" y="476" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">지속성 부족 ★★★☆☆</text>
+  <text x="1056" y="498" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">인센티브 없이는 지속 참여 불가</text>
+
+  <!-- 하단 결론 -->
+  <rect x="24" y="632" width="1232" height="72" rx="12" fill="#1A237E"/>
+  <text x="640" y="660" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#FFFFFF">→ 세 방법 모두 "비용·커버리지·지속성" 중 하나 이상에서 실패</text>
+  <text x="640" y="686" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">EcoReport: 설비 투자 Zero + 캠퍼스 全 커버 + 포인트로 지속 참여</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">03c / 30</text>
+</svg>

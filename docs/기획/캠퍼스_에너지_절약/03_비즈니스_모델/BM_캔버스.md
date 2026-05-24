@@ -34,7 +34,7 @@
 
 ### 핵심 자원
 - Gemini Vision API 기반 AI 판별 엔진
-- 건물·강의실 DB
+- 장소 트리 DB (LocationNode)
 - 포인트 정산 엔진
 - 개발팀 (BE: 차성호·이은총, FE·기획: 김해준)
 

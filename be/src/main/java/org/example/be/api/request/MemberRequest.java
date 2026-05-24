@@ -18,6 +18,10 @@ public class MemberRequest {
         private String password;
         @NotEmpty(message="Enter the email.")
         private String email;
+        @NotEmpty(message="Enter the phoneNumber.")
+        private String phoneNumber;
+        private Long affiliation;
+        private Long buildingId;
     }
 
     @Getter

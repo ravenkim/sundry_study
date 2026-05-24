@@ -54,53 +54,200 @@
 
 ---
 
-## 제보 (Report)
+## 제보 (Report) — Spring Boot
 
-### POST /reports
-제보 사진 업로드 + AI 판별 요청
+> 실제 엔드포인트: `POST /api/reports` (JWT 필수). 내부적으로 Cloud Run `POST /analyze`를 호출한다.
+
+### POST /api/reports
+제보 사진 업로드 + AI 판별 후 저장
+
+**인증**: Bearer JWT (`memberSeq` claim)
 
 **Request**: `multipart/form-data`
+
 | 필드 | 타입 | 필수 | 설명 |
 |------|------|------|------|
 | image | File | Y | 제보 사진 |
+| buildingId | Long | Y | 건물 ID |
+| roomName | String | Y | 강의실·호실 |
+| description | String | N | 제보 메모 |
+| isLightWasting | boolean | N | 사용자 체크 (AI가 `WASTE_DETECTED` 시 덮어씀) |
+| isAcWasting | boolean | N | 사용자 체크 (AI가 `WASTE_DETECTED` 시 덮어씀) |
+| isHeaterWasting | boolean | N | 히터 낭비 |
+| isOtherWasting | boolean | N | 기타 |
 
-**Response 200 — PASS (사람 있음 / 모두 꺼짐)**
+**처리 로직**
+1. BE → LocationNode(LEAF) 조회 — 자원 수량·요일별 운영시간
+2. BE → Cloud Run `POST /analyze` (이미지 + `metadata` JSON 전달)
+3. `WASTE_DETECTED`만 Report `PENDING` 저장 — AI `expected`(원) 파싱 → `estimatedSavingsKrw`, `estimatedPoint` 저장
+4. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
+
+**Response 200 — 성공 (`WASTE_DETECTED`만 해당)**
+```json
+{
+  "code": 10003,
+  "body": {
+    "reportId": 42,
+    "status": "PENDING",
+    "message": "제보가 정상적으로 접수되었습니다. AI 판별 프로세스를 시작합니다."
+  }
+}
+```
+
+**Response 4xx — AI PASS (정상·사용 중)**
+```json
+{
+  "code": 1005,
+  "message": "정상적인 강의실 상태이거나 사람이 있어 제보할 수 없습니다: 강의실에 2명의 사람이 있습니다. 정상 상태입니다."
+}
+```
+
+**Response 4xx — AI ERROR (강의실 미인식)**
+```json
+{
+  "code": 1005,
+  "message": "강의실로 인식되지 않거나 분석할 수 없는 사진입니다: 강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
+}
+```
+
+**Response 5xx — AI 서버 통신 실패**
+```json
+{
+  "code": 5003,
+  "message": "AI 분석 서버와 통신할 수 없습니다."
+}
+```
+
+> AI Service raw 응답 스키마는 아래 [AI Service (FastAPI)](#ai-service-fastapi--cloud-run) 참고.
+
+---
+
+## AI Service (FastAPI — Cloud Run)
+
+> Base URL (운영): `https://campus-energy-api-992786420144.us-central1.run.app`  
+> Spring Boot BE가 내부 호출. 클라이언트는 직접 호출하지 않음.
+
+### POST /analyze
+강의실 이미지 AI 판별 + 절약량 산출 (YOLO + Gemini 통합)
+
+**Request**: `multipart/form-data`
+
+| 필드 | 타입 | 필수 | 설명 |
+|------|------|------|------|
+| file | File | Y | 분석할 이미지 |
+| metadata | String (JSON) | Y | 강의실·제보 시각 메타데이터 |
+
+**metadata JSON 예시**
+
+```json
+{
+  "reportedAt": "2026-05-24T15:00:00",
+  "acCount": 1,
+  "fluorescentCount": 10,
+  "ledCount": 2,
+  "operatingSchedules": [
+    {
+      "dayOfWeek": 1,
+      "closed": false,
+      "powerOnTime": "07:00",
+      "powerOffTime": "22:00"
+    }
+  ]
+}
+```
+
+- `dayOfWeek`: 1=월 … 7=일
+- `operatingSchedules`: LEAF 요일별 운영시간 (DB `location_operating_schedule_db`와 동일)
+
+**Response 200 — PASS (사람 있음 / 모두 꺼짐 / 운영시간 내)**
 ```json
 {
   "result": "PASS",
-  "message": "강의실에 2명의 사람이 있습니다. 정상 상태입니다."
+  "message": "강의실에 2명의 사람이 있습니다. 정상 상태입니다.",
+  "expected": "0원"
 }
 ```
 
-**Response 200 — WASTE_DETECTED (에어컨 탐지됨)**
+**Response 200 — WASTE_DETECTED**
 ```json
 {
   "result": "WASTE_DETECTED",
-  "message": "빈 강의실에서 에너지 낭비가 발견되었습니다!",
-  "ac_status": "ON",
+  "message": "Energy waste detected!",
+  "ac_status": "OFF",
   "light_status": "ON",
-  "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated."
+  "reason": "Ceiling lights are on in an empty classroom during off-hours.",
+  "expected": "494원",
+  "expectedKwh": "3.8 kWh"
 }
 ```
 
-**Response 200 — WASTE_DETECTED (에어컨 미탐지, 조명만 켜짐)**
-```json
-{
-  "result": "WASTE_DETECTED",
-  "message": "[WARNING] 에어컨은 찾을 수 없으나, 빈 강의실에 조명이 켜져 있습니다!",
-  "ac_status": "UNKNOWN",
-  "light_status": "ON",
-  "reason": "Ceiling fluorescent lights are clearly on. No air conditioner detected in the image."
-}
-```
-
-**Response 200 — ERROR (강의실 미인식 / 서버 오류)**
+**Response 200 — ERROR (강의실 미인식)**
 ```json
 {
   "result": "ERROR",
   "message": "강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
 }
 ```
+
+**Response 500 — 서버 내부 오류**
+```json
+{
+  "result": "ERROR",
+  "message": "서버 내부 오류: ..."
+}
+```
+
+**응답 필드**
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| result | string | `PASS` / `ERROR` / `WASTE_DETECTED` |
+| message | string | 사용자·로그용 메시지 |
+| ac_status | string | `ON` / `OFF` / `UNKNOWN` (선택) |
+| light_status | string | `ON` / `OFF` (선택) |
+| reason | string | Gemini 판단 근거 (선택) |
+| expected | string | Gemini 산출 예상 절약 금액, 원화 문자열 (예: `"494원"`, `"0원"`) |
+| expectedKwh | string | Gemini 산출 예상 절약 전기량 (예: `"3.8 kWh"`, `"0 kWh"`) |
+
+**BE 저장 매핑** (`WASTE_DETECTED` 시):
+- `expected` → `estimatedSavingsKrw` (숫자 파싱)
+- `expectedKwh` → `estimated_kwh` (DECIMAL 파싱)
+- `estimatedPoint` = `round(estimatedSavingsKrw × 0.18)`
+
+소스: [`ai/for_deploy/campus_api/main.py`](../../../ai/for_deploy/campus_api/main.py)
+
+---
+
+## 절약량 (Savings)
+
+### GET /api/savings/buildings/me
+내 제보가 반영된 **건물별 절약 전기** 집계 (JWT 필수)
+
+**집계 대상**: 본인 제보 중 `status` ∈ `PENDING`, `APPROVED` 이고 `estimated_kwh > 0`
+
+**Response 200**
+```json
+{
+  "code": 10020,
+  "body": [
+    {
+      "buildingId": 1,
+      "buildingName": "공학관 A동",
+      "totalKwh": 86.4,
+      "thisMonthKwh": 52.1,
+      "reportCount": 8
+    }
+  ]
+}
+```
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| buildingId | Long | 루트 GROUP 노드 seq |
+| buildingName | string | 건물명 |
+| totalKwh | number | 누적 절약 kWh |
+| thisMonthKwh | number | 이번 달 절약 kWh |
+| reportCount | int | 집계 제보 건수 |
 
 ---
 
@@ -118,8 +265,11 @@
       {
         "reportId": 42,
         "roomName": "공학관 A동 303호",
-        "status": "APPROVED",
+        "status": "PENDING",
         "pointAwarded": 89,
+        "estimatedPoint": 89,
+        "offTimeMinutes": 420,
+        "estimatedKwh": "0.7980",
         "createdAt": "2026-05-20T14:03:22"
       }
     ],
@@ -221,29 +371,108 @@
 
 ## 건물 / 장소
 
-### GET /buildings
-등록된 건물 목록 조회
+> **용어**: 학생 UX는 "건물·강의실", API/DB는 `LocationNode` 트리(GROUP/LEAF). 상세: [장소_관리_모델.md](./장소_관리_모델.md)
+
+### GET /api/affiliations ✅
+소속(캠퍼스) 목록 — 회원가입·관리자 장소 관리용. **permitAll**
 
 **Response 200**
 ```json
 {
-  "code": "SUCCESS",
-  "data": [
+  "code": 10009,
+  "body": [
+    {
+      "affiliationId": 1,
+      "name": "삼육대학교",
+      "address": "서울특별시 ..."
+    }
+  ]
+}
+```
+
+---
+
+### GET /api/buildings ✅
+등록된 장소 트리 조회 (학생 제보·장소 선택용). JWT 있으면 회원 소속·담당 구역 scope 필터.
+
+**Response 200**
+```json
+{
+  "code": 10002,
+  "body": [
     {
       "buildingId": 1,
-      "name": "공학관 A동",
-      "locations": [
+      "name": "공학관",
+      "nodeKind": "GROUP",
+      "affiliationId": 1,
+      "affiliationName": "삼육대학교",
+      "children": [
         {
           "locationId": 10,
           "name": "303호",
-          "type": "CLASSROOM",
-          "floor": 3
+          "nodeKind": "LEAF",
+          "children": []
         },
         {
-          "locationId": 20,
-          "name": "1층 공용 화장실",
-          "type": "RESTROOM",
-          "floor": 1
+          "locationId": 11,
+          "name": "2층",
+          "nodeKind": "GROUP",
+          "children": [
+            {
+              "locationId": 12,
+              "name": "201호",
+              "nodeKind": "LEAF",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| `buildingId` | 루트 GROUP 노드 ID (레거시 명칭, 실제는 LocationNode PK) |
+| `nodeKind` | `GROUP` (하위 추가 가능) / `LEAF` (제보 선택 대상) |
+| `children` | 하위 노드 재귀 배열 (max depth 3) |
+
+---
+
+## 관리자 — 장소 (LocationNode) ✅
+
+> Base URL: `/api/admin/location-nodes` | **ADMIN** JWT 필요 (`UserType.ADMIN`)
+
+### GET /api/admin/location-nodes/tree
+관리자 장소 트리 조회
+
+**Query Params**: `affiliationId=1` (필수)
+
+**Response 200**
+```json
+{
+  "code": 10010,
+  "body": [
+    {
+      "id": 1,
+      "name": "공학관",
+      "nodeKind": "GROUP",
+      "depth": 1,
+      "sortOrder": 0,
+      "locationType": null,
+      "children": [
+        {
+          "id": 10,
+          "name": "303호",
+          "nodeKind": "LEAF",
+          "depth": 2,
+          "sortOrder": 0,
+          "locationType": null,
+          "acCount": 1,
+          "fluorescentCount": 8,
+          "ledCount": 2,
+          "children": []
         }
       ]
     }
@@ -252,6 +481,82 @@
 ```
 
 ---
+
+### POST /api/admin/location-nodes
+장소 노드 생성
+
+**Request Body — LEAF (항목, Phase 1 자원 수량)**
+```json
+{
+  "parentId": 1,
+  "affiliationId": 1,
+  "name": "303호",
+  "nodeKind": "LEAF",
+  "acCount": 1,
+  "fluorescentCount": 8,
+  "ledCount": 2,
+  "operatingSchedules": [
+    { "dayOfWeek": 1, "closed": false, "powerOnTime": "07:00", "powerOffTime": "22:00" },
+    { "dayOfWeek": 7, "closed": true }
+  ]
+}
+```
+
+| 필드 | 필수 | 설명 |
+|------|------|------|
+| `parentId` | 루트 제외 시 | 상위 GROUP 노드 ID (루트 생성 시 null) |
+| `affiliationId` | Y | 소속 ID |
+| `name` | Y | 표시 이름 |
+| `nodeKind` | Y | `GROUP` 또는 `LEAF` |
+| `acCount` | LEAF 선택 | 에어컨 대수 (기본 0) |
+| `fluorescentCount` | LEAF 선택 | 형광등 개수 (기본 0) |
+| `ledCount` | LEAF 선택 | LED 조명 개수 (기본 0) |
+| `operatingSchedules` | LEAF 선택 | 요일별 운영시간 7행 (null 시 기본값) |
+
+**Response 200**: `code` 10011, `body` — 생성된 TreeNode
+
+---
+
+### PATCH /api/admin/location-nodes/{id}
+장소 노드 수정
+
+**Request Body**
+```json
+{
+  "name": "303호 (대형)",
+  "sortOrder": 1,
+  "acCount": 2,
+  "fluorescentCount": 10,
+  "ledCount": 4,
+  "operatingSchedules": [
+    { "dayOfWeek": 1, "closed": false, "powerOnTime": "07:00", "powerOffTime": "22:00" }
+  ]
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| `name` | 표시 이름 |
+| `sortOrder` | 정렬 순서 (선택) |
+| `acCount` | LEAF만 — 에어컨 대수 (선택) |
+| `fluorescentCount` | LEAF만 — 형광등 개수 (선택) |
+| `ledCount` | LEAF만 — LED 개수 (선택) |
+| `operatingSchedules` | LEAF만 — 요일별 운영시간 (선택) |
+
+**Response 200**: `code` 10012
+
+---
+
+### DELETE /api/admin/location-nodes/{id}
+장소 노드 삭제 (하위 노드·연결 Report 있으면 거부)
+
+**Response 200**: `code` 10013, `body`: null
+
+---
+
+## [목표] 향후 확장 — 자원·LocationResource (미구현)
+
+> 아래는 P1 목표 API. 장소 CRUD는 LocationNode API로 대체됨.
 
 ### GET /buildings/{buildingId}/locations/{locationId}/resources
 특정 장소의 등록된 자원 목록 조회 (제보 시 선택용)
@@ -369,77 +674,13 @@
 
 ## 관리자 API (Admin)
 
-> Base URL: `/admin` | 관리자 전용 JWT 필요
+> Base URL: `/api/admin` | 관리자 전용 JWT 필요
 
-### POST /admin/buildings
-건물 등록
+### GET /api/admin/reports (미구현 — FE mock)
 
-**Request Body**
-```json
-{
-  "name": "공학관 A동",
-  "address": "서울시 XX구 XX로 1",
-  "electricityRate": 130,
-  "waterRate": 1.2
-}
-```
+FE `adminApi` mock 데이터 사용. mock 응답에 **`locationPath`** (상위 그룹 경로 배열) + **`locationName`** (LEAF 항목명) 필드 포함 — `ReportLocationCell`에서 상위(작게)·항목(크게) 표시.
 
----
-
-### POST /admin/buildings/{buildingId}/locations
-장소 등록 (장소 유형 자유 선택)
-
-**Request Body**
-```json
-{
-  "name": "303호",
-  "type": "CLASSROOM",
-  "floor": 3,
-  "description": "공학관 3층 대형 강의실"
-}
-```
-
-**LocationType 선택 가능 값**: `CLASSROOM`, `SEMINAR_ROOM`, `OFFICE`, `RESTROOM`, `KITCHEN`, `CORRIDOR`, `LOUNGE`, `LAB`, `LIBRARY`, `OTHER`
-
----
-
-### POST /admin/buildings/{buildingId}/locations/{locationId}/resources
-장소에 자원 등록 (ResourceType 마스터에서 선택)
-
-**Request Body**
-```json
-{
-  "locationResources": [
-    {
-      "resourceTypeId": 1,
-      "quantity": 10,
-      "customValue": null,
-      "isReportable": true,
-      "notes": "천장 매립형 LED"
-    },
-    {
-      "resourceTypeId": 2,
-      "quantity": 1,
-      "customValue": 2000.0,
-      "isReportable": true,
-      "notes": "실제 측정 소비전력 2000W"
-    },
-    {
-      "resourceTypeId": 9,
-      "quantity": 2,
-      "customValue": null,
-      "isReportable": true,
-      "notes": null
-    }
-  ]
-}
-```
-
----
-
-### GET /admin/reports (업데이트)
-
-**Response 200**
+**Response 200** (목표 스키마)
 ```json
 {
   "code": "SUCCESS",
@@ -471,7 +712,7 @@
 
 ---
 
-### GET /admin/dashboard (업데이트)
+### GET /api/admin/dashboard (미구현 — FE mock)
 
 **Query Params**: `buildingId=1&year=2026&month=5`
 

@@ -2,6 +2,9 @@ package org.example.be.service.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.be.domain.model.Member;
+import org.example.be.domain.model.MemberPoint;
+import org.example.be.domain.model.UserType;
+import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -23,6 +26,7 @@ import java.util.UUID;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
+    private final MemberPointRepository memberPointRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -51,9 +55,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             member.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
             member.setProvider(provider);
             member.setProviderId(providerId);
+            member.setUserType(UserType.USER);
 
-            // save() 내부에서 em.persist()가 호출되어 영속성 컨텍스트에 관리됨
             memberRepository.save(member);
+            memberPointRepository.save(new MemberPoint(member));
         } else {
             member = optionalMember.get();
             // 기존 유저 정보 업데이트가 필요하다면 여기서 member.setUserName()만 해도

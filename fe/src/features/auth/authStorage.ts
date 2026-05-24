@@ -4,6 +4,9 @@ const USER_KEY = 'ecoreport_user'
 export interface StoredUser {
     userName: string
     email?: string
+    buildingId?: number
+    buildingName?: string
+    userType?: 'USER' | 'ADMIN'
 }
 
 export function getAccessToken(): string | null {
@@ -35,6 +38,14 @@ export function clearAuth(): void {
 
 export function isAuthenticated(): boolean {
     return Boolean(getAccessToken())
+}
+
+export function getAppHomePath(user?: StoredUser | null): string {
+    return user?.userType === 'ADMIN' ? '/admin' : '/'
+}
+
+export function isAdminUser(user?: StoredUser | null): boolean {
+    return user?.userType === 'ADMIN'
 }
 
 export function setAuthSession(accessToken: string, user: StoredUser): void {

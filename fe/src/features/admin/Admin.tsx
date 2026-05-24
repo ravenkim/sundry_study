@@ -8,7 +8,6 @@ import {
     CheckCircle2,
     X,
     Settings,
-    Megaphone,
     Coins,
     Users,
     User as UserIcon,
@@ -34,6 +33,7 @@ import {
     useAdminDashboardState,
     useAdminReportsState,
 } from 'src/features/admin/useAdminData'
+import { ReportLocationCell } from 'src/features/admin/ReportLocationCell'
 import type { ReportStatus } from 'src/globals/api/types'
 
 const STATUS_LABEL: Record<ReportStatus, string> = {
@@ -128,7 +128,7 @@ export const AdminDashboard = () => {
                             <thead>
                                 <tr className="border-outline-variant bg-surface text-on-surface-variant border-b text-xs font-bold">
                                     <th className="p-4">제보 일시</th>
-                                    <th className="p-4">건물명</th>
+                                    <th className="p-4">장소</th>
                                     <th className="p-4">AI 판별</th>
                                     <th className="p-4">작성자</th>
                                     <th className="p-4">상태</th>
@@ -147,7 +147,7 @@ export const AdminDashboard = () => {
                                             ).toLocaleString('ko-KR')}
                                         </td>
                                         <td className="p-4">
-                                            {item.buildingName} {item.roomName}
+                                            <ReportLocationCell report={item} />
                                         </td>
                                         <td className="p-4">
                                             <EcoBadge variant="gray">
@@ -251,7 +251,7 @@ export const AdminReports = () => {
                             <thead>
                                 <tr className="border-outline-variant bg-surface-container-lowest text-on-surface-variant border-b text-[10px] font-black tracking-widest uppercase">
                                     <th className="px-6 py-4">제보 일시</th>
-                                    <th className="px-6 py-4">건물/장소</th>
+                                    <th className="px-6 py-4">장소</th>
                                     <th className="px-6 py-4">AI 판별</th>
                                     <th className="px-6 py-4">작성자</th>
                                     <th className="px-6 py-4">상태</th>
@@ -272,14 +272,7 @@ export const AdminReports = () => {
                                             ).toLocaleString('ko-KR')}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <div className="flex flex-col">
-                                                <span className="text-on-surface font-bold">
-                                                    {item.buildingName}
-                                                </span>
-                                                <span className="text-on-surface-variant text-[10px]">
-                                                    {item.roomName}
-                                                </span>
-                                            </div>
+                                            <ReportLocationCell report={item} />
                                         </td>
                                         <td className="px-6 py-4">
                                             <EcoBadge variant="gray">
@@ -581,19 +574,14 @@ export const AdminUsers = () => (
         <div className="bg-surface-bright flex min-h-screen flex-col md:ml-64">
             <AdminHeader title="사용자 관리" />
             <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 p-8">
-                <div className="flex items-end justify-between">
-                    <div>
-                        <h2 className="mb-1 text-3xl font-black tracking-tight">
-                            가입자 목록
-                        </h2>
-                        <p className="text-on-surface-variant text-sm font-medium">
-                            캠퍼스 에너지 절약 캠페인에 동참 중인 전체 사용자
-                            현황입니다.
-                        </p>
-                    </div>
-                    <EcoButton className="gap-2 px-5 py-2.5 text-sm font-bold">
-                        <Megaphone className="h-4 w-4" /> 전체 공지 발송
-                    </EcoButton>
+                <div>
+                    <h2 className="mb-1 text-3xl font-black tracking-tight">
+                        가입자 목록
+                    </h2>
+                    <p className="text-on-surface-variant text-sm font-medium">
+                        캠퍼스 에너지 절약 캠페인에 동참 중인 전체 사용자
+                        현황입니다.
+                    </p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-4">

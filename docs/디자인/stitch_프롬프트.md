@@ -251,7 +251,7 @@ Design an admin dashboard web screen (desktop, 1200px max width) for EcoReport a
 Screen content:
 - Top navigation bar: "EcoReport 관리자" logo left, building selector dropdown "공학관 A동 ▼" center-right, admin avatar right
 - Sidebar left (240px wide):
-  - Menu items: 대시보드(selected), 제보 관리, 건물·강의실, 시간표, 정산 내역, 설정
+  - Menu items: 대시보드(selected), 제보 관리, **장소 관리**, 시간표, 정산 내역, 설정
   - Selected item: bg #FFF9C4, left border 3px #FFC107, text #1A1A1A bold
 - Main content area:
   - Stats row (3 cards equal width):
@@ -260,8 +260,8 @@ Screen content:
     - Card 3: "처리 대기" label, "3건" (32px bold, #FF8F00), "즉시 확인 필요" sub text
   - Section title: "최근 제보 목록"
   - Data table:
-    - Columns: 접수 시간 | 강의실 | AI 판별 결과 | 상태 | 조치
-    - Row 1: "14:03" | "공학관 A동 303호" | "🔆 조명 켜짐" | "대기" badge (yellow) | [처리하기] button
+    - Columns: 접수 시간 | 장소 | AI 판별 결과 | 상태 | 조치
+    - Row 1: "14:03" | "공학관" (12px gray) + "303호" (16px bold) | "🔆 조명 켜짐" | "대기" badge (yellow) | [처리하기] button
     - Row 2: "13:41" | "공학관 A동 201호" | "❄️ 에어컨 켜짐" | "완료" badge (green) | —
     - Row 3: "11:20" | "공학관 A동 105호" | "판별불가" | "반려" badge (red) | [재검토] ghost button
     - Alternating row background: white / #FAFAFA
@@ -271,6 +271,29 @@ Screen content:
     - Chart title: "월별 절약량 추이 (kWh)"
 
 Style: Professional admin panel feel, data-dense but clean. Use card shadows consistently. Primary accent on action buttons.
+```
+
+---
+
+## Screen 07 — 관리자 장소 관리 (웹, 데스크탑)
+
+```
+Design an admin location management screen (desktop, 1200px) for EcoReport.
+
+Screen content:
+- Top bar: "EcoReport 관리자", affiliation badge "삼육대학교" (fixed, no dropdown)
+- Sidebar: 장소 관리 menu item selected (same style as Screen 05)
+- Main: 3-column explorer layout (1단계 | 2단계 | 3단계)
+  - Each column: scrollable list, selected row highlighted (#FFF9C4 bg)
+  - Row: name + badge "그룹" (gray) or "항목" (green)
+  - Columns 2–3 appear when parent GROUP selected
+- Toolbar above columns: [+ 추가] primary (#FFC107), [수정] outline, [삭제] destructive ghost
+- Right Sheet (slide-over, 400px): add/edit form
+  - Radio: 그룹 (GROUP) / 항목 (LEAF)
+  - Text input: 이름
+  - Buttons: 저장 (primary), 취소 (ghost)
+
+Style: Finder/macOS column view feel, clean admin panel, Eco Green #4CAF50 for LEAF badge.
 ```
 
 ---

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s09b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s09b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">기대 사용 시나리오</text>
+  <rect x="40" y="64" width="220" height="4" rx="2" fill="#FFC107"/>
+  <rect x="268" y="64" width="80" height="4" rx="2" fill="#4CAF50"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">다양한 사용자의 EcoReport 활용 방식</text>
+
+  <!-- 시나리오 1: 평범한 학생 -->
+  <rect x="24" y="96" width="390" height="280" rx="14" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="24" y="96" width="390" height="7" rx="3" fill="#4CAF50"/>
+
+  <image href="../images/smile.png" x="30" y="104" width="60" height="80" preserveAspectRatio="xMidYMid meet"/>
+  <text x="104" y="124" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">김민준 (학부 2년)</text>
+  <text x="104" y="144" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">평범한 공대생 · 커피 소비 많음</text>
+
+  <line x1="44" y1="194" x2="394" y2="194" stroke="#A5D6A7" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="44" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">수업 후 빈 강의실 지나치며 사진 찍음</text>
+  <text x="44" y="234" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">하루 2분 · 주 3회 → 월 600P 적립</text>
+  <text x="44" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">1학기 후: 아메리카노 5잔 교환 완료!</text>
+
+  <rect x="44" y="268" width="350" height="92" rx="10" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1"/>
+  <text x="219" y="288" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">"처음엔 그냥 포인트 모으려고 했는데</text>
+  <text x="219" y="308" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368"> 진짜로 에너지 절약에 도움이 된다니</text>
+  <text x="219" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">뿌듯하다."</text>
+  <text x="219" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">— 김민준 (가상 시나리오)</text>
+
+  <!-- 시나리오 2: 환경동아리 -->
+  <rect x="434" y="96" width="390" height="280" rx="14" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5"/>
+  <rect x="434" y="96" width="390" height="7" rx="3" fill="#4285F4"/>
+
+  <use data-icon="tabler-outline/users" x="444" y="108" width="50" height="50" fill="#4285F4"/>
+  <text x="510" y="124" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1565C0">에코캠퍼스 동아리 (30명)</text>
+  <text x="510" y="144" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">환경 관련 동아리 · 캠퍼스 활동</text>
+
+  <line x1="454" y1="194" x2="804" y2="194" stroke="#90CAF9" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="454" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">주간 미션: 조원별 강의실 구역 담당</text>
+  <text x="454" y="234" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">30명 × 주 5회 = 주 150개 제보</text>
+  <text x="454" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">월 포인트 1,800P → 공동 회식비 사용</text>
+
+  <rect x="454" y="268" width="350" height="92" rx="10" fill="#FFFFFF" stroke="#90CAF9" stroke-width="1"/>
+  <text x="629" y="288" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">"동아리 활동이 실제 에너지 절약</text>
+  <text x="629" y="308" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">데이터로 남으니 성과 보고에도</text>
+  <text x="629" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">활용할 수 있어요!"</text>
+  <text x="629" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">— 동아리장 (가상)</text>
+
+  <!-- 시나리오 3: 시설 관리자 -->
+  <rect x="844" y="96" width="412" height="280" rx="14" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <rect x="844" y="96" width="412" height="7" rx="3" fill="#FFC107"/>
+
+  <use data-icon="tabler-outline/settings" x="854" y="108" width="50" height="50" fill="#E65100"/>
+  <text x="920" y="124" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#E65100">이상훈 시설팀장</text>
+  <text x="920" y="144" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">A대학 시설관리팀 · 500개 강의실 담당</text>
+
+  <line x1="864" y1="194" x2="1236" y2="194" stroke="#FFD54F" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="864" y="214" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">매일 오전 대시보드 확인 — 전날 제보 내역</text>
+  <text x="864" y="234" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">핫스팟 강의실 집중 관리 · 월간 보고서 자동</text>
+  <text x="864" y="254" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">처장님께 "월 절약 876kWh" 보고 완료</text>
+
+  <rect x="864" y="268" width="372" height="92" rx="10" fill="#FFFFFF" stroke="#FFD54F" stroke-width="1"/>
+  <text x="1050" y="288" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">"학생들이 사진 찍어주니 저는</text>
+  <text x="1050" y="308" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">데이터 보고 조치만 하면 돼요.</text>
+  <text x="1050" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">순찰 인력 절반으로 줄었습니다."</text>
+  <text x="1050" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">— 시설팀장 (가상)</text>
+
+  <!-- 하단: 사용 통계 시뮬레이션 -->
+  <rect x="24" y="392" width="1232" height="60" rx="12" fill="#1A237E"/>
+  <text x="640" y="416" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#FFFFFF">파일럿 캠퍼스 목표 지표 (100개 강의실 · 3개월 운영 기준)</text>
+  <text x="640" y="438" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">MAU 200명+ · 월 1,000건+ 제보 · 누적 절감 2,400 kWh · 탄소 절감 1,100 kg CO₂</text>
+
+  <!-- 시나리오 4: 학생 창업팀 -->
+  <rect x="24" y="468" width="380" height="210" rx="14" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <rect x="24" y="468" width="380" height="7" rx="3" fill="#EA4335"/>
+  <use data-icon="tabler-outline/bulb" x="34" y="480" width="40" height="40" fill="#EA4335"/>
+  <text x="88" y="496" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#C62828">이은총 (그린테크 창업 준비)</text>
+  <text x="44" y="520" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">EcoReport를 프리시드 PoC로 활용</text>
+  <text x="44" y="540" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">실제 사용 데이터 → 투자자 IR 자료</text>
+  <text x="44" y="560" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">해커톤 수상 → 창업 진행</text>
+  <text x="44" y="580" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">EcoReport = MVP + 실사용자 + 데이터</text>
+  <text x="44" y="596" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#C62828">창업 준비의 완벽한 출발점</text>
+
+  <!-- 시나리오 5: 탄소중립 팀 -->
+  <rect x="424" y="468" width="380" height="210" rx="14" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.5"/>
+  <rect x="424" y="468" width="380" height="7" rx="3" fill="#9C27B0"/>
+  <use data-icon="tabler-outline/leaf" x="434" y="480" width="40" height="40" fill="#9C27B0"/>
+  <text x="488" y="496" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#6A1B9A">대학 탄소중립위원회</text>
+  <text x="444" y="520" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">EcoReport 데이터 → 탄소중립 보고서</text>
+  <text x="444" y="540" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">교육부 탄소중립 선도 대학 지정 신청</text>
+  <text x="444" y="560" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">연간 절감량 → CDM 크레딧 등록 가능</text>
+  <text x="444" y="580" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">ESG 경영 보고서 자동 수치 제공</text>
+  <text x="444" y="596" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#6A1B9A">국가 정책과 직접 연계 가능</text>
+
+  <!-- 임팩트 요약 -->
+  <rect x="824" y="468" width="432" height="210" rx="14" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <rect x="824" y="468" width="432" height="7" rx="3" fill="#4CAF50"/>
+  <text x="1040" y="494" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">핵심 인사이트</text>
+
+  <text x="844" y="520" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">EcoReport는 단순한 제보 앱이 아닙니다.</text>
+  <text x="844" y="544" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">학생에게는 — 부수입 창출 도구</text>
+  <text x="844" y="568" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1565C0">관리자에게는 — 비용 절감 플랫폼</text>
+  <text x="844" y="592" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">학교에게는 — ESG 실적 자산</text>
+  <text x="844" y="616" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#C62828">사회에게는 — 탄소중립 실천 모델</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">09b / 30</text>
+</svg>

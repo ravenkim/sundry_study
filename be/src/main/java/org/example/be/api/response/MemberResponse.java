@@ -1,6 +1,8 @@
 package org.example.be.api.response;
 
+import org.example.be.domain.model.LocationNode;
 import org.example.be.domain.model.Member;
+import org.example.be.domain.model.UserType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,12 +15,14 @@ public class MemberResponse {
         private Long memberSeq;
         private String userName;
         private String email;
+        private String phoneNumber;
 
         public static Detail of(Member member) {
             return Detail.builder()
                     .memberSeq(member.getSeq())
                     .userName(member.getUserName())
                     .email(member.getEmail())
+                    .phoneNumber(member.getPhoneNumber())
                     .build();
         }
     }
@@ -56,16 +60,38 @@ public class MemberResponse {
     @Getter
     @Setter
     @Builder
+    public static class PhoneCheck {
+        private String phoneNumber;
+        private boolean available;
+
+        public static PhoneCheck of(String phoneNumber, boolean available) {
+            return PhoneCheck.builder()
+                    .phoneNumber(phoneNumber)
+                    .available(available)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Setter
+    @Builder
     public static class Login {
         private String accessToken;
         private String userName;
         private String email;
+        private Long buildingId;
+        private String buildingName;
+        private String userType;
 
         public static Login of(Member member, String accessToken) {
+            LocationNode locationNode = member.getLocationNode();
             return Login.builder()
                     .accessToken(accessToken)
                     .userName(member.getUserName())
                     .email(member.getEmail())
+                    .buildingId(locationNode != null ? locationNode.getSeq() : null)
+                    .buildingName(locationNode != null ? locationNode.getName() : null)
+                    .userType(member.getUserType() != null ? member.getUserType().name() : UserType.USER.name())
                     .build();
         }
     }

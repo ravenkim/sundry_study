@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s08_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s08_kpi1Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="s08_kpi2Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="s08_expandBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s08_topBar)"/>
+
+  <!-- 장식 요소 -->
+  <circle cx="1200" cy="680" r="120" fill="#4CAF50" fill-opacity="0.05"/>
+  <circle cx="80" cy="680" r="80" fill="#FFC107" fill-opacity="0.06"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 슬라이드 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="36" font-weight="700" fill="#1A237E">기대 임팩트</text>
+  <rect x="40"  y="64" width="90"  height="4" rx="2" fill="#4CAF50"/>
+  <rect x="138" y="64" width="60"  height="4" rx="2" fill="#FFC107"/>
+  <rect x="206" y="64" width="60"  height="4" rx="2" fill="#4285F4"/>
+  <use data-icon="tabler-outline/leaf" x="530" y="36" width="32" height="32" fill="#4CAF50"/>
+  <text x="568" y="56" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#9AA0A6">100개 강의실 기준 추정치</text>
+
+  <!-- ======= KPI 카드 1: 에너지 절약 ======= -->
+  <rect x="24" y="80" width="460" height="230" rx="16" fill="url(#s08_kpi1Bg)" stroke="#81C784" stroke-width="1.5"/>
+  <rect x="24" y="80" width="460" height="8" rx="4" fill="#4CAF50"/>
+
+  <rect x="44" y="100" width="8" height="80" rx="4" fill="#4CAF50"/>
+  <text x="66" y="122" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="500" fill="#5F6368">월 전력 절감</text>
+  <text x="66" y="142" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">Monthly Energy Saving</text>
+
+  <text x="44" y="210" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="66" font-weight="700" fill="#2E7D32" letter-spacing="-2">600</text>
+  <text x="178" y="210" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="28" font-weight="500" fill="#5F6368">~1,000</text>
+  <text x="310" y="210" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="28" font-weight="600" fill="#4CAF50">kWh</text>
+
+  <!-- 상승 트렌드 표시 -->
+  <circle cx="60" cy="258" r="16" fill="#E8F5E9"/>
+  <polygon points="60,252 65,264 55,264" fill="#4CAF50"/>
+  <text x="88" y="264" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#4CAF50">절약 달성 시</text>
+  <text x="200" y="264" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" fill="#9AA0A6">형광등+에어컨 방치 제거 기준</text>
+  <text x="44" y="295" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">kWh당 약 130원 × 절감량 = 월 8~13만원 전기료 절약</text>
+
+  <!-- ======= KPI 카드 2: 탄소 절감 ======= -->
+  <rect x="500" y="80" width="460" height="230" rx="16" fill="url(#s08_kpi2Bg)" stroke="#90CAF9" stroke-width="1.5"/>
+  <rect x="500" y="80" width="460" height="8" rx="4" fill="#4285F4"/>
+
+  <rect x="520" y="100" width="8" height="80" rx="4" fill="#4285F4"/>
+  <text x="542" y="122" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="500" fill="#5F6368">월 탄소 절감</text>
+  <text x="542" y="142" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">Monthly CO₂ Reduction</text>
+
+  <text x="520" y="210" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="66" font-weight="700" fill="#1565C0" letter-spacing="-2">280</text>
+  <text x="654" y="210" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="28" font-weight="500" fill="#5F6368">~470</text>
+  <text x="786" y="210" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="28" font-weight="600" fill="#4285F4">kg CO₂</text>
+
+  <circle cx="536" cy="258" r="16" fill="#E3F2FD"/>
+  <polygon points="536,252 541,264 531,264" fill="#4285F4"/>
+  <text x="564" y="264" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#4285F4">탄소 절감 달성 시</text>
+  <text x="520" y="295" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">전력 1kWh ≈ 0.47kg CO₂ · 연간 소나무 50~80그루 흡수량</text>
+
+  <!-- ======= 관리자 통계 스크린샷 ======= -->
+  <rect x="976" y="80" width="280" height="230" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <image href="../images/screen_admin_stats.png" x="980" y="86" width="272" height="218" preserveAspectRatio="xMidYMin meet"/>
+  <text x="1116" y="320" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" font-weight="600" fill="#9AA0A6">관리자 통계 화면 (실제 UI)</text>
+
+  <!-- ======= 하단 확장 섹션 ======= -->
+  <!-- 소나무 뱃지 -->
+  <rect x="24" y="328" width="1232" height="60" rx="12" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.2"/>
+  <use data-icon="tabler-outline/leaf" x="44" y="340" width="30" height="30" fill="#4CAF50"/>
+  <text x="86" y="352" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">연간 환경 임팩트</text>
+  <text x="86" y="374" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#2E7D32">소나무 50~80그루의 연간 탄소 흡수량 · 전기료 96~156만원 절약 · 학생 1인 연간 약 200포인트 적립</text>
+  <use data-icon="tabler-outline/award" x="1164" y="338" width="30" height="30" fill="#FFC107"/>
+
+  <!-- 확장 가능성 4열 카드 -->
+  <text x="40" y="418" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="17" font-weight="700" fill="#1A237E">확장 가능성</text>
+  <rect x="40"  y="425" width="60" height="3" rx="1" fill="#4CAF50"/>
+
+  <!-- 확장 카드 1 -->
+  <rect x="24" y="436" width="290" height="88" rx="10" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/building-arch" x="42" y="450" width="24" height="24" fill="#4CAF50"/>
+  <text x="76" y="466" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A252F">전국 대학 캠퍼스</text>
+  <text x="42" y="490" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">약 430개 4년제 대학</text>
+  <text x="42" y="508" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">강의실 수만 개 적용 가능</text>
+
+  <!-- 확장 카드 2 -->
+  <rect x="328" y="436" width="290" height="88" rx="10" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/bolt" x="346" y="450" width="24" height="24" fill="#4285F4"/>
+  <text x="380" y="466" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A252F">공공기관·오피스</text>
+  <text x="346" y="490" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">회의실·강당·공용 공간</text>
+  <text x="346" y="508" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">직원 참여형 에너지 절약</text>
+
+  <!-- 확장 카드 3 -->
+  <rect x="632" y="436" width="290" height="88" rx="10" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/coins" x="650" y="450" width="24" height="24" fill="#FFC107"/>
+  <text x="684" y="466" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A252F">아파트 공용부</text>
+  <text x="650" y="490" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">공용 조명·복도·주차장</text>
+  <text x="650" y="508" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">입주민 참여형 관리비 절감</text>
+
+  <!-- 확장 카드 4 -->
+  <rect x="936" y="436" width="320" height="88" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/award" x="954" y="450" width="24" height="24" fill="#4CAF50"/>
+  <text x="988" y="466" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">사회적 가치</text>
+  <text x="954" y="490" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#2E7D32">학생 주도 탄소중립 문화</text>
+  <text x="954" y="508" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#2E7D32">IoT 없는 스마트캠퍼스 실현</text>
+
+  <!-- ======= 요약 배너 ======= -->
+  <rect x="24" y="540" width="1232" height="72" rx="12" fill="#1A237E"/>
+  <text x="640" y="568" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="700" fill="#FFFFFF">스마트폰 하나 + AI 판별 = 캠퍼스 에너지 낭비 제로를 향해</text>
+  <text x="640" y="596" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" fill="#9AA0A6">설비 투자 없이 · 학생이 스스로 · 포인트 보상으로 지속 가능한 절약 운동</text>
+
+  <!-- 포인트 색상 도트 -->
+  <circle cx="500" cy="620" r="6"  fill="#4CAF50" fill-opacity="0.7"/>
+  <circle cx="524" cy="620" r="5"  fill="#FFC107" fill-opacity="0.7"/>
+  <circle cx="546" cy="620" r="7"  fill="#4285F4" fill-opacity="0.7"/>
+  <circle cx="572" cy="620" r="5"  fill="#EA4335" fill-opacity="0.7"/>
+  <circle cx="596" cy="620" r="6"  fill="#4CAF50" fill-opacity="0.7"/>
+  <circle cx="620" cy="620" r="5"  fill="#FFC107" fill-opacity="0.7"/>
+  <circle cx="644" cy="620" r="7"  fill="#4285F4" fill-opacity="0.7"/>
+  <circle cx="670" cy="620" r="5"  fill="#EA4335" fill-opacity="0.7"/>
+  <circle cx="694" cy="620" r="6"  fill="#4CAF50" fill-opacity="0.7"/>
+  <circle cx="718" cy="620" r="5"  fill="#FFC107" fill-opacity="0.7"/>
+  <circle cx="742" cy="620" r="7"  fill="#4285F4" fill-opacity="0.7"/>
+  <circle cx="768" cy="620" r="5"  fill="#EA4335" fill-opacity="0.7"/>
+
+  <!-- 페이지 번호 -->
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">08 / 10</text>
+
+</svg>

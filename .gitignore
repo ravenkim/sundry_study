@@ -2,9 +2,13 @@
 .env
 .env.local
 .env.*.local
+!.env.local.example
 **/.env.docker
 
 !.env.example
+
+# Deploy state (migration hash cache)
+.deploy/
 
 # Backend (Gradle / Spring Boot)
 be/.gradle/
@@ -15,3 +19,22 @@ be/build/
 fe/node_modules/
 fe/dist/
 fe/dist-ssr/
+
+# Python
+.venv/
+**/.venv/
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# ppt_master local venv (explicit)
+ppt_master/.venv/
+
+.idea/

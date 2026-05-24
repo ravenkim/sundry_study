@@ -1,13 +1,15 @@
 import client from 'src/globals/api/client'
 import { unwrapApiData, withMockFallback } from 'src/globals/api/apiUtils'
 import {
+    createMockGifticonExchange,
+    getMockMyGifticonExchanges,
     getMockPoints,
     MOCK_REWARDS,
-    updateMockPointsAfterExchange,
 } from 'src/globals/api/mock/data'
 import type {
     ApiResponse,
     ExchangeResult,
+    GifticonExchangeRow,
     PointsSummary,
     RewardItem,
 } from 'src/globals/api/types'
@@ -47,20 +49,26 @@ export async function exchangeReward(
             return unwrapApiData(data)
         },
         () => {
-            const reward = MOCK_REWARDS.find((r) => r.rewardId === rewardId)
-            if (!reward) throw new Error('리워드를 찾을 수 없습니다.')
-            const pointUsed = reward.pointCost * quantity
-            const points = getMockPoints()
-            if (points.currentBalance < pointUsed) {
-                throw new Error('포인트가 부족합니다.')
-            }
-            const updated = updateMockPointsAfterExchange(pointUsed)
+            const exchange = createMockGifticonExchange(rewardId, quantity)
             return {
-                transactionId: Date.now(),
-                rewardName: reward.name,
-                pointUsed,
-                remainingBalance: updated.currentBalance,
+                transactionId: exchange.exchangeId,
+                rewardName: exchange.rewardName,
+                pointUsed: exchange.pointUsed,
+                remainingBalance: getMockPoints().currentBalance,
+                status: exchange.status,
             }
         },
+    )
+}
+
+export async function getMyGifticonExchanges(): Promise<GifticonExchangeRow[]> {
+    return withMockFallback(
+        async () => {
+            const { data } = await client.get<ApiResponse<GifticonExchangeRow[]>>(
+                '/api/points/exchanges/me',
+            )
+            return unwrapApiData(data)
+        },
+        () => getMockMyGifticonExchanges(),
     )
 }

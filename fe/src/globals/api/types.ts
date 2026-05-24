@@ -35,6 +35,8 @@ export interface AiReportResult {
     ac_status?: 'ON' | 'OFF' | 'UNKNOWN'
     light_status?: 'ON' | 'OFF' | 'UNKNOWN'
     reason?: string
+    expected?: string
+    expectedKwh?: string
     pointAwarded?: number
     currentBalance?: number
 }
@@ -44,6 +46,9 @@ export interface ReportSummary {
     roomName: string
     status: ReportStatus
     pointAwarded: number
+    estimatedPoint?: number
+    offTimeMinutes?: number
+    estimatedKwh?: string
     createdAt: string
     detectionLabel?: string
     thumbnailUrl?: string
@@ -76,6 +81,7 @@ export interface RewardItem {
     pointCost: number
     category: string
     imageUrl?: string
+    imageKey?: string
     tag?: string
 }
 
@@ -84,23 +90,89 @@ export interface ExchangeResult {
     rewardName: string
     pointUsed: number
     remainingBalance: number
+    status: GifticonExchangeStatus
+}
+
+export type GifticonExchangeStatus = 'PENDING' | 'SENT' | 'REJECTED'
+
+export interface GifticonExchangeRow {
+    exchangeId: number
+    memberName: string
+    memberPhone: string
+    rewardName: string
+    pointUsed: number
+    status: GifticonExchangeStatus
+    createdAt: string
+    processedAt?: string
+}
+
+export type NodeKind = 'GROUP' | 'LEAF'
+
+export interface LocationTreeNode {
+    locationId: number
+    name: string
+    nodeKind: NodeKind
+    children?: LocationTreeNode[]
 }
 
 export interface BuildingLocation {
     locationId: number
     name: string
+    path?: string
 }
 
 export interface Building {
     buildingId: number
     name: string
-    locations: BuildingLocation[]
+    nodeKind: NodeKind
+    affiliationId?: number
+    affiliationName?: string
+    children: LocationTreeNode[]
+}
+
+export interface AdminLocationNode {
+    id: number
+    name: string
+    nodeKind: NodeKind
+    depth: number
+    sortOrder: number
+    locationType?: string
+    acCount: number
+    fluorescentCount: number
+    ledCount: number
+    operatingSchedules?: OperatingScheduleItem[]
+    children: AdminLocationNode[]
+}
+
+export type OperatingScheduleItem = {
+    dayOfWeek: number
+    closed: boolean
+    powerOnTime?: string
+    powerOffTime?: string
+}
+
+export type LocationResourceCounts = {
+    acCount: number
+    fluorescentCount: number
+    ledCount: number
+}
+
+export type LocationLeafPayload = LocationResourceCounts & {
+    operatingSchedules?: OperatingScheduleItem[]
+}
+
+export interface Affiliation {
+    affiliationId: number
+    name: string
+    address?: string
 }
 
 export interface AdminReportRow {
     reportId: number
     buildingName: string
     roomName: string
+    /** 전체 경로 (예: 공학관 A동 > 2층 > 303호). 없으면 buildingName + roomName 사용 */
+    locationPath?: string
     memberName: string
     status: ReportStatus
     aiResult: string

@@ -7,9 +7,9 @@ import {
     formatKwh,
     getParticipatedSavingsMascotEmotion,
     getTreeEquivalent,
-    PARTICIPATED_BUILDING_SAVINGS,
     sumParticipatedKwh,
 } from './userSavingsData'
+import { useMyBuildingSavings } from './useMyBuildingSavings'
 
 type Props = {
     compact?: boolean
@@ -21,7 +21,7 @@ export const ParticipatedBuildingSavingsCard = ({
     className,
 }: Props) => {
     const [expanded, setExpanded] = useState(!compact)
-    const buildings = PARTICIPATED_BUILDING_SAVINGS
+    const { buildings, loading } = useMyBuildingSavings()
     const totalKwh = sumParticipatedKwh(buildings, 'total')
     const monthKwh = sumParticipatedKwh(buildings, 'month')
     const maxMonthKwh = Math.max(...buildings.map((b) => b.thisMonthKwh), 1)
@@ -37,7 +37,9 @@ export const ParticipatedBuildingSavingsCard = ({
             <div className="relative z-10 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-2">
                     <span className="text-on-surface-variant text-sm font-medium">
-                        참여 건물 절약 전기
+                        {buildings.length <= 1
+                            ? '내 건물 절약 전기'
+                            : '참여 건물 절약 전기'}
                     </span>
                     {compact && (
                         <button
@@ -67,20 +69,32 @@ export const ParticipatedBuildingSavingsCard = ({
 
                 <div className="flex flex-col gap-1">
                     <span className="text-on-surface-variant text-xs font-medium">
-                        참여 건물 누적 절약 전기
+                        {buildings.length <= 1
+                            ? '내 건물 누적 절약 전기'
+                            : '참여 건물 누적 절약 전기'}
                     </span>
                     <div className="flex items-center gap-2">
                         <span className="text-secondary text-3xl font-bold">
-                            🌿 {formatKwh(totalKwh)} kWh
+                            🌿{' '}
+                            {loading
+                                ? '—'
+                                : `${formatKwh(totalKwh)} kWh`}
                         </span>
                     </div>
                     <span className="text-secondary text-xs font-medium">
-                        이번 달 +{formatKwh(monthKwh)} kWh · 🌲 소나무 {trees}
-                        그루 흡수량과 동등
+                        {loading
+                            ? '불러오는 중...'
+                            : `이번 달 +${formatKwh(monthKwh)} kWh · 🌲 소나무 ${trees}그루 흡수량과 동등`}
                     </span>
                 </div>
 
-                {expanded && (
+                {expanded && !loading && buildings.length === 0 && (
+                    <p className="text-on-surface-variant border-outline-variant/60 border-t pt-3 text-center text-sm">
+                        아직 절약 전기 데이터가 없습니다. 제보를 시작해 보세요!
+                    </p>
+                )}
+
+                {expanded && buildings.length > 0 && (
                     <ul className="border-outline-variant/60 flex flex-col gap-2 border-t pt-1">
                         {buildings.map((building) => (
                             <li

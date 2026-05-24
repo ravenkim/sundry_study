@@ -4,22 +4,65 @@ import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoBadge, EcoCard, EcoButton } from 'src/shared/ui/eco'
 import { usePoints } from 'src/features/points/PointsContext'
-import { exchangeReward, getRewards } from 'src/globals/api/pointsApi'
-import type { RewardItem } from 'src/globals/api/types'
+import { RewardImage } from 'src/features/user/RewardImage'
+import {
+    exchangeReward,
+    getMyGifticonExchanges,
+    getRewards,
+} from 'src/globals/api/pointsApi'
+import type {
+    GifticonExchangeRow,
+    GifticonExchangeStatus,
+    RewardItem,
+} from 'src/globals/api/types'
 
 const CATEGORIES = ['전체', '커피/음료', '편의점', '환경 기부'] as const
+
+const EXCHANGE_STATUS_LABEL: Record<GifticonExchangeStatus, string> = {
+    PENDING: '발송 대기',
+    SENT: '발송 완료',
+    REJECTED: '반려',
+}
+
+function exchangeStatusVariant(
+    status: GifticonExchangeStatus,
+): 'green' | 'gray' | 'yellow' {
+    if (status === 'SENT') return 'green'
+    if (status === 'PENDING') return 'yellow'
+    return 'gray'
+}
 
 export const UserPointShop = () => {
     const { points, refresh } = usePoints()
     const [rewards, setRewards] = useState<RewardItem[]>([])
+    const [rewardsLoading, setRewardsLoading] = useState(true)
     const [activeCategory, setActiveCategory] = useState<string>('전체')
     const [selectedReward, setSelectedReward] = useState<RewardItem | null>(
         null,
     )
     const [exchanging, setExchanging] = useState(false)
+    const [myExchanges, setMyExchanges] = useState<GifticonExchangeRow[]>([])
+
+    const loadMyExchanges = () => {
+        void getMyGifticonExchanges()
+            .then(setMyExchanges)
+            .catch(() => setMyExchanges([]))
+    }
+
+    const loadRewards = () => {
+        setRewardsLoading(true)
+        void getRewards()
+            .then(setRewards)
+            .catch(() => {
+                toast.error('리워드 목록을 불러오지 못했습니다.')
+                setRewards([])
+            })
+            .finally(() => setRewardsLoading(false))
+    }
 
     useEffect(() => {
-        void getRewards().then(setRewards)
+        loadRewards()
+        loadMyExchanges()
     }, [])
 
     const filtered =
@@ -38,7 +81,10 @@ export const UserPointShop = () => {
         try {
             await exchangeReward(selectedReward.rewardId)
             await refresh()
-            toast.success('기프티콘이 발송되었습니다.')
+            loadMyExchanges()
+            toast.success(
+                '교환 신청이 완료되었습니다. 관리자 승인 후 기프티콘이 발송됩니다.',
+            )
             setSelectedReward(null)
         } catch (error) {
             toast.error(
@@ -73,6 +119,37 @@ export const UserPointShop = () => {
                 </div>
             </EcoCard>
 
+            {myExchanges.length > 0 && (
+                <section className="flex flex-col gap-3">
+                    <h2 className="text-lg font-bold">내 교환 신청</h2>
+                    <div className="flex flex-col gap-2">
+                        {myExchanges.map((item) => (
+                            <EcoCard
+                                key={item.exchangeId}
+                                className="flex items-center justify-between gap-3 p-4"
+                            >
+                                <div className="min-w-0 flex-1">
+                                    <p className="truncate text-sm font-bold">
+                                        {item.rewardName}
+                                    </p>
+                                    <p className="text-on-surface-variant text-xs">
+                                        {new Date(
+                                            item.createdAt,
+                                        ).toLocaleDateString('ko-KR')}{' '}
+                                        · {item.pointUsed.toLocaleString()}P
+                                    </p>
+                                </div>
+                                <EcoBadge
+                                    variant={exchangeStatusVariant(item.status)}
+                                >
+                                    {EXCHANGE_STATUS_LABEL[item.status]}
+                                </EcoBadge>
+                            </EcoCard>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             <nav className="border-outline-variant/30 no-scrollbar -mx-5 flex gap-4 overflow-x-auto border-b px-5 pt-2 pb-1">
                 {CATEGORIES.map((tab) => (
                     <button
@@ -91,77 +168,112 @@ export const UserPointShop = () => {
                 ))}
             </nav>
 
-            <div className="grid grid-cols-2 gap-4">
-                {filtered.map((item) => {
-                    const canAfford = points.currentBalance >= item.pointCost
-                    return (
-                        <article
-                            key={item.rewardId}
-                            onClick={() => canAfford && setSelectedReward(item)}
-                            className={cn(
-                                'group border-outline-variant bg-surface-container-lowest flex flex-col overflow-hidden rounded-2xl border transition-all active:scale-95',
-                                canAfford
-                                    ? 'hover:border-primary cursor-pointer'
-                                    : 'cursor-not-allowed opacity-50',
-                            )}
-                        >
-                            <div className="bg-surface-container-low relative aspect-square overflow-hidden">
-                                {item.tag && (
-                                    <EcoBadge
-                                        variant="green"
-                                        className="absolute top-2 left-2 z-10 px-2 py-0.5"
-                                    >
-                                        {item.tag}
-                                    </EcoBadge>
+            {rewardsLoading ? (
+                <p className="text-on-surface-variant py-12 text-center text-sm">
+                    리워드를 불러오는 중...
+                </p>
+            ) : filtered.length === 0 ? (
+                <p className="text-on-surface-variant py-12 text-center text-sm">
+                    {activeCategory === '전체'
+                        ? '교환 가능한 리워드가 없습니다.'
+                        : `${activeCategory} 카테고리에 리워드가 없습니다.`}
+                </p>
+            ) : (
+                <div className="grid grid-cols-2 gap-4">
+                    {filtered.map((item) => {
+                        const canAfford =
+                            points.currentBalance >= item.pointCost
+                        return (
+                            <article
+                                key={item.rewardId}
+                                onClick={() =>
+                                    canAfford && setSelectedReward(item)
+                                }
+                                className={cn(
+                                    'group border-outline-variant bg-surface-container-lowest flex flex-col overflow-hidden rounded-2xl border transition-all active:scale-95',
+                                    canAfford
+                                        ? 'hover:border-primary cursor-pointer'
+                                        : 'cursor-not-allowed opacity-50',
                                 )}
-                                {item.imageUrl && (
-                                    <img
-                                        src={item.imageUrl}
-                                        alt={item.name}
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            >
+                                <div className="relative aspect-square overflow-hidden">
+                                    {item.tag && (
+                                        <EcoBadge
+                                            variant="green"
+                                            className="absolute top-2 left-2 z-10 px-2 py-0.5"
+                                        >
+                                            {item.tag}
+                                        </EcoBadge>
+                                    )}
+                                    <RewardImage
+                                        item={item}
+                                        imgClassName="transition-transform duration-500 group-hover:scale-110"
                                     />
-                                )}
-                            </div>
-                            <div className="flex flex-grow flex-col gap-1.5 p-3.5">
-                                <h3 className="text-on-surface line-clamp-2 text-xs leading-snug font-bold">
-                                    {item.name}
-                                </h3>
-                                <div className="mt-auto">
-                                    <span className="text-primary text-sm font-black">
-                                        {item.pointCost.toLocaleString()} P
-                                    </span>
                                 </div>
-                            </div>
-                        </article>
-                    )
-                })}
-            </div>
+                                <div className="flex flex-grow flex-col gap-1.5 p-3.5">
+                                    <h3 className="text-on-surface line-clamp-2 text-xs leading-snug font-bold">
+                                        {item.name}
+                                    </h3>
+                                    <div className="mt-auto">
+                                        <span className="text-primary text-sm font-black">
+                                            {item.pointCost.toLocaleString()} P
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    })}
+                </div>
+            )}
 
             {selectedReward && (
-                <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
-                    <div className="bg-surface w-full max-w-sm rounded-2xl p-6 shadow-xl">
-                        <h3 className="mb-2 text-lg font-bold">교환 확인</h3>
-                        <p className="text-on-surface-variant mb-1 text-sm">
-                            {selectedReward.name}
-                        </p>
-                        <p className="text-primary mb-6 text-2xl font-black">
-                            {selectedReward.pointCost.toLocaleString()} P
-                        </p>
-                        <div className="flex flex-col gap-2">
-                            <EcoButton
-                                className="w-full py-3"
-                                disabled={exchanging}
-                                onClick={() => void handleExchange()}
+                <div
+                    className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
+                    onClick={() => setSelectedReward(null)}
+                    role="presentation"
+                >
+                    <div
+                        className="bg-surface w-full max-w-sm overflow-hidden rounded-2xl shadow-xl"
+                        onClick={(event) => event.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="exchange-dialog-title"
+                    >
+                        <div className="aspect-video w-full">
+                            <RewardImage item={selectedReward} />
+                        </div>
+                        <div className="p-6">
+                            <h3
+                                id="exchange-dialog-title"
+                                className="mb-2 text-lg font-bold"
                             >
-                                {exchanging ? '처리 중...' : '교환하기'}
-                            </EcoButton>
-                            <EcoButton
-                                variant="outline"
-                                className="w-full py-3"
-                                onClick={() => setSelectedReward(null)}
-                            >
-                                취소
-                            </EcoButton>
+                                교환 신청
+                            </h3>
+                            <p className="text-on-surface-variant mb-1 text-sm">
+                                {selectedReward.name}
+                            </p>
+                            <p className="text-on-surface-variant mb-4 text-xs">
+                                관리자 승인 후 기프티콘이 발송됩니다.
+                            </p>
+                            <p className="text-primary mb-6 text-2xl font-black">
+                                {selectedReward.pointCost.toLocaleString()} P
+                            </p>
+                            <div className="flex flex-col gap-2">
+                                <EcoButton
+                                    className="w-full py-3"
+                                    disabled={exchanging}
+                                    onClick={() => void handleExchange()}
+                                >
+                                    {exchanging ? '처리 중...' : '신청하기'}
+                                </EcoButton>
+                                <EcoButton
+                                    variant="outline"
+                                    className="w-full py-3"
+                                    onClick={() => setSelectedReward(null)}
+                                >
+                                    취소
+                                </EcoButton>
+                            </div>
                         </div>
                     </div>
                 </div>

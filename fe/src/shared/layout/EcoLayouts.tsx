@@ -1,21 +1,18 @@
 import { useState, type ReactNode } from 'react'
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import {
     Home,
     ClipboardCheck,
+    Gift,
     ShoppingBag,
     User as UserIcon,
-    Search,
-    Bell,
     Settings,
-    HelpCircle,
     LogOut,
     Database,
     BarChart3,
     Users,
     Menu,
     Camera,
-    Shield,
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import {
@@ -26,8 +23,10 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { LOC } from 'src/features/admin/buildings/locationTreeUtils'
 import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
 import { usePoints } from 'src/features/points/PointsContext'
+import { useAuth } from 'src/features/auth/AuthContext'
 
 export const USER_NAV_ITEMS = [
     { name: '홈', path: '/', icon: Home },
@@ -163,14 +162,6 @@ export const UserAppLayout = ({
                             </span>
                             <SSdarkmodeSwitch />
                         </div>
-                        <Link
-                            to="/admin"
-                            onClick={closeMenu}
-                            className="text-on-surface-variant hover:bg-surface-container-low flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors"
-                        >
-                            <Shield className="h-5 w-5" />
-                            관리자 대시보드
-                        </Link>
                     </div>
                 </SheetContent>
             </Sheet>
@@ -184,11 +175,13 @@ export const UserAppLayout = ({
 
 export const AdminSidebar = () => {
     const location = useLocation()
+    const navigate = useNavigate()
+    const { logout } = useAuth()
     const navItems = [
         { name: '제보 현황', path: '/admin', icon: Database },
         { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
-        { name: '건물·강의실', path: '/admin/buildings', icon: Settings },
-        { name: '포인트 관리', path: '/admin/points', icon: ShoppingBag },
+        { name: LOC.navLabel, path: '/admin/buildings', icon: Settings },
+        { name: '기프티콘 관리', path: '/admin/points', icon: Gift },
         { name: '에너지 통계', path: '/admin/stats', icon: BarChart3 },
         { name: '사용자 관리', path: '/admin/users', icon: Users },
     ]
@@ -235,39 +228,24 @@ export const AdminSidebar = () => {
                     </span>
                     <SSdarkmodeSwitch />
                 </div>
-                <Link
-                    to="/"
-                    className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full items-center gap-3 rounded-lg px-4 py-2"
+                <button
+                    type="button"
+                    onClick={() => {
+                        logout()
+                        navigate('/login')
+                    }}
+                    className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full items-center gap-3 rounded-lg px-4 py-2 text-left"
                 >
                     <LogOut className="h-5 w-5" />
-                    <span>사용자 모드</span>
-                </Link>
+                    <span>로그아웃</span>
+                </button>
             </div>
         </aside>
     )
 }
 
 export const AdminHeader = ({ title }: { title: string }) => (
-    <header className="border-outline-variant bg-surface sticky top-0 z-40 flex h-16 items-center justify-between border-b px-8">
+    <header className="border-outline-variant bg-surface sticky top-0 z-40 flex h-16 items-center border-b px-8">
         <h2 className="text-xl font-bold">{title}</h2>
-        <div className="flex items-center gap-4">
-            <div className="relative">
-                <Search className="text-on-surface-variant absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-                <input
-                    type="text"
-                    placeholder="검색..."
-                    className="bg-surface-container-lowest border-outline-variant focus:border-primary-container w-64 rounded-full border py-2 pr-4 pl-10 text-sm focus:outline-none"
-                />
-            </div>
-            <Bell className="text-on-surface-variant h-5 w-5 cursor-pointer" />
-            <Settings className="text-on-surface-variant h-5 w-5 cursor-pointer" />
-            <HelpCircle className="text-on-surface-variant h-5 w-5 cursor-pointer" />
-            <div className="bg-surface-container border-outline-variant h-8 w-8 overflow-hidden rounded-full border">
-                <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
-                    alt="Admin"
-                />
-            </div>
-        </div>
     </header>
 )

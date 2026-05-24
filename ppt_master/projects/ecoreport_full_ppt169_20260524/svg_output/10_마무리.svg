@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s10_bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+    <linearGradient id="s10_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s10_msgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+    <linearGradient id="s10_cardTop" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="50%"  stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#4285F4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="url(#s10_bgGrad)"/>
+
+  <!-- 장식 원 -->
+  <circle cx="100" cy="620" r="160" fill="#4CAF50" fill-opacity="0.06"/>
+  <circle cx="1180" cy="100" r="130" fill="#FFC107" fill-opacity="0.08"/>
+  <circle cx="900" cy="660" r="90" fill="#4285F4" fill-opacity="0.05"/>
+
+  <!-- 상단 6px 그라데이션 바 -->
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s10_topBar)"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 메인 카드 -->
+  <rect x="38" y="70" width="730" height="570" rx="22" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <!-- 카드 상단 색상 바 -->
+  <rect x="38" y="70" width="730" height="7" rx="3" fill="url(#s10_cardTop)"/>
+
+  <!-- 팀 배지 -->
+  <rect x="68" y="108" width="116" height="30" rx="15" fill="#4CAF50" fill-opacity="0.12" stroke="#4CAF50" stroke-width="1"/>
+  <text x="126" y="127" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="700" fill="#2E7D32">14팀 발표</text>
+
+  <!-- Q&A 배지 (우측) -->
+  <rect x="600" y="108" width="140" height="30" rx="15" fill="#1A237E"/>
+  <text x="670" y="127" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">Q &amp; A</text>
+
+  <!-- 핵심 메시지 -->
+  <text x="403" y="210" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="34" font-weight="700" fill="url(#s10_msgGrad)">"사진 한 장이</text>
+  <text x="403" y="258" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="34" font-weight="700" fill="url(#s10_msgGrad)">캠퍼스 전기료를 줄입니다."</text>
+
+  <!-- 4색 구분선 -->
+  <line x1="100" y1="292" x2="268" y2="292" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="284" y1="292" x2="396" y2="292" stroke="#FFC107" stroke-width="3" stroke-linecap="round"/>
+  <line x1="412" y1="292" x2="524" y2="292" stroke="#4285F4" stroke-width="3" stroke-linecap="round"/>
+  <line x1="540" y1="292" x2="706" y2="292" stroke="#EA4335" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 팀 정보 -->
+  <text x="403" y="352" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="26" font-weight="700" fill="#1A237E">14팀 · 김해준 · 차성호 · 이은총</text>
+  <text x="403" y="384" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" fill="#9AA0A6">2026 두유톤 해커톤  |  EcoReport</text>
+
+  <!-- GitHub & Deploy 정보 -->
+  <rect x="68" y="410" width="660" height="100" rx="12" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/cloud-computing" x="88" y="426" width="22" height="22" fill="#5F6368"/>
+  <text x="118" y="440" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">GitHub</text>
+  <text x="186" y="440" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#4285F4">https://github.com/ravenkim/duyuthon</text>
+
+  <use data-icon="tabler-outline/bolt" x="88" y="456" width="22" height="22" fill="#5F6368"/>
+  <text x="118" y="470" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">배포 서버</text>
+  <text x="186" y="470" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#4CAF50">ubuntu03 24시간 운영 중 (FE:8081 / BE:8080)</text>
+
+  <use data-icon="tabler-outline/recycle" x="88" y="486" width="22" height="22" fill="#5F6368"/>
+  <text x="118" y="500" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">AI 파이프라인</text>
+  <text x="210" y="500" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#9C27B0">YOLOv8n × 2 + Gemini 2.5 Flash · Cloud Run ✅</text>
+
+  <!-- 요약 핵심 배지 3개 -->
+  <rect x="68"  y="528" width="195" height="44" rx="22" fill="#4CAF50"/>
+  <text x="165" y="546" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">설비 투자 없음</text>
+  <text x="165" y="564" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#C8E6C9">No CapEx Required</text>
+
+  <rect x="278" y="528" width="195" height="44" rx="22" fill="#4285F4"/>
+  <text x="375" y="546" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">즉시 도입 가능</text>
+  <text x="375" y="564" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#BBDEFB">Instant Deployment</text>
+
+  <rect x="488" y="528" width="240" height="44" rx="22" fill="#FFC107"/>
+  <text x="608" y="546" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">학생 자발적 참여</text>
+  <text x="608" y="564" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#FFFDE7">Student-Driven</text>
+
+  <!-- 카드 하단 컬러 도트 장식 -->
+  <circle cx="228" cy="613" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+  <circle cx="254" cy="613" r="5"  fill="#FFC107" fill-opacity="0.85"/>
+  <circle cx="276" cy="613" r="9"  fill="#4285F4" fill-opacity="0.85"/>
+  <circle cx="304" cy="613" r="5"  fill="#EA4335" fill-opacity="0.85"/>
+  <circle cx="328" cy="613" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+  <circle cx="354" cy="613" r="5"  fill="#FFC107" fill-opacity="0.85"/>
+  <circle cx="376" cy="613" r="9"  fill="#4285F4" fill-opacity="0.85"/>
+  <circle cx="404" cy="613" r="5"  fill="#EA4335" fill-opacity="0.85"/>
+  <circle cx="428" cy="613" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+  <circle cx="454" cy="613" r="5"  fill="#FFC107" fill-opacity="0.85"/>
+  <circle cx="476" cy="613" r="9"  fill="#4285F4" fill-opacity="0.85"/>
+  <circle cx="504" cy="613" r="5"  fill="#EA4335" fill-opacity="0.85"/>
+
+  <!-- 마스코트: smile.png 우측 크게 -->
+  <image href="../images/smile.png" x="810" y="60" width="430" height="620" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- 감사 문구 (우측 하단) -->
+  <text x="1040" y="686" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="600" fill="#9AA0A6">감사합니다</text>
+  <text x="1040" y="704" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">EcoReport · 2026 두유톤</text>
+
+</svg>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s06_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <marker id="s06_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9AA0A6"/>
+    </marker>
+    <marker id="s06_arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+    <linearGradient id="s06_tableBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#F8F9FA"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s06_topBar)"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 슬라이드 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="36" font-weight="700" fill="#1A237E">실제로 이렇게 동작합니다</text>
+  <rect x="40"  y="64" width="140" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="188" y="64" width="90"  height="4" rx="2" fill="#FFC107"/>
+  <rect x="286" y="64" width="90"  height="4" rx="2" fill="#4285F4"/>
+
+  <!-- 시나리오 배지 -->
+  <rect x="40" y="76" width="560" height="40" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.2"/>
+  <use data-icon="tabler-outline/location-check" x="58" y="84" width="24" height="24" fill="#4CAF50"/>
+  <text x="92" y="92" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">시나리오</text>
+  <text x="92" y="110" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#2E7D32">공학관 A동 303호 — 수업 종료 후 조명 켜짐 발견 → 제보 → +100P 획득</text>
+
+  <!-- ======= Snake Flow 6단계 ======= -->
+  <!-- 흐름 트랙 배경 -->
+  <rect x="24" y="128" width="590" height="370" rx="16" fill="#F8F9FA" fill-opacity="0.7"/>
+
+  <!-- Row 1 연결선: 1→2→3 -->
+  <line x1="130" y1="238" x2="230" y2="238" stroke="#E0E0E0" stroke-width="3" stroke-linecap="round"/>
+  <line x1="330" y1="238" x2="430" y2="238" stroke="#E0E0E0" stroke-width="3" stroke-linecap="round"/>
+  <!-- Row 1→2 우측 꺾임 -->
+  <path d="M 530,238 Q 580,238 580,310 Q 580,388 530,388"
+        stroke="#E0E0E0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Row 2 연결선: 4→5→6 (우→좌) -->
+  <line x1="430" y1="388" x2="330" y2="388" stroke="#E0E0E0" stroke-width="3" stroke-linecap="round"/>
+  <line x1="230" y1="388" x2="130" y2="388" stroke="#E0E0E0" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Row 1 화살표 -->
+  <polygon points="230,238 218,230 218,246" fill="#9AA0A6" fill-opacity="0.6"/>
+  <polygon points="430,238 418,230 418,246" fill="#9AA0A6" fill-opacity="0.6"/>
+  <!-- Row 2 화살표 (좌향) -->
+  <polygon points="330,388 342,380 342,396" fill="#9AA0A6" fill-opacity="0.6"/>
+  <polygon points="130,388 142,380 142,396" fill="#9AA0A6" fill-opacity="0.6"/>
+
+  <!-- 단계 1: 로그인 -->
+  <circle cx="90" cy="238" r="36" fill="#4CAF50"/>
+  <text x="90" y="243" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">01</text>
+  <text x="90" y="293" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">로그인</text>
+  <text x="90" y="311" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">이메일 / Google OAuth</text>
+
+  <!-- 단계 2: 홈 -->
+  <circle cx="280" cy="238" r="36" fill="#4285F4"/>
+  <text x="280" y="243" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">02</text>
+  <text x="280" y="293" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">홈 화면</text>
+  <text x="280" y="311" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">포인트 잔액 + 절약 현황</text>
+
+  <!-- 단계 3: 제보 작성 -->
+  <circle cx="470" cy="238" r="36" fill="#FFC107"/>
+  <text x="470" y="243" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">03</text>
+  <text x="470" y="293" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">제보 작성</text>
+  <text x="470" y="311" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">사진+위치 선택</text>
+
+  <!-- 단계 4: AI 분석 -->
+  <circle cx="470" cy="388" r="36" fill="#9C27B0"/>
+  <text x="470" y="393" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">04</text>
+  <text x="470" y="443" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">AI 판별</text>
+  <text x="470" y="461" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">Cloud Run · 5초 이내</text>
+
+  <!-- 단계 5: 완료 +100P -->
+  <circle cx="280" cy="388" r="36" fill="#2E7D32"/>
+  <text x="280" y="393" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">05</text>
+  <text x="280" y="443" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">완료!</text>
+  <rect x="248" y="453" width="64" height="22" rx="11" fill="#FFC107"/>
+  <text x="280" y="469" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">+100P 적립</text>
+
+  <!-- 단계 6: 이력·포인트샵 -->
+  <circle cx="90" cy="388" r="36" fill="#EA4335"/>
+  <text x="90" y="393" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="20" font-weight="800" fill="#FFFFFF">06</text>
+  <text x="90" y="443" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">이력·샵</text>
+  <text x="90" y="461" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">기프티콘 교환</text>
+
+  <!-- ======= 우측 스크린샷 ======= -->
+  <!-- 폰 프레임 배경 -->
+  <rect x="635" y="74" width="196" height="438" rx="20" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="841" y="74" width="196" height="438" rx="20" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+
+  <!-- screen_report_form.png -->
+  <image href="../images/screen_report_form.png" x="638" y="80" width="190" height="424" preserveAspectRatio="xMidYMin meet"/>
+  <text x="733" y="524" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">제보 작성</text>
+  <text x="733" y="542" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">위치 선택 + 사진 업로드</text>
+
+  <!-- screen_report_success.png -->
+  <image href="../images/screen_report_success.png" x="844" y="80" width="190" height="424" preserveAspectRatio="xMidYMin meet"/>
+  <text x="939" y="524" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">제보 완료</text>
+  <text x="939" y="542" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">+100P 즉시 적립</text>
+
+  <!-- 관리자 대시보드 소형 미리보기 영역 -->
+  <rect x="1056" y="74" width="200" height="438" rx="14" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <image href="../images/screen_admin_dashboard.png" x="1060" y="80" width="192" height="430" preserveAspectRatio="xMidYMin meet"/>
+  <text x="1156" y="524" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">관리자 대시보드</text>
+  <text x="1156" y="542" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">제보 현황 실시간 확인</text>
+
+  <!-- ======= 하단 구현 범위 표 ======= -->
+  <rect x="24" y="560" width="1232" height="118" rx="12" fill="url(#s06_tableBg)" stroke="#E8EAED" stroke-width="1"/>
+
+  <!-- ✅ 완료 영역 -->
+  <rect x="34" y="570" width="570" height="98" rx="8" fill="#E8F5E9"/>
+  <text x="54" y="592" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">✅ 구현 완료</text>
+  <text x="54" y="612" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#2E7D32">전체 UI · JWT · Google OAuth · Cloud Run AI 연동</text>
+  <text x="54" y="630" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#2E7D32">제보 API · 장소 관리 CRUD · Docker Compose ubuntu03 배포</text>
+  <text x="54" y="648" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#2E7D32">Flyway 시드 · 건물/소속 API · Spring Security JWT</text>
+  <text x="54" y="666" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">15화면 · YOLOv8n×2 + Gemini 2.5 Flash · mAP 0.990</text>
+
+  <!-- 🔶 mock 영역 -->
+  <rect x="618" y="570" width="380" height="98" rx="8" fill="#FFF8E1"/>
+  <text x="638" y="592" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">🔶 UX 시연 (mock)</text>
+  <text x="638" y="612" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#E65100">AI 진행 UX 애니메이션</text>
+  <text x="638" y="630" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#E65100">포인트 즉시 적립 (BE 미구현)</text>
+  <text x="638" y="648" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#E65100">관리자 통계·제보 데이터</text>
+  <text x="638" y="666" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">AI 판별 자체는 BE→Cloud Run 연동 완료</text>
+
+  <!-- 각주 -->
+  <text x="1010" y="596" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6" font-style="italic">* AI 판별 BE→Cloud Run 연동 완료</text>
+  <text x="1010" y="614" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6" font-style="italic">  FE 진행 UI는 UX 시연용 mock</text>
+  <text x="1010" y="636" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">서버: ubuntu03 24시간 운영</text>
+  <text x="1010" y="654" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">FE:8081 / BE:8080 / MySQL:3306</text>
+
+  <!-- 페이지 번호 -->
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">06 / 10</text>
+
+</svg>

@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Camera, ImageIcon, Loader2, Plus } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton } from 'src/shared/ui/eco'
+import { useAuth } from 'src/features/auth/AuthContext'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import { createReport } from 'src/globals/api/reportApi'
+import { flattenLeafLocations } from 'src/globals/api/locationUtils'
 import type { Building } from 'src/globals/api/types'
 import { MOCK_BUILDINGS } from 'src/globals/api/mock/data'
 
@@ -13,21 +15,45 @@ type Step = 'photo' | 'location' | 'loading'
 
 export const UserReportForm = () => {
     const navigate = useNavigate()
+    const { user } = useAuth()
     const cameraRef = useRef<HTMLInputElement>(null)
     const galleryRef = useRef<HTMLInputElement>(null)
 
     const [step, setStep] = useState<Step>('photo')
     const [photo, setPhoto] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-    const [buildings, setBuildings] = useState<Building[]>(MOCK_BUILDINGS)
+    const [buildings, setBuildings] = useState<Building[]>([])
     const [buildingId, setBuildingId] = useState<number | ''>('')
     const [locationId, setLocationId] = useState<number | ''>('')
 
     useEffect(() => {
         void getBuildings()
-            .then(setBuildings)
-            .catch(() => setBuildings(MOCK_BUILDINGS))
-    }, [])
+            .then((items) => {
+                const scoped =
+                    items.length > 0
+                        ? items
+                        : MOCK_BUILDINGS.filter(
+                              (building) =>
+                                  !user?.buildingId ||
+                                  building.buildingId === user.buildingId,
+                          )
+                setBuildings(scoped)
+                if (scoped.length === 1) {
+                    setBuildingId(scoped[0].buildingId)
+                }
+            })
+            .catch(() => {
+                const fallback = MOCK_BUILDINGS.filter(
+                    (building) =>
+                        !user?.buildingId ||
+                        building.buildingId === user.buildingId,
+                )
+                setBuildings(fallback)
+                if (fallback.length === 1) {
+                    setBuildingId(fallback[0].buildingId)
+                }
+            })
+    }, [user?.buildingId])
 
     useEffect(() => {
         if (!photo) {
@@ -40,7 +66,11 @@ export const UserReportForm = () => {
     }, [photo])
 
     const selectedBuilding = buildings.find((b) => b.buildingId === buildingId)
-    const selectedLocation = selectedBuilding?.locations.find(
+    const leafLocations = useMemo(
+        () => flattenLeafLocations(selectedBuilding?.children),
+        [selectedBuilding],
+    )
+    const selectedLocation = leafLocations.find(
         (l) => l.locationId === locationId,
     )
 
@@ -113,6 +143,16 @@ export const UserReportForm = () => {
             <div className="flex flex-col gap-8 p-5 pb-8">
                 <section className="flex flex-col gap-4">
                     <h2 className="text-xl font-bold">위치를 선택해 주세요</h2>
+                    {selectedBuilding && (
+                        <div className="border-outline-variant bg-surface-container-low rounded-lg border px-4 py-3">
+                            <p className="text-on-surface-variant text-xs font-bold">
+                                소속 건물
+                            </p>
+                            <p className="text-on-surface text-sm font-semibold">
+                                {selectedBuilding.name}
+                            </p>
+                        </div>
+                    )}
                     {previewUrl && (
                         <img
                             src={previewUrl}
@@ -120,26 +160,6 @@ export const UserReportForm = () => {
                             className="border-outline-variant h-32 w-full rounded-xl border object-cover"
                         />
                     )}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-on-surface-variant text-xs font-bold">
-                            건물 선택
-                        </label>
-                        <select
-                            value={buildingId}
-                            onChange={(e) => {
-                                setBuildingId(Number(e.target.value) || '')
-                                setLocationId('')
-                            }}
-                            className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-4 outline-none focus:ring-2"
-                        >
-                            <option value="">건물을 선택해주세요</option>
-                            {buildings.map((b) => (
-                                <option key={b.buildingId} value={b.buildingId}>
-                                    {b.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
                     <div className="flex flex-col gap-2">
                         <label className="text-on-surface-variant text-xs font-bold">
                             강의실 선택
@@ -153,12 +173,12 @@ export const UserReportForm = () => {
                             className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-4 outline-none focus:ring-2 disabled:opacity-50"
                         >
                             <option value="">강의실을 선택해주세요</option>
-                            {selectedBuilding?.locations.map((loc) => (
+                            {leafLocations.map((loc) => (
                                 <option
                                     key={loc.locationId}
                                     value={loc.locationId}
                                 >
-                                    {loc.name}
+                                    {loc.path ?? loc.name}
                                 </option>
                             ))}
                         </select>

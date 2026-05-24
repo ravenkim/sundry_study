@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,11 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
             Long memberSeq, ReportStatus status, Pageable pageable);
 
     Optional<Report> findBySeqAndMember_Seq(Long seq, Long memberSeq);
+
+    boolean existsByLocationNode_Seq(Long locationSeq);
+
+    List<Report> findByMember_SeqAndStatusInAndEstimatedKwhIsNotNull(
+            Long memberSeq,
+            List<ReportStatus> statuses
+    );
 }

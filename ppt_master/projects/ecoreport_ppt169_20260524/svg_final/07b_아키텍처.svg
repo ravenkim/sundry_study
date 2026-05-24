@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s07b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+    <marker id="s07b_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5F6368" />
+    </marker>
+    <marker id="s07b_arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4285F4" />
+    </marker>
+    <marker id="s07b_arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50" />
+    </marker>
+    <marker id="s07b_arrowYellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FFC107" />
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#F8F9FA" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s07b_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1A237E">시스템 아키텍처</text>
+  <path fill="#4285F4" d="M42,64 H218 A2,2 0 0 1 220,66 V66 A2,2 0 0 1 218,68 H42 A2,2 0 0 1 40,66 V66 A2,2 0 0 1 42,64 Z" />
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#9AA0A6">Client → FE(Nginx) → BE(Spring Boot) → AI(Cloud Run) ← MySQL</text>
+
+  
+  <path fill="#FFFFFF" stroke="#4285F4" stroke-width="2" d="M36,96 H242 A12,12 0 0 1 254,108 V280 A12,12 0 0 1 242,292 H36 A12,12 0 0 1 24,280 V108 A12,12 0 0 1 36,96 Z" />
+  <path fill="#4285F4" d="M27,96 H251 A3,3 0 0 1 254,99 V100 A3,3 0 0 1 251,103 H27 A3,3 0 0 1 24,100 V99 A3,3 0 0 1 27,96 Z" />
+  <text x="139" y="118" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1565C0">클라이언트</text>
+
+  <path fill="#E3F2FD" d="M48,126 H230 A8,8 0 0 1 238,134 V164 A8,8 0 0 1 230,172 H48 A8,8 0 0 1 40,164 V134 A8,8 0 0 1 48,126 Z" />
+  
+  <g transform="translate(54.0, 138.0) scale(0.9166666666666666)" fill="none" stroke="#4285F4">
+    <path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14" />
+    <path d="M11 4h2" />
+    <path d="M12 17v.01" />
+  </g>
+  <text x="84" y="151" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1565C0">학생 앱</text>
+  <text x="84" y="166" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">React 19 + Vite</text>
+
+  <path fill="#E8F5E9" d="M48,180 H230 A8,8 0 0 1 238,188 V218 A8,8 0 0 1 230,226 H48 A8,8 0 0 1 40,218 V188 A8,8 0 0 1 48,180 Z" />
+  
+  <g transform="translate(54.0, 192.0) scale(0.9166666666666666)" fill="none" stroke="#4CAF50">
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+  </g>
+  <text x="84" y="205" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#2E7D32">관리자 웹</text>
+  <text x="84" y="220" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">React 19 + Vite</text>
+
+  <text x="139" y="260" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">ubuntu03 배포 · :8081</text>
+  <text x="139" y="278" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">Docker · Nginx</text>
+
+  
+  <line x1="258" y1="195" x2="308" y2="195" stroke="#4285F4" stroke-width="2" marker-end="url(#s07b_arrowBlue)" />
+  <text x="283" y="186" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#4285F4">HTTPS</text>
+  <text x="283" y="210" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#4285F4">REST API</text>
+
+  
+  <path fill="#FFFFFF" stroke="#1A237E" stroke-width="2" d="M324,96 H610 A12,12 0 0 1 622,108 V484 A12,12 0 0 1 610,496 H324 A12,12 0 0 1 312,484 V108 A12,12 0 0 1 324,96 Z" />
+  <path fill="#1A237E" d="M315,96 H619 A3,3 0 0 1 622,99 V100 A3,3 0 0 1 619,103 H315 A3,3 0 0 1 312,100 V99 A3,3 0 0 1 315,96 Z" />
+  <text x="467" y="118" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1A237E">백엔드 서버</text>
+  <text x="467" y="136" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">ubuntu03 · :8080 · Docker</text>
+
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1" d="M336,146 H598 A8,8 0 0 1 606,154 V190 A8,8 0 0 1 598,198 H336 A8,8 0 0 1 328,190 V154 A8,8 0 0 1 336,146 Z" />
+  <text x="467" y="166" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">Spring Boot 4.0.6</text>
+  <text x="467" y="184" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">Java 17 · Gradle · Layered Arch</text>
+
+  <path fill="#E3F2FD" d="M336,208 H450 A8,8 0 0 1 458,216 V246 A8,8 0 0 1 450,254 H336 A8,8 0 0 1 328,246 V216 A8,8 0 0 1 336,208 Z" />
+  <text x="393" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1565C0">Spring Security</text>
+  <text x="393" y="244" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">JWT HS256</text>
+
+  <path fill="#E8F5E9" d="M484,208 H598 A8,8 0 0 1 606,216 V246 A8,8 0 0 1 598,254 H484 A8,8 0 0 1 476,246 V216 A8,8 0 0 1 484,208 Z" />
+  <text x="541" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#2E7D32">Spring Data JPA</text>
+  <text x="541" y="244" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">Hibernate · Flyway</text>
+
+  <path fill="#FFF8E1" d="M336,266 H598 A8,8 0 0 1 606,274 V304 A8,8 0 0 1 598,312 H336 A8,8 0 0 1 328,304 V274 A8,8 0 0 1 336,266 Z" />
+  <text x="467" y="286" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#E65100">Controller / Service / Repository</text>
+  <text x="467" y="302" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">레이어드 아키텍처 · ApiResponse 표준</text>
+
+  <path fill="#FFEBEE" d="M336,324 H598 A8,8 0 0 1 606,332 V362 A8,8 0 0 1 598,370 H336 A8,8 0 0 1 328,362 V332 A8,8 0 0 1 336,324 Z" />
+  <text x="467" y="344" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#C62828">AI 연동 모듈</text>
+  <text x="467" y="360" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">RestTemplate → Cloud Run /analyze</text>
+
+  <path fill="#F3E5F5" d="M336,382 H598 A8,8 0 0 1 606,390 V420 A8,8 0 0 1 598,428 H336 A8,8 0 0 1 328,420 V390 A8,8 0 0 1 336,382 Z" />
+  <text x="467" y="402" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#6A1B9A">Swagger UI + Actuator</text>
+  <text x="467" y="418" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">:8080/swagger-ui · /actuator/health</text>
+
+  <text x="467" y="458" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">CORS: allowedOriginPatterns("*")</text>
+
+  
+  <line x1="467" y1="500" x2="467" y2="540" stroke="#5F6368" stroke-width="2" marker-end="url(#s07b_arrow)" />
+  <text x="480" y="528" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">JDBC</text>
+
+  
+  <path fill="#FFFFFF" stroke="#9C27B0" stroke-width="2" d="M344,544 H590 A12,12 0 0 1 602,556 V652 A12,12 0 0 1 590,664 H344 A12,12 0 0 1 332,652 V556 A12,12 0 0 1 344,544 Z" />
+  <path fill="#9C27B0" d="M335,544 H599 A3,3 0 0 1 602,547 V548 A3,3 0 0 1 599,551 H335 A3,3 0 0 1 332,548 V547 A3,3 0 0 1 335,544 Z" />
+  <text x="467" y="566" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#6A1B9A">MySQL 8.4</text>
+  <text x="467" y="584" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">energy_db · :3306 · Docker</text>
+  <text x="467" y="602" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">Flyway 마이그레이션</text>
+  <text x="467" y="620" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">ddl-auto: validate</text>
+  <text x="467" y="652" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">ubuntu03 내부 네트워크</text>
+
+  
+  <line x1="626" y1="350" x2="696" y2="350" stroke="#FFC107" stroke-width="2" marker-end="url(#s07b_arrowYellow)" />
+  <text x="661" y="340" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#E65100">HTTP</text>
+  <text x="661" y="365" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#E65100">multipart</text>
+
+  
+  <path fill="#FFFFFF" stroke="#FFC107" stroke-width="2" d="M712,260 H1038 A12,12 0 0 1 1050,272 V588 A12,12 0 0 1 1038,600 H712 A12,12 0 0 1 700,588 V272 A12,12 0 0 1 712,260 Z" />
+  <path fill="#FFC107" d="M703,260 H1047 A3,3 0 0 1 1050,263 V264 A3,3 0 0 1 1047,267 H703 A3,3 0 0 1 700,264 V263 A3,3 0 0 1 703,260 Z" />
+  <text x="875" y="282" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#E65100">AI 서버</text>
+  <text x="875" y="300" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">Google Cloud Run · FastAPI</text>
+
+  <path fill="#FFF8E1" d="M724,310 H1026 A8,8 0 0 1 1034,318 V354 A8,8 0 0 1 1026,362 H724 A8,8 0 0 1 716,354 V318 A8,8 0 0 1 724,310 Z" />
+  <text x="875" y="330" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#E65100">FastAPI 앱</text>
+  <text x="875" y="350" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">POST /analyze (이미지 + metadata)</text>
+
+  <path fill="#E3F2FD" d="M724,374 H858 A8,8 0 0 1 866,382 V418 A8,8 0 0 1 858,426 H724 A8,8 0 0 1 716,418 V382 A8,8 0 0 1 724,374 Z" />
+  <text x="791" y="394" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1565C0">YOLOv8n</text>
+  <text x="791" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">조명 + 에어컨 ×2</text>
+
+  <path fill="#E8F5E9" d="M890,374 H1026 A8,8 0 0 1 1034,382 V418 A8,8 0 0 1 1026,426 H890 A8,8 0 0 1 882,418 V382 A8,8 0 0 1 890,374 Z" />
+  <text x="958" y="394" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#2E7D32">Gemini 2.5 Flash</text>
+  <text x="958" y="410" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">최종 판정 + 금액</text>
+
+  <path fill="#FFEBEE" d="M724,438 H1026 A8,8 0 0 1 1034,446 V482 A8,8 0 0 1 1026,490 H724 A8,8 0 0 1 716,482 V446 A8,8 0 0 1 724,438 Z" />
+  <text x="875" y="458" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#C62828">응답 JSON</text>
+  <text x="875" y="476" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">waste · light_on · ac_on · expected · points</text>
+
+  <text x="875" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">Python 3.11 · Docker · ultralytics</text>
+  <text x="875" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">requirements.txt: torch, fastapi, uvicorn</text>
+
+  
+  <path fill="none" stroke="#4285F4" stroke-width="1" stroke-dasharray="8,4" d="M706,248 H1044 A16,16 0 0 1 1060,264 V600 A16,16 0 0 1 1044,616 H706 A16,16 0 0 1 690,600 V264 A16,16 0 0 1 706,248 Z" />
+  <text x="875" y="638" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#4285F4">Google Cloud Run</text>
+
+  
+  <path fill="#FFFFFF" stroke="#EA4335" stroke-width="1.5" d="M1092,260 H1248 A12,12 0 0 1 1260,272 V368 A12,12 0 0 1 1248,380 H1092 A12,12 0 0 1 1080,368 V272 A12,12 0 0 1 1092,260 Z" />
+  <path fill="#EA4335" d="M1083,260 H1257 A3,3 0 0 1 1260,263 V264 A3,3 0 0 1 1257,267 H1083 A3,3 0 0 1 1080,264 V263 A3,3 0 0 1 1083,260 Z" />
+  <text x="1170" y="282" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#C62828">Google OAuth2</text>
+  <text x="1170" y="302" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">소셜 로그인</text>
+  <text x="1170" y="322" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">Spring Security</text>
+  <text x="1170" y="342" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">Resource Server</text>
+  <text x="1170" y="372" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">JWT HS256 발급</text>
+
+  <line x1="626" y1="230" x2="1080" y2="300" stroke="#EA4335" stroke-width="1" stroke-dasharray="4,3" />
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">07b / 30</text>
+</svg>

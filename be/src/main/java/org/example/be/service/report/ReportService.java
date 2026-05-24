@@ -1,16 +1,21 @@
 package org.example.be.service.report;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.be.api.request.AiAnalyzeMetadata;
 import org.example.be.api.request.ReportCreateRequest;
+import org.example.be.api.response.AiAnalysisResponse;
 import org.example.be.api.response.ReportResponse;
 import org.example.be.domain.model.*;
-import org.example.be.domain.repository.BuildingRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.domain.repository.ReportRepository;
-import org.example.be.api.response.AiAnalysisResponse;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
+import org.example.be.service.location.LocationNodeService;
+import org.example.be.service.savings.ExpectedKrwParser;
+import org.example.be.service.savings.ExpectedKwhParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +27,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +40,9 @@ import java.util.Optional;
 public class ReportService {
 
     private final ReportRepository reportRepository;
-    private final BuildingRepository buildingRepository;
     private final MemberRepository memberRepository;
+    private final LocationNodeService locationNodeService;
+    private final ObjectMapper objectMapper;
 
     private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
 
@@ -45,49 +52,47 @@ public class ReportService {
         Member member = memberRepository.findById(memberSeq)
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
-        Building building = buildingRepository.findById(request.buildingId())
-                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 건물입니다."));
+        LocationNode locationNode = resolveLocationNode(request);
+        locationNodeService.validateMemberScope(member.getLocationNode(), locationNode);
 
         if (request.image() == null || request.image().isEmpty()) {
             throw new BusinessLogicException(ErrorCode.INVALID, "현장 사진 이미지는 필수입니다.");
         }
 
-        // 1. AI 서버로 이미지 전송 및 분석 요청
-        AiAnalysisResponse aiResponse = callAiApi(request.image());
+        LocalDateTime reportAt = LocalDateTime.now();
+        var schedules = locationNodeService.getOperatingSchedules(locationNode.getSeq());
+        AiAnalyzeMetadata metadata = buildAnalyzeMetadata(reportAt, locationNode, schedules);
+
+        AiAnalysisResponse aiResponse = callAiApi(request.image(), metadata);
         log.info("AI Analysis Result: {}", aiResponse.getResult());
 
-        // 2. AI 분석 결과에 따른 강력한 제어 로직 (WASTE_DETECTED 만 통과)
         boolean aiLightWasting = request.isLightWasting();
         boolean aiAcWasting = request.isAcWasting();
         String aiAdviceMessage = "";
 
         if ("ERROR".equals(aiResponse.getResult())) {
-            // 강의실이 아니거나 객체 탐지 실패
             throw new BusinessLogicException(ErrorCode.INVALID, "강의실로 인식되지 않거나 분석할 수 없는 사진입니다: " + aiResponse.getMessage());
 
         } else if ("PASS".equals(aiResponse.getResult())) {
-            // 사람이 있거나 조명/에어컨이 모두 꺼진 정상 상태
             throw new BusinessLogicException(ErrorCode.INVALID, "정상적인 강의실 상태이거나 사람이 있어 제보할 수 없습니다: " + aiResponse.getMessage());
 
         } else if ("WASTE_DETECTED".equals(aiResponse.getResult())) {
-            // 오직 낭비가 발견된 경우에만 통과하여 저장 진행
             aiAdviceMessage = "\n\n[💡 AI 보조 지표: 낭비 확인] " + aiResponse.getMessage();
             if (aiResponse.getReason() != null) {
                 aiAdviceMessage += "\n[이유] " + aiResponse.getReason();
             }
-            // 관리자 확인이 편하도록 AI가 읽은 데이터로 체크박스를 덮어씌움
+            if (aiResponse.getExpected() != null) {
+                aiAdviceMessage += "\n[예상 절약] " + aiResponse.getExpected();
+            }
             aiLightWasting = "ON".equals(aiResponse.getLight_status());
             aiAcWasting = "ON".equals(aiResponse.getAc_status());
 
         } else {
-            // 예상치 못한 AI 서버 응답
-            throw new BusinessLogicException(ErrorCode.INTERNAL_SERVER_ERROR, "알 수 없는 AI 분석 결과입니다.");
+            throw new BusinessLogicException(ErrorCode.INVALID, "알 수 없는 AI 분석 결과입니다.");
         }
 
-        // 3. 이미지 저장 (우선 가상 URL 매핑)
         String imageUrl = "https://storage.ecoreport.kr/reports/" + request.image().getOriginalFilename();
 
-        // 4. WasteType 세팅
         WasteType wasteType = new WasteType(
                 aiLightWasting,
                 aiAcWasting,
@@ -95,17 +100,26 @@ public class ReportService {
                 request.isOtherWasting()
         );
 
-        // 5. 엔티티 빌드 및 저장 (상태는 무조건 PENDING)
+        String locationDetail = locationNodeService.buildPath(locationNode);
+
+        int estimatedSavingsKrw = ExpectedKrwParser.parse(aiResponse.getExpected());
+        int estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
+        BigDecimal estimatedKwh = ExpectedKwhParser.parse(aiResponse.getExpectedKwh());
+
         Report report = Report.builder()
                 .member(member)
-                .building(building)
-                .locationDetail(request.roomName())
-                // 사용자가 쓴 내용 뒤에 AI 분석 결과를 덧붙임
+                .locationNode(locationNode)
+                .locationDetail(locationDetail)
                 .description(request.description() + aiAdviceMessage)
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)
-                .status(ReportStatus.PENDING) // 관리자 확인 대기 상태
-                .createdAt(LocalDateTime.now())
+                .status(ReportStatus.PENDING)
+                .createdAt(reportAt)
+                .offTimeMinutes(null)
+                .estimatedKwh(estimatedKwh)
+                .estimatedSavingsKrw(estimatedSavingsKrw)
+                .estimatedPoint(estimatedPoint)
+                .pointAwarded(0)
                 .build();
 
         Report savedReport = reportRepository.save(report);
@@ -113,8 +127,42 @@ public class ReportService {
         return savedReport.getSeq();
     }
 
-    // --- AI API 호출 헬퍼 메서드 ---
-    private AiAnalysisResponse callAiApi(MultipartFile file) {
+    private AiAnalyzeMetadata buildAnalyzeMetadata(
+            LocalDateTime reportAt,
+            LocationNode locationNode,
+            List<LocationOperatingSchedule> schedules
+    ) {
+        List<AiAnalyzeMetadata.OperatingScheduleItem> items = schedules.stream()
+                .map(schedule -> new AiAnalyzeMetadata.OperatingScheduleItem(
+                        schedule.getDayOfWeek(),
+                        schedule.isClosed(),
+                        schedule.getPowerOnTime(),
+                        schedule.getPowerOffTime()
+                ))
+                .toList();
+
+        return new AiAnalyzeMetadata(
+                reportAt,
+                locationNode.getAcCount(),
+                locationNode.getFluorescentCount(),
+                locationNode.getLedCount(),
+                items
+        );
+    }
+
+    private LocationNode resolveLocationNode(ReportCreateRequest request) {
+        if (request.locationId() != null) {
+            return locationNodeService.findLeafNode(request.locationId());
+        }
+
+        if (request.roomName() != null && !request.roomName().isBlank()) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "장소(locationId)를 선택해 주세요.");
+        }
+
+        throw new BusinessLogicException(ErrorCode.INVALID, "제보 장소를 선택해 주세요.");
+    }
+
+    private AiAnalysisResponse callAiApi(MultipartFile file, AiAnalyzeMetadata metadata) {
         try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
@@ -122,6 +170,7 @@ public class ReportService {
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("file", file.getResource());
+            body.add("metadata", objectMapper.writeValueAsString(metadata));
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
@@ -136,6 +185,11 @@ public class ReportService {
             }
             return response.getBody();
 
+        } catch (BusinessLogicException e) {
+            throw e;
+        } catch (JsonProcessingException e) {
+            log.error("AI metadata JSON 직렬화 실패", e);
+            throw new BusinessLogicException(ErrorCode.INTERNAL_SERVER_ERROR, "AI 분석 요청을 준비할 수 없습니다.");
         } catch (Exception e) {
             log.error("AI API 통신 실패", e);
             throw new BusinessLogicException(ErrorCode.INTERNAL_SERVER_ERROR, "AI 분석 서버와 통신할 수 없습니다.");
@@ -172,10 +226,13 @@ public class ReportService {
                 .roomName(summary.getRoomName())
                 .status(summary.getStatus())
                 .pointAwarded(summary.getPointAwarded())
+                .estimatedPoint(summary.getEstimatedPoint())
+                .offTimeMinutes(summary.getOffTimeMinutes())
+                .estimatedKwh(summary.getEstimatedKwh())
                 .createdAt(summary.getCreatedAt())
                 .detectionLabel(summary.getDetectionLabel())
                 .thumbnailUrl(summary.getThumbnailUrl())
-                .buildingName(report.getBuilding() != null ? report.getBuilding().getName() : null)
+                .buildingName(extractRootName(report))
                 .imageUrl(report.getImageUrl())
                 .aiResult(null)
                 .build();
@@ -193,20 +250,34 @@ public class ReportService {
     }
 
     private ReportResponse.Summary toSummary(Report report) {
-        String buildingName = report.getBuilding() != null ? report.getBuilding().getName() : "";
-        String roomName = buildingName.isBlank()
-                ? report.getLocationDetail()
-                : buildingName + " " + report.getLocationDetail();
+        int displayPoint = report.getPointAwarded() != null && report.getPointAwarded() > 0
+                ? report.getPointAwarded()
+                : (report.getEstimatedPoint() != null ? report.getEstimatedPoint() : 0);
 
         return ReportResponse.Summary.builder()
                 .reportId(report.getSeq())
-                .roomName(roomName)
+                .roomName(report.getLocationDetail())
                 .status(report.getStatus().name())
-                .pointAwarded(0)
+                .pointAwarded(displayPoint)
+                .estimatedPoint(report.getEstimatedPoint())
+                .offTimeMinutes(report.getOffTimeMinutes())
+                .estimatedKwh(report.getEstimatedKwh() != null ? report.getEstimatedKwh().toPlainString() : null)
                 .createdAt(report.getCreatedAt() != null ? report.getCreatedAt().toString() : null)
                 .detectionLabel(buildDetectionLabel(report.getWasteType()))
                 .thumbnailUrl(report.getImageUrl())
                 .build();
+    }
+
+    private String extractRootName(Report report) {
+        LocationNode node = report.getLocationNode();
+        if (node == null) {
+            return null;
+        }
+        LocationNode current = node;
+        while (current.getParent() != null) {
+            current = current.getParent();
+        }
+        return current.getName();
     }
 
     private String buildDetectionLabel(WasteType wasteType) {
