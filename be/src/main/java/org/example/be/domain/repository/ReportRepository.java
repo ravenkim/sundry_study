@@ -18,4 +18,6 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
             Long memberSeq, ReportStatus status, Pageable pageable);
 
     Optional<Report> findBySeqAndMember_Seq(Long seq, Long memberSeq);
+
+    boolean existsByLocationNode_Seq(Long locationSeq);
 }

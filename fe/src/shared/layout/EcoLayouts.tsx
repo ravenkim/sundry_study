@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router'
 import {
     Home,
     ClipboardCheck,
+    Gift,
     ShoppingBag,
     User as UserIcon,
     Settings,
@@ -179,7 +180,7 @@ export const AdminSidebar = () => {
         { name: '제보 현황', path: '/admin', icon: Database },
         { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
         { name: '건물·강의실', path: '/admin/buildings', icon: Settings },
-        { name: '포인트 관리', path: '/admin/points', icon: ShoppingBag },
+        { name: '기프티콘 관리', path: '/admin/points', icon: Gift },
         { name: '에너지 통계', path: '/admin/stats', icon: BarChart3 },
         { name: '사용자 관리', path: '/admin/users', icon: Users },
     ]

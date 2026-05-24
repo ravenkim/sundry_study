@@ -2,12 +2,13 @@ package org.example.be.config;
 
 import lombok.RequiredArgsConstructor;
 import org.example.be.domain.model.Affiliation;
-import org.example.be.domain.model.Building;
+import org.example.be.domain.model.LocationNode;
 import org.example.be.domain.model.Member;
 import org.example.be.domain.model.MemberPoint;
+import org.example.be.domain.model.NodeKind;
 import org.example.be.domain.model.UserType;
 import org.example.be.domain.repository.AffiliationRepository;
-import org.example.be.domain.repository.BuildingRepository;
+import org.example.be.domain.repository.LocationNodeRepository;
 import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.springframework.boot.ApplicationArguments;
@@ -28,7 +29,7 @@ public class UserDataInitializer implements ApplicationRunner {
 
     private final MemberRepository memberRepository;
     private final MemberPointRepository memberPointRepository;
-    private final BuildingRepository buildingRepository;
+    private final LocationNodeRepository locationNodeRepository;
     private final AffiliationRepository affiliationRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -39,8 +40,9 @@ public class UserDataInitializer implements ApplicationRunner {
             return;
         }
 
-        Building userBuilding = buildingRepository.findAll().stream()
-                .filter(building -> USER_BUILDING_NAME.equals(building.getName()))
+        LocationNode userLocation = locationNodeRepository.findAll().stream()
+                .filter(node -> node.getParent() == null)
+                .filter(node -> USER_BUILDING_NAME.equals(node.getName()))
                 .findFirst()
                 .orElseGet(() -> {
                     Affiliation affiliation = affiliationRepository.findAll().stream()
@@ -51,10 +53,13 @@ public class UserDataInitializer implements ApplicationRunner {
                                             .address(AffiliationDataInitializer.DEFAULT_AFFILIATION_ADDRESS)
                                             .build()
                             ));
-                    return buildingRepository.save(
-                            Building.builder()
+                    return locationNodeRepository.save(
+                            LocationNode.builder()
                                     .name(USER_BUILDING_NAME)
                                     .affiliation(affiliation)
+                                    .nodeKind(NodeKind.GROUP)
+                                    .depth(1)
+                                    .sortOrder(0)
                                     .build()
                     );
                 });
@@ -63,9 +68,9 @@ public class UserDataInitializer implements ApplicationRunner {
                 USER_USER_NAME,
                 passwordEncoder.encode(USER_PASSWORD),
                 "user@ecoreport.kr",
-                userBuilding.getAffiliation()
+                userLocation.getAffiliation()
         );
-        user.setBuilding(userBuilding);
+        user.setLocationNode(userLocation);
         user.setUserType(UserType.USER);
 
         memberRepository.save(user);

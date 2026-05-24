@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public record ReportCreateRequest(
         Long buildingId,
+        Long locationId,
         String roomName,
         String description,
         @JsonProperty("isLightWasting")

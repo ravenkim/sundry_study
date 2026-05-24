@@ -38,9 +38,11 @@ export function AffiliationSelection() {
     }, [])
 
     const buildingsForAffiliation = useMemo(() => {
-        if (!affiliationId) return buildings
-        const filtered = buildings.filter((b) => b.affiliationId === affiliationId)
-        return filtered.length > 0 ? filtered : buildings
+        const scoped = !affiliationId
+            ? buildings
+            : buildings.filter((b) => b.affiliationId === affiliationId)
+        const list = scoped.length > 0 ? scoped : buildings
+        return list.filter((b) => b.nodeKind === 'GROUP')
     }, [affiliationId, buildings])
 
     const buildingOptions = useMemo(

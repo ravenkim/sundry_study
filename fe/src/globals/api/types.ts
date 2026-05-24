@@ -98,17 +98,38 @@ export interface GifticonExchangeRow {
     processedAt?: string
 }
 
+export type NodeKind = 'GROUP' | 'LEAF'
+
+export interface LocationTreeNode {
+    locationId: number
+    name: string
+    nodeKind: NodeKind
+    children?: LocationTreeNode[]
+}
+
 export interface BuildingLocation {
     locationId: number
     name: string
+    path?: string
 }
 
 export interface Building {
     buildingId: number
     name: string
+    nodeKind: NodeKind
     affiliationId?: number
     affiliationName?: string
-    locations: BuildingLocation[]
+    children: LocationTreeNode[]
+}
+
+export interface AdminLocationNode {
+    id: number
+    name: string
+    nodeKind: NodeKind
+    depth: number
+    sortOrder: number
+    locationType?: string
+    children: AdminLocationNode[]
 }
 
 export interface Affiliation {

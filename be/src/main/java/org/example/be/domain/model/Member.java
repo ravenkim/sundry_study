@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.User;
 
 @Entity
 @Table(name = "member_db")
@@ -23,11 +22,11 @@ public class Member {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "affiliation_seq")
-    private Affiliation affiliation; // 캠퍼스·학교 소속
+    private Affiliation affiliation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "building_seq")
-    private Building building; // 이용자가 속한 건물
+    @JoinColumn(name = "location_node_seq")
+    private LocationNode locationNode;
 
     private String provider;
     private String providerId;
@@ -42,5 +41,4 @@ public class Member {
         this.email = email;
         this.affiliation = affiliation;
     }
-
 }

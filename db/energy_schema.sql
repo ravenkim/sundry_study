@@ -27,25 +27,31 @@ CREATE TABLE `affiliation_db` (
   `address` varchar(255) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `building_db`
+-- Table structure for table `location_node_db`
 --
 
-DROP TABLE IF EXISTS `building_db`;
+DROP TABLE IF EXISTS `location_node_db`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `building_db` (
+CREATE TABLE `location_node_db` (
   `seq` bigint NOT NULL AUTO_INCREMENT,
-  `address` varchar(255) DEFAULT NULL,
+  `parent_seq` bigint DEFAULT NULL,
+  `affiliation_seq` bigint NOT NULL,
   `name` varchar(255) NOT NULL,
-  `affiliation_seq` bigint DEFAULT NULL,
+  `node_kind` enum('GROUP','LEAF') NOT NULL,
+  `depth` int NOT NULL,
+  `sort_order` int NOT NULL DEFAULT 0,
+  `location_type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`seq`),
-  KEY `FK7i6uigdt363mpio1o5pkq5xr3` (`affiliation_seq`),
-  CONSTRAINT `FK7i6uigdt363mpio1o5pkq5xr3` FOREIGN KEY (`affiliation_seq`) REFERENCES `affiliation_db` (`seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_location_node_parent` (`parent_seq`),
+  KEY `FK_location_node_affiliation` (`affiliation_seq`),
+  CONSTRAINT `FK_location_node_affiliation` FOREIGN KEY (`affiliation_seq`) REFERENCES `affiliation_db` (`seq`),
+  CONSTRAINT `FK_location_node_parent` FOREIGN KEY (`parent_seq`) REFERENCES `location_node_db` (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,13 +70,13 @@ CREATE TABLE `member_db` (
   `provider_id` varchar(255) DEFAULT NULL,
   `user_type` enum('ADMIN','USER') NOT NULL,
   `affiliation_seq` bigint DEFAULT NULL,
-  `building_seq` bigint DEFAULT NULL,
+  `location_node_seq` bigint DEFAULT NULL,
   PRIMARY KEY (`seq`),
   KEY `FKn41q08vad7yp54w73pbsje9jf` (`affiliation_seq`),
-  KEY `FKfnwegggrek5f9pagfxfu3ssn3` (`building_seq`),
-  CONSTRAINT `FKfnwegggrek5f9pagfxfu3ssn3` FOREIGN KEY (`building_seq`) REFERENCES `building_db` (`seq`),
+  KEY `FK_member_location_node` (`location_node_seq`),
+  CONSTRAINT `FK_member_location_node` FOREIGN KEY (`location_node_seq`) REFERENCES `location_node_db` (`seq`),
   CONSTRAINT `FKn41q08vad7yp54w73pbsje9jf` FOREIGN KEY (`affiliation_seq`) REFERENCES `affiliation_db` (`seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +93,7 @@ CREATE TABLE `member_point_db` (
   PRIMARY KEY (`seq`),
   UNIQUE KEY `UKg61gqqhwrlw8xo1ekatjb1iip` (`member_seq`),
   CONSTRAINT `FK2yfmc9i7marhhm20bmby0yb2e` FOREIGN KEY (`member_seq`) REFERENCES `member_db` (`seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,14 +114,14 @@ CREATE TABLE `report_db` (
   `is_heater_wasting` bit(1) DEFAULT NULL,
   `is_light_wasting` bit(1) DEFAULT NULL,
   `is_other_wasting` bit(1) DEFAULT NULL,
-  `building_seq` bigint DEFAULT NULL,
+  `location_seq` bigint DEFAULT NULL,
   `member_seq` bigint DEFAULT NULL,
   PRIMARY KEY (`seq`),
-  KEY `FKlw58bmh1bsf6hwbh98ce227qp` (`building_seq`),
+  KEY `FK_report_location` (`location_seq`),
   KEY `FK87qftf4iy7s14kwivgjoi0hym` (`member_seq`),
   CONSTRAINT `FK87qftf4iy7s14kwivgjoi0hym` FOREIGN KEY (`member_seq`) REFERENCES `member_db` (`seq`),
-  CONSTRAINT `FKlw58bmh1bsf6hwbh98ce227qp` FOREIGN KEY (`building_seq`) REFERENCES `building_db` (`seq`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK_report_location` FOREIGN KEY (`location_seq`) REFERENCES `location_node_db` (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -127,4 +133,4 @@ CREATE TABLE `report_db` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-24  3:22:13
+-- Dump completed

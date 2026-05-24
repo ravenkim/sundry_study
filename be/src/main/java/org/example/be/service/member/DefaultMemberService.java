@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.example.be.api.request.MemberRequest;
 import org.example.be.api.response.MemberResponse;
 import org.example.be.domain.model.Affiliation;
-import org.example.be.domain.model.Building;
+import org.example.be.domain.model.LocationNode;
 import org.example.be.domain.model.Member;
 import org.example.be.domain.model.MemberPoint;
+import org.example.be.domain.model.NodeKind;
 import org.example.be.domain.model.UserType;
 import org.example.be.domain.repository.AffiliationRepository;
-import org.example.be.domain.repository.BuildingRepository;
+import org.example.be.domain.repository.LocationNodeRepository;
 import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.exception.BusinessLogicException;
@@ -26,7 +27,7 @@ public class DefaultMemberService implements MemberService {
     private final MemberRepository memberRepository;
     private final MemberPointRepository memberPointRepository;
     private final PasswordEncoder passwordEncoder;
-    private final BuildingRepository buildingRepository;
+    private final LocationNodeRepository locationNodeRepository;
     private final AffiliationRepository affiliationRepository;
 
     @Override
@@ -66,7 +67,13 @@ public class DefaultMemberService implements MemberService {
         }
 
         if (request.getBuildingId() != null) {
-            return saveNewMember(userName, request.getPassword(), normalizedEmail, resolveAffiliationFromBuilding(request.getBuildingId()), request.getBuildingId());
+            return saveNewMember(
+                    userName,
+                    request.getPassword(),
+                    normalizedEmail,
+                    resolveAffiliationFromLocationNode(request.getBuildingId()),
+                    request.getBuildingId()
+            );
         }
 
         if (request.getAffiliation() == null) {
@@ -91,17 +98,15 @@ public class DefaultMemberService implements MemberService {
         member.setAffiliation(affiliation);
 
         if (buildingId != null) {
-            Building building = buildingRepository.findById(buildingId)
-                    .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 건물입니다."));
+            LocationNode locationNode = resolveGroupLocationNode(buildingId);
 
-            if (building.getAffiliation() == null
-                    || !building.getAffiliation().getSeq().equals(affiliation.getSeq())) {
-                throw new BusinessLogicException(ErrorCode.INVALID, "선택한 구역이 소속과 일치하지 않습니다.");
+            if (!locationNode.getAffiliation().getSeq().equals(affiliation.getSeq())) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "선택한 장소가 소속과 일치하지 않습니다.");
             }
 
-            member.setBuilding(building);
+            member.setLocationNode(locationNode);
         } else {
-            member.setBuilding(null);
+            member.setLocationNode(null);
         }
 
         return MemberResponse.Detail.of(member);
@@ -113,9 +118,10 @@ public class DefaultMemberService implements MemberService {
         Member member = memberRepository.findById(memberSeq)
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
-        Affiliation affiliation = resolveAffiliationFromBuilding(buildingId);
+        LocationNode locationNode = resolveGroupLocationNode(buildingId);
+        Affiliation affiliation = locationNode.getAffiliation();
 
-        member.setBuilding(buildingRepository.findById(buildingId).orElseThrow());
+        member.setLocationNode(locationNode);
         member.setAffiliation(affiliation);
 
         return MemberResponse.Detail.of(member);
@@ -134,7 +140,7 @@ public class DefaultMemberService implements MemberService {
             String password,
             String normalizedEmail,
             Affiliation affiliation,
-            Long buildingId
+            Long locationNodeId
     ) {
         Member member = new Member(
                 userName,
@@ -144,8 +150,8 @@ public class DefaultMemberService implements MemberService {
         );
         member.setUserType(UserType.USER);
 
-        if (buildingId != null) {
-            member.setBuilding(buildingRepository.findById(buildingId).orElseThrow());
+        if (locationNodeId != null) {
+            member.setLocationNode(resolveGroupLocationNode(locationNodeId));
         }
 
         memberRepository.save(member);
@@ -153,16 +159,20 @@ public class DefaultMemberService implements MemberService {
         return true;
     }
 
-    private Affiliation resolveAffiliationFromBuilding(Long buildingId) {
-        Building building = buildingRepository.findById(buildingId)
-                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 건물입니다."));
+    private Affiliation resolveAffiliationFromLocationNode(Long locationNodeId) {
+        LocationNode locationNode = resolveGroupLocationNode(locationNodeId);
+        return locationNode.getAffiliation();
+    }
 
-        Affiliation affiliation = building.getAffiliation();
-        if (affiliation == null) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "건물에 연결된 소속 정보가 없습니다.");
+    private LocationNode resolveGroupLocationNode(Long locationNodeId) {
+        LocationNode locationNode = locationNodeRepository.findById(locationNodeId)
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 장소입니다."));
+
+        if (locationNode.getNodeKind() != NodeKind.GROUP) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "그룹 장소만 소속으로 선택할 수 있습니다.");
         }
 
-        return affiliation;
+        return locationNode;
     }
 
     private static String normalizeEmail(String email) {

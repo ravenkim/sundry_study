@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Camera, ImageIcon, Loader2, Plus } from 'lucide-react'
 import { toast } from 'react-toastify'
@@ -7,6 +7,7 @@ import { EcoButton } from 'src/shared/ui/eco'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import { createReport } from 'src/globals/api/reportApi'
+import { flattenLeafLocations } from 'src/globals/api/locationUtils'
 import type { Building } from 'src/globals/api/types'
 import { MOCK_BUILDINGS } from 'src/globals/api/mock/data'
 
@@ -65,7 +66,11 @@ export const UserReportForm = () => {
     }, [photo])
 
     const selectedBuilding = buildings.find((b) => b.buildingId === buildingId)
-    const selectedLocation = selectedBuilding?.locations.find(
+    const leafLocations = useMemo(
+        () => flattenLeafLocations(selectedBuilding?.children),
+        [selectedBuilding],
+    )
+    const selectedLocation = leafLocations.find(
         (l) => l.locationId === locationId,
     )
 
@@ -167,12 +172,12 @@ export const UserReportForm = () => {
                             className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-4 outline-none focus:ring-2 disabled:opacity-50"
                         >
                             <option value="">강의실을 선택해주세요</option>
-                            {selectedBuilding?.locations.map((loc) => (
+                            {leafLocations.map((loc) => (
                                 <option
                                     key={loc.locationId}
                                     value={loc.locationId}
                                 >
-                                    {loc.name}
+                                    {loc.path ?? loc.name}
                                 </option>
                             ))}
                         </select>

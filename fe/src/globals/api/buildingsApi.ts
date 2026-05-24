@@ -28,23 +28,3 @@ export async function getBuildings(): Promise<Building[]> {
         () => MOCK_BUILDINGS,
     )
 }
-
-export async function createBuilding(payload: {
-    name: string
-    roomCount: number
-}): Promise<Building> {
-    return withMockFallback(
-        async () => {
-            const { data } = await client.post<ApiResponse<Building>>(
-                '/api/admin/buildings',
-                payload,
-            )
-            return unwrapApiData(data)
-        },
-        () => ({
-            buildingId: Date.now(),
-            name: payload.name,
-            locations: [],
-        }),
-    )
-}

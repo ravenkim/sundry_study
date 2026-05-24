@@ -32,8 +32,8 @@ public class JwtTokenProvider {
                 .claim("email", member.getEmail())
                 .claim("memberSeq", member.getSeq())
                 .claim("userType", member.getUserType() != null ? member.getUserType().name() : UserType.USER.name())
-                .claim("buildingId", member.getBuilding() != null ? member.getBuilding().getSeq() : null)
-                .claim("buildingName", member.getBuilding() != null ? member.getBuilding().getName() : null)
+                .claim("buildingId", member.getLocationNode() != null ? member.getLocationNode().getSeq() : null)
+                .claim("buildingName", member.getLocationNode() != null ? member.getLocationNode().getName() : null)
                 .build();
 
         JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();

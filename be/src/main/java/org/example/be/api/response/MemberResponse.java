@@ -1,5 +1,6 @@
 package org.example.be.api.response;
 
+import org.example.be.domain.model.LocationNode;
 import org.example.be.domain.model.Member;
 import org.example.be.domain.model.UserType;
 import lombok.Builder;
@@ -66,12 +67,13 @@ public class MemberResponse {
         private String userType;
 
         public static Login of(Member member, String accessToken) {
+            LocationNode locationNode = member.getLocationNode();
             return Login.builder()
                     .accessToken(accessToken)
                     .userName(member.getUserName())
                     .email(member.getEmail())
-                    .buildingId(member.getBuilding() != null ? member.getBuilding().getSeq() : null)
-                    .buildingName(member.getBuilding() != null ? member.getBuilding().getName() : null)
+                    .buildingId(locationNode != null ? locationNode.getSeq() : null)
+                    .buildingName(locationNode != null ? locationNode.getName() : null)
                     .userType(member.getUserType() != null ? member.getUserType().name() : UserType.USER.name())
                     .build();
         }

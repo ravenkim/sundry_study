@@ -37,11 +37,11 @@ export const AdminPoints = () => {
         <>
             <AdminSidebar />
             <div className="bg-surface-bright flex min-h-screen flex-col md:ml-64">
-                <AdminHeader title="포인트 관리" />
+                <AdminHeader title="기프티콘 관리" />
                 <main className="mx-auto w-full max-w-7xl p-8">
                     <div className="mb-8">
                         <h2 className="mb-1 text-3xl font-bold">
-                            기프티콘 발송 관리
+                            기프티콘 관리
                         </h2>
                         <p className="text-on-surface-variant text-sm">
                             사용자별 기프티콘 교환 신청을 확인하고 발송

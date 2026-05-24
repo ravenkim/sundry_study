@@ -1,0 +1,264 @@
+package org.example.be.service.location;
+
+import lombok.RequiredArgsConstructor;
+import org.example.be.api.request.LocationNodeRequest;
+import org.example.be.api.response.BuildingResponse;
+import org.example.be.api.response.LocationNodeResponse;
+import org.example.be.domain.model.Affiliation;
+import org.example.be.domain.model.LocationNode;
+import org.example.be.domain.model.NodeKind;
+import org.example.be.domain.repository.AffiliationRepository;
+import org.example.be.domain.repository.LocationNodeRepository;
+import org.example.be.domain.repository.ReportRepository;
+import org.example.be.exception.BusinessLogicException;
+import org.example.be.exception.ErrorCode;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class LocationNodeService {
+
+    private static final int MAX_DEPTH = 3;
+
+    private final LocationNodeRepository locationNodeRepository;
+    private final AffiliationRepository affiliationRepository;
+    private final ReportRepository reportRepository;
+
+    public List<LocationNodeResponse.TreeNode> getAdminTree(Long affiliationId) {
+        List<LocationNode> nodes = locationNodeRepository
+                .findByAffiliation_SeqOrderByDepthAscSortOrderAscSeqAsc(affiliationId);
+        return buildTree(nodes);
+    }
+
+    public List<BuildingResponse.Item> listPublicTrees(Long affiliationId) {
+        List<LocationNode> roots = locationNodeRepository
+                .findByAffiliation_SeqAndParentIsNullOrderBySortOrderAscSeqAsc(affiliationId);
+        return roots.stream()
+                .map(this::toPublicItem)
+                .toList();
+    }
+
+    public List<BuildingResponse.Item> listPublicTreesForScope(LocationNode scopeNode) {
+        return List.of(toPublicItem(scopeNode));
+    }
+
+    public List<BuildingResponse.Item> listAllPublicTrees() {
+        return locationNodeRepository.findAll().stream()
+                .filter(node -> node.getParent() == null)
+                .sorted(Comparator.comparingInt(LocationNode::getSortOrder)
+                        .thenComparing(LocationNode::getSeq))
+                .map(this::toPublicItem)
+                .toList();
+    }
+
+    @Transactional
+    public LocationNodeResponse.TreeNode create(LocationNodeRequest.Create request) {
+        Affiliation affiliation = affiliationRepository.findById(request.getAffiliationId())
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 소속입니다."));
+
+        int depth;
+        int sortOrder;
+        LocationNode parent = null;
+
+        if (request.getParentId() == null) {
+            depth = 1;
+            sortOrder = nextSortOrder(null, affiliation.getSeq());
+        } else {
+            parent = locationNodeRepository.findById(request.getParentId())
+                    .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "상위 장소를 찾을 수 없습니다."));
+
+            if (parent.getNodeKind() != NodeKind.GROUP) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "그룹 노드에만 하위 장소를 추가할 수 있습니다.");
+            }
+            if (parent.getDepth() >= MAX_DEPTH) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "최대 3뎁스까지만 등록할 수 있습니다.");
+            }
+            if (!parent.getAffiliation().getSeq().equals(affiliation.getSeq())) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "상위 장소와 소속이 일치하지 않습니다.");
+            }
+
+            depth = parent.getDepth() + 1;
+            sortOrder = nextSortOrder(parent.getSeq(), affiliation.getSeq());
+        }
+
+        if (request.getNodeKind() == NodeKind.GROUP && depth >= MAX_DEPTH) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "3뎁스에는 장소(LEAF)만 등록할 수 있습니다.");
+        }
+
+        LocationNode saved = locationNodeRepository.save(
+                LocationNode.builder()
+                        .parent(parent)
+                        .affiliation(affiliation)
+                        .name(request.getName().trim())
+                        .nodeKind(request.getNodeKind())
+                        .depth(depth)
+                        .sortOrder(sortOrder)
+                        .build()
+        );
+
+        return toAdminTreeNode(saved, List.of());
+    }
+
+    @Transactional
+    public LocationNodeResponse.TreeNode update(Long nodeId, LocationNodeRequest.Update request) {
+        LocationNode node = findNode(nodeId);
+        node.setName(request.getName().trim());
+        if (request.getSortOrder() != null) {
+            node.setSortOrder(request.getSortOrder());
+        }
+        return toAdminTreeNode(node, loadChildren(node.getSeq()));
+    }
+
+    @Transactional
+    public void delete(Long nodeId) {
+        LocationNode node = findNode(nodeId);
+
+        if (locationNodeRepository.countByParent_Seq(nodeId) > 0) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "하위 장소가 있어 삭제할 수 없습니다.");
+        }
+
+        if (reportRepository.existsByLocationNode_Seq(nodeId)) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "제보가 연결된 장소는 삭제할 수 없습니다.");
+        }
+
+        locationNodeRepository.delete(node);
+    }
+
+    public LocationNode findNode(Long nodeId) {
+        return locationNodeRepository.findById(nodeId)
+                .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "장소를 찾을 수 없습니다."));
+    }
+
+    public LocationNode findLeafNode(Long nodeId) {
+        LocationNode node = findNode(nodeId);
+        if (node.getNodeKind() != NodeKind.LEAF) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "선택 가능한 장소(LEAF)만 지정할 수 있습니다.");
+        }
+        return node;
+    }
+
+    public void validateMemberScope(LocationNode memberScope, LocationNode target) {
+        if (memberScope == null) {
+            return;
+        }
+        if (memberScope.getNodeKind() != NodeKind.GROUP) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "회원 소속 장소 설정이 올바르지 않습니다.");
+        }
+        if (!isSameOrDescendant(target, memberScope)) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "소속 장소 범위에서만 제보할 수 있습니다.");
+        }
+    }
+
+    public boolean isSameOrDescendant(LocationNode node, LocationNode ancestor) {
+        LocationNode current = node;
+        while (current != null) {
+            if (current.getSeq().equals(ancestor.getSeq())) {
+                return true;
+            }
+            current = current.getParent();
+        }
+        return false;
+    }
+
+    public String buildPath(LocationNode node) {
+        List<String> names = new ArrayList<>();
+        LocationNode current = node;
+        while (current != null) {
+            names.add(0, current.getName());
+            current = current.getParent();
+        }
+        return String.join(" > ", names);
+    }
+
+    public List<LocationNode> findRootsForAffiliation(Long affiliationId, NodeKind nodeKind) {
+        return locationNodeRepository.findRootsByAffiliationAndKind(affiliationId, nodeKind);
+    }
+
+    private int nextSortOrder(Long parentId, Long affiliationId) {
+        if (parentId == null) {
+            List<LocationNode> roots = locationNodeRepository
+                    .findByAffiliation_SeqAndParentIsNullOrderBySortOrderAscSeqAsc(affiliationId);
+            return roots.isEmpty() ? 0 : roots.get(roots.size() - 1).getSortOrder() + 1;
+        }
+        List<LocationNode> siblings = locationNodeRepository.findByParent_SeqOrderBySortOrderAscSeqAsc(parentId);
+        return siblings.isEmpty() ? 0 : siblings.get(siblings.size() - 1).getSortOrder() + 1;
+    }
+
+    private BuildingResponse.Item toPublicItem(LocationNode root) {
+        return BuildingResponse.Item.builder()
+                .buildingId(root.getSeq())
+                .name(root.getName())
+                .nodeKind(root.getNodeKind())
+                .affiliationId(root.getAffiliation().getSeq())
+                .affiliationName(root.getAffiliation().getName())
+                .children(buildPublicChildren(root.getSeq()))
+                .build();
+    }
+
+    private List<BuildingResponse.TreeNode> buildPublicChildren(Long parentId) {
+        return locationNodeRepository.findByParent_SeqOrderBySortOrderAscSeqAsc(parentId).stream()
+                .map(child -> BuildingResponse.TreeNode.builder()
+                        .locationId(child.getSeq())
+                        .name(child.getName())
+                        .nodeKind(child.getNodeKind())
+                        .children(child.getNodeKind() == NodeKind.GROUP
+                                ? buildPublicChildren(child.getSeq())
+                                : List.of())
+                        .build())
+                .toList();
+    }
+
+    private List<LocationNodeResponse.TreeNode> buildTree(List<LocationNode> nodes) {
+        Map<Long, List<LocationNode>> childrenByParent = nodes.stream()
+                .filter(node -> node.getParent() != null)
+                .collect(Collectors.groupingBy(node -> node.getParent().getSeq()));
+
+        return nodes.stream()
+                .filter(node -> node.getParent() == null)
+                .sorted(Comparator.comparingInt(LocationNode::getSortOrder)
+                        .thenComparing(LocationNode::getSeq))
+                .map(root -> toAdminTreeNode(root, loadChildrenFromMap(root.getSeq(), childrenByParent)))
+                .toList();
+    }
+
+    private List<LocationNodeResponse.TreeNode> loadChildrenFromMap(
+            Long parentId,
+            Map<Long, List<LocationNode>> childrenByParent
+    ) {
+        List<LocationNode> children = childrenByParent.getOrDefault(parentId, List.of());
+        return children.stream()
+                .sorted(Comparator.comparingInt(LocationNode::getSortOrder)
+                        .thenComparing(LocationNode::getSeq))
+                .map(child -> toAdminTreeNode(child, loadChildrenFromMap(child.getSeq(), childrenByParent)))
+                .toList();
+    }
+
+    private List<LocationNodeResponse.TreeNode> loadChildren(Long parentId) {
+        return locationNodeRepository.findByParent_SeqOrderBySortOrderAscSeqAsc(parentId).stream()
+                .map(child -> toAdminTreeNode(child, loadChildren(child.getSeq())))
+                .toList();
+    }
+
+    private LocationNodeResponse.TreeNode toAdminTreeNode(
+            LocationNode node,
+            List<LocationNodeResponse.TreeNode> children
+    ) {
+        return LocationNodeResponse.TreeNode.builder()
+                .id(node.getSeq())
+                .name(node.getName())
+                .nodeKind(node.getNodeKind())
+                .depth(node.getDepth())
+                .sortOrder(node.getSortOrder())
+                .locationType(node.getLocationType())
+                .children(children)
+                .build();
+    }
+}

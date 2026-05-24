@@ -22,34 +22,38 @@ export const MOCK_BUILDINGS: Building[] = [
     {
         buildingId: 1,
         name: '공학관 A동',
-        locations: [
-            { locationId: 101, name: '303호' },
-            { locationId: 102, name: '304호' },
-            { locationId: 103, name: '2층 복도' },
+        nodeKind: 'GROUP',
+        children: [
+            { locationId: 101, name: '303호', nodeKind: 'LEAF' },
+            { locationId: 102, name: '304호', nodeKind: 'LEAF' },
+            { locationId: 103, name: '2층 복도', nodeKind: 'LEAF' },
         ],
     },
     {
         buildingId: 2,
         name: '도서관',
-        locations: [
-            { locationId: 201, name: '2열람실' },
-            { locationId: 202, name: '3열람실' },
+        nodeKind: 'GROUP',
+        children: [
+            { locationId: 201, name: '2열람실', nodeKind: 'LEAF' },
+            { locationId: 202, name: '3열람실', nodeKind: 'LEAF' },
         ],
     },
     {
         buildingId: 3,
         name: '학생회관',
-        locations: [
-            { locationId: 301, name: '101호' },
-            { locationId: 302, name: '201호' },
+        nodeKind: 'GROUP',
+        children: [
+            { locationId: 301, name: '101호', nodeKind: 'LEAF' },
+            { locationId: 302, name: '201호', nodeKind: 'LEAF' },
         ],
     },
     {
         buildingId: 4,
         name: '본관',
-        locations: [
-            { locationId: 401, name: '501호' },
-            { locationId: 402, name: '502호' },
+        nodeKind: 'GROUP',
+        children: [
+            { locationId: 401, name: '501호', nodeKind: 'LEAF' },
+            { locationId: 402, name: '502호', nodeKind: 'LEAF' },
         ],
     },
 ]
