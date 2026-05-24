@@ -35,6 +35,7 @@ export async function simulateAiAnalysis(
             result === 'WASTE_DETECTED'
                 ? 'Ceiling lights are visibly illuminated in an empty classroom.'
                 : undefined,
+        expected: result === 'WASTE_DETECTED' ? `${pointAwarded * 5}원` : '0원',
         pointAwarded,
         currentBalance: points.currentBalance,
     }

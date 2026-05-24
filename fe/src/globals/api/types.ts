@@ -34,6 +34,7 @@ export interface AiReportResult {
     ac_status?: 'ON' | 'OFF' | 'UNKNOWN'
     light_status?: 'ON' | 'OFF' | 'UNKNOWN'
     reason?: string
+    expected?: string
     pointAwarded?: number
     currentBalance?: number
 }

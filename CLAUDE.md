@@ -54,7 +54,7 @@ cd be
 - P0 API: `GET /api/buildings`, `GET /api/affiliations`, `GET /api/points/me`, `POST/GET /api/reports`, **`/api/admin/location-nodes/*`** (장소 CRUD)
 - **소속·역할**: `Affiliation` + Flyway 시드, `GET /api/affiliations`, `LocationNode` 트리, `UserType.ADMIN` 시드, 회원가입·FE 소속 선택 UI ✅
 - **장소 모델**: `LocationNode` + LEAF **자원 수량** + **`location_operating_schedule_db`(요일별 on/off)** ✅
-- **AI 코드**: monorepo `ai/` — Cloud Run `/analyze` (ON/OFF 판별). kWh는 BE `SavingsCalculationService`
+- **AI 코드**: monorepo `ai/` — Cloud Run `/analyze` (이미지+metadata → ON/OFF + `expected` 원화). BE는 `expected` 파싱·포인트 저장
 - 미구현: GCS·`aiResult` JSON·**승인 시 포인트 확정 적립(Kafka)**·admin reports/dashboard·ResourceType (Phase 2)
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 - DB 연결: `MYSQL_*` + `SPRING_DATASOURCE_*` (동일 user/password). `DB_URL`/`DB_USERNAME`/`DB_PASSWORD`는 사용하지 않음

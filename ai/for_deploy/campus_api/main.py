@@ -104,10 +104,13 @@ Respond STRICTLY in this JSON format only:
 """
 
 
+from typing import Optional
+
+
 def analyze_with_metadata(
     original_img_path: str,
     metadata: dict,
-    crop_img_path: str | None = None,
+    crop_img_path: Optional[str] = None,
 ) -> dict:
     parts = [Part.from_image(Image.load_from_file(original_img_path))]
     if crop_img_path:

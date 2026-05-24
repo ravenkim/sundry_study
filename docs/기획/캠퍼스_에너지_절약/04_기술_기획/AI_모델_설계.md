@@ -8,20 +8,21 @@
 |------|---------|------|
 | 사람·가구 감지 (강의실 판별) | AI (YOLOv8n) | COCO 사전학습 모델 — person/chair/desk 3클래스 필터링 |
 | 에어컨 탐지 | AI (YOLOv8n Custom) | Roboflow 데이터셋 파인튜닝 — `ac_best.pt` |
-| 에어컨 ON/OFF 및 조명 상태 판별 | AI (Gemini Vision) | 고정 프롬프트 — 시나리오 A(에어컨 탐지 시) / B(미탐지 시) |
-| 절약량 계산 (전기·수도) | 규칙 기반 | 자원 분류별 수식 엔진 |
+| 에어컨 ON/OFF 및 조명 상태 판별 | AI (Gemini Vision) | 이미지 + 강의실 metadata JSON |
+| 절약량 계산 (전기) | AI (Gemini) | metadata(운영시간·자원 수량) + ON/OFF 판별 → `expected`(원) |
+| 절약량 계산 (BE 참고용) | 규칙 기반 | `SavingsCalculationService` — 제보 플로우에서는 미사용, Phase 2 참고 |
 | 어뷰징 탐지 | 규칙 기반 | 임계값 필터 |
 | (P2) 낭비 패턴 예측 | AI (시계열) | 추후 구현 |
 
 ---
 
-## 2. 3단계 AI 파이프라인
+## 2. AI 파이프라인 (YOLO + Gemini 통합)
 
-이미지 한 장이 업로드되면 아래 세 모델이 순서대로 실행된다.  
+BE가 **이미지 + metadata JSON**을 전달하면 아래 파이프라인이 실행된다.  
 앞 단계에서 조기 종료 조건이 충족되면 이후 단계는 건너뛴다.
 
 ```
-[이미지]
+[이미지 + metadata JSON]
    │
    ▼
 [1단계] YOLOv8n — 사람·가구 탐지
@@ -29,10 +30,13 @@
    ├─ person ≥ 1          → PASS (사용 중)
    └─ person = 0          ↓
 [2단계] YOLOv8n Custom (ac_best.pt) — 에어컨 탐지
-   ├─ 미탐지              → [3단계 시나리오 B]
-   └─ 탐지 + 크롭         → [3단계 시나리오 A]
-[3단계] Gemini 2.5 Flash — ON/OFF 상태 판별
-   └─ JSON 응답 파싱 → WASTE_DETECTED / PASS
+   ├─ 미탐지              → [3단계: 원본만]
+   └─ 탐지 + 크롭         → [3단계: 원본 + AC 크롭]
+[3단계] Gemini 2.5 Flash — ON/OFF + 절약량 통합
+   ├─ 입력: 이미지 + metadata(운영시간, acCount, fluorescentCount, ledCount, reportedAt)
+   ├─ 운영시간 판단: 지금 꺼져 있어야 하는 시간인지
+   ├─ ON/OFF 판별 + expected(원) 산출
+   └─ JSON 응답 → WASTE_DETECTED / PASS + expected
 ```
 
 ---
@@ -68,7 +72,7 @@
 
 ---
 
-### 2-3. Gemini 2.5 Flash — 3단계 ON/OFF 판별
+### 2-3. Gemini 2.5 Flash — 3단계 ON/OFF + expected 통합
 
 ```python
 vertexai.init(project="duyuthon-496901", location="us-central1")  # 배포(main.py) 기준
@@ -83,63 +87,48 @@ gemini_model = GenerativeModel("gemini-2.5-flash")
 | 제공처 | Google DeepMind (Vertex AI) |
 | 추가 학습 | 없음 — Prompt Engineering만 사용 |
 
-#### 시나리오 A — 에어컨 탐지됨 (원본 + 크롭 이미지 2장 전달)
+#### 통합 프롬프트 — 이미지 + metadata JSON
 
-```
-You are a building energy management AI.
-The first image is the full photo of a classroom.
-The second image is a cropped close-up of a ceiling 4-way air conditioner.
-
-1. "ac_status": Look at the second image.
-   If louvers are open or LED is on -> "ON", else -> "OFF".
-2. "light_status": Look at the first image's background.
-   If ceiling indoor lights are on -> "ON", else -> "OFF".
-
-Respond STRICTLY in the following JSON format only:
-{
-    "ac_status": "ON or OFF",
-    "light_status": "ON or OFF",
-    "reason": "Detailed reasoning"
-}
-```
-
-#### 시나리오 B — 에어컨 미탐지 (원본 이미지 1장만 전달)
-
-```
-You are a building energy management AI.
-Analyze the provided classroom image.
-
-"light_status": Look at the ceiling.
-If indoor lights (fluorescent/LED) are turned on and emitting light, return "ON".
-If they are turned off, return "OFF".
-
-Respond STRICTLY in the following JSON format only:
-{
-    "light_status": "ON or OFF",
-    "reason": "Detailed reasoning"
-}
-```
-
-#### AI 응답 예시 (시나리오 A)
+Gemini에 전달하는 metadata 예시:
 
 ```json
 {
-  "ac_status": "ON",
+  "reportedAt": "2026-05-24T15:00:00",
+  "acCount": 1,
+  "fluorescentCount": 10,
+  "ledCount": 2,
+  "operatingSchedules": [
+    { "dayOfWeek": 1, "closed": false, "powerOnTime": "07:00", "powerOffTime": "22:00" }
+  ]
+}
+```
+
+프롬프트 핵심 지시:
+1. 이미지에서 `ac_status`, `light_status` ON/OFF 판별 (에어컨 크롭 있으면 2장 입력)
+2. `reportedAt` + `operatingSchedules`로 **지금 전원이 꺼져 있어야 하는 시간인지** 판단
+3. 운영시간 중(켜도 되는 시간)이면 `result: PASS`, `expected: "0원"`
+4. 낭비 확인 시 ON으로 판별된 자원만 합산 — 전력 상수: 형광등 40W, LED 20W, 에어컨 1500W, 130원/kWh
+5. 방치 시간: 제보 시각 ~ 당일 power_off (휴무·소등 후 cap 120분)
+
+#### AI 응답 형식 (고정 JSON)
+
+```json
+{
+  "result": "WASTE_DETECTED",
+  "message": "Energy waste detected!",
+  "ac_status": "OFF",
   "light_status": "ON",
-  "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated."
+  "reason": "Ceiling lights are on in an empty classroom during off-hours.",
+  "expected": "494원"
 }
 ```
 
 #### 판별 로직
 
 ```
-[시나리오 A]
-  ac_status=ON OR light_status=ON → WASTE_DETECTED
-  둘 다 OFF                       → PASS
-
-[시나리오 B]
-  light_status=ON → WASTE_DETECTED
-  light_status=OFF → PASS
+운영시간 중(켜도 되는 시간) → PASS, expected: "0원"
+ac_status=ON OR light_status=ON (소등 시간) → WASTE_DETECTED + expected 산출
+둘 다 OFF → PASS, expected: "0원"
 ```
 
 > **주의:** Gemini 응답은 Markdown 코드블록으로 래핑되어 올 수 있으므로  
@@ -151,18 +140,15 @@ Respond STRICTLY in the following JSON format only:
 
 ### 입력 데이터
 
-**AI (낭비 판별)** — 사진만 사용, 장소 메타데이터 불필요:
+**AI (낭비 판별 + 절약량) ✅** — 사진 + metadata JSON:
 - YOLO: 사람·가구·에어컨 탐지
-- Gemini: `ac_status`, `light_status` ON/OFF
+- Gemini: `ac_status`, `light_status` ON/OFF + `expected`(원) 산출
+- BE는 `expected` 파싱 → `estimatedSavingsKrw`, `estimatedPoint` 저장
 
-**절약량 계산 (BE, Phase 1) ✅** — `SavingsCalculationService`:
-- `report.createdAt` — 제보 시각 (서버 자동, NOT NULL)
-- LEAF `ac_count`, `fluorescent_count`, `led_count`
-- `location_operating_schedule_db` — 해당 요일 power_on/off (조명·AC 공통)
-- 기본 W: 형광등 40, LED 20, 에어컨 1500
-- `off_time_minutes`: 제보 시각 ~ 당일 power_off (휴무·소등 후·미등록 시 **120분 cap**)
-- `electricity_rate`: 130원/kWh
-- 결과: `estimated_kwh`, `estimated_savings_krw`, `estimated_point` → `report_db`
+**절약량 계산 (BE 참고용)** — `SavingsCalculationService` (제보 플로우 미사용):
+- Phase 2·검증용으로 유지
+- 입력: `report.createdAt`, LEAF 자원 수량, `location_operating_schedule_db`
+- 기본 W: 형광등 40, LED 20, 에어컨 1500 / 130원/kWh / 포인트 = 금액 × 0.18
 
 **절약량 계산 (BE, Phase 2 목표)** — `LocationResource` + `ResourceType`:
 - `location_resources`: 낭비로 판별된 자원 목록 (ResourceType + quantity + custom_value)
@@ -272,6 +258,6 @@ ai/
 | 학습 데이터 | Roboflow `Office-Air-Condition-1` (75 epochs, yolov8n base, CPU) |
 | 학습 성능 | mAP@0.5 **0.989** (epoch 75, `train_result/results.csv`), F1 **0.97** (validation 기준) |
 | Cloud Run | `us-central1` — `https://campus-energy-api-992786420144.us-central1.run.app/analyze` |
-| BE 연동 | `ReportService.callAiApi` → `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`) |
+| BE 연동 | `ReportService.callAiApi` → multipart `file` + `metadata` → `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`, `expected`) |
 | 배포 절차 | [배포_가이드.md §11](./배포_가이드.md) · [ai/README.md](../../../ai/README.md) |
 | 보안 | GCP 프로젝트 ID·Roboflow API 키는 placeholder 처리 |

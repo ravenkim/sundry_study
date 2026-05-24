@@ -1,7 +1,10 @@
 package org.example.be.service.report;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.be.api.request.AiAnalyzeMetadata;
 import org.example.be.api.request.ReportCreateRequest;
 import org.example.be.api.response.AiAnalysisResponse;
 import org.example.be.api.response.ReportResponse;
@@ -11,7 +14,7 @@ import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
 import org.example.be.service.location.LocationNodeService;
-import org.example.be.service.savings.SavingsCalculationService;
+import org.example.be.service.savings.ExpectedKrwParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +40,7 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final MemberRepository memberRepository;
     private final LocationNodeService locationNodeService;
-    private final SavingsCalculationService savingsCalculationService;
+    private final ObjectMapper objectMapper;
 
     private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
 
@@ -54,7 +57,11 @@ public class ReportService {
             throw new BusinessLogicException(ErrorCode.INVALID, "현장 사진 이미지는 필수입니다.");
         }
 
-        AiAnalysisResponse aiResponse = callAiApi(request.image());
+        LocalDateTime reportAt = LocalDateTime.now();
+        var schedules = locationNodeService.getOperatingSchedules(locationNode.getSeq());
+        AiAnalyzeMetadata metadata = buildAnalyzeMetadata(reportAt, locationNode, schedules);
+
+        AiAnalysisResponse aiResponse = callAiApi(request.image(), metadata);
         log.info("AI Analysis Result: {}", aiResponse.getResult());
 
         boolean aiLightWasting = request.isLightWasting();
@@ -71,6 +78,9 @@ public class ReportService {
             aiAdviceMessage = "\n\n[💡 AI 보조 지표: 낭비 확인] " + aiResponse.getMessage();
             if (aiResponse.getReason() != null) {
                 aiAdviceMessage += "\n[이유] " + aiResponse.getReason();
+            }
+            if (aiResponse.getExpected() != null) {
+                aiAdviceMessage += "\n[예상 절약] " + aiResponse.getExpected();
             }
             aiLightWasting = "ON".equals(aiResponse.getLight_status());
             aiAcWasting = "ON".equals(aiResponse.getAc_status());
@@ -90,16 +100,8 @@ public class ReportService {
 
         String locationDetail = locationNodeService.buildPath(locationNode);
 
-        LocalDateTime reportAt = LocalDateTime.now();
-        var schedules = locationNodeService.getOperatingSchedules(locationNode.getSeq());
-        var savings = savingsCalculationService.calculate(
-                reportAt,
-                schedules,
-                wasteType,
-                locationNode.getAcCount(),
-                locationNode.getFluorescentCount(),
-                locationNode.getLedCount()
-        );
+        int estimatedSavingsKrw = ExpectedKrwParser.parse(aiResponse.getExpected());
+        int estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
 
         Report report = Report.builder()
                 .member(member)
@@ -110,16 +112,39 @@ public class ReportService {
                 .wasteType(wasteType)
                 .status(ReportStatus.PENDING)
                 .createdAt(reportAt)
-                .offTimeMinutes(savings.getOffTimeMinutes())
-                .estimatedKwh(savings.getEstimatedKwh())
-                .estimatedSavingsKrw(savings.getEstimatedSavingsKrw())
-                .estimatedPoint(savings.getEstimatedPoint())
+                .offTimeMinutes(null)
+                .estimatedKwh(null)
+                .estimatedSavingsKrw(estimatedSavingsKrw)
+                .estimatedPoint(estimatedPoint)
                 .pointAwarded(0)
                 .build();
 
         Report savedReport = reportRepository.save(report);
 
         return savedReport.getSeq();
+    }
+
+    private AiAnalyzeMetadata buildAnalyzeMetadata(
+            LocalDateTime reportAt,
+            LocationNode locationNode,
+            List<LocationOperatingSchedule> schedules
+    ) {
+        List<AiAnalyzeMetadata.OperatingScheduleItem> items = schedules.stream()
+                .map(schedule -> new AiAnalyzeMetadata.OperatingScheduleItem(
+                        schedule.getDayOfWeek(),
+                        schedule.isClosed(),
+                        schedule.getPowerOnTime(),
+                        schedule.getPowerOffTime()
+                ))
+                .toList();
+
+        return new AiAnalyzeMetadata(
+                reportAt,
+                locationNode.getAcCount(),
+                locationNode.getFluorescentCount(),
+                locationNode.getLedCount(),
+                items
+        );
     }
 
     private LocationNode resolveLocationNode(ReportCreateRequest request) {
@@ -134,7 +159,7 @@ public class ReportService {
         throw new BusinessLogicException(ErrorCode.INVALID, "제보 장소를 선택해 주세요.");
     }
 
-    private AiAnalysisResponse callAiApi(MultipartFile file) {
+    private AiAnalysisResponse callAiApi(MultipartFile file, AiAnalyzeMetadata metadata) {
         try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
@@ -142,6 +167,7 @@ public class ReportService {
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("file", file.getResource());
+            body.add("metadata", objectMapper.writeValueAsString(metadata));
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
@@ -158,6 +184,9 @@ public class ReportService {
 
         } catch (BusinessLogicException e) {
             throw e;
+        } catch (JsonProcessingException e) {
+            log.error("AI metadata JSON 직렬화 실패", e);
+            throw new BusinessLogicException(ErrorCode.INTERNAL_SERVER_ERROR, "AI 분석 요청을 준비할 수 없습니다.");
         } catch (Exception e) {
             log.error("AI API 통신 실패", e);
             throw new BusinessLogicException(ErrorCode.INTERNAL_SERVER_ERROR, "AI 분석 서버와 통신할 수 없습니다.");

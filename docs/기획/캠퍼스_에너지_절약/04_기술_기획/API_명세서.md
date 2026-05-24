@@ -77,9 +77,10 @@
 | isOtherWasting | boolean | N | 기타 |
 
 **처리 로직**
-1. BE → Cloud Run `POST /analyze` (이미지 전달)
-2. `WASTE_DETECTED`만 Report `PENDING` 저장
-3. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
+1. BE → LocationNode(LEAF) 조회 — 자원 수량·요일별 운영시간
+2. BE → Cloud Run `POST /analyze` (이미지 + `metadata` JSON 전달)
+3. `WASTE_DETECTED`만 Report `PENDING` 저장 — AI `expected`(원) 파싱 → `estimatedSavingsKrw`, `estimatedPoint` 저장
+4. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
 
 **Response 200 — 성공 (`WASTE_DETECTED`만 해당)**
 ```json
@@ -127,41 +128,55 @@
 > Spring Boot BE가 내부 호출. 클라이언트는 직접 호출하지 않음.
 
 ### POST /analyze
-강의실 이미지 3단계 AI 판별
+강의실 이미지 AI 판별 + 절약량 산출 (YOLO + Gemini 통합)
 
 **Request**: `multipart/form-data`
 
 | 필드 | 타입 | 필수 | 설명 |
 |------|------|------|------|
 | file | File | Y | 분석할 이미지 |
+| metadata | String (JSON) | Y | 강의실·제보 시각 메타데이터 |
 
-**Response 200 — PASS (사람 있음 / 모두 꺼짐)**
+**metadata JSON 예시**
+
+```json
+{
+  "reportedAt": "2026-05-24T15:00:00",
+  "acCount": 1,
+  "fluorescentCount": 10,
+  "ledCount": 2,
+  "operatingSchedules": [
+    {
+      "dayOfWeek": 1,
+      "closed": false,
+      "powerOnTime": "07:00",
+      "powerOffTime": "22:00"
+    }
+  ]
+}
+```
+
+- `dayOfWeek`: 1=월 … 7=일
+- `operatingSchedules`: LEAF 요일별 운영시간 (DB `location_operating_schedule_db`와 동일)
+
+**Response 200 — PASS (사람 있음 / 모두 꺼짐 / 운영시간 내)**
 ```json
 {
   "result": "PASS",
-  "message": "강의실에 2명의 사람이 있습니다. 정상 상태입니다."
+  "message": "강의실에 2명의 사람이 있습니다. 정상 상태입니다.",
+  "expected": "0원"
 }
 ```
 
-**Response 200 — WASTE_DETECTED (에어컨 탐지됨)**
+**Response 200 — WASTE_DETECTED**
 ```json
 {
   "result": "WASTE_DETECTED",
-  "message": "빈 강의실에서 에너지 낭비가 발견되었습니다!",
-  "ac_status": "ON",
+  "message": "Energy waste detected!",
+  "ac_status": "OFF",
   "light_status": "ON",
-  "reason": "The cropped image shows open louvers indicating AC is running. Ceiling lights are visibly illuminated."
-}
-```
-
-**Response 200 — WASTE_DETECTED (에어컨 미탐지, 조명만 켜짐)**
-```json
-{
-  "result": "WASTE_DETECTED",
-  "message": "[WARNING] 에어컨은 찾을 수 없으나, 빈 강의실에 조명이 켜져 있습니다!",
-  "ac_status": "UNKNOWN",
-  "light_status": "ON",
-  "reason": "Ceiling fluorescent lights are clearly on. No air conditioner detected in the image."
+  "reason": "Ceiling lights are on in an empty classroom during off-hours.",
+  "expected": "494원"
 }
 ```
 
@@ -190,6 +205,11 @@
 | ac_status | string | `ON` / `OFF` / `UNKNOWN` (선택) |
 | light_status | string | `ON` / `OFF` (선택) |
 | reason | string | Gemini 판단 근거 (선택) |
+| expected | string | Gemini 산출 예상 절약 금액, 원화 문자열 (예: `"494원"`, `"0원"`) |
+
+**BE 저장 매핑** (`WASTE_DETECTED` 시):
+- `expected` → `estimatedSavingsKrw` (숫자 파싱)
+- `estimatedPoint` = `round(estimatedSavingsKrw × 0.18)`
 
 소스: [`ai/for_deploy/campus_api/main.py`](../../../ai/for_deploy/campus_api/main.py)
 

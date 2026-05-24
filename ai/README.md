@@ -1,8 +1,11 @@
 # AI — Campus Energy Analysis
 
-monorepo `ai/` 디렉터리는 **YOLOv8n + YOLOv8n Custom + Gemini 2.5 Flash** 3단계 AI 파이프라인의 학습·테스트·Cloud Run 배포 코드를 포함한다.
+monorepo `ai/` 디렉터리는 **YOLOv8n + YOLOv8n Custom + Gemini 2.5 Flash** AI 파이프라인의 학습·테스트·Cloud Run 배포 코드를 포함한다.
 
-Spring Boot BE는 제보 생성(`POST /api/reports`) 시 Cloud Run FastAPI `POST /analyze`를 호출한다.
+Spring Boot BE는 제보 생성(`POST /api/reports`) 시 Cloud Run FastAPI `POST /analyze`를 호출한다. **이미지와 강의실 metadata JSON**을 함께 전달하며, AI가 ON/OFF 판별과 `expected`(원) 절약량을 단일 응답으로 반환한다.
+
+> **AI 구현·Cloud Run 배포는 AI 담당** — BE/FE는 아래 스펙에 맞춰 연동 완료. 구현 기준 문서: [API_명세서 § POST /analyze](../docs/기획/캠퍼스_에너지_절약/04_기술_기획/API_명세서.md), [AI_모델_설계](../docs/기획/캠퍼스_에너지_절약/04_기술_기획/AI_모델_설계.md).  
+> `for_deploy/campus_api/main.py`는 참고용 초안일 수 있음 — 담당자가 스펙 기준으로 구현·배포한다.
 
 ---
 
@@ -12,7 +15,7 @@ Spring Boot BE는 제보 생성(`POST /api/reports`) 시 Cloud Run FastAPI `POST
 ai/
 ├── model_train.py              # Roboflow → YOLOv8n Custom 학습
 ├── model_train_re.ipynb
-├── model_test.py               # 로컬 3단계 파이프라인 테스트
+├── model_test.py               # 로컬 파이프라인 테스트
 ├── model_test.ipynb
 ├── train_result/
 │   ├── args.yaml               # 75 epochs, batch 16, imgsz 640, device cpu
@@ -81,7 +84,31 @@ gcloud run deploy campus-energy-api \
 
 ## API — POST /analyze
 
-**Request**: `multipart/form-data`, field `file`
+**Request**: `multipart/form-data`
+
+| 필드 | 타입 | 필수 | 설명 |
+|------|------|------|------|
+| `file` | File | Y | 분석할 이미지 |
+| `metadata` | String (JSON) | Y | 강의실·제보 시각 정보 |
+
+**metadata 예시**
+
+```json
+{
+  "reportedAt": "2026-05-24T15:00:00",
+  "acCount": 1,
+  "fluorescentCount": 10,
+  "ledCount": 2,
+  "operatingSchedules": [
+    {
+      "dayOfWeek": 1,
+      "closed": false,
+      "powerOnTime": "07:00",
+      "powerOffTime": "22:00"
+    }
+  ]
+}
+```
 
 **Response** (`result` 필드):
 
@@ -89,14 +116,32 @@ gcloud run deploy campus-energy-api \
 |--------|------|
 | `PASS` | 사용 중이거나 낭비 없음 — BE 저장 거부 |
 | `ERROR` | 강의실 미인식 등 — BE 저장 거부 |
-| `WASTE_DETECTED` | 낭비 확인 — BE만 Report 저장 |
+| `WASTE_DETECTED` | 낭비 확인 — BE Report 저장 |
 
-선택 필드: `ac_status`, `light_status`, `reason`
+**응답 예시 (`WASTE_DETECTED`)**
+
+```json
+{
+  "result": "WASTE_DETECTED",
+  "message": "Energy waste detected!",
+  "ac_status": "OFF",
+  "light_status": "ON",
+  "reason": "Ceiling lights are on in an empty classroom during off-hours.",
+  "expected": "494원"
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| `ac_status` / `light_status` | `ON` / `OFF` / `UNKNOWN` |
+| `reason` | Gemini 판단 근거 |
+| `expected` | 예상 절약 금액, 원화 문자열 (예: `"494원"`) |
 
 ---
 
 ## BE 연동
 
-- 호출: `ReportService.callAiApi` → multipart `file`
-- DTO: `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`)
+- 호출: `ReportService.callAiApi` → multipart `file` + `metadata`
+- DTO: `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`, `expected`)
+- BE: `expected` → `estimatedSavingsKrw`, `estimatedPoint = round(krw × 0.18)`
 - `AI_API_URL` env 분리: P1 (현재 Java 하드코딩)
