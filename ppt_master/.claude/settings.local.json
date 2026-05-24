@@ -27,7 +27,12 @@
       "Bash(mkdir -p ~/.local/share/fonts/pretendard)",
       "Bash(cp /home/ravenkim97/project/duyuthon/fe/src/assets/fonts/pretendard/woff2-subset/*.woff2 ~/.local/share/fonts/pretendard/)",
       "Bash(fc-cache -f ~/.local/share/fonts)",
-      "Bash(fc-list)"
+      "Bash(fc-list)",
+      "Bash(python3 scripts/total_md_split.py projects/ecoreport_ppt169_20260524)",
+      "Bash(python3 *)",
+      "Bash(pip install *)",
+      "Bash(sed -i 's|href=\"{{image:\\\\\\([^}]*\\\\\\)}}\"|href=\"../images/\\\\1\"|g' *.svg)",
+      "Bash(grep -l 'image:' *.svg)"
     ]
   }
 }
