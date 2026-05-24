@@ -10,7 +10,7 @@ if [[ ! -f .env ]]; then
   exit 1
 fi
 
-echo "[1/2] 백엔드 배포..."
+echo "[1/2] 백엔드 배포 (MySQL + Flyway 스키마)..."
 bash be/deploy.sh
 
 echo "[2/2] 프론트 배포..."

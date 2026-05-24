@@ -153,8 +153,9 @@ Docker: `cp .env.example .env` → `bash deploy.sh`. 로컬 BE: `bash be/run-dev
 ## 개발 환경 설정
 
 ### Backend DB
-- Docker 배포: Compose MySQL `energy_db` (`mysql:3306`, init SQL `db/energy_schema.sql`, `ddl-auto: validate`)
-- 로컬 개발: `bash be/db-init.sh` 후 `bash be/run-dev.sh` (호스트 `localhost:3306/energy_db`)
+- Docker 배포: Compose MySQL `energy_db` (`mysql:3306`) + **Flyway** (`be/src/main/resources/db/migration/V*.sql`) + `ddl-auto: validate`
+- 로컬 개발: `bash be/db-init.sh`(DB·유저만) 후 `bash be/run-dev.sh` — 스키마는 Flyway가 기동 시 적용
+- 참조 스냅샷: `db/energy_schema.sql` (V2 최종 상태, Flyway와 동기화 권장)
 - 상세: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/DB_설정_가이드.md`
 
 ### 환경변수 (Frontend)

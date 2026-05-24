@@ -2,7 +2,6 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SCHEMA_SQL="${ROOT}/db/energy_schema.sql"
 
 if [[ ! -f "${ROOT}/.env" ]]; then
   echo "[db-init] ${ROOT}/.env 없음 — cp .env.example .env"
@@ -17,11 +16,6 @@ DB_PASS="${MYSQL_PASSWORD:-${SPRING_DATASOURCE_PASSWORD:-${DB_PASSWORD:-}}}"
 
 if [[ -z "${DB_USER}" || -z "${DB_PASS}" ]]; then
   echo "[db-init] MYSQL_USER/MYSQL_PASSWORD 또는 DB_USERNAME/DB_PASSWORD 를 .env 에 설정하세요."
-  exit 1
-fi
-
-if [[ ! -f "${SCHEMA_SQL}" ]]; then
-  echo "[db-init] 스키마 파일 없음: ${SCHEMA_SQL}"
   exit 1
 fi
 
@@ -52,7 +46,5 @@ run_mysql() {
 echo "[db-init] MySQL 접속 확인..."
 run_mysql <<< "$SQL"
 
-echo "[db-init] 스키마 적용: ${SCHEMA_SQL}"
-run_mysql "${DB_NAME}" < "${SCHEMA_SQL}"
-
-echo "[db-init] 완료 — DB: ${DB_NAME}, USER: ${DB_USER}"
+echo "[db-init] DB·유저 준비 완료 — ${DB_NAME}, USER: ${DB_USER}"
+echo "[db-init] 테이블 스키마는 bash be/run-dev.sh (Flyway) 기동 시 자동 적용됩니다."

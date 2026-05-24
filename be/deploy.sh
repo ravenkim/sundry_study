@@ -16,6 +16,24 @@ export DOCKER_BUILDKIT=1
 set -a && source <(sed 's/\r$//' "${ROOT}/.env") && set +a
 DEPLOY_HOST="${DEPLOY_PUBLIC_HOST:-localhost}"
 
+MYSQL_USER="${MYSQL_USER:-${DB_USERNAME:-}}"
+MYSQL_PASSWORD="${MYSQL_PASSWORD:-${DB_PASSWORD:-}}"
+MYSQL_DATABASE="${MYSQL_DATABASE:-energy_db}"
+
+wait_for_mysql() {
+  local attempt=0
+  echo "[be] MySQL 준비 대기..."
+  until docker exec ecoreport-mysql mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" -e "SELECT 1" >/dev/null 2>&1; do
+    attempt=$((attempt + 1))
+    if [[ "${attempt}" -ge 30 ]]; then
+      echo "[be] MySQL 연결 시간 초과"
+      exit 1
+    fi
+    sleep 2
+  done
+  echo "[be] MySQL 연결 OK (스키마는 BE 기동 시 Flyway가 적용)"
+}
+
 deps_hash() {
   sha256sum \
     "$BE_DIR/Dockerfile.deps" \
@@ -29,9 +47,14 @@ HASH=$(deps_hash)
 DEPS_IMAGE="ecoreport-be-deps:${HASH}"
 
 if docker ps --format '{{.Names}}' | grep -q '^ecoreport-mysql$'; then
-  echo "[be] MySQL 이미 실행 중 — 건너뜀"
+  echo "[be] MySQL 이미 실행 중"
 else
+  echo "[be] MySQL 기동..."
   docker compose up -d mysql
+fi
+
+if [[ -n "${MYSQL_USER}" && -n "${MYSQL_PASSWORD}" ]]; then
+  wait_for_mysql
 fi
 
 if docker image inspect "$DEPS_IMAGE" >/dev/null 2>&1; then

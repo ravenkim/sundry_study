@@ -1,3 +1,7 @@
+-- 참조용 스키마 스냅샷 (V2 적용 후 최종 상태)
+-- DDL 단일 원본: be/src/main/resources/db/migration/V*.sql (Flyway)
+-- 신규/변경 시 Flyway 마이그레이션 파일을 추가하고, 필요하면 이 파일을 동기화하세요.
+
 -- MySQL dump 10.13  Distrib 8.0.45, for Linux (x86_64)
 --
 -- Host: localhost    Database: energy_db
