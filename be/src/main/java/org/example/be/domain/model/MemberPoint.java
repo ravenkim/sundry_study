@@ -31,4 +31,15 @@ public class MemberPoint {
     public void addPoint(int amount) {
         this.point += amount;
     }
+
+    public void deductPoint(int amount) {
+        if (this.point < amount) {
+            throw new IllegalArgumentException("Insufficient points");
+        }
+        this.point -= amount;
+    }
+
+    public void refundPoint(int amount) {
+        this.point += amount;
+    }
 }

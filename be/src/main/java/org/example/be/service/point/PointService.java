@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.be.api.response.PointResponse;
 import org.example.be.domain.model.Member;
 import org.example.be.domain.model.MemberPoint;
+import org.example.be.domain.repository.GifticonExchangeRepository;
 import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.exception.BusinessLogicException;
@@ -18,6 +19,7 @@ public class PointService {
 
     private final MemberRepository memberRepository;
     private final MemberPointRepository memberPointRepository;
+    private final GifticonExchangeRepository gifticonExchangeRepository;
 
     @Transactional
     public PointResponse.Me getMyPoints(Long memberSeq) {
@@ -27,6 +29,7 @@ public class PointService {
         MemberPoint wallet = memberPointRepository.findByMember_Seq(memberSeq)
                 .orElseGet(() -> memberPointRepository.save(new MemberPoint(member)));
 
-        return PointResponse.Me.of(wallet.getPoint());
+        int totalRedeemed = gifticonExchangeRepository.sumRedeemedPointsByMember(memberSeq);
+        return PointResponse.Me.of(wallet.getPoint(), totalRedeemed);
     }
 }

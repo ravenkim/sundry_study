@@ -72,32 +72,28 @@ export const MOCK_REWARDS: RewardItem[] = [
         name: '스타벅스 아이스 아메리카노 T',
         pointCost: 500,
         category: '커피/음료',
-        imageUrl:
-            'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=200',
+        imageKey: 'coffee',
     },
     {
         rewardId: 2,
         name: 'GS25 모바일 상품권 3천원',
         pointCost: 300,
         category: '편의점',
-        imageUrl:
-            'https://images.unsplash.com/photo-1542382257-80dee8dabc95?auto=format&fit=crop&q=80&w=200',
+        imageKey: 'convenience',
     },
     {
         rewardId: 3,
         name: '학식 포인트 100원',
         pointCost: 100,
         category: '편의점',
-        imageUrl:
-            'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=200',
+        imageKey: 'meal',
     },
     {
         rewardId: 4,
         name: '지구온난화 방지 기금 기부',
         pointCost: 1000,
         category: '환경 기부',
-        imageUrl:
-            'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=200',
+        imageKey: 'donation',
         tag: '기부',
     },
 ]
@@ -262,7 +258,17 @@ export const MOCK_ADMIN_DASHBOARD: AdminDashboardStats = {
     monthlySavingsKrw: 320000,
 }
 
-const MOCK_CURRENT_MEMBER_NAME = '김에코'
+function getMockCurrentMemberName(): string {
+    if (typeof localStorage === 'undefined') return 'user'
+    try {
+        const raw = localStorage.getItem('ecoreport_user')
+        if (!raw) return 'user'
+        const parsed = JSON.parse(raw) as { userName?: string }
+        return parsed.userName?.trim() || 'user'
+    } catch {
+        return 'user'
+    }
+}
 
 let mockGifticonExchanges: GifticonExchangeRow[] = [
     {
@@ -309,8 +315,9 @@ export function getMockGifticonExchanges(
 }
 
 export function getMockMyGifticonExchanges(): GifticonExchangeRow[] {
+    const currentMember = getMockCurrentMemberName()
     return getMockGifticonExchanges().filter(
-        (item) => item.memberName === MOCK_CURRENT_MEMBER_NAME,
+        (item) => item.memberName === currentMember,
     )
 }
 
@@ -331,7 +338,7 @@ export function createMockGifticonExchange(
 
     const exchange: GifticonExchangeRow = {
         exchangeId: nextGifticonExchangeId++,
-        memberName: MOCK_CURRENT_MEMBER_NAME,
+        memberName: getMockCurrentMemberName(),
         memberPhone: '010-1234-5678',
         rewardName: reward.name,
         pointUsed,

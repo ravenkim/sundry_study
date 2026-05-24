@@ -13,12 +13,12 @@ public class PointResponse {
         private int totalEarned;
         private int totalRedeemed;
 
-        public static Me of(int currentBalance) {
+        public static Me of(int currentBalance, int totalRedeemed) {
             return Me.builder()
                     .currentBalance(currentBalance)
                     .thisMonthEarned(0)
-                    .totalEarned(0)
-                    .totalRedeemed(0)
+                    .totalEarned(currentBalance + totalRedeemed)
+                    .totalRedeemed(totalRedeemed)
                     .build();
         }
     }

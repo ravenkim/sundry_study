@@ -127,7 +127,8 @@ gcloud run deploy campus-energy-api \
   "ac_status": "OFF",
   "light_status": "ON",
   "reason": "Ceiling lights are on in an empty classroom during off-hours.",
-  "expected": "494원"
+  "expected": "494원",
+  "expectedKwh": "3.8 kWh"
 }
 ```
 
@@ -136,12 +137,14 @@ gcloud run deploy campus-energy-api \
 | `ac_status` / `light_status` | `ON` / `OFF` / `UNKNOWN` |
 | `reason` | Gemini 판단 근거 |
 | `expected` | 예상 절약 금액, 원화 문자열 (예: `"494원"`) |
+| `expectedKwh` | 예상 절약 전기량 (예: `"3.8 kWh"`) |
 
 ---
 
 ## BE 연동
 
 - 호출: `ReportService.callAiApi` → multipart `file` + `metadata`
-- DTO: `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`, `expected`)
-- BE: `expected` → `estimatedSavingsKrw`, `estimatedPoint = round(krw × 0.18)`
+- DTO: `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`, `expected`, `expectedKwh`)
+- BE: `expected` → `estimatedSavingsKrw`, `expectedKwh` → `estimated_kwh`, `estimatedPoint = round(krw × 0.18)`
+- 집계: `GET /api/savings/buildings/me` — FE「내 건물 절약 전기」
 - `AI_API_URL` env 분리: P1 (현재 Java 하드코딩)

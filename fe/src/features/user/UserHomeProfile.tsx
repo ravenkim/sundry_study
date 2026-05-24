@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import {
     Leaf,
@@ -19,9 +19,9 @@ import { getMyReports } from 'src/globals/api/reportApi'
 import type { ReportSummary, ReportStatus } from 'src/globals/api/types'
 import {
     formatKwh,
-    PARTICIPATED_BUILDING_SAVINGS,
     sumParticipatedKwh,
 } from './userSavingsData'
+import { useMyBuildingSavings } from './useMyBuildingSavings'
 
 const STATUS_LABEL: Record<ReportStatus, string> = {
     APPROVED: '승인됨',
@@ -146,17 +146,8 @@ export const UserProfile = () => {
     const navigate = useNavigate()
     const [reportCount, setReportCount] = useState(0)
     const displayName = user?.userName ?? '김에코'
-    const myBuildingSavings = useMemo(() => {
-        if (!user?.buildingId && !user?.buildingName) {
-            return PARTICIPATED_BUILDING_SAVINGS
-        }
-        return PARTICIPATED_BUILDING_SAVINGS.filter(
-            (building) =>
-                (user.buildingId != null &&
-                    String(building.buildingId) === String(user.buildingId)) ||
-                building.buildingName === user.buildingName,
-        )
-    }, [user?.buildingId, user?.buildingName])
+    const { buildings: myBuildingSavings, loading: savingsLoading } =
+        useMyBuildingSavings()
 
     useEffect(() => {
         void getMyReports(0, 1).then((res) => setReportCount(res.totalElements))
@@ -243,9 +234,14 @@ export const UserProfile = () => {
                     </div>
                     <div className="flex items-baseline gap-1">
                         <span className="text-2xl font-bold">
-                            {formatKwh(
-                                sumParticipatedKwh(myBuildingSavings, 'total'),
-                            )}
+                            {savingsLoading
+                                ? '—'
+                                : formatKwh(
+                                      sumParticipatedKwh(
+                                          myBuildingSavings,
+                                          'total',
+                                      ),
+                                  )}
                         </span>
                         <span className="text-on-surface-variant text-[10px] font-bold">
                             kWh

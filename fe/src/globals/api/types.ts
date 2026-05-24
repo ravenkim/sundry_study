@@ -35,6 +35,7 @@ export interface AiReportResult {
     light_status?: 'ON' | 'OFF' | 'UNKNOWN'
     reason?: string
     expected?: string
+    expectedKwh?: string
     pointAwarded?: number
     currentBalance?: number
 }
@@ -79,6 +80,7 @@ export interface RewardItem {
     pointCost: number
     category: string
     imageUrl?: string
+    imageKey?: string
     tag?: string
 }
 

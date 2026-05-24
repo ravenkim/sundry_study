@@ -176,7 +176,8 @@
   "ac_status": "OFF",
   "light_status": "ON",
   "reason": "Ceiling lights are on in an empty classroom during off-hours.",
-  "expected": "494원"
+  "expected": "494원",
+  "expectedKwh": "3.8 kWh"
 }
 ```
 
@@ -206,12 +207,47 @@
 | light_status | string | `ON` / `OFF` (선택) |
 | reason | string | Gemini 판단 근거 (선택) |
 | expected | string | Gemini 산출 예상 절약 금액, 원화 문자열 (예: `"494원"`, `"0원"`) |
+| expectedKwh | string | Gemini 산출 예상 절약 전기량 (예: `"3.8 kWh"`, `"0 kWh"`) |
 
 **BE 저장 매핑** (`WASTE_DETECTED` 시):
 - `expected` → `estimatedSavingsKrw` (숫자 파싱)
+- `expectedKwh` → `estimated_kwh` (DECIMAL 파싱)
 - `estimatedPoint` = `round(estimatedSavingsKrw × 0.18)`
 
 소스: [`ai/for_deploy/campus_api/main.py`](../../../ai/for_deploy/campus_api/main.py)
+
+---
+
+## 절약량 (Savings)
+
+### GET /api/savings/buildings/me
+내 제보가 반영된 **건물별 절약 전기** 집계 (JWT 필수)
+
+**집계 대상**: 본인 제보 중 `status` ∈ `PENDING`, `APPROVED` 이고 `estimated_kwh > 0`
+
+**Response 200**
+```json
+{
+  "code": 10020,
+  "body": [
+    {
+      "buildingId": 1,
+      "buildingName": "공학관 A동",
+      "totalKwh": 86.4,
+      "thisMonthKwh": 52.1,
+      "reportCount": 8
+    }
+  ]
+}
+```
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| buildingId | Long | 루트 GROUP 노드 seq |
+| buildingName | string | 건물명 |
+| totalKwh | number | 누적 절약 kWh |
+| thisMonthKwh | number | 이번 달 절약 kWh |
+| reportCount | int | 집계 제보 건수 |
 
 ---
 

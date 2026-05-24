@@ -15,6 +15,7 @@ import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
 import org.example.be.service.location.LocationNodeService;
 import org.example.be.service.savings.ExpectedKrwParser;
+import org.example.be.service.savings.ExpectedKwhParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +104,7 @@ public class ReportService {
 
         int estimatedSavingsKrw = ExpectedKrwParser.parse(aiResponse.getExpected());
         int estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
+        BigDecimal estimatedKwh = ExpectedKwhParser.parse(aiResponse.getExpectedKwh());
 
         Report report = Report.builder()
                 .member(member)
@@ -113,7 +116,7 @@ public class ReportService {
                 .status(ReportStatus.PENDING)
                 .createdAt(reportAt)
                 .offTimeMinutes(null)
-                .estimatedKwh(null)
+                .estimatedKwh(estimatedKwh)
                 .estimatedSavingsKrw(estimatedSavingsKrw)
                 .estimatedPoint(estimatedPoint)
                 .pointAwarded(0)

@@ -107,7 +107,7 @@ Gemini에 전달하는 metadata 예시:
 1. 이미지에서 `ac_status`, `light_status` ON/OFF 판별 (에어컨 크롭 있으면 2장 입력)
 2. `reportedAt` + `operatingSchedules`로 **지금 전원이 꺼져 있어야 하는 시간인지** 판단
 3. 운영시간 중(켜도 되는 시간)이면 `result: PASS`, `expected: "0원"`
-4. 낭비 확인 시 ON으로 판별된 자원만 합산 — 전력 상수: 형광등 40W, LED 20W, 에어컨 1500W, 130원/kWh
+4. 낭비 확인 시 ON으로 판별된 자원만 합산 — 전력 상수: 형광등 40W, LED 20W, 에어컨 1500W, 130원/kWh → **`expectedKwh`** (예: `"3.8 kWh"`) 및 **`expected`** (원)
 5. 방치 시간: 제보 시각 ~ 당일 power_off (휴무·소등 후 cap 120분)
 
 #### AI 응답 형식 (고정 JSON)
@@ -119,7 +119,8 @@ Gemini에 전달하는 metadata 예시:
   "ac_status": "OFF",
   "light_status": "ON",
   "reason": "Ceiling lights are on in an empty classroom during off-hours.",
-  "expected": "494원"
+  "expected": "494원",
+  "expectedKwh": "3.8 kWh"
 }
 ```
 
@@ -142,8 +143,8 @@ ac_status=ON OR light_status=ON (소등 시간) → WASTE_DETECTED + expected �
 
 **AI (낭비 판별 + 절약량) ✅** — 사진 + metadata JSON:
 - YOLO: 사람·가구·에어컨 탐지
-- Gemini: `ac_status`, `light_status` ON/OFF + `expected`(원) 산출
-- BE는 `expected` 파싱 → `estimatedSavingsKrw`, `estimatedPoint` 저장
+- Gemini: `ac_status`, `light_status` ON/OFF + `expected`(원) + `expectedKwh` 산출
+- BE는 `expected` → `estimatedSavingsKrw`, `expectedKwh` → `estimated_kwh`, `estimatedPoint` 저장
 
 **절약량 계산 (BE 참고용)** — `SavingsCalculationService` (제보 플로우 미사용):
 - Phase 2·검증용으로 유지

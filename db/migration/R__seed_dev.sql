@@ -182,3 +182,20 @@ WHERE n.node_kind = 'LEAF'
   AND NOT EXISTS (
       SELECT 1 FROM location_operating_schedule_db s WHERE s.location_node_seq = n.seq
   );
+
+-- Rewards catalog (포인트샵)
+INSERT INTO reward_db (name, point_cost, category, image_key, tag, is_active)
+SELECT v.name, v.point_cost, v.category, v.image_key, v.tag, 1
+FROM (
+    SELECT '스타벅스 아이스 아메리카노 T' AS name, 500 AS point_cost, '커피/음료' AS category, 'coffee' AS image_key, NULL AS tag UNION ALL
+    SELECT 'GS25 모바일 상품권 3천원', 300, '편의점', 'convenience', NULL UNION ALL
+    SELECT '학식 포인트 100원', 100, '편의점', 'meal', NULL UNION ALL
+    SELECT '지구온난화 방지 기금 기부', 1000, '환경 기부', 'donation', '기부'
+) v
+WHERE NOT EXISTS (SELECT 1 FROM reward_db r WHERE r.name = v.name);
+
+-- Demo user points for 포인트샵 교환 테스트
+UPDATE member_point_db mp
+JOIN member_db m ON m.seq = mp.member_seq
+SET mp.point = 370
+WHERE m.user_name = 'user' AND mp.point = 0;
