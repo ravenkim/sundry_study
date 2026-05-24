@@ -12,7 +12,7 @@ fi
 # shellcheck source=/dev/null
 set -a && source <(sed 's/\r$//' "${ROOT}/.env") && set +a
 
-export DB_URL="${DB_URL:-jdbc:mysql://localhost:3306/${MYSQL_DATABASE:-DBname}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}"
+export DB_URL="${DB_URL:-jdbc:mysql://localhost:3306/${MYSQL_DATABASE:-energy_db}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}"
 export DB_USERNAME="${DB_USERNAME:-${SPRING_DATASOURCE_USERNAME:-}}"
 export DB_PASSWORD="${DB_PASSWORD:-${SPRING_DATASOURCE_PASSWORD:-}}"
 

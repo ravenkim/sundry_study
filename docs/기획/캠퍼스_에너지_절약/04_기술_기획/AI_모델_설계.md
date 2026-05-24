@@ -71,9 +71,11 @@
 ### 2-3. Gemini 2.5 Flash — 3단계 ON/OFF 판별
 
 ```python
-vertexai.init(project="duyuthon", location="us-central1")
+vertexai.init(project="duyuthon-496901", location="us-central1")  # 배포(main.py) 기준
 gemini_model = GenerativeModel("gemini-2.5-flash")
 ```
+
+> 학습 스크립트(`model_train.py`)의 `GCP_PROJECT_ID`는 placeholder(`duyuthon`)이다. Cloud Run 배포 코드는 `duyuthon-496901`을 사용한다.
 
 | 항목 | 내용 |
 |------|------|
@@ -236,25 +238,28 @@ total_L = flow_rate × quantity × off_time_minutes
 
 ```
 ai/
-├── yolov8n.pt                    # COCO 사전학습 (1단계)
-├── model_train.py                # YOLOv8n Custom 학습
+├── model_train.py                # YOLOv8n Custom 학습 (Roboflow 다운로드)
 ├── model_train_re.ipynb          # 학습 노트북
 ├── model_test.py                 # 파이프라인 추론 테스트
 ├── model_test.ipynb              # 추론 노트북
 ├── train_result/
-│   ├── weights/best.pt           # 학습 가중치 (ac_best.pt와 동일 계열)
-│   ├── results.csv               # epoch별 loss·mAP
-│   └── *.png                     # PR/F1/confusion matrix 등
+│   ├── args.yaml                 # 학습 하이퍼파라미터 (75 epochs, batch 16, imgsz 640, device cpu)
+│   └── results.csv               # epoch별 loss·mAP (최종 mAP@0.5 ≈ 0.989)
 └── for_deploy/campus_api/
     ├── main.py                   # FastAPI POST /analyze
-    ├── models/ac_best.pt         # Cloud Run 배포용 가중치
     ├── requirements.txt
-    └── Dockerfile.txt
+    ├── Dockerfile.txt            # 배포 시 Dockerfile 로 rename
+    ├── yolov8n.pt                # (배포 시 배치) COCO 사전학습 1단계
+    └── models/ac_best.pt         # (배포 시 배치) 에어컨 Custom 가중치
 ```
+
+> **Git 추적 범위**: `.py`·`.ipynb`·`args.yaml`·`results.csv` 등 소스만 포함. `.pt` 가중치·학습 그래프(`*.png`)는 **Git 미포함** — Cloud Run 이미지 빌드 전 `for_deploy/campus_api/`에 수동 배치.
 
 | 항목 | 내용 |
 |------|------|
-| 학습 데이터 | Roboflow `Office-Air-Condition-1` (75 epochs, yolov8n base) |
-| 학습 성능 | mAP@0.5 **0.990**, F1 **0.97** (`train_result/` 기준) |
-| 배포 | `for_deploy/campus_api/` → Cloud Run, Spring Boot `ReportService.callAiApi`에서 HTTP 호출 |
-| 보안 | GCP 프로젝트 ID·API 키는 placeholder 처리, `.idea/` gitignore 추가 |
+| 학습 데이터 | Roboflow `Office-Air-Condition-1` (75 epochs, yolov8n base, CPU) |
+| 학습 성능 | mAP@0.5 **0.989** (epoch 75, `train_result/results.csv`), F1 **0.97** (validation 기준) |
+| Cloud Run | `us-central1` — `https://campus-energy-api-992786420144.us-central1.run.app/analyze` |
+| BE 연동 | `ReportService.callAiApi` → `AiAnalysisResponse` (`result`, `message`, `ac_status`, `light_status`, `reason`) |
+| 배포 절차 | [배포_가이드.md §11](./배포_가이드.md) · [ai/README.md](../../../ai/README.md) |
+| 보안 | GCP 프로젝트 ID·Roboflow API 키는 placeholder 처리 |

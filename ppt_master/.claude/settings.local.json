@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 --version)",
+      "Bash(python3 -m pip --version)",
+      "Bash(sudo apt-get install -y python3-pip python3-venv)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8081)",
+      "Bash(node -e \"require\\('puppeteer'\\)\")",
+      "Read(//home/ravenkim97/project/duyuthon/fe/src/pages/url/**)",
+      "Read(//home/ravenkim97/project/duyuthon/fe/src/features/**)",
+      "Read(//home/ravenkim97/project/duyuthon/fe/**)",
+      "Bash(yarn --version)",
+      "Bash(yarn dev *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Read(//tmp/**)",
+      "Bash(npx playwright@latest --version)",
+      "Bash(npx playwright *)"
+    ]
+  }
+}

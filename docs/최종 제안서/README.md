@@ -11,13 +11,14 @@
 |------|------|------|
 | **사용자 UI** | ✅ 완료 | 홈·제보·이력·포인트샵·마이페이지·관리자 6화면 |
 | **이메일 회원가입/로그인** | ✅ BE 연동 | BCrypt + JPA |
-| **제보 생성 API** | ✅ 부분 | `POST /api/reports` — DB 저장, 이미지 URL placeholder |
-| **AI 3단계 파이프라인** | 🔶 설계·별도 구현 | FE mock 시뮬레이터로 데모 (`VITE_USE_MOCK`) |
+| **제보 생성 API** | ✅ 부분 | `POST /api/reports` — Cloud Run `/analyze` 연동, `WASTE_DETECTED`만 저장, 이미지 URL placeholder |
+| **AI 3단계 파이프라인** | ✅ BE 연동 | monorepo `ai/` + Cloud Run FastAPI; FE `simulateAiAnalysis()`는 UX 시연용 |
 | **포인트·관리자 API** | ⏳ UI만 | mock 데이터 기반 |
-| **Kafka / GCS / JWT** | ⏳ 코드만 | Producer/Consumer 존재, 운영 미연동 |
+| **Kafka / GCS** | ⏳ 코드만 | Producer/Consumer 존재, Compose·운영 미연동 |
+| **JWT** | ✅ | HS256 발급·검증, 제보·포인트·건물 API |
 | **운영 배포** | ✅ | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
 
-> **목표 아키텍처**(AI·Kafka·GCS·관리자 API)와 **현재 데모 경로**(mock AI + 부분 BE)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
+> **목표 아키텍처**(GCS·Kafka·관리자 API)와 **현재 데모 경로**(BE 실 AI 판별 + FE mock UX·포인트)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
 
 ---
 

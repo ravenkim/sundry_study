@@ -243,9 +243,9 @@
 
 | 구분 | 해커톤 MVP |
 |------|------------|
-| ✅ **완료** | UI 6화면(학생+관리자), 이메일 회원가입/로그인, JWT, `POST/GET /api/reports`, `GET /api/buildings`, `GET /api/points/me`, Docker 배포 |
-| 🔶 **데모** | AI·포인트·관리자 데이터 — **FE mock** (`VITE_USE_MOCK`, 기본 `true`) |
-| ⏳ **설계·코드** | FastAPI + YOLO + Gemini 파이프라인, Kafka, GCS, 관리자 API |
+| ✅ **완료** | UI 6화면(학생+관리자), 이메일 회원가입/로그인, JWT, `POST/GET /api/reports`(Cloud Run AI), `GET /api/buildings`, `GET /api/points/me`, Docker 배포, monorepo `ai/` |
+| 🔶 **데모** | FE AI 진행 UI mock, 포인트·관리자 — **FE mock** (`VITE_USE_MOCK`, 기본 `true`) |
+| ⏳ **미구현** | GCS, `aiResult` DB, Kafka, 관리자 API |
 
 ### 시각 자료
 

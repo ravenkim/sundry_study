@@ -54,15 +54,86 @@
 
 ---
 
-## 제보 (Report)
+## 제보 (Report) — Spring Boot
 
-### POST /reports
-제보 사진 업로드 + AI 판별 요청
+> 실제 엔드포인트: `POST /api/reports` (JWT 필수). 내부적으로 Cloud Run `POST /analyze`를 호출한다.
+
+### POST /api/reports
+제보 사진 업로드 + AI 판별 후 저장
+
+**인증**: Bearer JWT (`memberSeq` claim)
 
 **Request**: `multipart/form-data`
+
 | 필드 | 타입 | 필수 | 설명 |
 |------|------|------|------|
 | image | File | Y | 제보 사진 |
+| buildingId | Long | Y | 건물 ID |
+| roomName | String | Y | 강의실·호실 |
+| description | String | N | 제보 메모 |
+| isLightWasting | boolean | N | 사용자 체크 (AI가 `WASTE_DETECTED` 시 덮어씀) |
+| isAcWasting | boolean | N | 사용자 체크 (AI가 `WASTE_DETECTED` 시 덮어씀) |
+| isHeaterWasting | boolean | N | 히터 낭비 |
+| isOtherWasting | boolean | N | 기타 |
+
+**처리 로직**
+1. BE → Cloud Run `POST /analyze` (이미지 전달)
+2. `WASTE_DETECTED`만 Report `PENDING` 저장
+3. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
+
+**Response 200 — 성공 (`WASTE_DETECTED`만 해당)**
+```json
+{
+  "code": 10003,
+  "body": {
+    "reportId": 42,
+    "status": "PENDING",
+    "message": "제보가 정상적으로 접수되었습니다. AI 판별 프로세스를 시작합니다."
+  }
+}
+```
+
+**Response 4xx — AI PASS (정상·사용 중)**
+```json
+{
+  "code": 1005,
+  "message": "정상적인 강의실 상태이거나 사람이 있어 제보할 수 없습니다: 강의실에 2명의 사람이 있습니다. 정상 상태입니다."
+}
+```
+
+**Response 4xx — AI ERROR (강의실 미인식)**
+```json
+{
+  "code": 1005,
+  "message": "강의실로 인식되지 않거나 분석할 수 없는 사진입니다: 강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
+}
+```
+
+**Response 5xx — AI 서버 통신 실패**
+```json
+{
+  "code": 5003,
+  "message": "AI 분석 서버와 통신할 수 없습니다."
+}
+```
+
+> AI Service raw 응답 스키마는 아래 [AI Service (FastAPI)](#ai-service-fastapi--cloud-run) 참고.
+
+---
+
+## AI Service (FastAPI — Cloud Run)
+
+> Base URL (운영): `https://campus-energy-api-992786420144.us-central1.run.app`  
+> Spring Boot BE가 내부 호출. 클라이언트는 직접 호출하지 않음.
+
+### POST /analyze
+강의실 이미지 3단계 AI 판별
+
+**Request**: `multipart/form-data`
+
+| 필드 | 타입 | 필수 | 설명 |
+|------|------|------|------|
+| file | File | Y | 분석할 이미지 |
 
 **Response 200 — PASS (사람 있음 / 모두 꺼짐)**
 ```json
@@ -94,13 +165,33 @@
 }
 ```
 
-**Response 200 — ERROR (강의실 미인식 / 서버 오류)**
+**Response 200 — ERROR (강의실 미인식)**
 ```json
 {
   "result": "ERROR",
   "message": "강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
 }
 ```
+
+**Response 500 — 서버 내부 오류**
+```json
+{
+  "result": "ERROR",
+  "message": "서버 내부 오류: ..."
+}
+```
+
+**응답 필드**
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| result | string | `PASS` / `ERROR` / `WASTE_DETECTED` |
+| message | string | 사용자·로그용 메시지 |
+| ac_status | string | `ON` / `OFF` / `UNKNOWN` (선택) |
+| light_status | string | `ON` / `OFF` (선택) |
+| reason | string | Gemini 판단 근거 (선택) |
+
+소스: [`ai/for_deploy/campus_api/main.py`](../../../ai/for_deploy/campus_api/main.py)
 
 ---
 

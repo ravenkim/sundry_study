@@ -153,8 +153,9 @@ Docker: `cp .env.example .env` → `bash deploy.sh`. 로컬 BE: `bash be/run-dev
 ## 개발 환경 설정
 
 ### Backend DB
-로컬 개발: MySQL `localhost:3306`, DB명 `DBname`.  
-Docker 통합 배포 시 Compose가 MySQL을 함께 기동한다.
+- Docker 배포: Compose MySQL `energy_db` (`mysql:3306`, init SQL `db/energy_schema.sql`, `ddl-auto: validate`)
+- 로컬 개발: `bash be/db-init.sh` 후 `bash be/run-dev.sh` (호스트 `localhost:3306/energy_db`)
+- 상세: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/DB_설정_가이드.md`
 
 ### 환경변수 (Frontend)
 ```
