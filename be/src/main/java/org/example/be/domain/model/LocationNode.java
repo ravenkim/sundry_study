@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "location_node_db")
 @Getter
@@ -41,6 +44,25 @@ public class LocationNode {
     @Column(name = "location_type")
     private String locationType;
 
+    /** LEAF(항목) 전용 — 에어컨 대수 */
+    @Builder.Default
+    @Column(name = "ac_count", nullable = false)
+    private int acCount = 0;
+
+    /** LEAF(항목) 전용 — 형광등 개수 */
+    @Builder.Default
+    @Column(name = "fluorescent_count", nullable = false)
+    private int fluorescentCount = 0;
+
+    /** LEAF(항목) 전용 — LED 조명 개수 */
+    @Builder.Default
+    @Column(name = "led_count", nullable = false)
+    private int ledCount = 0;
+
+    @OneToMany(mappedBy = "locationNode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<LocationOperatingSchedule> operatingSchedules = new ArrayList<>();
+
     @Builder
     public LocationNode(
             LocationNode parent,
@@ -49,7 +71,10 @@ public class LocationNode {
             NodeKind nodeKind,
             int depth,
             int sortOrder,
-            String locationType
+            String locationType,
+            int acCount,
+            int fluorescentCount,
+            int ledCount
     ) {
         this.parent = parent;
         this.affiliation = affiliation;
@@ -58,5 +83,8 @@ public class LocationNode {
         this.depth = depth;
         this.sortOrder = sortOrder;
         this.locationType = locationType;
+        this.acCount = acCount;
+        this.fluorescentCount = fluorescentCount;
+        this.ledCount = ledCount;
     }
 }

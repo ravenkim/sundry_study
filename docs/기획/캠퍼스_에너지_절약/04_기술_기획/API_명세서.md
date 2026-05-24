@@ -209,8 +209,11 @@
       {
         "reportId": 42,
         "roomName": "공학관 A동 303호",
-        "status": "APPROVED",
+        "status": "PENDING",
         "pointAwarded": 89,
+        "estimatedPoint": 89,
+        "offTimeMinutes": 420,
+        "estimatedKwh": "0.7980",
         "createdAt": "2026-05-20T14:03:22"
       }
     ],
@@ -312,29 +315,108 @@
 
 ## 건물 / 장소
 
-### GET /buildings
-등록된 건물 목록 조회
+> **용어**: 학생 UX는 "건물·강의실", API/DB는 `LocationNode` 트리(GROUP/LEAF). 상세: [장소_관리_모델.md](./장소_관리_모델.md)
+
+### GET /api/affiliations ✅
+소속(캠퍼스) 목록 — 회원가입·관리자 장소 관리용. **permitAll**
 
 **Response 200**
 ```json
 {
-  "code": "SUCCESS",
-  "data": [
+  "code": 10009,
+  "body": [
+    {
+      "affiliationId": 1,
+      "name": "삼육대학교",
+      "address": "서울특별시 ..."
+    }
+  ]
+}
+```
+
+---
+
+### GET /api/buildings ✅
+등록된 장소 트리 조회 (학생 제보·장소 선택용). JWT 있으면 회원 소속·담당 구역 scope 필터.
+
+**Response 200**
+```json
+{
+  "code": 10002,
+  "body": [
     {
       "buildingId": 1,
-      "name": "공학관 A동",
-      "locations": [
+      "name": "공학관",
+      "nodeKind": "GROUP",
+      "affiliationId": 1,
+      "affiliationName": "삼육대학교",
+      "children": [
         {
           "locationId": 10,
           "name": "303호",
-          "type": "CLASSROOM",
-          "floor": 3
+          "nodeKind": "LEAF",
+          "children": []
         },
         {
-          "locationId": 20,
-          "name": "1층 공용 화장실",
-          "type": "RESTROOM",
-          "floor": 1
+          "locationId": 11,
+          "name": "2층",
+          "nodeKind": "GROUP",
+          "children": [
+            {
+              "locationId": 12,
+              "name": "201호",
+              "nodeKind": "LEAF",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| `buildingId` | 루트 GROUP 노드 ID (레거시 명칭, 실제는 LocationNode PK) |
+| `nodeKind` | `GROUP` (하위 추가 가능) / `LEAF` (제보 선택 대상) |
+| `children` | 하위 노드 재귀 배열 (max depth 3) |
+
+---
+
+## 관리자 — 장소 (LocationNode) ✅
+
+> Base URL: `/api/admin/location-nodes` | **ADMIN** JWT 필요 (`UserType.ADMIN`)
+
+### GET /api/admin/location-nodes/tree
+관리자 장소 트리 조회
+
+**Query Params**: `affiliationId=1` (필수)
+
+**Response 200**
+```json
+{
+  "code": 10010,
+  "body": [
+    {
+      "id": 1,
+      "name": "공학관",
+      "nodeKind": "GROUP",
+      "depth": 1,
+      "sortOrder": 0,
+      "locationType": null,
+      "children": [
+        {
+          "id": 10,
+          "name": "303호",
+          "nodeKind": "LEAF",
+          "depth": 2,
+          "sortOrder": 0,
+          "locationType": null,
+          "acCount": 1,
+          "fluorescentCount": 8,
+          "ledCount": 2,
+          "children": []
         }
       ]
     }
@@ -343,6 +425,82 @@
 ```
 
 ---
+
+### POST /api/admin/location-nodes
+장소 노드 생성
+
+**Request Body — LEAF (항목, Phase 1 자원 수량)**
+```json
+{
+  "parentId": 1,
+  "affiliationId": 1,
+  "name": "303호",
+  "nodeKind": "LEAF",
+  "acCount": 1,
+  "fluorescentCount": 8,
+  "ledCount": 2,
+  "operatingSchedules": [
+    { "dayOfWeek": 1, "closed": false, "powerOnTime": "07:00", "powerOffTime": "22:00" },
+    { "dayOfWeek": 7, "closed": true }
+  ]
+}
+```
+
+| 필드 | 필수 | 설명 |
+|------|------|------|
+| `parentId` | 루트 제외 시 | 상위 GROUP 노드 ID (루트 생성 시 null) |
+| `affiliationId` | Y | 소속 ID |
+| `name` | Y | 표시 이름 |
+| `nodeKind` | Y | `GROUP` 또는 `LEAF` |
+| `acCount` | LEAF 선택 | 에어컨 대수 (기본 0) |
+| `fluorescentCount` | LEAF 선택 | 형광등 개수 (기본 0) |
+| `ledCount` | LEAF 선택 | LED 조명 개수 (기본 0) |
+| `operatingSchedules` | LEAF 선택 | 요일별 운영시간 7행 (null 시 기본값) |
+
+**Response 200**: `code` 10011, `body` — 생성된 TreeNode
+
+---
+
+### PATCH /api/admin/location-nodes/{id}
+장소 노드 수정
+
+**Request Body**
+```json
+{
+  "name": "303호 (대형)",
+  "sortOrder": 1,
+  "acCount": 2,
+  "fluorescentCount": 10,
+  "ledCount": 4,
+  "operatingSchedules": [
+    { "dayOfWeek": 1, "closed": false, "powerOnTime": "07:00", "powerOffTime": "22:00" }
+  ]
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| `name` | 표시 이름 |
+| `sortOrder` | 정렬 순서 (선택) |
+| `acCount` | LEAF만 — 에어컨 대수 (선택) |
+| `fluorescentCount` | LEAF만 — 형광등 개수 (선택) |
+| `ledCount` | LEAF만 — LED 개수 (선택) |
+| `operatingSchedules` | LEAF만 — 요일별 운영시간 (선택) |
+
+**Response 200**: `code` 10012
+
+---
+
+### DELETE /api/admin/location-nodes/{id}
+장소 노드 삭제 (하위 노드·연결 Report 있으면 거부)
+
+**Response 200**: `code` 10013, `body`: null
+
+---
+
+## [목표] 향후 확장 — 자원·LocationResource (미구현)
+
+> 아래는 P1 목표 API. 장소 CRUD는 LocationNode API로 대체됨.
 
 ### GET /buildings/{buildingId}/locations/{locationId}/resources
 특정 장소의 등록된 자원 목록 조회 (제보 시 선택용)
@@ -460,77 +618,13 @@
 
 ## 관리자 API (Admin)
 
-> Base URL: `/admin` | 관리자 전용 JWT 필요
+> Base URL: `/api/admin` | 관리자 전용 JWT 필요
 
-### POST /admin/buildings
-건물 등록
+### GET /api/admin/reports (미구현 — FE mock)
 
-**Request Body**
-```json
-{
-  "name": "공학관 A동",
-  "address": "서울시 XX구 XX로 1",
-  "electricityRate": 130,
-  "waterRate": 1.2
-}
-```
+FE `adminApi` mock 데이터 사용. mock 응답에 **`locationPath`** (상위 그룹 경로 배열) + **`locationName`** (LEAF 항목명) 필드 포함 — `ReportLocationCell`에서 상위(작게)·항목(크게) 표시.
 
----
-
-### POST /admin/buildings/{buildingId}/locations
-장소 등록 (장소 유형 자유 선택)
-
-**Request Body**
-```json
-{
-  "name": "303호",
-  "type": "CLASSROOM",
-  "floor": 3,
-  "description": "공학관 3층 대형 강의실"
-}
-```
-
-**LocationType 선택 가능 값**: `CLASSROOM`, `SEMINAR_ROOM`, `OFFICE`, `RESTROOM`, `KITCHEN`, `CORRIDOR`, `LOUNGE`, `LAB`, `LIBRARY`, `OTHER`
-
----
-
-### POST /admin/buildings/{buildingId}/locations/{locationId}/resources
-장소에 자원 등록 (ResourceType 마스터에서 선택)
-
-**Request Body**
-```json
-{
-  "locationResources": [
-    {
-      "resourceTypeId": 1,
-      "quantity": 10,
-      "customValue": null,
-      "isReportable": true,
-      "notes": "천장 매립형 LED"
-    },
-    {
-      "resourceTypeId": 2,
-      "quantity": 1,
-      "customValue": 2000.0,
-      "isReportable": true,
-      "notes": "실제 측정 소비전력 2000W"
-    },
-    {
-      "resourceTypeId": 9,
-      "quantity": 2,
-      "customValue": null,
-      "isReportable": true,
-      "notes": null
-    }
-  ]
-}
-```
-
----
-
-### GET /admin/reports (업데이트)
-
-**Response 200**
+**Response 200** (목표 스키마)
 ```json
 {
   "code": "SUCCESS",
@@ -562,7 +656,7 @@
 
 ---
 
-### GET /admin/dashboard (업데이트)
+### GET /api/admin/dashboard (미구현 — FE mock)
 
 **Query Params**: `buildingId=1&year=2026&month=5`
 

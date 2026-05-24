@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -41,7 +42,23 @@ public class Report {
     @Enumerated(EnumType.STRING)
     private ReportStatus status;
 
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "off_time_minutes")
+    private Integer offTimeMinutes;
+
+    @Column(name = "estimated_kwh", precision = 10, scale = 4)
+    private BigDecimal estimatedKwh;
+
+    @Column(name = "estimated_savings_krw")
+    private Integer estimatedSavingsKrw;
+
+    @Column(name = "estimated_point")
+    private Integer estimatedPoint;
+
+    @Column(name = "point_awarded")
+    private Integer pointAwarded = 0;
 
     @Builder
     public Report(
@@ -52,7 +69,12 @@ public class Report {
             String imageUrl,
             WasteType wasteType,
             ReportStatus status,
-            LocalDateTime createdAt
+            LocalDateTime createdAt,
+            Integer offTimeMinutes,
+            BigDecimal estimatedKwh,
+            Integer estimatedSavingsKrw,
+            Integer estimatedPoint,
+            Integer pointAwarded
     ) {
         this.member = member;
         this.locationNode = locationNode;
@@ -62,5 +84,10 @@ public class Report {
         this.wasteType = wasteType;
         this.status = status;
         this.createdAt = createdAt;
+        this.offTimeMinutes = offTimeMinutes;
+        this.estimatedKwh = estimatedKwh;
+        this.estimatedSavingsKrw = estimatedSavingsKrw;
+        this.estimatedPoint = estimatedPoint;
+        this.pointAwarded = pointAwarded != null ? pointAwarded : 0;
     }
 }

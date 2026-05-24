@@ -32,6 +32,9 @@ public class ReportResponse {
         private String roomName;
         private String status;
         private int pointAwarded;
+        private Integer estimatedPoint;
+        private Integer offTimeMinutes;
+        private String estimatedKwh;
         private String createdAt;
         private String detectionLabel;
         private String thumbnailUrl;
@@ -44,6 +47,9 @@ public class ReportResponse {
         private String roomName;
         private String status;
         private int pointAwarded;
+        private Integer estimatedPoint;
+        private Integer offTimeMinutes;
+        private String estimatedKwh;
         private String createdAt;
         private String detectionLabel;
         private String thumbnailUrl;

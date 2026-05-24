@@ -178,6 +178,8 @@ flowchart LR
 
 `ddl-auto: validate`이므로 **Flyway SQL + 엔티티**를 함께 수정한다.
 
+장소 CRUD API: `GET/POST/PATCH/DELETE /api/admin/location-nodes` — [API_명세서.md](./API_명세서.md) · [장소_관리_모델.md](./장소_관리_모델.md)
+
 
 
 ### 3.4 시드 데이터
@@ -315,7 +317,8 @@ bash deploy.sh
 
 
 
-- [배포 가이드](./배포_가이드.md)
+- [장소 관리 모델](./장소_관리_모델.md)
+- [API 명세서](./API_명세서.md)
 
 - Flyway 마이그레이션: [`db/migration/`](../../../../db/migration/)
 

@@ -139,3 +139,46 @@ SELECT 0, m.seq
 FROM member_db m
 WHERE m.user_name = 'user'
   AND NOT EXISTS (SELECT 1 FROM member_point_db mp WHERE mp.member_seq = m.seq);
+
+-- Phase 1: LEAF 노드 전기 자원 수량 (데모용, idempotent)
+UPDATE location_node_db n
+SET n.ac_count = 1, n.fluorescent_count = 8, n.led_count = 2
+WHERE n.node_kind = 'LEAF' AND n.name = '303호';
+
+UPDATE location_node_db n
+SET n.ac_count = 1, n.fluorescent_count = 10, n.led_count = 0
+WHERE n.node_kind = 'LEAF' AND n.name = '304호';
+
+UPDATE location_node_db n
+SET n.ac_count = 0, n.fluorescent_count = 6, n.led_count = 4
+WHERE n.node_kind = 'LEAF' AND n.name = '2층 복도';
+
+UPDATE location_node_db n
+SET n.ac_count = 2, n.fluorescent_count = 12, n.led_count = 6
+WHERE n.node_kind = 'LEAF' AND n.name = '2열람실';
+
+UPDATE location_node_db n
+SET n.ac_count = 2, n.fluorescent_count = 10, n.led_count = 8
+WHERE n.node_kind = 'LEAF' AND n.name = '3열람실';
+
+UPDATE location_node_db n
+SET n.ac_count = 1, n.fluorescent_count = 6, n.led_count = 2
+WHERE n.node_kind = 'LEAF' AND n.name IN ('101호', '201호', '501호', '502호');
+
+-- Phase 1: LEAF 요일별 운영시간 (월~금 07-22, 토 08-18, 일 휴무, idempotent)
+INSERT INTO location_operating_schedule_db (location_node_seq, day_of_week, is_closed, power_on_time, power_off_time)
+SELECT n.seq, d.day_of_week, d.is_closed, d.power_on_time, d.power_off_time
+FROM location_node_db n
+CROSS JOIN (
+    SELECT 1 AS day_of_week, 0 AS is_closed, '07:00:00' AS power_on_time, '22:00:00' AS power_off_time UNION ALL
+    SELECT 2, 0, '07:00:00', '22:00:00' UNION ALL
+    SELECT 3, 0, '07:00:00', '22:00:00' UNION ALL
+    SELECT 4, 0, '07:00:00', '22:00:00' UNION ALL
+    SELECT 5, 0, '07:00:00', '22:00:00' UNION ALL
+    SELECT 6, 0, '08:00:00', '18:00:00' UNION ALL
+    SELECT 7, 1, NULL, NULL
+) d
+WHERE n.node_kind = 'LEAF'
+  AND NOT EXISTS (
+      SELECT 1 FROM location_operating_schedule_db s WHERE s.location_node_seq = n.seq
+  );

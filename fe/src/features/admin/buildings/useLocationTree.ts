@@ -7,7 +7,8 @@ import {
     getLocationNodeTree,
     updateLocationNode,
 } from 'src/globals/api/locationNodesApi'
-import type { AdminLocationNode, NodeKind } from 'src/globals/api/types'
+import type { AdminLocationNode, LocationLeafPayload, NodeKind } from 'src/globals/api/types'
+import { toApiOperatingSchedules } from 'src/features/admin/buildings/operatingScheduleUtils'
 import {
     getBuildingNodes,
     getBreadcrumb,
@@ -181,7 +182,11 @@ export function useLocationTree() {
     )
 
     const handleCreate = useCallback(
-        async (name: string, nodeKind: NodeKind) => {
+        async (
+            name: string,
+            nodeKind: NodeKind,
+            leafPayload?: LocationLeafPayload,
+        ) => {
             if (!sheet || sheet.mode !== 'create' || !affiliationId) return false
 
             setSubmitting(true)
@@ -191,6 +196,16 @@ export function useLocationTree() {
                     affiliationId,
                     name: name.trim(),
                     nodeKind,
+                    ...(nodeKind === 'LEAF' && leafPayload
+                        ? {
+                              acCount: leafPayload.acCount,
+                              fluorescentCount: leafPayload.fluorescentCount,
+                              ledCount: leafPayload.ledCount,
+                              operatingSchedules: toApiOperatingSchedules(
+                                  leafPayload.operatingSchedules ?? [],
+                              ),
+                          }
+                        : {}),
                 })
                 toast.success('등록되었습니다.')
                 closeSheet()
@@ -217,20 +232,42 @@ export function useLocationTree() {
     )
 
     const handleUpdate = useCallback(
-        async (name: string) => {
+        async (name: string, leafPayload?: LocationLeafPayload) => {
             if (!sheet || sheet.mode !== 'edit') return false
             if (!name.trim()) {
                 toast.error('이름을 입력해 주세요.')
                 return false
             }
-            if (name.trim() === sheet.node.name) {
+
+            const nameUnchanged = name.trim() === sheet.node.name
+            const resourcesUnchanged =
+                sheet.node.nodeKind !== 'LEAF' ||
+                !leafPayload ||
+                (leafPayload.acCount === (sheet.node.acCount ?? 0) &&
+                    leafPayload.fluorescentCount ===
+                        (sheet.node.fluorescentCount ?? 0) &&
+                    leafPayload.ledCount === (sheet.node.ledCount ?? 0))
+
+            if (nameUnchanged && resourcesUnchanged && !leafPayload?.operatingSchedules) {
                 closeSheet()
                 return true
             }
 
             setSubmitting(true)
             try {
-                await updateLocationNode(sheet.node.id, { name: name.trim() })
+                await updateLocationNode(sheet.node.id, {
+                    name: name.trim(),
+                    ...(sheet.node.nodeKind === 'LEAF' && leafPayload
+                        ? {
+                              acCount: leafPayload.acCount,
+                              fluorescentCount: leafPayload.fluorescentCount,
+                              ledCount: leafPayload.ledCount,
+                              operatingSchedules: toApiOperatingSchedules(
+                                  leafPayload.operatingSchedules ?? [],
+                              ),
+                          }
+                        : {}),
+                })
                 toast.success('수정되었습니다.')
                 closeSheet()
                 loadTree()

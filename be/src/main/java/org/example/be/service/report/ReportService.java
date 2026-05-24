@@ -11,6 +11,7 @@ import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
 import org.example.be.service.location.LocationNodeService;
+import org.example.be.service.savings.SavingsCalculationService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +37,7 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final MemberRepository memberRepository;
     private final LocationNodeService locationNodeService;
+    private final SavingsCalculationService savingsCalculationService;
 
     private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
 
@@ -88,6 +90,17 @@ public class ReportService {
 
         String locationDetail = locationNodeService.buildPath(locationNode);
 
+        LocalDateTime reportAt = LocalDateTime.now();
+        var schedules = locationNodeService.getOperatingSchedules(locationNode.getSeq());
+        var savings = savingsCalculationService.calculate(
+                reportAt,
+                schedules,
+                wasteType,
+                locationNode.getAcCount(),
+                locationNode.getFluorescentCount(),
+                locationNode.getLedCount()
+        );
+
         Report report = Report.builder()
                 .member(member)
                 .locationNode(locationNode)
@@ -96,7 +109,12 @@ public class ReportService {
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)
                 .status(ReportStatus.PENDING)
-                .createdAt(LocalDateTime.now())
+                .createdAt(reportAt)
+                .offTimeMinutes(savings.getOffTimeMinutes())
+                .estimatedKwh(savings.getEstimatedKwh())
+                .estimatedSavingsKrw(savings.getEstimatedSavingsKrw())
+                .estimatedPoint(savings.getEstimatedPoint())
+                .pointAwarded(0)
                 .build();
 
         Report savedReport = reportRepository.save(report);
@@ -176,6 +194,9 @@ public class ReportService {
                 .roomName(summary.getRoomName())
                 .status(summary.getStatus())
                 .pointAwarded(summary.getPointAwarded())
+                .estimatedPoint(summary.getEstimatedPoint())
+                .offTimeMinutes(summary.getOffTimeMinutes())
+                .estimatedKwh(summary.getEstimatedKwh())
                 .createdAt(summary.getCreatedAt())
                 .detectionLabel(summary.getDetectionLabel())
                 .thumbnailUrl(summary.getThumbnailUrl())
@@ -197,11 +218,18 @@ public class ReportService {
     }
 
     private ReportResponse.Summary toSummary(Report report) {
+        int displayPoint = report.getPointAwarded() != null && report.getPointAwarded() > 0
+                ? report.getPointAwarded()
+                : (report.getEstimatedPoint() != null ? report.getEstimatedPoint() : 0);
+
         return ReportResponse.Summary.builder()
                 .reportId(report.getSeq())
                 .roomName(report.getLocationDetail())
                 .status(report.getStatus().name())
-                .pointAwarded(0)
+                .pointAwarded(displayPoint)
+                .estimatedPoint(report.getEstimatedPoint())
+                .offTimeMinutes(report.getOffTimeMinutes())
+                .estimatedKwh(report.getEstimatedKwh() != null ? report.getEstimatedKwh().toPlainString() : null)
                 .createdAt(report.getCreatedAt() != null ? report.getCreatedAt().toString() : null)
                 .detectionLabel(buildDetectionLabel(report.getWasteType()))
                 .thumbnailUrl(report.getImageUrl())

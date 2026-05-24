@@ -150,10 +150,22 @@ Respond STRICTLY in the following JSON format only:
 ## 3. 절약량 계산 엔진 (자원 분류별)
 
 ### 입력 데이터
+
+**AI (낭비 판별)** — 사진만 사용, 장소 메타데이터 불필요:
+- YOLO: 사람·가구·에어컨 탐지
+- Gemini: `ac_status`, `light_status` ON/OFF
+
+**절약량 계산 (BE, Phase 1) ✅** — `SavingsCalculationService`:
+- `report.createdAt` — 제보 시각 (서버 자동, NOT NULL)
+- LEAF `ac_count`, `fluorescent_count`, `led_count`
+- `location_operating_schedule_db` — 해당 요일 power_on/off (조명·AC 공통)
+- 기본 W: 형광등 40, LED 20, 에어컨 1500
+- `off_time_minutes`: 제보 시각 ~ 당일 power_off (휴무·소등 후·미등록 시 **120분 cap**)
+- `electricity_rate`: 130원/kWh
+- 결과: `estimated_kwh`, `estimated_savings_krw`, `estimated_point` → `report_db`
+
+**절약량 계산 (BE, Phase 2 목표)** — `LocationResource` + `ResourceType`:
 - `location_resources`: 낭비로 판별된 자원 목록 (ResourceType + quantity + custom_value)
-- `off_time`: 제보 시각 ~ 다음 수업/예약 시작 시각 (시간표 연동) 또는 기본값 2시간
-- `electricity_rate`: 건물별 전기 단가 (기본값: 130원/kWh)
-- `water_rate`: 건물별 수도 단가 (기본값: 1.2원/L)
 
 ### 계산 공식 — ELECTRICITY
 

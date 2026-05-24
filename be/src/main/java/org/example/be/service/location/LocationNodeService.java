@@ -6,9 +6,11 @@ import org.example.be.api.response.BuildingResponse;
 import org.example.be.api.response.LocationNodeResponse;
 import org.example.be.domain.model.Affiliation;
 import org.example.be.domain.model.LocationNode;
+import org.example.be.domain.model.LocationOperatingSchedule;
 import org.example.be.domain.model.NodeKind;
 import org.example.be.domain.repository.AffiliationRepository;
 import org.example.be.domain.repository.LocationNodeRepository;
+import org.example.be.domain.repository.LocationOperatingScheduleRepository;
 import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
@@ -17,8 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +33,7 @@ public class LocationNodeService {
     private static final int MAX_DEPTH = 3;
 
     private final LocationNodeRepository locationNodeRepository;
+    private final LocationOperatingScheduleRepository operatingScheduleRepository;
     private final AffiliationRepository affiliationRepository;
     private final ReportRepository reportRepository;
 
@@ -93,6 +98,15 @@ public class LocationNodeService {
             throw new BusinessLogicException(ErrorCode.INVALID, "3뎁스에는 장소(LEAF)만 등록할 수 있습니다.");
         }
 
+        int acCount = 0;
+        int fluorescentCount = 0;
+        int ledCount = 0;
+        if (request.getNodeKind() == NodeKind.LEAF) {
+            acCount = normalizeResourceCount(request.getAcCount(), "에어컨 대수");
+            fluorescentCount = normalizeResourceCount(request.getFluorescentCount(), "형광등 개수");
+            ledCount = normalizeResourceCount(request.getLedCount(), "LED 조명 개수");
+        }
+
         LocationNode saved = locationNodeRepository.save(
                 LocationNode.builder()
                         .parent(parent)
@@ -101,8 +115,16 @@ public class LocationNodeService {
                         .nodeKind(request.getNodeKind())
                         .depth(depth)
                         .sortOrder(sortOrder)
+                        .acCount(acCount)
+                        .fluorescentCount(fluorescentCount)
+                        .ledCount(ledCount)
                         .build()
         );
+
+        if (request.getNodeKind() == NodeKind.LEAF) {
+            applyOperatingSchedules(saved, request.getOperatingSchedules());
+            saved = locationNodeRepository.save(saved);
+        }
 
         return toAdminTreeNode(saved, List.of());
     }
@@ -114,7 +136,25 @@ public class LocationNodeService {
         if (request.getSortOrder() != null) {
             node.setSortOrder(request.getSortOrder());
         }
+        if (node.getNodeKind() == NodeKind.LEAF) {
+            if (request.getAcCount() != null) {
+                node.setAcCount(normalizeResourceCount(request.getAcCount(), "에어컨 대수"));
+            }
+            if (request.getFluorescentCount() != null) {
+                node.setFluorescentCount(normalizeResourceCount(request.getFluorescentCount(), "형광등 개수"));
+            }
+            if (request.getLedCount() != null) {
+                node.setLedCount(normalizeResourceCount(request.getLedCount(), "LED 조명 개수"));
+            }
+            if (request.getOperatingSchedules() != null) {
+                applyOperatingSchedules(node, request.getOperatingSchedules());
+            }
+        }
         return toAdminTreeNode(node, loadChildren(node.getSeq()));
+    }
+
+    public List<LocationOperatingSchedule> getOperatingSchedules(Long locationNodeSeq) {
+        return operatingScheduleRepository.findByLocationNode_SeqOrderByDayOfWeekAsc(locationNodeSeq);
     }
 
     @Transactional
@@ -258,7 +298,73 @@ public class LocationNodeService {
                 .depth(node.getDepth())
                 .sortOrder(node.getSortOrder())
                 .locationType(node.getLocationType())
+                .acCount(node.getAcCount())
+                .fluorescentCount(node.getFluorescentCount())
+                .ledCount(node.getLedCount())
+                .operatingSchedules(node.getNodeKind() == NodeKind.LEAF
+                        ? toScheduleResponses(getOperatingSchedules(node.getSeq()))
+                        : null)
                 .children(children)
                 .build();
+    }
+
+    private List<LocationNodeResponse.OperatingScheduleItem> toScheduleResponses(
+            List<LocationOperatingSchedule> schedules
+    ) {
+        return schedules.stream()
+                .map(schedule -> LocationNodeResponse.OperatingScheduleItem.builder()
+                        .dayOfWeek(schedule.getDayOfWeek())
+                        .closed(schedule.isClosed())
+                        .powerOnTime(schedule.getPowerOnTime())
+                        .powerOffTime(schedule.getPowerOffTime())
+                        .build())
+                .toList();
+    }
+
+    private void applyOperatingSchedules(
+            LocationNode node,
+            List<LocationNodeRequest.OperatingScheduleItem> items
+    ) {
+        List<LocationNodeRequest.OperatingScheduleItem> resolved = items;
+        if (resolved == null || resolved.isEmpty()) {
+            resolved = OperatingScheduleDefaults.defaultScheduleItems();
+        }
+        validateOperatingSchedules(resolved);
+        node.getOperatingSchedules().clear();
+        node.getOperatingSchedules().addAll(OperatingScheduleDefaults.toEntities(node, resolved));
+    }
+
+    private void validateOperatingSchedules(List<LocationNodeRequest.OperatingScheduleItem> items) {
+        if (items.size() != 7) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "요일별 운영시간은 7일 모두 입력해야 합니다.");
+        }
+        Set<Integer> days = new HashSet<>();
+        for (LocationNodeRequest.OperatingScheduleItem item : items) {
+            if (item.getDayOfWeek() == null || item.getDayOfWeek() < 1 || item.getDayOfWeek() > 7) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "요일(dayOfWeek)은 1(월)~7(일)이어야 합니다.");
+            }
+            if (!days.add(item.getDayOfWeek())) {
+                throw new BusinessLogicException(ErrorCode.INVALID, "중복된 요일이 있습니다.");
+            }
+            boolean closed = Boolean.TRUE.equals(item.getClosed());
+            if (!closed) {
+                if (item.getPowerOnTime() == null || item.getPowerOffTime() == null) {
+                    throw new BusinessLogicException(ErrorCode.INVALID, "운영일에는 켜는/끄는 시간을 입력해 주세요.");
+                }
+                if (!item.getPowerOnTime().isBefore(item.getPowerOffTime())) {
+                    throw new BusinessLogicException(ErrorCode.INVALID, "끄는 시간은 켜는 시간보다 늦어야 합니다.");
+                }
+            }
+        }
+    }
+
+    private int normalizeResourceCount(Integer value, String label) {
+        if (value == null) {
+            return 0;
+        }
+        if (value < 0) {
+            throw new BusinessLogicException(ErrorCode.INVALID, label + "는 0 이상이어야 합니다.");
+        }
+        return value;
     }
 }

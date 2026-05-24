@@ -13,12 +13,13 @@
 | **이메일 회원가입/로그인** | ✅ BE 연동 | BCrypt + JPA |
 | **제보 생성 API** | ✅ 부분 | `POST /api/reports` — Cloud Run `/analyze` 연동, `WASTE_DETECTED`만 저장, 이미지 URL placeholder |
 | **AI 3단계 파이프라인** | ✅ BE 연동 | monorepo `ai/` + Cloud Run FastAPI; FE `simulateAiAnalysis()`는 UX 시연용 |
-| **포인트·관리자 API** | ⏳ UI만 | mock 데이터 기반 |
+| **장소 관리 API+FE** | ✅ | `/api/admin/location-nodes` CRUD + 3단 컬럼 UI |
+| **관리자 제보·대시보드** | ⏳ UI만 | FE mock (`adminApi`) |
 | **Kafka / GCS** | ⏳ 코드만 | Producer/Consumer 존재, Compose·운영 미연동 |
-| **JWT** | ✅ | HS256 발급·검증, 제보·포인트·건물 API |
+| **JWT** | ✅ | HS256 발급·검증, 제보·포인트·장소 API |
 | **운영 배포** | ✅ | `ubuntu03` Docker Compose (FE:8081, BE:8080, MySQL) |
 
-> **목표 아키텍처**(GCS·Kafka·관리자 API)와 **현재 데모 경로**(BE 실 AI 판별 + FE mock UX·포인트)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
+> **목표 아키텍처**(GCS·Kafka·admin reports/dashboard)와 **현재 데모 경로**(BE 실 AI 판별 + 장소 CRUD 실연동 + FE mock 포인트·admin 제보)를 구분해 기술한다. 상세: [7. 구현 상세](./7_구현상세.md)
 
 ---
 

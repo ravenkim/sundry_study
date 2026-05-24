@@ -43,6 +43,9 @@ export interface ReportSummary {
     roomName: string
     status: ReportStatus
     pointAwarded: number
+    estimatedPoint?: number
+    offTimeMinutes?: number
+    estimatedKwh?: string
     createdAt: string
     detectionLabel?: string
     thumbnailUrl?: string
@@ -130,7 +133,28 @@ export interface AdminLocationNode {
     depth: number
     sortOrder: number
     locationType?: string
+    acCount: number
+    fluorescentCount: number
+    ledCount: number
+    operatingSchedules?: OperatingScheduleItem[]
     children: AdminLocationNode[]
+}
+
+export type OperatingScheduleItem = {
+    dayOfWeek: number
+    closed: boolean
+    powerOnTime?: string
+    powerOffTime?: string
+}
+
+export type LocationResourceCounts = {
+    acCount: number
+    fluorescentCount: number
+    ledCount: number
+}
+
+export type LocationLeafPayload = LocationResourceCounts & {
+    operatingSchedules?: OperatingScheduleItem[]
 }
 
 export interface Affiliation {

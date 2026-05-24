@@ -1,6 +1,11 @@
 import client from 'src/globals/api/client'
 import { unwrapApiData, unwrapApiListData } from 'src/globals/api/apiUtils'
-import type { AdminLocationNode, ApiResponse, NodeKind } from 'src/globals/api/types'
+import type {
+    AdminLocationNode,
+    ApiResponse,
+    NodeKind,
+    OperatingScheduleItem,
+} from 'src/globals/api/types'
 
 export async function getLocationNodeTree(
     affiliationId: number,
@@ -17,6 +22,10 @@ export async function createLocationNode(payload: {
     affiliationId: number
     name: string
     nodeKind: NodeKind
+    acCount?: number
+    fluorescentCount?: number
+    ledCount?: number
+    operatingSchedules?: OperatingScheduleItem[]
 }): Promise<AdminLocationNode> {
     const { data } = await client.post<ApiResponse<AdminLocationNode>>(
         '/api/admin/location-nodes',
@@ -27,7 +36,13 @@ export async function createLocationNode(payload: {
 
 export async function updateLocationNode(
     id: number,
-    payload: { name: string },
+    payload: {
+        name: string
+        acCount?: number
+        fluorescentCount?: number
+        ledCount?: number
+        operatingSchedules?: OperatingScheduleItem[]
+    },
 ): Promise<AdminLocationNode> {
     const { data } = await client.patch<ApiResponse<AdminLocationNode>>(
         `/api/admin/location-nodes/${id}`,

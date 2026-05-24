@@ -51,10 +51,11 @@ cd be
 - CORS: `WebConfig`에서 `allowedOriginPatterns("*")`로 전체 허용
 - `MemberAuthService`: BCrypt 로그인 검증 + `JwtTokenProvider` JWT 발급
 - `DefaultMemberService`: 회원가입·중복확인 + 가입 시 `MemberPoint` 0P 생성
-- P0 API: `GET /api/buildings`, `GET /api/points/me`, `POST/GET /api/reports` (회원 FK·내 목록·상세, **제보 생성 시 FastAPI `/analyze` 연동**)
-- **소속·역할**: `Affiliation` 엔티티, `UserType` enum, `Member`·`Building` → Affiliation FK, 회원가입 `affiliation` 필드 (시드·조회 API·FE UI 미완)
-- **AI 코드**: monorepo `ai/` — 학습(`model_train*.py`), 가중치(`train_result/weights/best.pt`), Cloud Run 배포(`for_deploy/campus_api/`)
-- 미구현: GCS 실업로드·`aiResult` JSON·포인트 적립·관리자 API·Kafka Compose 연동·Affiliation 시드/API
+- P0 API: `GET /api/buildings`, `GET /api/affiliations`, `GET /api/points/me`, `POST/GET /api/reports`, **`/api/admin/location-nodes/*`** (장소 CRUD)
+- **소속·역할**: `Affiliation` + Flyway 시드, `GET /api/affiliations`, `LocationNode` 트리, `UserType.ADMIN` 시드, 회원가입·FE 소속 선택 UI ✅
+- **장소 모델**: `LocationNode` + LEAF **자원 수량** + **`location_operating_schedule_db`(요일별 on/off)** ✅
+- **AI 코드**: monorepo `ai/` — Cloud Run `/analyze` (ON/OFF 판별). kWh는 BE `SavingsCalculationService`
+- 미구현: GCS·`aiResult` JSON·**승인 시 포인트 확정 적립(Kafka)**·admin reports/dashboard·ResourceType (Phase 2)
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 - DB 연결: `MYSQL_*` + `SPRING_DATASOURCE_*` (동일 user/password). `DB_URL`/`DB_USERNAME`/`DB_PASSWORD`는 사용하지 않음
 
@@ -130,7 +131,14 @@ export function* rootSaga() { yield all([..., newSaga()]) }
 - `src/shared/layout/` — 레이아웃 컴포넌트 (Wh 접두사)
 
 ### API 클라이언트
-`src/globals/api/client.tsx`의 axios 인스턴스 사용. `baseURL`은 `VITE_API_HOST` 환경변수 (현재 빈 문자열 — 개발 중).
+`src/globals/api/client.tsx`의 axios 인스턴스 사용. `baseURL`은 `VITE_API_HOST` 환경변수.
+
+### 관리자 장소 관리 (FE)
+- 라우트: `/admin/buildings` — UI 명칭 **장소 관리**
+- 모듈: `fe/src/features/admin/buildings/` (3단 컬럼 탐색기, Sheet CRUD, `useLocationTree`)
+- 용어: 1·2·3단계, 그룹/항목 (`locationTreeUtils.ts` → `LOC`)
+- API: `locationNodesApi.ts` — **mock fallback 없음**
+- 관리자 소속: select 없음, JWT scope에서 `affiliationId` 고정
 
 ## 배포
 
@@ -165,8 +173,9 @@ VITE_API_HOST=http://localhost:8080
 Docker/프로덕션 빌드 시 `VITE_API_HOST`가 빌드 타임에 주입된다.
 
 ## 계획된 추가 기능 (미구현)
-- GCS 이미지 업로드 + FastAPI `/analyze` (제보 AI·`aiResult`)
+- GCS 이미지 업로드 + `aiResult` JSON 저장·API 반환
 - 포인트 적립·월/누적 집계·교환 (`rewards`, `exchange`)
-- 관리자 API (`/api/admin/*`)
+- 관리자 제보 목록·대시보드 API (`GET /api/admin/reports`, `/api/admin/dashboard`) — 장소 CRUD는 ✅
 - Kafka Compose + `PointProducer` 연동
-- 진행 현황: `docs/남은_기능_개발_목록.md`, API 명세: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/API_명세서.md`
+- ResourceType / LocationResource (자원 유형)
+- 진행 현황: `docs/남은_기능_개발_목록.md`, 장소 모델: `docs/기획/캠퍼스_에너지_절약/04_기술_기획/장소_관리_모델.md`
