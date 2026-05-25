@@ -67,7 +67,7 @@ async function postAuth<T>(
 
 export function login(request: LoginRequest) {
     return postAuth<LoginResponse>(
-        '/login',
+        '/api/auth/login',
         request,
         ResponseCode.LOGIN_SUCCESS,
     )

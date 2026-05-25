@@ -28,7 +28,7 @@ public class LoginController {
     private JwtTokenProvider jwtTokenProvider;
 
     @Operation(summary = "로그인", description = "사용자명과 비밀번호로 로그인합니다. JWT access token을 반환합니다.")
-    @PostMapping("/login")
+    @PostMapping("/api/auth/login")
     public ApiResponse<MemberResponse.Login> login(@Valid @RequestBody MemberRequest.Login request) {
         Member member = memberAuthService.authenticate(request);
         String accessToken = jwtTokenProvider.createToken(member);

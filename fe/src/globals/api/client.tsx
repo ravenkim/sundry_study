@@ -6,7 +6,19 @@ const client = axios.create({
     baseURL: import.meta.env.VITE_API_HOST ?? '',
 })
 
+function isPublicAuthRequest(url?: string): boolean {
+    if (!url) return false
+    return (
+        url.startsWith('/api/auth/login') ||
+        url.startsWith('/login') ||
+        url.startsWith('/register')
+    )
+}
+
 client.interceptors.request.use((config) => {
+    if (isPublicAuthRequest(config.url)) {
+        return config
+    }
     const token = getAccessToken()
     if (token) {
         config.headers.Authorization = `Bearer ${token}`

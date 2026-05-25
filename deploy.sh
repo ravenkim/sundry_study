@@ -294,7 +294,7 @@ smoke_test() {
   local response
 
   log "로그인 스모크 테스트 (admin)..."
-  response="$(curl -sf -X POST "http://${health_host}:${port}/login" \
+  response="$(curl -sf -X POST "http://${health_host}:${port}/api/auth/login" \
     -H 'Content-Type: application/json' \
     -d '{"userName":"admin","password":"admin1234!"}' 2>/dev/null || true)"
 
