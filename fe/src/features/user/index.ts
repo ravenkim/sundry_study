@@ -8,7 +8,9 @@ export { UserReportsList } from './UserReportsList'
 export { UserReportDetail } from './UserReportDetail'
 export { ParticipatedBuildingSavingsCard } from './ParticipatedBuildingSavings'
 export {
+    formatCo2Kg,
     formatKwh,
+    getCo2KgFromKwh,
     getTreeEquivalent,
     PARTICIPATED_BUILDING_SAVINGS,
     sumParticipatedKwh,

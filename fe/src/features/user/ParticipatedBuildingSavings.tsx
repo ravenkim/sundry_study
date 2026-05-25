@@ -5,7 +5,9 @@ import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoCard } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 import {
+    formatCo2Kg,
     formatKwh,
+    getCo2KgFromKwh,
     getParticipatedSavingsMascotEmotion,
     getTreeEquivalent,
     sumParticipatedKwh,
@@ -27,7 +29,10 @@ export const ParticipatedBuildingSavingsCard = ({
     const totalKwh = sumParticipatedKwh(buildings, 'total')
     const monthKwh = sumParticipatedKwh(buildings, 'month')
     const maxMonthKwh = Math.max(...buildings.map((b) => b.thisMonthKwh), 1)
-    const trees = getTreeEquivalent(totalKwh)
+    const monthCo2Kg = getCo2KgFromKwh(monthKwh)
+    const monthTrees = getTreeEquivalent(monthKwh)
+    const totalCo2Kg = getCo2KgFromKwh(totalKwh)
+    const totalTrees = getTreeEquivalent(totalKwh)
     const mascotEmotion = getParticipatedSavingsMascotEmotion(buildings)
     const isSingleBuilding = buildings.length <= 1
 
@@ -93,9 +98,18 @@ export const ParticipatedBuildingSavingsCard = ({
                             ? t('common:loading')
                             : t('savings.monthlySummary', {
                                   monthKwh: formatKwh(monthKwh),
-                                  trees,
+                                  co2Kg: formatCo2Kg(monthCo2Kg),
+                                  trees: monthTrees,
                               })}
                     </span>
+                    {!loading && totalKwh > 0 && (
+                        <span className="text-on-surface-variant text-[11px]">
+                            {t('savings.cumulativeImpact', {
+                                co2Kg: formatCo2Kg(totalCo2Kg),
+                                trees: totalTrees,
+                            })}
+                        </span>
+                    )}
                 </div>
 
                 {expanded && !loading && buildings.length === 0 && (

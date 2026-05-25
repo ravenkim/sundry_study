@@ -87,7 +87,8 @@
         "cumulativeSingle": "My building cumulative savings",
         "cumulativeMultiple": "Participating buildings cumulative savings",
         "kwhValue": "{{value}} kWh",
-        "monthlySummary": "This month +{{monthKwh}} kWh · 🌲 Equivalent to {{trees}} pine trees absorbed",
+        "monthlySummary": "This month +{{monthKwh}} kWh · CO₂ {{co2Kg}}kg · 🌲 Equivalent to {{trees}} pine trees absorbed",
+        "cumulativeImpact": "Cumulative CO₂ {{co2Kg}}kg saved · 🌲 {{trees}} pine tree effect",
         "empty": "No electricity savings data yet. Start reporting!",
         "buildingMonthly": "This month {{kwh}} kWh · {{count}} reports"
     },

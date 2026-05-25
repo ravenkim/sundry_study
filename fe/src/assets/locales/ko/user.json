@@ -87,7 +87,8 @@
         "cumulativeSingle": "내 건물 누적 절약 전기",
         "cumulativeMultiple": "참여 건물 누적 절약 전기",
         "kwhValue": "{{value}} kWh",
-        "monthlySummary": "이번 달 +{{monthKwh}} kWh · 🌲 소나무 {{trees}}그루 흡수량과 동등",
+        "monthlySummary": "이번 달 +{{monthKwh}} kWh · CO₂ {{co2Kg}}kg · 🌲 소나무 {{trees}}그루 흡수량과 동등",
+        "cumulativeImpact": "누적 CO₂ {{co2Kg}}kg 절감 · 🌲 소나무 {{trees}}그루 효과",
         "empty": "아직 절약 전기 데이터가 없습니다. 제보를 시작해 보세요!",
         "buildingMonthly": "이번 달 {{kwh}} kWh · 제보 {{count}}건"
     },

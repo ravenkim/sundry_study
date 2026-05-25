@@ -33,7 +33,14 @@ export const PARTICIPATED_BUILDING_SAVINGS: ParticipatedBuildingSavings[] = [
     },
 ]
 
-const KWH_PER_TREE_GROUP = 20.25
+/** kWh → CO₂(kg), 한국 전력 평균 배출계수 — BE `EnergyConstants.CO2_KG_PER_KWH` */
+export const CO2_KG_PER_KWH = 0.4594
+
+/**
+ * kWh → 소나무 흡수량 환산 (그루)
+ * 와이어프레임 기준 243 kWh ≈ 12그루 → 243 / 12 = 20.25 kWh/그루
+ */
+export const KWH_PER_TREE = 20.25
 
 export function sumParticipatedKwh(
     buildings: ParticipatedBuildingSavings[],
@@ -49,8 +56,21 @@ export function formatKwh(kwh: number): string {
     return kwh >= 100 ? kwh.toFixed(0) : kwh.toFixed(1)
 }
 
+export function formatCo2Kg(kg: number): string {
+    if (kg <= 0) return '0'
+    return kg >= 100 ? kg.toFixed(0) : kg.toFixed(1)
+}
+
+/** 절약 전기(kWh) → 절약 탄소(kg CO₂) */
+export function getCo2KgFromKwh(kwh: number): number {
+    if (kwh <= 0) return 0
+    return Math.round(kwh * CO2_KG_PER_KWH * 10) / 10
+}
+
+/** 절약 전기(kWh) → 소나무 흡수량 환산(그루) */
 export function getTreeEquivalent(kwh: number): number {
-    return Math.max(1, Math.round(kwh / KWH_PER_TREE_GROUP))
+    if (kwh <= 0) return 0
+    return Math.round(kwh / KWH_PER_TREE)
 }
 
 /** 참여 건물 절약 상태 — 이번 달 절약이 있으면 긍정, 없으면 아쉬움 */
