@@ -109,7 +109,7 @@ function LightWasteRoomsTable({
                         <td className="px-6 py-4">
                             <EcoBadge variant="yellow">
                                 {t('stats.lightWasteRooms.reportCountValue', {
-                                    count: formatNumber(room.reportCount, locale),
+                                    count: room.reportCount,
                                 })}
                             </EcoBadge>
                         </td>
