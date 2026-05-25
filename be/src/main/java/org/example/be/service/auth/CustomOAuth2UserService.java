@@ -35,12 +35,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2User oAuth2User = super.loadUser(userRequest);
-
-        String provider = userRequest.getClientRegistration().getRegistrationId();
-        Map<String, Object> attributes = oAuth2User.getAttributes();
-
         try {
+            OAuth2User oAuth2User = super.loadUser(userRequest);
+
+            String provider = userRequest.getClientRegistration().getRegistrationId();
+            Map<String, Object> attributes = oAuth2User.getAttributes();
+
             OAuthAttributesHelper.OAuthUserProfile profile =
                     OAuthAttributesHelper.extract(provider, attributes);
             String email = profile.email();
@@ -70,6 +70,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 member.setProvider(provider);
                 member.setProviderId(providerId);
             }
+
+            return new DefaultOAuth2User(
+                    Collections.emptyList(),
+                    attributes,
+                    "google".equals(provider) ? "sub" : "id"
+            );
         } catch (OAuth2AuthenticationException ex) {
             throw ex;
         } catch (DataAccessException ex) {
@@ -79,12 +85,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             log.error("OAuth user load failed", ex);
             throw oauthError("Google 로그인 처리 중 오류가 발생했습니다.");
         }
-
-        return new DefaultOAuth2User(
-                Collections.emptyList(),
-                attributes,
-                "google".equals(provider) ? "sub" : "id"
-        );
     }
 
     private static String buildOAuthUserName(String name, String providerId) {
