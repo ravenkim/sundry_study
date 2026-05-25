@@ -6,6 +6,7 @@ import org.example.be.domain.model.LocationNode;
 import org.example.be.domain.model.Report;
 import org.example.be.domain.model.ReportStatus;
 import org.example.be.domain.repository.ReportRepository;
+import org.example.be.service.tariff.ElectricityTariffService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,26 +30,34 @@ public class BuildingSavingsService {
     );
 
     private final ReportRepository reportRepository;
+    private final ElectricityTariffService electricityTariffService;
 
     public List<BuildingSavingsResponse.Item> getMyBuildingSavings(Long memberSeq) {
-        List<Report> reports = reportRepository.findByMember_SeqAndStatusInAndEstimatedKwhIsNotNull(
+        List<Report> reports = reportRepository.findByMember_SeqAndStatusIn(
                 memberSeq,
                 AGGREGATE_STATUSES
         );
 
         YearMonth currentMonth = YearMonth.now();
+        var unitCostKrw = electricityTariffService.getEffectiveUnitCostKrw();
         Map<Long, BuildingAccumulator> accumulators = new HashMap<>();
 
         for (Report report : reports) {
-            if (report.getLocationNode() == null || report.getEstimatedKwh() == null) {
+            if (report.getLocationNode() == null) {
                 continue;
             }
-            if (report.getEstimatedKwh().compareTo(BigDecimal.ZERO) <= 0) {
+
+            BigDecimal resolvedKwh = EstimatedKwhResolver.resolve(
+                    report.getEstimatedKwh(),
+                    report.getEstimatedSavingsKrw(),
+                    unitCostKrw
+            );
+            if (resolvedKwh.compareTo(BigDecimal.ZERO) <= 0) {
                 continue;
             }
 
             LocationNode root = findRoot(report.getLocationNode());
-            double kwh = report.getEstimatedKwh().doubleValue();
+            double kwh = resolvedKwh.doubleValue();
 
             BuildingAccumulator acc = accumulators.computeIfAbsent(
                     root.getSeq(),

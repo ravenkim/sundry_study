@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useAuth } from 'src/features/auth/AuthContext'
+import { useEffect, useState } from 'react'
 import { getMyBuildingSavings } from 'src/globals/api/savingsApi'
 import {
     PARTICIPATED_BUILDING_SAVINGS,
@@ -7,7 +6,6 @@ import {
 } from './userSavingsData'
 
 export function useMyBuildingSavings() {
-    const { user } = useAuth()
     const [buildings, setBuildings] = useState<ParticipatedBuildingSavings[]>(
         [],
     )
@@ -21,17 +19,5 @@ export function useMyBuildingSavings() {
             .finally(() => setLoading(false))
     }, [])
 
-    const scopedBuildings = useMemo(() => {
-        if (!user?.buildingId && !user?.buildingName) {
-            return buildings
-        }
-        return buildings.filter(
-            (building) =>
-                (user.buildingId != null &&
-                    String(building.buildingId) === String(user.buildingId)) ||
-                building.buildingName === user.buildingName,
-        )
-    }, [buildings, user?.buildingId, user?.buildingName])
-
-    return { buildings: scopedBuildings, loading }
+    return { buildings, loading }
 }

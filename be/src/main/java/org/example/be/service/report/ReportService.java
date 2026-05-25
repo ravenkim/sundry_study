@@ -17,8 +17,8 @@ import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
 import org.example.be.service.location.LocationNodeService;
 import org.example.be.service.savings.SavingsCalculationService;
+import org.example.be.service.savings.EstimatedKwhResolver;
 import org.example.be.service.savings.ExpectedKrwParser;
-import org.example.be.service.savings.ExpectedKwhParser;
 import org.example.be.service.tariff.ElectricityTariffService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -127,7 +127,11 @@ public class ReportService {
 
         int estimatedSavingsKrw = ExpectedKrwParser.parse(aiResponse.getExpected());
         int estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
-        BigDecimal estimatedKwh = ExpectedKwhParser.parse(aiResponse.getExpectedKwh());
+        BigDecimal estimatedKwh = EstimatedKwhResolver.resolve(
+                aiResponse.getExpectedKwh(),
+                estimatedSavingsKrw,
+                electricityTariffService.getEffectiveUnitCostKrw()
+        );
 
         MemberPoint wallet = memberPointRepository.findByMember_Seq(memberSeq)
                 .orElseGet(() -> memberPointRepository.save(new MemberPoint(member)));

@@ -97,8 +97,9 @@ Calculation & Logic Tasks:
 2. If waste is confirmed during off-hours (person-free classroom with ON devices that should be OFF):
    - Compute off_time_minutes until power_off (cap {OFF_TIME_CAP_MINUTES} min on closed/after-hours)
    - Sum kWh only for ON resources × their counts × off_time_hours
+   - expectedKwh = total_kwh rounded to 1 decimal, e.g. "3.8 kWh"
    - expected = round(total_kwh × {electricity_rate}) as Korean won string, e.g. "494원"
-3. If no waste: result "PASS", expected "0원"
+3. If no waste: result "PASS", expected "0원", expectedKwh "0 kWh"
 
 Respond STRICTLY in this JSON format only:
 {{
@@ -107,6 +108,7 @@ Respond STRICTLY in this JSON format only:
     "ac_status": "ON or OFF or UNKNOWN",
     "light_status": "ON or OFF",
     "reason": "Detailed visual reasoning about louvers, LEDs, and lights.",
+    "expectedKwh": "0 kWh or N.N kWh",
     "expected": "0원 or N원"
 }}
 """

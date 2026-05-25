@@ -16,6 +16,19 @@ function isPublicAuthRequest(url?: string): boolean {
     )
 }
 
+const PUBLIC_APP_PATHS = [
+    '/login',
+    '/signup',
+    '/find-account',
+    '/oauth/callback',
+]
+
+function isPublicAppPath(pathname: string): boolean {
+    return PUBLIC_APP_PATHS.some(
+        (path) => pathname === path || pathname.startsWith(`${path}/`),
+    )
+}
+
 client.interceptors.request.use((config) => {
     if (isPublicAuthRequest(config.url)) {
         return config
@@ -37,7 +50,8 @@ client.interceptors.response.use(
     (error) => {
         if (axios.isAxiosError(error) && error.response?.status === 401) {
             clearAuth()
-            if (window.location.pathname !== '/login') {
+            const pathname = window.location.pathname
+            if (pathname !== '/login' && !isPublicAppPath(pathname)) {
                 window.location.href = '/login'
             }
         }

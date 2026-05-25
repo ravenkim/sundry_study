@@ -192,14 +192,6 @@ async function main() {
         )
 
         await clearAuth(page)
-        await gotoAndCapture(
-            page,
-            '/signup/school',
-            'screen_signup_school.png',
-            'h1',
-        )
-
-        await clearAuth(page)
         await gotoAndCapture(page, '/signup/admin', 'screen_signup_admin.png', 'h1')
 
         await captureSignup(page)
