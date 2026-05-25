@@ -30,10 +30,7 @@ public class AdminStatsService {
     private static final int MONTHLY_HISTORY = 6;
     private static final List<String> WASTE_CATEGORY_ORDER = List.of(
             "조명 소등",
-            "냉난방 차단",
-            "대기전력 절감",
-            "창문 닫기",
-            "기타 절약"
+            "냉난방 차단"
     );
 
     private final ReportRepository reportRepository;
@@ -197,15 +194,6 @@ public class AdminStatsService {
             }
             if (wasteType.isAcWasting()) {
                 counts.merge("냉난방 차단", 1, Integer::sum);
-            }
-            if (wasteType.isHeaterWasting()) {
-                counts.merge("창문 닫기", 1, Integer::sum);
-            }
-            if (wasteType.isOtherWasting()) {
-                counts.merge("기타 절약", 1, Integer::sum);
-                if (!wasteType.isLightWasting() && !wasteType.isAcWasting() && !wasteType.isHeaterWasting()) {
-                    counts.merge("대기전력 절감", 1, Integer::sum);
-                }
             }
         }
 

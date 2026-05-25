@@ -4,10 +4,10 @@ import { Pencil } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton } from 'src/shared/ui/eco'
 import { SSloadingState } from 'src/shared/components/motion'
+import { getDepthLabel } from 'src/features/admin/buildings/locationTreeUtils'
 import { getDayLabel } from 'src/features/admin/buildings/operatingScheduleUtils'
 import {
     formatScheduleCell,
-    getBuildingFilterOptions,
     getJavaDayOfWeek,
     WEEKDAY_ORDER,
     type ScheduleMatrixRow,
@@ -182,29 +182,35 @@ export function ScheduleMatrixFilters({
     rows,
     allRows,
     buildingFilter,
+    middleFilter,
+    buildingOptions,
+    middleOptions,
     searchQuery,
     onBuildingFilterChange,
+    onMiddleFilterChange,
     onSearchQueryChange,
 }: {
     rows: ScheduleMatrixRow[]
     allRows: ScheduleMatrixRow[]
     buildingFilter: number | 'all'
+    middleFilter: number | 'all'
+    buildingOptions: { id: number; name: string }[]
+    middleOptions: { id: number; name: string }[]
     searchQuery: string
     onBuildingFilterChange: (value: number | 'all') => void
+    onMiddleFilterChange: (value: number | 'all') => void
     onSearchQueryChange: (value: string) => void
 }) {
     const { t } = useTranslation('adminSchedules')
-    const buildingOptions = useMemo(
-        () => getBuildingFilterOptions(allRows),
-        [allRows],
-    )
+    const depth1Label = getDepthLabel(1)
+    const depth2Label = getDepthLabel(2)
 
     return (
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
                 <label className="flex flex-col gap-1">
                     <span className="text-on-surface-variant text-xs font-semibold">
-                        {t('filters.building')}
+                        {depth1Label}
                     </span>
                     <select
                         value={buildingFilter === 'all' ? 'all' : String(buildingFilter)}
@@ -216,8 +222,35 @@ export function ScheduleMatrixFilters({
                         }}
                         className="border-outline-variant bg-surface h-10 min-w-[180px] rounded-lg border px-3 text-sm"
                     >
-                        <option value="all">{t('filters.allBuildings')}</option>
+                        <option value="all">
+                            {t('filters.allDepth', { depth: depth1Label })}
+                        </option>
                         {buildingOptions.map((option) => (
+                            <option key={option.id} value={option.id}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label className="flex flex-col gap-1">
+                    <span className="text-on-surface-variant text-xs font-semibold">
+                        {depth2Label}
+                    </span>
+                    <select
+                        value={middleFilter === 'all' ? 'all' : String(middleFilter)}
+                        disabled={buildingFilter === 'all'}
+                        onChange={(e) => {
+                            const value = e.target.value
+                            onMiddleFilterChange(
+                                value === 'all' ? 'all' : Number(value),
+                            )
+                        }}
+                        className="border-outline-variant bg-surface h-10 min-w-[180px] rounded-lg border px-3 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                        <option value="all">
+                            {t('filters.allDepth', { depth: depth2Label })}
+                        </option>
+                        {middleOptions.map((option) => (
                             <option key={option.id} value={option.id}>
                                 {option.name}
                             </option>

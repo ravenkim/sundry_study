@@ -56,8 +56,8 @@
             "percent": "{{value}}%"
         },
         "wasteByCategory": {
-            "title": "절약 유형별 분포",
-            "subtitle": "주요 에너지 낭비 요소 해결 현황"
+            "title": "AI 판별 유형별 분포",
+            "subtitle": "조명·에어컨 낭비 제보 현황"
         },
         "monthly": {
             "title": "월별 데이터 요약",

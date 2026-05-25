@@ -4,8 +4,7 @@
     "affiliationMissing": "Affiliation could not be resolved. Check your admin account settings.",
     "linkToBuildings": "Go to Location Management",
     "filters": {
-        "building": "Building",
-        "allBuildings": "All buildings",
+        "allDepth": "All {{depth}}",
         "search": "Search",
         "searchPlaceholder": "Search room or path",
         "resultCount": "{{shown}} / {{total}} items"

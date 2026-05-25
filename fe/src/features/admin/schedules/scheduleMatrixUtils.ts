@@ -13,6 +13,9 @@ export type ScheduleMatrixRow = {
     pathLabel: string
     buildingId: number
     buildingName: string
+    /** depth-2 ancestor id (direct child of building), or leaf id when LEAF at depth 2 */
+    middleId: number
+    middleName: string
     schedules: OperatingScheduleItem[]
 }
 
@@ -54,11 +57,15 @@ export function collectScheduleMatrixRows(
         trail: string[],
         buildingId: number | null,
         buildingName: string | null,
+        middleId: number | null,
+        middleName: string | null,
     ) {
         for (const node of nodes) {
             const nextTrail = [...trail, node.name]
             const rootBuildingId = trail.length === 0 ? node.id : buildingId!
             const rootBuildingName = trail.length === 0 ? node.name : buildingName!
+            const depth2Id = trail.length === 1 ? node.id : middleId
+            const depth2Name = trail.length === 1 ? node.name : middleName
 
             if (node.nodeKind === 'LEAF') {
                 rows.push({
@@ -68,16 +75,25 @@ export function collectScheduleMatrixRows(
                     pathLabel: nextTrail.join(' › '),
                     buildingId: rootBuildingId,
                     buildingName: rootBuildingName,
+                    middleId: depth2Id ?? node.id,
+                    middleName: depth2Name ?? node.name,
                     schedules: normalizeOperatingSchedules(node.operatingSchedules),
                 })
                 continue
             }
 
-            walk(node.children ?? [], nextTrail, rootBuildingId, rootBuildingName)
+            walk(
+                node.children ?? [],
+                nextTrail,
+                rootBuildingId,
+                rootBuildingName,
+                depth2Id,
+                depth2Name,
+            )
         }
     }
 
-    walk(tree, [], null, null)
+    walk(tree, [], null, null, null, null)
 
     return rows.sort((a, b) => {
         const buildingCompare = a.buildingName.localeCompare(b.buildingName, 'ko')

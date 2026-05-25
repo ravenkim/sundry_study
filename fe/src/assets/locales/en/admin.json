@@ -56,8 +56,8 @@
             "percent": "{{value}}%"
         },
         "wasteByCategory": {
-            "title": "Savings by category",
-            "subtitle": "Status of major energy waste resolution"
+            "title": "AI detection by category",
+            "subtitle": "Light and AC waste reports"
         },
         "monthly": {
             "title": "Monthly summary",

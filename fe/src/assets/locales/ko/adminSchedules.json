@@ -4,8 +4,7 @@
     "affiliationMissing": "소속 정보를 확인할 수 없습니다. 관리자 계정 설정을 확인해 주세요.",
     "linkToBuildings": "장소 관리로 이동",
     "filters": {
-        "building": "건물",
-        "allBuildings": "전체 건물",
+        "allDepth": "전체 {{depth}}",
         "search": "검색",
         "searchPlaceholder": "강의실·경로 검색",
         "resultCount": "{{shown}} / {{total}}개 항목"

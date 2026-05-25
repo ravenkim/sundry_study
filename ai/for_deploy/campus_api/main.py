@@ -54,6 +54,11 @@ def resize_image_if_needed(image_path: str, max_dim: int = 1920):
 # ==========================================
 def build_analysis_prompt(metadata: dict, has_ac_crop: bool) -> str:
     metadata_json = json.dumps(metadata, ensure_ascii=False, indent=2)
+    electricity_rate = metadata.get("electricityRateKrw", ELECTRICITY_RATE_KRW)
+    if isinstance(electricity_rate, (int, float)):
+        electricity_rate = int(round(electricity_rate))
+    else:
+        electricity_rate = ELECTRICITY_RATE_KRW
 
     # [수정] 에어컨 판별을 확실하게 하던 이전 시각 지시사항(Vision Instructions) 복구
     if has_ac_crop:
@@ -80,7 +85,7 @@ Energy constants:
 - Fluorescent: {FLUORESCENT_WATTS}W each, count = fluorescentCount
 - LED: {LED_WATTS}W each, count = ledCount
 - Air conditioner: {AC_WATTS}W each, count = acCount
-- Electricity rate: {ELECTRICITY_RATE_KRW} KRW/kWh
+- Electricity rate: {electricity_rate} KRW/kWh
 - Max off-time cap: {OFF_TIME_CAP_MINUTES} minutes when schedule is closed/after hours/unknown
 
 Vision Analysis Tasks:
@@ -92,7 +97,7 @@ Calculation & Logic Tasks:
 2. If waste is confirmed during off-hours (person-free classroom with ON devices that should be OFF):
    - Compute off_time_minutes until power_off (cap {OFF_TIME_CAP_MINUTES} min on closed/after-hours)
    - Sum kWh only for ON resources × their counts × off_time_hours
-   - expected = round(total_kwh × {ELECTRICITY_RATE_KRW}) as Korean won string, e.g. "494원"
+   - expected = round(total_kwh × {electricity_rate}) as Korean won string, e.g. "494원"
 3. If no waste: result "PASS", expected "0원"
 
 Respond STRICTLY in this JSON format only:

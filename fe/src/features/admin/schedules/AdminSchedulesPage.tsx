@@ -20,6 +20,10 @@ export function AdminSchedulesPage() {
         filteredRows,
         buildingFilter,
         setBuildingFilter,
+        middleFilter,
+        setMiddleFilter,
+        buildingOptions,
+        middleOptions,
         searchQuery,
         setSearchQuery,
         editTarget,
@@ -69,8 +73,12 @@ export function AdminSchedulesPage() {
                         rows={filteredRows}
                         allRows={allRows}
                         buildingFilter={buildingFilter}
+                        middleFilter={middleFilter}
+                        buildingOptions={buildingOptions}
+                        middleOptions={middleOptions}
                         searchQuery={searchQuery}
                         onBuildingFilterChange={setBuildingFilter}
+                        onMiddleFilterChange={setMiddleFilter}
                         onSearchQueryChange={setSearchQuery}
                     />
 

@@ -12,7 +12,8 @@ public record AiAnalyzeMetadata(
         int acCount,
         int fluorescentCount,
         int ledCount,
-        List<OperatingScheduleItem> operatingSchedules
+        List<OperatingScheduleItem> operatingSchedules,
+        Integer electricityRateKrw
 ) {
     public record OperatingScheduleItem(
             int dayOfWeek,

@@ -11,6 +11,12 @@ app:
     url: ${FRONTEND_URL:http://localhost:5173}
   affiliation:
     default-name: ${DEFAULT_AFFILIATION_NAME:삼육대학교}
+  kepco:
+    # 전력데이터개방포털(bigdata.kepco.co.kr) API 인증키 — 미설정 시 EnergyConstants 기본 단가 사용
+    api-key: ${KEPCO_API_KEY:}
+    contract-type-code: ${KEPCO_CONTRACT_TYPE_CODE:400}
+    contract-type-name: ${KEPCO_CONTRACT_TYPE_NAME:교육용}
+    sync-cron: ${KEPCO_SYNC_CRON:0 0 3 5 * *}
 
 jwt:
   secret: ${JWT_SECRET:ecoreport-dev-jwt-secret-key-min-32-chars!!}

@@ -12,8 +12,10 @@ import {
     toApiOperatingSchedules,
     type OperatingScheduleItem,
 } from 'src/features/admin/buildings/operatingScheduleUtils'
+import { getMiddleNodes } from 'src/features/admin/buildings/locationTreeUtils'
 import {
     collectScheduleMatrixRows,
+    getBuildingFilterOptions,
     type ScheduleMatrixRow,
 } from 'src/features/admin/schedules/scheduleMatrixUtils'
 
@@ -29,8 +31,14 @@ export function useScheduleMatrix() {
     const [tree, setTree] = useState<AdminLocationNode[]>([])
     const [loading, setLoading] = useState(true)
     const [submitting, setSubmitting] = useState(false)
-    const [buildingFilter, setBuildingFilter] = useState<number | 'all'>('all')
+    const [buildingFilter, setBuildingFilterState] = useState<number | 'all'>('all')
+    const [middleFilter, setMiddleFilter] = useState<number | 'all'>('all')
     const [searchQuery, setSearchQuery] = useState('')
+
+    const setBuildingFilter = useCallback((value: number | 'all') => {
+        setBuildingFilterState(value)
+        setMiddleFilter('all')
+    }, [])
     const [editTarget, setEditTarget] = useState<ScheduleEditTarget>(null)
 
     const loadAffiliation = useCallback(() => {
@@ -83,20 +91,37 @@ export function useScheduleMatrix() {
 
     const allRows = useMemo(() => collectScheduleMatrixRows(tree), [tree])
 
+    const buildingOptions = useMemo(
+        () => getBuildingFilterOptions(allRows),
+        [allRows],
+    )
+
+    const middleOptions = useMemo(() => {
+        if (buildingFilter === 'all') return []
+        return getMiddleNodes(tree, buildingFilter).map((node) => ({
+            id: node.id,
+            name: node.name,
+        }))
+    }, [tree, buildingFilter])
+
     const filteredRows = useMemo(() => {
         const query = searchQuery.trim().toLowerCase()
         return allRows.filter((row) => {
             if (buildingFilter !== 'all' && row.buildingId !== buildingFilter) {
                 return false
             }
+            if (middleFilter !== 'all' && row.middleId !== middleFilter) {
+                return false
+            }
             if (!query) return true
             return (
                 row.leafName.toLowerCase().includes(query) ||
                 row.pathLabel.toLowerCase().includes(query) ||
-                row.buildingName.toLowerCase().includes(query)
+                row.buildingName.toLowerCase().includes(query) ||
+                row.middleName.toLowerCase().includes(query)
             )
         })
-    }, [allRows, buildingFilter, searchQuery])
+    }, [allRows, buildingFilter, middleFilter, searchQuery])
 
     const saveSchedules = useCallback(
         async (row: ScheduleMatrixRow, schedules: OperatingScheduleItem[]) => {
@@ -133,6 +158,10 @@ export function useScheduleMatrix() {
         filteredRows,
         buildingFilter,
         setBuildingFilter,
+        middleFilter,
+        setMiddleFilter,
+        buildingOptions,
+        middleOptions,
         searchQuery,
         setSearchQuery,
         editTarget,

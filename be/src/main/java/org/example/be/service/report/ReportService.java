@@ -19,6 +19,7 @@ import org.example.be.service.location.LocationNodeService;
 import org.example.be.service.savings.SavingsCalculationService;
 import org.example.be.service.savings.ExpectedKrwParser;
 import org.example.be.service.savings.ExpectedKwhParser;
+import org.example.be.service.tariff.ElectricityTariffService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +48,7 @@ public class ReportService {
     private final MemberPointRepository memberPointRepository;
     private final LocationNodeService locationNodeService;
     private final SavingsCalculationService savingsCalculationService;
+    private final ElectricityTariffService electricityTariffService;
     private final ObjectMapper objectMapper;
 
     private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
@@ -190,7 +192,8 @@ public class ReportService {
                 locationNode.getAcCount(),
                 locationNode.getFluorescentCount(),
                 locationNode.getLedCount(),
-                items
+                items,
+                electricityTariffService.getEffectiveUnitCostKrwInt()
         );
     }
 
@@ -214,7 +217,7 @@ public class ReportService {
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("file", file.getResource());
-            body.add("metadata", objectMapper.writeValueAsString(metadata));
+            body.add("metadata_str", objectMapper.writeValueAsString(metadata));
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 

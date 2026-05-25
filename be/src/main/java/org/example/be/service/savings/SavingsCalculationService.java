@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import org.example.be.domain.model.LocationOperatingSchedule;
 import org.example.be.domain.model.WasteType;
+import org.example.be.service.tariff.ElectricityTariffService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +18,11 @@ import java.util.List;
 @Service
 public class SavingsCalculationService {
 
+    private final ElectricityTariffService electricityTariffService;
+
+    public SavingsCalculationService(ElectricityTariffService electricityTariffService) {
+        this.electricityTariffService = electricityTariffService;
+    }
     public SavingsResult calculate(
             LocalDateTime reportAt,
             List<LocationOperatingSchedule> schedules,
@@ -40,7 +46,7 @@ public class SavingsCalculationService {
 
         totalKwh = totalKwh.setScale(4, RoundingMode.HALF_UP);
         int savingsKrw = totalKwh
-                .multiply(BigDecimal.valueOf(EnergyConstants.ELECTRICITY_RATE_KRW))
+                .multiply(electricityTariffService.getEffectiveUnitCostKrw())
                 .setScale(0, RoundingMode.HALF_UP)
                 .intValue();
         int estimatedPoint = (int) Math.round(savingsKrw * EnergyConstants.POINT_RATE);

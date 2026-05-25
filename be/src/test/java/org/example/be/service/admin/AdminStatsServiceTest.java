@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,6 +55,29 @@ class AdminStatsServiceTest {
                 .isEqualTo("2026-05-22T12:00");
     }
 
+    @Test
+    void getStats_countsOnlyLightAndAcWasteCategories() {
+        List<Report> reports = List.of(
+                lightReport(leafNode(101L, "303호", rootNode(1L, "공학관 A동")), "공학관 A동 > 303호",
+                        LocalDateTime.of(2026, 5, 20, 10, 0)),
+                acReport(leafNode(102L, "201호", rootNode(1L, "공학관 A동")), "공학관 A동 > 201호",
+                        LocalDateTime.of(2026, 5, 21, 11, 0)),
+                combinedReport(leafNode(103L, "105호", rootNode(1L, "공학관 A동")), "공학관 A동 > 105호",
+                        LocalDateTime.of(2026, 5, 22, 12, 0))
+        );
+
+        when(reportRepository.findAllByOrderByCreatedAtDesc()).thenReturn(reports);
+
+        AdminResponse.Stats stats = adminStatsService.getStats(null, null);
+
+        assertThat(stats.getWasteByCategory())
+                .extracting(AdminResponse.CategoryCount::getName, AdminResponse.CategoryCount::getCount)
+                .containsExactly(
+                        tuple("조명 소등", 2),
+                        tuple("냉난방 차단", 2)
+                );
+    }
+
     private static LocationNode rootNode(Long seq, String name) {
         LocationNode node = new LocationNode();
         node.setSeq(seq);
@@ -70,10 +94,27 @@ class AdminStatsServiceTest {
     }
 
     private static Report lightReport(LocationNode locationNode, String locationDetail, LocalDateTime createdAt) {
+        return wasteReport(locationNode, locationDetail, createdAt, new WasteType(true, false, false, false));
+    }
+
+    private static Report acReport(LocationNode locationNode, String locationDetail, LocalDateTime createdAt) {
+        return wasteReport(locationNode, locationDetail, createdAt, new WasteType(false, true, false, false));
+    }
+
+    private static Report combinedReport(LocationNode locationNode, String locationDetail, LocalDateTime createdAt) {
+        return wasteReport(locationNode, locationDetail, createdAt, new WasteType(true, true, false, false));
+    }
+
+    private static Report wasteReport(
+            LocationNode locationNode,
+            String locationDetail,
+            LocalDateTime createdAt,
+            WasteType wasteType
+    ) {
         Report report = new Report();
         report.setLocationNode(locationNode);
         report.setLocationDetail(locationDetail);
-        report.setWasteType(new WasteType(true, false, false, false));
+        report.setWasteType(wasteType);
         report.setStatus(ReportStatus.APPROVED);
         report.setCreatedAt(createdAt);
         return report;
