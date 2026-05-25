@@ -123,6 +123,7 @@ flowchart LR
 |------|------|
 
 | `V1__baseline.sql` | affiliation, location_node, member, member_point, report (현재 스키마) |
+| `V9__electricity_tariff.sql` | 한전 API 월별 전기 단가 (`electricity_tariff_db`) |
 
 | `R__seed_dev.sql` | 개발 시드 (소속·장소 트리·admin/user 계정) |
 
@@ -153,6 +154,7 @@ flowchart LR
 | `member_point_db` | 회원 포인트 (1:1) |
 
 | `report_db` | 제보 (`location_seq` FK — LEAF 노드) |
+| `electricity_tariff_db` | 한전 OPEN API 월별 평균판매단가 (교육용 등) |
 
 
 

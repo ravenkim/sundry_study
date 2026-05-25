@@ -151,7 +151,7 @@ ac_status=ON OR light_status=ON (소등 시간) → WASTE_DETECTED + expected �
 **절약량 계산 (BE 참고용)** — `SavingsCalculationService` (제보 플로우 미사용):
 - Phase 2·검증용으로 유지
 - 입력: `report.createdAt`, LEAF 자원 수량, `location_operating_schedule_db`
-- 기본 W: 형광등 40, LED 20, 에어컨 1500 / 130원/kWh / 포인트 = 금액 × 0.18
+- 기본 W: 형광등 40, LED 20, 에어컨 1500 / **전기 단가: DB `electricity_tariff_db` 최신값 또는 fallback 130원/kWh** ([전기_단가_동기화.md](./전기_단가_동기화.md)) / 포인트 = 금액 × 0.18
 
 **절약량 계산 (BE, Phase 2 목표)** — `LocationResource` + `ResourceType`:
 - `location_resources`: 낭비로 판별된 자원 목록 (ResourceType + quantity + custom_value)

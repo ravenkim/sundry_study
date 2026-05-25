@@ -55,6 +55,7 @@ cd be
 - **소속·역할**: `Affiliation` + Flyway 시드, `GET /api/affiliations`, `LocationNode` 트리, `UserType.ADMIN` 시드, 회원가입·FE 소속 선택 UI ✅
 - **장소 모델**: `LocationNode` + LEAF **자원 수량** + **`location_operating_schedule_db`(요일별 on/off)** ✅
 - **AI 코드**: monorepo `ai/` — Cloud Run `/analyze` (이미지+metadata → ON/OFF + `expected` 원화). BE는 `expected` 파싱·포인트 저장
+- **전기 단가**: 한전 OPEN API 월별 `unitCost` → `electricity_tariff_db` (`ElectricityTariffService`, `KEPCO_API_KEY`). 미설정 시 130원/kWh fallback. 상세: `docs/기획/.../전기_단가_동기화.md` ✅
 - 미구현: GCS·`aiResult` JSON DB 저장·API 상세 반환·admin reports/dashboard API·ResourceType (Phase 2). 제보 포인트는 AI 판별 직후 동기 적립 ✅
 - DB·OAuth·JWT·VITE_*: 프로젝트 루트 `.env` 하나만 사용 (`cp .env.example .env`). Git 제외
 - DB 연결: `MYSQL_*` + `SPRING_DATASOURCE_*` (동일 user/password). `DB_URL`/`DB_USERNAME`/`DB_PASSWORD`는 사용하지 않음
