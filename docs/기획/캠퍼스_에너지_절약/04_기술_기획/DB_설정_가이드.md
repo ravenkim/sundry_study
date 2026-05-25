@@ -306,6 +306,7 @@ bash deploy.sh
 | SchemaManagementException | DB ≠ 엔티티 | Flyway 마이그레이션·엔티티 일치 확인 |
 
 | Flyway validate failed | `flyway_schema_history` 불일치 | `docker compose down -v` 후 재배포 |
+| `Detected failed migration to version N` | 이전 배포에서 VN migrate 중단 (`success=0`) | `docker compose down -v && bash deploy.sh` (또는 최신 `deploy.sh`는 실패 이력 자동 감지) |
 
 | 빈 DB에 테이블 없음 | BE 미기동 | `docker compose up -d be` — Flyway가 테이블 생성 |
 

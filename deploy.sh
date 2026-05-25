@@ -102,6 +102,43 @@ maybe_reset_legacy_db() {
   fi
 }
 
+maybe_reset_on_flyway_failure() {
+  load_env
+
+  if [[ -z "${MYSQL_USER:-}" || -z "${MYSQL_PASSWORD:-}" ]]; then
+    return 0
+  fi
+
+  if ! docker ps --format '{{.Names}}' | grep -q '^ecoreport-mysql$'; then
+    return 0
+  fi
+
+  local flyway_exists failed_count failed_rows
+  flyway_exists="$(mysql_exec \
+    "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${MYSQL_DATABASE:-energy_db}' AND table_name='flyway_schema_history';" \
+    2>/dev/null || echo "0")"
+  if [[ "${flyway_exists}" -eq 0 ]]; then
+    return 0
+  fi
+
+  failed_count="$(mysql_exec \
+    "SELECT COUNT(*) FROM flyway_schema_history WHERE success = 0;" \
+    2>/dev/null || echo "0")"
+  if [[ "${failed_count}" -eq 0 ]]; then
+    return 0
+  fi
+
+  failed_rows="$(mysql_exec \
+    "SELECT CONCAT('v', version, ' (', description, ')') FROM flyway_schema_history WHERE success = 0 ORDER BY installed_rank;" \
+    2>/dev/null || true)"
+  log_db "Flyway 실패 마이그레이션 ${failed_count}건 감지 — MySQL 볼륨 초기화 후 재적용"
+  while IFS= read -r row; do
+    [[ -n "${row}" ]] && log_db "  ${row}"
+  done <<< "${failed_rows}"
+  docker compose down -v 2>/dev/null || true
+  log_db "  mysql_data 볼륨 삭제 완료 (반쯤 적용된 스키마·이력 제거)"
+}
+
 db_credentials_hash() {
   load_env
   printf '%s\0%s\0%s\0%s' \
@@ -333,6 +370,7 @@ main() {
   log_db_migration_files
   ensure_mysql_for_db_check
   maybe_reset_legacy_db
+  maybe_reset_on_flyway_failure
   maybe_reset_db_on_credential_change
   maybe_reset_db_on_schema_change
 
