@@ -186,9 +186,13 @@ export const UserPointShop = () => {
                         return (
                             <article
                                 key={item.rewardId}
-                                onClick={() =>
-                                    canAfford && setSelectedReward(item)
-                                }
+                                onClick={() => {
+                                    if (canAfford) {
+                                        setSelectedReward(item)
+                                    } else {
+                                        toast.error('포인트가 부족합니다.')
+                                    }
+                                }}
                                 className={cn(
                                     'group border-outline-variant bg-surface-container-lowest flex flex-col overflow-hidden rounded-2xl border transition-all active:scale-95',
                                     canAfford

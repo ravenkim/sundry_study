@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
+import { MascotEmptyState } from 'src/shared/components/mascort'
 import { EcoBadge, EcoButton } from 'src/shared/ui/eco'
 import { getMyReports } from 'src/globals/api/reportApi'
 import type { PaginatedReports, ReportStatus } from 'src/globals/api/types'
@@ -67,9 +68,19 @@ export const UserReportsList = () => {
                     불러오는 중...
                 </p>
             ) : !data || data.content.length === 0 ? (
-                <p className="text-on-surface-variant py-12 text-center text-sm">
-                    제보 내역이 없습니다.
-                </p>
+                <MascotEmptyState
+                    emotion="question"
+                    title={
+                        filter === 'ALL'
+                            ? '제보 내역이 없습니다'
+                            : `${FILTERS.find((f) => f.value === filter)?.label ?? ''} 제보가 없습니다`
+                    }
+                    description={
+                        filter === 'ALL'
+                            ? '빈 강의실을 발견하면 첫 제보를 남겨 보세요.'
+                            : '다른 필터를 선택하거나 새 제보를 등록해 보세요.'
+                    }
+                />
             ) : (
                 <div className="flex flex-col gap-3">
                     {data.content.map((item) => (

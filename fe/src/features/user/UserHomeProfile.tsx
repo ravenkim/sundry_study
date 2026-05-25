@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
+import { MascotImage } from 'src/shared/components/mascort'
 import { ParticipatedBuildingSavingsCard } from './ParticipatedBuildingSavings'
 import { usePoints } from 'src/features/points/PointsContext'
 import { useAuth } from 'src/features/auth/AuthContext'
@@ -93,8 +94,15 @@ export const UserHome = () => {
                             불러오는 중...
                         </div>
                     ) : recentReports.length === 0 ? (
-                        <div className="bg-surface-container-lowest text-on-surface-variant p-8 text-center text-sm">
-                            아직 제보 내역이 없습니다.
+                        <div className="bg-surface-container-lowest flex flex-col items-center gap-3 p-8 text-center">
+                            <MascotImage
+                                emotion="question"
+                                size="md"
+                                decorative
+                            />
+                            <p className="text-on-surface-variant text-sm">
+                                아직 제보 내역이 없습니다.
+                            </p>
                         </div>
                     ) : (
                         recentReports.map((item) => (
@@ -136,7 +144,6 @@ export const UserHome = () => {
                     )}
                 </div>
             </div>
-            ``
         </div>
     )
 }
