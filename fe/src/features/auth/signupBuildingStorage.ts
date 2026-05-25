@@ -1,5 +1,3 @@
-import { assignAffiliation } from 'src/globals/api/memberProfileApi'
-
 const PENDING_AFFILIATION_KEY = 'ecoreport_pending_affiliation_id'
 const PENDING_AFFILIATION_NAME_KEY = 'ecoreport_pending_affiliation_name'
 const PENDING_BUILDING_KEY = 'ecoreport_pending_building_id'
@@ -69,26 +67,4 @@ export function clearPendingAffiliation(): void {
 /** @deprecated use clearPendingAffiliation */
 export function clearPendingBuildingId(): void {
     clearPendingAffiliation()
-}
-
-export async function assignAffiliationToMember(
-    affiliationId: number,
-): Promise<void> {
-    await assignAffiliation({ affiliationId })
-}
-
-export async function applyPendingAffiliationIfNeeded(): Promise<void> {
-    const pending = getPendingAffiliation()
-    if (!pending) return
-
-    try {
-        await assignAffiliationToMember(pending.affiliationId)
-    } finally {
-        clearPendingAffiliation()
-    }
-}
-
-/** @deprecated use applyPendingAffiliationIfNeeded */
-export async function applyPendingBuildingIfNeeded(): Promise<void> {
-    await applyPendingAffiliationIfNeeded()
 }

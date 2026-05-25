@@ -4,6 +4,7 @@ const USER_KEY = 'ecoreport_user'
 export interface StoredUser {
     userName: string
     email?: string
+    affiliationId?: number
     affiliationName?: string
     buildingId?: number
     buildingName?: string

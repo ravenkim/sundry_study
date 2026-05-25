@@ -3,23 +3,28 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router'
 import { ArrowLeft, CheckCircle2, Mail, Phone } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { getAffiliations } from 'src/globals/api/affiliationsApi'
-import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
+import { assignAffiliation } from 'src/globals/api/memberProfileApi'
 import type { Affiliation } from 'src/globals/api/types'
+import { useAuth } from 'src/features/auth/AuthContext'
+import { getAppHomePath, getStoredUser } from 'src/features/auth/authStorage'
 import { setPendingAffiliation } from 'src/features/auth/signupBuildingStorage'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 
-type SignupIntent = 'signup' | 'oauth'
+type SignupIntent = 'signup' | 'oauth-complete'
 
 export function AffiliationSelection() {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
+    const { refreshUser } = useAuth()
     const intent = (searchParams.get('intent') as SignupIntent) || 'signup'
+    const isOAuthComplete = intent === 'oauth-complete'
 
     const [affiliations, setAffiliations] = useState<Affiliation[]>([])
     const [affiliationId, setAffiliationId] = useState<number | ''>('')
     const [loading, setLoading] = useState(true)
+    const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
         getAffiliations()
@@ -43,7 +48,7 @@ export function AffiliationSelection() {
         [affiliations],
     )
 
-    const handleContinue = (e: FormEvent) => {
+    const handleContinue = async (e: FormEvent) => {
         e.preventDefault()
 
         if (!affiliationId) {
@@ -51,36 +56,51 @@ export function AffiliationSelection() {
             return
         }
 
-        setPendingAffiliation(
-            Number(affiliationId),
-            selectedAffiliation?.name,
-        )
-
-        if (intent === 'oauth') {
+        if (isOAuthComplete) {
+            setSubmitting(true)
             try {
-                window.location.href = getOAuthAuthorizationUrl('google')
+                const profile = await assignAffiliation({
+                    affiliationId: Number(affiliationId),
+                })
+                refreshUser({
+                    affiliationId: profile.affiliationId,
+                    affiliationName: profile.affiliationName,
+                    userType: profile.userType,
+                    buildingId: profile.buildingId,
+                    buildingName: profile.buildingName,
+                })
+                toast.success('소속이 등록되었습니다.')
+                navigate(getAppHomePath(getStoredUser()), { replace: true })
             } catch {
-                toast.error('API 서버 주소(VITE_API_HOST)가 설정되지 않았습니다.')
+                toast.error('소속 설정에 실패했습니다. 다시 시도해 주세요.')
+            } finally {
+                setSubmitting(false)
             }
             return
         }
 
+        setPendingAffiliation(
+            Number(affiliationId),
+            selectedAffiliation?.name,
+        )
         navigate('/signup')
     }
 
-    const title =
-        intent === 'oauth' ? 'Google 로그인' : '회원가입'
-    const subtitle =
-        intent === 'oauth'
-            ? 'Google 계정으로 로그인하기 전, 소속을 선택해 주세요.'
-            : '에코리포트 이용을 위해 소속을 선택해 주세요.'
+    const title = isOAuthComplete ? '소속 등록' : '회원가입'
+    const subtitle = isOAuthComplete
+        ? '로그인 후 소속을 선택해 주세요.'
+        : '에코리포트 이용을 위해 소속을 선택해 주세요.'
 
     return (
         <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
             <header className="border-outline-variant bg-surface sticky top-0 z-10 flex h-14 items-center justify-between border-b px-5">
-                <Link to="/login" className="text-on-surface-variant -ml-2 p-2">
-                    <ArrowLeft className="h-6 w-6" />
-                </Link>
+                {!isOAuthComplete ? (
+                    <Link to="/login" className="text-on-surface-variant -ml-2 p-2">
+                        <ArrowLeft className="h-6 w-6" />
+                    </Link>
+                ) : (
+                    <div className="w-10" />
+                )}
                 <h1 className="text-primary text-lg font-bold">{title}</h1>
                 <div className="w-10" />
             </header>
@@ -133,9 +153,13 @@ export function AffiliationSelection() {
                     className="w-full py-4 text-lg font-bold"
                     type="submit"
                     form="affiliation-form"
-                    disabled={loading}
+                    disabled={loading || submitting}
                 >
-                    {intent === 'oauth' ? 'Google 계정으로 계속' : '다음'}
+                    {submitting
+                        ? '저장 중...'
+                        : isOAuthComplete
+                          ? '소속 등록하고 시작하기'
+                          : '다음'}
                 </EcoButton>
             </div>
         </div>

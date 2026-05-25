@@ -12,6 +12,7 @@ import {
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 import { GoogleSignInButton } from 'src/features/auth/GoogleSignInButton'
+import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
 import { SignupTermsAgreement } from 'src/features/auth/SignupTermsAgreement'
 import {
     getPendingAffiliation,
@@ -51,7 +52,11 @@ export const Login = () => {
     }, [searchParams])
 
     const startOAuth = () => {
-        navigate('/signup/affiliation?intent=oauth')
+        try {
+            window.location.href = getOAuthAuthorizationUrl('google')
+        } catch {
+            toast.error('API 서버 주소(VITE_API_HOST)가 설정되지 않았습니다.')
+        }
     }
 
     const handleSubmit = async (e: FormEvent) => {

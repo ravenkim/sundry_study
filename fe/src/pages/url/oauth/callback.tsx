@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { useAuth } from 'src/features/auth/AuthContext'
-import { applyPendingAffiliationIfNeeded } from 'src/features/auth/signupBuildingStorage'
+import { getMyProfile } from 'src/globals/api/memberProfileApi'
 import { getAppHomePath, setAccessToken, getStoredUser } from 'src/features/auth/authStorage'
 
 export default function OAuthCallback() {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
-    const { completeOAuthLogin } = useAuth()
+    const { completeOAuthLogin, refreshUser, markProfileReady } = useAuth()
 
     useEffect(() => {
         const token = searchParams.get('token')
@@ -25,16 +25,33 @@ export default function OAuthCallback() {
 
         void (async () => {
             try {
-                await applyPendingAffiliationIfNeeded()
                 completeOAuthLogin(token, userName, email)
+                const profile = await getMyProfile()
+
+                if (!profile.affiliationId) {
+                    markProfileReady()
+                    toast.success('로그인되었습니다.')
+                    navigate('/signup/affiliation?intent=oauth-complete', {
+                        replace: true,
+                    })
+                    return
+                }
+
+                refreshUser({
+                    affiliationId: profile.affiliationId,
+                    affiliationName: profile.affiliationName,
+                    userType: profile.userType,
+                    buildingId: profile.buildingId,
+                    buildingName: profile.buildingName,
+                })
                 toast.success('로그인되었습니다.')
                 navigate(getAppHomePath(getStoredUser()), { replace: true })
             } catch {
-                toast.error('소속 설정에 실패했습니다. 다시 시도해 주세요.')
-                navigate('/signup/affiliation?intent=oauth', { replace: true })
+                toast.error('로그인 처리에 실패했습니다. 다시 시도해 주세요.')
+                navigate('/login', { replace: true })
             }
         })()
-    }, [searchParams, completeOAuthLogin, navigate])
+    }, [searchParams, completeOAuthLogin, refreshUser, markProfileReady, navigate])
 
     return (
         <div className="bg-background text-on-surface-variant flex min-h-screen items-center justify-center text-sm">
