@@ -51,6 +51,7 @@ public class ReportService {
     private final SavingsCalculationService savingsCalculationService;
     private final ElectricityTariffService electricityTariffService;
     private final ObjectMapper objectMapper;
+    private final RestTemplate restTemplate;
 
     @Value("${app.ai.api-url}")
     private String aiApiUrl;
@@ -233,7 +234,6 @@ public class ReportService {
 
     private AiAnalysisResponse callAiApi(MultipartFile file, AiAnalyzeMetadata metadata) {
         try {
-            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 

@@ -2,17 +2,23 @@ import os
 import cv2
 import json
 import uuid
+import logging
+import threading
+from contextlib import asynccontextmanager
+
 import vertexai
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
 from vertexai.generative_models import GenerativeModel, Part, Image
 from ultralytics import YOLO
 
+logger = logging.getLogger(__name__)
+
 # ==========================================
 # 1. Configuration & Constants
 # ==========================================
-GCP_PROJECT_ID = "duyuthon-496901"  # 본인의 정확한 프로젝트 ID
-LOCATION = "us-central1"
+GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID", "duyuthon-496901")
+LOCATION = os.environ.get("GCP_LOCATION", "us-central1")
 
 # Energy Constants
 FLUORESCENT_WATTS = 32
@@ -21,15 +27,73 @@ AC_WATTS = 1500
 ELECTRICITY_RATE_KRW = 120
 OFF_TIME_CAP_MINUTES = 60
 
-# Vertex AI 초기화
-vertexai.init(project=GCP_PROJECT_ID, location=LOCATION)
-gemini_model = GenerativeModel("gemini-2.5-flash")
+# Model state (loaded in background thread during lifespan)
+_models_lock = threading.Lock()
+_models_ready = False
+_models_error: str | None = None
+_base_model: YOLO | None = None
+_ac_model: YOLO | None = None
+_gemini_model: GenerativeModel | None = None
 
-app = FastAPI(title="Campus Energy Management API")
 
-# YOLO Models
-BASE_MODEL = YOLO("yolov8n.pt")
-AC_MODEL = YOLO("models/ac_best.pt")
+def _load_models() -> None:
+    global _models_ready, _models_error, _base_model, _ac_model, _gemini_model
+    try:
+        logger.info("Loading YOLO models and Vertex AI...")
+        vertexai.init(project=GCP_PROJECT_ID, location=LOCATION)
+        gemini = GenerativeModel("gemini-2.5-flash")
+        base = YOLO("yolov8n.pt")
+        ac = YOLO("models/ac_best.pt")
+        with _models_lock:
+            _gemini_model = gemini
+            _base_model = base
+            _ac_model = ac
+            _models_ready = True
+            _models_error = None
+        logger.info("Models loaded successfully")
+    except Exception as exc:
+        with _models_lock:
+            _models_error = str(exc)
+            _models_ready = False
+        logger.exception("Model loading failed")
+
+
+def _get_models() -> tuple[YOLO, YOLO, GenerativeModel]:
+    with _models_lock:
+        if not _models_ready or _base_model is None or _ac_model is None or _gemini_model is None:
+            if _models_error:
+                raise RuntimeError(f"모델 로딩 실패: {_models_error}")
+            raise RuntimeError("모델 로딩 중")
+        return _base_model, _ac_model, _gemini_model
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    thread = threading.Thread(target=_load_models, daemon=True, name="model-loader")
+    thread.start()
+    yield
+
+
+app = FastAPI(title="Campus Energy Management API", lifespan=lifespan)
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
+@app.get("/ready")
+async def ready():
+    with _models_lock:
+        if _models_ready:
+            return {"ready": True}
+        if _models_error:
+            return JSONResponse(
+                content={"ready": False, "error": _models_error},
+                status_code=503,
+            )
+    return JSONResponse(content={"ready": False, "message": "모델 로딩 중"}, status_code=503)
+
 
 # ==========================================
 # 2. Image Processing Helper
@@ -49,6 +113,7 @@ def resize_image_if_needed(image_path: str, max_dim: int = 1920):
         resized_img = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_AREA)
         cv2.imwrite(image_path, resized_img)
 
+
 # ==========================================
 # 3. Prompt & Gemini Analysis Function
 # ==========================================
@@ -60,7 +125,6 @@ def build_analysis_prompt(metadata: dict, has_ac_crop: bool) -> str:
     else:
         electricity_rate = ELECTRICITY_RATE_KRW
 
-    # [수정] 에어컨 판별을 확실하게 하던 이전 시각 지시사항(Vision Instructions) 복구
     if has_ac_crop:
         vision_instructions = """
 1. "ac_status": Look at the second image (cropped AC). If the louvers (blades) are open or the operation LED is on, return "ON". If they are completely closed and inactive, return "OFF".
@@ -113,7 +177,13 @@ Respond STRICTLY in this JSON format only:
 }}
 """
 
-def analyze_with_gemini(original_img_path: str, crop_img_path: str, metadata: dict):
+
+def analyze_with_gemini(
+    gemini_model: GenerativeModel,
+    original_img_path: str,
+    crop_img_path: str | None,
+    metadata: dict,
+):
     has_ac_crop = crop_img_path is not None
     prompt = build_analysis_prompt(metadata, has_ac_crop)
 
@@ -126,6 +196,7 @@ def analyze_with_gemini(original_img_path: str, crop_img_path: str, metadata: di
     response = gemini_model.generate_content(contents)
     return response.text
 
+
 # ==========================================
 # 4. Main API Endpoint
 # ==========================================
@@ -134,21 +205,26 @@ async def analyze_classroom_endpoint(
         file: UploadFile = File(...),
         metadata_str: str = Form(default="{}")
 ):
+    try:
+        base_model, ac_model, gemini_model = _get_models()
+    except RuntimeError as exc:
+        return JSONResponse(
+            content={"result": "ERROR", "message": str(exc)},
+            status_code=503,
+        )
+
     temp_filename = f"/tmp/{uuid.uuid4()}.jpg"
     temp_crop_path = None
 
     try:
         metadata = json.loads(metadata_str)
 
-        # 1. 이미지 임시 저장
         with open(temp_filename, "wb") as buffer:
             buffer.write(await file.read())
 
-        # 2. [추가] 이미지 크기 최적화 (비율 유지하며 최대 1920px로 리사이징)
         resize_image_if_needed(temp_filename, max_dim=1920)
 
-        # 3. 기본 객체 탐지 (사람, 의자, 책상)
-        base_results = BASE_MODEL(temp_filename, conf=0.3, classes=[0, 56, 60])[0]
+        base_results = base_model(temp_filename, conf=0.3, classes=[0, 56, 60])[0]
 
         detected_classes = base_results.boxes.cls.cpu().numpy()
         person_count = sum(detected_classes == 0)
@@ -165,15 +241,14 @@ async def analyze_classroom_endpoint(
         if person_count > 0:
             return JSONResponse(content={
                 "result": "PASS",
-                "message": f"강의실에 아직 사람이 있습니다. (정상 상태)",
+                "message": "강의실에 아직 사람이 있습니다. (정상 상태)",
                 "expected": "0원"
             })
 
-        # 4. 사람이 없다면 에어컨 탐지 시작
-        ac_results = AC_MODEL(temp_filename, conf=0.4)[0]
+        ac_results = ac_model(temp_filename, conf=0.4)[0]
 
         if len(ac_results.boxes) == 0:
-            ai_response = analyze_with_gemini(temp_filename, None, metadata)
+            ai_response = analyze_with_gemini(gemini_model, temp_filename, None, metadata)
         else:
             img = cv2.imread(temp_filename)
             box = ac_results.boxes.xyxy[0]
@@ -183,9 +258,8 @@ async def analyze_classroom_endpoint(
             temp_crop_path = f"/tmp/{uuid.uuid4()}_crop.jpg"
             cv2.imwrite(temp_crop_path, ac_crop)
 
-            ai_response = analyze_with_gemini(temp_filename, temp_crop_path, metadata)
+            ai_response = analyze_with_gemini(gemini_model, temp_filename, temp_crop_path, metadata)
 
-        # 5. 결과 반환
         clean_json = ai_response.strip().strip("```json").strip("```").strip()
         status_data = json.loads(clean_json)
 

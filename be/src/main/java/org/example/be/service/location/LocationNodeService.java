@@ -8,6 +8,7 @@ import org.example.be.domain.model.Affiliation;
 import org.example.be.domain.model.LocationNode;
 import org.example.be.domain.model.LocationOperatingSchedule;
 import org.example.be.domain.model.NodeKind;
+import org.example.be.domain.model.ReportStatus;
 import org.example.be.domain.repository.AffiliationRepository;
 import org.example.be.domain.repository.LocationNodeRepository;
 import org.example.be.domain.repository.LocationOperatingScheduleRepository;
@@ -282,8 +283,8 @@ public class LocationNodeService {
                         builder.reportable(savingsCalculationService.isReportableAt(now, schedules));
                         if (memberSeq != null) {
                             builder.alreadyReported(
-                                    reportRepository.existsByMember_SeqAndLocationNode_Seq(
-                                            memberSeq, child.getSeq()));
+                                    reportRepository.existsByMember_SeqAndLocationNode_SeqAndStatus(
+                                            memberSeq, child.getSeq(), ReportStatus.APPROVED));
                         }
                     }
 

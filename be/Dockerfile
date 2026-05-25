@@ -16,6 +16,8 @@ FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
+RUN apk add --no-cache wget
+
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 

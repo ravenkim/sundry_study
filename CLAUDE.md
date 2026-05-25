@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 be/              # Backend — Spring Boot 4 + MySQL + Gradle
 fe/              # Frontend — React 19 + TypeScript + Vite + TailwindCSS v4
 docs/            # 기획, 디자인 가이드, 회의록, API 명세
-deploy.sh        # 통합 배포 (be/deploy.sh → fe/deploy.sh, Docker Compose)
+deploy.sh        # 통합 배포 (ai/deploy.sh → be/deploy.sh → fe/deploy.sh, Docker Compose)
 docker-compose.yml
 ```
 
@@ -29,7 +29,7 @@ cd be
 ./gradlew test --tests "org.example.be.BeApplicationTests"  # 단일 테스트 클래스
 ```
 
-> 로컬 BE 실행은 Docker Compose 전용입니다. `bash deploy.sh`로 MySQL·BE·FE를 기동하세요.
+> 로컬 BE 실행은 Docker Compose 전용입니다. `bash deploy.sh`로 MySQL·AI·BE·FE를 기동하세요.
 
 ### Tech Stack
 - Spring Boot 4.0.6, Java 17, Gradle
@@ -147,7 +147,7 @@ export function* rootSaga() { yield all([..., newSaga()]) }
 
 ```bash
 # 로컬 통합 (FE:8081, BE:8080, MySQL:3306)
-bash deploy.sh              # be/deploy.sh → fe/deploy.sh (docker-compose.yml 사용)
+bash deploy.sh              # ai/deploy.sh → be/deploy.sh → fe/deploy.sh (docker-compose.yml)
 
 # 개별
 bash be/deploy.sh           # MySQL(필요 시) + BE
@@ -158,7 +158,7 @@ docker compose down         # 중지
 docker compose logs -f      # 로그
 ```
 
-Docker: `cp .env.example .env` → `bash deploy.sh` (MySQL + BE + FE, Flyway·헬스체크·스키마 변경 시 DB 자동 초기화)
+Docker: `cp .env.example .env` → `bash deploy.sh` (MySQL + AI + BE + FE, Flyway·헬스체크·스키마 변경 시 DB 자동 초기화)
 
 ## 개발 환경 설정
 

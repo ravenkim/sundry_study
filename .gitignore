@@ -7,6 +7,10 @@
 
 !.env.example
 
+# GCP / AI secrets & model weights
+secrets/
+*.pt
+
 # Deploy state (migration hash cache)
 .deploy/
 

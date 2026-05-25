@@ -9,5 +9,7 @@ public interface LocationOperatingScheduleRepository extends JpaRepository<Locat
 
     List<LocationOperatingSchedule> findByLocationNode_SeqOrderByDayOfWeekAsc(Long locationNodeSeq);
 
+    long countByLocationNode_Seq(Long locationNodeSeq);
+
     void deleteByLocationNode_Seq(Long locationNodeSeq);
 }

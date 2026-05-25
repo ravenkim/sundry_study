@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# EcoReport 통합 배포 — bash deploy.sh 한 번이면 MySQL·Flyway·BE·FE까지 자동 처리
+# EcoReport 통합 배포 — bash deploy.sh 한 번이면 MySQL·AI·BE·FE까지 자동 처리
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
@@ -332,17 +332,32 @@ smoke_test() {
   load_env
   local health_host="127.0.0.1"
   local port="${SERVER_PORT:-8080}"
+  local ai_port="${AI_PORT:-8082}"
   local response
 
-  log "로그인 스모크 테스트 (admin)..."
-  response="$(curl -sf -X POST "http://${health_host}:${port}/api/auth/login" \
+  log "AI 준비 스모크 테스트 (/ready)..."
+  if curl -sf "http://${health_host}:${ai_port}/ready" >/dev/null 2>&1; then
+    log "AI ready OK"
+  else
+    log "AI ready 스모크 테스트 실패 — 최근 로그:"
+    docker compose logs --tail 30 ai 2>/dev/null | sed 's/^/[deploy]   /' || true
+    exit 1
+  fi
+
+  log "로그인 스모크 테스트 (admin, FE nginx 경유)..."
+  response="$(curl -sf -X POST "http://${health_host}:8081/api/auth/login" \
     -H 'Content-Type: application/json' \
     -d '{"userName":"admin","password":"admin1234!"}' 2>/dev/null || true)"
 
   if echo "${response}" | grep -q '"code":10001'; then
-    log "로그인 OK"
+    log "로그인 OK (FE → BE)"
   else
-    log "로그인 스모크 테스트 실패 (BE 로그 확인: docker compose logs be)"
+    log "로그인 실패 — Cloudflare Tunnel /api/* 도 502가 납니다 (BE Restarting 여부 확인)."
+    log "  docker compose ps"
+    log "  docker compose logs --tail 80 be"
+    log "  curl -i http://${health_host}:8081/ping"
+    log "  curl -i -X POST http://${health_host}:8081/api/auth/login -H 'Content-Type: application/json' -d '{\"userName\":\"admin\",\"password\":\"admin1234!\"}'"
+    exit 1
   fi
 }
 
@@ -357,6 +372,7 @@ print_summary() {
   echo "========================================"
   echo "  FE       → http://${host}:8081"
   echo "  BE       → http://${host}:${port}"
+  echo "  AI       → http://${host}:${AI_PORT:-8082}/analyze"
   echo "  Swagger  → http://${host}:${port}/swagger-ui.html"
   echo "  Health   → http://${host}:${port}/actuator/health"
   echo ""
@@ -365,6 +381,11 @@ print_summary() {
   echo "  로그 보기: docker compose logs -f"
   echo "  중지:      docker compose down"
   echo "  DB 초기화: docker compose down -v && bash deploy.sh"
+  echo ""
+  echo "  Cloudflare Tunnel 시연:"
+  echo "    bash scripts/cloudflare-tunnel.sh"
+  echo "    VITE_API_HOST 는 비워 두세요 (same-origin /api 프록시)"
+  echo "    BE Restarting 이면: docker compose logs --tail 80 be"
   echo "========================================"
 }
 
@@ -378,13 +399,15 @@ main() {
   maybe_reset_db_on_credential_change
   maybe_reset_db_on_schema_change
 
-  log "[1/2] 백엔드 (MySQL + Flyway + BE)..."
+  log "[1/3] AI (FastAPI /analyze)..."
+  bash "${ROOT}/ai/deploy.sh"
+
+  log "[2/3] 백엔드 (MySQL + Flyway + BE)..."
   DEPLOY_NO_WAIT=1 bash "${ROOT}/be/deploy.sh"
-
-  log "[2/2] 프론트..."
-  bash "${ROOT}/fe/deploy.sh"
-
   wait_for_be
+
+  log "[3/3] 프론트..."
+  bash "${ROOT}/fe/deploy.sh"
   wait_for_fe
   smoke_test
   log_db "=== DB 배포 완료 ==="

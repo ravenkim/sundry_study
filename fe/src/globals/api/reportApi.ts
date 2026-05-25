@@ -16,7 +16,21 @@ import type {
     ReportDetail,
     ReportStatus,
 } from 'src/globals/api/types'
-import { isApiError, ResponseCode } from 'src/globals/api/types'
+import {
+    isApiError,
+    REPORT_SUBMIT_TIMEOUT_MS,
+    ResponseCode,
+} from 'src/globals/api/types'
+
+export class ReportSubmitError extends Error {
+    readonly code?: number
+
+    constructor(message: string, code?: number) {
+        super(message)
+        this.name = 'ReportSubmitError'
+        this.code = code
+    }
+}
 
 export async function createReport(
     payload: CreateReportPayload,
@@ -52,14 +66,19 @@ export async function createReport(
 
     const { data } = await client.post<
         ApiResponse<CreateReportResponse> | ApiErrorResponse
-    >('/api/reports', formData)
+    >('/api/reports', formData, {
+        timeout: REPORT_SUBMIT_TIMEOUT_MS,
+    })
 
     if (isApiError(data)) {
-        throw new Error(data.message || i18n.t('errors:reportSubmitFailed'))
+        throw new ReportSubmitError(
+            data.message || i18n.t('errors:reportSubmitFailed'),
+            typeof data.code === 'number' ? data.code : Number(data.code),
+        )
     }
 
     if (data.code !== ResponseCode.REPORT_CREATED || !data.body) {
-        throw new Error(i18n.t('errors:reportSubmitFailed'))
+        throw new ReportSubmitError(i18n.t('errors:reportSubmitFailed'))
     }
 
     const result = data.body
@@ -67,13 +86,7 @@ export async function createReport(
     return {
         ...result,
         reportId: result.reportSeq ?? result.reportId,
-        aiResult: result.aiResult ?? {
-            result: 'WASTE_DETECTED',
-            message:
-                result.message ??
-                i18n.t('errors:reportSubmittedSuccess'),
-            pointAwarded: 0,
-        },
+        aiResult: result.aiResult,
     }
 }
 

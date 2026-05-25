@@ -37,8 +37,21 @@ else
   docker build -f "$FE_DIR/Dockerfile.deps" -t "$DEPS_IMAGE" "$FE_DIR"
 fi
 
-export DEPS_IMAGE
+export FE_DEPS_IMAGE="${DEPS_IMAGE}"
+unset DEPS_IMAGE
+
+echo "[fe] AI 서비스 확인..."
+DEPLOY_NO_WAIT=1 bash "${ROOT}/ai/deploy.sh"
+
 docker compose build fe
-docker compose up -d fe
+docker compose up -d --force-recreate fe
+
+echo "[fe] nginx → BE 프록시 확인 (http://127.0.0.1:8081/ping)..."
+if curl -sf "http://127.0.0.1:8081/ping" >/dev/null 2>&1; then
+  echo "[fe] FE → BE 프록시 OK"
+else
+  echo "[fe] FE → BE 프록시 실패 — BE Restarting 여부 확인: docker compose logs --tail 80 be"
+  exit 1
+fi
 
 echo "프론트 → http://${DEPLOY_HOST}:8081"

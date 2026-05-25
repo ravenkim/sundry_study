@@ -43,7 +43,13 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use(
     (response) => {
         if (isApiError(response.data)) {
-            return Promise.reject(new Error(response.data.message))
+            const error = new Error(response.data.message) as Error & {
+                code?: number
+            }
+            const code = response.data.code
+            error.code =
+                typeof code === 'number' ? code : Number(code)
+            return Promise.reject(error)
         }
         return response
     },

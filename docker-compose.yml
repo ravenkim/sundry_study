@@ -1,4 +1,4 @@
-# FE + BE + MySQL 통합 실행
+# FE + BE + AI + MySQL 통합 실행
 # 사용: cp .env.example .env 후 값 설정 → bash deploy.sh
 # 비밀값은 .env 에만 두세요 (Git 추적 금지).
 
@@ -19,12 +19,41 @@ services:
       timeout: 5s
       retries: 10
 
+  ai:
+    build:
+      context: ./ai/for_deploy/campus_api
+      args:
+        DEPS_IMAGE: ${AI_DEPS_IMAGE:-ecoreport-ai-deps:local}
+    container_name: ecoreport-ai
+    restart: unless-stopped
+    ports:
+      - "${AI_PORT:-8082}:8080"
+    env_file:
+      - .env
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /secrets/gcp-sa.json
+      GCP_PROJECT_ID: ${GCP_PROJECT_ID:-duyuthon-496901}
+      GCP_LOCATION: ${GCP_LOCATION:-us-central1}
+    volumes:
+      - ${GCP_SA_KEY_PATH:-./secrets/gcp-sa.json}:/secrets/gcp-sa.json:ro
+      - ./ai/for_deploy/campus_api/models:/app/models:ro
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
   be:
     build:
       context: .
       dockerfile: be/Dockerfile
       args:
-        DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-be-deps:local}
+        DEPS_IMAGE: ${BE_DEPS_IMAGE:-ecoreport-be-deps:local}
     container_name: ecoreport-be
     restart: unless-stopped
     ports:
@@ -33,22 +62,33 @@ services:
       - .env
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      AI_API_URL: ${AI_API_URL:-http://ai:8080/analyze}
     depends_on:
       mysql:
         condition: service_healthy
+      ai:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/ping >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 120s
 
   fe:
     build:
       context: ./fe
       args:
-        DEPS_IMAGE: ${DEPS_IMAGE:-ecoreport-fe-deps:local}
+        DEPS_IMAGE: ${FE_DEPS_IMAGE:-ecoreport-fe-deps:local}
         VITE_API_HOST: ${VITE_API_HOST:-}
         VITE_USE_MOCK: ${VITE_USE_MOCK:-true}
     container_name: ecoreport-fe
+    restart: unless-stopped
     ports:
-      - "8081:80"
+      - "0.0.0.0:8081:80"
     depends_on:
-      - be
+      be:
+        condition: service_healthy
 
 volumes:
   mysql_data:

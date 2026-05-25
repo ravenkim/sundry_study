@@ -31,4 +31,6 @@ public interface LocationNodeRepository extends JpaRepository<LocationNode, Long
     );
 
     boolean existsBySeqAndNodeKind(Long seq, NodeKind nodeKind);
+
+    List<LocationNode> findByNodeKind(NodeKind nodeKind);
 }

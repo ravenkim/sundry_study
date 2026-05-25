@@ -69,6 +69,7 @@ env_hash() {
     echo "${MYSQL_USER:-}"
     echo "${MYSQL_PASSWORD:-}"
     echo "${MYSQL_DATABASE:-energy_db}"
+    echo "${AI_API_URL:-http://ai:8080/analyze}"
   } | sha256sum | awk '{print $1}'
 }
 
@@ -76,7 +77,7 @@ app_build_hash() {
   {
     sha256sum "$BE_DIR/Dockerfile" "$ROOT/db/migration/"*.sql
     find "$BE_DIR/src" -type f -print0 | sort -z | xargs -0 sha256sum 2>/dev/null || true
-    echo "${DEPS_IMAGE}"
+    echo "${HASH}"
   } | sha256sum | awk '{print $1}'
 }
 
@@ -97,6 +98,9 @@ else
   docker compose up -d mysql
 fi
 
+echo "[be] AI 서비스 확인..."
+DEPLOY_NO_WAIT=1 bash "${ROOT}/ai/deploy.sh"
+
 if [[ -n "${MYSQL_USER}" && -n "${MYSQL_PASSWORD}" ]]; then
   wait_for_mysql
 fi
@@ -108,7 +112,8 @@ else
   docker build -f "$BE_DIR/Dockerfile.deps" -t "$DEPS_IMAGE" "$BE_DIR"
 fi
 
-export DEPS_IMAGE
+export BE_DEPS_IMAGE="${DEPS_IMAGE}"
+unset DEPS_IMAGE
 
 APP_HASH="$(app_build_hash)"
 ENV_HASH="$(env_hash)"

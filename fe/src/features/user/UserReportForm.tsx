@@ -10,6 +10,7 @@ import { SSfadeIn, SSloadingState } from 'src/shared/components/motion'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import { createReport } from 'src/globals/api/reportApi'
+import { ErrorCode } from 'src/globals/api/types'
 import {
     filterReportableLeafLocations,
     flattenAffiliationLeafLocations,
@@ -228,24 +229,27 @@ export const UserReportForm = () => {
     const [locationId, setLocationId] = useState<number | ''>('')
     const [abuseAgreed, setAbuseAgreed] = useState(false)
 
-    useEffect(() => {
-        void getBuildings()
-            .then((items) => {
-                const scoped = filterBuildingsByAffiliation(
-                    items.length > 0 ? items : MOCK_BUILDINGS,
+    const refreshBuildings = useCallback(async () => {
+        try {
+            const items = await getBuildings()
+            const scoped = filterBuildingsByAffiliation(
+                items.length > 0 ? items : MOCK_BUILDINGS,
+                user?.affiliationId,
+            )
+            setBuildings(scoped)
+        } catch {
+            setBuildings(
+                filterBuildingsByAffiliation(
+                    MOCK_BUILDINGS,
                     user?.affiliationId,
-                )
-                setBuildings(scoped)
-            })
-            .catch(() => {
-                setBuildings(
-                    filterBuildingsByAffiliation(
-                        MOCK_BUILDINGS,
-                        user?.affiliationId,
-                    ),
-                )
-            })
+                ),
+            )
+        }
     }, [user?.affiliationId])
+
+    useEffect(() => {
+        void refreshBuildings()
+    }, [refreshBuildings])
 
     useEffect(() => {
         if (!photo) {
@@ -323,14 +327,26 @@ export const UserReportForm = () => {
                 },
             })
         } catch (error) {
-            toast.error(
-                error instanceof Error
-                    ? error.message
-                    : t('form.errorSubmitFailed'),
-            )
+            await refreshBuildings()
+
+            if (
+                error instanceof Error &&
+                'code' in error &&
+                (error as Error & { code?: number }).code ===
+                    ErrorCode.ALREADY_EXISTS
+            ) {
+                setLocationId('')
+                toast.error(t('form.errorAlreadyReported'))
+            } else {
+                toast.error(
+                    error instanceof Error
+                        ? error.message
+                        : t('form.errorSubmitFailed'),
+                )
+            }
             setStep('location')
         }
-    }, [photo, selectedLocation, abuseAgreed, navigate, t])
+    }, [photo, selectedLocation, abuseAgreed, navigate, refreshBuildings, t])
 
     if (step === 'loading') {
         return (
@@ -428,8 +444,6 @@ export const UserReportForm = () => {
                 </p>
 
                 <ReportCriteriaGuide />
-
-                <ReportAbuseNotice />
 
                 <ReportPhotoInput
                     previewUrl={previewUrl}

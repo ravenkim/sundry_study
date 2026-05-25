@@ -16,6 +16,13 @@ export const ResponseCode = {
     REPORT_CREATED: 10003,
 } as const
 
+export const ErrorCode = {
+    ALREADY_EXISTS: 2004,
+} as const
+
+/** AI 분석 포함 제보 제출 — BE RestTemplate read timeout과 맞춤 */
+export const REPORT_SUBMIT_TIMEOUT_MS = 120_000
+
 export function isApiError(data: unknown): data is ApiErrorResponse {
     return (
         typeof data === 'object' &&
