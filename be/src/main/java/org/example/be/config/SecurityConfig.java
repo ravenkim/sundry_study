@@ -21,6 +21,7 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
+    private final HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository;
     private final JwtDecoder jwtDecoder;
 
     @Bean
@@ -58,6 +59,9 @@ public class SecurityConfig {
                         // Google 단일 provider 시 기본 loginPage가 /oauth2/authorization/google 로 잡혀
                         // POST /login 과 충돌하므로 사용하지 않는 페이지 URL을 명시한다.
                         .loginPage("/oauth2/login")
+                        .authorizationEndpoint(authorization -> authorization
+                                .authorizationRequestRepository(cookieAuthorizationRequestRepository)
+                        )
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )
