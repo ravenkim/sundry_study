@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Camera, ImageIcon, Loader2, Plus } from 'lucide-react'
+import { Loader2, Plus } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton } from 'src/shared/ui/eco'
@@ -33,8 +33,6 @@ export const UserReportForm = () => {
     const { t } = useTranslation('report')
     const navigate = useNavigate()
     const { user } = useAuth()
-    const cameraRef = useRef<HTMLInputElement>(null)
-    const galleryRef = useRef<HTMLInputElement>(null)
 
     const [step, setStep] = useState<Step>('photo')
     const [photo, setPhoto] = useState<File | null>(null)
@@ -239,9 +237,10 @@ export const UserReportForm = () => {
                     {t('form.photoHint')}
                 </p>
 
-                <div
+                <label
+                    htmlFor="report-photo-input"
                     className={cn(
-                        'border-outline-variant bg-surface-container-lowest flex min-h-[240px] flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed',
+                        'border-outline-variant bg-surface-container-lowest flex min-h-[240px] cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed transition-colors hover:bg-surface-container-low',
                         previewUrl && 'border-solid p-0',
                     )}
                 >
@@ -261,40 +260,18 @@ export const UserReportForm = () => {
                             </p>
                         </>
                     )}
-                </div>
+                </label>
 
                 <input
-                    ref={cameraRef}
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    className="hidden"
-                    onChange={(e) => handleFileSelect(e.target.files?.[0])}
-                />
-                <input
-                    ref={galleryRef}
+                    id="report-photo-input"
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={(e) => handleFileSelect(e.target.files?.[0])}
+                    onChange={(e) => {
+                        handleFileSelect(e.target.files?.[0])
+                        e.target.value = ''
+                    }}
                 />
-
-                <div className="grid grid-cols-2 gap-3">
-                    <EcoButton
-                        variant="outline"
-                        className="py-3"
-                        onClick={() => cameraRef.current?.click()}
-                    >
-                        <Camera className="h-5 w-5" /> {t('form.camera')}
-                    </EcoButton>
-                    <EcoButton
-                        variant="outline"
-                        className="py-3"
-                        onClick={() => galleryRef.current?.click()}
-                    >
-                        <ImageIcon className="h-5 w-5" /> {t('form.gallery')}
-                    </EcoButton>
-                </div>
             </section>
 
             <EcoButton

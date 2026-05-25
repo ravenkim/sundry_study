@@ -45,6 +45,10 @@ export async function createReport(
     if (payload.buildingName)
         formData.append('buildingName', payload.buildingName)
     if (payload.roomName) formData.append('roomName', payload.roomName)
+    formData.append('isLightWasting', 'false')
+    formData.append('isAcWasting', 'false')
+    formData.append('isHeaterWasting', 'false')
+    formData.append('isOtherWasting', 'false')
 
     const { data } = await client.post<
         ApiResponse<CreateReportResponse> | ApiErrorResponse
