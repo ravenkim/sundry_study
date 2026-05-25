@@ -79,7 +79,8 @@ public class ReportService {
                     "현재 운영 시간 중인 강의실은 제보할 수 없습니다. 운영 시간이 끝난 후 다시 시도해 주세요.");
         }
 
-        if (reportRepository.existsByMember_SeqAndLocationNode_Seq(memberSeq, locationNode.getSeq())) {
+        if (reportRepository.existsByMember_SeqAndLocationNode_SeqAndStatus(
+                memberSeq, locationNode.getSeq(), ReportStatus.APPROVED)) {
             throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS,
                     "이미 제보한 강의실입니다. 같은 강의실은 중복 제보할 수 없습니다.");
         }
@@ -89,72 +90,75 @@ public class ReportService {
         AiAnalysisResponse aiResponse = callAiApi(request.image(), metadata);
         log.info("AI Analysis Result: {}", aiResponse.getResult());
 
-        boolean aiLightWasting = request.isLightWastingFlag();
-        boolean aiAcWasting = request.isAcWastingFlag();
-        String aiAdviceMessage = "";
-
-        if ("ERROR".equals(aiResponse.getResult())) {
-            throw new BusinessLogicException(ErrorCode.INVALID,
-                    "강의실로 인식되지 않습니다. 의자·책상이 보이는 강의실을 촬영해 주세요: "
-                            + aiResponse.getMessage());
-
-        } else if ("PASS".equals(aiResponse.getResult())) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "정상적인 강의실 상태이거나 사람이 있어 제보할 수 없습니다: " + aiResponse.getMessage());
-
-        } else if ("WASTE_DETECTED".equals(aiResponse.getResult())) {
-            aiAdviceMessage = "\n\n[💡 AI 보조 지표: 낭비 확인] " + aiResponse.getMessage();
-            if (aiResponse.getReason() != null) {
-                aiAdviceMessage += "\n[이유] " + aiResponse.getReason();
-            }
-            if (aiResponse.getExpected() != null) {
-                aiAdviceMessage += "\n[예상 절약] " + aiResponse.getExpected();
-            }
-            aiLightWasting = "ON".equals(aiResponse.getLight_status());
-            aiAcWasting = "ON".equals(aiResponse.getAc_status());
-
-        } else {
+        String aiResultType = aiResponse.getResult();
+        if (aiResultType == null || aiResultType.isBlank()) {
             throw new BusinessLogicException(ErrorCode.INVALID, "알 수 없는 AI 분석 결과입니다.");
         }
 
         String imageUrl = "https://storage.ecoreport.kr/reports/" + request.image().getOriginalFilename();
-
-        WasteType wasteType = new WasteType(
-                aiLightWasting,
-                aiAcWasting,
-                request.isHeaterWastingFlag(),
-                request.isOtherWastingFlag()
-        );
-
         String locationDetail = locationNodeService.buildPath(locationNode);
+        String userDescription = request.description() != null ? request.description() : "";
 
-        int estimatedSavingsKrw = ExpectedKrwParser.parse(aiResponse.getExpected());
-        int estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
-        BigDecimal estimatedKwh = EstimatedKwhResolver.resolve(
-                aiResponse.getExpectedKwh(),
-                estimatedSavingsKrw,
-                electricityTariffService.getEffectiveUnitCostKrw()
-        );
+        ReportStatus reportStatus;
+        WasteType wasteType;
+        String description;
+        int estimatedSavingsKrw = 0;
+        int estimatedPoint = 0;
+        BigDecimal estimatedKwh = null;
+        int pointAwarded = 0;
+
+        switch (aiResultType) {
+            case "WASTE_DETECTED" -> {
+                reportStatus = ReportStatus.APPROVED;
+                wasteType = new WasteType(
+                        "ON".equals(aiResponse.getLight_status()),
+                        "ON".equals(aiResponse.getAc_status()),
+                        request.isHeaterWastingFlag(),
+                        request.isOtherWastingFlag()
+                );
+                description = userDescription + buildWasteDetectedAdvice(aiResponse);
+                estimatedSavingsKrw = ExpectedKrwParser.parse(aiResponse.getExpected());
+                estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
+                estimatedKwh = EstimatedKwhResolver.resolve(
+                        aiResponse.getExpectedKwh(),
+                        estimatedSavingsKrw,
+                        electricityTariffService.getEffectiveUnitCostKrw()
+                );
+                pointAwarded = estimatedPoint;
+            }
+            case "ERROR" -> {
+                reportStatus = ReportStatus.REJECTED;
+                wasteType = new WasteType(false, false, false, false);
+                description = userDescription + "\n\n[AI 판별: 판별 불가] " + aiResponse.getMessage();
+            }
+            case "PASS" -> {
+                reportStatus = ReportStatus.REJECTED;
+                wasteType = new WasteType(false, false, false, false);
+                description = userDescription + "\n\n[AI 판별: 정상 상태] " + aiResponse.getMessage();
+            }
+            default -> throw new BusinessLogicException(ErrorCode.INVALID, "알 수 없는 AI 분석 결과입니다.");
+        }
 
         MemberPoint wallet = memberPointRepository.findByMember_Seq(memberSeq)
                 .orElseGet(() -> memberPointRepository.save(new MemberPoint(member)));
-        if (estimatedPoint > 0) {
-            wallet.addPoint(estimatedPoint);
+        if (pointAwarded > 0) {
+            wallet.addPoint(pointAwarded);
         }
 
         Report report = Report.builder()
                 .member(member)
                 .locationNode(locationNode)
                 .locationDetail(locationDetail)
-                .description((request.description() != null ? request.description() : "") + aiAdviceMessage)
+                .description(description)
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)
-                .status(ReportStatus.APPROVED)
+                .status(reportStatus)
                 .createdAt(reportAt)
                 .offTimeMinutes(null)
                 .estimatedKwh(estimatedKwh)
                 .estimatedSavingsKrw(estimatedSavingsKrw)
                 .estimatedPoint(estimatedPoint)
-                .pointAwarded(estimatedPoint)
+                .pointAwarded(pointAwarded)
                 .build();
 
         Report savedReport = reportRepository.save(report);
@@ -167,16 +171,28 @@ public class ReportService {
                 .reason(aiResponse.getReason())
                 .expected(aiResponse.getExpected())
                 .expectedKwh(aiResponse.getExpectedKwh())
-                .pointAwarded(estimatedPoint)
+                .pointAwarded(pointAwarded)
                 .currentBalance(wallet.getPoint())
                 .build();
 
         return ReportResponse.Create.builder()
                 .reportId(savedReport.getSeq())
-                .status(ReportStatus.APPROVED.name())
+                .status(reportStatus.name())
                 .message(aiResponse.getMessage())
                 .aiResult(aiResult)
                 .build();
+    }
+
+    private String buildWasteDetectedAdvice(AiAnalysisResponse aiResponse) {
+        StringBuilder advice = new StringBuilder("\n\n[💡 AI 보조 지표: 낭비 확인] ")
+                .append(aiResponse.getMessage());
+        if (aiResponse.getReason() != null) {
+            advice.append("\n[이유] ").append(aiResponse.getReason());
+        }
+        if (aiResponse.getExpected() != null) {
+            advice.append("\n[예상 절약] ").append(aiResponse.getExpected());
+        }
+        return advice.toString();
     }
 
     private AiAnalyzeMetadata buildAnalyzeMetadata(

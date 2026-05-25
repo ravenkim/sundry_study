@@ -60,6 +60,12 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     boolean existsByMember_SeqAndLocationNode_Seq(Long memberSeq, Long locationSeq);
 
+    boolean existsByMember_SeqAndLocationNode_SeqAndStatus(
+            Long memberSeq,
+            Long locationSeq,
+            ReportStatus status
+    );
+
     List<Report> findByMember_SeqAndStatusIn(
             Long memberSeq,
             List<ReportStatus> statuses
