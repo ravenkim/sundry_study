@@ -14,7 +14,7 @@ from ultralytics import YOLO
 GCP_PROJECT_ID = "duyuthon-496901"  # 본인의 정확한 프로젝트 ID
 LOCATION = "us-central1"
 
-# Energy Constants (프롬프트에서 사용될 상수값 정의)
+# Energy Constants
 FLUORESCENT_WATTS = 32
 LED_WATTS = 15
 AC_WATTS = 1500
@@ -27,29 +27,51 @@ gemini_model = GenerativeModel("gemini-2.5-flash")
 
 app = FastAPI(title="Campus Energy Management API")
 
-# YOLO Models (부팅 시 1회 로드)
+# YOLO Models
 BASE_MODEL = YOLO("yolov8n.pt")
 AC_MODEL = YOLO("models/ac_best.pt")
 
 # ==========================================
-# 2. Prompt & Gemini Analysis Function
+# 2. Image Processing Helper
+# ==========================================
+def resize_image_if_needed(image_path: str, max_dim: int = 1920):
+    """
+    이미지가 너무 클 경우 가로/세로 비율을 유지하며 최대 길이를 max_dim으로 리사이징합니다.
+    """
+    img = cv2.imread(image_path)
+    if img is None:
+        return
+
+    h, w = img.shape[:2]
+    if max(h, w) > max_dim:
+        scale = max_dim / float(max(h, w))
+        new_w, new_h = int(w * scale), int(h * scale)
+        resized_img = cv2.resize(img, (new_w, new_h), interpolation=cv2.INTER_AREA)
+        cv2.imwrite(image_path, resized_img)
+
+# ==========================================
+# 3. Prompt & Gemini Analysis Function
 # ==========================================
 def build_analysis_prompt(metadata: dict, has_ac_crop: bool) -> str:
     metadata_json = json.dumps(metadata, ensure_ascii=False, indent=2)
-    image_note = (
-            "The first image is the full classroom photo."
-            + (
-                " The second image is a cropped close-up of a ceiling air conditioner."
-                if has_ac_crop
-                else ""
-            )
-    )
 
-    # User provided prompt (그대로 유지)
+    # [수정] 에어컨 판별을 확실하게 하던 이전 시각 지시사항(Vision Instructions) 복구
+    if has_ac_crop:
+        vision_instructions = """
+1. "ac_status": Look at the second image (cropped AC). If the louvers (blades) are open or the operation LED is on, return "ON". If they are completely closed and inactive, return "OFF".
+2. "light_status": Look at the background of the first image (original). If the ceiling indoor lights (fluorescent/LED) are turned on and emitting light, return "ON". If they are turned off, return "OFF".
+"""
+    else:
+        vision_instructions = """
+1. "ac_status": Since there is no cropped AC image, return "UNKNOWN".
+2. "light_status": Look at the ceiling of the first image. If the indoor lights (fluorescent/LED) are turned on and emitting light, return "ON". If they are turned off, return "OFF".
+"""
+
     return f"""
 You are a building energy management AI for a Korean university campus.
 
-{image_note}
+The first image is the full classroom photo.
+{"The second image is a cropped close-up of a ceiling air conditioner." if has_ac_crop else ""}
 
 Classroom metadata (JSON):
 {metadata_json}
@@ -61,15 +83,17 @@ Energy constants:
 - Electricity rate: {ELECTRICITY_RATE_KRW} KRW/kWh
 - Max off-time cap: {OFF_TIME_CAP_MINUTES} minutes when schedule is closed/after hours/unknown
 
-Tasks:
-1. Determine ac_status ("ON", "OFF", or "UNKNOWN") and light_status ("ON" or "OFF") from the image(s).
-2. Using reportedAt and operatingSchedules, decide if lights/AC should be OFF now (off-hours or closed day).
+Vision Analysis Tasks:
+{vision_instructions}
+
+Calculation & Logic Tasks:
+1. Using reportedAt and operatingSchedules, decide if lights/AC should be OFF now (off-hours or closed day).
    - If currently within operating hours (power should be ON), return result "PASS" even if devices appear ON.
-3. If waste is confirmed during off-hours (person-free classroom with ON devices that should be OFF):
+2. If waste is confirmed during off-hours (person-free classroom with ON devices that should be OFF):
    - Compute off_time_minutes until power_off (cap {OFF_TIME_CAP_MINUTES} min on closed/after-hours)
    - Sum kWh only for ON resources × their counts × off_time_hours
    - expected = round(total_kwh × {ELECTRICITY_RATE_KRW}) as Korean won string, e.g. "494원"
-4. If no waste: result "PASS", expected "0원"
+3. If no waste: result "PASS", expected "0원"
 
 Respond STRICTLY in this JSON format only:
 {{
@@ -77,7 +101,7 @@ Respond STRICTLY in this JSON format only:
     "message": "Short user-facing message in Korean",
     "ac_status": "ON or OFF or UNKNOWN",
     "light_status": "ON or OFF",
-    "reason": "Detailed reasoning",
+    "reason": "Detailed visual reasoning about louvers, LEDs, and lights.",
     "expected": "0원 or N원"
 }}
 """
@@ -86,10 +110,7 @@ def analyze_with_gemini(original_img_path: str, crop_img_path: str, metadata: di
     has_ac_crop = crop_img_path is not None
     prompt = build_analysis_prompt(metadata, has_ac_crop)
 
-    # 원본 이미지 항상 포함
     contents = [Part.from_image(Image.load_from_file(original_img_path))]
-
-    # 에어컨이 탐지되어 크롭 이미지가 있다면 포함
     if has_ac_crop:
         contents.append(Part.from_image(Image.load_from_file(crop_img_path)))
 
@@ -99,26 +120,27 @@ def analyze_with_gemini(original_img_path: str, crop_img_path: str, metadata: di
     return response.text
 
 # ==========================================
-# 3. Main API Endpoint
+# 4. Main API Endpoint
 # ==========================================
 @app.post("/analyze")
 async def analyze_classroom_endpoint(
         file: UploadFile = File(...),
-        metadata_str: str = Form(default="{}") # 메타데이터를 문자열로 함께 받음
+        metadata_str: str = Form(default="{}")
 ):
     temp_filename = f"/tmp/{uuid.uuid4()}.jpg"
     temp_crop_path = None
 
     try:
-        # 1. 메타데이터 파싱 (앱에서 전달된 JSON 문자열)
         metadata = json.loads(metadata_str)
 
-        # 2. 이미지 임시 저장
+        # 1. 이미지 임시 저장
         with open(temp_filename, "wb") as buffer:
             buffer.write(await file.read())
 
+        # 2. [추가] 이미지 크기 최적화 (비율 유지하며 최대 1920px로 리사이징)
+        resize_image_if_needed(temp_filename, max_dim=1920)
+
         # 3. 기본 객체 탐지 (사람, 의자, 책상)
-        # COCO Classes -> 0: person, 56: chair, 60: dining table(desk)
         base_results = BASE_MODEL(temp_filename, conf=0.3, classes=[0, 56, 60])[0]
 
         detected_classes = base_results.boxes.cls.cpu().numpy()
@@ -126,7 +148,6 @@ async def analyze_classroom_endpoint(
         chair_count = sum(detected_classes == 56)
         desk_count = sum(detected_classes == 60)
 
-        # 로직 A: 강의실 환경 확인 (의자나 책상이 하나도 없다면 오류)
         if chair_count == 0 and desk_count == 0:
             return JSONResponse(content={
                 "result": "ERROR",
@@ -134,7 +155,6 @@ async def analyze_classroom_endpoint(
                 "expected": "0원"
             })
 
-        # 로직 B: 사람이 있다면 즉시 PASS 처리
         if person_count > 0:
             return JSONResponse(content={
                 "result": "PASS",
@@ -146,10 +166,8 @@ async def analyze_classroom_endpoint(
         ac_results = AC_MODEL(temp_filename, conf=0.4)[0]
 
         if len(ac_results.boxes) == 0:
-            # 로직 C: 에어컨 미발견 (크롭 없이 원본만 Gemini로 전송)
             ai_response = analyze_with_gemini(temp_filename, None, metadata)
         else:
-            # 로직 D: 에어컨 발견 -> 크롭 후 2장의 이미지를 Gemini로 전송
             img = cv2.imread(temp_filename)
             box = ac_results.boxes.xyxy[0]
             x1, y1, x2, y2 = map(int, box[:4])
@@ -160,11 +178,10 @@ async def analyze_classroom_endpoint(
 
             ai_response = analyze_with_gemini(temp_filename, temp_crop_path, metadata)
 
-        # 5. Gemini JSON 응답 파싱 및 클라이언트 반환
+        # 5. 결과 반환
         clean_json = ai_response.strip().strip("```json").strip("```").strip()
         status_data = json.loads(clean_json)
 
-        # 에어컨 미발견 시 Gemini가 "UNKNOWN" 등을 반환하겠지만, Python 측에서도 확실하게 알림(Warning)을 추가
         if len(ac_results.boxes) == 0 and status_data.get("result") == "WASTE_DETECTED":
             status_data["message"] = f"[WARNING] 에어컨은 탐지되지 않았으나 낭비가 감지되었습니다! {status_data.get('message', '')}"
 
@@ -174,7 +191,6 @@ async def analyze_classroom_endpoint(
         return JSONResponse(content={"result": "ERROR", "message": f"서버 오류: {str(e)}"}, status_code=500)
 
     finally:
-        # 리소스 정리
         if os.path.exists(temp_filename):
             os.remove(temp_filename)
         if temp_crop_path and os.path.exists(temp_crop_path):
