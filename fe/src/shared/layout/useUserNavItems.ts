@@ -6,6 +6,7 @@ import {
     ShoppingBag,
     User as UserIcon,
     Camera,
+    Info,
     type LucideIcon,
 } from 'lucide-react'
 
@@ -30,6 +31,7 @@ export function useUserNavItems(): UserNavItem[] {
             },
             { name: t('menu.reports'), path: '/reports', icon: ClipboardCheck },
             { name: t('menu.shop'), path: '/shop', icon: ShoppingBag },
+            { name: t('menu.aboutUs'), path: '/aboutus', icon: Info },
             { name: t('menu.profile'), path: '/profile', icon: UserIcon },
         ],
         [t],

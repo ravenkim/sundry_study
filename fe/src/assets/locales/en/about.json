@@ -1,0 +1,96 @@
+{
+    "hero": {
+        "badge": "2026 DuyuThon Team 14",
+        "title": "About EcoReport",
+        "subtitle": "AI-powered campus energy waste reporting and reward platform"
+    },
+    "tagline": {
+        "quote": "One photo of lights on in an empty classroom → AI analysis → points earned",
+        "description": "Small student reports reduce campus electricity bills, and part of those savings flows back to students."
+    },
+    "overview": {
+        "title": "Project Overview",
+        "description": "EcoReport is a crowdsourcing platform where students report invisible campus energy waste via smartphone, AI automatically detects waste and calculates savings, and verified reports earn points.",
+        "items": {
+            "target": "Student reporters · Building administrators",
+            "tech": "AI image analysis · Savings calculation · Point settlement",
+            "platform": "Mobile web (students) + Admin dashboard"
+        }
+    },
+    "flow": {
+        "title": "How It Works",
+        "steps": {
+            "report": {
+                "title": "Photo Report",
+                "description": "Students upload photos of waste in empty classrooms."
+            },
+            "ai": {
+                "title": "AI Analysis",
+                "description": "AI detects waste and calculates savings in money and kWh."
+            },
+            "reward": {
+                "title": "Points Earned",
+                "description": "Verified reports earn points instantly."
+            },
+            "cycle": {
+                "title": "Virtuous Cycle",
+                "description": "Part of saved electricity costs returns to the student reward pool."
+            }
+        }
+    },
+    "whyUniversity": {
+        "title": "Why Start with Universities?",
+        "summary": "Universities are the first market that simultaneously satisfies three conditions: serious waste, student participation, and cultural diffusion.",
+        "cards": {
+            "management": {
+                "title": "Management Gaps",
+                "description": "Club rooms and seminar rooms are hard to monitor — student reports fill the gap."
+            },
+            "physical": {
+                "title": "Patrol Limits",
+                "description": "Tall buildings, hills, stairs, and no elevators make full patrol coverage difficult."
+            },
+            "culture": {
+                "title": "Cultural Diffusion",
+                "description": "A starting point where eco-friendly habits learned on campus spread to society after graduation."
+            }
+        }
+    },
+    "culturalDiffusion": {
+        "title": "Cultural Diffusion — Starting in the Classroom",
+        "lead": "Universities are educational spaces where students learn about the environment and sustainability.",
+        "body": "The experience that \"my actions create change\" on campus becomes the seed of eco-friendly culture that spreads to workplaces and communities after graduation. EcoReport is not just a tool to save electricity — it is a platform for student-led carbon-neutral culture.",
+        "points": {
+            "experience": "Shift from passive environmental awareness to active participation through \"my photo changes the campus\"",
+            "education": "Natural alignment with green campus campaigns and the Ministry of Education's Green Smart Future School initiative",
+            "expansion": "Low-cost, immediately deployable model expandable from universities to public institutions and offices"
+        }
+    },
+    "impact": {
+        "title": "Expected Impact",
+        "stats": {
+            "waste": {
+                "value": "~30%",
+                "label": "Classroom energy waste ratio"
+            },
+            "saving": {
+                "value": "600–1,000 kWh",
+                "label": "Monthly savings per campus (100 rooms)"
+            },
+            "co2": {
+                "value": "280–470 kg",
+                "label": "Monthly CO₂ reduction"
+            }
+        }
+    },
+    "team": {
+        "title": "Team 14",
+        "members": "Kim Haejun · Cha Seongho · Lee Eunchong",
+        "description": "A 2026 DuyuThon hackathon team covering planning, frontend, backend, AI, and infrastructure."
+    },
+    "cta": {
+        "title": "Join Us Today",
+        "description": "Small actions across campus add up to big change.",
+        "button": "Report Waste"
+    }
+}

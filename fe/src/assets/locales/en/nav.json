@@ -5,7 +5,8 @@
         "reports": "Report History",
         "reportDetail": "Report Details",
         "shop": "Point Shop",
-        "profile": "My Page"
+        "profile": "My Page",
+        "aboutUs": "About"
     },
     "menu": {
         "openAriaLabel": "Open menu",
@@ -14,7 +15,8 @@
         "report": "Report Waste",
         "reports": "Report History",
         "shop": "Point Shop",
-        "profile": "My Page"
+        "profile": "My Page",
+        "aboutUs": "About EcoReport"
     },
     "admin": {
         "brandTitle": "EcoReport Admin",
