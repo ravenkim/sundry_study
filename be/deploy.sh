@@ -84,6 +84,12 @@ be_is_healthy() {
   curl -sf "http://127.0.0.1:${SERVER_PORT:-8080}/ping" >/dev/null 2>&1
 }
 
+be_container_restarting() {
+  local status
+  status="$(docker inspect -f '{{.State.Status}}' ecoreport-be 2>/dev/null || echo missing)"
+  [[ "${status}" == "restarting" ]]
+}
+
 if docker ps --format '{{.Names}}' | grep -q '^ecoreport-mysql$'; then
   echo "[be] MySQL 이미 실행 중"
 else
@@ -119,7 +125,8 @@ BE_NEEDS_DEPLOY=1
 if [[ "${APP_HASH}" == "${STORED_APP_HASH}" ]] \
     && [[ "${ENV_HASH}" == "${STORED_ENV_HASH}" ]] \
     && docker ps --format '{{.Names}}' | grep -q '^ecoreport-be$' \
-    && be_is_healthy; then
+    && be_is_healthy \
+    && ! be_container_restarting; then
   echo "[be] 소스·의존성·env 변경 없음 — BE 빌드·재시작 생략"
   BE_NEEDS_DEPLOY=0
 else

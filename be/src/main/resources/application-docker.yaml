@@ -5,7 +5,8 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
 
 server:
-  port: ${SERVER_PORT:8080}
+  # 컨테이너 내부 포트는 docker-compose ports 매핑(*:8080)과 고정
+  port: 8080
   forward-headers-strategy: framework
   servlet:
     session:

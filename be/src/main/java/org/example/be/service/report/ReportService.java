@@ -20,6 +20,7 @@ import org.example.be.service.savings.SavingsCalculationService;
 import org.example.be.service.savings.EstimatedKwhResolver;
 import org.example.be.service.savings.ExpectedKrwParser;
 import org.example.be.service.tariff.ElectricityTariffService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,8 @@ public class ReportService {
     private final ElectricityTariffService electricityTariffService;
     private final ObjectMapper objectMapper;
 
-    private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
+    @Value("${app.ai.api-url}")
+    private String aiApiUrl;
 
     @Transactional
     public ReportResponse.Create createReport(ReportCreateRequest request, Long memberSeq) {
@@ -226,7 +228,7 @@ public class ReportService {
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
             ResponseEntity<AiAnalysisResponse> response = restTemplate.postForEntity(
-                    AI_API_URL,
+                    aiApiUrl,
                     requestEntity,
                     AiAnalysisResponse.class
             );

@@ -7,6 +7,8 @@ springdoc:
     tags-sorter: alpha
 
 app:
+  ai:
+    api-url: ${AI_API_URL:https://campus-energy-api-992786420144.us-central1.run.app/analyze}
   frontend:
     url: ${FRONTEND_URL:http://localhost:5173}
   affiliation:

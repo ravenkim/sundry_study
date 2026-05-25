@@ -293,6 +293,10 @@ wait_for_be() {
     attempt=$((attempt + 1))
     if (( attempt % 5 == 0 )); then
       log "  ... 대기 중 (${attempt}/60)"
+      if docker inspect -f '{{.State.Status}}' ecoreport-be 2>/dev/null | grep -q restarting; then
+        log "  BE 컨테이너 재시작 루프 — 최근 로그:"
+        docker compose logs --tail 15 be 2>/dev/null | sed 's/^/    /' || true
+      fi
     fi
     if [[ "${attempt}" -ge 60 ]]; then
       log "백엔드 기동 시간 초과 — 최근 로그:"
