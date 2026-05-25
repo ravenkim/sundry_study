@@ -335,16 +335,24 @@ export const Signup = () => {
 
         setLoading(true)
         try {
+            const trimmedUserName = userName.trim()
+            const affiliationName = pendingAffiliation.affiliationName
+
             await register({
-                userName: userName.trim(),
+                userName: trimmedUserName,
                 email: email.trim(),
                 phoneNumber: phoneNumber.trim(),
                 password,
                 affiliation: pendingAffiliation.affiliationId,
             })
             clearPendingAffiliation()
-            toast.success('회원가입이 완료되었습니다.')
-            navigate('/login')
+            navigate('/signup/complete', {
+                replace: true,
+                state: {
+                    userName: trimmedUserName,
+                    affiliationName,
+                },
+            })
         } catch (error) {
             toast.error(getErrorMessage(error))
         } finally {

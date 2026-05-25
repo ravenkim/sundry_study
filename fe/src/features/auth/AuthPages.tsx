@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router'
-import { ArrowLeft, Mail, Phone } from 'lucide-react'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router'
+import { ArrowLeft, CheckCircle2, Mail, Phone } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { getAffiliations } from 'src/globals/api/affiliationsApi'
 import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
@@ -144,6 +144,82 @@ export function AffiliationSelection() {
 
 /** @deprecated use AffiliationSelection */
 export const SchoolSelection = AffiliationSelection
+
+interface SignupCompleteState {
+    userName?: string
+    affiliationName?: string
+}
+
+export function SignupComplete() {
+    const navigate = useNavigate()
+    const location = useLocation()
+    const state = (location.state as SignupCompleteState | null) ?? {}
+
+    const handleContinue = () => {
+        navigate('/login', { replace: true })
+    }
+
+    return (
+        <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
+            <header className="border-outline-variant bg-surface sticky top-0 z-10 flex h-14 items-center justify-between border-b px-5">
+                <div className="w-10" />
+                <h1 className="text-primary text-lg font-bold">가입 완료</h1>
+                <div className="w-10" />
+            </header>
+
+            <main className="flex flex-grow flex-col items-center justify-center gap-8 p-5 pb-28 text-center">
+                <div className="bg-secondary-container/20 rounded-full p-8">
+                    <CheckCircle2 className="text-secondary h-20 w-20" />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <MascotImage emotion="smile" size="md" decorative />
+                    <h2 className="text-on-surface text-2xl font-black">
+                        회원가입 완료!
+                    </h2>
+                    <p className="text-on-surface-variant text-sm leading-relaxed">
+                        에코리포트에 오신 것을 환영합니다.
+                        <br />
+                        아래 버튼을 눌러 로그인해 주세요.
+                    </p>
+                </div>
+
+                {(state.userName || state.affiliationName) && (
+                    <div className="border-outline-variant bg-surface w-full rounded-xl border p-5 text-left">
+                        {state.userName && (
+                            <div className="border-outline-variant/60 flex justify-between border-b py-2.5 text-sm">
+                                <span className="text-on-surface-variant">
+                                    아이디
+                                </span>
+                                <span className="font-semibold">
+                                    {state.userName}
+                                </span>
+                            </div>
+                        )}
+                        {state.affiliationName && (
+                            <div className="flex justify-between py-2.5 text-sm">
+                                <span className="text-on-surface-variant">
+                                    소속
+                                </span>
+                                <span className="font-semibold">
+                                    {state.affiliationName}
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </main>
+
+            <div className="border-outline-variant bg-surface sticky bottom-0 border-t p-5">
+                <EcoButton
+                    className="w-full py-4 text-lg font-bold"
+                    onClick={handleContinue}
+                >
+                    다음
+                </EcoButton>
+            </div>
+        </div>
+    )
+}
 
 interface AuthInquiryPageProps {
     title: string

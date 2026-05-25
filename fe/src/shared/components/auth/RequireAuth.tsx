@@ -9,6 +9,7 @@ const PUBLIC_PATHS = [
     '/signup/affiliation',
     '/signup/school',
     '/signup/admin',
+    '/signup/complete',
     '/find-account',
     '/oauth/callback',
 ]
