@@ -7,6 +7,7 @@ import { getReportDetail } from 'src/globals/api/reportApi'
 import type { ReportDetail } from 'src/globals/api/types'
 import { useReportStatusLabel } from 'src/shared/lib/i18n/reportStatus'
 import { useAppLocale, formatDateTime } from 'src/shared/lib/i18n/formatters'
+import { ReportMascotThumbnail } from './ReportMascotThumbnail'
 
 export const UserReportDetail = () => {
     const { t } = useTranslation('report')
@@ -54,13 +55,12 @@ export const UserReportDetail = () => {
                 <ArrowLeft className="h-4 w-4" /> {t('detail.historyLink')}
             </Link>
 
-            {report.thumbnailUrl && (
-                <img
-                    src={report.thumbnailUrl}
-                    alt={t('detail.reportPhotoAlt')}
-                    className="h-48 w-full rounded-xl object-cover"
-                />
-            )}
+            <ReportMascotThumbnail
+                variant="detail"
+                status={report.status}
+                pointAwarded={report.pointAwarded}
+                aiResult={report.aiResult}
+            />
 
             <EcoCard className="flex flex-col gap-4 p-5">
                 <div className="flex items-center justify-between">

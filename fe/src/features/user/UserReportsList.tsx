@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { MascotEmptyState } from 'src/shared/components/mascort'
+import { ReportMascotThumbnail } from './ReportMascotThumbnail'
 import { EcoBadge, EcoButton } from 'src/shared/ui/eco'
 import { getMyReports } from 'src/globals/api/reportApi'
 import type { PaginatedReports, ReportStatus } from 'src/globals/api/types'
@@ -106,17 +107,10 @@ export const UserReportsList = () => {
                             key={item.reportId}
                             className="border-outline-variant bg-surface-container-lowest flex gap-4 rounded-xl border p-4"
                         >
-                            {item.thumbnailUrl ? (
-                                <img
-                                    src={item.thumbnailUrl}
-                                    alt=""
-                                    className="h-16 w-16 shrink-0 rounded-lg object-cover"
-                                />
-                            ) : (
-                                <div className="bg-surface-container flex h-16 w-16 shrink-0 items-center justify-center rounded-lg text-2xl">
-                                    📷
-                                </div>
-                            )}
+                            <ReportMascotThumbnail
+                                status={item.status}
+                                pointAwarded={item.pointAwarded}
+                            />
                             <div className="flex min-w-0 flex-1 flex-col gap-1.5">
                                 <span className="truncate font-bold">
                                     {item.roomName}
