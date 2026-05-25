@@ -13,10 +13,33 @@ const BY_KEY: Record<string, string> = {
     gift: giftImg,
 }
 
-const BY_CATEGORY: Record<string, string> = {
-    '커피/음료': coffeeImg,
-    '편의점': convenienceImg,
-    '환경 기부': donationImg,
+export type RewardCategoryKey = 'coffee' | 'convenience' | 'donation'
+
+/** Canonical API category labels (matches BE / mock data). */
+export const REWARD_CATEGORY_API_VALUES: Record<RewardCategoryKey, string> = {
+    coffee: '커피/음료',
+    convenience: '편의점',
+    donation: '환경 기부',
+}
+
+const BY_CATEGORY_KEY: Record<RewardCategoryKey, string> = {
+    coffee: coffeeImg,
+    convenience: convenienceImg,
+    donation: donationImg,
+}
+
+const API_VALUE_TO_CATEGORY_KEY: Record<string, RewardCategoryKey> =
+    Object.fromEntries(
+        Object.entries(REWARD_CATEGORY_API_VALUES).map(([key, value]) => [
+            value,
+            key as RewardCategoryKey,
+        ]),
+    ) as Record<string, RewardCategoryKey>
+
+export function resolveRewardCategoryKey(
+    category: string,
+): RewardCategoryKey | undefined {
+    return API_VALUE_TO_CATEGORY_KEY[category]
 }
 
 export const DEFAULT_REWARD_IMAGE = giftImg
@@ -30,8 +53,9 @@ export function resolveRewardImageSrc(
     if (item.name.includes('학식')) {
         return mealImg
     }
-    if (BY_CATEGORY[item.category]) {
-        return BY_CATEGORY[item.category]
+    const categoryKey = resolveRewardCategoryKey(item.category)
+    if (categoryKey && BY_CATEGORY_KEY[categoryKey]) {
+        return BY_CATEGORY_KEY[categoryKey]
     }
     return DEFAULT_REWARD_IMAGE
 }

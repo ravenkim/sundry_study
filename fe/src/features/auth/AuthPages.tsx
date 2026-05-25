@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { ArrowLeft, CheckCircle2, Mail, Phone } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { getAffiliations } from 'src/globals/api/affiliationsApi'
@@ -18,6 +19,8 @@ export function AffiliationSelection() {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const { refreshUser } = useAuth()
+    const { t } = useTranslation('auth')
+    const { t: tErrors } = useTranslation('errors')
     const intent = (searchParams.get('intent') as SignupIntent) || 'signup'
     const isOAuthComplete = intent === 'oauth-complete'
 
@@ -31,9 +34,9 @@ export function AffiliationSelection() {
             .then((affiliationList) => {
                 setAffiliations(affiliationList)
             })
-            .catch(() => toast.error('소속 목록을 불러오지 못했습니다.'))
+            .catch(() => toast.error(tErrors('affiliationListLoadFailed')))
             .finally(() => setLoading(false))
-    }, [])
+    }, [tErrors])
 
     const selectedAffiliation = affiliations.find(
         (affiliation) => affiliation.affiliationId === affiliationId,
@@ -52,7 +55,7 @@ export function AffiliationSelection() {
         e.preventDefault()
 
         if (!affiliationId) {
-            toast.error('소속을 선택해 주세요.')
+            toast.error(tErrors('affiliationRequired'))
             return
         }
 
@@ -69,10 +72,10 @@ export function AffiliationSelection() {
                     buildingId: profile.buildingId,
                     buildingName: profile.buildingName,
                 })
-                toast.success('소속이 등록되었습니다.')
+                toast.success(t('affiliation.registerSuccess'))
                 navigate(getAppHomePath(getStoredUser()), { replace: true })
             } catch {
-                toast.error('소속 설정에 실패했습니다. 다시 시도해 주세요.')
+                toast.error(tErrors('affiliationAssignFailed'))
             } finally {
                 setSubmitting(false)
             }
@@ -86,10 +89,12 @@ export function AffiliationSelection() {
         navigate('/signup')
     }
 
-    const title = isOAuthComplete ? '소속 등록' : '회원가입'
+    const title = isOAuthComplete
+        ? t('affiliation.titleOAuthComplete')
+        : t('affiliation.titleSignup')
     const subtitle = isOAuthComplete
-        ? '로그인 후 소속을 선택해 주세요.'
-        : '에코리포트 이용을 위해 소속을 선택해 주세요.'
+        ? t('affiliation.subtitleOAuthComplete')
+        : t('affiliation.subtitleSignup')
 
     return (
         <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
@@ -111,14 +116,14 @@ export function AffiliationSelection() {
                 </div>
                 <div>
                     <h2 className="text-on-surface mb-1 text-xl font-bold">
-                        소속 선택
+                        {t('affiliation.sectionTitle')}
                     </h2>
                     <p className="text-on-surface-variant text-sm">{subtitle}</p>
                 </div>
 
                 {loading ? (
                     <p className="text-on-surface-variant text-sm">
-                        소속 목록을 불러오는 중...
+                        {t('affiliation.loadingList')}
                     </p>
                 ) : (
                     <form
@@ -129,19 +134,21 @@ export function AffiliationSelection() {
                         {affiliations.length > 0 ? (
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-on-surface text-sm font-semibold">
-                                    학교·캠퍼스
+                                    {t('affiliation.schoolLabel')}
                                 </label>
                                 <SearchableSelect
                                     options={affiliationOptions}
                                     value={affiliationId}
                                     onChange={setAffiliationId}
-                                    placeholder="학교를 검색·선택해 주세요"
-                                    searchPlaceholder="학교명 검색..."
+                                    placeholder={t('affiliation.schoolPlaceholder')}
+                                    searchPlaceholder={t(
+                                        'affiliation.schoolSearchPlaceholder',
+                                    )}
                                 />
                             </div>
                         ) : (
                             <p className="text-on-surface-variant text-sm">
-                                등록된 소속이 없습니다. 관리자에게 문의해 주세요.
+                                {t('affiliation.emptyList')}
                             </p>
                         )}
                     </form>
@@ -156,10 +163,10 @@ export function AffiliationSelection() {
                     disabled={loading || submitting}
                 >
                     {submitting
-                        ? '저장 중...'
+                        ? t('affiliation.submitSaving')
                         : isOAuthComplete
-                          ? '소속 등록하고 시작하기'
-                          : '다음'}
+                          ? t('affiliation.submitOAuthComplete')
+                          : t('affiliation.submitNext')}
                 </EcoButton>
             </div>
         </div>
@@ -177,6 +184,7 @@ interface SignupCompleteState {
 export function SignupComplete() {
     const navigate = useNavigate()
     const location = useLocation()
+    const { t } = useTranslation('auth')
     const state = (location.state as SignupCompleteState | null) ?? {}
 
     const handleContinue = () => {
@@ -187,7 +195,9 @@ export function SignupComplete() {
         <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
             <header className="border-outline-variant bg-surface sticky top-0 z-10 flex h-14 items-center justify-between border-b px-5">
                 <div className="w-10" />
-                <h1 className="text-primary text-lg font-bold">가입 완료</h1>
+                <h1 className="text-primary text-lg font-bold">
+                    {t('signup.complete.headerTitle')}
+                </h1>
                 <div className="w-10" />
             </header>
 
@@ -198,12 +208,12 @@ export function SignupComplete() {
                 <div className="flex flex-col gap-2">
                     <MascotImage emotion="smile" size="md" decorative />
                     <h2 className="text-on-surface text-2xl font-black">
-                        회원가입 완료!
+                        {t('signup.complete.title')}
                     </h2>
                     <p className="text-on-surface-variant text-sm leading-relaxed">
-                        에코리포트에 오신 것을 환영합니다.
+                        {t('signup.complete.welcome')}
                         <br />
-                        아래 버튼을 눌러 로그인해 주세요.
+                        {t('signup.complete.loginPrompt')}
                     </p>
                 </div>
 
@@ -212,7 +222,7 @@ export function SignupComplete() {
                         {state.userName && (
                             <div className="border-outline-variant/60 flex justify-between border-b py-2.5 text-sm">
                                 <span className="text-on-surface-variant">
-                                    아이디
+                                    {t('signup.complete.usernameLabel')}
                                 </span>
                                 <span className="font-semibold">
                                     {state.userName}
@@ -222,7 +232,7 @@ export function SignupComplete() {
                         {state.affiliationName && (
                             <div className="flex justify-between py-2.5 text-sm">
                                 <span className="text-on-surface-variant">
-                                    소속
+                                    {t('signup.complete.affiliationLabel')}
                                 </span>
                                 <span className="font-semibold">
                                     {state.affiliationName}
@@ -238,7 +248,7 @@ export function SignupComplete() {
                     className="w-full py-4 text-lg font-bold"
                     onClick={handleContinue}
                 >
-                    다음
+                    {t('signup.complete.loginButton')}
                 </EcoButton>
             </div>
         </div>
@@ -258,6 +268,9 @@ export function AuthInquiryPage({
     phone,
     email,
 }: AuthInquiryPageProps) {
+    const { t } = useTranslation('auth')
+    const { t: tCommon } = useTranslation('common')
+
     return (
         <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
             <header className="border-outline-variant bg-surface sticky top-0 z-10 flex h-14 items-center justify-between border-b px-5">
@@ -298,7 +311,7 @@ export function AuthInquiryPage({
                 </div>
 
                 <p className="text-on-surface-variant text-center text-xs leading-relaxed">
-                    운영 시간 내 문의 주시면 순차적으로 안내해 드립니다.
+                    {t('inquiry.hoursNotice')}
                 </p>
             </main>
 
@@ -308,7 +321,7 @@ export function AuthInquiryPage({
                     variant="outline"
                     onClick={() => window.history.back()}
                 >
-                    돌아가기
+                    {tCommon('back')}
                 </EcoButton>
             </div>
         </div>
@@ -316,23 +329,27 @@ export function AuthInquiryPage({
 }
 
 export function FindAccountInquiry() {
+    const { t } = useTranslation('auth')
+
     return (
         <AuthInquiryPage
-            title="아이디 · 비밀번호 찾기"
-            description="아이디 또는 비밀번호를 잊으셨다면 아래 연락처로 문의해 주세요. 본인 확인 후 안내해 드립니다."
-            phone="010-1111-1111"
-            email="eco@repoort.com"
+            title={t('findAccount.title')}
+            description={t('findAccount.description')}
+            phone={t('inquiry.contactPhone')}
+            email={t('inquiry.contactEmail')}
         />
     )
 }
 
 export function AdminSignupInquiry() {
+    const { t } = useTranslation('auth')
+
     return (
         <AuthInquiryPage
-            title="관리자 회원가입"
-            description="건물 관리자 계정은 별도 승인 후 발급됩니다. 아래 연락처로 소속명과 담당 구역 정보를 함께 문의해 주세요."
-            phone="010-1111-1111"
-            email="eco@repoort.com"
+            title={t('adminSignup.title')}
+            description={t('adminSignup.description')}
+            phone={t('inquiry.contactPhone')}
+            email={t('inquiry.contactEmail')}
         />
     )
 }

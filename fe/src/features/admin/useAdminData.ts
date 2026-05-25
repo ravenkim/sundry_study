@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import i18n from 'src/assets/locales/i18n'
 import { getStoredUser } from 'src/features/auth/authStorage'
 
 export function useAdminReportsState() {
@@ -38,7 +39,9 @@ export function useAdminReportsState() {
             prev.map((r) => (r.reportId === reportId ? { ...r, status } : r)),
         )
         toast.success(
-            status === 'APPROVED' ? '승인되었습니다.' : '반려되었습니다.',
+            status === 'APPROVED'
+                ? i18n.t('admin:toast.reportApproved')
+                : i18n.t('admin:toast.reportRejected'),
         )
     }
 
@@ -53,6 +56,20 @@ export function useAdminDashboardState() {
     useEffect(() => {
         void import('src/globals/api/adminApi')
             .then(({ getAdminDashboard }) => getAdminDashboard())
+            .then(setStats)
+    }, [])
+
+    return stats
+}
+
+export function useAdminStatsState() {
+    const [stats, setStats] = useState<Awaited<
+        ReturnType<typeof import('src/globals/api/adminApi').getAdminStats>
+    > | null>(null)
+
+    useEffect(() => {
+        void import('src/globals/api/adminApi')
+            .then(({ getAdminStats }) => getAdminStats())
             .then(setStats)
     }, [])
 
@@ -108,8 +125,8 @@ export function useAdminGifticonExchangesState() {
         setStats(nextStats)
         toast.success(
             status === 'SENT'
-                ? '기프티콘 발송 처리되었습니다.'
-                : '반려되었습니다. 포인트가 환불됩니다.',
+                ? i18n.t('admin:toast.gifticonSent')
+                : i18n.t('admin:toast.gifticonRejected'),
         )
     }
 

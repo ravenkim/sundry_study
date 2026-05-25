@@ -22,6 +22,7 @@ import {
 } from 'src/globals/api/authApi'
 import { getMyProfile } from 'src/globals/api/memberProfileApi'
 import type { LoginRequest, RegisterRequest } from 'src/globals/api/authApi'
+import i18n from 'src/assets/locales/i18n'
 
 interface AuthContextValue {
     user: StoredUser | null
@@ -94,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const login = useCallback(async (request: LoginRequest) => {
         const { body } = await loginApi(request)
         if (!body?.accessToken || !body.userName) {
-            throw new Error('로그인 응답이 올바르지 않습니다.')
+            throw new Error(i18n.t('errors:loginResponseInvalid'))
         }
         setAuthSession(body.accessToken, {
             userName: body.userName,

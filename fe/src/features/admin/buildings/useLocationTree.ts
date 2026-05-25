@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
+import i18n from 'src/assets/locales/i18n'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import {
     createLocationNode,
@@ -15,7 +16,6 @@ import {
     getMiddleNodes,
     getRoomNodes,
     isThirdColumnActive,
-    LOC,
     type LocationDepth,
 } from 'src/features/admin/buildings/locationTreeUtils'
 
@@ -56,13 +56,17 @@ export function useLocationTree() {
                 if (scoped?.affiliationId) {
                     setAffiliation({
                         affiliationId: scoped.affiliationId,
-                        name: scoped.affiliationName ?? '소속',
+                        name:
+                            scoped.affiliationName ??
+                            i18n.t('adminBuildings:affiliationFallback'),
                     })
                     return
                 }
                 setAffiliation(null)
             })
-            .catch(() => toast.error('소속 정보를 불러오지 못했습니다.'))
+            .catch(() =>
+                toast.error(i18n.t('adminBuildings:toast.affiliationLoadFailed')),
+            )
     }, [])
 
     const affiliationId = affiliation?.affiliationId ?? null
@@ -77,7 +81,7 @@ export function useLocationTree() {
         setLoading(true)
         void getLocationNodeTree(affiliationId)
             .then((nodes) => setTree(Array.isArray(nodes) ? nodes : []))
-            .catch(() => toast.error('장소 목록을 불러오지 못했습니다.'))
+            .catch(() => toast.error(i18n.t('adminBuildings:toast.treeLoadFailed')))
             .finally(() => setLoading(false))
     }, [affiliationId])
 
@@ -121,19 +125,19 @@ export function useLocationTree() {
     const openCreateSheet = useCallback(
         (depth: LocationDepth) => {
             if (depth === 2 && !selected.buildingId) {
-                toast.error(LOC.toast.selectParent)
+                toast.error(i18n.t('adminBuildings:toast.selectParent'))
                 return
             }
             if (depth === 3) {
                 if (!selected.middleId) {
-                    toast.error(LOC.toast.selectGroup)
+                    toast.error(i18n.t('adminBuildings:toast.selectGroup'))
                     return
                 }
                 const middle = getMiddleNodes(tree, selected.buildingId).find(
                     (n) => n.id === selected.middleId,
                 )
                 if (middle?.nodeKind !== 'GROUP') {
-                    toast.error(LOC.toast.selectGroupForLeaf)
+                    toast.error(i18n.t('adminBuildings:toast.selectGroupForLeaf'))
                     return
                 }
             }
@@ -207,7 +211,7 @@ export function useLocationTree() {
                           }
                         : {}),
                 })
-                toast.success('등록되었습니다.')
+                toast.success(i18n.t('adminBuildings:toast.createSuccess'))
                 closeSheet()
                 loadTree()
 
@@ -222,7 +226,7 @@ export function useLocationTree() {
 
                 return true
             } catch {
-                toast.error('등록에 실패했습니다.')
+                toast.error(i18n.t('adminBuildings:toast.createFailed'))
                 return false
             } finally {
                 setSubmitting(false)
@@ -235,7 +239,7 @@ export function useLocationTree() {
         async (name: string, leafPayload?: LocationLeafPayload) => {
             if (!sheet || sheet.mode !== 'edit') return false
             if (!name.trim()) {
-                toast.error('이름을 입력해 주세요.')
+                toast.error(i18n.t('adminBuildings:toast.nameRequired'))
                 return false
             }
 
@@ -268,12 +272,12 @@ export function useLocationTree() {
                           }
                         : {}),
                 })
-                toast.success('수정되었습니다.')
+                toast.success(i18n.t('adminBuildings:toast.updateSuccess'))
                 closeSheet()
                 loadTree()
                 return true
             } catch {
-                toast.error('수정에 실패했습니다.')
+                toast.error(i18n.t('adminBuildings:toast.updateFailed'))
                 return false
             } finally {
                 setSubmitting(false)
@@ -287,15 +291,13 @@ export function useLocationTree() {
             setSubmitting(true)
             try {
                 await deleteLocationNode(node.id)
-                toast.success('삭제되었습니다.')
+                toast.success(i18n.t('adminBuildings:toast.deleteSuccess'))
                 pruneSelectionAfterDelete(node.id)
                 closeSheet()
                 loadTree()
                 return true
             } catch {
-                toast.error(
-                    '삭제에 실패했습니다. 하위 항목이나 제보가 있으면 삭제할 수 없습니다.',
-                )
+                toast.error(i18n.t('adminBuildings:toast.deleteFailed'))
                 return false
             } finally {
                 setSubmitting(false)

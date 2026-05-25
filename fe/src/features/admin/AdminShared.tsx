@@ -1,25 +1,15 @@
+import { useTranslation } from 'react-i18next'
 import { CheckCircle2, Gift, X } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { AdminSidebar, AdminHeader } from 'src/shared/layout/EcoLayouts'
 import { EcoBadge, EcoCard } from 'src/shared/ui/eco'
 import { useAdminGifticonExchangesState } from 'src/features/admin/useAdminData'
+import {
+    formatDateTime,
+    formatNumber,
+    useAppLocale,
+} from 'src/shared/lib/i18n/formatters'
 import type { GifticonExchangeStatus } from 'src/globals/api/types'
-
-const FILTERS: {
-    label: string
-    value: GifticonExchangeStatus | 'ALL'
-}[] = [
-    { label: '전체', value: 'ALL' },
-    { label: '발송 대기', value: 'PENDING' },
-    { label: '발송 완료', value: 'SENT' },
-    { label: '반려', value: 'REJECTED' },
-]
-
-const STATUS_LABEL: Record<GifticonExchangeStatus, string> = {
-    PENDING: '발송 대기',
-    SENT: '발송 완료',
-    REJECTED: '반려',
-}
 
 function statusVariant(
     status: GifticonExchangeStatus,
@@ -30,50 +20,71 @@ function statusVariant(
 }
 
 export const AdminPoints = () => {
+    const { t } = useTranslation('admin')
+    const locale = useAppLocale()
     const { filter, setFilter, exchanges, stats, handleStatusUpdate } =
         useAdminGifticonExchangesState()
+
+    const filters: {
+        label: string
+        value: GifticonExchangeStatus | 'ALL'
+    }[] = [
+        { label: t('gifticon.filter.all'), value: 'ALL' },
+        { label: t('gifticon.filter.pending'), value: 'PENDING' },
+        { label: t('gifticon.filter.sent'), value: 'SENT' },
+        { label: t('gifticon.filter.rejected'), value: 'REJECTED' },
+    ]
+
+    const statCards = [
+        {
+            label: t('gifticon.stats.pendingCount'),
+            value: stats
+                ? t('gifticon.stats.pendingCountValue', {
+                      count: stats.pendingCount,
+                  })
+                : '—',
+        },
+        {
+            label: t('gifticon.stats.pendingPoints'),
+            value: stats
+                ? t('gifticon.stats.pendingPointsValue', {
+                      points: formatNumber(stats.pendingPoints, locale),
+                  })
+                : '—',
+        },
+        {
+            label: t('gifticon.stats.sentCount'),
+            value: stats
+                ? t('gifticon.stats.sentCountValue', { count: stats.sentCount })
+                : '—',
+        },
+        {
+            label: t('gifticon.stats.rejectedCount'),
+            value: stats
+                ? t('gifticon.stats.rejectedCountValue', {
+                      count: stats.rejectedCount,
+                  })
+                : '—',
+        },
+    ]
 
     return (
         <>
             <AdminSidebar />
             <div className="bg-surface-bright flex min-h-screen flex-col md:ml-64">
-                <AdminHeader title="기프티콘 관리" />
+                <AdminHeader title={t('gifticon.headerTitle')} />
                 <main className="mx-auto w-full max-w-7xl p-8">
                     <div className="mb-8">
                         <h2 className="mb-1 text-3xl font-bold">
-                            기프티콘 관리
+                            {t('gifticon.title')}
                         </h2>
                         <p className="text-on-surface-variant text-sm">
-                            사용자별 기프티콘 교환 신청을 확인하고 발송
-                            처리합니다.
+                            {t('gifticon.description')}
                         </p>
                     </div>
 
                     <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-                        {[
-                            {
-                                label: '발송 대기',
-                                value: stats
-                                    ? `${stats.pendingCount}건`
-                                    : '—',
-                            },
-                            {
-                                label: '대기 포인트',
-                                value: stats
-                                    ? `${stats.pendingPoints.toLocaleString()}P`
-                                    : '—',
-                            },
-                            {
-                                label: '발송 완료',
-                                value: stats ? `${stats.sentCount}건` : '—',
-                            },
-                            {
-                                label: '반려',
-                                value: stats
-                                    ? `${stats.rejectedCount}건`
-                                    : '—',
-                            },
-                        ].map((stat) => (
+                        {statCards.map((stat) => (
                             <EcoCard
                                 key={stat.label}
                                 className="flex flex-col gap-2 p-5"
@@ -89,7 +100,7 @@ export const AdminPoints = () => {
                     </div>
 
                     <nav className="mb-4 flex flex-wrap gap-2">
-                        {FILTERS.map((item) => (
+                        {filters.map((item) => (
                             <button
                                 key={item.value}
                                 type="button"
@@ -109,22 +120,36 @@ export const AdminPoints = () => {
                     <EcoCard className="overflow-hidden p-0">
                         <div className="border-outline-variant bg-surface-container-low flex items-center gap-2 border-b p-4">
                             <Gift className="text-primary h-5 w-5" />
-                            <h3 className="font-bold">기프티콘 교환 신청</h3>
+                            <h3 className="font-bold">
+                                {t('gifticon.sectionTitle')}
+                            </h3>
                         </div>
                         {exchanges.length === 0 ? (
                             <p className="text-on-surface-variant p-8 text-center text-sm">
-                                해당 상태의 교환 신청이 없습니다.
+                                {t('gifticon.empty')}
                             </p>
                         ) : (
                             <table className="w-full text-left text-sm">
                                 <thead>
                                     <tr className="border-outline-variant bg-surface text-on-surface-variant border-b text-xs font-bold">
-                                        <th className="p-4">신청 일시</th>
-                                        <th className="p-4">회원</th>
-                                        <th className="p-4">기프티콘</th>
-                                        <th className="p-4">포인트</th>
-                                        <th className="p-4">상태</th>
-                                        <th className="p-4 text-right">관리</th>
+                                        <th className="p-4">
+                                            {t('gifticon.table.requestDate')}
+                                        </th>
+                                        <th className="p-4">
+                                            {t('gifticon.table.member')}
+                                        </th>
+                                        <th className="p-4">
+                                            {t('gifticon.table.reward')}
+                                        </th>
+                                        <th className="p-4">
+                                            {t('gifticon.table.points')}
+                                        </th>
+                                        <th className="p-4">
+                                            {t('gifticon.table.status')}
+                                        </th>
+                                        <th className="p-4 text-right">
+                                            {t('gifticon.table.actions')}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-outline-variant/30 divide-y font-medium">
@@ -134,9 +159,10 @@ export const AdminPoints = () => {
                                             className="hover:bg-surface-container-low/30 transition-colors"
                                         >
                                             <td className="text-on-surface-variant p-4 text-xs">
-                                                {new Date(
+                                                {formatDateTime(
                                                     item.createdAt,
-                                                ).toLocaleString('ko-KR')}
+                                                    locale,
+                                                )}
                                             </td>
                                             <td className="p-4">
                                                 <div className="font-bold">
@@ -150,8 +176,12 @@ export const AdminPoints = () => {
                                                 {item.rewardName}
                                             </td>
                                             <td className="text-error p-4 font-bold">
-                                                -{item.pointUsed.toLocaleString()}
-                                                P
+                                                {t('gifticon.pointsUsed', {
+                                                    points: formatNumber(
+                                                        item.pointUsed,
+                                                        locale,
+                                                    ),
+                                                })}
                                             </td>
                                             <td className="p-4">
                                                 <EcoBadge
@@ -159,7 +189,9 @@ export const AdminPoints = () => {
                                                         item.status,
                                                     )}
                                                 >
-                                                    {STATUS_LABEL[item.status]}
+                                                    {t(
+                                                        `gifticon.status.${item.status}`,
+                                                    )}
                                                 </EcoBadge>
                                             </td>
                                             <td className="p-4 text-right">
@@ -168,7 +200,9 @@ export const AdminPoints = () => {
                                                         <button
                                                             type="button"
                                                             className="bg-primary-container text-on-primary-container rounded-lg p-1.5 transition-all hover:brightness-95"
-                                                            title="발송 완료"
+                                                            title={t(
+                                                                'gifticon.actions.markSent',
+                                                            )}
                                                             onClick={() =>
                                                                 void handleStatusUpdate(
                                                                     item.exchangeId,
@@ -181,7 +215,9 @@ export const AdminPoints = () => {
                                                         <button
                                                             type="button"
                                                             className="border-outline-variant text-on-surface-variant hover:bg-surface-container-low rounded-lg border p-1.5 transition-all"
-                                                            title="반려"
+                                                            title={t(
+                                                                'gifticon.actions.reject',
+                                                            )}
                                                             onClick={() =>
                                                                 void handleStatusUpdate(
                                                                     item.exchangeId,
@@ -195,12 +231,13 @@ export const AdminPoints = () => {
                                                 ) : (
                                                     <span className="text-on-surface-variant text-xs">
                                                         {item.processedAt
-                                                            ? new Date(
+                                                            ? formatDateTime(
                                                                   item.processedAt,
-                                                              ).toLocaleString(
-                                                                  'ko-KR',
+                                                                  locale,
                                                               )
-                                                            : '-'}
+                                                            : t(
+                                                                  'gifticon.noProcessedDate',
+                                                              )}
                                                     </span>
                                                 )}
                                             </td>

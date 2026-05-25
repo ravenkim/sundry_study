@@ -1,4 +1,5 @@
 import client from 'src/globals/api/client'
+import i18n from 'src/assets/locales/i18n'
 import { compressImageForUpload } from 'src/shared/lib/compressImage'
 import { shouldUseMock, withMockFallback } from 'src/globals/api/apiUtils'
 import {
@@ -52,11 +53,11 @@ export async function createReport(
     })
 
     if (isApiError(data)) {
-        throw new Error(data.message || '제보 접수에 실패했습니다.')
+        throw new Error(data.message || i18n.t('errors:reportSubmitFailed'))
     }
 
     if (data.code !== ResponseCode.REPORT_CREATED || !data.body) {
-        throw new Error('제보 접수에 실패했습니다.')
+        throw new Error(i18n.t('errors:reportSubmitFailed'))
     }
 
     const result = data.body
@@ -68,7 +69,7 @@ export async function createReport(
             result: 'WASTE_DETECTED',
             message:
                 result.message ??
-                '제보가 접수되었습니다. 관리자 확인 후 포인트가 지급됩니다.',
+                i18n.t('errors:reportSubmittedPending'),
             pointAwarded: 0,
         },
     }

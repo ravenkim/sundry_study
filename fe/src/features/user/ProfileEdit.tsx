@@ -1,8 +1,8 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
-import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getAffiliations } from 'src/globals/api/affiliationsApi'
 import {
@@ -14,18 +14,7 @@ import {
 import type { Affiliation } from 'src/globals/api/types'
 import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 import { EcoButton } from 'src/shared/ui/eco'
-
-function getErrorMessage(error: unknown): string {
-    if (isAxiosError(error)) {
-        const serverMsg = (error.response?.data as { message?: string })
-            ?.message
-        return serverMsg || error.message || '서버와 통신할 수 없습니다.'
-    }
-    if (error instanceof Error) {
-        return error.message || '요청 처리 중 오류가 발생했습니다.'
-    }
-    return '요청 처리 중 오류가 발생했습니다.'
-}
+import { getErrorMessage } from 'src/shared/lib/i18n/getErrorMessage'
 
 function isValidPhoneFormat(phone: string): boolean {
     const digits = phone.replace(/[^0-9]/g, '')
@@ -37,6 +26,7 @@ function isValidEmailFormat(email: string): boolean {
 }
 
 export function ProfileEdit() {
+    const { t } = useTranslation(['user', 'errors'])
     const navigate = useNavigate()
     const { refreshUser } = useAuth()
 
@@ -87,23 +77,23 @@ export function ProfileEdit() {
         const trimmedPhone = phoneNumber.trim()
 
         if (!trimmedEmail) {
-            toast.error('이메일을 입력해 주세요.')
+            toast.error(t('user:profileEdit.errorEmailRequired'))
             return
         }
         if (!isValidEmailFormat(trimmedEmail)) {
-            toast.error('올바른 이메일 형식을 입력해 주세요.')
+            toast.error(t('user:profileEdit.errorEmailInvalid'))
             return
         }
         if (!trimmedPhone) {
-            toast.error('전화번호를 입력해 주세요.')
+            toast.error(t('user:profileEdit.errorPhoneRequired'))
             return
         }
         if (!isValidPhoneFormat(trimmedPhone)) {
-            toast.error('올바른 휴대전화 번호 형식을 입력해 주세요.')
+            toast.error(t('user:profileEdit.errorPhoneInvalid'))
             return
         }
         if (!affiliationId) {
-            toast.error('소속을 선택해 주세요.')
+            toast.error(t('user:profileEdit.errorAffiliationRequired'))
             return
         }
 
@@ -115,15 +105,15 @@ export function ProfileEdit() {
 
         if (passwordChanged) {
             if (password.length < 8) {
-                toast.error('비밀번호는 8자 이상이어야 합니다.')
+                toast.error(t('user:profileEdit.errorPasswordMinLength'))
                 return
             }
             if (password !== passwordConfirm) {
-                toast.error('새 비밀번호가 일치하지 않습니다.')
+                toast.error(t('user:profileEdit.errorPasswordMismatch'))
                 return
             }
             if (!isOAuthUser && !currentPassword) {
-                toast.error('현재 비밀번호를 입력해 주세요.')
+                toast.error(t('user:profileEdit.errorCurrentPasswordRequired'))
                 return
             }
         }
@@ -134,7 +124,7 @@ export function ProfileEdit() {
             !affiliationChanged &&
             !passwordChanged
         ) {
-            toast.info('변경된 내용이 없습니다.')
+            toast.info(t('user:profileEdit.infoNoChanges'))
             return
         }
 
@@ -172,7 +162,7 @@ export function ProfileEdit() {
                 userType: latestProfile.userType,
             })
 
-            toast.success('프로필이 저장되었습니다.')
+            toast.success(t('user:profileEdit.successSaved'))
             navigate('/profile')
         } catch (error) {
             toast.error(getErrorMessage(error))
@@ -187,23 +177,25 @@ export function ProfileEdit() {
                 <Link to="/profile" className="text-on-surface-variant -ml-2 p-2">
                     <ArrowLeft className="h-6 w-6" />
                 </Link>
-                <h1 className="text-primary text-lg font-bold">프로필 수정</h1>
+                <h1 className="text-primary text-lg font-bold">
+                    {t('user:profileEdit.title')}
+                </h1>
                 <div className="w-10" />
             </header>
 
             <main className="flex flex-grow flex-col gap-6 p-5 pb-28">
                 {loading ? (
                     <p className="text-on-surface-variant text-center text-sm">
-                        프로필을 불러오는 중...
+                        {t('user:profileEdit.loading')}
                     </p>
                 ) : (
                     <>
                         <div>
                             <h2 className="text-on-surface mb-1 text-xl font-bold">
-                                내 정보
+                                {t('user:profileEdit.sectionTitle')}
                             </h2>
                             <p className="text-on-surface-variant text-sm">
-                                연락처와 소속 정보를 변경할 수 있습니다.
+                                {t('user:profileEdit.sectionDescription')}
                             </p>
                         </div>
 
@@ -214,7 +206,7 @@ export function ProfileEdit() {
                         >
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-on-surface text-sm font-semibold">
-                                    아이디
+                                    {t('user:profileEdit.username')}
                                 </label>
                                 <input
                                     type="text"
@@ -226,13 +218,15 @@ export function ProfileEdit() {
 
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-on-surface text-sm font-semibold">
-                                    이메일
+                                    {t('user:profileEdit.email')}
                                 </label>
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="example@email.com"
+                                    placeholder={t(
+                                        'user:profileEdit.emailPlaceholder',
+                                    )}
                                     autoComplete="email"
                                     className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                                 />
@@ -240,7 +234,7 @@ export function ProfileEdit() {
 
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-on-surface text-sm font-semibold">
-                                    전화번호
+                                    {t('user:profileEdit.phone')}
                                 </label>
                                 <input
                                     type="tel"
@@ -248,7 +242,9 @@ export function ProfileEdit() {
                                     onChange={(e) =>
                                         setPhoneNumber(e.target.value)
                                     }
-                                    placeholder="010-1234-5678"
+                                    placeholder={t(
+                                        'user:profileEdit.phonePlaceholder',
+                                    )}
                                     autoComplete="tel"
                                     className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                                 />
@@ -256,19 +252,23 @@ export function ProfileEdit() {
 
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-on-surface text-sm font-semibold">
-                                    소속
+                                    {t('user:profileEdit.affiliation')}
                                 </label>
                                 {affiliations.length > 0 ? (
                                     <SearchableSelect
                                         options={affiliationOptions}
                                         value={affiliationId}
                                         onChange={setAffiliationId}
-                                        placeholder="학교를 검색·선택해 주세요"
-                                        searchPlaceholder="학교명 검색..."
+                                        placeholder={t(
+                                            'user:profileEdit.affiliationPlaceholder',
+                                        )}
+                                        searchPlaceholder={t(
+                                            'user:profileEdit.affiliationSearchPlaceholder',
+                                        )}
                                     />
                                 ) : (
                                     <p className="text-on-surface-variant text-sm">
-                                        등록된 소속이 없습니다.
+                                        {t('user:profileEdit.noAffiliations')}
                                     </p>
                                 )}
                             </div>
@@ -276,19 +276,25 @@ export function ProfileEdit() {
                             <div className="border-outline-variant flex flex-col gap-4 border-t pt-5">
                                 <div>
                                     <h3 className="text-on-surface text-sm font-semibold">
-                                        비밀번호 변경
+                                        {t('user:profileEdit.passwordSectionTitle')}
                                     </h3>
                                     <p className="text-on-surface-variant mt-1 text-xs">
                                         {isOAuthUser
-                                            ? '소셜 로그인 계정은 새 비밀번호만 입력하면 설정됩니다.'
-                                            : '변경하지 않으려면 비워 두세요.'}
+                                            ? t(
+                                                  'user:profileEdit.passwordHintOAuth',
+                                              )
+                                            : t(
+                                                  'user:profileEdit.passwordHintLocal',
+                                              )}
                                     </p>
                                 </div>
 
                                 {!isOAuthUser && (
                                     <div className="flex flex-col gap-1.5">
                                         <label className="text-on-surface text-sm font-semibold">
-                                            현재 비밀번호
+                                            {t(
+                                                'user:profileEdit.currentPassword',
+                                            )}
                                         </label>
                                         <input
                                             type="password"
@@ -306,7 +312,7 @@ export function ProfileEdit() {
 
                                 <div className="flex flex-col gap-1.5">
                                     <label className="text-on-surface text-sm font-semibold">
-                                        새 비밀번호
+                                        {t('user:profileEdit.newPassword')}
                                     </label>
                                     <input
                                         type="password"
@@ -314,7 +320,9 @@ export function ProfileEdit() {
                                         onChange={(e) =>
                                             setPassword(e.target.value)
                                         }
-                                        placeholder="8자 이상"
+                                        placeholder={t(
+                                            'user:profileEdit.newPasswordPlaceholder',
+                                        )}
                                         autoComplete="new-password"
                                         className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                                     />
@@ -322,7 +330,7 @@ export function ProfileEdit() {
 
                                 <div className="flex flex-col gap-1.5">
                                     <label className="text-on-surface text-sm font-semibold">
-                                        새 비밀번호 확인
+                                        {t('user:profileEdit.confirmPassword')}
                                     </label>
                                     <input
                                         type="password"
@@ -347,7 +355,9 @@ export function ProfileEdit() {
                     form="profile-edit-form"
                     disabled={loading || saving}
                 >
-                    {saving ? '저장 중...' : '저장하기'}
+                    {saving
+                        ? t('user:profileEdit.saving')
+                        : t('user:profileEdit.save')}
                 </EcoButton>
             </div>
         </div>

@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { EcoCard } from 'src/shared/ui/eco'
 import { LocationColumn } from 'src/features/admin/buildings/LocationColumn'
 import { LocationFormSheet } from 'src/features/admin/buildings/LocationFormSheet'
-import { LOC, getDepthLabel, getDepthSubtitle } from 'src/features/admin/buildings/locationTreeUtils'
+import { getDepthLabel, getDepthSubtitle } from 'src/features/admin/buildings/locationTreeUtils'
 import type { useLocationTree } from 'src/features/admin/buildings/useLocationTree'
 import type { AdminLocationNode } from 'src/globals/api/types'
 
@@ -28,6 +29,7 @@ export const LocationExplorer = ({
     handleUpdate,
     handleDelete,
 }: LocationTreeState) => {
+    const { t } = useTranslation('adminBuildings')
     const [deleteIntent, setDeleteIntent] = useState(false)
 
     const openEdit = (node: AdminLocationNode) => {
@@ -49,11 +51,11 @@ export const LocationExplorer = ({
     const selectedMiddle = middleNodes.find((m) => m.id === selected.middleId)
 
     const column2Title = selectedBuilding
-        ? `${selectedBuilding.name} 하위`
+        ? t('columnChildrenTitle', { name: selectedBuilding.name })
         : getDepthLabel(2)
 
     const column3Title = selectedMiddle
-        ? `${selectedMiddle.name} 하위`
+        ? t('columnChildrenTitle', { name: selectedMiddle.name })
         : getDepthLabel(3)
 
     return (
@@ -68,8 +70,8 @@ export const LocationExplorer = ({
                         depth={1}
                         loading={loading}
                         canAdd
-                        emptyMessage={LOC.empty.depth1}
-                        emptyActionLabel={LOC.empty.depth1Action}
+                        emptyMessage={t('empty.depth1')}
+                        emptyActionLabel={t('empty.depth1Action')}
                         onSelect={selectBuilding}
                         onAdd={() => openCreateSheet(1)}
                         onEdit={openEdit}
@@ -88,11 +90,11 @@ export const LocationExplorer = ({
                         canAdd={!!selected.buildingId}
                         emptyMessage={
                             selected.buildingId
-                                ? LOC.empty.depth2Add
-                                : LOC.empty.selectDepth1
+                                ? t('empty.depth2Add')
+                                : t('empty.selectDepth1')
                         }
                         emptyActionLabel={
-                            selected.buildingId ? LOC.empty.depth2Action : undefined
+                            selected.buildingId ? t('empty.depth2Action') : undefined
                         }
                         onSelect={selectMiddle}
                         onAdd={() => openCreateSheet(2)}
@@ -116,15 +118,15 @@ export const LocationExplorer = ({
                         canAdd={thirdColumnActive}
                         emptyMessage={
                             !selected.buildingId
-                                ? LOC.empty.selectDepth1
+                                ? t('empty.selectDepth1')
                                 : !selected.middleId
-                                  ? LOC.empty.selectDepth2Group
+                                  ? t('empty.selectDepth2Group')
                                   : !thirdColumnActive
-                                    ? LOC.empty.depth3DirectLeaf
-                                    : LOC.empty.depth3Add
+                                    ? t('empty.depth3DirectLeaf')
+                                    : t('empty.depth3Add')
                         }
                         emptyActionLabel={
-                            thirdColumnActive ? LOC.empty.depth3Action : undefined
+                            thirdColumnActive ? t('empty.depth3Action') : undefined
                         }
                         onSelect={selectRoom}
                         onAdd={() => openCreateSheet(3)}

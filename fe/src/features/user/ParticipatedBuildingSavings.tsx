@@ -1,5 +1,6 @@
 import { Building2, ChevronDown, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoCard } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
@@ -20,6 +21,7 @@ export const ParticipatedBuildingSavingsCard = ({
     compact = false,
     className,
 }: Props) => {
+    const { t } = useTranslation(['user', 'common'])
     const [expanded, setExpanded] = useState(!compact)
     const { buildings, loading } = useMyBuildingSavings()
     const totalKwh = sumParticipatedKwh(buildings, 'total')
@@ -27,6 +29,7 @@ export const ParticipatedBuildingSavingsCard = ({
     const maxMonthKwh = Math.max(...buildings.map((b) => b.thisMonthKwh), 1)
     const trees = getTreeEquivalent(totalKwh)
     const mascotEmotion = getParticipatedSavingsMascotEmotion(buildings)
+    const isSingleBuilding = buildings.length <= 1
 
     return (
         <EcoCard className={cn('relative overflow-hidden', className)}>
@@ -37,9 +40,9 @@ export const ParticipatedBuildingSavingsCard = ({
             <div className="relative z-10 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-2">
                     <span className="text-on-surface-variant text-sm font-medium">
-                        {buildings.length <= 1
-                            ? '내 건물 절약 전기'
-                            : '참여 건물 절약 전기'}
+                        {isSingleBuilding
+                            ? t('savings.titleSingle')
+                            : t('savings.titleMultiple')}
                     </span>
                     {compact && (
                         <button
@@ -48,7 +51,9 @@ export const ParticipatedBuildingSavingsCard = ({
                             className="text-primary flex items-center gap-0.5 text-xs font-bold"
                             aria-expanded={expanded}
                         >
-                            {buildings.length}개 건물
+                            {t('savings.buildingCount', {
+                                count: buildings.length,
+                            })}
                             {expanded ? (
                                 <ChevronUp className="h-3.5 w-3.5" />
                             ) : (
@@ -69,28 +74,33 @@ export const ParticipatedBuildingSavingsCard = ({
 
                 <div className="flex flex-col gap-1">
                     <span className="text-on-surface-variant text-xs font-medium">
-                        {buildings.length <= 1
-                            ? '내 건물 누적 절약 전기'
-                            : '참여 건물 누적 절약 전기'}
+                        {isSingleBuilding
+                            ? t('savings.cumulativeSingle')
+                            : t('savings.cumulativeMultiple')}
                     </span>
                     <div className="flex items-center gap-2">
                         <span className="text-secondary text-3xl font-bold">
                             🌿{' '}
                             {loading
                                 ? '—'
-                                : `${formatKwh(totalKwh)} kWh`}
+                                : t('savings.kwhValue', {
+                                      value: formatKwh(totalKwh),
+                                  })}
                         </span>
                     </div>
                     <span className="text-secondary text-xs font-medium">
                         {loading
-                            ? '불러오는 중...'
-                            : `이번 달 +${formatKwh(monthKwh)} kWh · 🌲 소나무 ${trees}그루 흡수량과 동등`}
+                            ? t('common:loading')
+                            : t('savings.monthlySummary', {
+                                  monthKwh: formatKwh(monthKwh),
+                                  trees,
+                              })}
                     </span>
                 </div>
 
                 {expanded && !loading && buildings.length === 0 && (
                     <p className="text-on-surface-variant border-outline-variant/60 border-t pt-3 text-center text-sm">
-                        아직 절약 전기 데이터가 없습니다. 제보를 시작해 보세요!
+                        {t('savings.empty')}
                     </p>
                 )}
 
@@ -110,12 +120,19 @@ export const ParticipatedBuildingSavingsCard = ({
                                     </div>
                                     <div className="shrink-0 text-right">
                                         <span className="text-secondary text-sm font-bold">
-                                            {formatKwh(building.totalKwh)} kWh
+                                            {t('savings.kwhValue', {
+                                                value: formatKwh(
+                                                    building.totalKwh,
+                                                ),
+                                            })}
                                         </span>
                                         <p className="text-on-surface-variant text-[10px]">
-                                            이번 달{' '}
-                                            {formatKwh(building.thisMonthKwh)}{' '}
-                                            kWh · 제보 {building.reportCount}건
+                                            {t('savings.buildingMonthly', {
+                                                kwh: formatKwh(
+                                                    building.thisMonthKwh,
+                                                ),
+                                                count: building.reportCount,
+                                            })}
                                         </p>
                                     </div>
                                 </div>

@@ -4,9 +4,11 @@ import org.example.be.domain.model.Report;
 import org.example.be.domain.model.ReportStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +28,17 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
             Long memberSeq,
             List<ReportStatus> statuses
     );
+
+    @EntityGraph(attributePaths = {"member", "locationNode"})
+    List<Report> findAllByOrderByCreatedAtDesc();
+
+    long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
+
+    long countByCreatedAtBetweenAndStatus(
+            LocalDateTime start,
+            LocalDateTime end,
+            ReportStatus status
+    );
+
+    long countByStatus(ReportStatus status);
 }

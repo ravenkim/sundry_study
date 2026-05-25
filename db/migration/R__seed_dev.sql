@@ -119,6 +119,14 @@ FROM member_db m
 WHERE m.user_name = 'admin'
   AND NOT EXISTS (SELECT 1 FROM member_point_db mp WHERE mp.member_seq = m.seq);
 
+-- 기존 admin 계정 소속·건물을 삼육대학교로 맞춤 (시드 재실행 시)
+UPDATE member_db m
+JOIN affiliation_db a ON a.name = '삼육대학교'
+JOIN location_node_db n ON n.parent_seq IS NULL AND n.name = '공학관 A동' AND n.affiliation_seq = a.seq
+SET m.affiliation_seq = a.seq,
+    m.location_node_seq = n.seq
+WHERE m.user_name = 'admin';
+
 -- User account
 INSERT INTO member_db (user_name, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
 SELECT

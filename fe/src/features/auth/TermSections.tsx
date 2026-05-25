@@ -4,7 +4,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from 'src/shared/lib/shadcn/components/ui/accordion'
-import type { SignupTerm } from 'src/features/auth/signupTermsData'
+import type { SignupTerm } from 'src/features/auth/useSignupTerms'
 
 export function TermSections({ term }: { term: SignupTerm }) {
     return (

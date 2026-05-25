@@ -1,3 +1,5 @@
+import i18n from 'src/assets/locales/i18n'
+
 export type OperatingScheduleItem = {
     dayOfWeek: number
     closed: boolean
@@ -5,14 +7,19 @@ export type OperatingScheduleItem = {
     powerOffTime?: string
 }
 
-export const DAY_LABELS: Record<number, string> = {
-    1: '월',
-    2: '화',
-    3: '수',
-    4: '목',
-    5: '금',
-    6: '토',
-    7: '일',
+const DAY_I18N_KEYS: Record<number, string> = {
+    1: 'mon',
+    2: 'tue',
+    3: 'wed',
+    4: 'thu',
+    5: 'fri',
+    6: 'sat',
+    7: 'sun',
+}
+
+export function getDayLabel(dayOfWeek: number): string {
+    const key = DAY_I18N_KEYS[dayOfWeek]
+    return key ? i18n.t(`adminBuildings:day.${key}`) : String(dayOfWeek)
 }
 
 export function defaultOperatingSchedules(): OperatingScheduleItem[] {

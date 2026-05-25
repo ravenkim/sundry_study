@@ -1,0 +1,148 @@
+{
+    "reportStatus": {
+        "APPROVED": "Completed",
+        "PENDING": "Pending approval",
+        "REJECTED": "Rejected",
+        "UNDETECTABLE": "Undetectable"
+    },
+    "dashboard": {
+        "headerTitle": "Report Overview",
+        "title": "Report Management",
+        "description": "Manage and approve campus energy waste reports.",
+        "stats": {
+            "todayReports": "Today's reports",
+            "todayReportsTrend": "12% increase",
+            "pendingReports": "Pending reports",
+            "pendingReportsHint": "Prompt handling is important",
+            "totalCo2Saved": "Total CO₂ saved",
+            "co2Unit": "kg"
+        },
+        "table": {
+            "reportDate": "Report date",
+            "location": "Location",
+            "aiResult": "AI result",
+            "author": "Author",
+            "status": "Status",
+            "actions": "Actions"
+        },
+        "actions": {
+            "approve": "Approve",
+            "reject": "Reject"
+        },
+        "pointsAwarded": "+{{points}}P",
+        "noPoints": "-"
+    },
+    "reports": {
+        "headerTitle": "Report Management",
+        "title": "Report Management",
+        "description": "Review energy waste reports and decide approval.",
+        "export": "Export"
+    },
+    "stats": {
+        "headerTitle": "Energy Statistics",
+        "title": "Statistics & Reports",
+        "description": "Campus energy savings performance through EcoReport",
+        "dateRange": "2024.10.01 - 2024.10.31",
+        "buildingShare": {
+            "title": "Reports by building",
+            "subtitle": "Top 5 most reported buildings",
+            "totalReports": "Total reports",
+            "percent": "{{value}}%"
+        },
+        "wasteByCategory": {
+            "title": "Savings by category",
+            "subtitle": "Status of major energy waste resolution"
+        },
+        "monthly": {
+            "title": "Monthly summary",
+            "excelDownload": "Download Excel",
+            "table": {
+                "month": "Month",
+                "totalReports": "Total reports",
+                "completed": "Completed",
+                "completedBadge": "{{count}} ({{percent}}%)",
+                "co2Saved": "Est. CO₂ saved (kg)",
+                "co2Value": "{{value}}kg",
+                "pointsAwarded": "Points awarded",
+                "pointsValue": "{{value}} P"
+            },
+            "empty": "No report data to aggregate."
+        }
+    },
+    "users": {
+        "headerTitle": "User Management",
+        "title": "Member list",
+        "description": "Overview of all users participating in the campus energy saving campaign.",
+        "stats": {
+            "totalUsers": "Total users",
+            "newUsersWeekly": "New sign-ups (weekly)",
+            "activeUsersDaily": "Active users (daily)",
+            "pointsPaid": "Points paid",
+            "newUsersTrend": "+12% ↑"
+        },
+        "searchPlaceholder": "Search by name or email...",
+        "filter": "Filter",
+        "table": {
+            "user": "User",
+            "email": "Email",
+            "joinDate": "Join date",
+            "reportCount": "Total reports",
+            "reportCountValue": "{{count}}",
+            "points": "Points balance",
+            "actions": "Actions"
+        },
+        "grade": {
+            "greenMaster": "Green Master",
+            "greenRookie": "Green Rookie",
+            "ecoHero": "Eco Hero"
+        }
+    },
+    "gifticon": {
+        "headerTitle": "Gift Card Management",
+        "title": "Gift Card Management",
+        "description": "Review and process user gift card exchange requests.",
+        "stats": {
+            "pendingCount": "Pending delivery",
+            "pendingCountValue": "{{count}}",
+            "pendingPoints": "Pending points",
+            "pendingPointsValue": "{{points}}P",
+            "sentCount": "Delivered",
+            "sentCountValue": "{{count}}",
+            "rejectedCount": "Rejected",
+            "rejectedCountValue": "{{count}}"
+        },
+        "filter": {
+            "all": "All",
+            "pending": "Pending delivery",
+            "sent": "Delivered",
+            "rejected": "Rejected"
+        },
+        "status": {
+            "PENDING": "Pending delivery",
+            "SENT": "Delivered",
+            "REJECTED": "Rejected"
+        },
+        "sectionTitle": "Gift card exchange requests",
+        "empty": "No exchange requests in this status.",
+        "table": {
+            "requestDate": "Request date",
+            "member": "Member",
+            "reward": "Gift card",
+            "points": "Points",
+            "status": "Status",
+            "actions": "Actions"
+        },
+        "pointsUsed": "-{{points}}P",
+        "actions": {
+            "markSent": "Mark delivered",
+            "reject": "Reject"
+        },
+        "noProcessedDate": "-"
+    },
+    "toast": {
+        "reportApproved": "Approved.",
+        "reportRejected": "Rejected.",
+        "gifticonSent": "Gift card marked as delivered.",
+        "gifticonRejected": "Rejected. Points will be refunded."
+    }
+}

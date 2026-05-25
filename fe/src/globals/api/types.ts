@@ -189,6 +189,33 @@ export interface AdminDashboardStats {
     monthlySavingsKrw: number
 }
 
+export interface AdminBuildingShare {
+    name: string
+    count: number
+    percentage: number
+}
+
+export interface AdminCategoryCount {
+    name: string
+    count: number
+}
+
+export interface AdminMonthlySummary {
+    monthLabel: string
+    totalReports: number
+    completedReports: number
+    completedPercent: number
+    co2SavedKg: number
+    pointsAwarded: number
+}
+
+export interface AdminStatsData {
+    totalReports: number
+    buildingShares: AdminBuildingShare[]
+    wasteByCategory: AdminCategoryCount[]
+    monthlySummaries: AdminMonthlySummary[]
+}
+
 export interface CreateReportPayload {
     image: File
     buildingId?: number

@@ -1,3 +1,4 @@
+import 'src/assets/locales/i18n'
 import { createRoot } from 'react-dom/client'
 import App from 'src/App'
 import { Provider } from 'react-redux'

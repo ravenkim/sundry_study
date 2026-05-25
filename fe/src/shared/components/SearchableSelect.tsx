@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ChevronDown, Search } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 
@@ -21,14 +22,19 @@ export function SearchableSelect({
     options,
     value,
     onChange,
-    placeholder = '선택해 주세요',
-    searchPlaceholder = '검색...',
+    placeholder,
+    searchPlaceholder,
     disabled = false,
     className,
 }: Props) {
+    const { t } = useTranslation('common')
     const [open, setOpen] = useState(false)
     const [query, setQuery] = useState('')
     const containerRef = useRef<HTMLDivElement>(null)
+
+    const resolvedPlaceholder = placeholder ?? t('select.placeholder')
+    const resolvedSearchPlaceholder =
+        searchPlaceholder ?? t('select.searchPlaceholder')
 
     const selected = options.find((option) => option.value === value)
 
@@ -69,7 +75,7 @@ export function SearchableSelect({
                         selected ? 'text-on-surface' : 'text-on-surface-variant',
                     )}
                 >
-                    {selected?.label ?? placeholder}
+                    {selected?.label ?? resolvedPlaceholder}
                 </span>
                 <ChevronDown
                     className={cn(
@@ -87,7 +93,7 @@ export function SearchableSelect({
                             type="text"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder={searchPlaceholder}
+                            placeholder={resolvedSearchPlaceholder}
                             className="text-on-surface placeholder:text-on-surface-variant w-full bg-transparent text-sm outline-none"
                             autoFocus
                         />
@@ -95,7 +101,7 @@ export function SearchableSelect({
                     <ul className="max-h-48 overflow-y-auto py-1">
                         {filtered.length === 0 ? (
                             <li className="text-on-surface-variant px-3 py-2 text-sm">
-                                검색 결과가 없습니다.
+                                {t('select.noResults')}
                             </li>
                         ) : (
                             filtered.map((option) => (

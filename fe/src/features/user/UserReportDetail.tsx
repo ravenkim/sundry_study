@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { ArrowLeft } from 'lucide-react'
 import { EcoBadge, EcoCard } from 'src/shared/ui/eco'
 import { getReportDetail } from 'src/globals/api/reportApi'
-import type { ReportDetail, ReportStatus } from 'src/globals/api/types'
-
-const STATUS_LABEL: Record<ReportStatus, string> = {
-    APPROVED: '승인됨',
-    PENDING: '처리중',
-    REJECTED: '반려',
-    UNDETECTABLE: '판별불가',
-}
+import type { ReportDetail } from 'src/globals/api/types'
+import { useReportStatusLabel } from 'src/shared/lib/i18n/reportStatus'
+import { useAppLocale, formatDateTime } from 'src/shared/lib/i18n/formatters'
 
 export const UserReportDetail = () => {
+    const { t } = useTranslation('report')
+    const locale = useAppLocale()
     const { reportId } = useParams<{ reportId: string }>()
     const [report, setReport] = useState<ReportDetail | null>(null)
     const [loading, setLoading] = useState(true)
@@ -24,10 +22,12 @@ export const UserReportDetail = () => {
             .finally(() => setLoading(false))
     }, [reportId])
 
+    const statusLabel = useReportStatusLabel(report?.status ?? '')
+
     if (loading) {
         return (
             <p className="text-on-surface-variant p-8 text-center text-sm">
-                불러오는 중...
+                {t('detail.loading')}
             </p>
         )
     }
@@ -36,10 +36,10 @@ export const UserReportDetail = () => {
         return (
             <div className="flex flex-col items-center gap-4 p-8 text-center">
                 <p className="text-on-surface-variant">
-                    제보를 찾을 수 없습니다.
+                    {t('detail.notFound')}
                 </p>
                 <Link to="/reports" className="text-primary text-sm font-bold">
-                    목록으로
+                    {t('detail.backToList')}
                 </Link>
             </div>
         )
@@ -51,13 +51,13 @@ export const UserReportDetail = () => {
                 to="/reports"
                 className="text-on-surface-variant flex items-center gap-2 text-sm font-bold"
             >
-                <ArrowLeft className="h-4 w-4" /> 제보 이력
+                <ArrowLeft className="h-4 w-4" /> {t('detail.historyLink')}
             </Link>
 
             {report.thumbnailUrl && (
                 <img
                     src={report.thumbnailUrl}
-                    alt="제보 사진"
+                    alt={t('detail.reportPhotoAlt')}
                     className="h-48 w-full rounded-xl object-cover"
                 />
             )}
@@ -65,21 +65,21 @@ export const UserReportDetail = () => {
             <EcoCard className="flex flex-col gap-4 p-5">
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-bold">{report.roomName}</h2>
-                    <EcoBadge>{STATUS_LABEL[report.status]}</EcoBadge>
+                    <EcoBadge>{statusLabel}</EcoBadge>
                 </div>
                 <div className="flex flex-col gap-2 text-sm">
                     <div className="flex justify-between">
                         <span className="text-on-surface-variant">
-                            제보 일시
+                            {t('detail.reportedAt')}
                         </span>
                         <span className="font-medium">
-                            {new Date(report.createdAt).toLocaleString('ko-KR')}
+                            {formatDateTime(report.createdAt, locale)}
                         </span>
                     </div>
                     {report.detectionLabel && (
                         <div className="flex justify-between">
                             <span className="text-on-surface-variant">
-                                AI 판별
+                                {t('detail.aiDetection')}
                             </span>
                             <span className="font-medium">
                                 {report.detectionLabel}
@@ -89,25 +89,29 @@ export const UserReportDetail = () => {
                     <div className="flex justify-between">
                         <span className="text-on-surface-variant">
                             {report.status === 'APPROVED'
-                                ? '적립 포인트'
-                                : '예상 포인트'}
+                                ? t('detail.earnedPoints')
+                                : t('detail.estimatedPoints')}
                         </span>
                         <span className="text-primary font-bold">
                             {report.pointAwarded > 0
                                 ? `+${report.pointAwarded}P`
                                 : report.estimatedPoint && report.estimatedPoint > 0
-                                  ? `약 +${report.estimatedPoint}P`
-                                  : '-'}
+                                  ? t('detail.estimatedPointsValue', {
+                                        points: report.estimatedPoint,
+                                    })
+                                  : t('detail.noPoints')}
                         </span>
                     </div>
                     {report.offTimeMinutes != null && report.offTimeMinutes > 0 && (
                         <div className="flex justify-between">
                             <span className="text-on-surface-variant">
-                                예상 방치 시간
+                                {t('detail.estimatedIdleTime')}
                             </span>
                             <span className="font-medium">
-                                {Math.floor(report.offTimeMinutes / 60)}시간{' '}
-                                {report.offTimeMinutes % 60}분
+                                {t('detail.idleTimeValue', {
+                                    hours: Math.floor(report.offTimeMinutes / 60),
+                                    minutes: report.offTimeMinutes % 60,
+                                })}
                             </span>
                         </div>
                     )}

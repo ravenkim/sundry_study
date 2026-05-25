@@ -10,6 +10,7 @@ import {
 import type {
     AdminDashboardStats,
     AdminReportRow,
+    AdminStatsData,
     ApiResponse,
     GifticonExchangeRow,
     GifticonExchangeStatus,
@@ -26,6 +27,26 @@ export async function getAdminReports(): Promise<AdminReportRow[]> {
             return unwrapApiData(data)
         },
         () => MOCK_ADMIN_REPORTS,
+    )
+}
+
+export async function getAdminStats(
+    buildingId?: number,
+): Promise<AdminStatsData> {
+    return withMockFallback(
+        async () => {
+            const { data } = await client.get<ApiResponse<AdminStatsData>>(
+                '/api/admin/stats',
+                { params: { buildingId } },
+            )
+            return unwrapApiData(data)
+        },
+        () => ({
+            totalReports: 0,
+            buildingShares: [],
+            wasteByCategory: [],
+            monthlySummaries: [],
+        }),
     )
 }
 

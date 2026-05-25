@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { AlertCircle, CheckCircle2, RefreshCw, XCircle } from 'lucide-react'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
 import type { AiReportResult } from 'src/globals/api/types'
 import { usePoints } from 'src/features/points/PointsContext'
+import { useAppLocale, formatNumber } from 'src/shared/lib/i18n/formatters'
 
 interface ReportResultState {
     aiResult?: AiReportResult
@@ -12,20 +14,24 @@ interface ReportResultState {
     status?: string
 }
 
-function getDetectionLabel(result: AiReportResult): string {
-    if (result.result === 'PASS') return '정상 상태'
-    if (result.result === 'ERROR') return '판별 불가'
-    const parts: string[] = []
-    if (result.light_status === 'ON') parts.push('조명 켜짐')
-    if (result.ac_status === 'ON') parts.push('에어컨 가동')
-    return parts.length > 0 ? parts.join(' / ') : '낭비 감지'
-}
-
 export const UserReportResult = () => {
+    const { t } = useTranslation('report')
+    const locale = useAppLocale()
     const location = useLocation()
     const navigate = useNavigate()
     const { points, refresh } = usePoints()
     const state = (location.state as ReportResultState | null) ?? {}
+
+    const getDetectionLabel = (result: AiReportResult): string => {
+        if (result.result === 'PASS') return t('result.detection.normal')
+        if (result.result === 'ERROR') return t('result.detection.undetectable')
+        const parts: string[] = []
+        if (result.light_status === 'ON') parts.push(t('result.detection.lightOn'))
+        if (result.ac_status === 'ON') parts.push(t('result.detection.acOn'))
+        return parts.length > 0
+            ? parts.join(t('result.detection.joinSeparator'))
+            : t('result.detection.wasteDetected')
+    }
 
     useEffect(() => {
         void refresh()
@@ -35,18 +41,21 @@ export const UserReportResult = () => {
         return (
             <div className="bg-surface flex min-h-[calc(100dvh-3.5rem)] flex-col items-center justify-center gap-8 p-5 py-10 text-center">
                 <p className="text-on-surface-variant">
-                    제보 결과를 불러올 수 없습니다.
+                    {t('result.loadFailed')}
                 </p>
                 <Link to="/report-form">
-                    <EcoButton className="w-full py-3">다시 제보하기</EcoButton>
+                    <EcoButton className="w-full py-3">
+                        {t('result.reportAgain')}
+                    </EcoButton>
                 </Link>
             </div>
         )
     }
 
     const aiResult = state.aiResult
-    const buildingName = state.buildingName ?? '공학관 A동'
-    const roomName = state.roomName ?? '303호'
+    const buildingName =
+        state.buildingName ?? t('result.fallbackBuilding')
+    const roomName = state.roomName ?? t('result.fallbackRoom')
     const isPendingReview =
         state.status === 'PENDING' || (aiResult.pointAwarded ?? 0) === 0
 
@@ -57,25 +66,28 @@ export const UserReportResult = () => {
                     <XCircle className="text-error h-24 w-24" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-black">판별할 수 없습니다</h1>
+                    <h1 className="text-2xl font-black">
+                        {t('result.cannotDetectTitle')}
+                    </h1>
                     <p className="text-on-surface-variant">
                         {aiResult.message}
                     </p>
                 </div>
                 <EcoCard className="text-on-surface-variant w-full max-w-sm text-left text-sm">
-                    <p>• 의자와 책상이 보이도록 다시 촬영해 주세요.</p>
-                    <p>• 조명·에어컨 상태가 잘 보이는 각도로 촬영해 주세요.</p>
+                    <p>{t('result.tipChairDesk')}</p>
+                    <p>{t('result.tipLightingAc')}</p>
                 </EcoCard>
                 <div className="flex w-full max-w-sm flex-col gap-3">
                     <EcoButton
                         className="w-full py-3"
                         onClick={() => navigate('/report-form')}
                     >
-                        <RefreshCw className="h-4 w-4" /> 다시 촬영하기
+                        <RefreshCw className="h-4 w-4" />{' '}
+                        {t('result.retakePhoto')}
                     </EcoButton>
                     <Link to="/">
                         <EcoButton variant="outline" className="w-full py-3">
-                            홈으로 이동
+                            {t('result.goHome')}
                         </EcoButton>
                     </Link>
                 </div>
@@ -90,7 +102,9 @@ export const UserReportResult = () => {
                     <AlertCircle className="text-on-surface-variant h-24 w-24" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-black">정상 상태입니다</h1>
+                    <h1 className="text-2xl font-black">
+                        {t('result.normalTitle')}
+                    </h1>
                     <p className="text-on-surface-variant">
                         {aiResult.message}
                     </p>
@@ -98,12 +112,12 @@ export const UserReportResult = () => {
                 <div className="flex w-full max-w-sm flex-col gap-3">
                     <Link to="/">
                         <EcoButton className="w-full py-3">
-                            홈으로 이동
+                            {t('result.goHome')}
                         </EcoButton>
                     </Link>
                     <Link to="/report-form">
                         <EcoButton variant="outline" className="w-full py-3">
-                            또 제보하기
+                            {t('result.reportAgainAlt')}
                         </EcoButton>
                     </Link>
                 </div>
@@ -121,7 +135,9 @@ export const UserReportResult = () => {
             </div>
             <div className="flex flex-col gap-2">
                 <h1 className="text-2xl font-black">
-                    {isPendingReview ? '제보 접수 완료!' : '낭비 확인됨!'}
+                    {isPendingReview
+                        ? t('result.submittedTitle')
+                        : t('result.wasteConfirmedTitle')}
                 </h1>
                 <p className="text-on-surface-variant">
                     {isPendingReview
@@ -134,9 +150,11 @@ export const UserReportResult = () => {
                 <EcoCard className="flex w-full max-w-sm flex-col gap-4">
                     <div className="flex items-center justify-between text-sm">
                         <span className="text-on-surface-variant">
-                            적립 포인트
+                            {t('result.earnedPoints')}
                         </span>
-                        <EcoBadge variant="yellow">리워드</EcoBadge>
+                        <EcoBadge variant="yellow">
+                            {t('result.rewardBadge')}
+                        </EcoBadge>
                     </div>
                     <div className="text-right">
                         <span className="text-primary text-4xl font-bold">
@@ -144,25 +162,27 @@ export const UserReportResult = () => {
                         </span>
                     </div>
                     <div className="border-surface-container border-t pt-3 text-sm">
-                        <span className="text-on-surface-variant">누적 </span>
+                        <span className="text-on-surface-variant">
+                            {t('result.accumulated')}{' '}
+                        </span>
                         <span className="text-primary font-bold">
-                            {balance.toLocaleString()}P
+                            {formatNumber(balance, locale)}P
                         </span>
                     </div>
                 </EcoCard>
             )}
 
             <EcoCard className="flex w-full max-w-sm flex-col gap-3 px-6 py-4 text-left">
-                <h3 className="text-sm font-bold">제보 요약</h3>
+                <h3 className="text-sm font-bold">{t('result.summaryTitle')}</h3>
                 <div className="border-surface-container flex justify-between border-b pb-2">
                     <span className="text-on-surface-variant text-sm">
-                        건물명
+                        {t('result.buildingName')}
                     </span>
                     <span className="text-sm font-bold">{buildingName}</span>
                 </div>
                 <div className="flex justify-between">
                     <span className="text-on-surface-variant text-sm">
-                        강의실
+                        {t('result.roomName')}
                     </span>
                     <span className="text-sm font-bold">{roomName}</span>
                 </div>
@@ -170,11 +190,13 @@ export const UserReportResult = () => {
 
             <div className="flex w-full max-w-sm flex-col gap-3">
                 <Link to="/">
-                    <EcoButton className="w-full py-3">홈으로 이동</EcoButton>
+                    <EcoButton className="w-full py-3">
+                        {t('result.goHome')}
+                    </EcoButton>
                 </Link>
                 <Link to="/report-form">
                     <EcoButton variant="outline" className="w-full py-3">
-                        또 제보하기
+                        {t('result.reportAgainAlt')}
                     </EcoButton>
                 </Link>
             </div>

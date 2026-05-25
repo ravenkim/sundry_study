@@ -1,25 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { MascotEmptyState } from 'src/shared/components/mascort'
 import { EcoBadge, EcoButton } from 'src/shared/ui/eco'
 import { getMyReports } from 'src/globals/api/reportApi'
 import type { PaginatedReports, ReportStatus } from 'src/globals/api/types'
+import { useReportStatusLabel } from 'src/shared/lib/i18n/reportStatus'
+import { useAppLocale, formatDate } from 'src/shared/lib/i18n/formatters'
 
-const FILTERS: { label: string; value: ReportStatus | 'ALL' }[] = [
-    { label: '전체', value: 'ALL' },
-    { label: '승인됨', value: 'APPROVED' },
-    { label: '처리중', value: 'PENDING' },
-    { label: '반려', value: 'REJECTED' },
-    { label: '판별불가', value: 'UNDETECTABLE' },
+const FILTER_VALUES: { value: ReportStatus | 'ALL'; labelKey: string }[] = [
+    { value: 'ALL', labelKey: 'list.filterAll' },
+    { value: 'APPROVED', labelKey: 'list.filterApproved' },
+    { value: 'PENDING', labelKey: 'list.filterPending' },
+    { value: 'REJECTED', labelKey: 'list.filterRejected' },
+    { value: 'UNDETECTABLE', labelKey: 'list.filterUndetectable' },
 ]
-
-const STATUS_LABEL: Record<ReportStatus, string> = {
-    APPROVED: '승인됨',
-    PENDING: '처리중',
-    REJECTED: '반려',
-    UNDETECTABLE: '판별불가',
-}
 
 function statusVariant(status: ReportStatus): 'green' | 'gray' | 'yellow' {
     if (status === 'APPROVED') return 'green'
@@ -27,11 +23,31 @@ function statusVariant(status: ReportStatus): 'green' | 'gray' | 'yellow' {
     return 'gray'
 }
 
+function ReportStatusBadge({ status }: { status: ReportStatus }) {
+    const label = useReportStatusLabel(status)
+    return (
+        <EcoBadge variant={statusVariant(status)}>{label}</EcoBadge>
+    )
+}
+
 export const UserReportsList = () => {
+    const { t } = useTranslation('report')
+    const locale = useAppLocale()
     const [filter, setFilter] = useState<ReportStatus | 'ALL'>('ALL')
     const [page, setPage] = useState(0)
     const [data, setData] = useState<PaginatedReports | null>(null)
     const [loading, setLoading] = useState(true)
+
+    const filters = useMemo(
+        () =>
+            FILTER_VALUES.map((f) => ({
+                ...f,
+                label: t(f.labelKey),
+            })),
+        [t],
+    )
+
+    const activeFilterLabel = filters.find((f) => f.value === filter)?.label
 
     useEffect(() => {
         setLoading(true)
@@ -43,7 +59,7 @@ export const UserReportsList = () => {
     return (
         <div className="flex flex-col gap-6 p-5 pb-8">
             <nav className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5">
-                {FILTERS.map((f) => (
+                {filters.map((f) => (
                     <button
                         key={f.value}
                         type="button"
@@ -65,20 +81,22 @@ export const UserReportsList = () => {
 
             {loading ? (
                 <p className="text-on-surface-variant py-12 text-center text-sm">
-                    불러오는 중...
+                    {t('list.loading')}
                 </p>
             ) : !data || data.content.length === 0 ? (
                 <MascotEmptyState
                     emotion="question"
                     title={
                         filter === 'ALL'
-                            ? '제보 내역이 없습니다'
-                            : `${FILTERS.find((f) => f.value === filter)?.label ?? ''} 제보가 없습니다`
+                            ? t('list.emptyAllTitle')
+                            : t('list.emptyFilteredTitle', {
+                                  filter: activeFilterLabel ?? '',
+                              })
                     }
                     description={
                         filter === 'ALL'
-                            ? '빈 강의실을 발견하면 첫 제보를 남겨 보세요.'
-                            : '다른 필터를 선택하거나 새 제보를 등록해 보세요.'
+                            ? t('list.emptyAllDescription')
+                            : t('list.emptyFilteredDescription')
                     }
                 />
             ) : (
@@ -109,16 +127,10 @@ export const UserReportsList = () => {
                                             {item.detectionLabel}
                                         </EcoBadge>
                                     )}
-                                    <EcoBadge
-                                        variant={statusVariant(item.status)}
-                                    >
-                                        {STATUS_LABEL[item.status]}
-                                    </EcoBadge>
+                                    <ReportStatusBadge status={item.status} />
                                 </div>
                                 <span className="text-on-surface-variant text-xs">
-                                    {new Date(
-                                        item.createdAt,
-                                    ).toLocaleDateString('ko-KR')}
+                                    {formatDate(item.createdAt, locale)}
                                 </span>
                             </div>
                             <span
@@ -131,7 +143,7 @@ export const UserReportsList = () => {
                             >
                                 {item.pointAwarded > 0
                                     ? `+${item.pointAwarded}P`
-                                    : '-'}
+                                    : t('list.noPoints')}
                             </span>
                         </div>
                     ))}
@@ -149,7 +161,10 @@ export const UserReportsList = () => {
                         <ChevronLeft className="h-4 w-4" />
                     </EcoButton>
                     <span className="text-sm font-bold">
-                        {page + 1} / {data.totalPages}
+                        {t('list.pagination', {
+                            current: page + 1,
+                            total: data.totalPages,
+                        })}
                     </span>
                     <EcoButton
                         variant="outline"

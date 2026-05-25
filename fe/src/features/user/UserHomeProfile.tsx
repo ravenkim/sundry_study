@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import {
     Leaf,
     ChevronRight,
     Coins,
     ClipboardCheck,
-    Bell,
     FileText,
     Edit2,
+    Languages,
     LogOut,
 } from 'lucide-react'
+import { LanguageSwitcher } from 'src/shared/components/i18n/LanguageSwitcher'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
@@ -23,13 +25,8 @@ import {
     sumParticipatedKwh,
 } from './userSavingsData'
 import { useMyBuildingSavings } from './useMyBuildingSavings'
-
-const STATUS_LABEL: Record<ReportStatus, string> = {
-    APPROVED: '승인됨',
-    PENDING: '검토중',
-    REJECTED: '반려',
-    UNDETECTABLE: '판별불가',
-}
+import { useReportStatusLabel } from 'src/shared/lib/i18n/reportStatus'
+import { useAppLocale, formatNumber } from 'src/shared/lib/i18n/formatters'
 
 function statusVariant(status: ReportStatus): 'green' | 'gray' | 'yellow' {
     if (status === 'APPROVED') return 'green'
@@ -37,7 +34,17 @@ function statusVariant(status: ReportStatus): 'green' | 'gray' | 'yellow' {
     return 'gray'
 }
 
+function ProfileReportStatusBadge({ status }: { status: ReportStatus }) {
+    const label = useReportStatusLabel(status, 'profile')
+    return (
+        <EcoBadge variant={statusVariant(status)}>{label}</EcoBadge>
+    )
+}
+
 export const UserHome = () => {
+    const { t: tUser } = useTranslation('user')
+    const { t: tReport } = useTranslation('report')
+    const locale = useAppLocale()
     const { points, loading: pointsLoading } = usePoints()
     const [recentReports, setRecentReports] = useState<ReportSummary[]>([])
     const [reportsLoading, setReportsLoading] = useState(true)
@@ -52,27 +59,29 @@ export const UserHome = () => {
         <div className="flex flex-col gap-8 p-5 pb-8">
             <Link to="/report-form">
                 <EcoButton className="w-full py-4 text-lg shadow-md">
-                    📷 낭비 제보하기
+                    {tUser('home.reportCta')}
                 </EcoButton>
             </Link>
 
             <div className="grid grid-cols-1 gap-4">
                 <EcoCard className="flex flex-col gap-2">
                     <span className="text-on-surface-variant text-sm font-medium">
-                        내 포인트
+                        {tUser('home.myPoints')}
                     </span>
                     <div className="flex items-baseline gap-1">
                         <span className="text-primary text-4xl font-bold">
                             {pointsLoading
                                 ? '—'
-                                : points.currentBalance.toLocaleString()}
+                                : formatNumber(points.currentBalance, locale)}
                         </span>
                         <span className="text-primary text-2xl font-bold">
                             P
                         </span>
                     </div>
                     <span className="text-secondary text-xs font-medium">
-                        이번 달 +{points.thisMonthEarned} P
+                        {tUser('home.thisMonthEarned', {
+                            points: points.thisMonthEarned,
+                        })}
                     </span>
                 </EcoCard>
                 <ParticipatedBuildingSavingsCard />
@@ -80,18 +89,20 @@ export const UserHome = () => {
 
             <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-bold">최근 제보 내역</h2>
+                    <h2 className="text-xl font-bold">
+                        {tReport('homeRecent.sectionTitle')}
+                    </h2>
                     <Link
                         to="/reports"
                         className="text-primary text-xs font-bold"
                     >
-                        전체 보기
+                        {tReport('homeRecent.viewAll')}
                     </Link>
                 </div>
                 <div className="border-outline-variant bg-outline-variant flex flex-col gap-1 overflow-hidden rounded-xl border">
                     {reportsLoading ? (
                         <div className="bg-surface-container-lowest text-on-surface-variant p-8 text-center text-sm">
-                            불러오는 중...
+                            {tReport('homeRecent.loading')}
                         </div>
                     ) : recentReports.length === 0 ? (
                         <div className="bg-surface-container-lowest flex flex-col items-center gap-3 p-8 text-center">
@@ -101,7 +112,7 @@ export const UserHome = () => {
                                 decorative
                             />
                             <p className="text-on-surface-variant text-sm">
-                                아직 제보 내역이 없습니다.
+                                {tReport('homeRecent.empty')}
                             </p>
                         </div>
                     ) : (
@@ -120,11 +131,9 @@ export const UserHome = () => {
                                                 {item.detectionLabel}
                                             </EcoBadge>
                                         )}
-                                        <EcoBadge
-                                            variant={statusVariant(item.status)}
-                                        >
-                                            {STATUS_LABEL[item.status]}
-                                        </EcoBadge>
+                                        <ProfileReportStatusBadge
+                                            status={item.status}
+                                        />
                                     </div>
                                 </div>
                                 <span
@@ -149,11 +158,14 @@ export const UserHome = () => {
 }
 
 export const UserProfile = () => {
+    const { t } = useTranslation('user')
+    const { t: tCommon } = useTranslation('common')
+    const locale = useAppLocale()
     const { points, loading } = usePoints()
     const { user, logout } = useAuth()
     const navigate = useNavigate()
     const [reportCount, setReportCount] = useState(0)
-    const displayName = user?.userName ?? '김에코'
+    const displayName = user?.userName ?? t('profile.fallbackName')
     const { buildings: myBuildingSavings, loading: savingsLoading } =
         useMyBuildingSavings()
 
@@ -172,7 +184,7 @@ export const UserProfile = () => {
                 <div className="border-primary-container h-20 w-20 overflow-hidden rounded-full border-2 p-1 shadow-sm">
                     <img
                         src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${displayName}`}
-                        alt="User"
+                        alt={t('profile.avatarAlt')}
                         className="bg-surface-container h-full w-full rounded-full object-cover"
                     />
                 </div>
@@ -187,7 +199,7 @@ export const UserProfile = () => {
                         <Leaf className="h-3.5 w-3.5 fill-current" />{' '}
                         {user?.affiliationName ??
                             user?.buildingName ??
-                            '그린 마스터'}
+                            t('profile.fallbackBadge')}
                     </EcoBadge>
                 </div>
             </section>
@@ -199,17 +211,18 @@ export const UserProfile = () => {
                     </div>
                     <div className="mb-2 flex items-center justify-between">
                         <span className="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase">
-                            보유 포인트
+                            {t('profile.heldPoints')}
                         </span>
                         <span className="text-primary flex items-center gap-0.5 text-[10px] font-bold">
-                            내역 보기 <ChevronRight className="h-3 w-3" />
+                            {t('profile.viewHistory')}{' '}
+                            <ChevronRight className="h-3 w-3" />
                         </span>
                     </div>
                     <div className="relative z-10 flex items-baseline gap-1">
                         <span className="text-primary text-4xl font-black tracking-tight">
                             {loading
                                 ? '—'
-                                : points.currentBalance.toLocaleString()}
+                                : formatNumber(points.currentBalance, locale)}
                         </span>
                         <span className="text-primary text-xl font-bold">
                             P
@@ -223,7 +236,7 @@ export const UserProfile = () => {
                     <div className="text-primary flex items-center gap-2">
                         <ClipboardCheck className="h-4 w-4" />
                         <span className="text-[10px] font-bold tracking-wider uppercase">
-                            총 제보
+                            {t('profile.totalReports')}
                         </span>
                     </div>
                     <div className="flex items-baseline gap-1">
@@ -231,7 +244,7 @@ export const UserProfile = () => {
                             {reportCount}
                         </span>
                         <span className="text-on-surface-variant text-[10px] font-bold">
-                            건
+                            {t('profile.reportCountUnit')}
                         </span>
                     </div>
                 </EcoCard>
@@ -239,7 +252,7 @@ export const UserProfile = () => {
                     <div className="text-secondary flex items-center gap-2">
                         <Leaf className="h-4 w-4 fill-current" />
                         <span className="text-[10px] font-bold tracking-wider uppercase">
-                            절약 전기
+                            {t('profile.savedElectricity')}
                         </span>
                     </div>
                     <div className="flex items-baseline gap-1">
@@ -254,7 +267,7 @@ export const UserProfile = () => {
                                   )}
                         </span>
                         <span className="text-on-surface-variant text-[10px] font-bold">
-                            kWh
+                            {t('profile.kwhUnit')}
                         </span>
                     </div>
                 </EcoCard>
@@ -270,23 +283,32 @@ export const UserProfile = () => {
                     <div className="flex items-center gap-4">
                         <Edit2 className="h-5 w-5 opacity-70 group-hover:opacity-100" />
                         <span className="text-sm font-semibold">
-                            프로필 수정
+                            {t('profile.editProfile')}
                         </span>
                     </div>
                     <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
                 </Link>
                 <Link
                     to="/profile/terms"
-                    className="group border-surface-container hover:bg-surface-container-low flex cursor-pointer items-center justify-between border-b p-4 transition-colors last:border-0"
+                    className="group border-surface-container hover:bg-surface-container-low flex cursor-pointer items-center justify-between border-b p-4 transition-colors"
                 >
                     <div className="flex items-center gap-4">
                         <FileText className="h-5 w-5 opacity-70 group-hover:opacity-100" />
                         <span className="text-sm font-semibold">
-                            서비스 이용약관
+                            {t('profile.serviceTerms')}
                         </span>
                     </div>
                     <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
                 </Link>
+                <div className="border-surface-container flex items-center justify-between border-b p-4">
+                    <div className="flex items-center gap-4">
+                        <Languages className="h-5 w-5 opacity-70" />
+                        <span className="text-sm font-semibold">
+                            {tCommon('language.label')}
+                        </span>
+                    </div>
+                    <LanguageSwitcher />
+                </div>
                 <button
                     type="button"
                     onClick={handleLogout}
@@ -294,7 +316,9 @@ export const UserProfile = () => {
                 >
                     <div className="flex items-center gap-4">
                         <LogOut className="h-5 w-5 opacity-70 group-hover:opacity-100" />
-                        <span className="text-sm font-semibold">로그아웃</span>
+                        <span className="text-sm font-semibold">
+                            {t('profile.logout')}
+                        </span>
                     </div>
                     <ChevronRight className="h-4 w-4 opacity-30 transition-opacity group-hover:opacity-100" />
                 </button>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ChevronRight } from 'lucide-react'
 import {
     Sheet,
@@ -45,12 +46,13 @@ const NodeKindField = ({
     disabled?: boolean
     onChange?: (kind: NodeKind) => void
 }) => {
+    const { t } = useTranslation('adminBuildings')
     const options = getAvailableNodeKindsForCreate(depth)
     const choiceDisabled = disabled || isNodeKindChoiceDisabled(depth)
 
     return (
         <div className="flex flex-col gap-2">
-            <Label htmlFor={id}>유형</Label>
+            <Label htmlFor={id}>{t('form.typeLabel')}</Label>
             <select
                 id={id}
                 value={value}
@@ -87,56 +89,65 @@ const LeafResourceFields = ({
     onAcCountChange: (value: string) => void
     onFluorescentCountChange: (value: string) => void
     onLedCountChange: (value: string) => void
-}) => (
-    <div className="border-outline-variant flex flex-col gap-4 rounded-lg border p-4">
-        <div>
-            <p className="text-sm font-medium">전기 자원 (절약량 산출용)</p>
-            <p className="text-on-surface-variant mt-1 text-xs">
-                항목(LEAF) 등록 시 해당 공간의 설치 수량을 입력합니다. 소비전력(W)은
-                시스템 기본값을 사용합니다.
-            </p>
+}) => {
+    const { t } = useTranslation('adminBuildings')
+
+    return (
+        <div className="border-outline-variant flex flex-col gap-4 rounded-lg border p-4">
+            <div>
+                <p className="text-sm font-medium">{t('form.resources.title')}</p>
+                <p className="text-on-surface-variant mt-1 text-xs">
+                    {t('form.resources.description')}
+                </p>
+            </div>
+            <div className="flex flex-col gap-2">
+                <Label htmlFor="location-ac-count">
+                    {t('form.resources.acCount')}
+                </Label>
+                <Input
+                    id="location-ac-count"
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    value={acCount}
+                    disabled={disabled}
+                    onChange={(e) => onAcCountChange(e.target.value)}
+                    className="border-outline-variant bg-surface h-11"
+                />
+            </div>
+            <div className="flex flex-col gap-2">
+                <Label htmlFor="location-fluorescent-count">
+                    {t('form.resources.fluorescentCount')}
+                </Label>
+                <Input
+                    id="location-fluorescent-count"
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    value={fluorescentCount}
+                    disabled={disabled}
+                    onChange={(e) => onFluorescentCountChange(e.target.value)}
+                    className="border-outline-variant bg-surface h-11"
+                />
+            </div>
+            <div className="flex flex-col gap-2">
+                <Label htmlFor="location-led-count">
+                    {t('form.resources.ledCount')}
+                </Label>
+                <Input
+                    id="location-led-count"
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    value={ledCount}
+                    disabled={disabled}
+                    onChange={(e) => onLedCountChange(e.target.value)}
+                    className="border-outline-variant bg-surface h-11"
+                />
+            </div>
         </div>
-        <div className="flex flex-col gap-2">
-            <Label htmlFor="location-ac-count">에어컨 (대)</Label>
-            <Input
-                id="location-ac-count"
-                type="number"
-                min={0}
-                inputMode="numeric"
-                value={acCount}
-                disabled={disabled}
-                onChange={(e) => onAcCountChange(e.target.value)}
-                className="border-outline-variant bg-surface h-11"
-            />
-        </div>
-        <div className="flex flex-col gap-2">
-            <Label htmlFor="location-fluorescent-count">형광등 (개)</Label>
-            <Input
-                id="location-fluorescent-count"
-                type="number"
-                min={0}
-                inputMode="numeric"
-                value={fluorescentCount}
-                disabled={disabled}
-                onChange={(e) => onFluorescentCountChange(e.target.value)}
-                className="border-outline-variant bg-surface h-11"
-            />
-        </div>
-        <div className="flex flex-col gap-2">
-            <Label htmlFor="location-led-count">LED 조명 (개)</Label>
-            <Input
-                id="location-led-count"
-                type="number"
-                min={0}
-                inputMode="numeric"
-                value={ledCount}
-                disabled={disabled}
-                onChange={(e) => onLedCountChange(e.target.value)}
-                className="border-outline-variant bg-surface h-11"
-            />
-        </div>
-    </div>
-)
+    )
+}
 
 const parseResourceCount = (value: string): number | null => {
     const trimmed = value.trim()
@@ -172,6 +183,7 @@ export const LocationFormSheet = ({
     ) => Promise<boolean>
     onDelete: (node: AdminLocationNode) => Promise<boolean>
 }) => {
+    const { t } = useTranslation('adminBuildings')
     const open = sheet !== null
     const isEdit = sheet?.mode === 'edit'
     const depth: LocationDepth | undefined =
@@ -309,7 +321,9 @@ export const LocationFormSheet = ({
                         )}
 
                         <div className="flex flex-col gap-2">
-                            <Label htmlFor="location-name">이름</Label>
+                            <Label htmlFor="location-name">
+                                {t('form.nameLabel')}
+                            </Label>
                             <Input
                                 id="location-name"
                                 value={name}
@@ -350,7 +364,7 @@ export const LocationFormSheet = ({
 
                         {isEdit && (
                             <p className="text-on-surface-variant text-xs">
-                                유형은 등록 후 변경할 수 없습니다.
+                                {t('form.typeLockedHint')}
                             </p>
                         )}
                     </div>
@@ -362,10 +376,10 @@ export const LocationFormSheet = ({
                             className="w-full py-3"
                         >
                             {submitting
-                                ? '저장 중...'
+                                ? t('form.saving')
                                 : isEdit
-                                  ? '저장'
-                                  : '등록'}
+                                  ? t('form.save')
+                                  : t('form.register')}
                         </EcoButton>
                         <EcoButton
                             type="button"
@@ -374,7 +388,7 @@ export const LocationFormSheet = ({
                             onClick={onClose}
                             disabled={submitting}
                         >
-                            취소
+                            {t('form.cancel')}
                         </EcoButton>
                         {isEdit && sheet?.mode === 'edit' && (
                             <EcoButton
@@ -385,8 +399,8 @@ export const LocationFormSheet = ({
                                 disabled={submitting}
                             >
                                 {confirmDelete
-                                    ? '정말 삭제할까요? (한 번 더 클릭)'
-                                    : '삭제'}
+                                    ? t('form.deleteConfirm')
+                                    : t('form.delete')}
                             </EcoButton>
                         )}
                     </SheetFooter>

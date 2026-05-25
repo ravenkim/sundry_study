@@ -1,7 +1,8 @@
+import { useTranslation } from 'react-i18next'
 import { Label } from 'src/shared/lib/shadcn/components/ui/label'
 import { Input } from 'src/shared/lib/shadcn/components/ui/input'
 import {
-    DAY_LABELS,
+    getDayLabel,
     type OperatingScheduleItem,
 } from 'src/features/admin/buildings/operatingScheduleUtils'
 
@@ -14,6 +15,8 @@ export const LeafOperatingScheduleFields = ({
     disabled?: boolean
     onChange: (schedules: OperatingScheduleItem[]) => void
 }) => {
+    const { t } = useTranslation('adminBuildings')
+
     const updateDay = (
         dayOfWeek: number,
         patch: Partial<OperatingScheduleItem>,
@@ -28,10 +31,9 @@ export const LeafOperatingScheduleFields = ({
     return (
         <div className="border-outline-variant flex flex-col gap-3 rounded-lg border p-4">
             <div>
-                <p className="text-sm font-medium">요일별 운영시간</p>
+                <p className="text-sm font-medium">{t('schedule.title')}</p>
                 <p className="text-on-surface-variant mt-1 text-xs">
-                    조명·에어컨 공통 스케줄입니다. 제보 시각부터 끄는 시간까지
-                    방치 시간을 계산합니다.
+                    {t('schedule.description')}
                 </p>
             </div>
             <div className="flex flex-col gap-3">
@@ -42,7 +44,9 @@ export const LeafOperatingScheduleFields = ({
                     >
                         <div className="mb-2 flex items-center justify-between gap-2">
                             <span className="text-sm font-medium">
-                                {DAY_LABELS[schedule.dayOfWeek]}요일
+                                {t('schedule.dayLabel', {
+                                    day: getDayLabel(schedule.dayOfWeek),
+                                })}
                             </span>
                             <label className="text-on-surface-variant flex items-center gap-2 text-xs">
                                 <input
@@ -63,7 +67,7 @@ export const LeafOperatingScheduleFields = ({
                                         })
                                     }
                                 />
-                                운영 없음
+                                {t('schedule.closed')}
                             </label>
                         </div>
                         {!schedule.closed && (
@@ -73,7 +77,7 @@ export const LeafOperatingScheduleFields = ({
                                         htmlFor={`on-${schedule.dayOfWeek}`}
                                         className="text-xs"
                                     >
-                                        켜는 시간
+                                        {t('schedule.powerOn')}
                                     </Label>
                                     <Input
                                         id={`on-${schedule.dayOfWeek}`}
@@ -93,7 +97,7 @@ export const LeafOperatingScheduleFields = ({
                                         htmlFor={`off-${schedule.dayOfWeek}`}
                                         className="text-xs"
                                     >
-                                        끄는 시간
+                                        {t('schedule.powerOff')}
                                     </Label>
                                     <Input
                                         id={`off-${schedule.dayOfWeek}`}

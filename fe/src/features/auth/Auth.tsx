@@ -1,8 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { ArrowLeft } from 'lucide-react'
 import { toast } from 'react-toastify'
-import { isAxiosError } from 'axios'
 import { useAuth } from 'src/features/auth/AuthContext'
 import {
     checkEmailAvailability,
@@ -19,18 +19,7 @@ import {
     clearPendingAffiliation,
 } from 'src/features/auth/signupBuildingStorage'
 import { getAppHomePath, getStoredUser } from 'src/features/auth/authStorage'
-
-function getErrorMessage(error: unknown): string {
-    if (isAxiosError(error)) {
-        const serverMsg = (error.response?.data as { message?: string })
-            ?.message
-        return serverMsg || error.message || '서버와 통신할 수 없습니다.'
-    }
-    if (error instanceof Error) {
-        return error.message || '요청 처리 중 오류가 발생했습니다.'
-    }
-    return '요청 처리 중 오류가 발생했습니다.'
-}
+import { getErrorMessage } from 'src/shared/lib/i18n/getErrorMessage'
 
 function isValidPhoneFormat(phone: string): boolean {
     const digits = phone.replace(/[^0-9]/g, '')
@@ -41,35 +30,38 @@ export const Login = () => {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const { login } = useAuth()
+    const { t } = useTranslation('auth')
+    const { t: tNav } = useTranslation('nav')
+    const { t: tErrors } = useTranslation('errors')
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (searchParams.get('error') === 'oauth') {
-            toast.error('소셜 로그인에 실패했습니다. 다시 시도해 주세요.')
+            toast.error(t('login.oauthFailedRetry'))
         }
-    }, [searchParams])
+    }, [searchParams, t])
 
     const startOAuth = () => {
         try {
             window.location.href = getOAuthAuthorizationUrl('google')
         } catch {
-            toast.error('API 서버 주소(VITE_API_HOST)가 설정되지 않았습니다.')
+            toast.error(tErrors('apiHostNotConfigured'))
         }
     }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         if (!userName.trim() || !password) {
-            toast.error('아이디와 비밀번호를 입력해 주세요.')
+            toast.error(t('login.credentialsRequired'))
             return
         }
 
         setLoading(true)
         try {
             await login({ userName: userName.trim(), password })
-            toast.success('로그인되었습니다.')
+            toast.success(t('login.success'))
             navigate(getAppHomePath(getStoredUser()))
         } catch (error) {
             toast.error(getErrorMessage(error))
@@ -84,10 +76,10 @@ export const Login = () => {
                 <header className="mt-8 flex flex-col items-center gap-2">
                     <MascotImage emotion="smile" size="lg" decorative />
                     <h1 className="text-primary text-3xl font-bold">
-                        EcoReport
+                        {t('login.title')}
                     </h1>
                     <p className="text-on-surface-variant text-sm">
-                        에너지 절약의 시작, 에코리포트
+                        {t('brand.tagline')}
                     </p>
                 </header>
 
@@ -95,26 +87,26 @@ export const Login = () => {
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-1.5">
                             <label className="text-on-surface text-sm font-semibold">
-                                아이디
+                                {t('login.usernameLabel')}
                             </label>
                             <input
                                 type="text"
                                 value={userName}
                                 onChange={(e) => setUserName(e.target.value)}
-                                placeholder="아이디를 입력하세요"
+                                placeholder={t('login.usernamePlaceholder')}
                                 autoComplete="username"
                                 className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                             />
                         </div>
                         <div className="flex flex-col gap-1.5">
                             <label className="text-on-surface text-sm font-semibold">
-                                비밀번호
+                                {t('login.passwordLabel')}
                             </label>
                             <input
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="비밀번호를 입력하세요"
+                                placeholder={t('login.passwordPlaceholder')}
                                 autoComplete="current-password"
                                 className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                             />
@@ -124,18 +116,17 @@ export const Login = () => {
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? '로그인 중...' : '로그인'}
+                            {loading ? t('login.submitting') : t('login.submit')}
                         </EcoButton>
                     </form>
 
                     <div className="border-outline-variant/60 bg-surface-container-low flex flex-col items-center gap-2.5 rounded-xl border px-4 py-3.5">
                         <p className="text-sm">
-                        
                             <Link
                                 to="/signup/affiliation?intent=signup"
                                 className="text-primary font-semibold hover:underline"
                             >
-                                회원가입
+                                {t('signup.link')}
                             </Link>
                         </p>
                         <div className="bg-outline-variant/30 h-px w-full max-w-[200px]" />
@@ -144,7 +135,7 @@ export const Login = () => {
                                 to="/find-account"
                                 className="text-on-surface-variant hover:text-primary transition-colors hover:underline"
                             >
-                                아이디 · 비밀번호 찾기
+                                {tNav('findAccount')}
                             </Link>
                             <span
                                 className="text-outline-variant"
@@ -156,7 +147,7 @@ export const Login = () => {
                                 to="/signup/admin"
                                 className="text-on-surface-variant hover:text-primary transition-colors hover:underline"
                             >
-                                관리자 회원가입
+                                {tNav('adminSignup')}
                             </Link>
                         </div>
                     </div>
@@ -165,7 +156,7 @@ export const Login = () => {
                 <div className="flex items-center gap-3">
                     <div className="bg-surface-container-high h-px flex-1"></div>
                     <span className="text-on-surface-variant text-[10px] font-bold">
-                        또는 간편하게 로그인
+                        {t('login.oauthDivider')}
                     </span>
                     <div className="bg-surface-container-high h-px flex-1"></div>
                 </div>
@@ -179,6 +170,9 @@ export const Login = () => {
 export const Signup = () => {
     const navigate = useNavigate()
     const { register } = useAuth()
+    const { t } = useTranslation('auth')
+    const { t: tCommon } = useTranslation('common')
+    const { t: tErrors } = useTranslation('errors')
     const pendingAffiliation = getPendingAffiliation()
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
@@ -212,7 +206,7 @@ export const Signup = () => {
     const handleCheckUserName = async () => {
         const trimmed = userName.trim()
         if (!trimmed) {
-            toast.error('아이디를 입력해 주세요.')
+            toast.error(tErrors('usernameRequired'))
             return
         }
 
@@ -222,9 +216,9 @@ export const Signup = () => {
             setUserNameChecked(true)
             setUserNameAvailable(result.available)
             if (result.available) {
-                toast.success('사용 가능한 아이디입니다.')
+                toast.success(t('signup.usernameAvailable'))
             } else {
-                toast.error('이미 사용 중인 아이디입니다.')
+                toast.error(t('signup.usernameTaken'))
             }
         } catch (error) {
             toast.error(getErrorMessage(error))
@@ -242,11 +236,11 @@ export const Signup = () => {
     const handleCheckEmail = async () => {
         const trimmed = email.trim()
         if (!trimmed) {
-            toast.error('이메일을 입력해 주세요.')
+            toast.error(tErrors('emailRequired'))
             return
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-            toast.error('올바른 이메일 형식을 입력해 주세요.')
+            toast.error(tErrors('emailInvalidFormat'))
             return
         }
 
@@ -256,9 +250,9 @@ export const Signup = () => {
             setEmailChecked(true)
             setEmailAvailable(result.available)
             if (result.available) {
-                toast.success('사용 가능한 이메일입니다.')
+                toast.success(t('signup.emailAvailable'))
             } else {
-                toast.error('이미 사용 중인 이메일입니다.')
+                toast.error(t('signup.emailTaken'))
             }
         } catch (error) {
             toast.error(getErrorMessage(error))
@@ -276,11 +270,11 @@ export const Signup = () => {
     const handleCheckPhone = async () => {
         const trimmed = phoneNumber.trim()
         if (!trimmed) {
-            toast.error('전화번호를 입력해 주세요.')
+            toast.error(tErrors('phoneRequired'))
             return
         }
         if (!isValidPhoneFormat(trimmed)) {
-            toast.error('올바른 휴대전화 번호 형식을 입력해 주세요.')
+            toast.error(tErrors('phoneInvalidFormat'))
             return
         }
 
@@ -290,9 +284,9 @@ export const Signup = () => {
             setPhoneChecked(true)
             setPhoneAvailable(result.available)
             if (result.available) {
-                toast.success('사용 가능한 전화번호입니다.')
+                toast.success(t('signup.phoneAvailable'))
             } else {
-                toast.error('이미 사용 중인 전화번호입니다.')
+                toast.error(t('signup.phoneTaken'))
             }
         } catch (error) {
             toast.error(getErrorMessage(error))
@@ -305,35 +299,35 @@ export const Signup = () => {
         e.preventDefault()
 
         if (!userName.trim() || !email.trim() || !phoneNumber.trim() || !password) {
-            toast.error('필수 정보를 모두 입력해 주세요.')
+            toast.error(tErrors('requiredFieldsMissing'))
             return
         }
         if (!userNameChecked || !userNameAvailable) {
-            toast.error('아이디 중복 확인을 완료해 주세요.')
+            toast.error(tErrors('usernameCheckRequired'))
             return
         }
         if (!emailChecked || !emailAvailable) {
-            toast.error('이메일 중복 확인을 완료해 주세요.')
+            toast.error(tErrors('emailCheckRequired'))
             return
         }
         if (!phoneChecked || !phoneAvailable) {
-            toast.error('전화번호 중복 확인을 완료해 주세요.')
+            toast.error(tErrors('phoneCheckRequired'))
             return
         }
         if (password.length < 8) {
-            toast.error('비밀번호는 8자 이상이어야 합니다.')
+            toast.error(tErrors('passwordMinLength'))
             return
         }
         if (password !== passwordConfirm) {
-            toast.error('비밀번호가 일치하지 않습니다.')
+            toast.error(tErrors('passwordMismatch'))
             return
         }
         if (!requiredTermsAgreed) {
-            toast.error('필수 약관에 동의해 주세요.')
+            toast.error(tErrors('requiredTermsNotAgreed'))
             return
         }
         if (!pendingAffiliation) {
-            toast.error('소속을 선택해 주세요.')
+            toast.error(tErrors('affiliationRequired'))
             navigate('/signup/affiliation?intent=signup')
             return
         }
@@ -374,7 +368,9 @@ export const Signup = () => {
                 >
                     <ArrowLeft className="h-6 w-6" />
                 </Link>
-                <h1 className="text-primary text-lg font-bold">회원가입</h1>
+                <h1 className="text-primary text-lg font-bold">
+                    {t('signup.title')}
+                </h1>
                 <div className="w-10"></div>
             </header>
 
@@ -384,14 +380,15 @@ export const Signup = () => {
                 </div>
                 <div>
                     <h2 className="text-on-surface mb-1 text-xl font-bold">
-                        기본 정보 입력
+                        {t('signup.basicInfoTitle')}
                     </h2>
                     <p className="text-on-surface-variant text-sm">
-                        에코리포트 서비스 이용을 위해 정보를 입력해 주세요.
+                        {t('signup.basicInfoDescription')}
                     </p>
                     {pendingAffiliation?.affiliationName && (
                         <p className="text-primary mt-2 text-sm font-semibold">
-                            소속: {pendingAffiliation.affiliationName}
+                            {t('signup.affiliationPrefix')}{' '}
+                            {pendingAffiliation.affiliationName}
                         </p>
                     )}
                 </div>
@@ -403,7 +400,7 @@ export const Signup = () => {
                 >
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
-                            아이디
+                            {t('signup.usernameLabel')}
                         </label>
                         <div className="flex gap-2">
                             <input
@@ -412,7 +409,7 @@ export const Signup = () => {
                                 onChange={(e) =>
                                     handleUserNameChange(e.target.value)
                                 }
-                                placeholder="로그인에 사용할 아이디"
+                                placeholder={t('signup.usernamePlaceholder')}
                                 autoComplete="username"
                                 className="border-outline-variant bg-surface focus:ring-primary-container flex-1 rounded-lg border p-3.5 outline-none focus:ring-2"
                             />
@@ -423,7 +420,9 @@ export const Signup = () => {
                                 disabled={checkingUserName}
                                 onClick={handleCheckUserName}
                             >
-                                {checkingUserName ? '확인 중...' : '중복확인'}
+                                {checkingUserName
+                                    ? tCommon('checking')
+                                    : tCommon('duplicateCheck')}
                             </EcoButton>
                         </div>
                         {userNameChecked && (
@@ -435,14 +434,14 @@ export const Signup = () => {
                                 }`}
                             >
                                 {userNameAvailable
-                                    ? '사용 가능한 아이디입니다.'
-                                    : '이미 사용 중인 아이디입니다.'}
+                                    ? t('signup.usernameAvailable')
+                                    : t('signup.usernameTaken')}
                             </p>
                         )}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
-                            이메일
+                            {t('signup.emailLabel')}
                         </label>
                         <div className="flex gap-2">
                             <input
@@ -451,7 +450,7 @@ export const Signup = () => {
                                 onChange={(e) =>
                                     handleEmailChange(e.target.value)
                                 }
-                                placeholder="example@email.com"
+                                placeholder={t('signup.emailPlaceholder')}
                                 autoComplete="email"
                                 className="border-outline-variant bg-surface focus:ring-primary-container flex-1 rounded-lg border p-3.5 outline-none focus:ring-2"
                             />
@@ -462,7 +461,9 @@ export const Signup = () => {
                                 disabled={checkingEmail}
                                 onClick={handleCheckEmail}
                             >
-                                {checkingEmail ? '확인 중...' : '중복확인'}
+                                {checkingEmail
+                                    ? tCommon('checking')
+                                    : tCommon('duplicateCheck')}
                             </EcoButton>
                         </div>
                         {emailChecked && (
@@ -474,14 +475,14 @@ export const Signup = () => {
                                 }`}
                             >
                                 {emailAvailable
-                                    ? '사용 가능한 이메일입니다.'
-                                    : '이미 사용 중인 이메일입니다.'}
+                                    ? t('signup.emailAvailable')
+                                    : t('signup.emailTaken')}
                             </p>
                         )}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
-                            전화번호
+                            {t('signup.phoneLabel')}
                         </label>
                         <div className="flex gap-2">
                             <input
@@ -490,7 +491,7 @@ export const Signup = () => {
                                 onChange={(e) =>
                                     handlePhoneChange(e.target.value)
                                 }
-                                placeholder="010-1234-5678"
+                                placeholder={t('signup.phonePlaceholder')}
                                 autoComplete="tel"
                                 className="border-outline-variant bg-surface focus:ring-primary-container flex-1 rounded-lg border p-3.5 outline-none focus:ring-2"
                             />
@@ -501,7 +502,9 @@ export const Signup = () => {
                                 disabled={checkingPhone}
                                 onClick={handleCheckPhone}
                             >
-                                {checkingPhone ? '확인 중...' : '중복확인'}
+                                {checkingPhone
+                                    ? tCommon('checking')
+                                    : tCommon('duplicateCheck')}
                             </EcoButton>
                         </div>
                         {phoneChecked && (
@@ -513,33 +516,33 @@ export const Signup = () => {
                                 }`}
                             >
                                 {phoneAvailable
-                                    ? '사용 가능한 전화번호입니다.'
-                                    : '이미 사용 중인 전화번호입니다.'}
+                                    ? t('signup.phoneAvailable')
+                                    : t('signup.phoneTaken')}
                             </p>
                         )}
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
-                            비밀번호
+                            {t('signup.passwordLabel')}
                         </label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="비밀번호를 입력해주세요"
+                            placeholder={t('signup.passwordPlaceholder')}
                             autoComplete="new-password"
                             className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                         />
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <label className="text-on-surface text-sm font-semibold">
-                            비밀번호 확인
+                            {t('signup.passwordConfirmLabel')}
                         </label>
                         <input
                             type="password"
                             value={passwordConfirm}
                             onChange={(e) => setPasswordConfirm(e.target.value)}
-                            placeholder="비밀번호를 다시 입력해주세요"
+                            placeholder={t('signup.passwordConfirmPlaceholder')}
                             autoComplete="new-password"
                             className="border-outline-variant bg-surface focus:ring-primary-container rounded-lg border p-3.5 outline-none focus:ring-2"
                         />
@@ -567,7 +570,7 @@ export const Signup = () => {
                         !requiredTermsAgreed
                     }
                 >
-                    {loading ? '가입 중...' : '가입하기'}
+                    {loading ? t('signup.submitting') : t('signup.submit')}
                 </EcoButton>
             </div>
         </div>

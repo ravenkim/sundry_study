@@ -1,3 +1,5 @@
+import i18n from 'src/assets/locales/i18n'
+
 const DEFAULT_MAX_EDGE = 1920
 const DEFAULT_QUALITY = 0.85
 const DEFAULT_MAX_BYTES = 1.5 * 1024 * 1024
@@ -19,7 +21,7 @@ function loadImageFromFile(file: File): Promise<HTMLImageElement> {
         }
         image.onerror = () => {
             URL.revokeObjectURL(url)
-            reject(new Error('이미지를 불러올 수 없습니다.'))
+            reject(new Error(i18n.t('errors:imageLoadFailed')))
         }
         image.src = url
     })

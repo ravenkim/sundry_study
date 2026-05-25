@@ -1,6 +1,7 @@
 import BlurText from 'src/shared/components/text/SSblurAniText.tsx'
 import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
 import SScolorDrawer from 'src/shared/components/theme/SScolorDrawer.tsx'
+import { LanguageSwitcher } from 'src/shared/components/i18n/LanguageSwitcher'
 
 const WhHeader = () => {
     return (
@@ -16,6 +17,7 @@ const WhHeader = () => {
                 />
             </div>
             <div className="flex items-center gap-2">
+                <LanguageSwitcher />
                 <SSdarkmodeSwitch />
                 <SScolorDrawer />
             </div>

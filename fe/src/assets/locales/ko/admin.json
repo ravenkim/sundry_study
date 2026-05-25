@@ -1,0 +1,148 @@
+{
+    "reportStatus": {
+        "APPROVED": "처리완료",
+        "PENDING": "승인대기",
+        "REJECTED": "반려",
+        "UNDETECTABLE": "판별불가"
+    },
+    "dashboard": {
+        "headerTitle": "제보 현황",
+        "title": "제보 관리",
+        "description": "캠퍼스 내 에너지 낭비 제보를 관리하고 승인하세요.",
+        "stats": {
+            "todayReports": "오늘의 제보",
+            "todayReportsTrend": "12% 증가",
+            "pendingReports": "미처리 제보",
+            "pendingReportsHint": "신속 처리가 중요합니다",
+            "totalCo2Saved": "누적 CO₂ 절감",
+            "co2Unit": "kg"
+        },
+        "table": {
+            "reportDate": "제보 일시",
+            "location": "장소",
+            "aiResult": "AI 판별",
+            "author": "작성자",
+            "status": "상태",
+            "actions": "관리"
+        },
+        "actions": {
+            "approve": "승인",
+            "reject": "반려"
+        },
+        "pointsAwarded": "+{{points}}P",
+        "noPoints": "-"
+    },
+    "reports": {
+        "headerTitle": "제보 관리",
+        "title": "제보 관리",
+        "description": "에너지 낭비 제보 내역을 확인하고 승인 여부를 결정합니다.",
+        "export": "내보내기"
+    },
+    "stats": {
+        "headerTitle": "에너지 통계",
+        "title": "통계 및 리포트",
+        "description": "에코리포트를 통한 캠퍼스 에너지 절약 성과 분석",
+        "dateRange": "2024.10.01 - 2024.10.31",
+        "buildingShare": {
+            "title": "건물별 제보 비중",
+            "subtitle": "가장 많이 제보된 건물 TOP 5",
+            "totalReports": "총 제보 수",
+            "percent": "{{value}}%"
+        },
+        "wasteByCategory": {
+            "title": "절약 유형별 분포",
+            "subtitle": "주요 에너지 낭비 요소 해결 현황"
+        },
+        "monthly": {
+            "title": "월별 데이터 요약",
+            "excelDownload": "엑셀 다운로드",
+            "table": {
+                "month": "월",
+                "totalReports": "총 제보수",
+                "completed": "처리 완료",
+                "completedBadge": "{{count}} ({{percent}}%)",
+                "co2Saved": "CO₂ 절감 추정치 (kg)",
+                "co2Value": "{{value}}kg",
+                "pointsAwarded": "지급 포인트",
+                "pointsValue": "{{value}} P"
+            },
+            "empty": "집계할 제보 데이터가 없습니다."
+        }
+    },
+    "users": {
+        "headerTitle": "사용자 관리",
+        "title": "가입자 목록",
+        "description": "캠퍼스 에너지 절약 캠페인에 동참 중인 전체 사용자 현황입니다.",
+        "stats": {
+            "totalUsers": "전체 사용자",
+            "newUsersWeekly": "신규 가입 (주간)",
+            "activeUsersDaily": "활성 사용자 (일간)",
+            "pointsPaid": "포인트 지급액",
+            "newUsersTrend": "+12% ↑"
+        },
+        "searchPlaceholder": "사용자 이름, 이메일 검색...",
+        "filter": "필터링",
+        "table": {
+            "user": "사용자",
+            "email": "이메일",
+            "joinDate": "가입일",
+            "reportCount": "누적 제보",
+            "reportCountValue": "{{count}}건",
+            "points": "보유 포인트",
+            "actions": "액션"
+        },
+        "grade": {
+            "greenMaster": "그린 마스터",
+            "greenRookie": "그린 루키",
+            "ecoHero": "에코 히어로"
+        }
+    },
+    "gifticon": {
+        "headerTitle": "기프티콘 관리",
+        "title": "기프티콘 관리",
+        "description": "사용자별 기프티콘 교환 신청을 확인하고 발송 처리합니다.",
+        "stats": {
+            "pendingCount": "발송 대기",
+            "pendingCountValue": "{{count}}건",
+            "pendingPoints": "대기 포인트",
+            "pendingPointsValue": "{{points}}P",
+            "sentCount": "발송 완료",
+            "sentCountValue": "{{count}}건",
+            "rejectedCount": "반려",
+            "rejectedCountValue": "{{count}}건"
+        },
+        "filter": {
+            "all": "전체",
+            "pending": "발송 대기",
+            "sent": "발송 완료",
+            "rejected": "반려"
+        },
+        "status": {
+            "PENDING": "발송 대기",
+            "SENT": "발송 완료",
+            "REJECTED": "반려"
+        },
+        "sectionTitle": "기프티콘 교환 신청",
+        "empty": "해당 상태의 교환 신청이 없습니다.",
+        "table": {
+            "requestDate": "신청 일시",
+            "member": "회원",
+            "reward": "기프티콘",
+            "points": "포인트",
+            "status": "상태",
+            "actions": "관리"
+        },
+        "pointsUsed": "-{{points}}P",
+        "actions": {
+            "markSent": "발송 완료",
+            "reject": "반려"
+        },
+        "noProcessedDate": "-"
+    },
+    "toast": {
+        "reportApproved": "승인되었습니다.",
+        "reportRejected": "반려되었습니다.",
+        "gifticonSent": "기프티콘 발송 처리되었습니다.",
+        "gifticonRejected": "반려되었습니다. 포인트가 환불됩니다."
+    }
+}

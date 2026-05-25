@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
     Building2,
     ChevronRight,
@@ -60,6 +61,7 @@ export const LocationColumn = ({
     onDelete?: (node: AdminLocationNode) => void
     onEmptyAction?: () => void
 }) => {
+    const { t } = useTranslation('adminBuildings')
     const showChevron = depth < 3
 
     return (
@@ -84,7 +86,7 @@ export const LocationColumn = ({
                         variant="ghost"
                         className="shrink-0 px-2 py-1.5"
                         onClick={onAdd}
-                        title={`${title} 추가`}
+                        title={t('columnAddTitle', { title })}
                     >
                         <Plus className="h-4 w-4" />
                     </EcoButton>
@@ -94,7 +96,7 @@ export const LocationColumn = ({
             <ScrollArea className="flex-1">
                 {loading ? (
                     <p className="text-on-surface-variant p-6 text-center text-sm">
-                        불러오는 중...
+                        {t('column.loading')}
                     </p>
                 ) : disabled ? (
                     <p className="text-on-surface-variant p-6 text-center text-sm">
@@ -169,7 +171,7 @@ export const LocationColumn = ({
                                                 <button
                                                     type="button"
                                                     className="text-on-surface-variant hover:text-primary rounded p-1"
-                                                    title="수정"
+                                                    title={t('column.edit')}
                                                     onClick={(e) => {
                                                         e.stopPropagation()
                                                         onEdit(item)
@@ -182,7 +184,7 @@ export const LocationColumn = ({
                                                 <button
                                                     type="button"
                                                     className="text-on-surface-variant hover:text-error rounded p-1"
-                                                    title="삭제"
+                                                    title={t('column.delete')}
                                                     onClick={(e) => {
                                                         e.stopPropagation()
                                                         onDelete(item)

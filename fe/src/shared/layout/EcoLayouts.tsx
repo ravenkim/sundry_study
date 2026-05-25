@@ -1,18 +1,15 @@
 import { useState, type ReactNode } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import {
-    Home,
     ClipboardCheck,
     Gift,
-    ShoppingBag,
-    User as UserIcon,
     Settings,
     LogOut,
     Database,
     BarChart3,
     Users,
     Menu,
-    Camera,
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import {
@@ -23,18 +20,11 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoBadge } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
-import { LOC } from 'src/features/admin/buildings/locationTreeUtils'
+import { LanguageSwitcher } from 'src/shared/components/i18n/LanguageSwitcher'
 import SSdarkmodeSwitch from 'src/shared/components/theme/SSdarkmodeSwitch.tsx'
 import { usePoints } from 'src/features/points/PointsContext'
 import { useAuth } from 'src/features/auth/AuthContext'
-
-export const USER_NAV_ITEMS = [
-    { name: '홈', path: '/', icon: Home },
-    { name: '낭비 제보', path: '/report-form', icon: Camera, highlight: true },
-    { name: '제보 이력', path: '/reports', icon: ClipboardCheck },
-    { name: '포인트샵', path: '/shop', icon: ShoppingBag },
-    { name: '마이페이지', path: '/profile', icon: UserIcon },
-] as const
+import { useUserNavItems } from 'src/shared/layout/useUserNavItems'
 
 type UserAppLayoutProps = {
     children: ReactNode
@@ -54,6 +44,9 @@ export const UserAppLayout = ({
     const [menuOpen, setMenuOpen] = useState(false)
     const location = useLocation()
     const { points, loading: pointsLoading } = usePoints()
+    const { t: tNav } = useTranslation('nav')
+    const { t: tCommon } = useTranslation('common')
+    const userNavItems = useUserNavItems()
 
     const closeMenu = () => setMenuOpen(false)
 
@@ -65,7 +58,7 @@ export const UserAppLayout = ({
                         type="button"
                         onClick={() => setMenuOpen(true)}
                         className="text-primary hover:bg-surface-container-low flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors"
-                        aria-label="메뉴 열기"
+                        aria-label={tNav('menu.openAriaLabel')}
                     >
                         <Menu className="h-6 w-6" />
                     </button>
@@ -82,7 +75,7 @@ export const UserAppLayout = ({
                         >
                             <MascotImage emotion="nomal" size="xs" decorative />
                             <span className="text-primary text-lg font-black">
-                                EcoReport
+                                {tCommon('brand')}
                             </span>
                         </Link>
                     )}
@@ -95,8 +88,8 @@ export const UserAppLayout = ({
                                     className="text-xs font-bold"
                                 >
                                     {pointsLoading
-                                        ? '...'
-                                        : `${points.currentBalance.toLocaleString()}P`}
+                                        ? tCommon('loadingDash')
+                                        : `${points.currentBalance.toLocaleString()}${tCommon('pointUnit')}`}
                                 </EcoBadge>
                             ) : (
                                 <span className="w-8" aria-hidden />
@@ -120,17 +113,17 @@ export const UserAppLayout = ({
                             />
                             <div>
                                 <SheetTitle className="text-primary text-left text-base font-black">
-                                    EcoReport
+                                    {tCommon('brand')}
                                 </SheetTitle>
                                 <p className="text-on-surface-variant text-xs">
-                                    캠퍼스 에너지 절약
+                                    {tNav('menu.tagline')}
                                 </p>
                             </div>
                         </div>
                     </SheetHeader>
 
                     <nav className="flex flex-col gap-1 p-3">
-                        {USER_NAV_ITEMS.map((item) => {
+                        {userNavItems.map((item) => {
                             const isActive = location.pathname === item.path
                             const isHighlight =
                                 'highlight' in item && item.highlight
@@ -158,7 +151,13 @@ export const UserAppLayout = ({
                     <div className="border-outline-variant mt-auto flex flex-col gap-1 border-t p-3">
                         <div className="flex items-center justify-between rounded-xl px-4 py-3">
                             <span className="text-on-surface-variant text-sm font-semibold">
-                                다크 모드
+                                {tCommon('language.label')}
+                            </span>
+                            <LanguageSwitcher />
+                        </div>
+                        <div className="flex items-center justify-between rounded-xl px-4 py-3">
+                            <span className="text-on-surface-variant text-sm font-semibold">
+                                {tCommon('darkMode')}
                             </span>
                             <SSdarkmodeSwitch />
                         </div>
@@ -177,13 +176,23 @@ export const AdminSidebar = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const { logout } = useAuth()
+    const { t: tNav } = useTranslation('nav')
+    const { t: tCommon } = useTranslation('common')
     const navItems = [
-        { name: '제보 현황', path: '/admin', icon: Database },
-        { name: '제보 관리', path: '/admin/reports', icon: ClipboardCheck },
-        { name: LOC.navLabel, path: '/admin/buildings', icon: Settings },
-        { name: '기프티콘 관리', path: '/admin/points', icon: Gift },
-        { name: '에너지 통계', path: '/admin/stats', icon: BarChart3 },
-        { name: '사용자 관리', path: '/admin/users', icon: Users },
+        { name: tNav('admin.reportsDashboard'), path: '/admin', icon: Database },
+        {
+            name: tNav('admin.reportsManage'),
+            path: '/admin/reports',
+            icon: ClipboardCheck,
+        },
+        {
+            name: tNav('admin.buildings'),
+            path: '/admin/buildings',
+            icon: Settings,
+        },
+        { name: tNav('admin.gifticon'), path: '/admin/points', icon: Gift },
+        { name: tNav('admin.stats'), path: '/admin/stats', icon: BarChart3 },
+        { name: tNav('admin.users'), path: '/admin/users', icon: Users },
     ]
     return (
         <aside className="border-outline-variant bg-surface-container-low fixed top-0 left-0 z-50 flex h-screen w-64 flex-col gap-2 border-r p-4">
@@ -191,10 +200,10 @@ export const AdminSidebar = () => {
                 <MascotImage emotion="nomal" size="sm" decorative />
                 <div>
                     <h1 className="text-primary text-sm leading-tight font-bold">
-                        EcoReport Admin
+                        {tNav('admin.brandTitle')}
                     </h1>
                     <p className="text-on-surface-variant text-[10px]">
-                        Management Console
+                        {tNav('admin.brandSubtitle')}
                     </p>
                 </div>
             </div>
@@ -224,7 +233,13 @@ export const AdminSidebar = () => {
             <div className="border-outline-variant flex flex-col gap-1 border-t pt-4">
                 <div className="flex items-center justify-between px-4 py-2">
                     <span className="text-on-surface-variant text-sm font-semibold">
-                        다크 모드
+                        {tCommon('language.label')}
+                    </span>
+                    <LanguageSwitcher />
+                </div>
+                <div className="flex items-center justify-between px-4 py-2">
+                    <span className="text-on-surface-variant text-sm font-semibold">
+                        {tCommon('darkMode')}
                     </span>
                     <SSdarkmodeSwitch />
                 </div>
@@ -237,7 +252,7 @@ export const AdminSidebar = () => {
                     className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full items-center gap-3 rounded-lg px-4 py-2 text-left"
                 >
                     <LogOut className="h-5 w-5" />
-                    <span>로그아웃</span>
+                    <span>{tCommon('logout')}</span>
                 </button>
             </div>
         </aside>

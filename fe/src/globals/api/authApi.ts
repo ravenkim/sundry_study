@@ -1,4 +1,5 @@
 import client from 'src/globals/api/client'
+import i18n from 'src/assets/locales/i18n'
 import {
     ApiErrorResponse,
     ApiResponse,
@@ -55,11 +56,11 @@ async function postAuth<T>(
     )
 
     if (isApiError(data)) {
-        throw new Error(data.message || '요청 처리 중 오류가 발생했습니다.')
+        throw new Error(data.message || i18n.t('errors:requestFailed'))
     }
 
     if (data.code !== successCode) {
-        throw new Error('요청 처리 중 오류가 발생했습니다.')
+        throw new Error(i18n.t('errors:requestFailed'))
     }
 
     return data
@@ -81,11 +82,11 @@ export async function checkEmailAvailability(
     >('/register/check-email', { params: { email: email.trim() } })
 
     if (isApiError(data)) {
-        throw new Error(data.message || '이메일 확인에 실패했습니다.')
+        throw new Error(data.message || i18n.t('errors:emailCheckFailed'))
     }
 
     if (data.code !== ResponseCode.OK || !data.body) {
-        throw new Error('이메일 확인에 실패했습니다.')
+        throw new Error(i18n.t('errors:emailCheckFailed'))
     }
 
     return data.body
@@ -99,11 +100,11 @@ export async function checkUserNameAvailability(
     >('/register/check-username', { params: { userName: userName.trim() } })
 
     if (isApiError(data)) {
-        throw new Error(data.message || '아이디 확인에 실패했습니다.')
+        throw new Error(data.message || i18n.t('errors:usernameCheckFailed'))
     }
 
     if (data.code !== ResponseCode.OK || !data.body) {
-        throw new Error('아이디 확인에 실패했습니다.')
+        throw new Error(i18n.t('errors:usernameCheckFailed'))
     }
 
     return data.body
@@ -117,11 +118,11 @@ export async function checkPhoneAvailability(
     >('/register/check-phone', { params: { phone: phone.trim() } })
 
     if (isApiError(data)) {
-        throw new Error(data.message || '전화번호 확인에 실패했습니다.')
+        throw new Error(data.message || i18n.t('errors:phoneCheckFailed'))
     }
 
     if (data.code !== ResponseCode.OK || !data.body) {
-        throw new Error('전화번호 확인에 실패했습니다.')
+        throw new Error(i18n.t('errors:phoneCheckFailed'))
     }
 
     return data.body

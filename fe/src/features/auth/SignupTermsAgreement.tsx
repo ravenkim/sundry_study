@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ChevronRight } from 'lucide-react'
 import {
     Accordion,
@@ -23,7 +24,10 @@ import {
 } from 'src/shared/lib/shadcn/components/ui/sheet'
 import { EcoButton } from 'src/shared/ui/eco'
 import { TermSections } from 'src/features/auth/TermSections'
-import { SIGNUP_TERMS, SignupTerm } from 'src/features/auth/signupTermsData'
+import {
+    useSignupTerms,
+    type SignupTerm,
+} from 'src/features/auth/useSignupTerms'
 
 interface SignupTermsAgreementProps {
     onRequiredChange: (agreed: boolean) => void
@@ -32,8 +36,10 @@ interface SignupTermsAgreementProps {
 export function SignupTermsAgreement({
     onRequiredChange,
 }: SignupTermsAgreementProps) {
+    const { t } = useTranslation('auth')
+    const signupTerms = useSignupTerms()
     const [termsAgreed, setTermsAgreed] = useState(() =>
-        SIGNUP_TERMS.map(() => false),
+        signupTerms.map(() => false),
     )
     const [drawerTermId, setDrawerTermId] = useState<string | null>(null)
     const [sheetTermId, setSheetTermId] = useState<string | null>(null)
@@ -42,12 +48,12 @@ export function SignupTermsAgreement({
     )
 
     const allTermsAgreed = termsAgreed.every(Boolean)
-    const requiredTermsAgreed = SIGNUP_TERMS.every(
+    const requiredTermsAgreed = signupTerms.every(
         (term, index) => !term.required || termsAgreed[index],
     )
 
-    const drawerTerm = SIGNUP_TERMS.find((t) => t.id === drawerTermId)
-    const sheetTerm = SIGNUP_TERMS.find((t) => t.id === sheetTermId)
+    const drawerTerm = signupTerms.find((t) => t.id === drawerTermId)
+    const sheetTerm = signupTerms.find((t) => t.id === sheetTermId)
 
     useEffect(() => {
         onRequiredChange(requiredTermsAgreed)
@@ -55,7 +61,7 @@ export function SignupTermsAgreement({
 
     const handleToggleAllTerms = () => {
         const next = !allTermsAgreed
-        setTermsAgreed(SIGNUP_TERMS.map(() => next))
+        setTermsAgreed(signupTerms.map(() => next))
     }
 
     const handleToggleTerm = (index: number) => {
@@ -79,7 +85,7 @@ export function SignupTermsAgreement({
     }
 
     const agreeFromViewer = (termId: string) => {
-        const index = SIGNUP_TERMS.findIndex((t) => t.id === termId)
+        const index = signupTerms.findIndex((t) => t.id === termId)
         if (index >= 0) {
             setTermsAgreed((prev) => {
                 const next = [...prev]
@@ -101,17 +107,17 @@ export function SignupTermsAgreement({
                         onChange={handleToggleAllTerms}
                         className="border-outline-variant text-primary focus:ring-primary h-5 w-5 rounded"
                     />
-                    <span>전체 약관 동의</span>
+                    <span>{t('terms.agreeAll')}</span>
                 </label>
 
                 <Accordion type="single" collapsible className="rounded-lg border">
                     <AccordionItem value="summary" className="border-none">
                         <AccordionTrigger className="text-on-surface-variant px-3 py-2.5 text-xs font-semibold hover:no-underline">
-                            약관 요약 보기
+                            {t('terms.summaryToggle')}
                         </AccordionTrigger>
                         <AccordionContent className="px-3 pb-3">
                             <div className="flex flex-col gap-2">
-                                {SIGNUP_TERMS.map((term) => (
+                                {signupTerms.map((term) => (
                                     <div
                                         key={term.id}
                                         className="bg-surface-container-low rounded-md p-2.5"
@@ -129,7 +135,7 @@ export function SignupTermsAgreement({
                     </AccordionItem>
                 </Accordion>
 
-                {SIGNUP_TERMS.map((term, i) => (
+                {signupTerms.map((term, i) => (
                     <div key={term.id} className="flex flex-col gap-2">
                         <div className="flex items-center gap-2">
                             <label className="text-on-surface-variant flex flex-1 cursor-pointer items-center gap-3 text-sm font-medium">
@@ -147,8 +153,8 @@ export function SignupTermsAgreement({
                                 className="text-primary flex shrink-0 items-center gap-0.5 text-xs font-semibold hover:underline"
                             >
                                 {term.viewer === 'accordion'
-                                    ? '펼치기'
-                                    : '전문 보기'}
+                                    ? t('terms.expand')
+                                    : t('terms.viewFull')}
                                 <ChevronRight className="h-3.5 w-3.5" />
                             </button>
                         </div>
@@ -189,7 +195,7 @@ export function SignupTermsAgreement({
                                         agreeFromViewer(drawerTerm.id)
                                     }
                                 >
-                                    내용을 확인했으며 동의합니다
+                                    {t('terms.confirmAgree')}
                                 </EcoButton>
                             </DrawerFooter>
                         </>
@@ -226,7 +232,7 @@ export function SignupTermsAgreement({
                                         agreeFromViewer(sheetTerm.id)
                                     }
                                 >
-                                    내용을 확인했으며 동의합니다
+                                    {t('terms.confirmAgree')}
                                 </EcoButton>
                             </SheetFooter>
                         </>

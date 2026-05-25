@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { TrendingUp } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoBadge, EcoCard, EcoButton } from 'src/shared/ui/eco'
 import { usePoints } from 'src/features/points/PointsContext'
 import { RewardImage } from 'src/features/user/RewardImage'
+import {
+    REWARD_CATEGORY_API_VALUES,
+    type RewardCategoryKey,
+} from 'src/features/user/rewardAssets'
 import {
     exchangeReward,
     getMyGifticonExchanges,
@@ -15,13 +20,24 @@ import type {
     GifticonExchangeStatus,
     RewardItem,
 } from 'src/globals/api/types'
+import { useAppLocale, formatDate, formatNumber } from 'src/shared/lib/i18n/formatters'
 
-const CATEGORIES = ['전체', '커피/음료', '편의점', '환경 기부'] as const
+type CategoryFilter = 'all' | RewardCategoryKey
 
-const EXCHANGE_STATUS_LABEL: Record<GifticonExchangeStatus, string> = {
-    PENDING: '발송 대기',
-    SENT: '발송 완료',
-    REJECTED: '반려',
+const CATEGORY_FILTERS: CategoryFilter[] = [
+    'all',
+    'coffee',
+    'convenience',
+    'donation',
+]
+
+const EXCHANGE_STATUS_KEYS: Record<
+    GifticonExchangeStatus,
+    'pending' | 'sent' | 'rejected'
+> = {
+    PENDING: 'pending',
+    SENT: 'sent',
+    REJECTED: 'rejected',
 }
 
 function exchangeStatusVariant(
@@ -33,15 +49,32 @@ function exchangeStatusVariant(
 }
 
 export const UserPointShop = () => {
+    const { t } = useTranslation(['user', 'common'])
+    const locale = useAppLocale()
     const { points, refresh } = usePoints()
     const [rewards, setRewards] = useState<RewardItem[]>([])
     const [rewardsLoading, setRewardsLoading] = useState(true)
-    const [activeCategory, setActiveCategory] = useState<string>('전체')
+    const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all')
     const [selectedReward, setSelectedReward] = useState<RewardItem | null>(
         null,
     )
     const [exchanging, setExchanging] = useState(false)
     const [myExchanges, setMyExchanges] = useState<GifticonExchangeRow[]>([])
+
+    const categoryTabs = useMemo(
+        () =>
+            CATEGORY_FILTERS.map((key) => ({
+                key,
+                label:
+                    key === 'all'
+                        ? t('user:shop.categoryAll')
+                        : t(`user:rewardCategory.${key}`),
+            })),
+        [t],
+    )
+
+    const activeCategoryLabel =
+        categoryTabs.find((tab) => tab.key === activeCategory)?.label ?? ''
 
     const loadMyExchanges = () => {
         void getMyGifticonExchanges()
@@ -54,7 +87,7 @@ export const UserPointShop = () => {
         void getRewards()
             .then(setRewards)
             .catch(() => {
-                toast.error('리워드 목록을 불러오지 못했습니다.')
+                toast.error(t('user:shop.errorLoadRewards'))
                 setRewards([])
             })
             .finally(() => setRewardsLoading(false))
@@ -66,14 +99,18 @@ export const UserPointShop = () => {
     }, [])
 
     const filtered =
-        activeCategory === '전체'
+        activeCategory === 'all'
             ? rewards
-            : rewards.filter((r) => r.category === activeCategory)
+            : rewards.filter(
+                  (r) =>
+                      r.category ===
+                      REWARD_CATEGORY_API_VALUES[activeCategory],
+              )
 
     const handleExchange = async () => {
         if (!selectedReward) return
         if (points.currentBalance < selectedReward.pointCost) {
-            toast.error('포인트가 부족합니다.')
+            toast.error(t('user:shop.errorInsufficientPoints'))
             return
         }
 
@@ -82,13 +119,13 @@ export const UserPointShop = () => {
             await exchangeReward(selectedReward.rewardId)
             await refresh()
             loadMyExchanges()
-            toast.success(
-                '교환 신청이 완료되었습니다. 관리자 승인 후 기프티콘이 발송됩니다.',
-            )
+            toast.success(t('user:shop.successExchange'))
             setSelectedReward(null)
         } catch (error) {
             toast.error(
-                error instanceof Error ? error.message : '교환에 실패했습니다.',
+                error instanceof Error
+                    ? error.message
+                    : t('user:shop.errorExchangeFailed'),
             )
         } finally {
             setExchanging(false)
@@ -99,29 +136,41 @@ export const UserPointShop = () => {
         <div className="relative flex flex-col gap-6 p-5 pb-8">
             <EcoCard className="border-primary-container bg-primary-container/10 p-5">
                 <span className="text-on-surface-variant text-xs font-bold tracking-wider uppercase">
-                    내 포인트
+                    {t('user:shop.myPoints')}
                 </span>
                 <div className="mt-1 flex items-baseline gap-1">
                     <span className="text-primary text-5xl leading-none font-black">
-                        {points.currentBalance.toLocaleString()}
+                        {formatNumber(points.currentBalance, locale)}
                     </span>
                     <span className="text-primary text-2xl font-bold">P</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2">
                     <TrendingUp className="text-secondary h-3.5 w-3.5" />
                     <span className="text-secondary text-xs font-bold">
-                        이번 달 +{points.thisMonthEarned}P 적립
+                        {t('user:shop.thisMonthEarned', {
+                            points: points.thisMonthEarned,
+                        })}
                     </span>
                 </div>
                 <div className="text-on-surface-variant mt-3 flex gap-4 text-xs">
-                    <span>총 획득 {points.totalEarned.toLocaleString()}P</span>
-                    <span>교환 {points.totalRedeemed.toLocaleString()}P</span>
+                    <span>
+                        {t('user:shop.totalEarned', {
+                            points: formatNumber(points.totalEarned, locale),
+                        })}
+                    </span>
+                    <span>
+                        {t('user:shop.totalRedeemed', {
+                            points: formatNumber(points.totalRedeemed, locale),
+                        })}
+                    </span>
                 </div>
             </EcoCard>
 
             {myExchanges.length > 0 && (
                 <section className="flex flex-col gap-3">
-                    <h2 className="text-lg font-bold">내 교환 신청</h2>
+                    <h2 className="text-lg font-bold">
+                        {t('user:shop.myExchangesTitle')}
+                    </h2>
                     <div className="flex flex-col gap-2">
                         {myExchanges.map((item) => (
                             <EcoCard
@@ -133,16 +182,16 @@ export const UserPointShop = () => {
                                         {item.rewardName}
                                     </p>
                                     <p className="text-on-surface-variant text-xs">
-                                        {new Date(
-                                            item.createdAt,
-                                        ).toLocaleDateString('ko-KR')}{' '}
-                                        · {item.pointUsed.toLocaleString()}P
+                                        {formatDate(item.createdAt, locale)} ·{' '}
+                                        {formatNumber(item.pointUsed, locale)}P
                                     </p>
                                 </div>
                                 <EcoBadge
                                     variant={exchangeStatusVariant(item.status)}
                                 >
-                                    {EXCHANGE_STATUS_LABEL[item.status]}
+                                    {t(
+                                        `user:shop.exchangeStatus.${EXCHANGE_STATUS_KEYS[item.status]}`,
+                                    )}
                                 </EcoBadge>
                             </EcoCard>
                         ))}
@@ -151,32 +200,34 @@ export const UserPointShop = () => {
             )}
 
             <nav className="border-outline-variant/30 no-scrollbar -mx-5 flex gap-4 overflow-x-auto border-b px-5 pt-2 pb-1">
-                {CATEGORIES.map((tab) => (
+                {categoryTabs.map((tab) => (
                     <button
-                        key={tab}
+                        key={tab.key}
                         type="button"
-                        onClick={() => setActiveCategory(tab)}
+                        onClick={() => setActiveCategory(tab.key)}
                         className={cn(
                             'border-b-2 pb-3 text-sm font-bold whitespace-nowrap transition-all',
-                            activeCategory === tab
+                            activeCategory === tab.key
                                 ? 'border-primary text-on-surface'
                                 : 'text-on-surface-variant border-transparent opacity-60',
                         )}
                     >
-                        {tab}
+                        {tab.label}
                     </button>
                 ))}
             </nav>
 
             {rewardsLoading ? (
                 <p className="text-on-surface-variant py-12 text-center text-sm">
-                    리워드를 불러오는 중...
+                    {t('user:shop.loadingRewards')}
                 </p>
             ) : filtered.length === 0 ? (
                 <p className="text-on-surface-variant py-12 text-center text-sm">
-                    {activeCategory === '전체'
-                        ? '교환 가능한 리워드가 없습니다.'
-                        : `${activeCategory} 카테고리에 리워드가 없습니다.`}
+                    {activeCategory === 'all'
+                        ? t('user:shop.emptyAll')
+                        : t('user:shop.emptyCategory', {
+                              category: activeCategoryLabel,
+                          })}
                 </p>
             ) : (
                 <div className="grid grid-cols-2 gap-4">
@@ -190,7 +241,11 @@ export const UserPointShop = () => {
                                     if (canAfford) {
                                         setSelectedReward(item)
                                     } else {
-                                        toast.error('포인트가 부족합니다.')
+                                        toast.error(
+                                            t(
+                                                'user:shop.errorInsufficientPoints',
+                                            ),
+                                        )
                                     }
                                 }}
                                 className={cn(
@@ -220,7 +275,8 @@ export const UserPointShop = () => {
                                     </h3>
                                     <div className="mt-auto">
                                         <span className="text-primary text-sm font-black">
-                                            {item.pointCost.toLocaleString()} P
+                                            {formatNumber(item.pointCost, locale)}{' '}
+                                            P
                                         </span>
                                     </div>
                                 </div>
@@ -251,16 +307,16 @@ export const UserPointShop = () => {
                                 id="exchange-dialog-title"
                                 className="mb-2 text-lg font-bold"
                             >
-                                교환 신청
+                                {t('user:shop.exchangeDialogTitle')}
                             </h3>
                             <p className="text-on-surface-variant mb-1 text-sm">
                                 {selectedReward.name}
                             </p>
                             <p className="text-on-surface-variant mb-4 text-xs">
-                                관리자 승인 후 기프티콘이 발송됩니다.
+                                {t('user:shop.exchangeDialogHint')}
                             </p>
                             <p className="text-primary mb-6 text-2xl font-black">
-                                {selectedReward.pointCost.toLocaleString()} P
+                                {formatNumber(selectedReward.pointCost, locale)} P
                             </p>
                             <div className="flex flex-col gap-2">
                                 <EcoButton
@@ -268,14 +324,16 @@ export const UserPointShop = () => {
                                     disabled={exchanging}
                                     onClick={() => void handleExchange()}
                                 >
-                                    {exchanging ? '처리 중...' : '신청하기'}
+                                    {exchanging
+                                        ? t('common:processing')
+                                        : t('user:shop.apply')}
                                 </EcoButton>
                                 <EcoButton
                                     variant="outline"
                                     className="w-full py-3"
                                     onClick={() => setSelectedReward(null)}
                                 >
-                                    취소
+                                    {t('common:cancel')}
                                 </EcoButton>
                             </div>
                         </div>

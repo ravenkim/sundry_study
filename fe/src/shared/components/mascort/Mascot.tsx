@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import {
-    MASCORT_ALT,
     MASCORT_SRC,
     resolveMascortEmotion,
     type MascortEmotion,
@@ -33,6 +33,7 @@ export const MascotImage = ({
     imgClassName,
     decorative = false,
 }: MascotImageProps) => {
+    const { t } = useTranslation('common')
     const key = resolveMascortEmotion(emotion)
     return (
         <span
@@ -45,7 +46,7 @@ export const MascotImage = ({
         >
             <img
                 src={MASCORT_SRC[key]}
-                alt={decorative ? '' : MASCORT_ALT[key]}
+                alt={decorative ? '' : t(`mascort.${key}`)}
                 className={cn(
                     'h-full w-full object-contain drop-shadow-sm',
                     imgClassName,

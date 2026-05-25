@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 
 function GoogleLogo({ className }: { className?: string }) {
@@ -30,9 +31,11 @@ function GoogleLogo({ className }: { className?: string }) {
 
 export function GoogleSignInButton({
     className,
-    children = 'Google 계정으로 로그인',
+    children,
     ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+    const { t } = useTranslation('auth')
+
     return (
         <button
             type="button"
@@ -52,7 +55,7 @@ export function GoogleSignInButton({
             {...props}
         >
             <GoogleLogo className="h-5 w-5 shrink-0" />
-            <span>{children}</span>
+            <span>{children ?? t('login.googleButton')}</span>
         </button>
     )
 }

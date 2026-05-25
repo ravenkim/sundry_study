@@ -1,63 +1,25 @@
+import i18n from 'src/assets/locales/i18n'
 import type { AdminLocationNode, NodeKind } from 'src/globals/api/types'
 
 export type LocationDepth = 1 | 2 | 3
 
-/** 관리자 장소 관리 화면 공통 용어 */
-export const LOC = {
-    pageTitle: '장소 관리',
-    navLabel: '장소 관리',
-    pageDescription:
-        '그룹과 항목을 조합해 최대 3단계까지 구성합니다. 항목은 제보 시 선택되는 장소입니다.',
-    depth: {
-        1: '1단계',
-        2: '2단계',
-        3: '3단계',
-    } as Record<LocationDepth, string>,
-    depthSubtitle: {
-        1: '그룹 · 항목',
-        2: '하위 그룹 · 항목',
-        3: '항목',
-    } as Record<LocationDepth, string>,
-    group: '그룹',
-    leaf: '항목',
-    addDepth: (depth: LocationDepth) => `${LOC.depth[depth]} 추가`,
-    editDepthKind: (depth: LocationDepth, kind: NodeKind) =>
-        `${LOC.depth[depth]} ${kind === 'GROUP' ? LOC.group : LOC.leaf} 수정`,
-    empty: {
-        depth1: '등록된 장소가 없습니다.',
-        depth1Action: '1단계 추가',
-        selectDepth1: '1단계에서 항목을 선택하세요.',
-        depth2Add: '하위 그룹 또는 항목을 추가해 보세요.',
-        depth2Action: '추가',
-        selectDepth2Group: '2단계에서 그룹을 선택하세요.',
-        depth3DirectLeaf:
-            '2단계가 항목이라 3단계가 필요 없습니다. (공학관 → 303호처럼 2단계 구조)',
-        depth3Add: '항목을 추가해 보세요.',
-        depth3Action: '항목 추가',
-    },
-    toast: {
-        selectParent: '먼저 상위 항목을 선택해 주세요.',
-        selectGroup: '먼저 그룹을 선택해 주세요.',
-        selectGroupForLeaf: '그룹을 선택한 뒤 항목을 추가해 주세요.',
-    },
-} as const
-
-export const DEPTH_LABELS = LOC.depth
-
 export function getDepthLabel(depth: LocationDepth): string {
-    return LOC.depth[depth]
+    return i18n.t(`adminBuildings:depth.${depth}`)
 }
 
 export function getDepthSubtitle(depth: LocationDepth): string {
-    return LOC.depthSubtitle[depth]
+    return i18n.t(`adminBuildings:depthSubtitle.${depth}`)
 }
 
 export function getCreateTitle(depth: LocationDepth): string {
-    return LOC.addDepth(depth)
+    return i18n.t('adminBuildings:addDepth', { depth: getDepthLabel(depth) })
 }
 
 export function getEditTitle(node: AdminLocationNode): string {
-    return LOC.editDepthKind(node.depth as LocationDepth, node.nodeKind)
+    return i18n.t('adminBuildings:editDepthKind', {
+        depth: getDepthLabel(node.depth as LocationDepth),
+        kind: getNodeKindLabel(node.nodeKind),
+    })
 }
 
 export function findNode(
@@ -134,18 +96,23 @@ export function getDefaultNodeKindForCreate(
 }
 
 export function getCreatePlaceholder(depth: LocationDepth, kind?: NodeKind): string {
-    if (depth === 1) return kind === 'LEAF' ? '야외 구역' : '공학관 A동'
-    if (depth === 2) return kind === 'LEAF' ? '303호' : '2층'
-    return '201호'
-}
-
-export const NODE_KIND_LABELS: Record<NodeKind, string> = {
-    GROUP: LOC.group,
-    LEAF: LOC.leaf,
+    if (depth === 1) {
+        return kind === 'LEAF'
+            ? i18n.t('adminBuildings:placeholder.depth1.leaf')
+            : i18n.t('adminBuildings:placeholder.depth1.group')
+    }
+    if (depth === 2) {
+        return kind === 'LEAF'
+            ? i18n.t('adminBuildings:placeholder.depth2.leaf')
+            : i18n.t('adminBuildings:placeholder.depth2.group')
+    }
+    return i18n.t('adminBuildings:placeholder.depth3.leaf')
 }
 
 export function getNodeKindLabel(kind: NodeKind): string {
-    return NODE_KIND_LABELS[kind]
+    return kind === 'GROUP'
+        ? i18n.t('adminBuildings:nodeKind.group')
+        : i18n.t('adminBuildings:nodeKind.leaf')
 }
 
 export function getAvailableNodeKindsForCreate(depth: LocationDepth): NodeKind[] {
@@ -160,13 +127,13 @@ export function isNodeKindChoiceDisabled(depth: LocationDepth): boolean {
 export function getNodeKindHint(depth: LocationDepth, kind: NodeKind): string {
     if (depth === 1) {
         return kind === 'GROUP'
-            ? '그룹은 하위에 또 다른 그룹이나 항목을 둘 수 있습니다.'
-            : '항목은 제보 시 바로 선택할 수 있는 장소입니다.'
+            ? i18n.t('adminBuildings:nodeKindHint.depth1.group')
+            : i18n.t('adminBuildings:nodeKindHint.depth1.leaf')
     }
     if (depth === 2) {
         return kind === 'GROUP'
-            ? '그룹을 선택하면 3단계에서 하위 항목을 추가할 수 있습니다.'
-            : '항목은 상위 그룹에 바로 연결되는 제보 대상입니다.'
+            ? i18n.t('adminBuildings:nodeKindHint.depth2.group')
+            : i18n.t('adminBuildings:nodeKindHint.depth2.leaf')
     }
-    return '3단계는 항목만 등록할 수 있습니다.'
+    return i18n.t('adminBuildings:nodeKindHint.depth3')
 }

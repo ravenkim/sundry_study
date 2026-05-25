@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { ArrowLeft } from 'lucide-react'
 import {
     Accordion,
@@ -7,35 +8,40 @@ import {
     AccordionTrigger,
 } from 'src/shared/lib/shadcn/components/ui/accordion'
 import { TermSections } from 'src/features/auth/TermSections'
-import { SIGNUP_TERMS } from 'src/features/auth/signupTermsData'
+import { useSignupTerms } from 'src/features/auth/useSignupTerms'
 
 function termTitle(label: string): string {
     return label.replace(/^\[.+?\]\s*/, '')
 }
 
 export function ServiceTerms() {
+    const { t } = useTranslation(['user', 'legal'])
+    const terms = useSignupTerms()
+
     return (
         <div className="bg-background flex min-h-screen flex-col md:mx-auto md:max-w-[390px]">
             <header className="border-outline-variant bg-surface sticky top-0 z-10 flex h-14 items-center justify-between border-b px-5">
                 <Link to="/profile" className="text-on-surface-variant -ml-2 p-2">
                     <ArrowLeft className="h-6 w-6" />
                 </Link>
-                <h1 className="text-primary text-lg font-bold">약관 및 정책</h1>
+                <h1 className="text-primary text-lg font-bold">
+                    {t('user:terms.title')}
+                </h1>
                 <div className="w-10" />
             </header>
 
             <main className="flex flex-grow flex-col gap-6 p-5 pb-8">
                 <div>
                     <h2 className="text-on-surface mb-1 text-xl font-bold">
-                        서비스 이용약관
+                        {t('user:terms.sectionTitle')}
                     </h2>
                     <p className="text-on-surface-variant text-sm leading-relaxed">
-                        에코리포트 서비스 이용과 관련된 약관·정책 전문입니다.
+                        {t('user:terms.sectionDescription')}
                     </p>
                 </div>
 
                 <Accordion type="single" collapsible className="flex flex-col gap-3">
-                    {SIGNUP_TERMS.map((term) => (
+                    {terms.map((term) => (
                         <AccordionItem
                             key={term.id}
                             value={term.id}
@@ -55,9 +61,9 @@ export function ServiceTerms() {
                 </Accordion>
 
                 <p className="text-on-surface-variant text-center text-xs leading-relaxed">
-                    약관 변경 시 서비스 내 공지를 통해 안내드립니다.
+                    {t('user:terms.changeNotice')}
                     <br />
-                    시행일: 2026년 5월 1일
+                    {t('user:terms.effectiveDate')}
                 </p>
             </main>
         </div>
