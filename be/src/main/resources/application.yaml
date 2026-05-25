@@ -18,6 +18,10 @@ spring:
   http:
     converters:
       preferred-json-mapper: jackson2
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
   application:
     name: backend
   datasource:

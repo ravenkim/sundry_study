@@ -1,4 +1,5 @@
 import client from 'src/globals/api/client'
+import { compressImageForUpload } from 'src/shared/lib/compressImage'
 import { shouldUseMock, withMockFallback } from 'src/globals/api/apiUtils'
 import {
     getMockReportDetail,
@@ -32,8 +33,10 @@ export async function createReport(
         }
     }
 
+    const image = await compressImageForUpload(payload.image)
+
     const formData = new FormData()
-    formData.append('image', payload.image)
+    formData.append('image', image)
     if (payload.buildingId)
         formData.append('buildingId', String(payload.buildingId))
     if (payload.locationId)

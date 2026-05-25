@@ -7,3 +7,5 @@ spring:
 server:
   port: ${SERVER_PORT:8080}
   forward-headers-strategy: framework
+  tomcat:
+    max-http-form-post-size: 12MB
