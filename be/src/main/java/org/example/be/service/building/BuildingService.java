@@ -33,14 +33,14 @@ public class BuildingService {
 
         Affiliation affiliation = member.getAffiliation();
         if (affiliation != null) {
-            return locationNodeService.listPublicTrees(affiliation.getSeq());
+            return locationNodeService.listPublicTrees(affiliation.getSeq(), memberSeq);
         }
 
         LocationNode scopeNode = member.getLocationNode();
         if (scopeNode != null) {
-            return locationNodeService.listPublicTreesForScope(scopeNode);
+            return locationNodeService.listPublicTreesForScope(scopeNode, memberSeq);
         }
 
-        return listBuildings();
+        return locationNodeService.listAllPublicTrees(memberSeq);
     }
 }

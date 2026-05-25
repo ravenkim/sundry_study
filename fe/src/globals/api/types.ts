@@ -112,6 +112,10 @@ export interface LocationTreeNode {
     locationId: number
     name: string
     nodeKind: NodeKind
+    /** 운영 시간 외(제보 가능) — LEAF만 */
+    reportable?: boolean
+    /** 이미 제보한 장소 — LEAF + 로그인 시 */
+    alreadyReported?: boolean
     children?: LocationTreeNode[]
 }
 
@@ -119,6 +123,8 @@ export interface BuildingLocation {
     locationId: number
     name: string
     path?: string
+    reportable?: boolean
+    alreadyReported?: boolean
 }
 
 export interface Building {

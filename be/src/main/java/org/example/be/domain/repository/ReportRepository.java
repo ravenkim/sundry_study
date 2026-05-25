@@ -24,6 +24,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     boolean existsByLocationNode_Seq(Long locationSeq);
 
+    boolean existsByMember_SeqAndLocationNode_Seq(Long memberSeq, Long locationSeq);
+
     List<Report> findByMember_SeqAndStatusInAndEstimatedKwhIsNotNull(
             Long memberSeq,
             List<ReportStatus> statuses

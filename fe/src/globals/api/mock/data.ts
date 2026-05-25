@@ -26,9 +26,9 @@ export const MOCK_BUILDINGS: Building[] = [
         affiliationId: 1,
         affiliationName: '삼육대학교',
         children: [
-            { locationId: 101, name: '303호', nodeKind: 'LEAF' },
-            { locationId: 102, name: '304호', nodeKind: 'LEAF' },
-            { locationId: 103, name: '2층 복도', nodeKind: 'LEAF' },
+            { locationId: 101, name: '303호', nodeKind: 'LEAF', reportable: true },
+            { locationId: 102, name: '304호', nodeKind: 'LEAF', reportable: true },
+            { locationId: 103, name: '2층 복도', nodeKind: 'LEAF', reportable: true },
         ],
     },
     {
@@ -38,8 +38,8 @@ export const MOCK_BUILDINGS: Building[] = [
         affiliationId: 1,
         affiliationName: '삼육대학교',
         children: [
-            { locationId: 201, name: '2열람실', nodeKind: 'LEAF' },
-            { locationId: 202, name: '3열람실', nodeKind: 'LEAF' },
+            { locationId: 201, name: '2열람실', nodeKind: 'LEAF', reportable: true },
+            { locationId: 202, name: '3열람실', nodeKind: 'LEAF', reportable: true },
         ],
     },
     {
@@ -49,8 +49,8 @@ export const MOCK_BUILDINGS: Building[] = [
         affiliationId: 1,
         affiliationName: '삼육대학교',
         children: [
-            { locationId: 301, name: '101호', nodeKind: 'LEAF' },
-            { locationId: 302, name: '201호', nodeKind: 'LEAF' },
+            { locationId: 301, name: '101호', nodeKind: 'LEAF', reportable: true },
+            { locationId: 302, name: '201호', nodeKind: 'LEAF', reportable: true },
         ],
     },
     {
@@ -60,8 +60,8 @@ export const MOCK_BUILDINGS: Building[] = [
         affiliationId: 1,
         affiliationName: '삼육대학교',
         children: [
-            { locationId: 401, name: '501호', nodeKind: 'LEAF' },
-            { locationId: 402, name: '502호', nodeKind: 'LEAF' },
+            { locationId: 401, name: '501호', nodeKind: 'LEAF', reportable: true },
+            { locationId: 402, name: '502호', nodeKind: 'LEAF', reportable: true },
         ],
     },
 ]

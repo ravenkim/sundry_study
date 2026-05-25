@@ -53,6 +53,44 @@ public class SavingsCalculationService {
                 .build();
     }
 
+    /**
+     * 운영 시간(전원 ON 구간)이 아닐 때만 제보 가능.
+     * 휴무일·개방 전·소등 후 → true, 운영 중 → false.
+     */
+    public boolean isReportableAt(LocalDateTime reportAt, List<LocationOperatingSchedule> schedules) {
+        if (schedules == null || schedules.isEmpty()) {
+            return true;
+        }
+
+        DayOfWeek day = reportAt.getDayOfWeek();
+        LocationOperatingSchedule schedule = schedules.stream()
+                .filter(s -> s.toDayOfWeek() == day)
+                .findFirst()
+                .orElse(null);
+
+        if (schedule == null) {
+            return true;
+        }
+        if (schedule.isClosed()) {
+            return true;
+        }
+
+        LocalTime on = schedule.getPowerOnTime();
+        LocalTime off = schedule.getPowerOffTime();
+        if (on == null || off == null) {
+            return true;
+        }
+
+        LocalTime reportTime = reportAt.toLocalTime();
+        if (reportTime.isBefore(on)) {
+            return true;
+        }
+        if (!reportTime.isBefore(off)) {
+            return true;
+        }
+        return false;
+    }
+
     int resolveOffTimeMinutes(LocalDateTime reportAt, List<LocationOperatingSchedule> schedules) {
         if (schedules == null || schedules.isEmpty()) {
             return EnergyConstants.OFF_TIME_CAP_MINUTES;

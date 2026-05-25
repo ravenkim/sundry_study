@@ -78,9 +78,11 @@
 
 **처리 로직**
 1. BE → LocationNode(LEAF) 조회 — 자원 수량·요일별 운영시간
-2. BE → Cloud Run `POST /analyze` (이미지 + `metadata` JSON 전달)
-3. `WASTE_DETECTED` → Report `APPROVED` 저장, AI `expected`(원) 파싱 → `estimatedSavingsKrw`·`estimatedPoint` 저장, `MemberPoint` 즉시 적립
-4. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
+2. **운영 시간(전원 ON 구간) 여부 검증** — `SavingsCalculationService.isReportableAt()` → 운영 중이면 `INVALID` (AI 호출 전)
+3. **중복 제보 검증** — 동일 `memberSeq` + `locationId` 기존 제보 존재 시 `ALREADY_EXISTS` (2004, AI 호출 전)
+4. BE → Cloud Run `POST /analyze` (이미지 + `metadata` JSON 전달)
+5. `WASTE_DETECTED` → Report `APPROVED` 저장, AI `expected`(원) 파싱 → `estimatedSavingsKrw`·`estimatedPoint` 저장, `MemberPoint` 즉시 적립
+6. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
 
 **Response 200 — 성공 (`WASTE_DETECTED`만 해당)**
 ```json
@@ -116,7 +118,23 @@
 ```json
 {
   "code": 1005,
-  "message": "강의실로 인식되지 않거나 분석할 수 없는 사진입니다: 강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
+  "message": "강의실로 인식되지 않습니다. 운영 중인 강의실(의자·책상이 보이는 공간)을 촬영해 주세요: 강의실로 인식되지 않습니다. (의자나 책상을 찾을 수 없음)"
+}
+```
+
+**Response 4xx — 운영 시간 중 제보**
+```json
+{
+  "code": 1005,
+  "message": "현재 운영 시간 중인 강의실은 제보할 수 없습니다. 운영 시간이 끝난 후 다시 시도해 주세요."
+}
+```
+
+**Response 4xx — 중복 제보**
+```json
+{
+  "code": 2004,
+  "message": "이미 제보한 강의실입니다. 같은 강의실은 중복 제보할 수 없습니다."
 }
 ```
 
@@ -421,6 +439,8 @@
           "locationId": 10,
           "name": "303호",
           "nodeKind": "LEAF",
+          "reportable": true,
+          "alreadyReported": false,
           "children": []
         },
         {
@@ -432,6 +452,8 @@
               "locationId": 12,
               "name": "201호",
               "nodeKind": "LEAF",
+              "reportable": false,
+              "alreadyReported": false,
               "children": []
             }
           ]
@@ -446,7 +468,11 @@
 |------|------|
 | `buildingId` | 루트 GROUP 노드 ID (레거시 명칭, 실제는 LocationNode PK) |
 | `nodeKind` | `GROUP` (하위 추가 가능) / `LEAF` (제보 선택 대상) |
+| `reportable` | **LEAF만** — 현재 시각 기준 운영 시간(전원 ON 구간) **외**이면 `true`. 휴무일·개방 전·소등 후 포함 |
+| `alreadyReported` | **LEAF + JWT** — 해당 회원이 이미 제보한 강의실이면 `true` |
 | `children` | 하위 노드 재귀 배열 (max depth 3) |
+
+> FE는 `reportable !== false && !alreadyReported`인 LEAF만 제보 선택 목록에 표시한다.
 
 ---
 
@@ -773,8 +799,10 @@ FE `adminApi` mock 데이터 사용. mock 응답에 **`locationPath`** (상위 �
 |------|------|------|
 | `UNAUTHORIZED` | 401 | 인증 토큰 없음/만료 |
 | `FORBIDDEN` | 403 | 권한 없음 |
-| `REPORT_DUPLICATE` | 400 | 동일 장소 중복 제보 (1시간 내) |
+| `REPORT_DUPLICATE` | 400 | 동일 장소 중복 제보 (1시간 내) — **⏳ 미구현** |
+| `ALREADY_EXISTS` | 2004 | 동일 회원+강의실 **기존 제보 존재** (영구 1회) — **✅ 2026-05-25** |
 | `DAILY_LIMIT_EXCEEDED` | 429 | 일일 제보 한도 초과 |
 | `NO_REPORTABLE_RESOURCES` | 400 | 해당 장소에 제보 가능한 자원이 없음 |
+| `INVALID` (1005) | 400 | 운영 시간 중 제보 시도 등 — **✅ 2026-05-25** |
 | `IMAGE_UPLOAD_FAILED` | 500 | 이미지 업로드 실패 |
 | `AI_SERVICE_ERROR` | 502 | Gemini API 호출 실패 |

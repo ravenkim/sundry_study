@@ -15,6 +15,7 @@ import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
 import org.example.be.service.location.LocationNodeService;
+import org.example.be.service.savings.SavingsCalculationService;
 import org.example.be.service.savings.ExpectedKrwParser;
 import org.example.be.service.savings.ExpectedKwhParser;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,7 @@ public class ReportService {
     private final MemberRepository memberRepository;
     private final MemberPointRepository memberPointRepository;
     private final LocationNodeService locationNodeService;
+    private final SavingsCalculationService savingsCalculationService;
     private final ObjectMapper objectMapper;
 
     private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
@@ -66,6 +68,17 @@ public class ReportService {
 
         LocalDateTime reportAt = LocalDateTime.now();
         var schedules = locationNodeService.getOperatingSchedules(locationNode.getSeq());
+
+        if (!savingsCalculationService.isReportableAt(reportAt, schedules)) {
+            throw new BusinessLogicException(ErrorCode.INVALID,
+                    "현재 운영 시간 중인 강의실은 제보할 수 없습니다. 운영 시간이 끝난 후 다시 시도해 주세요.");
+        }
+
+        if (reportRepository.existsByMember_SeqAndLocationNode_Seq(memberSeq, locationNode.getSeq())) {
+            throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS,
+                    "이미 제보한 강의실입니다. 같은 강의실은 중복 제보할 수 없습니다.");
+        }
+
         AiAnalyzeMetadata metadata = buildAnalyzeMetadata(reportAt, locationNode, schedules);
 
         AiAnalysisResponse aiResponse = callAiApi(request.image(), metadata);
@@ -76,7 +89,9 @@ public class ReportService {
         String aiAdviceMessage = "";
 
         if ("ERROR".equals(aiResponse.getResult())) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "강의실로 인식되지 않거나 분석할 수 없는 사진입니다: " + aiResponse.getMessage());
+            throw new BusinessLogicException(ErrorCode.INVALID,
+                    "강의실로 인식되지 않습니다. 운영 중인 강의실(의자·책상이 보이는 공간)을 촬영해 주세요: "
+                            + aiResponse.getMessage());
 
         } else if ("PASS".equals(aiResponse.getResult())) {
             throw new BusinessLogicException(ErrorCode.INVALID, "정상적인 강의실 상태이거나 사람이 있어 제보할 수 없습니다: " + aiResponse.getMessage());

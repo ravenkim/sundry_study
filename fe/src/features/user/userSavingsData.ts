@@ -33,12 +33,12 @@ export const PARTICIPATED_BUILDING_SAVINGS: ParticipatedBuildingSavings[] = [
     },
 ]
 
-/** kWh → CO₂(kg), 한국 전력 평균 배출계수 — BE `EnergyConstants.CO2_KG_PER_KWH` */
+/** kWh → CO₂(kg), 한국 전력 국가고유 배출계수 — docs/기획/.../절약량_환산_공식_및_근거.md §3 */
 export const CO2_KG_PER_KWH = 0.4594
 
 /**
- * kWh → 소나무 흡수량 환산 (그루)
- * 와이어프레임 기준 243 kWh ≈ 12그루 → 243 / 12 = 20.25 kWh/그루
+ * kWh → 소나무 흡수량 환산 (그루) — §4
+ * 9.2 kg CO₂/그루·년 ÷ 0.4594 ≈ 20.0; UI 검증 243 kWh → 12그루 → 20.25
  */
 export const KWH_PER_TREE = 20.25
 

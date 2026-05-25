@@ -24,6 +24,50 @@ class SavingsCalculationServiceTest {
     }
 
     @Test
+    @DisplayName("운영 시간 중 → 제보 불가")
+    void notReportableDuringOperatingHours() {
+        LocalDateTime reportAt = LocalDateTime.of(2026, 5, 18, 15, 0);
+        List<LocationOperatingSchedule> schedules = List.of(
+                schedule(DayOfWeek.MONDAY, false, LocalTime.of(7, 0), LocalTime.of(22, 0))
+        );
+
+        assertThat(service.isReportableAt(reportAt, schedules)).isFalse();
+    }
+
+    @Test
+    @DisplayName("소등 후 → 제보 가능")
+    void reportableAfterPowerOff() {
+        LocalDateTime reportAt = LocalDateTime.of(2026, 5, 18, 23, 0);
+        List<LocationOperatingSchedule> schedules = List.of(
+                schedule(DayOfWeek.MONDAY, false, LocalTime.of(7, 0), LocalTime.of(22, 0))
+        );
+
+        assertThat(service.isReportableAt(reportAt, schedules)).isTrue();
+    }
+
+    @Test
+    @DisplayName("휴무일 → 제보 가능")
+    void reportableOnClosedDay() {
+        LocalDateTime reportAt = LocalDateTime.of(2026, 5, 24, 14, 0);
+        List<LocationOperatingSchedule> schedules = List.of(
+                schedule(DayOfWeek.SUNDAY, true, null, null)
+        );
+
+        assertThat(service.isReportableAt(reportAt, schedules)).isTrue();
+    }
+
+    @Test
+    @DisplayName("개방 전 → 제보 가능")
+    void reportableBeforePowerOn() {
+        LocalDateTime reportAt = LocalDateTime.of(2026, 5, 18, 6, 0);
+        List<LocationOperatingSchedule> schedules = List.of(
+                schedule(DayOfWeek.MONDAY, false, LocalTime.of(7, 0), LocalTime.of(22, 0))
+        );
+
+        assertThat(service.isReportableAt(reportAt, schedules)).isTrue();
+    }
+
+    @Test
     @DisplayName("월요일 15:00 제보, 22:00 소등 → 7시간(420분)")
     void duringOperatingHours() {
         LocalDateTime reportAt = LocalDateTime.of(2026, 5, 18, 15, 0);

@@ -14,6 +14,10 @@ public class BuildingResponse {
         private Long locationId;
         private String name;
         private NodeKind nodeKind;
+        /** 운영 시간 외(제보 가능 시간) 여부 — LEAF만 설정 */
+        private Boolean reportable;
+        /** 로그인 회원이 이미 제보한 장소 — LEAF + 인증 시만 설정 */
+        private Boolean alreadyReported;
         private List<TreeNode> children;
     }
 

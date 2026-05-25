@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Loader2, Plus } from 'lucide-react'
+import { CheckCircle2, Loader2, Plus } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton } from 'src/shared/ui/eco'
@@ -9,7 +9,10 @@ import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import { createReport } from 'src/globals/api/reportApi'
-import { flattenAffiliationLeafLocations } from 'src/globals/api/locationUtils'
+import {
+    filterReportableLeafLocations,
+    flattenAffiliationLeafLocations,
+} from 'src/globals/api/locationUtils'
 import type { Building } from 'src/globals/api/types'
 import { MOCK_BUILDINGS } from 'src/globals/api/mock/data'
 
@@ -26,6 +29,57 @@ function filterBuildingsByAffiliation(
         (building) =>
             building.affiliationId == null ||
             building.affiliationId === affiliationId,
+    )
+}
+
+function ReportCriteriaGuide() {
+    const { t } = useTranslation('report')
+
+    const criteriaItems = [
+        t('form.criteriaOffHours'),
+        t('form.criteriaEmptyRoom'),
+        t('form.criteriaWaste'),
+    ]
+
+    const guideItems = [
+        t('form.photoGuideClassroom'),
+        t('form.photoGuideLighting'),
+        t('form.photoGuideWide'),
+    ]
+
+    return (
+        <div className="border-outline-variant bg-surface-container-low flex flex-col gap-4 rounded-xl border p-4">
+            <div className="flex flex-col gap-2">
+                <h3 className="text-sm font-bold">{t('form.criteriaTitle')}</h3>
+                <p className="text-on-surface-variant text-xs leading-relaxed">
+                    {t('form.criteriaIntro')}
+                </p>
+                <ul className="flex flex-col gap-1.5">
+                    {criteriaItems.map((item) => (
+                        <li
+                            key={item}
+                            className="text-on-surface flex items-start gap-2 text-xs"
+                        >
+                            <CheckCircle2 className="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="border-outline-variant flex flex-col gap-2 border-t pt-4">
+                <h3 className="text-sm font-bold">{t('form.photoGuideTitle')}</h3>
+                <ul className="flex flex-col gap-1.5">
+                    {guideItems.map((item) => (
+                        <li
+                            key={item}
+                            className="text-on-surface-variant text-xs leading-relaxed"
+                        >
+                            • {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
     )
 }
 
@@ -77,7 +131,10 @@ export const UserReportForm = () => {
     }, [user?.affiliationName, buildings])
 
     const leafLocations = useMemo(
-        () => flattenAffiliationLeafLocations(buildings),
+        () =>
+            filterReportableLeafLocations(
+                flattenAffiliationLeafLocations(buildings),
+            ),
         [buildings],
     )
 
@@ -204,7 +261,7 @@ export const UserReportForm = () => {
                         />
                         {locationOptions.length === 0 && (
                             <p className="text-on-surface-variant text-xs">
-                                {t('form.noRooms')}
+                                {t('form.noReportableRooms')}
                             </p>
                         )}
                     </div>
@@ -214,6 +271,7 @@ export const UserReportForm = () => {
                     <EcoButton
                         className="w-full py-4 text-lg"
                         onClick={() => void handleSubmit()}
+                        disabled={!selectedLocation}
                     >
                         {t('form.submit')}
                     </EcoButton>
@@ -236,6 +294,8 @@ export const UserReportForm = () => {
                 <p className="text-on-surface-variant text-sm">
                     {t('form.photoHint')}
                 </p>
+
+                <ReportCriteriaGuide />
 
                 <label
                     htmlFor="report-photo-input"

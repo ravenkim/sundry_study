@@ -45,14 +45,20 @@ export function flattenLeafLocations(
                 locationId: node.locationId,
                 name: node.name,
                 path,
+                reportable: node.reportable,
+                alreadyReported: node.alreadyReported,
             })
             continue
         }
 
-        if (node.children?.length) {
-            result.push(...flattenLeafLocations(node.children, path))
-        }
-    }
-
     return result
+}
+
+/** 제보 가능(운영 시간 외)하고 아직 제보하지 않은 LEAF만 반환 */
+export function filterReportableLeafLocations(
+    locations: SelectableReportLocation[],
+): SelectableReportLocation[] {
+    return locations.filter(
+        (loc) => loc.reportable !== false && !loc.alreadyReported,
+    )
 }

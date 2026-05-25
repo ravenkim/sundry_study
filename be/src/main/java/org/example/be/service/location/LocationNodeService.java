@@ -14,8 +14,11 @@ import org.example.be.domain.repository.LocationOperatingScheduleRepository;
 import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
+import org.example.be.service.savings.SavingsCalculationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,6 +39,7 @@ public class LocationNodeService {
     private final LocationOperatingScheduleRepository operatingScheduleRepository;
     private final AffiliationRepository affiliationRepository;
     private final ReportRepository reportRepository;
+    private final SavingsCalculationService savingsCalculationService;
 
     public List<LocationNodeResponse.TreeNode> getAdminTree(Long affiliationId) {
         List<LocationNode> nodes = locationNodeRepository
@@ -44,23 +48,35 @@ public class LocationNodeService {
     }
 
     public List<BuildingResponse.Item> listPublicTrees(Long affiliationId) {
+        return listPublicTrees(affiliationId, null);
+    }
+
+    public List<BuildingResponse.Item> listPublicTrees(Long affiliationId, Long memberSeq) {
         List<LocationNode> roots = locationNodeRepository
                 .findByAffiliation_SeqAndParentIsNullOrderBySortOrderAscSeqAsc(affiliationId);
         return roots.stream()
-                .map(this::toPublicItem)
+                .map(root -> toPublicItem(root, memberSeq))
                 .toList();
     }
 
     public List<BuildingResponse.Item> listPublicTreesForScope(LocationNode scopeNode) {
-        return List.of(toPublicItem(scopeNode));
+        return listPublicTreesForScope(scopeNode, null);
+    }
+
+    public List<BuildingResponse.Item> listPublicTreesForScope(LocationNode scopeNode, Long memberSeq) {
+        return List.of(toPublicItem(scopeNode, memberSeq));
     }
 
     public List<BuildingResponse.Item> listAllPublicTrees() {
+        return listAllPublicTrees(null);
+    }
+
+    public List<BuildingResponse.Item> listAllPublicTrees(Long memberSeq) {
         return locationNodeRepository.findAll().stream()
                 .filter(node -> node.getParent() == null)
                 .sorted(Comparator.comparingInt(LocationNode::getSortOrder)
                         .thenComparing(LocationNode::getSeq))
-                .map(this::toPublicItem)
+                .map(root -> toPublicItem(root, memberSeq))
                 .toList();
     }
 
@@ -241,27 +257,42 @@ public class LocationNodeService {
         return siblings.isEmpty() ? 0 : siblings.get(siblings.size() - 1).getSortOrder() + 1;
     }
 
-    private BuildingResponse.Item toPublicItem(LocationNode root) {
+    private BuildingResponse.Item toPublicItem(LocationNode root, Long memberSeq) {
         return BuildingResponse.Item.builder()
                 .buildingId(root.getSeq())
                 .name(root.getName())
                 .nodeKind(root.getNodeKind())
                 .affiliationId(root.getAffiliation().getSeq())
                 .affiliationName(root.getAffiliation().getName())
-                .children(buildPublicChildren(root.getSeq()))
+                .children(buildPublicChildren(root.getSeq(), memberSeq))
                 .build();
     }
 
-    private List<BuildingResponse.TreeNode> buildPublicChildren(Long parentId) {
+    private List<BuildingResponse.TreeNode> buildPublicChildren(Long parentId, Long memberSeq) {
+        LocalDateTime now = LocalDateTime.now();
         return locationNodeRepository.findByParent_SeqOrderBySortOrderAscSeqAsc(parentId).stream()
-                .map(child -> BuildingResponse.TreeNode.builder()
-                        .locationId(child.getSeq())
-                        .name(child.getName())
-                        .nodeKind(child.getNodeKind())
-                        .children(child.getNodeKind() == NodeKind.GROUP
-                                ? buildPublicChildren(child.getSeq())
-                                : List.of())
-                        .build())
+                .map(child -> {
+                    BuildingResponse.TreeNode.TreeNodeBuilder builder = BuildingResponse.TreeNode.builder()
+                            .locationId(child.getSeq())
+                            .name(child.getName())
+                            .nodeKind(child.getNodeKind());
+
+                    if (child.getNodeKind() == NodeKind.LEAF) {
+                        var schedules = getOperatingSchedules(child.getSeq());
+                        builder.reportable(savingsCalculationService.isReportableAt(now, schedules));
+                        if (memberSeq != null) {
+                            builder.alreadyReported(
+                                    reportRepository.existsByMember_SeqAndLocationNode_Seq(
+                                            memberSeq, child.getSeq()));
+                        }
+                    }
+
+                    return builder
+                            .children(child.getNodeKind() == NodeKind.GROUP
+                                    ? buildPublicChildren(child.getSeq(), memberSeq)
+                                    : List.of())
+                            .build();
+                })
                 .toList();
     }
 
