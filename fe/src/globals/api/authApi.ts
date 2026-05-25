@@ -14,6 +14,7 @@ export interface LoginRequest {
 
 export interface RegisterRequest {
     userName: string
+    nickname: string
     password: string
     email: string
     phoneNumber: string
@@ -42,6 +43,11 @@ export interface UserNameCheckResponse {
 
 export interface PhoneCheckResponse {
     phoneNumber: string
+    available: boolean
+}
+
+export interface NicknameCheckResponse {
+    nickname: string
     available: boolean
 }
 
@@ -123,6 +129,24 @@ export async function checkPhoneAvailability(
 
     if (data.code !== ResponseCode.OK || !data.body) {
         throw new Error(i18n.t('errors:phoneCheckFailed'))
+    }
+
+    return data.body
+}
+
+export async function checkNicknameAvailability(
+    nickname: string,
+): Promise<NicknameCheckResponse> {
+    const { data } = await client.get<
+        ApiResponse<NicknameCheckResponse> | ApiErrorResponse
+    >('/register/check-nickname', { params: { nickname: nickname.trim() } })
+
+    if (isApiError(data)) {
+        throw new Error(data.message || i18n.t('errors:nicknameCheckFailed'))
+    }
+
+    if (data.code !== ResponseCode.OK || !data.body) {
+        throw new Error(i18n.t('errors:nicknameCheckFailed'))
     }
 
     return data.body

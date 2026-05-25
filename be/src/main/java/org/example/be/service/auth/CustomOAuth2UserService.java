@@ -57,6 +57,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             if (optionalMember.isEmpty()) {
                 Member member = new Member();
                 member.setUserName(buildOAuthUserName(name, providerId));
+                member.setNickname(buildOAuthNickname(providerId));
                 member.setEmail(normalizedEmail);
                 member.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
                 member.setProvider(provider);
@@ -96,6 +97,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 : providerId;
         String userName = safeName + "_" + idSuffix;
         return userName.length() > 255 ? userName.substring(0, 255) : userName;
+    }
+
+    private static String buildOAuthNickname(String providerId) {
+        String suffix = providerId == null ? UUID.randomUUID().toString().substring(0, 8) : providerId;
+        String nickname = "oauth_" + suffix.replaceAll("[^a-zA-Z0-9]", "");
+        if (nickname.length() > 20) {
+            nickname = nickname.substring(0, 20);
+        }
+        if (nickname.length() < 2) {
+            nickname = "oauth" + UUID.randomUUID().toString().substring(0, 6);
+        }
+        return nickname;
     }
 
     private static OAuth2AuthenticationException oauthError(String message) {

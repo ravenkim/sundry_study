@@ -58,7 +58,8 @@ public class MemberProfileController {
         MemberResponse.Detail detail = memberService.assignAffiliation(
                 memberSeq,
                 request.getAffiliationId(),
-                request.getBuildingId()
+                request.getBuildingId(),
+                request.getNickname()
         );
         return ApiResponse.success(ResponseCode.MEMBER_BUILDING_UPDATED, detail);
     }

@@ -32,6 +32,7 @@ public enum ResponseCode {
     ADMIN_DASHBOARD(10023),
     ADMIN_STATS(10024),
     ADMIN_REPORTS(10025),
-    ADMIN_REPORT_UPDATED(10026);
+    ADMIN_REPORT_UPDATED(10026),
+    RANKING_BUILDING_ME(10027);
     private final int code;
 }

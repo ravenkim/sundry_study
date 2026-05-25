@@ -6,7 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,4 +47,24 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     );
 
     long countByStatus(ReportStatus status);
+
+    @Query(value = """
+            SELECT m.seq AS memberSeq,
+                   m.nickname AS nickname,
+                   COUNT(r.seq) AS reportCount,
+                   COALESCE(SUM(r.estimated_kwh), 0) AS totalKwh,
+                   COALESCE(SUM(r.point_awarded), 0) AS pointAwarded
+            FROM member_db m
+            LEFT JOIN report_db r ON r.member_seq = m.seq
+                AND r.status IN ('PENDING', 'APPROVED')
+                AND (:periodStart IS NULL OR r.created_at >= :periodStart)
+            WHERE m.location_node_seq = :buildingId
+              AND m.user_type = 'USER'
+            GROUP BY m.seq, m.nickname
+            ORDER BY reportCount DESC, totalKwh DESC, m.nickname ASC
+            """, nativeQuery = true)
+    List<BuildingRankingProjection> findBuildingRanking(
+            @Param("buildingId") Long buildingId,
+            @Param("periodStart") LocalDateTime periodStart
+    );
 }

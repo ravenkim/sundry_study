@@ -13,6 +13,7 @@ import koErrors from 'src/assets/locales/ko/errors.json'
 import koLegal from 'src/assets/locales/ko/legal.json'
 import koNotFound from 'src/assets/locales/ko/notFound.json'
 import koAbout from 'src/assets/locales/ko/about.json'
+import koRanking from 'src/assets/locales/ko/ranking.json'
 
 import enCommon from 'src/assets/locales/en/common.json'
 import enNav from 'src/assets/locales/en/nav.json'
@@ -25,6 +26,7 @@ import enErrors from 'src/assets/locales/en/errors.json'
 import enLegal from 'src/assets/locales/en/legal.json'
 import enNotFound from 'src/assets/locales/en/notFound.json'
 import enAbout from 'src/assets/locales/en/about.json'
+import enRanking from 'src/assets/locales/en/ranking.json'
 
 export const I18N_NAMESPACES = [
     'common',
@@ -38,6 +40,7 @@ export const I18N_NAMESPACES = [
     'legal',
     'notFound',
     'about',
+    'ranking',
 ] as const
 
 export type I18nNamespace = (typeof I18N_NAMESPACES)[number]
@@ -55,6 +58,7 @@ const resources = {
         legal: koLegal,
         notFound: koNotFound,
         about: koAbout,
+        ranking: koRanking,
     },
     en: {
         common: enCommon,
@@ -68,6 +72,7 @@ const resources = {
         legal: enLegal,
         notFound: enNotFound,
         about: enAbout,
+        ranking: enRanking,
     },
 }
 

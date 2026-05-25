@@ -99,9 +99,10 @@ WHERE p.parent_seq IS NULL AND p.name = '본관'
   );
 
 -- Admin account
-INSERT INTO member_db (user_name, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
+INSERT INTO member_db (user_name, nickname, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
 SELECT
     'admin',
+    '에코관리자',
     '$2b$10$u76UxwI8aDheM9FsbKTcW.PQnaIIrZX5BswXAZfj8dKN53A53O0G.',
     'admin@ecoreport.kr',
     '01011110001',
@@ -124,13 +125,15 @@ UPDATE member_db m
 JOIN affiliation_db a ON a.name = '삼육대학교'
 JOIN location_node_db n ON n.parent_seq IS NULL AND n.name = '공학관 A동' AND n.affiliation_seq = a.seq
 SET m.affiliation_seq = a.seq,
-    m.location_node_seq = n.seq
+    m.location_node_seq = n.seq,
+    m.nickname = '에코관리자'
 WHERE m.user_name = 'admin';
 
 -- User account
-INSERT INTO member_db (user_name, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
+INSERT INTO member_db (user_name, nickname, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
 SELECT
     'user',
+    '에코유저',
     '$2b$10$M20EFNpJiVd8zG4K36.um.kG1.ebqmPztuHMOAEtLKGPvtK5doATK',
     'user@ecoreport.kr',
     '01022220002',
@@ -147,6 +150,9 @@ SELECT 0, m.seq
 FROM member_db m
 WHERE m.user_name = 'user'
   AND NOT EXISTS (SELECT 1 FROM member_point_db mp WHERE mp.member_seq = m.seq);
+
+UPDATE member_db SET nickname = '에코유저' WHERE user_name = 'user';
+UPDATE member_db SET nickname = '에코관리자' WHERE user_name = 'admin';
 
 -- Phase 1: LEAF 노드 전기 자원 수량 (데모용, idempotent)
 UPDATE location_node_db n

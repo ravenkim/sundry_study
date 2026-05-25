@@ -20,6 +20,8 @@ public class MemberRequest {
         private String email;
         @NotEmpty(message="Enter the phoneNumber.")
         private String phoneNumber;
+        @NotEmpty(message="Enter the nickname.")
+        private String nickname;
         private Long affiliation;
         private Long buildingId;
     }

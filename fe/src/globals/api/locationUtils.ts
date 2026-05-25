@@ -51,6 +51,9 @@ export function flattenLeafLocations(
             continue
         }
 
+        result.push(...flattenLeafLocations(node.children, path))
+    }
+
     return result
 }
 

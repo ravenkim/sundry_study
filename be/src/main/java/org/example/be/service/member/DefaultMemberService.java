@@ -59,6 +59,17 @@ public class DefaultMemberService implements MemberService {
         return memberRepository.findByPhoneNumber(normalized).isEmpty();
     }
 
+    @Override
+    public boolean isNicknameAvailable(String nickname) {
+        String normalized = normalizeAndValidateNickname(nickname);
+        return memberRepository.findByNicknameIgnoreCase(normalized).isEmpty();
+    }
+
+    @Override
+    public String normalizeNicknameForResponse(String nickname) {
+        return normalizeAndValidateNickname(nickname);
+    }
+
     @Transactional
     @Override
     public boolean registerMember(MemberRequest.Create request) {
@@ -67,12 +78,17 @@ public class DefaultMemberService implements MemberService {
         }
 
         String userName = request.getUserName().trim();
+        String normalizedNickname = normalizeAndValidateNickname(request.getNickname());
         String normalizedEmail = normalizeEmail(request.getEmail());
         String normalizedPhone = normalizePhone(request.getPhoneNumber());
         validatePhoneFormat(normalizedPhone);
 
         if (memberRepository.findByUserName(userName).isPresent()) {
             throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 아이디입니다.");
+        }
+
+        if (memberRepository.findByNicknameIgnoreCase(normalizedNickname).isPresent()) {
+            throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 닉네임입니다.");
         }
 
         if (memberRepository.findByEmailIgnoreCase(normalizedEmail).isPresent()) {
@@ -86,6 +102,7 @@ public class DefaultMemberService implements MemberService {
         if (request.getBuildingId() != null) {
             return saveNewMember(
                     userName,
+                    normalizedNickname,
                     request.getPassword(),
                     normalizedEmail,
                     normalizedPhone,
@@ -101,12 +118,20 @@ public class DefaultMemberService implements MemberService {
         Affiliation affiliation = affiliationRepository.findById(request.getAffiliation())
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "존재하지 않는 소속입니다."));
 
-        return saveNewMember(userName, request.getPassword(), normalizedEmail, normalizedPhone, affiliation, null);
+        return saveNewMember(
+                userName,
+                normalizedNickname,
+                request.getPassword(),
+                normalizedEmail,
+                normalizedPhone,
+                affiliation,
+                null
+        );
     }
 
     @Transactional
     @Override
-    public MemberResponse.Detail assignAffiliation(Long memberSeq, Long affiliationId, Long buildingId) {
+    public MemberResponse.Detail assignAffiliation(Long memberSeq, Long affiliationId, Long buildingId, String nickname) {
         Member member = memberRepository.findById(memberSeq)
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
@@ -125,6 +150,12 @@ public class DefaultMemberService implements MemberService {
             member.setLocationNode(locationNode);
         } else {
             member.setLocationNode(null);
+        }
+
+        if (nickname != null && !nickname.isBlank()) {
+            String normalizedNickname = normalizeAndValidateNickname(nickname);
+            ensureNicknameAvailable(normalizedNickname, memberSeq);
+            member.setNickname(normalizedNickname);
         }
 
         return MemberResponse.Detail.of(member);
@@ -158,12 +189,19 @@ public class DefaultMemberService implements MemberService {
         Member member = memberRepository.findById(memberSeq)
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
+        boolean hasNickname = request.getNickname() != null && !request.getNickname().isBlank();
         boolean hasEmail = request.getEmail() != null && !request.getEmail().isBlank();
         boolean hasPhone = request.getPhoneNumber() != null && !request.getPhoneNumber().isBlank();
         boolean hasPassword = request.getPassword() != null && !request.getPassword().isBlank();
 
-        if (!hasEmail && !hasPhone && !hasPassword) {
+        if (!hasNickname && !hasEmail && !hasPhone && !hasPassword) {
             throw new BusinessLogicException(ErrorCode.INVALID, "변경할 정보를 입력해 주세요.");
+        }
+
+        if (hasNickname) {
+            String normalizedNickname = normalizeAndValidateNickname(request.getNickname());
+            ensureNicknameAvailable(normalizedNickname, memberSeq);
+            member.setNickname(normalizedNickname);
         }
 
         if (hasEmail) {
@@ -215,6 +253,7 @@ public class DefaultMemberService implements MemberService {
 
     private boolean saveNewMember(
             String userName,
+            String nickname,
             String password,
             String normalizedEmail,
             String normalizedPhone,
@@ -227,6 +266,7 @@ public class DefaultMemberService implements MemberService {
                 normalizedEmail,
                 affiliation
         );
+        member.setNickname(nickname);
         member.setPhoneNumber(normalizedPhone);
         member.setUserType(UserType.USER);
 
@@ -269,6 +309,26 @@ public class DefaultMemberService implements MemberService {
     private static void validatePhoneFormat(String normalizedPhone) {
         if (!normalizedPhone.matches("^01[016789]\\d{7,8}$")) {
             throw new BusinessLogicException(ErrorCode.INVALID, "올바른 휴대전화 번호를 입력해 주세요.");
+        }
+    }
+
+    private static String normalizeAndValidateNickname(String nickname) {
+        String trimmed = nickname == null ? "" : nickname.trim();
+        if (trimmed.isBlank()) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "닉네임을 입력해 주세요.");
+        }
+        if (!trimmed.matches("^[가-힣a-zA-Z0-9]{2,20}$")) {
+            throw new BusinessLogicException(
+                    ErrorCode.INVALID,
+                    "닉네임은 2~20자의 한글, 영문, 숫자만 사용할 수 있습니다."
+            );
+        }
+        return trimmed;
+    }
+
+    private void ensureNicknameAvailable(String nickname, Long memberSeq) {
+        if (memberRepository.existsByNicknameIgnoreCaseAndSeqNot(nickname, memberSeq)) {
+            throw new BusinessLogicException(ErrorCode.ALREADY_EXISTS, "이미 사용 중인 닉네임입니다.");
         }
     }
 }

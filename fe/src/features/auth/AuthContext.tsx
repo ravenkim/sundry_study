@@ -49,6 +49,7 @@ function profileToStoredUserPartial(
     profile: Awaited<ReturnType<typeof getMyProfile>>,
 ): Partial<StoredUser> {
     return {
+        nickname: profile.nickname,
         affiliationId: profile.affiliationId,
         affiliationName: profile.affiliationName,
         userType: profile.userType,

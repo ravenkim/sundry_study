@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, Mail, Phone } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { getAffiliations } from 'src/globals/api/affiliationsApi'
 import { assignAffiliation } from 'src/globals/api/memberProfileApi'
+import { checkNicknameAvailability } from 'src/globals/api/authApi'
 import type { Affiliation } from 'src/globals/api/types'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getAppHomePath, getStoredUser } from 'src/features/auth/authStorage'
@@ -12,6 +13,8 @@ import { setPendingAffiliation } from 'src/features/auth/signupBuildingStorage'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
 import { SearchableSelect } from 'src/shared/components/SearchableSelect'
+import { getErrorMessage } from 'src/shared/lib/i18n/getErrorMessage'
+import { isValidNicknameFormat } from 'src/shared/lib/nicknameUtils'
 
 type SignupIntent = 'signup' | 'oauth-complete'
 
@@ -20,12 +23,17 @@ export function AffiliationSelection() {
     const [searchParams] = useSearchParams()
     const { refreshUser } = useAuth()
     const { t } = useTranslation('auth')
+    const { t: tCommon } = useTranslation('common')
     const { t: tErrors } = useTranslation('errors')
     const intent = (searchParams.get('intent') as SignupIntent) || 'signup'
     const isOAuthComplete = intent === 'oauth-complete'
 
     const [affiliations, setAffiliations] = useState<Affiliation[]>([])
     const [affiliationId, setAffiliationId] = useState<number | ''>('')
+    const [nickname, setNickname] = useState('')
+    const [nicknameChecked, setNicknameChecked] = useState(false)
+    const [nicknameAvailable, setNicknameAvailable] = useState(false)
+    const [checkingNickname, setCheckingNickname] = useState(false)
     const [loading, setLoading] = useState(true)
     const [submitting, setSubmitting] = useState(false)
 
@@ -60,12 +68,28 @@ export function AffiliationSelection() {
         }
 
         if (isOAuthComplete) {
+            const trimmedNickname = nickname.trim()
+            if (!trimmedNickname) {
+                toast.error(tErrors('nicknameRequired'))
+                return
+            }
+            if (!isValidNicknameFormat(trimmedNickname)) {
+                toast.error(tErrors('nicknameInvalidFormat'))
+                return
+            }
+            if (!nicknameChecked || !nicknameAvailable) {
+                toast.error(tErrors('nicknameCheckRequired'))
+                return
+            }
+
             setSubmitting(true)
             try {
                 const profile = await assignAffiliation({
                     affiliationId: Number(affiliationId),
+                    nickname: trimmedNickname,
                 })
                 refreshUser({
+                    nickname: profile.nickname,
                     affiliationId: profile.affiliationId,
                     affiliationName: profile.affiliationName,
                     userType: profile.userType,
@@ -74,8 +98,8 @@ export function AffiliationSelection() {
                 })
                 toast.success(t('affiliation.registerSuccess'))
                 navigate(getAppHomePath(getStoredUser()), { replace: true })
-            } catch {
-                toast.error(tErrors('affiliationAssignFailed'))
+            } catch (error) {
+                toast.error(getErrorMessage(error))
             } finally {
                 setSubmitting(false)
             }
@@ -150,6 +174,100 @@ export function AffiliationSelection() {
                             <p className="text-on-surface-variant text-sm">
                                 {t('affiliation.emptyList')}
                             </p>
+                        )}
+
+                        {isOAuthComplete && (
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-on-surface text-sm font-semibold">
+                                    {t('signup.nicknameLabel')}
+                                </label>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={nickname}
+                                        onChange={(e) => {
+                                            setNickname(e.target.value)
+                                            setNicknameChecked(false)
+                                            setNicknameAvailable(false)
+                                        }}
+                                        placeholder={t(
+                                            'signup.nicknamePlaceholder',
+                                        )}
+                                        autoComplete="nickname"
+                                        className="border-outline-variant bg-surface focus:ring-primary-container flex-1 rounded-lg border p-3.5 outline-none focus:ring-2"
+                                    />
+                                    <EcoButton
+                                        variant="outline"
+                                        className="px-4 whitespace-nowrap"
+                                        type="button"
+                                        disabled={checkingNickname}
+                                        onClick={async () => {
+                                            const trimmed = nickname.trim()
+                                            if (!trimmed) {
+                                                toast.error(
+                                                    tErrors('nicknameRequired'),
+                                                )
+                                                return
+                                            }
+                                            if (!isValidNicknameFormat(trimmed)) {
+                                                toast.error(
+                                                    tErrors(
+                                                        'nicknameInvalidFormat',
+                                                    ),
+                                                )
+                                                return
+                                            }
+                                            setCheckingNickname(true)
+                                            try {
+                                                const result =
+                                                    await checkNicknameAvailability(
+                                                        trimmed,
+                                                    )
+                                                setNicknameChecked(true)
+                                                setNicknameAvailable(
+                                                    result.available,
+                                                )
+                                                if (result.available) {
+                                                    toast.success(
+                                                        t(
+                                                            'signup.nicknameAvailable',
+                                                        ),
+                                                    )
+                                                } else {
+                                                    toast.error(
+                                                        t(
+                                                            'signup.nicknameTaken',
+                                                        ),
+                                                    )
+                                                }
+                                            } catch (error) {
+                                                toast.error(
+                                                    getErrorMessage(error),
+                                                )
+                                            } finally {
+                                                setCheckingNickname(false)
+                                            }
+                                        }}
+                                    >
+                                        {checkingNickname
+                                            ? tCommon('checking')
+                                            : tCommon('duplicateCheck')}
+                                    </EcoButton>
+                                </div>
+                                {nicknameChecked && (
+                                    <p
+                                        className={`text-xs font-medium ${
+                                            nicknameAvailable
+                                                ? 'text-primary'
+                                                : 'text-error'
+                                        }`}
+                                    >
+                                        {nicknameAvailable
+                                            ? t('signup.nicknameAvailable')
+                                            : t('signup.nicknameTaken')}
+                                    </p>
+                                )}
+                            </div>
                         )}
                     </form>
                 )}

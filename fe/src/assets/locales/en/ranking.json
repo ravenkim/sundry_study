@@ -1,0 +1,23 @@
+{
+    "title": "Building Ranking",
+    "description": "Report rankings among students in your building. Displayed by nickname.",
+    "loading": "Loading rankings...",
+    "period": {
+        "month": "This month",
+        "all": "All time"
+    },
+    "myRank": {
+        "title": "My rank",
+        "empty": "You are not ranked yet. Submit your first report!",
+        "anonymous": "Me"
+    },
+    "leaderboardTitle": "Eco Hero Leaderboard",
+    "empty": "No ranking data yet.",
+    "meBadge": "Me",
+    "entry": {
+        "reports": "{{count}} reports"
+    },
+    "missingBuildingTitle": "Building required",
+    "missingBuildingDescription": "Select your building in profile settings to view the building ranking.",
+    "missingBuildingCta": "Edit profile"
+}

@@ -20,11 +20,14 @@ public class MemberProfileRequest {
         private Long affiliationId;
 
         private Long buildingId;
+
+        private String nickname;
     }
 
     @Getter
     @Setter
     public static class Update {
+        private String nickname;
         private String email;
         private String phoneNumber;
         private String currentPassword;

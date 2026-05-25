@@ -43,6 +43,7 @@ export default function OAuthCallback() {
                 }
 
                 refreshUser({
+                    nickname: profile.nickname,
                     affiliationId: profile.affiliationId,
                     affiliationName: profile.affiliationName,
                     userType: profile.userType,

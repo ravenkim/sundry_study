@@ -165,7 +165,8 @@ export const UserProfile = () => {
     const { user, logout } = useAuth()
     const navigate = useNavigate()
     const [reportCount, setReportCount] = useState(0)
-    const displayName = user?.userName ?? t('profile.fallbackName')
+    const displayName =
+        user?.nickname ?? user?.userName ?? t('profile.fallbackName')
     const { buildings: myBuildingSavings, loading: savingsLoading } =
         useMyBuildingSavings()
 

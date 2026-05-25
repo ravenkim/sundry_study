@@ -56,6 +56,17 @@ public class RegistrationController {
         );
     }
 
+    @Operation(summary = "닉네임 중복 확인", description = "DB에서 닉네임 사용 여부를 확인합니다.")
+    @GetMapping("/register/check-nickname")
+    public ApiResponse<MemberResponse.NicknameCheck> checkNickname(@RequestParam String nickname) {
+        boolean available = defaultMemberService.isNicknameAvailable(nickname);
+        String normalized = defaultMemberService.normalizeNicknameForResponse(nickname);
+        return ApiResponse.success(
+                ResponseCode.OK,
+                MemberResponse.NicknameCheck.of(normalized, available)
+        );
+    }
+
     @Operation(summary = "회원가입", description = "새 사용자 계정을 등록합니다.")
     @PostMapping("/register")
     public ApiResponse<Void> register(@Valid @RequestBody MemberRequest.Create request) {

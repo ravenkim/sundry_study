@@ -14,6 +14,7 @@ public class MemberResponse {
     public static class Detail {
         private Long memberSeq;
         private String userName;
+        private String nickname;
         private String email;
         private String phoneNumber;
         private Long affiliationId;
@@ -29,6 +30,7 @@ public class MemberResponse {
             return Detail.builder()
                     .memberSeq(member.getSeq())
                     .userName(member.getUserName())
+                    .nickname(member.getNickname())
                     .email(member.getEmail())
                     .phoneNumber(member.getPhoneNumber())
                     .affiliationId(affiliation != null ? affiliation.getSeq() : null)
@@ -81,6 +83,21 @@ public class MemberResponse {
         public static PhoneCheck of(String phoneNumber, boolean available) {
             return PhoneCheck.builder()
                     .phoneNumber(phoneNumber)
+                    .available(available)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class NicknameCheck {
+        private String nickname;
+        private boolean available;
+
+        public static NicknameCheck of(String nickname, boolean available) {
+            return NicknameCheck.builder()
+                    .nickname(nickname)
                     .available(available)
                     .build();
         }

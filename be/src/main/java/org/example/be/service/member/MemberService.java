@@ -11,11 +11,15 @@ public interface MemberService {
 
     boolean isPhoneAvailable(String phoneNumber);
 
+    boolean isNicknameAvailable(String nickname);
+
+    String normalizeNicknameForResponse(String nickname);
+
     boolean registerMember(MemberRequest.Create request);
 
     MemberResponse.Detail assignBuilding(Long memberSeq, Long buildingId);
 
-    MemberResponse.Detail assignAffiliation(Long memberSeq, Long affiliationId, Long buildingId);
+    MemberResponse.Detail assignAffiliation(Long memberSeq, Long affiliationId, Long buildingId, String nickname);
 
     MemberResponse.Detail findMyProfile(Long memberSeq);
 

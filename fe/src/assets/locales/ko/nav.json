@@ -6,7 +6,8 @@
         "reportDetail": "제보 상세",
         "shop": "포인트샵",
         "profile": "마이페이지",
-        "aboutUs": "소개"
+        "aboutUs": "소개",
+        "ranking": "건물 랭킹"
     },
     "menu": {
         "openAriaLabel": "메뉴 열기",
@@ -16,7 +17,8 @@
         "reports": "제보 이력",
         "shop": "포인트샵",
         "profile": "마이페이지",
-        "aboutUs": "에코리포트 소개"
+        "aboutUs": "에코리포트 소개",
+        "ranking": "건물 랭킹"
     },
     "admin": {
         "brandTitle": "EcoReport Admin",

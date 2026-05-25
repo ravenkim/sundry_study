@@ -5,6 +5,7 @@ import type { ApiResponse } from 'src/globals/api/types'
 export interface MemberProfile {
     memberSeq: number
     userName: string
+    nickname?: string
     email?: string
     phoneNumber?: string
     affiliationId?: number
@@ -16,6 +17,7 @@ export interface MemberProfile {
 }
 
 export interface UpdateProfileRequest {
+    nickname?: string
     email?: string
     phoneNumber?: string
     currentPassword?: string
@@ -25,6 +27,11 @@ export interface UpdateProfileRequest {
 export interface AssignAffiliationRequest {
     affiliationId: number
     buildingId?: number
+    nickname?: string
+}
+
+export interface AssignBuildingRequest {
+    buildingId: number
 }
 
 export async function getMyProfile(): Promise<MemberProfile> {
@@ -47,6 +54,16 @@ export async function assignAffiliation(
 ): Promise<MemberProfile> {
     const { data } = await client.patch<ApiResponse<MemberProfile>>(
         '/api/me/affiliation',
+        request,
+    )
+    return unwrapApiData(data)
+}
+
+export async function assignBuilding(
+    request: AssignBuildingRequest,
+): Promise<MemberProfile> {
+    const { data } = await client.patch<ApiResponse<MemberProfile>>(
+        '/api/me/building',
         request,
     )
     return unwrapApiData(data)

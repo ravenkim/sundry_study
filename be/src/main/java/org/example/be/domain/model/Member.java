@@ -17,6 +17,10 @@ public class Member {
     private Long seq;
 
     private String userName;
+
+    @Column(nullable = false, length = 20)
+    private String nickname;
+
     private String password;
     private String email;
 

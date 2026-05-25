@@ -15,6 +15,9 @@
     "phoneInvalidFormat": "Please enter a valid mobile phone number.",
     "requiredFieldsMissing": "Please fill in all required fields.",
     "usernameCheckRequired": "Please complete username availability check.",
+    "nicknameRequired": "Please enter a nickname.",
+    "nicknameInvalidFormat": "Nickname must be 2-20 characters using Korean, letters, or numbers only.",
+    "nicknameCheckRequired": "Please complete nickname availability check.",
     "emailCheckRequired": "Please complete email availability check.",
     "phoneCheckRequired": "Please complete phone number availability check.",
     "passwordMinLength": "Password must be at least 8 characters.",
@@ -25,5 +28,6 @@
     "reportSubmittedSuccess": "AI confirmed energy waste.",
     "emailCheckFailed": "Email verification failed.",
     "usernameCheckFailed": "Username verification failed.",
+    "nicknameCheckFailed": "Nickname verification failed.",
     "phoneCheckFailed": "Phone number verification failed."
 }
