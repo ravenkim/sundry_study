@@ -9,9 +9,25 @@ public record ReportCreateRequest(
         String roomName,
         String description,
         @JsonProperty("isLightWasting")
-        boolean isLightWasting,
-        boolean isAcWasting,
-        boolean isHeaterWasting,
-        boolean isOtherWasting,
+        Boolean isLightWasting,
+        Boolean isAcWasting,
+        Boolean isHeaterWasting,
+        Boolean isOtherWasting,
         MultipartFile image
-) {}
+) {
+    public boolean isLightWastingFlag() {
+        return Boolean.TRUE.equals(isLightWasting);
+    }
+
+    public boolean isAcWastingFlag() {
+        return Boolean.TRUE.equals(isAcWasting);
+    }
+
+    public boolean isHeaterWastingFlag() {
+        return Boolean.TRUE.equals(isHeaterWasting);
+    }
+
+    public boolean isOtherWastingFlag() {
+        return Boolean.TRUE.equals(isOtherWasting);
+    }
+}

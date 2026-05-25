@@ -48,9 +48,7 @@ export async function createReport(
 
     const { data } = await client.post<
         ApiResponse<CreateReportResponse> | ApiErrorResponse
-    >('/api/reports', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    >('/api/reports', formData)
 
     if (isApiError(data)) {
         throw new Error(data.message || i18n.t('errors:reportSubmitFailed'))

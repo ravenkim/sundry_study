@@ -9,11 +9,25 @@ import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import { createReport } from 'src/globals/api/reportApi'
-import { flattenLeafLocations } from 'src/globals/api/locationUtils'
+import { flattenAffiliationLeafLocations } from 'src/globals/api/locationUtils'
 import type { Building } from 'src/globals/api/types'
 import { MOCK_BUILDINGS } from 'src/globals/api/mock/data'
 
 type Step = 'photo' | 'location' | 'loading'
+
+function filterBuildingsByAffiliation(
+    items: Building[],
+    affiliationId?: number,
+): Building[] {
+    if (!affiliationId) {
+        return items
+    }
+    return items.filter(
+        (building) =>
+            building.affiliationId == null ||
+            building.affiliationId === affiliationId,
+    )
+}
 
 export const UserReportForm = () => {
     const { t } = useTranslation('report')
@@ -26,58 +40,26 @@ export const UserReportForm = () => {
     const [photo, setPhoto] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [buildings, setBuildings] = useState<Building[]>([])
-    const [buildingId, setBuildingId] = useState<number | ''>('')
     const [locationId, setLocationId] = useState<number | ''>('')
-
-    const applyBuildings = useCallback(
-        (items: Building[]) => {
-            setBuildings(items)
-            if (items.length === 0) {
-                setBuildingId('')
-                return
-            }
-
-            const preferred = user?.buildingId
-                ? items.find((b) => b.buildingId === user.buildingId)
-                : undefined
-
-            if (preferred) {
-                setBuildingId(preferred.buildingId)
-            } else if (items.length === 1) {
-                setBuildingId(items[0].buildingId)
-            } else {
-                setBuildingId('')
-            }
-        },
-        [user?.buildingId],
-    )
 
     useEffect(() => {
         void getBuildings()
             .then((items) => {
-                const scoped =
-                    items.length > 0
-                        ? items
-                        : MOCK_BUILDINGS.filter(
-                              (building) =>
-                                  !user?.buildingId ||
-                                  building.buildingId === user.buildingId,
-                          )
-                applyBuildings(scoped)
+                const scoped = filterBuildingsByAffiliation(
+                    items.length > 0 ? items : MOCK_BUILDINGS,
+                    user?.affiliationId,
+                )
+                setBuildings(scoped)
             })
             .catch(() => {
-                const fallback = MOCK_BUILDINGS.filter(
-                    (building) =>
-                        !user?.buildingId ||
-                        building.buildingId === user.buildingId,
+                setBuildings(
+                    filterBuildingsByAffiliation(
+                        MOCK_BUILDINGS,
+                        user?.affiliationId,
+                    ),
                 )
-                applyBuildings(fallback)
             })
-    }, [applyBuildings])
-
-    useEffect(() => {
-        setLocationId('')
-    }, [buildingId])
+    }, [user?.affiliationId])
 
     useEffect(() => {
         if (!photo) {
@@ -89,29 +71,27 @@ export const UserReportForm = () => {
         return () => URL.revokeObjectURL(url)
     }, [photo])
 
-    const selectedBuilding = buildings.find((b) => b.buildingId === buildingId)
+    const affiliationName = useMemo(() => {
+        if (user?.affiliationName) {
+            return user.affiliationName
+        }
+        return buildings[0]?.affiliationName ?? ''
+    }, [user?.affiliationName, buildings])
+
     const leafLocations = useMemo(
-        () => flattenLeafLocations(selectedBuilding?.children),
-        [selectedBuilding],
-    )
-    const selectedLocation = leafLocations.find(
-        (l) => l.locationId === locationId,
+        () => flattenAffiliationLeafLocations(buildings),
+        [buildings],
     )
 
-    const buildingOptions = useMemo(
-        () =>
-            buildings.map((building) => ({
-                value: building.buildingId,
-                label: building.name,
-            })),
-        [buildings],
+    const selectedLocation = leafLocations.find(
+        (location) => location.locationId === locationId,
     )
 
     const locationOptions = useMemo(
         () =>
-            leafLocations.map((loc) => ({
-                value: loc.locationId,
-                label: loc.path ?? loc.name,
+            leafLocations.map((location) => ({
+                value: location.locationId,
+                label: location.path ?? location.name,
             })),
         [leafLocations],
     )
@@ -130,7 +110,7 @@ export const UserReportForm = () => {
     }
 
     const handleSubmit = useCallback(async () => {
-        if (!photo || !selectedBuilding || !selectedLocation) {
+        if (!photo || !selectedLocation) {
             toast.error(t('form.errorPhotoAndLocationRequired'))
             return
         }
@@ -140,8 +120,8 @@ export const UserReportForm = () => {
         try {
             const response = await createReport({
                 image: photo,
-                buildingId: selectedBuilding.buildingId,
-                buildingName: selectedBuilding.name,
+                buildingId: selectedLocation.buildingId,
+                buildingName: selectedLocation.buildingName,
                 locationId: selectedLocation.locationId,
                 roomName: selectedLocation.name,
             })
@@ -150,7 +130,7 @@ export const UserReportForm = () => {
                 state: {
                     aiResult: response.aiResult,
                     status: response.status,
-                    buildingName: selectedBuilding.name,
+                    buildingName: selectedLocation.buildingName,
                     roomName: selectedLocation.name,
                 },
             })
@@ -162,7 +142,7 @@ export const UserReportForm = () => {
             )
             setStep('location')
         }
-    }, [photo, selectedBuilding, selectedLocation, navigate, t])
+    }, [photo, selectedLocation, navigate, t])
 
     if (step === 'loading') {
         return (
@@ -198,25 +178,18 @@ export const UserReportForm = () => {
                     )}
                     <div className="flex flex-col gap-2">
                         <label className="text-on-surface-variant text-xs font-bold">
-                            {t('form.buildingLabel')}
+                            {t('form.affiliationLabel')}
                         </label>
-                        {buildings.length === 1 && selectedBuilding ? (
+                        {affiliationName ? (
                             <div className="border-outline-variant bg-surface-container-low rounded-lg border px-4 py-3">
                                 <p className="text-on-surface text-sm font-semibold">
-                                    {selectedBuilding.name}
+                                    {affiliationName}
                                 </p>
                             </div>
                         ) : (
-                            <SearchableSelect
-                                options={buildingOptions}
-                                value={buildingId}
-                                onChange={setBuildingId}
-                                placeholder={t('form.buildingPlaceholder')}
-                                searchPlaceholder={t(
-                                    'form.buildingSearchPlaceholder',
-                                )}
-                                disabled={buildings.length === 0}
-                            />
+                            <p className="text-on-surface-variant text-xs">
+                                {t('form.affiliationMissing')}
+                            </p>
                         )}
                     </div>
                     <div className="flex flex-col gap-2">
@@ -229,9 +202,9 @@ export const UserReportForm = () => {
                             onChange={setLocationId}
                             placeholder={t('form.roomPlaceholder')}
                             searchPlaceholder={t('form.roomSearchPlaceholder')}
-                            disabled={!selectedBuilding || locationOptions.length === 0}
+                            disabled={locationOptions.length === 0}
                         />
-                        {selectedBuilding && locationOptions.length === 0 && (
+                        {locationOptions.length === 0 && (
                             <p className="text-on-surface-variant text-xs">
                                 {t('form.noRooms')}
                             </p>

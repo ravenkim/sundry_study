@@ -53,7 +53,10 @@ public class ReportService {
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
         LocationNode locationNode = resolveLocationNode(request);
-        locationNodeService.validateMemberScope(member.getLocationNode(), locationNode);
+        locationNodeService.validateMemberAffiliation(member.getAffiliation(), locationNode);
+        if (member.getAffiliation() == null) {
+            locationNodeService.validateMemberScope(member.getLocationNode(), locationNode);
+        }
 
         if (request.image() == null || request.image().isEmpty()) {
             throw new BusinessLogicException(ErrorCode.INVALID, "현장 사진 이미지는 필수입니다.");
@@ -66,8 +69,8 @@ public class ReportService {
         AiAnalysisResponse aiResponse = callAiApi(request.image(), metadata);
         log.info("AI Analysis Result: {}", aiResponse.getResult());
 
-        boolean aiLightWasting = request.isLightWasting();
-        boolean aiAcWasting = request.isAcWasting();
+        boolean aiLightWasting = request.isLightWastingFlag();
+        boolean aiAcWasting = request.isAcWastingFlag();
         String aiAdviceMessage = "";
 
         if ("ERROR".equals(aiResponse.getResult())) {
@@ -96,8 +99,8 @@ public class ReportService {
         WasteType wasteType = new WasteType(
                 aiLightWasting,
                 aiAcWasting,
-                request.isHeaterWasting(),
-                request.isOtherWasting()
+                request.isHeaterWastingFlag(),
+                request.isOtherWastingFlag()
         );
 
         String locationDetail = locationNodeService.buildPath(locationNode);
@@ -110,7 +113,7 @@ public class ReportService {
                 .member(member)
                 .locationNode(locationNode)
                 .locationDetail(locationDetail)
-                .description(request.description() + aiAdviceMessage)
+                .description((request.description() != null ? request.description() : "") + aiAdviceMessage)
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)
                 .status(ReportStatus.PENDING)

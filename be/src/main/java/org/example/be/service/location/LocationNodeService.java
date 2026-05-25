@@ -197,6 +197,15 @@ public class LocationNodeService {
         }
     }
 
+    public void validateMemberAffiliation(Affiliation affiliation, LocationNode target) {
+        if (affiliation == null) {
+            return;
+        }
+        if (!target.getAffiliation().getSeq().equals(affiliation.getSeq())) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "소속 캠퍼스 내 장소만 제보할 수 있습니다.");
+        }
+    }
+
     public boolean isSameOrDescendant(LocationNode node, LocationNode ancestor) {
         LocationNode current = node;
         while (current != null) {
