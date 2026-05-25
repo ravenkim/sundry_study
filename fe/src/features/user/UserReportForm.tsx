@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { CheckCircle2, Plus } from 'lucide-react'
+import { CheckCircle2, Plus, TriangleAlert } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton } from 'src/shared/ui/eco'
@@ -30,6 +30,66 @@ function filterBuildingsByAffiliation(
         (building) =>
             building.affiliationId == null ||
             building.affiliationId === affiliationId,
+    )
+}
+
+function ReportAbuseNotice({
+    showAgree = false,
+    agreed = false,
+    onAgreeChange,
+}: {
+    showAgree?: boolean
+    agreed?: boolean
+    onAgreeChange?: (agreed: boolean) => void
+}) {
+    const { t } = useTranslation('report')
+
+    const abuseItems = [
+        t('form.abuseNoticeItem1'),
+        t('form.abuseNoticeItem2'),
+        t('form.abuseNoticeItem3'),
+    ]
+
+    return (
+        <div className="border-error/30 bg-error-container/10 flex flex-col gap-3 rounded-xl border p-4">
+            <div className="flex items-start gap-2">
+                <TriangleAlert className="text-error mt-0.5 h-4 w-4 shrink-0" />
+                <div className="flex flex-col gap-2">
+                    <h3 className="text-error text-sm font-bold">
+                        {t('form.abuseNoticeTitle')}
+                    </h3>
+                    <p className="text-on-surface-variant text-xs leading-relaxed">
+                        {t('form.abuseNoticeIntro')}
+                    </p>
+                    <ul className="flex flex-col gap-1.5">
+                        {abuseItems.map((item) => (
+                            <li
+                                key={item}
+                                className="text-on-surface text-xs leading-relaxed"
+                            >
+                                • {item}
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="text-on-surface-variant text-xs leading-relaxed">
+                        {t('form.abuseNoticePenalty')}
+                    </p>
+                </div>
+            </div>
+            {showAgree && (
+                <label className="border-error/20 flex cursor-pointer items-start gap-3 border-t pt-3">
+                    <input
+                        type="checkbox"
+                        checked={agreed}
+                        onChange={(e) => onAgreeChange?.(e.target.checked)}
+                        className="border-outline-variant text-primary focus:ring-primary mt-0.5 h-4 w-4 shrink-0 rounded"
+                    />
+                    <span className="text-on-surface text-xs leading-relaxed">
+                        {t('form.abuseAgreeLabel')}
+                    </span>
+                </label>
+            )}
+        </div>
     )
 }
 
@@ -95,6 +155,7 @@ export const UserReportForm = () => {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [buildings, setBuildings] = useState<Building[]>([])
     const [locationId, setLocationId] = useState<number | ''>('')
+    const [abuseAgreed, setAbuseAgreed] = useState(false)
 
     useEffect(() => {
         void getBuildings()
@@ -171,6 +232,10 @@ export const UserReportForm = () => {
             toast.error(t('form.errorPhotoAndLocationRequired'))
             return
         }
+        if (!abuseAgreed) {
+            toast.error(t('form.errorAbuseAgreeRequired'))
+            return
+        }
 
         setStep('loading')
 
@@ -199,7 +264,7 @@ export const UserReportForm = () => {
             )
             setStep('location')
         }
-    }, [photo, selectedLocation, navigate, t])
+    }, [photo, selectedLocation, abuseAgreed, navigate, t])
 
     if (step === 'loading') {
         return (
@@ -264,11 +329,17 @@ export const UserReportForm = () => {
                     </div>
                 </section>
 
+                <ReportAbuseNotice
+                    showAgree
+                    agreed={abuseAgreed}
+                    onAgreeChange={setAbuseAgreed}
+                />
+
                 <div className="flex flex-col gap-3">
                     <EcoButton
                         className="w-full py-4 text-lg"
                         onClick={() => void handleSubmit()}
-                        disabled={!selectedLocation}
+                        disabled={!selectedLocation || !abuseAgreed}
                     >
                         {t('form.submit')}
                     </EcoButton>
@@ -293,6 +364,8 @@ export const UserReportForm = () => {
                 </p>
 
                 <ReportCriteriaGuide />
+
+                <ReportAbuseNotice />
 
                 <label
                     htmlFor="report-photo-input"
