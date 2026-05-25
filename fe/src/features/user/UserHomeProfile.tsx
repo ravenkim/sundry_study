@@ -35,7 +35,7 @@ function statusVariant(status: ReportStatus): 'green' | 'gray' | 'yellow' {
 }
 
 function ProfileReportStatusBadge({ status }: { status: ReportStatus }) {
-    const label = useReportStatusLabel(status, 'profile')
+    const label = useReportStatusLabel(status)
     return (
         <EcoBadge variant={statusVariant(status)}>{label}</EcoBadge>
     )

@@ -121,8 +121,9 @@ const MOCK_REPORTS_RAW: ReportDetail[] = [
         reportId: 41,
         roomName: '도서관 2열람실',
         buildingName: '도서관',
-        status: 'PENDING',
-        pointAwarded: 0,
+        status: 'APPROVED',
+        pointAwarded: 120,
+        estimatedPoint: 120,
         createdAt: '2026-05-19T11:20:00',
         detectionLabel: '에어컨 공회전',
         thumbnailUrl:
@@ -132,6 +133,7 @@ const MOCK_REPORTS_RAW: ReportDetail[] = [
             message: '빈 강의실에서 에어컨이 가동 중입니다.',
             ac_status: 'ON',
             light_status: 'ON',
+            pointAwarded: 120,
         },
     },
     {
@@ -151,8 +153,8 @@ const MOCK_REPORTS_RAW: ReportDetail[] = [
         reportId: 39,
         roomName: '본관 501호',
         buildingName: '본관',
-        status: 'APPROVED',
-        pointAwarded: 50,
+        status: 'REJECTED',
+        pointAwarded: 0,
         createdAt: '2026-05-17T16:45:00',
         detectionLabel: '정상 상태',
         aiResult: {
@@ -210,7 +212,7 @@ export const MOCK_ADMIN_REPORTS: AdminReportRow[] = [
         roomName: '303호',
         locationPath: '공학관 A동 > 303호',
         memberName: '김에코',
-        status: 'PENDING',
+        status: 'APPROVED',
         aiResult: '조명 ON / AC OFF',
         pointAwarded: 89,
         createdAt: '2026-05-20T14:03:22',
@@ -252,7 +254,7 @@ export const MOCK_ADMIN_REPORTS: AdminReportRow[] = [
 
 export const MOCK_ADMIN_DASHBOARD: AdminDashboardStats = {
     todayReports: 24,
-    pendingReports: 5,
+    pendingReports: 1,
     totalCo2SavedKg: 1240,
     monthlyReports: 156,
     monthlySavingsKrw: 320000,

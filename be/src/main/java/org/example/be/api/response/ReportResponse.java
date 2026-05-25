@@ -2,27 +2,32 @@ package org.example.be.api.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
 public class ReportResponse {
 
     @Getter
-    @Setter
+    @Builder
+    public static class AiResult {
+        private String result;
+        private String message;
+        private String ac_status;
+        private String light_status;
+        private String reason;
+        private String expected;
+        private String expectedKwh;
+        private Integer pointAwarded;
+        private Integer currentBalance;
+    }
+
+    @Getter
     @Builder
     public static class Create {
         private Long reportId;
         private String status;
         private String message;
-
-        public static Create of(Long reportId, String status, String message) {
-            return Create.builder()
-                    .reportId(reportId)
-                    .status(status)
-                    .message(message)
-                    .build();
-        }
+        private AiResult aiResult;
     }
 
     @Getter

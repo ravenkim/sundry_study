@@ -5,7 +5,6 @@ import org.example.be.api.request.ReportCreateRequest;
 import org.example.be.api.response.ApiResponse;
 import org.example.be.api.response.ReportResponse;
 import org.example.be.api.response.ResponseCode;
-import org.example.be.domain.model.ReportStatus;
 import org.example.be.service.report.ReportService;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -47,14 +46,7 @@ public class ReportController {
             @ModelAttribute ReportCreateRequest request) {
 
         Long memberSeq = jwt.getClaim("memberSeq");
-        Long createdReportSeq = reportService.createReport(request, memberSeq);
-
-        ReportResponse.Create body = ReportResponse.Create.of(
-                createdReportSeq,
-                ReportStatus.PENDING.name(),
-                "제보가 정상적으로 접수되었습니다. AI 판별 프로세스를 시작합니다."
-        );
-
+        ReportResponse.Create body = reportService.createReport(request, memberSeq);
         return ApiResponse.success(ResponseCode.REPORT_CREATED, body);
     }
 }

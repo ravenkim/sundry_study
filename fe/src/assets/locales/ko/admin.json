@@ -1,19 +1,19 @@
 {
     "reportStatus": {
-        "APPROVED": "처리완료",
-        "PENDING": "승인대기",
+        "APPROVED": "적립 완료",
+        "PENDING": "확인 필요",
         "REJECTED": "반려",
         "UNDETECTABLE": "판별불가"
     },
     "dashboard": {
         "headerTitle": "제보 현황",
         "title": "제보 관리",
-        "description": "캠퍼스 내 에너지 낭비 제보를 관리하고 승인하세요.",
+        "description": "AI 판별 결과와 포인트 지급 내역을 확인하고, 이상 건을 관리하세요.",
         "stats": {
             "todayReports": "오늘의 제보",
             "todayReportsTrend": "12% 증가",
-            "pendingReports": "미처리 제보",
-            "pendingReportsHint": "신속 처리가 중요합니다",
+            "pendingReports": "확인 필요",
+            "pendingReportsHint": "수동 확인이 필요한 제보",
             "totalCo2Saved": "누적 CO₂ 절감",
             "co2Unit": "kg"
         },
@@ -26,7 +26,7 @@
             "actions": "관리"
         },
         "actions": {
-            "approve": "승인",
+            "approve": "포인트 지급",
             "reject": "반려"
         },
         "pointsAwarded": "+{{points}}P",
@@ -35,7 +35,7 @@
     "reports": {
         "headerTitle": "제보 관리",
         "title": "제보 관리",
-        "description": "에너지 낭비 제보 내역을 확인하고 승인 여부를 결정합니다.",
+        "description": "AI 판별 결과를 확인하고, 필요 시 반려·포인트 회수를 처리합니다.",
         "export": "내보내기"
     },
     "stats": {
@@ -140,8 +140,8 @@
         "noProcessedDate": "-"
     },
     "toast": {
-        "reportApproved": "승인되었습니다.",
-        "reportRejected": "반려되었습니다.",
+        "reportApproved": "처리되었습니다.",
+        "reportRejected": "반려되었습니다. 포인트가 회수됩니다.",
         "gifticonSent": "기프티콘 발송 처리되었습니다.",
         "gifticonRejected": "반려되었습니다. 포인트가 환불됩니다."
     }

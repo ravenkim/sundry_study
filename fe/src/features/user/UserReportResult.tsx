@@ -56,8 +56,6 @@ export const UserReportResult = () => {
     const buildingName =
         state.buildingName ?? t('result.fallbackBuilding')
     const roomName = state.roomName ?? t('result.fallbackRoom')
-    const isPendingReview =
-        state.status === 'PENDING' || (aiResult.pointAwarded ?? 0) === 0
 
     if (aiResult.result === 'ERROR') {
         return (
@@ -135,42 +133,36 @@ export const UserReportResult = () => {
             </div>
             <div className="flex flex-col gap-2">
                 <h1 className="text-2xl font-black">
-                    {isPendingReview
-                        ? t('result.submittedTitle')
-                        : t('result.wasteConfirmedTitle')}
+                    {t('result.wasteConfirmedTitle')}
                 </h1>
                 <p className="text-on-surface-variant">
-                    {isPendingReview
-                        ? aiResult.message
-                        : getDetectionLabel(aiResult)}
+                    {getDetectionLabel(aiResult)}
                 </p>
             </div>
 
-            {!isPendingReview && (
-                <EcoCard className="flex w-full max-w-sm flex-col gap-4">
-                    <div className="flex items-center justify-between text-sm">
-                        <span className="text-on-surface-variant">
-                            {t('result.earnedPoints')}
-                        </span>
-                        <EcoBadge variant="yellow">
-                            {t('result.rewardBadge')}
-                        </EcoBadge>
-                    </div>
-                    <div className="text-right">
-                        <span className="text-primary text-4xl font-bold">
-                            +{pointAwarded}P
-                        </span>
-                    </div>
-                    <div className="border-surface-container border-t pt-3 text-sm">
-                        <span className="text-on-surface-variant">
-                            {t('result.accumulated')}{' '}
-                        </span>
-                        <span className="text-primary font-bold">
-                            {formatNumber(balance, locale)}P
-                        </span>
-                    </div>
-                </EcoCard>
-            )}
+            <EcoCard className="flex w-full max-w-sm flex-col gap-4">
+                <div className="flex items-center justify-between text-sm">
+                    <span className="text-on-surface-variant">
+                        {t('result.earnedPoints')}
+                    </span>
+                    <EcoBadge variant="yellow">
+                        {t('result.rewardBadge')}
+                    </EcoBadge>
+                </div>
+                <div className="text-right">
+                    <span className="text-primary text-4xl font-bold">
+                        +{pointAwarded}P
+                    </span>
+                </div>
+                <div className="border-surface-container border-t pt-3 text-sm">
+                    <span className="text-on-surface-variant">
+                        {t('result.accumulated')}{' '}
+                    </span>
+                    <span className="text-primary font-bold">
+                        {formatNumber(balance, locale)}P
+                    </span>
+                </div>
+            </EcoCard>
 
             <EcoCard className="flex w-full max-w-sm flex-col gap-3 px-6 py-4 text-left">
                 <h3 className="text-sm font-bold">{t('result.summaryTitle')}</h3>

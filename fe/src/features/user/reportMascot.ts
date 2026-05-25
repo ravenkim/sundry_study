@@ -17,7 +17,7 @@ export function getReportMascotEmotion({
 
     switch (status) {
         case 'PENDING':
-            return aiResult?.result === 'WASTE_DETECTED' ? 'recognize' : 'sleepy'
+            return 'sleepy'
         case 'REJECTED':
             return 'sad'
         case 'UNDETECTABLE':

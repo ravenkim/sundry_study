@@ -22,7 +22,7 @@
     "requiredTermsNotAgreed": "Please agree to the required terms.",
     "imageLoadFailed": "Unable to load the image.",
     "reportSubmitFailed": "Failed to submit report.",
-    "reportSubmittedPending": "Report submitted. Points will be awarded after admin review.",
+    "reportSubmittedSuccess": "AI confirmed energy waste.",
     "emailCheckFailed": "Email verification failed.",
     "usernameCheckFailed": "Username verification failed.",
     "phoneCheckFailed": "Phone number verification failed."

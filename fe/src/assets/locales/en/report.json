@@ -1,10 +1,9 @@
 {
     "status": {
-        "APPROVED": "Approved",
+        "APPROVED": "Points awarded",
         "PENDING": "Processing",
         "REJECTED": "Rejected",
-        "UNDETECTABLE": "Undetectable",
-        "reviewing": "Under review"
+        "UNDETECTABLE": "Undetectable"
     },
     "form": {
         "photoTitle": "Take a photo of the scene",
@@ -39,7 +38,6 @@
         "retakePhoto": "Retake photo",
         "goHome": "Go to Home",
         "normalTitle": "Normal status",
-        "submittedTitle": "Report submitted!",
         "wasteConfirmedTitle": "Waste confirmed!",
         "earnedPoints": "Points earned",
         "rewardBadge": "Reward",
@@ -62,7 +60,7 @@
     },
     "list": {
         "filterAll": "All",
-        "filterApproved": "Approved",
+        "filterApproved": "Points awarded",
         "filterPending": "Processing",
         "filterRejected": "Rejected",
         "filterUndetectable": "Undetectable",

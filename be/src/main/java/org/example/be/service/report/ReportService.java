@@ -9,6 +9,7 @@ import org.example.be.api.request.ReportCreateRequest;
 import org.example.be.api.response.AiAnalysisResponse;
 import org.example.be.api.response.ReportResponse;
 import org.example.be.domain.model.*;
+import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
@@ -41,13 +42,14 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
     private final MemberRepository memberRepository;
+    private final MemberPointRepository memberPointRepository;
     private final LocationNodeService locationNodeService;
     private final ObjectMapper objectMapper;
 
     private static final String AI_API_URL = "https://campus-energy-api-992786420144.us-central1.run.app/analyze";
 
     @Transactional
-    public Long createReport(ReportCreateRequest request, Long memberSeq) {
+    public ReportResponse.Create createReport(ReportCreateRequest request, Long memberSeq) {
 
         Member member = memberRepository.findById(memberSeq)
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
@@ -109,6 +111,12 @@ public class ReportService {
         int estimatedPoint = ExpectedKrwParser.toEstimatedPoint(estimatedSavingsKrw);
         BigDecimal estimatedKwh = ExpectedKwhParser.parse(aiResponse.getExpectedKwh());
 
+        MemberPoint wallet = memberPointRepository.findByMember_Seq(memberSeq)
+                .orElseGet(() -> memberPointRepository.save(new MemberPoint(member)));
+        if (estimatedPoint > 0) {
+            wallet.addPoint(estimatedPoint);
+        }
+
         Report report = Report.builder()
                 .member(member)
                 .locationNode(locationNode)
@@ -116,18 +124,35 @@ public class ReportService {
                 .description((request.description() != null ? request.description() : "") + aiAdviceMessage)
                 .imageUrl(imageUrl)
                 .wasteType(wasteType)
-                .status(ReportStatus.PENDING)
+                .status(ReportStatus.APPROVED)
                 .createdAt(reportAt)
                 .offTimeMinutes(null)
                 .estimatedKwh(estimatedKwh)
                 .estimatedSavingsKrw(estimatedSavingsKrw)
                 .estimatedPoint(estimatedPoint)
-                .pointAwarded(0)
+                .pointAwarded(estimatedPoint)
                 .build();
 
         Report savedReport = reportRepository.save(report);
 
-        return savedReport.getSeq();
+        ReportResponse.AiResult aiResult = ReportResponse.AiResult.builder()
+                .result(aiResponse.getResult())
+                .message(aiResponse.getMessage())
+                .ac_status(aiResponse.getAc_status())
+                .light_status(aiResponse.getLight_status())
+                .reason(aiResponse.getReason())
+                .expected(aiResponse.getExpected())
+                .expectedKwh(aiResponse.getExpectedKwh())
+                .pointAwarded(estimatedPoint)
+                .currentBalance(wallet.getPoint())
+                .build();
+
+        return ReportResponse.Create.builder()
+                .reportId(savedReport.getSeq())
+                .status(ReportStatus.APPROVED.name())
+                .message(aiResponse.getMessage())
+                .aiResult(aiResult)
+                .build();
     }
 
     private AiAnalyzeMetadata buildAnalyzeMetadata(

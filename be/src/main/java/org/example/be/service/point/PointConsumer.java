@@ -31,7 +31,7 @@ public class PointConsumer {
             // 3단계: 다운 캐스팅 후 비즈니스 로직 처리
             PointEventPayload payload = (PointEventPayload) event.getPayload();
 
-            log.info("제보 승인 감지! 회원 {}에게 {} 포인트 지급", payload.getMemberSeq(), payload.getAmount());
+            log.info("제보 포인트 지급 — 회원 {}에게 {}P", payload.getMemberSeq(), payload.getAmount());
 
             // (MemberPoint는 이전 답변에서 만든 1:1 테이블이라 가정)
             MemberPoint memberPoint = memberPointRepository.findByMember_Seq(payload.getMemberSeq())

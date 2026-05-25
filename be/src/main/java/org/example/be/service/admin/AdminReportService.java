@@ -32,7 +32,7 @@ public class AdminReportService {
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "제보를 찾을 수 없습니다."));
 
         if (status != ReportStatus.APPROVED && status != ReportStatus.REJECTED) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "승인 또는 반려만 가능합니다.");
+            throw new BusinessLogicException(ErrorCode.INVALID, "포인트 지급 또는 반려만 가능합니다.");
         }
 
         report.setStatus(status);

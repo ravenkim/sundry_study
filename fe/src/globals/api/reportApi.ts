@@ -71,7 +71,7 @@ export async function createReport(
             result: 'WASTE_DETECTED',
             message:
                 result.message ??
-                i18n.t('errors:reportSubmittedPending'),
+                i18n.t('errors:reportSubmittedSuccess'),
             pointAwarded: 0,
         },
     }

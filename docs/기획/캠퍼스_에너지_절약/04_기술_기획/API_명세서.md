@@ -79,7 +79,7 @@
 **처리 로직**
 1. BE → LocationNode(LEAF) 조회 — 자원 수량·요일별 운영시간
 2. BE → Cloud Run `POST /analyze` (이미지 + `metadata` JSON 전달)
-3. `WASTE_DETECTED`만 Report `PENDING` 저장 — AI `expected`(원) 파싱 → `estimatedSavingsKrw`, `estimatedPoint` 저장
+3. `WASTE_DETECTED` → Report `APPROVED` 저장, AI `expected`(원) 파싱 → `estimatedSavingsKrw`·`estimatedPoint` 저장, `MemberPoint` 즉시 적립
 4. `PASS` / `ERROR` → `BusinessLogicException(INVALID)` — 저장 거부
 
 **Response 200 — 성공 (`WASTE_DETECTED`만 해당)**
@@ -88,8 +88,18 @@
   "code": 10003,
   "body": {
     "reportId": 42,
-    "status": "PENDING",
-    "message": "제보가 정상적으로 접수되었습니다. AI 판별 프로세스를 시작합니다."
+    "status": "APPROVED",
+    "message": "조명과 에어컨이 켜져 있는 것으로 확인되었습니다.",
+    "aiResult": {
+      "result": "WASTE_DETECTED",
+      "message": "조명과 에어컨이 켜져 있는 것으로 확인되었습니다.",
+      "ac_status": "ON",
+      "light_status": "ON",
+      "expected": "494원",
+      "expectedKwh": "3.8 kWh",
+      "pointAwarded": 49,
+      "currentBalance": 419
+    }
   }
 }
 ```
@@ -265,7 +275,7 @@
       {
         "reportId": 42,
         "roomName": "공학관 A동 303호",
-        "status": "PENDING",
+        "status": "APPROVED",
         "pointAwarded": 89,
         "estimatedPoint": 89,
         "offTimeMinutes": 420,

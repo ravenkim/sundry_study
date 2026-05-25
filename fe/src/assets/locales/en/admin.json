@@ -1,19 +1,19 @@
 {
     "reportStatus": {
-        "APPROVED": "Completed",
-        "PENDING": "Pending approval",
+        "APPROVED": "Points awarded",
+        "PENDING": "Needs review",
         "REJECTED": "Rejected",
         "UNDETECTABLE": "Undetectable"
     },
     "dashboard": {
         "headerTitle": "Report Overview",
         "title": "Report Management",
-        "description": "Manage and approve campus energy waste reports.",
+        "description": "Review AI detection results and point awards, and handle exceptional cases.",
         "stats": {
             "todayReports": "Today's reports",
             "todayReportsTrend": "12% increase",
-            "pendingReports": "Pending reports",
-            "pendingReportsHint": "Prompt handling is important",
+            "pendingReports": "Needs review",
+            "pendingReportsHint": "Reports requiring manual review",
             "totalCo2Saved": "Total CO₂ saved",
             "co2Unit": "kg"
         },
@@ -26,7 +26,7 @@
             "actions": "Actions"
         },
         "actions": {
-            "approve": "Approve",
+            "approve": "Award points",
             "reject": "Reject"
         },
         "pointsAwarded": "+{{points}}P",
@@ -35,7 +35,7 @@
     "reports": {
         "headerTitle": "Report Management",
         "title": "Report Management",
-        "description": "Review energy waste reports and decide approval.",
+        "description": "Review AI detection results and handle rejections or point reversals when needed.",
         "export": "Export"
     },
     "stats": {
@@ -140,8 +140,8 @@
         "noProcessedDate": "-"
     },
     "toast": {
-        "reportApproved": "Approved.",
-        "reportRejected": "Rejected.",
+        "reportApproved": "Processed successfully.",
+        "reportRejected": "Rejected. Points have been reversed.",
         "gifticonSent": "Gift card marked as delivered.",
         "gifticonRejected": "Rejected. Points will be refunded."
     }

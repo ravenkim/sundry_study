@@ -1,10 +1,9 @@
 {
     "status": {
-        "APPROVED": "승인됨",
-        "PENDING": "처리중",
+        "APPROVED": "적립 완료",
+        "PENDING": "처리 중",
         "REJECTED": "반려",
-        "UNDETECTABLE": "판별불가",
-        "reviewing": "검토중"
+        "UNDETECTABLE": "판별불가"
     },
     "form": {
         "photoTitle": "현장 사진을 촬영해 주세요",
@@ -39,7 +38,6 @@
         "retakePhoto": "다시 촬영하기",
         "goHome": "홈으로 이동",
         "normalTitle": "정상 상태입니다",
-        "submittedTitle": "제보 접수 완료!",
         "wasteConfirmedTitle": "낭비 확인됨!",
         "earnedPoints": "적립 포인트",
         "rewardBadge": "리워드",
@@ -62,8 +60,8 @@
     },
     "list": {
         "filterAll": "전체",
-        "filterApproved": "승인됨",
-        "filterPending": "처리중",
+        "filterApproved": "적립 완료",
+        "filterPending": "처리 중",
         "filterRejected": "반려",
         "filterUndetectable": "판별불가",
         "loading": "불러오는 중...",

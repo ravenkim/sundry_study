@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ReportStatus {
-    PENDING("처리중"),
-    APPROVED("승인됨"),
+    PENDING("확인 필요"),
+    APPROVED("적립 완료"),
     REJECTED("반려됨");
 
     private final String description;

@@ -22,7 +22,7 @@
     "requiredTermsNotAgreed": "필수 약관에 동의해 주세요.",
     "imageLoadFailed": "이미지를 불러올 수 없습니다.",
     "reportSubmitFailed": "제보 접수에 실패했습니다.",
-    "reportSubmittedPending": "제보가 접수되었습니다. 관리자 확인 후 포인트가 지급됩니다.",
+    "reportSubmittedSuccess": "AI가 에너지 낭비를 확인했습니다.",
     "emailCheckFailed": "이메일 확인에 실패했습니다.",
     "usernameCheckFailed": "아이디 확인에 실패했습니다.",
     "phoneCheckFailed": "전화번호 확인에 실패했습니다."
