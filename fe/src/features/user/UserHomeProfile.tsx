@@ -15,6 +15,7 @@ import { LanguageSwitcher } from 'src/shared/components/i18n/LanguageSwitcher'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton, EcoBadge, EcoCard } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SSfadeIn, SSloadingState } from 'src/shared/components/motion'
 import { ParticipatedBuildingSavingsCard } from './ParticipatedBuildingSavings'
 import { usePoints } from 'src/features/points/PointsContext'
 import { useAuth } from 'src/features/auth/AuthContext'
@@ -57,13 +58,15 @@ export const UserHome = () => {
 
     return (
         <div className="flex flex-col gap-8 p-5 pb-8">
-            <Link to="/report-form">
-                <EcoButton className="w-full py-4 text-lg shadow-md">
-                    {tUser('home.reportCta')}
-                </EcoButton>
-            </Link>
+            <SSfadeIn>
+                <Link to="/report-form">
+                    <EcoButton className="w-full py-4 text-lg shadow-md">
+                        {tUser('home.reportCta')}
+                    </EcoButton>
+                </Link>
+            </SSfadeIn>
 
-            <div className="grid grid-cols-1 gap-4">
+            <SSfadeIn delay={0.05} className="grid grid-cols-1 gap-4">
                 <EcoCard className="flex flex-col gap-2">
                     <span className="text-on-surface-variant text-sm font-medium">
                         {tUser('home.myPoints')}
@@ -85,9 +88,9 @@ export const UserHome = () => {
                     </span>
                 </EcoCard>
                 <ParticipatedBuildingSavingsCard />
-            </div>
+            </SSfadeIn>
 
-            <div className="flex flex-col gap-4">
+            <SSfadeIn delay={0.1} className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-bold">
                         {tReport('homeRecent.sectionTitle')}
@@ -101,9 +104,12 @@ export const UserHome = () => {
                 </div>
                 <div className="border-outline-variant bg-outline-variant flex flex-col gap-1 overflow-hidden rounded-xl border">
                     {reportsLoading ? (
-                        <div className="bg-surface-container-lowest text-on-surface-variant p-8 text-center text-sm">
-                            {tReport('homeRecent.loading')}
-                        </div>
+                        <SSloadingState
+                            text={tReport('homeRecent.loading')}
+                            size="sm"
+                            compact
+                            showSpinner={false}
+                        />
                     ) : recentReports.length === 0 ? (
                         <div className="bg-surface-container-lowest flex flex-col items-center gap-3 p-8 text-center">
                             <MascotImage
@@ -152,7 +158,7 @@ export const UserHome = () => {
                         ))
                     )}
                 </div>
-            </div>
+            </SSfadeIn>
         </div>
     )
 }

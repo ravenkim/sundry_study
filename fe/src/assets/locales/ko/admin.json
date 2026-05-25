@@ -30,7 +30,13 @@
             "reject": "반려"
         },
         "pointsAwarded": "+{{points}}P",
-        "noPoints": "-"
+        "noPoints": "-",
+        "lightWasteRooms": {
+            "title": "조명 미소등 주의 강의실",
+            "subtitle": "반복 제보가 많은 장소",
+            "viewAll": "전체 통계 보기",
+            "empty": "아직 집계할 데이터가 없습니다."
+        }
     },
     "reports": {
         "headerTitle": "제보 관리",
@@ -67,6 +73,18 @@
                 "pointsValue": "{{value}} P"
             },
             "empty": "집계할 제보 데이터가 없습니다."
+        },
+        "lightWasteRooms": {
+            "title": "조명 미소등 주의 강의실",
+            "subtitle": "AI가 조명 ON으로 판별된 제보가 많은 장소 TOP 10",
+            "table": {
+                "rank": "순위",
+                "location": "장소",
+                "reportCount": "제보 횟수",
+                "lastReported": "최근 제보"
+            },
+            "reportCountValue": "{{count}}건",
+            "empty": "조명 미소등 제보 데이터가 없습니다."
         }
     },
     "users": {

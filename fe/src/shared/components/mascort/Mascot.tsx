@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
+import { SSfadeIn } from 'src/shared/components/motion'
 import {
     MASCORT_SRC,
     resolveMascortEmotion,
@@ -126,13 +127,15 @@ export const MascotEmptyState = ({
     children,
     className,
 }: MascotEmptyStateProps) => (
-    <div
+    <SSfadeIn
         className={cn(
             'flex flex-col items-center gap-4 py-10 text-center',
             className,
         )}
     >
-        <MascotImage emotion={emotion} size="lg" />
+        <div className="animate-[mascot-pop_0.6s_ease-out]">
+            <MascotImage emotion={emotion} size="lg" />
+        </div>
         <div className="flex flex-col gap-2">
             <h2 className="text-on-surface text-xl font-black">{title}</h2>
             {description ? (
@@ -142,7 +145,7 @@ export const MascotEmptyState = ({
             ) : null}
         </div>
         {children}
-    </div>
+    </SSfadeIn>
 )
 
 export const MascotWatermark = ({

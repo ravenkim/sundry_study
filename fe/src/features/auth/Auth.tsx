@@ -12,7 +12,9 @@ import {
 } from 'src/globals/api/authApi'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SSwaveText } from 'src/shared/components/motion'
 import { GoogleSignInButton } from 'src/features/auth/GoogleSignInButton'
+import { SSfadeIn } from 'src/shared/components/motion'
 import { getOAuthAuthorizationUrl } from 'src/globals/api/oauth'
 import { SignupTermsAgreement } from 'src/features/auth/SignupTermsAgreement'
 import {
@@ -74,7 +76,7 @@ export const Login = () => {
 
     return (
         <div className="bg-background flex min-h-screen flex-col items-center justify-center p-5 font-sans">
-            <div className="flex w-full max-w-[390px] flex-col gap-8">
+            <SSfadeIn className="flex w-full max-w-[390px] flex-col gap-8">
                 <header className="mt-8 flex flex-col items-center gap-2">
                     <MascotImage emotion="smile" size="lg" decorative />
                     <h1 className="text-primary text-3xl font-bold">
@@ -118,7 +120,14 @@ export const Login = () => {
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? t('login.submitting') : t('login.submit')}
+                            {loading ? (
+                                <SSwaveText
+                                    text={t('login.submitting')}
+                                    className="font-bold"
+                                />
+                            ) : (
+                                t('login.submit')
+                            )}
                         </EcoButton>
                     </form>
 
@@ -164,7 +173,7 @@ export const Login = () => {
                 </div>
 
                 <GoogleSignInButton onClick={startOAuth} />
-            </div>
+            </SSfadeIn>
         </div>
     )
 }
@@ -662,7 +671,14 @@ export const Signup = () => {
                         !requiredTermsAgreed
                     }
                 >
-                    {loading ? t('signup.submitting') : t('signup.submit')}
+                    {loading ? (
+                        <SSwaveText
+                            text={t('signup.submitting')}
+                            className="font-bold"
+                        />
+                    ) : (
+                        t('signup.submit')
+                    )}
                 </EcoButton>
             </div>
         </div>

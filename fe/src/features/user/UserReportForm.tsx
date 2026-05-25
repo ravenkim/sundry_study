@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { CheckCircle2, Loader2, Plus } from 'lucide-react'
+import { CheckCircle2, Plus } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoButton } from 'src/shared/ui/eco'
 import { SearchableSelect } from 'src/shared/components/SearchableSelect'
+import { SSfadeIn, SSloadingState } from 'src/shared/components/motion'
 import { useAuth } from 'src/features/auth/AuthContext'
 import { getBuildings } from 'src/globals/api/buildingsApi'
 import { createReport } from 'src/globals/api/reportApi'
@@ -42,6 +43,7 @@ function ReportCriteriaGuide() {
     ]
 
     const guideItems = [
+        t('form.photoGuideBeforeTurnOff'),
         t('form.photoGuideClassroom'),
         t('form.photoGuideLighting'),
         t('form.photoGuideWide'),
@@ -201,25 +203,20 @@ export const UserReportForm = () => {
 
     if (step === 'loading') {
         return (
-            <div className="flex min-h-[calc(100dvh-3.5rem)] flex-col items-center justify-center gap-6 p-5 text-center">
-                <Loader2 className="text-primary h-16 w-16 animate-spin" />
-                <div className="flex flex-col gap-2">
-                    <h2 className="text-xl font-bold">
-                        {t('form.loadingTitle')}
-                    </h2>
-                    <p className="text-on-surface-variant text-sm">
-                        {t('form.loadingDescription')}
-                        <br />
-                        {t('form.loadingDuration')}
-                    </p>
-                </div>
-            </div>
+            <SSloadingState
+                text={t('form.loadingTitle')}
+                description={`${t('form.loadingDescription')}\n${t('form.loadingDuration')}`}
+                mascot="recognize"
+                size="lg"
+                showSpinner={false}
+                className="min-h-[calc(100dvh-3.5rem)]"
+            />
         )
     }
 
     if (step === 'location') {
         return (
-            <div className="flex flex-col gap-8 p-5 pb-8">
+            <SSfadeIn className="flex flex-col gap-8 p-5 pb-8">
                 <section className="flex flex-col gap-4">
                     <h2 className="text-xl font-bold">
                         {t('form.locationTitle')}
@@ -283,12 +280,12 @@ export const UserReportForm = () => {
                         {t('form.back')}
                     </EcoButton>
                 </div>
-            </div>
+            </SSfadeIn>
         )
     }
 
     return (
-        <div className="flex flex-col gap-8 p-5 pb-8">
+        <SSfadeIn className="flex flex-col gap-8 p-5 pb-8">
             <section className="flex flex-col gap-4">
                 <h2 className="text-xl font-bold">{t('form.photoTitle')}</h2>
                 <p className="text-on-surface-variant text-sm">
@@ -340,6 +337,6 @@ export const UserReportForm = () => {
             >
                 {t('form.next')}
             </EcoButton>
-        </div>
+        </SSfadeIn>
     )
 }

@@ -7,13 +7,14 @@
     },
     "form": {
         "photoTitle": "Take a photo of the scene",
-        "photoHint": "Capture lighting and air conditioning status in the empty classroom clearly.",
+        "photoHint": "Take the photo before turning off the lights. Capture the empty classroom with lights and AC clearly on.",
         "criteriaTitle": "AI judgment criteria",
         "criteriaIntro": "Points are awarded when all of the following conditions are met.",
         "criteriaOffHours": "Empty classroom outside operating hours (not reportable during scheduled power-on times)",
         "criteriaEmptyRoom": "No people in the classroom",
         "criteriaWaste": "Lights or air conditioning turned on",
         "photoGuideTitle": "Photo guide",
+        "photoGuideBeforeTurnOff": "Take the photo first while lights and AC are still on — before turning them off",
         "photoGuideClassroom": "If the classroom is not visible, photograph an operating classroom (space with visible chairs and desks)",
         "photoGuideLighting": "Capture ceiling lights and AC status clearly",
         "photoGuideWide": "The full room is not required — chairs and desks visible in frame are enough",
@@ -38,7 +39,15 @@
         "loadingDuration": "Takes about 3–5 seconds.",
         "errorPhotoRequired": "Please take or select a scene photo.",
         "errorPhotoAndLocationRequired": "Please select both photo and location.",
-        "errorSubmitFailed": "An error occurred while submitting the report."
+        "errorSubmitFailed": "An error occurred while submitting the report.",
+        "errorAbuseAgreeRequired": "Please agree to the anti-abuse notice before submitting.",
+        "abuseNoticeTitle": "Prohibited reporting notice",
+        "abuseNoticeIntro": "The following acts are strictly prohibited to maintain trust in crowd-sourced energy reporting.",
+        "abuseNoticeItem1": "Turning on lights or AC yourself and reporting to earn points",
+        "abuseNoticeItem2": "False or duplicate reports, or reporting normal use during operating hours as waste",
+        "abuseNoticeItem3": "Repeated reports for the same room, or misusing others' reports",
+        "abuseNoticePenalty": "Violations may result in point clawback, reward exchange restrictions, account suspension, and points are confirmed after facility team review.",
+        "abuseAgreeLabel": "I have read the notice above and will only report waste I actually discovered."
     },
     "result": {
         "loadFailed": "Unable to load report result.",

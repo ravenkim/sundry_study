@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { MascotEmptyState } from 'src/shared/components/mascort'
+import { SSloadingState, SSstaggerChildren } from 'src/shared/components/motion'
 import { ReportMascotThumbnail } from './ReportMascotThumbnail'
 import { EcoBadge, EcoButton } from 'src/shared/ui/eco'
 import { getMyReports } from 'src/globals/api/reportApi'
@@ -37,7 +38,9 @@ export const UserReportsList = () => {
     const [filter, setFilter] = useState<ReportStatus | 'ALL'>('ALL')
     const [page, setPage] = useState(0)
     const [data, setData] = useState<PaginatedReports | null>(null)
-    const [loading, setLoading] = useState(true)
+    const [initialLoading, setInitialLoading] = useState(true)
+    const [refreshing, setRefreshing] = useState(false)
+    const hasLoadedRef = useRef(false)
 
     const filters = useMemo(
         () =>
@@ -51,10 +54,31 @@ export const UserReportsList = () => {
     const activeFilterLabel = filters.find((f) => f.value === filter)?.label
 
     useEffect(() => {
-        setLoading(true)
+        let cancelled = false
+        const isInitial = !hasLoadedRef.current
+        if (isInitial) {
+            setInitialLoading(true)
+        } else {
+            setRefreshing(true)
+        }
+
         void getMyReports(page, 10, filter)
-            .then(setData)
-            .finally(() => setLoading(false))
+            .then((next) => {
+                if (!cancelled) {
+                    setData(next)
+                    hasLoadedRef.current = true
+                }
+            })
+            .finally(() => {
+                if (!cancelled) {
+                    setInitialLoading(false)
+                    setRefreshing(false)
+                }
+            })
+
+        return () => {
+            cancelled = true
+        }
     }, [filter, page])
 
     return (
@@ -80,10 +104,8 @@ export const UserReportsList = () => {
                 ))}
             </nav>
 
-            {loading ? (
-                <p className="text-on-surface-variant py-12 text-center text-sm">
-                    {t('list.loading')}
-                </p>
+            {initialLoading ? (
+                <SSloadingState text={t('list.loading')} />
             ) : !data || data.content.length === 0 ? (
                 <MascotEmptyState
                     emotion="question"
@@ -101,7 +123,13 @@ export const UserReportsList = () => {
                     }
                 />
             ) : (
-                <div className="flex flex-col gap-3">
+                <div className="relative flex flex-col gap-3">
+                    {refreshing ? (
+                        <div className="absolute inset-x-0 -top-1 flex justify-center">
+                            <Loader2 className="text-primary h-4 w-4 animate-spin" />
+                        </div>
+                    ) : null}
+                    <SSstaggerChildren className="flex flex-col gap-3">
                     {data.content.map((item) => (
                         <div
                             key={item.reportId}
@@ -141,6 +169,7 @@ export const UserReportsList = () => {
                             </span>
                         </div>
                     ))}
+                    </SSstaggerChildren>
                 </div>
             )}
 

@@ -12,6 +12,7 @@ import { getAppHomePath, getStoredUser } from 'src/features/auth/authStorage'
 import { setPendingAffiliation } from 'src/features/auth/signupBuildingStorage'
 import { EcoButton } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SSloadingState } from 'src/shared/components/motion'
 import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 import { getErrorMessage } from 'src/shared/lib/i18n/getErrorMessage'
 import { isValidNicknameFormat } from 'src/shared/lib/nicknameUtils'
@@ -146,9 +147,11 @@ export function AffiliationSelection() {
                 </div>
 
                 {loading ? (
-                    <p className="text-on-surface-variant text-sm">
-                        {t('affiliation.loadingList')}
-                    </p>
+                    <SSloadingState
+                        text={t('affiliation.loadingList')}
+                        size="sm"
+                        compact
+                    />
                 ) : (
                     <form
                         id="affiliation-form"

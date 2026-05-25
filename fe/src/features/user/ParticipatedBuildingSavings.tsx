@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { EcoCard } from 'src/shared/ui/eco'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SSwaveText } from 'src/shared/components/motion'
 import {
     formatCo2Kg,
     formatKwh,
@@ -94,13 +95,18 @@ export const ParticipatedBuildingSavingsCard = ({
                         </span>
                     </div>
                     <span className="text-secondary text-xs font-medium">
-                        {loading
-                            ? t('common:loading')
-                            : t('savings.monthlySummary', {
-                                  monthKwh: formatKwh(monthKwh),
-                                  co2Kg: formatCo2Kg(monthCo2Kg),
-                                  trees: monthTrees,
-                              })}
+                        {loading ? (
+                            <SSwaveText
+                                text={t('common:loading')}
+                                className="text-secondary text-xs"
+                            />
+                        ) : (
+                            t('savings.monthlySummary', {
+                                monthKwh: formatKwh(monthKwh),
+                                co2Kg: formatCo2Kg(monthCo2Kg),
+                                trees: monthTrees,
+                            })
+                        )}
                     </span>
                     {!loading && totalKwh > 0 && (
                         <span className="text-on-surface-variant text-[11px]">

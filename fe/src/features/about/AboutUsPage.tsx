@@ -13,6 +13,8 @@ import {
     Users,
     Zap,
     TreePine,
+    Calculator,
+    ExternalLink,
 } from 'lucide-react'
 import { MascotImage } from 'src/shared/components/mascort'
 import { EcoBadge, EcoButton, EcoCard } from 'src/shared/ui/eco'
@@ -29,6 +31,17 @@ export function AboutUsPage() {
     const whyCards = ['management', 'physical', 'culture'] as const
     const impactStats = ['waste', 'saving', 'co2'] as const
     const culturePoints = ['experience', 'education', 'expansion'] as const
+    const constantKeys = [
+        'fluorescent',
+        'led',
+        'ac',
+        'rate',
+        'co2Factor',
+        'tree',
+    ] as const
+    const formulaKeys = ['kwh', 'cost', 'co2', 'point', 'cap'] as const
+    const referenceKeys = ['kses', 'pccs', 'keep', 'kpx', 'forest', 'kepco'] as const
+    const exampleMetrics = ['kwh', 'cost', 'co2', 'points'] as const
 
     return (
         <div className="flex flex-col gap-8 p-5 pb-10">
@@ -177,6 +190,106 @@ export function AboutUsPage() {
                         ))}
                     </ul>
                 </EcoCard>
+            </section>
+
+            <section className="flex flex-col gap-4">
+                <div className="flex items-center gap-2">
+                    <Calculator className="text-primary h-5 w-5" />
+                    <SectionTitle>{t('savingsCriteria.title')}</SectionTitle>
+                </div>
+                <p className="text-on-surface-variant text-sm leading-relaxed">
+                    {t('savingsCriteria.lead')}
+                </p>
+
+                <EcoCard className="border-outline-variant space-y-2 p-4">
+                    <p className="text-on-surface text-sm font-bold">
+                        {t('savingsCriteria.formula.title')}
+                    </p>
+                    <ul className="flex flex-col gap-1.5">
+                        {formulaKeys.map((key) => (
+                            <li
+                                key={key}
+                                className="text-on-surface-variant font-mono text-xs leading-relaxed"
+                            >
+                                {t(`savingsCriteria.formula.${key}`)}
+                            </li>
+                        ))}
+                    </ul>
+                </EcoCard>
+
+                <div className="flex flex-col gap-2">
+                    <p className="text-on-surface text-sm font-bold">
+                        {t('savingsCriteria.constants.title')}
+                    </p>
+                    <div className="grid grid-cols-1 gap-2">
+                        {constantKeys.map((key) => (
+                            <EcoCard key={key} className="p-3">
+                                <div className="flex items-baseline justify-between gap-2">
+                                    <p className="text-on-surface text-xs font-bold">
+                                        {t(`savingsCriteria.constants.items.${key}.label`)}
+                                    </p>
+                                    <p className="text-primary shrink-0 text-sm font-black">
+                                        {t(`savingsCriteria.constants.items.${key}.value`)}
+                                    </p>
+                                </div>
+                                <p className="text-on-surface-variant mt-1 text-[11px] leading-relaxed">
+                                    {t(`savingsCriteria.constants.items.${key}.source`)}
+                                </p>
+                            </EcoCard>
+                        ))}
+                    </div>
+                </div>
+
+                <EcoCard className="border-secondary/30 from-secondary-container/20 to-surface bg-gradient-to-br p-4">
+                    <p className="text-on-surface mb-1 text-sm font-bold">
+                        {t('savingsCriteria.example.title')}
+                    </p>
+                    <p className="text-on-surface-variant mb-3 text-xs leading-relaxed">
+                        {t('savingsCriteria.example.scenario')}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                        {exampleMetrics.map((key) => (
+                            <div
+                                key={key}
+                                className="border-outline-variant/60 bg-surface/80 rounded-lg border px-3 py-2 text-center"
+                            >
+                                <p className="text-primary text-sm font-black">
+                                    {t(`savingsCriteria.example.${key}`)}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </EcoCard>
+
+                <div className="flex flex-col gap-2">
+                    <p className="text-on-surface text-sm font-bold">
+                        {t('savingsCriteria.references.title')}
+                    </p>
+                    <div className="flex flex-col gap-2">
+                        {referenceKeys.map((key) => {
+                            const url = t(`savingsCriteria.references.items.${key}.url`)
+                            return (
+                                <a
+                                    key={key}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="border-outline-variant bg-surface-container-low hover:border-primary/40 hover:bg-primary-container/10 group flex gap-3 rounded-xl border p-3 transition-colors"
+                                >
+                                    <ExternalLink className="text-on-surface-variant group-hover:text-primary mt-0.5 h-4 w-4 shrink-0" />
+                                    <div className="min-w-0 flex-1">
+                                        <p className="text-on-surface text-xs font-bold">
+                                            {t(`savingsCriteria.references.items.${key}.name`)}
+                                        </p>
+                                        <p className="text-on-surface-variant mt-0.5 text-[11px] leading-relaxed">
+                                            {t(`savingsCriteria.references.items.${key}.detail`)}
+                                        </p>
+                                    </div>
+                                </a>
+                            )
+                        })}
+                    </div>
+                </div>
             </section>
 
             <section className="flex flex-col gap-4">

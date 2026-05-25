@@ -12,6 +12,7 @@ import org.example.be.domain.model.*;
 import org.example.be.domain.repository.MemberPointRepository;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.domain.repository.ReportRepository;
+import org.example.be.domain.repository.ReportSummaryProjection;
 import org.example.be.exception.BusinessLogicException;
 import org.example.be.exception.ErrorCode;
 import org.example.be.service.location.LocationNodeService;
@@ -241,10 +242,10 @@ public class ReportService {
 
     public ReportResponse.Page getMyReports(Long memberSeq, int page, int size, String statusFilter) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Report> reportPage = resolveStatusFilter(statusFilter)
-                .map(status -> reportRepository.findByMember_SeqAndStatusOrderByCreatedAtDesc(
+        Page<ReportSummaryProjection> reportPage = resolveStatusFilter(statusFilter)
+                .map(status -> reportRepository.findSummariesByMemberSeqAndStatus(
                         memberSeq, status, pageable))
-                .orElseGet(() -> reportRepository.findByMember_SeqOrderByCreatedAtDesc(memberSeq, pageable));
+                .orElseGet(() -> reportRepository.findSummariesByMemberSeq(memberSeq, pageable));
 
         List<ReportResponse.Summary> content = reportPage.getContent().stream()
                 .map(this::toSummary)
@@ -293,22 +294,79 @@ public class ReportService {
     }
 
     private ReportResponse.Summary toSummary(Report report) {
-        int displayPoint = report.getPointAwarded() != null && report.getPointAwarded() > 0
-                ? report.getPointAwarded()
-                : (report.getEstimatedPoint() != null ? report.getEstimatedPoint() : 0);
+        return toSummary(
+                report.getSeq(),
+                report.getLocationDetail(),
+                report.getStatus(),
+                report.getPointAwarded(),
+                report.getEstimatedPoint(),
+                report.getOffTimeMinutes(),
+                report.getEstimatedKwh(),
+                report.getCreatedAt(),
+                report.getWasteType(),
+                report.getImageUrl()
+        );
+    }
+
+    private ReportResponse.Summary toSummary(ReportSummaryProjection row) {
+        return toSummary(
+                row.getSeq(),
+                row.getLocationDetail(),
+                row.getStatus(),
+                row.getPointAwarded(),
+                row.getEstimatedPoint(),
+                row.getOffTimeMinutes(),
+                row.getEstimatedKwh(),
+                row.getCreatedAt(),
+                toWasteType(row),
+                row.getImageUrl()
+        );
+    }
+
+    private ReportResponse.Summary toSummary(
+            Long reportId,
+            String locationDetail,
+            ReportStatus status,
+            Integer pointAwarded,
+            Integer estimatedPoint,
+            Integer offTimeMinutes,
+            BigDecimal estimatedKwh,
+            LocalDateTime createdAt,
+            WasteType wasteType,
+            String imageUrl
+    ) {
+        int displayPoint = pointAwarded != null && pointAwarded > 0
+                ? pointAwarded
+                : (estimatedPoint != null ? estimatedPoint : 0);
 
         return ReportResponse.Summary.builder()
-                .reportId(report.getSeq())
-                .roomName(report.getLocationDetail())
-                .status(report.getStatus().name())
+                .reportId(reportId)
+                .roomName(locationDetail)
+                .status(status.name())
                 .pointAwarded(displayPoint)
-                .estimatedPoint(report.getEstimatedPoint())
-                .offTimeMinutes(report.getOffTimeMinutes())
-                .estimatedKwh(report.getEstimatedKwh() != null ? report.getEstimatedKwh().toPlainString() : null)
-                .createdAt(report.getCreatedAt() != null ? report.getCreatedAt().toString() : null)
-                .detectionLabel(buildDetectionLabel(report.getWasteType()))
-                .thumbnailUrl(report.getImageUrl())
+                .estimatedPoint(estimatedPoint)
+                .offTimeMinutes(offTimeMinutes)
+                .estimatedKwh(estimatedKwh != null ? estimatedKwh.toPlainString() : null)
+                .createdAt(createdAt != null ? createdAt.toString() : null)
+                .detectionLabel(buildDetectionLabel(wasteType))
+                .thumbnailUrl(imageUrl)
                 .build();
+    }
+
+    private WasteType toWasteType(ReportSummaryProjection row) {
+        if (row.getIsLightWasting() == null
+                && row.getIsAcWasting() == null
+                && row.getIsHeaterWasting() == null
+                && row.getIsOtherWasting() == null) {
+            return null;
+        }
+
+        return new WasteType(
+                Boolean.TRUE.equals(row.getIsLightWasting()),
+                Boolean.TRUE.equals(row.getIsAcWasting()),
+                Boolean.TRUE.equals(row.getIsHeaterWasting()),
+                Boolean.TRUE.equals(row.getIsOtherWasting())
+        );
     }
 
     private String extractRootName(Report report) {

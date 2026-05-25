@@ -11,18 +11,48 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
-    Page<Report> findByMember_SeqOrderByCreatedAtDesc(Long memberSeq, Pageable pageable);
+    String REPORT_SUMMARY_SELECT = """
+            SELECT r.seq AS seq,
+                   r.locationDetail AS locationDetail,
+                   r.status AS status,
+                   r.pointAwarded AS pointAwarded,
+                   r.estimatedPoint AS estimatedPoint,
+                   r.offTimeMinutes AS offTimeMinutes,
+                   r.estimatedKwh AS estimatedKwh,
+                   r.createdAt AS createdAt,
+                   r.wasteType.isLightWasting AS isLightWasting,
+                   r.wasteType.isAcWasting AS isAcWasting,
+                   r.wasteType.isHeaterWasting AS isHeaterWasting,
+                   r.wasteType.isOtherWasting AS isOtherWasting,
+                   r.imageUrl AS imageUrl
+            FROM Report r
+            """;
 
-    Page<Report> findByMember_SeqAndStatusOrderByCreatedAtDesc(
-            Long memberSeq, ReportStatus status, Pageable pageable);
+    @Query(REPORT_SUMMARY_SELECT + """
+            WHERE r.member.seq = :memberSeq
+            ORDER BY r.createdAt DESC
+            """)
+    Page<ReportSummaryProjection> findSummariesByMemberSeq(
+            @Param("memberSeq") Long memberSeq,
+            Pageable pageable
+    );
+
+    @Query(REPORT_SUMMARY_SELECT + """
+            WHERE r.member.seq = :memberSeq
+              AND r.status = :status
+            ORDER BY r.createdAt DESC
+            """)
+    Page<ReportSummaryProjection> findSummariesByMemberSeqAndStatus(
+            @Param("memberSeq") Long memberSeq,
+            @Param("status") ReportStatus status,
+            Pageable pageable
+    );
 
     Optional<Report> findBySeqAndMember_Seq(Long seq, Long memberSeq);
 

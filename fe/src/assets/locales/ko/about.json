@@ -66,20 +66,110 @@
             "expansion": "대학 → 공공기관 → 기업 오피스로 확장 가능한 저비용·즉시 도입 모델"
         }
     },
+    "savingsCriteria": {
+        "title": "절약량 산출 기준",
+        "lead": "에코리포트는 AI가 판별한 낭비 자원과 방치 시간을 바탕으로, 아래 공식·상수로 절약 전기량·탄소·포인트를 계산합니다. 상수는 교육시설 실측 연구와 국가 공식 배출계수를 근거로 합니다.",
+        "formula": {
+            "title": "계산 공식",
+            "kwh": "절약 kWh = Σ(소비전력 W × 수량 ÷ 1,000 × 방치 시간 h)",
+            "cost": "절약 금액 = kWh × 130원",
+            "co2": "CO₂(kg) = kWh × 0.4594",
+            "point": "포인트 = round(절약 금액 × 18%)",
+            "cap": "방치 시간 상한: 제보 시각 ~ 소등 시각, 최대 120분"
+        },
+        "constants": {
+            "title": "적용 상수",
+            "items": {
+                "fluorescent": {
+                    "value": "40 W",
+                    "label": "형광등 1개",
+                    "source": "F32·F40급 정격 + 안정기 손실 대표값 (에너지소비효율등급 기준)"
+                },
+                "led": {
+                    "value": "20 W",
+                    "label": "LED 조명 1개",
+                    "source": "동일 조도 대비 형광등 약 50% 전력 (IEA 조명 효율 보고)"
+                },
+                "ac": {
+                    "value": "1,500 W",
+                    "label": "에어컨 1대",
+                    "source": "벽걸이형 7~9㎡급 정격 1.2~1.8 kW 중간값 (환경부 KEEP: 선풍기 대비 약 30배)"
+                },
+                "rate": {
+                    "value": "130원/kWh",
+                    "label": "전기 단가",
+                    "source": "한전 교육·일반용(저압) 전력량요금 단순화 단가"
+                },
+                "co2Factor": {
+                    "value": "0.4594 kg/kWh",
+                    "label": "전력 CO₂ 배출계수",
+                    "source": "KPX 전력배출계수 · 환경부 온실가스 배출권거래제 지침 (Scope 2)"
+                },
+                "tree": {
+                    "value": "20.25 kWh/그루",
+                    "label": "소나무 환산",
+                    "source": "산림청 탄소나무계산기: 소나무 1그루 연간 약 9.2 kg CO₂ 흡수"
+                }
+            }
+        },
+        "example": {
+            "title": "제보 1건 예시",
+            "scenario": "형광등 10개 + 에어컨 1대, 2시간 방치 (303호)",
+            "kwh": "3.8 kWh",
+            "cost": "494원",
+            "co2": "1.7 kg CO₂",
+            "points": "89P"
+        },
+        "references": {
+            "title": "근거 자료",
+            "items": {
+                "kses": {
+                    "name": "한국학교에너지학회",
+                    "detail": "10개교 조사: 면적당 연간 전력 0.013~0.030 TOE/m² (School A 552,550 kWh/년)",
+                    "url": "https://www.ksesjournal.co.kr/articles/xml/n4je/"
+                },
+                "pccs": {
+                    "name": "고등학교 전력 프로파일 (PCCS)",
+                    "detail": "기저전력 비동절 ~12 kW / 동절 ~21 kW; 용도별 조명 9%, 냉방 7%, 난방 36%",
+                    "url": "https://pdfs.semanticscholar.org/f3d2/f40f0647580ed36d4942625e54d2deafcb09.pdf"
+                },
+                "keep": {
+                    "name": "환경부 KEEP — 탄소중립 학교",
+                    "detail": "에어컨 소비전력 ≈ 선풍기 30배; Scope2 = 사용량 × 배출계수",
+                    "url": "https://www.keep.go.kr/contents/netzeroschool/index.html"
+                },
+                "kpx": {
+                    "name": "EG-TIPS · 환경부 고시",
+                    "detail": "전력 국가고유 배출계수 0.4594 kg CO₂/kWh (온실가스 배출권거래제 지침 별표 6)",
+                    "url": "https://tips.energy.or.kr/qna/qna_view.do?no=1841"
+                },
+                "forest": {
+                    "name": "산림청 탄소나무계산기",
+                    "detail": "소나무 1그루 연간 약 9.2 kg CO₂ 흡수 (표준탄소흡수량 ver.1.2 기반)",
+                    "url": "https://carbonregistry.forest.go.kr/fcr_web/resources/carbon_calc/html/main/CTC_02_01.html"
+                },
+                "kepco": {
+                    "name": "한국전력공사 전기요금표",
+                    "detail": "교육·일반용 전력량요금 (130원/kWh 단순화 적용)",
+                    "url": "https://home.kepco.co.kr/kepco/front/html/CY/E/E/CYEEHP00103.html"
+                }
+            }
+        }
+    },
     "impact": {
         "title": "기대 효과",
         "stats": {
             "waste": {
                 "value": "약 30%",
-                "label": "강의실 에너지 낭비 비율"
+                "label": "교내 에너지 빈 공간 낭비 추정 (기획 가정)"
             },
             "saving": {
                 "value": "600~1,000 kWh",
                 "label": "캠퍼스 1곳 월 절약 전기(100개 강의실 기준)"
             },
             "co2": {
-                "value": "280~470 kg",
-                "label": "월 탄소 절감(CO₂)"
+                "value": "275~460 kg",
+                "label": "월 탄소 절감(CO₂, 배출계수 0.4594 기준)"
             }
         }
     },

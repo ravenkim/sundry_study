@@ -1,5 +1,6 @@
 import { Loader } from 'lucide-react'
 import { ReactNode } from 'react'
+import { SSwaveText } from 'src/shared/components/motion'
 
 type SSspinProps = {
     children?: ReactNode
@@ -28,14 +29,19 @@ const SSspin = ({
         >
             {loading && (
                 <div
-                    className={`absolute inset-0 z-50 flex h-full w-full items-center justify-center rounded-[0.3rem] ${overlayColor} ${overlayOpacity}`}
+                    className={`absolute inset-0 z-50 flex h-full w-full flex-col items-center justify-center gap-3 rounded-[0.3rem] ${overlayColor} ${overlayOpacity}`}
                 >
                     <Loader
                         className="text-primary animate-spin"
                         size={size}
                         strokeWidth={strokeWidth}
                     />
-                    {text && <div className="ml-4 text-2xl">{text}</div>}
+                    {text ? (
+                        <SSwaveText
+                            text={text}
+                            className="text-on-surface text-lg font-medium"
+                        />
+                    ) : null}
                 </div>
             )}
             {children}

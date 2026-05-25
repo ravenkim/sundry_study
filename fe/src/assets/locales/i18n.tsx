@@ -9,6 +9,7 @@ import koReport from 'src/assets/locales/ko/report.json'
 import koUser from 'src/assets/locales/ko/user.json'
 import koAdmin from 'src/assets/locales/ko/admin.json'
 import koAdminBuildings from 'src/assets/locales/ko/adminBuildings.json'
+import koAdminSchedules from 'src/assets/locales/ko/adminSchedules.json'
 import koErrors from 'src/assets/locales/ko/errors.json'
 import koLegal from 'src/assets/locales/ko/legal.json'
 import koNotFound from 'src/assets/locales/ko/notFound.json'
@@ -22,6 +23,7 @@ import enReport from 'src/assets/locales/en/report.json'
 import enUser from 'src/assets/locales/en/user.json'
 import enAdmin from 'src/assets/locales/en/admin.json'
 import enAdminBuildings from 'src/assets/locales/en/adminBuildings.json'
+import enAdminSchedules from 'src/assets/locales/en/adminSchedules.json'
 import enErrors from 'src/assets/locales/en/errors.json'
 import enLegal from 'src/assets/locales/en/legal.json'
 import enNotFound from 'src/assets/locales/en/notFound.json'
@@ -36,6 +38,7 @@ export const I18N_NAMESPACES = [
     'user',
     'admin',
     'adminBuildings',
+    'adminSchedules',
     'errors',
     'legal',
     'notFound',
@@ -54,6 +57,7 @@ const resources = {
         user: koUser,
         admin: koAdmin,
         adminBuildings: koAdminBuildings,
+        adminSchedules: koAdminSchedules,
         errors: koErrors,
         legal: koLegal,
         notFound: koNotFound,
@@ -68,6 +72,7 @@ const resources = {
         user: enUser,
         admin: enAdmin,
         adminBuildings: enAdminBuildings,
+        adminSchedules: enAdminSchedules,
         errors: enErrors,
         legal: enLegal,
         notFound: enNotFound,

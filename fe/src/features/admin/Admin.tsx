@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import {
     ClipboardCheck,
     TrendingUp,
@@ -14,6 +15,7 @@ import {
     Clock,
     ChevronDown,
     Calendar,
+    Lightbulb,
 } from 'lucide-react'
 import {
     PieChart,
@@ -43,6 +45,87 @@ import {
 } from 'src/shared/lib/i18n/formatters'
 import { useAdminReportStatusLabel } from 'src/shared/lib/i18n/reportStatus'
 import type { ReportStatus } from 'src/globals/api/types'
+import type { AdminLightWasteRoom } from 'src/globals/api/types'
+
+function LightWasteRoomsTable({
+    rooms,
+    emptyMessage,
+    showLastReported = true,
+}: {
+    rooms: AdminLightWasteRoom[]
+    emptyMessage: string
+    showLastReported?: boolean
+}) {
+    const { t } = useTranslation('admin')
+    const locale = useAppLocale()
+
+    if (rooms.length === 0) {
+        return (
+            <p className="text-on-surface-variant px-6 py-8 text-center text-sm">
+                {emptyMessage}
+            </p>
+        )
+    }
+
+    return (
+        <table className="w-full text-left">
+            <thead>
+                <tr className="bg-surface-container-lowest text-on-surface-variant border-outline-variant border-b text-[10px] font-black tracking-widest uppercase">
+                    <th className="px-6 py-4">
+                        {t('stats.lightWasteRooms.table.rank')}
+                    </th>
+                    <th className="px-6 py-4">
+                        {t('stats.lightWasteRooms.table.location')}
+                    </th>
+                    <th className="px-6 py-4">
+                        {t('stats.lightWasteRooms.table.reportCount')}
+                    </th>
+                    {showLastReported ? (
+                        <th className="px-6 py-4">
+                            {t('stats.lightWasteRooms.table.lastReported')}
+                        </th>
+                    ) : null}
+                </tr>
+            </thead>
+            <tbody className="divide-outline-variant/30 divide-y text-sm font-medium">
+                {rooms.map((room) => (
+                    <tr
+                        key={`${room.locationPath}-${room.rank}`}
+                        className="hover:bg-surface-container-low/30 transition-colors"
+                    >
+                        <td className="text-primary px-6 py-4 font-black">
+                            {room.rank}
+                        </td>
+                        <td className="px-6 py-4">
+                            <div className="flex flex-col">
+                                <span className="text-on-surface font-bold">
+                                    {room.roomName}
+                                </span>
+                                <span className="text-on-surface-variant text-xs">
+                                    {room.locationPath || room.buildingName}
+                                </span>
+                            </div>
+                        </td>
+                        <td className="px-6 py-4">
+                            <EcoBadge variant="yellow">
+                                {t('stats.lightWasteRooms.reportCountValue', {
+                                    count: formatNumber(room.reportCount, locale),
+                                })}
+                            </EcoBadge>
+                        </td>
+                        {showLastReported ? (
+                            <td className="text-on-surface-variant px-6 py-4 text-xs">
+                                {room.lastReportedAt
+                                    ? formatDateTime(room.lastReportedAt, locale)
+                                    : '-'}
+                            </td>
+                        ) : null}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    )
+}
 
 function ReportStatusBadge({ status }: { status: ReportStatus }) {
     const label = useAdminReportStatusLabel(status)
@@ -59,7 +142,9 @@ export const AdminDashboard = () => {
     const { t } = useTranslation('admin')
     const locale = useAppLocale()
     const stats = useAdminDashboardState()
+    const adminStats = useAdminStatsState()
     const { reports, handleStatusUpdate } = useAdminReportsState()
+    const topLightWasteRooms = (adminStats?.topLightWasteRooms ?? []).slice(0, 5)
 
     return (
         <>
@@ -140,6 +225,33 @@ export const AdminDashboard = () => {
                             </div>
                         </EcoCard>
                     </div>
+
+                    <EcoCard className="overflow-hidden p-0">
+                        <div className="bg-surface-container-low border-outline-variant flex items-center justify-between border-b p-5">
+                            <div>
+                                <div className="mb-1 flex items-center gap-2">
+                                    <Lightbulb className="text-primary h-5 w-5" />
+                                    <h3 className="text-lg font-bold">
+                                        {t('dashboard.lightWasteRooms.title')}
+                                    </h3>
+                                </div>
+                                <p className="text-on-surface-variant text-xs font-medium">
+                                    {t('dashboard.lightWasteRooms.subtitle')}
+                                </p>
+                            </div>
+                            <Link
+                                to="/admin/stats"
+                                className="text-primary text-xs font-bold hover:underline"
+                            >
+                                {t('dashboard.lightWasteRooms.viewAll')}
+                            </Link>
+                        </div>
+                        <LightWasteRoomsTable
+                            rooms={topLightWasteRooms}
+                            emptyMessage={t('dashboard.lightWasteRooms.empty')}
+                            showLastReported={false}
+                        />
+                    </EcoCard>
 
                     <EcoCard className="overflow-hidden p-0">
                         <table className="w-full text-left">
@@ -416,6 +528,7 @@ export const AdminStats = () => {
     }))
 
     const monthlyRows = stats?.monthlySummaries ?? []
+    const lightWasteRooms = stats?.topLightWasteRooms ?? []
 
     return (
         <>
@@ -545,6 +658,26 @@ export const AdminStats = () => {
                             </div>
                         </EcoCard>
                     </div>
+
+                    <EcoCard className="overflow-hidden p-0">
+                        <div className="bg-surface-container-low border-outline-variant flex items-center justify-between border-b p-5">
+                            <div>
+                                <div className="mb-1 flex items-center gap-2">
+                                    <Lightbulb className="text-primary h-5 w-5" />
+                                    <h3 className="text-lg font-bold">
+                                        {t('stats.lightWasteRooms.title')}
+                                    </h3>
+                                </div>
+                                <p className="text-on-surface-variant text-xs font-medium">
+                                    {t('stats.lightWasteRooms.subtitle')}
+                                </p>
+                            </div>
+                        </div>
+                        <LightWasteRoomsTable
+                            rooms={lightWasteRooms}
+                            emptyMessage={t('stats.lightWasteRooms.empty')}
+                        />
+                    </EcoCard>
 
                     <EcoCard className="overflow-hidden p-0">
                         <div className="bg-surface-container-low border-outline-variant flex items-center justify-between border-b p-5">

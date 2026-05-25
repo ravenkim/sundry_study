@@ -14,6 +14,28 @@ export default defineConfig({
     // 포트지정
     server: {
         port: 6075,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+            },
+            '/register': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+            },
+            '/oauth2': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+            },
+            '/login/oauth2': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+            },
+            '/ping': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+            },
+        },
     },
 
     resolve: {

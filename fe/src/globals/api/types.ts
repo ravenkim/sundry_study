@@ -215,11 +215,22 @@ export interface AdminMonthlySummary {
     pointsAwarded: number
 }
 
+export interface AdminLightWasteRoom {
+    rank: number
+    locationId?: number
+    buildingName: string
+    roomName: string
+    locationPath: string
+    reportCount: number
+    lastReportedAt?: string
+}
+
 export interface AdminStatsData {
     totalReports: number
     buildingShares: AdminBuildingShare[]
     wasteByCategory: AdminCategoryCount[]
     monthlySummaries: AdminMonthlySummary[]
+    topLightWasteRooms: AdminLightWasteRoom[]
 }
 
 export interface CreateReportPayload {

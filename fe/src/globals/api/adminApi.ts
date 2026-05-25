@@ -46,6 +46,7 @@ export async function getAdminStats(
             buildingShares: [],
             wasteByCategory: [],
             monthlySummaries: [],
+            topLightWasteRooms: [],
         }),
     )
 }

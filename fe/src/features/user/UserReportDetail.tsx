@@ -7,6 +7,7 @@ import { getReportDetail } from 'src/globals/api/reportApi'
 import type { ReportDetail } from 'src/globals/api/types'
 import { useReportStatusLabel } from 'src/shared/lib/i18n/reportStatus'
 import { useAppLocale, formatDateTime } from 'src/shared/lib/i18n/formatters'
+import { SSfadeIn, SSloadingState } from 'src/shared/components/motion'
 import { ReportMascotThumbnail } from './ReportMascotThumbnail'
 
 export const UserReportDetail = () => {
@@ -27,9 +28,11 @@ export const UserReportDetail = () => {
 
     if (loading) {
         return (
-            <p className="text-on-surface-variant p-8 text-center text-sm">
-                {t('detail.loading')}
-            </p>
+            <SSloadingState
+                text={t('detail.loading')}
+                mascot="sleepy"
+                className="p-8"
+            />
         )
     }
 
@@ -47,7 +50,7 @@ export const UserReportDetail = () => {
     }
 
     return (
-        <div className="flex flex-col gap-6 p-5 pb-8">
+        <SSfadeIn className="flex flex-col gap-6 p-5 pb-8">
             <Link
                 to="/reports"
                 className="text-on-surface-variant flex items-center gap-2 text-sm font-bold"
@@ -122,6 +125,6 @@ export const UserReportDetail = () => {
                     </p>
                 )}
             </EcoCard>
-        </div>
+        </SSfadeIn>
     )
 }

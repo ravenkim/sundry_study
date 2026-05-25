@@ -10,6 +10,7 @@ import {
     BarChart3,
     Users,
     Menu,
+    CalendarDays,
 } from 'lucide-react'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import {
@@ -189,6 +190,11 @@ export const AdminSidebar = () => {
             name: tNav('admin.buildings'),
             path: '/admin/buildings',
             icon: Settings,
+        },
+        {
+            name: tNav('admin.schedules'),
+            path: '/admin/schedules',
+            icon: CalendarDays,
         },
         { name: tNav('admin.gifticon'), path: '/admin/points', icon: Gift },
         { name: tNav('admin.stats'), path: '/admin/stats', icon: BarChart3 },

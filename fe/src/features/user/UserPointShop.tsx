@@ -21,6 +21,7 @@ import type {
     RewardItem,
 } from 'src/globals/api/types'
 import { useAppLocale, formatDate, formatNumber } from 'src/shared/lib/i18n/formatters'
+import { SSloadingState, SSstaggerChildren } from 'src/shared/components/motion'
 
 type CategoryFilter = 'all' | RewardCategoryKey
 
@@ -218,9 +219,7 @@ export const UserPointShop = () => {
             </nav>
 
             {rewardsLoading ? (
-                <p className="text-on-surface-variant py-12 text-center text-sm">
-                    {t('user:shop.loadingRewards')}
-                </p>
+                <SSloadingState text={t('user:shop.loadingRewards')} />
             ) : filtered.length === 0 ? (
                 <p className="text-on-surface-variant py-12 text-center text-sm">
                     {activeCategory === 'all'
@@ -230,7 +229,7 @@ export const UserPointShop = () => {
                           })}
                 </p>
             ) : (
-                <div className="grid grid-cols-2 gap-4">
+                <SSstaggerChildren className="grid grid-cols-2 gap-4">
                     {filtered.map((item) => {
                         const canAfford =
                             points.currentBalance >= item.pointCost
@@ -283,7 +282,7 @@ export const UserPointShop = () => {
                             </article>
                         )
                     })}
-                </div>
+                </SSstaggerChildren>
             )}
 
             {selectedReward && (

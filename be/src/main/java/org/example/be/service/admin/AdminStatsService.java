@@ -9,13 +9,16 @@ import org.example.be.domain.repository.ReportRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,7 @@ import java.util.Map;
 public class AdminStatsService {
 
     private static final int TOP_BUILDINGS = 5;
+    private static final int TOP_LIGHT_WASTE_ROOMS = 10;
     private static final int MONTHLY_HISTORY = 6;
     private static final List<String> WASTE_CATEGORY_ORDER = List.of(
             "조명 소등",
@@ -44,7 +48,98 @@ public class AdminStatsService {
                 .buildingShares(buildBuildingShares(scoped))
                 .wasteByCategory(buildWasteCategories(scoped))
                 .monthlySummaries(buildMonthlySummaries(scoped))
+                .topLightWasteRooms(buildTopLightWasteRooms(scoped))
                 .build();
+    }
+
+    private List<AdminResponse.LightWasteRoom> buildTopLightWasteRooms(List<Report> reports) {
+        Map<String, RoomAggregate> aggregates = new LinkedHashMap<>();
+
+        for (Report report : reports) {
+            if (!isLightWasteReport(report)) {
+                continue;
+            }
+
+            RoomLocation location = resolveRoomLocation(report);
+            String key = location.key();
+            RoomAggregate aggregate = aggregates.computeIfAbsent(key, ignored -> new RoomAggregate(location));
+            aggregate.reportCount++;
+            if (report.getCreatedAt() != null
+                    && (aggregate.lastReportedAt == null || report.getCreatedAt().isAfter(aggregate.lastReportedAt))) {
+                aggregate.lastReportedAt = report.getCreatedAt();
+            }
+        }
+
+        List<RoomAggregate> sorted = aggregates.values().stream()
+                .sorted(Comparator
+                        .comparingInt(RoomAggregate::getReportCount).reversed()
+                        .thenComparing(
+                                RoomAggregate::getLastReportedAt,
+                                Comparator.nullsLast(Comparator.reverseOrder())
+                        ))
+                .limit(TOP_LIGHT_WASTE_ROOMS)
+                .toList();
+
+        List<AdminResponse.LightWasteRoom> rooms = new ArrayList<>();
+        for (int i = 0; i < sorted.size(); i++) {
+            RoomAggregate aggregate = sorted.get(i);
+            rooms.add(AdminResponse.LightWasteRoom.builder()
+                    .rank(i + 1)
+                    .locationId(aggregate.location.locationId())
+                    .buildingName(aggregate.location.buildingName())
+                    .roomName(aggregate.location.roomName())
+                    .locationPath(aggregate.location.locationPath())
+                    .reportCount(aggregate.reportCount)
+                    .lastReportedAt(aggregate.lastReportedAt != null ? aggregate.lastReportedAt.toString() : null)
+                    .build());
+        }
+
+        return rooms;
+    }
+
+    private boolean isLightWasteReport(Report report) {
+        if (report.getStatus() == ReportStatus.REJECTED) {
+            return false;
+        }
+        WasteType wasteType = report.getWasteType();
+        return wasteType != null && wasteType.isLightWasting();
+    }
+
+    private RoomLocation resolveRoomLocation(Report report) {
+        if (report.getLocationNode() != null) {
+            String buildingName = AdminReportSupport.findRoot(report.getLocationNode()).getName();
+            String roomName = report.getLocationNode().getName();
+            String locationPath = report.getLocationDetail() != null && !report.getLocationDetail().isBlank()
+                    ? report.getLocationDetail()
+                    : buildingName + " > " + roomName;
+            return new RoomLocation(
+                    "node:" + report.getLocationNode().getSeq(),
+                    report.getLocationNode().getSeq(),
+                    buildingName,
+                    roomName,
+                    locationPath
+            );
+        }
+
+        String locationDetail = report.getLocationDetail();
+        if (locationDetail != null && locationDetail.contains(" > ")) {
+            String[] parts = locationDetail.split(" > ");
+            return new RoomLocation(
+                    "detail:" + locationDetail,
+                    null,
+                    parts[0],
+                    parts[parts.length - 1],
+                    locationDetail
+            );
+        }
+
+        return new RoomLocation(
+                "detail:" + Objects.toString(locationDetail, "unknown"),
+                null,
+                "미지정",
+                locationDetail != null ? locationDetail : "미지정",
+                locationDetail != null ? locationDetail : "미지정"
+        );
     }
 
     private List<AdminResponse.BuildingShare> buildBuildingShares(List<Report> reports) {
@@ -179,5 +274,32 @@ public class AdminStatsService {
             return 0;
         }
         return (int) Math.round((part * 100.0) / total);
+    }
+
+    private record RoomLocation(
+            String key,
+            Long locationId,
+            String buildingName,
+            String roomName,
+            String locationPath
+    ) {
+    }
+
+    private static final class RoomAggregate {
+        private final RoomLocation location;
+        private int reportCount;
+        private LocalDateTime lastReportedAt;
+
+        private RoomAggregate(RoomLocation location) {
+            this.location = location;
+        }
+
+        private int getReportCount() {
+            return reportCount;
+        }
+
+        private LocalDateTime getLastReportedAt() {
+            return lastReportedAt;
+        }
     }
 }

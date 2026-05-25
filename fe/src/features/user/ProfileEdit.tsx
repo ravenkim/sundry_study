@@ -17,6 +17,7 @@ import {
 import type { Affiliation, Building } from 'src/globals/api/types'
 import { SearchableSelect } from 'src/shared/components/SearchableSelect'
 import { EcoButton } from 'src/shared/ui/eco'
+import { SSloadingState } from 'src/shared/components/motion'
 import { getErrorMessage } from 'src/shared/lib/i18n/getErrorMessage'
 import { isValidNicknameFormat } from 'src/shared/lib/nicknameUtils'
 
@@ -284,9 +285,10 @@ export function ProfileEdit() {
 
             <main className="flex flex-grow flex-col gap-6 p-5 pb-28">
                 {loading ? (
-                    <p className="text-on-surface-variant text-center text-sm">
-                        {t('user:profileEdit.loading')}
-                    </p>
+                    <SSloadingState
+                        text={t('user:profileEdit.loading')}
+                        mascot="sleepy"
+                    />
                 ) : (
                     <>
                         <div>

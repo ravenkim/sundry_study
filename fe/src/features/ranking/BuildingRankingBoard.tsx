@@ -10,6 +10,7 @@ import {
     type RankingPeriod,
 } from 'src/globals/api/rankingApi'
 import { MascotImage } from 'src/shared/components/mascort'
+import { SSloadingState, SSstaggerChildren } from 'src/shared/components/motion'
 import { EcoBadge, EcoButton, EcoCard } from 'src/shared/ui/eco'
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { getErrorMessage } from 'src/shared/lib/i18n/getErrorMessage'
@@ -83,9 +84,7 @@ export function BuildingRankingBoard() {
             </section>
 
             {loading ? (
-                <EcoCard className="text-on-surface-variant p-8 text-center text-sm">
-                    {t('loading')}
-                </EcoCard>
+                <SSloadingState text={t('loading')} mascot="sleepy" />
             ) : missingBuilding ? (
                 <EcoCard className="flex flex-col items-center gap-4 p-8 text-center">
                     <MascotImage emotion="question" size="md" decorative />
@@ -148,7 +147,8 @@ export function BuildingRankingBoard() {
                                 {t('empty')}
                             </EcoCard>
                         ) : (
-                            data.entries.map((entry) => {
+                            <SSstaggerChildren className="flex flex-col gap-3">
+                                {data.entries.map((entry) => {
                                 const Icon = rankIcon(entry.rank)
                                 const isMe = entry.nickname === user?.nickname
 
@@ -203,7 +203,8 @@ export function BuildingRankingBoard() {
                                         </div>
                                     </EcoCard>
                                 )
-                            })
+                            })}
+                            </SSstaggerChildren>
                         )}
                     </section>
                 </>

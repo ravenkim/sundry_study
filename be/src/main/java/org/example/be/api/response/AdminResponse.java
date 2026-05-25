@@ -24,6 +24,19 @@ public class AdminResponse {
         private List<BuildingShare> buildingShares;
         private List<CategoryCount> wasteByCategory;
         private List<MonthlySummary> monthlySummaries;
+        private List<LightWasteRoom> topLightWasteRooms;
+    }
+
+    @Getter
+    @Builder
+    public static class LightWasteRoom {
+        private int rank;
+        private Long locationId;
+        private String buildingName;
+        private String roomName;
+        private String locationPath;
+        private int reportCount;
+        private String lastReportedAt;
     }
 
     @Getter

@@ -30,7 +30,13 @@
             "reject": "Reject"
         },
         "pointsAwarded": "+{{points}}P",
-        "noPoints": "-"
+        "noPoints": "-",
+        "lightWasteRooms": {
+            "title": "Rooms with lights left on",
+            "subtitle": "Locations with repeated light-on reports",
+            "viewAll": "View full statistics",
+            "empty": "No data to aggregate yet."
+        }
     },
     "reports": {
         "headerTitle": "Report Management",
@@ -67,6 +73,18 @@
                 "pointsValue": "{{value}} P"
             },
             "empty": "No report data to aggregate."
+        },
+        "lightWasteRooms": {
+            "title": "Rooms with lights left on",
+            "subtitle": "Top 10 locations with AI-detected lights ON",
+            "table": {
+                "rank": "Rank",
+                "location": "Location",
+                "reportCount": "Reports",
+                "lastReported": "Last report"
+            },
+            "reportCountValue": "{{count}} reports",
+            "empty": "No light-waste report data."
         }
     },
     "users": {

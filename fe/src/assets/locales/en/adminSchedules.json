@@ -1,0 +1,32 @@
+{
+    "pageTitle": "Operating Hours Overview",
+    "pageDescription": "Review power schedules for all items (LEAF) at a glance. Change location names or structure in Location Management; use the row edit button to update schedules quickly.",
+    "affiliationMissing": "Affiliation could not be resolved. Check your admin account settings.",
+    "linkToBuildings": "Go to Location Management",
+    "filters": {
+        "building": "Building",
+        "allBuildings": "All buildings",
+        "search": "Search",
+        "searchPlaceholder": "Search room or path",
+        "resultCount": "{{shown}} / {{total}} items"
+    },
+    "matrix": {
+        "loading": "Loading operating hours…",
+        "empty": "No items to display. Register LEAF locations in Location Management.",
+        "location": "Location",
+        "today": "Today",
+        "closedHint": "Closed",
+        "actions": "Edit",
+        "editAria": "Edit schedule for {{name}}"
+    },
+    "editSheet": {
+        "title": "Edit operating hours",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving…"
+    },
+    "toast": {
+        "updateSuccess": "Operating hours saved.",
+        "updateFailed": "Failed to save operating hours."
+    }
+}

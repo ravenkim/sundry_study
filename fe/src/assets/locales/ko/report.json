@@ -7,13 +7,14 @@
     },
     "form": {
         "photoTitle": "현장 사진을 촬영해 주세요",
-        "photoHint": "빈 강의실의 조명·에어컨 상태가 잘 보이도록 촬영해 주세요.",
+        "photoHint": "불을 끄기 전에 촬영해 주세요. 빈 강의실의 조명·에어컨이 켜진 상태가 잘 보이도록 찍어 주세요.",
         "criteriaTitle": "AI 판별 기준",
         "criteriaIntro": "아래 조건을 모두 충족하면 에너지 낭비로 인정되어 포인트가 적립됩니다.",
         "criteriaOffHours": "운영 시간이 아닌 빈 강의실 (수업·행사 등으로 전원이 켜져 있어야 하는 시간에는 제보 불가)",
         "criteriaEmptyRoom": "사람이 없는 강의실",
         "criteriaWaste": "조명 또는 에어컨이 켜진 상태",
         "photoGuideTitle": "촬영 가이드",
+        "photoGuideBeforeTurnOff": "조명·에어컨을 끄기 전에, 켜진 상태로 먼저 촬영해 주세요",
         "photoGuideClassroom": "강의실이 안 보이면, 운영 중인 강의실(의자·책상이 보이는 공간)을 촬영해 주세요",
         "photoGuideLighting": "천장 조명·에어컨 상태가 잘 보이도록 촬영해 주세요",
         "photoGuideWide": "강의실 전체가 아니어도, 의자와 책상이 화면에 보이면 됩니다",
@@ -38,7 +39,15 @@
         "loadingDuration": "약 3~5초 소요됩니다.",
         "errorPhotoRequired": "현장 사진을 촬영하거나 선택해 주세요.",
         "errorPhotoAndLocationRequired": "사진과 위치를 모두 선택해 주세요.",
-        "errorSubmitFailed": "제보 접수 중 오류가 발생했습니다."
+        "errorSubmitFailed": "제보 접수 중 오류가 발생했습니다.",
+        "errorAbuseAgreeRequired": "제보 전 부정 제보 금지 안내에 동의해 주세요.",
+        "abuseNoticeTitle": "부정 제보 금지 안내",
+        "abuseNoticeIntro": "에너지 절약 크라우드소싱의 신뢰를 위해 아래 행위는 엄격히 금지됩니다.",
+        "abuseNoticeItem1": "조명·에어컨을 직접 켠 뒤 제보하여 포인트를 받는 행위",
+        "abuseNoticeItem2": "허위·중복 제보, 또는 운영 시간 중 정상 사용을 낭비로 신고하는 행위",
+        "abuseNoticeItem3": "같은 강의실을 반복 제보하거나, 타인의 제보를 도용하는 행위",
+        "abuseNoticePenalty": "위반 시 지급된 포인트 회수, 리워드 교환 제한, 계정 정지 등의 조치가 적용될 수 있으며, 시설팀 확인 후 포인트가 확정됩니다.",
+        "abuseAgreeLabel": "위 부정 제보 금지 안내를 확인했으며, 발견한 낭비만 제보하겠습니다."
     },
     "result": {
         "loadFailed": "제보 결과를 불러올 수 없습니다.",

@@ -11,6 +11,7 @@ import {
 import { cn } from 'src/shared/lib/shadcn/lib/utils'
 import { ScrollArea } from 'src/shared/lib/shadcn/components/ui/scroll-area'
 import { EcoButton } from 'src/shared/ui/eco'
+import { SSloadingState } from 'src/shared/components/motion'
 import type { AdminLocationNode } from 'src/globals/api/types'
 import type { LocationDepth } from 'src/features/admin/buildings/locationTreeUtils'
 import { getNodeKindLabel } from 'src/features/admin/buildings/locationTreeUtils'
@@ -95,9 +96,11 @@ export const LocationColumn = ({
 
             <ScrollArea className="flex-1">
                 {loading ? (
-                    <p className="text-on-surface-variant p-6 text-center text-sm">
-                        {t('column.loading')}
-                    </p>
+                    <SSloadingState
+                        text={t('column.loading')}
+                        size="sm"
+                        compact
+                    />
                 ) : disabled ? (
                     <p className="text-on-surface-variant p-6 text-center text-sm">
                         {emptyMessage}
