@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.be.api.response.AdminResponse;
 import org.example.be.api.response.ApiResponse;
 import org.example.be.api.response.ResponseCode;
+import org.example.be.domain.model.Member;
 import org.example.be.service.admin.AdminDashboardService;
 import org.example.be.service.admin.AdminStatsService;
 import org.example.be.service.auth.AdminAuthorizationHelper;
@@ -30,10 +31,11 @@ public class AdminDashboardController {
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Integer month
     ) {
-        adminAuthorizationHelper.requireAdmin(jwt.getClaim("memberSeq"));
+        Member admin = adminAuthorizationHelper.requireAdmin(jwt.getClaim("memberSeq"));
+        Long affiliationId = admin.getAffiliation() != null ? admin.getAffiliation().getSeq() : null;
         return ApiResponse.success(
                 ResponseCode.ADMIN_DASHBOARD,
-                adminDashboardService.getDashboard(buildingId, year, month)
+                adminDashboardService.getDashboard(buildingId, affiliationId, year, month)
         );
     }
 
@@ -42,10 +44,11 @@ public class AdminDashboardController {
             @AuthenticationPrincipal Jwt jwt,
             @RequestParam(required = false) Long buildingId
     ) {
-        adminAuthorizationHelper.requireAdmin(jwt.getClaim("memberSeq"));
+        Member admin = adminAuthorizationHelper.requireAdmin(jwt.getClaim("memberSeq"));
+        Long affiliationId = admin.getAffiliation() != null ? admin.getAffiliation().getSeq() : null;
         return ApiResponse.success(
                 ResponseCode.ADMIN_STATS,
-                adminStatsService.getStats(buildingId)
+                adminStatsService.getStats(buildingId, affiliationId)
         );
     }
 }

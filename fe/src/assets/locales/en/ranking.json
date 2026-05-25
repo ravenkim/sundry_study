@@ -1,6 +1,6 @@
 {
-    "title": "Building Ranking",
-    "description": "Report rankings among students in your building. Displayed by nickname.",
+    "title": "Affiliation Ranking",
+    "description": "Report rankings among students in your affiliation. Displayed by nickname.",
     "loading": "Loading rankings...",
     "period": {
         "month": "This month",
@@ -8,7 +8,6 @@
     },
     "myRank": {
         "title": "My rank",
-        "empty": "You are not ranked yet. Submit your first report!",
         "anonymous": "Me"
     },
     "leaderboardTitle": "Eco Hero Leaderboard",
@@ -17,7 +16,7 @@
     "entry": {
         "reports": "{{count}} reports"
     },
-    "missingBuildingTitle": "Building required",
-    "missingBuildingDescription": "Select your building in profile settings to view the building ranking.",
-    "missingBuildingCta": "Edit profile"
+    "missingAffiliationTitle": "Affiliation required",
+    "missingAffiliationDescription": "Select your affiliation in profile settings to view the affiliation ranking.",
+    "missingAffiliationCta": "Edit profile"
 }

@@ -1,6 +1,6 @@
 package org.example.be.domain.repository;
 
-public interface BuildingRankingProjection {
+public interface AffiliationRankingProjection {
     Long getMemberSeq();
 
     String getNickname();

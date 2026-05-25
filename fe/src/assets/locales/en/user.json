@@ -41,7 +41,7 @@
         "buildingPlaceholder": "Search and select a building",
         "buildingSearchPlaceholder": "Search building name...",
         "noBuildings": "No buildings available.",
-        "buildingHint": "Select your building to join the building ranking.",
+        "buildingHint": "Select your affiliation to join the affiliation ranking.",
         "passwordSectionTitle": "Change password",
         "passwordHintOAuth": "For social login accounts, enter a new password to set one.",
         "passwordHintLocal": "Leave blank to keep your current password.",

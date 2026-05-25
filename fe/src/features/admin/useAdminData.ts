@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import i18n from 'src/assets/locales/i18n'
-import { getStoredUser } from 'src/features/auth/authStorage'
 
 export function useAdminReportsState() {
     const [reports, setReports] = useState<
@@ -13,20 +12,9 @@ export function useAdminReportsState() {
     >([])
 
     useEffect(() => {
-        const user = getStoredUser()
         void import('src/globals/api/adminApi')
             .then(({ getAdminReports }) => getAdminReports())
-            .then((items) => {
-                if (!user?.buildingName) {
-                    setReports(items)
-                    return
-                }
-                setReports(
-                    items.filter(
-                        (item) => item.buildingName === user.buildingName,
-                    ),
-                )
-            })
+            .then(setReports)
     }, [])
 
     const handleStatusUpdate = async (

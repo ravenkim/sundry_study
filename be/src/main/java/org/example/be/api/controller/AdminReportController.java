@@ -6,6 +6,7 @@ import org.example.be.api.request.AdminReportStatusRequest;
 import org.example.be.api.response.AdminResponse;
 import org.example.be.api.response.ApiResponse;
 import org.example.be.api.response.ResponseCode;
+import org.example.be.domain.model.Member;
 import org.example.be.service.admin.AdminReportService;
 import org.example.be.service.auth.AdminAuthorizationHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -33,10 +34,11 @@ public class AdminReportController {
             @AuthenticationPrincipal Jwt jwt,
             @RequestParam(required = false) Long buildingId
     ) {
-        adminAuthorizationHelper.requireAdmin(jwt.getClaim("memberSeq"));
+        Member admin = adminAuthorizationHelper.requireAdmin(jwt.getClaim("memberSeq"));
+        Long affiliationId = admin.getAffiliation() != null ? admin.getAffiliation().getSeq() : null;
         return ApiResponse.success(
                 ResponseCode.ADMIN_REPORTS,
-                adminReportService.getReports(buildingId)
+                adminReportService.getReports(buildingId, affiliationId)
         );
     }
 

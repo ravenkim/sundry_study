@@ -38,9 +38,9 @@ public class AdminStatsService {
 
     private final ReportRepository reportRepository;
 
-    public AdminResponse.Stats getStats(Long buildingId) {
+    public AdminResponse.Stats getStats(Long buildingId, Long affiliationId) {
         List<Report> scoped = reportRepository.findAllByOrderByCreatedAtDesc().stream()
-                .filter(report -> AdminReportSupport.matchesBuildingFilter(report, buildingId))
+                .filter(report -> AdminReportSupport.matchesAdminScope(report, buildingId, affiliationId))
                 .toList();
 
         return AdminResponse.Stats.builder()

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { BuildingRankingBoard } from 'src/features/ranking/BuildingRankingBoard'
+import { AffiliationRankingBoard } from 'src/features/ranking/AffiliationRankingBoard'
 import { UserAppLayout } from 'src/shared/layout/EcoLayouts'
 
 const RankingPage = () => {
@@ -7,7 +7,7 @@ const RankingPage = () => {
 
     return (
         <UserAppLayout title={t('pages.ranking')} showPoints={false}>
-            <BuildingRankingBoard />
+            <AffiliationRankingBoard />
         </UserAppLayout>
     )
 }

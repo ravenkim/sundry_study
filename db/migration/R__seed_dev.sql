@@ -129,6 +129,12 @@ SET m.affiliation_seq = a.seq,
     m.nickname = '에코관리자'
 WHERE m.user_name = 'admin';
 
+-- 소속 미지정 회원을 삼육대학교로 맞춤 (시드 재실행 시)
+UPDATE member_db m
+JOIN affiliation_db a ON a.name = '삼육대학교'
+SET m.affiliation_seq = a.seq
+WHERE m.affiliation_seq IS NULL;
+
 -- User account
 INSERT INTO member_db (user_name, nickname, password, email, phone_number, user_type, affiliation_seq, location_node_seq)
 SELECT

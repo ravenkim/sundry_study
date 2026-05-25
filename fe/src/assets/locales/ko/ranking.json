@@ -1,6 +1,6 @@
 {
-    "title": "우리 건물 랭킹",
-    "description": "같은 건물 학생들의 제보 순위입니다. 닉네임으로 표시됩니다.",
+    "title": "소속 랭킹",
+    "description": "같은 소속 학생들의 제보 순위입니다. 닉네임으로 표시됩니다.",
     "loading": "랭킹을 불러오는 중...",
     "period": {
         "month": "이번 달",
@@ -8,7 +8,6 @@
     },
     "myRank": {
         "title": "내 순위",
-        "empty": "아직 순위에 올라가지 않았어요. 첫 제보를 남겨보세요!",
         "anonymous": "나"
     },
     "leaderboardTitle": "에코 히어로 순위",
@@ -17,7 +16,7 @@
     "entry": {
         "reports": "{{count}}건 제보"
     },
-    "missingBuildingTitle": "소속 건물이 필요해요",
-    "missingBuildingDescription": "건물 랭킹을 보려면 프로필에서 소속 건물을 먼저 선택해 주세요.",
-    "missingBuildingCta": "프로필 수정하기"
+    "missingAffiliationTitle": "소속 정보가 필요해요",
+    "missingAffiliationDescription": "소속 랭킹을 보려면 프로필에서 소속을 먼저 선택해 주세요.",
+    "missingAffiliationCta": "프로필 수정하기"
 }

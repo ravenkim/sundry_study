@@ -88,13 +88,13 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
             LEFT JOIN report_db r ON r.member_seq = m.seq
                 AND r.status IN ('PENDING', 'APPROVED')
                 AND (:periodStart IS NULL OR r.created_at >= :periodStart)
-            WHERE m.location_node_seq = :buildingId
+            WHERE m.affiliation_seq = :affiliationId
               AND m.user_type = 'USER'
             GROUP BY m.seq, m.nickname
             ORDER BY reportCount DESC, totalKwh DESC, m.nickname ASC
             """, nativeQuery = true)
-    List<BuildingRankingProjection> findBuildingRanking(
-            @Param("buildingId") Long buildingId,
+    List<AffiliationRankingProjection> findAffiliationRanking(
+            @Param("affiliationId") Long affiliationId,
             @Param("periodStart") LocalDateTime periodStart
     );
 }

@@ -14,9 +14,7 @@ import { useAppLocale, formatDate } from 'src/shared/lib/i18n/formatters'
 const FILTER_VALUES: { value: ReportStatus | 'ALL'; labelKey: string }[] = [
     { value: 'ALL', labelKey: 'list.filterAll' },
     { value: 'APPROVED', labelKey: 'list.filterApproved' },
-    { value: 'PENDING', labelKey: 'list.filterPending' },
     { value: 'REJECTED', labelKey: 'list.filterRejected' },
-    { value: 'UNDETECTABLE', labelKey: 'list.filterUndetectable' },
 ]
 
 function statusVariant(status: ReportStatus): 'green' | 'gray' | 'yellow' {

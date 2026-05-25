@@ -4,7 +4,7 @@ import type { ApiResponse } from 'src/globals/api/types'
 
 export type RankingPeriod = 'month' | 'all'
 
-export interface BuildingRankingEntry {
+export interface AffiliationRankingEntry {
     rank: number
     memberSeq: number
     nickname: string
@@ -13,19 +13,19 @@ export interface BuildingRankingEntry {
     pointAwarded: number
 }
 
-export interface BuildingRanking {
-    buildingId: number
-    buildingName: string
+export interface AffiliationRanking {
+    affiliationId: number
+    affiliationName: string
     period: RankingPeriod
     myRank: number | null
-    entries: BuildingRankingEntry[]
+    entries: AffiliationRankingEntry[]
 }
 
-export async function getBuildingRanking(
+export async function getAffiliationRanking(
     period: RankingPeriod = 'month',
-): Promise<BuildingRanking> {
-    const { data } = await client.get<ApiResponse<BuildingRanking>>(
-        '/api/rankings/building/me',
+): Promise<AffiliationRanking> {
+    const { data } = await client.get<ApiResponse<AffiliationRanking>>(
+        '/api/rankings/affiliation/me',
         { params: { period } },
     )
     return unwrapApiData(data)

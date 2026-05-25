@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { CheckCircle2, Plus, TriangleAlert } from 'lucide-react'
@@ -47,7 +47,6 @@ function ReportAbuseNotice({
     const abuseItems = [
         t('form.abuseNoticeItem1'),
         t('form.abuseNoticeItem2'),
-        t('form.abuseNoticeItem3'),
     ]
 
     return (
@@ -145,6 +144,78 @@ function ReportCriteriaGuide() {
     )
 }
 
+function ReportPhotoInput({
+    previewUrl,
+    onFileSelect,
+    variant = 'large',
+}: {
+    previewUrl: string | null
+    onFileSelect: (file: File) => void
+    variant?: 'large' | 'compact'
+}) {
+    const { t } = useTranslation('report')
+    const inputId = useId()
+    const isCompact = variant === 'compact'
+
+    return (
+        <>
+            <label
+                htmlFor={inputId}
+                aria-label={
+                    previewUrl ? t('form.changePhotoHint') : undefined
+                }
+                className={cn(
+                    'border-outline-variant bg-surface-container-lowest group relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed transition-colors hover:bg-surface-container-low',
+                    previewUrl && 'border-solid p-0',
+                    isCompact ? 'h-32 w-full' : 'min-h-[240px] gap-3',
+                )}
+            >
+                {previewUrl ? (
+                    <>
+                        <img
+                            src={previewUrl}
+                            alt={
+                                isCompact
+                                    ? t('form.reportPhotoAlt')
+                                    : t('form.previewAlt')
+                            }
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/50 via-black/10 to-transparent p-3">
+                            <span className="rounded-full bg-black/60 px-3 py-1.5 text-xs font-semibold text-white">
+                                {t('form.changePhoto')}
+                            </span>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="bg-surface-container flex h-12 w-12 items-center justify-center rounded-full">
+                            <Plus className="text-on-surface-variant h-6 w-6" />
+                        </div>
+                        <p className="text-on-surface-variant text-center text-sm">
+                            {t('form.photoPlaceholder')}
+                        </p>
+                    </>
+                )}
+            </label>
+
+            <input
+                id={inputId}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                    const file = e.target.files?.[0]
+                    if (file) {
+                        onFileSelect(file)
+                    }
+                    e.target.value = ''
+                }}
+            />
+        </>
+    )
+}
+
 export const UserReportForm = () => {
     const { t } = useTranslation('report')
     const navigate = useNavigate()
@@ -214,11 +285,6 @@ export const UserReportForm = () => {
         [leafLocations],
     )
 
-    const handleFileSelect = (file: File | undefined) => {
-        if (!file) return
-        setPhoto(file)
-    }
-
     const handleNextFromPhoto = () => {
         if (!photo) {
             toast.error(t('form.errorPhotoRequired'))
@@ -286,13 +352,11 @@ export const UserReportForm = () => {
                     <h2 className="text-xl font-bold">
                         {t('form.locationTitle')}
                     </h2>
-                    {previewUrl && (
-                        <img
-                            src={previewUrl}
-                            alt={t('form.reportPhotoAlt')}
-                            className="border-outline-variant h-32 w-full rounded-xl border object-cover"
-                        />
-                    )}
+                    <ReportPhotoInput
+                        variant="compact"
+                        previewUrl={previewUrl}
+                        onFileSelect={setPhoto}
+                    />
                     <div className="flex flex-col gap-2">
                         <label className="text-on-surface-variant text-xs font-bold">
                             {t('form.affiliationLabel')}
@@ -367,40 +431,9 @@ export const UserReportForm = () => {
 
                 <ReportAbuseNotice />
 
-                <label
-                    htmlFor="report-photo-input"
-                    className={cn(
-                        'border-outline-variant bg-surface-container-lowest flex min-h-[240px] cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed transition-colors hover:bg-surface-container-low',
-                        previewUrl && 'border-solid p-0',
-                    )}
-                >
-                    {previewUrl ? (
-                        <img
-                            src={previewUrl}
-                            alt={t('form.previewAlt')}
-                            className="h-full w-full object-cover"
-                        />
-                    ) : (
-                        <>
-                            <div className="bg-surface-container flex h-12 w-12 items-center justify-center rounded-full">
-                                <Plus className="text-on-surface-variant h-6 w-6" />
-                            </div>
-                            <p className="text-on-surface-variant text-center text-sm">
-                                {t('form.photoPlaceholder')}
-                            </p>
-                        </>
-                    )}
-                </label>
-
-                <input
-                    id="report-photo-input"
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => {
-                        handleFileSelect(e.target.files?.[0])
-                        e.target.value = ''
-                    }}
+                <ReportPhotoInput
+                    previewUrl={previewUrl}
+                    onFileSelect={setPhoto}
                 />
             </section>
 

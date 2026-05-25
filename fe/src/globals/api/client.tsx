@@ -4,7 +4,7 @@ import { isApiError } from 'src/globals/api/types'
 
 const client = axios.create({
     baseURL: import.meta.env.VITE_API_HOST ?? '',
-    timeout: 8000,
+    timeout: 15000,
 })
 
 function isPublicAuthRequest(url?: string): boolean {

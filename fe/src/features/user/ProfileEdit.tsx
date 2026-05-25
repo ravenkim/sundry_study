@@ -55,14 +55,14 @@ export function ProfileEdit() {
 
     useEffect(() => {
         Promise.all([getMyProfile(), getAffiliations(), getBuildings()])
-            .then(([profileData, affiliationList, buildingList]) => {
+            .then(([profileData, affiliationData, buildingList]) => {
                 setProfile(profileData)
                 setNickname(profileData.nickname ?? '')
                 setEmail(profileData.email ?? '')
                 setPhoneNumber(profileData.phoneNumber ?? '')
                 setAffiliationId(profileData.affiliationId ?? '')
                 setBuildingId(profileData.buildingId ?? '')
-                setAffiliations(affiliationList)
+                setAffiliations(affiliationData.items)
                 setBuildings(buildingList)
             })
             .catch((error) => {

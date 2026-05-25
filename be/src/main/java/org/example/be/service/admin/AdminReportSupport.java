@@ -35,6 +35,24 @@ final class AdminReportSupport {
         return findRoot(report.getLocationNode()).getSeq().equals(buildingId);
     }
 
+    static boolean matchesAffiliationFilter(Report report, Long affiliationId) {
+        if (affiliationId == null) {
+            return true;
+        }
+        if (report.getLocationNode() != null && report.getLocationNode().getAffiliation() != null) {
+            return report.getLocationNode().getAffiliation().getSeq().equals(affiliationId);
+        }
+        if (report.getMember() != null && report.getMember().getAffiliation() != null) {
+            return report.getMember().getAffiliation().getSeq().equals(affiliationId);
+        }
+        return false;
+    }
+
+    static boolean matchesAdminScope(Report report, Long buildingId, Long affiliationId) {
+        return matchesBuildingFilter(report, buildingId)
+                && matchesAffiliationFilter(report, affiliationId);
+    }
+
     static boolean countsTowardSavings(Report report) {
         return report.getStatus() != null && SAVINGS_STATUSES.contains(report.getStatus());
     }

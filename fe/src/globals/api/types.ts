@@ -173,6 +173,11 @@ export interface Affiliation {
     address?: string
 }
 
+export interface AffiliationListData {
+    defaultAffiliationId?: number
+    items: Affiliation[]
+}
+
 export interface AdminReportRow {
     reportId: number
     buildingName: string

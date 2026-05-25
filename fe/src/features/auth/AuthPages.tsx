@@ -40,8 +40,11 @@ export function AffiliationSelection() {
 
     useEffect(() => {
         getAffiliations()
-            .then((affiliationList) => {
-                setAffiliations(affiliationList)
+            .then((affiliationData) => {
+                setAffiliations(affiliationData.items)
+                if (affiliationData.defaultAffiliationId != null) {
+                    setAffiliationId(affiliationData.defaultAffiliationId)
+                }
             })
             .catch(() => toast.error(tErrors('affiliationListLoadFailed')))
             .finally(() => setLoading(false))

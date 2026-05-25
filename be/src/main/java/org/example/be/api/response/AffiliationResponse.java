@@ -4,7 +4,16 @@ import lombok.Builder;
 import lombok.Getter;
 import org.example.be.domain.model.Affiliation;
 
+import java.util.List;
+
 public class AffiliationResponse {
+
+    @Getter
+    @Builder
+    public static class ListPayload {
+        private Long defaultAffiliationId;
+        private List<Item> items;
+    }
 
     @Getter
     @Builder

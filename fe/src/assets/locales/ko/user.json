@@ -41,7 +41,7 @@
         "buildingPlaceholder": "건물을 검색·선택해 주세요",
         "buildingSearchPlaceholder": "건물명 검색...",
         "noBuildings": "선택 가능한 건물이 없습니다.",
-        "buildingHint": "건물 랭킹에 참여하려면 소속 건물을 선택해 주세요.",
+        "buildingHint": "소속 랭킹에 참여하려면 소속을 선택해 주세요.",
         "passwordSectionTitle": "비밀번호 변경",
         "passwordHintOAuth": "소셜 로그인 계정은 새 비밀번호만 입력하면 설정됩니다.",
         "passwordHintLocal": "변경하지 않으려면 비워 두세요.",

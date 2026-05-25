@@ -44,7 +44,7 @@ class AdminStatsServiceTest {
 
         when(reportRepository.findAllByOrderByCreatedAtDesc()).thenReturn(reports);
 
-        AdminResponse.Stats stats = adminStatsService.getStats(null);
+        AdminResponse.Stats stats = adminStatsService.getStats(null, null);
 
         assertThat(stats.getTopLightWasteRooms())
                 .extracting(AdminResponse.LightWasteRoom::getRoomName)

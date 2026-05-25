@@ -10,6 +10,7 @@ import org.example.be.domain.model.Member;
 import org.example.be.domain.model.MemberPoint;
 import org.example.be.domain.model.NodeKind;
 import org.example.be.domain.model.UserType;
+import org.example.be.service.affiliation.AffiliationService;
 import org.example.be.domain.repository.AffiliationRepository;
 import org.example.be.domain.repository.LocationNodeRepository;
 import org.example.be.domain.repository.MemberPointRepository;
@@ -30,6 +31,7 @@ public class DefaultMemberService implements MemberService {
     private final PasswordEncoder passwordEncoder;
     private final LocationNodeRepository locationNodeRepository;
     private final AffiliationRepository affiliationRepository;
+    private final AffiliationService affiliationService;
 
     @Override
     public boolean isEmailAvailable(String email) {
@@ -112,7 +114,16 @@ public class DefaultMemberService implements MemberService {
         }
 
         if (request.getAffiliation() == null) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "소속을 선택해 주세요.");
+            Affiliation defaultAffiliation = affiliationService.resolveDefaultAffiliation();
+            return saveNewMember(
+                    userName,
+                    normalizedNickname,
+                    request.getPassword(),
+                    normalizedEmail,
+                    normalizedPhone,
+                    defaultAffiliation,
+                    null
+            );
         }
 
         Affiliation affiliation = affiliationRepository.findById(request.getAffiliation())

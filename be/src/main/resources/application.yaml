@@ -9,6 +9,8 @@ springdoc:
 app:
   frontend:
     url: ${FRONTEND_URL:http://localhost:5173}
+  affiliation:
+    default-name: ${DEFAULT_AFFILIATION_NAME:삼육대학교}
 
 jwt:
   secret: ${JWT_SECRET:ecoreport-dev-jwt-secret-key-min-32-chars!!}

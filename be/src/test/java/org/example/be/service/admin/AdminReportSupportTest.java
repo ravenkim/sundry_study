@@ -12,6 +12,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AdminReportSupportTest {
 
     @Test
+    void matchesAffiliationFilter_usesLocationNodeAffiliation() {
+        org.example.be.domain.model.Affiliation affiliation = new org.example.be.domain.model.Affiliation();
+        affiliation.setSeq(1L);
+
+        org.example.be.domain.model.LocationNode locationNode = new org.example.be.domain.model.LocationNode();
+        locationNode.setAffiliation(affiliation);
+
+        Report report = new Report();
+        report.setLocationNode(locationNode);
+
+        assertThat(AdminReportSupport.matchesAffiliationFilter(report, 1L)).isTrue();
+        assertThat(AdminReportSupport.matchesAffiliationFilter(report, 2L)).isFalse();
+    }
+
+    @Test
     void co2KgFromKwh_usesGridFactor() {
         assertThat(AdminReportSupport.co2KgFromKwh(10)).isEqualTo(4.6);
     }

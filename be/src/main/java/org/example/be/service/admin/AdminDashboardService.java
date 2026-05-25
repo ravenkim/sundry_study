@@ -21,7 +21,12 @@ public class AdminDashboardService {
 
     private final ReportRepository reportRepository;
 
-    public AdminResponse.Dashboard getDashboard(Long buildingId, Integer year, Integer month) {
+    public AdminResponse.Dashboard getDashboard(
+            Long buildingId,
+            Long affiliationId,
+            Integer year,
+            Integer month
+    ) {
         YearMonth targetMonth = resolveMonth(year, month);
         LocalDate today = LocalDate.now();
 
@@ -33,7 +38,7 @@ public class AdminDashboardService {
 
         List<Report> allReports = reportRepository.findAllByOrderByCreatedAtDesc();
         List<Report> scoped = allReports.stream()
-                .filter(report -> AdminReportSupport.matchesBuildingFilter(report, buildingId))
+                .filter(report -> AdminReportSupport.matchesAdminScope(report, buildingId, affiliationId))
                 .toList();
 
         int todayReports = (int) scoped.stream()

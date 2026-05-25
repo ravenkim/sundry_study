@@ -19,9 +19,9 @@ public class AdminReportService {
 
     private final ReportRepository reportRepository;
 
-    public List<AdminResponse.ReportRow> getReports(Long buildingId) {
+    public List<AdminResponse.ReportRow> getReports(Long buildingId, Long affiliationId) {
         return reportRepository.findAllByOrderByCreatedAtDesc().stream()
-                .filter(report -> AdminReportSupport.matchesBuildingFilter(report, buildingId))
+                .filter(report -> AdminReportSupport.matchesAdminScope(report, buildingId, affiliationId))
                 .map(this::toRow)
                 .toList();
     }

@@ -91,7 +91,7 @@ public class ReportService {
 
         if ("ERROR".equals(aiResponse.getResult())) {
             throw new BusinessLogicException(ErrorCode.INVALID,
-                    "강의실로 인식되지 않습니다. 운영 중인 강의실(의자·책상이 보이는 공간)을 촬영해 주세요: "
+                    "강의실로 인식되지 않습니다. 의자·책상이 보이는 강의실을 촬영해 주세요: "
                             + aiResponse.getMessage());
 
         } else if ("PASS".equals(aiResponse.getResult())) {

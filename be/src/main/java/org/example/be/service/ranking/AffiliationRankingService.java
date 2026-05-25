@@ -3,7 +3,7 @@ package org.example.be.service.ranking;
 import lombok.RequiredArgsConstructor;
 import org.example.be.api.response.RankingResponse;
 import org.example.be.domain.model.Member;
-import org.example.be.domain.repository.BuildingRankingProjection;
+import org.example.be.domain.repository.AffiliationRankingProjection;
 import org.example.be.domain.repository.MemberRepository;
 import org.example.be.domain.repository.ReportRepository;
 import org.example.be.exception.BusinessLogicException;
@@ -19,17 +19,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class BuildingRankingService {
+public class AffiliationRankingService {
 
     private final MemberRepository memberRepository;
     private final ReportRepository reportRepository;
 
-    public RankingResponse.BuildingLeaderboard getMyBuildingRanking(Long memberSeq, String period) {
+    public RankingResponse.AffiliationLeaderboard getMyAffiliationRanking(Long memberSeq, String period) {
         Member member = memberRepository.findById(memberSeq)
                 .orElseThrow(() -> new BusinessLogicException(ErrorCode.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
-        if (member.getLocationNode() == null) {
-            throw new BusinessLogicException(ErrorCode.INVALID, "소속 건물을 먼저 선택해 주세요.");
+        if (member.getAffiliation() == null) {
+            throw new BusinessLogicException(ErrorCode.INVALID, "소속을 먼저 선택해 주세요.");
         }
 
         String normalizedPeriod = normalizePeriod(period);
@@ -37,8 +37,9 @@ public class BuildingRankingService {
                 ? YearMonth.now().atDay(1).atStartOfDay()
                 : null;
 
-        Long buildingId = member.getLocationNode().getSeq();
-        List<BuildingRankingProjection> rows = reportRepository.findBuildingRanking(buildingId, periodStart);
+        Long affiliationId = member.getAffiliation().getSeq();
+        List<AffiliationRankingProjection> rows =
+                reportRepository.findAffiliationRanking(affiliationId, periodStart);
 
         List<RankingResponse.Entry> entries = new ArrayList<>();
         Integer myRank = null;
@@ -47,7 +48,7 @@ public class BuildingRankingService {
         double previousTotalKwh = -1;
 
         for (int index = 0; index < rows.size(); index++) {
-            BuildingRankingProjection row = rows.get(index);
+            AffiliationRankingProjection row = rows.get(index);
             long reportCount = row.getReportCount() != null ? row.getReportCount() : 0L;
             double totalKwh = row.getTotalKwh() != null ? roundKwh(row.getTotalKwh()) : 0.0;
             long pointAwarded = row.getPointAwarded() != null ? row.getPointAwarded() : 0L;
@@ -72,9 +73,9 @@ public class BuildingRankingService {
                     .build());
         }
 
-        return RankingResponse.BuildingLeaderboard.builder()
-                .buildingId(buildingId)
-                .buildingName(member.getLocationNode().getName())
+        return RankingResponse.AffiliationLeaderboard.builder()
+                .affiliationId(affiliationId)
+                .affiliationName(member.getAffiliation().getName())
                 .period(normalizedPeriod)
                 .myRank(myRank)
                 .entries(entries)

@@ -5,8 +5,8 @@ import { Crown, Medal, Trophy } from 'lucide-react'
 import { toast } from 'react-toastify'
 import { useAuth } from 'src/features/auth/AuthContext'
 import {
-    getBuildingRanking,
-    type BuildingRanking,
+    getAffiliationRanking,
+    type AffiliationRanking,
     type RankingPeriod,
 } from 'src/globals/api/rankingApi'
 import { MascotImage } from 'src/shared/components/mascort'
@@ -23,23 +23,23 @@ function rankIcon(rank: number) {
     return null
 }
 
-export function BuildingRankingBoard() {
+export function AffiliationRankingBoard() {
     const { t } = useTranslation('ranking')
     const { user } = useAuth()
     const [period, setPeriod] = useState<RankingPeriod>('month')
-    const [data, setData] = useState<BuildingRanking | null>(null)
+    const [data, setData] = useState<AffiliationRanking | null>(null)
     const [loading, setLoading] = useState(true)
-    const [missingBuilding, setMissingBuilding] = useState(false)
+    const [missingAffiliation, setMissingAffiliation] = useState(false)
 
     useEffect(() => {
         setLoading(true)
-        setMissingBuilding(false)
-        void getBuildingRanking(period)
+        setMissingAffiliation(false)
+        void getAffiliationRanking(period)
             .then(setData)
             .catch((error) => {
                 const message = getErrorMessage(error)
-                if (message.includes('건물')) {
-                    setMissingBuilding(true)
+                if (message.includes('소속')) {
+                    setMissingAffiliation(true)
                     setData(null)
                     return
                 }
@@ -58,7 +58,9 @@ export function BuildingRankingBoard() {
                 <div className="flex items-center gap-2">
                     <Trophy className="text-primary h-5 w-5" />
                     <h2 className="text-on-surface text-lg font-black">
-                        {data?.buildingName ?? user?.buildingName ?? t('title')}
+                        {data?.affiliationName ??
+                            user?.affiliationName ??
+                            t('title')}
                     </h2>
                 </div>
                 <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -85,30 +87,30 @@ export function BuildingRankingBoard() {
 
             {loading ? (
                 <SSloadingState text={t('loading')} mascot="sleepy" />
-            ) : missingBuilding ? (
+            ) : missingAffiliation ? (
                 <EcoCard className="flex flex-col items-center gap-4 p-8 text-center">
                     <MascotImage emotion="question" size="md" decorative />
                     <div>
                         <p className="text-on-surface font-bold">
-                            {t('missingBuildingTitle')}
+                            {t('missingAffiliationTitle')}
                         </p>
                         <p className="text-on-surface-variant mt-2 text-sm leading-relaxed">
-                            {t('missingBuildingDescription')}
+                            {t('missingAffiliationDescription')}
                         </p>
                     </div>
                     <Link to="/profile/edit" className="w-full">
                         <EcoButton className="w-full">
-                            {t('missingBuildingCta')}
+                            {t('missingAffiliationCta')}
                         </EcoButton>
                     </Link>
                 </EcoCard>
             ) : data ? (
                 <>
-                    <EcoCard className="border-primary-container/40 bg-primary-container/10 space-y-3 p-5">
-                        <p className="text-on-surface-variant text-xs font-bold tracking-wide uppercase">
-                            {t('myRank.title')}
-                        </p>
-                        {data.myRank ? (
+                    {data.myRank && (
+                        <EcoCard className="border-primary-container/40 bg-primary-container/10 space-y-3 p-5">
+                            <p className="text-on-surface-variant text-xs font-bold tracking-wide uppercase">
+                                {t('myRank.title')}
+                            </p>
                             <div className="flex items-end justify-between gap-3">
                                 <div>
                                     <p className="text-primary text-3xl font-black">
@@ -131,12 +133,8 @@ export function BuildingRankingBoard() {
                                     </div>
                                 )}
                             </div>
-                        ) : (
-                            <p className="text-on-surface-variant text-sm">
-                                {t('myRank.empty')}
-                            </p>
-                        )}
-                    </EcoCard>
+                        </EcoCard>
+                    )}
 
                     <section className="flex flex-col gap-3">
                         <h3 className="text-on-surface text-base font-bold">
@@ -149,61 +147,62 @@ export function BuildingRankingBoard() {
                         ) : (
                             <SSstaggerChildren className="flex flex-col gap-3">
                                 {data.entries.map((entry) => {
-                                const Icon = rankIcon(entry.rank)
-                                const isMe = entry.nickname === user?.nickname
+                                    const Icon = rankIcon(entry.rank)
+                                    const isMe = entry.nickname === user?.nickname
 
-                                return (
-                                    <EcoCard
-                                        key={`${entry.memberSeq}-${entry.rank}`}
-                                        className={cn(
-                                            'flex items-center gap-3 p-4',
-                                            entry.rank <= 3 &&
-                                                'border-secondary/30 bg-secondary-container/10',
-                                            isMe && 'ring-primary-container ring-2',
-                                        )}
-                                    >
-                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center">
-                                            {Icon ? (
-                                                <Icon
-                                                    className={cn(
-                                                        'h-6 w-6',
-                                                        entry.rank === 1
-                                                            ? 'text-primary'
-                                                            : 'text-on-surface-variant',
-                                                    )}
-                                                />
-                                            ) : (
-                                                <span className="text-on-surface-variant text-sm font-bold">
-                                                    {entry.rank}
-                                                </span>
+                                    return (
+                                        <EcoCard
+                                            key={`${entry.memberSeq}-${entry.rank}`}
+                                            className={cn(
+                                                'flex items-center gap-3 p-4',
+                                                entry.rank <= 3 &&
+                                                    'border-secondary/30 bg-secondary-container/10',
+                                                isMe &&
+                                                    'ring-primary-container ring-2',
                                             )}
-                                        </div>
-                                        <div className="min-w-0 flex-1">
-                                            <div className="flex items-center gap-2">
-                                                <p className="text-on-surface truncate font-bold">
-                                                    {entry.nickname}
-                                                </p>
-                                                {isMe && (
-                                                    <EcoBadge variant="yellow">
-                                                        {t('meBadge')}
-                                                    </EcoBadge>
+                                        >
+                                            <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+                                                {Icon ? (
+                                                    <Icon
+                                                        className={cn(
+                                                            'h-6 w-6',
+                                                            entry.rank === 1
+                                                                ? 'text-primary'
+                                                                : 'text-on-surface-variant',
+                                                        )}
+                                                    />
+                                                ) : (
+                                                    <span className="text-on-surface-variant text-sm font-bold">
+                                                        {entry.rank}
+                                                    </span>
                                                 )}
                                             </div>
-                                            <p className="text-on-surface-variant text-xs">
-                                                {t('entry.reports', {
-                                                    count: entry.reportCount,
-                                                })}{' '}
-                                                · {formatKwh(entry.totalKwh)}
-                                            </p>
-                                        </div>
-                                        <div className="text-right">
-                                            <p className="text-secondary text-sm font-bold">
-                                                +{entry.pointAwarded}P
-                                            </p>
-                                        </div>
-                                    </EcoCard>
-                                )
-                            })}
+                                            <div className="min-w-0 flex-1">
+                                                <div className="flex items-center gap-2">
+                                                    <p className="text-on-surface truncate font-bold">
+                                                        {entry.nickname}
+                                                    </p>
+                                                    {isMe && (
+                                                        <EcoBadge variant="yellow">
+                                                            {t('meBadge')}
+                                                        </EcoBadge>
+                                                    )}
+                                                </div>
+                                                <p className="text-on-surface-variant text-xs">
+                                                    {t('entry.reports', {
+                                                        count: entry.reportCount,
+                                                    })}{' '}
+                                                    · {formatKwh(entry.totalKwh)}
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-secondary text-sm font-bold">
+                                                    +{entry.pointAwarded}P
+                                                </p>
+                                            </div>
+                                        </EcoCard>
+                                    )
+                                })}
                             </SSstaggerChildren>
                         )}
                     </section>

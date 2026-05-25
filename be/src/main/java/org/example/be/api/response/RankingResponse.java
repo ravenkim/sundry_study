@@ -11,9 +11,9 @@ public class RankingResponse {
     @Getter
     @Setter
     @Builder
-    public static class BuildingLeaderboard {
-        private Long buildingId;
-        private String buildingName;
+    public static class AffiliationLeaderboard {
+        private Long affiliationId;
+        private String affiliationName;
         private String period;
         private Integer myRank;
         private List<Entry> entries;
