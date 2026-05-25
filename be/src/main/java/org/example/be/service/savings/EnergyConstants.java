@@ -1,7 +1,5 @@
 package org.example.be.service.savings;
 
-import java.math.BigDecimal;
-
 public final class EnergyConstants {
 
     public static final int FLUORESCENT_WATTS = 40;
