@@ -13,17 +13,20 @@ function AppToastContainer() {
 
     return (
         <ToastContainer
-            position="top-right"
-            autoClose={5000}
+            position="top-center"
+            autoClose={4000}
             hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
+            newestOnTop
+            closeOnClick
             rtl={false}
             pauseOnFocusLoss
-            draggable
+            draggable={false}
             pauseOnHover
             theme={theme}
             transition={Bounce}
+            limit={3}
+            className="eco-toast-container"
+            toastClassName="eco-toast"
         />
     )
 }

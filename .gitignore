@@ -20,11 +20,19 @@ fe/node_modules/
 fe/dist/
 fe/dist-ssr/
 
-# Python
+# Python virtual environments
 .venv/
+.venv*/
 **/.venv/
+**/.venv*/
 venv/
 **/venv/
+env/
+**/env/
+ENV/
+**/ENV/
+
+# Python cache / build
 __pycache__/
 **/__pycache__/
 *.py[cod]
@@ -33,8 +41,5 @@ __pycache__/
 .ruff_cache/
 .ipynb_checkpoints/
 *.egg-info/
-
-# ppt_master local venv (explicit)
-ppt_master/.venv/
 
 .idea/

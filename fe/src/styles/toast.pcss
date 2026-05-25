@@ -1,0 +1,62 @@
+/* EcoReport — 모바일 우선 토스트 스타일 */
+:root {
+    --toastify-toast-width: min(calc(100vw - 2rem), 358px);
+    --toastify-toast-min-height: 48px;
+    --toastify-toast-padding: 10px 14px;
+    --toastify-toast-offset: 12px;
+    --toastify-toast-bd-radius: 12px;
+    --toastify-font-size: 0.8125rem;
+}
+
+.Toastify__toast {
+    font-family: var(--font-pretendard, sans-serif);
+    font-size: var(--toastify-font-size);
+    line-height: 1.4;
+}
+
+.Toastify__toast-body {
+    padding: 0;
+    font-size: inherit;
+}
+
+.Toastify__toast-icon {
+    width: 18px;
+    flex-shrink: 0;
+}
+
+.Toastify__close-button {
+    align-self: center;
+}
+
+/* react-toastify 기본 모바일(full-bleed) 스타일 대체 */
+@media only screen and (max-width: 480px) {
+    .Toastify__toast-container {
+        width: auto !important;
+        left: 50% !important;
+        right: auto !important;
+        margin: 0;
+        padding-inline: 1rem;
+    }
+
+    .Toastify__toast-container--top-left,
+    .Toastify__toast-container--top-center,
+    .Toastify__toast-container--top-right {
+        top: max(12px, env(safe-area-inset-top)) !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .Toastify__toast-container--bottom-left,
+    .Toastify__toast-container--bottom-center,
+    .Toastify__toast-container--bottom-right {
+        bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .Toastify__toast {
+        --toastify-toast-width: min(calc(100vw - 2rem), 358px);
+        width: var(--toastify-toast-width) !important;
+        border-radius: var(--toastify-toast-bd-radius) !important;
+        margin-bottom: 8px;
+        min-height: 48px;
+    }
+}
