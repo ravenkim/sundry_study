@@ -194,6 +194,9 @@ async function main() {
         await clearAuth(page)
         await gotoAndCapture(page, '/signup/admin', 'screen_signup_admin.png', 'h1')
 
+        await clearAuth(page)
+        await gotoAndCapture(page, '/find-account', 'screen_find_account.png', 'h1')
+
         await captureSignup(page)
 
         console.log('\n[User]')
@@ -202,6 +205,8 @@ async function main() {
         await gotoAndCapture(page, '/report-form', 'screen_report_form.png', 'form, main')
         await gotoAndCapture(page, '/reports', 'screen_reports.png', 'main, body')
         await gotoAndCapture(page, '/shop', 'screen_shop.png', 'main, body')
+        await gotoAndCapture(page, '/ranking', 'screen_ranking.png', 'main, body')
+        await gotoAndCapture(page, '/aboutus', 'screen_aboutus.png', 'main, body')
         await gotoAndCapture(page, '/profile', 'screen_profile.png', 'main, body')
         await captureReportSuccess(page)
 
@@ -247,6 +252,13 @@ async function main() {
             page,
             '/admin/users',
             'screen_admin_users.png',
+            'main, body',
+            ADMIN_VIEWPORT,
+        )
+        await gotoAndCapture(
+            page,
+            '/admin/schedules',
+            'screen_admin_schedules.png',
             'main, body',
             ADMIN_VIEWPORT,
         )
