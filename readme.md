@@ -95,13 +95,32 @@ cd fe && yarn install && yarn dev   # http://localhost:5173
 
 ## 기여자 (Git 커밋)
 
-총 **117** commits · [GitHub](https://github.com/ravenkim/duyuthon)
+총 **186** commits · [GitHub](https://github.com/ravenkim/duyuthon)
 
 | 이름 | GitHub | 커밋 | 주요 기여 |
 |------|--------|------|-----------|
-| 김해준 | [@ravenkim](https://github.com/ravenkim) | 114 | FE·BE·기획·문서·Docker 배포·Flyway |
-| 이은총 | [@BarrelZebra2149](https://github.com/BarrelZebra2149) | 25 | BE API·AI 파이프라인·Gemini 연동 |
+| 김해준 | [@ravenkim](https://github.com/ravenkim) | 158 | FE·BE·기획·문서·Docker 배포·Flyway |
+| 이은총 | [@BarrelZebra2149](https://github.com/BarrelZebra2149) | 23 | BE API·AI 파이프라인·Gemini 연동 |
 | 차성호 | [@WhiteMilk357](https://github.com/WhiteMilk357) | 5 | BE API (회원·제보·소속) |
+
+> 줄 수 통계는 실수로 커밋됐다가 삭제된 `legalize-kr/` 법률 문서, `yarn.lock`, 이미지 파일을 제외한 **프로젝트 코드 기준**입니다.  
+
+### 기여도 요약 (프로젝트 코드 기준)
+
+| 작성자 | 커밋 | 추가(+) | 삭제(-) | 순 변경 | 총 변경 | 비율 |
+|--------|-----:|--------:|--------:|--------:|--------:|-----:|
+| **ravenkim** | 158 | +249,771 | -12,432 | +237,339 | 262,203 | **97.1%** |
+| **BarrelZebra2149** | 23 | +6,226 | -841 | +5,385 | 7,067 | **2.6%** |
+| **WhiteMilk** | 5 | +656 | -27 | +629 | 683 | **0.3%** |
+| **합계** | **186** | **+256,653** | **-13,300** | **+243,353** | **269,953** | 100% |
+
+### 영역별 추가 줄 수 (+)
+
+| 작성자 | BE | FE | AI | docs | db | 기타 |
+|--------|---:|---:|---:|-----:|---:|-----:|
+| ravenkim | 8,296 | 31,789 | 786 | 16,138 | 661 | 192,101 |
+| BarrelZebra2149 | 3,234 | 0 | 2,461 | 478 | 0 | 53 |
+| WhiteMilk | 656 | 0 | 0 | 0 | 0 | 0 |
 
 ---
 
