@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s02b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s02b_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+    <linearGradient id="s02b_center" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+    <marker id="s02b_arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="url(#s02b_bg)"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s02b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="640" y="56" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">EcoReport — 서비스 한눈에 보기</text>
+  <rect x="500" y="66" width="280" height="4" rx="2" fill="url(#s02b_topBar)"/>
+
+  <!-- 중앙 핵심 메시지 원 -->
+  <circle cx="640" cy="360" r="110" fill="url(#s02b_center)" fill-opacity="0.12" stroke="#4CAF50" stroke-width="2"/>
+  <circle cx="640" cy="360" r="80" fill="#FFFFFF" fill-opacity="0.8"/>
+  <text x="640" y="348" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="700" fill="#2E7D32">사진 한 장</text>
+  <text x="640" y="372" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">→ AI 판별</text>
+  <text x="640" y="394" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">→ 포인트 적립</text>
+
+  <!-- 4 주변 박스 (상/하/좌/우) -->
+  <!-- 상단: 문제 -->
+  <rect x="460" y="96" width="360" height="100" rx="14" fill="#FFFFFF" stroke="#EA4335" stroke-width="2"/>
+  <rect x="460" y="96" width="360" height="6" rx="3" fill="#EA4335"/>
+  <text x="640" y="124" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#C62828">문제</text>
+  <text x="640" y="146" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">빈 강의실 조명·에어컨 방치</text>
+  <text x="640" y="166" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">교내 에너지 비용 30% 낭비 추정</text>
+  <!-- 화살표 아래 -->
+  <line x1="640" y1="196" x2="640" y2="243" stroke="#EA4335" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="640,248 633,237 647,237" fill="#EA4335"/>
+
+  <!-- 하단: 임팩트 -->
+  <rect x="460" y="524" width="360" height="100" rx="14" fill="#FFFFFF" stroke="#4CAF50" stroke-width="2"/>
+  <rect x="460" y="524" width="360" height="6" rx="3" fill="#4CAF50"/>
+  <text x="640" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">임팩트</text>
+  <text x="640" y="574" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">월 600~1,000 kWh 절약</text>
+  <text x="640" y="594" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">월 280~470 kg CO₂ 절감</text>
+  <!-- 화살표 위 -->
+  <line x1="640" y1="477" x2="640" y2="520" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="640,524 633,513 647,513" fill="#4CAF50"/>
+
+  <!-- 좌측: 학생 -->
+  <rect x="60" y="300" width="320" height="120" rx="14" fill="#FFFFFF" stroke="#FFC107" stroke-width="2"/>
+  <rect x="60" y="300" width="6" height="120" rx="3" fill="#FFC107"/>
+  <text x="230" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#E65100">학생 역할</text>
+  <text x="230" y="350" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">강의실 에너지 낭비 사진 촬영</text>
+  <text x="230" y="370" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">위치 태깅 후 앱으로 제보</text>
+  <text x="230" y="390" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#FFC107">포인트 획득 → 기프티콘 교환</text>
+  <!-- 화살표 우 -->
+  <line x1="383" y1="360" x2="527" y2="360" stroke="#FFC107" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="532,360 521,353 521,367" fill="#FFC107"/>
+
+  <!-- 우측: 관리자 -->
+  <rect x="900" y="300" width="320" height="120" rx="14" fill="#FFFFFF" stroke="#4285F4" stroke-width="2"/>
+  <rect x="1214" y="300" width="6" height="120" rx="3" fill="#4285F4"/>
+  <text x="1060" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#1565C0">관리자 역할</text>
+  <text x="1060" y="350" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">제보 현황 대시보드 확인</text>
+  <text x="1060" y="370" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">장소 관리 · 포인트 지급</text>
+  <text x="1060" y="390" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#4285F4">월 절약량 통계 조회</text>
+  <!-- 화살표 좌 -->
+  <line x1="897" y1="360" x2="753" y2="360" stroke="#4285F4" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="748,360 759,353 759,367" fill="#4285F4"/>
+
+  <!-- 스택 배지 하단 -->
+  <rect x="60" y="644" width="1160" height="48" rx="10" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <text x="100" y="668" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="600" fill="#1A237E">핵심 기술</text>
+  <text x="190" y="668" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">React 19 · Spring Boot 4 · YOLOv8n ×2 · Gemini 2.5 Flash · Cloud Run ✅ · ubuntu03 24시간 배포 · Docker Compose</text>
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">02b / 30</text>
+</svg>

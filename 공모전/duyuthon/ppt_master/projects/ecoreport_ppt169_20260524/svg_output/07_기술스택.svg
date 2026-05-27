@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s07_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s07_feBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="s07_beBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="s07_aiBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#E1BEE7"/>
+    </linearGradient>
+    <linearGradient id="s07_infraBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+    <marker id="s07_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9AA0A6"/>
+    </marker>
+    <marker id="s07_arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4285F4"/>
+    </marker>
+    <marker id="s07_arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s07_topBar)"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 슬라이드 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="36" font-weight="700" fill="#1A237E">기술 스택</text>
+  <rect x="40"  y="64" width="80"  height="4" rx="2" fill="#4CAF50"/>
+  <rect x="128" y="64" width="50"  height="4" rx="2" fill="#FFC107"/>
+  <rect x="186" y="64" width="50"  height="4" rx="2" fill="#4285F4"/>
+  <use data-icon="tabler-outline/cloud-computing" x="540" y="36" width="32" height="32" fill="#4285F4"/>
+
+  <!-- ======= 좌측 기술 표 ======= -->
+
+  <!-- FE 행 -->
+  <rect x="24" y="82" width="580" height="128" rx="12" fill="url(#s07_feBg)" stroke="#90CAF9" stroke-width="1.5"/>
+  <rect x="24" y="82" width="8"   height="128" rx="4" fill="#4285F4"/>
+  <text x="50" y="108" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="800" fill="#1565C0" letter-spacing="0.5">FRONT-END</text>
+  <text x="140" y="108" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#1565C0">모바일 9화면 + 관리자 6화면</text>
+  <text x="50" y="130" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="600" fill="#1A252F">React 19</text>
+  <text x="50" y="150" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Vite 6 · TypeScript · TailwindCSS v4 · shadcn/ui</text>
+  <text x="50" y="170" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Redux Toolkit + redux-saga · Recharts · i18next · Pretendard</text>
+  <text x="50" y="198" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#4285F4">JWT Bearer 인증 · Google OAuth2 콜백 · axios</text>
+
+  <!-- BE 행 -->
+  <rect x="24" y="222" width="580" height="128" rx="12" fill="url(#s07_beBg)" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="24" y="222" width="8"   height="128" rx="4" fill="#4CAF50"/>
+  <text x="50" y="248" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="800" fill="#2E7D32" letter-spacing="0.5">BACK-END</text>
+  <text x="155" y="248" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#2E7D32">REST API · Layered Architecture</text>
+  <text x="50" y="270" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="600" fill="#1A252F">Spring Boot 4</text>
+  <text x="50" y="290" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Java 17 · Spring Data JPA · MySQL 8.4 · Flyway</text>
+  <text x="50" y="310" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Spring Security · JWT HS256 · Google OAuth2 Resource Server</text>
+  <text x="50" y="338" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#4CAF50">Swagger UI · Actuator health · ControllerAdvice 표준 응답</text>
+
+  <!-- AI 행 -->
+  <rect x="24" y="362" width="580" height="128" rx="12" fill="url(#s07_aiBg)" stroke="#CE93D8" stroke-width="1.5"/>
+  <rect x="24" y="362" width="8"   height="128" rx="4" fill="#9C27B0"/>
+  <text x="50" y="388" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="800" fill="#6A1B9A" letter-spacing="0.5">AI SERVICE</text>
+  <text x="145" y="388" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#6A1B9A">Cloud Run 배포 · BE 연동 완료 ✅</text>
+  <text x="50" y="410" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="600" fill="#1A252F">YOLOv8n × 2 + Gemini 2.5 Flash</text>
+  <text x="50" y="430" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">COCO 사전학습 1단계 · Custom AC (mAP 0.990) 2단계</text>
+  <text x="50" y="450" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Gemini 2.5 Flash (Vertex AI) · FastAPI · Dockerfile</text>
+  <text x="50" y="478" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9C27B0">monorepo ai/ 포함 · 학습코드·가중치·배포코드 일체</text>
+
+  <!-- Infra 행 -->
+  <rect x="24" y="502" width="580" height="100" rx="12" fill="url(#s07_infraBg)" stroke="#FFD54F" stroke-width="1.5"/>
+  <rect x="24" y="502" width="8"   height="100" rx="4" fill="#FFC107"/>
+  <text x="50" y="526" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="800" fill="#E65100" letter-spacing="0.5">INFRA</text>
+  <text x="105" y="526" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#E65100">ubuntu03 24시간 운영 중</text>
+  <text x="50" y="548" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Docker Compose (FE:8081 / BE:8080 / MySQL:3306)</text>
+  <text x="50" y="568" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">bash deploy.sh · nginx 정적 서빙 · .env 환경변수 분리</text>
+  <text x="50" y="592" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#FFC107">GCP Cloud Run AI · GCS (목표 인프라)</text>
+
+  <!-- ======= 우측 아키텍처 다이어그램 ======= -->
+  <rect x="628" y="74" width="628" height="610" rx="16" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="942" y="100" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#1A237E">시스템 아키텍처</text>
+
+  <!-- FE 박스 -->
+  <rect x="660" y="116" width="556" height="80" rx="10" fill="#4285F4" fill-opacity="0.12" stroke="#4285F4" stroke-width="1.5"/>
+  <text x="938" y="145" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#1565C0">React 19 + Vite (FE)</text>
+  <text x="938" y="166" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">nginx:8081 · 모바일+관리자 15화면</text>
+  <text x="938" y="184" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">Redux-Saga · Axios · JWT Bearer</text>
+
+  <!-- Arrow FE→BE -->
+  <line x1="938" y1="196" x2="938" y2="240" stroke="#9AA0A6" stroke-width="2" marker-end="url(#s07_arrow)"/>
+  <text x="960" y="222" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">REST API</text>
+
+  <!-- BE 박스 -->
+  <rect x="660" y="242" width="360" height="90" rx="10" fill="#4CAF50" fill-opacity="0.12" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="840" y="271" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">Spring Boot 4 (BE)</text>
+  <text x="840" y="291" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">ubuntu03:8080 · JWT+OAuth2</text>
+  <text x="840" y="309" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">Layered · Flyway · ControllerAdvice</text>
+
+  <!-- Arrow BE↔MySQL (horizontal) -->
+  <line x1="1020" y1="287" x2="1056" y2="287" stroke="#9AA0A6" stroke-width="1.5" marker-end="url(#s07_arrow)"/>
+
+  <!-- MySQL 박스 -->
+  <rect x="1058" y="251" width="200" height="72" rx="10" fill="#FFC107" fill-opacity="0.1" stroke="#FFC107" stroke-width="1.5"/>
+  <text x="1158" y="277" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">MySQL 8.4</text>
+  <text x="1158" y="297" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#5F6368">localhost:3306</text>
+  <text x="1158" y="313" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">Flyway 시드</text>
+
+  <!-- Arrow BE→Cloud Run -->
+  <line x1="840" y1="332" x2="840" y2="376" stroke="#9AA0A6" stroke-width="2" marker-end="url(#s07_arrow)"/>
+  <text x="862" y="358" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">POST /analyze</text>
+
+  <!-- Cloud Run 박스 -->
+  <rect x="660" y="378" width="360" height="90" rx="10" fill="#9C27B0" fill-opacity="0.1" stroke="#9C27B0" stroke-width="1.5"/>
+  <text x="840" y="407" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#6A1B9A">FastAPI (Cloud Run) ✅</text>
+  <text x="840" y="427" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">YOLOv8n×2 + Gemini 2.5 Flash</text>
+  <text x="840" y="445" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">GCP Cloud Run · Dockerfile · ac_best.pt</text>
+
+  <!-- Arrow Cloud Run→GCS (optional) -->
+  <line x1="1020" y1="423" x2="1056" y2="423" stroke="#9AA0A6" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <rect x="1058" y="391" width="200" height="72" rx="10" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="1158" y="417" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#9AA0A6">GCS 버킷</text>
+  <text x="1158" y="437" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">이미지 저장</text>
+  <text x="1158" y="453" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">(목표 인프라)</text>
+
+  <!-- Arrow Cloud Run→Response -->
+  <line x1="840" y1="468" x2="840" y2="510" stroke="#9AA0A6" stroke-width="2" marker-end="url(#s07_arrow)"/>
+  <text x="862" y="493" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">WASTE_DETECTED</text>
+
+  <!-- Response 박스 -->
+  <rect x="660" y="512" width="556" height="70" rx="10" fill="#4CAF50" fill-opacity="0.1" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="938" y="537" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">낭비 확인 → 제보 저장 → 포인트 적립</text>
+  <text x="938" y="558" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">PASS / ERROR: 저장 거부 · WASTE_DETECTED: 저장 + 포인트</text>
+  <text x="938" y="573" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">light_status / ac_status ON 시 WasteType 덮어쓰기</text>
+
+  <!-- 범례 -->
+  <line x1="660" y1="608" x2="700" y2="608" stroke="#9AA0A6" stroke-width="1.5"/>
+  <text x="706" y="612" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">구현 완료</text>
+  <line x1="770" y1="608" x2="810" y2="608" stroke="#9AA0A6" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="816" y="612" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">목표 인프라</text>
+
+  <!-- 페이지 번호 -->
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">07 / 10</text>
+
+</svg>

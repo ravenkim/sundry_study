@@ -1,0 +1,115 @@
+{
+    "pageTitle": "Location Management",
+    "navLabel": "Location Management",
+    "pageDescription": "Combine groups and items up to 3 levels. Items are locations selectable when reporting.",
+    "affiliationMissing": "Unable to verify affiliation. Please check admin account settings.",
+    "affiliationFallback": "Affiliation",
+    "depth": {
+        "1": "Level 1",
+        "2": "Level 2",
+        "3": "Level 3"
+    },
+    "depthSubtitle": {
+        "1": "Group · Item",
+        "2": "Sub-group · Item",
+        "3": "Item"
+    },
+    "columnChildrenTitle": "Under {{name}}",
+    "nodeKind": {
+        "group": "Group",
+        "leaf": "Item"
+    },
+    "addDepth": "Add {{depth}}",
+    "editDepthKind": "Edit {{depth}} {{kind}}",
+    "columnAddTitle": "Add {{title}}",
+    "empty": {
+        "depth1": "No locations registered.",
+        "depth1Action": "Add Level 1",
+        "selectDepth1": "Select an item at Level 1.",
+        "depth2Add": "Add a sub-group or item.",
+        "depth2Action": "Add",
+        "selectDepth2Group": "Select a group at Level 2.",
+        "depth3DirectLeaf": "Level 2 is an item, so Level 3 is not needed (e.g. Engineering Building → Room 303).",
+        "depth3Add": "Add an item.",
+        "depth3Action": "Add item"
+    },
+    "toast": {
+        "selectParent": "Please select a parent item first.",
+        "selectGroup": "Please select a group first.",
+        "selectGroupForLeaf": "Select a group before adding an item.",
+        "affiliationLoadFailed": "Failed to load affiliation information.",
+        "treeLoadFailed": "Failed to load location list.",
+        "createSuccess": "Registered.",
+        "createFailed": "Registration failed.",
+        "nameRequired": "Please enter a name.",
+        "updateSuccess": "Updated.",
+        "updateFailed": "Update failed.",
+        "deleteSuccess": "Deleted.",
+        "deleteFailed": "Delete failed. Cannot delete if there are child items or reports."
+    },
+    "form": {
+        "typeLabel": "Type",
+        "nameLabel": "Name",
+        "typeLockedHint": "Type cannot be changed after registration.",
+        "saving": "Saving...",
+        "save": "Save",
+        "register": "Register",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleteConfirm": "Really delete? (click again)",
+        "resources": {
+            "title": "Electrical resources (for savings calculation)",
+            "description": "When registering an item (LEAF), enter installed quantities. Power consumption (W) uses system defaults.",
+            "acCount": "Air conditioners (units)",
+            "fluorescentCount": "Fluorescent lights (units)",
+            "ledCount": "LED lights (units)"
+        }
+    },
+    "placeholder": {
+        "depth1": {
+            "group": "Engineering Building A",
+            "leaf": "Outdoor area"
+        },
+        "depth2": {
+            "group": "2nd floor",
+            "leaf": "Room 303"
+        },
+        "depth3": {
+            "leaf": "Room 201"
+        }
+    },
+    "nodeKindHint": {
+        "depth1": {
+            "group": "Groups can contain sub-groups or items.",
+            "leaf": "Items are locations directly selectable when reporting."
+        },
+        "depth2": {
+            "group": "Selecting a group allows adding sub-items at Level 3.",
+            "leaf": "Items connect directly to the parent group as report targets."
+        },
+        "depth3": "Only items can be registered at Level 3."
+    },
+    "schedule": {
+        "title": "Operating hours by day",
+        "description": "Shared schedule for lighting and AC. Idle time is calculated from report time until power-off.",
+        "closed": "Closed",
+        "powerOn": "Power on",
+        "powerOff": "Power off",
+        "daySuffix": "",
+        "dayLabel": "{{day}}"
+    },
+    "day": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+    },
+    "column": {
+        "loading": "Loading...",
+        "edit": "Edit",
+        "delete": "Delete"
+    }
+}

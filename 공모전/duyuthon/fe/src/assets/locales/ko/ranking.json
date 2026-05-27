@@ -1,0 +1,22 @@
+{
+    "title": "소속 랭킹",
+    "description": "같은 소속 학생들의 제보 순위입니다. 닉네임으로 표시됩니다.",
+    "loading": "랭킹을 불러오는 중...",
+    "period": {
+        "month": "이번 달",
+        "all": "전체"
+    },
+    "myRank": {
+        "title": "내 순위",
+        "anonymous": "나"
+    },
+    "leaderboardTitle": "에코 히어로 순위",
+    "empty": "아직 랭킹 데이터가 없습니다.",
+    "meBadge": "나",
+    "entry": {
+        "reports": "{{count}}건 제보"
+    },
+    "missingAffiliationTitle": "소속 정보가 필요해요",
+    "missingAffiliationDescription": "소속 랭킹을 보려면 프로필에서 소속을 먼저 선택해 주세요.",
+    "missingAffiliationCta": "프로필 수정하기"
+}

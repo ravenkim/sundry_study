@@ -1,0 +1,31 @@
+{
+    "pageTitle": "운영시간 일괄 보기",
+    "pageDescription": "모든 항목(LEAF)의 요일별 전원 스케줄을 한눈에 확인합니다. 장소 이름·구조 변경은 장소 관리에서, 스케줄만 빠르게 수정하려면 행의 편집 버튼을 사용하세요.",
+    "affiliationMissing": "소속 정보를 확인할 수 없습니다. 관리자 계정 설정을 확인해 주세요.",
+    "linkToBuildings": "장소 관리로 이동",
+    "filters": {
+        "allDepth": "전체 {{depth}}",
+        "search": "검색",
+        "searchPlaceholder": "강의실·경로 검색",
+        "resultCount": "{{shown}} / {{total}}개 항목"
+    },
+    "matrix": {
+        "loading": "운영시간을 불러오는 중…",
+        "empty": "표시할 항목이 없습니다. 장소 관리에서 LEAF 항목을 등록해 주세요.",
+        "location": "장소",
+        "today": "오늘",
+        "closedHint": "운영 없음",
+        "actions": "편집",
+        "editAria": "{{name}} 운영시간 수정"
+    },
+    "editSheet": {
+        "title": "운영시간 수정",
+        "cancel": "취소",
+        "save": "저장",
+        "saving": "저장 중…"
+    },
+    "toast": {
+        "updateSuccess": "운영시간이 저장되었습니다.",
+        "updateFailed": "운영시간 저장에 실패했습니다."
+    }
+}

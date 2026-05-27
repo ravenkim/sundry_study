@@ -1,0 +1,76 @@
+{
+    "service": {
+        "label": "[Required] Terms of Service Agreement",
+        "summary": "Covers EcoReport service conditions, member obligations, reporting and point policies, and service suspension.",
+        "sections": [
+            {
+                "title": "Article 1 (Purpose)",
+                "content": "These Terms govern the conditions and procedures for using the campus energy-saving reporting and points service provided by EcoReport (the \"Service\"), and the rights and obligations of members and the operator."
+            },
+            {
+                "title": "Article 2 (Definitions)",
+                "content": "① \"Member\" means a person who agrees to these Terms, creates an account, and uses the Service.\n② \"Report\" means reporting campus energy waste situations through photos, etc.\n③ \"Points\" means in-service reward units accrued based on AI detection results, etc."
+            },
+            {
+                "title": "Article 3 (Effect and Amendment)",
+                "content": "These Terms take effect upon completion of registration. The operator may amend the Terms within the scope permitted by applicable law and will provide prior notice through in-service announcements."
+            },
+            {
+                "title": "Article 4 (Member Obligations)",
+                "content": "Members must not impersonate others or submit false reports. When taking photos, members must respect others' portrait and privacy rights and must not post illegal, obscene, or hateful content through the Service.\n\n【Prohibited reporting】 Members must not:\n① Turn on lights or AC themselves and report to obtain points\n② Report power that should be on during operating hours as waste\n③ Submit duplicate reports for the same room, false or manipulated reports, or misuse others' reports\n\n【Sanctions】 The operator may claw back points, restrict reward exchange, suspend accounts, and confirm points only after facility team or administrator review."
+            },
+            {
+                "title": "Article 5 (Service Provision and Suspension)",
+                "content": "The operator provides AI detection, point awards, statistics, and other features. Service may be temporarily suspended due to maintenance, force majeure, or technical failures."
+            },
+            {
+                "title": "Article 6 (Disclaimer)",
+                "content": "To the extent permitted by law, the operator may limit liability for damages caused by member fault, disputes arising from AI detection errors, and disputes with third parties."
+            }
+        ]
+    },
+    "privacy": {
+        "label": "[Required] Personal Information Collection and Use Agreement",
+        "summary": "Describes personal information collected for registration and service provision, purposes of use, retention period, and third-party provision.",
+        "sections": [
+            {
+                "title": "1. Personal information collected",
+                "content": "Required: username, email, password (stored encrypted)\nOptional: marketing consent\nAutomatically collected: IP address, device information, service usage records, report images and metadata"
+            },
+            {
+                "title": "2. Purpose of collection and use",
+                "content": "Member identification and registration confirmation, report intake, AI detection, point awards, customer support, service improvement and fraud prevention, compliance with legal obligations"
+            },
+            {
+                "title": "3. Retention period",
+                "content": "Retained until membership withdrawal; certain records may be retained separately as required by law.\n(E-commerce Act: contract/cancellation records 5 years, consumer complaints/disputes 3 years, etc.)"
+            },
+            {
+                "title": "4. Right to refuse consent",
+                "content": "Refusal of required items may limit registration and service use. Optional items may be declined without affecting basic service use."
+            },
+            {
+                "title": "5. Processing entrustment",
+                "content": "For smooth service delivery, cloud hosting, image storage, AI analysis, and other tasks may be entrusted to external providers, with notice of processors and tasks."
+            }
+        ]
+    },
+    "marketing": {
+        "label": "[Optional] Marketing Information Consent",
+        "summary": "Receive energy-saving campaigns, events, and new feature announcements via email or app notifications.",
+        "sections": [
+            {
+                "title": "Channels",
+                "content": "Marketing information may be delivered via email, app push notifications (where supported), and in-service notices."
+            },
+            {
+                "title": "Content",
+                "content": "Energy-saving challenges, point events, campus ranking notices, new features, survey invitations, and other service-related benefits."
+            },
+            {
+                "title": "Withdrawal of consent",
+                "content": "Marketing consent may be withdrawn anytime via My Page or unsubscribe links. Essential service notifications may still be sent after withdrawal."
+            }
+        ]
+    }
+}

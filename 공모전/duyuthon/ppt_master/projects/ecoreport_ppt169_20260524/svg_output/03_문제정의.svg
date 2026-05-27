@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s03_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s03_statBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#FFECB3"/>
+      <stop offset="100%" stop-color="#FFF8E1"/>
+    </linearGradient>
+    <linearGradient id="s03_hypoBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#F1F8E9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s03_topBar)"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 슬라이드 제목 영역 -->
+  <text x="40" y="60" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="38" font-weight="700" fill="#1A237E">왜 지금, 왜 학생인가</text>
+  <!-- 제목 언더라인 4색 세그먼트 -->
+  <rect x="40"  y="72" width="120" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="168" y="72" width="80"  height="4" rx="2" fill="#FFC107"/>
+  <rect x="256" y="72" width="80"  height="4" rx="2" fill="#4285F4"/>
+  <rect x="344" y="72" width="120" height="4" rx="2" fill="#EA4335"/>
+  <use data-icon="tabler-outline/alert-triangle" x="590" y="36" width="32" height="32" fill="#EA4335"/>
+
+  <!-- ① 핵심 통계 카드 (큰 숫자) -->
+  <rect x="24" y="90" width="380" height="110" rx="16" fill="url(#s03_statBg)" stroke="#FFC107" stroke-width="1.5"/>
+  <text x="44" y="128" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="58" font-weight="700" fill="#E65100">30%</text>
+  <text x="44" y="156" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="500" fill="#5F6368">교내 에너지 비용 중 빈 공간 낭비 추정</text>
+  <text x="44" y="178" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#9AA0A6">100개 강의실 기준 월 10만원+ 불필요 전기료 지출</text>
+
+  <!-- 보조 통계 카드 -->
+  <rect x="420" y="90" width="360" height="110" rx="16" fill="#FFEBEE" stroke="#EA4335" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/bulb" x="440" y="106" width="36" height="36" fill="#EA4335"/>
+  <text x="490" y="130" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="18" font-weight="700" fill="#C62828">수업 후 방치된 조명·에어컨</text>
+  <text x="490" y="154" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#5F6368">학생이 떠난 강의실, 아무도 끄지 않는 낭비</text>
+  <text x="490" y="174" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" fill="#9AA0A6">— 보이지 않는 일상의 에너지 낭비</text>
+
+  <!-- ② 기존 해결책 한계 표 제목 -->
+  <text x="24" y="232" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="18" font-weight="700" fill="#1A237E">기존 해결책의 한계</text>
+  <line x1="24" y1="240" x2="800" y2="240" stroke="#E8EAED" stroke-width="1"/>
+
+  <!-- 표 헤더 행 -->
+  <rect x="24"  y="246" width="200" height="40" rx="6" fill="#F8F9FA"/>
+  <rect x="232" y="246" width="280" height="40" rx="6" fill="#F8F9FA"/>
+  <rect x="520" y="246" width="280" height="40" rx="6" fill="#F8F9FA"/>
+  <text x="124"  y="271" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">해결책</text>
+  <text x="372"  y="271" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">주요 한계</text>
+  <text x="660"  y="271" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">비용/효과</text>
+
+  <!-- 행 1: IoT 센서 -->
+  <rect x="24"  y="293" width="200" height="72" rx="6" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <rect x="232" y="293" width="280" height="72" rx="6" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <rect x="520" y="293" width="280" height="72" rx="6" fill="#FFEBEE" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/air-conditioning" x="36"  y="305" width="26" height="26" fill="#4285F4"/>
+  <text x="70"  y="320" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A252F">IoT 센서 설치</text>
+  <text x="70"  y="340" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">스마트 빌딩 자동화</text>
+  <text x="252" y="320" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">전체 강의실 설치 수천만원</text>
+  <text x="252" y="340" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">장기 구축 프로젝트 필요</text>
+  <text x="252" y="356" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">유지보수 비용 지속 발생</text>
+  <text x="540" y="322" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="22" font-weight="700" fill="#C62828">고비용</text>
+  <text x="540" y="346" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#EA4335">즉시 도입 불가 · 수천만원+</text>
+  <text x="540" y="362" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">중소규모 캠퍼스 현실 부적합</text>
+
+  <!-- 행 2: 관리인 순찰 -->
+  <rect x="24"  y="372" width="200" height="72" rx="6" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <rect x="232" y="372" width="280" height="72" rx="6" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <rect x="520" y="372" width="280" height="72" rx="6" fill="#FFF3E0" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/building-arch" x="36"  y="384" width="26" height="26" fill="#FFC107"/>
+  <text x="70"  y="399" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A252F">관리인 순찰</text>
+  <text x="70"  y="419" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">인력 기반 점검</text>
+  <text x="252" y="399" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">야간·주말 커버리지 공백</text>
+  <text x="252" y="419" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">인건비 지속 발생</text>
+  <text x="252" y="436" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">100개 강의실 동시 점검 불가</text>
+  <text x="540" y="401" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="22" font-weight="700" fill="#E65100">불완전</text>
+  <text x="540" y="425" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#E65100">시간대별 순찰 공백 발생</text>
+  <text x="540" y="441" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">낭비 탐지율 낮음</text>
+
+  <!-- 행 3: 캠페인·포스터 -->
+  <rect x="24"  y="451" width="200" height="72" rx="6" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <rect x="232" y="451" width="280" height="72" rx="6" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1"/>
+  <rect x="520" y="451" width="280" height="72" rx="6" fill="#FFF3E0" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/alert-triangle" x="36"  y="463" width="26" height="26" fill="#E65100"/>
+  <text x="70"  y="478" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A252F">캠페인·포스터</text>
+  <text x="70"  y="498" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">인식 개선 활동</text>
+  <text x="252" y="478" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">효과 측정 불가</text>
+  <text x="252" y="498" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">학생 자발적 행동 변화 한계</text>
+  <text x="252" y="515" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">일회성, 장기 효과 없음</text>
+  <text x="540" y="480" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="22" font-weight="700" fill="#E65100">낮은 효과</text>
+  <text x="540" y="504" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#E65100">행동 변화 유인 부재</text>
+  <text x="540" y="520" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">지속 가능성 없음</text>
+
+  <!-- ③ 핵심 가설 카드 -->
+  <rect x="24" y="538" width="776" height="64" rx="12" fill="url(#s03_hypoBg)" stroke="#4CAF50" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/recycle" x="42" y="552" width="28" height="28" fill="#4CAF50"/>
+  <text x="84" y="567" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">핵심 가설</text>
+  <text x="84" y="590" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="16" font-weight="600" fill="#2E7D32">"합리적 보상이 있으면, 학생은 자발적으로 에너지 낭비를 제보한다"</text>
+
+  <!-- 페이지 번호 -->
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">03 / 10</text>
+
+  <!-- 마스코트: sleepy.png 우측 배치 -->
+  <image href="../images/sleepy.png" x="840" y="220" width="380" height="420" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- 우측 배경 경량 카드 -->
+  <rect x="820" y="90" width="432" height="110" rx="16" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="836" y="120" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">수업 종료 후 현실</text>
+  <text x="836" y="144" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">강의실이 비었지만</text>
+  <text x="836" y="164" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">조명과 에어컨은 켜진 채로 방치</text>
+  <use data-icon="tabler-outline/bulb" x="1168" y="100" width="28" height="28" fill="#FFC107"/>
+  <use data-icon="tabler-outline/air-conditioning" x="1204" y="100" width="28" height="28" fill="#4285F4"/>
+
+</svg>

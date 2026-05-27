@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    막대 차트 템플릿
+    용도: 범주별 데이터 비교
+    적합한 시나리오: 매출 비교, 지역 순위, 연도별 데이터 비교
+    지원: 막대 6개 (3~8개로 조정 가능)
+    -->
+
+    <defs>
+        <!-- 막대 그라데이션 -->
+        <linearGradient id="barGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1976D2;stop-opacity:1" />
+        </linearGradient>
+
+        <linearGradient id="barGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+        </linearGradient>
+
+        <linearGradient id="barGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+        </linearGradient>
+
+        <!-- 그림자 -->
+        <filter id="barShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="1"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.3"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+
+    <!-- 제목 -->
+    <text x="60" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>지역별 매출 비교</tspan>
+    </text>
+
+    <text x="60" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="18" fill="#7F8C8D">
+        <tspan>2025년 3분기 · 단위: 백만 원</tspan>
+    </text>
+
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- Y축 그리드 -->
+        <line x1="140" y1="550" x2="1160" y2="550" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="450" x2="1160" y2="450" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="350" x2="1160" y2="350" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="250" x2="1160" y2="250" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="140" y1="150" x2="1160" y2="150" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+
+        <!-- Y축 눈금 -->
+        <text x="125" y="555" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>0</tspan>
+        </text>
+        <text x="125" y="455" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>50</tspan>
+        </text>
+        <text x="125" y="355" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>100</tspan>
+        </text>
+        <text x="125" y="255" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>150</tspan>
+        </text>
+        <text x="125" y="155" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#7F8C8D" text-anchor="end">
+            <tspan>200</tspan>
+        </text>
+
+        <!-- 축선 -->
+        <line x1="140" y1="150" x2="140" y2="550" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="140" y1="550" x2="1160" y2="550" stroke="#95A5A6" stroke-width="2"/>
+
+        <!-- 막대 (폭 50px, 간격 기준 안내 주석) -->
+
+        <!-- 막대 1: 화동 185M -->
+        <rect x="220" y="180" width="50" height="370" rx="4" fill="url(#barGrad1)" filter="url(#barShadow)"/>
+        <text x="245" y="165" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>185</tspan>
+        </text>
+        <text x="245" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" fill="#5D6D7E" text-anchor="middle">
+            <tspan>화동</tspan>
+        </text>
+
+        <!-- 막대 2: 화남 142M -->
+        <rect x="400" y="266" width="50" height="284" rx="4" fill="url(#barGrad1)" filter="url(#barShadow)"/>
+        <text x="425" y="251" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>142</tspan>
+        </text>
+        <text x="425" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" fill="#5D6D7E" text-anchor="middle">
+            <tspan>화남</tspan>
+        </text>
+
+        <!-- 막대 3: 화북 128M -->
+        <rect x="580" y="294" width="50" height="256" rx="4" fill="url(#barGrad1)" filter="url(#barShadow)"/>
+        <text x="605" y="279" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>128</tspan>
+        </text>
+        <text x="605" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" fill="#5D6D7E" text-anchor="middle">
+            <tspan>화북</tspan>
+        </text>
+
+        <!-- 막대 4: 서남 96M -->
+        <rect x="760" y="358" width="50" height="192" rx="4" fill="url(#barGrad2)" filter="url(#barShadow)"/>
+        <text x="785" y="343" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>96</tspan>
+        </text>
+        <text x="785" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" fill="#5D6D7E" text-anchor="middle">
+            <tspan>서남</tspan>
+        </text>
+
+        <!-- 막대 5: 화중 73M -->
+        <rect x="940" y="404" width="50" height="146" rx="4" fill="url(#barGrad2)" filter="url(#barShadow)"/>
+        <text x="965" y="389" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>73</tspan>
+        </text>
+        <text x="965" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" fill="#5D6D7E" text-anchor="middle">
+            <tspan>화중</tspan>
+        </text>
+
+        <!-- 막대 6: 동북 52M -->
+        <rect x="1120" y="446" width="50" height="104" rx="4" fill="url(#barGrad3)" filter="url(#barShadow)"/>
+        <text x="1145" y="431" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">
+            <tspan>52</tspan>
+        </text>
+        <text x="1145" y="580" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="16" fill="#5D6D7E" text-anchor="middle">
+            <tspan>동북</tspan>
+        </text>
+    </g>
+
+    <!-- 범례 -->
+    <g id="legend">
+        <rect x="920" y="620" width="16" height="16" rx="2" fill="url(#barGrad1)"/>
+        <text x="945" y="632" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#5D6D7E">
+            <tspan>고성장 지역 (&gt;100M)</tspan>
+        </text>
+
+        <rect x="920" y="645" width="16" height="16" rx="2" fill="url(#barGrad2)"/>
+        <text x="945" y="657" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#5D6D7E">
+            <tspan>안정 지역 (50–100M)</tspan>
+        </text>
+
+        <rect x="920" y="670" width="16" height="16" rx="2" fill="url(#barGrad3)"/>
+        <text x="945" y="682" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-size="14" fill="#5D6D7E">
+            <tspan>잠재 지역 (&lt;50M)</tspan>
+        </text>
+    </g>
+
+    <!-- 데이터 출처 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 출처: 영업부 통계</tspan>
+    </text>
+</svg>

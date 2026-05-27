@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+    <!-- 템플릿: 본문 페이지 - Google 스타일 -->
+
+    <defs>
+        <!-- 상단 4색 그라데이션 막대 -->
+        <linearGradient id="topGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+            <stop offset="33%" style="stop-color:#EA4335;stop-opacity:1" />
+            <stop offset="66%" style="stop-color:#FBBC04;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#34A853;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- 하얀색배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF" />
+
+    <!-- 상단 4색 그라데이션 막대 -->
+    <rect x="0" y="0" width="1280" height="6" fill="url(#topGradient)" />
+
+    <!-- 페이지 제목 -->
+    <text x="60" y="85" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="700" fill="#1A237E">
+        {{PAGE_TITLE}}
+    </text>
+
+    <!-- 파란색 제목 밑줄 -->
+    <rect x="60" y="100" width="120" height="4" rx="2" fill="#4285F4" />
+
+    <!-- 콘텐츠 영역 - 유연한 숙소 공간 배치 -->
+    <!-- 
+        사용 가능한 레이아웃 모드：
+        - KPI 그리드 (2×2 또는 2×3)
+        - 왼쪽 텍스트, 오른쪽 그림 / 왼쪽 및 오른쪽 텍스트
+        - 세 개의 열 카드
+        - 네 사분면
+        - 상부 및 하부 파티션
+        - Dashboard 스타일
+        - 목록 + 설명하다
+    -->
+    <rect x="60" y="130" width="1160" height="520" fill="none" stroke="#E8EAED" stroke-width="2" stroke-dasharray="8,8" />
+    <text x="640" y="380" text-anchor="middle" fill="#9AA0A6" font-size="18" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+        {{CONTENT_AREA}}
+    </text>
+    <text x="640" y="420" text-anchor="middle" fill="#9AA0A6" font-size="14" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+        (의존하다 Executor 실제 콘텐츠를 기반으로 한 무료 레이아웃)
+    </text>
+
+    <!-- 공통 설계 요소 참조 -->
+    <!-- 
+        KPI 카드: <rect rx="16" stroke="#4285F4" stroke-width="3" fill="#FFFFFF"/>
+        밝은 회색배경조각: <rect rx="12" fill="#F8F9FA"/>
+        브랜드 컬러 도트: <circle r="12" fill="#4285F4"/>
+        분할기: <line stroke="#E8EAED" stroke-width="1"/>
+        데이터 숫자: font-size="56" font-weight="700" fill="#4285F4"
+        데이터 라벨: font-size="16" font-weight="500" fill="#5F6368"
+    -->
+
+    <!-- 하단 4색 도트 장식 -->
+    <g transform="translate(640, 680)">
+        <circle cx="-60" cy="0" r="6" fill="#4285F4" />
+        <circle cx="-30" cy="0" r="6" fill="#EA4335" />
+        <circle cx="0" cy="0" r="6" fill="#FBBC04" />
+        <circle cx="30" cy="0" r="6" fill="#34A853" />
+        <circle cx="60" cy="0" r="6" fill="#4285F4" />
+    </g>
+
+    <!-- 쪽 번호（선택 과목） -->
+    <text x="1220" y="695" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#9AA0A6">
+        {{PAGE_NUM}}
+    </text>
+
+</svg>

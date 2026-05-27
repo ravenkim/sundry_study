@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s01_bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+    <linearGradient id="s01_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s01_titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+    <linearGradient id="s01_cardTop" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="50%"  stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#4285F4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="url(#s01_bgGrad)"/>
+
+  <!-- 장식 원 -->
+  <circle cx="100" cy="620" r="160" fill="#4CAF50" fill-opacity="0.06"/>
+  <circle cx="1180" cy="100" r="130" fill="#FFC107" fill-opacity="0.08"/>
+  <circle cx="850" cy="680" r="90" fill="#4285F4" fill-opacity="0.05"/>
+  <rect x="960" y="40" width="160" height="160" rx="20" fill="#FFC107" fill-opacity="0.05" transform="rotate(20 1040 120)"/>
+
+  <!-- 상단 6px 그라데이션 바 -->
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s01_topBar)"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 메인 카드 -->
+  <rect x="38" y="80" width="720" height="548" rx="20" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <!-- 카드 상단 색상 바 -->
+  <rect x="38" y="80" width="720" height="7" rx="3" fill="url(#s01_cardTop)"/>
+
+  <!-- 배지: 두유톤 2026 -->
+  <rect x="68" y="120" width="168" height="32" rx="16" fill="#4CAF50" fill-opacity="0.12"/>
+  <rect x="68" y="120" width="168" height="32" rx="16" stroke="#4CAF50" stroke-width="1" fill-opacity="0"/>
+  <text x="152" y="141" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">2026 두유톤 해커톤</text>
+
+  <!-- 메인 제목 EcoReport -->
+  <text x="398" y="246" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="72" font-weight="700" fill="url(#s01_titleGrad)" letter-spacing="-1">EcoReport</text>
+
+  <!-- 부제목 -->
+  <text x="398" y="296" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="22" font-weight="400" fill="#5F6368">AI 기반 캠퍼스 에너지 낭비 제보·보상 플랫폼</text>
+
+  <!-- 4색 구분선 -->
+  <line x1="100" y1="330" x2="268" y2="330" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="284" y1="330" x2="396" y2="330" stroke="#FFC107" stroke-width="3" stroke-linecap="round"/>
+  <line x1="412" y1="330" x2="524" y2="330" stroke="#4285F4" stroke-width="3" stroke-linecap="round"/>
+  <line x1="540" y1="330" x2="706" y2="330" stroke="#EA4335" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 한 줄 핵심 메시지 배지 -->
+  <rect x="88" y="350" width="580" height="52" rx="26" fill="#4CAF50" fill-opacity="0.09" stroke="#4CAF50" stroke-width="1.5" stroke-opacity="0.4"/>
+  <text x="378" y="382" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="19" font-weight="600" fill="#2E7D32">빈 강의실 사진 한 장  →  AI 분석  →  포인트 적립</text>
+
+  <!-- 팀 정보 -->
+  <text x="398" y="456" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="26" font-weight="700" fill="#1A237E">14팀 · 김해준 · 차성호 · 이은총</text>
+  <text x="398" y="492" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="18" font-weight="400" fill="#9AA0A6">2026 두유톤 해커톤  |  2026-05-24</text>
+
+  <!-- 카드 하단 컬러 도트 장식 -->
+  <circle cx="228" cy="556" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+  <circle cx="254" cy="556" r="5"  fill="#FFC107" fill-opacity="0.85"/>
+  <circle cx="276" cy="556" r="9"  fill="#4285F4" fill-opacity="0.85"/>
+  <circle cx="304" cy="556" r="5"  fill="#EA4335" fill-opacity="0.85"/>
+  <circle cx="328" cy="556" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+  <circle cx="354" cy="556" r="5"  fill="#FFC107" fill-opacity="0.85"/>
+  <circle cx="376" cy="556" r="9"  fill="#4285F4" fill-opacity="0.85"/>
+  <circle cx="404" cy="556" r="5"  fill="#EA4335" fill-opacity="0.85"/>
+  <circle cx="428" cy="556" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+  <circle cx="454" cy="556" r="5"  fill="#FFC107" fill-opacity="0.85"/>
+  <circle cx="476" cy="556" r="9"  fill="#4285F4" fill-opacity="0.85"/>
+  <circle cx="504" cy="556" r="5"  fill="#EA4335" fill-opacity="0.85"/>
+  <circle cx="528" cy="556" r="7"  fill="#4CAF50" fill-opacity="0.85"/>
+
+  <!-- 마스코트: smile.png 우측 배치 -->
+  <image href="../images/smile.png" x="800" y="70" width="400" height="580" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- 우측 하단 슬라이드 아이콘 힌트 (소형 screen_login 프리뷰 생략 - 마스코트가 충분) -->
+
+</svg>

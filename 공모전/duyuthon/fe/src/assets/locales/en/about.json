@@ -1,0 +1,186 @@
+{
+    "hero": {
+        "badge": "2026 DuyuThon Team 14",
+        "title": "About EcoReport",
+        "subtitle": "AI-powered campus energy waste reporting and reward platform"
+    },
+    "tagline": {
+        "quote": "One photo of lights on in an empty classroom → AI analysis → points earned",
+        "description": "Small student reports reduce campus electricity bills, and part of those savings flows back to students."
+    },
+    "overview": {
+        "title": "Project Overview",
+        "description": "EcoReport is a crowdsourcing platform where students report invisible campus energy waste via smartphone, AI automatically detects waste and calculates savings, and verified reports earn points.",
+        "items": {
+            "target": "Student reporters · Building administrators",
+            "tech": "AI image analysis · Savings calculation · Point settlement",
+            "platform": "Mobile web (students) + Admin dashboard"
+        }
+    },
+    "flow": {
+        "title": "How It Works",
+        "steps": {
+            "report": {
+                "title": "Photo Report",
+                "description": "Students upload photos of waste in empty classrooms."
+            },
+            "ai": {
+                "title": "AI Analysis",
+                "description": "AI detects waste and calculates savings in money and kWh."
+            },
+            "reward": {
+                "title": "Points Earned",
+                "description": "Verified reports earn points instantly."
+            },
+            "cycle": {
+                "title": "Virtuous Cycle",
+                "description": "Part of saved electricity costs returns to the student reward pool."
+            }
+        }
+    },
+    "whyUniversity": {
+        "title": "Why Start with Universities?",
+        "summary": "Universities are the first market that simultaneously satisfies three conditions: serious waste, student participation, and cultural diffusion.",
+        "cards": {
+            "management": {
+                "title": "Management Gaps",
+                "description": "Club rooms and seminar rooms are hard to monitor — student reports fill the gap."
+            },
+            "physical": {
+                "title": "Patrol Limits",
+                "description": "Tall buildings, hills, stairs, and no elevators make full patrol coverage difficult."
+            },
+            "culture": {
+                "title": "Cultural Diffusion",
+                "description": "A starting point where eco-friendly habits learned on campus spread to society after graduation."
+            }
+        }
+    },
+    "culturalDiffusion": {
+        "title": "Cultural Diffusion — Starting in the Classroom",
+        "lead": "Universities are educational spaces where students learn about the environment and sustainability.",
+        "body": "The experience that \"my actions create change\" on campus becomes the seed of eco-friendly culture that spreads to workplaces and communities after graduation. EcoReport is not just a tool to save electricity — it is a platform for student-led carbon-neutral culture.",
+        "points": {
+            "experience": "Shift from passive environmental awareness to active participation through \"my photo changes the campus\"",
+            "education": "Natural alignment with green campus campaigns and the Ministry of Education's Green Smart Future School initiative",
+            "expansion": "Low-cost, immediately deployable model expandable from universities to public institutions and offices"
+        }
+    },
+    "savingsCriteria": {
+        "title": "Savings Calculation Criteria",
+        "lead": "EcoReport calculates saved electricity, carbon, and points from AI-detected waste resources and idle time, using the formulas and constants below. Constants are grounded in school energy field studies and official national emission factors.",
+        "formula": {
+            "title": "Formulas",
+            "kwh": "Saved kWh = Σ(power W × qty ÷ 1,000 × idle hours h)",
+            "cost": "Saved cost = kWh × ₩130",
+            "co2": "CO₂(kg) = kWh × 0.4594",
+            "point": "Points = round(saved cost × 18%)",
+            "cap": "Idle time cap: report time → lights-off, max 120 min"
+        },
+        "constants": {
+            "title": "Constants",
+            "items": {
+                "fluorescent": {
+                    "value": "40 W",
+                    "label": "Fluorescent lamp",
+                    "source": "F32/F40 rated + ballast loss (energy efficiency label standards)"
+                },
+                "led": {
+                    "value": "20 W",
+                    "label": "LED lamp",
+                    "source": "~50% power vs fluorescent at same brightness (IEA lighting report)"
+                },
+                "ac": {
+                    "value": "1,500 W",
+                    "label": "Air conditioner",
+                    "source": "Wall-mounted 7–9 m² rated 1.2–1.8 kW mid-value (MOE KEEP: ~30× fan power)"
+                },
+                "rate": {
+                    "value": "₩130/kWh",
+                    "label": "Electricity rate",
+                    "source": "KEPCO simplified educational/general low-voltage rate"
+                },
+                "co2Factor": {
+                    "value": "0.4594 kg/kWh",
+                    "label": "Grid CO₂ factor",
+                    "source": "KPX power emission factor · MOE ETS reporting guidelines (Scope 2)"
+                },
+                "tree": {
+                    "value": "20.25 kWh/tree",
+                    "label": "Pine tree equivalent",
+                    "source": "Korea Forest Service carbon tree calculator: ~9.2 kg CO₂/tree/year"
+                }
+            }
+        },
+        "example": {
+            "title": "Sample report",
+            "scenario": "10 fluorescent lamps + 1 AC, 2 h idle (Room 303)",
+            "kwh": "3.8 kWh",
+            "cost": "₩494",
+            "co2": "1.7 kg CO₂",
+            "points": "89P"
+        },
+        "references": {
+            "title": "Sources",
+            "items": {
+                "kses": {
+                    "name": "Korean Society for School Energy Studies",
+                    "detail": "10-school survey: 0.013–0.030 TOE/m²·yr; School A 552,550 kWh/yr",
+                    "url": "https://www.ksesjournal.co.kr/articles/xml/n4je/"
+                },
+                "pccs": {
+                    "name": "High school power profile (PCCS)",
+                    "detail": "Baseload ~12 kW (non-winter) / ~21 kW (winter); lighting 9%, cooling 7%, heating 36%",
+                    "url": "https://pdfs.semanticscholar.org/f3d2/f40f0647580ed36d4942625e54d2deafcb09.pdf"
+                },
+                "keep": {
+                    "name": "MOE KEEP — Net-zero schools",
+                    "detail": "AC power ≈ 30× fan; Scope 2 = usage × emission factor",
+                    "url": "https://www.keep.go.kr/contents/netzeroschool/index.html"
+                },
+                "kpx": {
+                    "name": "EG-TIPS · MOE guidelines",
+                    "detail": "National grid factor 0.4594 kg CO₂/kWh (ETS reporting annex 6)",
+                    "url": "https://tips.energy.or.kr/qna/qna_view.do?no=1841"
+                },
+                "forest": {
+                    "name": "Korea Forest Service carbon tree calculator",
+                    "detail": "~9.2 kg CO₂ absorbed per pine tree per year (standard absorption v1.2)",
+                    "url": "https://carbonregistry.forest.go.kr/fcr_web/resources/carbon_calc/html/main/CTC_02_01.html"
+                },
+                "kepco": {
+                    "name": "KEPCO electricity tariff",
+                    "detail": "Educational/general energy charge (₩130/kWh simplified)",
+                    "url": "https://home.kepco.co.kr/kepco/front/html/CY/E/E/CYEEHP00103.html"
+                }
+            }
+        }
+    },
+    "impact": {
+        "title": "Expected Impact",
+        "stats": {
+            "waste": {
+                "value": "~30%",
+                "label": "Estimated empty-space waste (planning assumption)"
+            },
+            "saving": {
+                "value": "600–1,000 kWh",
+                "label": "Monthly savings per campus (100 rooms)"
+            },
+            "co2": {
+                "value": "275–460 kg",
+                "label": "Monthly CO₂ reduction (factor 0.4594)"
+            }
+        }
+    },
+    "team": {
+        "title": "Team 14",
+        "members": "Kim Haejun · Cha Seongho · Lee Eunchong",
+        "description": "A 2026 DuyuThon hackathon team covering planning, frontend, backend, AI, and infrastructure."
+    },
+    "cta": {
+        "title": "Join Us Today",
+        "description": "Small actions across campus add up to big change.",
+        "button": "Report Waste"
+    }
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s02b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+    <linearGradient id="s02b_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9" />
+      <stop offset="100%" stop-color="#E8F5E9" />
+    </linearGradient>
+    <linearGradient id="s02b_center" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E7D32" />
+      <stop offset="100%" stop-color="#4CAF50" />
+    </linearGradient>
+    <marker id="s02b_arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50" />
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="url(#s02b_bg)" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s02b_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  <text x="640" y="56" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1A237E">EcoReport — 서비스 한눈에 보기</text>
+  <path fill="url(#s02b_topBar)" d="M502,66 H778 A2,2 0 0 1 780,68 V68 A2,2 0 0 1 778,70 H502 A2,2 0 0 1 500,68 V68 A2,2 0 0 1 502,66 Z" />
+
+  
+  <circle cx="640" cy="360" r="110" fill="url(#s02b_center)" fill-opacity="0.12" stroke="#4CAF50" stroke-width="2" />
+  <circle cx="640" cy="360" r="80" fill="#FFFFFF" fill-opacity="0.8" />
+  <text x="640" y="348" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#2E7D32">사진 한 장</text>
+  <text x="640" y="372" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">→ AI 판별</text>
+  <text x="640" y="394" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">→ 포인트 적립</text>
+
+  
+  
+  <path fill="#FFFFFF" stroke="#EA4335" stroke-width="2" d="M474,96 H806 A14,14 0 0 1 820,110 V182 A14,14 0 0 1 806,196 H474 A14,14 0 0 1 460,182 V110 A14,14 0 0 1 474,96 Z" />
+  <path fill="#EA4335" d="M463,96 H817 A3,3 0 0 1 820,99 V99 A3,3 0 0 1 817,102 H463 A3,3 0 0 1 460,99 V99 A3,3 0 0 1 463,96 Z" />
+  <text x="640" y="124" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#C62828">문제</text>
+  <text x="640" y="146" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">빈 강의실 조명·에어컨 방치</text>
+  <text x="640" y="166" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">교내 에너지 비용 30% 낭비 추정</text>
+  
+  <line x1="640" y1="196" x2="640" y2="243" stroke="#EA4335" stroke-width="2" stroke-dasharray="6,4" />
+  <polygon points="640,248 633,237 647,237" fill="#EA4335" />
+
+  
+  <path fill="#FFFFFF" stroke="#4CAF50" stroke-width="2" d="M474,524 H806 A14,14 0 0 1 820,538 V610 A14,14 0 0 1 806,624 H474 A14,14 0 0 1 460,610 V538 A14,14 0 0 1 474,524 Z" />
+  <path fill="#4CAF50" d="M463,524 H817 A3,3 0 0 1 820,527 V527 A3,3 0 0 1 817,530 H463 A3,3 0 0 1 460,527 V527 A3,3 0 0 1 463,524 Z" />
+  <text x="640" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#2E7D32">임팩트</text>
+  <text x="640" y="574" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#5F6368">월 600~1,000 kWh 절약</text>
+  <text x="640" y="594" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">월 280~470 kg CO₂ 절감</text>
+  
+  <line x1="640" y1="477" x2="640" y2="520" stroke="#4CAF50" stroke-width="2" stroke-dasharray="6,4" />
+  <polygon points="640,524 633,513 647,513" fill="#4CAF50" />
+
+  
+  <path fill="#FFFFFF" stroke="#FFC107" stroke-width="2" d="M74,300 H366 A14,14 0 0 1 380,314 V406 A14,14 0 0 1 366,420 H74 A14,14 0 0 1 60,406 V314 A14,14 0 0 1 74,300 Z" />
+  <path fill="#FFC107" d="M63,300 H63 A3,3 0 0 1 66,303 V417 A3,3 0 0 1 63,420 H63 A3,3 0 0 1 60,417 V303 A3,3 0 0 1 63,300 Z" />
+  <text x="230" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#E65100">학생 역할</text>
+  <text x="230" y="350" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">강의실 에너지 낭비 사진 촬영</text>
+  <text x="230" y="370" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">위치 태깅 후 앱으로 제보</text>
+  <text x="230" y="390" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#FFC107">포인트 획득 → 기프티콘 교환</text>
+  
+  <line x1="383" y1="360" x2="527" y2="360" stroke="#FFC107" stroke-width="2" stroke-dasharray="6,4" />
+  <polygon points="532,360 521,353 521,367" fill="#FFC107" />
+
+  
+  <path fill="#FFFFFF" stroke="#4285F4" stroke-width="2" d="M914,300 H1206 A14,14 0 0 1 1220,314 V406 A14,14 0 0 1 1206,420 H914 A14,14 0 0 1 900,406 V314 A14,14 0 0 1 914,300 Z" />
+  <path fill="#4285F4" d="M1217,300 H1217 A3,3 0 0 1 1220,303 V417 A3,3 0 0 1 1217,420 H1217 A3,3 0 0 1 1214,417 V303 A3,3 0 0 1 1217,300 Z" />
+  <text x="1060" y="328" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#1565C0">관리자 역할</text>
+  <text x="1060" y="350" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">제보 현황 대시보드 확인</text>
+  <text x="1060" y="370" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">장소 관리 · 포인트 지급</text>
+  <text x="1060" y="390" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#4285F4">월 절약량 통계 조회</text>
+  
+  <line x1="897" y1="360" x2="753" y2="360" stroke="#4285F4" stroke-width="2" stroke-dasharray="6,4" />
+  <polygon points="748,360 759,353 759,367" fill="#4285F4" />
+
+  
+  <path fill="#FFFFFF" stroke="#E8EAED" stroke-width="1" d="M70,644 H1210 A10,10 0 0 1 1220,654 V682 A10,10 0 0 1 1210,692 H70 A10,10 0 0 1 60,682 V654 A10,10 0 0 1 70,644 Z" />
+  <text x="100" y="668" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">핵심 기술</text>
+  <text x="190" y="668" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">React 19 · Spring Boot 4 · YOLOv8n ×2 · Gemini 2.5 Flash · Cloud Run ✅ · ubuntu03 24시간 배포 · Docker Compose</text>
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">02b / 30</text>
+</svg>

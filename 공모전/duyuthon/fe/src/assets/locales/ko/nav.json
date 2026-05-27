@@ -1,0 +1,36 @@
+{
+    "pages": {
+        "reportForm": "제보하기",
+        "reportSuccess": "낭비 확인",
+        "reports": "제보 이력",
+        "reportDetail": "제보 상세",
+        "shop": "포인트샵",
+        "profile": "마이페이지",
+        "aboutUs": "소개",
+        "ranking": "소속 랭킹"
+    },
+    "menu": {
+        "openAriaLabel": "메뉴 열기",
+        "tagline": "캠퍼스 에너지 절약",
+        "home": "홈",
+        "report": "낭비 제보",
+        "reports": "제보 이력",
+        "shop": "포인트샵",
+        "profile": "마이페이지",
+        "aboutUs": "에코리포트 소개",
+        "ranking": "소속 랭킹"
+    },
+    "admin": {
+        "brandTitle": "EcoReport Admin",
+        "brandSubtitle": "Management Console",
+        "reportsDashboard": "제보 현황",
+        "reportsManage": "제보 관리",
+        "buildings": "장소 관리",
+        "schedules": "운영시간",
+        "gifticon": "기프티콘 관리",
+        "stats": "에너지 통계",
+        "users": "사용자 관리"
+    },
+    "findAccount": "아이디 · 비밀번호 찾기",
+    "adminSignup": "관리자 회원가입"
+}

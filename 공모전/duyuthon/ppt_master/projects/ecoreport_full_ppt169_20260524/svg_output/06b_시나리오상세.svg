@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s06b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <marker id="s06b_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s06b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">실제 사용 시나리오</text>
+  <rect x="40" y="64" width="200" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="248" y="64" width="80" height="4" rx="2" fill="#FFC107"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#9AA0A6">상황: 수업 후 강의실에 조명·에어컨이 켜진 채 방치됨</text>
+
+  <!-- 시나리오 캐릭터 소개 -->
+  <rect x="24" y="96" width="240" height="100" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5"/>
+  <image href="../images/smile.png" x="30" y="98" width="70" height="90" preserveAspectRatio="xMidYMid meet"/>
+  <text x="116" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#E65100">학생 A (21)</text>
+  <text x="116" y="146" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">수업 후 이동 중</text>
+  <text x="116" y="164" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">스마트폰 소지</text>
+
+  <rect x="282" y="96" width="240" height="100" rx="12" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/building-arch" x="296" y="110" width="40" height="40" fill="#4285F4"/>
+  <text x="390" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1565C0">301호 강의실</text>
+  <text x="390" y="146" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">15시 수업 종료 후</text>
+  <text x="390" y="164" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">조명 ON + 에어컨 ON</text>
+
+  <rect x="540" y="96" width="240" height="100" rx="12" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/cpu" x="554" y="110" width="40" height="40" fill="#4CAF50"/>
+  <text x="648" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">EcoReport AI</text>
+  <text x="648" y="146" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">Cloud Run 대기 중</text>
+  <text x="648" y="164" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">YOLOv8 + Gemini 준비</text>
+
+  <rect x="798" y="96" width="258" height="100" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5"/>
+  <use data-icon="tabler-outline/user-check" x="812" y="110" width="40" height="40" fill="#C62828"/>
+  <text x="906" y="126" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#C62828">시설 관리자 B</text>
+  <text x="906" y="146" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">관리자 앱 모니터링</text>
+  <text x="906" y="164" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">대시보드 확인</text>
+
+  <!-- 시나리오 단계 타임라인 -->
+  <!-- 단계 1 -->
+  <rect x="24" y="216" width="1232" height="106" rx="12" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <circle cx="64" cy="269" r="24" fill="#4285F4"/>
+  <text x="64" y="276" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">1</text>
+  <text x="104" y="248" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">발견 · 촬영</text>
+  <text x="104" y="268" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">학생 A가 복도를 지나다 빈 301호에 조명·에어컨이 켜진 것을 발견</text>
+  <text x="104" y="288" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">EcoReport 앱 열기 → 카메라 아이콘 탭 → 강의실 사진 촬영 (2~3초)</text>
+  <text x="104" y="308" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">소요 시간: 약 10초</text>
+  <!-- 화살표 -->
+  <line x1="1100" y1="269" x2="1240" y2="269" stroke="#4285F4" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#s06b_arrow)"/>
+
+  <!-- 단계 2 -->
+  <rect x="24" y="334" width="1232" height="106" rx="12" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/>
+  <circle cx="64" cy="387" r="24" fill="#4CAF50"/>
+  <text x="64" y="394" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">2</text>
+  <text x="104" y="366" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">장소 선택 · 제출</text>
+  <text x="104" y="386" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">제보 폼에서 "공학관 3층 301호" 선택 (계층 선택 UI, 3-tap)</text>
+  <text x="104" y="406" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">제출 버튼 탭 → BE API 호출 → Cloud Run AI 분석 요청 (이미지 multipart)</text>
+  <text x="104" y="422" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">소요 시간: 약 15초 (AI 분석 1~2초 포함)</text>
+
+  <!-- 단계 3 -->
+  <rect x="24" y="452" width="1232" height="106" rx="12" fill="#FFF8E1" stroke="#FFD54F" stroke-width="1"/>
+  <circle cx="64" cy="505" r="24" fill="#FFC107"/>
+  <text x="64" y="512" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">3</text>
+  <text x="104" y="484" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">AI 판별 · 포인트 적립</text>
+  <text x="104" y="504" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">YOLOv8n: 조명 ON ✅, 에어컨 ON ✅ → Gemini: waste=true, expected=20,540원, points=80P</text>
+  <text x="104" y="524" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">학생 A 앱 화면: "80포인트 적립! 👏" → 누적 포인트 갱신</text>
+  <text x="104" y="540" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">BE MemberPoint 테이블 업데이트 / 제보 DB 저장</text>
+
+  <!-- 단계 4 -->
+  <rect x="24" y="570" width="1232" height="106" rx="12" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1"/>
+  <circle cx="64" cy="623" r="24" fill="#EA4335"/>
+  <text x="64" y="630" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#FFFFFF">4</text>
+  <text x="104" y="602" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">관리자 확인 · 조치</text>
+  <text x="104" y="622" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">관리자 B 대시보드: "301호 에너지 낭비 제보" 알림 — 장소·사진·AI 결과 확인</text>
+  <text x="104" y="642" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">관리자가 해당 강의실 출동 또는 원격 설비 제어 → 낭비 즉시 종료</text>
+  <text x="104" y="658" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">총 소요 시간: 학생 제보 25초 + 관리자 확인 2분 이내</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">06b / 30</text>
+</svg>

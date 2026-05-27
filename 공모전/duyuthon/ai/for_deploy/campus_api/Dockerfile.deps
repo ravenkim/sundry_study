@@ -1,0 +1,36 @@
+# syntax=docker/dockerfile:1
+# requirements.txt 변경 시에만 빌드 (ai/deploy.sh)
+# 완성된 deps 이미지(ecoreport-ai-deps:<hash>)가 pip·apt·yolov8n.pt 영구 캐시
+FROM python:3.10-slim
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y --no-install-recommends \
+      libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_DEFAULT_TIMEOUT=120
+
+# 1) torch 의존성 — PyPI (CPU 인덱스는 typing-extensions/jinja2 메타데이터 깨짐)
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install \
+      "typing-extensions>=4.10.0" \
+      jinja2 sympy networkx filelock fsspec numpy pillow
+
+# 2) CPU torch wheel만 (~150MB) — CUDA 13 (~2GB+) 방지
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install \
+      torch==2.6.0 torchvision==0.21.0 \
+      --index-url https://download.pytorch.org/whl/cpu \
+      --no-deps
+
+COPY requirements.txt .
+# 3) 나머지 패키지 — torch는 이미 설치됨(only-if-needed)
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --upgrade-strategy only-if-needed -r requirements.txt
+
+# 4) yolov8n.pt — deps 이미지에 포함
+RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"

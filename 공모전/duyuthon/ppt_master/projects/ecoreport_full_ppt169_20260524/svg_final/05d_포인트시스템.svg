@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s05d_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+    <linearGradient id="s05d_pointBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1" />
+      <stop offset="100%" stop-color="#FFECB3" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s05d_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  
+  <text x="40" y="50" font-family="Pretendard, system-ui, sans-serif" font-size="30" font-weight="700" fill="#1A237E">포인트 시스템 설계</text>
+  <path fill="#FFC107" d="M42,58 H218 A2,1.50 0 0 1 220,59.50 V59.50 A2,1.50 0 0 1 218,61 H42 A2,1.50 0 0 1 40,59.50 V59.50 A2,1.50 0 0 1 42,58 Z" />
+
+  
+  <path fill="url(#s05d_pointBg)" stroke="#FFD54F" stroke-width="1.5" d="M34,70 H586 A14,14 0 0 1 600,84 V424 A14,14 0 0 1 586,438 H34 A14,14 0 0 1 20,424 V84 A14,14 0 0 1 34,70 Z" />
+  <path fill="#FFC107" d="M23,70 H597 A3,3 0 0 1 600,73 V74 A3,3 0 0 1 597,77 H23 A3,3 0 0 1 20,74 V73 A3,3 0 0 1 23,70 Z" />
+
+  
+  <g transform="translate(38.0, 86.0) scale(1.0833333333333333)" fill="none" stroke="#E65100">
+    <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3" />
+    <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4" />
+    <path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598" />
+    <path d="M3 6v10c0 .888 .772 1.45 2 2" />
+    <path d="M3 11c0 .888 .772 1.45 2 2" />
+  </g>
+  <text x="72" y="104" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#E65100">포인트 적립 기준</text>
+  <text x="72" y="120" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">Gemini AI가 절감 예상액 기반 동적 산출</text>
+
+  
+  <path fill="#E65100" fill-opacity="0.15" d="M44,130 H575 A6,6 0 0 1 581,136 V158 A6,6 0 0 1 575,164 H44 A6,6 0 0 1 38,158 V136 A6,6 0 0 1 44,130 Z" />
+  <text x="120" y="153" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#E65100">제보 유형</text>
+  <text x="330" y="153" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#E65100">예상 절감액/시간</text>
+  <text x="530" y="153" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#E65100">적립 포인트</text>
+
+  
+  <path fill="#FFFFFF" fill-opacity="0.7" d="M41,164 H578 A3,3 0 0 1 581,167 V197 A3,3 0 0 1 578,200 H41 A3,3 0 0 1 38,197 V167 A3,3 0 0 1 41,164 Z" />
+  <text x="120" y="187" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">조명만 ON</text>
+  <text x="330" y="187" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">~1,040원</text>
+  <text x="530" y="187" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#E65100">30P</text>
+
+  
+  <path fill="#FFF9C4" fill-opacity="0.6" d="M41,200 H578 A3,3 0 0 1 581,203 V233 A3,3 0 0 1 578,236 H41 A3,3 0 0 1 38,233 V203 A3,3 0 0 1 41,200 Z" />
+  <text x="120" y="223" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">에어컨만 ON</text>
+  <text x="330" y="223" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">~19,500원</text>
+  <text x="530" y="223" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#E65100">50P</text>
+
+  
+  <path fill="#FFFFFF" fill-opacity="0.7" d="M41,236 H578 A3,3 0 0 1 581,239 V269 A3,3 0 0 1 578,272 H41 A3,3 0 0 1 38,269 V239 A3,3 0 0 1 41,236 Z" />
+  <text x="120" y="259" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">조명 + 에어컨 모두 ON</text>
+  <text x="330" y="259" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">~20,540원</text>
+  <text x="530" y="259" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="800" fill="#EA4335">80P</text>
+
+  
+  <path fill="#FFF9C4" fill-opacity="0.4" d="M41,272 H578 A3,3 0 0 1 581,275 V305 A3,3 0 0 1 578,308 H41 A3,3 0 0 1 38,305 V275 A3,3 0 0 1 41,272 Z" />
+  <text x="120" y="295" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">낭비 없음 (불채택)</text>
+  <text x="330" y="295" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">—</text>
+  <text x="530" y="295" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">0P</text>
+
+  <text x="38" y="328" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">* 1P = 1원 환산. 교환 최소 500P 이상</text>
+  <text x="38" y="346" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">* 동일 장소·동일 사용자 24시간 내 중복 제보 차단</text>
+  <text x="38" y="364" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">* expected = waste_kw × 130원 × 가중치 (Gemini 자동 산출)</text>
+  <text x="38" y="382" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">* AI 신뢰도 0.5 미만 시 관리자 수동 검토 대기</text>
+
+  
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5" d="M34,450 H586 A14,14 0 0 1 600,464 V686 A14,14 0 0 1 586,700 H34 A14,14 0 0 1 20,686 V464 A14,14 0 0 1 34,450 Z" />
+  <path fill="#4CAF50" d="M23,450 H597 A3,3 0 0 1 600,453 V454 A3,3 0 0 1 597,457 H23 A3,3 0 0 1 20,454 V453 A3,3 0 0 1 23,450 Z" />
+  
+  <g transform="translate(38.0, 468.0)" fill="none" stroke="#4CAF50">
+    <path d="M3 9a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1l0 -2" />
+    <path d="M12 8l0 13" />
+    <path d="M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7" />
+    <path d="M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5" />
+  </g>
+  <text x="70" y="484" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#2E7D32">교환 가능 보상</text>
+
+  <path fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1.5" d="M48,496 H146 A10,10 0 0 1 156,506 V566 A10,10 0 0 1 146,576 H48 A10,10 0 0 1 38,566 V506 A10,10 0 0 1 48,496 Z" />
+  
+  <g transform="translate(85.0, 508.0) scale(1.0833333333333333)" fill="none" stroke="#4CAF50">
+    <path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1" />
+    <path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
+    <path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
+    <path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5" />
+    <path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />
+  </g>
+  <text x="97" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#2E7D32">커피 쿠폰</text>
+  <text x="97" y="568" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">500P~</text>
+
+  <path fill="#FFFFFF" stroke="#90CAF9" stroke-width="1.5" d="M178,496 H276 A10,10 0 0 1 286,506 V566 A10,10 0 0 1 276,576 H178 A10,10 0 0 1 168,566 V506 A10,10 0 0 1 178,496 Z" />
+  
+  <g transform="translate(215.0, 508.0) scale(1.0833333333333333)" fill="none" stroke="#4285F4">
+    <path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14" />
+    <path d="M11 4h2" />
+    <path d="M12 17v.01" />
+  </g>
+  <text x="227" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1565C0">편의점 상품권</text>
+  <text x="227" y="568" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">1,000P~</text>
+
+  <path fill="#FFFFFF" stroke="#FFD54F" stroke-width="1.5" d="M308,496 H406 A10,10 0 0 1 416,506 V566 A10,10 0 0 1 406,576 H308 A10,10 0 0 1 298,566 V506 A10,10 0 0 1 308,496 Z" />
+  
+  <g transform="translate(345.0, 508.0) scale(1.0833333333333333)" fill="none" stroke="#FFC107">
+    <path d="M15 5l0 2" />
+    <path d="M15 11l0 2" />
+    <path d="M15 17l0 2" />
+    <path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" />
+  </g>
+  <text x="357" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#E65100">문화상품권</text>
+  <text x="357" y="568" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">3,000P~</text>
+
+  <path fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.5" d="M438,496 H570 A10,10 0 0 1 580,506 V566 A10,10 0 0 1 570,576 H438 A10,10 0 0 1 428,566 V506 A10,10 0 0 1 438,496 Z" />
+  
+  <g transform="translate(492.0, 508.0) scale(1.0833333333333333)" fill="none" stroke="#4CAF50">
+    <path d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+    <path d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12 9c0 1 0 3 2 5h3l.014 0" />
+  </g>
+  <text x="504" y="552" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="700" fill="#2E7D32">탄소중립 배지</text>
+  <text x="504" y="568" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#5F6368">무료 지급</text>
+
+  <text x="38" y="608" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">포인트 사용처 확장: 학교 식당 · 도서관 프린트 · 기숙사 포인트 연계 (Phase 2)</text>
+  <text x="38" y="628" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">기업 협찬 리워드 추가 가능 — 참여 학생 수 증가에 따라 협상력 상승</text>
+  <text x="38" y="650" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">* 현재 MVP: 포인트 조회 완료, 교환 UI 구현 완료, 실제 지급 로직 Phase 1 예정</text>
+  <text x="38" y="668" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">* 포인트 재원: 학교 절약 전기료 일부를 포인트 예산으로 전환 (계약 조건)</text>
+
+  
+  <path fill="#1A237E" d="M634,70 H1246 A14,14 0 0 1 1260,84 V426 A14,14 0 0 1 1246,440 H634 A14,14 0 0 1 620,426 V84 A14,14 0 0 1 634,70 Z" />
+  <path fill="#4285F4" d="M623,70 H1257 A3,3 0 0 1 1260,73 V74 A3,3 0 0 1 1257,77 H623 A3,3 0 0 1 620,74 V73 A3,3 0 0 1 623,70 Z" />
+
+  <text x="940" y="100" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">학생 수익 시뮬레이션</text>
+  <text x="940" y="118" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">주 3회 · 평균 50P/회 기준</text>
+
+  
+  <path fill="#FFFFFF" fill-opacity="0.07" d="M646,130 H1234 A8,8 0 0 1 1242,138 V168 A8,8 0 0 1 1234,176 H646 A8,8 0 0 1 638,168 V138 A8,8 0 0 1 646,130 Z" />
+  <text x="658" y="152" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">주간 적립</text>
+  <text x="940" y="152" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#FFFFFF">3회 × 50P = 150P / 주</text>
+  <text x="1220" y="169" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">매일 5분</text>
+
+  <path fill="#FFFFFF" fill-opacity="0.07" d="M646,182 H1234 A8,8 0 0 1 1242,190 V220 A8,8 0 0 1 1234,228 H646 A8,8 0 0 1 638,220 V190 A8,8 0 0 1 646,182 Z" />
+  <text x="658" y="204" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">월간 적립</text>
+  <text x="940" y="204" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#FFFFFF">150P × 4주 = 600P / 월</text>
+  <text x="1220" y="221" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">≈ 600원</text>
+
+  <path fill="#4CAF50" fill-opacity="0.2" d="M646,234 H1234 A8,8 0 0 1 1242,242 V278 A8,8 0 0 1 1234,286 H646 A8,8 0 0 1 638,278 V242 A8,8 0 0 1 646,234 Z" />
+  <text x="658" y="256" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9AA0A6">학기 적립 (4개월)</text>
+  <text x="940" y="258" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="20" font-weight="800" fill="#FFC107">2,400P</text>
+  <text x="940" y="278" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">커피 4잔 이상 교환 가능</text>
+
+  <path fill="#4CAF50" fill-opacity="0.3" d="M646,292 H1234 A8,8 0 0 1 1242,300 V336 A8,8 0 0 1 1234,344 H646 A8,8 0 0 1 638,336 V300 A8,8 0 0 1 646,292 Z" />
+  <text x="658" y="314" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9AA0A6">연간 적립 (2학기)</text>
+  <text x="940" y="316" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="24" font-weight="800" fill="#4CAF50">4,800P ≈ 4,800원</text>
+  <text x="940" y="336" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#A5D6A7">적극 참여(일 2회) 시 연 20,000P+ 가능</text>
+
+  
+  <path fill="#1A1A2E" stroke="#FFC107" stroke-width="2" d="M632,452 H902 A12,12 0 0 1 914,464 V688 A12,12 0 0 1 902,700 H632 A12,12 0 0 1 620,688 V464 A12,12 0 0 1 632,452 Z" />
+  <path fill="#FFC107" d="M623,452 H911 A3,2.50 0 0 1 914,454.50 V454.50 A3,2.50 0 0 1 911,457 H623 A3,2.50 0 0 1 620,454.50 V454.50 A3,2.50 0 0 1 623,452 Z" />
+  <image href="data:image/png;base64,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JUAkCZEAiSAAQAZ8CKU/IQAIWQYZSEmm+v0pRRJINaECAAEEAUQJRBlABlnGTtKfXYQggCAASKBooGigr88Nq6eSxDBdD1JiOHPgydI1TnB4PJ5uHEij0WBtRw82m61n9ycEQZABA0oSgiAoSQiCIChJCIKgJCEIgqAkIQiCkoQgCIKShCAIShKCIAhKEoIgKEkIgiAoSQiCoCQhCIKgJCEIgqAkIQiCktRFqqur9+/f30mGixcv7tu3TxCEPj1KSUnJiRMn+u5azp07V1RU1NTU1Mm11NTU7Nu3T5bl7l0C0kO+++67V1991f+nJEnl5eXHjx/n+fYXzO/du3f9+vVXLef1118vKChQtisqKvZ2RF1d3ZV+vmvXrg0bNnT9tD/++ONNmzb5/9yyZcuHH37o/9Nmsx09etRutyt/FhcXr1+/3v9nf9E/nxLZunXruXPnnn76aX+KLMv//Oc/A/MsXbq0pqbmwIED06dPB4CDBw8WFBQ899xzNE2/++672dnZCxcurKur27t37+TJk2ma7qTwQHieLykpqa2tzc7OHjt2LEEQgUcBgPr6+uPHjzMMc8MNN8THxwPAqVOnCIIYN25c55fQ9aMcOXLE6/UqOYcPH37u3LmqqiqO45RrqampKSws9BeVlpY2e/bs2travXv3Tps2jSCI4uJil8vlz6D8xF+42+3+6quvJk6cOHLkyDAd/x6Pp7CwsKSkJCkpafbs2SkpKUq60+nMz8+vrq5OSkqaM2dOamqqkl5QUHD69GmtVjt9+vThw4cria+99pooiv4y77333qysLP+fr7766g8//BB0XIqitm7darVaV6xY8dhjj/3sZz/buXPn22+/vWnTpn379r3++utr1qwBgKqqqvnz5zc0NACAVqv97LPP5syZs3///nXr1v3hD38IKvOFF174n//5n/r6ev9xH3vssblz5wLA3//+93feeSf08v/zP//z17/+dX5+/u233+5PHDdu3MGDB/fs2fPpp5/+9re/Dczv9Xp37dpVWVmZlpY2Y8YMpVoOHTrk9Xr//ve/S5KUmZnJsuzUqVO/+uqrmpqaBx98EACeeuqpDz74QCnhqaee+vOf/3zixIl169atWLHCYDBEnSS1tLS43W6Px6NSqfySVF1dnZmZOXjwYCWFIDp4reaBAwdIkuz83YahhQfyr3/9q7m5eejQoQUFBY2NjQsWLAgyuzZt2pSTk2O32zdu3Lhq1Sqj0djrRzl69CgAGI3G6urqmJiYoN9qtVp/JRQXF7Ns8HcgGhoaWlpaAKCtra2pqWnSpEmBe0VRrK6uHjZsWJjqUXl5+W233VZTU6P8GR8f//HHH8+aNctisSxevNhvriYlJX3zzTc5OTl//OMf33zzzfT0dJvN5vP53nrrrfvuu8/pdP7Hf/xHYLFTp04NlKSysrLS0tJVq1b5Uw4ePPjdd98BgM/nKygouOeeewCgsbGxoKDA5/vJZ1TeeOMNg8FQXFys1WqXLl360ksvzZkz50qX43Q6XS6XIAiBd02/xfTLX/5y2rRpn3766eLFizds2LB27VqLxaL0qEmTJu3YsUPJ+corr7S1tXVY/oULF5YtW1ZSUjJ+/PgTJ07odLrvv/9+xIgR7777rtlsPn/+vKLOsbGxU6dODTS6P/jgA+W4n3/++QMPPPDEE09Er+PW1NSkmKanTp0K2jV48OAZl6CoDl4IXVtbW1NTw/N8UVHRX/7yl/z8/K4XDgAWi6W8vPzmm2+++eabp0+fXlRUFOQoHTt2LDk5+fbbb1+2bBnDMMePH7/WS+jKUQBg9OjRS5cu9YtvoP4mJSX5K0Gn04WWv2jRouXLly9fvnzs2LEMw3SoiWEKz/PLli2zWq1btmxpbm7+5ptveJ5/7LHHZFnetGnTiRMn3nvvPbvdvm3bNrPZ/Morr7S2tv71r3+dN29eSUnJ0aNH1Wr1e++9p0iJMhRdl1AMk0CSkpL+EMDMmTMD9ypeVUVFRehJ1tfXx8fHGwwGiqIyMjL86tkhBw4cEEVx8+bNgUpkMpkUX2/jxo0A8NVXX61fv37v3r2K3p08eRIA4uLiZl1ClmXlJ6F8/fXXJSUlH3zwwYEDBzZv3uxwOLZt2wYAGzdu3L59e2Zm5qBBg7Zv3/7oo4+uX7++vLxc+ZXJZEpJSXnjjTfWr1+/YcOGjIyM2NjYAdIHrreVVFtbu3379kGDBqWnp3/33XcsywY6RCdPnlQaWKPRKFarJEn79u1LS0vze3OK45aYmDh58uSysrIjR450sXAAaG5uBgDFEUhNTZUkyWw2Bx7FbDb73YTk5GSlZ1/TJXTlKIGZCwsLvV5voClUVVV18OBBZdtqter1+qC74p49ezwej8fjcbvdGRkZipwphaenpyvOZphSUFBw9uzZp59+etGiRQAwZ86c/Px8q9XK87wyZvLz82+55ZabbrrJH/JobW1VNlJSUlQqlVKTTU1NAOByudavXx8bGzt//vyhQ4de05ls2LAhKGojiuL69evz8vKWLl360EMP3XrrrcnJyZs3b3722Wc7LMHtdv/hD384f/78okWL1q5dO3ny5FGjRgHAL37xiwceeEAxVcrLy+fOndvY2Kj0tLlz5xYWFk6bNq2uru7dd9+12+0Oh8Nutx87dkyr1T788MOhNvXq1atXr17tv1Mqnr7y56FDh4qKipRAwcWLF/fv3282m5W9Go0mPz9fiVs98sgjU6dOraysjDpJam5u3rNnT1VVVWZm5pIlS9RqtSAI27dvP3z48I033piTk6P4MorPEjhEa2pqtFqtP0CgbGRnZ2dkZChtcNXCR48efdXTU45ypfhx7x4lMCU+Pt7pdAa6oi6Xq7q6etKkSYoHF3T7MhqNo0ePVqvVNpvthx9+GDNmTGDhBoNBkaT8/PwgE3LGjBmzZs0a4JKkOBpKTZaWlv7rX/9S0ocMGXLnnXd+/fXXX3zxxRdffGEwGJYvX/7666+T5GUz/6mnnmpoaHj55Zf9g/Oll16aMGHCiRMntFrtrl27gu4c586dW7x4caDWB+595513Vq5c+dFHH/kHvCzL+/fvT0xMfOihh0aOHJmfny8IwjfffKN4benp6YGGmCzLP//5zw8dOvTOO+8sWbJkxYoV8+bNUwRi0KBBM2bMOHz48IULF/wRzEAOHTqkVqvLy8sTExPtdvuOHTueeeYZg8Ewbdq0r7766kph7N/85jcMw/ztb39bvny5JEk7d+5cvXr1okWLdDrdPffc8957723btu3+++9XbvnLli2rrKxsaWkxm82KCZ+cnPzHP/4xuiQpLi4uJiZmxYoVgwYNUlIWLFiQm5tbUlISFxcX6Lj9xLEkyeXLlwOA3W73hzMBQLEd9Hp9ZmYmSZJdKRwAEhISlKGbk5NTXV1NkqTJZCorK/MfRXEMAUAQhIsXL06cOPFaL6ErRwmMXg8bNqyxsbGqqiqouiZMmJCUlBRajQaDIS8vz+12f/jhh8nJyWPHjg2qKFEU77vvPsUJ+uyzz3Jzc5WI75WCYgMK5VsmigVkNpv3799fU1NTWVm5cOHCtLS0L774ory8fNu2bf/7v//73nvvxcfHP//888r4f+qppz788MM33nhDqYTBgwe/8MIL8+fPz83NPXTo0Lx5895///23337bf6Bbb71VsZu+/fbbEydOPPXUU0oddjZUaHr79u3+G8n3338PAPv373/jjTdCMxMEsW7dOoZhcnNzlcmQCxcupKWlzZo1KyMjIyhzRUXFJ5988sgjj/i9M5PJ9MknnwDAhx9+uGPHjieeeGLNmjUvvviicujQw82fP1+ZTXviiSe8Xu+KFSuefPLJ1NTUt99+Oy4ubu3atevWrQv0TNesWeN0OpuamlauXPnss8/GxMTU1tbu3LkzuiSJoijFGg8kJiZm9uzZit8Bl6a6lU4WZLAYDIa2trZvv/22G4UHmiRKyNlsNhcVFQVN1QHAxIkTN23atH37dp/PJ0nShAkT+uIoAHD69Ona2lr/HTXUOisqKhJF0eVyiaJIEERmZmZgJGvbtm2yLN95552ho0gJcMClDxzFxMSEjoEBixKC/fLLL1etWjVz5syZM2fef//9lZWVGRkZv//978+ePfvJJ58888wzjz766KBBg/79738///zzXq931apVX375pWLXBHpzyp1j4sSJNE1bLJbAA91+++1KZKC1tbWysjJ0pmznzp11dXVXWvwRHx//3HPPBaZ8/vnngfPrADBt2jRBEP7yl7/s3r27qqpKkqTs7OwFCxbcf//9AJCXl2c0Gr/88svQwn/zm98od7ji4mKLxTJ37lyGYX73u9+tXLny/fffV0JOfrZv337y5MmHH3540aJFM2bMSE5O3rJly+rVqwsKCtRq9enTp8ePHx+4fMHfz8vKyhRbcujQoTqdbs+ePR2GKSJZkn788Uer1XqlvXl5eZmZmRzHOZ1OrVZLkmRqamqQLa1SqfxTUQp1dXUVFRWSJHVe+JQpU/zfm7vjjjuKi4svXrw4d+7cIEte8cMfeOCB48ePGwyGBx54IMiy6K2jTJ48WVkEMHjw4MTERGU62U9iYqLfw4qNjSUIIjCqVVdXt3HjxuTk5Pvuuy80suDz+fzzzcqSGZvNpnhDilEZaM0NQIYMGfLb3/52w4YNd999d15eXlFR0Y4dO2677bb4+HiVSrV79+5ly5b96le/Onr0qNvtHjFiBM/zd9xxx/fffz9x4sS6urr169eTJLlmzRqr1bpu3boTJ06sWLHi008/FQRh3rx5/qNs2bLFH+gt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" x="620" y="457" width="294" height="243" />
+  <text x="767" y="706" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#E65100">포인트 샵 화면</text>
+
+  
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5" d="M938,452 H1248 A12,12 0 0 1 1260,464 V688 A12,12 0 0 1 1248,700 H938 A12,12 0 0 1 926,688 V464 A12,12 0 0 1 938,452 Z" />
+  <path fill="#4CAF50" d="M929,452 H1257 A3,3 0 0 1 1260,455 V456 A3,3 0 0 1 1257,459 H929 A3,3 0 0 1 926,456 V455 A3,3 0 0 1 929,452 Z" />
+  <text x="1093" y="478" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="14" font-weight="700" fill="#2E7D32">포인트 재원 흐름</text>
+
+  <text x="946" y="504" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">① 학교 전기료 절약 달성</text>
+  <text x="946" y="526" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">② 절약분 20~30% → 포인트 예산</text>
+  <text x="946" y="548" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">③ EcoReport 플랫폼 → 학생 지급</text>
+  <text x="946" y="570" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">④ 학생 기프티콘 교환</text>
+  <path fill="#E8EAED" d="M947,582 H1239 A1,1 0 0 1 1240,583 V583 A1,1 0 0 1 1239,584 H947 A1,1 0 0 1 946,583 V583 A1,1 0 0 1 947,582 Z" />
+  <text x="946" y="604" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#2E7D32">학교: 순 70~80% 비용 절약</text>
+  <text x="946" y="622" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#4285F4">학생: 실질 금전 보상</text>
+  <text x="946" y="640" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#EA4335">플랫폼: 구독료 + 마진</text>
+  <text x="1093" y="688" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">3자 Win-Win 지속 가능 구조</text>
+
+  <text x="1240" y="716" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">05d / 30</text>
+</svg>

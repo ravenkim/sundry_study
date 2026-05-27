@@ -1,0 +1,44 @@
+{
+    "loading": "불러오는 중...",
+    "saving": "저장 중...",
+    "checking": "확인 중...",
+    "processing": "처리 중...",
+    "save": "저장하기",
+    "cancel": "취소",
+    "next": "다음",
+    "back": "이전",
+    "goHome": "홈으로 이동",
+    "goBack": "이전 페이지",
+    "duplicateCheck": "중복확인",
+    "pointUnit": "P",
+    "loadingDash": "—",
+    "noPoints": "-",
+    "select": {
+        "placeholder": "선택해 주세요",
+        "searchPlaceholder": "검색...",
+        "noResults": "검색 결과가 없습니다."
+    },
+    "field": {
+        "username": "아이디",
+        "password": "비밀번호",
+        "email": "이메일",
+        "phone": "전화번호",
+        "affiliation": "소속"
+    },
+    "language": {
+        "label": "언어 설정"
+    },
+    "mascort": {
+        "smile": "기쁜 에코 마스코트",
+        "nomal": "에코 마스코트",
+        "recognize": "낭비를 확인하는 에코 마스코트",
+        "question": "궁금해하는 에코 마스코트",
+        "sleepy": "대기 중인 에코 마스코트",
+        "sad": "아쉬워하는 에코 마스코트",
+        "anger": "화난 에코 마스코트",
+        "contempt": "심각한 낭비를 보는 에코 마스코트"
+    },
+    "darkMode": "다크 모드",
+    "logout": "로그아웃",
+    "brand": "EcoReport"
+}

@@ -1,0 +1,289 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!-- 
+    버블 차트 템플릿
+    사용: 3D 데이터 표시（X중심선、Y중심선、거품 크기）
+    적용 가능한 시나리오: 시장 규모vs성장률vs공유하다、위험 평가、경쟁제품 분석
+    지원하다: 여러 개의 거품，크기는 3차원 데이터를 나타냅니다
+    -->
+    
+    <defs>
+        <!-- 버블 그라데이션（파란색） -->
+        <radialGradient id="bubbleGrad1" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#64B5F6;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#1976D2;stop-opacity:0.7" />
+        </radialGradient>
+        
+        <!-- 버블 그라데이션（녹색） -->
+        <radialGradient id="bubbleGrad2" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#81C784;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#388E3C;stop-opacity:0.7" />
+        </radialGradient>
+        
+        <!-- 버블 그라데이션（오렌지색） -->
+        <radialGradient id="bubbleGrad3" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#FFB74D;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#F57C00;stop-opacity:0.7" />
+        </radialGradient>
+        
+        <!-- 버블 그라데이션（보라） -->
+        <radialGradient id="bubbleGrad4" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#BA68C8;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:0.7" />
+        </radialGradient>
+        
+        <!-- 버블 그라데이션（빨간색） -->
+        <radialGradient id="bubbleGrad5" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#EF5350;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#D32F2F;stop-opacity:0.7" />
+        </radialGradient>
+        
+        <!-- 거품 그림자 -->
+        <filter id="bubbleShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+            <feOffset dx="0" dy="3"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.3"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 -->
+    <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="32" font-weight="bold" fill="#2C3E50">
+        <tspan>제품 라인 시장 포지셔닝 분석</tspan>
+    </text>
+    
+    <text x="60" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="18" fill="#7F8C8D">
+        <tspan>시장 규모 vs 성장률 vs 시장 점유율 · 버블 크기는 시장 점유율을 나타냅니다</tspan>
+    </text>
+    
+    <!-- 차트 영역 -->
+    <g id="chartArea">
+        <!-- 사분면배경 -->
+        <rect x="160" y="130" width="440" height="215" fill="#FFEBEE" opacity="0.3"/>
+        <rect x="600" y="130" width="440" height="215" fill="#E8F5E9" opacity="0.3"/>
+        <rect x="160" y="345" width="440" height="215" fill="#FFF3E0" opacity="0.3"/>
+        <rect x="600" y="345" width="440" height="215" fill="#E3F2FD" opacity="0.3"/>
+        
+        <!-- 사분면 라벨 -->
+        <text x="380" y="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#C62828" text-anchor="middle"><tspan>낮은 규모 · 높은 성장</tspan></text>
+        <text x="380" y="178" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#E57373" text-anchor="middle"><tspan>스타 상품 ⭐</tspan></text>
+        
+        <text x="820" y="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#2E7D32" text-anchor="middle"><tspan>대규모 · 높은 성장</tspan></text>
+        <text x="820" y="178" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#81C784" text-anchor="middle"><tspan>황소자리 제품 🐂</tspan></text>
+        
+        <text x="380" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#EF6C00" text-anchor="middle"><tspan>낮은 규모 · 저성장</tspan></text>
+        <text x="380" y="548" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#FFB74D" text-anchor="middle"><tspan>문제제품 ❓</tspan></text>
+        
+        <text x="820" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" fill="#1565C0" text-anchor="middle"><tspan>대규모 · 저성장</tspan></text>
+        <text x="820" y="548" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#64B5F6" text-anchor="middle"><tspan>현금 소 💰</tspan></text>
+        
+        <!-- 그리드 선 -->
+        <line x1="160" y1="345" x2="1040" y2="345" stroke="#BDC3C7" stroke-width="2" stroke-dasharray="6,3"/>
+        <line x1="600" y1="130" x2="600" y2="560" stroke="#BDC3C7" stroke-width="2" stroke-dasharray="6,3"/>
+        
+        <!-- Y축 그리드 선 -->
+        <line x1="160" y1="200" x2="1040" y2="200" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="160" y1="270" x2="1040" y2="270" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="160" y1="420" x2="1040" y2="420" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="160" y1="490" x2="1040" y2="490" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- X축 그리드 선 -->
+        <line x1="280" y1="130" x2="280" y2="560" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="400" y1="130" x2="400" y2="560" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="520" y1="130" x2="520" y2="560" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="720" y1="130" x2="720" y2="560" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="840" y1="130" x2="840" y2="560" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="960" y1="130" x2="960" y2="560" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+        
+        <!-- Y축 스케일 레이블 -->
+        <text x="145" y="565" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>-10%</tspan></text>
+        <text x="145" y="495" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>0%</tspan></text>
+        <text x="145" y="425" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>10%</tspan></text>
+        <text x="145" y="350" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#95A5A6" text-anchor="end"><tspan>20%</tspan></text>
+        <text x="145" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>30%</tspan></text>
+        <text x="145" y="205" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>40%</tspan></text>
+        <text x="145" y="135" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="end"><tspan>50%</tspan></text>
+        
+        <!-- Y축 제목 -->
+        <text x="35" y="345" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="15" fill="#5D6D7E" text-anchor="middle" transform="rotate(-90, 35, 345)">
+            <tspan>시장 성장률 (%)</tspan>
+        </text>
+        
+        <!-- X축 스케일 레이블 -->
+        <text x="160" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>0</tspan></text>
+        <text x="280" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>20</tspan></text>
+        <text x="400" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>40</tspan></text>
+        <text x="520" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>60</tspan></text>
+        <text x="600" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#95A5A6" text-anchor="middle"><tspan>80</tspan></text>
+        <text x="720" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>100</tspan></text>
+        <text x="840" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>120</tspan></text>
+        <text x="960" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>140</tspan></text>
+        <text x="1040" y="590" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" fill="#7F8C8D" text-anchor="middle"><tspan>160</tspan></text>
+        
+        <!-- X축 제목 -->
+        <text x="600" y="625" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="15" fill="#5D6D7E" text-anchor="middle">
+            <tspan>시장 규모（10억）</tspan>
+        </text>
+        
+        <!-- 중심선 -->
+        <line x1="160" y1="130" x2="160" y2="560" stroke="#95A5A6" stroke-width="2"/>
+        <line x1="160" y1="560" x2="1040" y2="560" stroke="#95A5A6" stroke-width="2"/>
+        
+        <!-- 
+        버블 데이터：
+        X: 시장 규모（10억）0-160，모든201억=120px
+        Y: 성장률 -10%도착하다50%，모든10%=70px，기준선(0%)존재하다y=490
+        거품 크기: 시장 점유율 5%-35%，반지름15-60px
+        
+        제품A: 규모1201억, 증가하다35%, 공유하다28% -> x=820, y=245, r=50
+        제품B: 규모851억, 증가하다25%, 공유하다18% -> x=630, y=315, r=38
+        제품C: 규모451억, 증가하다42%, 공유하다12% -> x=430, y=196, r=28
+        제품D: 규모1301억, 증가하다8%, 공유하다25% -> x=880, y=434, r=45
+        제품E: 규모301억, 증가하다-5%, 공유하다8% -> x=340, y=525, r=22
+        제품F: 규모651억, 증가하다15%, 공유하다9% -> x=550, y=385, r=24
+        -->
+        
+        <!-- 거품F: 제품F (녹색，중간 위치) -->
+        <circle cx="550" cy="385" r="24" fill="url(#bubbleGrad2)" filter="url(#bubbleShadow)"/>
+        <text x="550" y="390" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>F</tspan></text>
+        
+        <!-- 거품E: 제품E (빨간색，문제 사분면) -->
+        <circle cx="340" cy="525" r="22" fill="url(#bubbleGrad5)" filter="url(#bubbleShadow)"/>
+        <text x="340" y="530" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>E</tspan></text>
+        
+        <!-- 거품C: 제품C (오렌지색，별 사분면) -->
+        <circle cx="430" cy="196" r="28" fill="url(#bubbleGrad3)" filter="url(#bubbleShadow)"/>
+        <text x="430" y="201" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>C</tspan></text>
+        
+        <!-- 거품B: 제품B (보라，황소자리 사분면 가장자리) -->
+        <circle cx="630" cy="315" r="38" fill="url(#bubbleGrad4)" filter="url(#bubbleShadow)"/>
+        <text x="630" y="320" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>B</tspan></text>
+        
+        <!-- 거품D: 제품D (파란색，Cash Bull 사분면) -->
+        <circle cx="880" cy="434" r="45" fill="url(#bubbleGrad1)" filter="url(#bubbleShadow)"/>
+        <text x="880" y="439" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>D</tspan></text>
+        
+        <!-- 거품A: 제품A (녹색，최고，황소자리 사분면) -->
+        <circle cx="820" cy="245" r="50" fill="url(#bubbleGrad2)" filter="url(#bubbleShadow)"/>
+        <text x="820" y="250" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle"><tspan>A</tspan></text>
+    </g>
+    
+    <!-- 제품 목록 -->
+    <g id="productList" transform="translate(1060, 130)">
+        <rect x="0" y="0" width="180" height="320" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <text x="90" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle"><tspan>제품 목록</tspan></text>
+        
+        <line x1="15" y1="42" x2="165" y2="42" stroke="#E0E0E0" stroke-width="1"/>
+        
+        <!-- 제품A -->
+        <circle cx="30" cy="70" r="12" fill="url(#bubbleGrad2)"/>
+        <text x="50" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2C3E50"><tspan>제품A</tspan></text>
+        <text x="50" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>1201억 | +35% | 28%</tspan></text>
+        
+        <!-- 제품B -->
+        <circle cx="30" cy="115" r="10" fill="url(#bubbleGrad4)"/>
+        <text x="50" y="111" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2C3E50"><tspan>제품B</tspan></text>
+        <text x="50" y="127" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>851억 | +25% | 18%</tspan></text>
+        
+        <!-- 제품C -->
+        <circle cx="30" cy="160" r="8" fill="url(#bubbleGrad3)"/>
+        <text x="50" y="156" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2C3E50"><tspan>제품C</tspan></text>
+        <text x="50" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>451억 | +42% | 12%</tspan></text>
+        
+        <!-- 제품D -->
+        <circle cx="30" cy="205" r="11" fill="url(#bubbleGrad1)"/>
+        <text x="50" y="201" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2C3E50"><tspan>제품D</tspan></text>
+        <text x="50" y="217" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>1301억 | +8% | 25%</tspan></text>
+        
+        <!-- 제품E -->
+        <circle cx="30" cy="250" r="7" fill="url(#bubbleGrad5)"/>
+        <text x="50" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2C3E50"><tspan>제품E</tspan></text>
+        <text x="50" y="262" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>301억 | -5% | 8%</tspan></text>
+        
+        <!-- 제품F -->
+        <circle cx="30" cy="295" r="7" fill="url(#bubbleGrad2)"/>
+        <text x="50" y="291" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="13" font-weight="600" fill="#2C3E50"><tspan>제품F</tspan></text>
+        <text x="50" y="307" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="11" fill="#7F8C8D"><tspan>651억 | +15% | 9%</tspan></text>
+    </g>
+    
+    <!-- 버블 크기 범례 -->
+    <g id="sizeLegend" transform="translate(1060, 470)">
+        <rect x="0" y="0" width="180" height="90" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="90" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+              font-size="12" fill="#7F8C8D" text-anchor="middle"><tspan>거품 크기 = 시장 점유율</tspan></text>
+        
+        <circle cx="40" cy="60" r="10" fill="#BDC3C7"/>
+        <text x="40" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="10" fill="#7F8C8D" text-anchor="middle"><tspan>10%</tspan></text>
+        
+        <circle cx="90" cy="55" r="18" fill="#BDC3C7"/>
+        <text x="90" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="10" fill="#7F8C8D" text-anchor="middle"><tspan>20%</tspan></text>
+        
+        <circle cx="145" cy="48" r="25" fill="#BDC3C7"/>
+        <text x="145" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="10" fill="#7F8C8D" text-anchor="middle"><tspan>30%</tspan></text>
+    </g>
+    
+    <!-- 데이터 소스 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Malgun Gothic', sans-serif" 
+          font-size="14" fill="#95A5A6">
+        <tspan>데이터 소스: 시장조사부</tspan>
+    </text>
+</svg>
+

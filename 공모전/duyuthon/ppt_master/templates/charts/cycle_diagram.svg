@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--사이클 플로트 차트
+    목적: 반복하기, PDCA, 반복주기
+    적용 가능한 시나리오: 품질 관리, 민첩한 반복, 비즈니스 폐쇄 루프
+    지원: 5단계 주기(4~6단계 권장)-->
+    
+    <defs>
+        <!--노드 섀도우-->
+        <filter id="nodeShadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+            <feOffset dx="0" dy="3" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.15"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        
+        <!--카드 섀도우-->
+        <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            <feOffset dx="0" dy="2" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.1"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- 배경 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+    
+    <!-- 제목 영역 -->
+    <text x="60" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="32" font-weight="700" fill="#1A252F" letter-spacing="-0.5">지속적인 개선 주기</text>
+    <text x="60" y="100" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="16" fill="#7F8C8D">Continuous Improvement Cycle · 5단계 폐쇄 루프 드라이브</text>
+    
+    <!--센터 가이드 서클(점선)-->
+    <circle cx="480" cy="410" r="200" fill="none" stroke="#E0E0E0" stroke-width="2" stroke-dasharray="8,4"/>
+    <circle cx="480" cy="410" r="130" fill="none" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="4,4"/>
+    
+    <!--중앙 텍스트-->
+    <text x="480" y="400" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="20" font-weight="800" fill="#2C3E50">연속주기</text>
+    <text x="480" y="425" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="13" fill="#95A5A6">Continuous Loop</text>
+    
+    <!--5원을 따라 개별 (원의 중심 480,410 r=200)-->
+    <!--위치 : 상단(480,210), 우측상단(670,350), 우측하단(600,570), 좌측하단(360,570), 좌측상단(290,350)-->
+    
+    <!--화살표 연결 (곡선 경로 + 다각형 삼각형 사용)-->
+    <!-- 1→2 -->
+    <path d="M 510,220 Q 620,240 650,340" stroke="#6C5CE7" stroke-width="2.5" fill="none" stroke-opacity="0.5"/>
+    <polygon points="655,340 645,332 648,348" fill="#6C5CE7" fill-opacity="0.6"/>
+    
+    <!-- 2→3 -->
+    <path d="M 670,380 Q 680,480 610,555" stroke="#00B894" stroke-width="2.5" fill="none" stroke-opacity="0.5"/>
+    <polygon points="605,558 618,552 610,565" fill="#00B894" fill-opacity="0.6"/>
+    
+    <!-- 3→4 -->
+    <path d="M 575,580 Q 480,620 375,575" stroke="#FDCB6E" stroke-width="2.5" fill="none" stroke-opacity="0.5"/>
+    <polygon points="372,572 380,584 368,580" fill="#FDCB6E" fill-opacity="0.6"/>
+    
+    <!-- 4→5 -->
+    <path d="M 340,555 Q 280,470 285,365" stroke="#E17055" stroke-width="2.5" fill="none" stroke-opacity="0.5"/>
+    <polygon points="287,360 278,372 294,368" fill="#E17055" fill-opacity="0.6"/>
+    
+    <!-- 5→1 -->
+    <path d="M 310,340 Q 340,250 460,215" stroke="#0984E3" stroke-width="2.5" fill="none" stroke-opacity="0.5"/>
+    <polygon points="462,213 452,206 454,222" fill="#0984E3" fill-opacity="0.6"/>
+    
+    <!--노드 1: 연구 및 분석(상단)-->
+    <circle cx="480" cy="210" r="45" fill="#6C5CE7" filter="url(#nodeShadow)"/>
+    <text x="480" y="205" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="28" font-weight="700" fill="#FFFFFF">01</text>
+    <text x="480" y="228" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="11" font-weight="600" fill="#FFFFFF" fill-opacity="0.85">연구 및 분석</text>
+    
+    <!--노드 2: 구성표 설계(오른쪽 위)-->
+    <circle cx="670" cy="355" r="45" fill="#00B894" filter="url(#nodeShadow)"/>
+    <text x="670" y="350" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="28" font-weight="700" fill="#FFFFFF">02</text>
+    <text x="670" y="373" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="11" font-weight="600" fill="#FFFFFF" fill-opacity="0.85">계획 설계</text>
+    
+    <!--노드 3: 구현(오른쪽 아래)-->
+    <circle cx="600" cy="570" r="45" fill="#FDCB6E" filter="url(#nodeShadow)"/>
+    <text x="600" y="565" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="28" font-weight="700" fill="#FFFFFF">03</text>
+    <text x="600" y="588" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="11" font-weight="600" fill="#FFFFFF" fill-opacity="0.85">구현</text>
+    
+    <!--노드 4: 효과 평가(왼쪽 아래)-->
+    <circle cx="360" cy="570" r="45" fill="#E17055" filter="url(#nodeShadow)"/>
+    <text x="360" y="565" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="28" font-weight="700" fill="#FFFFFF">04</text>
+    <text x="360" y="588" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="11" font-weight="600" fill="#FFFFFF" fill-opacity="0.85">효과 평가</text>
+    
+    <!--노드 5: 반복 최적화(왼쪽 위)-->
+    <circle cx="290" cy="355" r="45" fill="#0984E3" filter="url(#nodeShadow)"/>
+    <text x="290" y="350" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="28" font-weight="700" fill="#FFFFFF">05</text>
+    <text x="290" y="373" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="11" font-weight="600" fill="#FFFFFF" fill-opacity="0.85">반복적 최적화</text>
+    
+    <!-- 오른쪽 도움말 패널 -->
+    <g filter="url(#cardShadow)">
+        <rect x="780" y="150" width="440" height="75" rx="8" fill="#FFFFFF"/>
+        <rect x="780" y="150" width="5" height="75" rx="3" fill="#6C5CE7"/>
+        <text x="802" y="178" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#6C5CE7">01 연구 및 분석</text>
+        <text x="802" y="202" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D">현재 상태에 대해 자세히 알아보기，데이터 및 사용자 피드백 수집</text>
+    </g>
+    
+    <g filter="url(#cardShadow)">
+        <rect x="780" y="240" width="440" height="75" rx="8" fill="#FFFFFF"/>
+        <rect x="780" y="240" width="5" height="75" rx="3" fill="#00B894"/>
+        <text x="802" y="268" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#00B894">02 계획 설계</text>
+        <text x="802" y="292" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D">개선 계획 수립，목표와 주요 경로를 명확히 합니다.</text>
+    </g>
+    
+    <g filter="url(#cardShadow)">
+        <rect x="780" y="330" width="440" height="75" rx="8" fill="#FFFFFF"/>
+        <rect x="780" y="330" width="5" height="75" rx="3" fill="#FDCB6E"/>
+        <text x="802" y="358" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#D4A537">03 구현</text>
+        <text x="802" y="382" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D">고급 프로그램 구현，리소스 조율 및 진행 상황 추적</text>
+    </g>
+    
+    <g filter="url(#cardShadow)">
+        <rect x="780" y="420" width="440" height="75" rx="8" fill="#FFFFFF"/>
+        <rect x="780" y="420" width="5" height="75" rx="3" fill="#E17055"/>
+        <text x="802" y="448" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#E17055">04 효과 평가</text>
+        <text x="802" y="472" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D">정량적 결과，목표 달성률 비교</text>
+    </g>
+    
+    <g filter="url(#cardShadow)">
+        <rect x="780" y="510" width="440" height="75" rx="8" fill="#FFFFFF"/>
+        <rect x="780" y="510" width="5" height="75" rx="3" fill="#0984E3"/>
+        <text x="802" y="538" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="15" font-weight="700" fill="#0984E3">05 반복적 최적화</text>
+        <text x="802" y="562" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+              font-size="12" fill="#7F8C8D">교훈，다음 개선 주기로 이동</text>
+    </g>
+
+    <!--하단 음표-->
+    <text x="60" y="690" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+          font-size="12" fill="#BDC3C7">매 사이클 완료，전반적인 능력은 한 단계씩 뛰어오릅니다.</text>
+</svg>

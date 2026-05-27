@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s08d_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+    <marker id="s08d_arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50" />
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s08d_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1A237E">확장 전략 — 4단계 시장 공략</text>
+  <path fill="#4CAF50" d="M42,64 H288 A2,2 0 0 1 290,66 V66 A2,2 0 0 1 288,68 H42 A2,2 0 0 1 40,66 V66 A2,2 0 0 1 42,64 Z" />
+  <path fill="#FFC107" d="M300,64 H376 A2,2 0 0 1 378,66 V66 A2,2 0 0 1 376,68 H300 A2,2 0 0 1 298,66 V66 A2,2 0 0 1 300,64 Z" />
+
+  
+  
+  <path fill="#E8F5E9" stroke="#4CAF50" stroke-width="2" d="M40,82 H290 A16,16 0 0 1 306,98 V586 A16,16 0 0 1 290,602 H40 A16,16 0 0 1 24,586 V98 A16,16 0 0 1 40,82 Z" />
+  <path fill="#4CAF50" d="M28,82 H302 A4,4 0 0 1 306,86 V86 A4,4 0 0 1 302,90 H28 A4,4 0 0 1 24,86 V86 A4,4 0 0 1 28,82 Z" />
+  <text x="165" y="110" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" dy="-8">Phase 1</text>
+  <circle cx="165" cy="148" r="40" fill="#4CAF50" fill-opacity="0.2" />
+  
+  <g transform="translate(141.0, 124.0) scale(2.0)" fill="none" stroke="#2E7D32">
+    <path d="M3 21l18 0" />
+    <path d="M4 21v-15a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v15" />
+    <path d="M9 21v-8a3 3 0 0 1 6 0v8" />
+  </g>
+  <text x="165" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#2E7D32">대학 캠퍼스</text>
+  <text x="165" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">2026 H2 ~ 2027 H1</text>
+
+  <line x1="44" y1="244" x2="286" y2="244" stroke="#A5D6A7" stroke-width="1" stroke-dasharray="3,2" />
+
+  <text x="44" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#2E7D32" font-weight="600">타겟</text>
+  <text x="44" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">4년제 대학 430개</text>
+  <text x="44" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">전문대학 130개+</text>
+  <text x="44" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">학생 수 약 200만명</text>
+
+  <text x="44" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#2E7D32" font-weight="600">진입 전략</text>
+  <text x="44" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 해커톤→ 파일럿 캠퍼스 직접 제안</text>
+  <text x="44" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 시설관리처 ESG 실적 패키지</text>
+  <text x="44" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 탄소중립 선도 대학 공모전</text>
+
+  <path fill="#4CAF50" fill-opacity="0.15" d="M54,436 H276 A10,10 0 0 1 286,446 V474 A10,10 0 0 1 276,484 H54 A10,10 0 0 1 44,474 V446 A10,10 0 0 1 54,436 Z" />
+  <text x="165" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#2E7D32">목표: 10개 대학 파일럿</text>
+  <text x="165" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">연 구독료 3,600만원 ARR</text>
+
+  <text x="165" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="22" fill="#4CAF50">★ 현재</text>
+  <text x="165" y="558" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#2E7D32" font-weight="600">핵심 타겟 시장</text>
+
+  
+  <line x1="310" y1="342" x2="326" y2="342" stroke="#4CAF50" stroke-width="2" marker-end="url(#s08d_arrow)" />
+
+  
+  <path fill="#E3F2FD" stroke="#4285F4" stroke-width="2" d="M346,82 H596 A16,16 0 0 1 612,98 V586 A16,16 0 0 1 596,602 H346 A16,16 0 0 1 330,586 V98 A16,16 0 0 1 346,82 Z" />
+  <path fill="#4285F4" d="M334,82 H608 A4,4 0 0 1 612,86 V86 A4,4 0 0 1 608,90 H334 A4,4 0 0 1 330,86 V86 A4,4 0 0 1 334,82 Z" />
+  <text x="471" y="102" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Phase 2</text>
+  <circle cx="471" cy="148" r="40" fill="#4285F4" fill-opacity="0.2" />
+  
+  <g transform="translate(447.0, 124.0) scale(2.0)" fill="none" stroke="#1565C0">
+    <path d="M3 21l18 0" />
+    <path d="M9 8l1 0" />
+    <path d="M9 12l1 0" />
+    <path d="M9 16l1 0" />
+    <path d="M14 8l1 0" />
+    <path d="M14 12l1 0" />
+    <path d="M14 16l1 0" />
+    <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />
+  </g>
+  <text x="471" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#1565C0">공공기관</text>
+  <text x="471" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">2027 H1 ~ 2027 H2</text>
+
+  <line x1="350" y1="244" x2="592" y2="244" stroke="#90CAF9" stroke-width="1" stroke-dasharray="3,2" />
+
+  <text x="350" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#1565C0" font-weight="600">타겟</text>
+  <text x="350" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">정부부처·공공기관 5,000+</text>
+  <text x="350" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">회의실·강당·공용 공간</text>
+  <text x="350" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">직원 참여형 에너지 절약</text>
+
+  <text x="350" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#1565C0" font-weight="600">진입 전략</text>
+  <text x="350" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 조달청 공공구매 등록</text>
+  <text x="350" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 국가 탄소중립 정책 연계</text>
+  <text x="350" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 대학 레퍼런스 사례 활용</text>
+
+  <path fill="#4285F4" fill-opacity="0.12" d="M360,436 H582 A10,10 0 0 1 592,446 V474 A10,10 0 0 1 582,484 H360 A10,10 0 0 1 350,474 V446 A10,10 0 0 1 360,436 Z" />
+  <text x="471" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#1565C0">목표: 30개 기관</text>
+  <text x="471" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">연 구독료 3.6억원 ARR</text>
+
+  <text x="471" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" fill="#4285F4">📋 파일럿 레퍼런스</text>
+  <text x="471" y="556" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#1565C0" font-weight="600">B2G 확장</text>
+
+  <line x1="616" y1="342" x2="632" y2="342" stroke="#4CAF50" stroke-width="2" marker-end="url(#s08d_arrow)" />
+
+  
+  <path fill="#FFF8E1" stroke="#FFC107" stroke-width="2" d="M652,82 H902 A16,16 0 0 1 918,98 V586 A16,16 0 0 1 902,602 H652 A16,16 0 0 1 636,586 V98 A16,16 0 0 1 652,82 Z" />
+  <path fill="#FFC107" d="M640,82 H914 A4,4 0 0 1 918,86 V86 A4,4 0 0 1 914,90 H640 A4,4 0 0 1 636,86 V86 A4,4 0 0 1 640,82 Z" />
+  <text x="777" y="102" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Phase 3</text>
+  <circle cx="777" cy="148" r="40" fill="#FFC107" fill-opacity="0.2" />
+  
+  <g transform="translate(753.0, 124.0) scale(2.0)" fill="none" stroke="#E65100">
+    <path d="M3 21l18 0" />
+    <path d="M5 21v-14l8 -4v18" />
+    <path d="M19 21v-10l-6 -4" />
+    <path d="M9 9l0 .01" />
+    <path d="M9 12l0 .01" />
+    <path d="M9 15l0 .01" />
+    <path d="M9 18l0 .01" />
+  </g>
+  <text x="777" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#E65100">오피스 빌딩</text>
+  <text x="777" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">2027 H2 ~ 2028</text>
+
+  <line x1="656" y1="244" x2="898" y2="244" stroke="#FFD54F" stroke-width="1" stroke-dasharray="3,2" />
+
+  <text x="656" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#E65100" font-weight="600">타겟</text>
+  <text x="656" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">중소기업 사무실</text>
+  <text x="656" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">코워킹스페이스</text>
+  <text x="656" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">대형 빌딩 공용 공간</text>
+
+  <text x="656" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#E65100" font-weight="600">진입 전략</text>
+  <text x="656" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• HR 시스템 연동</text>
+  <text x="656" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• ESG 경영 보고서 자동 생성</text>
+  <text x="656" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 직원 복지 포인트 연계</text>
+
+  <path fill="#FFC107" fill-opacity="0.15" d="M666,436 H888 A10,10 0 0 1 898,446 V474 A10,10 0 0 1 888,484 H666 A10,10 0 0 1 656,474 V446 A10,10 0 0 1 666,436 Z" />
+  <text x="777" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#E65100">목표: 100개 사업장</text>
+  <text x="777" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">연 구독료 6억원 ARR</text>
+
+  <text x="777" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" fill="#FFC107">🏢 B2B 확장</text>
+  <text x="777" y="556" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#E65100" font-weight="600">대형 시장 진출</text>
+
+  <line x1="922" y1="342" x2="938" y2="342" stroke="#4CAF50" stroke-width="2" marker-end="url(#s08d_arrow)" />
+
+  
+  <path fill="#FFEBEE" stroke="#EA4335" stroke-width="2" d="M958,82 H1240 A16,16 0 0 1 1256,98 V586 A16,16 0 0 1 1240,602 H958 A16,16 0 0 1 942,586 V98 A16,16 0 0 1 958,82 Z" />
+  <path fill="#EA4335" d="M946,82 H1252 A4,4 0 0 1 1256,86 V86 A4,4 0 0 1 1252,90 H946 A4,4 0 0 1 942,86 V86 A4,4 0 0 1 946,82 Z" />
+  <text x="1099" y="102" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Phase 4</text>
+  <circle cx="1099" cy="148" r="40" fill="#EA4335" fill-opacity="0.2" />
+  
+  <g transform="translate(1075.0, 124.0) scale(2.0)" fill="none" stroke="#C62828">
+    <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+  </g>
+  <text x="1099" y="208" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="700" fill="#C62828">주거·아파트</text>
+  <text x="1099" y="228" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">2028+</text>
+
+  <line x1="962" y1="244" x2="1236" y2="244" stroke="#EF9A9A" stroke-width="1" stroke-dasharray="3,2" />
+
+  <text x="962" y="264" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#C62828" font-weight="600">타겟</text>
+  <text x="962" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">아파트 단지 공용부</text>
+  <text x="962" y="304" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">복도·주차장·엘리베이터홀</text>
+  <text x="962" y="324" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">입주민 관리비 절감 보상</text>
+
+  <text x="962" y="352" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#C62828" font-weight="600">진입 전략</text>
+  <text x="962" y="372" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 입주자대표회의 영업</text>
+  <text x="962" y="392" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 관리비 절감 스마트앱 연동</text>
+  <text x="962" y="412" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• B2C 구독 (입주민 직접)</text>
+
+  <path fill="#EA4335" fill-opacity="0.1" d="M972,436 H1226 A10,10 0 0 1 1236,446 V474 A10,10 0 0 1 1226,484 H972 A10,10 0 0 1 962,474 V446 A10,10 0 0 1 972,436 Z" />
+  <text x="1099" y="456" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#C62828">잠재 시장 1조원+</text>
+  <text x="1099" y="474" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">전국 아파트 1,200만 세대</text>
+
+  <text x="1099" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" fill="#EA4335">🚀 최종 목표</text>
+  <text x="1099" y="556" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#C62828" font-weight="600">주거 에너지 혁신</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">08d / 30</text>
+</svg>

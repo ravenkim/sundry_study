@@ -1,0 +1,106 @@
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+app:
+  ai:
+    api-url: ${AI_API_URL:https://campus-energy-api-992786420144.us-central1.run.app/analyze}
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5173}
+  affiliation:
+    default-name: ${DEFAULT_AFFILIATION_NAME:삼육대학교}
+  kepco:
+    # 전력데이터개방포털(bigdata.kepco.co.kr) API 인증키 — 미설정 시 EnergyConstants 기본 단가 사용
+    api-key: ${KEPCO_API_KEY:}
+    contract-type-code: ${KEPCO_CONTRACT_TYPE_CODE:400}
+    contract-type-name: ${KEPCO_CONTRACT_TYPE_NAME:교육용}
+    sync-cron: ${KEPCO_SYNC_CRON:0 0 3 5 * *}
+
+jwt:
+  secret: ${JWT_SECRET:ecoreport-dev-jwt-secret-key-min-32-chars!!}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+spring:
+  http:
+    converters:
+      preferred-json-mapper: jackson2
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+  application:
+    name: backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    listener:
+      auto-startup: false
+    consumer:
+      group-id: eco-point-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: profile, email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+management:
+  info:
+    git:
+      mode: full
+    env:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info
+
+info:
+  app:
+    name: Backend Weather API
+    version: 1.0.0
+    description: A RESTful API for Something
+  build:
+    artifact: "@project.artifactId@"
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
+    properties:
+      java:
+        version: "@java.version@"
+
+kind: Application

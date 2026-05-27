@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s08b_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s08b_bgGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#s08b_bgGreen)"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s08b_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">환경 임팩트 계산</text>
+  <rect x="40" y="64" width="190" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="238" y="64" width="60" height="4" rx="2" fill="#FFC107"/>
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#5F6368">100개 강의실 기준 · 조명+에어컨 방치 하루 3시간 절감 가정</text>
+
+  <!-- 계산 흐름 -->
+  <!-- Step A -->
+  <rect x="24" y="96" width="580" height="130" rx="14" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="24" y="96" width="580" height="7" rx="3" fill="#4CAF50"/>
+  <text x="44" y="118" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">A. 소비전력 추정</text>
+  <text x="44" y="140" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">강의실 1개: 조명(80W) + 에어컨(1,500W) = <tspan font-weight="700" fill="#2E7D32">1,580W</tspan></text>
+  <text x="44" y="160" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">하루 낭비 시간: 3시간 → 1개 강의실 하루: 1.58 kW × 3h = <tspan font-weight="700" fill="#2E7D32">4.74 kWh</tspan></text>
+  <text x="44" y="180" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">100개 강의실 × 4.74 = <tspan font-weight="700" fill="#2E7D32">474 kWh/일</tspan> → 월 22일 기준: <tspan font-weight="700" fill="#2E7D32">10,428 kWh/월</tspan></text>
+  <text x="44" y="216" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">※ 실제 EcoReport 절감 가정: 제보 커버리지 30% → 절감 효율 30% 적용</text>
+
+  <!-- Step B -->
+  <rect x="24" y="242" width="580" height="120" rx="14" fill="#FFFFFF" stroke="#90CAF9" stroke-width="1.5"/>
+  <rect x="24" y="242" width="580" height="7" rx="3" fill="#4285F4"/>
+  <text x="44" y="264" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#1565C0">B. 실질 월 전기 절감량</text>
+  <text x="44" y="286" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">10,428 kWh × 30% 커버율 ≈ <tspan font-weight="700" fill="#1565C0">3,128 kWh/월 절감 가능</tspan></text>
+  <text x="44" y="306" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">보수적 가정(100개 중 절감 성공 50개): <tspan font-weight="700" fill="#1565C0">600~1,000 kWh/월</tspan></text>
+  <text x="44" y="326" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">전기료: 130원/kWh × 800 kWh = <tspan font-weight="700" fill="#1565C0">월 10.4만원 절약</tspan></text>
+  <text x="44" y="346" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">연간: 124만원 절약 (100개 강의실 단 하나의 캠퍼스 기준)</text>
+
+  <!-- Step C -->
+  <rect x="24" y="378" width="580" height="120" rx="14" fill="#FFFFFF" stroke="#A5D6A7" stroke-width="1.5"/>
+  <rect x="24" y="378" width="580" height="7" rx="3" fill="#2E7D32"/>
+  <text x="44" y="400" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#2E7D32">C. CO₂ 절감 계산</text>
+  <text x="44" y="422" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">한국 전력 탄소배출계수: <tspan font-weight="700">0.4586 kg CO₂/kWh</tspan> (2023년 기준)</text>
+  <text x="44" y="442" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">월 800 kWh × 0.4586 = <tspan font-weight="700" fill="#2E7D32">약 367 kg CO₂/월</tspan></text>
+  <text x="44" y="462" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">연간: <tspan font-weight="700" fill="#2E7D32">4,404 kg CO₂ ≈ 소나무 440그루 연간 흡수량</tspan></text>
+  <text x="44" y="482" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">소나무 1그루 연간 약 10kg CO₂ 흡수 (국립산림과학원)</text>
+
+  <!-- 전국 확장 -->
+  <rect x="24" y="514" width="580" height="90" rx="14" fill="#1A237E"/>
+  <text x="314" y="540" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="15" font-weight="700" fill="#FFFFFF">전국 430개 대학으로 확장 시</text>
+  <text x="314" y="562" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="18" font-weight="800" fill="#4CAF50">연간 약 18,935 tCO₂ 절감 가능</text>
+  <text x="314" y="584" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">= 소나무 189만 그루 심는 효과 · 전국 대학 연간 전기료 1,000억+ 절감</text>
+
+  <!-- 우측: 비교 시각화 -->
+  <rect x="628" y="96" width="628" height="508" rx="16" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="628" y="96" width="628" height="8" rx="4" fill="#2E7D32"/>
+  <text x="942" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">임팩트 비교</text>
+
+  <!-- 소나무 시각화 -->
+  <text x="648" y="148" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="600" fill="#1A237E">EcoReport 연간 탄소 절감 = 소나무 몇 그루?</text>
+
+  <!-- 소나무 아이콘들 (leaf 아이콘으로 표현) -->
+  <text x="648" y="178" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">1개 캠퍼스 (100개 강의실)</text>
+  <!-- 소나무 440개 → 그룹으로 표시 -->
+  <rect x="648" y="188" width="590" height="52" rx="8" fill="#E8F5E9"/>
+  <text x="660" y="220" font-family="Pretendard, system-ui, sans-serif"
+        font-size="32" fill="#4CAF50">🌲🌲🌲🌲🌲 × 88 = 440그루</text>
+
+  <text x="648" y="268" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">10개 캠퍼스 확장 시</text>
+  <rect x="648" y="278" width="590" height="52" rx="8" fill="#E8F5E9"/>
+  <text x="660" y="310" font-family="Pretendard, system-ui, sans-serif"
+        font-size="32" fill="#2E7D32">🌲🌲🌲🌲🌲 × 880 = 4,400그루</text>
+
+  <text x="648" y="358" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">전국 430개 대학 전면 도입 시</text>
+  <rect x="648" y="368" width="590" height="52" rx="8" fill="#C8E6C9"/>
+  <text x="660" y="400" font-family="Pretendard, system-ui, sans-serif"
+        font-size="28" font-weight="700" fill="#1B5E20">🌳🌳🌳🌳🌳 × 37만 = 189만 그루!</text>
+
+  <!-- 비교 데이터 -->
+  <line x1="648" y1="434" x2="1236" y2="434" stroke="#E8EAED" stroke-width="1"/>
+  <text x="648" y="456" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1A237E">에너지 절감 규모 비교</text>
+
+  <rect x="648" y="466" width="180" height="90" rx="10" fill="#E8F5E9"/>
+  <text x="738" y="490" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">가정용 전기</text>
+  <text x="738" y="510" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="22" font-weight="700" fill="#2E7D32">2.7가구</text>
+  <text x="738" y="532" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">월 평균 300kWh 기준</text>
+  <text x="738" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">1개 캠퍼스 월 절감</text>
+
+  <rect x="844" y="466" width="180" height="90" rx="10" fill="#E3F2FD"/>
+  <text x="934" y="490" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">EV 충전</text>
+  <text x="934" y="510" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="22" font-weight="700" fill="#1565C0">12대분</text>
+  <text x="934" y="532" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">65kWh/대 기준</text>
+  <text x="934" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">완충 가능 대수</text>
+
+  <rect x="1040" y="466" width="196" height="90" rx="10" fill="#FFF8E1"/>
+  <text x="1138" y="490" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">탄소 크레딧</text>
+  <text x="1138" y="510" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="22" font-weight="700" fill="#E65100">약 2만원</text>
+  <text x="1138" y="532" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">월 367kg CO₂</text>
+  <text x="1138" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">거래소 가격 기준</text>
+
+  <!-- 하단 배너 -->
+  <rect x="24" y="620" width="1232" height="64" rx="12" fill="#2E7D32"/>
+  <use data-icon="tabler-outline/leaf" x="44" y="636" width="30" height="30" fill="#A5D6A7"/>
+  <text x="88" y="648" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#FFFFFF">스마트폰 한 대가 만드는 변화 — 학생 1명 연간 제보 100회 = 소나무 4.4그루</text>
+  <text x="88" y="670" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#A5D6A7">설비 투자 없이 · 앱 하나로 · 전국 학생이 함께 만드는 탄소중립 캠퍼스</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">08b / 30</text>
+</svg>

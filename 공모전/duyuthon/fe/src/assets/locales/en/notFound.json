@@ -1,0 +1,14 @@
+{
+    "brand": "EcoReport",
+    "code": "404",
+    "mascotBubble": "This isn't an empty classroom… looks like we're lost!",
+    "title": "Page not found",
+    "descriptionLine1": "The address may have changed or the page may have been removed.",
+    "descriptionLine2": "Try navigating using the buttons below.",
+    "tipsTitle": "Try this",
+    "tipUrlTypo": "• Check the URL for typos.",
+    "tipUseMenu": "• Return to Home and select Report or History from the menu.",
+    "tipLogin": "• If the page requires login, please sign in first.",
+    "goHome": "Go to Home",
+    "goBack": "Previous Page"
+}

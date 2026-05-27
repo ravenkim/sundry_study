@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s05c_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s05c_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 제목 -->
+  <text x="40" y="50" font-family="Pretendard, system-ui, sans-serif"
+        font-size="28" font-weight="700" fill="#1A237E">관리자 대시보드 — UI 투어</text>
+  <rect x="40" y="58" width="210" height="3" rx="2" fill="#4285F4"/>
+  <text x="40" y="76" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">관리자 전용 웹 인터페이스 — 실제 구현 화면 (1280×800 데스크톱)</text>
+
+  <!-- 관리자 스크린샷: 1280×800 비율 = 1.6:1 (가로) -->
+  <!-- 프레임 크기: 400×250 = 1.6:1 완벽 매칭 -->
+  <!-- Row 1: 3개 (y=82~340), Row 2: 3개 (y=352~606), 라벨(y=612~640) -->
+  <!-- x: 20 | 432 | 844  (gap=12, 각 400px) -->
+
+  <!-- ===== ROW 1 ===== -->
+  <!-- R1 C1: 대시보드 -->
+  <rect x="20" y="82" width="400" height="250" rx="10" fill="#F8F9FA" stroke="#1A237E" stroke-width="2"/>
+  <rect x="20" y="82" width="400" height="5" rx="2" fill="#1A237E"/>
+  <image href="../images/screen_admin_dashboard.png" x="20" y="87" width="400" height="245" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="20" y="334" width="400" height="30" rx="6" fill="#1A237E"/>
+  <text x="220" y="354" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">메인 대시보드</text>
+
+  <!-- R1 C2: 제보 목록 -->
+  <rect x="432" y="82" width="400" height="250" rx="10" fill="#F8F9FA" stroke="#4285F4" stroke-width="2"/>
+  <rect x="432" y="82" width="400" height="5" rx="2" fill="#4285F4"/>
+  <image href="../images/screen_admin_reports.png" x="432" y="87" width="400" height="245" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="432" y="334" width="400" height="30" rx="6" fill="#4285F4"/>
+  <text x="632" y="354" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">제보 목록</text>
+
+  <!-- R1 C3: 장소 관리 -->
+  <rect x="844" y="82" width="416" height="250" rx="10" fill="#F8F9FA" stroke="#4CAF50" stroke-width="2"/>
+  <rect x="844" y="82" width="416" height="5" rx="2" fill="#4CAF50"/>
+  <image href="../images/screen_admin_buildings.png" x="844" y="87" width="416" height="245" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="844" y="334" width="416" height="30" rx="6" fill="#4CAF50"/>
+  <text x="1052" y="354" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">장소 관리 (3단 계층)</text>
+
+  <!-- ===== ROW 2 ===== -->
+  <!-- R2 C1: 절약 통계 -->
+  <rect x="20" y="370" width="400" height="250" rx="10" fill="#F8F9FA" stroke="#FFC107" stroke-width="2"/>
+  <rect x="20" y="370" width="400" height="5" rx="2" fill="#FFC107"/>
+  <image href="../images/screen_admin_stats.png" x="20" y="375" width="400" height="245" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="20" y="622" width="400" height="30" rx="6" fill="#FFC107"/>
+  <text x="220" y="642" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">절약 통계 (kWh·CO₂·금액)</text>
+
+  <!-- R2 C2: 포인트 관리 -->
+  <rect x="432" y="370" width="400" height="250" rx="10" fill="#F8F9FA" stroke="#EA4335" stroke-width="2"/>
+  <rect x="432" y="370" width="400" height="5" rx="2" fill="#EA4335"/>
+  <image href="../images/screen_admin_points.png" x="432" y="375" width="400" height="245" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="432" y="622" width="400" height="30" rx="6" fill="#EA4335"/>
+  <text x="632" y="642" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">포인트 관리</text>
+
+  <!-- R2 C3: 사용자 관리 -->
+  <rect x="844" y="370" width="416" height="250" rx="10" fill="#F8F9FA" stroke="#9C27B0" stroke-width="2"/>
+  <rect x="844" y="370" width="416" height="5" rx="2" fill="#9C27B0"/>
+  <image href="../images/screen_admin_users.png" x="844" y="375" width="416" height="245" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="844" y="622" width="416" height="30" rx="6" fill="#9C27B0"/>
+  <text x="1052" y="642" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">사용자 관리</text>
+
+  <!-- 하단 요약 -->
+  <rect x="20" y="658" width="1240" height="44" rx="10" fill="#1A237E"/>
+  <text x="640" y="676" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" font-weight="700" fill="#FFFFFF">관리자 6개 화면 — 제보 · 장소 · 포인트 · 통계 · 사용자 관리 완성 ✅</text>
+  <text x="640" y="695" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">React 19 · shadcn/ui · Redux-Saga · Spring Boot 4 REST API</text>
+
+  <text x="1240" y="716" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="11" fill="#9AA0A6">05c / 30</text>
+</svg>

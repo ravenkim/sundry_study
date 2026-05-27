@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s09d_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="33%" stop-color="#FFC107"/>
+      <stop offset="66%" stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <linearGradient id="s09d_bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+    <linearGradient id="s09d_centerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#s09d_bgGrad)"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s09d_topBar)"/>
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <text x="640" y="54" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="34" font-weight="700" fill="#1A237E">발표 요약</text>
+  <rect x="530" y="64" width="220" height="4" rx="2" fill="url(#s09d_topBar)"/>
+
+  <!-- 중앙 원 -->
+  <circle cx="640" cy="350" r="120" fill="url(#s09d_centerBg)" fill-opacity="0.15" stroke="#4CAF50" stroke-width="2"/>
+  <circle cx="640" cy="350" r="90" fill="#FFFFFF" fill-opacity="0.9"/>
+  <text x="640" y="334" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="16" font-weight="700" fill="#2E7D32">EcoReport</text>
+  <text x="640" y="356" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">사진 한 장</text>
+  <text x="640" y="374" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ AI 판별</text>
+  <text x="640" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ 포인트 적립</text>
+
+  <!-- 6개 요약 카드 (주변) -->
+  <!-- 상단 좌 -->
+  <rect x="60" y="90" width="300" height="100" rx="14" fill="#FFFFFF" stroke="#EA4335" stroke-width="1.5"/>
+  <rect x="60" y="90" width="300" height="6" rx="3" fill="#EA4335"/>
+  <text x="80" y="116" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#C62828">문제</text>
+  <text x="80" y="136" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">빈 강의실 에너지 30% 낭비</text>
+  <text x="80" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">IoT 없이 해결 불가능?</text>
+  <text x="80" y="172" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">→ EcoReport가 답입니다</text>
+
+  <!-- 상단 우 -->
+  <rect x="920" y="90" width="300" height="100" rx="14" fill="#FFFFFF" stroke="#FFC107" stroke-width="1.5"/>
+  <rect x="920" y="90" width="300" height="6" rx="3" fill="#FFC107"/>
+  <text x="940" y="116" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">솔루션</text>
+  <text x="940" y="136" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">크라우드소싱 + AI + 포인트</text>
+  <text x="940" y="154" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">설비 투자 Zero, 즉시 도입</text>
+  <text x="940" y="172" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">학생 참여형 지속 가능 모델</text>
+
+  <!-- 좌측 상 -->
+  <rect x="24" y="218" width="280" height="100" rx="14" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+  <rect x="24" y="218" width="280" height="6" rx="3" fill="#4285F4"/>
+  <text x="44" y="244" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#1565C0">AI 기술</text>
+  <text x="44" y="264" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">YOLOv8n mAP 0.990</text>
+  <text x="44" y="284" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">Gemini 2.5 Flash 판정</text>
+  <text x="44" y="298" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">Cloud Run 배포 완료 ✅</text>
+
+  <!-- 우측 상 -->
+  <rect x="976" y="218" width="280" height="100" rx="14" fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5"/>
+  <rect x="976" y="218" width="280" height="6" rx="3" fill="#4CAF50"/>
+  <text x="996" y="244" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">임팩트</text>
+  <text x="996" y="264" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">월 600~1,000 kWh 절약</text>
+  <text x="996" y="284" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">280~470 kg CO₂ 절감</text>
+  <text x="996" y="298" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">소나무 50~80그루/월</text>
+
+  <!-- 좌측 하 -->
+  <rect x="24" y="380" width="280" height="100" rx="14" fill="#FFFFFF" stroke="#4CAF50" stroke-width="1.5"/>
+  <rect x="24" y="380" width="280" height="6" rx="3" fill="#2E7D32"/>
+  <text x="44" y="406" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">비즈니스</text>
+  <text x="44" y="426" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">SaaS 구독 · 포인트 마진</text>
+  <text x="44" y="446" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">430개 대학 × 40만 = 1.7억/월</text>
+  <text x="44" y="460" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">Phase 1: 10개 파일럿 목표</text>
+
+  <!-- 우측 하 -->
+  <rect x="976" y="380" width="280" height="100" rx="14" fill="#FFFFFF" stroke="#9C27B0" stroke-width="1.5"/>
+  <rect x="976" y="380" width="280" height="6" rx="3" fill="#9C27B0"/>
+  <text x="996" y="406" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#6A1B9A">확장 전략</text>
+  <text x="996" y="426" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">대학 → 공공기관 → 오피스</text>
+  <text x="996" y="446" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">→ 아파트 공용부</text>
+  <text x="996" y="460" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">잠재 시장 1조원+</text>
+
+  <!-- 하단 좌 -->
+  <rect x="60" y="510" width="300" height="100" rx="14" fill="#FFFFFF" stroke="#EA4335" stroke-width="1.5"/>
+  <rect x="60" y="510" width="300" height="6" rx="3" fill="#EA4335"/>
+  <text x="80" y="536" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#C62828">구현 현황</text>
+  <text x="80" y="556" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">핵심 기능 7/10 완료 ✅</text>
+  <text x="80" y="576" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">ubuntu03 24시간 배포 중</text>
+  <text x="80" y="590" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">데모 시나리오 100% 작동</text>
+
+  <!-- 하단 우 -->
+  <rect x="920" y="510" width="300" height="100" rx="14" fill="#FFFFFF" stroke="#FFC107" stroke-width="1.5"/>
+  <rect x="920" y="510" width="300" height="6" rx="3" fill="#FFC107"/>
+  <text x="940" y="536" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" font-weight="700" fill="#E65100">팀</text>
+  <text x="940" y="556" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">김해준(BE) · 차성호(AI)</text>
+  <text x="940" y="576" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#5F6368">이은총(FE) · 14팀</text>
+  <text x="940" y="590" font-family="Pretendard, system-ui, sans-serif"
+        font-size="12" fill="#9AA0A6">48시간 풀스택 해커톤</text>
+
+  <!-- 핵심 한 문장 -->
+  <rect x="24" y="626" width="1232" height="58" rx="12" fill="#1A237E"/>
+  <text x="640" y="652" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="20" font-weight="700" fill="#FFFFFF">사진 한 장으로 캠퍼스를 바꾸고, 포인트로 학생을 움직이고, AI로 지구를 지킵니다.</text>
+  <text x="640" y="674" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif"
+        font-size="14" fill="#4CAF50">EcoReport — 2026 두유톤 14팀</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif"
+        font-size="13" fill="#9AA0A6">09d / 30</text>
+</svg>

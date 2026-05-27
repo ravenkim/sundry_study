@@ -1,0 +1,44 @@
+{
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "checking": "Checking...",
+    "processing": "Processing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "next": "Next",
+    "back": "Back",
+    "goHome": "Go to Home",
+    "goBack": "Previous Page",
+    "duplicateCheck": "Check availability",
+    "pointUnit": "P",
+    "loadingDash": "—",
+    "noPoints": "-",
+    "select": {
+        "placeholder": "Please select",
+        "searchPlaceholder": "Search...",
+        "noResults": "No results found."
+    },
+    "field": {
+        "username": "Username",
+        "password": "Password",
+        "email": "Email",
+        "phone": "Phone number",
+        "affiliation": "Affiliation"
+    },
+    "language": {
+        "label": "Language"
+    },
+    "mascort": {
+        "smile": "Happy Eco mascot",
+        "nomal": "Eco mascot",
+        "recognize": "Eco mascot confirming waste",
+        "question": "Curious Eco mascot",
+        "sleepy": "Eco mascot waiting",
+        "sad": "Disappointed Eco mascot",
+        "anger": "Angry Eco mascot",
+        "contempt": "Eco mascot seeing serious waste"
+    },
+    "darkMode": "Dark mode",
+    "logout": "Log out",
+    "brand": "EcoReport"
+}

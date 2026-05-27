@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+
+  <defs>
+    <linearGradient id="s05_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#4CAF50"/>
+      <stop offset="33%"  stop-color="#FFC107"/>
+      <stop offset="66%"  stop-color="#4285F4"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+    <marker id="s05_arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9AA0A6"/>
+    </marker>
+    <marker id="s05_arrowGreen" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4CAF50"/>
+    </marker>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s05_topBar)"/>
+
+  <!-- 좌측 4색 세로 바 -->
+  <rect x="0" y="6"   width="10" height="178" fill="#4CAF50"/>
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107"/>
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4"/>
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335"/>
+
+  <!-- 슬라이드 제목 -->
+  <text x="40" y="54" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="36" font-weight="700" fill="#1A237E">세 가지 핵심 기능</text>
+  <rect x="40"  y="64" width="110" height="4" rx="2" fill="#4CAF50"/>
+  <rect x="158" y="64" width="70"  height="4" rx="2" fill="#FFC107"/>
+  <rect x="236" y="64" width="70"  height="4" rx="2" fill="#4285F4"/>
+
+  <!-- ======= 3 기능 카드 ======= -->
+
+  <!-- 카드 1: AI 이미지 분석 -->
+  <rect x="24" y="82" width="265" height="210" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="24" y="82" width="265" height="6" rx="3" fill="#4CAF50"/>
+  <circle cx="74" cy="138" r="28" fill="#4CAF50" fill-opacity="0.12"/>
+  <use data-icon="tabler-outline/camera" x="54" y="118" width="40" height="40" fill="#4CAF50"/>
+  <text x="116" y="128" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="17" font-weight="700" fill="#1A252F">AI 이미지 분석</text>
+  <text x="116" y="148" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" font-weight="600" fill="#4CAF50">AI Image Analysis</text>
+  <line x1="44" y1="168" x2="269" y2="168" stroke="#F0F0F0" stroke-width="1"/>
+  <text x="44" y="191" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">사진 1장으로 조명·에어컨 낭비</text>
+  <text x="44" y="211" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">자동 판별 — 3단계 AI 파이프라인</text>
+  <text x="44" y="231" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">5초 이내 · Cloud Run 연동 ✅</text>
+  <rect x="44" y="258" width="86" height="22" rx="11" fill="#4CAF50" fill-opacity="0.1"/>
+  <text x="87" y="273" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" font-weight="700" fill="#4CAF50">핵심 기술</text>
+
+  <!-- 카드 2: 제보·포인트 -->
+  <rect x="303" y="82" width="265" height="210" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="303" y="82" width="265" height="6" rx="3" fill="#FFC107"/>
+  <circle cx="353" cy="138" r="28" fill="#FFC107" fill-opacity="0.12"/>
+  <use data-icon="tabler-outline/coins" x="333" y="118" width="40" height="40" fill="#FFC107"/>
+  <text x="395" y="128" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="17" font-weight="700" fill="#1A252F">제보·포인트 정산</text>
+  <text x="395" y="148" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" font-weight="600" fill="#E65100">Report &amp; Reward</text>
+  <line x1="323" y1="168" x2="548" y2="168" stroke="#F0F0F0" stroke-width="1"/>
+  <text x="323" y="191" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">사진+장소 → 낭비 확인 → 즉시 적립</text>
+  <text x="323" y="211" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">포인트 → 기프티콘 교환</text>
+  <text x="323" y="231" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">제보 이력 및 상태 조회 가능</text>
+  <rect x="323" y="258" width="86" height="22" rx="11" fill="#FFC107" fill-opacity="0.15"/>
+  <text x="366" y="273" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" font-weight="700" fill="#E65100">참여 보상</text>
+
+  <!-- 카드 3: 관리자 대시보드 -->
+  <rect x="582" y="82" width="265" height="210" rx="14" fill="#FFFFFF" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="582" y="82" width="265" height="6" rx="3" fill="#4285F4"/>
+  <circle cx="632" cy="138" r="28" fill="#4285F4" fill-opacity="0.1"/>
+  <use data-icon="tabler-outline/building-arch" x="612" y="118" width="40" height="40" fill="#4285F4"/>
+  <text x="674" y="128" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="17" font-weight="700" fill="#1A252F">관리자 대시보드</text>
+  <text x="674" y="148" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" font-weight="600" fill="#1565C0">Admin Dashboard</text>
+  <line x1="602" y1="168" x2="827" y2="168" stroke="#F0F0F0" stroke-width="1"/>
+  <text x="602" y="191" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">6화면 · 제보·통계·포인트 관리</text>
+  <text x="602" y="211" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">장소 관리 CRUD — BE 연동 ✅</text>
+  <text x="602" y="231" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#5F6368">Recharts 통계 차트 내장</text>
+  <rect x="602" y="258" width="86" height="22" rx="11" fill="#4285F4" fill-opacity="0.1"/>
+  <text x="645" y="273" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" font-weight="700" fill="#4285F4">운영 도구</text>
+
+  <!-- ======= AI 파이프라인 numbered steps ======= -->
+  <rect x="24" y="308" width="823" height="100" rx="12" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <text x="44" y="332" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="15" font-weight="700" fill="#1A237E">AI 3단계 파이프라인</text>
+
+  <!-- Step 1 -->
+  <circle cx="64"  cy="375" r="18" fill="#4CAF50"/>
+  <text x="64" y="381" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="800" fill="#FFFFFF">①</text>
+  <text x="90"  y="368" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">YOLOv8n</text>
+  <text x="90"  y="387" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#5F6368">사람·가구 탐지 → 강의실 판별</text>
+  <!-- Arrow 1→2 -->
+  <line x1="278" y1="375" x2="310" y2="375" stroke="#9AA0A6" stroke-width="2" marker-end="url(#s05_arrow)"/>
+
+  <!-- Step 2 -->
+  <circle cx="330" cy="375" r="18" fill="#4285F4"/>
+  <text x="330" y="381" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="800" fill="#FFFFFF">②</text>
+  <text x="356"  y="368" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">Custom AC</text>
+  <text x="356"  y="387" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#5F6368">에어컨 탐지 · mAP 0.990</text>
+  <!-- Arrow 2→3 -->
+  <line x1="545" y1="375" x2="577" y2="375" stroke="#9AA0A6" stroke-width="2" marker-end="url(#s05_arrow)"/>
+
+  <!-- Step 3 -->
+  <circle cx="597" cy="375" r="18" fill="#FFC107"/>
+  <text x="597" y="381" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="800" fill="#FFFFFF">③</text>
+  <text x="623"  y="368" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1A252F">Gemini 2.5 Flash</text>
+  <text x="623"  y="387" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#5F6368">조명·에어컨 ON/OFF 최종 판별</text>
+
+  <!-- Result badge -->
+  <rect x="720" y="354" width="112" height="42" rx="21" fill="#4CAF50"/>
+  <text x="776" y="370" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" font-weight="700" fill="#FFFFFF">WASTE_DETECTED</text>
+  <text x="776" y="388" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="10" fill="#FFFFFF">낭비 감지 → 제보 저장</text>
+
+  <!-- ======= UI 카운트 배지 ======= -->
+  <rect x="24" y="424" width="260" height="46" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1"/>
+  <use data-icon="tabler-outline/location-check" x="40" y="432" width="24" height="24" fill="#4CAF50"/>
+  <text x="72" y="444" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#2E7D32">학생 UI 9화면 구현 완료</text>
+  <text x="72" y="462" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#5F6368">로그인 · 제보 · 이력 · 샵 · 프로필</text>
+
+  <rect x="298" y="424" width="250" height="46" rx="10" fill="#E3F2FD" stroke="#4285F4" stroke-width="1"/>
+  <use data-icon="tabler-outline/building-arch" x="314" y="432" width="24" height="24" fill="#4285F4"/>
+  <text x="346" y="444" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#1565C0">관리자 UI 6화면 구현 완료</text>
+  <text x="346" y="462" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#5F6368">대시보드 · 제보 · 장소 · 포인트</text>
+
+  <rect x="562" y="424" width="285" height="46" rx="10" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1"/>
+  <use data-icon="tabler-outline/cloud-computing" x="578" y="432" width="24" height="24" fill="#9AA0A6"/>
+  <text x="610" y="444" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="700" fill="#5F6368">JWT · Google OAuth2 · Docker</text>
+  <text x="610" y="462" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="12" fill="#9AA0A6">이메일 로그인 · 구글 로그인 · ubuntu03 배포</text>
+
+  <!-- ======= 우측 스크린샷 ======= -->
+  <!-- 폰 프레임 배경 -->
+  <rect x="868" y="72" width="195" height="610" rx="20" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+  <rect x="1072" y="72" width="195" height="610" rx="20" fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5"/>
+
+  <!-- 스크린: screen_home.png -->
+  <image href="../images/screen_home.png" x="872" y="80" width="187" height="405" preserveAspectRatio="xMidYMin meet"/>
+  <text x="964" y="510" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">홈 화면</text>
+  <text x="964" y="528" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">포인트 + 건물 절약 현황</text>
+
+  <!-- 스크린: screen_shop.png -->
+  <image href="../images/screen_shop.png" x="1076" y="80" width="187" height="405" preserveAspectRatio="xMidYMin meet"/>
+  <text x="1168" y="510" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" font-weight="600" fill="#5F6368">포인트샵</text>
+  <text x="1168" y="528" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="11" fill="#9AA0A6">기프티콘 교환</text>
+
+  <!-- 화면 레이블 구분선 -->
+  <line x1="868" y1="495" x2="1063" y2="495" stroke="#E8EAED" stroke-width="1"/>
+  <line x1="1072" y1="495" x2="1267" y2="495" stroke="#E8EAED" stroke-width="1"/>
+
+  <!-- 페이지 번호 -->
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, -apple-system, sans-serif"
+        font-size="13" fill="#9AA0A6">05 / 10</text>
+
+</svg>

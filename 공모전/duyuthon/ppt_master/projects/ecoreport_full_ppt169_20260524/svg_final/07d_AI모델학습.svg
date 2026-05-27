@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="s07d_topBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="33%" stop-color="#FFC107" />
+      <stop offset="66%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#EA4335" />
+    </linearGradient>
+    <linearGradient id="s07d_barGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="100%" stop-color="#81C784" />
+    </linearGradient>
+    <linearGradient id="s07d_barBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4285F4" />
+      <stop offset="100%" stop-color="#64B5F6" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF" />
+  <rect x="0" y="0" width="1280" height="6" fill="url(#s07d_topBar)" />
+  <rect x="0" y="6" width="10" height="178" fill="#4CAF50" />
+  <rect x="0" y="184" width="10" height="178" fill="#FFC107" />
+  <rect x="0" y="362" width="10" height="178" fill="#4285F4" />
+  <rect x="0" y="540" width="10" height="180" fill="#EA4335" />
+
+  
+  <text x="40" y="54" font-family="Pretendard, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1A237E">AI 모델 학습 결과</text>
+  <path fill="#4CAF50" d="M42,64 H228 A2,2 0 0 1 230,66 V66 A2,2 0 0 1 228,68 H42 A2,2 0 0 1 40,66 V66 A2,2 0 0 1 42,64 Z" />
+  <path fill="#4285F4" d="M240,64 H316 A2,2 0 0 1 318,66 V66 A2,2 0 0 1 316,68 H240 A2,2 0 0 1 238,66 V66 A2,2 0 0 1 240,64 Z" />
+  <text x="40" y="84" font-family="Pretendard, system-ui, sans-serif" font-size="14" fill="#9AA0A6">YOLOv8n 자체 학습 · mAP@0.5: 0.990 달성</text>
+
+  
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5" d="M40,96 H388 A16,16 0 0 1 404,112 V660 A16,16 0 0 1 388,676 H40 A16,16 0 0 1 24,660 V112 A16,16 0 0 1 40,96 Z" />
+  <path fill="#4285F4" d="M28,96 H400 A4,4 0 0 1 404,100 V100 A4,4 0 0 1 400,104 H28 A4,4 0 0 1 24,100 V100 A4,4 0 0 1 28,96 Z" />
+  <text x="214" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="16" font-weight="700" fill="#1A237E">학습 설정</text>
+
+  
+  <path fill="#FFFFFF" stroke="#E8EAED" stroke-width="1" d="M54,132 H374 A10,10 0 0 1 384,142 V302 A10,10 0 0 1 374,312 H54 A10,10 0 0 1 44,302 V142 A10,10 0 0 1 54,132 Z" />
+  <text x="64" y="154" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">모델</text>
+  <text x="250" y="154" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">YOLOv8n (nano)</text>
+
+  <line x1="64" y1="162" x2="364" y2="162" stroke="#F0F0F0" stroke-width="1" />
+  <text x="64" y="180" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">epochs</text>
+  <text x="250" y="180" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">100</text>
+
+  <line x1="64" y1="188" x2="364" y2="188" stroke="#F0F0F0" stroke-width="1" />
+  <text x="64" y="206" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">imgsz</text>
+  <text x="250" y="206" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">640 × 640</text>
+
+  <line x1="64" y1="214" x2="364" y2="214" stroke="#F0F0F0" stroke-width="1" />
+  <text x="64" y="232" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">batch</text>
+  <text x="250" y="232" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">16</text>
+
+  <line x1="64" y1="240" x2="364" y2="240" stroke="#F0F0F0" stroke-width="1" />
+  <text x="64" y="258" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">optimizer</text>
+  <text x="250" y="258" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">AdamW</text>
+
+  <line x1="64" y1="266" x2="364" y2="266" stroke="#F0F0F0" stroke-width="1" />
+  <text x="64" y="284" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">classes</text>
+  <text x="250" y="284" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">2 (ON / OFF)</text>
+
+  <line x1="64" y1="292" x2="364" y2="292" stroke="#F0F0F0" stroke-width="1" />
+  <text x="64" y="308" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A237E">data augmentation</text>
+  <text x="250" y="308" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">hsv, flip, mosaic</text>
+
+  
+  <text x="214" y="346" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#1A237E">최종 성능 지표</text>
+
+  <path fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5" d="M54,356 H194 A10,10 0 0 1 204,366 V434 A10,10 0 0 1 194,444 H54 A10,10 0 0 1 44,434 V366 A10,10 0 0 1 54,356 Z" />
+  <text x="124" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="36" font-weight="800" fill="#2E7D32">0.990</text>
+  <text x="124" y="414" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4CAF50">mAP@0.5</text>
+  <text x="124" y="434" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">조명 모델</text>
+
+  <path fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.5" d="M234,356 H354 A10,10 0 0 1 364,366 V434 A10,10 0 0 1 354,444 H234 A10,10 0 0 1 224,434 V366 A10,10 0 0 1 234,356 Z" />
+  <text x="294" y="392" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="36" font-weight="800" fill="#1565C0">0.97+</text>
+  <text x="294" y="414" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4285F4">precision</text>
+  <text x="294" y="434" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">조명 ON 클래스</text>
+
+  <path fill="#FFF8E1" stroke="#FFD54F" stroke-width="1.5" d="M54,456 H194 A10,10 0 0 1 204,466 V534 A10,10 0 0 1 194,544 H54 A10,10 0 0 1 44,534 V466 A10,10 0 0 1 54,456 Z" />
+  <text x="124" y="492" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="36" font-weight="800" fill="#E65100">0.96+</text>
+  <text x="124" y="514" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFC107">recall</text>
+  <text x="124" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">누락 오류 최소화</text>
+
+  <path fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.5" d="M234,456 H354 A10,10 0 0 1 364,466 V534 A10,10 0 0 1 354,544 H234 A10,10 0 0 1 224,534 V466 A10,10 0 0 1 234,456 Z" />
+  <text x="294" y="492" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="36" font-weight="800" fill="#C62828">~1.2s</text>
+  <text x="294" y="514" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" font-weight="600" fill="#EA4335">추론 속도</text>
+  <text x="294" y="534" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#9AA0A6">Cloud Run CPU</text>
+
+  
+  <path fill="#FFFFFF" stroke="#E8EAED" stroke-width="1" d="M54,558 H374 A10,10 0 0 1 384,568 V648 A10,10 0 0 1 374,658 H54 A10,10 0 0 1 44,648 V568 A10,10 0 0 1 54,558 Z" />
+  <text x="64" y="578" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#1A237E">학습 데이터셋</text>
+  <text x="64" y="598" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 직접 촬영: 강의실 조명 ON/OFF 400장+</text>
+  <text x="64" y="616" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• 오픈소스 증강: 공공 건물 이미지 400장+</text>
+  <text x="64" y="634" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#5F6368">• train:val:test = 70:20:10</text>
+  <text x="64" y="652" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">YOLO format (label .txt)</text>
+
+  
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5" d="M440,96 H848 A16,16 0 0 1 864,112 V380 A16,16 0 0 1 848,396 H440 A16,16 0 0 1 424,380 V112 A16,16 0 0 1 440,96 Z" />
+  <path fill="#4CAF50" d="M428,96 H860 A4,4 0 0 1 864,100 V100 A4,4 0 0 1 860,104 H428 A4,4 0 0 1 424,100 V100 A4,4 0 0 1 428,96 Z" />
+  <text x="644" y="120" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#2E7D32">mAP@0.5 학습 곡선</text>
+  <text x="644" y="138" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">epochs 진행에 따른 수렴</text>
+
+  
+  <path fill="#FFFFFF" stroke="#E8EAED" stroke-width="1" d="M448,150 H840 A4,4 0 0 1 844,154 V346 A4,4 0 0 1 840,350 H448 A4,4 0 0 1 444,346 V154 A4,4 0 0 1 448,150 Z" />
+
+  
+  <text x="472" y="160" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">1.0</text>
+  <text x="472" y="210" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">0.8</text>
+  <text x="472" y="260" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">0.6</text>
+  <text x="472" y="310" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">0.4</text>
+  <text x="472" y="345" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">epoch</text>
+
+  
+  <line x1="490" y1="155" x2="836" y2="155" stroke="#F0F0F0" stroke-width="1" />
+  <line x1="490" y1="205" x2="836" y2="205" stroke="#F0F0F0" stroke-width="1" />
+  <line x1="490" y1="255" x2="836" y2="255" stroke="#F0F0F0" stroke-width="1" />
+  <line x1="490" y1="305" x2="836" y2="305" stroke="#F0F0F0" stroke-width="1" />
+  <line x1="490" y1="340" x2="836" y2="340" stroke="#E8EAED" stroke-width="1" />
+
+  
+  <text x="490" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">0</text>
+  <text x="577" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">25</text>
+  <text x="663" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">50</text>
+  <text x="750" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">75</text>
+  <text x="836" y="352" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="10" fill="#9AA0A6">100</text>
+
+  
+  
+  <polyline points="490,305 520,280 550,255 577,225 610,200 640,178 663,166 690,160 720,157 750,155.5 780,155 810,154.8 836,154.5" stroke="#4CAF50" stroke-width="2.5" fill="none" />
+
+  
+  <polyline points="490,310 520,288 550,262 577,232 610,208 640,184 663,170 690,163 720,159 750,157 780,155.5 810,155 836,154.8" stroke="#4285F4" stroke-width="1.5" fill="none" stroke-dasharray="4,2" />
+
+  
+  <line x1="500" y1="165" x2="530" y2="165" stroke="#4CAF50" stroke-width="2.5" />
+  <text x="536" y="169" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4CAF50">train mAP</text>
+  <line x1="600" y1="165" x2="630" y2="165" stroke="#4285F4" stroke-width="1.5" stroke-dasharray="4,2" />
+  <text x="636" y="169" font-family="Pretendard, system-ui, sans-serif" font-size="11" fill="#4285F4">val mAP</text>
+
+  
+  <circle cx="836" cy="154.5" r="5" fill="#4CAF50" />
+  <text x="840" y="148" font-family="Pretendard, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2E7D32">0.990</text>
+
+  
+  <path fill="#F8F9FA" stroke="#E8EAED" stroke-width="1.5" d="M440,408 H848 A16,16 0 0 1 864,424 V660 A16,16 0 0 1 848,676 H440 A16,16 0 0 1 424,660 V424 A16,16 0 0 1 440,408 Z" />
+  <path fill="#4285F4" d="M428,408 H860 A4,4 0 0 1 864,412 V412 A4,4 0 0 1 860,416 H428 A4,4 0 0 1 424,412 V412 A4,4 0 0 1 428,408 Z" />
+  <text x="644" y="432" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#1A237E">혼동 행렬 (Confusion Matrix)</text>
+
+  
+  <text x="560" y="458" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">예측 ON</text>
+  <text x="680" y="458" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">예측 OFF</text>
+  <text x="444" y="490" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">실제 ON</text>
+  <text x="444" y="538" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">실제 OFF</text>
+
+  <path fill="#4CAF50" fill-opacity="0.7" d="M516,464 H604 A6,6 0 0 1 610,470 V510 A6,6 0 0 1 604,516 H516 A6,6 0 0 1 510,510 V470 A6,6 0 0 1 516,464 Z" />
+  <text x="560" y="496" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">97</text>
+
+  <path fill="#FFEBEE" d="M636,464 H724 A6,6 0 0 1 730,470 V510 A6,6 0 0 1 724,516 H636 A6,6 0 0 1 630,510 V470 A6,6 0 0 1 636,464 Z" />
+  <text x="680" y="496" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="800" fill="#EA4335">3</text>
+
+  <path fill="#FFEBEE" d="M516,516 H604 A6,6 0 0 1 610,522 V562 A6,6 0 0 1 604,568 H516 A6,6 0 0 1 510,562 V522 A6,6 0 0 1 516,516 Z" />
+  <text x="560" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="800" fill="#EA4335">2</text>
+
+  <path fill="#4285F4" fill-opacity="0.7" d="M636,516 H724 A6,6 0 0 1 730,522 V562 A6,6 0 0 1 724,568 H636 A6,6 0 0 1 630,562 V522 A6,6 0 0 1 636,516 Z" />
+  <text x="680" y="548" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">98</text>
+
+  <text x="644" y="590" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">테스트셋 200장 기준 (추정치)</text>
+  <text x="644" y="608" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="700" fill="#2E7D32">정확도 97.5% · F1-score 0.975</text>
+  <text x="644" y="628" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#5F6368">오탐(FP) 3건 / 미탐(FN) 2건 — 실사용 충분</text>
+  <text x="644" y="666" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">에어컨 모델도 동일 구조 · 유사 성능</text>
+
+  
+  <path fill="#1A237E" d="M900,408 H1240 A16,16 0 0 1 1256,424 V660 A16,16 0 0 1 1240,676 H900 A16,16 0 0 1 884,660 V424 A16,16 0 0 1 900,408 Z" />
+  <path fill="#4CAF50" d="M888,408 H1252 A4,4 0 0 1 1256,412 V412 A4,4 0 0 1 1252,416 H888 A4,4 0 0 1 884,412 V412 A4,4 0 0 1 888,408 Z" />
+  <text x="1070" y="432" text-anchor="middle" font-family="Pretendard, system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">배포 정보</text>
+
+  <text x="904" y="460" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#4CAF50">모델 파일</text>
+  <text x="904" y="480" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">best.pt (YOLOv8n, ~6MB)</text>
+  <text x="904" y="498" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">2모델 (조명/에어컨) Docker 번들</text>
+
+  <text x="904" y="526" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#4285F4">런타임</text>
+  <text x="904" y="546" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">Python 3.11 · ultralytics · torch CPU</text>
+  <text x="904" y="564" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">FastAPI + Uvicorn</text>
+
+  <text x="904" y="592" font-family="Pretendard, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFC107">Cloud Run 설정</text>
+  <text x="904" y="612" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">Memory: 2GiB · CPU: 1 · Min-instances: 1</text>
+  <text x="904" y="630" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">콜드스타트 방지 (최소 1인스턴스 유지)</text>
+
+  <text x="904" y="658" font-family="Pretendard, system-ui, sans-serif" font-size="12" fill="#9AA0A6">Gemini API 키: Secret Manager 관리</text>
+
+  <text x="1240" y="706" text-anchor="end" font-family="Pretendard, system-ui, sans-serif" font-size="13" fill="#9AA0A6">07d / 30</text>
+</svg>

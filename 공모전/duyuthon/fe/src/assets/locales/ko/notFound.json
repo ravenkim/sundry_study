@@ -1,0 +1,14 @@
+{
+    "brand": "EcoReport",
+    "code": "404",
+    "mascotBubble": "여기는 빈 강의실이 아니라… 길을 잃은 것 같아요!",
+    "title": "페이지를 찾을 수 없어요",
+    "descriptionLine1": "주소가 바뀌었거나 삭제된 페이지일 수 있어요.",
+    "descriptionLine2": "아래 버튼으로 다시 이동해 보세요.",
+    "tipsTitle": "이렇게 해보세요",
+    "tipUrlTypo": "• 주소(URL)에 오타가 없는지 확인해 주세요.",
+    "tipUseMenu": "• 홈에서 제보·이력 메뉴를 다시 선택해 주세요.",
+    "tipLogin": "• 로그인이 필요한 페이지라면 먼저 로그인해 주세요.",
+    "goHome": "홈으로 가기",
+    "goBack": "이전 페이지"
+}

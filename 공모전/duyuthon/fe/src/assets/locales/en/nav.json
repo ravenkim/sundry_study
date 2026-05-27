@@ -1,0 +1,36 @@
+{
+    "pages": {
+        "reportForm": "Submit Report",
+        "reportSuccess": "Waste confirmed",
+        "reports": "Report History",
+        "reportDetail": "Report Details",
+        "shop": "Point Shop",
+        "profile": "My Page",
+        "aboutUs": "About",
+        "ranking": "Affiliation Ranking"
+    },
+    "menu": {
+        "openAriaLabel": "Open menu",
+        "tagline": "Campus energy saving",
+        "home": "Home",
+        "report": "Report Waste",
+        "reports": "Report History",
+        "shop": "Point Shop",
+        "profile": "My Page",
+        "aboutUs": "About EcoReport",
+        "ranking": "Affiliation Ranking"
+    },
+    "admin": {
+        "brandTitle": "EcoReport Admin",
+        "brandSubtitle": "Management Console",
+        "reportsDashboard": "Report Overview",
+        "reportsManage": "Report Management",
+        "buildings": "Location Management",
+        "schedules": "Operating Hours",
+        "gifticon": "Gift Card Management",
+        "stats": "Energy Statistics",
+        "users": "User Management"
+    },
+    "findAccount": "Find ID / Password",
+    "adminSignup": "Admin Registration"
+}
